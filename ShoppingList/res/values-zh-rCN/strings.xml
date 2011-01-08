@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">Launchpad Contributions:
+  Peli https://launchpad.net/~peli0101
+  friedger https://launchpad.net/~friedger</string>
+	
+	<!-- Strings for OI About -->
+	<string name="about_comments">OI 购物列表自动记录您所选购的物品。您也可以将它用作其他方面的核对清单，如未完成列表或者派对客人列表。</string>
+	<string name="about_website_label">在OpenIntents上的OI 购物列表</string>
+
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<string name="app_name">OI 购物列表</string>
+
+	<!-- Shopping Provider -->
+	<string name="new_item">新物品</string>
+	<string name="new_list">新列表</string>
+	<string name="send">发送列表</string>
+	<string name="empty_list_not_sent">不能发送空列表.</string>
+	<string name="email_not_available">发送失败.</string>
+	<string name="my_shopping_list">我的购物列表</string>
+	<string name="new_list_hint">例如 愿望表, 家庭表</string>
+	<string name="clean_up_list">清除列表</string>
+	<string name="delete_list">删除列表</string>
+	<string name="ask_new_list">输入新购物列表的名称</string>
+	<string name="ask_rename_list">购物列表重命名</string>
+	<string name="ask_edit_item">编辑物品</string>
+	<string name="please_enter_name">请输入名称</string>
+	<string name="no_items_marked">没有物品被标记为取消。</string>
+	<string name="confirm_delete_list">确定删除此购物列表吗？</string>
+	<string name="no_shopping_provider">读取购物列表失败。</string>
+	<string name="pick_item">挑选一个物品</string>
+	<string name="pick_list">挑选一张列表</string>
+	<string name="theme">主题</string>
+	<string name="theme_settings">主题设置</string>
+	<string name="rename_list">重命名列表</string>
+	<string name="menu_mark_item">标记物品</string>
+	<string name="menu_edit_item">编辑物品</string>
+	<string name="menu_auto_add">自动添加</string>
+	<string name="no_items_available">无可用项目</string>
+	
+	<!-- Remove item from this list, but keep it internally, so that the user
+	     can choose it later for inclusion again. Information like
+	     tags or price will be kept. -->
+	<string name="menu_remove_item">从列表中删除此物品</string>
+	
+	<!-- Delete this item completely. If the user wants to add it again, they
+	     have to enter all the information again. -->
+	<string name="menu_delete_item">永久删除此物品</string>
+	<string name="menu_move_item">Move item to other list</string>
+	<!-- Button label to add an item to the list. -->
+	<string name="add">添加</string>
+	
+	<string name="menu_pick_items">选择物品</string>
+	<string name="menu_start_shopping">购物</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="pick_items_titel">%s - 选择物品</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="shopping_title">%s - 购物</string>
+	
+	<string name="tags">标签</string>
+	<string name="price">价格</string>
+	<string name="item">物品</string>
+	<string name="quantity">数量</string>
+	
+	<!-- Total sum of all prices. \'%s\' is the sum -->
+	<string name="total">总共: %s</string>
+	
+	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+	<string name="total_checked">已核对: %s</string>
+	
+	<string name="delete_item_confirm">确定要从所有购物列表中永久删除此物品，其标签以及价格吗？</string>
+	<string name="delete">删除</string>
+	
+	<!-- Added to an item to indicate it was bought. -->
+	<string name="suffix_checked">... 确定</string>
+	<string name="empty"/>
+	
+	<!-- The shortcut is created on the home screen. -->
+	<string name="pick_list_for_shortcut">从快捷方式中选择列表</string>
+	
+	<!-- Shown if external application wants to insert new items. -->
+	<string name="pick_list_to_insert_items">选择列表插入物品</string>
+	
+	<!-- Theme related -->
+	<string name="theme_pick">选择主题</string>
+	<string name="theme_description">给此列表挑选主题</string>
+	<string name="theme_default">默认</string>
+	<string name="theme_classic">经典的</string>
+	<string name="theme_bugdroid">Android</string>
+	<string name="theme_classic_export">经典的 (来自 OI 购物列表)</string>
+	<string name="theme_bugdroid_export">Android (来自 OI 购物列表)</string>
+
+	<!--     Dialog box    -->
+	<string name="ok">确认</string>
+	<string name="cancel">取消</string>
+	<string name="use_theme_for_all_lists">对所有列表使用此主题</string>
+	<string name="get_more_themes">获得更多主题</string>
+	
+	<!-- preferences -->
+	<string name="preferences">设置</string>
+	
+    <string name="preference_application">应用设置</string>
+    
+	<string name="preference_unchecked_on_top">未检查的置顶</string>
+	<string name="preference_unchecked_on_top_summary">总是优先显示未检查的物品</string>
+	<string name="preference_fontsize">字体大小</string>
+	<string name="preference_fontsize_summary">改变字体大小</string>
+	<string name="preference_fontsize_dialog_title">选择字体大小</string>
+	<string name="preference_sortorder_title">分类命令</string>
+	<string name="preference_sortorder_summary">改变列表物品的分类命令</string>
+	<string name="preference_sortorder_dialog_title">选择分类命令</string>
+	<string name="preference_loadlastused_title">加载上次使用的列表</string>
+	<string name="preference_loadlastused_summary">总是默认打开上次浏览的列表。</string>
+	<string name="preference_capitalization_title">大写</string>
+	<string name="preference_capitalization_summary">条目自动大写</string>
+	<string name="preference_capitalization_dialog_title">选择大写</string> 
+	<string name="preference_hidechecked_title">隐藏已检查物品</string>
+	<string name="preference_hidechecked_summary">立即隐藏已检查物品。</string>
+	<string name="preference_showprice_title">显示价格</string>
+	<string name="preference_showprice_summary">被显示为列表的额外列</string>
+	<string name="preference_showtags_title">显示标签</string>
+	<string name="preference_showtags_summary">被显示为列表的额外列</string>
+	<string name="preference_showquantity_title">显示数量</string>
+	<string name="preference_showquantity_summary">被显示为列表的额外列</string>
+	
+	<!-- Preference title: Shake the phone to clean up the list. -->
+	<string name="preference_shake_title">摇动手机以清空列表</string>
+	
+	<!-- Preference summary: Shake the phone to clean up the list. -->
+	<string name="preference_shake_summary">摇动手机以清空列表</string>
+	
+    <string name="preference_advanced">高级设置</string>
+    <string name="preference_advanced_summary">外观附加设置</string>
+    
+    <!-- Preference category: General settings -->
+    <string name="preference_general">常规</string>
+    
+    <string name="preference_appearance">外观</string>
+    
+    <string name="preference_addons">插件</string>
+    <string name="preference_get_addons">获得新的插件</string>
+    <string name="preference_get_addons_summary">在线搜索插件和主题.</string>
+    <string name="preference_get_market_addons">从Market上获得插件</string>
+    <string name="preference_get_developer_addons">从 OpenIntents上获得插件</string>
+    <string name="preference_extensions">插件</string>
+    <string name="preference_themes">主题</string>
+    <string name="preference_market_extensions_summary">从Android Market上获得插件 .</string>
+    <string name="preference_market_themes_summary">从Android Market上获得主题.</string>
+    <string name="preference_developer_extensions_summary">从OpenIntents 主页上获得插件.</string>
+	<string name="preference_developer_themes_summary">从OpenIntents 主页上获得主题.</string>
+	
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">OI 购物列表 EULA</string>
+	<string name="eula_accept">接受</string>
+	<string name="eula_refuse">取消</string>
+
+	<!-- Update -->
+	<string name="update_box_text">请手动检查更新或者根据自动通知安装OI更新。当前版本: %s</string>
+	<string name="update_check_now">检查更新。</string>
+	<string name="update_get_updater">获得 OI 更新器。</string>
+	<string name="update_error">下载软件不可用。</string>
+	<string name="update">检查更新</string>
+
+	<!-- About -->
+	<string name="about">关于</string>
+	<string name="aboutapp_not_available">版本 %s
+
+没有可用的兼容插件来显示全部信息（联系方式，信誉，执照）。</string>
+	<string name="aboutapp_get">得到 OI 关于</string>
+	
+	<!-- ***************************
+	     Permissions
+	     *************************** -->
+	
+	<!-- OI Shopping list -->
+	<string name="oi_shopping_permission_read">读购物列表</string>
+	<string name="oi_shopping_permission_read_descr">允许应用软件读取购物列表。注意加密列表和物品以加密格式来提供。</string>
+	<string name="oi_shopping_permission_write">写购物列表</string>
+	<string name="oi_shopping_permission_write_descr">允许应用软件创建新的列表和物品或者改变当前的。</string>
+	
+	
+	<!-- ***************************
+	     Preferences
+	     *************************** -->
+	
+    <string-array name="preference_sortorder_entries">
+    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    	<item>优先列出未检查物品，按其字母顺序排序</item>
+        <!-- Preference sort order: Sort by item name -->
+    	<item>按字母排序</item>
+        <!-- Preference sort order: Newest item first -->
+    	<item>优先最新的</item>
+        <!-- Preference sort order: Oldest item first -->
+    	<item>优先最旧的</item>
+        <!-- Preference sort order: Sort alphabetically by tags -->
+    	<item>按标签的字母顺序排序</item>
+        <!-- Preference sort order: Sort by price, the most expensive first -->
+    	<item>优先最贵的</item>
+        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    	<item>优先列出未检查物品， 按标签的字母顺序排序</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entries">
+    	<!-- Preference fontsize: tiny font size -->
+        <item>微小</item>
+    	<!-- Preference fontsize: small font size -->
+        <item>小</item>
+    	<!-- Preference fontsize: default font size-->
+    	<item>默认</item>
+    	<!-- Preference fontsize: large font size -->
+        <item>大</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entries">
+    	<!-- Preference capitalization: No capitalization -->
+        <item>无</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+        <item>句首字母大写</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+        <item>单词首字母大写</item>
+    </string-array>
+
+
+	<!-- ***************************
+	     Automation
+	     *************************** -->
+	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<string name="label_select_action">选择行为:</string>
+	
+	<!-- Label above button that opens a list of all shopping lists to choose from. -->
+	<string name="label_select_list">选择列表:</string>
+	
+	<!-- Arrays -->
+	
+    <string-array name="automation_actions">
+    	<!-- Automation action to clean up a list. -->
+    	<item>清除列表</item>
+    </string-array>
+    
+</resources>

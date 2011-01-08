@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2011 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+ 
+<resources>
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	<string name="about_copyright">Copyright © 2008-2011 OpenIntents</string>
+	<string name="about_website_url">http://www.openintents.org/en/shoppinglist</string>
+	<string name="about_email">support@openintents.org</string>
+	
+	<string-array name="about_authors"><!-- Add your name here if you helped out -->
+		<item>Peli</item>
+		<item>Friedger</item>
+		<item>"Ronan 'Zero' Schwarz"</item>
+		<item>Michael A. Krehan</item>
+		<item>Ben Caldwell</item>
+	</string-array>
+
+	<string-array name="about_documenters"><!-- Add your name here if you helped out -->
+		<!-- <item></item> -->
+	</string-array>
+	
+	<string-array name="about_artists"><!-- Add your name here if you helped out -->
+		<item>Peli</item>
+		<item>Anke-Art http://www.anke-art.de</item><!-- For the hand-writing font -->
+		<item></item>
+	</string-array>
+	
+	<string-array name="about_translators"><!-- Add your name here if you helped out, but only in the arrays.xml for the localization that you helped to translate into! -->
+		<!-- <item></item>  -->
+	</string-array>
+	
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- Update -->
+	<string name="update_app_url">market://search?q=pname:org.openintents.shopping</string>
+    <string name="update_app_developer_url">http://www.openintents.org/en/shoppinglist</string><!-- OI Shopping list -->
+	<string name="update_checker_url">market://search?q=pname:org.openintents.updatechecker</string>
+    <string name="update_checker_developer_url">http://www.openintents.org/en/node/203</string><!-- 203 = OI Update -->
+	
+	<!-- About -->
+	<string name="aboutapp_market_uri">market://search?q=pname:org.openintents.about</string>
+    <string name="aboutapp_developer_uri">http://www.openintents.org/en/node/202</string><!-- 202 = OI About -->
+    
+	<!-- ***************************
+	     Preferences
+	     *************************** -->
+	
+    <string-array name="preference_sortorder_entryvalues">
+    	<item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entryvalues">
+    	<item>0</item>
+    	<item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entryvalues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array> 
+    
+    <!-- URL to OI Shopping list extensions on Market -->
+    <string name="preference_market_extensions_link">market://search?q=extension oi shopping list</string>
+    
+    <!-- URL to OI Shopping list themes on Market -->
+    <string name="preference_market_themes_link">market://search?q=theme oi shopping list</string>
+    
+    <!-- URL to OI Shopping list extensions-->
+    <string name="preference_developer_extensions_link">http://www.openintents.org/en/shoppinglist#extensions</string>
+    
+    <!-- URL to OI Shopping list themes-->
+    <string name="preference_developer_themes_link">http://www.openintents.org/en/shoppinglist#themes</string>
+	
+</resources> 

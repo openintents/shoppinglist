@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">Launchpad Contributions:
+  CSro https://launchpad.net/~choongsan</string>
+	
+	<!-- Strings for OI About -->
+	<string name="about_comments">OI Shopping list lets you keep track of your shopping items. You can also use it for other kinds of check lists, for example for ToDo lists or party guest lists.</string>
+	<string name="about_website_label">OI Shopping list at OpenIntents</string>
+
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<string name="app_name">OI 쇼핑 목록</string>
+
+	<!-- Shopping Provider -->
+	<string name="new_item">새 아이템</string>
+	<string name="new_list">새 목록</string>
+	<string name="send">목록 보네기</string>
+	<string name="empty_list_not_sent">Empty list not sent.</string>
+	<string name="email_not_available">No application available for sending.</string>
+	<string name="my_shopping_list">나의 쇼핑 목록</string>
+	<string name="new_list_hint">i.e. wishlist, family list</string>
+	<string name="clean_up_list">Clean up list</string>
+	<string name="delete_list">목록 삭제</string>
+	<string name="ask_new_list">Enter name of new shopping list</string>
+	<string name="ask_rename_list">Rename shopping list</string>
+	<string name="ask_edit_item">Edit item</string>
+	<string name="please_enter_name">Please enter a name</string>
+	<string name="no_items_marked">No items are marked as crossed out.</string>
+	<string name="confirm_delete_list">Do you really want to delete this shopping list?</string>
+	<string name="no_shopping_provider">Error while accessing shopping lists.</string>
+	<string name="pick_item">Pick an item</string>
+	<string name="pick_list">목록 선택</string>
+	<string name="theme">테마</string>
+	<string name="theme_settings">테마 세팅</string>
+	<string name="rename_list">Rename list</string>
+	<string name="menu_mark_item">Mark item</string>
+	<string name="menu_edit_item">Edit item</string>
+	<string name="menu_auto_add">Auto add</string>
+	<string name="no_items_available">No items available</string>
+	
+	<!-- Remove item from this list, but keep it internally, so that the user
+	     can choose it later for inclusion again. Information like
+	     tags or price will be kept. -->
+	<string name="menu_remove_item">Remove item from list</string>
+	
+	<!-- Delete this item completely. If the user wants to add it again, they
+	     have to enter all the information again. -->
+	<string name="menu_delete_item">Delete item permanently</string>
+	<string name="menu_move_item">Move item to other list</string>
+	<!-- Button label to add an item to the list. -->
+	<string name="add">추가</string>
+	
+	<string name="menu_pick_items">아이템 선택</string>
+	<string name="menu_start_shopping">쇼핑</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="pick_items_titel">%s - Pick items</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="shopping_title">%s - 쇼핑</string>
+	
+	<string name="tags">태그</string>
+	<string name="price">가격</string>
+	<string name="item">아이템</string>
+	<string name="quantity">Quantity</string>
+	
+	<!-- Total sum of all prices. \'%s\' is the sum -->
+	<string name="total">Total: %s</string>
+	
+	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+	<string name="total_checked">Checked: %s</string>
+	
+	<string name="delete_item_confirm">Are you sure you want to permanently delete this item, its tags, and its price from all shopping lists?</string>
+	<string name="delete">삭제</string>
+	
+	<!-- Added to an item to indicate it was bought. -->
+	<string name="suffix_checked">... OK</string>
+	<string name="empty"/>
+	
+	<!-- The shortcut is created on the home screen. -->
+	<string name="pick_list_for_shortcut">Pick list for shortcut</string>
+	
+	<!-- Shown if external application wants to insert new items. -->
+	<string name="pick_list_to_insert_items">Pick list to insert items</string>
+	
+	<!-- Theme related -->
+	<string name="theme_pick">테마 선택</string>
+	<string name="theme_description">Choose a theme for this list</string>
+	<string name="theme_default">기본값</string>
+	<string name="theme_classic">고전</string>
+	<string name="theme_bugdroid">안드로이드</string>
+	<string name="theme_classic_export">Classic (from OI Shopping List)</string>
+	<string name="theme_bugdroid_export">Android (from OI Shopping List)</string>
+
+	<!--     Dialog box    -->
+	<string name="ok">확인</string>
+	<string name="cancel">취소</string>
+	<string name="use_theme_for_all_lists">Use this theme for all lists</string>
+	<string name="get_more_themes">Get more themes</string>
+	
+	<!-- preferences -->
+	<string name="preferences">설정</string>
+	
+    <string name="preference_application">Application settings</string>
+    
+	<string name="preference_unchecked_on_top">Unchecked on top</string>
+	<string name="preference_unchecked_on_top_summary">Always show unchecked items first</string>
+	<string name="preference_fontsize">글꼴 크기</string>
+	<string name="preference_fontsize_summary">글꼴 크기 수정</string>
+	<string name="preference_fontsize_dialog_title">글꼴 크기 선택</string>
+	<string name="preference_sortorder_title">정렬 순서</string>
+	<string name="preference_sortorder_summary">Change sort order of list items</string>
+	<string name="preference_sortorder_dialog_title">정렬 순서 선택</string>
+	<string name="preference_loadlastused_title">Load last list used</string>
+	<string name="preference_loadlastused_summary">Always start with the list viewed last time.</string>
+	<string name="preference_capitalization_title">Capitalization</string>
+	<string name="preference_capitalization_summary">Automatic capitalization of entries</string>
+	<string name="preference_capitalization_dialog_title">Choose capitalization</string> 
+	<string name="preference_hidechecked_title">Hide checked items</string>
+	<string name="preference_hidechecked_summary">Immediately hide items checked off.</string>
+	<string name="preference_showprice_title">Show price</string>
+	<string name="preference_showprice_summary">Shown as extra column in list.</string>
+	<string name="preference_showtags_title">태그 보이기</string>
+	<string name="preference_showtags_summary">Shown as extra column in list.</string>
+	<string name="preference_showquantity_title">Show quantity</string>
+	<string name="preference_showquantity_summary">Shown as extra column in list.</string>
+	
+	<!-- Preference title: Shake the phone to clean up the list. -->
+	<string name="preference_shake_title">Shake to clean up</string>
+	
+	<!-- Preference summary: Shake the phone to clean up the list. -->
+	<string name="preference_shake_summary">Shake the phone to clean up the list.</string>
+	
+    <string name="preference_advanced">고급 설정</string>
+    <string name="preference_advanced_summary">Additional settings regarding the appearance.</string>
+    
+    <!-- Preference category: General settings -->
+    <string name="preference_general">일반</string>
+    
+    <string name="preference_appearance">모양</string>
+    
+    <string name="preference_addons">Add-ons</string>
+    <string name="preference_get_addons">Get new add-ons</string>
+    <string name="preference_get_addons_summary">Search for extensions and themes online.</string>
+    <string name="preference_get_market_addons">Get add-ons from Market</string>
+    <string name="preference_get_developer_addons">Get add-ons from OpenIntents</string>
+    <string name="preference_extensions">확장 기능</string>
+    <string name="preference_themes">Themes</string>
+    <string name="preference_market_extensions_summary">Search for extensions at Android Market.</string>
+    <string name="preference_market_themes_summary">Search for themes at Android Market.</string>
+    <string name="preference_developer_extensions_summary">Get extensions from the OpenIntents homepage.</string>
+	<string name="preference_developer_themes_summary">Get themes from the OpenIntents homepage.</string>
+	
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">OI Shopping List EULA</string>
+	<string name="eula_accept">수락</string>
+	<string name="eula_refuse">취소</string>
+
+	<!-- Update -->
+	<string name="update_box_text">Please check manually for updates or install OI Update
+for automatic notifications.
+Current version: %s
+	</string>
+	<string name="update_check_now">지금 확인</string>
+	<string name="update_get_updater">OI 업데이트기 가져오기</string>
+	<string name="update_error">Download application not available.</string>
+	<string name="update">업데이트 확인</string>
+
+	<!-- About -->
+	<string name="about">프로그램 정보</string>
+	<string name="aboutapp_not_available">Version %s\n\nNo compatible extension available to display full info (contact, credits, license).</string>
+	<string name="aboutapp_get">Get OI About</string>
+	
+	<!-- ***************************
+	     Permissions
+	     *************************** -->
+	
+	<!-- OI Shopping list -->
+	<string name="oi_shopping_permission_read">쇼핑 목록 읽기</string>
+	<string name="oi_shopping_permission_read_descr">Allows an application to read shopping lists. Note that encrypted lists and items are provided in the encrypted format.</string>
+	<string name="oi_shopping_permission_write">쇼핑 목록 쓰기</string>
+	<string name="oi_shopping_permission_write_descr">Allows an application to create new lists and items or change existing ones.</string>
+	
+	
+	<!-- ***************************
+	     Preferences
+	     *************************** -->
+	
+    <string-array name="preference_sortorder_entries">
+    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    	<item>unchecked first, alphabetical</item>
+        <!-- Preference sort order: Sort by item name -->
+    	<item>alphabetical</item>
+        <!-- Preference sort order: Newest item first -->
+    	<item>newest first</item>
+        <!-- Preference sort order: Oldest item first -->
+    	<item>oldest first</item>
+        <!-- Preference sort order: Sort alphabetically by tags -->
+    	<item>tags alphabetical</item>
+        <!-- Preference sort order: Sort by price, the most expensive first -->
+    	<item>most expensive first</item>
+        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    	<item>unchecked first, tags alphabetical</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entries">
+    	<!-- Preference fontsize: tiny font size -->
+        <item>Tiny</item>
+    	<!-- Preference fontsize: small font size -->
+        <item>작은</item>
+    	<!-- Preference fontsize: default font size-->
+    	<item>기본값</item>
+    	<!-- Preference fontsize: large font size -->
+        <item>큰</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entries">
+    	<!-- Preference capitalization: No capitalization -->
+        <item>없음</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+        <item>Per Sentence</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+        <item>Per Word</item>
+    </string-array>
+
+
+	<!-- ***************************
+	     Automation
+	     *************************** -->
+	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<string name="label_select_action">행동 선택:</string>
+	
+	<!-- Label above button that opens a list of all shopping lists to choose from. -->
+	<string name="label_select_list">목록 선택:</string>
+	
+	<!-- Arrays -->
+	
+    <string-array name="automation_actions">
+    	<!-- Automation action to clean up a list. -->
+    	<item>Clean up list</item>
+    </string-array>
+    
+</resources>

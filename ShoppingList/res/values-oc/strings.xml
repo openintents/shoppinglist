@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">Launchpad Contributions:
+  Cédric VALMARY (Tot en òc) https://launchpad.net/~cvalmary</string>
+	
+	<!-- Strings for OI About -->
+	<string name="about_comments">OI Shopping list vos permet de seguir vòstra lista de crompas. Lo podètz utilizar tanben per d\'autres tipes de listas, per exemple una lista de causas a far o una lista de convidats.</string>
+	<string name="about_website_label">OI Shopping list d\'OpenIntents</string>
+
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<string name="app_name">OI Shopping list</string>
+
+	<!-- Shopping Provider -->
+	<string name="new_item">Element novèl</string>
+	<string name="new_list">Lista novèla</string>
+	<string name="send">Mandar la lista</string>
+	<string name="empty_list_not_sent">Lista voida pas mandada</string>
+	<string name="email_not_available">Pas d\'aplicacion disponibla pel mandadadís</string>
+	<string name="my_shopping_list">Ma lista de crompas</string>
+	<string name="new_list_hint">Per ex. present, familha</string>
+	<string name="clean_up_list">Netejar la lista</string>
+	<string name="delete_list">Suprimir la lista</string>
+	<string name="ask_new_list">Entratz lo nom de la novèla lista de crompas</string>
+	<string name="ask_rename_list">Tonar nomenar la lista de crompas</string>
+	<string name="ask_edit_item">Editar l\'element</string>
+	<string name="please_enter_name">Mercés de picar un nom</string>
+	<string name="no_items_marked">Cap d\'element pas marcat</string>
+	<string name="confirm_delete_list">Sètz segur que volètz suprimir aquesta lista ?</string>
+	<string name="no_shopping_provider">Error al moment de l\'accès a las listas de crompas</string>
+	<string name="pick_item">Marcatz un element</string>
+	<string name="pick_list">Seleccionar una lista</string>
+	<string name="theme">Tèma</string>
+	<string name="theme_settings">Opcion del tèma</string>
+	<string name="rename_list">Tornar nomenar la lista</string>
+	<string name="menu_mark_item">Marcar l\'element</string>
+	<string name="menu_edit_item">Editar l\'element</string>
+	<string name="menu_auto_add">Apondon automatic</string>
+	<string name="no_items_available">No items available</string>
+	
+	<!-- Remove item from this list, but keep it internally, so that the user
+	     can choose it later for inclusion again. Information like
+	     tags or price will be kept. -->
+	<string name="menu_remove_item">Levar l\'element de la lista</string>
+	
+	<!-- Delete this item completely. If the user wants to add it again, they
+	     have to enter all the information again. -->
+	<string name="menu_delete_item">Suprimir l\'element definitivament</string>
+	<string name="menu_move_item">Move item to other list</string>
+	<!-- Button label to add an item to the list. -->
+	<string name="add">Apondre</string>
+	
+	<string name="menu_pick_items">Marcatz d\'elements</string>
+	<string name="menu_start_shopping">Crompas</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="pick_items_titel">%s - Marcatz d\'elements</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="shopping_title">%s - Crompas</string>
+	
+	<string name="tags">Etiquetas</string>
+	<string name="price">Prètz</string>
+	<string name="item">Element</string>
+	<string name="quantity">Quantitat</string>
+	
+	<!-- Total sum of all prices. \'%s\' is the sum -->
+	<string name="total">Total : %s</string>
+	
+	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+	<string name="total_checked">Marcat : %s</string>
+	
+	<string name="delete_item_confirm">Sètz segur que volètz suprimir definitivament aqueste element, son libellat e son prètz de totas las listas ?</string>
+	<string name="delete">Suprimir</string>
+	
+	<!-- Added to an item to indicate it was bought. -->
+	<string name="suffix_checked">... D\'acòrdi</string>
+	<string name="empty"/>
+	
+	<!-- The shortcut is created on the home screen. -->
+	<string name="pick_list_for_shortcut">Marcar una lista per acorchis</string>
+	
+	<!-- Shown if external application wants to insert new items. -->
+	<string name="pick_list_to_insert_items">Seleccionar una lista per inserir d\'elements</string>
+	
+	<!-- Theme related -->
+	<string name="theme_pick">Causissètz un tèma</string>
+	<string name="theme_description">Causir un tèma per aquesta lista</string>
+	<string name="theme_default">Per defaut</string>
+	<string name="theme_classic">Classic</string>
+	<string name="theme_bugdroid">Androïd</string>
+	<string name="theme_classic_export">Classic (Dempuèi la lista de crompas de OI)</string>
+	<string name="theme_bugdroid_export">Android  (Dempuèi la lista de crompas de OI)</string>
+
+	<!--     Dialog box    -->
+	<string name="ok">D\'acòrdi</string>
+	<string name="cancel">Anullar</string>
+	<string name="use_theme_for_all_lists">Utilizar aqueste tèma per totas las listas</string>
+	<string name="get_more_themes">Aver mai de tèmas</string>
+	
+	<!-- preferences -->
+	<string name="preferences">Paramètres</string>
+	
+    <string name="preference_application">Paramètres de l\'aplicacion</string>
+    
+	<string name="preference_unchecked_on_top">Desmarcat en primièr</string>
+	<string name="preference_unchecked_on_top_summary">Afichar totjorn los elements pas marcats en primièr</string>
+	<string name="preference_fontsize">Talha de la poliça</string>
+	<string name="preference_fontsize_summary">Cambiar la talha de la poliça</string>
+	<string name="preference_fontsize_dialog_title">Causir la talha de  la poliça</string>
+	<string name="preference_sortorder_title">Òrdre de triada</string>
+	<string name="preference_sortorder_summary">Cambiar l\'òrdre de triada dels elements de lista</string>
+	<string name="preference_sortorder_dialog_title">Causir l\'òrdre de triada</string>
+	<string name="preference_loadlastused_title">Cargar la darrièra lista utilizada</string>
+	<string name="preference_loadlastused_summary">Aviar totjorn amb la darrièra lista vista</string>
+	<string name="preference_capitalization_title">Mesa en majusculas</string>
+	<string name="preference_capitalization_summary">Mesa en majusculas automatica de las entradas</string>
+	<string name="preference_capitalization_dialog_title">Causir la mesa en majusculas</string> 
+	<string name="preference_hidechecked_title">Amagar los elements marcats</string>
+	<string name="preference_hidechecked_summary">Amagar immediatament los elements amagats</string>
+	<string name="preference_showprice_title">Veire lo prètz</string>
+	<string name="preference_showprice_summary">Veire coma una colomna suplementària dins la lista</string>
+	<string name="preference_showtags_title">Afichar las etiquetas</string>
+	<string name="preference_showtags_summary">Veire coma una colomna suplementària dins la lista</string>
+	<string name="preference_showquantity_title">Fa veire la quantitat</string>
+	<string name="preference_showquantity_summary">Veire coma una colomna suplementària dins la lista</string>
+	
+	<!-- Preference title: Shake the phone to clean up the list. -->
+	<string name="preference_shake_title">Shake to clean up</string>
+	
+	<!-- Preference summary: Shake the phone to clean up the list. -->
+	<string name="preference_shake_summary">Shake the phone to clean up the list.</string>
+	
+    <string name="preference_advanced">Paramètres avançats</string>
+    <string name="preference_advanced_summary">Paramètres suplementaris sus l\'aparéncia</string>
+    
+    <!-- Preference category: General settings -->
+    <string name="preference_general">General</string>
+    
+    <string name="preference_appearance">Aparéncia</string>
+    
+    <string name="preference_addons">Ensèrts</string>
+    <string name="preference_get_addons">Obténer d\'ensèrts novèls</string>
+    <string name="preference_get_addons_summary">Recercar d\'extensions e de tèmas en linha.</string>
+    <string name="preference_get_market_addons">Obténer d\'ensèrts dempuèi lo Market.</string>
+    <string name="preference_get_developer_addons">Obténer d\'ensèrts dempuèi OpenIntents</string>
+    <string name="preference_extensions">Extensions</string>
+    <string name="preference_themes">Tèmas</string>
+    <string name="preference_market_extensions_summary">Recercar d\'extensions sus l\'Android Market</string>
+    <string name="preference_market_themes_summary">Recercar de tèmas sus l\'Android Market.</string>
+    <string name="preference_developer_extensions_summary">Obténer d\'extensions dempuèi lo site d\'OpenIntents</string>
+	<string name="preference_developer_themes_summary">Obténer de tèmas dempuèi la pagina internet d\'OpenIntents</string>
+	
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">OI Shopping List EULA</string>
+	<string name="eula_accept">Acceptar</string>
+	<string name="eula_refuse">Anullar</string>
+
+	<!-- Update -->
+	<string name="update_box_text">Se vos plai, verificatz manualament las mesas a jorn o installatz OI Update per obténer de notificacions automaticas. Version actuala : %s</string>
+	<string name="update_check_now">Verificar ara.</string>
+	<string name="update_get_updater">Obténer OI Updater.</string>
+	<string name="update_error">Telecargament de l\'aplicacion indisponible.</string>
+	<string name="update">Verificar las mesas a jorn</string>
+
+	<!-- About -->
+	<string name="about">A prepaus</string>
+	<string name="aboutapp_not_available">Version %s\n\nCap d\'extension pas disponibla per afichar la totalitat de las informacions (contacte, credits, licéncia).</string>
+	<string name="aboutapp_get">Obténer OI About</string>
+	
+	<!-- ***************************
+	     Permissions
+	     *************************** -->
+	
+	<!-- OI Shopping list -->
+	<string name="oi_shopping_permission_read">Legir las listas de crompas</string>
+	<string name="oi_shopping_permission_read_descr">Allows an application to read shopping lists. Note that encrypted lists and items are provided in the encrypted format.</string>
+	<string name="oi_shopping_permission_write">Escriure las listas de crompas</string>
+	<string name="oi_shopping_permission_write_descr">Allows an application to create new lists and items or change existing ones.</string>
+	
+	
+	<!-- ***************************
+	     Preferences
+	     *************************** -->
+	
+    <string-array name="preference_sortorder_entries">
+    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    	<item>unchecked first, alphabetical</item>
+        <!-- Preference sort order: Sort by item name -->
+    	<item>alfabetic</item>
+        <!-- Preference sort order: Newest item first -->
+    	<item>novèl en primièr</item>
+        <!-- Preference sort order: Oldest item first -->
+    	<item>ancian en primièr</item>
+        <!-- Preference sort order: Sort alphabetically by tags -->
+    	<item>Libellat per òrdre alfabetic</item>
+        <!-- Preference sort order: Sort by price, the most expensive first -->
+    	<item>pus car en primièr</item>
+        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    	<item>unchecked first, tags alphabetical</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entries">
+    	<!-- Preference fontsize: tiny font size -->
+        <item>Minuscul</item>
+    	<!-- Preference fontsize: small font size -->
+        <item>Pichon</item>
+    	<!-- Preference fontsize: default font size-->
+    	<item>Per defaut</item>
+    	<!-- Preference fontsize: large font size -->
+        <item>Grand</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entries">
+    	<!-- Preference capitalization: No capitalization -->
+        <item>Pas cap</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+        <item>Per frasa</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+        <item>Per mot</item>
+    </string-array>
+
+
+	<!-- ***************************
+	     Automation
+	     *************************** -->
+	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<string name="label_select_action">Seleccionar una accion :</string>
+	
+	<!-- Label above button that opens a list of all shopping lists to choose from. -->
+	<string name="label_select_list">Seleccionar una lista :</string>
+	
+	<!-- Arrays -->
+	
+    <string-array name="automation_actions">
+    	<!-- Automation action to clean up a list. -->
+    	<item>Netejar la lista</item>
+    </string-array>
+    
+</resources>

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">This is a dummy translation so that the credits are counted as translated.
+
+Launchpad Contributions:
+  Mads Peter Rommedahl https://launchpad.net/~lhademmor</string>
+	
+	<!-- Strings for OI About -->
+	<string name="about_comments">OI Shopping List lader dig holde styr på din indkøbsliste. Du kan også bruge den til andre slags lister, for eksempel huskelister eller gæstelister til en fest.</string>
+	<string name="about_website_label">OI Shopping List hos OpenIntents</string>
+
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<string name="app_name">OI Shopping List</string>
+
+	<!-- Shopping Provider -->
+	<string name="new_item">Ny vare</string>
+	<string name="new_list">Ny liste</string>
+	<string name="send">Send liste</string>
+	<string name="empty_list_not_sent">Tom liste ikke sendt</string>
+	<string name="email_not_available">Ingen programmer til rådighed til at kunne sende</string>
+	<string name="my_shopping_list">Min indkøbsliste</string>
+	<string name="new_list_hint">f.eks. ønskeliste, familieliste</string>
+	<string name="clean_up_list">Ryd op i liste</string>
+	<string name="delete_list">Slet liste</string>
+	<string name="ask_new_list">Indtast navn på ny indkøbsliste</string>
+	<string name="ask_rename_list">Omdøb indkøbsliste</string>
+	<string name="ask_edit_item">Redigér vare</string>
+	<string name="please_enter_name">Indtast venligst et navn</string>
+	<string name="no_items_marked">Ingen varer er markeret som overstregede</string>
+	<string name="confirm_delete_list">Er du sikker på at du vil slette denne indkøbsliste?</string>
+	<string name="no_shopping_provider">Fejl under behandling af indkøbsliste.</string>
+	<string name="pick_item">Vælg en vare</string>
+	<string name="pick_list">Vælg en liste</string>
+	<string name="theme">Tema</string>
+	<string name="theme_settings">Temaindstillinger</string>
+	<string name="rename_list">Omdøb liste</string>
+	<string name="menu_mark_item">Markér vare</string>
+	<string name="menu_edit_item">Redigér vare</string>
+	<string name="menu_auto_add">Auto-tilføj</string>
+	<string name="no_items_available">Ingen tilgængelige varer</string>
+	
+	<!-- Remove item from this list, but keep it internally, so that the user
+	     can choose it later for inclusion again. Information like
+	     tags or price will be kept. -->
+	<string name="menu_remove_item">Fjern vare fra liste</string>
+	
+	<!-- Delete this item completely. If the user wants to add it again, they
+	     have to enter all the information again. -->
+	<string name="menu_delete_item">Slet vare permanent</string>
+	<string name="menu_move_item">Move item to other list</string>
+	<!-- Button label to add an item to the list. -->
+	<string name="add">Tilføj</string>
+	
+	<string name="menu_pick_items">Vælg varer</string>
+	<string name="menu_start_shopping">Indkøb</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="pick_items_titel">%s - Vælg varer</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="shopping_title">%s - Indkøb</string>
+	
+	<string name="tags">Mærker (Tags)</string>
+	<string name="price">Pris</string>
+	<string name="item">Vare</string>
+	<string name="quantity">Antal</string>
+	
+	<!-- Total sum of all prices. \'%s\' is the sum -->
+	<string name="total">I alt: %s</string>
+	
+	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+	<string name="total_checked">Afkrydset: %s</string>
+	
+	<string name="delete_item_confirm">Er du sikker på at du vil slette denne vare, dens mærker og dens pris permanent fra alle indkøbslister?</string>
+	<string name="delete">Delete</string>
+	
+	<!-- Added to an item to indicate it was bought. -->
+	<string name="suffix_checked">... OK</string>
+	<string name="empty"/>
+	
+	<!-- The shortcut is created on the home screen. -->
+	<string name="pick_list_for_shortcut">Vælg liste til genvej</string>
+	
+	<!-- Shown if external application wants to insert new items. -->
+	<string name="pick_list_to_insert_items">Vælg liste til at indsætte varer</string>
+	
+	<!-- Theme related -->
+	<string name="theme_pick">Vælg et tema</string>
+	<string name="theme_description">Vælg et tema til denne liste</string>
+	<string name="theme_default">Default</string>
+	<string name="theme_classic">Basal</string>
+	<string name="theme_bugdroid">Android</string>
+	<string name="theme_classic_export">Klassisk (fra OI Shopping List)</string>
+	<string name="theme_bugdroid_export">Android (fra OI Shopping List)</string>
+
+	<!--     Dialog box    -->
+	<string name="ok">OK</string>
+	<string name="cancel">Annullér</string>
+	<string name="use_theme_for_all_lists">Brug dette tema til alle lister</string>
+	<string name="get_more_themes">Hent flere temaer</string>
+	
+	<!-- preferences -->
+	<string name="preferences">Indstillinger</string>
+	
+    <string name="preference_application">Programindstillinger</string>
+    
+	<string name="preference_unchecked_on_top">Uafkrydset på top</string>
+	<string name="preference_unchecked_on_top_summary">Vis altid uafkrydsede varer først</string>
+	<string name="preference_fontsize">Skriftstørrelse</string>
+	<string name="preference_fontsize_summary">Ændr skriftstørrelse</string>
+	<string name="preference_fontsize_dialog_title">Vælg skriftstørrelse</string>
+	<string name="preference_sortorder_title">Sorteringsrækkefølge</string>
+	<string name="preference_sortorder_summary">Ændr sorteringsrækkefølge af varer</string>
+	<string name="preference_sortorder_dialog_title">Vælg sorteringsrækkefølge</string>
+	<string name="preference_loadlastused_title">Indlæs senest brugte liste</string>
+	<string name="preference_loadlastused_summary">Start altid med den liste der blev vist sidste gang.</string>
+	<string name="preference_capitalization_title">Brug af store bogstaver</string>
+	<string name="preference_capitalization_summary">Sæt automatisk store bogstaver i indtastninger</string>
+	<string name="preference_capitalization_dialog_title">Vælg brug af store bogstaver</string> 
+	<string name="preference_hidechecked_title">Skjul afkrydsede varer</string>
+	<string name="preference_hidechecked_summary">Skjul øjeblikkeligt varer som er blevet afkrydset</string>
+	<string name="preference_showprice_title">Vis pris</string>
+	<string name="preference_showprice_summary">Vises som en ekstra kolonne i lister</string>
+	<string name="preference_showtags_title">Vis mærker</string>
+	<string name="preference_showtags_summary">Vises som en ekstra kolonne i lister</string>
+	<string name="preference_showquantity_title">Vis kvantitet</string>
+	<string name="preference_showquantity_summary">Vises som en ekstra kolonne i lister</string>
+	
+	<!-- Preference title: Shake the phone to clean up the list. -->
+	<string name="preference_shake_title">Ryst for at rydde op</string>
+	
+	<!-- Preference summary: Shake the phone to clean up the list. -->
+	<string name="preference_shake_summary">Ryst telefonen for at rydde op i listen</string>
+	
+    <string name="preference_advanced">Avancerede indstillinger</string>
+    <string name="preference_advanced_summary">Yderligere indstillinger om udseende.</string>
+    
+    <!-- Preference category: General settings -->
+    <string name="preference_general">Generelt</string>
+    
+    <string name="preference_appearance">Udseende</string>
+    
+    <string name="preference_addons">Tilføjelser</string>
+    <string name="preference_get_addons">Hent nye tilføjelser</string>
+    <string name="preference_get_addons_summary">Søg efter tilføjelser og temaer online.</string>
+    <string name="preference_get_market_addons">Hent tilføjelser fra Market</string>
+    <string name="preference_get_developer_addons">Hent tilføjelser fra OpenIntents</string>
+    <string name="preference_extensions">Udvidelser</string>
+    <string name="preference_themes">Temaer</string>
+    <string name="preference_market_extensions_summary">Søg efter udvidelser på Android Market.</string>
+    <string name="preference_market_themes_summary">Søg efter temaer på Android Market.</string>
+    <string name="preference_developer_extensions_summary">Hent udvidelser fra OpenIntents\' hjemmeside.</string>
+	<string name="preference_developer_themes_summary">Hent temaer fra OpenIntents\' hjemmeside.</string>
+	
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">OI Shopping Lists licensaftale</string>
+	<string name="eula_accept">Acceptér</string>
+	<string name="eula_refuse">Annullér</string>
+
+	<!-- Update -->
+	<string name="update_box_text">Tjek venligst manuelt for opdateringer eller installér OI Update for automatiske påmindelser. Nuværende version: %s</string>
+	<string name="update_check_now">Tjek nu.</string>
+	<string name="update_get_updater">Hent OI Updater.</string>
+	<string name="update_error">Downloadprogram er ikke tilgængeligt.</string>
+	<string name="update">Tjek opdateringer</string>
+
+	<!-- About -->
+	<string name="about">Om</string>
+	<string name="aboutapp_not_available">Version %s\n\nIngen kompatible udvidelser til at vise fuld info (kontakt, tak til, licens) blev fundet.</string>
+	<string name="aboutapp_get">Hent OI About</string>
+	
+	<!-- ***************************
+	     Permissions
+	     *************************** -->
+	
+	<!-- OI Shopping list -->
+	<string name="oi_shopping_permission_read">læs indkøbslister</string>
+	<string name="oi_shopping_permission_read_descr">Tillader et program at læse indkøbslister. Bemærk at krypterede lister og varer kommer i det krypterede format.</string>
+	<string name="oi_shopping_permission_write">skriv indkøbslister</string>
+	<string name="oi_shopping_permission_write_descr">Tillader et program at oprette nye lister og varer eller ændre i eksisterende.</string>
+	
+	
+	<!-- ***************************
+	     Preferences
+	     *************************** -->
+	
+    <string-array name="preference_sortorder_entries">
+    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    	<item>uafkrydsede først, alfabetisk</item>
+        <!-- Preference sort order: Sort by item name -->
+    	<item>alfabetisk</item>
+        <!-- Preference sort order: Newest item first -->
+    	<item>nyeste først</item>
+        <!-- Preference sort order: Oldest item first -->
+    	<item>ældste først</item>
+        <!-- Preference sort order: Sort alphabetically by tags -->
+    	<item>mærker alfabetisk</item>
+        <!-- Preference sort order: Sort by price, the most expensive first -->
+    	<item>dyreste først</item>
+        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    	<item>uafkrydsede først, mærker alfabetisk</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entries">
+    	<!-- Preference fontsize: tiny font size -->
+        <item>Meget lille</item>
+    	<!-- Preference fontsize: small font size -->
+        <item>Lille</item>
+    	<!-- Preference fontsize: default font size-->
+    	<item>Default</item>
+    	<!-- Preference fontsize: large font size -->
+        <item>Stor</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entries">
+    	<!-- Preference capitalization: No capitalization -->
+        <item>Ingen</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+        <item>Pr. sætning</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+        <item>Pr. ord</item>
+    </string-array>
+
+
+	<!-- ***************************
+	     Automation
+	     *************************** -->
+	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<string name="label_select_action">Vælg handling:</string>
+	
+	<!-- Label above button that opens a list of all shopping lists to choose from. -->
+	<string name="label_select_list">Vælg liste:</string>
+	
+	<!-- Arrays -->
+	
+    <string-array name="automation_actions">
+    	<!-- Automation action to clean up a list. -->
+    	<item>Ryd op i liste</item>
+    </string-array>
+    
+</resources>

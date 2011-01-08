@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">Launchpad Contributions:
+  Peli https://launchpad.net/~peli0101
+  friedger https://launchpad.net/~friedger</string>
+	
+	<!-- Strings for OI About -->
+	<string name="about_comments">Ol Seznam nákupů vám dovoluje sledovat co máte nakoupit. Můžete ho také použít i pro jiné kontrolní seznamy, například seznam denních činností, nebo seznam hostů na večírek.</string>
+	<string name="about_website_label">Ol Seznam nákupů v OpenIntents</string>
+
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<string name="app_name">Ol Seznam nákupů</string>
+
+	<!-- Shopping Provider -->
+	<string name="new_item">Nový bod</string>
+	<string name="new_list">Nový seznam</string>
+	<string name="send">Poslat seznam</string>
+	<string name="empty_list_not_sent">Prázdný seznam není poslán</string>
+	<string name="email_not_available">Žádná aplikace není k dispozici pro odeslání</string>
+	<string name="my_shopping_list">Můj seznam nákupů</string>
+	<string name="new_list_hint">Např. seznam přání, rodinný seznam</string>
+	<string name="clean_up_list">Vyčistit seznam</string>
+	<string name="delete_list">Vymazat seznam</string>
+	<string name="ask_new_list">Vložit jméno nového seznamu nákupů</string>
+	<string name="ask_rename_list">Přejmenovat seznam nákupů</string>
+	<string name="ask_edit_item">Editovat bod</string>
+	<string name="please_enter_name">Prosím, napište jméno</string>
+	<string name="no_items_marked">Žádný bod není označen jako vyškrtlý</string>
+	<string name="confirm_delete_list">Chcete opravdu vymazat tento seznam nákupů?</string>
+	<string name="no_shopping_provider">Chyba v přístupu k seznamům nákupů</string>
+	<string name="pick_item">Zvolte bod</string>
+	<string name="pick_list">Zvolte seznam</string>
+	<string name="theme">Téma</string>
+	<string name="theme_settings">Téma nastavení</string>
+	<string name="rename_list">Přejmenovat seznam</string>
+	<string name="menu_mark_item">Označit bod</string>
+	<string name="menu_edit_item">Editovat bod</string>
+	<string name="menu_auto_add">Automaticky přidat</string>
+	<string name="no_items_available">Žádné položky nejsou k dispozici</string>
+	
+	<!-- Remove item from this list, but keep it internally, so that the user
+	     can choose it later for inclusion again. Information like
+	     tags or price will be kept. -->
+	<string name="menu_remove_item">Odstranit bod ze seznamu</string>
+	
+	<!-- Delete this item completely. If the user wants to add it again, they
+	     have to enter all the information again. -->
+	<string name="menu_delete_item">Permanentně vymazat bod</string>
+	<string name="menu_move_item">Move item to other list</string>
+	<!-- Button label to add an item to the list. -->
+	<string name="add">Přidat</string>
+	
+	<string name="menu_pick_items">Zvolit body</string>
+	<string name="menu_start_shopping">Nakupování</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="pick_items_titel">%s - Zvolit body</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="shopping_title">%s - Nakupování</string>
+	
+	<string name="tags">Štítky</string>
+	<string name="price">Cena</string>
+	<string name="item">Bod</string>
+	<string name="quantity">Množství</string>
+	
+	<!-- Total sum of all prices. \'%s\' is the sum -->
+	<string name="total">Celkem: %s</string>
+	
+	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+	<string name="total_checked">Kontrola: %s</string>
+	
+	<string name="delete_item_confirm">Určitě chcete permanentně vymazat tento bod, jeho označení a jeho cenu ze všech seznamů nákupů?</string>
+	<string name="delete">Vymazat</string>
+	
+	<!-- Added to an item to indicate it was bought. -->
+	<string name="suffix_checked">... Dobře</string>
+	<string name="empty"/>
+	
+	<!-- The shortcut is created on the home screen. -->
+	<string name="pick_list_for_shortcut">Zvolit seznam pro zkratku</string>
+	
+	<!-- Shown if external application wants to insert new items. -->
+	<string name="pick_list_to_insert_items">Zvolit seznam kam vsunout body</string>
+	
+	<!-- Theme related -->
+	<string name="theme_pick">Zvolte téma</string>
+	<string name="theme_description">Zvolte téma pro tento seznam</string>
+	<string name="theme_default">Výchozí nastavení</string>
+	<string name="theme_classic">Klasické</string>
+	<string name="theme_bugdroid">Android</string>
+	<string name="theme_classic_export">Klasické (z Ol Seznamu nákupů)</string>
+	<string name="theme_bugdroid_export">Android (z Ol Seznamu nákupů)</string>
+
+	<!--     Dialog box    -->
+	<string name="ok">Dobře</string>
+	<string name="cancel">Zrušit</string>
+	<string name="use_theme_for_all_lists">Použít toto téma pro všechny seznamy</string>
+	<string name="get_more_themes">Dostaňte více témat</string>
+	
+	<!-- preferences -->
+	<string name="preferences">Nastavení</string>
+	
+    <string name="preference_application">Nastavení aplikace</string>
+    
+	<string name="preference_unchecked_on_top">Horní nezaškrtnutá</string>
+	<string name="preference_unchecked_on_top_summary">Vždy ukázat nezaškrtnutý bod první</string>
+	<string name="preference_fontsize">Velikost písma</string>
+	<string name="preference_fontsize_summary">Změnit velikost písma</string>
+	<string name="preference_fontsize_dialog_title">Zvolte velikost písma</string>
+	<string name="preference_sortorder_title">Třídit objednávku</string>
+	<string name="preference_sortorder_summary">Změnit roztřídění bodů na seznamu</string>
+	<string name="preference_sortorder_dialog_title">Zvolte řazení bodů</string>
+	<string name="preference_loadlastused_title">Natáhnout naposled použitý seznam</string>
+	<string name="preference_loadlastused_summary">Vždy začít se seznamem shlédnutým naposled</string>
+	<string name="preference_capitalization_title">Velká písmena</string>
+	<string name="preference_capitalization_summary">Automatická velká písmena vstupů</string>
+	<string name="preference_capitalization_dialog_title">Zvolte velká písmena</string> 
+	<string name="preference_hidechecked_title">Skrýt odškrtnuté body</string>
+	<string name="preference_hidechecked_summary">Ihned skrýt odškrtnuté body.</string>
+	<string name="preference_showprice_title">Ukázat cenu</string>
+	<string name="preference_showprice_summary">Ukázáno na seznamu jako další sloupek</string>
+	<string name="preference_showtags_title">Ukázat označené</string>
+	<string name="preference_showtags_summary">Ukázáno na seznamu jako další sloupek</string>
+	<string name="preference_showquantity_title">Ukázat množství</string>
+	<string name="preference_showquantity_summary">Ukázáno na seznamu jako další sloupek</string>
+	
+	<!-- Preference title: Shake the phone to clean up the list. -->
+	<string name="preference_shake_title">Pro vyčištění zatřást</string>
+	
+	<!-- Preference summary: Shake the phone to clean up the list. -->
+	<string name="preference_shake_summary">Pro vyčištění seznamu zatřást telefonem</string>
+	
+    <string name="preference_advanced">Pokročilá nastavení</string>
+    <string name="preference_advanced_summary">Dodatečná nastavení vzhledu</string>
+    
+    <!-- Preference category: General settings -->
+    <string name="preference_general">Obecné</string>
+    
+    <string name="preference_appearance">Vzhled</string>
+    
+    <string name="preference_addons">Doplňky</string>
+    <string name="preference_get_addons">Získejte nový doplněk</string>
+    <string name="preference_get_addons_summary">Hledejte na netu přídatky a témata</string>
+    <string name="preference_get_market_addons">Získejte doplňky z Marketu</string>
+    <string name="preference_get_developer_addons">Získejte doplňky z OpenIntents</string>
+    <string name="preference_extensions">Přídavky</string>
+    <string name="preference_themes">Témata</string>
+    <string name="preference_market_extensions_summary">Hledejte přídavky v Android Marketu.</string>
+    <string name="preference_market_themes_summary">Hledejte témata v Android Marketu.</string>
+    <string name="preference_developer_extensions_summary">Získejte přídatky z domovské stránky OpenIntents.</string>
+	<string name="preference_developer_themes_summary">Získejte témata z domovské stránky OpenIntents.</string>
+	
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">Ol Seznam nákupů EULA</string>
+	<string name="eula_accept">Přijmout</string>
+	<string name="eula_refuse">Zrušit</string>
+
+	<!-- Update -->
+	<string name="update_box_text">Prosím, kontrolujte manuálně aktualizace, nebo nainstalujte Ol Update pro automatická oznámení.
+Současná verze: %s</string>
+	<string name="update_check_now">Zkontrolovat teď.</string>
+	<string name="update_get_updater">Získejte Ol Updater.</string>
+	<string name="update_error">Aplikace není k dispozici ke stažení.</string>
+	<string name="update">Kontrola aktualizací</string>
+
+	<!-- About -->
+	<string name="about">O</string>
+	<string name="aboutapp_not_available">Kompatibilní verze %s\n\nNo přídatku je k dispozici k zobrazení úplných informací (kontakt, kredity, licence).</string>
+	<string name="aboutapp_get">Získejte Ol About</string>
+	
+	<!-- ***************************
+	     Permissions
+	     *************************** -->
+	
+	<!-- OI Shopping list -->
+	<string name="oi_shopping_permission_read">číst seznamy nákupů</string>
+	<string name="oi_shopping_permission_read_descr">Dovoluje aplikaci čtení seznamu nákupů. Vezměte na vědomí, že zakódované seznamy a body jsou dodány v zakódovaném formátu</string>
+	<string name="oi_shopping_permission_write">sepište seznamy nákupů</string>
+	<string name="oi_shopping_permission_write_descr">Dovoluje aplikaci k vytvoření nových seznamů a bodů, nebo ke změně stávajících.</string>
+	
+	
+	<!-- ***************************
+	     Preferences
+	     *************************** -->
+	
+    <string-array name="preference_sortorder_entries">
+    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    	<item>dát neodškrtnuté první: alfabeticky</item>
+        <!-- Preference sort order: Sort by item name -->
+    	<item>alfabeticky</item>
+        <!-- Preference sort order: Newest item first -->
+    	<item>nejnovější první</item>
+        <!-- Preference sort order: Oldest item first -->
+    	<item>nejstarší první</item>
+        <!-- Preference sort order: Sort alphabetically by tags -->
+    	<item>alfabeticky podle označení</item>
+        <!-- Preference sort order: Sort by price, the most expensive first -->
+    	<item>nejdražší první</item>
+        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    	<item>dát neodškrtnuté první, alfabeticky podle označení</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entries">
+    	<!-- Preference fontsize: tiny font size -->
+        <item>Nejmenší</item>
+    	<!-- Preference fontsize: small font size -->
+        <item>Malé</item>
+    	<!-- Preference fontsize: default font size-->
+    	<item>Výchozí nastavení</item>
+    	<!-- Preference fontsize: large font size -->
+        <item>Velké</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entries">
+    	<!-- Preference capitalization: No capitalization -->
+        <item>Žádné</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+        <item>Každou větu</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+        <item>Každé slovo</item>
+    </string-array>
+
+
+	<!-- ***************************
+	     Automation
+	     *************************** -->
+	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<string name="label_select_action">Zvolte úkon:</string>
+	
+	<!-- Label above button that opens a list of all shopping lists to choose from. -->
+	<string name="label_select_list">Zvolte seznam:</string>
+	
+	<!-- Arrays -->
+	
+    <string-array name="automation_actions">
+    	<!-- Automation action to clean up a list. -->
+    	<item>Vyčistit seznam</item>
+    </string-array>
+    
+</resources>

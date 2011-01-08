@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">Launchpad Contributions:
+  Peli https://launchpad.net/~peli0101
+  bkiw https://launchpad.net/~bkiw
+  friedger https://launchpad.net/~friedger</string>
+	
+	<!-- Strings for OI About -->
+	<string name="about_comments">OI Shopping list lets you keep track of your shopping items. You can also use it for other kinds of check lists, for example for ToDo lists or party guest lists.</string>
+	<string name="about_website_label">OpenIntentsのOI Shopping list</string>
+
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<string name="app_name">OI Shopping list</string>
+
+	<!-- Shopping Provider -->
+	<string name="new_item">新規アイテム</string>
+	<string name="new_list">新規リスト</string>
+	<string name="send">リストを送信</string>
+	<string name="empty_list_not_sent">Empty list not sent.</string>
+	<string name="email_not_available">利用できる送信用アプリがありません。</string>
+	<string name="my_shopping_list">My shopping list</string>
+	<string name="new_list_hint">例：欲しいものリスト, 家族一覧</string>
+	<string name="clean_up_list">リストのクリーン</string>
+	<string name="delete_list">リストを削除</string>
+	<string name="ask_new_list">新しいリストの名前を入力して下さい</string>
+	<string name="ask_rename_list">リストの名前を変更</string>
+	<string name="ask_edit_item">アイテムの編集</string>
+	<string name="please_enter_name">名前を入力して下さい</string>
+	<string name="no_items_marked">チェック済みのアイテムがありません。</string>
+	<string name="confirm_delete_list">リストを削除してもよろしいですか？</string>
+	<string name="no_shopping_provider">リストへのアクセスでエラーが発生しました。</string>
+	<string name="pick_item">アイテムを選択</string>
+	<string name="pick_list">リストを選択</string>
+	<string name="theme">テーマ</string>
+	<string name="theme_settings">テーマの設定</string>
+	<string name="rename_list">リストの名前を変更</string>
+	<string name="menu_mark_item">アイテムをマーク</string>
+	<string name="menu_edit_item">アイテムの編集</string>
+	<string name="menu_auto_add">自動追加</string>
+	<string name="no_items_available">No items available</string>
+	
+	<!-- Remove item from this list, but keep it internally, so that the user
+	     can choose it later for inclusion again. Information like
+	     tags or price will be kept. -->
+	<string name="menu_remove_item">Remove item from list</string>
+	
+	<!-- Delete this item completely. If the user wants to add it again, they
+	     have to enter all the information again. -->
+	<string name="menu_delete_item">Delete item permanently</string>
+	<string name="menu_move_item">Move item to other list</string>
+	<!-- Button label to add an item to the list. -->
+	<string name="add">追加</string>
+	
+	<string name="menu_pick_items">アイテムを選択</string>
+	<string name="menu_start_shopping">ショッピング</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="pick_items_titel">%s - アイテムを選択</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="shopping_title">%s - Shopping</string>
+	
+	<string name="tags">タグ</string>
+	<string name="price">価格</string>
+	<string name="item">アイテム</string>
+	<string name="quantity">数量</string>
+	
+	<!-- Total sum of all prices. \'%s\' is the sum -->
+	<string name="total">合計価格: %s</string>
+	
+	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+	<string name="total_checked">チェック済合計価格: %s</string>
+	
+	<string name="delete_item_confirm">Are you sure you want to permanently delete this item, its tags, and its price from all shopping lists?</string>
+	<string name="delete">削除</string>
+	
+	<!-- Added to an item to indicate it was bought. -->
+	<string name="suffix_checked">... OK</string>
+	<string name="empty"/>
+	
+	<!-- The shortcut is created on the home screen. -->
+	<string name="pick_list_for_shortcut">リストのショートカットを作成</string>
+	
+	<!-- Shown if external application wants to insert new items. -->
+	<string name="pick_list_to_insert_items">Pick list to insert items</string>
+	
+	<!-- Theme related -->
+	<string name="theme_pick">テーマを選択</string>
+	<string name="theme_description">このリストのテーマを選択</string>
+	<string name="theme_default">デフォルト</string>
+	<string name="theme_classic">クラシック</string>
+	<string name="theme_bugdroid">Android</string>
+	<string name="theme_classic_export">Classic (from OI Shopping List)</string>
+	<string name="theme_bugdroid_export">Android (from OI Shopping List)</string>
+
+	<!--     Dialog box    -->
+	<string name="ok">OK</string>
+	<string name="cancel">キャンセル</string>
+	<string name="use_theme_for_all_lists">テーマを全てのリストで使用する</string>
+	<string name="get_more_themes">テーマを入手</string>
+	
+	<!-- preferences -->
+	<string name="preferences">設定</string>
+	
+    <string name="preference_application">アプリケーションの設定</string>
+    
+	<string name="preference_unchecked_on_top">Unchecked on top</string>
+	<string name="preference_unchecked_on_top_summary">未チェックのアイテムを先頭に表示</string>
+	<string name="preference_fontsize">フォントサイズ</string>
+	<string name="preference_fontsize_summary">フォントサイズを変更</string>
+	<string name="preference_fontsize_dialog_title">フォントサイズを選択</string>
+	<string name="preference_sortorder_title">ソート順</string>
+	<string name="preference_sortorder_summary">アイテムのソート順を変更</string>
+	<string name="preference_sortorder_dialog_title">ソート順を選択</string>
+	<string name="preference_loadlastused_title">Load last list used</string>
+	<string name="preference_loadlastused_summary">Always start with the list viewed last time.</string>
+	<string name="preference_capitalization_title">大文字化</string>
+	<string name="preference_capitalization_summary">アイテム追加時に自動的に大文字化する</string>
+	<string name="preference_capitalization_dialog_title">大文字化の方法を選択</string> 
+	<string name="preference_hidechecked_title">チェックしたアイテムを隠す</string>
+	<string name="preference_hidechecked_summary">Immediately hide items checked off.</string>
+	<string name="preference_showprice_title">価格を表示</string>
+	<string name="preference_showprice_summary">リストに列を追加表示。</string>
+	<string name="preference_showtags_title">タグを表示</string>
+	<string name="preference_showtags_summary">リストに列を追加表示。</string>
+	<string name="preference_showquantity_title">数量を表示</string>
+	<string name="preference_showquantity_summary">リストに列を追加表示。</string>
+	
+	<!-- Preference title: Shake the phone to clean up the list. -->
+	<string name="preference_shake_title">シェイクでリストをクリーン</string>
+	
+	<!-- Preference summary: Shake the phone to clean up the list. -->
+	<string name="preference_shake_summary">端末をシェイクする事でリストをクリーンする。</string>
+	
+    <string name="preference_advanced">詳細設定</string>
+    <string name="preference_advanced_summary">表示に関する追加設定。</string>
+    
+    <!-- Preference category: General settings -->
+    <string name="preference_general">一般</string>
+    
+    <string name="preference_appearance">表示</string>
+    
+    <string name="preference_addons">アドオン</string>
+    <string name="preference_get_addons">アドオンを取得</string>
+    <string name="preference_get_addons_summary">拡張機能とテーマをインターネットで検索</string>
+    <string name="preference_get_market_addons">アドオンをマーケットから取得</string>
+    <string name="preference_get_developer_addons">アドオンをOpenIntentsから取得</string>
+    <string name="preference_extensions">拡張機能</string>
+    <string name="preference_themes">テーマ</string>
+    <string name="preference_market_extensions_summary">拡張機能をAndroid Marketから検索</string>
+    <string name="preference_market_themes_summary">テーマをAndroid Marketから検索</string>
+    <string name="preference_developer_extensions_summary">拡張機能をOpenIntentsから検索</string>
+	<string name="preference_developer_themes_summary">テーマをOpenIntentsから取得</string>
+	
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">OI Shoppingの利用規約</string>
+	<string name="eula_accept">許可</string>
+	<string name="eula_refuse">キャンセル</string>
+
+	<!-- Update -->
+	<string name="update_box_text">新バージョンを手動でチェックするか、自動通知のためにOI Updateをインストールしてください。現在のバージョン: %s</string>
+	<string name="update_check_now">確認中。</string>
+	<string name="update_get_updater">OI Updaterを入手する</string>
+	<string name="update_error">ダウンロード用アプリが利用できません。</string>
+	<string name="update">アップデートをチェック</string>
+
+	<!-- About -->
+	<string name="about">このソフトウェアについて</string>
+	<string name="aboutapp_not_available">バージョン %s\n\n全情報(連絡先・クレジット・ライセンスなど)を表示するための互換性のある拡張機能は利用できません。</string>
+	<string name="aboutapp_get">OI Aboutを入手する</string>
+	
+	<!-- ***************************
+	     Permissions
+	     *************************** -->
+	
+	<!-- OI Shopping list -->
+	<string name="oi_shopping_permission_read">ショッピングリストの閲覧</string>
+	<string name="oi_shopping_permission_read_descr">他のアプリケーションにショッピングリストを閲覧する事を許可します。暗号化されたリストやアイテムは暗号化された状態で提供される事に注意してください。</string>
+	<string name="oi_shopping_permission_write">ショッピングリストの作成・編集</string>
+	<string name="oi_shopping_permission_write_descr">他のアプリケーションにリストやアイテムの新規追加や編集を許可する。</string>
+	
+	
+	<!-- ***************************
+	     Preferences
+	     *************************** -->
+	
+    <string-array name="preference_sortorder_entries">
+    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    	<item>unchecked first, alphabetical</item>
+        <!-- Preference sort order: Sort by item name -->
+    	<item>アルファベット順</item>
+        <!-- Preference sort order: Newest item first -->
+    	<item>新しいアイテム順</item>
+        <!-- Preference sort order: Oldest item first -->
+    	<item>古いアイテム順</item>
+        <!-- Preference sort order: Sort alphabetically by tags -->
+    	<item>タグのアルファベット順</item>
+        <!-- Preference sort order: Sort by price, the most expensive first -->
+    	<item>価格の高い順</item>
+        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    	<item>unchecked first, tags alphabetical</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entries">
+    	<!-- Preference fontsize: tiny font size -->
+        <item>極小</item>
+    	<!-- Preference fontsize: small font size -->
+        <item>小</item>
+    	<!-- Preference fontsize: default font size-->
+    	<item>デフォルト</item>
+    	<!-- Preference fontsize: large font size -->
+        <item>大</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entries">
+    	<!-- Preference capitalization: No capitalization -->
+        <item>なし</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+        <item>文単位</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+        <item>単語単位</item>
+    </string-array>
+
+
+	<!-- ***************************
+	     Automation
+	     *************************** -->
+	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<string name="label_select_action">アクションを選択</string>
+	
+	<!-- Label above button that opens a list of all shopping lists to choose from. -->
+	<string name="label_select_list">リストを選択</string>
+	
+	<!-- Arrays -->
+	
+    <string-array name="automation_actions">
+    	<!-- Automation action to clean up a list. -->
+    	<item>リストのクリーン</item>
+    </string-array>
+    
+</resources>

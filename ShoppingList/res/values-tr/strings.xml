@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">This is a dummy translation so that the credits are counted as translated.
+
+Launchpad Contributions:
+  zeugma https://launchpad.net/~sunder67</string>
+	
+	<!-- Strings for OI About -->
+	<string name="about_comments">OI Shopping list lets you keep track of your shopping items. You can also use it for other kinds of check lists, for example for ToDo lists or party guest lists.</string>
+	<string name="about_website_label">OI Shopping list at OpenIntents</string>
+
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<string name="app_name">OI Alışveriş listesi</string>
+
+	<!-- Shopping Provider -->
+	<string name="new_item">Yeni öğe</string>
+	<string name="new_list">Yeni liste</string>
+	<string name="send">Send list</string>
+	<string name="empty_list_not_sent">Empty list not sent.</string>
+	<string name="email_not_available">No application available for sending.</string>
+	<string name="my_shopping_list">Alışveriş listem</string>
+	<string name="new_list_hint">i.e. wishlist, family list</string>
+	<string name="clean_up_list">Clean up list</string>
+	<string name="delete_list">Listeyi sil</string>
+	<string name="ask_new_list">Yeni alışveriş listesinin adını girin</string>
+	<string name="ask_rename_list">Alışveriş listesini  yeniden adlandır</string>
+	<string name="ask_edit_item">Öğeyi düzenle</string>
+	<string name="please_enter_name">Bir isim girin</string>
+	<string name="no_items_marked">No items are marked as crossed out.</string>
+	<string name="confirm_delete_list">Alışveriş listesini gerçekten silmek istiyor musunuz?</string>
+	<string name="no_shopping_provider">Error while accessing shopping lists.</string>
+	<string name="pick_item">Pick an item</string>
+	<string name="pick_list">Pick a list</string>
+	<string name="theme">Tema</string>
+	<string name="theme_settings">Tema ayarları</string>
+	<string name="rename_list">Rename list</string>
+	<string name="menu_mark_item">Mark item</string>
+	<string name="menu_edit_item">Öğeyi düzenle</string>
+	<string name="menu_auto_add">Auto add</string>
+	<string name="no_items_available">Hiçbir öğe mevcut değil</string>
+	
+	<!-- Remove item from this list, but keep it internally, so that the user
+	     can choose it later for inclusion again. Information like
+	     tags or price will be kept. -->
+	<string name="menu_remove_item">Listeden öğeyi kaldır</string>
+	
+	<!-- Delete this item completely. If the user wants to add it again, they
+	     have to enter all the information again. -->
+	<string name="menu_delete_item">Öğeyi kalıcı olarak sil</string>
+	<string name="menu_move_item">Move item to other list</string>
+	<!-- Button label to add an item to the list. -->
+	<string name="add">Ekle</string>
+	
+	<string name="menu_pick_items">Pick items</string>
+	<string name="menu_start_shopping">Alışveriş</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="pick_items_titel">%s - Pick items</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="shopping_title">%s - Alışveriş</string>
+	
+	<string name="tags">Etiketler</string>
+	<string name="price">Fiyat</string>
+	<string name="item">Öğe</string>
+	<string name="quantity">Adet</string>
+	
+	<!-- Total sum of all prices. \'%s\' is the sum -->
+	<string name="total">Toplam: %s</string>
+	
+	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+	<string name="total_checked">Checked: %s</string>
+	
+	<string name="delete_item_confirm">Are you sure you want to permanently delete this item, its tags, and its price from all shopping lists?</string>
+	<string name="delete">Sil</string>
+	
+	<!-- Added to an item to indicate it was bought. -->
+	<string name="suffix_checked">...TAMAM</string>
+	<string name="empty"/>
+	
+	<!-- The shortcut is created on the home screen. -->
+	<string name="pick_list_for_shortcut">Pick list for shortcut</string>
+	
+	<!-- Shown if external application wants to insert new items. -->
+	<string name="pick_list_to_insert_items">Pick list to insert items</string>
+	
+	<!-- Theme related -->
+	<string name="theme_pick">Pick a theme</string>
+	<string name="theme_description">Liste için bir  tema seçin</string>
+	<string name="theme_default">Ön tanımlı</string>
+	<string name="theme_classic">Klasik</string>
+	<string name="theme_bugdroid">Android</string>
+	<string name="theme_classic_export">Klasik (OI Alışveriş Listesinden)</string>
+	<string name="theme_bugdroid_export">Android (OI Alışveriş Listesinden)</string>
+
+	<!--     Dialog box    -->
+	<string name="ok">TAMAM</string>
+	<string name="cancel">İptal</string>
+	<string name="use_theme_for_all_lists">Tüm listeler için bu temayı kullan</string>
+	<string name="get_more_themes">Daha fazla tema al</string>
+	
+	<!-- preferences -->
+	<string name="preferences">Ayarlar</string>
+	
+    <string name="preference_application">Uygulama ayarları</string>
+    
+	<string name="preference_unchecked_on_top">Unchecked on top</string>
+	<string name="preference_unchecked_on_top_summary">Always show unchecked items first</string>
+	<string name="preference_fontsize">Yazı tipi boyutu</string>
+	<string name="preference_fontsize_summary">Yazı boyutunu değiştir</string>
+	<string name="preference_fontsize_dialog_title">Yazı boyutunu seçin</string>
+	<string name="preference_sortorder_title">Sort order</string>
+	<string name="preference_sortorder_summary">Change sort order of list items</string>
+	<string name="preference_sortorder_dialog_title">Choose sort order</string>
+	<string name="preference_loadlastused_title">Load last list used</string>
+	<string name="preference_loadlastused_summary">Always start with the list viewed last time.</string>
+	<string name="preference_capitalization_title">Capitalization</string>
+	<string name="preference_capitalization_summary">Automatic capitalization of entries</string>
+	<string name="preference_capitalization_dialog_title">Choose capitalization</string> 
+	<string name="preference_hidechecked_title">Hide checked items</string>
+	<string name="preference_hidechecked_summary">Immediately hide items checked off.</string>
+	<string name="preference_showprice_title">Fiyat göster</string>
+	<string name="preference_showprice_summary">Shown as extra column in list.</string>
+	<string name="preference_showtags_title">Etiketleri göster</string>
+	<string name="preference_showtags_summary">Shown as extra column in list.</string>
+	<string name="preference_showquantity_title">Miktar göster</string>
+	<string name="preference_showquantity_summary">Shown as extra column in list.</string>
+	
+	<!-- Preference title: Shake the phone to clean up the list. -->
+	<string name="preference_shake_title">Shake to clean up</string>
+	
+	<!-- Preference summary: Shake the phone to clean up the list. -->
+	<string name="preference_shake_summary">Shake the phone to clean up the list.</string>
+	
+    <string name="preference_advanced">Gelişmiş ayarlar</string>
+    <string name="preference_advanced_summary">Additional settings regarding the appearance.</string>
+    
+    <!-- Preference category: General settings -->
+    <string name="preference_general">Genel</string>
+    
+    <string name="preference_appearance">Appearance</string>
+    
+    <string name="preference_addons">Eklentiler</string>
+    <string name="preference_get_addons">Yeni eklentiler al</string>
+    <string name="preference_get_addons_summary">Eklenti ve tema için çevrimiçi arama</string>
+    <string name="preference_get_market_addons">Marketten yeni eklentiler al</string>
+    <string name="preference_get_developer_addons">OpenIntents\'den yeni eklentiler al</string>
+    <string name="preference_extensions">Uzantılar</string>
+    <string name="preference_themes">Temalar</string>
+    <string name="preference_market_extensions_summary">Android Markette uzantıları arayın.</string>
+    <string name="preference_market_themes_summary">Android Markette temaları arayın.</string>
+    <string name="preference_developer_extensions_summary">Get extensions from the OpenIntents homepage.</string>
+	<string name="preference_developer_themes_summary">Get themes from the OpenIntents homepage.</string>
+	
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">OI Shopping List kullanıcı lisans sözleşmesi (EULA)</string>
+	<string name="eula_accept">Kabul</string>
+	<string name="eula_refuse">İptal</string>
+
+	<!-- Update -->
+	<string name="update_box_text">Please check manually for updates or install OI Update
+for automatic notifications.
+Current version: %s
+	</string>
+	<string name="update_check_now">Şimdi kontrol edin.</string>
+	<string name="update_get_updater">OI Güncellemelerini al.</string>
+	<string name="update_error">Download application not available.</string>
+	<string name="update">Güncellemeleri kontrol et</string>
+
+	<!-- About -->
+	<string name="about">Hakkında</string>
+	<string name="aboutapp_not_available">Sürüm %s\n\n Uyumlu uzantısı mevcut tüm bilgileri (iletişim, krediler, lisans) gösterilecek.</string>
+	<string name="aboutapp_get">Get OI About</string>
+	
+	<!-- ***************************
+	     Permissions
+	     *************************** -->
+	
+	<!-- OI Shopping list -->
+	<string name="oi_shopping_permission_read">alışveriş listelerini oku</string>
+	<string name="oi_shopping_permission_read_descr">Allows an application to read shopping lists. Note that encrypted lists and items are provided in the encrypted format.</string>
+	<string name="oi_shopping_permission_write">write shopping lists</string>
+	<string name="oi_shopping_permission_write_descr">Allows an application to create new lists and items or change existing ones.</string>
+	
+	
+	<!-- ***************************
+	     Preferences
+	     *************************** -->
+	
+    <string-array name="preference_sortorder_entries">
+    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    	<item>unchecked first, alphabetical</item>
+        <!-- Preference sort order: Sort by item name -->
+    	<item>alfabetik</item>
+        <!-- Preference sort order: Newest item first -->
+    	<item>newest first</item>
+        <!-- Preference sort order: Oldest item first -->
+    	<item>oldest first</item>
+        <!-- Preference sort order: Sort alphabetically by tags -->
+    	<item>tags alphabetical</item>
+        <!-- Preference sort order: Sort by price, the most expensive first -->
+    	<item>most expensive first</item>
+        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    	<item>unchecked first, tags alphabetical</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entries">
+    	<!-- Preference fontsize: tiny font size -->
+        <item>Minik</item>
+    	<!-- Preference fontsize: small font size -->
+        <item>Küçük</item>
+    	<!-- Preference fontsize: default font size-->
+    	<item>Ön tanımlı</item>
+    	<!-- Preference fontsize: large font size -->
+        <item>Büyük</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entries">
+    	<!-- Preference capitalization: No capitalization -->
+        <item>Hiçbiri</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+        <item>Per Sentence</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+        <item>Per Word</item>
+    </string-array>
+
+
+	<!-- ***************************
+	     Automation
+	     *************************** -->
+	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<string name="label_select_action">Eylem seçin:</string>
+	
+	<!-- Label above button that opens a list of all shopping lists to choose from. -->
+	<string name="label_select_list">Liste seç:</string>
+	
+	<!-- Arrays -->
+	
+    <string-array name="automation_actions">
+    	<!-- Automation action to clean up a list. -->
+    	<item>Clean up list</item>
+    </string-array>
+    
+</resources>

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">Launchpad Contributions:
+  Bernd Schlapsi https://launchpad.net/~bernd-sch
+  Fabian Riechsteiner https://launchpad.net/~ruffy91-gmail
+  Peli https://launchpad.net/~peli0101
+  SpaceCafé https://launchpad.net/~spacecafe
+  friedger https://launchpad.net/~friedger
+  markus.ruderman https://launchpad.net/~markus-ruderman</string>
+	
+	<!-- Strings for OI About -->
+	<string name="about_comments">Mit der OI Einkaufsliste haben Sie Ihre Einkäufe im Griff. Sie können aber auch andere Listen erstellen, wie zum Beispiel eine Aufgabenliste oder eine Gästeliste für die Party.</string>
+	<string name="about_website_label">OI Einkaufsliste bei OpenIntents</string>
+
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<string name="app_name">OI Einkaufsliste</string>
+
+	<!-- Shopping Provider -->
+	<string name="new_item">Neuer Eintrag</string>
+	<string name="new_list">Neue Liste</string>
+	<string name="send">Liste senden</string>
+	<string name="empty_list_not_sent">Leere Liste wurde nicht gesendet.</string>
+	<string name="email_not_available">Keine Anwendung zum Senden vorhanden.</string>
+	<string name="my_shopping_list">Meine Einkaufsliste</string>
+	<string name="new_list_hint">z.B. Wunschliste, Familienliste</string>
+	<string name="clean_up_list">Liste aufräumen</string>
+	<string name="delete_list">Liste löschen</string>
+	<string name="ask_new_list">Name der neuen Liste eingeben</string>
+	<string name="ask_rename_list">Liste umbenennen</string>
+	<string name="ask_edit_item">Eintrag bearbeiten</string>
+	<string name="please_enter_name">Bitte Namen eingeben</string>
+	<string name="no_items_marked">Kein Eintrag ist als erledigt gesetzt.</string>
+	<string name="confirm_delete_list">Wollen Sie diese Liste wirklich löschen?</string>
+	<string name="no_shopping_provider">Fehler bei Zugriff auf die Einkaufsliste.</string>
+	<string name="pick_item">Eintrag auswählen</string>
+	<string name="pick_list">Wählen Sie eine Liste</string>
+	<string name="theme">Design</string>
+	<string name="theme_settings">Design Einstellungen</string>
+	<string name="rename_list">Liste umbenennen</string>
+	<string name="menu_mark_item">Eintrag markieren</string>
+	<string name="menu_edit_item">Eintrag bearbeiten</string>
+	<string name="menu_auto_add">Automatisch hinzufügen</string>
+	<string name="no_items_available">Keine Einträge vorhanden</string>
+	
+	<!-- Remove item from this list, but keep it internally, so that the user
+	     can choose it later for inclusion again. Information like
+	     tags or price will be kept. -->
+	<string name="menu_remove_item">Eintrag von der Liste löschen</string>
+	
+	<!-- Delete this item completely. If the user wants to add it again, they
+	     have to enter all the information again. -->
+	<string name="menu_delete_item">Eintrag vollständig löschen</string>
+	<string name="menu_move_item">Move item to other list</string>
+	<!-- Button label to add an item to the list. -->
+	<string name="add">Hinzufügen</string>
+	
+	<string name="menu_pick_items">Eintrag auswählen</string>
+	<string name="menu_start_shopping">Einkaufen</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="pick_items_titel">%s - Eintrag auswählen</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="shopping_title">%s - Einkaufen</string>
+	
+	<string name="tags">Stichwörter</string>
+	<string name="price">Preis</string>
+	<string name="item">Eintrag</string>
+	<string name="quantity">Menge</string>
+	
+	<!-- Total sum of all prices. \'%s\' is the sum -->
+	<string name="total">Summe: %s</string>
+	
+	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+	<string name="total_checked">Erledigt: %s</string>
+	
+	<string name="delete_item_confirm">Sind Sie sicher, dass Sie diesen Eintrag, die dazugehörigen Stichwörter und den Preis von allen Einkaufslisten löschen möchten?</string>
+	<string name="delete">Löschen</string>
+	
+	<!-- Added to an item to indicate it was bought. -->
+	<string name="suffix_checked">... OK</string>
+	<string name="empty"/>
+	
+	<!-- The shortcut is created on the home screen. -->
+	<string name="pick_list_for_shortcut">Liste für Verknüpfung auswählen</string>
+	
+	<!-- Shown if external application wants to insert new items. -->
+	<string name="pick_list_to_insert_items">Liste wählen um den Eintrag einzufügen</string>
+	
+	<!-- Theme related -->
+	<string name="theme_pick">Design auswählen</string>
+	<string name="theme_description">Wählen Sie ein Design für die Liste</string>
+	<string name="theme_default">Standard</string>
+	<string name="theme_classic">Klassisch</string>
+	<string name="theme_bugdroid">Android</string>
+	<string name="theme_classic_export">Klassisch (von OI Einkaufsliste)</string>
+	<string name="theme_bugdroid_export">Android (von OI Einkaufsliste)</string>
+
+	<!--     Dialog box    -->
+	<string name="ok">OK</string>
+	<string name="cancel">Abbrechen</string>
+	<string name="use_theme_for_all_lists">Dieses Design für alle Listen verwenden</string>
+	<string name="get_more_themes">Neue Designs herunterladen</string>
+	
+	<!-- preferences -->
+	<string name="preferences">Einstellungen</string>
+	
+    <string name="preference_application">Einstellungen der Anwendung</string>
+    
+	<string name="preference_unchecked_on_top">Nicht erledigte Einträge zuerst anzeigen</string>
+	<string name="preference_unchecked_on_top_summary">Immer nicht erledigte Einträge zuerst anzeigen</string>
+	<string name="preference_fontsize">Schriftgröße</string>
+	<string name="preference_fontsize_summary">Schriftgröße ändern</string>
+	<string name="preference_fontsize_dialog_title">Wählen Sie die Schriftgröße</string>
+	<string name="preference_sortorder_title">Sortierung</string>
+	<string name="preference_sortorder_summary">Sortierung der Einträge auswählen</string>
+	<string name="preference_sortorder_dialog_title">Wählen Sie eine Sortierung</string>
+	<string name="preference_loadlastused_title">Verwendete Liste merken</string>
+	<string name="preference_loadlastused_summary">Immer die zuletzt benutzte Liste verwenden</string>
+	<string name="preference_capitalization_title">Großschreibung</string>
+	<string name="preference_capitalization_summary">Großschreibung automatisch setzen</string>
+	<string name="preference_capitalization_dialog_title">Großschreibung auswählen</string> 
+	<string name="preference_hidechecked_title">Ausgewählten Eintrag verbergen</string>
+	<string name="preference_hidechecked_summary">Erledigte Einträge sofort verbergen</string>
+	<string name="preference_showprice_title">Preis anzeigen</string>
+	<string name="preference_showprice_summary">Wird als separate Spalte in der Liste angezeigt</string>
+	<string name="preference_showtags_title">Stichwörter anzeigen</string>
+	<string name="preference_showtags_summary">Wird als separate Spalte in der Liste angezeigt</string>
+	<string name="preference_showquantity_title">Menge anzeigen</string>
+	<string name="preference_showquantity_summary">Wird als separate Spalte in der Liste angezeigt</string>
+	
+	<!-- Preference title: Shake the phone to clean up the list. -->
+	<string name="preference_shake_title">Schütteln um Liste aufzuräumen</string>
+	
+	<!-- Preference summary: Shake the phone to clean up the list. -->
+	<string name="preference_shake_summary">Das Handy schütteln um die Liste aufzuräumen</string>
+	
+    <string name="preference_advanced">Erweiterte Einstellungen</string>
+    <string name="preference_advanced_summary">Zusätzliche Einstellungen zur Erscheinung</string>
+    
+    <!-- Preference category: General settings -->
+    <string name="preference_general">Allgemein</string>
+    
+    <string name="preference_appearance">Erscheinung</string>
+    
+    <string name="preference_addons">Erweiterungen</string>
+    <string name="preference_get_addons">Neue Erweiterungen herunterladen</string>
+    <string name="preference_get_addons_summary">Online nach Erweiterungen und Designs suchen.</string>
+    <string name="preference_get_market_addons">Erweiterungen vom Market herunterladen</string>
+    <string name="preference_get_developer_addons">Erweiterungen von OpenIntents herunterladen</string>
+    <string name="preference_extensions">Erweiterungen</string>
+    <string name="preference_themes">Designs</string>
+    <string name="preference_market_extensions_summary">Nach Erweiterungen auf Android Market suchen</string>
+    <string name="preference_market_themes_summary">Nach Designs auf Android Market suchen.</string>
+    <string name="preference_developer_extensions_summary">Erweiterungen von der OpenIntents Webseite erhalten</string>
+	<string name="preference_developer_themes_summary">Nach Designs auf der OpenIntents Homepage suchen.</string>
+	
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">OI Einkaufsliste EULA</string>
+	<string name="eula_accept">Akzeptieren</string>
+	<string name="eula_refuse">Abbrechen</string>
+
+	<!-- Update -->
+	<string name="update_box_text">Bitte manuell nach Updates suchen, oder OI Info installieren um automatisch benachrichtigt zu werden.
+Aktuelle Version: %s</string>
+	<string name="update_check_now">Jetzt prüfen.</string>
+	<string name="update_get_updater">OI Update herunterladen</string>
+	<string name="update_error">Keine Anwendung zum Herunterladen verfügbar.</string>
+	<string name="update">Suche nach Updates</string>
+
+	<!-- About -->
+	<string name="about">Info</string>
+	<string name="aboutapp_not_available">Version %s\n\nKeine kompatible Erweiterung verfügbar um vollständige Information anzuzeigen (Kontakt, Beitragende, Lizenz).</string>
+	<string name="aboutapp_get">OI Info herunterladen</string>
+	
+	<!-- ***************************
+	     Permissions
+	     *************************** -->
+	
+	<!-- OI Shopping list -->
+	<string name="oi_shopping_permission_read">Einkaufslisten lesen</string>
+	<string name="oi_shopping_permission_read_descr">Erlaubt einer Anwendung, Einkaufslisten zu lesen. Beachten Sie dass verschlüsselte Listen und Einträge in verschlüsselter Form weitergegeben werden.</string>
+	<string name="oi_shopping_permission_write">Einkaufslisten schreiben</string>
+	<string name="oi_shopping_permission_write_descr">Erlaubt einer Anwendung, neue Einkaufslisten zu erstellen, oder bestehende zu ändern.</string>
+	
+	
+	<!-- ***************************
+	     Preferences
+	     *************************** -->
+	
+    <string-array name="preference_sortorder_entries">
+    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    	<item>nicht erledigte zuerst, alphabetisch</item>
+        <!-- Preference sort order: Sort by item name -->
+    	<item>alphabetisch</item>
+        <!-- Preference sort order: Newest item first -->
+    	<item>neueste zuerst</item>
+        <!-- Preference sort order: Oldest item first -->
+    	<item>älteste zuerst</item>
+        <!-- Preference sort order: Sort alphabetically by tags -->
+    	<item>Stichwörter alphabetisch</item>
+        <!-- Preference sort order: Sort by price, the most expensive first -->
+    	<item>teuerstes zuerst</item>
+        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    	<item>nicht erledigte zuerst, Stichwörter alphabetisch</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entries">
+    	<!-- Preference fontsize: tiny font size -->
+        <item>Sehr klein</item>
+    	<!-- Preference fontsize: small font size -->
+        <item>Klein</item>
+    	<!-- Preference fontsize: default font size-->
+    	<item>Standard</item>
+    	<!-- Preference fontsize: large font size -->
+        <item>Groß</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entries">
+    	<!-- Preference capitalization: No capitalization -->
+        <item>Keine</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+        <item>Pro Satz</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+        <item>Pro Wort</item>
+    </string-array>
+
+
+	<!-- ***************************
+	     Automation
+	     *************************** -->
+	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<string name="label_select_action">Aktion auswählen:</string>
+	
+	<!-- Label above button that opens a list of all shopping lists to choose from. -->
+	<string name="label_select_list">Liste auswählen:</string>
+	
+	<!-- Arrays -->
+	
+    <string-array name="automation_actions">
+    	<!-- Automation action to clean up a list. -->
+    	<item>Liste aufräumen</item>
+    </string-array>
+    
+</resources>

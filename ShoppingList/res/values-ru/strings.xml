@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">Launchpad Contributions:
+  Peli https://launchpad.net/~peli0101
+  ZipUltra https://launchpad.net/~zipultra
+  friedger https://launchpad.net/~friedger</string>
+	
+	<!-- Strings for OI About -->
+	<string name="about_comments">"OI Shopping list" предназначен для создания и хранения списков покупок. Вы так же можете использовать программу для других целей, например как список задач.</string>
+	<string name="about_website_label">OI Список покупок - OpenIntents</string>
+
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<string name="app_name">OI Список покупок</string>
+
+	<!-- Shopping Provider -->
+	<string name="new_item">Новый элемент</string>
+	<string name="new_list">Новый список</string>
+	<string name="send">Отправить список</string>
+	<string name="empty_list_not_sent">Список пуст.</string>
+	<string name="email_not_available">Нет приложения для отправки.</string>
+	<string name="my_shopping_list">Мой список покупок</string>
+	<string name="new_list_hint">пример: продукты, запчасти, стойматериалы и т.д.</string>
+	<string name="clean_up_list">Очистить список</string>
+	<string name="delete_list">Удалить список</string>
+	<string name="ask_new_list">Введите имя нового списка покупок</string>
+	<string name="ask_rename_list">Переименовать список покупок</string>
+	<string name="ask_edit_item">Редактировать элемент</string>
+	<string name="please_enter_name">Пожалуйста введите имя</string>
+	<string name="no_items_marked">Нет помеченных элементов.</string>
+	<string name="confirm_delete_list">Вы действительно хотите удалить этот список покупок?</string>
+	<string name="no_shopping_provider">Ошибка доступа к спискам покупок.</string>
+	<string name="pick_item">Выбор элемента</string>
+	<string name="pick_list">Выбор списка</string>
+	<string name="theme">Тема</string>
+	<string name="theme_settings">Настройки темы</string>
+	<string name="rename_list">Переименовать список</string>
+	<string name="menu_mark_item">Выделить элемент</string>
+	<string name="menu_edit_item">Редактировать элемент</string>
+	<string name="menu_auto_add">Авто добавление</string>
+	<string name="no_items_available">Нет доступных элементов</string>
+	
+	<!-- Remove item from this list, but keep it internally, so that the user
+	     can choose it later for inclusion again. Information like
+	     tags or price will be kept. -->
+	<string name="menu_remove_item">Удалить из списка покупок</string>
+	
+	<!-- Delete this item completely. If the user wants to add it again, they
+	     have to enter all the information again. -->
+	<string name="menu_delete_item">Удалить навсегда</string>
+	<string name="menu_move_item">Move item to other list</string>
+	<!-- Button label to add an item to the list. -->
+	<string name="add">Добавить</string>
+	
+	<string name="menu_pick_items">Выбор элементов</string>
+	<string name="menu_start_shopping">Покупки</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="pick_items_titel">%s - Выбрано элементов</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="shopping_title">%s - Список</string>
+	
+	<string name="tags">Метки</string>
+	<string name="price">Цена</string>
+	<string name="item">Элемент</string>
+	<string name="quantity">Количество</string>
+	
+	<!-- Total sum of all prices. \'%s\' is the sum -->
+	<string name="total">Итог: %s</string>
+	
+	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+	<string name="total_checked">Сумма: %s</string>
+	
+	<string name="delete_item_confirm">Вы действительно желаете удалить навсегда этот элемент из всех списков?</string>
+	<string name="delete">Удалить</string>
+	
+	<!-- Added to an item to indicate it was bought. -->
+	<string name="suffix_checked">... ДА</string>
+	<string name="empty"/>
+	
+	<!-- The shortcut is created on the home screen. -->
+	<string name="pick_list_for_shortcut">Выбор списка для ярлыка</string>
+	
+	<!-- Shown if external application wants to insert new items. -->
+	<string name="pick_list_to_insert_items">Выбор листа для добавления элемента</string>
+	
+	<!-- Theme related -->
+	<string name="theme_pick">Выбрать тему</string>
+	<string name="theme_description">Выбор темы для этого списка</string>
+	<string name="theme_default">По умолчанию</string>
+	<string name="theme_classic">Классический вид</string>
+	<string name="theme_bugdroid">Андроид</string>
+	<string name="theme_classic_export">Классический вид (от OI Shopping List)</string>
+	<string name="theme_bugdroid_export">Андроид (от OI Shopping List)</string>
+
+	<!--     Dialog box    -->
+	<string name="ok">OK</string>
+	<string name="cancel">Отмена</string>
+	<string name="use_theme_for_all_lists">Использовать данную тему для всех списков</string>
+	<string name="get_more_themes">Еще темы</string>
+	
+	<!-- preferences -->
+	<string name="preferences">Настройки</string>
+	
+    <string name="preference_application">Настройки программы</string>
+    
+	<string name="preference_unchecked_on_top">Невыбранный вверху</string>
+	<string name="preference_unchecked_on_top_summary">Всегда показывать невыбранные элементы первыми</string>
+	<string name="preference_fontsize">Размер шрифта</string>
+	<string name="preference_fontsize_summary">Изменить размер шрифта</string>
+	<string name="preference_fontsize_dialog_title">Выбрать размер шрифта</string>
+	<string name="preference_sortorder_title">Порядок сортировки</string>
+	<string name="preference_sortorder_summary">Изменить порядок сортировки элементов списка</string>
+	<string name="preference_sortorder_dialog_title">Выбрать порядок сортировки</string>
+	<string name="preference_loadlastused_title">Загружать последний список</string>
+	<string name="preference_loadlastused_summary">Всегда открывать список использовавшийся перед закрытием программы.</string>
+	<string name="preference_capitalization_title">Регистр</string>
+	<string name="preference_capitalization_summary">Автоматизация набора заглавной буквы в названиях</string>
+	<string name="preference_capitalization_dialog_title">Выбор регистра</string> 
+	<string name="preference_hidechecked_title">Скрывать выбранные элементы</string>
+	<string name="preference_hidechecked_summary">Скрывать элементы списка сразу после выбора.</string>
+	<string name="preference_showprice_title">Показывать цену</string>
+	<string name="preference_showprice_summary">Отображать как дополнительную колонку в списке.</string>
+	<string name="preference_showtags_title">Показывать метки</string>
+	<string name="preference_showtags_summary">Отображать как дополнительную колонку в списке.</string>
+	<string name="preference_showquantity_title">Показывать количество</string>
+	<string name="preference_showquantity_summary">Отображать как дополнительную колонку в списке.</string>
+	
+	<!-- Preference title: Shake the phone to clean up the list. -->
+	<string name="preference_shake_title">Очистка тряской</string>
+	
+	<!-- Preference summary: Shake the phone to clean up the list. -->
+	<string name="preference_shake_summary">Потрясите телефон для очистки списка покупок.</string>
+	
+    <string name="preference_advanced">Расширенные настройки</string>
+    <string name="preference_advanced_summary">Дополнительные настройки внешнего вида</string>
+    
+    <!-- Preference category: General settings -->
+    <string name="preference_general">Основные</string>
+    
+    <string name="preference_appearance">Вид</string>
+    
+    <string name="preference_addons">Дополнения</string>
+    <string name="preference_get_addons">Еще дополнения</string>
+    <string name="preference_get_addons_summary">Поиск дополнений и тем в интернете</string>
+    <string name="preference_get_market_addons">Дополнения с Android market</string>
+    <string name="preference_get_developer_addons">Дополнения с OpenIntents</string>
+    <string name="preference_extensions">Расширения</string>
+    <string name="preference_themes">Темы</string>
+    <string name="preference_market_extensions_summary">Поиск расширений на Android Market.</string>
+    <string name="preference_market_themes_summary">Поиск тем на Android Market.</string>
+    <string name="preference_developer_extensions_summary">Получить расширения с домашней страницы OpenIntents.</string>
+	<string name="preference_developer_themes_summary">Получить темы с домашней страницы OpenIntents.</string>
+	
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">OI Лист покупок EULA</string>
+	<string name="eula_accept">Принять</string>
+	<string name="eula_refuse">Отмена</string>
+
+	<!-- Update -->
+	<string name="update_box_text">Проверяйте обновления вручную или установите OI Update для автоматического уведомления. Текущая версия: %s</string>
+	<string name="update_check_now">Проверить сейчас.</string>
+	<string name="update_get_updater">Получить OI Updater.</string>
+	<string name="update_error">Приложение загрузчик отсутствует.</string>
+	<string name="update">Проверить обновления</string>
+
+	<!-- About -->
+	<string name="about">О программе</string>
+	<string name="aboutapp_not_available">Версия %s\n\n Отсутствует совместимое расширение для отображения полной информации (контакты, авторы, лицензия).</string>
+	<string name="aboutapp_get">Получить OI About</string>
+	
+	<!-- ***************************
+	     Permissions
+	     *************************** -->
+	
+	<!-- OI Shopping list -->
+	<string name="oi_shopping_permission_read">чтение листа покупок</string>
+	<string name="oi_shopping_permission_read_descr">Разрешить приложениям получать списки. Примечание: зашифрованные списки и элементы предоставлены в зашифрованном формате.</string>
+	<string name="oi_shopping_permission_write">Запись списков покупок</string>
+	<string name="oi_shopping_permission_write_descr">Разрешить приложениям создавать новые списки и элементы и изменять существующие.</string>
+	
+	
+	<!-- ***************************
+	     Preferences
+	     *************************** -->
+	
+    <string-array name="preference_sortorder_entries">
+    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    	<item>сначала неотмеченные, алфавитный</item>
+        <!-- Preference sort order: Sort by item name -->
+    	<item>алфавитный</item>
+        <!-- Preference sort order: Newest item first -->
+    	<item>Сначала новые</item>
+        <!-- Preference sort order: Oldest item first -->
+    	<item>сначала старые</item>
+        <!-- Preference sort order: Sort alphabetically by tags -->
+    	<item>по меткам, алфавитный</item>
+        <!-- Preference sort order: Sort by price, the most expensive first -->
+    	<item>по цене</item>
+        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    	<item>сначала неотмеченные, по меткам, алфавитный</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entries">
+    	<!-- Preference fontsize: tiny font size -->
+        <item>Крошечный</item>
+    	<!-- Preference fontsize: small font size -->
+        <item>Маленький</item>
+    	<!-- Preference fontsize: default font size-->
+    	<item>По умолчанию</item>
+    	<!-- Preference fontsize: large font size -->
+        <item>Большой</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entries">
+    	<!-- Preference capitalization: No capitalization -->
+        <item>Нет</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+        <item>Первое слово</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+        <item>Все слова</item>
+    </string-array>
+
+
+	<!-- ***************************
+	     Automation
+	     *************************** -->
+	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<string name="label_select_action">Выбрать действие:</string>
+	
+	<!-- Label above button that opens a list of all shopping lists to choose from. -->
+	<string name="label_select_list">Выбрать список:</string>
+	
+	<!-- Arrays -->
+	
+    <string-array name="automation_actions">
+    	<!-- Automation action to clean up a list. -->
+    	<item>Очистить список</item>
+    </string-array>
+    
+</resources>

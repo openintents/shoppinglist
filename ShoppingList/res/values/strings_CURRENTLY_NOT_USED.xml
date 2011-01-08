@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+ 
+<resources>
+	<!-- Share shopping list -->
+	<string name="shopping_name_description">Enter a unique identifier for this list.</string>
+	<string name="please_enter_description">Please enter a unique identifier</string>
+	<string name="shopping_name_hint">i.e. bob1</string>
+	<string name="shopping_share_description">Insert the email addresses of the contacts 
+		separated by comma
+		with who you want to share this list 
+		(use \'local/new_id\' to test locally).</string>
+	<string name="shopping_share_hint">i.e. local/bob2, alice@gmail.com</string>
+	<string name="share">Share</string>
+	<string name="share_settings">Share settings</string>
+	
+	<!-- Shopping list location alert related -->
+	<string name="shopping_add_alert">Add alert</string>
+	<string name="add_location_alert">Add location alert</string>
+	<string name="add_location_alert_description">This shopping list can be opened automatically
+	when you reach the following location.</string>
+	<string name="location_alert_added">A location alert has been added for the following location:</string>
+	<string name="pick_location">Pick a location</string>
+	<string name="view_alerts">View list of alerts</string>
+	<string name="locations_not_installed">No application installed for locations.</string>
+	
+	<!--  alert related  -->
+	<string name="alert_added">Alert has been added.</string>
+	<string name="alert_not_added">Alert could not be added (see log for information).</string>
+	<string name="alerts_not_installed">No application installed for alerts.</string>
+	
+	<!-- GTalk related -->
+	<!-- 
+	<string name="gtalk_invalid_username">Invalid username. Please enter your Gmail or Google apps. username.</string>
+    <string name="gtalk_service_not_connected">GTalk service not connected.</string>
+    <string name="gtalk_session_not_found">The default GTalk session cannot be found.</string>
+    <string name="gtalk_found_stale_service">The GTalk service is stale. Rebinding...</string>
+    
+    <string name="gtalk_not_connected">GTalk service not connected. Please log into GTalk first.</string>
+     -->
+     
+    <!-- Shake control related -->
+    <!-- 
+    <string name="shake_control">Shake control</string>
+	 -->
+	 
+	 
+	<!--  Sensor Simulator -->
+	<!-- 
+	<string name="sensorsimulator">Sensor Simulator</string>
+	<string name="settings">Settings</string>
+	<string name="connect">Connect</string>
+	<string name="testing">Testing</string>
+	<string name="disconnect">Disconnect</string>
+	<string name="IP_address">IP address:</string>
+	<string name="socket">Socket:</string>
+	<string name="real_device_data">Real device data:</string>
+	<string name="sensor_simulator_data">Sensor simulator data:</string>
+	<string name="enable_sensors">Enable sensors</string>
+	<string name="auto_update">Auto update</string>
+	<string name="disabled">disabled</string>
+	<string name="set_update_interval">Set update interval...</string>
+	<string name="ask_update_interval">Enter update interval (ms)</string>
+	<string name="sensorsimulator_settings">SensorSimulator settings...</string>
+	<string name="connect_to_sensorsimulator">Connect to SensorSimulator</string>
+	<string name="sensorsimulator_settings_description">
+		Enter the connection settings below.
+		They are displayed on the Sensor Simulator.</string>
+	<string name="sensorsimulator_testing_description">
+		Test the connection to the Sensor Simulator.
+		Disable the sensors and disconnect after testing.</string>
+	<string name="update_rate">update rate</string>
+	<string name="update_rate_seconds">update rate (1/s)</string>
+	 -->
+	 
+	<!-- Sensor service -->
+	<!-- 
+	<string name="sensor_service">Sensor service</string>
+	<string name="sensor_service_settings">Sensor service settings</string>
+	<string name="bind_service">Bind</string>
+	<string name="unbind_service">Unbind</string>
+	<string name="sensor_service_started">Sensor service started</string>
+	<string name="sensor_service_stopped">Sensor service stopped</string>
+	<string name="sensor_service_connected">Sensor service connected</string>
+	<string name="sensor_service_disconnected">Sensor service disconnected</string>
+	 -->
+</resources> 
