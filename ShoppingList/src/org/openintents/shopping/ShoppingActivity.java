@@ -1088,7 +1088,7 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 		}
 
 		UpdateMenu
-				.addUpdateMenu(this, menu, 0, MENU_UPDATE, 0, R.string.update);
+				.addUpdateMenu(this, menu, 0, MENU_UPDATE, 0, R.string.menu_update);
 
 		// NOTE:
 		// Dynamically added menu items are included in onPrepareOptionsMenu()
