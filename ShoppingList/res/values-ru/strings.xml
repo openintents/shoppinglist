@@ -30,6 +30,13 @@
 	<string name="about_website_label">OI Список покупок - OpenIntents</string>
 
 	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">OI Лист покупок EULA</string>
+	
+	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<string name="app_name">OI Список покупок</string>
@@ -173,27 +180,6 @@
     <string name="preference_market_themes_summary">Поиск тем на Android Market.</string>
     <string name="preference_developer_extensions_summary">Получить расширения с домашней страницы OpenIntents.</string>
 	<string name="preference_developer_themes_summary">Получить темы с домашней страницы OpenIntents.</string>
-	
-	<!-- ***************************
-	     Distribution
-	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">OI Лист покупок EULA</string>
-	<string name="eula_accept">Принять</string>
-	<string name="eula_refuse">Отмена</string>
-
-	<!-- Update -->
-	<string name="update_box_text">Проверяйте обновления вручную или установите OI Update для автоматического уведомления. Текущая версия: %s</string>
-	<string name="update_check_now">Проверить сейчас.</string>
-	<string name="update_get_updater">Получить OI Updater.</string>
-	<string name="update_error">Приложение загрузчик отсутствует.</string>
-	<string name="update">Проверить обновления</string>
-
-	<!-- About -->
-	<string name="about">О программе</string>
-	<string name="aboutapp_not_available">Версия %s\n\n Отсутствует совместимое расширение для отображения полной информации (контакты, авторы, лицензия).</string>
-	<string name="aboutapp_get">Получить OI About</string>
 	
 	<!-- ***************************
 	     Permissions

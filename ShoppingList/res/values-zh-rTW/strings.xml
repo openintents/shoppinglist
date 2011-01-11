@@ -29,6 +29,13 @@
 	<string name="about_website_label">OI Shopping list at OpenIntents</string>
 
 	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">OI Shopping List EULA</string>
+	
+	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<string name="app_name">OI 購物清單</string>
@@ -172,30 +179,6 @@
     <string name="preference_market_themes_summary">Search for themes at Android Market.</string>
     <string name="preference_developer_extensions_summary">Get extensions from the OpenIntents homepage.</string>
 	<string name="preference_developer_themes_summary">Get themes from the OpenIntents homepage.</string>
-	
-	<!-- ***************************
-	     Distribution
-	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">OI Shopping List EULA</string>
-	<string name="eula_accept">Accept</string>
-	<string name="eula_refuse">Cancel</string>
-
-	<!-- Update -->
-	<string name="update_box_text">Please check manually for updates or install OI Update
-for automatic notifications.
-Current version: %s
-	</string>
-	<string name="update_check_now">Check now.</string>
-	<string name="update_get_updater">Get OI Updater.</string>
-	<string name="update_error">Download application not available.</string>
-	<string name="update">Check updates</string>
-
-	<!-- About -->
-	<string name="about">About</string>
-	<string name="aboutapp_not_available">Version %s\n\nNo compatible extension available to display full info (contact, credits, license).</string>
-	<string name="aboutapp_get">Get OI About</string>
 	
 	<!-- ***************************
 	     Permissions

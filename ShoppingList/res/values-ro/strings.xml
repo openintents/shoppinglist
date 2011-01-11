@@ -29,6 +29,13 @@
 	<string name="about_website_label">OI Shopping list pe OpenIntents</string>
 
 	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">OI Shopping List ALUF</string>
+	
+	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<string name="app_name">OI Shopping list</string>
@@ -172,27 +179,6 @@
     <string name="preference_market_themes_summary">Search for themes at Android Market.</string>
     <string name="preference_developer_extensions_summary">Instalează extensii de pe siteul OpenIntents.</string>
 	<string name="preference_developer_themes_summary">Get themes from the OpenIntents homepage.</string>
-	
-	<!-- ***************************
-	     Distribution
-	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">OI Shopping List ALUF</string>
-	<string name="eula_accept">Acceptă</string>
-	<string name="eula_refuse">Renunță</string>
-
-	<!-- Update -->
-	<string name="update_box_text">Verificați manual existența versiunilor noi sau instalați OI Update pentru noitificări automate. Versiunea curentă: %s</string>
-	<string name="update_check_now">Verifică acum</string>
-	<string name="update_get_updater">Instalează OI Updater</string>
-	<string name="update_error">Aplicația pentru descărcare nu este disponibilă.</string>
-	<string name="update">Verifică versiuni noi</string>
-
-	<!-- About -->
-	<string name="about">Despre</string>
-	<string name="aboutapp_not_available">Versiune %s\n\nNu există extensie compatibilă pentru afișarea informațiilor complete (contact, mulțumiri, licență).</string>
-	<string name="aboutapp_get">Instalează OI About</string>
 	
 	<!-- ***************************
 	     Permissions

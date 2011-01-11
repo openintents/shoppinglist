@@ -29,6 +29,13 @@
 	<string name="about_website_label">Ol Seznam nákupů v OpenIntents</string>
 
 	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">Ol Seznam nákupů EULA</string>
+	
+	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<string name="app_name">Ol Seznam nákupů</string>
@@ -172,28 +179,6 @@
     <string name="preference_market_themes_summary">Hledejte témata v Android Marketu.</string>
     <string name="preference_developer_extensions_summary">Získejte přídatky z domovské stránky OpenIntents.</string>
 	<string name="preference_developer_themes_summary">Získejte témata z domovské stránky OpenIntents.</string>
-	
-	<!-- ***************************
-	     Distribution
-	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">Ol Seznam nákupů EULA</string>
-	<string name="eula_accept">Přijmout</string>
-	<string name="eula_refuse">Zrušit</string>
-
-	<!-- Update -->
-	<string name="update_box_text">Prosím, kontrolujte manuálně aktualizace, nebo nainstalujte Ol Update pro automatická oznámení.
-Současná verze: %s</string>
-	<string name="update_check_now">Zkontrolovat teď.</string>
-	<string name="update_get_updater">Získejte Ol Updater.</string>
-	<string name="update_error">Aplikace není k dispozici ke stažení.</string>
-	<string name="update">Kontrola aktualizací</string>
-
-	<!-- About -->
-	<string name="about">O</string>
-	<string name="aboutapp_not_available">Kompatibilní verze %s\n\nNo přídatku je k dispozici k zobrazení úplných informací (kontakt, kredity, licence).</string>
-	<string name="aboutapp_get">Získejte Ol About</string>
 	
 	<!-- ***************************
 	     Permissions

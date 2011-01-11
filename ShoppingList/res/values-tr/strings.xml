@@ -23,12 +23,20 @@
 	<string name="about_translators">This is a dummy translation so that the credits are counted as translated.
 
 Launchpad Contributions:
+  Peli https://launchpad.net/~peli0101
   zeugma https://launchpad.net/~sunder67</string>
 	
 	<!-- Strings for OI About -->
 	<string name="about_comments">OI Shopping list lets you keep track of your shopping items. You can also use it for other kinds of check lists, for example for ToDo lists or party guest lists.</string>
 	<string name="about_website_label">OI Shopping list at OpenIntents</string>
 
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">OI Shopping List kullanıcı lisans sözleşmesi (EULA)</string>
+	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
@@ -173,30 +181,6 @@ Launchpad Contributions:
     <string name="preference_market_themes_summary">Android Markette temaları arayın.</string>
     <string name="preference_developer_extensions_summary">Get extensions from the OpenIntents homepage.</string>
 	<string name="preference_developer_themes_summary">Get themes from the OpenIntents homepage.</string>
-	
-	<!-- ***************************
-	     Distribution
-	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">OI Shopping List kullanıcı lisans sözleşmesi (EULA)</string>
-	<string name="eula_accept">Kabul</string>
-	<string name="eula_refuse">İptal</string>
-
-	<!-- Update -->
-	<string name="update_box_text">Please check manually for updates or install OI Update
-for automatic notifications.
-Current version: %s
-	</string>
-	<string name="update_check_now">Şimdi kontrol edin.</string>
-	<string name="update_get_updater">OI Güncellemelerini al.</string>
-	<string name="update_error">Download application not available.</string>
-	<string name="update">Güncellemeleri kontrol et</string>
-
-	<!-- About -->
-	<string name="about">Hakkında</string>
-	<string name="aboutapp_not_available">Sürüm %s\n\n Uyumlu uzantısı mevcut tüm bilgileri (iletişim, krediler, lisans) gösterilecek.</string>
-	<string name="aboutapp_get">Get OI About</string>
 	
 	<!-- ***************************
 	     Permissions

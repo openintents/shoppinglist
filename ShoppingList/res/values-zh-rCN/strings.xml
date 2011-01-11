@@ -29,6 +29,13 @@
 	<string name="about_website_label">在OpenIntents上的OI 购物列表</string>
 
 	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">OI 购物列表 EULA</string>
+	
+	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<string name="app_name">OI 购物列表</string>
@@ -172,29 +179,6 @@
     <string name="preference_market_themes_summary">从Android Market上获得主题.</string>
     <string name="preference_developer_extensions_summary">从OpenIntents 主页上获得插件.</string>
 	<string name="preference_developer_themes_summary">从OpenIntents 主页上获得主题.</string>
-	
-	<!-- ***************************
-	     Distribution
-	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">OI 购物列表 EULA</string>
-	<string name="eula_accept">接受</string>
-	<string name="eula_refuse">取消</string>
-
-	<!-- Update -->
-	<string name="update_box_text">请手动检查更新或者根据自动通知安装OI更新。当前版本: %s</string>
-	<string name="update_check_now">检查更新。</string>
-	<string name="update_get_updater">获得 OI 更新器。</string>
-	<string name="update_error">下载软件不可用。</string>
-	<string name="update">检查更新</string>
-
-	<!-- About -->
-	<string name="about">关于</string>
-	<string name="aboutapp_not_available">版本 %s
-
-没有可用的兼容插件来显示全部信息（联系方式，信誉，执照）。</string>
-	<string name="aboutapp_get">得到 OI 关于</string>
 	
 	<!-- ***************************
 	     Permissions

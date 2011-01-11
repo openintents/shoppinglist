@@ -30,6 +30,13 @@
 	<string name="about_website_label">OpenIntentsのOI Shopping list</string>
 
 	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">OI Shoppingの利用規約</string>
+	
+	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<string name="app_name">OI Shopping list</string>
@@ -173,27 +180,6 @@
     <string name="preference_market_themes_summary">テーマをAndroid Marketから検索</string>
     <string name="preference_developer_extensions_summary">拡張機能をOpenIntentsから検索</string>
 	<string name="preference_developer_themes_summary">テーマをOpenIntentsから取得</string>
-	
-	<!-- ***************************
-	     Distribution
-	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">OI Shoppingの利用規約</string>
-	<string name="eula_accept">許可</string>
-	<string name="eula_refuse">キャンセル</string>
-
-	<!-- Update -->
-	<string name="update_box_text">新バージョンを手動でチェックするか、自動通知のためにOI Updateをインストールしてください。現在のバージョン: %s</string>
-	<string name="update_check_now">確認中。</string>
-	<string name="update_get_updater">OI Updaterを入手する</string>
-	<string name="update_error">ダウンロード用アプリが利用できません。</string>
-	<string name="update">アップデートをチェック</string>
-
-	<!-- About -->
-	<string name="about">このソフトウェアについて</string>
-	<string name="aboutapp_not_available">バージョン %s\n\n全情報(連絡先・クレジット・ライセンスなど)を表示するための互換性のある拡張機能は利用できません。</string>
-	<string name="aboutapp_get">OI Aboutを入手する</string>
 	
 	<!-- ***************************
 	     Permissions

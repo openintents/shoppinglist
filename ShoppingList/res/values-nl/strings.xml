@@ -30,6 +30,13 @@
 	<string name="about_website_label">boodschappenlijst bij openintents</string>
 
 	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">OI Boodschappenlijst  EULA</string>
+	
+	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<string name="app_name">OI Boodschappenlijst</string>
@@ -173,27 +180,6 @@
     <string name="preference_market_themes_summary">zoek naar thema\'s bij Android Market</string>
     <string name="preference_developer_extensions_summary">Extensies van OpenIntents homepage verkrijgen</string>
 	<string name="preference_developer_themes_summary">Mere thema\'s op OpenIntents</string>
-	
-	<!-- ***************************
-	     Distribution
-	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">OI Boodschappenlijst  EULA</string>
-	<string name="eula_accept">Accepteren</string>
-	<string name="eula_refuse">Annuleer</string>
-
-	<!-- Update -->
-	<string name="update_box_text">Gelieve manueel naar updates te controleren of OI Update te installeren voor automatische meldingen over updates. Huidige versie: %s</string>
-	<string name="update_check_now">Controleer nu.</string>
-	<string name="update_get_updater">Haal OI Updater.</string>
-	<string name="update_error">Applicatiedownload niet beschikbaar.</string>
-	<string name="update">Controleer op updates</string>
-
-	<!-- About -->
-	<string name="about">Over</string>
-	<string name="aboutapp_not_available">Versie %s\n\nGeen compatibele extensie beschikbaar om volledige info weer te geven (contactinformatie, dankbetuigingen, licentie).</string>
-	<string name="aboutapp_get">Haal OI About</string>
 	
 	<!-- ***************************
 	     Permissions

@@ -30,6 +30,13 @@ Launchpad Contributions:
 	<string name="about_website_label">OI Shopping List hos OpenIntents</string>
 
 	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">OI Shopping Lists licensaftale</string>
+	
+	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<string name="app_name">OI Shopping List</string>
@@ -173,27 +180,6 @@ Launchpad Contributions:
     <string name="preference_market_themes_summary">Søg efter temaer på Android Market.</string>
     <string name="preference_developer_extensions_summary">Hent udvidelser fra OpenIntents\' hjemmeside.</string>
 	<string name="preference_developer_themes_summary">Hent temaer fra OpenIntents\' hjemmeside.</string>
-	
-	<!-- ***************************
-	     Distribution
-	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">OI Shopping Lists licensaftale</string>
-	<string name="eula_accept">Acceptér</string>
-	<string name="eula_refuse">Annullér</string>
-
-	<!-- Update -->
-	<string name="update_box_text">Tjek venligst manuelt for opdateringer eller installér OI Update for automatiske påmindelser. Nuværende version: %s</string>
-	<string name="update_check_now">Tjek nu.</string>
-	<string name="update_get_updater">Hent OI Updater.</string>
-	<string name="update_error">Downloadprogram er ikke tilgængeligt.</string>
-	<string name="update">Tjek opdateringer</string>
-
-	<!-- About -->
-	<string name="about">Om</string>
-	<string name="aboutapp_not_available">Version %s\n\nIngen kompatible udvidelser til at vise fuld info (kontakt, tak til, licens) blev fundet.</string>
-	<string name="aboutapp_get">Hent OI About</string>
 	
 	<!-- ***************************
 	     Permissions
