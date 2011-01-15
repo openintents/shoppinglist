@@ -23,9 +23,11 @@ import org.openintents.intents.ProviderUtils;
 import org.openintents.provider.Shopping;
 import org.openintents.provider.Shopping.Contains;
 import org.openintents.provider.Shopping.ContainsFull;
+import org.openintents.provider.Shopping.ItemStores;
 import org.openintents.provider.Shopping.Items;
 import org.openintents.provider.Shopping.Lists;
 import org.openintents.provider.Shopping.Status;
+import org.openintents.provider.Shopping.Stores;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -65,13 +67,16 @@ public class ShoppingProvider extends ContentProvider {
 	 * 2: Release 0.1.6
 	 * 3: Release 1.0.4-beta
 	 * 4: Release 1.0.4-beta
+	 * 5: Release 1.2.7-beta ?
 	 */
-	private static final int DATABASE_VERSION = 4;
+	private static final int DATABASE_VERSION = 5;
 
 	private static HashMap<String, String> ITEMS_PROJECTION_MAP;
 	private static HashMap<String, String> LISTS_PROJECTION_MAP;
 	private static HashMap<String, String> CONTAINS_PROJECTION_MAP;
 	private static HashMap<String, String> CONTAINS_FULL_PROJECTION_MAP;
+	private static HashMap<String, String> STORES_PROJECTION_MAP;
+	private static HashMap<String, String> ITEMSTORES_PROJECTION_MAP;
 
 	// Basic tables
 	private static final int ITEMS = 1;
@@ -80,6 +85,11 @@ public class ShoppingProvider extends ContentProvider {
 	private static final int LIST_ID = 4;
 	private static final int CONTAINS = 5;
 	private static final int CONTAINS_ID = 6;
+	private static final int STORES = 7;
+	private static final int STORES_ID = 8;
+	private static final int STORES_LISTID = 9;
+	private static final int ITEMSTORES = 10;
+	private static final int ITEMSTORES_ID = 11;
 
 	// Derived tables
 	private static final int CONTAINS_FULL = 101; // combined with items and
@@ -89,10 +99,12 @@ public class ShoppingProvider extends ContentProvider {
 	private static final UriMatcher URL_MATCHER;
 
 	/**
-	 * ShoppingProvider maintains the following tables: * items: items you want
-	 * to buy * lists: shopping lists ("My shopping list",
-	 * "Bob's shopping list") * contains: which item/list/(recipe) is contained
-	 * in which shopping list.
+	 * ShoppingProvider maintains the following tables: 
+	 * * items: items you want to buy 
+	 * * lists: shopping lists ("My shopping list",	"Bob's shopping list") 
+	 * * contains: which item/list/(recipe) is contained in which shopping list. 
+	 * * stores: 
+	 * * itemstores: (which store carries which item) 
 	 */
 	private static class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -142,6 +154,20 @@ public class ShoppingProvider extends ContentProvider {
 					+ "share_modified_by VARCHAR," // V2
 					+ "sort_key INTEGER" // V3
 					+ ");");
+			db.execSQL("CREATE TABLE stores (" + "_id INTEGER PRIMARY KEY," // V5
+					+ "name VARCHAR, " // V5
+					+ "list_id INTEGER," // V5
+					+ "created INTEGER," // V5
+					+ "modified INTEGER" // V5
+					+ ");");
+			db.execSQL("CREATE TABLE itemstores(" + "_id INTEGER PRIMARY KEY," // V5
+					+ "item_id INTEGER," // V5
+					+ "store_id INTEGER," // V5
+					+ "aisle INTEGER," // V5
+					+ "price INTEGER," // V5
+					+ "created INTEGER," // V5
+					+ "modified INTEGER" // V5
+					+ ");");
 		}
 
 		@Override
@@ -190,8 +216,27 @@ public class ShoppingProvider extends ContentProvider {
 						// and then upgrading again 2->3.
 					}
 					// fall through for further upgrades.
+				case 4:
+					try {						
+						db.execSQL("CREATE TABLE stores (" + "_id INTEGER PRIMARY KEY," // V5
+								+ "name VARCHAR, " // V5
+								+ "list_id INTEGER," // V5
+								+ "created INTEGER," // V5
+								+ "modified INTEGER" // V5
+								+ ");");
+						db.execSQL("CREATE TABLE itemstores(" + "_id INTEGER PRIMARY KEY," // V5
+								+ "item_id INTEGER," // V5
+								+ "store_id INTEGER," // V5
+								+ "aisle INTEGER," // V5
+								+ "price INTEGER," // V5
+								+ "created INTEGER," // V5
+								+ "modified INTEGER" // V5
+								+ ");");
+					} catch (SQLException e) {
+						Log.e(TAG, "Error executing SQL: ", e);
+					}
 					/**
-					* case 4:
+					* case 5:
 					*/
 					break;
 				default:
@@ -200,6 +245,8 @@ public class ShoppingProvider extends ContentProvider {
 					db.execSQL("DROP TABLE IF EXISTS items");
 					db.execSQL("DROP TABLE IF EXISTS lists");
 					db.execSQL("DROP TABLE IF EXISTS contains");
+					db.execSQL("DROP TABLE IF EXISTS stores");
+					db.execSQL("DROP TABLE IF EXISTS itemstores");
 					onCreate(db);
 				}
 			} else { // newVersion <= oldVersion
@@ -277,6 +324,35 @@ public class ShoppingProvider extends ContentProvider {
 			qb
 					.appendWhere("contains.item_id = items._id AND contains.list_id = lists._id");
 			break;
+			
+		case STORES:
+			qb.setTables("stores");
+			qb.setProjectionMap(STORES_PROJECTION_MAP);
+			break;
+
+		case STORES_ID:
+			qb.setTables("stores");
+			qb.appendWhere("_id=" + url.getPathSegments().get(1));
+			break;
+
+		case STORES_LISTID:
+			qb.setTables("stores");
+			qb.setProjectionMap(STORES_PROJECTION_MAP);
+			qb.appendWhere("list_id=" + url.getPathSegments().get(1));
+			break;
+			
+		case ITEMSTORES:
+			qb.setTables("itemstores, items, stores");
+			qb.setProjectionMap(ITEMSTORES_PROJECTION_MAP);
+			qb.appendWhere("itemstores.item_id = items._id AND itemstores.store_id = stores._id");
+			break;
+			
+		case ITEMSTORES_ID:
+			qb.setTables("itemstores, items, stores");
+			qb.appendWhere("_id=" + url.getPathSegments().get(1));
+			qb.appendWhere("itemstores.item_id = items._id AND itemstores.store_id = stores._id");
+			break;
+			
 		default:
 			throw new IllegalArgumentException("Unknown URL " + url);
 		}
@@ -320,6 +396,12 @@ public class ShoppingProvider extends ContentProvider {
 		case CONTAINS_FULL:
 			throw new IllegalArgumentException("Insert not supported for "
 					+ url + ", use CONTAINS instead of CONTAINS_FULL.");
+
+		case STORES:
+			return insertStore(url, values);
+			
+		case ITEMSTORES:
+			return insertItemStore(url, values);
 
 		default:
 			throw new IllegalArgumentException("Unknown URL " + url);
@@ -427,7 +509,7 @@ public class ShoppingProvider extends ContentProvider {
 		// insert the tag.
 		rowID = db.insert("lists", "lists", values);
 		if (rowID > 0) {
-			Uri uri = ContentUris.withAppendedId(Items.CONTENT_URI, rowID);
+			Uri uri = ContentUris.withAppendedId(Lists.CONTENT_URI, rowID);
 			getContext().getContentResolver().notifyChange(uri, null);
 
 			Intent intent = new Intent(ProviderIntents.ACTION_INSERTED);
@@ -497,6 +579,100 @@ public class ShoppingProvider extends ContentProvider {
 		long rowId = db.insert("contains", "contains", values);
 		if (rowId > 0) {
 			Uri uri = ContentUris.withAppendedId(Contains.CONTENT_URI, rowId);
+			getContext().getContentResolver().notifyChange(uri, null);
+
+			Intent intent = new Intent(ProviderIntents.ACTION_INSERTED);
+			intent.setData(uri);
+			getContext().sendBroadcast(intent);
+
+			return uri;
+		}
+
+		// If everything works, we should not reach the following line:
+		throw new SQLException("Failed to insert row into " + url);
+	}
+
+	private Uri insertStore(Uri url, ContentValues values) {
+		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+		long rowID;
+
+		Long now = Long.valueOf(System.currentTimeMillis());
+		Resources r = Resources.getSystem();
+
+		// Make sure that the fields are all set
+		if (!values.containsKey(Stores.NAME)) {
+			throw new SQLException("Failed to insert row into " + url
+					+ ": Store NAME must be given.");
+		}
+
+		if (!values.containsKey(Stores.CREATED_DATE)) {
+			values.put(Stores.CREATED_DATE, now);
+		}
+
+		if (!values.containsKey(Stores.MODIFIED_DATE)) {
+			values.put(Stores.MODIFIED_DATE, now);
+		}
+
+		// TODO: Here we should check, whether item exists already.
+		// (see TagsProvider)
+
+		// insert the tag.
+		rowID = db.insert("stores", "stores", values);
+		if (rowID > 0) {
+			Uri uri = ContentUris.withAppendedId(Stores.CONTENT_URI, rowID);
+			getContext().getContentResolver().notifyChange(uri, null);
+
+			Intent intent = new Intent(ProviderIntents.ACTION_INSERTED);
+			intent.setData(uri);
+			getContext().sendBroadcast(intent);
+
+			return uri;
+		}
+
+		// If everything works, we should not reach the following line:
+		throw new SQLException("Failed to insert row into " + url);
+
+	}
+
+	private Uri insertItemStore(Uri url, ContentValues values) {
+		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+		Long now = Long.valueOf(System.currentTimeMillis());
+		Resources r = Resources.getSystem();
+
+		// Make sure that the fields are all set
+		if (!(values.containsKey(ItemStores.ITEM_ID) && values
+				.containsKey(ItemStores.STORE_ID))) {
+			// At least these values should exist.
+			throw new SQLException("Failed to insert row into " + url
+					+ ": ITEM_ID and STORE_ID must be given.");
+		}
+
+		// TODO: Check here that ITEM_ID and STORE_ID
+		// actually exist in the tables.
+
+		if (!values.containsKey(ItemStores.PRICE)) {
+			values.put(ItemStores.PRICE, -1);
+		} 
+		if (!values.containsKey(ItemStores.AISLE)) {
+			values.put(ItemStores.AISLE, -1);
+		}
+
+		if (!values.containsKey(ItemStores.CREATED_DATE)) {
+			values.put(ItemStores.CREATED_DATE, now);
+		}
+
+		if (!values.containsKey(ItemStores.MODIFIED_DATE)) {
+			values.put(ItemStores.MODIFIED_DATE, now);
+		}
+
+
+		// TODO: Here we should check, whether item exists already.
+		// (see TagsProvider)
+
+		// insert the item.
+		long rowId = db.insert("itemstores", "itemstores", values);
+		if (rowId > 0) {
+			Uri uri = ContentUris.withAppendedId(ItemStores.CONTENT_URI, rowId);
 			getContext().getContentResolver().notifyChange(uri, null);
 
 			Intent intent = new Intent(ProviderIntents.ACTION_INSERTED);
@@ -655,6 +831,38 @@ public class ShoppingProvider extends ContentProvider {
 					+ whereString, whereArgs);
 			break;
 
+		case STORES:
+			count = db.update("stores", values, where, whereArgs);
+			break;
+			
+		case STORES_ID:
+			segment = url.getPathSegments().get(1); // contains rowId
+			// rowId = Long.parseLong(segment);
+			if (!TextUtils.isEmpty(where)) {
+				whereString = " AND (" + where + ')';
+			} else {
+				whereString = "";
+			}
+			count = db.update("stores", values, "_id=" + segment
+					+ whereString, whereArgs);
+			break;
+
+		case ITEMSTORES:
+			count = db.update("itemstores", values, where, whereArgs);
+			break;
+			
+		case ITEMSTORES_ID:
+			segment = url.getPathSegments().get(1); // contains rowId
+			// rowId = Long.parseLong(segment);
+			if (!TextUtils.isEmpty(where)) {
+				whereString = " AND (" + where + ')';
+			} else {
+				whereString = "";
+			}
+			count = db.update("itemstores", values, "_id=" + segment
+					+ whereString, whereArgs);
+			break;
+			
 		default:
 			Log.e(TAG, "Update received unknown URL: " + url);
 			throw new IllegalArgumentException("Unknown URL " + url);
@@ -696,6 +904,15 @@ public class ShoppingProvider extends ContentProvider {
 		case CONTAINS_FULL_ID:
 			return "vnd.android.cursor.item/vnd.openintents.shopping.containsfull";
 
+		case STORES:
+		case STORES_ID:
+		case STORES_LISTID:
+			return "vnd.android.cursor.dir/vnd.openintents.shopping.stores";
+			
+		case ITEMSTORES:
+		case ITEMSTORES_ID:
+			return "vnd.android.cursor.dir/vnd.openintents.shopping.itemstores";
+			
 		default:
 			throw new IllegalArgumentException("Unknown URL " + url);
 		}
@@ -714,6 +931,13 @@ public class ShoppingProvider extends ContentProvider {
 				CONTAINS_FULL);
 		URL_MATCHER.addURI("org.openintents.shopping", "containsfull/#",
 				CONTAINS_FULL_ID);
+		URL_MATCHER.addURI("org.openintents.shopping", "stores", STORES);
+		URL_MATCHER.addURI("org.openintents.shopping", "stores/#", STORES_ID);
+		URL_MATCHER.addURI("org.openintents.shopping", "itemstores", ITEMSTORES);
+		URL_MATCHER.addURI("org.openintents.shopping", "itemstores/#", 
+				ITEMSTORES_ID);
+		URL_MATCHER.addURI("org.openintents.shopping", "liststores/#", 
+				STORES_LISTID);
 
 		ITEMS_PROJECTION_MAP = new HashMap<String, String>();
 		ITEMS_PROJECTION_MAP.put(Items._ID, "items._id");
@@ -792,6 +1016,24 @@ public class ShoppingProvider extends ContentProvider {
 				"lists.name as list_name");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.LIST_IMAGE,
 				"lists.image as list_image");
+
+		STORES_PROJECTION_MAP = new HashMap<String, String>();
+		STORES_PROJECTION_MAP.put(Stores._ID, "stores._id");
+		STORES_PROJECTION_MAP.put(Stores.CREATED_DATE, "stores.created");
+		STORES_PROJECTION_MAP.put(Stores.MODIFIED_DATE, "stores.modified");
+		STORES_PROJECTION_MAP.put(Stores.NAME, "stores.name");
+		STORES_PROJECTION_MAP.put(Stores.LIST_ID, "stores.list_id");
+
+		ITEMSTORES_PROJECTION_MAP = new HashMap<String, String>();
+		ITEMSTORES_PROJECTION_MAP.put(ItemStores._ID, "itemstores._id");
+		ITEMSTORES_PROJECTION_MAP.put(ItemStores.CREATED_DATE, 
+				"itemstores.created");
+		ITEMSTORES_PROJECTION_MAP.put(ItemStores.MODIFIED_DATE, 
+				"itemstores.modified");
+		ITEMSTORES_PROJECTION_MAP.put(ItemStores.ITEM_ID, "itemstores.item_id");
+		ITEMSTORES_PROJECTION_MAP.put(ItemStores.STORE_ID, "itemstores.store_id");
+		ITEMSTORES_PROJECTION_MAP.put(ItemStores.AISLE, "itemstores.aisle");
+		ITEMSTORES_PROJECTION_MAP.put(ItemStores.PRICE, "itemstores.price");
 
 	}
 }
