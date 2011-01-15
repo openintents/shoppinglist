@@ -59,7 +59,7 @@ public class ShoppingListsActivity extends ListActivity {
 				Intent shortcut = new Intent(Intent.ACTION_CREATE_SHORTCUT);
 				shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME, title);
 				shortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT, data);
-				Intent.ShortcutIconResource sir = Intent.ShortcutIconResource.fromContext(this, R.drawable.icon_shoppinglist);
+				Intent.ShortcutIconResource sir = Intent.ShortcutIconResource.fromContext(this, R.drawable.ic_launcher_shoppinglist);
 				shortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, sir);
 				
 				
