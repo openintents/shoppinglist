@@ -17,10 +17,10 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="org.openintents.shopping"
-	android:versionCode="10024" android:versionName="1.2.7-rc1">
+	android:versionCode="10024" android:versionName="1.2.7-beta1">
 	<!-- History:
 	 * * * UPDATE ATRACKDOG METADATA BELOW FOR RELEASE CANDIDATES * * *
-	1.2.7-rc1   [10024]: 2011-?
+	1.2.7-beta1   [10024]: 2011-?
 	1.2.6 [10023]: 2011-01-06
 	1.2.5 [10021]: 2010-08-05
 	1.2.4 [10020]: 2010-06-26

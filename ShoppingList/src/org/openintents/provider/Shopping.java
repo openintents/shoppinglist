@@ -27,7 +27,8 @@ import android.util.Log;
 /**
  * Definition for content provider related to shopping.
  * 
- * @version 1.1.0
+ * Version corresponds to main version of OI Shopping List.
+ * @version 1.2.7
  */
 public abstract class Shopping {
 
