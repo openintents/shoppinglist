@@ -147,10 +147,7 @@ public class ShoppingListView extends ListView {
 			View view = super.newView(context, cursor, parent);
 			view.findViewById(R.id.price).setVisibility(mPriceVisibility);
 			view.findViewById(R.id.tags).setVisibility(mTagsVisibility);
-			/*
-			 * view.findViewById(R.id.quantity).setVisibility(mQuantityVisibility
-			 * );
-			 */
+			view.findViewById(R.id.quantity).setVisibility(mQuantityVisibility);
 			return view;
 		}
 
@@ -164,8 +161,14 @@ public class ShoppingListView extends ListView {
 			super.bindView(view, context, cursor);
 
 			long status = cursor.getLong(ShoppingActivity.mStringItemsSTATUS);
+			final int cursorpos = cursor.getPosition();
 
-			TextView t = (TextView) view.findViewById(R.id.name);
+			int styled_as_name [] = {R.id.name, R.id.quantity};
+			int i;
+			
+			for (i = 0; i < styled_as_name.length; i++) {
+				int res_id = styled_as_name[i];
+				TextView t = (TextView) view.findViewById(res_id);
 
 			// set style for name view
 			// Set font
@@ -183,6 +186,25 @@ public class ShoppingListView extends ListView {
 
 			t.setTextColor(mTextColor);
 
+				if (res_id == R.id.quantity) {
+					
+					if ( TextUtils.isEmpty(t.getText())) {
+					// mixed feelings about this.
+					   t.setText("1 "); 
+					}
+					
+					t.setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							Log.d(TAG, "Quantity Click ");
+							// toggleItemBought(cursorpos);
+						}
+
+					});
+				}
+				
+				
 			if (status == Shopping.Status.BOUGHT) {
 				t.setTextColor(mTextColorChecked);
 
@@ -209,16 +231,17 @@ public class ShoppingListView extends ListView {
 					// color: 0x33336600
 				}
 
-				if (mTextSuffixChecked != null) {
+					if (res_id == R.id.name && mTextSuffixChecked != null) {
 					// very simple
 					t.append(mTextSuffixChecked);
 				}
 
 			} else {
 				// item not bought:
-				if (mTextSuffixUnchecked != null) {
+					if (res_id == R.id.name && mTextSuffixUnchecked != null) {
 					t.append(mTextSuffixUnchecked);
 				}
+			}
 			}
 
 			// we have a check box now.. more visual and gets the point across
@@ -242,15 +265,9 @@ public class ShoppingListView extends ListView {
 				c.setVisibility(CheckBox.GONE);
 			}
 
-			/*
-			 * t = (TextView) view.findViewById(R.id.quantity); if (t != null &&
-			 * TextUtils.isEmpty(t.getText())) { t.setText("1"); }
-			 */
-
 			// The parent view knows how to deal with clicks.
 			// We just pass the click through.
 			// c.setClickable(false);
-			final int cursorpos = cursor.getPosition();
 
 			c.setOnClickListener(new OnClickListener() {
 
@@ -299,12 +316,6 @@ public class ShoppingListView extends ListView {
 			if (id == R.id.name) {
 				String name = cursor
 						.getString(ShoppingActivity.mStringItemsITEMNAME);
-				String quantity = cursor
-						.getString(ShoppingActivity.mStringItemsQUANTITY);
-				if (mQuantityVisibility == View.VISIBLE
-						&& !TextUtils.isEmpty(quantity)) {
-					name = quantity + " " + name;
-				}
 				TextView tv = (TextView) view;
 				tv.setText(name);
 				return true;
@@ -334,16 +345,20 @@ public class ShoppingListView extends ListView {
 					tv.setText("");
 				}
 				return true;
-			}/*
-			 * else if (id == R.id.quantity) { //String quantity = cursor //
-			 * .getString(ShoppingActivity.mStringItemsQUANTITY); TextView tv =
-			 * (TextView) view; //if (mQuantityVisibility == View.VISIBLE // &&
-			 * !TextUtils.isEmpty(quantity)) { //
-			 * tv.setVisibility(View.VISIBLE); //
-			 * tv.setTextColor(mPriceTextColor); // tv.setText(quantity); //}
-			 * else { tv.setVisibility(View.GONE); // tv.setText(""); //} return
-			 * true; }
-			 */else {
+			} else if (id == R.id.quantity) { 
+				String quantity = cursor.getString(ShoppingActivity.mStringItemsQUANTITY);
+				TextView tv =(TextView) view; 
+				if (mQuantityVisibility == View.VISIBLE  &&
+					!TextUtils.isEmpty(quantity)) { 
+					tv.setVisibility(View.VISIBLE); 
+					// tv.setTextColor(mPriceTextColor);  
+					tv.setText(quantity + " "); }
+			    else { 
+				    tv.setVisibility(View.GONE);  
+				    tv.setText(""); 
+			    } 
+				return true; 
+			} else {
 				return false;
 			}
 		}
@@ -479,14 +494,12 @@ public class ShoppingListView extends ListView {
 														 * ContainsFull.ITEM_IMAGE
 														 * ,
 														 */
-				ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE /*
-																 * ,
-																 * ContainsFull
-																 * .QUANTITY
-																 */},
+				ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,  
+				ContainsFull.QUANTITY
+																 },
 				// the view defined in the XML template
 				new int[] { R.id.name, /* R.id.image_URI, */R.id.tags,
-						R.id.price /* , R.id.quantity */});
+						R.id.price, R.id.quantity });
 		setAdapter(adapter);
 
 		// called in requery():

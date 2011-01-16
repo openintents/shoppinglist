@@ -78,13 +78,6 @@
               android:layout_marginRight="0dip"
               android:layout_marginTop="8dip"
               android:layout_marginBottom="8dip" -->
-   <!-- 
-   <TextView android:id="@+id/quantity"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:visibility="visible"
-              android:layout_gravity="center"              
-              android:text="1" android:longClickable="true"/>   -->
   
     <TextView android:id="@+id/price"
               android:layout_width="wrap_content"
@@ -100,13 +93,24 @@
             android:layout_marginTop="8dip"
             android:layout_marginBottom="8dip" -->
             
-        
-   <TextView android:id="@+id/name"
+	<TextView android:id="@+id/quantity"
 			android:textAppearance="?android:attr/textAppearanceLarge"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="8dip"
         	android:layout_toRightOf="@id/check"
+        	android:layout_alignParentTop="true"
+        	android:layout_alignWithParentIfMissing="true"
+		    android:visibility="visible"
+            android:gravity="center_vertical"              
+            android:text="1" android:clickable="true"/>  
+<!--        	android:layout_toLeftOf="@id/name"-->        
+   <TextView android:id="@+id/name"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dip"
+        	android:layout_toRightOf="@id/quantity"
         	android:layout_toLeftOf="@id/price"
         	android:layout_alignParentTop="true"
         	android:layout_alignWithParentIfMissing="true"
@@ -120,17 +124,6 @@
 			android:layout_marginLeft="27dip"
 			android:layout_marginRight="27dip" -->
 			
-	<!-- 
-	<TextView android:id="@+id/quantity"
-			  android:layout_width="wrap_content"
-			  android:layout_height="wrap_content"
-        	android:layout_toRightOf="@id/check"
-        	android:layout_below="@id/name"
-        	android:layout_alignParentBottom="true"
-        	android:layout_alignWithParentIfMissing="true"
-			  android:gravity="top"
-			  android:visibility="gone"/>
-	 -->
 				 
 	<TextView android:id="@+id/tags"
 			  android:layout_width="wrap_content"
