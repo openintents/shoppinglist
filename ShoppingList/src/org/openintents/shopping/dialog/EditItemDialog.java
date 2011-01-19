@@ -23,6 +23,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.MultiAutoCompleteTextView;
@@ -45,6 +46,8 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
     /** Cursor to be requeried after modifications */
     Cursor mRequeryCursor;
 
+    public enum FieldType { ITEMNAME, QUANTITY, PRICE };
+    
 	public EditItemDialog(Context context, Uri itemUri, Uri relationUri) {
 		super(context);
 		mContext = context;
@@ -252,6 +255,33 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		
 		if (mRequeryCursor != null) {
 			mRequeryCursor.requery();
+		}
+	}
+
+	private void focus_field (EditText e, Boolean selectAll) {
+		InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+		if (selectAll)
+			e.selectAll();
+		if (e.requestFocus())
+			// this part doesn't seem to work:
+		    imm.showSoftInput(e, 0);
+		imm.toggleSoftInputFromWindow(e.getWindowToken(), 0, 0);
+	}
+	
+	public void setFocusField(FieldType focusField) {
+
+		switch(focusField) {
+		// hack, need to share some values with ShoppingActivity.
+		case QUANTITY: 
+			focus_field(mQuantity, true);
+			break;
+		case PRICE:
+			focus_field(mPrice, true);
+			break;
+		case ITEMNAME:
+			focus_field(mEditText, false);
+			break;
+			
 		}
 	}
 	

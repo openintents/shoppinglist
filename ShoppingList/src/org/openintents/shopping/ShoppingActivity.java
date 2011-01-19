@@ -240,6 +240,8 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 	private int mUpdateInterval;
 
 	private boolean mUpdating;
+	
+	
 
 	/**
 	 * The items to add to the shopping list.
@@ -374,6 +376,8 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 	private Uri mRelationUri;
 	private int mMoveItemPosition;
 
+	private EditItemDialog.FieldType mEditItemFocusField;
+	
 	/**
 	 * Called when the activity is first created.
 	 */
@@ -874,7 +878,7 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 
 			public void onItemClick(AdapterView parent, View v, int pos, long id) {
 				Cursor c = (Cursor) parent.getItemAtPosition(pos);
-				onCustomClick(c, pos);
+				onCustomClick(c, pos, EditItemDialog.FieldType.ITEMNAME);
 				// DO NOT CLOSE THIS CURSOR - IT IS A MANAGED ONE.
 				// ---- c.close();
 			}
@@ -904,7 +908,7 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 				});
 	}
 
-	public void onCustomClick(Cursor c, int pos) {
+	public void onCustomClick(Cursor c, int pos, EditItemDialog.FieldType field) {
 		if (mState == STATE_PICK_ITEM) {
 			pickItem(c);
 		} else {
@@ -912,7 +916,7 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 				// In default theme, there is an extra check box,
 				// so clicking on anywhere else means to edit the
 				// item.
-				editItem(pos);
+				editItem(pos, field);
 			} else {
 				// For themes without a checkbox, clicking anywhere means
 				// to toggle the item.
@@ -1304,7 +1308,7 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 			markItem(menuInfo.position);
 			break;
 		case MENU_EDIT_ITEM:
-			editItem(menuInfo.position);
+			editItem(menuInfo.position, EditItemDialog.FieldType.ITEMNAME);
 			break;
 		case MENU_REMOVE_ITEM_FROM_LIST:
 			removeItemFromList(menuInfo.position);
@@ -1510,8 +1514,9 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 		mListItemsView.toggleItemBought(position);
 	}
 
-	/** Edit item */
-	void editItem(int position) {
+	/** Edit item 
+	 * @param field */
+	void editItem(int position, EditItemDialog.FieldType field) {
 		if (debug)
 			Log.d(TAG, "EditItems: Position: " + position);
 		mListItemsView.mCursorItems.moveToPosition(position);
@@ -1525,6 +1530,7 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 				.withAppendedPath(Shopping.Items.CONTENT_URI, "" + itemId);
 		mRelationUri = Uri.withAppendedPath(Shopping.Contains.CONTENT_URI, ""
 				+ containsId);
+		mEditItemFocusField = field;
 
 		showDialog(DIALOG_EDIT_ITEM);
 	}
@@ -1805,6 +1811,7 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 			EditItemDialog d = (EditItemDialog) dialog;
 			d.setItemUri(mItemUri);
 			d.setRelationUri(mRelationUri);
+			d.setFocusField(mEditItemFocusField);
 
 			String[] taglist = getTaglist();
 			d.setTagList(taglist);

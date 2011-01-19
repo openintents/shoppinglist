@@ -8,6 +8,7 @@ import org.openintents.provider.Shopping;
 import org.openintents.provider.Shopping.Contains;
 import org.openintents.provider.Shopping.ContainsFull;
 import org.openintents.provider.Shopping.Status;
+import org.openintents.shopping.dialog.EditItemDialog;
 import org.openintents.shopping.theme.ThemeAttributes;
 import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;
@@ -198,7 +199,10 @@ public class ShoppingListView extends ListView {
 						@Override
 						public void onClick(View v) {
 							Log.d(TAG, "Quantity Click ");
-							// toggleItemBought(cursorpos);
+							if (mListener != null) {
+								mListener.onCustomClick(cursor, cursorpos,
+										EditItemDialog.FieldType.QUANTITY);
+							}
 						}
 
 					});
@@ -293,6 +297,22 @@ public class ShoppingListView extends ListView {
 
 			});
 
+			// Check for clicks on price
+			View v;
+			v = view.findViewById(R.id.price);
+			v.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Log.d(TAG, "Click on description: ");
+					if (mListener != null) {
+						mListener.onCustomClick(cursor, cursorpos,
+								EditItemDialog.FieldType.PRICE);
+					}
+				}
+
+			});
+			
 			// Check for clicks on item text
 			RelativeLayout r = (RelativeLayout) view
 					.findViewById(R.id.description);
@@ -303,7 +323,8 @@ public class ShoppingListView extends ListView {
 				public void onClick(View v) {
 					Log.d(TAG, "Click on description: ");
 					if (mListener != null) {
-						mListener.onCustomClick(cursor, cursorpos);
+						mListener.onCustomClick(cursor, cursorpos,
+								EditItemDialog.FieldType.ITEMNAME);
 					}
 				}
 
@@ -1047,7 +1068,7 @@ public class ShoppingListView extends ListView {
 	}
 
 	public interface OnCustomClickListener {
-		public void onCustomClick(Cursor c, int pos);
+		public void onCustomClick(Cursor c, int pos, EditItemDialog.FieldType field);
 	}
 
 	@Override
