@@ -38,7 +38,8 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 	MultiAutoCompleteTextView mTags;
 	EditText mPrice;
 	EditText mQuantity;
-	
+	EditText mPriority;
+
 	TextView mPriceLabel;
 
     String[] mTagList;
@@ -46,7 +47,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
     /** Cursor to be requeried after modifications */
     Cursor mRequeryCursor;
 
-    public enum FieldType { ITEMNAME, QUANTITY, PRICE };
+    public enum FieldType { ITEMNAME, QUANTITY, PRICE, PRIORITY };
     
 	public EditItemDialog(Context context, Uri itemUri, Uri relationUri) {
 		super(context);
@@ -61,6 +62,8 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		mTags = (MultiAutoCompleteTextView) view.findViewById(R.id.edittags);
 		mPrice = (EditText) view.findViewById(R.id.editprice);
 		mQuantity= (EditText) view.findViewById(R.id.editquantity);
+		mPriority= (EditText) view.findViewById(R.id.editpriority);
+
 		mPriceLabel = (TextView) view.findViewById(R.id.labeleditprice);
 
 		final KeyListener kl = PreferenceActivity
@@ -184,7 +187,8 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 			Shopping.Items.PRICE 
 	};
 	private final String[] mRelationProjection = { 
-			Shopping.Contains.QUANTITY 
+			Shopping.Contains.QUANTITY,
+			Shopping.Contains.PRIORITY
 	};
 
 	private Uri mRelationUri;
@@ -213,6 +217,8 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		if (c != null && c.moveToFirst()){
 			String quantity = c.getString(0);
 			mQuantity.setText(quantity);
+			String priority = c.getString(1);
+			mPriority.setText(priority);
 		}
 		c.close();		
 	}
@@ -229,7 +235,8 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		String tags = mTags.getText().toString();
 		String price = mPrice.getText().toString();
 		String quantity = mQuantity.getText().toString();
-		
+		String priority = mPriority.getText().toString();
+
 		Long priceLong = PriceConverter.getCentPriceFromString(price);
 
     	// Remove trailing ","
@@ -250,6 +257,8 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 
 		values.clear();
 		values.put(Contains.QUANTITY, quantity);
+		values.put(Contains.PRIORITY, priority);
+
 		mContext.getContentResolver().update(mRelationUri, values, null, null);
 		mContext.getContentResolver().notifyChange(mRelationUri, null);
 		
@@ -275,6 +284,9 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		case QUANTITY: 
 			focus_field(mQuantity, true);
 			break;
+		case PRIORITY: 
+			focus_field(mPriority, true);
+			break;	
 		case PRICE:
 			focus_field(mPrice, true);
 			break;

@@ -63,6 +63,7 @@ public class ShoppingListView extends ListView {
 	public int mPriceVisibility;
 	public int mTagsVisibility;
 	public int mQuantityVisibility;
+	public int mPriorityVisibility;
 	public String mTextTypeface;
 	public float mTextSize;
 	public boolean mTextUpperCaseFont;
@@ -149,6 +150,7 @@ public class ShoppingListView extends ListView {
 			view.findViewById(R.id.price).setVisibility(mPriceVisibility);
 			view.findViewById(R.id.tags).setVisibility(mTagsVisibility);
 			view.findViewById(R.id.quantity).setVisibility(mQuantityVisibility);
+			view.findViewById(R.id.priority).setVisibility(mQuantityVisibility);
 			return view;
 		}
 
@@ -304,7 +306,7 @@ public class ShoppingListView extends ListView {
 
 				@Override
 				public void onClick(View v) {
-					Log.d(TAG, "Click on description: ");
+					Log.d(TAG, "Click on price: ");
 					if (mListener != null) {
 						mListener.onCustomClick(cursor, cursorpos,
 								EditItemDialog.FieldType.PRICE);
@@ -312,7 +314,20 @@ public class ShoppingListView extends ListView {
 				}
 
 			});
-			
+			// Check for clicks on priority
+			v = view.findViewById(R.id.priority);
+			v.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Log.d(TAG, "Click on priority: ");
+					if (mListener != null) {
+						mListener.onCustomClick(cursor, cursorpos,
+								EditItemDialog.FieldType.PRIORITY);
+					}
+				}
+
+			});
 			// Check for clicks on item text
 			RelativeLayout r = (RelativeLayout) view
 					.findViewById(R.id.description);
@@ -374,6 +389,19 @@ public class ShoppingListView extends ListView {
 					tv.setVisibility(View.VISIBLE); 
 					// tv.setTextColor(mPriceTextColor);  
 					tv.setText(quantity + " "); }
+			    else { 
+				    tv.setVisibility(View.GONE);  
+				    tv.setText(""); 
+			    } 
+				return true; 
+			} else if (id == R.id.priority) { 
+				String priority = cursor.getString(ShoppingActivity.mStringItemsPRIORITY);
+				TextView tv =(TextView) view; 
+				if (mPriorityVisibility == View.VISIBLE  &&
+					!TextUtils.isEmpty(priority)) { 
+					tv.setVisibility(View.VISIBLE); 
+					// tv.setTextColor(mPriceTextColor);  
+					tv.setText("-" + priority + "- "); }
 			    else { 
 				    tv.setVisibility(View.GONE);  
 				    tv.setText(""); 
@@ -516,11 +544,11 @@ public class ShoppingListView extends ListView {
 														 * ,
 														 */
 				ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,  
-				ContainsFull.QUANTITY
+				ContainsFull.QUANTITY, ContainsFull.PRIORITY
 																 },
 				// the view defined in the XML template
 				new int[] { R.id.name, /* R.id.image_URI, */R.id.tags,
-						R.id.price, R.id.quantity });
+						R.id.price, R.id.quantity, R.id.priority });
 		setAdapter(adapter);
 
 		// called in requery():
@@ -901,14 +929,14 @@ public class ShoppingListView extends ListView {
 	 * @param barcode
 	 */
 	public void insertNewItem(Activity activity, String newItem,
-			String quantity, String price, String barcode) {
+			String quantity, String priority, String price, String barcode) {
 
 		long itemId = ShoppingUtils.updateOrCreateItem(getContext(), newItem,
 				null, price, barcode);
 
 		Log.i(TAG, "Insert new item. " + " itemId = " + itemId + ", listId = "
 				+ mListId);
-		ShoppingUtils.addItemToList(getContext(), itemId, mListId, quantity);
+		ShoppingUtils.addItemToList(getContext(), itemId, mListId, quantity, priority);
 
 		fillItems(activity, mListId);
 

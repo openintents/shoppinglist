@@ -140,12 +140,13 @@ public class ShoppingUtils {
 	 * @param listId
 	 *            The id of the shopping list the item is added.
 	 * @param quantity
+	 * @param priority 
 	 * @param itemType
 	 *            The type of the new item
 	 * 
 	 * @return id of the "contains" table entry, or -1 if insert failed.
 	 */
-	public static long addItemToList(Context context, final long itemId, final long listId, String quantity) {
+	public static long addItemToList(Context context, final long itemId, final long listId, String quantity, String priority) {
 		long id = -1;
 		long status = Status.WANT_TO_BUY;
 		Cursor existingItems = context.getContentResolver()
@@ -172,6 +173,9 @@ public class ShoppingUtils {
 				// (see issue 286)
 				values.put(Shopping.Contains.QUANTITY, quantity);
 			}
+			if (priority != null) {
+				values.put(Shopping.Contains.PRIORITY, priority);
+			}
 			try {
 				Uri uri = Uri.withAppendedPath(Shopping.Contains.CONTENT_URI, String.valueOf(id));
 				context.getContentResolver().update(uri, values, null, null);
@@ -186,6 +190,7 @@ public class ShoppingUtils {
 			values.put(Shopping.Contains.LIST_ID, listId);
 			values.put(Shopping.Contains.STATUS, status);
 			values.put(Shopping.Contains.QUANTITY, quantity);
+			values.put(Shopping.Contains.PRIORITY, priority);
 			try {
 				Uri uri = context.getContentResolver().insert(Shopping.Contains.CONTENT_URI, values);
 				Log.i(TAG, "Insert new entry in 'contains': " + uri);

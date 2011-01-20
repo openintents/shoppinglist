@@ -315,6 +315,14 @@ public abstract class Shopping {
 		public static final String QUANTITY = "quantity";
 
 		/**
+		 * Priority specifier.
+		 * <P>
+		 * Type: INTEGER (long) 1-5
+		 * </P>
+		 */
+		public static final String PRIORITY = "priority";
+		
+		/**
 		 * Status: WANT_TO_BUY or BOUGHT.
 		 * <P>
 		 * Type: INTEGER (long)
@@ -388,7 +396,6 @@ public abstract class Shopping {
 				"items.price DESC, items.name ASC",
 				"contains.status ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags ASC, items.name ASC", // unchecked first, tags alphabetical, but put empty tags last.
 				};
-
 		
 	}
 
@@ -436,6 +443,14 @@ public abstract class Shopping {
 		 */
 		public static final String QUANTITY = "quantity";
 
+		/**
+		 * Priority specifier.
+		 * <P>
+		 * Type: INTEGER (long) 1-5
+		 * </P>
+		 */
+		public static final String PRIORITY = "priority";
+		
 		/**
 		 * Status: WANT_TO_BUY or BOUGHT.
 		 * <P>
@@ -539,7 +554,7 @@ public abstract class Shopping {
 		 * </P>
 		 */
 		public static final String LIST_IMAGE = "list_image";
-		
+
 		/**
 		 * A barcode (EAN or QR)
 		 * <P>
@@ -841,7 +856,9 @@ public abstract class Shopping {
 	 *            The type of the new item
 	 * @return id of the "contains" table entry, or -1 if insert failed.
 	 */
-	public static long addItemToList(Context context, final long itemId, final long listId, final long status, final long quantity) {
+	public static long addItemToList(Context context, final long itemId,
+			final long listId,	final long status, final long priority, 
+			final long quantity) {
 		long id = -1;
 		Cursor existingItems = context.getContentResolver()
 				.query(Contains.CONTENT_URI, new String[] { Contains._ID },
@@ -872,6 +889,8 @@ public abstract class Shopping {
 			values.put(Contains.LIST_ID, listId);
 			values.put(Contains.STATUS, status);
 			values.put(Contains.QUANTITY, quantity);
+			values.put(Contains.PRIORITY, priority);
+
 			try {
 				Uri uri = context.getContentResolver().insert(Contains.CONTENT_URI, values);
 				Log.i(TAG, "Insert new entry in 'contains': " + uri);

@@ -298,7 +298,8 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 			ContainsFull.ITEM_NAME, ContainsFull.ITEM_IMAGE,
 			ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,
 			ContainsFull.QUANTITY, ContainsFull.STATUS, ContainsFull.ITEM_ID,
-			ContainsFull.SHARE_CREATED_BY, ContainsFull.SHARE_MODIFIED_BY };
+			ContainsFull.SHARE_CREATED_BY, ContainsFull.SHARE_MODIFIED_BY, 
+			ContainsFull.PRIORITY};
 	static final int mStringItemsCONTAINSID = 0;
 	static final int mStringItemsITEMNAME = 1;
 	static final int mStringItemsITEMIMAGE = 2;
@@ -309,6 +310,7 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 	static final int mStringItemsITEMID = 7;
 	private static final int mStringItemsSHARECREATEDBY = 8;
 	private static final int mStringItemsSHAREMODIFIEDBY = 9;
+	static final int mStringItemsPRIORITY = 10;
 
 	private LinearLayout.LayoutParams mLayoutParamsItems;
 	private int mAllowedListHeight; // Height for the list allowed in this view.
@@ -571,6 +573,12 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 				mListItemsView.mQuantityVisibility = View.VISIBLE;
 			} else {
 				mListItemsView.mQuantityVisibility = View.GONE;
+			}
+			if (sp.getBoolean(PreferenceActivity.PREFS_SHOW_PRIORITY,
+					PreferenceActivity.PREFS_SHOW_PRIORITY_DEFAULT)) {
+				mListItemsView.mPriorityVisibility = View.VISIBLE;
+			} else {
+				mListItemsView.mPriorityVisibility = View.GONE;
 			}
 		}
 
@@ -940,7 +948,7 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 				return;
 			}
 
-			mListItemsView.insertNewItem(this, newItem, null, null, null);
+			mListItemsView.insertNewItem(this, newItem, null, null, null, null);
 			mEditText.setText("");
 		} else {
 			// Open list to select item from
@@ -1009,7 +1017,7 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 				if (debug)
 					Log.d(TAG, "Add item: " + item + ", quantity: " + quantity
 							+ ", price: " + price + ", barcode: " + barcode);
-				mListItemsView.insertNewItem(this, item, quantity, price,
+				mListItemsView.insertNewItem(this, item, quantity, null, price,
 						barcode);
 			}
 			// delete the string array list of extra items so it can't be
@@ -1580,7 +1588,7 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 		
 		// add item to new list
 		ShoppingUtils.addItemToList(this, c.getInt(mStringItemsITEMID),
-				targetListId, c.getString(mStringItemsQUANTITY));
+				targetListId, c.getString(mStringItemsQUANTITY), null);
 
 		// Delete item from currentList
 		// by deleting contains row

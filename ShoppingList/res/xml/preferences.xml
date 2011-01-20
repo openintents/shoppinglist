@@ -61,7 +61,8 @@
 					android:defaultValue="true" android:title="@string/preference_showquantity_title"
 					android:summary="@string/preference_showquantity_summary" />
 
-			</PreferenceCategory>
+			<CheckBoxPreference android:defaultValue="false" android:key="showpriority" android:title="@string/preference_showpriority_title" android:summary="@string/preference_showpriority_summary"></CheckBoxPreference>
+</PreferenceCategory>
 		</PreferenceScreen>
 	</PreferenceCategory>
 	

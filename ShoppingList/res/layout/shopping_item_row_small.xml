@@ -86,13 +86,20 @@
              <!-- 
             android:layout_marginTop="8dip"
             android:layout_marginBottom="8dip" -->
-            
+    <TextView android:id="@+id/priority"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_toRightOf="@id/check"       	
+              android:layout_marginTop="10dip"
+			  android:layout_marginLeft="2dip"
+              android:gravity="center_vertical"
+              android:visibility="visible"/>     
 	<TextView android:id="@+id/quantity"
 			android:textAppearance="?android:attr/textAppearanceLarge"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="2dip"
-        	android:layout_toRightOf="@id/check"
+        	android:layout_toRightOf="@id/priority"
         	android:layout_alignParentTop="true"
         	android:layout_alignWithParentIfMissing="true"
 		    android:visibility="visible"
@@ -133,6 +140,7 @@
         	android:layout_toRightOf="@id/quantity"  
         android:singleLine="true"
         android:ellipsize="end" -->
+
 </RelativeLayout>
 </LinearLayout>
 <!-- 

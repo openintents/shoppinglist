@@ -19,6 +19,7 @@ import android.text.method.TextKeyListener;
 public class PreferenceActivity extends android.preference.PreferenceActivity {
 	private static boolean mBackupManagerAvailable;
 
+
 	static {
 		try {
 			BackupManagerWrapper.checkAvailable();
@@ -46,6 +47,8 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
 	public static final boolean PREFS_SHOW_TAGS_DEFAULT = true;
 	public static final String PREFS_SHOW_QUANTITY = "showquantity";
 	public static final boolean PREFS_SHOW_QUANTITY_DEFAULT = true;
+	public static final String PREFS_SHOW_PRIORITY = "showpriority";
+	public static final boolean PREFS_SHOW_PRIORITY_DEFAULT = false;
 	public static final String PREFS_SHAKE = "shake";
 	public static final boolean PREFS_SHAKE_DEFAULT = false;
 	public static final String PREFS_MARKET_EXTENSIONS = "preference_market_extensions";

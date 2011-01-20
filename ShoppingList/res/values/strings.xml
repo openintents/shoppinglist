@@ -91,6 +91,7 @@
 	<string name="price">Price</string>
 	<string name="item">Item</string>
 	<string name="quantity">Quantity</string>
+	<string name="priority">Priority</string>
 	
 	<!-- Total sum of all prices. '%s' is the sum -->
 	<string name="total">Total: %s</string>
@@ -152,6 +153,8 @@
 	<string name="preference_showtags_summary">Shown as extra column in list.</string>
 	<string name="preference_showquantity_title">Show quantity</string>
 	<string name="preference_showquantity_summary">Shown as extra column in list.</string>
+	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_summary">Shown as extra column in list.</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Shake to clean up</string>

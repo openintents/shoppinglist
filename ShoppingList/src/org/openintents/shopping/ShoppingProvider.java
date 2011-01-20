@@ -67,9 +67,10 @@ public class ShoppingProvider extends ContentProvider {
 	 * 2: Release 0.1.6
 	 * 3: Release 1.0.4-beta
 	 * 4: Release 1.0.4-beta
-	 * 5: Release 1.2.7-beta ?
+	 * 5: Release 1.2.7-beta 
+	 * 6: Release 1.2.7-beta 
 	 */
-	private static final int DATABASE_VERSION = 5;
+	private static final int DATABASE_VERSION = 6;
 
 	private static HashMap<String, String> ITEMS_PROJECTION_MAP;
 	private static HashMap<String, String> LISTS_PROJECTION_MAP;
@@ -152,7 +153,8 @@ public class ShoppingProvider extends ContentProvider {
 					+ "accessed INTEGER," // V1
 					+ "share_created_by VARCHAR," // V2
 					+ "share_modified_by VARCHAR," // V2
-					+ "sort_key INTEGER" // V3
+					+ "sort_key INTEGER," // V3
+					+ "priority INTEGER" // V6
 					+ ");");
 			db.execSQL("CREATE TABLE stores (" + "_id INTEGER PRIMARY KEY," // V5
 					+ "name VARCHAR, " // V5
@@ -235,8 +237,15 @@ public class ShoppingProvider extends ContentProvider {
 					} catch (SQLException e) {
 						Log.e(TAG, "Error executing SQL: ", e);
 					}
+				case 5:
+					try {				
+						db.execSQL("ALTER TABLE contains ADD COLUMN "
+								+ Contains.PRIORITY + " INTEGER;");
+					} catch (SQLException e) {
+						Log.e(TAG, "Error executing SQL: ", e);
+					}
 					/**
-					* case 5:
+					* case 6:
 					*/
 					break;
 				default:
@@ -973,6 +982,8 @@ public class ShoppingProvider extends ContentProvider {
 		CONTAINS_PROJECTION_MAP.put(Contains.ITEM_ID, "contains.item_id");
 		CONTAINS_PROJECTION_MAP.put(Contains.LIST_ID, "contains.list_id");
 		CONTAINS_PROJECTION_MAP.put(Contains.QUANTITY, "contains.quantity");
+		CONTAINS_PROJECTION_MAP.put(Contains.PRIORITY, "contains.priority");
+
 		CONTAINS_PROJECTION_MAP.put(Contains.STATUS, "contains.status");
 		CONTAINS_PROJECTION_MAP.put(Contains.CREATED_DATE, "contains.created");
 		CONTAINS_PROJECTION_MAP
@@ -992,6 +1003,8 @@ public class ShoppingProvider extends ContentProvider {
 				"contains.list_id");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.QUANTITY,
 				"contains.quantity");
+		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.PRIORITY,
+		"contains.priority");
 		CONTAINS_FULL_PROJECTION_MAP
 				.put(ContainsFull.STATUS, "contains.status");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.CREATED_DATE,

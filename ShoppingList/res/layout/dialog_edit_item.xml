@@ -33,6 +33,19 @@
 				android:layout_weight="1"
 				android:layout_height="wrap_content"
 				android:layout_marginRight="5dip" >
+				<TextView android:layout_width="fill_parent" android:id="@+id/labeleditpriority"
+					android:layout_height="wrap_content" android:layout_weight="1"
+					android:text="@string/priority"  />
+				<EditText android:hint="@string/priority" android:id="@+id/editpriority"
+					android:layout_height="wrap_content" android:layout_width="fill_parent"
+					android:singleLine="true" android:inputType="number"
+					android:layout_below="@+id/labeleditpriority"/>
+			</RelativeLayout>
+			<RelativeLayout
+				android:layout_width="0dip"
+				android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:layout_marginRight="5dip" >
 				<TextView android:layout_width="fill_parent" android:id="@+id/labeleditquantity"
 					android:layout_height="wrap_content" android:layout_weight="1"
 					android:text="@string/quantity"  />
