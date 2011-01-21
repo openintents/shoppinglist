@@ -378,7 +378,7 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 	private Uri mRelationUri;
 	private int mMoveItemPosition;
 
-	private EditItemDialog.FieldType mEditItemFocusField;
+	private EditItemDialog.FieldType mEditItemFocusField = EditItemDialog.FieldType.ITEMNAME;
 	
 	/**
 	 * Called when the activity is first created.
