@@ -212,6 +212,8 @@
     	<item>most expensive first</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
     	<item>unchecked first, tags alphabetical</item>
+    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    	<item>unchecked first, priority, alphabetical</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">

@@ -66,7 +66,8 @@
         <item>4</item>
         <item>5</item>
         <item>6</item>
-    </string-array>
+    <item>7</item>
+</string-array>
     
     <string-array name="preference_fontsize_entryvalues">
     	<item>0</item>

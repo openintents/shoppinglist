@@ -395,6 +395,7 @@ public abstract class Shopping {
 				"(items.tags IS NULL or items.tags = '') ASC, items.tags ASC, items.name ASC", // sort by tags, but put empty tags last.
 				"items.price DESC, items.name ASC",
 				"contains.status ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags ASC, items.name ASC", // unchecked first, tags alphabetical, but put empty tags last.
+				"contains.status ASC, contains.priority ASC, items.name ASC", // unchecked first, priority, alphabetical
 				};
 		
 	}
