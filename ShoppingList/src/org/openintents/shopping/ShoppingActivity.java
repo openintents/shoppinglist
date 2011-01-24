@@ -299,7 +299,7 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 			ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,
 			ContainsFull.QUANTITY, ContainsFull.STATUS, ContainsFull.ITEM_ID,
 			ContainsFull.SHARE_CREATED_BY, ContainsFull.SHARE_MODIFIED_BY, 
-			ContainsFull.PRIORITY};
+			ContainsFull.PRIORITY, ContainsFull.ITEM_HAS_NOTE};
 	static final int mStringItemsCONTAINSID = 0;
 	static final int mStringItemsITEMNAME = 1;
 	static final int mStringItemsITEMIMAGE = 2;
@@ -311,6 +311,7 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 	private static final int mStringItemsSHARECREATEDBY = 8;
 	private static final int mStringItemsSHAREMODIFIEDBY = 9;
 	static final int mStringItemsPRIORITY = 10;
+	static final int mStringItemsITEMHASNOTE = 11;
 
 	private LinearLayout.LayoutParams mLayoutParamsItems;
 	private int mAllowedListHeight; // Height for the list allowed in this view.

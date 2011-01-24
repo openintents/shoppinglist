@@ -7,16 +7,21 @@ import java.util.Locale;
 import org.openintents.provider.Shopping;
 import org.openintents.provider.Shopping.Contains;
 import org.openintents.provider.Shopping.ContainsFull;
+import org.openintents.provider.Shopping.Items;
 import org.openintents.provider.Shopping.Status;
 import org.openintents.shopping.dialog.EditItemDialog;
 import org.openintents.shopping.theme.ThemeAttributes;
 import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;
 import org.openintents.shopping.util.ShoppingUtils;
+import org.openintents.distribution.GetFromMarketDialog;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
@@ -48,6 +53,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 
 /**
@@ -328,6 +334,35 @@ public class ShoppingListView extends ListView {
 				}
 
 			});
+			// Check for clicks on priority
+			v = view.findViewById(R.id.has_note);
+			v.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Log.d(TAG, "Click on has_note: ");
+					//if (mListener != null) {
+					//	mListener.onCustomClick(cursor, cursorpos,
+					//			EditItemDialog.FieldType.PRIORITY);
+					//}
+					Intent i = new Intent(Intent.ACTION_VIEW);
+					cursor.moveToPosition(cursorpos);
+					long note_id = cursor.getLong(ShoppingActivity.mStringItemsITEMID);
+					Uri uri = ContentUris.withAppendedId(Shopping.Notes.CONTENT_URI, note_id);
+					i.setData(uri);
+					try {
+					    context.startActivity(i);
+					} catch (ActivityNotFoundException e) {
+						// we could add a simple edit note dialog, but for now...
+						GetFromMarketDialog g = new GetFromMarketDialog(context, 
+								R.string.notepad_not_available,
+								R.string.notepad_get, R.string.notepad_app_url,
+								R.string.notepad_app_developer);
+						g.show();
+					}
+				}
+
+			});
 			// Check for clicks on item text
 			RelativeLayout r = (RelativeLayout) view
 					.findViewById(R.id.description);
@@ -407,6 +442,15 @@ public class ShoppingListView extends ListView {
 				    tv.setText(""); 
 			    } 
 				return true; 
+			} else if (id == R.id.has_note) { 
+				int has_note = cursor
+				.getInt(ShoppingActivity.mStringItemsITEMHASNOTE);
+				if (has_note == 0) {
+					view.setVisibility(View.GONE);  
+				} else {
+				    view.setVisibility(View.VISIBLE); 
+				}
+				return true;
 			} else {
 				return false;
 			}
@@ -544,11 +588,12 @@ public class ShoppingListView extends ListView {
 														 * ,
 														 */
 				ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,  
-				ContainsFull.QUANTITY, ContainsFull.PRIORITY
-																 },
+				ContainsFull.QUANTITY, ContainsFull.PRIORITY,
+				ContainsFull.ITEM_HAS_NOTE					
+				},
 				// the view defined in the XML template
 				new int[] { R.id.name, /* R.id.image_URI, */R.id.tags,
-						R.id.price, R.id.quantity, R.id.priority });
+						R.id.price, R.id.quantity, R.id.priority, R.id.has_note });
 		setAdapter(adapter);
 
 		// called in requery():

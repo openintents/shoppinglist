@@ -103,6 +103,14 @@ public abstract class Shopping {
 		public static final String LOCATION = "location";
 
 		/**
+		 * text of a note about the item
+		 * <P>
+		 * Type: VARCHAR
+		 * </P>
+		 */
+		public static final String NOTE = "note";
+
+		/**
 		 * The timestamp for when the item was created.
 		 * <P>
 		 * Type: INTEGER (long)
@@ -579,6 +587,14 @@ public abstract class Shopping {
 		 * </P>
 		 */
 		public static final String DUE_DATE = "due";
+		
+		/**
+		 * Whether the item has a note.
+		 * <P>
+		 * Type: INTEGER 
+		 * </P>
+		 */
+		public static final String ITEM_HAS_NOTE = "item_has_note";
 	
 	}
 
@@ -730,6 +746,79 @@ public abstract class Shopping {
 		public static final String PRICE = "price";
 	}
 	
+	public static final class Notes implements BaseColumns {
+		
+	    // unlike other tables, this one does not correspond
+		// to its own sql table... it just defines a projection of the items table.
+		
+	    // This class cannot be instantiated
+	    private Notes() {}
+
+	        /**
+	         * The content:// style URL for this table
+	         */
+	        public static final Uri CONTENT_URI = Uri.parse("content://org.openintents.shopping/notes");
+	        
+	        /**
+	         * The MIME type of {@link #CONTENT_URI} providing a directory of notes.
+	         */
+	        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.openintents.notepad.note";
+
+	        /**
+	         * The MIME type of a {@link #CONTENT_URI} sub-directory of a single note.
+	         */
+	        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.openintents.notepad.note";
+
+	        /**
+	         * The title of the note
+	         * <P>Type: TEXT</P>
+	         */
+	        public static final String TITLE = "title";
+
+	        /**
+	         * The note itself
+	         * <P>Type: TEXT</P>
+	         */
+	        public static final String NOTE = "note";
+
+	        /**
+	         * The timestamp for when the note was created
+	         * <P>Type: INTEGER (long from System.curentTimeMillis())</P>
+	         */
+	        public static final String CREATED_DATE = "created";
+
+	        /**
+	         * The timestamp for when the note was last modified
+	         * <P>Type: INTEGER (long from System.curentTimeMillis())</P>
+	         */
+	        public static final String MODIFIED_DATE = "modified";
+	     
+	        /**
+	         * Tags associated with a note.
+	         * Multiple tags are separated by commas.
+	         * <P>Type: TEXT</P>
+	         * @since 1.1.0
+	         */
+	        public static final String TAGS = "tags";
+
+	        /**
+	         * Whether the note is encrypted.
+	         * 0 = not encrypted. 1 = encrypted.
+	         * <P>Type: INTEGER</P>
+	         * @since 1.1.0
+	         */
+	        public static final String ENCRYPTED = "encrypted";
+
+	        /**
+	         * A theme URI.
+	         * <P>Type: TEXT</P>
+	         * @since 1.1.0
+	         */
+	        public static final String THEME = "theme";
+	        
+	}
+	
+	
 	// Some convenience functions follow	
 
 	/**
@@ -740,7 +829,8 @@ public abstract class Shopping {
 	 *            New name of the item.
 	 * @return id of the new or existing item.
 	 */
-	public static long getItem(Context context, String name, String tags, String price) {
+	public static long getItem(Context context, String name, String tags, 
+			String price, String note) {
 		long id = -1;
 		Cursor existingItems = context.getContentResolver().query(Items.CONTENT_URI,
 				new String[] { Items._ID }, "upper(name) = ?",
@@ -756,6 +846,7 @@ public abstract class Shopping {
 			ContentValues values = new ContentValues(1);
 			values.put(Items.NAME, name);
 			values.put(Items.TAGS, tags);
+			values.put(Items.NOTE, note);
 			
 			if (price != null){
 				values.put(Items.PRICE, price);

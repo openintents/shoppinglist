@@ -53,7 +53,11 @@
 	<!-- Update -->
 	<string name="update_app_url">market://search?q=pname:org.openintents.shopping</string>
     <string name="update_app_developer_url">http://www.openintents.org/en/shoppinglist</string><!-- OI Shopping list -->
-	 
+	
+	<!-- Notepad -->
+	<string name="notepad_app_url">market://search?q=pname:org.openintents.notepad</string>
+    <string name="notepad_app_developer">http://www.openintents.org/en/notepad</string>
+    
 	<!-- ***************************
 	     Preferences
 	     *************************** -->

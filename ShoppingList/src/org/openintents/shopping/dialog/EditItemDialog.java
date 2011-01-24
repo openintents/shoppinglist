@@ -1,17 +1,22 @@
 package org.openintents.shopping.dialog;
 
 
+import org.openintents.distribution.GetFromMarketDialog;
 import org.openintents.provider.Shopping;
 import org.openintents.provider.Shopping.Contains;
 import org.openintents.provider.Shopping.Items;
 import org.openintents.shopping.PreferenceActivity;
 import org.openintents.shopping.R;
+import org.openintents.shopping.ShoppingActivity;
 import org.openintents.shopping.util.PriceConverter;
 
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.database.Cursor;
 import android.net.Uri;
@@ -19,6 +24,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.KeyListener;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,13 +32,17 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class EditItemDialog extends AlertDialog implements OnClickListener {
 
 	Context mContext;
 	Uri mItemUri;
+	long mItemId = 0;
+	String mNoteText = null;
 	
 	EditText mEditText;
 	MultiAutoCompleteTextView mTags;
@@ -41,6 +51,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 	EditText mPriority;
 
 	TextView mPriceLabel;
+	ImageView mNote;
 
     String[] mTagList;
     
@@ -63,6 +74,36 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		mPrice = (EditText) view.findViewById(R.id.editprice);
 		mQuantity= (EditText) view.findViewById(R.id.editquantity);
 		mPriority= (EditText) view.findViewById(R.id.editpriority);
+		mNote = (ImageView) view.findViewById(R.id.note);
+		
+		mNote.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Uri uri = ContentUris.withAppendedId(Shopping.Notes.CONTENT_URI, mItemId);
+				
+				if (mNoteText == null) {
+					// can't edit a null note, put an empty one instead.
+					ContentValues values = new ContentValues();
+					values.put("note", "");
+					mContext.getContentResolver().update(mItemUri, values, null, null);
+					mContext.getContentResolver().notifyChange(mItemUri, null);
+				}
+									
+				Intent i = new Intent(Intent.ACTION_VIEW);
+				i.setData(uri);
+				try {
+				    mContext.startActivity(i);
+				} catch (ActivityNotFoundException e) {
+					GetFromMarketDialog g = new GetFromMarketDialog(mContext, 
+							R.string.notepad_not_available,
+							R.string.notepad_get, R.string.notepad_app_url,
+							R.string.notepad_app_developer);
+					g.show();
+				}
+			}
+
+		});
 
 		mPriceLabel = (TextView) view.findViewById(R.id.labeleditprice);
 
@@ -184,7 +225,9 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 	private final String[] mProjection = { 
 			Shopping.Items.NAME,
 			Shopping.Items.TAGS,
-			Shopping.Items.PRICE 
+			Shopping.Items.PRICE,
+			Shopping.Items.NOTE,
+			Shopping.Items._ID
 	};
 	private final String[] mRelationProjection = { 
 			Shopping.Contains.QUANTITY,
@@ -203,6 +246,8 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 			String tags = c.getString(1);
 			long pricecent = c.getLong(2);
 			String price = PriceConverter.getStringFromCentPrice(pricecent);
+			mNoteText = c.getString(3);
+			mItemId = c.getLong(4);
 			
 			mEditText.setText(text);
 			mTags.setText(tags);

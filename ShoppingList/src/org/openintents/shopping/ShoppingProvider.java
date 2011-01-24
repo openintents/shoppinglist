@@ -69,8 +69,9 @@ public class ShoppingProvider extends ContentProvider {
 	 * 4: Release 1.0.4-beta
 	 * 5: Release 1.2.7-beta 
 	 * 6: Release 1.2.7-beta 
+	 * 7: Release 1.2.7-beta
 	 */
-	private static final int DATABASE_VERSION = 6;
+	private static final int DATABASE_VERSION = 7;
 
 	private static HashMap<String, String> ITEMS_PROJECTION_MAP;
 	private static HashMap<String, String> LISTS_PROJECTION_MAP;
@@ -78,6 +79,8 @@ public class ShoppingProvider extends ContentProvider {
 	private static HashMap<String, String> CONTAINS_FULL_PROJECTION_MAP;
 	private static HashMap<String, String> STORES_PROJECTION_MAP;
 	private static HashMap<String, String> ITEMSTORES_PROJECTION_MAP;
+	private static HashMap<String, String> NOTES_PROJECTION_MAP;
+
 
 	// Basic tables
 	private static final int ITEMS = 1;
@@ -91,6 +94,8 @@ public class ShoppingProvider extends ContentProvider {
 	private static final int STORES_LISTID = 9;
 	private static final int ITEMSTORES = 10;
 	private static final int ITEMSTORES_ID = 11;
+	private static final int NOTES = 12;
+	private static final int NOTE_ID = 13;
 
 	// Derived tables
 	private static final int CONTAINS_FULL = 101; // combined with items and
@@ -125,6 +130,7 @@ public class ShoppingProvider extends ContentProvider {
 					+ "tags VARCHAR," // V3
 					+ "barcode VARCHAR," // V4
 					+ "location VARCHAR," // V4
+					+ "note VARCHAR" // V7
 					+ "due INTEGER," // V4
 					+ "created INTEGER," // V1
 					+ "modified INTEGER," // V1
@@ -244,8 +250,17 @@ public class ShoppingProvider extends ContentProvider {
 					} catch (SQLException e) {
 						Log.e(TAG, "Error executing SQL: ", e);
 					}
+					
+			    case 6:
+			    	try {				
+						db.execSQL("ALTER TABLE items ADD COLUMN "
+								+ Items.NOTE + " VARCHAR;");
+					} catch (SQLException e) {
+						Log.e(TAG, "Error executing SQL: ", e);
+					}
+					
 					/**
-					* case 6:
+					* case 7:
 					*/
 					break;
 				default:
@@ -362,6 +377,16 @@ public class ShoppingProvider extends ContentProvider {
 			qb.appendWhere("itemstores.item_id = items._id AND itemstores.store_id = stores._id");
 			break;
 			
+		case NOTES:
+			qb.setTables("items");
+			qb.setProjectionMap(NOTES_PROJECTION_MAP);
+
+		case NOTE_ID:
+			qb.setTables("items");
+			qb.setProjectionMap(NOTES_PROJECTION_MAP);
+			qb.appendWhere("_id=" + url.getPathSegments().get(1));
+			break;
+			
 		default:
 			throw new IllegalArgumentException("Unknown URL " + url);
 		}
@@ -394,6 +419,7 @@ public class ShoppingProvider extends ContentProvider {
 		// insert is supported for items or lists
 		switch (URL_MATCHER.match(url)) {
 		case ITEMS:
+		case NOTES:
 			return insertItem(url, values);
 
 		case LISTS:
@@ -766,6 +792,13 @@ public class ShoppingProvider extends ContentProvider {
 					whereArgs);
 			break;
 
+		case NOTE_ID:
+			// don't delete the row, just the note.
+			ContentValues values = new ContentValues();
+			values.putNull("note");
+			count = update(url, values, null, null);
+			break;
+			
 		default:
 			throw new IllegalArgumentException("Unknown URL " + url);
 		}
@@ -789,9 +822,17 @@ public class ShoppingProvider extends ContentProvider {
 		// long rowId;
 		switch (URL_MATCHER.match(url)) {
 		case ITEMS:
+		case NOTES:
 			count = db.update("items", values, where, whereArgs);
 			break;
 
+		case NOTE_ID:
+			// drop some OI Notepad fields on the floor.
+			values.remove("title");
+			values.remove("encrypted");
+			values.remove("theme");
+			values.remove("nothing_To_see_here");
+			// fall through...
 		case ITEM_ID:
 			String segment = url.getPathSegments().get(1); // contains rowId
 			// rowId = Long.parseLong(segment);
@@ -914,13 +955,21 @@ public class ShoppingProvider extends ContentProvider {
 			return "vnd.android.cursor.item/vnd.openintents.shopping.containsfull";
 
 		case STORES:
+			return "vnd.android.cursor.dir/vnd.openintents.shopping.stores";
+
 		case STORES_ID:
 		case STORES_LISTID:
-			return "vnd.android.cursor.dir/vnd.openintents.shopping.stores";
+			return "vnd.android.cursor.item/vnd.openintents.shopping.stores";
+			
+		case NOTES:
+			return Shopping.Notes.CONTENT_TYPE; 
+		case NOTE_ID: 
+			return Shopping.Notes.CONTENT_ITEM_TYPE;
 			
 		case ITEMSTORES:
-		case ITEMSTORES_ID:
 			return "vnd.android.cursor.dir/vnd.openintents.shopping.itemstores";
+		case ITEMSTORES_ID:
+			return "vnd.android.cursor.item/vnd.openintents.shopping.itemstores";
 			
 		default:
 			throw new IllegalArgumentException("Unknown URL " + url);
@@ -947,6 +996,9 @@ public class ShoppingProvider extends ContentProvider {
 				ITEMSTORES_ID);
 		URL_MATCHER.addURI("org.openintents.shopping", "liststores/#", 
 				STORES_LISTID);
+		URL_MATCHER.addURI("org.openintents.shopping", "notes", NOTES);
+		URL_MATCHER.addURI("org.openintents.shopping", "notes/#", NOTE_ID);
+
 
 		ITEMS_PROJECTION_MAP = new HashMap<String, String>();
 		ITEMS_PROJECTION_MAP.put(Items._ID, "items._id");
@@ -1029,6 +1081,8 @@ public class ShoppingProvider extends ContentProvider {
 				"lists.name as list_name");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.LIST_IMAGE,
 				"lists.image as list_image");
+		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_HAS_NOTE,
+		        "items.note is not NULL as item_has_note");
 
 		STORES_PROJECTION_MAP = new HashMap<String, String>();
 		STORES_PROJECTION_MAP.put(Stores._ID, "stores._id");
@@ -1047,6 +1101,15 @@ public class ShoppingProvider extends ContentProvider {
 		ITEMSTORES_PROJECTION_MAP.put(ItemStores.STORE_ID, "itemstores.store_id");
 		ITEMSTORES_PROJECTION_MAP.put(ItemStores.AISLE, "itemstores.aisle");
 		ITEMSTORES_PROJECTION_MAP.put(ItemStores.PRICE, "itemstores.price");
+
+		NOTES_PROJECTION_MAP = new HashMap<String, String>();
+		NOTES_PROJECTION_MAP.put(Shopping.Notes._ID, "items._id");
+		NOTES_PROJECTION_MAP.put(Shopping.Notes.NOTE, "items.note");
+		NOTES_PROJECTION_MAP.put(Shopping.Notes.TITLE, "null as title");
+		NOTES_PROJECTION_MAP.put(Shopping.Notes.TAGS, "null as tags");
+		NOTES_PROJECTION_MAP.put(Shopping.Notes.ENCRYPTED, "null as encrypted");
+		NOTES_PROJECTION_MAP.put(Shopping.Notes.THEME, "null as theme");
+
 
 	}
 }

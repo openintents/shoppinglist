@@ -90,7 +90,7 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_toRightOf="@id/check"       	
-              android:layout_marginTop="10dip"
+              android:layout_marginTop="2dip"
 			  android:layout_marginLeft="2dip"
               android:gravity="center_vertical"
               android:visibility="visible"/>     
@@ -113,7 +113,6 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
         	android:layout_toRightOf="@id/quantity"
-        	android:layout_toLeftOf="@id/price"
         	android:layout_alignParentTop="true"
         	android:layout_alignWithParentIfMissing="true"
             android:layout_marginTop="2dip"
@@ -126,6 +125,15 @@
         android:ellipsize="end"
 			android:layout_marginLeft="27dip"
 			android:layout_marginRight="27dip" -->
+	<ImageView android:id="@+id/has_note"
+			   android:layout_width="14dip"
+			   android:layout_height="14dip"
+			   android:layout_toRightOf="@id/name"
+			   android:layout_margin="4dip"
+			   android:layout_alignBottom="@id/name"
+			   android:scaleType="centerInside"
+			   android:src="@drawable/note"
+			/> 
 	<TextView android:id="@+id/tags"
 			  android:layout_width="wrap_content"
 			  android:layout_height="wrap_content"
