@@ -83,6 +83,18 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 				Uri uri = ContentUris.withAppendedId(Shopping.Notes.CONTENT_URI, mItemId);
 				
 				if (mNoteText == null) {
+				   // Maybe an earlier edit activity added it? If so, 
+				   // we should not replace with empty string below.
+					String[] shortProjection = {Shopping.Items.NOTE}; 
+					
+					Cursor c = mContext.getContentResolver().query(mItemUri, 
+							shortProjection, null, null, null);
+					if (c != null && c.moveToFirst()) {
+						mNoteText = c.getString(0);
+					}
+				}
+				
+				if (mNoteText == null) {
 					// can't edit a null note, put an empty one instead.
 					ContentValues values = new ContentValues();
 					values.put("note", "");
