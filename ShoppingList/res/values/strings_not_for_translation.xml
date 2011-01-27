@@ -47,14 +47,6 @@
 	</string-array>
 	
 	<!-- ***************************
-	     Distribution
-	     *************************** -->
-	
-	<!-- Update -->
-	<string name="update_app_url">market://search?q=pname:org.openintents.shopping</string>
-    <string name="update_app_developer_url">http://www.openintents.org/en/shoppinglist</string><!-- OI Shopping list -->
-	 
-	<!-- ***************************
 	     Preferences
 	     *************************** -->
 	

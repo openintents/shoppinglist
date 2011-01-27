@@ -28,13 +28,6 @@
 	<string name="about_website_label">OI Shopping list at OpenIntents</string>
 
 	<!-- ***************************
-	     Distribution
-	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">OI Shopping List EULA</string>
-	
-	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<string name="app_name">OI Shopping list</string>
