@@ -29,11 +29,11 @@
 	<string name="about_website_label">在OpenIntents上的OI 购物列表</string>
 
 	<!-- ***************************
-	     Distribution
+	     OI Notepad
 	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">OI 购物列表 EULA</string>
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<string name="notepad">OI Notepad</string>
+
 	
 	<!-- ***************************
 	     Applicatio-specific strings
@@ -92,6 +92,8 @@
 	<string name="price">价格</string>
 	<string name="item">物品</string>
 	<string name="quantity">数量</string>
+	<string name="priority">Priority</string>
+	<string name="has_note">Has Note</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">总共: %s</string>
@@ -153,6 +155,8 @@
 	<string name="preference_showtags_summary">被显示为列表的额外列</string>
 	<string name="preference_showquantity_title">显示数量</string>
 	<string name="preference_showquantity_summary">被显示为列表的额外列</string>
+	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_summary">被显示为列表的额外列</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">摇动手机以清空列表</string>
@@ -210,6 +214,8 @@
     	<item>优先最贵的</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
     	<item>优先列出未检查物品， 按标签的字母顺序排序</item>
+    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    	<item>unchecked first, priority, alphabetical</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
@@ -248,5 +254,6 @@
     	<!-- Automation action to clean up a list. -->
     	<item>清除列表</item>
     </string-array>
-    
+      
+	     
 </resources>

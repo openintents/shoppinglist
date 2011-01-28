@@ -35,11 +35,11 @@
 	<string name="about_website_label">OI Shopping list de OpenIntents</string>
 
 	<!-- ***************************
-	     Distribution
+	     OI Notepad
 	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">OI Shopping List EULA</string>
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<string name="notepad">OI Notepad</string>
+
 	
 	<!-- ***************************
 	     Applicatio-specific strings
@@ -98,6 +98,8 @@
 	<string name="price">Prix</string>
 	<string name="item">Elément</string>
 	<string name="quantity">Quantité</string>
+	<string name="priority">Priority</string>
+	<string name="has_note">Has Note</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Total: %s</string>
@@ -159,6 +161,8 @@
 	<string name="preference_showtags_summary">Voir comme une colonne supplémentaire dans la liste</string>
 	<string name="preference_showquantity_title">Montrer la quantité</string>
 	<string name="preference_showquantity_summary">Voir comme une colonne supplémentaire dans la liste</string>
+	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_summary">Voir comme une colonne supplémentaire dans la liste</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Secouer pour nettoyer</string>
@@ -216,6 +220,8 @@
     	<item>plus cher en premier</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
     	<item>Non coché en premier, libellé par ordre alphabétique</item>
+    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    	<item>unchecked first, priority, alphabetical</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
@@ -254,5 +260,6 @@
     	<!-- Automation action to clean up a list. -->
     	<item>Nettoyer la liste</item>
     </string-array>
-    
+      
+	     
 </resources>

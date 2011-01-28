@@ -32,11 +32,11 @@ Launchpad Contributions:
 	<string name="about_website_label">OI Shopping list at OpenIntents</string>
 
 	<!-- ***************************
-	     Distribution
+	     OI Notepad
 	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">OI Shopping List EULA</string>
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<string name="notepad">OI Notepad</string>
+
 	
 	<!-- ***************************
 	     Applicatio-specific strings
@@ -95,6 +95,8 @@ Launchpad Contributions:
 	<string name="price">Preço</string>
 	<string name="item">Item</string>
 	<string name="quantity">Quantidade</string>
+	<string name="priority">Priority</string>
+	<string name="has_note">Has Note</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Total: %s</string>
@@ -156,6 +158,8 @@ Launchpad Contributions:
 	<string name="preference_showtags_summary">Shown as extra column in list.</string>
 	<string name="preference_showquantity_title">Show quantity</string>
 	<string name="preference_showquantity_summary">Shown as extra column in list.</string>
+	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_summary">Shown as extra column in list.</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Shake to clean up</string>
@@ -213,6 +217,8 @@ Launchpad Contributions:
     	<item>most expensive first</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
     	<item>unchecked first, tags alphabetical</item>
+    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    	<item>unchecked first, priority, alphabetical</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
@@ -251,5 +257,6 @@ Launchpad Contributions:
     	<!-- Automation action to clean up a list. -->
     	<item>Clean up list</item>
     </string-array>
-    
+      
+	     
 </resources>

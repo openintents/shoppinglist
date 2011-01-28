@@ -30,11 +30,11 @@
 	<string name="about_website_label">boodschappenlijst bij openintents</string>
 
 	<!-- ***************************
-	     Distribution
+	     OI Notepad
 	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">OI Boodschappenlijst  EULA</string>
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<string name="notepad">OI Notepad</string>
+
 	
 	<!-- ***************************
 	     Applicatio-specific strings
@@ -93,6 +93,8 @@
 	<string name="price">Prijs</string>
 	<string name="item">Item</string>
 	<string name="quantity">Aantal</string>
+	<string name="priority">Priority</string>
+	<string name="has_note">Has Note</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Totaal: %s</string>
@@ -154,6 +156,8 @@
 	<string name="preference_showtags_summary">Toon als extra kolom in lijst</string>
 	<string name="preference_showquantity_title">Toon aantal</string>
 	<string name="preference_showquantity_summary">Toon als extra kolom in lijst</string>
+	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_summary">Toon als extra kolom in lijst</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Schudden om op te kuisen</string>
@@ -211,6 +215,8 @@
     	<item>duurste eerst</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
     	<item>onvoltooid eerst, tags alfabetisch</item>
+    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    	<item>unchecked first, priority, alphabetical</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
@@ -249,5 +255,6 @@
     	<!-- Automation action to clean up a list. -->
     	<item>schoonmaak lijst</item>
     </string-array>
-    
+      
+	     
 </resources>

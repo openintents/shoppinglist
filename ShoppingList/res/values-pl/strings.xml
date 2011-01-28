@@ -30,11 +30,11 @@
 	<string name="about_website_label">OI Lista Zakupów na OpenIntents</string>
 
 	<!-- ***************************
-	     Distribution
+	     OI Notepad
 	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">OI Lista Zakupów EULA</string>
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<string name="notepad">OI Notepad</string>
+
 	
 	<!-- ***************************
 	     Applicatio-specific strings
@@ -93,6 +93,8 @@
 	<string name="price">Cena</string>
 	<string name="item">Element</string>
 	<string name="quantity">Ilość</string>
+	<string name="priority">Priority</string>
+	<string name="has_note">Has Note</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Razem: %s</string>
@@ -154,6 +156,8 @@
 	<string name="preference_showtags_summary">Pokaż jako dodatkową kolumnę na liście.</string>
 	<string name="preference_showquantity_title">Pokaż ilość</string>
 	<string name="preference_showquantity_summary">Pokaż jako dodatkową kolumnę na liście.</string>
+	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_summary">Pokaż jako dodatkową kolumnę na liście.</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Potrząśnij, aby wyczyścić</string>
@@ -211,6 +215,8 @@
     	<item>najdroższe najpierw</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
     	<item>najpierw nieodznaczone, znaczniki alfabetycznie</item>
+    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    	<item>unchecked first, priority, alphabetical</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
@@ -249,5 +255,6 @@
     	<!-- Automation action to clean up a list. -->
     	<item>Wyczyść listę</item>
     </string-array>
-    
+      
+	     
 </resources>

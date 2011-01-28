@@ -30,11 +30,11 @@
 	<string name="about_website_label">OpenIntentsのOI Shopping list</string>
 
 	<!-- ***************************
-	     Distribution
+	     OI Notepad
 	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">OI Shoppingの利用規約</string>
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<string name="notepad">OI Notepad</string>
+
 	
 	<!-- ***************************
 	     Applicatio-specific strings
@@ -93,6 +93,8 @@
 	<string name="price">価格</string>
 	<string name="item">アイテム</string>
 	<string name="quantity">数量</string>
+	<string name="priority">Priority</string>
+	<string name="has_note">Has Note</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">合計価格: %s</string>
@@ -154,6 +156,8 @@
 	<string name="preference_showtags_summary">リストに列を追加表示。</string>
 	<string name="preference_showquantity_title">数量を表示</string>
 	<string name="preference_showquantity_summary">リストに列を追加表示。</string>
+	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_summary">リストに列を追加表示。</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">シェイクでリストをクリーン</string>
@@ -211,6 +215,8 @@
     	<item>価格の高い順</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
     	<item>unchecked first, tags alphabetical</item>
+    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    	<item>unchecked first, priority, alphabetical</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
@@ -249,5 +255,6 @@
     	<!-- Automation action to clean up a list. -->
     	<item>リストのクリーン</item>
     </string-array>
-    
+      
+	     
 </resources>

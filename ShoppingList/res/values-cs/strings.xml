@@ -29,11 +29,11 @@
 	<string name="about_website_label">Ol Seznam nákupů v OpenIntents</string>
 
 	<!-- ***************************
-	     Distribution
+	     OI Notepad
 	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">Ol Seznam nákupů EULA</string>
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<string name="notepad">OI Notepad</string>
+
 	
 	<!-- ***************************
 	     Applicatio-specific strings
@@ -92,6 +92,8 @@
 	<string name="price">Cena</string>
 	<string name="item">Bod</string>
 	<string name="quantity">Množství</string>
+	<string name="priority">Priority</string>
+	<string name="has_note">Has Note</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Celkem: %s</string>
@@ -153,6 +155,8 @@
 	<string name="preference_showtags_summary">Ukázáno na seznamu jako další sloupek</string>
 	<string name="preference_showquantity_title">Ukázat množství</string>
 	<string name="preference_showquantity_summary">Ukázáno na seznamu jako další sloupek</string>
+	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_summary">Ukázáno na seznamu jako další sloupek</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Pro vyčištění zatřást</string>
@@ -210,6 +214,8 @@
     	<item>nejdražší první</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
     	<item>dát neodškrtnuté první, alfabeticky podle označení</item>
+    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    	<item>unchecked first, priority, alphabetical</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
@@ -248,5 +254,6 @@
     	<!-- Automation action to clean up a list. -->
     	<item>Vyčistit seznam</item>
     </string-array>
-    
+      
+	     
 </resources>

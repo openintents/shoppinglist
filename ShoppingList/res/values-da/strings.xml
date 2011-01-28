@@ -30,11 +30,11 @@ Launchpad Contributions:
 	<string name="about_website_label">OI Shopping List hos OpenIntents</string>
 
 	<!-- ***************************
-	     Distribution
+	     OI Notepad
 	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">OI Shopping Lists licensaftale</string>
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<string name="notepad">OI Notepad</string>
+
 	
 	<!-- ***************************
 	     Applicatio-specific strings
@@ -93,6 +93,8 @@ Launchpad Contributions:
 	<string name="price">Pris</string>
 	<string name="item">Vare</string>
 	<string name="quantity">Antal</string>
+	<string name="priority">Priority</string>
+	<string name="has_note">Has Note</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">I alt: %s</string>
@@ -154,6 +156,8 @@ Launchpad Contributions:
 	<string name="preference_showtags_summary">Vises som en ekstra kolonne i lister</string>
 	<string name="preference_showquantity_title">Vis kvantitet</string>
 	<string name="preference_showquantity_summary">Vises som en ekstra kolonne i lister</string>
+	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_summary">Vises som en ekstra kolonne i lister</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Ryst for at rydde op</string>
@@ -211,6 +215,8 @@ Launchpad Contributions:
     	<item>dyreste først</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
     	<item>uafkrydsede først, mærker alfabetisk</item>
+    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    	<item>unchecked first, priority, alphabetical</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
@@ -249,5 +255,6 @@ Launchpad Contributions:
     	<!-- Automation action to clean up a list. -->
     	<item>Ryd op i liste</item>
     </string-array>
-    
+      
+	     
 </resources>
