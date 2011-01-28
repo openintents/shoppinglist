@@ -1,31 +1,29 @@
 package org.openintents.shopping.dialog;
 
 
-import org.openintents.distribution.GetFromMarketDialog;
+import org.openintents.distribution.DownloadAppDialog;
 import org.openintents.provider.Shopping;
 import org.openintents.provider.Shopping.Contains;
 import org.openintents.provider.Shopping.Items;
 import org.openintents.shopping.PreferenceActivity;
 import org.openintents.shopping.R;
-import org.openintents.shopping.ShoppingActivity;
 import org.openintents.shopping.util.PriceConverter;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.KeyListener;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -35,7 +33,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class EditItemDialog extends AlertDialog implements OnClickListener {
 
@@ -107,10 +104,11 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 				try {
 				    mContext.startActivity(i);
 				} catch (ActivityNotFoundException e) {
-					GetFromMarketDialog g = new GetFromMarketDialog(mContext, 
-							R.string.notepad_not_available,
-							R.string.notepad_get, R.string.notepad_app_url,
-							R.string.notepad_app_developer);
+					Dialog g = new DownloadAppDialog(mContext, 
+							R.string.notepad_not_available, 
+							R.string.notepad, 
+							R.string.notepad_package, 
+							R.string.notepad_website);
 					g.show();
 				}
 			}

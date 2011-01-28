@@ -23,13 +23,13 @@ import java.util.List;
 
 import org.openintents.OpenIntents;
 import org.openintents.distribution.AboutDialog;
+import org.openintents.distribution.DistributionLibraryActivity;
 import org.openintents.distribution.EulaActivity;
-import org.openintents.distribution.UpdateMenu;
 import org.openintents.intents.GeneralIntents;
 import org.openintents.intents.ShoppingListIntents;
 import org.openintents.provider.Alert;
-import org.openintents.provider.Shopping;
 import org.openintents.provider.Location.Locations;
+import org.openintents.provider.Shopping;
 import org.openintents.provider.Shopping.Contains;
 import org.openintents.provider.Shopping.ContainsFull;
 import org.openintents.provider.Shopping.Items;
@@ -50,7 +50,6 @@ import org.openintents.shopping.util.ShoppingUtils;
 import org.openintents.util.MenuIntentOptionsWithIcons;
 import org.openintents.util.ShakeSensorListener;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -74,16 +73,19 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -94,16 +96,13 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 /**
  * 
  * Displays a shopping list.
  * 
  */
-public class ShoppingActivity extends Activity implements ThemeDialogListener,
+public class ShoppingActivity extends DistributionLibraryActivity implements ThemeDialogListener,
 		OnCustomClickListener { // implements
 	// AdapterView.OnItemClickListener
 	// {
@@ -137,8 +136,6 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 																		// intent
 																		// extras
 
-	private static final int MENU_ABOUT = Menu.FIRST + 11;
-
 	// TODO: Implement the following menu items
 	// private static final int MENU_EDIT_LIST = Menu.FIRST + 12; // includes
 	// rename
@@ -153,12 +150,13 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 	// that can be called by other programs.
 	// private static final int MENU_SELECT_LIST = Menu.FIRST + 15; // select a
 	// shopping list
-	private static final int MENU_UPDATE = Menu.FIRST + 16;
 	private static final int MENU_PREFERENCES = Menu.FIRST + 17;
 	private static final int MENU_SEND = Menu.FIRST + 18;
 	private static final int MENU_REMOVE_ITEM_FROM_LIST = Menu.FIRST + 19;
 	private static final int MENU_MOVE_ITEM = Menu.FIRST + 20;
 	
+	private static final int MENU_DISTRIBUTION_START = Menu.FIRST + 100; // MUST BE LAST
+
 	private static final int DIALOG_ABOUT = 1;
 	// private static final int DIALOG_TEXT_ENTRY = 2;
 	private static final int DIALOG_NEW_LIST = 2;
@@ -166,6 +164,8 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 	private static final int DIALOG_EDIT_ITEM = 4;
 	private static final int DIALOG_DELETE_ITEM = 5;
 	private static final int DIALOG_THEME = 6;
+
+	private static final int DIALOG_DISTRIBUTION_START = 100; // MUST BE LAST
 
 	private static final int REQUEST_CODE_CATEGORY_ALTERNATIVE = 1;
 	private static final int REQUEST_PICK_LIST = 2;
@@ -390,9 +390,14 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 		if (debug)
 			Log.d(TAG, "Shopping list onCreate()");
 
-		if (!EulaActivity.checkEula(this)) {
-			return;
-		}
+        mDistribution.setFirst(MENU_DISTRIBUTION_START, DIALOG_DISTRIBUTION_START);
+        
+        // Check whether EULA has been accepted
+        // or information about new version can be presented.
+        if (mDistribution.showEulaOrNewVersion()) {
+            return;
+        }
+        
 		setContentView(R.layout.shopping);
 
 		// mEditItemPosition = -1;
@@ -1100,16 +1105,13 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 							'8', 'l');
 		}
 
-		UpdateMenu
-				.addUpdateMenu(this, menu, 0, MENU_UPDATE, 0, R.string.menu_update);
-
+ 		// Add distribution menu items last.
+ 		mDistribution.onCreateOptionsMenu(menu);
+ 		
 		// NOTE:
 		// Dynamically added menu items are included in onPrepareOptionsMenu()
 		// instead of here!
 		// (Explanation see there.)
-
-		menu.add(0, MENU_ABOUT, 0, R.string.about).setIcon(
-				android.R.drawable.ic_menu_info_details).setShortcut('0', 'a');
 
 		return true;
 	}
@@ -1259,14 +1261,6 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 
 		case MENU_ADD_LOCATION_ALERT:
 			addLocationAlert();
-			return true;
-
-		case MENU_UPDATE:
-			UpdateMenu.showUpdateBox(this);
-			return true;
-
-		case MENU_ABOUT:
-			showAboutBox();
 			return true;
 
 		case MENU_PREFERENCES:
@@ -1756,8 +1750,6 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 	protected Dialog onCreateDialog(int id) {
 
 		switch (id) {
-		case DIALOG_ABOUT:
-			return new AboutDialog(this);
 
 		case DIALOG_NEW_LIST:
 			return new NewListDialog(this, new DialogActionListener() {
@@ -1800,7 +1792,7 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 		case DIALOG_THEME:
 			return new ThemeDialog(this, this);
 		}
-		return null;
+		return super.onCreateDialog(id);
 
 	}
 
@@ -1809,8 +1801,6 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 		super.onPrepareDialog(id, dialog);
 
 		switch (id) {
-		case DIALOG_ABOUT:
-			break;
 
 		case DIALOG_RENAME_LIST:
 			((RenameListDialog) dialog).setName(getCurrentListName());
@@ -1832,10 +1822,6 @@ public class ShoppingActivity extends Activity implements ThemeDialogListener,
 			((ThemeDialog) dialog).prepareDialog();
 			break;
 		}
-	}
-
-	private void showAboutBox() {
-		AboutDialog.showDialogOrStartActivity(this, DIALOG_ABOUT);
 	}
 
 	// /////////////////////////////////////////////////////

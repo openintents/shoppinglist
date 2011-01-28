@@ -225,8 +225,6 @@
         	</intent-filter>
         </receiver>
 
-        <activity android:name="org.openintents.distribution.EulaActivity" android:label="@string/eula_title">
-        </activity> 
         <activity android:name=".PreferenceActivity" android:label="@string/preferences">
         </activity> 
         <activity android:name=".PickItemsActivity" 
@@ -234,6 +232,9 @@
         android:theme="@android:style/Theme.Dialog">
         </activity> 
         
+		<!-- Activities from OI Distribution Library -->
+        <activity android:name="org.openintents.distribution.EulaActivity" />
+        <activity android:name="org.openintents.distribution.NewVersionActivity" />
 	</application>	 
 	
 	<uses-feature android:name="android.hardware.touchscreen" android:required="false"/>

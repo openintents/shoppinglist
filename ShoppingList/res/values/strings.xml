@@ -28,17 +28,10 @@
 	<string name="about_website_label">OI Shopping list at OpenIntents</string>
 
 	<!-- ***************************
-	     Distribution
-	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">OI Shopping List EULA</string>
-	
-	<!-- ***************************
 	     OI Notepad
 	     *************************** -->
 	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
-	<string name="notepad_get">Get OI Notepad</string>
+	<string name="notepad">OI Notepad</string>
 
 	
 	<!-- ***************************

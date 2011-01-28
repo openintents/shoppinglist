@@ -1,0 +1,27 @@
+---------------------------------------------------------
+release 1.2.7
+date: 2011-?
+- translations into various languages.
+
+---------------------------------------------------------
+release 1.2.6
+date: 2011-01-06
+- move items between lists
+- backup preferences and items
+- support for xlarge screens
+- launcher icons for different resolutions
+
+---------------------------------------------------------
+release 1.2.5
+date: 2010-08-05
+- translations: Danish, minor changes
+
+---------------------------------------------------------
+For the complete list of changes and a list of frequently asked questions, please visit:
+http://www.openintents.org
+
+You can help to improve the translation into your language at Launchpad:
+https://translations.launchpad.net/openintents/trunk
+
+The source code of this free and open source application is available at:
+http://code.google.com/p/openintents

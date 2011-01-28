@@ -4,19 +4,19 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import org.openintents.distribution.DownloadAppDialog;
 import org.openintents.provider.Shopping;
 import org.openintents.provider.Shopping.Contains;
 import org.openintents.provider.Shopping.ContainsFull;
-import org.openintents.provider.Shopping.Items;
 import org.openintents.provider.Shopping.Status;
 import org.openintents.shopping.dialog.EditItemDialog;
 import org.openintents.shopping.theme.ThemeAttributes;
 import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;
 import org.openintents.shopping.util.ShoppingUtils;
-import org.openintents.distribution.GetFromMarketDialog;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -52,9 +52,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.SimpleCursorAdapter.ViewBinder;
+import android.widget.TextView;
 
 /**
  * View to show a shopping list with its items
@@ -354,10 +353,11 @@ public class ShoppingListView extends ListView {
 					    context.startActivity(i);
 					} catch (ActivityNotFoundException e) {
 						// we could add a simple edit note dialog, but for now...
-						GetFromMarketDialog g = new GetFromMarketDialog(context, 
-								R.string.notepad_not_available,
-								R.string.notepad_get, R.string.notepad_app_url,
-								R.string.notepad_app_developer);
+						Dialog g = new DownloadAppDialog(context, 
+								R.string.notepad_not_available, 
+								R.string.notepad, 
+								R.string.notepad_package, 
+								R.string.notepad_website);
 						g.show();
 					}
 				}
