@@ -21,7 +21,8 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
-  Jocke Pihlström https://launchpad.net/~jockepihlstrom</string>
+  Jocke Pihlström https://launchpad.net/~jockepihlstrom
+  Peli https://launchpad.net/~peli0101</string>
 	
 	<!-- Strings for OI About -->
 	<string name="about_comments">OI Shopping list lets you keep track of your shopping items. You can also use it for other kinds of check lists, for example for ToDo lists or party guest lists.</string>
