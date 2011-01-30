@@ -25,23 +25,15 @@
   ZipUltra https://launchpad.net/~zipultra
   friedger https://launchpad.net/~friedger</string>
 	
-	<!-- Strings for OI About -->
+    <!-- Short explanation of the application -->
 	<string name="about_comments">"OI Shopping list" предназначен для создания и хранения списков покупок. Вы так же можете использовать программу для других целей, например как список задач.</string>
-	<string name="about_website_label">OI Список покупок - OpenIntents</string>
-
-	<!-- ***************************
-	     OI Notepad
-	     *************************** -->
-	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
-	<string name="notepad">OI Notepad</string>
-
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
+	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
 	<string name="app_name">OI Список покупок</string>
 
-	<!-- Shopping Provider -->
 	<string name="new_item">Новый элемент</string>
 	<string name="new_list">Новый список</string>
 	<string name="send">Отправить список</string>
@@ -116,6 +108,7 @@
 	<string name="pick_list_to_insert_items">Выбор листа для добавления элемента</string>
 	
 	<!-- Theme related -->
+	<!-- Title for selecting a theme -->
 	<string name="theme_pick">Выбрать тему</string>
 	<string name="theme_description">Выбор темы для этого списка</string>
 	<string name="theme_default">По умолчанию</string>
@@ -125,7 +118,9 @@
 	<string name="theme_bugdroid_export">Андроид (от OI Shopping List)</string>
 
 	<!--     Dialog box    -->
+	<!-- Button label "OK" -->
 	<string name="ok">OK</string>
+	<!-- Button label "Cancel" -->
 	<string name="cancel">Отмена</string>
 	<string name="use_theme_for_all_lists">Использовать данную тему для всех списков</string>
 	<string name="get_more_themes">Еще темы</string>
@@ -190,8 +185,10 @@
 	     *************************** -->
 	
 	<!-- OI Shopping list -->
+	<!-- Permission to read shopping lists -->
 	<string name="oi_shopping_permission_read">чтение листа покупок</string>
 	<string name="oi_shopping_permission_read_descr">Разрешить приложениям получать списки. Примечание: зашифрованные списки и элементы предоставлены в зашифрованном формате.</string>
+	<!-- Permission to write to shopping lists -->
 	<string name="oi_shopping_permission_write">Запись списков покупок</string>
 	<string name="oi_shopping_permission_write_descr">Разрешить приложениям создавать новые списки и элементы и изменять существующие.</string>
 	
@@ -239,6 +236,13 @@
         <item>Все слова</item>
     </string-array>
 
+	<!-- ***************************
+	     OI Notepad
+	     *************************** -->
+	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<!-- Name of application "OI Notepad". Translations should be consistent. -->
+	<string name="notepad">OI Notepad</string>
 
 	<!-- ***************************
 	     Automation

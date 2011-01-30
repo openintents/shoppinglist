@@ -24,23 +24,15 @@
   Peli https://launchpad.net/~peli0101
   friedger https://launchpad.net/~friedger</string>
 	
-	<!-- Strings for OI About -->
+    <!-- Short explanation of the application -->
 	<string name="about_comments">Ol Seznam nákupů vám dovoluje sledovat co máte nakoupit. Můžete ho také použít i pro jiné kontrolní seznamy, například seznam denních činností, nebo seznam hostů na večírek.</string>
-	<string name="about_website_label">Ol Seznam nákupů v OpenIntents</string>
-
-	<!-- ***************************
-	     OI Notepad
-	     *************************** -->
-	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
-	<string name="notepad">OI Notepad</string>
-
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
+	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
 	<string name="app_name">Ol Seznam nákupů</string>
 
-	<!-- Shopping Provider -->
 	<string name="new_item">Nový bod</string>
 	<string name="new_list">Nový seznam</string>
 	<string name="send">Poslat seznam</string>
@@ -115,6 +107,7 @@
 	<string name="pick_list_to_insert_items">Zvolit seznam kam vsunout body</string>
 	
 	<!-- Theme related -->
+	<!-- Title for selecting a theme -->
 	<string name="theme_pick">Zvolte téma</string>
 	<string name="theme_description">Zvolte téma pro tento seznam</string>
 	<string name="theme_default">Výchozí nastavení</string>
@@ -124,7 +117,9 @@
 	<string name="theme_bugdroid_export">Android (z Ol Seznamu nákupů)</string>
 
 	<!--     Dialog box    -->
+	<!-- Button label "OK" -->
 	<string name="ok">Dobře</string>
+	<!-- Button label "Cancel" -->
 	<string name="cancel">Zrušit</string>
 	<string name="use_theme_for_all_lists">Použít toto téma pro všechny seznamy</string>
 	<string name="get_more_themes">Dostaňte více témat</string>
@@ -189,8 +184,10 @@
 	     *************************** -->
 	
 	<!-- OI Shopping list -->
+	<!-- Permission to read shopping lists -->
 	<string name="oi_shopping_permission_read">číst seznamy nákupů</string>
 	<string name="oi_shopping_permission_read_descr">Dovoluje aplikaci čtení seznamu nákupů. Vezměte na vědomí, že zakódované seznamy a body jsou dodány v zakódovaném formátu</string>
+	<!-- Permission to write to shopping lists -->
 	<string name="oi_shopping_permission_write">sepište seznamy nákupů</string>
 	<string name="oi_shopping_permission_write_descr">Dovoluje aplikaci k vytvoření nových seznamů a bodů, nebo ke změně stávajících.</string>
 	
@@ -238,6 +235,13 @@
         <item>Každé slovo</item>
     </string-array>
 
+	<!-- ***************************
+	     OI Notepad
+	     *************************** -->
+	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<!-- Name of application "OI Notepad". Translations should be consistent. -->
+	<string name="notepad">OI Notepad</string>
 
 	<!-- ***************************
 	     Automation

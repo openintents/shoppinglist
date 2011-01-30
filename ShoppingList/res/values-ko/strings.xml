@@ -23,23 +23,15 @@
 	<string name="about_translators">Launchpad Contributions:
   CSro https://launchpad.net/~choongsan</string>
 	
-	<!-- Strings for OI About -->
+    <!-- Short explanation of the application -->
 	<string name="about_comments">OI Shopping list lets you keep track of your shopping items. You can also use it for other kinds of check lists, for example for ToDo lists or party guest lists.</string>
-	<string name="about_website_label">OI Shopping list at OpenIntents</string>
-
-	<!-- ***************************
-	     OI Notepad
-	     *************************** -->
-	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
-	<string name="notepad">OI Notepad</string>
-
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
+	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
 	<string name="app_name">OI 쇼핑 목록</string>
 
-	<!-- Shopping Provider -->
 	<string name="new_item">새 아이템</string>
 	<string name="new_list">새 목록</string>
 	<string name="send">목록 보네기</string>
@@ -114,6 +106,7 @@
 	<string name="pick_list_to_insert_items">Pick list to insert items</string>
 	
 	<!-- Theme related -->
+	<!-- Title for selecting a theme -->
 	<string name="theme_pick">테마 선택</string>
 	<string name="theme_description">Choose a theme for this list</string>
 	<string name="theme_default">기본값</string>
@@ -123,7 +116,9 @@
 	<string name="theme_bugdroid_export">Android (from OI Shopping List)</string>
 
 	<!--     Dialog box    -->
+	<!-- Button label "OK" -->
 	<string name="ok">확인</string>
+	<!-- Button label "Cancel" -->
 	<string name="cancel">취소</string>
 	<string name="use_theme_for_all_lists">Use this theme for all lists</string>
 	<string name="get_more_themes">Get more themes</string>
@@ -188,8 +183,10 @@
 	     *************************** -->
 	
 	<!-- OI Shopping list -->
+	<!-- Permission to read shopping lists -->
 	<string name="oi_shopping_permission_read">쇼핑 목록 읽기</string>
 	<string name="oi_shopping_permission_read_descr">Allows an application to read shopping lists. Note that encrypted lists and items are provided in the encrypted format.</string>
+	<!-- Permission to write to shopping lists -->
 	<string name="oi_shopping_permission_write">쇼핑 목록 쓰기</string>
 	<string name="oi_shopping_permission_write_descr">Allows an application to create new lists and items or change existing ones.</string>
 	
@@ -237,6 +234,13 @@
         <item>Per Word</item>
     </string-array>
 
+	<!-- ***************************
+	     OI Notepad
+	     *************************** -->
+	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<!-- Name of application "OI Notepad". Translations should be consistent. -->
+	<string name="notepad">OI Notepad</string>
 
 	<!-- ***************************
 	     Automation

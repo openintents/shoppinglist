@@ -25,23 +25,15 @@
   bkiw https://launchpad.net/~bkiw
   friedger https://launchpad.net/~friedger</string>
 	
-	<!-- Strings for OI About -->
+    <!-- Short explanation of the application -->
 	<string name="about_comments">OI Shopping list lets you keep track of your shopping items. You can also use it for other kinds of check lists, for example for ToDo lists or party guest lists.</string>
-	<string name="about_website_label">OpenIntentsのOI Shopping list</string>
-
-	<!-- ***************************
-	     OI Notepad
-	     *************************** -->
-	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
-	<string name="notepad">OI Notepad</string>
-
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
+	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
 	<string name="app_name">OI Shopping list</string>
 
-	<!-- Shopping Provider -->
 	<string name="new_item">新規アイテム</string>
 	<string name="new_list">新規リスト</string>
 	<string name="send">リストを送信</string>
@@ -116,6 +108,7 @@
 	<string name="pick_list_to_insert_items">Pick list to insert items</string>
 	
 	<!-- Theme related -->
+	<!-- Title for selecting a theme -->
 	<string name="theme_pick">テーマを選択</string>
 	<string name="theme_description">このリストのテーマを選択</string>
 	<string name="theme_default">デフォルト</string>
@@ -125,7 +118,9 @@
 	<string name="theme_bugdroid_export">Android (from OI Shopping List)</string>
 
 	<!--     Dialog box    -->
+	<!-- Button label "OK" -->
 	<string name="ok">OK</string>
+	<!-- Button label "Cancel" -->
 	<string name="cancel">キャンセル</string>
 	<string name="use_theme_for_all_lists">テーマを全てのリストで使用する</string>
 	<string name="get_more_themes">テーマを入手</string>
@@ -190,8 +185,10 @@
 	     *************************** -->
 	
 	<!-- OI Shopping list -->
+	<!-- Permission to read shopping lists -->
 	<string name="oi_shopping_permission_read">ショッピングリストの閲覧</string>
 	<string name="oi_shopping_permission_read_descr">他のアプリケーションにショッピングリストを閲覧する事を許可します。暗号化されたリストやアイテムは暗号化された状態で提供される事に注意してください。</string>
+	<!-- Permission to write to shopping lists -->
 	<string name="oi_shopping_permission_write">ショッピングリストの作成・編集</string>
 	<string name="oi_shopping_permission_write_descr">他のアプリケーションにリストやアイテムの新規追加や編集を許可する。</string>
 	
@@ -239,6 +236,13 @@
         <item>単語単位</item>
     </string-array>
 
+	<!-- ***************************
+	     OI Notepad
+	     *************************** -->
+	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<!-- Name of application "OI Notepad". Translations should be consistent. -->
+	<string name="notepad">OI Notepad</string>
 
 	<!-- ***************************
 	     Automation

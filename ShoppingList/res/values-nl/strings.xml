@@ -21,27 +21,20 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
+  Henk van der Velden https://launchpad.net/~henkvandervelden86
   Jasperdc https://launchpad.net/~jasperdc
   Peli https://launchpad.net/~peli0101
   friedger https://launchpad.net/~friedger</string>
 	
-	<!-- Strings for OI About -->
+    <!-- Short explanation of the application -->
 	<string name="about_comments">OI Boodschappenlijst geeft u de mogelijkheid om uw boodschappen bij te houden. U kunt het ook gebruiken voor andere vormen van checklists, bijvoorbeeld voor ToDo lijsten of lijsten met gasten partij.</string>
-	<string name="about_website_label">boodschappenlijst bij openintents</string>
-
-	<!-- ***************************
-	     OI Notepad
-	     *************************** -->
-	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
-	<string name="notepad">OI Notepad</string>
-
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
+	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
 	<string name="app_name">OI Boodschappenlijst</string>
 
-	<!-- Shopping Provider -->
 	<string name="new_item">Nieuw item</string>
 	<string name="new_list">Nieuwe lijst</string>
 	<string name="send">Verzend lijst</string>
@@ -55,17 +48,17 @@
 	<string name="ask_rename_list">herbenoem boodschappenlijst</string>
 	<string name="ask_edit_item">Item bewerken</string>
 	<string name="please_enter_name">Gelieve een naam in te voeren</string>
-	<string name="no_items_marked">geen punten zijn weggestreept</string>
+	<string name="no_items_marked">Geen punten zijn weggestreept</string>
 	<string name="confirm_delete_list">wilt u deze boodschappen lijst echt verwijderen</string>
 	<string name="no_shopping_provider">foutmelding bij benadering van de boodschappenlijsten</string>
 	<string name="pick_item">Kies een item</string>
 	<string name="pick_list">Kies een lijst</string>
 	<string name="theme">Thema</string>
 	<string name="theme_settings">Thema instellingen</string>
-	<string name="rename_list">herbenoem lijst</string>
-	<string name="menu_mark_item">streep item aan</string>
+	<string name="rename_list">Hernoem lijst</string>
+	<string name="menu_mark_item">Streep item aan</string>
 	<string name="menu_edit_item">Item bewerken</string>
-	<string name="menu_auto_add">automatissch toevoegen</string>
+	<string name="menu_auto_add">Automatisch toevoegen</string>
 	<string name="no_items_available">Geen items beschikbaar</string>
 	
 	<!-- Remove item from this list, but keep it internally, so that the user
@@ -76,7 +69,7 @@
 	<!-- Delete this item completely. If the user wants to add it again, they
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">wis item permanent uit. volledig uitwissen van dit item. als de gebruiker dit item opnieuw wil toevoegen moet hij alle informatie opnieuw invoeren</string>
-	<string name="menu_move_item">Move item to other list</string>
+	<string name="menu_move_item">Verplaats item naar andere lijst</string>
 	<!-- Button label to add an item to the list. -->
 	<string name="add">Toevoegen</string>
 	
@@ -84,17 +77,17 @@
 	<string name="menu_start_shopping">Boodschappen</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">kies items.</string>
+	<string name="pick_items_titel">%s - Kies items</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="shopping_title">boodschappen.</string>
+	<string name="shopping_title">%s - Boodschappen</string>
 	
 	<string name="tags">Labels</string>
 	<string name="price">Prijs</string>
 	<string name="item">Item</string>
 	<string name="quantity">Aantal</string>
-	<string name="priority">Priority</string>
-	<string name="has_note">Has Note</string>
+	<string name="priority">Prioriteit</string>
+	<string name="has_note">Heeft notitie</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Totaal: %s</string>
@@ -102,7 +95,7 @@
 	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
 	<string name="total_checked">afgevinkt</string>
 	
-	<string name="delete_item_confirm">weet u zeker dat u dit item,  dit label en de prijs permanent wil uitwissen van alle boodschappenlijsten</string>
+	<string name="delete_item_confirm">Weet u zeker dat u dit item, zijn labels en de prijs permanent wilt wissen van alle boodschappenlijsten?</string>
 	<string name="delete">Verwijderen</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
@@ -113,50 +106,53 @@
 	<string name="pick_list_for_shortcut">Kies lijst, maak snellkoppeling</string>
 	
 	<!-- Shown if external application wants to insert new items. -->
-	<string name="pick_list_to_insert_items">Kies lijst, items</string>
+	<string name="pick_list_to_insert_items">Kies lijst voor het toevoegen van de items</string>
 	
 	<!-- Theme related -->
+	<!-- Title for selecting a theme -->
 	<string name="theme_pick">Kies een thema</string>
 	<string name="theme_description">Kies een thema voor dit lijst</string>
 	<string name="theme_default">Standaard</string>
-	<string name="theme_classic">Klaziek</string>
+	<string name="theme_classic">Klassiek</string>
 	<string name="theme_bugdroid">Android</string>
-	<string name="theme_classic_export">Klasiek (bij OI Boodschappenlijst)</string>
-	<string name="theme_bugdroid_export">Andoid (bij OI Boodschappenlijst )</string>
+	<string name="theme_classic_export">Klassiek (bij OI Boodschappenlijst)</string>
+	<string name="theme_bugdroid_export">Android (bij OI Boodschappenlijst)</string>
 
 	<!--     Dialog box    -->
-	<string name="ok">Oke</string>
-	<string name="cancel">Annuleer</string>
-	<string name="use_theme_for_all_lists">Gebruik deze thema voor alle lijsten</string>
-	<string name="get_more_themes">Mere thema\'s</string>
+	<!-- Button label "OK" -->
+	<string name="ok">OK</string>
+	<!-- Button label "Cancel" -->
+	<string name="cancel">Annuleren</string>
+	<string name="use_theme_for_all_lists">Gebruik dit thema voor alle lijsten</string>
+	<string name="get_more_themes">Nieuwe thema\'s ophalen</string>
 	
 	<!-- preferences -->
 	<string name="preferences">Instellingen</string>
 	
     <string name="preference_application">Applicatie instellingen</string>
     
-	<string name="preference_unchecked_on_top">Onvoltooide eerst</string>
-	<string name="preference_unchecked_on_top_summary">altijd onvoltooide item eerst laten zien</string>
-	<string name="preference_fontsize">Lettergrootte</string>
-	<string name="preference_fontsize_summary">Wijzig lettergrootte</string>
-	<string name="preference_fontsize_dialog_title">Kies lettergrootte</string>
-	<string name="preference_sortorder_title">Sorteervolgorde</string>
-	<string name="preference_sortorder_summary">Wijzig sorteervolgorde van lijst items</string>
-	<string name="preference_sortorder_dialog_title">Kies sorteervolgorde</string>
+	<string name="preference_unchecked_on_top">Onvoltooide bovenaan</string>
+	<string name="preference_unchecked_on_top_summary">Altijd onvoltooide item eerst laten zien</string>
+	<string name="preference_fontsize">Tekengrootte</string>
+	<string name="preference_fontsize_summary">Wijzig tekengrootte</string>
+	<string name="preference_fontsize_dialog_title">Kies tekengrootte</string>
+	<string name="preference_sortorder_title">Sorteer volgorde</string>
+	<string name="preference_sortorder_summary">Wijzig sorteer volgorde van lijst items</string>
+	<string name="preference_sortorder_dialog_title">Kies sorteer volgorde</string>
 	<string name="preference_loadlastused_title">Laad laatst gebruikte lijst</string>
 	<string name="preference_loadlastused_summary">Altijd starten met de laatst bekeken lijst</string>
 	<string name="preference_capitalization_title">Hoofdlettergebruik</string>
 	<string name="preference_capitalization_summary">Automatisch hoofdletters gebruiken bij ingaves</string>
 	<string name="preference_capitalization_dialog_title">Kies hoodletter gebruik</string> 
 	<string name="preference_hidechecked_title">verberg voltooide items</string>
-	<string name="preference_hidechecked_summary">direkt voltooide items verbergen</string>
+	<string name="preference_hidechecked_summary">Direct voltooide items verbergen</string>
 	<string name="preference_showprice_title">Toon prijs</string>
 	<string name="preference_showprice_summary">Toon als extra kolom in lijst</string>
-	<string name="preference_showtags_title">Tags tonen</string>
+	<string name="preference_showtags_title">Labels tonen</string>
 	<string name="preference_showtags_summary">Toon als extra kolom in lijst</string>
 	<string name="preference_showquantity_title">Toon aantal</string>
 	<string name="preference_showquantity_summary">Toon als extra kolom in lijst</string>
-	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_title">Toon prioriteit</string>
 	<string name="preference_showpriority_summary">Toon als extra kolom in lijst</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
@@ -173,26 +169,28 @@
     
     <string name="preference_appearance">Weergave</string>
     
-    <string name="preference_addons">Extra\'s</string>
-    <string name="preference_get_addons">Nieuw add-ons verkrijgen</string>
-    <string name="preference_get_addons_summary">zoek naar uitbreidingen en thema\'s op het web</string>
-    <string name="preference_get_market_addons">Add-ons van Market verkrijgen</string>
-    <string name="preference_get_developer_addons">Add-ons van OpenIntents verkrijgen</string>
-    <string name="preference_extensions">Uitbreidingen</string>
+    <string name="preference_addons">Extensies</string>
+    <string name="preference_get_addons">Nieuwe extensies ophalen</string>
+    <string name="preference_get_addons_summary">Zoek naar Extensies en thema\'s op het web</string>
+    <string name="preference_get_market_addons">Extensies van Market ophalen</string>
+    <string name="preference_get_developer_addons">Extensies van OpenIntents ophalen</string>
+    <string name="preference_extensions">Extensies</string>
     <string name="preference_themes">Thema\'s</string>
-    <string name="preference_market_extensions_summary">zoek naar uitbreidingen bij Android market</string>
-    <string name="preference_market_themes_summary">zoek naar thema\'s bij Android Market</string>
-    <string name="preference_developer_extensions_summary">Extensies van OpenIntents homepage verkrijgen</string>
-	<string name="preference_developer_themes_summary">Mere thema\'s op OpenIntents</string>
+    <string name="preference_market_extensions_summary">Zoek naar Extensies in de Android Market.</string>
+    <string name="preference_market_themes_summary">Zoek naar thema\'s in de Android Market</string>
+    <string name="preference_developer_extensions_summary">Verkrijg extensies vanaf de OpenIntents website.</string>
+	<string name="preference_developer_themes_summary">Meer thema\'s op de OpenIntents website.</string>
 	
 	<!-- ***************************
 	     Permissions
 	     *************************** -->
 	
 	<!-- OI Shopping list -->
+	<!-- Permission to read shopping lists -->
 	<string name="oi_shopping_permission_read">boodschappenlijstjes lezen</string>
-	<string name="oi_shopping_permission_read_descr">Laat een toepassing toe om boodschappenlijstjes te lezen. Merk op dat versleutelde lijsten en elementen ter beschikking worden gesteld in het versleutelde formaat.</string>
-	<string name="oi_shopping_permission_write">boodschappenlijstjes schrijven</string>
+	<string name="oi_shopping_permission_read_descr">Laat een toepassing toe om boodschappenlijsten te lezen. Let wel op dat versleutelde lijsten en elementen ter beschikking worden gesteld in het versleutelde formaat.</string>
+	<!-- Permission to write to shopping lists -->
+	<string name="oi_shopping_permission_write">boodschappenlijsten schrijven</string>
 	<string name="oi_shopping_permission_write_descr">Laat een applicatie toe om nieuwe lijsten en items te maken of bestaande te wijzigen.</string>
 	
 	
@@ -206,17 +204,17 @@
         <!-- Preference sort order: Sort by item name -->
     	<item>alfabetisch</item>
         <!-- Preference sort order: Newest item first -->
-    	<item>nieuwste eerst</item>
+    	<item>Nieuwste eerst</item>
         <!-- Preference sort order: Oldest item first -->
-    	<item>oudste eerst</item>
+    	<item>Oudste eerst</item>
         <!-- Preference sort order: Sort alphabetically by tags -->
-    	<item>tags alfabetisch</item>
+    	<item>Labels alfabetisch</item>
         <!-- Preference sort order: Sort by price, the most expensive first -->
-    	<item>duurste eerst</item>
+    	<item>Duurste eerst</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
-    	<item>onvoltooid eerst, tags alfabetisch</item>
+    	<item>Onvoltooid eerst, labels alfabetisch</item>
     	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
-    	<item>unchecked first, priority, alphabetical</item>
+    	<item>Onvoltooide eerst, prioriteit, alfabetisch</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
@@ -234,11 +232,18 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>Geen</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>per zin</item>
+        <item>Per zin</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>per woord</item>
+        <item>Per woord</item>
     </string-array>
 
+	<!-- ***************************
+	     OI Notepad
+	     *************************** -->
+	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+	<string name="notepad_not_available">Voor het bewerken van notities is OI Notitieblok nodig.</string>
+	<!-- Name of application "OI Notepad". Translations should be consistent. -->
+	<string name="notepad">OI Notitieblok</string>
 
 	<!-- ***************************
 	     Automation

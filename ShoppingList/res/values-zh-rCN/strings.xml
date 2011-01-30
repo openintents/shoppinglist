@@ -24,23 +24,15 @@
   Peli https://launchpad.net/~peli0101
   friedger https://launchpad.net/~friedger</string>
 	
-	<!-- Strings for OI About -->
+    <!-- Short explanation of the application -->
 	<string name="about_comments">OI 购物列表自动记录您所选购的物品。您也可以将它用作其他方面的核对清单，如未完成列表或者派对客人列表。</string>
-	<string name="about_website_label">在OpenIntents上的OI 购物列表</string>
-
-	<!-- ***************************
-	     OI Notepad
-	     *************************** -->
-	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
-	<string name="notepad">OI Notepad</string>
-
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
+	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
 	<string name="app_name">OI 购物列表</string>
 
-	<!-- Shopping Provider -->
 	<string name="new_item">新物品</string>
 	<string name="new_list">新列表</string>
 	<string name="send">发送列表</string>
@@ -115,6 +107,7 @@
 	<string name="pick_list_to_insert_items">选择列表插入物品</string>
 	
 	<!-- Theme related -->
+	<!-- Title for selecting a theme -->
 	<string name="theme_pick">选择主题</string>
 	<string name="theme_description">给此列表挑选主题</string>
 	<string name="theme_default">默认</string>
@@ -124,7 +117,9 @@
 	<string name="theme_bugdroid_export">Android (来自 OI 购物列表)</string>
 
 	<!--     Dialog box    -->
+	<!-- Button label "OK" -->
 	<string name="ok">确认</string>
+	<!-- Button label "Cancel" -->
 	<string name="cancel">取消</string>
 	<string name="use_theme_for_all_lists">对所有列表使用此主题</string>
 	<string name="get_more_themes">获得更多主题</string>
@@ -189,8 +184,10 @@
 	     *************************** -->
 	
 	<!-- OI Shopping list -->
+	<!-- Permission to read shopping lists -->
 	<string name="oi_shopping_permission_read">读购物列表</string>
 	<string name="oi_shopping_permission_read_descr">允许应用软件读取购物列表。注意加密列表和物品以加密格式来提供。</string>
+	<!-- Permission to write to shopping lists -->
 	<string name="oi_shopping_permission_write">写购物列表</string>
 	<string name="oi_shopping_permission_write_descr">允许应用软件创建新的列表和物品或者改变当前的。</string>
 	
@@ -238,6 +235,13 @@
         <item>单词首字母大写</item>
     </string-array>
 
+	<!-- ***************************
+	     OI Notepad
+	     *************************** -->
+	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<!-- Name of application "OI Notepad". Translations should be consistent. -->
+	<string name="notepad">OI Notepad</string>
 
 	<!-- ***************************
 	     Automation

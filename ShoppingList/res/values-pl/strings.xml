@@ -25,23 +25,15 @@
   Tomasz \'Zen\' Napierala https://launchpad.net/~tzn
   friedger https://launchpad.net/~friedger</string>
 	
-	<!-- Strings for OI About -->
+    <!-- Short explanation of the application -->
 	<string name="about_comments">OI Lista Zakupów pozwala śledzić listę zakupów. Można jej używać również dla innych typów list: lista rzeczy do zrobienia lub lista gości.</string>
-	<string name="about_website_label">OI Lista Zakupów na OpenIntents</string>
-
-	<!-- ***************************
-	     OI Notepad
-	     *************************** -->
-	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
-	<string name="notepad">OI Notepad</string>
-
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
+	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
 	<string name="app_name">OI Lista Zakupów</string>
 
-	<!-- Shopping Provider -->
 	<string name="new_item">Nowy element</string>
 	<string name="new_list">Nowa lista</string>
 	<string name="send">Wyślij listę</string>
@@ -116,6 +108,7 @@
 	<string name="pick_list_to_insert_items">Wybierz listę do której dodać elementy</string>
 	
 	<!-- Theme related -->
+	<!-- Title for selecting a theme -->
 	<string name="theme_pick">Wybierz motyw</string>
 	<string name="theme_description">Wybierz  motyw dla tej listy</string>
 	<string name="theme_default">Domyślny</string>
@@ -125,7 +118,9 @@
 	<string name="theme_bugdroid_export">Android (z OI Lista zakupów)</string>
 
 	<!--     Dialog box    -->
+	<!-- Button label "OK" -->
 	<string name="ok">OK</string>
+	<!-- Button label "Cancel" -->
 	<string name="cancel">Anuluj</string>
 	<string name="use_theme_for_all_lists">Użyj tego motywu dla wszystkich list</string>
 	<string name="get_more_themes">Pobierz więcej motywów</string>
@@ -190,8 +185,10 @@
 	     *************************** -->
 	
 	<!-- OI Shopping list -->
+	<!-- Permission to read shopping lists -->
 	<string name="oi_shopping_permission_read">czytanie list zakupów</string>
 	<string name="oi_shopping_permission_read_descr">Pozwala aplikacji czytać listy zakupów. Warto odnotować, że listy i elementy zaszyfrowane będą dostępne w formie zaszyfrowanej.</string>
+	<!-- Permission to write to shopping lists -->
 	<string name="oi_shopping_permission_write">zapis list zakupów</string>
 	<string name="oi_shopping_permission_write_descr">Pozwala aplikacji tworzyć nowe listy i ich elementy oraz modyfikować istniejące.</string>
 	
@@ -239,6 +236,13 @@
         <item>Wyrazami</item>
     </string-array>
 
+	<!-- ***************************
+	     OI Notepad
+	     *************************** -->
+	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<!-- Name of application "OI Notepad". Translations should be consistent. -->
+	<string name="notepad">OI Notepad</string>
 
 	<!-- ***************************
 	     Automation

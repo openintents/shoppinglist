@@ -30,23 +30,15 @@
   kawazzzzzz@yahoo.fr https://launchpad.net/~kawazzzzzz
   viktor https://launchpad.net/~lfraisse</string>
 	
-	<!-- Strings for OI About -->
+    <!-- Short explanation of the application -->
 	<string name="about_comments">OI Shopping list vous permet de suivre votre liste de course. Vous pouvez aussi l\'utiliser pour d\'autres types de listes, par exemple une liste de chose à faire ou une liste d\'invités.</string>
-	<string name="about_website_label">OI Shopping list de OpenIntents</string>
-
-	<!-- ***************************
-	     OI Notepad
-	     *************************** -->
-	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
-	<string name="notepad">OI Notepad</string>
-
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
+	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
 	<string name="app_name">OI Shopping list</string>
 
-	<!-- Shopping Provider -->
 	<string name="new_item">Nouvel élément</string>
 	<string name="new_list">Nouvelle liste</string>
 	<string name="send">Envoyer la liste</string>
@@ -121,6 +113,7 @@
 	<string name="pick_list_to_insert_items">Sélectionner une liste pour insérer des éléments</string>
 	
 	<!-- Theme related -->
+	<!-- Title for selecting a theme -->
 	<string name="theme_pick">Choisissez un thème</string>
 	<string name="theme_description">Choisir un thème pour cette liste</string>
 	<string name="theme_default">Défaut</string>
@@ -130,7 +123,9 @@
 	<string name="theme_bugdroid_export">Android  (Depuis la liste de course de OI)</string>
 
 	<!--     Dialog box    -->
+	<!-- Button label "OK" -->
 	<string name="ok">OK</string>
+	<!-- Button label "Cancel" -->
 	<string name="cancel">Annuler</string>
 	<string name="use_theme_for_all_lists">Utiliser ce thème pour toutes les listes</string>
 	<string name="get_more_themes">Obtenir plus de thèmes</string>
@@ -195,8 +190,10 @@
 	     *************************** -->
 	
 	<!-- OI Shopping list -->
+	<!-- Permission to read shopping lists -->
 	<string name="oi_shopping_permission_read">Lire les listes de courses</string>
 	<string name="oi_shopping_permission_read_descr">Autoriser une application à lire les listes de courses. Les listes et éléments criptés sont fournis dans le format crypté</string>
+	<!-- Permission to write to shopping lists -->
 	<string name="oi_shopping_permission_write">Ecrire les listes de courses</string>
 	<string name="oi_shopping_permission_write_descr">Autoriser une application à créer de nouvelles listes ou modifier une existante.</string>
 	
@@ -244,6 +241,13 @@
         <item>Par mot</item>
     </string-array>
 
+	<!-- ***************************
+	     OI Notepad
+	     *************************** -->
+	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<!-- Name of application "OI Notepad". Translations should be consistent. -->
+	<string name="notepad">OI Notepad</string>
 
 	<!-- ***************************
 	     Automation

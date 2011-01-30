@@ -25,23 +25,15 @@
 Launchpad Contributions:
   Mads Peter Rommedahl https://launchpad.net/~lhademmor</string>
 	
-	<!-- Strings for OI About -->
+    <!-- Short explanation of the application -->
 	<string name="about_comments">OI Shopping List lader dig holde styr på din indkøbsliste. Du kan også bruge den til andre slags lister, for eksempel huskelister eller gæstelister til en fest.</string>
-	<string name="about_website_label">OI Shopping List hos OpenIntents</string>
-
-	<!-- ***************************
-	     OI Notepad
-	     *************************** -->
-	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
-	<string name="notepad">OI Notepad</string>
-
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
+	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
 	<string name="app_name">OI Shopping List</string>
 
-	<!-- Shopping Provider -->
 	<string name="new_item">Ny vare</string>
 	<string name="new_list">Ny liste</string>
 	<string name="send">Send liste</string>
@@ -116,6 +108,7 @@ Launchpad Contributions:
 	<string name="pick_list_to_insert_items">Vælg liste til at indsætte varer</string>
 	
 	<!-- Theme related -->
+	<!-- Title for selecting a theme -->
 	<string name="theme_pick">Vælg et tema</string>
 	<string name="theme_description">Vælg et tema til denne liste</string>
 	<string name="theme_default">Default</string>
@@ -125,7 +118,9 @@ Launchpad Contributions:
 	<string name="theme_bugdroid_export">Android (fra OI Shopping List)</string>
 
 	<!--     Dialog box    -->
+	<!-- Button label "OK" -->
 	<string name="ok">OK</string>
+	<!-- Button label "Cancel" -->
 	<string name="cancel">Annullér</string>
 	<string name="use_theme_for_all_lists">Brug dette tema til alle lister</string>
 	<string name="get_more_themes">Hent flere temaer</string>
@@ -190,8 +185,10 @@ Launchpad Contributions:
 	     *************************** -->
 	
 	<!-- OI Shopping list -->
+	<!-- Permission to read shopping lists -->
 	<string name="oi_shopping_permission_read">læs indkøbslister</string>
 	<string name="oi_shopping_permission_read_descr">Tillader et program at læse indkøbslister. Bemærk at krypterede lister og varer kommer i det krypterede format.</string>
+	<!-- Permission to write to shopping lists -->
 	<string name="oi_shopping_permission_write">skriv indkøbslister</string>
 	<string name="oi_shopping_permission_write_descr">Tillader et program at oprette nye lister og varer eller ændre i eksisterende.</string>
 	
@@ -239,6 +236,13 @@ Launchpad Contributions:
         <item>Pr. ord</item>
     </string-array>
 
+	<!-- ***************************
+	     OI Notepad
+	     *************************** -->
+	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<!-- Name of application "OI Notepad". Translations should be consistent. -->
+	<string name="notepad">OI Notepad</string>
 
 	<!-- ***************************
 	     Automation
