@@ -22,6 +22,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
+import android.text.TextUtils;
 import android.util.Log;
 
 /**
@@ -78,6 +79,14 @@ public abstract class Shopping {
 		 */
 		public static final String PRICE = "price";
 
+		/**
+		 * Units for the item
+		 * <P>
+		 * Type: VARCHAR
+		 * </P>
+		 */
+		public static final String UNITS = "units";
+		
 		/**
 		 * Tags for the item
 		 * <P>
@@ -146,7 +155,7 @@ public abstract class Shopping {
 		 * Generic projection map.
 		 */
 		public static final String[] PROJECTION = { _ID, NAME, IMAGE, PRICE,
-				CREATED_DATE, MODIFIED_DATE, ACCESSED_DATE };
+				CREATED_DATE, MODIFIED_DATE, ACCESSED_DATE, UNITS };
 
 		/**
 		 * Offset in PROJECTION array.
@@ -158,8 +167,7 @@ public abstract class Shopping {
 		public static final int PROJECTION_CREATED_DATE = 4;
 		public static final int PROJECTION_MODIFIED_DATE = 5;
 		public static final int PROJECTION_ACCESSED_DATE = 6;
-
-
+		public static final int PROJECTION_UNITS = 7;
 
 	}
 
@@ -539,6 +547,14 @@ public abstract class Shopping {
 		public static final String ITEM_PRICE = "item_price";
 
 		/**
+		 * Units of the item.
+		 * <P>
+		 * Type: VARCHAR
+		 * </P>
+		 */
+		public static final String ITEM_UNITS = "item_units";
+		
+		/**
 		 * tags of the item.
 		 * <P>
 		 * Type: VARCHAR
@@ -745,6 +761,58 @@ public abstract class Shopping {
 		 */
 		public static final String PRICE = "price";
 	}
+
+
+	/**
+	 * Completion table for the Units field of Items.
+	 */
+	public static final class Units implements BaseColumns {
+		/**
+		 * The content:// style URL for this table.
+		 */
+		public static final Uri CONTENT_URI = Uri
+				.parse("content://org.openintents.shopping/units");
+
+		/**
+		 * The default sort order for this table.
+		 */
+		public static final String DEFAULT_SORT_ORDER = "name ASC";
+
+		/**
+		 * The name of the units.
+		 * <P>
+		 * Type: TEXT
+		 * </P>
+		 */
+		public static final String NAME = "name";
+		
+		/**
+		 * The name of the units when quantity == 1, 
+		 * if different from general/plural unit name.
+		 * <P>
+		 * Type: TEXT
+		 * </P>
+		 */
+		public static final String SINGULAR = "singular";
+		
+		/**
+		 * The timestamp for when the unit was created.
+		 * <P>
+		 * Type: INTEGER (long)
+		 * </P>
+		 */
+		public static final String CREATED_DATE = "created";
+
+		/**
+		 * The timestamp for when the unit was last modified.
+		 * <P>
+		 * Type: INTEGER (long)
+		 * </P>
+		 */
+		public static final String MODIFIED_DATE = "modified";
+
+	}
+
 	
 	public static final class Notes implements BaseColumns {
 		
@@ -830,7 +898,7 @@ public abstract class Shopping {
 	 * @return id of the new or existing item.
 	 */
 	public static long getItem(Context context, String name, String tags, 
-			String price, String note) {
+			String price, String units, String note) {
 		long id = -1;
 		Cursor existingItems = context.getContentResolver().query(Items.CONTENT_URI,
 				new String[] { Items._ID }, "upper(name) = ?",
@@ -846,10 +914,18 @@ public abstract class Shopping {
 			ContentValues values = new ContentValues(1);
 			values.put(Items.NAME, name);
 			values.put(Items.TAGS, tags);
-			values.put(Items.NOTE, note);
-			
+			if (!TextUtils.isEmpty(note)) {
+			   values.put(Items.NOTE, note);
+			}
 			if (price != null){
 				values.put(Items.PRICE, price);
+			}
+			if (!TextUtils.isEmpty(units)){
+				// in the items table we store the string directly,
+				// but we register the units in the units table for use in 
+				// completion.
+				long unit_id = getUnits(context, units);
+				values.put(Items.UNITS, units);
 			}
 			try {
 				Uri uri = context.getContentResolver().insert(Items.CONTENT_URI, values);
@@ -862,6 +938,33 @@ public abstract class Shopping {
 		}
 		return id;
 
+	}
+
+	public static long getUnits(Context context, String units) {
+		long id = -1;
+		Cursor existingUnits = context.getContentResolver().query(Units.CONTENT_URI,
+				new String[] { Units._ID }, "upper(name) = ?",
+				new String[] { units.toUpperCase() }, null);
+		if (existingUnits.getCount() > 0) {
+			existingUnits.moveToFirst();
+			id = existingUnits.getLong(0);
+			existingUnits.close();
+						
+		} else {
+			existingUnits.close();
+			// Add item to list:
+			ContentValues values = new ContentValues(1);
+			values.put(Units.NAME, units);
+			try {
+				Uri uri = context.getContentResolver().insert(Units.CONTENT_URI, values);
+				Log.i(TAG, "Insert new units: " + uri);
+				id = Long.parseLong(uri.getPathSegments().get(1));
+			} catch (Exception e) {
+				Log.i(TAG, "Insert units failed", e);
+				// return -1
+			}
+		}
+		return id;
 	}
 
 	/**

@@ -33,26 +33,26 @@
 				android:layout_weight="1"
 				android:layout_height="wrap_content"
 				android:layout_marginRight="5dip" >
-				<TextView android:layout_width="fill_parent" android:id="@+id/labeleditpriority"
+				<TextView android:layout_width="fill_parent" android:id="@+id/labeleditquantity"
 					android:layout_height="wrap_content" android:layout_weight="1"
-					android:text="@string/priority"  />
-				<EditText android:hint="@string/priority" android:id="@+id/editpriority"
+					android:text="@string/quantity"  />
+				<EditText android:hint="1" android:id="@+id/editquantity"
 					android:layout_height="wrap_content" android:layout_width="fill_parent"
-					android:singleLine="true" android:inputType="number"
-					android:layout_below="@+id/labeleditpriority"/>
+					android:singleLine="true" android:inputType="numberDecimal"
+					android:layout_below="@+id/labeleditquantity"/>
 			</RelativeLayout>
 			<RelativeLayout
 				android:layout_width="0dip"
 				android:layout_weight="1"
 				android:layout_height="wrap_content"
 				android:layout_marginRight="5dip" >
-				<TextView android:layout_width="fill_parent" android:id="@+id/labeleditquantity"
+				<TextView android:layout_width="fill_parent" android:id="@+id/labeleditunits"
 					android:layout_height="wrap_content" android:layout_weight="1"
-					android:text="@string/quantity"  />
-				<EditText android:hint="@string/quantity" android:id="@+id/editquantity"
+					android:text="@string/units"  />
+				<AutoCompleteTextView android:hint="@string/units" android:id="@+id/editunits"
 					android:layout_height="wrap_content" android:layout_width="fill_parent"
-					android:singleLine="true" android:inputType="numberDecimal"
-					android:layout_below="@+id/labeleditquantity"/>
+					android:singleLine="true" android:inputType="text"
+					android:layout_below="@+id/labeleditunits" android:completionThreshold="1"/>
 			</RelativeLayout>
 			<RelativeLayout
 				android:layout_width="0dip"
@@ -63,7 +63,7 @@
 					/>
 				<EditText android:id="@+id/editprice" android:layout_width="fill_parent"
 					android:layout_height="wrap_content" android:text=""
-					android:hint="@string/price"
+					android:hint="0.00"
 					android:singleLine="true" android:numeric="signed|decimal"
 					android:layout_below="@id/labeleditprice" />
 			</RelativeLayout>
@@ -79,14 +79,42 @@
 	     android:hint="@string/tags"
 	     android:singleLine="true"
 	     android:layout_below="@id/labeledittag"  />
-	    <ImageView android:id="@+id/note"
+	    <LinearLayout  android:id="@+id/priority_and_note"
+			android:orientation="horizontal"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:layout_below="@id/edittags" >
+	  
+		<RelativeLayout
+				android:layout_width="0dip"
+				android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:layout_marginRight="5dip" >
+				<TextView android:layout_width="fill_parent" android:id="@+id/labeleditpriority"
+					android:layout_height="wrap_content" android:layout_weight="1"
+					android:text="@string/priority"  />
+				<EditText android:hint="1" android:id="@+id/editpriority"
+					android:layout_height="wrap_content" android:layout_width="fill_parent"
+					android:singleLine="true" android:inputType="number"
+					android:layout_below="@+id/labeleditpriority"/>
+		</RelativeLayout>
+		<RelativeLayout
+				android:layout_width="0dip"
+				android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:layout_marginRight="5dip" >
+		      <TextView android:layout_width="fill_parent" android:id="@+id/labeleditnote"
+					android:layout_height="wrap_content" android:layout_weight="1"
+					android:text="@string/note"  />
+			  <ImageView android:id="@+id/note"
 			   android:layout_width="18dip"
 			   android:layout_height="18dip"
 			   android:layout_margin="8dip"
-			   android:layout_below="@id/edittags"
+			   android:layout_below="@id/labeleditnote"
 			   android:scaleType="centerInside"
 			   android:src="@drawable/note"
 			/> 
+		</RelativeLayout>
+			</LinearLayout>
 	    <!--
 			android:capitalize="words"
 		-->

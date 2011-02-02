@@ -47,6 +47,8 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
 	public static final boolean PREFS_SHOW_TAGS_DEFAULT = true;
 	public static final String PREFS_SHOW_QUANTITY = "showquantity";
 	public static final boolean PREFS_SHOW_QUANTITY_DEFAULT = true;
+	public static final String PREFS_SHOW_UNITS = "showunits";
+	public static final boolean PREFS_SHOW_UNITS_DEFAULT = true;
 	public static final String PREFS_SHOW_PRIORITY = "showpriority";
 	public static final boolean PREFS_SHOW_PRIORITY_DEFAULT = false;
 	public static final String PREFS_SHAKE = "shake";

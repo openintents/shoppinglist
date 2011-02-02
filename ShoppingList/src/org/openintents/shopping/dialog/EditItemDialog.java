@@ -4,9 +4,12 @@ package org.openintents.shopping.dialog;
 import org.openintents.distribution.DownloadAppDialog;
 import org.openintents.provider.Shopping;
 import org.openintents.provider.Shopping.Contains;
+import org.openintents.provider.Shopping.ContainsFull;
 import org.openintents.provider.Shopping.Items;
+import org.openintents.provider.Shopping.Units;
 import org.openintents.shopping.PreferenceActivity;
 import org.openintents.shopping.R;
+import org.openintents.shopping.ShoppingListView.mSimpleCursorAdapter;
 import org.openintents.shopping.util.PriceConverter;
 
 import android.app.AlertDialog;
@@ -29,10 +32,14 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.FilterQueryProvider;
 import android.widget.ImageView;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.SimpleCursorAdapter.CursorToStringConverter;
 
 public class EditItemDialog extends AlertDialog implements OnClickListener {
 
@@ -46,6 +53,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 	EditText mPrice;
 	EditText mQuantity;
 	EditText mPriority;
+	AutoCompleteTextView mUnits;
 
 	TextView mPriceLabel;
 	ImageView mNote;
@@ -54,8 +62,12 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
     
     /** Cursor to be requeried after modifications */
     Cursor mRequeryCursor;
+    
+    SimpleCursorAdapter mUnitsAdapter;
+    
 
-    public enum FieldType { ITEMNAME, QUANTITY, PRICE, PRIORITY };
+
+    public enum FieldType { ITEMNAME, QUANTITY, PRICE, PRIORITY, UNITS };
     
 	public EditItemDialog(Context context, Uri itemUri, Uri relationUri) {
 		super(context);
@@ -71,8 +83,46 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		mPrice = (EditText) view.findViewById(R.id.editprice);
 		mQuantity= (EditText) view.findViewById(R.id.editquantity);
 		mPriority= (EditText) view.findViewById(R.id.editpriority);
-		mNote = (ImageView) view.findViewById(R.id.note);
-		
+		mUnits = (AutoCompleteTextView) view.findViewById(R.id.editunits);
+
+	    mUnitsAdapter = new SimpleCursorAdapter(mContext,
+	    		android.R.layout.simple_dropdown_item_1line,
+				null,
+				// Map the units name...
+				new String[] { Units.NAME },
+				// to the view defined in the XML template
+				new int[] { android.R.id.text1 });
+	    mUnitsAdapter.setCursorToStringConverter(new CursorToStringConverter() {
+            public String convertToString(android.database.Cursor cursor) {
+                return cursor.getString(1);
+            }
+        });
+	    mUnitsAdapter.setFilterQueryProvider(new FilterQueryProvider() {
+            public Cursor runQuery(CharSequence constraint) {
+                // Search for units whose names begin with the specified letters.
+            	String query = null;
+            	String[] args = null;
+            	
+            	if (constraint != null) {
+            		// query = "units." + Units.NAME + " like '?%' ";
+            		// args = new String[] {(constraint != null ? constraint.toString() : null)} ;
+            		// http://code.google.com/p/android/issues/detail?id=3153
+            		//
+            		// workaround:
+            		query = "units." + Units.NAME + " like '" + constraint.toString() + "%' ";
+            	}
+            	
+                Cursor cursor = mContext.getContentResolver().query(Units.CONTENT_URI, 
+        				new String[] { Units._ID, Units.NAME }, 
+        				query, args, Units.NAME);
+               
+                return cursor;
+            }
+        });
+	    mUnits.setAdapter(mUnitsAdapter);
+	    mUnits.setThreshold(0);
+
+		mNote = (ImageView) view.findViewById(R.id.note);	    
 		mNote.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -82,10 +132,8 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 				if (mNoteText == null) {
 				   // Maybe an earlier edit activity added it? If so, 
 				   // we should not replace with empty string below.
-					String[] shortProjection = {Shopping.Items.NOTE}; 
-					
 					Cursor c = mContext.getContentResolver().query(mItemUri, 
-							shortProjection, null, null, null);
+							new String[] {Shopping.Items.NOTE} , null, null, null);
 					if (c != null && c.moveToFirst()) {
 						mNoteText = c.getString(0);
 					}
@@ -121,7 +169,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 			.getCapitalizationKeyListenerFromPrefs(context);
 		mEditText.setKeyListener(kl);
 		mTags.setKeyListener(kl);
-		
+
 		mTags.setImeOptions(EditorInfo.IME_ACTION_DONE);
 		mTags.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 		mTags.setThreshold(0);
@@ -237,7 +285,8 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 			Shopping.Items.TAGS,
 			Shopping.Items.PRICE,
 			Shopping.Items.NOTE,
-			Shopping.Items._ID
+			Shopping.Items._ID,
+			Shopping.Items.UNITS
 	};
 	private final String[] mRelationProjection = { 
 			Shopping.Contains.QUANTITY,
@@ -258,10 +307,17 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 			String price = PriceConverter.getStringFromCentPrice(pricecent);
 			mNoteText = c.getString(3);
 			mItemId = c.getLong(4);
+			String units = c.getString(5);
 			
 			mEditText.setText(text);
 			mTags.setText(tags);
 			mPrice.setText(price);
+			
+			if (units == null) {
+				units = "";
+			}
+			mUnits.setText(units);			
+			
 		}
 		c.close();
 	}
@@ -291,6 +347,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		String price = mPrice.getText().toString();
 		String quantity = mQuantity.getText().toString();
 		String priority = mPriority.getText().toString();
+		String units = mUnits.getText().toString();
 
 		Long priceLong = PriceConverter.getCentPriceFromString(price);
 
@@ -306,6 +363,10 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		values.put(Items.TAGS, tags);
 		if (price != null) {
 			values.put(Items.PRICE, priceLong);
+		}
+		if (units != null) {
+			long units_id = Shopping.getUnits(mContext, units);
+			values.put(Items.UNITS, units);
 		}
 		mContext.getContentResolver().update(mItemUri, values, null, null);
 		mContext.getContentResolver().notifyChange(mItemUri, null);
@@ -344,6 +405,9 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 			break;	
 		case PRICE:
 			focus_field(mPrice, true);
+			break;
+		case UNITS:
+			focus_field(mUnits, true);
 			break;
 		case ITEMNAME:
 			focus_field(mEditText, false);

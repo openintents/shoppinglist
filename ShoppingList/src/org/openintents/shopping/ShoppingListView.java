@@ -68,6 +68,7 @@ public class ShoppingListView extends ListView {
 	public int mPriceVisibility;
 	public int mTagsVisibility;
 	public int mQuantityVisibility;
+	public int mUnitsVisibility;
 	public int mPriorityVisibility;
 	public String mTextTypeface;
 	public float mTextSize;
@@ -155,7 +156,8 @@ public class ShoppingListView extends ListView {
 			view.findViewById(R.id.price).setVisibility(mPriceVisibility);
 			view.findViewById(R.id.tags).setVisibility(mTagsVisibility);
 			view.findViewById(R.id.quantity).setVisibility(mQuantityVisibility);
-			view.findViewById(R.id.priority).setVisibility(mQuantityVisibility);
+			view.findViewById(R.id.units).setVisibility(mUnitsVisibility);
+			view.findViewById(R.id.priority).setVisibility(mPriorityVisibility);
 			return view;
 		}
 
@@ -171,7 +173,7 @@ public class ShoppingListView extends ListView {
 			long status = cursor.getLong(ShoppingActivity.mStringItemsSTATUS);
 			final int cursorpos = cursor.getPosition();
 
-			int styled_as_name [] = {R.id.name, R.id.quantity};
+			int styled_as_name [] = {R.id.name, R.id.units, R.id.quantity};
 			int i;
 			
 			for (i = 0; i < styled_as_name.length; i++) {
@@ -429,6 +431,22 @@ public class ShoppingListView extends ListView {
 				    tv.setText(""); 
 			    } 
 				return true; 
+			} else if (id == R.id.units) { 
+				String units = cursor.getString(ShoppingActivity.mStringItemsITEMUNITS);
+				String quantity = cursor.getString(ShoppingActivity.mStringItemsQUANTITY);
+				TextView tv =(TextView) view; 
+				// looks more natural if you only show units when showing qty.
+				if (mUnitsVisibility == View.VISIBLE  &&
+					mQuantityVisibility == View.VISIBLE  &&
+					!TextUtils.isEmpty(units) && !TextUtils.isEmpty(quantity)) { 
+					tv.setVisibility(View.VISIBLE); 
+					// tv.setTextColor(mPriceTextColor);  
+					tv.setText(units + " "); }
+			    else { 
+				    tv.setVisibility(View.GONE);  
+				    tv.setText(""); 
+			    } 
+				return true; 
 			} else if (id == R.id.priority) { 
 				String priority = cursor.getString(ShoppingActivity.mStringItemsPRIORITY);
 				TextView tv =(TextView) view; 
@@ -589,11 +607,11 @@ public class ShoppingListView extends ListView {
 														 */
 				ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,  
 				ContainsFull.QUANTITY, ContainsFull.PRIORITY,
-				ContainsFull.ITEM_HAS_NOTE					
+				ContainsFull.ITEM_HAS_NOTE, ContainsFull.ITEM_UNITS				
 				},
 				// the view defined in the XML template
 				new int[] { R.id.name, /* R.id.image_URI, */R.id.tags,
-						R.id.price, R.id.quantity, R.id.priority, R.id.has_note });
+						R.id.price, R.id.quantity, R.id.priority, R.id.has_note, R.id.units });
 		setAdapter(adapter);
 
 		// called in requery():
@@ -1135,7 +1153,7 @@ public class ShoppingListView extends ListView {
 
 	OnCustomClickListener mListener = null;
 	private boolean mDragAndDropEnabled = false;
-
+	
 	public void setCustomClickListener(OnCustomClickListener listener) {
 		mListener = listener;
 	}

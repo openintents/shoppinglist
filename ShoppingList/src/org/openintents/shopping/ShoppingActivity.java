@@ -299,7 +299,7 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 			ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,
 			ContainsFull.QUANTITY, ContainsFull.STATUS, ContainsFull.ITEM_ID,
 			ContainsFull.SHARE_CREATED_BY, ContainsFull.SHARE_MODIFIED_BY, 
-			ContainsFull.PRIORITY, ContainsFull.ITEM_HAS_NOTE};
+			ContainsFull.PRIORITY, ContainsFull.ITEM_HAS_NOTE, ContainsFull.ITEM_UNITS};
 	static final int mStringItemsCONTAINSID = 0;
 	static final int mStringItemsITEMNAME = 1;
 	static final int mStringItemsITEMIMAGE = 2;
@@ -312,6 +312,7 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 	private static final int mStringItemsSHAREMODIFIEDBY = 9;
 	static final int mStringItemsPRIORITY = 10;
 	static final int mStringItemsITEMHASNOTE = 11;
+	static final int mStringItemsITEMUNITS = 12;
 
 	private LinearLayout.LayoutParams mLayoutParamsItems;
 	private int mAllowedListHeight; // Height for the list allowed in this view.
@@ -579,6 +580,12 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 				mListItemsView.mQuantityVisibility = View.VISIBLE;
 			} else {
 				mListItemsView.mQuantityVisibility = View.GONE;
+			}
+			if (sp.getBoolean(PreferenceActivity.PREFS_SHOW_UNITS,
+					PreferenceActivity.PREFS_SHOW_UNITS_DEFAULT)) {
+				mListItemsView.mUnitsVisibility = View.VISIBLE;
+			} else {
+				mListItemsView.mUnitsVisibility = View.GONE;
 			}
 			if (sp.getBoolean(PreferenceActivity.PREFS_SHOW_PRIORITY,
 					PreferenceActivity.PREFS_SHOW_PRIORITY_DEFAULT)) {
@@ -1409,6 +1416,11 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 				String tags = item.getString(mStringItemsITEMTAGS);
 				if (!TextUtils.isEmpty(quantity)) {
 					sb.append(quantity);
+					sb.append(" ");
+				}
+				String units = item.getString(mStringItemsITEMUNITS);
+				if (!TextUtils.isEmpty(units)) {
+					sb.append(units);
 					sb.append(" ");
 				}
 				sb.append(item.getString(mStringItemsITEMNAME));

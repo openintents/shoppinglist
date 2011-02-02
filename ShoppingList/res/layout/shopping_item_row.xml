@@ -116,12 +116,24 @@
             android:gravity="center_vertical"              
             android:text="1" android:clickable="true"/>  
 <!--        	android:layout_toLeftOf="@id/name"-->        
-   <TextView android:id="@+id/name"
+	<TextView android:id="@+id/units"
 			android:textAppearance="?android:attr/textAppearanceLarge"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="8dip"
         	android:layout_toRightOf="@id/quantity"
+        	android:layout_alignParentTop="true"
+        	android:layout_alignWithParentIfMissing="true"
+		    android:visibility="visible"
+            android:gravity="center_vertical"              
+            android:clickable="true"/>  
+<!--        	android:layout_toLeftOf="@id/name"-->        
+   <TextView android:id="@+id/name"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dip"
+        	android:layout_toRightOf="@id/units"
         	android:layout_alignParentTop="true"
         	android:layout_alignWithParentIfMissing="true"
 			android:gravity="center_vertical"
