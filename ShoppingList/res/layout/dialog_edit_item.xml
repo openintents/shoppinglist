@@ -36,7 +36,7 @@
 				<TextView android:layout_width="fill_parent" android:id="@+id/labeleditquantity"
 					android:layout_height="wrap_content" android:layout_weight="1"
 					android:text="@string/quantity"  />
-				<EditText android:hint="1" android:id="@+id/editquantity"
+				<EditText android:id="@+id/editquantity"
 					android:layout_height="wrap_content" android:layout_width="fill_parent"
 					android:singleLine="true" android:inputType="numberDecimal"
 					android:layout_below="@+id/labeleditquantity"/>
@@ -92,7 +92,7 @@
 				<TextView android:layout_width="fill_parent" android:id="@+id/labeleditpriority"
 					android:layout_height="wrap_content" android:layout_weight="1"
 					android:text="@string/priority"  />
-				<EditText android:hint="1" android:id="@+id/editpriority"
+				<EditText android:id="@+id/editpriority"
 					android:layout_height="wrap_content" android:layout_width="fill_parent"
 					android:singleLine="true" android:inputType="number"
 					android:layout_below="@+id/labeleditpriority"/>
