@@ -25,6 +25,8 @@ To obtain the current release, visit
 release 1.2.7
 date: ?
 - new application icon for Android 2.0 or higher.
+- allow app installation on external storage
+  (requires Android 2.2 or higher)
 - unit can be added to quantity.
 - new field for priority, sort by priority.
 - possibility to add notes (requires OI Notepad).
