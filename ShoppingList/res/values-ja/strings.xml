@@ -87,6 +87,8 @@
 	<string name="quantity">数量</string>
 	<string name="priority">Priority</string>
 	<string name="has_note">Has Note</string>
+	<string name="units">Units</string>
+	<string name="note">Note</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">合計価格: %s</string>
@@ -153,6 +155,8 @@
 	<string name="preference_showquantity_summary">リストに列を追加表示。</string>
 	<string name="preference_showpriority_title">Show priority</string>
 	<string name="preference_showpriority_summary">リストに列を追加表示。</string>
+	<string name="preference_showunits_title">Show units</string>
+	<string name="preference_showunits_summary">リストに列を追加表示。</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">シェイクでリストをクリーン</string>

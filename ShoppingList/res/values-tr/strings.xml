@@ -88,6 +88,8 @@ Launchpad Contributions:
 	<string name="quantity">Adet</string>
 	<string name="priority">Priority</string>
 	<string name="has_note">Has Note</string>
+	<string name="units">Units</string>
+	<string name="note">Note</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Toplam: %s</string>
@@ -154,6 +156,8 @@ Launchpad Contributions:
 	<string name="preference_showquantity_summary">Shown as extra column in list.</string>
 	<string name="preference_showpriority_title">Show priority</string>
 	<string name="preference_showpriority_summary">Shown as extra column in list.</string>
+	<string name="preference_showunits_title">Show units</string>
+	<string name="preference_showunits_summary">Shown as extra column in list.</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Shake to clean up</string>

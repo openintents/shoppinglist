@@ -87,6 +87,8 @@ Launchpad Contributions:
 	<string name="quantity">Antal</string>
 	<string name="priority">Priority</string>
 	<string name="has_note">Has Note</string>
+	<string name="units">Units</string>
+	<string name="note">Note</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">I alt: %s</string>
@@ -153,6 +155,8 @@ Launchpad Contributions:
 	<string name="preference_showquantity_summary">Vises som en ekstra kolonne i lister</string>
 	<string name="preference_showpriority_title">Show priority</string>
 	<string name="preference_showpriority_summary">Vises som en ekstra kolonne i lister</string>
+	<string name="preference_showunits_title">Show units</string>
+	<string name="preference_showunits_summary">Vises som en ekstra kolonne i lister</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Ryst for at rydde op</string>

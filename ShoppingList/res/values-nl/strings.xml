@@ -88,6 +88,8 @@
 	<string name="quantity">Aantal</string>
 	<string name="priority">Prioriteit</string>
 	<string name="has_note">Heeft notitie</string>
+	<string name="units">Units</string>
+	<string name="note">Note</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Totaal: %s</string>
@@ -154,6 +156,8 @@
 	<string name="preference_showquantity_summary">Toon als extra kolom in lijst</string>
 	<string name="preference_showpriority_title">Toon prioriteit</string>
 	<string name="preference_showpriority_summary">Toon als extra kolom in lijst</string>
+	<string name="preference_showunits_title">Show units</string>
+	<string name="preference_showunits_summary">Toon als extra kolom in lijst</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Schudden om op te kuisen</string>

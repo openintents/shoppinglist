@@ -86,6 +86,8 @@
 	<string name="quantity">数量</string>
 	<string name="priority">Priority</string>
 	<string name="has_note">Has Note</string>
+	<string name="units">Units</string>
+	<string name="note">Note</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">总共: %s</string>
@@ -152,6 +154,8 @@
 	<string name="preference_showquantity_summary">被显示为列表的额外列</string>
 	<string name="preference_showpriority_title">Show priority</string>
 	<string name="preference_showpriority_summary">被显示为列表的额外列</string>
+	<string name="preference_showunits_title">Show units</string>
+	<string name="preference_showunits_summary">被显示为列表的额外列</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">摇动手机以清空列表</string>

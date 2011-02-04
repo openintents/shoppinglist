@@ -92,6 +92,8 @@
 	<string name="quantity">Quantité</string>
 	<string name="priority">Priority</string>
 	<string name="has_note">Has Note</string>
+	<string name="units">Units</string>
+	<string name="note">Note</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Total: %s</string>
@@ -158,6 +160,8 @@
 	<string name="preference_showquantity_summary">Voir comme une colonne supplémentaire dans la liste</string>
 	<string name="preference_showpriority_title">Show priority</string>
 	<string name="preference_showpriority_summary">Voir comme une colonne supplémentaire dans la liste</string>
+	<string name="preference_showunits_title">Show units</string>
+	<string name="preference_showunits_summary">Voir comme une colonne supplémentaire dans la liste</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Secouer pour nettoyer</string>
