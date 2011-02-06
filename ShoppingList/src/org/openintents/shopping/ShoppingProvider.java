@@ -35,9 +35,11 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.UriMatcher;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -106,6 +108,7 @@ public class ShoppingProvider extends ContentProvider {
 	private static final int CONTAINS_FULL = 101; // combined with items and
 	// lists
 	private static final int CONTAINS_FULL_ID = 102;
+	private static final int ACTIVELIST = 103;
 
 	private static final UriMatcher URL_MATCHER;
 
@@ -328,6 +331,7 @@ public class ShoppingProvider extends ContentProvider {
 		String defaultOrderBy = null;
 
 		switch (URL_MATCHER.match(url)) {
+		
 		case ITEMS:
 			qb.setTables("items");
 			qb.setProjectionMap(ITEMS_PROJECTION_MAP);
@@ -425,6 +429,16 @@ public class ShoppingProvider extends ContentProvider {
 			qb.setProjectionMap(UNITS_PROJECTION_MAP);
 			qb.appendWhere("_id=" + url.getPathSegments().get(1));
 			break;
+		
+		case ACTIVELIST:
+			MatrixCursor m = new MatrixCursor(projection);
+			// assumes only one projection will ever be used, 
+			// asking only for the id of the active list.
+			SharedPreferences sp = getContext().getSharedPreferences(
+					"org.openintents.shopping_preferences", Context.MODE_PRIVATE);
+			long list_id = sp.getInt("lastused", 1);
+			m.addRow(new Object [] {Long.toString(list_id)});
+			return (Cursor)m;
 			
 		default:
 			throw new IllegalArgumentException("Unknown URL " + url);
@@ -1074,6 +1088,11 @@ public class ShoppingProvider extends ContentProvider {
 			return "vnd.android.cursor.dir/vnd.openintents.shopping.units";
 		case UNITS_ID:
 			return "vnd.android.cursor.item/vnd.openintents.shopping.units";
+		
+		case ACTIVELIST:
+			// not sure this is quite right
+			return "vnd.android.cursor.item/vnd.openintents.shopping.list";
+
 			
 		default:
 			throw new IllegalArgumentException("Unknown URL " + url);
@@ -1104,6 +1123,7 @@ public class ShoppingProvider extends ContentProvider {
 		URL_MATCHER.addURI("org.openintents.shopping", "notes/#", NOTE_ID);
 		URL_MATCHER.addURI("org.openintents.shopping", "units", UNITS);
 		URL_MATCHER.addURI("org.openintents.shopping", "units/#", UNITS_ID);
+		URL_MATCHER.addURI("org.openintents.shopping", "lists/active", ACTIVELIST);
 
 
 		ITEMS_PROJECTION_MAP = new HashMap<String, String>();

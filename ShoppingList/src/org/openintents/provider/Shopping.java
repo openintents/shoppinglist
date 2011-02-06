@@ -19,6 +19,7 @@ package org.openintents.provider;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
@@ -886,7 +887,24 @@ public abstract class Shopping {
 	        
 	}
 	
-	
+
+	/**
+	 * Virtual table containing the id of the active list.
+	 */
+	public static final class ActiveList implements BaseColumns {
+		/**
+		 * The content:// style URL for this table.
+		 */
+		public static final Uri CONTENT_URI = Uri
+				.parse("content://org.openintents.shopping/lists/active");
+
+		/**
+		 * Generic projection map.
+		 */
+		public static final String[] PROJECTION = { _ID };
+
+	}
+		
 	// Some convenience functions follow	
 
 	/**
@@ -898,46 +916,62 @@ public abstract class Shopping {
 	 * @return id of the new or existing item.
 	 */
 	public static long getItem(Context context, String name, String tags, 
-			String price, String units, String note) {
+			String price, String units, String note, Boolean duplicate, Boolean update) {
 		long id = -1;
-		Cursor existingItems = context.getContentResolver().query(Items.CONTENT_URI,
+		
+		if (!duplicate) {
+			Cursor existingItems = context.getContentResolver().query(Items.CONTENT_URI,
 				new String[] { Items._ID }, "upper(name) = ?",
 				new String[] { name.toUpperCase() }, null);
-		if (existingItems.getCount() > 0) {
-			existingItems.moveToFirst();
-			id = existingItems.getLong(0);
+			if (existingItems.getCount() > 0) {
+				existingItems.moveToFirst();
+				id = existingItems.getLong(0);
+			}
 			existingItems.close();
-						
-		} else {
-			existingItems.close();
-			// Add item to list:
-			ContentValues values = new ContentValues(1);
+			
+			if (id != -1 && !update) {
+				return id;
+			}
+		} 
+		
+		// now we are either updating or adding.
+		// either way we need some content values.
+		// Add item to list:
+		ContentValues values = new ContentValues(1);
+		if (id == -1) {
 			values.put(Items.NAME, name);
-			values.put(Items.TAGS, tags);
-			if (!TextUtils.isEmpty(note)) {
-			   values.put(Items.NOTE, note);
-			}
-			if (price != null){
-				values.put(Items.PRICE, price);
-			}
-			if (!TextUtils.isEmpty(units)){
-				// in the items table we store the string directly,
-				// but we register the units in the units table for use in 
-				// completion.
-				long unit_id = getUnits(context, units);
-				values.put(Items.UNITS, units);
-			}
-			try {
+		}
+		
+		values.put(Items.TAGS, tags);
+		if (!TextUtils.isEmpty(note)) {
+			values.put(Items.NOTE, note);
+		}
+		if (price != null){
+			values.put(Items.PRICE, price);
+		}
+		if (!TextUtils.isEmpty(units)){
+			// in the items table we store the string directly,
+			// but we register the units in the units table for use in 
+			// completion.
+			long unit_id = getUnits(context, units);
+			values.put(Items.UNITS, units);
+		}
+		
+		try {
+			if (id == -1) {
 				Uri uri = context.getContentResolver().insert(Items.CONTENT_URI, values);
 				Log.i(TAG, "Insert new item: " + uri);
 				id = Long.parseLong(uri.getPathSegments().get(1));
-			} catch (Exception e) {
-				Log.i(TAG, "Insert item failed", e);
-				// return -1
+			} else {
+				context.getContentResolver().update(Uri.withAppendedPath(Items.CONTENT_URI, 
+						String.valueOf(id)), values, null, null);
 			}
+		} catch (Exception e) {
+			Log.i(TAG, "Insert item failed", e);
+			// return -1
 		}
+		
 		return id;
-
 	}
 
 	public static long getUnits(Context context, String units) {
@@ -1160,11 +1194,16 @@ public abstract class Shopping {
 	 * 
 	 * @return The id of the default shopping list.
 	 */
-	public static long getDefaultList() {
-		// TODO: Once CentralTagging is available,
-		// the shopping list that is tagged as "default"
-		// should be returned here.
-		return 1;
+	public static long getDefaultList(Context context) {
+		long id = 1;
+		Cursor c = context.getContentResolver().query(ActiveList.CONTENT_URI,
+				ActiveList.PROJECTION, null, null, null);
+		if (c.getCount() > 0) {
+			c.moveToFirst();
+			id = c.getLong(0);
+			c.close();
+		}
+		return id;
 	}	
 
 	public static Uri getListForItem(Context context, String itemId) {
@@ -1186,5 +1225,29 @@ public abstract class Shopping {
 		} else {
 			return null;
 		}
+	}
+
+	public static void addTagToItem(Context context, long itemId, String store) {
+		String allTags = "";
+		Cursor existingTags = context.getContentResolver().query(Items.CONTENT_URI,
+				new String[] { Items.TAGS }, "_id = ?",
+				new String[] { String.valueOf(itemId) }, null);
+		if (existingTags.getCount() > 0) {
+			existingTags.moveToFirst();
+			allTags = existingTags.getString(0);
+			existingTags.close();
+		} 
+
+		if (!TextUtils.isEmpty(allTags)) {
+			allTags = allTags + ", " + store;
+		} else {
+			allTags = store;
+		}
+		
+		ContentValues values = new ContentValues(1);
+		values.put(Items.TAGS, allTags);
+		
+		context.getContentResolver().update(Uri.withAppendedPath(Items.CONTENT_URI, 
+				String.valueOf(itemId)), values, null, null);
 	}
 }
