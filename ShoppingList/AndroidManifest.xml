@@ -56,7 +56,7 @@
         <meta-data android:name="org.openintents.metadata.DOCUMENTERS"
                        android:resource="@array/about_documenters" />
         <meta-data android:name="org.openintents.metadata.TRANSLATORS"
-                       android:resource="@array/about_translators" />
+                       android:resource="@string/about_translators" />
         <meta-data android:name="org.openintents.metadata.ARTISTS"
                        android:resource="@array/about_artists" />
         <meta-data android:name="org.openintents.metadata.WEBSITE_LABEL"
@@ -67,6 +67,8 @@
                        android:resource="@raw/license_short" />
         <meta-data android:name="org.openintents.metadata.EMAIL"
                        android:value="@string/about_email" />
+        <meta-data android:name="org.openintents.metadata.RECENT_CHANGES"
+                       android:resource="@raw/recent_changes" />
                        
 	    <meta-data android:name="org.openintents.metadata.USES_INTENT"
 	                   android:value="org.openintents.action.SHOW_ABOUT_DIALOG?org.openintents.extra.PACKAGE_NAME=org.openintents.shopping"/>                       
