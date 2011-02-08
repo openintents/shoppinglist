@@ -1087,7 +1087,7 @@ public abstract class Shopping {
 	 */
 	public static long addItemToList(Context context, final long itemId,
 			final long listId,	final long status, final long priority, 
-			final long quantity) {
+			final double quantity) {
 		long id = -1;
 		Cursor existingItems = context.getContentResolver()
 				.query(Contains.CONTENT_URI, new String[] { Contains._ID },
