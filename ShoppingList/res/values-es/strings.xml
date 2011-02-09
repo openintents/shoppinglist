@@ -89,10 +89,10 @@
 	<string name="price">Precio</string>
 	<string name="item">Elemento</string>
 	<string name="quantity">Cantidad</string>
-	<string name="priority">Priority</string>
-	<string name="has_note">Has Note</string>
-	<string name="units">Units</string>
-	<string name="note">Note</string>
+	<string name="priority">Prioridad</string>
+	<string name="has_note">Tiene nota</string>
+	<string name="units">Unidades</string>
+	<string name="note">Nota</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Total: %s</string>
@@ -157,9 +157,9 @@
 	<string name="preference_showtags_summary">Mostrado como columna extra en la lista.</string>
 	<string name="preference_showquantity_title">Mostrar cantidad</string>
 	<string name="preference_showquantity_summary">Mostrado como columna extra en la lista.</string>
-	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_title">Mostrar prioridad</string>
 	<string name="preference_showpriority_summary">Mostrado como columna extra en la lista.</string>
-	<string name="preference_showunits_title">Show units</string>
+	<string name="preference_showunits_title">Mostrar unidades</string>
 	<string name="preference_showunits_summary">Mostrado como columna extra en la lista.</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
@@ -250,7 +250,7 @@
 	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
 	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
 	<!-- Name of application "OI Notepad". Translations should be consistent. -->
-	<string name="notepad">OI Notepad</string>
+	<string name="notepad">Bloc de notas OI</string>
 
 	<!-- ***************************
 	     Automation
