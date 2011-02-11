@@ -42,10 +42,6 @@
 		<item></item>
 	</string-array>
 	
-	<string-array name="about_translators"><!-- Add your name here if you helped out, but only in the arrays.xml for the localization that you helped to translate into! -->
-		<!-- <item></item>  -->
-	</string-array>
-	
 	<!-- ***************************
 	     Distribution
 	     *************************** -->

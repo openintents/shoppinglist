@@ -22,7 +22,7 @@ To obtain the current release, visit
   http://www.openintents.org
 
 ---------------------------------------------------------
-release 1.2.7
+release 1.3.0
 date: ?
 - new application icon for Android 2.0 or higher.
 - allow app installation on external storage
@@ -30,6 +30,7 @@ date: ?
 - unit can be added to quantity.
 - new field for priority, sort by priority.
 - possibility to add notes (requires OI Notepad).
+- case insensitive sort order.
 - translations into various languages.
 
 ---------------------------------------------------------
