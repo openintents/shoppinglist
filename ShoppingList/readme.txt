@@ -22,8 +22,8 @@ To obtain the current release, visit
   http://www.openintents.org
 
 ---------------------------------------------------------
-release 1.3.0
-date: ?
+release 1.3.0-beta1
+date: 2011-02-12
 - new application icon for Android 2.0 or higher.
 - allow app installation on external storage
   (requires Android 2.2 or higher)

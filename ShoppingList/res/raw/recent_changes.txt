@@ -1,9 +1,13 @@
 ---------------------------------------------------------
-release 1.2.7
-date: ?
+release 1.3.0-beta1
+date: 2011-02-12
 - new application icon for Android 2.0 or higher.
-- new fields for priority and notes
-  (requires OI Notepad)
+- allow app installation on external storage
+  (requires Android 2.2 or higher)
+- unit can be added to quantity.
+- new field for priority, sort by priority.
+- possibility to add notes (requires OI Notepad).
+- case insensitive sort order.
 - translations into various languages.
 
 ---------------------------------------------------------
