@@ -1107,7 +1107,7 @@ public abstract class Shopping {
 				context.getContentResolver().update(uri, values, null, null);
 				Log.i(TAG, "updated item: " + uri);				
 			} catch (Exception e) {
-				Log.i(TAG, "Insert item failed", e);				
+				Log.i(TAG, "Insert item failed", e);
 			}
 			
 		} else {
@@ -1125,8 +1125,16 @@ public abstract class Shopping {
 				Log.i(TAG, "Insert new entry in 'contains': " + uri);
 				id = Long.parseLong(uri.getPathSegments().get(1));
 			} catch (Exception e) {
-				Log.i(TAG, "insert into table 'contains' failed", e);
-				id = -1;
+				try {
+					// Maybe old version of OI Shopping List is installed:
+					values.remove(Contains.PRIORITY);
+					Uri uri = context.getContentResolver().insert(Contains.CONTENT_URI, values);
+					Log.i(TAG, "Insert new entry in 'contains': " + uri);
+					id = Long.parseLong(uri.getPathSegments().get(1));
+				} catch (Exception e2) {
+					Log.i(TAG, "insert into table 'contains' failed", e2);
+					id = -1;
+				}
 			}
 		}
 		return id;
