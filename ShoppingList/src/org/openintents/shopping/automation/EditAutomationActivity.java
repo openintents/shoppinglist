@@ -2,9 +2,9 @@ package org.openintents.shopping.automation;
 
 import org.openintents.intents.AutomationIntents;
 import org.openintents.intents.ShoppingListIntents;
-import org.openintents.provider.Shopping;
 import org.openintents.shopping.LogConstants;
 import org.openintents.shopping.R;
+import org.openintents.shopping.library.provider.Shopping;
 
 import android.app.Activity;
 import android.content.Intent;

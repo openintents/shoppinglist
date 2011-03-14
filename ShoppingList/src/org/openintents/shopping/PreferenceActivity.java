@@ -1,10 +1,9 @@
 package org.openintents.shopping;
 
-import org.openintents.provider.Shopping.Contains;
+import org.openintents.shopping.library.provider.Shopping.Contains;
 import org.openintents.util.BackupManagerWrapper;
 import org.openintents.util.IntentUtils;
 
-import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;

@@ -1,8 +1,8 @@
 package org.openintents.shopping.automation;
 
-import org.openintents.provider.Shopping;
-import org.openintents.provider.Shopping.Contains;
-import org.openintents.provider.Shopping.Status;
+import org.openintents.shopping.library.provider.Shopping;
+import org.openintents.shopping.library.provider.Shopping.Contains;
+import org.openintents.shopping.library.provider.Shopping.Status;
 
 import android.content.ContentValues;
 import android.content.Context;

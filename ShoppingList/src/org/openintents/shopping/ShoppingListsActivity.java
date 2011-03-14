@@ -1,8 +1,8 @@
 package org.openintents.shopping;
 
 import org.openintents.intents.GeneralIntents;
-import org.openintents.provider.Shopping;
-import org.openintents.provider.Shopping.Lists;
+import org.openintents.shopping.library.provider.Shopping;
+import org.openintents.shopping.library.provider.Shopping.Lists;
 
 import android.app.ListActivity;
 import android.content.Intent;

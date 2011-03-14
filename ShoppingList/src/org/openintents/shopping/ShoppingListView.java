@@ -5,11 +5,11 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 import org.openintents.distribution.DownloadAppDialog;
-import org.openintents.provider.Shopping;
-import org.openintents.provider.Shopping.Contains;
-import org.openintents.provider.Shopping.ContainsFull;
-import org.openintents.provider.Shopping.Status;
 import org.openintents.shopping.dialog.EditItemDialog;
+import org.openintents.shopping.library.provider.Shopping;
+import org.openintents.shopping.library.provider.Shopping.Contains;
+import org.openintents.shopping.library.provider.Shopping.ContainsFull;
+import org.openintents.shopping.library.provider.Shopping.Status;
 import org.openintents.shopping.theme.ThemeAttributes;
 import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;

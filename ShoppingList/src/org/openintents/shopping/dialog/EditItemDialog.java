@@ -2,14 +2,12 @@ package org.openintents.shopping.dialog;
 
 
 import org.openintents.distribution.DownloadAppDialog;
-import org.openintents.provider.Shopping;
-import org.openintents.provider.Shopping.Contains;
-import org.openintents.provider.Shopping.ContainsFull;
-import org.openintents.provider.Shopping.Items;
-import org.openintents.provider.Shopping.Units;
 import org.openintents.shopping.PreferenceActivity;
 import org.openintents.shopping.R;
-import org.openintents.shopping.ShoppingListView.mSimpleCursorAdapter;
+import org.openintents.shopping.library.provider.Shopping;
+import org.openintents.shopping.library.provider.Shopping.Contains;
+import org.openintents.shopping.library.provider.Shopping.Items;
+import org.openintents.shopping.library.provider.Shopping.Units;
 import org.openintents.shopping.util.PriceConverter;
 
 import android.app.AlertDialog;
@@ -38,8 +36,8 @@ import android.widget.FilterQueryProvider;
 import android.widget.ImageView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
 import android.widget.SimpleCursorAdapter.CursorToStringConverter;
+import android.widget.TextView;
 
 public class EditItemDialog extends AlertDialog implements OnClickListener {
 

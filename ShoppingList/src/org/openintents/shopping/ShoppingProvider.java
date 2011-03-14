@@ -20,15 +20,15 @@ import java.util.HashMap;
 
 import org.openintents.intents.ProviderIntents;
 import org.openintents.intents.ProviderUtils;
-import org.openintents.provider.Shopping;
-import org.openintents.provider.Shopping.Contains;
-import org.openintents.provider.Shopping.ContainsFull;
-import org.openintents.provider.Shopping.ItemStores;
-import org.openintents.provider.Shopping.Items;
-import org.openintents.provider.Shopping.Lists;
-import org.openintents.provider.Shopping.Status;
-import org.openintents.provider.Shopping.Stores;
-import org.openintents.provider.Shopping.Units;
+import org.openintents.shopping.library.provider.Shopping;
+import org.openintents.shopping.library.provider.Shopping.Contains;
+import org.openintents.shopping.library.provider.Shopping.ContainsFull;
+import org.openintents.shopping.library.provider.Shopping.ItemStores;
+import org.openintents.shopping.library.provider.Shopping.Items;
+import org.openintents.shopping.library.provider.Shopping.Lists;
+import org.openintents.shopping.library.provider.Shopping.Status;
+import org.openintents.shopping.library.provider.Shopping.Stores;
+import org.openintents.shopping.library.provider.Shopping.Units;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;

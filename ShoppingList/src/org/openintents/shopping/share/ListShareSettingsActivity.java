@@ -16,9 +16,9 @@
 
 package org.openintents.shopping.share;
 
-import org.openintents.provider.Shopping;
-import org.openintents.provider.Shopping.Lists;
 import org.openintents.shopping.R;
+import org.openintents.shopping.library.provider.Shopping;
+import org.openintents.shopping.library.provider.Shopping.Lists;
 
 import android.app.Activity;
 import android.content.ContentValues;

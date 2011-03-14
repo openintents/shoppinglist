@@ -20,21 +20,11 @@
 
 package org.openintents.shopping.share;
 
-import org.openintents.OpenIntents;
-import org.openintents.provider.Shopping;
-import org.openintents.provider.Shopping.Contains;
-import org.openintents.provider.Shopping.ContainsFull;
-import org.openintents.provider.Shopping.Lists;
+import org.openintents.shopping.library.provider.Shopping;
+import org.openintents.shopping.library.provider.Shopping.ContainsFull;
 
 import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
 /**
  * Handles receiving information about changes in shared shopping lists.
