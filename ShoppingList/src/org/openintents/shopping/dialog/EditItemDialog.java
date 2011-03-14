@@ -8,7 +8,7 @@ import org.openintents.shopping.library.provider.Shopping;
 import org.openintents.shopping.library.provider.Shopping.Contains;
 import org.openintents.shopping.library.provider.Shopping.Items;
 import org.openintents.shopping.library.provider.Shopping.Units;
-import org.openintents.shopping.util.PriceConverter;
+import org.openintents.shopping.library.util.PriceConverter;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

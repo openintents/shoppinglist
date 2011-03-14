@@ -1,4 +1,4 @@
-package org.openintents.shopping.util;
+package org.openintents.shopping.library.util;
 
 
 import org.openintents.shopping.library.provider.Shopping;

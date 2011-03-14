@@ -13,7 +13,7 @@ import org.openintents.shopping.library.provider.Shopping.Status;
 import org.openintents.shopping.theme.ThemeAttributes;
 import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;
-import org.openintents.shopping.util.ShoppingUtils;
+import org.openintents.shopping.library.util.ShoppingUtils;
 
 import android.app.Activity;
 import android.app.Dialog;

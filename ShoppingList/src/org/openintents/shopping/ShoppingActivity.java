@@ -42,9 +42,9 @@ import org.openintents.shopping.library.provider.Shopping.ContainsFull;
 import org.openintents.shopping.library.provider.Shopping.Items;
 import org.openintents.shopping.library.provider.Shopping.Lists;
 import org.openintents.shopping.library.provider.Shopping.Status;
+import org.openintents.shopping.library.util.PriceConverter;
+import org.openintents.shopping.library.util.ShoppingUtils;
 import org.openintents.shopping.share.GTalkSender;
-import org.openintents.shopping.util.PriceConverter;
-import org.openintents.shopping.util.ShoppingUtils;
 import org.openintents.util.MenuIntentOptionsWithIcons;
 import org.openintents.util.ShakeSensorListener;
 

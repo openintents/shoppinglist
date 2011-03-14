@@ -1,4 +1,4 @@
-package org.openintents.shopping.util;
+package org.openintents.shopping.library.util;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
