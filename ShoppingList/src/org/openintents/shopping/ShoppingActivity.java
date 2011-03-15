@@ -556,7 +556,7 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 			defaultShoppingList = sp.getInt(PreferenceActivity.PREFS_LASTUSED,
 					1);
 		} else {
-			defaultShoppingList = (int) ShoppingUtils.getDefaultList();
+			defaultShoppingList = (int) ShoppingUtils.getDefaultList(this);
 		}
 
 		if (mListItemsView != null) {
@@ -1593,7 +1593,9 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 		
 		// add item to new list
 		ShoppingUtils.addItemToList(this, c.getInt(mStringItemsITEMID),
-				targetListId, c.getString(mStringItemsQUANTITY), null);
+				targetListId, Status.WANT_TO_BUY, 
+				c.getString(mStringItemsPRIORITY),
+				c.getString(mStringItemsQUANTITY), false);
 
 		// Delete item from currentList
 		// by deleting contains row

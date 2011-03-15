@@ -999,7 +999,8 @@ public class ShoppingListView extends ListView {
 
 		Log.i(TAG, "Insert new item. " + " itemId = " + itemId + ", listId = "
 				+ mListId);
-		ShoppingUtils.addItemToList(getContext(), itemId, mListId, quantity, priority);
+		ShoppingUtils.addItemToList(getContext(), itemId, mListId, Status.WANT_TO_BUY,
+				priority, quantity, true);
 
 		fillItems(activity, mListId);
 

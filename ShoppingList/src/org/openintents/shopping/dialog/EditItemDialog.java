@@ -9,6 +9,7 @@ import org.openintents.shopping.library.provider.Shopping.Contains;
 import org.openintents.shopping.library.provider.Shopping.Items;
 import org.openintents.shopping.library.provider.Shopping.Units;
 import org.openintents.shopping.library.util.PriceConverter;
+import org.openintents.shopping.library.util.ShoppingUtils;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -363,7 +364,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 			values.put(Items.PRICE, priceLong);
 		}
 		if (units != null) {
-			long units_id = Shopping.getUnits(mContext, units);
+			long units_id = ShoppingUtils.getUnits(mContext, units);
 			values.put(Items.UNITS, units);
 		}
 		mContext.getContentResolver().update(mItemUri, values, null, null);
