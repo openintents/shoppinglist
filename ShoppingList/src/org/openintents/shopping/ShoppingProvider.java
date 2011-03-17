@@ -1104,6 +1104,7 @@ public class ShoppingProvider extends ContentProvider {
 		URL_MATCHER.addURI("org.openintents.shopping", "items", ITEMS);
 		URL_MATCHER.addURI("org.openintents.shopping", "items/#", ITEM_ID);
 		URL_MATCHER.addURI("org.openintents.shopping", "lists", LISTS);
+		URL_MATCHER.addURI("org.openintents.shopping", "lists/active", ACTIVELIST);
 		URL_MATCHER.addURI("org.openintents.shopping", "lists/#", LIST_ID);
 		URL_MATCHER.addURI("org.openintents.shopping", "contains", CONTAINS);
 		URL_MATCHER.addURI("org.openintents.shopping", "contains/#",
@@ -1123,7 +1124,6 @@ public class ShoppingProvider extends ContentProvider {
 		URL_MATCHER.addURI("org.openintents.shopping", "notes/#", NOTE_ID);
 		URL_MATCHER.addURI("org.openintents.shopping", "units", UNITS);
 		URL_MATCHER.addURI("org.openintents.shopping", "units/#", UNITS_ID);
-		URL_MATCHER.addURI("org.openintents.shopping", "lists/active", ACTIVELIST);
 
 
 		ITEMS_PROJECTION_MAP = new HashMap<String, String>();
