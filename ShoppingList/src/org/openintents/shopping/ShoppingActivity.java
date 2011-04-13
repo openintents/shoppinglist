@@ -69,15 +69,20 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.view.View.OnTouchListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -100,16 +105,62 @@ import android.widget.Toast;
  * Displays a shopping list.
  * 
  */
-public class ShoppingActivity extends DistributionLibraryActivity implements ThemeDialogListener,
-		OnCustomClickListener { // implements
+public class ShoppingActivity extends DistributionLibraryActivity implements
+		ThemeDialogListener, OnCustomClickListener { // implements
 	// AdapterView.OnItemClickListener
 	// {
+
+	public class MyGestureDetector extends SimpleOnGestureListener {
+        private static final float DISTANCE_DIP = 16.0f;
+        private static final float PATH_DIP = 40.0f;
+        // convert dip measurements to pixels
+        final float scale = getResources().getDisplayMetrics().density;
+        int scaledDistance = (int) (DISTANCE_DIP * scale + 0.5f);
+        int scaledPath = (int) (PATH_DIP * scale + 0.5f);
+        // For more information about touch gestures and screens support, see:
+        // http://developer.android.com/resources/articles/gestures.html
+        // http://developer.android.com/reference/android/gesture/package-summary.html
+        // http://developer.android.com/guide/practices/screens_support.html try {
+
+        @Override
+	        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        	if (e1 == null || e2 == null) return false;
+
+        	 try {
+        		 DisplayMetrics dm = getResources().getDisplayMetrics();
+
+        		 int REL_SWIPE_MIN_DISTANCE = (int)(SWIPE_MIN_DISTANCE * dm.densityDpi / 160.0f);
+        		 int REL_SWIPE_MAX_OFF_PATH = (int)(SWIPE_MAX_OFF_PATH * dm.densityDpi / 160.0f);
+        		 int REL_SWIPE_THRESHOLD_VELOCITY = (int)(SWIPE_THRESHOLD_VELOCITY * dm.densityDpi / 160.0f);
+
+
+	                if (Math.abs(e1.getY() - e2.getY()) > REL_SWIPE_MAX_OFF_PATH)
+	                    return false;
+	                // right to left swipe
+	                if(e1.getX() - e2.getX() > REL_SWIPE_MIN_DISTANCE && Math.abs(velocityX) > REL_SWIPE_THRESHOLD_VELOCITY) {
+	                    Toast.makeText(ShoppingActivity.this, "Left Swipe", Toast.LENGTH_SHORT).show();
+	                    changeList(-1);
+	                }  else if (e2.getX() - e1.getX() > REL_SWIPE_MIN_DISTANCE && Math.abs(velocityX) > REL_SWIPE_THRESHOLD_VELOCITY) {
+	                    Toast.makeText(ShoppingActivity.this, "Right Swipe", Toast.LENGTH_SHORT).show();
+	                    changeList(1);
+	                }
+	            } catch (Exception e) {
+	                // nothing
+	            }
+	            return false;
+	        }
+
+	}
 
 	/**
 	 * TAG for logging.
 	 */
 	private static final String TAG = "ShoppingActivity";
 	private static final boolean debug = !false;
+
+	private static final int SWIPE_MIN_DISTANCE = 120;
+	private static final int SWIPE_MAX_OFF_PATH = 250;
+	private static final int SWIPE_THRESHOLD_VELOCITY = 200;
 
 	private static final int MENU_NEW_LIST = Menu.FIRST;
 	private static final int MENU_CLEAN_UP_LIST = Menu.FIRST + 1;
@@ -152,8 +203,10 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 	private static final int MENU_SEND = Menu.FIRST + 18;
 	private static final int MENU_REMOVE_ITEM_FROM_LIST = Menu.FIRST + 19;
 	private static final int MENU_MOVE_ITEM = Menu.FIRST + 20;
-	
-	private static final int MENU_DISTRIBUTION_START = Menu.FIRST + 100; // MUST BE LAST
+
+	private static final int MENU_DISTRIBUTION_START = Menu.FIRST + 100; // MUST
+																			// BE
+																			// LAST
 
 	private static final int DIALOG_ABOUT = 1;
 	// private static final int DIALOG_TEXT_ENTRY = 2;
@@ -238,8 +291,6 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 	private int mUpdateInterval;
 
 	private boolean mUpdating;
-	
-	
 
 	/**
 	 * The items to add to the shopping list.
@@ -296,8 +347,9 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 			ContainsFull.ITEM_NAME, ContainsFull.ITEM_IMAGE,
 			ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,
 			ContainsFull.QUANTITY, ContainsFull.STATUS, ContainsFull.ITEM_ID,
-			ContainsFull.SHARE_CREATED_BY, ContainsFull.SHARE_MODIFIED_BY, 
-			ContainsFull.PRIORITY, ContainsFull.ITEM_HAS_NOTE, ContainsFull.ITEM_UNITS};
+			ContainsFull.SHARE_CREATED_BY, ContainsFull.SHARE_MODIFIED_BY,
+			ContainsFull.PRIORITY, ContainsFull.ITEM_HAS_NOTE,
+			ContainsFull.ITEM_UNITS };
 	static final int mStringItemsCONTAINSID = 0;
 	static final int mStringItemsITEMNAME = 1;
 	static final int mStringItemsITEMIMAGE = 2;
@@ -328,9 +380,8 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 	// "cursor items position";
 	private static final String BUNDLE_ITEM_URI = "item uri";
 	private static final String BUNDLE_RELATION_URI = "relation_uri";
-	
+
 	private static final String BUNDLE_POSITION = "position";
-	
 
 	// Skins --------------------------
 
@@ -379,7 +430,9 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 	private int mMoveItemPosition;
 
 	private EditItemDialog.FieldType mEditItemFocusField = EditItemDialog.FieldType.ITEMNAME;
-	
+	private GestureDetector mGestureDetector;
+	private View.OnTouchListener mGestureListener;
+
 	/**
 	 * Called when the activity is first created.
 	 */
@@ -389,14 +442,15 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 		if (debug)
 			Log.d(TAG, "Shopping list onCreate()");
 
-        mDistribution.setFirst(MENU_DISTRIBUTION_START, DIALOG_DISTRIBUTION_START);
-        
-        // Check whether EULA has been accepted
-        // or information about new version can be presented.
-        if (mDistribution.showEulaOrNewVersion()) {
-            return;
-        }
-        
+		mDistribution.setFirst(MENU_DISTRIBUTION_START,
+				DIALOG_DISTRIBUTION_START);
+
+		// Check whether EULA has been accepted
+		// or information about new version can be presented.
+		if (mDistribution.showEulaOrNewVersion()) {
+			return;
+		}
+
 		setContentView(R.layout.shopping);
 
 		// mEditItemPosition = -1;
@@ -534,7 +588,6 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 		// set focus to the edit line:
 		mEditText.requestFocus();
 
-		
 		// TODO remove initFromPreferences from onCreate
 		// we need it in resume to update after settings have changed
 		initFromPreferences();
@@ -646,7 +699,18 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 		mListItemsView.setListTheme(loadListTheme());
 		mListItemsView.onResume();
 
-		
+		// TODO fling disabled for release 1.3.0
+//		mGestureDetector = new GestureDetector(new MyGestureDetector());
+//		mGestureListener = new OnTouchListener() {
+//			public boolean onTouch(View view, MotionEvent e) {
+//				if (mGestureDetector.onTouchEvent(e)) {
+//                    return true;
+//                }
+//				return false;
+//			}
+//		};
+//		mListItemsView.setOnTouchListener(mGestureListener);
+				
 		mEditText
 				.setKeyListener(PreferenceActivity
 						.getCapitalizationKeyListenerFromPrefs(getApplicationContext()));
@@ -857,6 +921,24 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 				insertNewItem();
 			}
 		});
+		button.setOnLongClickListener(new View.OnLongClickListener() {
+
+			@Override
+			public boolean onLongClick(View v) {
+				Intent intent = new Intent();				
+				intent.setData(mListUri);
+				intent.setClassName("org.openintents.barcodescanner", "org.openintents.barcodescanner.BarcodeScanner");
+				intent.setAction(Intent.ACTION_GET_CONTENT);
+				intent.addCategory(Intent.CATEGORY_ALTERNATIVE);
+				try {
+					startActivity(intent);
+				} catch (ActivityNotFoundException e) {
+					Log.v(TAG, "barcode scanner not found");
+					return false;
+				}
+				return true;
+			}
+		});
 
 		mLayoutParamsItems = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.FILL_PARENT,
@@ -868,19 +950,19 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 
 		mListItemsView.setItemsCanFocus(true);
 		mListItemsView.setDragListener(new DragListener() {
-			
+
 			@Override
 			public void drag(int from, int to) {
-				Log.v("DRAG", ""+ from + "/"+ to );
-				
+				Log.v("DRAG", "" + from + "/" + to);
+
 			}
 		});
 		mListItemsView.setDropListener(new DropListener() {
-			
+
 			@Override
 			public void drop(int from, int to) {
-				Log.v("DRAG", ""+ from + "/"+ to );
-				
+				Log.v("DRAG", "" + from + "/" + to);
+
 			}
 		});
 
@@ -889,7 +971,7 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 
 		tv = (TextView) findViewById(R.id.total_2);
 		mListItemsView.setTotalTextView(tv);
-		
+
 		tv = (TextView) findViewById(R.id.count);
 		mListItemsView.setCountTextView(tv);
 
@@ -920,8 +1002,7 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 								R.string.menu_delete_item)
 								.setShortcut('4', 'd');
 						contextmenu.add(0, MENU_MOVE_ITEM, 0,
-								R.string.menu_move_item)
-								.setShortcut('5', 's');
+								R.string.menu_move_item).setShortcut('5', 's');
 					}
 
 				});
@@ -1072,14 +1153,14 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 		}
 
 		// Standard menu
-		menu.add(0, MENU_NEW_LIST, 0, R.string.new_list).setIcon(
-				R.drawable.ic_menu_add_list).setShortcut('0', 'n');
-		menu.add(0, MENU_CLEAN_UP_LIST, 0, R.string.clean_up_list).setIcon(
-				R.drawable.ic_menu_clean_up).setShortcut('1', 'c');
+		menu.add(0, MENU_NEW_LIST, 0, R.string.new_list)
+				.setIcon(R.drawable.ic_menu_add_list).setShortcut('0', 'n');
+		menu.add(0, MENU_CLEAN_UP_LIST, 0, R.string.clean_up_list)
+				.setIcon(R.drawable.ic_menu_clean_up).setShortcut('1', 'c');
 		;
 
-		menu.add(0, MENU_PICK_ITEMS, 0, R.string.menu_pick_items).setIcon(
-				android.R.drawable.ic_menu_add).setShortcut('2', 'p');
+		menu.add(0, MENU_PICK_ITEMS, 0, R.string.menu_pick_items)
+				.setIcon(android.R.drawable.ic_menu_add).setShortcut('2', 'p');
 		;
 
 		/*
@@ -1087,32 +1168,33 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 		 * .setIcon(R.drawable.contact_share001a) .setShortcut('4', 's');
 		 */
 
-		menu.add(0, MENU_THEME, 0, R.string.theme).setIcon(
-				android.R.drawable.ic_menu_manage).setShortcut('3', 't');
+		menu.add(0, MENU_THEME, 0, R.string.theme)
+				.setIcon(android.R.drawable.ic_menu_manage)
+				.setShortcut('3', 't');
 
-		menu.add(0, MENU_PREFERENCES, 0, R.string.preferences).setIcon(
-				android.R.drawable.ic_menu_preferences).setShortcut('4', 'p');
+		menu.add(0, MENU_PREFERENCES, 0, R.string.preferences)
+				.setIcon(android.R.drawable.ic_menu_preferences)
+				.setShortcut('4', 'p');
 
-		menu.add(0, MENU_RENAME_LIST, 0, R.string.rename_list).setIcon(
-				android.R.drawable.ic_menu_edit).setShortcut('5', 'r');
+		menu.add(0, MENU_RENAME_LIST, 0, R.string.rename_list)
+				.setIcon(android.R.drawable.ic_menu_edit).setShortcut('5', 'r');
 
-		menu.add(0, MENU_DELETE_LIST, 0, R.string.delete_list).setIcon(
-				android.R.drawable.ic_menu_delete).setShortcut('6', 'd');
+		menu.add(0, MENU_DELETE_LIST, 0, R.string.delete_list)
+				.setIcon(android.R.drawable.ic_menu_delete)
+				.setShortcut('6', 'd');
 
-		menu.add(0, MENU_SEND, 0, R.string.send).setIcon(
-				android.R.drawable.ic_menu_send).setShortcut('7', 's');
+		menu.add(0, MENU_SEND, 0, R.string.send)
+				.setIcon(android.R.drawable.ic_menu_send).setShortcut('7', 's');
 
 		if (addLocationAlertPossible()) {
-			menu
-					.add(0, MENU_ADD_LOCATION_ALERT, 0,
-							R.string.shopping_add_alert).setIcon(
-							android.R.drawable.ic_menu_mylocation).setShortcut(
-							'8', 'l');
+			menu.add(0, MENU_ADD_LOCATION_ALERT, 0, R.string.shopping_add_alert)
+					.setIcon(android.R.drawable.ic_menu_mylocation)
+					.setShortcut('8', 'l');
 		}
 
- 		// Add distribution menu items last.
- 		mDistribution.onCreateOptionsMenu(menu);
- 		
+		// Add distribution menu items last.
+		mDistribution.onCreateOptionsMenu(menu);
+
 		// NOTE:
 		// Dynamically added menu items are included in onPrepareOptionsMenu()
 		// instead of here!
@@ -1328,7 +1410,7 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 			Intent intent = new Intent();
 			intent.setAction(Intent.ACTION_PICK);
 			intent.setData(Shopping.Lists.CONTENT_URI);
-			startActivityForResult(intent , REQUEST_PICK_LIST);
+			startActivityForResult(intent, REQUEST_PICK_LIST);
 			mMoveItemPosition = menuInfo.position;
 			break;
 		}
@@ -1391,8 +1473,8 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 		ContentValues values = new ContentValues();
 		values.put(Lists.NAME, "" + newName);
 		getContentResolver().update(
-				Uri.withAppendedPath(Lists.CONTENT_URI, mCursorListFilter
-						.getString(0)), values, null, null);
+				Uri.withAppendedPath(Lists.CONTENT_URI,
+						mCursorListFilter.getString(0)), values, null, null);
 
 		mCursorListFilter.requery();
 		return true;
@@ -1481,15 +1563,17 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 	 */
 	private void deleteListConfirm() {
 		new AlertDialog.Builder(this)
-		// .setIcon(R.drawable.alert_dialog_icon)
-				.setTitle(R.string.delete_list).setPositiveButton(R.string.ok,
+				// .setIcon(R.drawable.alert_dialog_icon)
+				.setTitle(R.string.delete_list)
+				.setPositiveButton(R.string.ok,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
 									int whichButton) {
 								// click Ok
 								deleteList();
 							}
-						}).setNegativeButton(R.string.cancel,
+						})
+				.setNegativeButton(R.string.cancel,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
 									int whichButton) {
@@ -1527,8 +1611,11 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 		mListItemsView.toggleItemBought(position);
 	}
 
-	/** Edit item 
-	 * @param field */
+	/**
+	 * Edit item
+	 * 
+	 * @param field
+	 */
 	void editItem(int position, EditItemDialog.FieldType field) {
 		if (debug)
 			Log.d(TAG, "EditItems: Position: " + position);
@@ -1590,10 +1677,10 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 			return;
 		}
 		listId = Integer.parseInt(mListUri.getLastPathSegment());
-		
+
 		// add item to new list
 		ShoppingUtils.addItemToList(this, c.getInt(mStringItemsITEMID),
-				targetListId, Status.WANT_TO_BUY, 
+				targetListId, Status.WANT_TO_BUY,
 				c.getString(mStringItemsPRIORITY),
 				c.getString(mStringItemsQUANTITY), false);
 
@@ -1740,8 +1827,8 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 		ContentValues values = new ContentValues();
 		values.put(Lists.SKIN_BACKGROUND, theme);
 		getContentResolver().update(
-				Uri.withAppendedPath(Lists.CONTENT_URI, mCursorListFilter
-						.getString(0)), values, null, null);
+				Uri.withAppendedPath(Lists.CONTENT_URI,
+						mCursorListFilter.getString(0)), values, null, null);
 
 		mCursorListFilter.requery();
 	}
@@ -1784,22 +1871,24 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 			return new EditItemDialog(this, mItemUri, mRelationUri);
 
 		case DIALOG_DELETE_ITEM:
-			return new AlertDialog.Builder(this).setIcon(
-					android.R.drawable.ic_dialog_alert).setTitle(
-					R.string.menu_delete_item).setMessage(
-					R.string.delete_item_confirm).setPositiveButton(
-					R.string.delete, new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog,
-								int whichButton) {
-							deleteItem(mDeleteItemPosition);
-						}
-					}).setNegativeButton(android.R.string.cancel,
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog,
-								int whichButton) {
-							// Don't do anything
-						}
-					}).create();
+			return new AlertDialog.Builder(this)
+					.setIcon(android.R.drawable.ic_dialog_alert)
+					.setTitle(R.string.menu_delete_item)
+					.setMessage(R.string.delete_item_confirm)
+					.setPositiveButton(R.string.delete,
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int whichButton) {
+									deleteItem(mDeleteItemPosition);
+								}
+							})
+					.setNegativeButton(android.R.string.cancel,
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int whichButton) {
+									// Don't do anything
+								}
+							}).create();
 
 		case DIALOG_THEME:
 			return new ThemeDialog(this, this);
@@ -1918,8 +2007,8 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 
 		if (mCursorListFilter.getCount() < 1) {
 			// We have to create default shopping list:
-			long listId = ShoppingUtils.getList(this, getText(
-					R.string.my_shopping_list).toString());
+			long listId = ShoppingUtils.getList(this,
+					getText(R.string.my_shopping_list).toString());
 
 			// Check if insertion really worked. Otherwise
 			// we may end up in infinite recursion.
@@ -1951,9 +2040,7 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 			public boolean deliverSelfNotifications() {
 				// TODO Auto-generated method stub
 				if (debug)
-					Log
-							.i(TAG,
-									"mListContentObserver: deliverSelfNotifications");
+					Log.i(TAG, "mListContentObserver: deliverSelfNotifications");
 				return super.deliverSelfNotifications();
 			}
 
@@ -1975,9 +2062,8 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 
 		}
 		;
-
-		mCursorListFilter.registerContentObserver(new mListContentObserver(
-				new Handler()));
+		mListContentObserver observer = new mListContentObserver(new Handler());
+		mCursorListFilter.registerContentObserver(observer);
 
 		// Register a ContentObserver, so that a new list can be
 		// automatically detected.
@@ -2001,8 +2087,7 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 				// Give the cursor to the list adapter
 				mCursorListFilter, new String[] { Lists.NAME },
 				new int[] { android.R.id.text1 });
-		adapter
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 		mSpinnerListFilter.setAdapter(adapter);
 
@@ -2270,19 +2355,42 @@ public class ShoppingActivity extends DistributionLibraryActivity implements The
 					getShoppingExtras(data);
 				}
 			}
-		} else if (REQUEST_PICK_LIST == requestCode){
+		} else if (REQUEST_PICK_LIST == requestCode) {
 			if (debug)
 				Log.d(TAG, "result received");
-			
+
 			if (RESULT_OK == resultCode) {
-				int position = mMoveItemPosition;				
-				if (mMoveItemPosition >= 0){
-					moveItem(position, Integer.parseInt(data.getData().getLastPathSegment()));
+				int position = mMoveItemPosition;
+				if (mMoveItemPosition >= 0) {
+					moveItem(position, Integer.parseInt(data.getData()
+							.getLastPathSegment()));
 				}
 			}
-			
+
 			mMoveItemPosition = -1;
 		}
+	}
+
+	public void changeList(int value) {
+
+		int pos = mSpinnerListFilter.getSelectedItemPosition();
+		int newPos;
+
+		if (pos < 0) {
+			// nothing selected - probably view is out of focus:
+			// Do nothing.
+			newPos = -1;
+		} else if (pos == 0) {
+			newPos = mSpinnerListFilter.getCount() - 1;
+		} else if (pos == mSpinnerListFilter.getCount()) {
+			newPos = 0;
+		} else {
+			newPos = pos + value;
+		}
+		mSpinnerListFilter.setSelection(newPos);
+		fillItems();
+		// Now set the theme based on the selected list:
+		mListItemsView.setListTheme(loadListTheme());
 	}
 
 }

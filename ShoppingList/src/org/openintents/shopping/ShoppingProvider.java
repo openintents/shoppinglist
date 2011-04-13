@@ -103,6 +103,7 @@ public class ShoppingProvider extends ContentProvider {
 	private static final int NOTE_ID = 13;
 	private static final int UNITS = 14;
 	private static final int UNITS_ID = 15;
+	private static final int PREFS = 16;
 
 	// Derived tables
 	private static final int CONTAINS_FULL = 101; // combined with items and
@@ -439,7 +440,13 @@ public class ShoppingProvider extends ContentProvider {
 			long list_id = sp.getInt("lastused", 1);
 			m.addRow(new Object [] {Long.toString(list_id)});
 			return (Cursor)m;
-			
+		case PREFS:
+			m = new MatrixCursor(projection);
+			// assumes only one projection will ever be used, 
+			// asking only for the id of the active list.
+			String sortOrder = PreferenceActivity.getSortOrderFromPrefs(getContext());
+			m.addRow(new Object [] {sortOrder});
+			return (Cursor)m;
 		default:
 			throw new IllegalArgumentException("Unknown URL " + url);
 		}
@@ -916,6 +923,8 @@ public class ShoppingProvider extends ContentProvider {
 		if (debug) Log.d(TAG, "update called for: " + url);
 		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
 		int count;
+		Uri secondUri = null;
+		
 		// long rowId;
 		switch (URL_MATCHER.match(url)) {
 		case ITEMS:
@@ -942,6 +951,7 @@ public class ShoppingProvider extends ContentProvider {
 
 			count = db.update("items", values, "_id=" + segment + whereString,
 					whereArgs);
+			secondUri  = Shopping.Items.CONTENT_URI;
 			break;
 
 		case LISTS:
@@ -1032,7 +1042,10 @@ public class ShoppingProvider extends ContentProvider {
 		}
 
 		getContext().getContentResolver().notifyChange(url, null);
-
+		if (secondUri != null){
+			getContext().getContentResolver().notifyChange(secondUri, null);
+		}
+		
 		Intent intent = new Intent(ProviderIntents.ACTION_MODIFIED);
 		intent.setData(url);
 		getContext().sendBroadcast(intent);
@@ -1124,6 +1137,8 @@ public class ShoppingProvider extends ContentProvider {
 		URL_MATCHER.addURI("org.openintents.shopping", "notes/#", NOTE_ID);
 		URL_MATCHER.addURI("org.openintents.shopping", "units", UNITS);
 		URL_MATCHER.addURI("org.openintents.shopping", "units/#", UNITS_ID);
+		
+		URL_MATCHER.addURI("org.openintents.shopping", "prefs", PREFS);
 
 
 		ITEMS_PROJECTION_MAP = new HashMap<String, String>();
