@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--   * Copyright (C) 2007-2010 OpenIntents.org  *  * Licensed under the Apache License, Version 2.0 (the "License");  * you may not use this file except in compliance with the License.  * You may obtain a copy of the License at  *  *      http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  -->
+ 
+<resources>
+	<!-- *************************** 	     About information 	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">fordító-stáb</string>
+	
+	<!-- Strings for OI About -->
+	<string name="about_comments">Az OI Shopping list segítségével figyelemmel követheti bevásárlási listájának elemeit. Az alkalmazást használhatja egyéb ellenőrzőlistákhoz is, például tennivalókat tartalmazó listákhoz vagy vendéglistákhoz.</string>
+	<string name="about_website_label">OI Shopping list az OpenIntents oldalon</string>
+
+	<!-- *************************** 	     Applicatio-specific strings 	     *************************** -->
+	<string name="app_name">OI Shopping list</string>
+
+	<!-- Shopping Provider -->
+	<string name="new_item">Új elem</string>
+	<string name="new_list">Új lista</string>
+	<string name="send">Lista küldése</string>
+	<string name="empty_list_not_sent">Az üres lista nem került elküldésre.</string>
+	<string name="email_not_available">A küldéshez nem áll rendelkezésre egyetlen alkalmazás sem.</string>
+	<string name="my_shopping_list">Bevásárlási listám</string>
+	<string name="new_list_hint">pl. kívánságlista, családlista</string>
+	<string name="clean_up_list">Lista ürítése</string>
+	<string name="delete_list">Lista törlése</string>
+	<string name="ask_new_list">Adja meg az új bevásárlási lista nevét</string>
+	<string name="ask_rename_list">Bevásárlási lista átnevezése</string>
+	<string name="ask_edit_item">Elem szerkesztése</string>
+	<string name="please_enter_name">Adjon meg egy nevet</string>
+	<string name="no_items_marked">Egyetlen elem sincs áthúzva.</string>
+	<string name="confirm_delete_list">Biztosan törölni kívánja ezt a bevásárlási listát?</string>
+	<string name="no_shopping_provider">Hiba a bevásárlási lista megnyitásakor.</string>
+	<string name="pick_item">Válasszon egy elemet</string>
+	<string name="pick_list">Válasszon egy listát</string>
+	<string name="theme">Téma</string>
+	<string name="theme_settings">Téma beállítások</string>
+	<string name="rename_list">Lista átnevezése</string>
+	<string name="menu_mark_item">Elem megjelölése</string>
+	<string name="menu_edit_item">Elem szerkesztése</string>
+	<string name="menu_auto_add">Automatikus hozzáadás</string>
+	
+	<!-- Remove item from this list, but keep it internally, so that the user 	     can choose it later for inclusion again. Information like 	     tags or price will be kept. -->
+	<string name="menu_remove_item">Elem törlése a listából</string>
+	
+	<!-- Delete this item completely. If the user wants to add it again, they 	     have to enter all the information again. -->
+	<string name="menu_delete_item">Elem végleges törlése</string>
+	
+	<!-- Button label to add an item to the list. -->
+	<string name="add">Hozzáadás</string>
+	
+	<string name="menu_pick_items">Elemek kiválasztása</string>
+	<string name="menu_start_shopping">Bevásárlás</string>
+	
+	<!-- Title supplement. '%s' is the name of the current list. -->
+	<string name="pick_items_titel">%s - Elemek kiválasztása</string>
+	
+	<!-- Title supplement. '%s' is the name of the current list. -->
+	<string name="shopping_title">%s - Bevásárlás</string>
+	
+	<string name="tags">Címkék</string>
+	<string name="price">Ár</string>
+	<string name="item">Elem</string>
+	<string name="quantity">Mennyiség</string>
+	
+	<!-- Total sum of all prices. '%s' is the sum -->
+	<string name="total">Összesen: %s</string>
+	
+	<!-- Sum of all prices of the checked items. '%s' is the sum -->
+	<string name="total_checked">Kipipálva: %s</string>
+	
+	<string name="delete_item_confirm">Biztosan véglegesen törölni kívánja ezt az elemet, a címkéit és az árát az összes bevásárlási listából?</string>
+	<string name="delete">Törlés</string>
+	
+	<!-- Added to an item to indicate it was bought. -->
+	<string name="suffix_checked">... OK</string>
+	<string name="empty"></string>
+	
+	<!-- The shortcut is created on the home screen. -->
+	<string name="pick_list_for_shortcut">Lista kiválasztása parancsikonhoz</string>
+	
+	<!-- Shown if external application wants to insert new items. -->
+	<string name="pick_list_to_insert_items">Lista kiválasztása elemek hozzáadásához</string>
+	
+	<!-- Theme related -->
+	<string name="theme_pick">Téma kiválasztása</string>
+	<string name="theme_description">Válasszon egy témát a listának</string>
+	<string name="theme_default">Alapértelmezett</string>
+	<string name="theme_classic">Klasszikus</string>
+	<string name="theme_bugdroid">Android</string>
+	<string name="theme_classic_export">Klasszikus (OI Shopping List)</string>
+	<string name="theme_bugdroid_export">Android (OI Shopping List)</string>
+
+	<!--     Dialog box    -->
+	<string name="ok">OK</string>
+	<string name="cancel">Mégsem</string>
+	<string name="use_theme_for_all_lists">A téma használata az összes listához</string>
+	<string name="get_more_themes">További témák letöltése</string>
+	
+	<!-- preferences -->
+	<string name="preferences">Beállítások</string>
+	
+    <string name="preference_application">Az alkalmazás beállításai</string>
+    
+	<string name="preference_unchecked_on_top">Kipipálatlan felül</string>
+	<string name="preference_unchecked_on_top_summary">Mindig a kipipálatlan elemeket mutatja először</string>
+	<string name="preference_fontsize">Betűméret</string>
+	<string name="preference_fontsize_summary">Betűméret megváltoztatása</string>
+	<string name="preference_fontsize_dialog_title">Betűméret kiválasztása</string>
+	<string name="preference_sortorder_title">Rendezési sorrend</string>
+	<string name="preference_sortorder_summary">A listában található elemek rendezési sorrendjének megváltoztatása</string>
+	<string name="preference_sortorder_dialog_title">Rendezési sorrend kiválasztása</string>
+	<string name="preference_loadlastused_title">Legutóbb használt lista betöltése</string>
+	<string name="preference_loadlastused_summary">Mindig a legutóbb megtekintett listával kezdje.</string>
+	<string name="preference_capitalization_title">Nagybetűsítés</string>
+	<string name="preference_capitalization_summary">A bejegyzések automatikus nagybetűsítése</string>
+	<string name="preference_capitalization_dialog_title">Nagybetűsítés kiválasztása</string> 
+	<string name="preference_hidechecked_title">Kipipált elemek elrejtése</string>
+	<string name="preference_hidechecked_summary">A kipipált elemek azonnali elrejtése.</string>
+	<string name="preference_showprice_title">Ár megjelenítése</string>
+	<string name="preference_showprice_summary">Egy kiegészítő oszlopként jelenik meg a listában.</string>
+	<string name="preference_showtags_title">Címkék megjelenítése</string>
+	<string name="preference_showtags_summary">Egy kiegészítő oszlopként jelenik meg a listában.</string>
+	<string name="preference_showquantity_title">Mennyiség megjelenítése</string>
+	<string name="preference_showquantity_summary">Egy kiegészítő oszlopként jelenik meg a listában.</string>
+	
+	<!-- Preference title: Shake the phone to clean up the list. -->
+	<string name="preference_shake_title">Ürítéshez rázza meg</string>
+	
+	<!-- Preference summary: Shake the phone to clean up the list. -->
+	<string name="preference_shake_summary">A lista ürítéséhez rázza meg a készüléket.</string>
+	
+    <string name="preference_advanced">Különleges beállítások</string>
+    <string name="preference_advanced_summary">A megjelenésre vonatkozó további beállítások.</string>
+    
+    <!-- Preference category: General settings -->
+    <string name="preference_general">Általános</string>
+    
+    <string name="preference_appearance">Megjelenés</string>
+    
+    <string name="preference_addons">Kiegészítők</string>
+    <string name="preference_get_addons">Új kiegészítők letöltése</string>
+    <string name="preference_get_addons_summary">Bővítések és témák on-line keresése.</string>
+    <string name="preference_get_market_addons">Kiegészítők letöltése a piactérről</string>
+    <string name="preference_get_developer_addons">Kiegészítők letöltése az OpenIntents oldalról</string>
+    <string name="preference_extensions">Bővítések</string>
+    <string name="preference_themes">Témák</string>
+    <string name="preference_market_extensions_summary">Bővítések keresése az Android Market oldalon.</string>
+    <string name="preference_market_themes_summary">Témák keresése az Android Market oldalon.</string>
+    <string name="preference_developer_extensions_summary">Bővítések letöltése az OpenIntents honlapról.</string>
+	<string name="preference_developer_themes_summary">Témák letöltése az OpenIntents honlapról.</string>
+	
+	<!-- *************************** 	     Distribution 	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">OI Shopping List végfelhasználói licencszerződés</string>
+	<string name="eula_accept">Elfogad</string>
+	<string name="eula_refuse">Mégsem</string>
+
+	<!-- Update -->
+	<string name="update_box_text">Keressen frissítések után kézileg, vagy telepítse az OI Update programot az automatikus értesítések érdekében. Jelenlegi verzió: %s
+	</string>
+	<string name="update_check_now">Ellenőrizze most.</string>
+	<string name="update_get_updater">OI Updater letöltése.</string>
+	<string name="update_error">Nem áll rendelkezésre letöltő alkalmazás.</string>
+	<string name="update">Frissítések keresése</string>
+
+	<!-- About -->
+	<string name="about">Névjegy</string>
+	<string name="aboutapp_not_available">%s verzió\n\nNem áll rendelkezésre kompatibilis bővítés a teljes információ megjelenítésére (kapcsolat, stáb, licenc).</string>
+	<string name="aboutapp_get">OI About letöltése</string>
+	
+	<!-- *************************** 	     Permissions 	     *************************** -->
+	
+	<!-- OI Shopping list -->
+	<string name="oi_shopping_permission_read">bevásárlási lista olvasása</string>
+	<string name="oi_shopping_permission_read_descr">Engedélyezi egy alkalmazásnak a bevásárlási lista olvasását. Vegye figyelembe, hogy a titkosított listák és elemek titkosított formában állnak rendelkezésre.</string>
+	<string name="oi_shopping_permission_write">bevásárlási listák írása</string>
+	<string name="oi_shopping_permission_write_descr">Engedélyezi egy alkalmazásnak új listák és elemek létrehozását vagy a már meglévők módosítását.</string>
+	
+	
+	<!-- *************************** 	     Preferences 	     *************************** -->
+	
+    <string-array name="preference_sortorder_entries">
+    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    	<item>kipipálatlanok először, abc sorrend</item>
+        <!-- Preference sort order: Sort by item name -->
+    	<item>abc sorrend</item>
+        <!-- Preference sort order: Newest item first -->
+    	<item>legújabbak elöl</item>
+        <!-- Preference sort order: Oldest item first -->
+    	<item>legrégebbiek elöl</item>
+        <!-- Preference sort order: Sort alphabetically by tags -->
+    	<item>címkék abc sorrendben</item>
+        <!-- Preference sort order: Sort by price, the most expensive first -->
+    	<item>legköltségesebb elöl</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entries">
+    	<!-- Preference fontsize: tiny font size -->
+        <item>Apró</item>
+    	<!-- Preference fontsize: small font size -->
+        <item>Kicsi</item>
+    	<!-- Preference fontsize: default font size-->
+    	<item>Alapértelmezett</item>
+    	<!-- Preference fontsize: large font size -->
+        <item>Nagy</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entries">
+    	<!-- Preference capitalization: No capitalization -->
+        <item>Nélkül</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+        <item>Mondatonként</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+        <item>Szavanként</item>
+    </string-array>
+
+
+	<!-- *************************** 	     Automation 	     *************************** --> <!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<string name="label_select_action">Művelet kiválasztása:</string>
+	
+	<!-- Label above button that opens a list of all shopping lists to choose from. -->
+	<string name="label_select_list">Lista kiválasztása:</string>
+	
+	<!-- Arrays -->
+	
+    <string-array name="automation_actions">
+    	<!-- Automation action to clean up a list. -->
+    	<item>Lista ürítése</item>
+    </string-array>
+    
+</resources> 

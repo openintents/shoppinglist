@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--   * Copyright (C) 2007-2010 OpenIntents.org  *  * Licensed under the Apache License, Version 2.0 (the "License");  * you may not use this file except in compliance with the License.  * You may obtain a copy of the License at  *  *      http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  -->
+ 
+<resources>
+	<!-- *************************** 	     About information 	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">μεταφραστής-συντελεστές</string>
+	
+	<!-- Strings for OI About -->
+	<string name="about_comments">Η λίστα αγορών OI Shopping list σας δίνει τη δυνατότητα να παρακολουθείτε τις αγορές σας. Μπορείτε επίσης να χρησιμοποιήσετε την εφαρμογή για πολλές ακόμη λίστες, όπως για παράδειγμα, λίστες υποχρεώσεων ή λίστες προσκεκλημένων.</string>
+	<string name="about_website_label">Λίστα OI Shopping list στο OpenIntents</string>
+
+	<!-- *************************** 	     Applicatio-specific strings 	     *************************** -->
+	<string name="app_name">Λίστα αγορών OI Shopping list</string>
+
+	<!-- Shopping Provider -->
+	<string name="new_item">Νέο στοιχείο</string>
+	<string name="new_list">Νέα λίστα</string>
+	<string name="send">Αποστολή λίστας</string>
+	<string name="empty_list_not_sent">Κενή λίστα. Δεν εστάλη.</string>
+	<string name="email_not_available">Δεν υπάρχει εφαρμογή για αποστολή.</string>
+	<string name="my_shopping_list">Η λίστα αγορών μου</string>
+	<string name="new_list_hint">π.χ. λίστα επιθυμιών, οικογενειακή λίστα</string>
+	<string name="clean_up_list">Εκκαθάριση λίστας</string>
+	<string name="delete_list">Διαγραφή λίστας</string>
+	<string name="ask_new_list">Εισαγάγετε το όνομα της νέας λίστας αγορών</string>
+	<string name="ask_rename_list">Μετονομασία λίστας αγορών</string>
+	<string name="ask_edit_item">Επεξεργασία στοιχείου</string>
+	<string name="please_enter_name">Εισαγάγετε ένα όνομα</string>
+	<string name="no_items_marked">Δεν έχουν επισημανθεί στοιχεία ως ολοκληρωμένα.</string>
+	<string name="confirm_delete_list">Να διαγραφεί η λίστα αγορών;</string>
+	<string name="no_shopping_provider">Σφάλμα κατά την πρόσβαση στις λίστες αγορών.</string>
+	<string name="pick_item">Επιλέξτε στοιχείο</string>
+	<string name="pick_list">Επιλέξτε λίστα</string>
+	<string name="theme">Θέμα</string>
+	<string name="theme_settings">Ρυθμίσεις θέματος</string>
+	<string name="rename_list">Μετονομασία λίστας</string>
+	<string name="menu_mark_item">Επισήμανση στοιχείου</string>
+	<string name="menu_edit_item">Επεξεργασία στοιχείου</string>
+	<string name="menu_auto_add">Αυτόματη προσθήκη</string>
+	
+	<!-- Remove item from this list, but keep it internally, so that the user 	     can choose it later for inclusion again. Information like 	     tags or price will be kept. -->
+	<string name="menu_remove_item">Κατάργηση στοιχείου από λίστα</string>
+	
+	<!-- Delete this item completely. If the user wants to add it again, they 	     have to enter all the information again. -->
+	<string name="menu_delete_item">Μόνιμη διαγραφή στοιχείου</string>
+	
+	<!-- Button label to add an item to the list. -->
+	<string name="add">Προσθήκη</string>
+	
+	<string name="menu_pick_items">Επιλογή στοιχείων</string>
+	<string name="menu_start_shopping">Αγορές</string>
+	
+	<!-- Title supplement. '%s' is the name of the current list. -->
+	<string name="pick_items_titel">%s - Επιλογή στοιχείων</string>
+	
+	<!-- Title supplement. '%s' is the name of the current list. -->
+	<string name="shopping_title">%s - Αγορές</string>
+	
+	<string name="tags">Ετικέτες</string>
+	<string name="price">Τιμή</string>
+	<string name="item">Στοιχείο</string>
+	<string name="quantity">Ποσότητα</string>
+	
+	<!-- Total sum of all prices. '%s' is the sum -->
+	<string name="total">Σύνολο: %s</string>
+	
+	<!-- Sum of all prices of the checked items. '%s' is the sum -->
+	<string name="total_checked">Επιλεγμένα: %s</string>
+	
+	<string name="delete_item_confirm">Είστε βέβαιοι ότι θέλετε να διαγραφεί μόνιμα αυτό το στοιχείο μαζί με τις ετικέτες και την τιμή του από όλες τις λίστες αγορών;</string>
+	<string name="delete">Διαγραφή</string>
+	
+	<!-- Added to an item to indicate it was bought. -->
+	<string name="suffix_checked">... OK</string>
+	<string name="empty"></string>
+	
+	<!-- The shortcut is created on the home screen. -->
+	<string name="pick_list_for_shortcut">Επιλογή λίστας για συντόμευση</string>
+	
+	<!-- Shown if external application wants to insert new items. -->
+	<string name="pick_list_to_insert_items">Επιλογή λίστας για εισαγωγή στοιχείων</string>
+	
+	<!-- Theme related -->
+	<string name="theme_pick">Επιλογή θέματος</string>
+	<string name="theme_description">Επιλογή θέματος για τη λίστα</string>
+	<string name="theme_default">Προεπιλογή</string>
+	<string name="theme_classic">Κλασσικό</string>
+	<string name="theme_bugdroid">Android</string>
+	<string name="theme_classic_export">Κλασσικό (από OI Shopping List)</string>
+	<string name="theme_bugdroid_export">Android (από OI Shopping List)</string>
+
+	<!--     Dialog box    -->
+	<string name="ok">OK</string>
+	<string name="cancel">Άκυρο</string>
+	<string name="use_theme_for_all_lists">Χρήση αυτού του θέματος σε όλες τις λίστες</string>
+	<string name="get_more_themes">Λήψη περισσότερων θεμάτων</string>
+	
+	<!-- preferences -->
+	<string name="preferences">Ρυθμίσεις</string>
+	
+    <string name="preference_application">Ρυθμίσεις εφαρμογής</string>
+    
+	<string name="preference_unchecked_on_top">Τα μη επιλεγμένα στην κορυφή</string>
+	<string name="preference_unchecked_on_top_summary">Να εμφανίζονται πάντα πρώτα τα μη επιλεγμένα στοιχεία</string>
+	<string name="preference_fontsize">Μέγεθος γραμματοσειράς</string>
+	<string name="preference_fontsize_summary">Αλλαγή μεγέθους γραμματοσειράς</string>
+	<string name="preference_fontsize_dialog_title">Επιλογή μεγέθους γραμματοσειράς</string>
+	<string name="preference_sortorder_title">Σειρά ταξινόμησης</string>
+	<string name="preference_sortorder_summary">Αλλαγή σειράς ταξινόμησης στοιχείων λίστας</string>
+	<string name="preference_sortorder_dialog_title">Επιλογή σειράς ταξινόμησης</string>
+	<string name="preference_loadlastused_title">Φόρτωση της πιο πρόσφατης λίστας</string>
+	<string name="preference_loadlastused_summary">Έναρξη πάντα με τη λίστα που προβλήθηκε τελευταία.</string>
+	<string name="preference_capitalization_title">Κεφαλαιοποίηση</string>
+	<string name="preference_capitalization_summary">Αυτόματη κεφαλαιοποίηση των καταχωρήσεων</string>
+	<string name="preference_capitalization_dialog_title">Επιλογή κεφαλαιοποίησης</string> 
+	<string name="preference_hidechecked_title">Απόκρυψη επιλεγμένων στοιχείων</string>
+	<string name="preference_hidechecked_summary">Άμεση απόκρυψη των στοιχείων που έχουν επιλεγεί ως ολοκληρωμένα.</string>
+	<string name="preference_showprice_title">Εμφάνιση τιμής</string>
+	<string name="preference_showprice_summary">Εμφάνιση ως επιπλέον στήλης στη λίστα.</string>
+	<string name="preference_showtags_title">Εμφάνιση ετικετών</string>
+	<string name="preference_showtags_summary">Εμφάνιση ως επιπλέον στήλης στη λίστα.</string>
+	<string name="preference_showquantity_title">Εμφάνιση ποσότητας</string>
+	<string name="preference_showquantity_summary">Εμφάνιση ως επιπλέον στήλης στη λίστα.</string>
+	
+	<!-- Preference title: Shake the phone to clean up the list. -->
+	<string name="preference_shake_title">Κίνηση για εκκαθάριση</string>
+	
+	<!-- Preference summary: Shake the phone to clean up the list. -->
+	<string name="preference_shake_summary">Κινήστε το τηλέφωνο για την εκκαθάριση της λίστας.</string>
+	
+    <string name="preference_advanced">Σύνθετες ρυθμίσεις</string>
+    <string name="preference_advanced_summary">Επιπλέον ρυθμίσεις που αφορούν την εμφάνιση.</string>
+    
+    <!-- Preference category: General settings -->
+    <string name="preference_general">Γενικά</string>
+    
+    <string name="preference_appearance">Εμφάνιση</string>
+    
+    <string name="preference_addons">Προσθήκες</string>
+    <string name="preference_get_addons">Λήψη νέων προσθηκών</string>
+    <string name="preference_get_addons_summary">Αναζήτηση για επεκτάσεις και θέματα στο Internet.</string>
+    <string name="preference_get_market_addons">Λήψη προσθηκών από το Market</string>
+    <string name="preference_get_developer_addons">Λήψη προσθηκών από το OpenIntents</string>
+    <string name="preference_extensions">Επεκτάσεις</string>
+    <string name="preference_themes">Θέματα</string>
+    <string name="preference_market_extensions_summary">Αναζήτηση για επεκτάσεις στο Android Market.</string>
+    <string name="preference_market_themes_summary">Αναζήτηση για θέματα στο Android Market.</string>
+    <string name="preference_developer_extensions_summary">Λήψη επεκτάσεων από την αρχική σελίδα του OpenIntents.</string>
+	<string name="preference_developer_themes_summary">Λήψη θεμάτων από την αρχική σελίδα του OpenIntents.</string>
+	
+	<!-- *************************** 	     Distribution 	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">Άδεια EULA του OI Shopping List</string>
+	<string name="eula_accept">Αποδοχή</string>
+	<string name="eula_refuse">Άκυρο</string>
+
+	<!-- Update -->
+	<string name="update_box_text">Κάντε μη αυτόματα έλεγχο για ενημερώσεις ή εγκαταστήστε το OI Update για αυτόματες ειδοποιήσεις. Τρέχουσα έκδοση: %s
+	</string>
+	<string name="update_check_now">Έλεγχος τώρα.</string>
+	<string name="update_get_updater">Λήψη του προγράμματος ενημερώσεων OI Updater.</string>
+	<string name="update_error">Η λήψη της εφαρμογής δεν είναι διαθέσιμη.</string>
+	<string name="update">Έλεγχος για ενημερώσεις</string>
+
+	<!-- About -->
+	<string name="about">Πληροφορίες</string>
+	<string name="aboutapp_not_available">Έκδοση %s\n\nΔεν υπάρχει διαθέσιμη συμβατή επέκταση για την προβολή όλων των πληροφοριών (επικοινωνία, συντελεστές, άδεια χρήσης).</string>
+	<string name="aboutapp_get">Λήψη των πληροφοριών OI About</string>
+	
+	<!-- *************************** 	     Permissions 	     *************************** -->
+	
+	<!-- OI Shopping list -->
+	<string name="oi_shopping_permission_read">ανάγνωση λιστών αγορών</string>
+	<string name="oi_shopping_permission_read_descr">Επιτρέπει σε μια εφαρμογή την ανάγνωση λιστών αγορών. Λάβετε υπόψη σας ότι οι κρυπτογραφημένες λίστες και στοιχεία παρέχονται στην κρυπτογραφημένη μορφή.</string>
+	<string name="oi_shopping_permission_write">εγγραφή λιστών αγορών</string>
+	<string name="oi_shopping_permission_write_descr">Επιτρέπει στην εφαρμογή τη δημιουργία νέων λιστών και στοιχείων ή την αλλαγή των όσων ήδη υπάρχουν.</string>
+	
+	
+	<!-- *************************** 	     Preferences 	     *************************** -->
+	
+    <string-array name="preference_sortorder_entries">
+    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    	<item>μη επιλεγμένα, με αλφαβητική σειρά</item>
+        <!-- Preference sort order: Sort by item name -->
+    	<item>με αλφαβητική σειρά</item>
+        <!-- Preference sort order: Newest item first -->
+    	<item>πιο πρόσφατα</item>
+        <!-- Preference sort order: Oldest item first -->
+    	<item>παλαιότερα</item>
+        <!-- Preference sort order: Sort alphabetically by tags -->
+    	<item>ετικέτες με αλφαβητική σειρά</item>
+        <!-- Preference sort order: Sort by price, the most expensive first -->
+    	<item>πιο ακριβά</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entries">
+    	<!-- Preference fontsize: tiny font size -->
+        <item>Ελάχιστο</item>
+    	<!-- Preference fontsize: small font size -->
+        <item>Μικρό</item>
+    	<!-- Preference fontsize: default font size-->
+    	<item>Προεπιλογή</item>
+    	<!-- Preference fontsize: large font size -->
+        <item>Μεγάλο</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entries">
+    	<!-- Preference capitalization: No capitalization -->
+        <item>Καμία</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+        <item>Ανά πρόταση</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+        <item>Ανά λέξη</item>
+    </string-array>
+
+
+	<!-- *************************** 	     Automation 	     *************************** --> <!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<string name="label_select_action">Επιλογή ενέργειας:</string>
+	
+	<!-- Label above button that opens a list of all shopping lists to choose from. -->
+	<string name="label_select_list">Επιλογή λίστας:</string>
+	
+	<!-- Arrays -->
+	
+    <string-array name="automation_actions">
+    	<!-- Automation action to clean up a list. -->
+    	<item>Εκκαθάριση λίστας</item>
+    </string-array>
+    
+</resources> 
