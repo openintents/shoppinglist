@@ -22,6 +22,12 @@ To obtain the current release, visit
   http://www.openintents.org
 
 ---------------------------------------------------------
+release 1.3.0
+date: 2011-04-14
+- localization for br, hu and gr
+- long press to launch barcode scanner
+
+---------------------------------------------------------
 release 1.3.0-beta1
 date: 2011-02-12
 - new application icon for Android 2.0 or higher.
