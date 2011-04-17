@@ -16,13 +16,8 @@
 
 package org.openintents.shopping.library.provider;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
-import android.text.TextUtils;
-import android.util.Log;
 
 /**
  * Definition for content provider related to shopping.
