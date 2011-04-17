@@ -386,7 +386,7 @@ public class ShoppingUtils {
 	 *            The type of the new item
 	 * @return id of the "contains" table entry, or -1 if insert failed.
 	 */
-	public static long addItemToStore(Context context, final long itemId, final long storeId, final long aisle, final String price) {
+	public static long addItemToStore(Context context, final long itemId, final long storeId, final String aisle, final String price) {
 		long id = -1;
 		Cursor existingItems = context.getContentResolver()
 				.query(ItemStores.CONTENT_URI, new String[] { ItemStores._ID },
