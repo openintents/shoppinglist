@@ -74,8 +74,9 @@ public class ShoppingProvider extends ContentProvider {
 	 * 6: Release 1.2.7-beta 
 	 * 7: Release 1.2.7-beta 
 	 * 8: Release 1.2.7-beta
+	 * 9: Release 1.3.0-rc1
 	 */
-	private static final int DATABASE_VERSION = 8;
+	private static final int DATABASE_VERSION = 9;
 
 	private static HashMap<String, String> ITEMS_PROJECTION_MAP;
 	private static HashMap<String, String> LISTS_PROJECTION_MAP;
@@ -181,7 +182,7 @@ public class ShoppingProvider extends ContentProvider {
 			db.execSQL("CREATE TABLE itemstores(" + "_id INTEGER PRIMARY KEY," // V5
 					+ "item_id INTEGER," // V5
 					+ "store_id INTEGER," // V5
-					+ "aisle INTEGER," // V5
+					+ "aisle VARCHAR," // (V5:INTEGER), V9
 					+ "price INTEGER," // V5
 					+ "created INTEGER," // V5
 					+ "modified INTEGER" // V5
@@ -290,8 +291,52 @@ public class ShoppingProvider extends ContentProvider {
 					} catch (SQLException e) {
 						Log.e(TAG, "Error executing SQL: ", e);
 					}
+			    case 8:
+			    	try {
+			    		// There is no simple command in sqlite to change the type of a
+			    		// field.
+			    		// -> copy the whole table to change type of aisle
+			    		//    from INTEGER to VARCHAR.
+			    		// (see http://www.sqlite.org/faq.html#q11 )
+			    		// ("BEGIN TRANSACTION;" and "COMMIT;" are not valid
+			    		//  because we are already within a transaction.)
+						db.execSQL("CREATE TEMPORARY TABLE itemstores_backup("
+									+ "_id INTEGER PRIMARY KEY," // V5
+									+ "item_id INTEGER," // V5
+									+ "store_id INTEGER," // V5
+									+ "aisle INTEGER," // V5:INTEGER, (V9:VARCHAR)
+									+ "price INTEGER," // V5
+									+ "created INTEGER," // V5
+									+ "modified INTEGER" // V5
+									+ ");");
+						db.execSQL("INSERT INTO itemstores_backup SELECT "
+									+ "_id,item_id,store_id,aisle,price,created,modified"
+									+ " FROM itemstores;");
+						db.execSQL("DROP TABLE itemstores;");
+						db.execSQL("CREATE TABLE itemstores("
+									+ "_id INTEGER PRIMARY KEY," // V5
+									+ "item_id INTEGER," // V5
+									+ "store_id INTEGER," // V5
+									+ "aisle VARCHAR," // (V5:INTEGER), V9
+									+ "price INTEGER," // V5
+									+ "created INTEGER," // V5
+									+ "modified INTEGER" // V5
+									+ ");");
+						db.execSQL("INSERT INTO itemstores SELECT "
+									+ "_id,item_id,store_id,aisle,price,created,modified"
+									+ " FROM itemstores_backup;");
+						db.execSQL("DROP TABLE itemstores_backup;");
+
+						// Replace "-1" values by "".
+		            	ContentValues values = new ContentValues();
+		            	values.put(ItemStores.AISLE, "");
+		                db.update("itemstores", values, "aisle = '-1'", null);
+						
+					} catch (SQLException e) {
+						Log.e(TAG, "Error executing SQL: ", e);
+					}
 					/**
-					* case 8:
+					* case 9:
 					*/
 					break;
 				default:
