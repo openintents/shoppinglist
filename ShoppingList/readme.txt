@@ -22,6 +22,11 @@ To obtain the current release, visit
   http://www.openintents.org
 
 ---------------------------------------------------------
+release 1.3.0-rc? / 1.3.1-beta?
+date: ?
+- new menu command "mark all items" (patch by Tomek Scieplek)
+
+---------------------------------------------------------
 release 1.3.0
 date: 2011-04-14
 - localization for br, hu and gr
