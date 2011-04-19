@@ -203,7 +203,7 @@ public class ShoppingActivity extends DistributionLibraryActivity implements
 	private static final int MENU_SEND = Menu.FIRST + 18;
 	private static final int MENU_REMOVE_ITEM_FROM_LIST = Menu.FIRST + 19;
 	private static final int MENU_MOVE_ITEM = Menu.FIRST + 20;
-
+	private static final int MENU_MARK_ALL_ITEMS = Menu.FIRST + 21;
 	private static final int MENU_DISTRIBUTION_START = Menu.FIRST + 100; // MUST
 																			// BE
 																			// LAST
@@ -1191,6 +1191,11 @@ public class ShoppingActivity extends DistributionLibraryActivity implements
 					.setIcon(android.R.drawable.ic_menu_mylocation)
 					.setShortcut('8', 'l');
 		}
+		
+		menu.add(0, MENU_MARK_ALL_ITEMS, 0, R.string.mark_all_items)
+				.setIcon(android.R.drawable.ic_menu_agenda)
+				.setShortcut('9', 'm');
+		
 
 		// Add distribution menu items last.
 		mDistribution.onCreateOptionsMenu(menu);
@@ -1360,7 +1365,9 @@ public class ShoppingActivity extends DistributionLibraryActivity implements
 		case MENU_INSERT_FROM_EXTRAS:
 			insertItemsFromExtras();
 			return true;
-
+		case MENU_MARK_ALL_ITEMS:
+			mListItemsView.toggleOnAllItems();
+			return true;
 		}
 		if (debug)
 			Log.d(TAG, "Start intent group id : " + item.getGroupId());

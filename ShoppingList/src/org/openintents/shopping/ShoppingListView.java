@@ -889,7 +889,38 @@ public class ShoppingListView extends ListView {
 		mThemedBackground = background;
 
 	}
+	
+	public void toggleOnAllItems(){
+		for(int i=0;i<mCursorItems.getCount();i++){
+			mCursorItems.moveToPosition(i);
+			
+			long oldstatus = mCursorItems
+					.getLong(ShoppingActivity.mStringItemsSTATUS);
+			
+			// Toggle status:
+			// bought -> bought
+			// want_to_buy -> bought
+			// removed_from_list -> want_to_buy
+			long newstatus = Shopping.Status.WANT_TO_BUY;
+			if(oldstatus == Shopping.Status.WANT_TO_BUY){
+				newstatus = Shopping.Status.BOUGHT;
+				
+				ContentValues values = new ContentValues();
+				values.put(Shopping.Contains.STATUS, newstatus);
+				Log.d(TAG, "update row " + mCursorItems.getString(0) + ", newstatus "
+						+ newstatus);
+				getContext().getContentResolver().update(
+						Uri.withAppendedPath(Shopping.Contains.CONTENT_URI,
+								mCursorItems.getString(0)), values, null, null);
+				
+			}
+		}
+		
+		requery();
 
+		invalidate();
+	}
+	
 	public void toggleItemBought(int position) {
 		if (mCursorItems.getCount() <= position) {
 			Log.e(TAG, "toggle inexistent item. Probably clicked too quickly?");
