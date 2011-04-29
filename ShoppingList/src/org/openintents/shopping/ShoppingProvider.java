@@ -182,7 +182,7 @@ public class ShoppingProvider extends ContentProvider {
 			db.execSQL("CREATE TABLE itemstores(" + "_id INTEGER PRIMARY KEY," // V5
 					+ "item_id INTEGER," // V5
 					+ "store_id INTEGER," // V5
-					+ "aisle VARCHAR," // (V5:INTEGER), V9
+					+ "aisle INTEGER," // V5
 					+ "price INTEGER," // V5
 					+ "created INTEGER," // V5
 					+ "modified INTEGER" // V5
@@ -300,32 +300,32 @@ public class ShoppingProvider extends ContentProvider {
 			    		// (see http://www.sqlite.org/faq.html#q11 )
 			    		// ("BEGIN TRANSACTION;" and "COMMIT;" are not valid
 			    		//  because we are already within a transaction.)
-						db.execSQL("CREATE TEMPORARY TABLE itemstores_backup("
-									+ "_id INTEGER PRIMARY KEY," // V5
-									+ "item_id INTEGER," // V5
-									+ "store_id INTEGER," // V5
-									+ "aisle INTEGER," // V5:INTEGER, (V9:VARCHAR)
-									+ "price INTEGER," // V5
-									+ "created INTEGER," // V5
-									+ "modified INTEGER" // V5
-									+ ");");
-						db.execSQL("INSERT INTO itemstores_backup SELECT "
-									+ "_id,item_id,store_id,aisle,price,created,modified"
-									+ " FROM itemstores;");
-						db.execSQL("DROP TABLE itemstores;");
-						db.execSQL("CREATE TABLE itemstores("
-									+ "_id INTEGER PRIMARY KEY," // V5
-									+ "item_id INTEGER," // V5
-									+ "store_id INTEGER," // V5
-									+ "aisle VARCHAR," // (V5:INTEGER), V9
-									+ "price INTEGER," // V5
-									+ "created INTEGER," // V5
-									+ "modified INTEGER" // V5
-									+ ");");
-						db.execSQL("INSERT INTO itemstores SELECT "
-									+ "_id,item_id,store_id,aisle,price,created,modified"
-									+ " FROM itemstores_backup;");
-						db.execSQL("DROP TABLE itemstores_backup;");
+						//db.execSQL("CREATE TEMPORARY TABLE itemstores_backup("
+						//			+ "_id INTEGER PRIMARY KEY," // V5
+						//			+ "item_id INTEGER," // V5
+						//			+ "store_id INTEGER," // V5
+						//			+ "aisle INTEGER," // V5:INTEGER, (V9:VARCHAR)
+						//			+ "price INTEGER," // V5
+						//			+ "created INTEGER," // V5
+						//			+ "modified INTEGER" // V5
+						//			+ ");");
+						//db.execSQL("INSERT INTO itemstores_backup SELECT "
+						//			+ "_id,item_id,store_id,aisle,price,created,modified"
+						//			+ " FROM itemstores;");
+						//db.execSQL("DROP TABLE itemstores;");
+						//db.execSQL("CREATE TABLE itemstores("
+						//			+ "_id INTEGER PRIMARY KEY," // V5
+						//			+ "item_id INTEGER," // V5
+						//			+ "store_id INTEGER," // V5
+						//			+ "aisle VARCHAR," // (V5:INTEGER), V9
+						//			+ "price INTEGER," // V5
+						//			+ "created INTEGER," // V5
+						//			+ "modified INTEGER" // V5
+						//			+ ");");
+						//db.execSQL("INSERT INTO itemstores SELECT "
+						//			+ "_id,item_id,store_id,aisle,price,created,modified"
+						//			+ " FROM itemstores_backup;");
+						//db.execSQL("DROP TABLE itemstores_backup;");
 
 						// Replace "-1" values by "".
 		            	ContentValues values = new ContentValues();
