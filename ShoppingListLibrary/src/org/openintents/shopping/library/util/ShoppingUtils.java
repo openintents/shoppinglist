@@ -351,8 +351,12 @@ public class ShoppingUtils {
 			} else {
 				values.put(Contains.STATUS, status);
 			}
-			values.put(Contains.QUANTITY, quantity);
-			values.put(Contains.PRIORITY, priority);
+			if (quantity != null) {
+				values.put(Contains.QUANTITY, quantity);
+			}
+			if (priority != null) {
+				values.put(Contains.PRIORITY, priority);
+			}
 
 			try {
 				Uri uri = context.getContentResolver().insert(Contains.CONTENT_URI, values);
@@ -438,12 +442,19 @@ public class ShoppingUtils {
 	 */
 	public static long getDefaultList(Context context) {
 		long id = 1;
-		Cursor c = context.getContentResolver().query(ActiveList.CONTENT_URI,
-				ActiveList.PROJECTION, null, null, null);
-		if (c.getCount() > 0) {
-			c.moveToFirst();
-			id = c.getLong(0);
-			c.close();
+		try {
+			Cursor c = context.getContentResolver().query(ActiveList.CONTENT_URI,
+					ActiveList.PROJECTION, null, null, null);
+			if (c.getCount() > 0) {
+				c.moveToFirst();
+				id = c.getLong(0);
+				c.close();
+			}
+		} catch (IllegalArgumentException e) {
+			// The URI has not been defined. 
+			// The URI requires OI Shopping List 1.3.0 or higher. 
+			// Most probably we want to access OI Shopping List 1.2.6 or earlier.
+			Log.d(TAG, "ActiveList URI not supported", e);
 		}
 		return id;
 	}	
