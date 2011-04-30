@@ -22,27 +22,17 @@ To obtain the current release, visit
   http://www.openintents.org
 
 ---------------------------------------------------------
-release 1.3.0-rc? / 1.3.1-beta?
+release 1.3.0-rc1
 date: ?
-- new menu command "mark all items" (patch by Tomek Scieplek)
-
----------------------------------------------------------
-release 1.3.0
-date: 2011-04-14
-- localization for br, hu and gr
-- long press to launch barcode scanner
-
----------------------------------------------------------
-release 1.3.0-beta1
-date: 2011-02-12
 - new application icon for Android 2.0 or higher.
-- allow app installation on external storage
-  (requires Android 2.2 or higher)
+- allow app installation on external storage (requires Android 2.2 or higher)
 - unit can be added to quantity.
 - new field for priority, sort by priority.
 - possibility to add notes (requires OI Notepad).
 - case insensitive sort order.
-- translations into various languages.
+- new menu command "mark all items" (patch by Tomek Scieplek)
+- long press to launch barcode scanner
+- translations into various languages, including br, hu and gr.
 
 ---------------------------------------------------------
 release 1.2.6
