@@ -138,13 +138,13 @@
 			android:layout_marginLeft="27dip"
 			android:layout_marginRight="27dip" -->
 	<ImageView android:id="@+id/has_note"
-			   android:layout_width="14dip"
-			   android:layout_height="14dip"
+			   android:layout_width="18dip"
+			   android:layout_height="18dip"
 			   android:layout_toRightOf="@id/name"
 			   android:layout_margin="4dip"
 			   android:layout_alignBottom="@id/name"
 			   android:scaleType="centerInside"
-			   android:src="@drawable/note"
+			   android:src="@drawable/ic_launcher_notepad_small"
 			/> 
 	<TextView android:id="@+id/tags"
 			  android:layout_width="wrap_content"

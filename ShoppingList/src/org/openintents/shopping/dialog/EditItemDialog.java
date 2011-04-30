@@ -34,7 +34,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.FilterQueryProvider;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.CursorToStringConverter;
@@ -55,7 +55,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 	AutoCompleteTextView mUnits;
 
 	TextView mPriceLabel;
-	ImageView mNote;
+	ImageButton mNote;
 
     String[] mTagList;
     
@@ -121,7 +121,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 	    mUnits.setAdapter(mUnitsAdapter);
 	    mUnits.setThreshold(0);
 
-		mNote = (ImageView) view.findViewById(R.id.note);	    
+		mNote = (ImageButton) view.findViewById(R.id.note);	    
 		mNote.setOnClickListener(new View.OnClickListener() {
 
 			@Override
