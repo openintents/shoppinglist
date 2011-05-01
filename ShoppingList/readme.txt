@@ -23,7 +23,7 @@ To obtain the current release, visit
 
 ---------------------------------------------------------
 release 1.3.0-rc1
-date: ?
+date: 2011-05-01
 - new application icon for Android 2.0 or higher.
 - allow app installation on external storage (requires Android 2.2 or higher)
 - unit can be added to quantity.
