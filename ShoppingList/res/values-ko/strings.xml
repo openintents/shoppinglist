@@ -35,6 +35,7 @@
 	<string name="new_item">새 아이템</string>
 	<string name="new_list">새 목록</string>
 	<string name="send">목록 보네기</string>
+	<string name="mark_all_items">Mark all items</string>
 	<string name="empty_list_not_sent">Empty list not sent.</string>
 	<string name="email_not_available">No application available for sending.</string>
 	<string name="my_shopping_list">나의 쇼핑 목록</string>

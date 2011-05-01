@@ -37,6 +37,7 @@ Launchpad Contributions:
 	<string name="new_item">Ny vare</string>
 	<string name="new_list">Ny liste</string>
 	<string name="send">Send liste</string>
+	<string name="mark_all_items">Mark all items</string>
 	<string name="empty_list_not_sent">Tom liste ikke sendt</string>
 	<string name="email_not_available">Ingen programmer til rådighed til at kunne sende</string>
 	<string name="my_shopping_list">Min indkøbsliste</string>

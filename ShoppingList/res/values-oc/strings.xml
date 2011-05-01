@@ -35,6 +35,7 @@
 	<string name="new_item">Element novèl</string>
 	<string name="new_list">Lista novèla</string>
 	<string name="send">Mandar la lista</string>
+	<string name="mark_all_items">Mark all items</string>
 	<string name="empty_list_not_sent">Lista voida pas mandada</string>
 	<string name="email_not_available">Pas d\'aplicacion disponibla pel mandadadís</string>
 	<string name="my_shopping_list">Ma lista de crompas</string>

@@ -37,6 +37,7 @@
 	<string name="new_item">新規アイテム</string>
 	<string name="new_list">新規リスト</string>
 	<string name="send">リストを送信</string>
+	<string name="mark_all_items">Mark all items</string>
 	<string name="empty_list_not_sent">Empty list not sent.</string>
 	<string name="email_not_available">利用できる送信用アプリがありません。</string>
 	<string name="my_shopping_list">My shopping list</string>

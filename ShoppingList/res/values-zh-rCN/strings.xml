@@ -36,6 +36,7 @@
 	<string name="new_item">新物品</string>
 	<string name="new_list">新列表</string>
 	<string name="send">发送列表</string>
+	<string name="mark_all_items">Mark all items</string>
 	<string name="empty_list_not_sent">不能发送空列表.</string>
 	<string name="email_not_available">发送失败.</string>
 	<string name="my_shopping_list">我的购物列表</string>

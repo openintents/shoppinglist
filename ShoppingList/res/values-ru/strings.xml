@@ -37,6 +37,7 @@
 	<string name="new_item">Новый элемент</string>
 	<string name="new_list">Новый список</string>
 	<string name="send">Отправить список</string>
+	<string name="mark_all_items">Mark all items</string>
 	<string name="empty_list_not_sent">Список пуст.</string>
 	<string name="email_not_available">Нет приложения для отправки.</string>
 	<string name="my_shopping_list">Мой список покупок</string>

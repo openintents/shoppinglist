@@ -21,6 +21,7 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
+  Damian Skrodzki https://launchpad.net/~damienix
   Peli https://launchpad.net/~peli0101
   Tomasz \'Zen\' Napierala https://launchpad.net/~tzn
   friedger https://launchpad.net/~friedger</string>
@@ -37,7 +38,7 @@
 	<string name="new_item">Nowy element</string>
 	<string name="new_list">Nowa lista</string>
 	<string name="send">Wyślij listę</string>
-	<string name="mark_all_items">Zaznacz wszystkie elementy</string>
+	<string name="mark_all_items">Mark all items</string>
 	<string name="empty_list_not_sent">Nie wysłano pustej listy.</string>
 	<string name="email_not_available">Brak aplikacji służącej wysłaniu.</string>
 	<string name="my_shopping_list">Moja lista zakupów</string>
@@ -69,7 +70,7 @@
 	<!-- Delete this item completely. If the user wants to add it again, they
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">Usuń element na stałe</string>
-	<string name="menu_move_item">Move item to other list</string>
+	<string name="menu_move_item">Przenieś wpis do innej listy</string>
 	<!-- Button label to add an item to the list. -->
 	<string name="add">Dodaj</string>
 	
@@ -86,10 +87,10 @@
 	<string name="price">Cena</string>
 	<string name="item">Element</string>
 	<string name="quantity">Ilość</string>
-	<string name="priority">Priority</string>
-	<string name="has_note">Has Note</string>
-	<string name="units">Units</string>
-	<string name="note">Note</string>
+	<string name="priority">Priorytet</string>
+	<string name="has_note">Ma notatkę</string>
+	<string name="units">Jednostki</string>
+	<string name="note">Notatka</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Razem: %s</string>
@@ -154,9 +155,9 @@
 	<string name="preference_showtags_summary">Pokaż jako dodatkową kolumnę na liście.</string>
 	<string name="preference_showquantity_title">Pokaż ilość</string>
 	<string name="preference_showquantity_summary">Pokaż jako dodatkową kolumnę na liście.</string>
-	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_title">Pokazuj priorytet</string>
 	<string name="preference_showpriority_summary">Pokaż jako dodatkową kolumnę na liście.</string>
-	<string name="preference_showunits_title">Show units</string>
+	<string name="preference_showunits_title">Pokazuj jednostki</string>
 	<string name="preference_showunits_summary">Pokaż jako dodatkową kolumnę na liście.</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
@@ -218,7 +219,7 @@
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
     	<item>najpierw nieodznaczone, znaczniki alfabetycznie</item>
     	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
-    	<item>unchecked first, priority, alphabetical</item>
+    	<item>nieukończone pierwsze, priorytet, alfabetycznie</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
@@ -245,9 +246,9 @@
 	     OI Notepad
 	     *************************** -->
 	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
-	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<string name="notepad_not_available">Edytowanie notatek do wpisów wymaga programu OI Notatnik.</string>
 	<!-- Name of application "OI Notepad". Translations should be consistent. -->
-	<string name="notepad">OI Notepad</string>
+	<string name="notepad">OI Notatnik</string>
 
 	<!-- ***************************
 	     Automation

@@ -36,6 +36,7 @@
 	<string name="new_item">Nový bod</string>
 	<string name="new_list">Nový seznam</string>
 	<string name="send">Poslat seznam</string>
+	<string name="mark_all_items">Mark all items</string>
 	<string name="empty_list_not_sent">Prázdný seznam není poslán</string>
 	<string name="email_not_available">Žádná aplikace není k dispozici pro odeslání</string>
 	<string name="my_shopping_list">Můj seznam nákupů</string>

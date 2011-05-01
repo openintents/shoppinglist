@@ -27,7 +27,7 @@ Launchpad Contributions:
   zeugma https://launchpad.net/~sunder67</string>
 	
     <!-- Short explanation of the application -->
-	<string name="about_comments">OI Shopping list lets you keep track of your shopping items. You can also use it for other kinds of check lists, for example for ToDo lists or party guest lists.</string>
+	<string name="about_comments">OI Alışveriş listesi sizin alışveriş öğelerinizi izlemenize olanak tanır. Ayrıca yapılacaklar listeleri , konuk listeleri, kontrol listeleri veya diğer türler için de kullanabilirsiniz. Örneğin parti konuk listeleri.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
@@ -38,6 +38,7 @@ Launchpad Contributions:
 	<string name="new_item">Yeni öğe</string>
 	<string name="new_list">Yeni liste</string>
 	<string name="send">Send list</string>
+	<string name="mark_all_items">Mark all items</string>
 	<string name="empty_list_not_sent">Empty list not sent.</string>
 	<string name="email_not_available">No application available for sending.</string>
 	<string name="my_shopping_list">Alışveriş listem</string>
@@ -55,7 +56,7 @@ Launchpad Contributions:
 	<string name="pick_list">Pick a list</string>
 	<string name="theme">Tema</string>
 	<string name="theme_settings">Tema ayarları</string>
-	<string name="rename_list">Rename list</string>
+	<string name="rename_list">Listeyi yeniden adlandır</string>
 	<string name="menu_mark_item">Mark item</string>
 	<string name="menu_edit_item">Öğeyi düzenle</string>
 	<string name="menu_auto_add">Auto add</string>
@@ -88,8 +89,8 @@ Launchpad Contributions:
 	<string name="quantity">Adet</string>
 	<string name="priority">Priority</string>
 	<string name="has_note">Has Note</string>
-	<string name="units">Units</string>
-	<string name="note">Note</string>
+	<string name="units">Birim</string>
+	<string name="note">Not</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Toplam: %s</string>
@@ -138,7 +139,7 @@ Launchpad Contributions:
 	<string name="preference_fontsize">Yazı tipi boyutu</string>
 	<string name="preference_fontsize_summary">Yazı boyutunu değiştir</string>
 	<string name="preference_fontsize_dialog_title">Yazı boyutunu seçin</string>
-	<string name="preference_sortorder_title">Sort order</string>
+	<string name="preference_sortorder_title">Sıralama düzeni</string>
 	<string name="preference_sortorder_summary">Change sort order of list items</string>
 	<string name="preference_sortorder_dialog_title">Choose sort order</string>
 	<string name="preference_loadlastused_title">Load last list used</string>
@@ -171,7 +172,7 @@ Launchpad Contributions:
     <!-- Preference category: General settings -->
     <string name="preference_general">Genel</string>
     
-    <string name="preference_appearance">Appearance</string>
+    <string name="preference_appearance">Görünüş</string>
     
     <string name="preference_addons">Eklentiler</string>
     <string name="preference_get_addons">Yeni eklentiler al</string>
@@ -182,8 +183,8 @@ Launchpad Contributions:
     <string name="preference_themes">Temalar</string>
     <string name="preference_market_extensions_summary">Android Markette uzantıları arayın.</string>
     <string name="preference_market_themes_summary">Android Markette temaları arayın.</string>
-    <string name="preference_developer_extensions_summary">Get extensions from the OpenIntents homepage.</string>
-	<string name="preference_developer_themes_summary">Get themes from the OpenIntents homepage.</string>
+    <string name="preference_developer_extensions_summary">OpenIntents ana sayfasından  uzantılar al</string>
+	<string name="preference_developer_themes_summary">OpenIntents ana sayfasından temalar al</string>
 	
 	<!-- ***************************
 	     Permissions
@@ -247,7 +248,7 @@ Launchpad Contributions:
 	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
 	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
 	<!-- Name of application "OI Notepad". Translations should be consistent. -->
-	<string name="notepad">OI Notepad</string>
+	<string name="notepad">OI Not defteri</string>
 
 	<!-- ***************************
 	     Automation

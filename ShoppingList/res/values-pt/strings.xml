@@ -39,6 +39,7 @@ Launchpad Contributions:
 	<string name="new_item">Novo item</string>
 	<string name="new_list">Nova lista</string>
 	<string name="send">Enviar lista</string>
+	<string name="mark_all_items">Mark all items</string>
 	<string name="empty_list_not_sent">Empty list not sent.</string>
 	<string name="email_not_available">No application available for sending.</string>
 	<string name="my_shopping_list">My shopping list</string>

@@ -1,23 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--   * Copyright (C) 2007-2010 OpenIntents.org  *  * Licensed under the Apache License, Version 2.0 (the "License");  * you may not use this file except in compliance with the License.  * You may obtain a copy of the License at  *  *      http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  -->
- 
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
 <resources>
-	<!-- *************************** 	     About information 	     *************************** -->
+	<!-- ***************************
+	     About information
+	     *************************** -->
 	
 	<!-- Automatically filled in by Launchpad: -->
-	<string name="about_translators">μεταφραστής-συντελεστές</string>
+	<string name="about_translators">Launchpad Contributions:
+  Peli https://launchpad.net/~peli0101</string>
 	
-	<!-- Strings for OI About -->
+    <!-- Short explanation of the application -->
 	<string name="about_comments">Η λίστα αγορών OI Shopping list σας δίνει τη δυνατότητα να παρακολουθείτε τις αγορές σας. Μπορείτε επίσης να χρησιμοποιήσετε την εφαρμογή για πολλές ακόμη λίστες, όπως για παράδειγμα, λίστες υποχρεώσεων ή λίστες προσκεκλημένων.</string>
-	<string name="about_website_label">Λίστα OI Shopping list στο OpenIntents</string>
-
-	<!-- *************************** 	     Applicatio-specific strings 	     *************************** -->
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
 	<string name="app_name">Λίστα αγορών OI Shopping list</string>
 
-	<!-- Shopping Provider -->
 	<string name="new_item">Νέο στοιχείο</string>
 	<string name="new_list">Νέα λίστα</string>
 	<string name="send">Αποστολή λίστας</string>
+	<string name="mark_all_items">Mark all items</string>
 	<string name="empty_list_not_sent">Κενή λίστα. Δεν εστάλη.</string>
 	<string name="email_not_available">Δεν υπάρχει εφαρμογή για αποστολή.</string>
 	<string name="my_shopping_list">Η λίστα αγορών μου</string>
@@ -29,7 +47,7 @@
 	<string name="ask_edit_item">Επεξεργασία στοιχείου</string>
 	<string name="please_enter_name">Εισαγάγετε ένα όνομα</string>
 	<string name="no_items_marked">Δεν έχουν επισημανθεί στοιχεία ως ολοκληρωμένα.</string>
-	<string name="confirm_delete_list">Να διαγραφεί η λίστα αγορών;</string>
+	<string name="confirm_delete_list">Do you really want to delete this shopping list?</string>
 	<string name="no_shopping_provider">Σφάλμα κατά την πρόσβαση στις λίστες αγορών.</string>
 	<string name="pick_item">Επιλέξτε στοιχείο</string>
 	<string name="pick_list">Επιλέξτε λίστα</string>
@@ -39,34 +57,42 @@
 	<string name="menu_mark_item">Επισήμανση στοιχείου</string>
 	<string name="menu_edit_item">Επεξεργασία στοιχείου</string>
 	<string name="menu_auto_add">Αυτόματη προσθήκη</string>
+	<string name="no_items_available">No items available</string>
 	
-	<!-- Remove item from this list, but keep it internally, so that the user 	     can choose it later for inclusion again. Information like 	     tags or price will be kept. -->
+	<!-- Remove item from this list, but keep it internally, so that the user
+	     can choose it later for inclusion again. Information like
+	     tags or price will be kept. -->
 	<string name="menu_remove_item">Κατάργηση στοιχείου από λίστα</string>
 	
-	<!-- Delete this item completely. If the user wants to add it again, they 	     have to enter all the information again. -->
+	<!-- Delete this item completely. If the user wants to add it again, they
+	     have to enter all the information again. -->
 	<string name="menu_delete_item">Μόνιμη διαγραφή στοιχείου</string>
-	
+	<string name="menu_move_item">Move item to other list</string>
 	<!-- Button label to add an item to the list. -->
 	<string name="add">Προσθήκη</string>
 	
 	<string name="menu_pick_items">Επιλογή στοιχείων</string>
 	<string name="menu_start_shopping">Αγορές</string>
 	
-	<!-- Title supplement. '%s' is the name of the current list. -->
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="pick_items_titel">%s - Επιλογή στοιχείων</string>
 	
-	<!-- Title supplement. '%s' is the name of the current list. -->
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - Αγορές</string>
 	
 	<string name="tags">Ετικέτες</string>
 	<string name="price">Τιμή</string>
 	<string name="item">Στοιχείο</string>
 	<string name="quantity">Ποσότητα</string>
+	<string name="priority">Priority</string>
+	<string name="has_note">Has Note</string>
+	<string name="units">Units</string>
+	<string name="note">Note</string>
 	
-	<!-- Total sum of all prices. '%s' is the sum -->
+	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Σύνολο: %s</string>
 	
-	<!-- Sum of all prices of the checked items. '%s' is the sum -->
+	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
 	<string name="total_checked">Επιλεγμένα: %s</string>
 	
 	<string name="delete_item_confirm">Είστε βέβαιοι ότι θέλετε να διαγραφεί μόνιμα αυτό το στοιχείο μαζί με τις ετικέτες και την τιμή του από όλες τις λίστες αγορών;</string>
@@ -74,7 +100,7 @@
 	
 	<!-- Added to an item to indicate it was bought. -->
 	<string name="suffix_checked">... OK</string>
-	<string name="empty"></string>
+	<string name="empty"/>
 	
 	<!-- The shortcut is created on the home screen. -->
 	<string name="pick_list_for_shortcut">Επιλογή λίστας για συντόμευση</string>
@@ -83,6 +109,7 @@
 	<string name="pick_list_to_insert_items">Επιλογή λίστας για εισαγωγή στοιχείων</string>
 	
 	<!-- Theme related -->
+	<!-- Title for selecting a theme -->
 	<string name="theme_pick">Επιλογή θέματος</string>
 	<string name="theme_description">Επιλογή θέματος για τη λίστα</string>
 	<string name="theme_default">Προεπιλογή</string>
@@ -92,7 +119,9 @@
 	<string name="theme_bugdroid_export">Android (από OI Shopping List)</string>
 
 	<!--     Dialog box    -->
+	<!-- Button label "OK" -->
 	<string name="ok">OK</string>
+	<!-- Button label "Cancel" -->
 	<string name="cancel">Άκυρο</string>
 	<string name="use_theme_for_all_lists">Χρήση αυτού του θέματος σε όλες τις λίστες</string>
 	<string name="get_more_themes">Λήψη περισσότερων θεμάτων</string>
@@ -123,6 +152,10 @@
 	<string name="preference_showtags_summary">Εμφάνιση ως επιπλέον στήλης στη λίστα.</string>
 	<string name="preference_showquantity_title">Εμφάνιση ποσότητας</string>
 	<string name="preference_showquantity_summary">Εμφάνιση ως επιπλέον στήλης στη λίστα.</string>
+	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_summary">Εμφάνιση ως επιπλέον στήλης στη λίστα.</string>
+	<string name="preference_showunits_title">Show units</string>
+	<string name="preference_showunits_summary">Εμφάνιση ως επιπλέον στήλης στη λίστα.</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Κίνηση για εκκαθάριση</string>
@@ -150,36 +183,22 @@
     <string name="preference_developer_extensions_summary">Λήψη επεκτάσεων από την αρχική σελίδα του OpenIntents.</string>
 	<string name="preference_developer_themes_summary">Λήψη θεμάτων από την αρχική σελίδα του OpenIntents.</string>
 	
-	<!-- *************************** 	     Distribution 	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">Άδεια EULA του OI Shopping List</string>
-	<string name="eula_accept">Αποδοχή</string>
-	<string name="eula_refuse">Άκυρο</string>
-
-	<!-- Update -->
-	<string name="update_box_text">Κάντε μη αυτόματα έλεγχο για ενημερώσεις ή εγκαταστήστε το OI Update για αυτόματες ειδοποιήσεις. Τρέχουσα έκδοση: %s
-	</string>
-	<string name="update_check_now">Έλεγχος τώρα.</string>
-	<string name="update_get_updater">Λήψη του προγράμματος ενημερώσεων OI Updater.</string>
-	<string name="update_error">Η λήψη της εφαρμογής δεν είναι διαθέσιμη.</string>
-	<string name="update">Έλεγχος για ενημερώσεις</string>
-
-	<!-- About -->
-	<string name="about">Πληροφορίες</string>
-	<string name="aboutapp_not_available">Έκδοση %s\n\nΔεν υπάρχει διαθέσιμη συμβατή επέκταση για την προβολή όλων των πληροφοριών (επικοινωνία, συντελεστές, άδεια χρήσης).</string>
-	<string name="aboutapp_get">Λήψη των πληροφοριών OI About</string>
-	
-	<!-- *************************** 	     Permissions 	     *************************** -->
+	<!-- ***************************
+	     Permissions
+	     *************************** -->
 	
 	<!-- OI Shopping list -->
+	<!-- Permission to read shopping lists -->
 	<string name="oi_shopping_permission_read">ανάγνωση λιστών αγορών</string>
 	<string name="oi_shopping_permission_read_descr">Επιτρέπει σε μια εφαρμογή την ανάγνωση λιστών αγορών. Λάβετε υπόψη σας ότι οι κρυπτογραφημένες λίστες και στοιχεία παρέχονται στην κρυπτογραφημένη μορφή.</string>
+	<!-- Permission to write to shopping lists -->
 	<string name="oi_shopping_permission_write">εγγραφή λιστών αγορών</string>
 	<string name="oi_shopping_permission_write_descr">Επιτρέπει στην εφαρμογή τη δημιουργία νέων λιστών και στοιχείων ή την αλλαγή των όσων ήδη υπάρχουν.</string>
 	
 	
-	<!-- *************************** 	     Preferences 	     *************************** -->
+	<!-- ***************************
+	     Preferences
+	     *************************** -->
 	
     <string-array name="preference_sortorder_entries">
     	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
@@ -194,6 +213,10 @@
     	<item>ετικέτες με αλφαβητική σειρά</item>
         <!-- Preference sort order: Sort by price, the most expensive first -->
     	<item>πιο ακριβά</item>
+        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    	<item>unchecked first, tags alphabetical</item>
+    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    	<item>unchecked first, priority, alphabetical</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
@@ -216,8 +239,18 @@
         <item>Ανά λέξη</item>
     </string-array>
 
+	<!-- ***************************
+	     OI Notepad
+	     *************************** -->
+	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<!-- Name of application "OI Notepad". Translations should be consistent. -->
+	<string name="notepad">OI Notepad</string>
 
-	<!-- *************************** 	     Automation 	     *************************** --> <!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<!-- ***************************
+	     Automation
+	     *************************** -->
+	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
 	<string name="label_select_action">Επιλογή ενέργειας:</string>
 	
 	<!-- Label above button that opens a list of all shopping lists to choose from. -->
@@ -229,5 +262,6 @@
     	<!-- Automation action to clean up a list. -->
     	<item>Εκκαθάριση λίστας</item>
     </string-array>
-    
-</resources> 
+      
+	     
+</resources>

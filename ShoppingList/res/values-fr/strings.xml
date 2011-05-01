@@ -42,6 +42,7 @@
 	<string name="new_item">Nouvel élément</string>
 	<string name="new_list">Nouvelle liste</string>
 	<string name="send">Envoyer la liste</string>
+	<string name="mark_all_items">Mark all items</string>
 	<string name="empty_list_not_sent">Liste vide non envoyée</string>
 	<string name="email_not_available">Non disponible pour l\'envoi.</string>
 	<string name="my_shopping_list">Ma liste de courses</string>

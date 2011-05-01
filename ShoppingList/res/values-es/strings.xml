@@ -27,6 +27,7 @@
   Joselt Peña https://launchpad.net/~inf3rn41j4p
   Paco Molinero https://launchpad.net/~franciscomol
   Peli https://launchpad.net/~peli0101
+  Sebas - KM Sistemas https://launchpad.net/~sebas-kmsistemas
   friedger https://launchpad.net/~friedger</string>
 	
     <!-- Short explanation of the application -->
@@ -41,6 +42,7 @@
 	<string name="new_item">Nuevo elemento</string>
 	<string name="new_list">Nueva lista</string>
 	<string name="send">Enviar lista</string>
+	<string name="mark_all_items">Mark all items</string>
 	<string name="empty_list_not_sent">Lista vacía no enviada</string>
 	<string name="email_not_available">Aplicación no disponible para enviar.</string>
 	<string name="my_shopping_list">Mi lista de compras</string>
@@ -221,7 +223,7 @@
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
     	<item>Sin revisar primero, etiquetar alfabéticamente</item>
     	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
-    	<item>unchecked first, priority, alphabetical</item>
+    	<item>los no seleccionados primero, por prioridad, por orden alfabético</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
@@ -248,7 +250,7 @@
 	     OI Notepad
 	     *************************** -->
 	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
-	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<string name="notepad_not_available">Para poder editar las notas del artículo se necesita OI Notepad.</string>
 	<!-- Name of application "OI Notepad". Translations should be consistent. -->
 	<string name="notepad">Bloc de notas OI</string>
 
