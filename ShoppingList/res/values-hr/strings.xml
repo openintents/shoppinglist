@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+ 
+<resources>
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">informacije o prevoditelju</string>
+	
+	<!-- Strings for OI About -->
+	<string name="about_comments">Popis za kupovinu vam omogućava praćenje vaše kupovine. Isto tako ga možete koristiti za ostale popise - npr. za ToDo popise ili popisa gostiju.</string>
+	<string name="about_website_label">Popis za kupovinu na OpenIntents</string>
+
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<string name="app_name">Popis za kupovinu</string>
+
+	<!-- Shopping Provider -->
+	<string name="new_item">Nova stavka</string>
+	<string name="new_list">Novi popis</string>
+	<string name="send">Pošalji popis</string>
+	<string name="empty_list_not_sent">Prazni popis nije poslan.</string>
+	<string name="email_not_available">Nema dostupne aplikacije za slanje.</string>
+	<string name="my_shopping_list">Moj popis za kupovinu</string>
+	<string name="new_list_hint">i.e. popis želja, obitelj</string>
+	<string name="clean_up_list">Očisti popis</string>
+	<string name="delete_list">Obriši popis</string>
+	<string name="ask_new_list">Unesite ime novog popisa za kupovinu</string>
+	<string name="ask_rename_list">Preimenuj popis za kupovinu</string>
+	<string name="ask_edit_item">Uredi stavku</string>
+	<string name="please_enter_name">Molimo unesite ime</string>
+	<string name="no_items_marked">Nema označenih stavki.</string>
+	<string name="confirm_delete_list">Jeste li sigurni da želite obrisati popis za kupovinu?</string>
+	<string name="no_shopping_provider">Greška u pristupanju popisu za kupovinu.</string>
+	<string name="pick_item">Odaberite stavku</string>
+	<string name="pick_list">Odaberite popis</string>
+	<string name="theme">Tema</string>
+	<string name="theme_settings">Postavke teme</string>
+	<string name="rename_list">Preimenuj popis</string>
+	<string name="menu_mark_item">Označi stavku</string>
+	<string name="menu_edit_item">Uredi stavku</string>
+	<string name="menu_auto_add">Automatsko dodavanje</string>
+	
+	<!-- Remove item from this list, but keep it internally, so that the user
+	     can choose it later for inclusion again. Information like
+	     tags or price will be kept. -->
+	<string name="menu_remove_item">Ukloni stavku s popisa</string>
+	
+	<!-- Delete this item completely. If the user wants to add it again, they
+	     have to enter all the information again. -->
+	<string name="menu_delete_item">Trajno obriši stavku</string>
+	
+	<!-- Button label to add an item to the list. -->
+	<string name="add">Dodaj</string>
+	
+	<string name="menu_pick_items">Odaberi stavku</string>
+	<string name="menu_start_shopping">Kupovina</string>
+	
+	<!-- Title supplement. '%s' is the name of the current list. -->
+	<string name="pick_items_titel">%s - odaberite stavke</string>
+	
+	<!-- Title supplement. '%s' is the name of the current list. -->
+	<string name="shopping_title">%s - kupovina</string>
+	
+	<string name="tags">Oznake</string>
+	<string name="price">Cijena</string>
+	<string name="item">Stavka</string>
+	<string name="quantity">Količina</string>
+	
+	<!-- Total sum of all prices. '%s' is the sum -->
+	<string name="total">Ukupno: %s</string>
+	
+	<!-- Sum of all prices of the checked items. '%s' is the sum -->
+	<string name="total_checked">Označeno: %s</string>
+	
+	<string name="delete_item_confirm">Jeste li sigurni da želite trajno obrisati ovu stavku, vezane oznake i cijenu iz svih popisa za kupovinu?</string>
+	<string name="delete">Obriši</string>
+	
+	<!-- Added to an item to indicate it was bought. -->
+	<string name="suffix_checked">... U redu</string>
+	<string name="empty"></string>
+	
+	<!-- The shortcut is created on the home screen. -->
+	<string name="pick_list_for_shortcut">Odaberite stavku za prečac</string>
+	
+	<!-- Shown if external application wants to insert new items. -->
+	<string name="pick_list_to_insert_items">Odaberite popis za dodavanje stavki</string>
+	
+	<!-- Theme related -->
+	<string name="theme_pick">Odaberite temu</string>
+	<string name="theme_description">Odaberite temu za ovaj popis</string>
+	<string name="theme_default">Zadano</string>
+	<string name="theme_classic">Klasično</string>
+	<string name="theme_bugdroid">Android</string>
+	<string name="theme_classic_export">Klasično (iz Popisa za kupovinu)</string>
+	<string name="theme_bugdroid_export">Android (iz Popisa za kupovinu)</string>
+
+	<!--     Dialog box    -->
+	<string name="ok">U redu</string>
+	<string name="cancel">Poništi</string>
+	<string name="use_theme_for_all_lists">Koristi ovu temu za sve popise</string>
+	<string name="get_more_themes">Preuzimanje više tema</string>
+	
+	<!-- preferences -->
+	<string name="preferences">Postavke</string>
+	
+    <string name="preference_application">Postavke aplikacije</string>
+    
+	<string name="preference_unchecked_on_top">Odznačeno na vrh</string>
+	<string name="preference_unchecked_on_top_summary">Uvijek prvo prikaži odznačene stavke</string>
+	<string name="preference_fontsize">Veličina fonta</string>
+	<string name="preference_fontsize_summary">Promjena veličine fonta</string>
+	<string name="preference_fontsize_dialog_title">Odaberite veličinu fonta</string>
+	<string name="preference_sortorder_title">Raspored sortiranja</string>
+	<string name="preference_sortorder_summary">Promjena rasporeda sortiranja stavki popisa</string>
+	<string name="preference_sortorder_dialog_title">Odaberite raspored sortiranja</string>
+	<string name="preference_loadlastused_title">Učitavanje zadnje korištenog popisa</string>
+	<string name="preference_loadlastused_summary">Uvijek započni s popisima koji su zadnji puta pogledani.</string>
+	<string name="preference_capitalization_title">Velika slova</string>
+	<string name="preference_capitalization_summary">Automatski unos velikih slova</string>
+	<string name="preference_capitalization_dialog_title">Odaberite velika slova</string> 
+	<string name="preference_hidechecked_title">Sakrij označene stavke</string>
+	<string name="preference_hidechecked_summary">Odmah sakrij stavke koje su odrađene.</string>
+	<string name="preference_showprice_title">Prikaži cijenu</string>
+	<string name="preference_showprice_summary">Prikaži kao dodatni stupac u popisu.</string>
+	<string name="preference_showtags_title">Prikaži oznake</string>
+	<string name="preference_showtags_summary">Prikaži kao dodatni stupac u popisu.</string>
+	<string name="preference_showquantity_title">Prikaži količinu</string>
+	<string name="preference_showquantity_summary">Prikaži kao dodatni stupac u popisu.</string>
+	
+	<!-- Preference title: Shake the phone to clean up the list. -->
+	<string name="preference_shake_title">Protresite za brisanje</string>
+	
+	<!-- Preference summary: Shake the phone to clean up the list. -->
+	<string name="preference_shake_summary">Protresite telefon za brisanje popisa.</string>
+	
+    <string name="preference_advanced">Napredne postavke</string>
+    <string name="preference_advanced_summary">Dodatne postavke vezane uz izgled.</string>
+    
+    <!-- Preference category: General settings -->
+    <string name="preference_general">Općenito</string>
+    
+    <string name="preference_appearance">Izgled</string>
+    
+    <string name="preference_addons">Dodaci</string>
+    <string name="preference_get_addons">Preuzimanje novih dodataka</string>
+    <string name="preference_get_addons_summary">Pretraživanje za dodacima i temama na mreži.</string>
+    <string name="preference_get_market_addons">Preuzimanje dodataka na Market-u</string>
+    <string name="preference_get_developer_addons">Preuzimanje dodataka na OpenIntents</string>
+    <string name="preference_extensions">Dodaci</string>
+    <string name="preference_themes">Teme</string>
+    <string name="preference_market_extensions_summary">Pretraživanje dodataka na Android Market-u.</string>
+    <string name="preference_market_themes_summary">Pretraživanje tema na Android Market-u.</string>
+    <string name="preference_developer_extensions_summary">Pretraživanje dodataka na OpenIntents stranicama.</string>
+	<string name="preference_developer_themes_summary">Pretraživanje tema na OpenIntents stranicama.</string>
+	
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">Popis za kupovinu EULA</string>
+	<string name="eula_accept">Prihvati</string>
+	<string name="eula_refuse">Poništi</string>
+
+	<!-- Update -->
+	<string name="update_box_text">Molimo ručno provjerite za ažuriranja ili instalirajte OI ažuriranja za automatske obavijesti.
+Trenutna inačica: %s
+	</string>
+	<string name="update_check_now">Provjeri sada.</string>
+	<string name="update_get_updater">Preuzmi OI ažuriranje.</string>
+	<string name="update_error">Aplikacija nije dostupna.</string>
+	<string name="update">Provjeri ažuriranja</string>
+
+	<!-- About -->
+	<string name="about">Informacije</string>
+	<string name="aboutapp_not_available">Inačica %s\n\nNema dostupnih kompatibilnih dodataka za prikaz informacija (kontakti, informacije, licence).</string>
+	<string name="aboutapp_get">Preuzimanje OI informacija</string>
+	
+	<!-- ***************************
+	     Permissions
+	     *************************** -->
+	
+	<!-- OI Shopping list -->
+	<string name="oi_shopping_permission_read">čitanje popisa za kupovinu</string>
+	<string name="oi_shopping_permission_read_descr">Dozvoljava aplikaciji čitanje popisa za kupovinu. Primijetite da su šifrirani popisi i stavke raspoloživi u šifriranom formatu.</string>
+	<string name="oi_shopping_permission_write">pisanje popisa za kupovinu</string>
+	<string name="oi_shopping_permission_write_descr">Dozvoljava aplikaciji izradu novih popisa i stavki ili promjenu postojećih.</string>
+	
+	
+	<!-- ***************************
+	     Preferences
+	     *************************** -->
+	
+    <string-array name="preference_sortorder_entries">
+    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    	<item>odznačeno prvo, abecedno</item>
+        <!-- Preference sort order: Sort by item name -->
+    	<item>abecedno</item>
+        <!-- Preference sort order: Newest item first -->
+    	<item>prvo najnovije</item>
+        <!-- Preference sort order: Oldest item first -->
+    	<item>prvo najstarije</item>
+        <!-- Preference sort order: Sort alphabetically by tags -->
+    	<item>oznake abecedno</item>
+        <!-- Preference sort order: Sort by price, the most expensive first -->
+    	<item>prvo najskuplje</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entries">
+    	<!-- Preference fontsize: tiny font size -->
+        <item>Sitno</item>
+    	<!-- Preference fontsize: small font size -->
+        <item>Malo</item>
+    	<!-- Preference fontsize: default font size-->
+    	<item>Zadano</item>
+    	<!-- Preference fontsize: large font size -->
+        <item>Veliko</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entries">
+    	<!-- Preference capitalization: No capitalization -->
+        <item>Bez</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+        <item>Po rečenici</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+        <item>Po riječi</item>
+    </string-array>
+
+
+	<!-- ***************************
+	     Automation
+	     *************************** -->
+	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<string name="label_select_action">Odaberite radnju:</string>
+	
+	<!-- Label above button that opens a list of all shopping lists to choose from. -->
+	<string name="label_select_list">Odaberite popis:</string>
+	
+	<!-- Arrays -->
+	
+    <string-array name="automation_actions">
+    	<!-- Automation action to clean up a list. -->
+    	<item>Očisti popis</item>
+    </string-array>
+    
+</resources> 
