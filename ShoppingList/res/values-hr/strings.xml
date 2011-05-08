@@ -14,28 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  -->
- 
 <resources>
 	<!-- ***************************
 	     About information
 	     *************************** -->
 	
 	<!-- Automatically filled in by Launchpad: -->
-	<string name="about_translators">informacije o prevoditelju</string>
+	<string name="about_translators">Launchpad Contributions:
+  Peli https://launchpad.net/~peli0101</string>
 	
-	<!-- Strings for OI About -->
+    <!-- Short explanation of the application -->
 	<string name="about_comments">Popis za kupovinu vam omogućava praćenje vaše kupovine. Isto tako ga možete koristiti za ostale popise - npr. za ToDo popise ili popisa gostiju.</string>
-	<string name="about_website_label">Popis za kupovinu na OpenIntents</string>
-
+	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
+	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
 	<string name="app_name">Popis za kupovinu</string>
 
-	<!-- Shopping Provider -->
 	<string name="new_item">Nova stavka</string>
 	<string name="new_list">Novi popis</string>
 	<string name="send">Pošalji popis</string>
+	<string name="mark_all_items">Mark all items</string>
 	<string name="empty_list_not_sent">Prazni popis nije poslan.</string>
 	<string name="email_not_available">Nema dostupne aplikacije za slanje.</string>
 	<string name="my_shopping_list">Moj popis za kupovinu</string>
@@ -57,6 +57,7 @@
 	<string name="menu_mark_item">Označi stavku</string>
 	<string name="menu_edit_item">Uredi stavku</string>
 	<string name="menu_auto_add">Automatsko dodavanje</string>
+	<string name="no_items_available">No items available</string>
 	
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
@@ -66,28 +67,32 @@
 	<!-- Delete this item completely. If the user wants to add it again, they
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">Trajno obriši stavku</string>
-	
+	<string name="menu_move_item">Move item to other list</string>
 	<!-- Button label to add an item to the list. -->
 	<string name="add">Dodaj</string>
 	
 	<string name="menu_pick_items">Odaberi stavku</string>
 	<string name="menu_start_shopping">Kupovina</string>
 	
-	<!-- Title supplement. '%s' is the name of the current list. -->
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="pick_items_titel">%s - odaberite stavke</string>
 	
-	<!-- Title supplement. '%s' is the name of the current list. -->
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - kupovina</string>
 	
 	<string name="tags">Oznake</string>
 	<string name="price">Cijena</string>
 	<string name="item">Stavka</string>
 	<string name="quantity">Količina</string>
+	<string name="priority">Priority</string>
+	<string name="has_note">Has Note</string>
+	<string name="units">Units</string>
+	<string name="note">Note</string>
 	
-	<!-- Total sum of all prices. '%s' is the sum -->
+	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Ukupno: %s</string>
 	
-	<!-- Sum of all prices of the checked items. '%s' is the sum -->
+	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
 	<string name="total_checked">Označeno: %s</string>
 	
 	<string name="delete_item_confirm">Jeste li sigurni da želite trajno obrisati ovu stavku, vezane oznake i cijenu iz svih popisa za kupovinu?</string>
@@ -95,7 +100,7 @@
 	
 	<!-- Added to an item to indicate it was bought. -->
 	<string name="suffix_checked">... U redu</string>
-	<string name="empty"></string>
+	<string name="empty"/>
 	
 	<!-- The shortcut is created on the home screen. -->
 	<string name="pick_list_for_shortcut">Odaberite stavku za prečac</string>
@@ -104,6 +109,7 @@
 	<string name="pick_list_to_insert_items">Odaberite popis za dodavanje stavki</string>
 	
 	<!-- Theme related -->
+	<!-- Title for selecting a theme -->
 	<string name="theme_pick">Odaberite temu</string>
 	<string name="theme_description">Odaberite temu za ovaj popis</string>
 	<string name="theme_default">Zadano</string>
@@ -113,7 +119,9 @@
 	<string name="theme_bugdroid_export">Android (iz Popisa za kupovinu)</string>
 
 	<!--     Dialog box    -->
+	<!-- Button label "OK" -->
 	<string name="ok">U redu</string>
+	<!-- Button label "Cancel" -->
 	<string name="cancel">Poništi</string>
 	<string name="use_theme_for_all_lists">Koristi ovu temu za sve popise</string>
 	<string name="get_more_themes">Preuzimanje više tema</string>
@@ -144,6 +152,10 @@
 	<string name="preference_showtags_summary">Prikaži kao dodatni stupac u popisu.</string>
 	<string name="preference_showquantity_title">Prikaži količinu</string>
 	<string name="preference_showquantity_summary">Prikaži kao dodatni stupac u popisu.</string>
+	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_summary">Prikaži kao dodatni stupac u popisu.</string>
+	<string name="preference_showunits_title">Show units</string>
+	<string name="preference_showunits_summary">Prikaži kao dodatni stupac u popisu.</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Protresite za brisanje</string>
@@ -172,35 +184,14 @@
 	<string name="preference_developer_themes_summary">Pretraživanje tema na OpenIntents stranicama.</string>
 	
 	<!-- ***************************
-	     Distribution
-	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">Popis za kupovinu EULA</string>
-	<string name="eula_accept">Prihvati</string>
-	<string name="eula_refuse">Poništi</string>
-
-	<!-- Update -->
-	<string name="update_box_text">Molimo ručno provjerite za ažuriranja ili instalirajte OI ažuriranja za automatske obavijesti.
-Trenutna inačica: %s
-	</string>
-	<string name="update_check_now">Provjeri sada.</string>
-	<string name="update_get_updater">Preuzmi OI ažuriranje.</string>
-	<string name="update_error">Aplikacija nije dostupna.</string>
-	<string name="update">Provjeri ažuriranja</string>
-
-	<!-- About -->
-	<string name="about">Informacije</string>
-	<string name="aboutapp_not_available">Inačica %s\n\nNema dostupnih kompatibilnih dodataka za prikaz informacija (kontakti, informacije, licence).</string>
-	<string name="aboutapp_get">Preuzimanje OI informacija</string>
-	
-	<!-- ***************************
 	     Permissions
 	     *************************** -->
 	
 	<!-- OI Shopping list -->
+	<!-- Permission to read shopping lists -->
 	<string name="oi_shopping_permission_read">čitanje popisa za kupovinu</string>
 	<string name="oi_shopping_permission_read_descr">Dozvoljava aplikaciji čitanje popisa za kupovinu. Primijetite da su šifrirani popisi i stavke raspoloživi u šifriranom formatu.</string>
+	<!-- Permission to write to shopping lists -->
 	<string name="oi_shopping_permission_write">pisanje popisa za kupovinu</string>
 	<string name="oi_shopping_permission_write_descr">Dozvoljava aplikaciji izradu novih popisa i stavki ili promjenu postojećih.</string>
 	
@@ -222,6 +213,10 @@ Trenutna inačica: %s
     	<item>oznake abecedno</item>
         <!-- Preference sort order: Sort by price, the most expensive first -->
     	<item>prvo najskuplje</item>
+        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    	<item>unchecked first, tags alphabetical</item>
+    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    	<item>unchecked first, priority, alphabetical</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
@@ -244,6 +239,13 @@ Trenutna inačica: %s
         <item>Po riječi</item>
     </string-array>
 
+	<!-- ***************************
+	     OI Notepad
+	     *************************** -->
+	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<!-- Name of application "OI Notepad". Translations should be consistent. -->
+	<string name="notepad">OI Notepad</string>
 
 	<!-- ***************************
 	     Automation
@@ -260,5 +262,6 @@ Trenutna inačica: %s
     	<!-- Automation action to clean up a list. -->
     	<item>Očisti popis</item>
     </string-array>
-    
-</resources> 
+      
+	     
+</resources>

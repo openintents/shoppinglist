@@ -32,7 +32,7 @@ date: 2011-05-01
 - case insensitive sort order.
 - new menu command "mark all items" (patch by Tomek Scieplek)
 - long press to launch barcode scanner
-- translations into various languages, including Brazilian Portugese, Greek, and Hungarian.
+- translations into various languages, including Brazilian Portugese, Croatian, Greek, Hungarian, Persian (Farsi).
 
 ---------------------------------------------------------
 release 1.2.6
