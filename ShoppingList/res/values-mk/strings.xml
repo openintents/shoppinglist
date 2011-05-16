@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Лиценцирано според Apache лиценца, верзија 2.0 („Лиценца“);
+ * не смеете да го користите овој фајл освен во согласност со лиценцата.
+ * Може да добиете копија од лиценцата на
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Освен ако не се бара со важечките закони или ако не е договорено во писмена форма, софтверот
+ * дистрибуиран според лиценцата се дистрибуира врз ОСНОВА „КАКОВ ШТО Е“,
+ * БЕЗ ГАРАНЦИИ ИЛИ УСЛОВИ ОД БИЛО КАКОВ ВИД, изрични или имплицирани.
+ * Видете ја лиценцата за конкретните јазични дозволи и
+ * огрнаничувања според лиценцата.
+ -->
+ 
+<resources>
+	<!-- ***************************
+	     За информациите
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">преведувач-признание</string>
+	
+	<!-- Strings for OI About -->
+	<string name="about_comments">OI шопинг листата ви овозможува да ги следите купените предмети. Можете да го користите за други видови листи, на пример листа на работи за завршување или гости за забава.</string>
+	<string name="about_website_label">OI шопинг листа на OpenIntents</string>
+
+	<!-- ***************************
+	     Низи специфични за апликацијата
+	     *************************** -->
+	<string name="app_name">OI шопинг листа</string>
+
+	<!-- Shopping Provider -->
+	<string name="new_item">Нова ставка</string>
+	<string name="new_list">Нова листа</string>
+	<string name="send">Испрати ја листата</string>
+	<string name="empty_list_not_sent">Празната листа не е испратена.</string>
+	<string name="email_not_available">Ниту една апликација не е достапна за испракање.</string>
+	<string name="my_shopping_list">Моја шопинг листа</string>
+	<string name="new_list_hint">односно, листа на желби, семејна листа</string>
+	<string name="clean_up_list">Испразни ја листата</string>
+	<string name="delete_list">Избриши ја листата</string>
+	<string name="ask_new_list">Внесете име на новата шопинг листа</string>
+	<string name="ask_rename_list">Преименувајте ја шопинг листата</string>
+	<string name="ask_edit_item">Уредете ја ставката</string>
+	<string name="please_enter_name">Внесете име</string>
+	<string name="no_items_marked">Ниту една ставка не е пречкртана.</string>
+	<string name="confirm_delete_list">Дали сакате да ја избришете шопинг листата?</string>
+	<string name="no_shopping_provider">Грешка во пристапувањето на шопинг листите.</string>
+	<string name="pick_item">Изберете ставка</string>
+	<string name="pick_list">Изберете листа</string>
+	<string name="theme">Тема</string>
+	<string name="theme_settings">Подесувања на тема</string>
+	<string name="rename_list">Преименувајте ја листата</string>
+	<string name="menu_mark_item">Обележете ја ставката</string>
+	<string name="menu_edit_item">Уредете ја ставката</string>
+	<string name="menu_auto_add">Автоматско додавање</string>
+	
+	<!-- Отстранете ја ставката од оваа листа, но чувајте ја интерно за да може
+	     корисникот подоцна пак да ја вклучи. Информациите како што се
+	     ознаките или цената ќе се зачуваат. -->
+	<string name="menu_remove_item">Отстранете ја ставката од листата</string>
+	
+	<!-- Целосно избришете ја ставката. Ако корисникот сака пак да ја додаде
+	     ќе мора повторно да ги внесе сите информации. -->
+	<string name="menu_delete_item">Трајно избришете ја ставката</string>
+	
+	<!-- Етикета за додавање на ставката на листата. -->
+	<string name="add">Додади</string>
+	
+	<string name="menu_pick_items">Избери ставки</string>
+	<string name="menu_start_shopping">Шопинг</string>
+	
+	<!-- Додаток на наслов. '%s' е името на сегашната листа. -->
+	<string name="pick_items_titel">%s – Одберете ставки</string>
+	
+	<!-- Додаток на наслов. '%s' е името на сегашната листа. -->
+	<string name="shopping_title">%s - Шопинг</string>
+	
+	<string name="tags">Ознаки</string>
+	<string name="price">Цена</string>
+	<string name="item">Ставка</string>
+	<string name="quantity">Количина</string>
+	
+	<!-- Вкупен збир на сите цени. '%s' е сумата -->
+	<string name="total">Вкупно: %s</string>
+	
+	<!-- Збир на сите цени на означените ставки. '%s' е сумата -->
+	<string name="total_checked">Проверени: %s</string>
+	
+	<string name="delete_item_confirm">Дали сте сигурни дека сакате трајно да ја избришете оваа ставка, нејзините ознаки, и цена од сите листи?</string>
+	<string name="delete">Избриши</string>
+	
+	<!-- Додадено на ставка за да покаже дека е купена. -->
+	<string name="suffix_checked">... OK</string>
+	<string name="empty"></string>
+	
+	<!-- Кратенката се креира на матичниот екран. -->
+	<string name="pick_list_for_shortcut">Избери листа за кратенка</string>
+	
+	<!-- Се покажува ако надворешна апликацијасака да вметне нови ставки. -->
+	<string name="pick_list_to_insert_items">Избери листа за вметнување ставки</string>
+	
+	<!-- Поврзано со тема -->
+	<string name="theme_pick">Избери тема</string>
+	<string name="theme_description">Избери тема за оваа листа</string>
+	<string name="theme_default">Стандардна</string>
+	<string name="theme_classic">Класична</string>
+	<string name="theme_bugdroid">Android</string>
+	<string name="theme_classic_export">Класична (од OI шопинг листата)</string>
+	<string name="theme_bugdroid_export">Android (од OI шопинг листата)</string>
+
+	<!--     Поле за дијалог    -->
+	<string name="ok">ОК</string>
+	<string name="cancel">Откажи</string>
+	<string name="use_theme_for_all_lists">Користи ја оваа тема за сите листи</string>
+	<string name="get_more_themes">Земи повеќе теми</string>
+	
+	<!-- преференции -->
+	<string name="preferences">Подесувања</string>
+	
+    <string name="preference_application">Подесувања за апликацијата</string>
+    
+	<string name="preference_unchecked_on_top">Нештиклирано на врвот</string>
+	<string name="preference_unchecked_on_top_summary">Секогаш покажи ги прво нештиклираните ставки</string>
+	<string name="preference_fontsize">Големина на фонт</string>
+	<string name="preference_fontsize_summary">Промени ја големината на фонтот</string>
+	<string name="preference_fontsize_dialog_title">Избери големина на фонт</string>
+	<string name="preference_sortorder_title">Редослед</string>
+	<string name="preference_sortorder_summary">Промени го редоследот на листата ставки</string>
+	<string name="preference_sortorder_dialog_title">Избери редослед</string>
+	<string name="preference_loadlastused_title">Вчитај на последната користена листа</string>
+	<string name="preference_loadlastused_summary">Секогаш почни со последната погледната листа.</string>
+	<string name="preference_capitalization_title">Капитализација</string>
+	<string name="preference_capitalization_summary">Автоматска капитализација на записите</string>
+	<string name="preference_capitalization_dialog_title">Избери капитализација</string> 
+	<string name="preference_hidechecked_title">Скриј ги штиклираните ставки</string>
+	<string name="preference_hidechecked_summary">Веднаш скриј ги штиклираните ставки.</string>
+	<string name="preference_showprice_title">Покажи цена</string>
+	<string name="preference_showprice_summary">Прикажано како екстра колона на листата.</string>
+	<string name="preference_showtags_title">Покажи ознаки</string>
+	<string name="preference_showtags_summary">Прикажано како екстра колона на листата.</string>
+	<string name="preference_showquantity_title">Покажи количина</string>
+	<string name="preference_showquantity_summary">Покажано како екстра колона на листата.</string>
+	
+	<!-- Префериран наслов: Затреси го телефонот да ја испразниш листата. -->
+	<string name="preference_shake_title">Затреси за да испразниш</string>
+	
+	<!-- Преферирано резиме: Затреси го телефонот да ја испразниш листата. -->
+	<string name="preference_shake_summary"> Затреси го телефонот да ја испразниш листата.</string>
+	
+    <string name="preference_advanced">Напредни подесувања</string>
+    <string name="preference_advanced_summary">Дополнителни подесувања во врска со изгледот.</string>
+    
+    <!-- Преферирана категорија: Општи подесувања -->
+    <string name="preference_general">Општо</string>
+    
+    <string name="preference_appearance">Изглед</string>
+    
+    <string name="preference_addons">Додатоци</string>
+    <string name="preference_get_addons">Земи нови додатоци</string>
+    <string name="preference_get_addons_summary">Пребарувај екстензии и теми онлајн.</string>
+    <string name="preference_get_market_addons">Земи додатоци од маркетот</string>
+    <string name="preference_get_developer_addons">Земи додатоци од OpenIntents</string>
+    <string name="preference_extensions">Екстензии</string>
+    <string name="preference_themes">Теми</string>
+    <string name="preference_market_extensions_summary">Пребарувај екстензии на Android маркетот.</string>
+    <string name="preference_market_themes_summary">Пребарувај теми на Android маркетот.</string>
+    <string name="preference_developer_extensions_summary">Земи екстензии од OpenIntents страницата.</string>
+	<string name="preference_developer_themes_summary">Земи теми од OpenIntents страницата.</string>
+	
+	<!-- ***************************
+	     Дистрибуција
+	     *************************** -->
+	
+	<!-- EULA -->
+	<string name="eula_title">OI шопинг листа EULA</string>
+	<string name="eula_accept">Прифати</string>
+	<string name="eula_refuse">Откажи</string>
+
+	<!-- Ажурирање -->
+	<string name="update_box_text">Ве молиме мануелно проверете ажурирања или инсталирајте OI ажурирање
+за автоматски известувања.
+Сегашна верзија: %s
+	</string>
+	<string name="update_check_now">Проверете сега.</string>
+	<string name="update_get_updater">Земи OI ажурирање.</string>
+	<string name="update_error">Симнатата апликација е недостапна.</string>
+	<string name="update">Провери ажурирања</string>
+
+	<!-- За -->
+	<string name="about">За</string>
+	<string name="aboutapp_not_available">Version %s\n\nНема достапна компатибилна екстензија за прикажување на целото инфо (контакт, признанија, лиценца).</string>
+	<string name="aboutapp_get">Земи OI За</string>
+	
+	<!-- ***************************
+	     Дозволи
+	     *************************** -->
+	
+	<!-- OI шопинг листа -->
+	<string name="oi_shopping_permission_read">читај ги шопинг листите</string>
+	<string name="oi_shopping_permission_read_descr">Овозможува апликацијата да чита шопинг листи. Шифрираните листи и ставки се обезбедуваат во шифриран формат.</string>
+	<string name="oi_shopping_permission_write">запиши шопинг листи</string>
+	<string name="oi_shopping_permission_write_descr">Овозможува апликацијата да создаде нови листи или да ги промени постојните.</string>
+	
+	
+	<!-- ***************************
+	     Преференции
+	     *************************** -->
+	
+    <string-array name="preference_sortorder_entries">
+    	<!-- Редослед на преференции: Прво нештиклирани ставки, сортирај ги ставките по азбучен ред -->
+    	<item>нештиклирани прво, по азбучен ред</item>
+        <!-- Редослед на преференции: Сортирај по име на ставка -->
+    	<item>по азбучен ред</item>
+        <!-- Редослед на преференции: Прво најновите ставки -->
+    	<item>прво најновите</item>
+        <!-- Редослед на преференции: Прво најстарите ставки -->
+    	<item>прво најстарите</item>
+        <!-- Редослед на преференции: Сортирај по азбучен ред, по ознаки -->
+    	<item>ознаки по азбучен ред</item>
+        <!-- Редослед на преференции: Сортирај по цена, прво најскапите -->
+    	<item>прво најскапите</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entries">
+    	<!-- Преферирана големина на фонт: ситен фонт -->
+        <item>Ситен</item>
+    	<!-- Преферирана големина на фонт: мал фонт -->
+        <item>Мал</item>
+    	<!-- Преферирана големина на фонт: стандарден фонт-->
+    	<item>Стандарден</item>
+    	<!-- Преферирана големина на фонт: голем фонт -->
+        <item>Голем</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entries">
+    	<!-- Преферирана капитализација: Нема капитализација -->
+        <item>Нема</item>
+    	<!-- Преферирана капитализација: Автоматско капитализирање на првата буква во реченицата. -->
+        <item>По реченица</item>
+    	<!-- Преферирана капитализација: Автоматско капитализирање на првата буква од секој збор. -->
+        <item>По збор</item>
+    </string-array>
+
+
+	<!-- ***************************
+	     Автоматизација
+	     *************************** -->
+	<!-- Етикета над спинерот за сите активности (автоматски задачи) што може да се извршуваат. -->
+	<string name="label_select_action">Избери активност:</string>
+	
+	<!-- Етикета над копчето кое отвора листа на сите шопинг листи за избор. -->
+	<string name="label_select_list">Избери листа:</string>
+	
+	<!-- Редови -->
+	
+    <string-array name="automation_actions">
+    	<!-- Автоматска активност за празнење листа. -->
+    	<item>Испразни листа</item>
+    </string-array>
+    
+</resources>
