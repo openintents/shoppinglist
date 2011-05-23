@@ -42,6 +42,8 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
 	public static final String PREFS_CAPITALIZATION = "capitalization";
 	public static final String PREFS_SHOW_PRICE = "showprice";
 	public static final boolean PREFS_SHOW_PRICE_DEFAULT = true;
+	public static final String PREFS_PERSTOREPRICES = "perstoreprices";
+	public static final boolean PREFS_PERSTOREPRICES_DEFAULT = false;
 	public static final String PREFS_SHOW_TAGS = "showtags";
 	public static final boolean PREFS_SHOW_TAGS_DEFAULT = true;
 	public static final String PREFS_SHOW_QUANTITY = "showquantity";
@@ -119,6 +121,12 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
 		return size;
 	}
 
+	public static boolean getUsingPerStorePricesFromPrefs(Context context) {
+		boolean using = PreferenceManager.getDefaultSharedPreferences(context)
+		.getBoolean(PREFS_PERSTOREPRICES,PREFS_PERSTOREPRICES_DEFAULT);
+		return using;
+	}
+	
 	/**
 	 * Returns the sort order for the notes list based on the user preferences.
 	 * Performs error-checking.

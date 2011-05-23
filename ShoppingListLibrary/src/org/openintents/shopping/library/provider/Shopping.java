@@ -754,6 +754,15 @@ public abstract class Shopping {
 		 * </P>
 		 */
 		public static final String PRICE = "price";
+		
+
+		/**
+		 * Whether we expect to find item item_id at store store_id.
+		 * <P>
+		 * Type: INTEGER (long)
+		 * </P>
+		 */
+		public static final String STOCKS_ITEM = "stocks_item";
 	}
 
 

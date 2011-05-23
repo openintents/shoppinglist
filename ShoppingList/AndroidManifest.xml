@@ -236,6 +236,10 @@
         android:label="@string/menu_pick_items"
         android:theme="@android:style/Theme.Dialog">
         </activity> 
+        <activity android:name=".ItemStoresActivity" 
+        android:label="@string/item_stores_activity_label"
+        android:theme="@android:style/Theme.Dialog">
+        </activity> 
         
 		<!-- Activities from OI Distribution Library -->
         <activity android:name="org.openintents.distribution.EulaActivity" />

@@ -75,6 +75,7 @@ public class ShoppingProvider extends ContentProvider {
 	 * 7: Release 1.2.7-beta 
 	 * 8: Release 1.2.7-beta
 	 * 9: Release 1.3.0-rc1
+         * 10: Release 1.3.1-beta
 	 */
 	private static final int DATABASE_VERSION = 9;
 
@@ -82,6 +83,7 @@ public class ShoppingProvider extends ContentProvider {
 	private static HashMap<String, String> LISTS_PROJECTION_MAP;
 	private static HashMap<String, String> CONTAINS_PROJECTION_MAP;
 	private static HashMap<String, String> CONTAINS_FULL_PROJECTION_MAP;
+	private static HashMap<String, String> CONTAINS_FULL_CHEAPEST_PROJECTION_MAP;
 	private static HashMap<String, String> STORES_PROJECTION_MAP;
 	private static HashMap<String, String> ITEMSTORES_PROJECTION_MAP;
 	private static HashMap<String, String> NOTES_PROJECTION_MAP;
@@ -105,6 +107,7 @@ public class ShoppingProvider extends ContentProvider {
 	private static final int UNITS = 14;
 	private static final int UNITS_ID = 15;
 	private static final int PREFS = 16;
+	private static final int ITEMSTORES_ITEMID = 17;
 
 	// Derived tables
 	private static final int CONTAINS_FULL = 101; // combined with items and
@@ -182,6 +185,7 @@ public class ShoppingProvider extends ContentProvider {
 			db.execSQL("CREATE TABLE itemstores(" + "_id INTEGER PRIMARY KEY," // V5
 					+ "item_id INTEGER," // V5
 					+ "store_id INTEGER," // V5
+					+ "stocks_item INTEGER DEFAULT 1," //V10
 					+ "aisle INTEGER," // V5
 					+ "price INTEGER," // V5
 					+ "created INTEGER," // V5
@@ -335,8 +339,18 @@ public class ShoppingProvider extends ContentProvider {
 					} catch (SQLException e) {
 						Log.e(TAG, "Error executing SQL: ", e);
 					}
+
+		        case 9:
+			    	try {				
+						db.execSQL("ALTER TABLE itemstores ADD COLUMN "
+								+ ItemStores.STOCKS_ITEM + " INTEGER DEFAULT 1;");
+						
+					} catch (SQLException e) {
+						Log.e(TAG, "Error executing SQL: ", e);
+					}
+
 					/**
-					* case 9:
+					* case 10:
 					*/
 					break;
 				default:
@@ -375,6 +389,7 @@ public class ShoppingProvider extends ContentProvider {
 		if (debug) Log.d(TAG, "Query for URL: " + url);
 
 		String defaultOrderBy = null;
+		String groupBy = null;
 
 		switch (URL_MATCHER.match(url)) {
 		
@@ -412,10 +427,21 @@ public class ShoppingProvider extends ContentProvider {
 			break;
 
 		case CONTAINS_FULL:
-			qb.setTables("contains, items, lists");
-			qb.setProjectionMap(CONTAINS_FULL_PROJECTION_MAP);
-			qb.appendWhere("contains.item_id = items._id AND " +
-				 		   "contains.list_id = lists._id");
+			
+			if (PreferenceActivity.getUsingPerStorePricesFromPrefs(getContext())) {
+				qb.setTables("contains, items, lists left outer join itemstores on (items._id = itemstores.item_id)");
+				qb.setProjectionMap(CONTAINS_FULL_CHEAPEST_PROJECTION_MAP);
+				qb.appendWhere("contains.item_id = items._id AND " +
+					 		   "contains.list_id = lists._id");
+				groupBy = "itemstores.item_id";
+				
+			} else {
+				qb.setTables("contains, items, lists");
+				qb.setProjectionMap(CONTAINS_FULL_PROJECTION_MAP);
+				qb.appendWhere("contains.item_id = items._id AND " +
+					 		   "contains.list_id = lists._id");
+				
+			}
 			defaultOrderBy = ContainsFull.DEFAULT_SORT_ORDER;
 			break;
 
@@ -452,6 +478,12 @@ public class ShoppingProvider extends ContentProvider {
 			qb.setTables("itemstores, items, stores");
 			qb.appendWhere("_id=" + url.getPathSegments().get(1));
 			qb.appendWhere("itemstores.item_id = items._id AND itemstores.store_id = stores._id");
+			break;
+		
+		case ITEMSTORES_ITEMID:
+			// path segment 1 is "item", path segment 2 is item id.
+			qb.setTables("stores left outer join itemstores on (stores._id = itemstores.store_id and " +
+					"itemstores.item_id = " + url.getPathSegments().get(2) + ")");
 			break;
 			
 		case NOTES:
@@ -506,7 +538,7 @@ public class ShoppingProvider extends ContentProvider {
 		}
 
 		SQLiteDatabase db = mOpenHelper.getReadableDatabase();
-		Cursor c = qb.query(db, projection, selection, selectionArgs, null,
+		Cursor c = qb.query(db, projection, selection, selectionArgs, groupBy,
 				null, orderBy);
 		c.setNotificationUri(getContext().getContentResolver(), url);
 		return c;
@@ -797,7 +829,7 @@ public class ShoppingProvider extends ContentProvider {
 			values.put(ItemStores.PRICE, -1);
 		} 
 		if (!values.containsKey(ItemStores.AISLE)) {
-			values.put(ItemStores.AISLE, -1);
+			values.putNull(ItemStores.AISLE);
 		}
 
 		if (!values.containsKey(ItemStores.CREATED_DATE)) {
@@ -946,6 +978,21 @@ public class ShoppingProvider extends ContentProvider {
 			ContentValues values = new ContentValues();
 			values.putNull("note");
 			count = update(url, values, null, null);
+			break;
+			
+		case ITEMSTORES_ID:
+			segment = url.getPathSegments().get(1); // contains rowId
+			// rowId = Long.parseLong(segment);
+			if (!TextUtils.isEmpty(where)) {
+				whereString = " AND (" + where + ')';
+			} else {
+				whereString = "";
+			}
+
+			affectedRows = ProviderUtils.getAffectedRows(db, "itemstores", "_id="
+					+ segment + whereString, whereArgs);
+			count = db.delete("itemstores", "_id=" + segment + whereString,
+					whereArgs);
 			break;
 			
 		default:
@@ -1141,6 +1188,8 @@ public class ShoppingProvider extends ContentProvider {
 			return "vnd.android.cursor.dir/vnd.openintents.shopping.itemstores";
 		case ITEMSTORES_ID:
 			return "vnd.android.cursor.item/vnd.openintents.shopping.itemstores";
+		case ITEMSTORES_ITEMID:
+			return "vnd.android.cursor.dir/vnd.openintents.shopping.itemstores";
 
 		case UNITS:
 			return "vnd.android.cursor.dir/vnd.openintents.shopping.units";
@@ -1176,6 +1225,8 @@ public class ShoppingProvider extends ContentProvider {
 		URL_MATCHER.addURI("org.openintents.shopping", "itemstores", ITEMSTORES);
 		URL_MATCHER.addURI("org.openintents.shopping", "itemstores/#", 
 				ITEMSTORES_ID);
+		URL_MATCHER.addURI("org.openintents.shopping", "itemstores/item/#", 
+				ITEMSTORES_ITEMID);
 		URL_MATCHER.addURI("org.openintents.shopping", "liststores/#", 
 				STORES_LISTID);
 		URL_MATCHER.addURI("org.openintents.shopping", "notes", NOTES);
@@ -1273,6 +1324,10 @@ public class ShoppingProvider extends ContentProvider {
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_HAS_NOTE,
 		        "items.note is not NULL as item_has_note");
 
+		CONTAINS_FULL_CHEAPEST_PROJECTION_MAP = 
+			new HashMap<String, String>(CONTAINS_FULL_PROJECTION_MAP);
+		CONTAINS_FULL_CHEAPEST_PROJECTION_MAP.put(ContainsFull.ITEM_PRICE, 
+				"min(itemstores.price) as item_price");
 
 		UNITS_PROJECTION_MAP = new HashMap<String, String>();
 		UNITS_PROJECTION_MAP.put(Units._ID, "units._id");
@@ -1296,6 +1351,7 @@ public class ShoppingProvider extends ContentProvider {
 				"itemstores.modified");
 		ITEMSTORES_PROJECTION_MAP.put(ItemStores.ITEM_ID, "itemstores.item_id");
 		ITEMSTORES_PROJECTION_MAP.put(ItemStores.STORE_ID, "itemstores.store_id");
+		ITEMSTORES_PROJECTION_MAP.put(Stores.NAME, "stores.name");
 		ITEMSTORES_PROJECTION_MAP.put(ItemStores.AISLE, "itemstores.aisle");
 		ITEMSTORES_PROJECTION_MAP.put(ItemStores.PRICE, "itemstores.price");
 

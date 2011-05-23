@@ -204,6 +204,8 @@ public class ShoppingActivity extends DistributionLibraryActivity implements
 	private static final int MENU_REMOVE_ITEM_FROM_LIST = Menu.FIRST + 19;
 	private static final int MENU_MOVE_ITEM = Menu.FIRST + 20;
 	private static final int MENU_MARK_ALL_ITEMS = Menu.FIRST + 21;
+	private static final int MENU_ITEM_STORES = Menu.FIRST + 22;
+
 	private static final int MENU_DISTRIBUTION_START = Menu.FIRST + 100; // MUST
 																			// BE
 																			// LAST
@@ -995,6 +997,8 @@ public class ShoppingActivity extends DistributionLibraryActivity implements
 								R.string.menu_edit_item).setShortcut('1', 'e');
 						contextmenu.add(0, MENU_MARK_ITEM, 0,
 								R.string.menu_mark_item).setShortcut('2', 'm');
+						contextmenu.add(0, MENU_ITEM_STORES, 0,
+								R.string.menu_item_stores).setShortcut('3', 's');
 						contextmenu.add(0, MENU_REMOVE_ITEM_FROM_LIST, 0,
 								R.string.menu_remove_item)
 								.setShortcut('3', 'r');
@@ -1002,7 +1006,7 @@ public class ShoppingActivity extends DistributionLibraryActivity implements
 								R.string.menu_delete_item)
 								.setShortcut('4', 'd');
 						contextmenu.add(0, MENU_MOVE_ITEM, 0,
-								R.string.menu_move_item).setShortcut('5', 's');
+								R.string.menu_move_item).setShortcut('5', 'l');
 					}
 
 				});
@@ -1016,7 +1020,15 @@ public class ShoppingActivity extends DistributionLibraryActivity implements
 				// In default theme, there is an extra check box,
 				// so clicking on anywhere else means to edit the
 				// item.
-				editItem(pos, field);
+				
+				if (field == EditItemDialog.FieldType.PRICE &&
+					PreferenceActivity.getUsingPerStorePricesFromPrefs(this))
+					// should really be a per-list preference
+				{
+					editItemStores(pos);
+				}
+				else
+					editItem(pos, field);
 			} else {
 				// For themes without a checkbox, clicking anywhere means
 				// to toggle the item.
@@ -1420,6 +1432,9 @@ public class ShoppingActivity extends DistributionLibraryActivity implements
 			startActivityForResult(intent, REQUEST_PICK_LIST);
 			mMoveItemPosition = menuInfo.position;
 			break;
+		case MENU_ITEM_STORES:
+			editItemStores(menuInfo.position);
+			break;
 		}
 
 		return true;
@@ -1642,6 +1657,20 @@ public class ShoppingActivity extends DistributionLibraryActivity implements
 		showDialog(DIALOG_EDIT_ITEM);
 	}
 
+	void editItemStores(int position) {
+		if (debug)
+			Log.d(TAG, "EditItemStores: Position: " + position);
+
+		mListItemsView.mCursorItems.moveToPosition(position);
+		// mEditItemPosition = position;
+		long itemId = mListItemsView.mCursorItems.getLong(mStringItemsITEMID);
+	
+		Intent intent;
+		intent = new Intent(this, ItemStoresActivity.class);
+		intent.setData(mListUri.buildUpon().appendPath(String.valueOf(itemId)).build());
+		startActivity(intent);
+	}
+	
 	int mDeleteItemPosition;
 
 	/** delete item */

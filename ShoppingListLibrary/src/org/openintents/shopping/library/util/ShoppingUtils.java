@@ -44,6 +44,19 @@ public class ShoppingUtils {
 		return id;
 	}
 	
+	public static String getItemName(Context context, long itemId) {
+		String name = "";
+		Cursor existingItems = context.getContentResolver().query(Shopping.Items.CONTENT_URI,
+				new String[] { Shopping.Items.NAME }, "_id = ?",
+				new String[] { String.valueOf(itemId) }, null);
+		if (existingItems.getCount() > 0) {
+			existingItems.moveToFirst();
+			name = existingItems.getString(0);
+		};
+		existingItems.close();		
+		return name;
+	}
+	
 	/**
 	 * Gets or creates a new item and returns its id. If the item exists
 	 * already, the existing id is returned. Otherwise a new item is created.
@@ -384,13 +397,14 @@ public class ShoppingUtils {
 	 * 
 	 * @param itemId
 	 *            The id of the new item.
-	 * @param listId
+	 * @param storeId
 	 *            The id of the shopping list the item is added.
-	 * @param itemType
+	 * @param stocksItem
 	 *            The type of the new item
 	 * @return id of the "contains" table entry, or -1 if insert failed.
 	 */
-	public static long addItemToStore(Context context, final long itemId, final long storeId, final String aisle, final String price) {
+	public static long addItemToStore(Context context, final long itemId, final long storeId, 
+			final boolean stocksItem, final String aisle, final String price) {
 		long id = -1;
 		Cursor existingItems = context.getContentResolver()
 				.query(ItemStores.CONTENT_URI, new String[] { ItemStores._ID },
@@ -406,6 +420,7 @@ public class ShoppingUtils {
 			ContentValues values = new ContentValues(1);
 			values.put(ItemStores.PRICE, price);
 			values.put(ItemStores.AISLE, aisle);
+			values.put(ItemStores.STOCKS_ITEM, stocksItem);
 			try {
 				Uri uri = Uri.withAppendedPath(ItemStores.CONTENT_URI, String.valueOf(id));
 				context.getContentResolver().update(uri, values, null, null);
@@ -434,7 +449,22 @@ public class ShoppingUtils {
 		return id;
 	}
 
-	
+	/**
+	 * Adds an item to a specific store and returns its id. If the item exists
+	 * already, the existing id is returned.
+	 * 
+	 * @param itemId
+	 *            The id of the new item.
+	 * @param listId
+	 *            The id of the shopping list the item is added.
+	 * @param itemType
+	 *            The type of the new item
+	 * @return id of the "contains" table entry, or -1 if insert failed.
+	 */
+	public static long addItemToStore(Context context, final long itemId, 
+			final long storeId, final String aisle, final String price) {
+		return addItemToStore(context, itemId, storeId, true, aisle, price);
+	}
 	/**
 	 * Returns the id of the default shopping list. Currently this is always 1.
 	 * 
