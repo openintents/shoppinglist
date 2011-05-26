@@ -213,7 +213,7 @@ public class ShoppingListView extends ListView {
 					if ( TextUtils.isEmpty(t.getText()) && 
 						mQuantityVisibility == View.VISIBLE) {
 					// mixed feelings about this.
-					   t.setText("1 "); 
+					//   t.setText("1 "); 
 					}
 					
 					t.setOnClickListener(new OnClickListener() {
