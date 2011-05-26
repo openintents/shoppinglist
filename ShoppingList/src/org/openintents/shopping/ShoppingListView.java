@@ -14,6 +14,7 @@ import org.openintents.shopping.theme.ThemeAttributes;
 import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;
 import org.openintents.shopping.library.util.ShoppingUtils;
+import org.openintents.util.VersionUtils;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -33,6 +34,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.text.Spannable;
 import android.text.TextUtils;
@@ -153,11 +155,21 @@ public class ShoppingListView extends ListView {
 		@Override
 		public View newView(Context context, Cursor cursor, ViewGroup parent) {
 			View view = super.newView(context, cursor, parent);
-			view.findViewById(R.id.price).setVisibility(mPriceVisibility);
-			view.findViewById(R.id.tags).setVisibility(mTagsVisibility);
-			view.findViewById(R.id.quantity).setVisibility(mQuantityVisibility);
-			view.findViewById(R.id.units).setVisibility(mUnitsVisibility);
-			view.findViewById(R.id.priority).setVisibility(mPriorityVisibility);
+			if (VersionUtils.getAndroidSDKLevel() > Build.VERSION_CODES.CUPCAKE) {
+				view.findViewById(R.id.price).setVisibility(mPriceVisibility);
+				view.findViewById(R.id.tags).setVisibility(mTagsVisibility);
+				view.findViewById(R.id.quantity).setVisibility(mQuantityVisibility);
+				view.findViewById(R.id.units).setVisibility(mUnitsVisibility);
+				view.findViewById(R.id.priority).setVisibility(mPriorityVisibility);
+			} else {
+				// avoid problems on Cupcake with views positioned relative to 
+				// invisible views
+				view.findViewById(R.id.price).setVisibility(View.VISIBLE);
+				view.findViewById(R.id.tags).setVisibility(View.VISIBLE);
+				view.findViewById(R.id.quantity).setVisibility(View.VISIBLE);
+				view.findViewById(R.id.units).setVisibility(View.VISIBLE);
+				view.findViewById(R.id.priority).setVisibility(View.VISIBLE);
+			}
 			return view;
 		}
 
@@ -198,7 +210,8 @@ public class ShoppingListView extends ListView {
 
 				if (res_id == R.id.quantity) {
 					
-					if ( TextUtils.isEmpty(t.getText())) {
+					if ( TextUtils.isEmpty(t.getText()) && 
+						mQuantityVisibility == View.VISIBLE) {
 					// mixed feelings about this.
 					   t.setText("1 "); 
 					}
@@ -384,6 +397,16 @@ public class ShoppingListView extends ListView {
 
 		}
 
+		private void hideTextView(TextView view) {
+			// Cupcake doesn't compute position for invisible
+			// members of RelativeLayout, so we can't make 
+			// views invisible when running Cupcake.
+			if (VersionUtils.getAndroidSDKLevel() > Build.VERSION_CODES.CUPCAKE) {
+				view.setVisibility(View.GONE);
+			}	
+			view.setText("");
+		}
+		
 		public boolean setViewValue(View view, Cursor cursor, int i) {
 			int id = view.getId();
 			if (id == R.id.name) {
@@ -401,8 +424,7 @@ public class ShoppingListView extends ListView {
 					tv.setTextColor(mTextColorPrice);
 					tv.setText(s);
 				} else {
-					tv.setVisibility(View.GONE);
-					tv.setText("");
+					hideTextView(tv);
 				}
 				return true;
 			} else if (id == R.id.tags) {
@@ -414,8 +436,7 @@ public class ShoppingListView extends ListView {
 					tv.setTextColor(mTextColorPrice);
 					tv.setText(tags);
 				} else {
-					tv.setVisibility(View.GONE);
-					tv.setText("");
+					hideTextView(tv);
 				}
 				return true;
 			} else if (id == R.id.quantity) { 
@@ -427,8 +448,7 @@ public class ShoppingListView extends ListView {
 					// tv.setTextColor(mPriceTextColor);  
 					tv.setText(quantity + " "); }
 			    else { 
-				    tv.setVisibility(View.GONE);  
-				    tv.setText(""); 
+				    hideTextView(tv); 
 			    } 
 				return true; 
 			} else if (id == R.id.units) { 
@@ -443,8 +463,7 @@ public class ShoppingListView extends ListView {
 					// tv.setTextColor(mPriceTextColor);  
 					tv.setText(units + " "); }
 			    else { 
-				    tv.setVisibility(View.GONE);  
-				    tv.setText(""); 
+				    hideTextView(tv); 
 			    } 
 				return true; 
 			} else if (id == R.id.priority) { 
@@ -456,8 +475,7 @@ public class ShoppingListView extends ListView {
 					// tv.setTextColor(mPriceTextColor);  
 					tv.setText("-" + priority + "- "); }
 			    else { 
-				    tv.setVisibility(View.GONE);  
-				    tv.setText(""); 
+				    hideTextView(tv); 
 			    } 
 				return true; 
 			} else if (id == R.id.has_note) { 
