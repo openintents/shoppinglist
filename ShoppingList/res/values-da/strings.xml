@@ -47,6 +47,7 @@ Launchpad Contributions:
 	<string name="ask_new_list">Indtast navn på ny indkøbsliste</string>
 	<string name="ask_rename_list">Omdøb indkøbsliste</string>
 	<string name="ask_edit_item">Redigér vare</string>
+	<string name="ask_new_store">Enter new store name</string>
 	<string name="please_enter_name">Indtast venligst et navn</string>
 	<string name="no_items_marked">Ingen varer er markeret som overstregede</string>
 	<string name="confirm_delete_list">Er du sikker på at du vil slette denne indkøbsliste?</string>
@@ -59,6 +60,7 @@ Launchpad Contributions:
 	<string name="menu_mark_item">Markér vare</string>
 	<string name="menu_edit_item">Redigér vare</string>
 	<string name="menu_auto_add">Auto-tilføj</string>
+	<string name="menu_item_stores">Stores...</string>
 	<string name="no_items_available">Ingen tilgængelige varer</string>
 	
 	<!-- Remove item from this list, but keep it internally, so that the user
@@ -81,6 +83,10 @@ Launchpad Contributions:
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - Indkøb</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current item. -->
+	<string name="item_stores_title">%s - Stores</string>
+	<string name="item_stores_activity_label">Edit Item Stores</string>
 	
 	<string name="tags">Mærker (Tags)</string>
 	<string name="price">Pris</string>
@@ -150,6 +156,8 @@ Launchpad Contributions:
 	<string name="preference_hidechecked_summary">Skjul øjeblikkeligt varer som er blevet afkrydset</string>
 	<string name="preference_showprice_title">Vis pris</string>
 	<string name="preference_showprice_summary">Vises som en ekstra kolonne i lister</string>
+	<string name="preference_perstoreprice_title">Track per-store prices</string>
+	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
 	<string name="preference_showtags_title">Vis mærker</string>
 	<string name="preference_showtags_summary">Vises som en ekstra kolonne i lister</string>
 	<string name="preference_showquantity_title">Vis kvantitet</string>

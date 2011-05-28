@@ -48,6 +48,7 @@ Launchpad Contributions:
 	<string name="ask_new_list">Yeni alışveriş listesinin adını girin</string>
 	<string name="ask_rename_list">Alışveriş listesini  yeniden adlandır</string>
 	<string name="ask_edit_item">Öğeyi düzenle</string>
+	<string name="ask_new_store">Enter new store name</string>
 	<string name="please_enter_name">Bir isim girin</string>
 	<string name="no_items_marked">No items are marked as crossed out.</string>
 	<string name="confirm_delete_list">Alışveriş listesini gerçekten silmek istiyor musunuz?</string>
@@ -60,6 +61,7 @@ Launchpad Contributions:
 	<string name="menu_mark_item">Mark item</string>
 	<string name="menu_edit_item">Öğeyi düzenle</string>
 	<string name="menu_auto_add">Auto add</string>
+	<string name="menu_item_stores">Stores...</string>
 	<string name="no_items_available">Hiçbir öğe mevcut değil</string>
 	
 	<!-- Remove item from this list, but keep it internally, so that the user
@@ -82,6 +84,10 @@ Launchpad Contributions:
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - Alışveriş</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current item. -->
+	<string name="item_stores_title">%s - Stores</string>
+	<string name="item_stores_activity_label">Edit Item Stores</string>
 	
 	<string name="tags">Etiketler</string>
 	<string name="price">Fiyat</string>
@@ -151,6 +157,8 @@ Launchpad Contributions:
 	<string name="preference_hidechecked_summary">Immediately hide items checked off.</string>
 	<string name="preference_showprice_title">Fiyat göster</string>
 	<string name="preference_showprice_summary">Shown as extra column in list.</string>
+	<string name="preference_perstoreprice_title">Track per-store prices</string>
+	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
 	<string name="preference_showtags_title">Etiketleri göster</string>
 	<string name="preference_showtags_summary">Shown as extra column in list.</string>
 	<string name="preference_showquantity_title">Miktar göster</string>

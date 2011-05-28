@@ -45,6 +45,7 @@
 	<string name="ask_new_list">Entratz lo nom de la novèla lista de crompas</string>
 	<string name="ask_rename_list">Tonar nomenar la lista de crompas</string>
 	<string name="ask_edit_item">Editar l\'element</string>
+	<string name="ask_new_store">Enter new store name</string>
 	<string name="please_enter_name">Mercés de picar un nom</string>
 	<string name="no_items_marked">Cap d\'element pas marcat</string>
 	<string name="confirm_delete_list">Sètz segur que volètz suprimir aquesta lista ?</string>
@@ -57,6 +58,7 @@
 	<string name="menu_mark_item">Marcar l\'element</string>
 	<string name="menu_edit_item">Editar l\'element</string>
 	<string name="menu_auto_add">Apondon automatic</string>
+	<string name="menu_item_stores">Stores...</string>
 	<string name="no_items_available">No items available</string>
 	
 	<!-- Remove item from this list, but keep it internally, so that the user
@@ -79,6 +81,10 @@
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - Crompas</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current item. -->
+	<string name="item_stores_title">%s - Stores</string>
+	<string name="item_stores_activity_label">Edit Item Stores</string>
 	
 	<string name="tags">Etiquetas</string>
 	<string name="price">Prètz</string>
@@ -148,6 +154,8 @@
 	<string name="preference_hidechecked_summary">Amagar immediatament los elements amagats</string>
 	<string name="preference_showprice_title">Veire lo prètz</string>
 	<string name="preference_showprice_summary">Veire coma una colomna suplementària dins la lista</string>
+	<string name="preference_perstoreprice_title">Track per-store prices</string>
+	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
 	<string name="preference_showtags_title">Afichar las etiquetas</string>
 	<string name="preference_showtags_summary">Veire coma una colomna suplementària dins la lista</string>
 	<string name="preference_showquantity_title">Fa veire la quantitat</string>

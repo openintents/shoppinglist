@@ -1,23 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--   * Copyright (C) 2007-2010 OpenIntents.org  *  * Licensed under the Apache License, Version 2.0 (the "License");  * you may not use this file except in compliance with the License.  * You may obtain a copy of the License at  *  *      http://www.apache.org/licenses/LICENSE-2.0  *  * Unless required by applicable law or agreed to in writing, software  * distributed under the License is distributed on an "AS IS" BASIS,  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  * See the License for the specific language governing permissions and  * limitations under the License.  -->
- 
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
 <resources>
-	<!-- *************************** 	     About information 	     *************************** -->
+	<!-- ***************************
+	     About information
+	     *************************** -->
 	
 	<!-- Automatically filled in by Launchpad: -->
-	<string name="about_translators">кредити за преводачи</string>
+	<string name="about_translators">Launchpad Contributions:
+  Peli https://launchpad.net/~peli0101</string>
 	
-	<!-- Strings for OI About -->
+    <!-- Short explanation of the application -->
 	<string name="about_comments">Списъкът за пазаруване на OI ви позволява да следите вашите покупки. Можете да го използвате за други проверки, например за списъци със задачи или списъци с гости за партита.</string>
-	<string name="about_website_label">OI списък за пазаруване в OpenIntents</string>
-
-	<!-- *************************** 	     Applicatio-specific strings 	     *************************** -->
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
 	<string name="app_name">OI списък за пазаруване</string>
 
-	<!-- Shopping Provider -->
 	<string name="new_item">Нов продукт</string>
 	<string name="new_list">Нов списък</string>
 	<string name="send">Изпрати списък</string>
+	<string name="mark_all_items">Mark all items</string>
 	<string name="empty_list_not_sent">Празният списък не е изпратен.</string>
 	<string name="email_not_available">Не се предлага приложение за изпращане.</string>
 	<string name="my_shopping_list">Мой списък за пазаруване</string>
@@ -27,6 +45,7 @@
 	<string name="ask_new_list">Въведи име на новия списък за пазаруване</string>
 	<string name="ask_rename_list">Преименувай списъка за пазаруване</string>
 	<string name="ask_edit_item">Редактирай елемент</string>
+	<string name="ask_new_store">Enter new store name</string>
 	<string name="please_enter_name">Моля, въведете име</string>
 	<string name="no_items_marked">Няма елементи, които да са маркирани като зачеркнати.</string>
 	<string name="confirm_delete_list">Наистина ли искате да изтриете този списък за пазаруване?</string>
@@ -39,34 +58,47 @@
 	<string name="menu_mark_item">Маркирай елемент</string>
 	<string name="menu_edit_item">Редактирай елемент</string>
 	<string name="menu_auto_add">Автоматично добавяне</string>
+	<string name="menu_item_stores">Stores...</string>
+	<string name="no_items_available">No items available</string>
 	
-	<!-- Remove item from this list, but keep it internally, so that the user 	     can choose it later for inclusion again. Information like 	     tags or price will be kept. -->
+	<!-- Remove item from this list, but keep it internally, so that the user
+	     can choose it later for inclusion again. Information like
+	     tags or price will be kept. -->
 	<string name="menu_remove_item">Отстрани елемент от списъка</string>
 	
-	<!-- Delete this item completely. If the user wants to add it again, they 	     have to enter all the information again. -->
+	<!-- Delete this item completely. If the user wants to add it again, they
+	     have to enter all the information again. -->
 	<string name="menu_delete_item">Изтрий елемент перманентно</string>
-	
+	<string name="menu_move_item">Move item to other list</string>
 	<!-- Button label to add an item to the list. -->
 	<string name="add">Добавяне</string>
 	
 	<string name="menu_pick_items">Избери елементи</string>
 	<string name="menu_start_shopping">Пазаруване</string>
 	
-	<!-- Title supplement. '%s' is the name of the current list. -->
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="pick_items_titel">%s - Избери елементи</string>
 	
-	<!-- Title supplement. '%s' is the name of the current list. -->
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - Пазаруване</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current item. -->
+	<string name="item_stores_title">%s - Stores</string>
+	<string name="item_stores_activity_label">Edit Item Stores</string>
 	
 	<string name="tags">Отметки</string>
 	<string name="price">Цена</string>
 	<string name="item">Елемент</string>
 	<string name="quantity">Количество</string>
+	<string name="priority">Priority</string>
+	<string name="has_note">Has Note</string>
+	<string name="units">Units</string>
+	<string name="note">Note</string>
 	
-	<!-- Total sum of all prices. '%s' is the sum -->
+	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Общо: %s</string>
 	
-	<!-- Sum of all prices of the checked items. '%s' is the sum -->
+	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
 	<string name="total_checked">Проверени: %s</string>
 	
 	<string name="delete_item_confirm">Сигурни ли сте, че искате перманентно да изтриете този елемент, неговите маркери и цената му от всички списъци за пазаруване?</string>
@@ -74,7 +106,7 @@
 	
 	<!-- Added to an item to indicate it was bought. -->
 	<string name="suffix_checked">... OK</string>
-	<string name="empty"></string>
+	<string name="empty"/>
 	
 	<!-- The shortcut is created on the home screen. -->
 	<string name="pick_list_for_shortcut">Избери списък за бърза команда</string>
@@ -83,6 +115,7 @@
 	<string name="pick_list_to_insert_items">Избери списък за въвеждане на елементи</string>
 	
 	<!-- Theme related -->
+	<!-- Title for selecting a theme -->
 	<string name="theme_pick">Избери палитра</string>
 	<string name="theme_description">Избери палитра от този списък</string>
 	<string name="theme_default">По подразбиране</string>
@@ -92,7 +125,9 @@
 	<string name="theme_bugdroid_export">Android (от OI списъка за пазаруване)</string>
 
 	<!--     Dialog box    -->
+	<!-- Button label "OK" -->
 	<string name="ok">OK</string>
+	<!-- Button label "Cancel" -->
 	<string name="cancel">Откажи</string>
 	<string name="use_theme_for_all_lists">Използване на тази палитра за всички списъци</string>
 	<string name="get_more_themes">Вземете повече палитри</string>
@@ -119,10 +154,16 @@
 	<string name="preference_hidechecked_summary">Скрий веднага елементи, които са демаркирани.</string>
 	<string name="preference_showprice_title">Покажи цена</string>
 	<string name="preference_showprice_summary">Показано като допълнителна колона в списъка.</string>
+	<string name="preference_perstoreprice_title">Track per-store prices</string>
+	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
 	<string name="preference_showtags_title">Покажи маркери</string>
 	<string name="preference_showtags_summary">Показано като допълнителна колона в списъка.</string>
 	<string name="preference_showquantity_title">Покажи количество</string>
 	<string name="preference_showquantity_summary">Показано като допълнителна колона в списъка.</string>
+	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_summary">Показано като допълнителна колона в списъка.</string>
+	<string name="preference_showunits_title">Show units</string>
+	<string name="preference_showunits_summary">Показано като допълнителна колона в списъка.</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Разклати за почистване</string>
@@ -150,36 +191,22 @@
     <string name="preference_developer_extensions_summary">Вземете разширения от началната страница на OpenIntents.</string>
 	<string name="preference_developer_themes_summary">Вземете палитри от началната страница на OpenIntents.</string>
 	
-	<!-- *************************** 	     Distribution 	     *************************** -->
-	
-	<!-- EULA -->
-	<string name="eula_title">OI списък за пазаруване EULA</string>
-	<string name="eula_accept">Приеми</string>
-	<string name="eula_refuse">Откажи</string>
-
-	<!-- Update -->
-	<string name="update_box_text">Моля, проверете ръчно за актуализации или инсталирайте OI актуализация за автоматично известяване. Текуща версия: %s
-	</string>
-	<string name="update_check_now">Провери сега.</string>
-	<string name="update_get_updater">Вземи OI адаптер.</string>
-	<string name="update_error">Приложение за изтегляне не е налично.</string>
-	<string name="update">Провери актуализации</string>
-
-	<!-- About -->
-	<string name="about">Информация</string>
-	<string name="aboutapp_not_available">Версия %s\n\nНяма съвместимо разширение за показване на цялата информация (контакти, кредити, лицензи).</string>
-	<string name="aboutapp_get">Вземи OI информация</string>
-	
-	<!-- *************************** 	     Permissions 	     *************************** -->
+	<!-- ***************************
+	     Permissions
+	     *************************** -->
 	
 	<!-- OI Shopping list -->
+	<!-- Permission to read shopping lists -->
 	<string name="oi_shopping_permission_read">прочети списъци за пазаруване</string>
 	<string name="oi_shopping_permission_read_descr">Позволява на приложение да чете списъците за пазаруване. Отбележете, че кодираните списъци и елементи се предоставят в кодиран формат.</string>
+	<!-- Permission to write to shopping lists -->
 	<string name="oi_shopping_permission_write">напиши списъци за пазаруване</string>
 	<string name="oi_shopping_permission_write_descr">Позволява на приложение да създаде нови списъци и елементи или да промени съществуващи.</string>
 	
 	
-	<!-- *************************** 	     Preferences 	     *************************** -->
+	<!-- ***************************
+	     Preferences
+	     *************************** -->
 	
     <string-array name="preference_sortorder_entries">
     	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
@@ -194,6 +221,10 @@
     	<item>маркери по азбучен ред</item>
         <!-- Preference sort order: Sort by price, the most expensive first -->
     	<item>първо най-скъпите</item>
+        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    	<item>unchecked first, tags alphabetical</item>
+    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    	<item>unchecked first, priority, alphabetical</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
@@ -216,8 +247,18 @@
         <item>На дума</item>
     </string-array>
 
+	<!-- ***************************
+	     OI Notepad
+	     *************************** -->
+	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<!-- Name of application "OI Notepad". Translations should be consistent. -->
+	<string name="notepad">OI Notepad</string>
 
-	<!-- *************************** 	     Automation 	     *************************** --> <!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<!-- ***************************
+	     Automation
+	     *************************** -->
+	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
 	<string name="label_select_action">Избери действие:</string>
 	
 	<!-- Label above button that opens a list of all shopping lists to choose from. -->
@@ -229,5 +270,6 @@
     	<!-- Automation action to clean up a list. -->
     	<item>Почисти списък</item>
     </string-array>
-    
-</resources> 
+      
+	     
+</resources>
