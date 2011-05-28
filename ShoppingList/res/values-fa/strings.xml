@@ -21,7 +21,8 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
-  Peli https://launchpad.net/~peli0101</string>
+  Peli https://launchpad.net/~peli0101
+  reza kia https://launchpad.net/~kia1349</string>
 	
     <!-- Short explanation of the application -->
 	<string name="about_comments">لیست خرید OI به شما اجازه می دهد موارد خرید خود را ردیابی کنید. همچنین می توانید از آن برای سایر لیست های بررسی بعنوان مثال برای لیست های ToDo یا لیست های مهمان نیز استفاده کنید.</string>
@@ -35,7 +36,7 @@
 	<string name="new_item">مورد جدید</string>
 	<string name="new_list">لیست جدید</string>
 	<string name="send">ارسال لیست</string>
-	<string name="mark_all_items">Mark all items</string>
+	<string name="mark_all_items">نشانه دار كردن تمام موارد</string>
 	<string name="empty_list_not_sent">لیست خالی ارسال نمی شود.</string>
 	<string name="email_not_available">برنامه ای برای ارسال موجود نیست.</string>
 	<string name="my_shopping_list">لیست خرید من</string>
@@ -57,7 +58,7 @@
 	<string name="menu_mark_item">علامتگذاری مورد</string>
 	<string name="menu_edit_item">ویرایش مورد</string>
 	<string name="menu_auto_add">افزودن خودکار</string>
-	<string name="no_items_available">No items available</string>
+	<string name="no_items_available">هيچ موردي وجود ندارد</string>
 	
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
@@ -67,9 +68,9 @@
 	<!-- Delete this item completely. If the user wants to add it again, they
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">مورد را برای همیشه حذف کنید</string>
-	<string name="menu_move_item">Move item to other list</string>
+	<string name="menu_move_item">انتقال مورد به يك ليست ديگر</string>
 	<!-- Button label to add an item to the list. -->
-	<string name="add">افزودن</string>
+	<string name="add">اضافه کردن</string>
 	
 	<string name="menu_pick_items">انتخاب موارد</string>
 	<string name="menu_start_shopping">خرید</string>
@@ -84,13 +85,13 @@
 	<string name="price">قیمت</string>
 	<string name="item">مورد</string>
 	<string name="quantity">کمیت</string>
-	<string name="priority">Priority</string>
-	<string name="has_note">Has Note</string>
-	<string name="units">Units</string>
-	<string name="note">Note</string>
+	<string name="priority">اولویت</string>
+	<string name="has_note">يادداشت دارد</string>
+	<string name="units">واحدها</string>
+	<string name="note">یادداشت</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
-	<string name="total">کل: %s</string>
+	<string name="total">جمع كل: %s</string>
 	
 	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
 	<string name="total_checked">بررسی شد: %s</string>
@@ -152,9 +153,9 @@
 	<string name="preference_showtags_summary">بعنوان ستون اضافی در لیست نشان داده می شود.</string>
 	<string name="preference_showquantity_title">نشان دادن کمیت</string>
 	<string name="preference_showquantity_summary">بعنوان ستون اضافی در لیست نشان داده می شود.</string>
-	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_title">نمايش اولويت</string>
 	<string name="preference_showpriority_summary">بعنوان ستون اضافی در لیست نشان داده می شود.</string>
-	<string name="preference_showunits_title">Show units</string>
+	<string name="preference_showunits_title">نمايش واحدها</string>
 	<string name="preference_showunits_summary">بعنوان ستون اضافی در لیست نشان داده می شود.</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
@@ -214,9 +215,9 @@
         <!-- Preference sort order: Sort by price, the most expensive first -->
     	<item>ابتدا گران ترین ها</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
-    	<item>unchecked first, tags alphabetical</item>
+    	<item>ابتدا علامت نخورده ها باشد، برچسب ها به ترتیب حروف الفبا</item>
     	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
-    	<item>unchecked first, priority, alphabetical</item>
+    	<item>ابتدا علامت نخورده ها باشد، اولويت ، برچسب ها به ترتیب حروف الفبا</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
@@ -243,9 +244,9 @@
 	     OI Notepad
 	     *************************** -->
 	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
-	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<string name="notepad_not_available">ويرايش مورد يادداشتها به OI Notepad نياز دارد</string>
 	<!-- Name of application "OI Notepad". Translations should be consistent. -->
-	<string name="notepad">OI Notepad</string>
+	<string name="notepad">OI يادداشت</string>
 
 	<!-- ***************************
 	     Automation

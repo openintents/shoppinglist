@@ -18,9 +18,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="org.openintents.shopping"
     android:installLocation="auto"
-	android:versionName="1.3.0-rc1" android:versionCode="10025">
+	android:versionName="1.3.0"
+	android:versionCode="10026">
 	<!-- History:
 	 * * * UPDATE ATRACKDOG METADATA BELOW FOR RELEASE CANDIDATES * * *
+	1.3.0 [10026]: 2011-05-28
 	1.3.0-rc1 [10025]: 2011-05-01
 	1.3.0-beta1 [10024]: 2011-02-12
 	1.2.6 [10023]: 2011-01-06
