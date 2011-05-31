@@ -361,6 +361,7 @@ public class ShoppingProvider extends ContentProvider {
 					db.execSQL("DROP TABLE IF EXISTS contains");
 					db.execSQL("DROP TABLE IF EXISTS stores");
 					db.execSQL("DROP TABLE IF EXISTS itemstores");
+					db.execSQL("DROP TABLE IF EXISTS units");
 					onCreate(db);
 				}
 			} else { // newVersion <= oldVersion
