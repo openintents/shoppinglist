@@ -74,10 +74,10 @@ public class ShoppingProvider extends ContentProvider {
 	 * 6: Release 1.2.7-beta 
 	 * 7: Release 1.2.7-beta 
 	 * 8: Release 1.2.7-beta
-	 * 9: Release 1.3.0-rc1
-         * 10: Release 1.3.1-beta
+	 * 9: Release 1.3.0
+     * 10: Release 1.3.1-beta
 	 */
-	private static final int DATABASE_VERSION = 9;
+	private static final int DATABASE_VERSION = 10;
 
 	private static HashMap<String, String> ITEMS_PROJECTION_MAP;
 	private static HashMap<String, String> LISTS_PROJECTION_MAP;
