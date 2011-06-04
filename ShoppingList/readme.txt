@@ -22,6 +22,12 @@ To obtain the current release, visit
   http://www.openintents.org
 
 ---------------------------------------------------------
+release 1.3.1
+date: ?
+- support for per-store prices
+- support for Tablets - Android 3.0 (patch by Temp)
+
+---------------------------------------------------------
 release 1.3.0
 date: 2011-05-28
 - new application icon for Android 2.0 or higher.
