@@ -22,7 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.openintents.OpenIntents;
-import org.openintents.distribution.DistributionLibraryActivity;
+import org.openintents.distribution.DistributionLibraryFragmentActivity;
 import org.openintents.intents.GeneralIntents;
 import org.openintents.intents.ShoppingListIntents;
 import org.openintents.provider.Alert;
@@ -47,6 +47,7 @@ import org.openintents.shopping.library.util.ShoppingUtils;
 import org.openintents.shopping.share.GTalkSender;
 import org.openintents.util.MenuIntentOptionsWithIcons;
 import org.openintents.util.ShakeSensorListener;
+import org.openintents.util.VersionUtils;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -68,6 +69,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.view.MenuCompat;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -105,7 +107,7 @@ import android.widget.Toast;
  * Displays a shopping list.
  * 
  */
-public class ShoppingActivity extends DistributionLibraryActivity implements
+public class ShoppingActivity extends DistributionLibraryFragmentActivity implements
 		ThemeDialogListener, OnCustomClickListener { // implements
 	// AdapterView.OnItemClickListener
 	// {
@@ -1157,23 +1159,45 @@ public class ShoppingActivity extends DistributionLibraryActivity implements
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 
+		int MENU_ACTION_WITH_TEXT=0;
+		
+		//Temp- for backward compatibility with OS 3 features 
+		if(VersionUtils.getAndroidSDKLevel()>=11){
+			try{
+				//setting the value equivalent to desired expression
+				//MenuItem.SHOW_AS_ACTION_IF_ROOM|MenuItem.SHOW_AS_ACTION_WITH_TEXT
+				java.lang.reflect.Field field=MenuItem.class.getDeclaredField("SHOW_AS_ACTION_IF_ROOM");
+				MENU_ACTION_WITH_TEXT=field.getInt(MenuItem.class);
+				field=MenuItem.class.getDeclaredField("SHOW_AS_ACTION_WITH_TEXT");
+				MENU_ACTION_WITH_TEXT|=field.getInt(MenuItem.class);				
+			}catch(Exception e){
+				//reset value irrespective of cause
+				MENU_ACTION_WITH_TEXT=0;
+			}
+			
+		}
+		
 		// Add menu option for auto adding items from string array in intent
-		// extra if they exist
+		// extra if they exist		
 		if (mExtraItems != null) {
 			menu.add(0, MENU_INSERT_FROM_EXTRAS, 0, R.string.menu_auto_add)
 					.setIcon(android.R.drawable.ic_menu_upload);
 		}
 
+		//Temp - Temporary item holder for compatibility framework
+		MenuItem item=null;
 		// Standard menu
-		menu.add(0, MENU_NEW_LIST, 0, R.string.new_list)
+		item=menu.add(0, MENU_NEW_LIST, 0, R.string.new_list)
 				.setIcon(R.drawable.ic_menu_add_list).setShortcut('0', 'n');
-		menu.add(0, MENU_CLEAN_UP_LIST, 0, R.string.clean_up_list)
+		MenuCompat.setShowAsAction(item, MENU_ACTION_WITH_TEXT);
+		item=menu.add(0, MENU_CLEAN_UP_LIST, 0, R.string.clean_up_list)
 				.setIcon(R.drawable.ic_menu_clean_up).setShortcut('1', 'c');
-		;
+		MenuCompat.setShowAsAction(item, MENU_ACTION_WITH_TEXT);
+		
 
 		menu.add(0, MENU_PICK_ITEMS, 0, R.string.menu_pick_items)
 				.setIcon(android.R.drawable.ic_menu_add).setShortcut('2', 'p');
-		;
+		
 
 		/*
 		 * menu.add(0, MENU_SHARE, 0, R.string.share)
@@ -1184,16 +1208,19 @@ public class ShoppingActivity extends DistributionLibraryActivity implements
 				.setIcon(android.R.drawable.ic_menu_manage)
 				.setShortcut('3', 't');
 
-		menu.add(0, MENU_PREFERENCES, 0, R.string.preferences)
+		item=menu.add(0, MENU_PREFERENCES, 0, R.string.preferences)
 				.setIcon(android.R.drawable.ic_menu_preferences)
 				.setShortcut('4', 'p');
+		MenuCompat.setShowAsAction(item, MENU_ACTION_WITH_TEXT);
 
-		menu.add(0, MENU_RENAME_LIST, 0, R.string.rename_list)
+		item=menu.add(0, MENU_RENAME_LIST, 0, R.string.rename_list)
 				.setIcon(android.R.drawable.ic_menu_edit).setShortcut('5', 'r');
+		MenuCompat.setShowAsAction(item, MENU_ACTION_WITH_TEXT);
 
 		menu.add(0, MENU_DELETE_LIST, 0, R.string.delete_list)
 				.setIcon(android.R.drawable.ic_menu_delete)
 				.setShortcut('6', 'd');
+		MenuCompat.setShowAsAction(item, MENU_ACTION_WITH_TEXT);
 
 		menu.add(0, MENU_SEND, 0, R.string.send)
 				.setIcon(android.R.drawable.ic_menu_send).setShortcut('7', 's');
@@ -1207,6 +1234,7 @@ public class ShoppingActivity extends DistributionLibraryActivity implements
 		menu.add(0, MENU_MARK_ALL_ITEMS, 0, R.string.mark_all_items)
 				.setIcon(android.R.drawable.ic_menu_agenda)
 				.setShortcut('9', 'm');
+		MenuCompat.setShowAsAction(item, MENU_ACTION_WITH_TEXT);
 		
 
 		// Add distribution menu items last.
