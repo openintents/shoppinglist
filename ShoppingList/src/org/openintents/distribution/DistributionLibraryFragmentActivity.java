@@ -2,7 +2,7 @@ package org.openintents.distribution;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v3.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
