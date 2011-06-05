@@ -55,7 +55,7 @@
 					android:defaultValue="true" android:title="@string/preference_showprice_title"
 					android:summary="@string/preference_showprice_summary" />
 				<CheckBoxPreference android:key="perstoreprices"
-					android:defaultValue="true" android:title="@string/preference_perstoreprice_title"
+					android:defaultValue="false" android:title="@string/preference_perstoreprice_title"
 					android:summary="@string/preference_perstoreprice_summary" />
 				<CheckBoxPreference android:key="showtags"
 					android:defaultValue="true" android:title="@string/preference_showtags_title"

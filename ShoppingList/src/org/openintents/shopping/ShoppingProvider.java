@@ -1287,15 +1287,15 @@ public class ShoppingProvider extends ContentProvider {
 				"contains.share_modified_by");
 
 		CONTAINS_FULL_PROJECTION_MAP = new HashMap<String, String>();
-		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull._ID, "contains._id");
+		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull._ID, "contains._id as _id");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_ID,
 				"contains.item_id");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.LIST_ID,
 				"contains.list_id");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.QUANTITY,
-				"contains.quantity");
+				"contains.quantity as quantity");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.PRIORITY,
-		"contains.priority");
+		"contains.priority as priority");
 		CONTAINS_FULL_PROJECTION_MAP
 				.put(ContainsFull.STATUS, "contains.status");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.CREATED_DATE,
