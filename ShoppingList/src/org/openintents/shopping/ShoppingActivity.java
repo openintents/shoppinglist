@@ -69,7 +69,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v3.view.MenuCompat;
+import android.support.v2.view.MenuCompat;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
