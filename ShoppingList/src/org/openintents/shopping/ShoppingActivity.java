@@ -66,6 +66,7 @@ import android.database.Cursor;
 import android.hardware.SensorListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -1162,7 +1163,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		int MENU_ACTION_WITH_TEXT=0;
 		
 		//Temp- for backward compatibility with OS 3 features 
-		if(VersionUtils.getAndroidSDKLevel()>=11){
+		if(android.support.v2.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
 			try{
 				//setting the value equivalent to desired expression
 				//MenuItem.SHOW_AS_ACTION_IF_ROOM|MenuItem.SHOW_AS_ACTION_WITH_TEXT

@@ -155,7 +155,7 @@ public class ShoppingListView extends ListView {
 		@Override
 		public View newView(Context context, Cursor cursor, ViewGroup parent) {
 			View view = super.newView(context, cursor, parent);
-			if (VersionUtils.getAndroidSDKLevel() > Build.VERSION_CODES.CUPCAKE) {
+			if (android.support.v2.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.CUPCAKE) {
 				view.findViewById(R.id.price).setVisibility(mPriceVisibility);
 				view.findViewById(R.id.tags).setVisibility(mTagsVisibility);
 				view.findViewById(R.id.quantity).setVisibility(mQuantityVisibility);
@@ -401,7 +401,7 @@ public class ShoppingListView extends ListView {
 			// Cupcake doesn't compute position for invisible
 			// members of RelativeLayout, so we can't make 
 			// views invisible when running Cupcake.
-			if (VersionUtils.getAndroidSDKLevel() > Build.VERSION_CODES.CUPCAKE) {
+			if (android.support.v2.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.CUPCAKE) {
 				view.setVisibility(View.GONE);
 			}	
 			view.setText("");
