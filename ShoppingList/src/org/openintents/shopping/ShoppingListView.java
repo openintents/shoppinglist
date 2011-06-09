@@ -83,6 +83,9 @@ public class ShoppingListView extends ListView {
 	public String mTextSuffixUnchecked;
 	public String mTextSuffixChecked;
 	public int mBackgroundPadding;
+	public int mUpdateLastListPosition = 0;
+	public int mLastListPosition;
+	public int mLastListTop;
 
 	NumberFormat mPriceFormatter = DecimalFormat
 			.getNumberInstance(Locale.ENGLISH);
@@ -1099,8 +1102,20 @@ public class ShoppingListView extends ListView {
 	public void requery() {
 		if (debug)
 			Log.d(TAG, "requery()");
-		mCursorItems.requery();
-		updateTotal();
+		
+		// Test for null pointer exception (issue 313)
+		if (mCursorItems != null) {
+			mCursorItems.requery();
+			updateTotal();
+
+			
+			if (mUpdateLastListPosition > 0) {
+				if (debug) Log.d(TAG, "Restore list position: pos: " + mLastListPosition
+						+ ", top: " + mLastListTop + ", tries: " + mUpdateLastListPosition);
+				setSelectionFromTop(mLastListPosition, mLastListTop);
+				mUpdateLastListPosition--;
+			}
+		}
 	}
 
 	public void setTotalTextView(TextView tv) {

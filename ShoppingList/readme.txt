@@ -22,10 +22,16 @@ To obtain the current release, visit
   http://www.openintents.org
 
 ---------------------------------------------------------
-release 1.3.1
+release 1.4
 date: ?
 - support for per-store prices
 - support for Tablets - Android 3.0 (patch by Temp)
+
+---------------------------------------------------------
+release 1.3.1
+date: ?
+- fix crash when shaking phone (issue 313).
+- remember list position (issue 349).
 
 ---------------------------------------------------------
 release 1.3.0

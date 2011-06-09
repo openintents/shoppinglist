@@ -112,6 +112,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		ThemeDialogListener, OnCustomClickListener { // implements
 	// AdapterView.OnItemClickListener
 	// {
+	
+	/**
+	 * TAG for logging.
+	 */
+	private static final String TAG = "ShoppingActivity";
+	private static final boolean debug = false;
 
 	public class MyGestureDetector extends SimpleOnGestureListener {
         private static final float DISTANCE_DIP = 16.0f;
@@ -155,11 +161,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 	}
 
-	/**
-	 * TAG for logging.
-	 */
-	private static final String TAG = "ShoppingActivity";
-	private static final boolean debug = !false;
 
 	private static final int SWIPE_MIN_DISTANCE = 120;
 	private static final int SWIPE_MAX_OFF_PATH = 250;
@@ -386,8 +387,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private static final String BUNDLE_ITEM_URI = "item uri";
 	private static final String BUNDLE_RELATION_URI = "relation_uri";
 
-	private static final String BUNDLE_POSITION = "position";
-
 	// Skins --------------------------
 
 	// GTalk --------------------------
@@ -613,6 +612,18 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		if (loadLastUsed) {
 			defaultShoppingList = sp.getInt(PreferenceActivity.PREFS_LASTUSED,
 					1);
+			if (mListItemsView != null) {
+				// UGLY WORKAROUND:
+				// On screen orientation changes, fillItems() is called twice.
+				// That is why we have to set the list position twice.
+				mListItemsView.mUpdateLastListPosition = 2;
+				
+				mListItemsView.mLastListPosition = sp.getInt(PreferenceActivity.PREFS_LASTLIST_POSITION, 0);
+				mListItemsView.mLastListTop = sp.getInt(PreferenceActivity.PREFS_LASTLIST_TOP, 0);
+
+				if (debug) Log.d(TAG, "Load list position: pos: " + mListItemsView.mLastListPosition
+						+ ", top: " + mListItemsView.mLastListTop);
+			}
 		} else {
 			defaultShoppingList = (int) ShoppingUtils.getDefaultList(this);
 		}
@@ -689,6 +700,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		if (debug)
 			Log.i(TAG, "Shopping list onResume() 2");
 
+		// Reload preferences, in case something changed
+		initFromPreferences();
+		
 		mIsActive = true;
 
 		// Modify our overall title depending on the mode we are running in.
@@ -738,9 +752,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		 * registerReceiver(mIntentReceiver, intentfilter);
 		 */
 
-		// Reload preferences, in case something changed
-		initFromPreferences();
-
 		// Items received through intents are added in
 		// fillItems().
 
@@ -769,11 +780,21 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		unregisterSensor();
 
+		// Save position and pixel position of first visible item
+		// of current shopping list
+		int listposition = mListItemsView.getFirstVisiblePosition();
+		View v = mListItemsView.getChildAt(0);
+		int listtop = (v == null) ? 0 : v.getTop();
+		if (debug) Log.d(TAG, "Save list position: pos: " + listposition
+				+ ", top: " + listtop);
+		
 		SharedPreferences sp = getSharedPreferences(
 				"org.openintents.shopping_preferences", MODE_PRIVATE);
 		SharedPreferences.Editor editor = sp.edit();
 		editor.putInt(PreferenceActivity.PREFS_LASTUSED, new Long(
 				getSelectedListId()).intValue());
+		editor.putInt(PreferenceActivity.PREFS_LASTLIST_POSITION, listposition);
+		editor.putInt(PreferenceActivity.PREFS_LASTLIST_TOP, listtop);
 		editor.commit();
 		// TODO ???
 		/*

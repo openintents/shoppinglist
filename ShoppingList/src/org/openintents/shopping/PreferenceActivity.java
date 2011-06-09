@@ -37,6 +37,8 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
 	public static final String PREFS_LOADLASTUSED = "loadlastused";
 	public static final boolean PREFS_LOADLASTUSED_DEFAULT = true;
 	public static final String PREFS_LASTUSED = "lastused";
+	public static final String PREFS_LASTLIST_POSITION = "lastlist_position";
+	public static final String PREFS_LASTLIST_TOP = "lastlist_top";
 	public static final String PREFS_HIDECHECKED = "hidechecked";
 	public static final boolean PREFS_HIDECHECKED_DEFAULT = false;
 	public static final String PREFS_CAPITALIZATION = "capitalization";
