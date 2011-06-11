@@ -29,9 +29,10 @@ date: ?
 
 ---------------------------------------------------------
 release 1.3.1
-date: ?
+date: 2011-06-11
 - fix crash when shaking phone (issue 313).
 - remember list position (issue 349).
+- update translations.
 
 ---------------------------------------------------------
 release 1.3.0
