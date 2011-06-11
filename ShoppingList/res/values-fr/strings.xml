@@ -22,6 +22,7 @@
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
   Abdessamad Derraz https://launchpad.net/~derraz
+  Maxime Gentils https://launchpad.net/~maxime.gentils
   Omega13 https://launchpad.net/~omega13
   Peli https://launchpad.net/~peli0101
   Thibault Févry https://launchpad.net/~thibaultfevry
@@ -97,9 +98,9 @@
 	<string name="price">Prix</string>
 	<string name="item">Elément</string>
 	<string name="quantity">Quantité</string>
-	<string name="priority">Priority</string>
+	<string name="priority">Priorité</string>
 	<string name="has_note">Has Note</string>
-	<string name="units">Units</string>
+	<string name="units">Unités</string>
 	<string name="note">Note</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
