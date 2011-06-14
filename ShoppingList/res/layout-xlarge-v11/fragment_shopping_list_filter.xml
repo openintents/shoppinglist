@@ -8,5 +8,7 @@
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
         android:drawSelectorOnTop="true" 
+        android:choiceMode="singleChoice"        
+        android:background="?android:attr/activatedBackgroundIndicator"        
         />
 </LinearLayout>

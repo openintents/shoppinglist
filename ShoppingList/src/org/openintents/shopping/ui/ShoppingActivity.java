@@ -1027,6 +1027,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 					fillItems();
 					// Now set the theme based on the selected list:
 					mItemsView.setListTheme(loadListTheme());
+					((ListView) mShoppingListsView).setItemChecked(position,true);
 					
 				}
 
@@ -2119,6 +2120,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		fillItems();
 		// Now set the theme based on the selected list:
 		mItemsView.setListTheme(loadListTheme());
+		
+		if (mShoppingListsView instanceof ListView){
+			((ListView) mShoppingListsView).setItemChecked(pos,true);
+		}
 	}
 	
 
@@ -2217,14 +2222,25 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		 * mSpinnerListFilter.setAdapter(adapter);
 		 */
 
-		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
+		SimpleCursorAdapter adapter;
+		
+		if (mShoppingListsView instanceof Spinner){
+		adapter = new SimpleCursorAdapter(this,
 				// Use a template that displays a text view
 				android.R.layout.simple_spinner_item,
 				// Give the cursor to the list adapter
 				mCursorShoppingLists, new String[] { Lists.NAME },
 				new int[] { android.R.id.text1 });
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
+		} else {
+			// mShoppingListView is a ListView
+			adapter = new SimpleCursorAdapter(this,
+					// Use a template that displays a text view
+					R.layout.list_item_shopping_list,
+					// Give the cursor to the list adapter
+					mCursorShoppingLists, new String[] { Lists.NAME },
+					new int[] { R.id.text1 });
+		}
 //		mSpinnerListFilter.setAdapter(adapter);//Temp- redirected through method
 		setSpinnerListAdapter(adapter);
 
