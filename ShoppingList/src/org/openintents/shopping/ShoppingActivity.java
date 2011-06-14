@@ -98,6 +98,8 @@ import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.FilterQueryProvider;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -334,7 +336,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	/**
 	 * Private members connected to Spinner ListFilter.
 	 */
-	private Spinner mSpinnerListFilter;
+	//	Temp - making it generic for OS3 compatibility
+	//	private Spinner mSpinnerListFilter;
+	private AdapterView mSpinnerListFilter;
 	private Cursor mCursorListFilter;
 	private static final String[] mStringListFilter = new String[] { Lists._ID,
 			Lists.NAME, Lists.IMAGE, Lists.SHARE_NAME, Lists.SHARE_CONTACTS,
@@ -840,29 +844,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 */
 	private void createView() {
 
-		mSpinnerListFilter = (Spinner) findViewById(R.id.spinner_listfilter);
-		mSpinnerListFilter
-				.setOnItemSelectedListener(new OnItemSelectedListener() {
-					public void onItemSelected(AdapterView parent, View v,
-							int position, long id) {
-						if (debug)
-							Log.d(TAG, "Spinner: onItemSelected");
-						fillItems();
-						// Now set the theme based on the selected list:
-						mListItemsView.setListTheme(loadListTheme());
-
-						bindGTalkIfNeeded();
-					}
-
-					public void onNothingSelected(AdapterView arg0) {
-						if (debug)
-							Log.d(TAG, "Spinner: onNothingSelected: "
-									+ mIsActive);
-						if (mIsActive) {
-							fillItems();
-						}
-					}
-				});
+		//Temp-create either Spinner or List based upon the Display
+		createList();
 
 		mEditText = (AutoCompleteTextView) findViewById(R.id.autocomplete_add_item);
 		if (mItemsCursor != null) {
@@ -1036,6 +1019,65 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				});
 	}
 
+	private void createList() {
+
+		if(Build.VERSION.SDK_INT>=11){
+			mSpinnerListFilter = (ListView) findViewById(android.R.id.list);
+			((ListView)mSpinnerListFilter)
+			.setOnItemSelectedListener(new OnItemSelectedListener() {
+				public void onItemSelected(AdapterView parent, View v,
+						int position, long id) {
+					if (debug)
+						Log.d(TAG, "ListView: onItemSelected");
+					fillItems();
+					// Now set the theme based on the selected list:
+					mListItemsView.setListTheme(loadListTheme());
+
+					bindGTalkIfNeeded();
+				}
+
+				public void onNothingSelected(AdapterView arg0) {
+					if (debug)
+						Log.d(TAG, "Listview: onNothingSelected: "
+								+ mIsActive);
+					if (mIsActive) {
+						fillItems();
+					}
+				}
+			});
+
+			
+			
+			
+
+
+		}else{
+			mSpinnerListFilter = (Spinner) findViewById(R.id.spinner_listfilter);
+			((Spinner)mSpinnerListFilter)
+			.setOnItemSelectedListener(new OnItemSelectedListener() {
+				public void onItemSelected(AdapterView parent, View v,
+						int position, long id) {
+					if (debug)
+						Log.d(TAG, "Spinner: onItemSelected");
+					fillItems();
+					// Now set the theme based on the selected list:
+					mListItemsView.setListTheme(loadListTheme());
+
+					bindGTalkIfNeeded();
+				}
+
+				public void onNothingSelected(AdapterView arg0) {
+					if (debug)
+						Log.d(TAG, "Spinner: onNothingSelected: "
+								+ mIsActive);
+					if (mIsActive) {
+						fillItems();
+					}
+				}
+			});
+		}
+	}
+
 	public void onCustomClick(Cursor c, int pos, EditItemDialog.FieldType field) {
 		if (mState == STATE_PICK_ITEM) {
 			pickItem(c);
@@ -1184,7 +1226,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		int MENU_ACTION_WITH_TEXT=0;
 		
 		//Temp- for backward compatibility with OS 3 features 
-		if(android.support.v2.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
+		
+		if(android.support.v2.os.Build.VERSION.SDK_INT >= 11){
+			//Build.VERSION_CODES.HONEYCOMB -- reverted, since integer constant is not defined in older API level. Example:API 9
 			try{
 				//setting the value equivalent to desired expression
 				//MenuItem.SHOW_AS_ACTION_IF_ROOM|MenuItem.SHOW_AS_ACTION_WITH_TEXT
@@ -2025,6 +2069,15 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 */
 	private long getSelectedListId() {
 		int pos = mSpinnerListFilter.getSelectedItemPosition();
+		//Temp- Due to architecture requirements of OS 3, the value can not be passed directly
+		if(pos==-1 && Build.VERSION.SDK_INT>=11){
+			try {
+				pos=(Integer)mSpinnerListFilter.getTag();	
+				pos=mCursorListFilter.getCount()<=pos?-1:pos;
+			} catch (Exception e) {
+//				e.printStackTrace();
+			}
+		}
 		if (pos < 0) {
 			// nothing selected - probably view is out of focus:
 			// Do nothing.
@@ -2084,10 +2137,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		if (mCursorListFilter == null) {
 			Log.e(TAG, "missing shopping provider");
-
-			mSpinnerListFilter.setAdapter(new ArrayAdapter(this,
+			ArrayAdapter adapter=new ArrayAdapter(this,
 					android.R.layout.simple_spinner_item,
-					new String[] { getString(R.string.no_shopping_provider) }));
+					new String[] { getString(R.string.no_shopping_provider) });
+			setSpinnerListAdapter(adapter);
+			
 			return;
 		}
 
@@ -2175,7 +2229,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				new int[] { android.R.id.text1 });
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-		mSpinnerListFilter.setAdapter(adapter);
+//		mSpinnerListFilter.setAdapter(adapter);//Temp- redirected through method
+		setSpinnerListAdapter(adapter);
 
 	}
 
@@ -2199,7 +2254,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private String getCurrentListName() {
 		return ((Cursor) mSpinnerListFilter.getSelectedItem())
 				.getString(mStringListFilterNAME);
-	}
+	}	
+	
 
 	private void fillItems() {
 		if (debug)
@@ -2460,6 +2516,15 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	public void changeList(int value) {
 
 		int pos = mSpinnerListFilter.getSelectedItemPosition();
+		//Temp- Due to architecture requirements of OS 3, the value can not be passed directly
+		if(pos==-1 && Build.VERSION.SDK_INT>=11){
+			try {
+				pos=(Integer)mSpinnerListFilter.getTag();	
+				pos=mCursorListFilter.getCount()<=pos?-1:pos;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		int newPos;
 
 		if (pos < 0) {
@@ -2477,6 +2542,19 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		fillItems();
 		// Now set the theme based on the selected list:
 		mListItemsView.setListTheme(loadListTheme());
+	}
+	
+	/**
+	 * With the requirement of OS3, making an intermediary decision depending upon the widget
+	 * @param adapter
+	 */
+	private void setSpinnerListAdapter(ListAdapter adapter){
+		if(Build.VERSION.SDK_INT < 11){//Temp - restricted for OS3
+			mSpinnerListFilter.setAdapter(adapter);
+		}else{
+			ShoppingListFilterOS3 os3=(ShoppingListFilterOS3)getSupportFragmentManager().findFragmentById(R.id.sidelist);
+			os3.setAdapter(adapter);
+		}
 	}
 
 }
