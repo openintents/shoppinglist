@@ -90,7 +90,7 @@
         	android:readPermission="org.openintents.shopping.READ_PERMISSION"
 			android:writePermission="org.openintents.shopping.WRITE_PERMISSION"
          -->
-
+		
 		<!-- Shopping activity -->
 		<activity android:name=".ui.ShoppingActivity"
 			android:label="@string/app_name" 
@@ -132,6 +132,13 @@
             </intent-filter>
              -->
 		</activity>
+
+        <!-- alias is for users 1.3.1 and before that have created a link to ShoppingActivity -->
+		<activity-alias android:label="@string/app_name"
+                android:name=".ShoppingActivity"
+                android:targetActivity=".ui.ShoppingActivity" >
+        </activity-alias>
+
 		
 		<!-- The main activity prior to version 1.4 was ".ShoppingActivity".
 		Home screens may still contain a direct link to the old activity. -->
@@ -277,9 +284,5 @@
 		android:description="@string/oi_shopping_permission_write_descr"
 		android:permissionGroup="android.permission-group.PERSONAL_INFO"
 		android:protectionLevel="normal" />
-
-
-    <!-- required for gtalk (shopping list) -->
-    <!-- <uses-permission android:name="com.google.android.gtalkservice.permission.GTALK_SERVICE" />   -->
 	
 </manifest>
