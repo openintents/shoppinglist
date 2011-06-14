@@ -3,7 +3,7 @@ package org.openintents.shopping.ui;
 import org.openintents.shopping.R;
 import org.openintents.shopping.R.id;
 import org.openintents.shopping.R.layout;
-import org.openintents.shopping.ui.widget.ShoppingListView;
+import org.openintents.shopping.ui.widget.ShoppingItemsView;
 
 import android.app.Activity;
 import android.database.Cursor;
@@ -21,7 +21,7 @@ public class PickItemsActivity extends Activity {
 
 		setContentView(R.layout.activity_pick_items);
 
-		final ShoppingListView mListItems = (ShoppingListView) findViewById(R.id.list_items);
+		final ShoppingItemsView mListItems = (ShoppingItemsView) findViewById(R.id.list_items);
 		mListItems.mMode = ShoppingActivity.MODE_ADD_ITEMS;
 
 		String listId = getIntent().getData().getLastPathSegment();

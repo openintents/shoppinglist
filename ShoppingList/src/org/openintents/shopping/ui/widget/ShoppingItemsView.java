@@ -69,7 +69,7 @@ import android.widget.TextView;
  * View to show a shopping list with its items
  * 
  */
-public class ShoppingListView extends ListView {
+public class ShoppingItemsView extends ListView {
 	private final static String TAG = "ShoppingListView";
 	private final static boolean debug = true;
 
@@ -531,17 +531,17 @@ public class ShoppingListView extends ListView {
 	};
 	private TextView mCountTextView;
 
-	public ShoppingListView(Context context, AttributeSet attrs, int defStyle) {
+	public ShoppingItemsView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init();
 	}
 
-	public ShoppingListView(Context context, AttributeSet attrs) {
+	public ShoppingItemsView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}
 
-	public ShoppingListView(Context context) {
+	public ShoppingItemsView(Context context) {
 		super(context);
 		init();
 	}

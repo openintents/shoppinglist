@@ -80,7 +80,7 @@
 	        android:resource="@xml/themes"
 	      />
 	      
-		<provider android:name=".ShoppingProvider"
+		<provider android:name="org.openintents.shopping.provider.ShoppingProvider"
 			android:authorities="org.openintents.shopping" />
         <provider android:name="org.openintents.shopping.backup.MyBackupPro"  
             android:authorities="org.openintents.shopping.backup.MyBackupPro"

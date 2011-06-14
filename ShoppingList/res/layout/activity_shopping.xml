@@ -28,7 +28,7 @@
 		android:layout_height="wrap_content"
         android:drawSelectorOnTop="true" />
         
-	<org.openintents.shopping.ui.widget.ShoppingListView android:id="@+id/list_items" 
+	<org.openintents.shopping.ui.widget.ShoppingItemsView android:id="@+id/list_items" 
 		android:layout_width="fill_parent"
 		android:layout_height="0dip"
 		android:layout_weight="1"

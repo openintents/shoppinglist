@@ -49,10 +49,10 @@ import org.openintents.shopping.ui.dialog.RenameListDialog;
 import org.openintents.shopping.ui.dialog.ThemeDialog;
 import org.openintents.shopping.ui.dialog.ThemeDialog.ThemeDialogListener;
 import org.openintents.shopping.ui.tablet.ShoppingListFilterFragment;
-import org.openintents.shopping.ui.widget.ShoppingListView;
-import org.openintents.shopping.ui.widget.ShoppingListView.DragListener;
-import org.openintents.shopping.ui.widget.ShoppingListView.DropListener;
-import org.openintents.shopping.ui.widget.ShoppingListView.OnCustomClickListener;
+import org.openintents.shopping.ui.widget.ShoppingItemsView;
+import org.openintents.shopping.ui.widget.ShoppingItemsView.DragListener;
+import org.openintents.shopping.ui.widget.ShoppingItemsView.DropListener;
+import org.openintents.shopping.ui.widget.ShoppingItemsView.OnCustomClickListener;
 import org.openintents.util.MenuIntentOptionsWithIcons;
 import org.openintents.util.ShakeSensorListener;
 import org.openintents.util.VersionUtils;
@@ -342,12 +342,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private Uri mExtraListUri;
 
 	/**
-	 * Private members connected to Spinner ListFilter.
+	 * Private members connected to list of shopping lists
 	 */
-	//	Temp - making it generic for OS3 compatibility
-	//	private Spinner mSpinnerListFilter;
-	private AdapterView mSpinnerListFilter;
-	private Cursor mCursorListFilter;
+	//	Temp - making it generic for tablet compatibility
+	private AdapterView mShoppingListsView;
+	private Cursor mCursorShoppingLists;
 	private static final String[] mStringListFilter = new String[] { Lists._ID,
 			Lists.NAME, Lists.IMAGE, Lists.SHARE_NAME, Lists.SHARE_CONTACTS,
 			Lists.SKIN_BACKGROUND };
@@ -358,7 +357,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private static final int mStringListFilterSHARECONTACTS = 4;
 	private static final int mStringListFilterSKINBACKGROUND = 5;
 
-	private ShoppingListView mListItemsView;
+	private ShoppingItemsView mItemsView;
 	// private Cursor mCursorItems;
 
 	public static final String[] mStringItems = new String[] { ContainsFull._ID,
@@ -400,9 +399,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private static final String BUNDLE_RELATION_URI = "relation_uri";
 
 	// Skins --------------------------
-
-	// GTalk --------------------------
-	private GTalkSender mGTalkSender;
 
 	// private int mTextEntryMenu;
 	/*
@@ -470,9 +466,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		setContentView(R.layout.activity_shopping);
 
 		// mEditItemPosition = -1;
-
-		// Initialize GTalkSender (but don't bind yet!)
-		mGTalkSender = new GTalkSender(this);
 
 		// Automatic requeries (once a second)
 		mUpdateInterval = 2000;
@@ -585,9 +578,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		// select the default shopping list at the beginning:
 		setSelectedListId(selectList);
 
-		// Bind GTalk if currently selected shopping list needs it:
-		bindGTalkIfNeeded();
-
 		if (icicle != null) {
 			String prevText = icicle.getString(ORIGINAL_ITEM);
 			if (prevText != null) {
@@ -624,53 +614,53 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		if (loadLastUsed) {
 			defaultShoppingList = sp.getInt(PreferenceActivity.PREFS_LASTUSED,
 					1);
-			if (mListItemsView != null) {
+			if (mItemsView != null) {
 				// UGLY WORKAROUND:
 				// On screen orientation changes, fillItems() is called twice.
 				// That is why we have to set the list position twice.
-				mListItemsView.mUpdateLastListPosition = 2;
+				mItemsView.mUpdateLastListPosition = 2;
 				
-				mListItemsView.mLastListPosition = sp.getInt(PreferenceActivity.PREFS_LASTLIST_POSITION, 0);
-				mListItemsView.mLastListTop = sp.getInt(PreferenceActivity.PREFS_LASTLIST_TOP, 0);
+				mItemsView.mLastListPosition = sp.getInt(PreferenceActivity.PREFS_LASTLIST_POSITION, 0);
+				mItemsView.mLastListTop = sp.getInt(PreferenceActivity.PREFS_LASTLIST_TOP, 0);
 
-				if (debug) Log.d(TAG, "Load list position: pos: " + mListItemsView.mLastListPosition
-						+ ", top: " + mListItemsView.mLastListTop);
+				if (debug) Log.d(TAG, "Load list position: pos: " + mItemsView.mLastListPosition
+						+ ", top: " + mItemsView.mLastListTop);
 			}
 		} else {
 			defaultShoppingList = (int) ShoppingUtils.getDefaultList(this);
 		}
 
-		if (mListItemsView != null) {
+		if (mItemsView != null) {
 			if (sp.getBoolean(PreferenceActivity.PREFS_SHOW_PRICE,
 					PreferenceActivity.PREFS_SHOW_PRICE_DEFAULT)) {
-				mListItemsView.mPriceVisibility = View.VISIBLE;
+				mItemsView.mPriceVisibility = View.VISIBLE;
 			} else {
-				mListItemsView.mPriceVisibility = View.GONE;
+				mItemsView.mPriceVisibility = View.GONE;
 			}
 
 			if (sp.getBoolean(PreferenceActivity.PREFS_SHOW_TAGS,
 					PreferenceActivity.PREFS_SHOW_TAGS_DEFAULT)) {
-				mListItemsView.mTagsVisibility = View.VISIBLE;
+				mItemsView.mTagsVisibility = View.VISIBLE;
 			} else {
-				mListItemsView.mTagsVisibility = View.GONE;
+				mItemsView.mTagsVisibility = View.GONE;
 			}
 			if (sp.getBoolean(PreferenceActivity.PREFS_SHOW_QUANTITY,
 					PreferenceActivity.PREFS_SHOW_QUANTITY_DEFAULT)) {
-				mListItemsView.mQuantityVisibility = View.VISIBLE;
+				mItemsView.mQuantityVisibility = View.VISIBLE;
 			} else {
-				mListItemsView.mQuantityVisibility = View.GONE;
+				mItemsView.mQuantityVisibility = View.GONE;
 			}
 			if (sp.getBoolean(PreferenceActivity.PREFS_SHOW_UNITS,
 					PreferenceActivity.PREFS_SHOW_UNITS_DEFAULT)) {
-				mListItemsView.mUnitsVisibility = View.VISIBLE;
+				mItemsView.mUnitsVisibility = View.VISIBLE;
 			} else {
-				mListItemsView.mUnitsVisibility = View.GONE;
+				mItemsView.mUnitsVisibility = View.GONE;
 			}
 			if (sp.getBoolean(PreferenceActivity.PREFS_SHOW_PRIORITY,
 					PreferenceActivity.PREFS_SHOW_PRIORITY_DEFAULT)) {
-				mListItemsView.mPriorityVisibility = View.VISIBLE;
+				mItemsView.mPriorityVisibility = View.VISIBLE;
 			} else {
-				mListItemsView.mPriorityVisibility = View.GONE;
+				mItemsView.mPriorityVisibility = View.GONE;
 			}
 		}
 
@@ -727,8 +717,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			setTitleColor(0xFFAAAAFF);
 		}
 
-		mListItemsView.setListTheme(loadListTheme());
-		mListItemsView.onResume();
+		mItemsView.setListTheme(loadListTheme());
+		mItemsView.onResume();
 
 		// TODO fling disabled for release 1.3.0
 //		mGestureDetector = new GestureDetector(new MyGestureDetector());
@@ -756,9 +746,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		// TODO ???
 		/*
-		 * ??? // Bind GTalk service if (mGTalkSender != null) {
-		 * bindGTalkIfNeeded(); }
-		 * 
 		 * // Register intent receiver for refresh intents: IntentFilter
 		 * intentfilter = new IntentFilter(OpenIntents.REFRESH_ACTION);
 		 * registerReceiver(mIntentReceiver, intentfilter);
@@ -794,8 +781,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		// Save position and pixel position of first visible item
 		// of current shopping list
-		int listposition = mListItemsView.getFirstVisiblePosition();
-		View v = mListItemsView.getChildAt(0);
+		int listposition = mItemsView.getFirstVisiblePosition();
+		View v = mItemsView.getChildAt(0);
 		int listtop = (v == null) ? 0 : v.getTop();
 		if (debug) Log.d(TAG, "Save list position: pos: " + listposition
 				+ ", top: " + listtop);
@@ -813,11 +800,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		 * // Unregister refresh intent receiver
 		 * unregisterReceiver(mIntentReceiver);
 		 * 
-		 * // Unbind GTalk service if (mGTalkSender != null) {
-		 * mGTalkSender.unbindGTalkService(); }
 		 */
 
-		mListItemsView.onPause();
+		mItemsView.onPause();
 	}
 
 	@Override
@@ -961,12 +946,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				LinearLayout.LayoutParams.FILL_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
 
-		mListItemsView = (ShoppingListView) findViewById(R.id.list_items);
-		mListItemsView.setThemedBackground(findViewById(R.id.background));
-		mListItemsView.setCustomClickListener(this);
+		mItemsView = (ShoppingItemsView) findViewById(R.id.list_items);
+		mItemsView.setThemedBackground(findViewById(R.id.background));
+		mItemsView.setCustomClickListener(this);
 
-		mListItemsView.setItemsCanFocus(true);
-		mListItemsView.setDragListener(new DragListener() {
+		mItemsView.setItemsCanFocus(true);
+		mItemsView.setDragListener(new DragListener() {
 
 			@Override
 			public void drag(int from, int to) {
@@ -974,7 +959,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 			}
 		});
-		mListItemsView.setDropListener(new DropListener() {
+		mItemsView.setDropListener(new DropListener() {
 
 			@Override
 			public void drop(int from, int to) {
@@ -984,15 +969,15 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		});
 
 		TextView tv = (TextView) findViewById(R.id.total_1);
-		mListItemsView.setTotalCheckedTextView(tv);
+		mItemsView.setTotalCheckedTextView(tv);
 
 		tv = (TextView) findViewById(R.id.total_2);
-		mListItemsView.setTotalTextView(tv);
+		mItemsView.setTotalTextView(tv);
 
 		tv = (TextView) findViewById(R.id.count);
-		mListItemsView.setCountTextView(tv);
+		mItemsView.setCountTextView(tv);
 
-		mListItemsView.setOnItemClickListener(new OnItemClickListener() {
+		mItemsView.setOnItemClickListener(new OnItemClickListener() {
 
 			public void onItemClick(AdapterView parent, View v, int pos, long id) {
 				Cursor c = (Cursor) parent.getItemAtPosition(pos);
@@ -1003,7 +988,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		});
 
-		mListItemsView
+		mItemsView
 				.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
 
 					public void onCreateContextMenu(ContextMenu contextmenu,
@@ -1029,9 +1014,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 	private void createList() {
 
+		// TODO switch layout on screen size, not sdk versions
 		if(Build.VERSION.SDK_INT>=11){
-			mSpinnerListFilter = (ListView) findViewById(android.R.id.list);
-			((ListView)mSpinnerListFilter)
+			
+			mShoppingListsView = (ListView) findViewById(android.R.id.list);
+			((ListView)mShoppingListsView)
 			.setOnItemSelectedListener(new OnItemSelectedListener() {
 				public void onItemSelected(AdapterView parent, View v,
 						int position, long id) {
@@ -1039,9 +1026,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 						Log.d(TAG, "ListView: onItemSelected");
 					fillItems();
 					// Now set the theme based on the selected list:
-					mListItemsView.setListTheme(loadListTheme());
-
-					bindGTalkIfNeeded();
+					mItemsView.setListTheme(loadListTheme());
+					
 				}
 
 				public void onNothingSelected(AdapterView arg0) {
@@ -1060,8 +1046,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 
 		}else{
-			mSpinnerListFilter = (Spinner) findViewById(R.id.spinner_listfilter);
-			((Spinner)mSpinnerListFilter)
+			mShoppingListsView = (Spinner) findViewById(R.id.spinner_listfilter);
+			((Spinner)mShoppingListsView)
 			.setOnItemSelectedListener(new OnItemSelectedListener() {
 				public void onItemSelected(AdapterView parent, View v,
 						int position, long id) {
@@ -1069,9 +1055,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 						Log.d(TAG, "Spinner: onItemSelected");
 					fillItems();
 					// Now set the theme based on the selected list:
-					mListItemsView.setListTheme(loadListTheme());
-
-					bindGTalkIfNeeded();
+					mItemsView.setListTheme(loadListTheme());
+					
 				}
 
 				public void onNothingSelected(AdapterView arg0) {
@@ -1090,7 +1075,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		if (mState == STATE_PICK_ITEM) {
 			pickItem(c);
 		} else {
-			if (mListItemsView.mShowCheckBox) {
+			if (mItemsView.mShowCheckBox) {
 				// In default theme, there is an extra check box,
 				// so clicking on anywhere else means to edit the
 				// item.
@@ -1106,7 +1091,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			} else {
 				// For themes without a checkbox, clicking anywhere means
 				// to toggle the item.
-				mListItemsView.toggleItemBought(pos);
+				mItemsView.toggleItemBought(pos);
 			}
 		}
 	}
@@ -1126,7 +1111,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				return;
 			}
 
-			mListItemsView.insertNewItem(this, newItem, null, null, null, null);
+			mItemsView.insertNewItem(this, newItem, null, null, null, null);
 			mEditText.setText("");
 		} else {
 			// Open list to select item from
@@ -1175,7 +1160,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 					if (debug)
 						Log.d(TAG, "set new list: " + listId);
 					setSelectedListId((int) listId);
-					mListItemsView.fillItems(this, listId);
+					mItemsView.fillItems(this, listId);
 				}
 			}
 
@@ -1195,7 +1180,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				if (debug)
 					Log.d(TAG, "Add item: " + item + ", quantity: " + quantity
 							+ ", price: " + price + ", barcode: " + barcode);
-				mListItemsView.insertNewItem(this, item, quantity, null, price,
+				mItemsView.insertNewItem(this, item, quantity, null, price,
 						barcode);
 			}
 			// delete the string array list of extra items so it can't be
@@ -1480,7 +1465,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			insertItemsFromExtras();
 			return true;
 		case MENU_MARK_ALL_ITEMS:
-			mListItemsView.toggleOnAllItems();
+			mItemsView.toggleOnAllItems();
 			return true;
 		}
 		if (debug)
@@ -1571,10 +1556,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		// Now set the theme based on the selected list:
 		saveListTheme(previousTheme);
-		mListItemsView.setListTheme(previousTheme);
+		mItemsView.setListTheme(previousTheme);
 
-		// A newly created list will not yet be shared via GTalk:
-		// bindGTalkIfNeeded();
 		return true;
 	}
 
@@ -1598,17 +1581,17 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		values.put(Lists.NAME, "" + newName);
 		getContentResolver().update(
 				Uri.withAppendedPath(Lists.CONTENT_URI,
-						mCursorListFilter.getString(0)), values, null, null);
+						mCursorShoppingLists.getString(0)), values, null, null);
 
-		mCursorListFilter.requery();
+		mCursorShoppingLists.requery();
 		return true;
 	}
 
 	private void sendList() {
-		if (mListItemsView.getAdapter() instanceof CursorAdapter) {
+		if (mItemsView.getAdapter() instanceof CursorAdapter) {
 			StringBuffer sb = new StringBuffer();
-			for (int i = 0; i < mListItemsView.getAdapter().getCount(); i++) {
-				Cursor item = (Cursor) mListItemsView.getAdapter().getItem(i);
+			for (int i = 0; i < mItemsView.getAdapter().getCount(); i++) {
+				Cursor item = (Cursor) mItemsView.getAdapter().getItem(i);
 				if (item.getLong(mStringItemsSTATUS) == ShoppingContract.Status.BOUGHT) {
 					sb.append("[X] ");
 				} else {
@@ -1675,7 +1658,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		// Remove all items from current list
 		// which have STATUS = Status.BOUGHT
 
-		if (!mListItemsView.cleanupList()) {
+		if (!mItemsView.cleanupList()) {
 			// Show toast
 			Toast.makeText(this, R.string.no_items_marked, Toast.LENGTH_SHORT)
 					.show();
@@ -1712,7 +1695,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 * Deletes currently selected shopping list.
 	 */
 	private void deleteList() {
-		String listId = mCursorListFilter.getString(0);
+		String listId = mCursorShoppingLists.getString(0);
 		// First delete all items in list
 		getContentResolver().delete(Contains.CONTENT_URI,
 				"list_id = " + listId, null);
@@ -1725,14 +1708,13 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		fillItems();
 
 		// Now set the theme based on the selected list:
-		mListItemsView.setListTheme(loadListTheme());
+		mItemsView.setListTheme(loadListTheme());
 
-		bindGTalkIfNeeded();
 	}
 
 	/** Mark item */
 	void markItem(int position) {
-		mListItemsView.toggleItemBought(position);
+		mItemsView.toggleItemBought(position);
 	}
 
 	/**
@@ -1743,11 +1725,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	void editItem(int position, EditItemDialog.FieldType field) {
 		if (debug)
 			Log.d(TAG, "EditItems: Position: " + position);
-		mListItemsView.mCursorItems.moveToPosition(position);
+		mItemsView.mCursorItems.moveToPosition(position);
 		// mEditItemPosition = position;
 
-		long itemId = mListItemsView.mCursorItems.getLong(mStringItemsITEMID);
-		long containsId = mListItemsView.mCursorItems
+		long itemId = mItemsView.mCursorItems.getLong(mStringItemsITEMID);
+		long containsId = mItemsView.mCursorItems
 				.getLong(mStringItemsCONTAINSID);
 
 		mItemUri = Uri
@@ -1763,9 +1745,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		if (debug)
 			Log.d(TAG, "EditItemStores: Position: " + position);
 
-		mListItemsView.mCursorItems.moveToPosition(position);
+		mItemsView.mCursorItems.moveToPosition(position);
 		// mEditItemPosition = position;
-		long itemId = mListItemsView.mCursorItems.getLong(mStringItemsITEMID);
+		long itemId = mItemsView.mCursorItems.getLong(mStringItemsITEMID);
 	
 		Intent intent;
 		intent = new Intent(this, ItemStoresActivity.class);
@@ -1779,7 +1761,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	void deleteItemDialog(int position) {
 		if (debug)
 			Log.d(TAG, "EditItems: Position: " + position);
-		mListItemsView.mCursorItems.moveToPosition(position);
+		mItemsView.mCursorItems.moveToPosition(position);
 		mDeleteItemPosition = position;
 
 		showDialog(DIALOG_DELETE_ITEM);
@@ -1787,7 +1769,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 	/** delete item */
 	void deleteItem(int position) {
-		Cursor c = mListItemsView.mCursorItems;
+		Cursor c = mItemsView.mCursorItems;
 		c.moveToPosition(position);
 		// Delete item from all lists
 		// by deleting contains row
@@ -1799,13 +1781,13 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				new String[] { c.getString(mStringItemsITEMID) });
 
 		// c.requery();
-		mListItemsView.requery();
+		mItemsView.requery();
 	}
 
 	/** move item */
 	void moveItem(int position, int targetListId) {
-		Cursor c = mListItemsView.mCursorItems;
-		mListItemsView.mCursorItems.requery();
+		Cursor c = mItemsView.mCursorItems;
+		mItemsView.mCursorItems.requery();
 		c.moveToPosition(position);
 
 		long listId = getSelectedListId();
@@ -1830,12 +1812,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				new String[] { c.getString(mStringItemsITEMID),
 						String.valueOf(listId) });
 
-		mListItemsView.requery();
+		mItemsView.requery();
 	}
 
 	/** removeItemFromList */
 	void removeItemFromList(int position) {
-		Cursor c = mListItemsView.mCursorItems;
+		Cursor c = mItemsView.mCursorItems;
 		c.moveToPosition(position);
 		// Remember old values before delete (for share below)
 		String itemName = c.getString(mStringItemsITEMNAME);
@@ -1849,7 +1831,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		// c.requery();
 
-		mListItemsView.requery();
+		mItemsView.requery();
 
 		// If we share items, mark item on other lists:
 		// TODO ???
@@ -1878,11 +1860,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				mListUri);
 		startActivityForResult(intent, SUBACTIVITY_LIST_SHARE_SETTINGS);
 
-		// Also, start to bind as we will likely need it:
-		// TODO ???
-		/*
-		 * if (mGTalkSender != null) { mGTalkSender.bindGTalkService(); }
-		 */
 	}
 
 	void setThemeSettings() {
@@ -1901,7 +1878,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 	@Override
 	public void onSetTheme(String theme) {
-		mListItemsView.setListTheme(theme);
+		mItemsView.setListTheme(theme);
 	}
 
 	@Override
@@ -1940,15 +1917,15 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		 */
 
 		// Return default theme if something unexpected happens:
-		if (mCursorListFilter == null)
+		if (mCursorShoppingLists == null)
 			return "1";
-		if (mCursorListFilter.getPosition() < 0)
+		if (mCursorShoppingLists.getPosition() < 0)
 			return "1";
 
 		// mCursorListFilter has been set to correct position
 		// by calling getSelectedListId(),
 		// so we can read out further elements:
-		String skinBackground = mCursorListFilter
+		String skinBackground = mCursorShoppingLists
 				.getString(mStringListFilterSKINBACKGROUND);
 
 		return skinBackground;
@@ -1966,9 +1943,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		values.put(Lists.SKIN_BACKGROUND, theme);
 		getContentResolver().update(
 				Uri.withAppendedPath(Lists.CONTENT_URI,
-						mCursorListFilter.getString(0)), values, null, null);
+						mCursorShoppingLists.getString(0)), values, null, null);
 
-		mCursorListFilter.requery();
+		mCursorShoppingLists.requery();
 	}
 
 	/**
@@ -2054,7 +2031,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			String[] taglist = getTaglist();
 			d.setTagList(taglist);
 
-			d.setRequeryCursor(mListItemsView.mCursorItems);
+			d.setRequeryCursor(mItemsView.mCursorItems);
 			break;
 
 		case DIALOG_THEME:
@@ -2076,12 +2053,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 * @return ID of selected shopping list.
 	 */
 	private long getSelectedListId() {
-		int pos = mSpinnerListFilter.getSelectedItemPosition();
+		int pos = mShoppingListsView.getSelectedItemPosition();
 		//Temp- Due to architecture requirements of OS 3, the value can not be passed directly
 		if(pos==-1 && Build.VERSION.SDK_INT>=11){
 			try {
-				pos=(Integer)mSpinnerListFilter.getTag();	
-				pos=mCursorListFilter.getCount()<=pos?-1:pos;
+				pos=(Integer)mShoppingListsView.getTag();	
+				pos=mCursorShoppingLists.getCount()<=pos?-1:pos;
 			} catch (Exception e) {
 //				e.printStackTrace();
 			}
@@ -2093,9 +2070,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		}
 
 		// Obtain Id of currently selected shopping list:
-		mCursorListFilter.moveToPosition(pos);
+		mCursorShoppingLists.moveToPosition(pos);
 
-		long listId = mCursorListFilter.getLong(mStringListFilterID);
+		long listId = mCursorShoppingLists.getLong(mStringListFilterID);
 
 		mListUri = Uri
 				.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, "" + listId);
@@ -2120,30 +2097,41 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		//
 		// one could use: findViewById() but how will this
 		// translate to the position in the list?
-		mCursorListFilter.moveToPosition(-1);
-		while (mCursorListFilter.moveToNext()) {
-			int posId = mCursorListFilter.getInt(mStringListFilterID);
+		mCursorShoppingLists.moveToPosition(-1);
+		while (mCursorShoppingLists.moveToNext()) {
+			int posId = mCursorShoppingLists.getInt(mStringListFilterID);
 			if (posId == id) {
-				int row = mCursorListFilter.getPosition();
+				int row = mCursorShoppingLists.getPosition();
 
 				// if we found the Id, then select this in
 				// the Spinner:
-				mSpinnerListFilter.setSelection(row);
+				setSelectedListPos(row);
 				break;
 			}
 		}
 	}
+	
+	private void setSelectedListPos(int pos){
+		mShoppingListsView.setTag(pos);
+		
+		mShoppingListsView.setSelection(pos);	
+		
+		fillItems();
+		// Now set the theme based on the selected list:
+		mItemsView.setListTheme(loadListTheme());
+	}
+	
 
 	/**
      *
      */
 	private void fillListFilter() {
 		// Get a cursor with all lists
-		mCursorListFilter = getContentResolver().query(Lists.CONTENT_URI,
+		mCursorShoppingLists = getContentResolver().query(Lists.CONTENT_URI,
 				mStringListFilter, null, null, Lists.DEFAULT_SORT_ORDER);
-		startManagingCursor(mCursorListFilter);
+		startManagingCursor(mCursorShoppingLists);
 
-		if (mCursorListFilter == null) {
+		if (mCursorShoppingLists == null) {
 			Log.e(TAG, "missing shopping provider");
 			ArrayAdapter adapter=new ArrayAdapter(this,
 					android.R.layout.simple_spinner_item,
@@ -2153,7 +2141,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			return;
 		}
 
-		if (mCursorListFilter.getCount() < 1) {
+		if (mCursorShoppingLists.getCount() < 1) {
 			// We have to create default shopping list:
 			long listId = ShoppingUtils.getList(this,
 					getText(R.string.my_shopping_list).toString());
@@ -2203,7 +2191,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				if (debug)
 					Log.i(TAG, "mListContentObserver: onChange");
 
-				mCursorListFilter.requery();
+				mCursorShoppingLists.requery();
 
 				super.onChange(arg0);
 			}
@@ -2211,7 +2199,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		}
 		;
 		mListContentObserver observer = new mListContentObserver(new Handler());
-		mCursorListFilter.registerContentObserver(observer);
+		mCursorShoppingLists.registerContentObserver(observer);
 
 		// Register a ContentObserver, so that a new list can be
 		// automatically detected.
@@ -2233,7 +2221,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				// Use a template that displays a text view
 				android.R.layout.simple_spinner_item,
 				// Give the cursor to the list adapter
-				mCursorListFilter, new String[] { Lists.NAME },
+				mCursorShoppingLists, new String[] { Lists.NAME },
 				new int[] { android.R.id.text1 });
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -2260,7 +2248,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	}
 
 	private String getCurrentListName() {
-		return ((Cursor) mSpinnerListFilter.getSelectedItem())
+		return ((Cursor) mShoppingListsView.getSelectedItem())
 				.getString(mStringListFilterNAME);
 	}	
 	
@@ -2277,7 +2265,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		}
 		if (debug)
 			Log.d(TAG, "fillItems() for list " + listId);
-		mListItemsView.fillItems(this, listId);
+		mItemsView.fillItems(this, listId);
 
 		// Insert any pending items received either through intents
 		// or in onActivityResult:
@@ -2326,18 +2314,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		return list.toArray(new String[0]);
 	}
 
-	/**
-	 * Initialized GTalk if the currently selected list requires it.
-	 */
-	void bindGTalkIfNeeded() {
-		if (isCurrentListShared()) {
-			// Only bind the first time a shared shopping list is opened.
-			// TODO ???
-			/*
-			 * mGTalkSender.bindGTalkService();
-			 */
-		}
-	}
 
 	/**
 	 * Tests whether the current list is shared via GTalk. (not local sharing!)
@@ -2357,7 +2333,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		// so we can read out further elements:
 		// String shareName =
 		// mCursorListFilter.getString(mStringListFilterSHARENAME);
-		String recipients = mCursorListFilter
+		String recipients = mCursorShoppingLists
 				.getString(mStringListFilterSHARECONTACTS);
 
 		// If recipients contains the '@' symbol, it is shared.
@@ -2369,7 +2345,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		@Override
 		public void handleMessage(Message msg) {
 			if (msg.what == MESSAGE_UPDATE_CURSORS) {
-				mCursorListFilter.requery();
+				mCursorShoppingLists.requery();
 
 				if (mUpdating) {
 					sendMessageDelayed(obtainMessage(MESSAGE_UPDATE_CURSORS),
@@ -2459,11 +2435,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 				if (debug)
 					Log.i(TAG, "Received bundle: sharename: " + sharename
-							+ ", contacts: " + contacts);
-				// TODO ???
-				/*
-				 * mGTalkSender.sendList(contacts, sharename);
-				 */
+							+ ", contacts: " + contacts);				
 
 				// Here we also send the current content of the list
 				// to all recipients.
@@ -2523,12 +2495,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 	public void changeList(int value) {
 
-		int pos = mSpinnerListFilter.getSelectedItemPosition();
+		int pos = mShoppingListsView.getSelectedItemPosition();
 		//Temp- Due to architecture requirements of OS 3, the value can not be passed directly
 		if(pos==-1 && Build.VERSION.SDK_INT>=11){
 			try {
-				pos=(Integer)mSpinnerListFilter.getTag();	
-				pos=mCursorListFilter.getCount()<=pos?-1:pos;
+				pos=(Integer)mShoppingListsView.getTag();	
+				pos=mCursorShoppingLists.getCount()<=pos?-1:pos;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -2540,16 +2512,17 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			// Do nothing.
 			newPos = -1;
 		} else if (pos == 0) {
-			newPos = mSpinnerListFilter.getCount() - 1;
-		} else if (pos == mSpinnerListFilter.getCount()) {
+			newPos = mShoppingListsView.getCount() - 1;
+		} else if (pos == mShoppingListsView.getCount()) {
 			newPos = 0;
 		} else {
 			newPos = pos + value;
 		}
-		mSpinnerListFilter.setSelection(newPos);
+		setSelectedListPos(newPos);
+		
 		fillItems();
 		// Now set the theme based on the selected list:
-		mListItemsView.setListTheme(loadListTheme());
+		mItemsView.setListTheme(loadListTheme());
 	}
 	
 	/**
@@ -2558,7 +2531,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 */
 	private void setSpinnerListAdapter(ListAdapter adapter){
 		if(Build.VERSION.SDK_INT < 11){//Temp - restricted for OS3
-			mSpinnerListFilter.setAdapter(adapter);
+			mShoppingListsView.setAdapter(adapter);
 		}else{
 			ShoppingListFilterFragment os3=(ShoppingListFilterFragment)getSupportFragmentManager().findFragmentById(R.id.sidelist);
 			os3.setAdapter(adapter);
