@@ -1,16 +1,16 @@
 package org.openintents.shopping;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
+
+import org.openintents.shopping.provider.ShoppingDatabase;
+import org.openintents.shopping.provider.ShoppingProvider;
 
 import android.app.backup.BackupAgentHelper;
 import android.app.backup.BackupDataInput;
 import android.app.backup.BackupDataOutput;
 import android.app.backup.FileBackupHelper;
 import android.app.backup.SharedPreferencesBackupHelper;
-import android.content.SharedPreferences;
 import android.os.ParcelFileDescriptor;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class ShoppingBackupAgent extends BackupAgentHelper {
@@ -31,7 +31,7 @@ public class ShoppingBackupAgent extends BackupAgentHelper {
 		addHelper(PREFS_BACKUP_KEY, prefsHelper);
 
 		FileBackupHelper helper = new FileBackupHelper(this, "../databases/"
-				+ ShoppingProvider.DATABASE_NAME);
+				+ ShoppingDatabase.DATABASE_NAME);
 		addHelper(DB_BACKUP_KEY, helper);
 	}
 
