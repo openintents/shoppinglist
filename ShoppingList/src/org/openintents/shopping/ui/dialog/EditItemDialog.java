@@ -1,8 +1,7 @@
-package org.openintents.shopping.dialog;
+package org.openintents.shopping.ui.dialog;
 
 
 import org.openintents.distribution.DownloadAppDialog;
-import org.openintents.shopping.PreferenceActivity;
 import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.Shopping;
 import org.openintents.shopping.library.provider.Shopping.Contains;
@@ -10,6 +9,7 @@ import org.openintents.shopping.library.provider.Shopping.Items;
 import org.openintents.shopping.library.provider.Shopping.Units;
 import org.openintents.shopping.library.util.PriceConverter;
 import org.openintents.shopping.library.util.ShoppingUtils;
+import org.openintents.shopping.ui.PreferenceActivity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

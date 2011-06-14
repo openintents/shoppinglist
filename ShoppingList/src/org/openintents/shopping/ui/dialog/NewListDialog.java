@@ -1,4 +1,4 @@
-package org.openintents.shopping.dialog;
+package org.openintents.shopping.ui.dialog;
 
 import org.openintents.shopping.R;
 

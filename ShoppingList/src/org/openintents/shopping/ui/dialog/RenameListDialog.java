@@ -1,7 +1,7 @@
-package org.openintents.shopping.dialog;
+package org.openintents.shopping.ui.dialog;
 
-import org.openintents.shopping.PreferenceActivity;
 import org.openintents.shopping.R;
+import org.openintents.shopping.ui.PreferenceActivity;
 
 import android.app.AlertDialog;
 import android.content.Context;

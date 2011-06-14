@@ -92,7 +92,7 @@
          -->
 
 		<!-- Shopping activity -->
-		<activity android:name=".ShoppingActivity"
+		<activity android:name=".ui.ShoppingActivity"
 			android:label="@string/app_name" 
 			android:windowSoftInputMode="stateHidden|adjustResize" >
 			<intent-filter>
@@ -131,7 +131,7 @@
              -->
 		</activity>
 		
-		<activity android:name=".ShoppingListsActivity">
+		<activity android:name=".ui.ShoppingListsActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
 				<action android:name="android.intent.action.PICK" />
@@ -186,7 +186,7 @@
 				TODO commented out for new sdk, if needed recover from svn
         -->				
 
-		<activity android:name=".AddLocationAlertActivity" 
+		<activity android:name=".ui.AddLocationAlertActivity" 
 				android:label="@string/add_location_alert"
 				android:theme="@android:style/Theme.Dialog"
 				>
@@ -232,13 +232,13 @@
         	</intent-filter>
         </receiver>
 
-        <activity android:name=".PreferenceActivity" android:label="@string/preferences">
+        <activity android:name=".ui.PreferenceActivity" android:label="@string/preferences">
         </activity> 
-        <activity android:name=".PickItemsActivity" 
+        <activity android:name=".ui.PickItemsActivity" 
         android:label="@string/menu_pick_items"
         android:theme="@android:style/Theme.Dialog">
         </activity> 
-        <activity android:name=".ItemStoresActivity" 
+        <activity android:name=".ui.ItemStoresActivity" 
         android:label="@string/item_stores_activity_label"
         android:theme="@android:style/Theme.Dialog">
         </activity> 

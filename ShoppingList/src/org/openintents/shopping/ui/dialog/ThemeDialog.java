@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package org.openintents.shopping.dialog;
+package org.openintents.shopping.ui.dialog;
 
 import java.util.List;
 
-import org.openintents.shopping.PreferenceActivity;
 import org.openintents.shopping.R;
 import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;
 import org.openintents.shopping.theme.ThemeUtils.ThemeInfo;
+import org.openintents.shopping.ui.PreferenceActivity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

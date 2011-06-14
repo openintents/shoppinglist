@@ -29,6 +29,7 @@ import org.openintents.shopping.library.provider.Shopping.Lists;
 import org.openintents.shopping.library.provider.Shopping.Status;
 import org.openintents.shopping.library.provider.Shopping.Stores;
 import org.openintents.shopping.library.provider.Shopping.Units;
+import org.openintents.shopping.ui.PreferenceActivity;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;

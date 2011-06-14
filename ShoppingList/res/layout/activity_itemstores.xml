@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 
- * Copyright (C) 2007-2008 OpenIntents.org
+ * Copyright (C) 2011 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,12 +23,7 @@
 	>
 	<!-- android:background="@drawable/shoppinglist01d" -->
         
-	<Spinner android:id="@+id/spinner_listfilter"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-        android:drawSelectorOnTop="true" />
-        
-	<org.openintents.shopping.ShoppingListView android:id="@+id/list_items" 
+   <org.openintents.shopping.ui.widget.StoreListViewistView android:id="@+id/list_stores" 
 		android:layout_width="fill_parent"
 		android:layout_height="0dip"
 		android:layout_weight="1"
@@ -40,38 +35,23 @@
 		android:stackFromBottom="true"
 		android:layout_height="wrap_content" -->
   		<!--  android:layout_weight="0"  -->
-  	<LinearLayout android:id="@+id/total_panel"
+  	<LinearLayout android:id="@+id/add_panel"
  		android:orientation="horizontal"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content">
-		<TextView android:id="@+id/count"
+		<Button android:id="@+id/button_ok"
 			android:layout_width="0dip"
-			android:layout_weight="1"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="10dip" />
-		<TextView android:id="@+id/total_1"
+			android:layout_weight="1" 				
+			android:layout_height="wrap_content" 				
+			android:text="@string/ok" />
+		<Button android:id="@+id/button_cancel"
 			android:layout_width="0dip"
-			android:layout_weight="1"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="10dip" />
-		<TextView android:id="@+id/total_2"
+			android:layout_weight="1" 				
+			android:layout_height="wrap_content" 				
+			android:text="@string/cancel" />
+	    <Button android:id="@+id/button_add_store"
 			android:layout_width="0dip"
-			android:layout_weight="1"
-			android:layout_height="wrap_content"
-			android:gravity="right" 
-			android:layout_marginRight="10dip" />
-	</LinearLayout>
- 	<LinearLayout android:id="@+id/add_panel"
- 		android:orientation="horizontal"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content">
-		<AutoCompleteTextView android:id="@+id/autocomplete_add_item"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="20dip"
-			android:layout_weight="1"/>
-		<Button android:id="@+id/button_add_item"
-			android:layout_width="wrap_content"
+			android:layout_weight="1" 				
 			android:layout_height="wrap_content" 				
 			android:text="@string/add" />
 	</LinearLayout>

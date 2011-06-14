@@ -14,31 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/page"
-	android:orientation="horizontal" 
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent"
-	>
-	  <fragment android:id="@+id/sidelist"
-  android:layout_width="fill_parent"
-  android:layout_height="wrap_content"
-  class="org.openintents.shopping.ShoppingListFilterOS3"
-  android:layout_weight="3"
-    /> 
-
+ 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/background"
 	android:orientation="vertical" 
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:layout_weight="1"
 	>
 	<!-- android:background="@drawable/shoppinglist01d" -->
         
-	
-       
-	<org.openintents.shopping.ShoppingListView android:id="@+id/list_items" 
+	<Spinner android:id="@+id/spinner_listfilter"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+        android:drawSelectorOnTop="true" />
+        
+	<org.openintents.shopping.ui.widget.ShoppingListView android:id="@+id/list_items" 
 		android:layout_width="fill_parent"
 		android:layout_height="0dip"
 		android:layout_weight="1"
@@ -86,5 +76,4 @@
 			android:text="@string/add" />
 	</LinearLayout>
 	
-</LinearLayout>
 </LinearLayout>

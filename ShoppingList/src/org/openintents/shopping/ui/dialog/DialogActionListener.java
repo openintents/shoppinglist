@@ -1,4 +1,4 @@
-package org.openintents.shopping.dialog;
+package org.openintents.shopping.ui.dialog;
 
 public interface DialogActionListener {
 

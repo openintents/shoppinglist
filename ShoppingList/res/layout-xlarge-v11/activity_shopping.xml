@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/page"
+	android:orientation="horizontal" 
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	>
+	  <fragment android:id="@+id/sidelist"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  class="org.openintents.shopping.ui.tablet.ShoppingListFilterOS3"
+  android:layout_weight="3"
+    /> 
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/background"
+	android:orientation="vertical" 
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:layout_weight="1"
+	>
+	<!-- android:background="@drawable/shoppinglist01d" -->
+        
+	
+       
+	<org.openintents.shopping.ui.widget.ShoppingListView android:id="@+id/list_items" 
+		android:layout_width="fill_parent"
+		android:layout_height="0dip"
+		android:layout_weight="1"
+        android:cacheColorHint="#00000000"
+		/>
+		<!-- 
+        android:transcriptMode="alwaysScroll"
+		android:transcriptMode="normal"
+		android:stackFromBottom="true"
+		android:layout_height="wrap_content" -->
+  		<!--  android:layout_weight="0"  -->
+  	<LinearLayout android:id="@+id/total_panel"
+ 		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<TextView android:id="@+id/count"
+			android:layout_width="0dip"
+			android:layout_weight="1"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dip" />
+		<TextView android:id="@+id/total_1"
+			android:layout_width="0dip"
+			android:layout_weight="1"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dip" />
+		<TextView android:id="@+id/total_2"
+			android:layout_width="0dip"
+			android:layout_weight="1"
+			android:layout_height="wrap_content"
+			android:gravity="right" 
+			android:layout_marginRight="10dip" />
+	</LinearLayout>
+ 	<LinearLayout android:id="@+id/add_panel"
+ 		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		<AutoCompleteTextView android:id="@+id/autocomplete_add_item"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="20dip"
+			android:layout_weight="1"/>
+		<Button android:id="@+id/button_add_item"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" 				
+			android:text="@string/add" />
+	</LinearLayout>
+	
+</LinearLayout>
+</LinearLayout>

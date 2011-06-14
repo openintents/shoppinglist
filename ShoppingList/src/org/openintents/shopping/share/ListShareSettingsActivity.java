@@ -79,7 +79,7 @@ public class ListShareSettingsActivity extends Activity {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        setContentView(R.layout.shopping_share_settings);
+        setContentView(R.layout.activity_list_share_settings);
 
         // Get the uri of the list
         mUri = getIntent().getData();
