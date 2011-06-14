@@ -1,15 +1,15 @@
 package org.openintents.shopping.library.util;
 
 
-import org.openintents.shopping.library.provider.Shopping;
-import org.openintents.shopping.library.provider.Shopping.ActiveList;
-import org.openintents.shopping.library.provider.Shopping.Contains;
-import org.openintents.shopping.library.provider.Shopping.ItemStores;
-import org.openintents.shopping.library.provider.Shopping.Items;
-import org.openintents.shopping.library.provider.Shopping.Lists;
-import org.openintents.shopping.library.provider.Shopping.Status;
-import org.openintents.shopping.library.provider.Shopping.Stores;
-import org.openintents.shopping.library.provider.Shopping.Units;
+import org.openintents.shopping.library.provider.ShoppingContract;
+import org.openintents.shopping.library.provider.ShoppingContract.ActiveList;
+import org.openintents.shopping.library.provider.ShoppingContract.Contains;
+import org.openintents.shopping.library.provider.ShoppingContract.ItemStores;
+import org.openintents.shopping.library.provider.ShoppingContract.Items;
+import org.openintents.shopping.library.provider.ShoppingContract.Lists;
+import org.openintents.shopping.library.provider.ShoppingContract.Status;
+import org.openintents.shopping.library.provider.ShoppingContract.Stores;
+import org.openintents.shopping.library.provider.ShoppingContract.Units;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -33,8 +33,8 @@ public class ShoppingUtils {
 	private static long getItemId(Context context, String name) {
 		long id = -1;
 		
-		Cursor existingItems = context.getContentResolver().query(Shopping.Items.CONTENT_URI,
-				new String[] { Shopping.Items._ID }, "upper(name) = upper(?)",
+		Cursor existingItems = context.getContentResolver().query(ShoppingContract.Items.CONTENT_URI,
+				new String[] { ShoppingContract.Items._ID }, "upper(name) = upper(?)",
 				new String[] { name }, null);
 		if (existingItems.getCount() > 0) {
 			existingItems.moveToFirst();
@@ -46,8 +46,8 @@ public class ShoppingUtils {
 	
 	public static String getItemName(Context context, long itemId) {
 		String name = "";
-		Cursor existingItems = context.getContentResolver().query(Shopping.Items.CONTENT_URI,
-				new String[] { Shopping.Items.NAME }, "_id = ?",
+		Cursor existingItems = context.getContentResolver().query(ShoppingContract.Items.CONTENT_URI,
+				new String[] { ShoppingContract.Items.NAME }, "_id = ?",
 				new String[] { String.valueOf(itemId) }, null);
 		if (existingItems.getCount() > 0) {
 			existingItems.moveToFirst();
@@ -75,7 +75,7 @@ public class ShoppingUtils {
 					null, // Existing item: no need to change name.
 					tags, price, barcode);
 			try {
-				Uri uri = Uri.withAppendedPath(Shopping.Items.CONTENT_URI, String.valueOf(id));
+				Uri uri = Uri.withAppendedPath(ShoppingContract.Items.CONTENT_URI, String.valueOf(id));
 				context.getContentResolver().update(uri, values, null, null);
 				Log.i(TAG, "updated item: " + uri);				
 			} catch (Exception e) {
@@ -87,7 +87,7 @@ public class ShoppingUtils {
 			// Add new item to list:
 			ContentValues values = getContentValues(name, tags, price, barcode);
 			try {
-				Uri uri = context.getContentResolver().insert(Shopping.Items.CONTENT_URI, values);
+				Uri uri = context.getContentResolver().insert(ShoppingContract.Items.CONTENT_URI, values);
 				Log.i(TAG, "Insert new item: " + uri);
 				id = Long.parseLong(uri.getPathSegments().get(1));
 			} catch (Exception e) {
@@ -103,17 +103,17 @@ public class ShoppingUtils {
 			String barcode) {
 		ContentValues values = new ContentValues(4);
 		if (name != null) {
-			values.put(Shopping.Items.NAME, name);
+			values.put(ShoppingContract.Items.NAME, name);
 		}
 		if (tags != null) {
-			values.put(Shopping.Items.TAGS, tags);
+			values.put(ShoppingContract.Items.TAGS, tags);
 		}
 		if (price != null) {
 			Long priceLong = PriceConverter.getCentPriceFromString(price);
-			values.put(Shopping.Items.PRICE, priceLong);
+			values.put(ShoppingContract.Items.PRICE, priceLong);
 		}
 		if (barcode != null) {
-			values.put(Shopping.Items.BARCODE, barcode);
+			values.put(ShoppingContract.Items.BARCODE, barcode);
 		}
 		return values;
 	}
@@ -331,10 +331,10 @@ public class ShoppingUtils {
 			if (quantity != null) {
 				// Only change quantity if an explicit value has been passed.
 				// (see issue 286)
-				values.put(Shopping.Contains.QUANTITY, quantity);
+				values.put(ShoppingContract.Contains.QUANTITY, quantity);
 			}
 			if (priority != null) {
-				values.put(Shopping.Contains.PRIORITY, priority);
+				values.put(ShoppingContract.Contains.PRIORITY, priority);
 			}
 			
 			Uri uri = Uri.withAppendedPath(Contains.CONTENT_URI, String.valueOf(id));
@@ -497,7 +497,7 @@ public class ShoppingUtils {
 			Uri uri;
 			if (cursor.moveToFirst()) {
 
-				uri = Uri.withAppendedPath(Shopping.Lists.CONTENT_URI, cursor
+				uri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, cursor
 						.getString(0));
 
 			} else {

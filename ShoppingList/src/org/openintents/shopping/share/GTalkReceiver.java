@@ -20,8 +20,8 @@
 
 package org.openintents.shopping.share;
 
-import org.openintents.shopping.library.provider.Shopping;
-import org.openintents.shopping.library.provider.Shopping.ContainsFull;
+import org.openintents.shopping.library.provider.ShoppingContract;
+import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -39,10 +39,10 @@ public class GTalkReceiver /*extends IntentReceiver*/ {
 	 * This defines the projection for the table Lists. */
 	private static final String[] mProjectionLists =
         new String[]{
-			Shopping.Lists._ID,
-			Shopping.Lists.NAME,
-			Shopping.Lists.SHARE_NAME,
-			Shopping.Lists.SHARE_CONTACTS};
+			ShoppingContract.Lists._ID,
+			ShoppingContract.Lists.NAME,
+			ShoppingContract.Lists.SHARE_NAME,
+			ShoppingContract.Lists.SHARE_CONTACTS};
 	
 	/** Index of ID in the Projection for Lists */
 	private static final int mProjectionListsID = 0;

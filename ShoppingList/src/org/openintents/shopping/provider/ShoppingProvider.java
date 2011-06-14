@@ -22,15 +22,15 @@ import org.openintents.intents.ProviderIntents;
 import org.openintents.intents.ProviderUtils;
 import org.openintents.shopping.R;
 import org.openintents.shopping.R.string;
-import org.openintents.shopping.library.provider.Shopping;
-import org.openintents.shopping.library.provider.Shopping.Contains;
-import org.openintents.shopping.library.provider.Shopping.ContainsFull;
-import org.openintents.shopping.library.provider.Shopping.ItemStores;
-import org.openintents.shopping.library.provider.Shopping.Items;
-import org.openintents.shopping.library.provider.Shopping.Lists;
-import org.openintents.shopping.library.provider.Shopping.Status;
-import org.openintents.shopping.library.provider.Shopping.Stores;
-import org.openintents.shopping.library.provider.Shopping.Units;
+import org.openintents.shopping.library.provider.ShoppingContract;
+import org.openintents.shopping.library.provider.ShoppingContract.Contains;
+import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
+import org.openintents.shopping.library.provider.ShoppingContract.ItemStores;
+import org.openintents.shopping.library.provider.ShoppingContract.Items;
+import org.openintents.shopping.library.provider.ShoppingContract.Lists;
+import org.openintents.shopping.library.provider.ShoppingContract.Status;
+import org.openintents.shopping.library.provider.ShoppingContract.Stores;
+import org.openintents.shopping.library.provider.ShoppingContract.Units;
 import org.openintents.shopping.ui.PreferenceActivity;
 
 import android.content.ContentProvider;
@@ -775,7 +775,7 @@ public class ShoppingProvider extends ContentProvider {
 
 			count = db.update("items", values, "_id=" + segment + whereString,
 					whereArgs);
-			secondUri  = Shopping.Items.CONTENT_URI;
+			secondUri  = ShoppingContract.Items.CONTENT_URI;
 			break;
 
 		case LISTS:
@@ -884,7 +884,7 @@ public class ShoppingProvider extends ContentProvider {
 			return "vnd.android.cursor.dir/vnd.openintents.shopping.item";
 
 		case ITEM_ID:
-			return Shopping.ITEM_TYPE;
+			return ShoppingContract.ITEM_TYPE;
 
 		case LISTS:
 			return "vnd.android.cursor.dir/vnd.openintents.shopping.list";
@@ -912,9 +912,9 @@ public class ShoppingProvider extends ContentProvider {
 			return "vnd.android.cursor.item/vnd.openintents.shopping.stores";
 			
 		case NOTES:
-			return Shopping.Notes.CONTENT_TYPE; 
+			return ShoppingContract.Notes.CONTENT_TYPE; 
 		case NOTE_ID: 
-			return Shopping.Notes.CONTENT_ITEM_TYPE;
+			return ShoppingContract.Notes.CONTENT_ITEM_TYPE;
 			
 		case ITEMSTORES:
 			return "vnd.android.cursor.dir/vnd.openintents.shopping.itemstores";
@@ -1088,11 +1088,11 @@ public class ShoppingProvider extends ContentProvider {
 		ITEMSTORES_PROJECTION_MAP.put(ItemStores.PRICE, "itemstores.price");
 
 		NOTES_PROJECTION_MAP = new HashMap<String, String>();
-		NOTES_PROJECTION_MAP.put(Shopping.Notes._ID, "items._id");
-		NOTES_PROJECTION_MAP.put(Shopping.Notes.NOTE, "items.note");
-		NOTES_PROJECTION_MAP.put(Shopping.Notes.TITLE, "null as title");
-		NOTES_PROJECTION_MAP.put(Shopping.Notes.TAGS, "null as tags");
-		NOTES_PROJECTION_MAP.put(Shopping.Notes.ENCRYPTED, "null as encrypted");
-		NOTES_PROJECTION_MAP.put(Shopping.Notes.THEME, "null as theme");
+		NOTES_PROJECTION_MAP.put(ShoppingContract.Notes._ID, "items._id");
+		NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.NOTE, "items.note");
+		NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.TITLE, "null as title");
+		NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.TAGS, "null as tags");
+		NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.ENCRYPTED, "null as encrypted");
+		NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.THEME, "null as theme");
 	}
 }

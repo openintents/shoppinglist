@@ -3,10 +3,10 @@ package org.openintents.shopping.ui.dialog;
 
 import org.openintents.distribution.DownloadAppDialog;
 import org.openintents.shopping.R;
-import org.openintents.shopping.library.provider.Shopping;
-import org.openintents.shopping.library.provider.Shopping.Contains;
-import org.openintents.shopping.library.provider.Shopping.Items;
-import org.openintents.shopping.library.provider.Shopping.Units;
+import org.openintents.shopping.library.provider.ShoppingContract;
+import org.openintents.shopping.library.provider.ShoppingContract.Contains;
+import org.openintents.shopping.library.provider.ShoppingContract.Items;
+import org.openintents.shopping.library.provider.ShoppingContract.Units;
 import org.openintents.shopping.library.util.PriceConverter;
 import org.openintents.shopping.library.util.ShoppingUtils;
 import org.openintents.shopping.ui.PreferenceActivity;
@@ -126,13 +126,13 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 
 			@Override
 			public void onClick(View v) {
-				Uri uri = ContentUris.withAppendedId(Shopping.Notes.CONTENT_URI, mItemId);
+				Uri uri = ContentUris.withAppendedId(ShoppingContract.Notes.CONTENT_URI, mItemId);
 				
 				if (mNoteText == null) {
 				   // Maybe an earlier edit activity added it? If so, 
 				   // we should not replace with empty string below.
 					Cursor c = mContext.getContentResolver().query(mItemUri, 
-							new String[] {Shopping.Items.NOTE} , null, null, null);
+							new String[] {ShoppingContract.Items.NOTE} , null, null, null);
 					if (c != null && c.moveToFirst()) {
 						mNoteText = c.getString(0);
 					}
@@ -280,16 +280,16 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 	}
 	
 	private final String[] mProjection = { 
-			Shopping.Items.NAME,
-			Shopping.Items.TAGS,
-			Shopping.Items.PRICE,
-			Shopping.Items.NOTE,
-			Shopping.Items._ID,
-			Shopping.Items.UNITS
+			ShoppingContract.Items.NAME,
+			ShoppingContract.Items.TAGS,
+			ShoppingContract.Items.PRICE,
+			ShoppingContract.Items.NOTE,
+			ShoppingContract.Items._ID,
+			ShoppingContract.Items.UNITS
 	};
 	private final String[] mRelationProjection = { 
-			Shopping.Contains.QUANTITY,
-			Shopping.Contains.PRIORITY
+			ShoppingContract.Contains.QUANTITY,
+			ShoppingContract.Contains.PRIORITY
 	};
 
 	private Uri mRelationUri;

@@ -4,7 +4,7 @@ import org.openintents.intents.AutomationIntents;
 import org.openintents.intents.ShoppingListIntents;
 import org.openintents.shopping.LogConstants;
 import org.openintents.shopping.R;
-import org.openintents.shopping.library.provider.Shopping;
+import org.openintents.shopping.library.provider.ShoppingContract;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -169,7 +169,7 @@ public class EditAutomationActivity extends Activity {
 
 	void pickList() {
 		Intent i = new Intent(Intent.ACTION_PICK);
-		i.setData(Shopping.Lists.CONTENT_URI);
+		i.setData(ShoppingContract.Lists.CONTENT_URI);
 		
 		startActivityForResult(i, REQUEST_CODE_PICK_LIST);
 	}
@@ -197,7 +197,7 @@ public class EditAutomationActivity extends Activity {
 			mButtonOk.setEnabled(true);
 			
 			// Get name of list from content provider
-			Cursor c = getContentResolver().query(mUri, new String[] {Shopping.Lists._ID, Shopping.Lists.NAME}, null, null, null);
+			Cursor c = getContentResolver().query(mUri, new String[] {ShoppingContract.Lists._ID, ShoppingContract.Lists.NAME}, null, null, null);
 			
 			if (c != null & c.moveToFirst()) {
 				mDescriptionShoppingList = c.getString(1);

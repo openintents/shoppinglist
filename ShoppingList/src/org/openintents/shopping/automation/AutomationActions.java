@@ -1,8 +1,8 @@
 package org.openintents.shopping.automation;
 
-import org.openintents.shopping.library.provider.Shopping;
-import org.openintents.shopping.library.provider.Shopping.Contains;
-import org.openintents.shopping.library.provider.Shopping.Status;
+import org.openintents.shopping.library.provider.ShoppingContract;
+import org.openintents.shopping.library.provider.ShoppingContract.Contains;
+import org.openintents.shopping.library.provider.ShoppingContract.Status;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -21,9 +21,9 @@ public class AutomationActions {
 			boolean nothingdeleted = context.getContentResolver().update(
 					Contains.CONTENT_URI,
 					values,
-					Shopping.Contains.LIST_ID + " = " + id + " AND "
-							+ Shopping.Contains.STATUS + " = "
-							+ Shopping.Status.BOUGHT, null) == 0;
+					ShoppingContract.Contains.LIST_ID + " = " + id + " AND "
+							+ ShoppingContract.Contains.STATUS + " = "
+							+ ShoppingContract.Status.BOUGHT, null) == 0;
 		}
 	}
 

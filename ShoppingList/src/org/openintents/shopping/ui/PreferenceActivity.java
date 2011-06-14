@@ -3,7 +3,7 @@ package org.openintents.shopping.ui;
 import org.openintents.shopping.R;
 import org.openintents.shopping.R.string;
 import org.openintents.shopping.R.xml;
-import org.openintents.shopping.library.provider.Shopping.Contains;
+import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.util.BackupManagerWrapper;
 import org.openintents.util.IntentUtils;
 

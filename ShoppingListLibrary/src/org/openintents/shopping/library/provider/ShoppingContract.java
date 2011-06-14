@@ -25,7 +25,7 @@ import android.provider.BaseColumns;
  * Version corresponds to main version of OI Shopping List.
  * @version 1.2.7
  */
-public abstract class Shopping {
+public abstract class ShoppingContract {
 
 	/**
 	 * TAG for logging.

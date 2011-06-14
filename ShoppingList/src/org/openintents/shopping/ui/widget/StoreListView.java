@@ -6,12 +6,12 @@ import java.util.Locale;
 
 import org.openintents.distribution.DownloadAppDialog;
 import org.openintents.shopping.R;
-import org.openintents.shopping.library.provider.Shopping;
-import org.openintents.shopping.library.provider.Shopping.Contains;
-import org.openintents.shopping.library.provider.Shopping.ContainsFull;
-import org.openintents.shopping.library.provider.Shopping.ItemStores;
-import org.openintents.shopping.library.provider.Shopping.Status;
-import org.openintents.shopping.library.provider.Shopping.Stores;
+import org.openintents.shopping.library.provider.ShoppingContract;
+import org.openintents.shopping.library.provider.ShoppingContract.Contains;
+import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
+import org.openintents.shopping.library.provider.ShoppingContract.ItemStores;
+import org.openintents.shopping.library.provider.ShoppingContract.Status;
+import org.openintents.shopping.library.provider.ShoppingContract.Stores;
 import org.openintents.shopping.R.id;
 import org.openintents.shopping.R.layout;
 import org.openintents.shopping.theme.ThemeAttributes;
@@ -448,7 +448,7 @@ public class StoreListView extends ListView {
 	 */
 	private void registerContentObserver() {
 		getContext().getContentResolver().registerContentObserver(
-				Shopping.ItemStores.CONTENT_URI, true, mContentObserver);
+				ShoppingContract.ItemStores.CONTENT_URI, true, mContentObserver);
 	}
 
 	private void unregisterContentObserver() {
@@ -486,7 +486,7 @@ public class StoreListView extends ListView {
 		Log.d(TAG, "update row " + itemstore_id + ", newstatus "
 				+ newstatus);
 		getContext().getContentResolver().update(
-				Uri.withAppendedPath(Shopping.ItemStores.CONTENT_URI,
+				Uri.withAppendedPath(ShoppingContract.ItemStores.CONTENT_URI,
 						itemstore_id), values, null, null);
 
 		requery();

@@ -11,10 +11,10 @@ import org.openintents.shopping.R.id;
 import org.openintents.shopping.R.layout;
 import org.openintents.shopping.R.string;
 import org.openintents.shopping.R.style;
-import org.openintents.shopping.library.provider.Shopping;
-import org.openintents.shopping.library.provider.Shopping.Contains;
-import org.openintents.shopping.library.provider.Shopping.ContainsFull;
-import org.openintents.shopping.library.provider.Shopping.Status;
+import org.openintents.shopping.library.provider.ShoppingContract;
+import org.openintents.shopping.library.provider.ShoppingContract.Contains;
+import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
+import org.openintents.shopping.library.provider.ShoppingContract.Status;
 import org.openintents.shopping.theme.ThemeAttributes;
 import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;
@@ -242,7 +242,7 @@ public class ShoppingListView extends ListView {
 				}
 				
 				
-			if (status == Shopping.Status.BOUGHT) {
+			if (status == ShoppingContract.Status.BOUGHT) {
 				t.setTextColor(mTextColorChecked);
 
 				if (mShowStrikethrough) {
@@ -291,8 +291,8 @@ public class ShoppingListView extends ListView {
 
 			if (mShowCheckBox) {
 				c.setVisibility(CheckBox.VISIBLE);
-				if ((status == Shopping.Status.BOUGHT && mMode == ShoppingActivity.MODE_IN_SHOP)
-						|| (status == Shopping.Status.WANT_TO_BUY)
+				if ((status == ShoppingContract.Status.BOUGHT && mMode == ShoppingActivity.MODE_IN_SHOP)
+						|| (status == ShoppingContract.Status.WANT_TO_BUY)
 						&& mMode == ShoppingActivity.MODE_ADD_ITEMS) {
 					c.setChecked(true);
 				} else {
@@ -373,7 +373,7 @@ public class ShoppingListView extends ListView {
 					Intent i = new Intent(Intent.ACTION_VIEW);
 					cursor.moveToPosition(cursorpos);
 					long note_id = cursor.getLong(ShoppingActivity.mStringItemsITEMID);
-					Uri uri = ContentUris.withAppendedId(Shopping.Notes.CONTENT_URI, note_id);
+					Uri uri = ContentUris.withAppendedId(ShoppingContract.Notes.CONTENT_URI, note_id);
 					i.setData(uri);
 					try {
 					    context.startActivity(i);
@@ -582,11 +582,11 @@ public class ShoppingListView extends ListView {
 		String selection;
 		if (mMode == ShoppingActivity.MODE_IN_SHOP) {
 			if (hideBought) {
-				selection = "list_id = ? AND " + Shopping.Contains.STATUS
-						+ " == " + Shopping.Status.WANT_TO_BUY;
+				selection = "list_id = ? AND " + ShoppingContract.Contains.STATUS
+						+ " == " + ShoppingContract.Status.WANT_TO_BUY;
 			} else {
-				selection = "list_id = ? AND " + Shopping.Contains.STATUS
-						+ " <> " + Shopping.Status.REMOVED_FROM_LIST;
+				selection = "list_id = ? AND " + ShoppingContract.Contains.STATUS
+						+ " <> " + ShoppingContract.Status.REMOVED_FROM_LIST;
 			}
 		} else {
 			selection = "list_id = ? ";
@@ -654,7 +654,7 @@ public class ShoppingListView extends ListView {
 	 */
 	private void registerContentObserver() {
 		getContext().getContentResolver().registerContentObserver(
-				Shopping.Items.CONTENT_URI, true, mContentObserver);
+				ShoppingContract.Items.CONTENT_URI, true, mContentObserver);
 	}
 
 	private void unregisterContentObserver() {
@@ -930,16 +930,16 @@ public class ShoppingListView extends ListView {
 			// bought -> bought
 			// want_to_buy -> bought
 			// removed_from_list -> want_to_buy
-			long newstatus = Shopping.Status.WANT_TO_BUY;
-			if(oldstatus == Shopping.Status.WANT_TO_BUY){
-				newstatus = Shopping.Status.BOUGHT;
+			long newstatus = ShoppingContract.Status.WANT_TO_BUY;
+			if(oldstatus == ShoppingContract.Status.WANT_TO_BUY){
+				newstatus = ShoppingContract.Status.BOUGHT;
 				
 				ContentValues values = new ContentValues();
-				values.put(Shopping.Contains.STATUS, newstatus);
+				values.put(ShoppingContract.Contains.STATUS, newstatus);
 				Log.d(TAG, "update row " + mCursorItems.getString(0) + ", newstatus "
 						+ newstatus);
 				getContext().getContentResolver().update(
-						Uri.withAppendedPath(Shopping.Contains.CONTENT_URI,
+						Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI,
 								mCursorItems.getString(0)), values, null, null);
 				
 			}
@@ -965,17 +965,17 @@ public class ShoppingListView extends ListView {
 		// bought -> want_to_buy
 		// want_to_buy -> bought
 		// removed_from_list -> want_to_buy
-		long newstatus = Shopping.Status.WANT_TO_BUY;
-		if (oldstatus == Shopping.Status.WANT_TO_BUY) {
-			newstatus = Shopping.Status.BOUGHT;
+		long newstatus = ShoppingContract.Status.WANT_TO_BUY;
+		if (oldstatus == ShoppingContract.Status.WANT_TO_BUY) {
+			newstatus = ShoppingContract.Status.BOUGHT;
 		}
 
 		ContentValues values = new ContentValues();
-		values.put(Shopping.Contains.STATUS, newstatus);
+		values.put(ShoppingContract.Contains.STATUS, newstatus);
 		Log.d(TAG, "update row " + mCursorItems.getString(0) + ", newstatus "
 				+ newstatus);
 		getContext().getContentResolver().update(
-				Uri.withAppendedPath(Shopping.Contains.CONTENT_URI,
+				Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI,
 						mCursorItems.getString(0)), values, null, null);
 
 		requery();
@@ -990,10 +990,10 @@ public class ShoppingListView extends ListView {
 			// by deleteing items
 
 			nothingdeleted = getContext().getContentResolver().delete(
-					Shopping.Contains.CONTENT_URI,
-					Shopping.Contains.LIST_ID + " = " + mListId + " AND "
-							+ Shopping.Contains.STATUS + " = "
-							+ Shopping.Status.BOUGHT, null) == 0;
+					ShoppingContract.Contains.CONTENT_URI,
+					ShoppingContract.Contains.LIST_ID + " = " + mListId + " AND "
+							+ ShoppingContract.Contains.STATUS + " = "
+							+ ShoppingContract.Status.BOUGHT, null) == 0;
 
 		} else {
 			// by changing state
@@ -1002,9 +1002,9 @@ public class ShoppingListView extends ListView {
 			nothingdeleted = getContext().getContentResolver().update(
 					Contains.CONTENT_URI,
 					values,
-					Shopping.Contains.LIST_ID + " = " + mListId + " AND "
-							+ Shopping.Contains.STATUS + " = "
-							+ Shopping.Status.BOUGHT, null) == 0;
+					ShoppingContract.Contains.LIST_ID + " = " + mListId + " AND "
+							+ ShoppingContract.Contains.STATUS + " = "
+							+ ShoppingContract.Status.BOUGHT, null) == 0;
 		}
 
 		requery();
@@ -1023,17 +1023,17 @@ public class ShoppingListView extends ListView {
 		// bought -> want_to_buy
 		// want_to_buy -> removed_from_list
 		// removed_from_list -> want_to_buy
-		long newstatus = Shopping.Status.WANT_TO_BUY;
-		if (oldstatus == Shopping.Status.WANT_TO_BUY) {
-			newstatus = Shopping.Status.REMOVED_FROM_LIST;
+		long newstatus = ShoppingContract.Status.WANT_TO_BUY;
+		if (oldstatus == ShoppingContract.Status.WANT_TO_BUY) {
+			newstatus = ShoppingContract.Status.REMOVED_FROM_LIST;
 		}
 
 		ContentValues values = new ContentValues();
-		values.put(Shopping.Contains.STATUS, newstatus);
+		values.put(ShoppingContract.Contains.STATUS, newstatus);
 		Log.d(TAG, "update row " + mCursorItems.getString(0) + ", newstatus "
 				+ newstatus);
 		getContext().getContentResolver().update(
-				Uri.withAppendedPath(Shopping.Contains.CONTENT_URI,
+				Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI,
 						mCursorItems.getString(0)), values, null, null);
 
 		requery();
@@ -1173,7 +1173,7 @@ public class ShoppingListView extends ListView {
 		while (mCursorItems.moveToNext()) {
 			long price = getQuantityPrice(mCursorItems);
 			total += price;
-			if (mCursorItems.getLong(ShoppingActivity.mStringItemsSTATUS) == Shopping.Status.BOUGHT) {
+			if (mCursorItems.getLong(ShoppingActivity.mStringItemsSTATUS) == ShoppingContract.Status.BOUGHT) {
 				totalchecked += price;
 				counter++;
 			}

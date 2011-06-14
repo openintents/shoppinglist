@@ -17,8 +17,8 @@
 package org.openintents.shopping.share;
 
 import org.openintents.shopping.R;
-import org.openintents.shopping.library.provider.Shopping;
-import org.openintents.shopping.library.provider.Shopping.Lists;
+import org.openintents.shopping.library.provider.ShoppingContract;
+import org.openintents.shopping.library.provider.ShoppingContract.Lists;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -46,10 +46,10 @@ public class ListShareSettingsActivity extends Activity {
 	 * This defines the projection for the table Lists. */
 	private static final String[] mProjectionLists =
         new String[]{
-			Shopping.Lists._ID,
-			Shopping.Lists.NAME,
-			Shopping.Lists.SHARE_NAME,
-			Shopping.Lists.SHARE_CONTACTS};
+			ShoppingContract.Lists._ID,
+			ShoppingContract.Lists.NAME,
+			ShoppingContract.Lists.SHARE_NAME,
+			ShoppingContract.Lists.SHARE_CONTACTS};
 	
 	/** Index of ID in the Projection for Lists */
 	private static final int mProjectionListsID = 0;
@@ -160,8 +160,8 @@ public class ListShareSettingsActivity extends Activity {
         // Broadcast the information to peers:
         // Should be done in the calling activity.
         Bundle bundle = new Bundle();
-        bundle.putString(Shopping.Lists.SHARE_NAME, sharename);
-        bundle.putString(Shopping.Lists.SHARE_CONTACTS, contacts);
+        bundle.putString(ShoppingContract.Lists.SHARE_NAME, sharename);
+        bundle.putString(ShoppingContract.Lists.SHARE_CONTACTS, contacts);
         
         /*
         setResult(RESULT_OK, mUri.toString(), bundle);

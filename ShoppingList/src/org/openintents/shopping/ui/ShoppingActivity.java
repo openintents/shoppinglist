@@ -33,12 +33,12 @@ import org.openintents.shopping.R.drawable;
 import org.openintents.shopping.R.id;
 import org.openintents.shopping.R.layout;
 import org.openintents.shopping.R.string;
-import org.openintents.shopping.library.provider.Shopping;
-import org.openintents.shopping.library.provider.Shopping.Contains;
-import org.openintents.shopping.library.provider.Shopping.ContainsFull;
-import org.openintents.shopping.library.provider.Shopping.Items;
-import org.openintents.shopping.library.provider.Shopping.Lists;
-import org.openintents.shopping.library.provider.Shopping.Status;
+import org.openintents.shopping.library.provider.ShoppingContract;
+import org.openintents.shopping.library.provider.ShoppingContract.Contains;
+import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
+import org.openintents.shopping.library.provider.ShoppingContract.Items;
+import org.openintents.shopping.library.provider.ShoppingContract.Lists;
+import org.openintents.shopping.library.provider.ShoppingContract.Status;
 import org.openintents.shopping.library.util.PriceConverter;
 import org.openintents.shopping.library.util.ShoppingUtils;
 import org.openintents.shopping.share.GTalkSender;
@@ -479,8 +479,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		mUpdating = false;
 
 		// General Uris:
-		mListUri = Shopping.Lists.CONTENT_URI;
-		mItemUri = Shopping.Items.CONTENT_URI;
+		mListUri = ShoppingContract.Lists.CONTENT_URI;
+		mItemUri = ShoppingContract.Items.CONTENT_URI;
 
 		int defaultShoppingList = initFromPreferences();
 
@@ -493,7 +493,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			// Main action
 			mState = STATE_MAIN;
 
-			mListUri = Uri.withAppendedPath(Shopping.Lists.CONTENT_URI, ""
+			mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, ""
 					+ defaultShoppingList);
 
 			intent.setData(mListUri);
@@ -501,7 +501,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			// Main action
 			mState = STATE_MAIN;
 
-			mListUri = Uri.withAppendedPath(Shopping.Lists.CONTENT_URI, ""
+			mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, ""
 					+ defaultShoppingList);
 
 			intent.setData(mListUri);
@@ -509,7 +509,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		} else if (Intent.ACTION_VIEW.equals(action)) {
 			mState = STATE_VIEW_LIST;
 
-			if (Shopping.ITEM_TYPE.equals(type)) {
+			if (ShoppingContract.ITEM_TYPE.equals(type)) {
 				mListUri = ShoppingUtils.getListForItem(this, intent.getData()
 						.getLastPathSegment());
 			} else if (intent.getData() != null) {
@@ -519,7 +519,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			// TODO: insert items from extras ????
 			mState = STATE_VIEW_LIST;
 
-			if (Shopping.ITEM_TYPE.equals(type)) {
+			if (ShoppingContract.ITEM_TYPE.equals(type)) {
 				mListUri = ShoppingUtils.getListForItem(
 						getApplicationContext(), intent.getData()
 								.getLastPathSegment());
@@ -530,12 +530,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		} else if (Intent.ACTION_PICK.equals(action)) {
 			mState = STATE_PICK_ITEM;
 
-			mListUri = Uri.withAppendedPath(Shopping.Lists.CONTENT_URI, ""
+			mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, ""
 					+ defaultShoppingList);
 		} else if (Intent.ACTION_GET_CONTENT.equals(action)) {
 			mState = STATE_GET_CONTENT_ITEM;
 
-			mListUri = Uri.withAppendedPath(Shopping.Lists.CONTENT_URI, ""
+			mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, ""
 					+ defaultShoppingList);
 		} else if (GeneralIntents.ACTION_INSERT_FROM_EXTRAS.equals(action)) {
 			if (ShoppingListIntents.TYPE_STRING_ARRAYLIST_SHOPPING.equals(type)) {
@@ -546,11 +546,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				 */
 				getShoppingExtras(intent);
 				mState = STATE_MAIN;
-				mListUri = Uri.withAppendedPath(Shopping.Lists.CONTENT_URI, ""
+				mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, ""
 						+ defaultShoppingList);
 				intent.setData(mListUri);
 			} else if (intent.getDataString().startsWith(
-					Shopping.Lists.CONTENT_URI.toString())) {
+					ShoppingContract.Lists.CONTENT_URI.toString())) {
 				// Somewhat quick fix to pass data from ShoppingListsActivity to
 				// this activity.
 
@@ -1150,7 +1150,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		mExtraListUri = null;
 		if ((intent.getDataString() != null)
 				&& (intent.getDataString()
-						.startsWith(Shopping.Lists.CONTENT_URI.toString()))) {
+						.startsWith(ShoppingContract.Lists.CONTENT_URI.toString()))) {
 			// We received a valid shopping list URI.
 
 			// Set current list to received list:
@@ -1217,7 +1217,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private void pickItem(Cursor c) {
 		long itemId = c.getLong(mStringItemsITEMID);
 		Uri url = ContentUris
-				.withAppendedId(Shopping.Items.CONTENT_URI, itemId);
+				.withAppendedId(ShoppingContract.Items.CONTENT_URI, itemId);
 
 		Intent intent = new Intent();
 		intent.setData(url);
@@ -1530,7 +1530,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		case MENU_MOVE_ITEM:
 			Intent intent = new Intent();
 			intent.setAction(Intent.ACTION_PICK);
-			intent.setData(Shopping.Lists.CONTENT_URI);
+			intent.setData(ShoppingContract.Lists.CONTENT_URI);
 			startActivityForResult(intent, REQUEST_PICK_LIST);
 			mMoveItemPosition = menuInfo.position;
 			break;
@@ -1609,7 +1609,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			StringBuffer sb = new StringBuffer();
 			for (int i = 0; i < mListItemsView.getAdapter().getCount(); i++) {
 				Cursor item = (Cursor) mListItemsView.getAdapter().getItem(i);
-				if (item.getLong(mStringItemsSTATUS) == Shopping.Status.BOUGHT) {
+				if (item.getLong(mStringItemsSTATUS) == ShoppingContract.Status.BOUGHT) {
 					sb.append("[X] ");
 				} else {
 					sb.append("[ ] ");
@@ -1751,8 +1751,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				.getLong(mStringItemsCONTAINSID);
 
 		mItemUri = Uri
-				.withAppendedPath(Shopping.Items.CONTENT_URI, "" + itemId);
-		mRelationUri = Uri.withAppendedPath(Shopping.Contains.CONTENT_URI, ""
+				.withAppendedPath(ShoppingContract.Items.CONTENT_URI, "" + itemId);
+		mRelationUri = Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI, ""
 				+ containsId);
 		mEditItemFocusField = field;
 
@@ -2098,7 +2098,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		long listId = mCursorListFilter.getLong(mStringListFilterID);
 
 		mListUri = Uri
-				.withAppendedPath(Shopping.Lists.CONTENT_URI, "" + listId);
+				.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, "" + listId);
 
 		getIntent().setData(mListUri);
 
@@ -2296,9 +2296,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 * @return
 	 */
 	String[] getTaglist() {
-		Cursor c = getContentResolver().query(Shopping.Items.CONTENT_URI,
-				new String[] { Shopping.Items.TAGS }, null, null,
-				Shopping.Items.DEFAULT_SORT_ORDER);
+		Cursor c = getContentResolver().query(ShoppingContract.Items.CONTENT_URI,
+				new String[] { ShoppingContract.Items.TAGS }, null, null,
+				ShoppingContract.Items.DEFAULT_SORT_ORDER);
 		// Create a set of all tags (every tag should only appear once).
 		HashSet<String> tagset = new HashSet<String>();
 		c.moveToPosition(-1);
@@ -2453,9 +2453,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				// TODO ???
 				Bundle extras = data.getExtras();
 
-				String sharename = extras.getString(Shopping.Lists.SHARE_NAME);
+				String sharename = extras.getString(ShoppingContract.Lists.SHARE_NAME);
 				String contacts = extras
-						.getString(Shopping.Lists.SHARE_CONTACTS);
+						.getString(ShoppingContract.Lists.SHARE_CONTACTS);
 
 				if (debug)
 					Log.i(TAG, "Received bundle: sharename: " + sharename

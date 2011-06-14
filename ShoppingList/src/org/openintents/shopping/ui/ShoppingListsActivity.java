@@ -4,8 +4,8 @@ import org.openintents.intents.GeneralIntents;
 import org.openintents.shopping.R;
 import org.openintents.shopping.R.drawable;
 import org.openintents.shopping.R.string;
-import org.openintents.shopping.library.provider.Shopping;
-import org.openintents.shopping.library.provider.Shopping.Lists;
+import org.openintents.shopping.library.provider.ShoppingContract;
+import org.openintents.shopping.library.provider.ShoppingContract.Lists;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -25,7 +25,7 @@ public class ShoppingListsActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		Cursor cursor = managedQuery(Shopping.Lists.CONTENT_URI, new String[] {
+		Cursor cursor = managedQuery(ShoppingContract.Lists.CONTENT_URI, new String[] {
 				Lists._ID, Lists.NAME }, null, null, Lists.DEFAULT_SORT_ORDER);
 		setListAdapter(new SimpleCursorAdapter(this,
 				android.R.layout.simple_list_item_1, cursor,
@@ -89,7 +89,7 @@ public class ShoppingListsActivity extends ListActivity {
 	}
 	
 	private String getTitle(Uri uri) {
-		Cursor c = getContentResolver().query(uri, new String[] {Shopping.Lists.NAME}, null, null, null);
+		Cursor c = getContentResolver().query(uri, new String[] {ShoppingContract.Lists.NAME}, null, null, null);
 		if (c != null && c.moveToFirst()) {
 			return c.getString(0);
 		}

@@ -1,8 +1,8 @@
 package org.openintents.shopping.provider;
 
-import org.openintents.shopping.library.provider.Shopping.Contains;
-import org.openintents.shopping.library.provider.Shopping.ItemStores;
-import org.openintents.shopping.library.provider.Shopping.Items;
+import org.openintents.shopping.library.provider.ShoppingContract.Contains;
+import org.openintents.shopping.library.provider.ShoppingContract.ItemStores;
+import org.openintents.shopping.library.provider.ShoppingContract.Items;
 
 import android.content.ContentValues;
 import android.content.Context;
