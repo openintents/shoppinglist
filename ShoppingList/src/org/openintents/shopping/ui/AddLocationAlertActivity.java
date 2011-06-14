@@ -65,7 +65,7 @@ public class AddLocationAlertActivity extends Activity
 
         mTag = new Tag(this);
         
-        setContentView(R.layout.shopping_add_location_alert);
+        setContentView(R.layout.activity_add_location_alert);
 
         // Get the uri of the list
         mShoppingListUri = getIntent().getData();

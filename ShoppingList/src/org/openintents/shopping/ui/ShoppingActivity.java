@@ -48,7 +48,7 @@ import org.openintents.shopping.ui.dialog.NewListDialog;
 import org.openintents.shopping.ui.dialog.RenameListDialog;
 import org.openintents.shopping.ui.dialog.ThemeDialog;
 import org.openintents.shopping.ui.dialog.ThemeDialog.ThemeDialogListener;
-import org.openintents.shopping.ui.tablet.ShoppingListFilterOS3;
+import org.openintents.shopping.ui.tablet.ShoppingListFilterFragment;
 import org.openintents.shopping.ui.widget.ShoppingListView;
 import org.openintents.shopping.ui.widget.ShoppingListView.DragListener;
 import org.openintents.shopping.ui.widget.ShoppingListView.DropListener;
@@ -2560,7 +2560,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		if(Build.VERSION.SDK_INT < 11){//Temp - restricted for OS3
 			mSpinnerListFilter.setAdapter(adapter);
 		}else{
-			ShoppingListFilterOS3 os3=(ShoppingListFilterOS3)getSupportFragmentManager().findFragmentById(R.id.sidelist);
+			ShoppingListFilterFragment os3=(ShoppingListFilterFragment)getSupportFragmentManager().findFragmentById(R.id.sidelist);
 			os3.setAdapter(adapter);
 		}
 	}

@@ -13,7 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.openintents.shopping;
+package org.openintents.shopping.ui.tablet;
+
+import org.openintents.shopping.R;
+import org.openintents.shopping.R.layout;
 
 import android.os.Bundle;
 import android.support.v2.app.ListFragment;
@@ -25,12 +28,12 @@ import android.widget.ListView;
 
 /**
  * <pre>
- * This replaces the top spinner with the List at left side for OS3 tablets
+ * This replaces the top spinner with the List at left side for tablets
  *  
  * @author Temp
  * </pre>
  */
-public class ShoppingListFilterOS3 extends ListFragment {
+public class ShoppingListFilterFragment extends ListFragment {
 
 	private ListAdapter mListAdapter;
 	private ListView mListView;
@@ -39,7 +42,7 @@ public class ShoppingListFilterOS3 extends ListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		return inflater
-				.inflate(R.layout.shopping_list_filter, container, false);
+				.inflate(R.layout.fragment_shopping_list_filter, container, false);
 	}
 
 	public void onActivityCreated(Bundle savedInstanceState) {

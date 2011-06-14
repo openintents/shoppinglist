@@ -23,7 +23,7 @@
 	  <fragment android:id="@+id/sidelist"
   android:layout_width="fill_parent"
   android:layout_height="wrap_content"
-  class="org.openintents.shopping.ui.tablet.ShoppingListFilterOS3"
+  class="org.openintents.shopping.ui.tablet.ShoppingListFilterFragment"
   android:layout_weight="3"
     /> 
 

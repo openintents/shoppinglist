@@ -47,7 +47,7 @@ public class EditAutomationActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		setContentView(R.layout.automation_settings);
+		setContentView(R.layout.activity_edit_automation);
 		
 		mUri = null;
 		mDescriptionShoppingList = "?";
