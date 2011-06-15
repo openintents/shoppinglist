@@ -1015,7 +1015,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private void createList() {
 
 		// TODO switch layout on screen size, not sdk versions
-		if(Build.VERSION.SDK_INT>=11){
+		if(android.support.v2.os.Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB){
 			
 			mShoppingListsView = (ListView) findViewById(android.R.id.list);
 			((ListView)mShoppingListsView)
@@ -1221,7 +1221,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		
 		//Temp- for backward compatibility with OS 3 features 
 		
-		if(android.support.v2.os.Build.VERSION.SDK_INT >= 11){
+		if(android.support.v2.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
 			//Build.VERSION_CODES.HONEYCOMB -- reverted, since integer constant is not defined in older API level. Example:API 9
 			try{
 				//setting the value equivalent to desired expression
@@ -2056,7 +2056,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private long getSelectedListId() {
 		int pos = mShoppingListsView.getSelectedItemPosition();
 		//Temp- Due to architecture requirements of OS 3, the value can not be passed directly
-		if(pos==-1 && Build.VERSION.SDK_INT>=11){
+		if(pos==-1 && android.support.v2.os.Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB){
 			try {
 				pos=(Integer)mShoppingListsView.getTag();	
 				pos=mCursorShoppingLists.getCount()<=pos?-1:pos;
@@ -2513,7 +2513,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		int pos = mShoppingListsView.getSelectedItemPosition();
 		//Temp- Due to architecture requirements of OS 3, the value can not be passed directly
-		if(pos==-1 && Build.VERSION.SDK_INT>=11){
+		if(pos==-1 && android.support.v2.os.Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB){
 			try {
 				pos=(Integer)mShoppingListsView.getTag();	
 				pos=mCursorShoppingLists.getCount()<=pos?-1:pos;
@@ -2546,7 +2546,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 * @param adapter
 	 */
 	private void setSpinnerListAdapter(ListAdapter adapter){
-		if(Build.VERSION.SDK_INT < 11){//Temp - restricted for OS3
+		if(android.support.v2.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){//Temp - restricted for OS3
 			mShoppingListsView.setAdapter(adapter);
 		}else{
 			ShoppingListFilterFragment os3=(ShoppingListFilterFragment)getSupportFragmentManager().findFragmentById(R.id.sidelist);
