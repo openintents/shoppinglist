@@ -67,8 +67,20 @@
 					android:defaultValue="true" android:title="@string/preference_showquantity_title"
 					android:summary="@string/preference_showquantity_summary" />
 
-			<CheckBoxPreference android:defaultValue="false" android:key="showpriority" android:title="@string/preference_showpriority_title" android:summary="@string/preference_showpriority_summary"></CheckBoxPreference>
-</PreferenceCategory>
+			    <CheckBoxPreference android:defaultValue="false" android:key="showpriority" android:title="@string/preference_showpriority_title" android:summary="@string/preference_showpriority_summary"></CheckBoxPreference>
+			</PreferenceCategory>
+			<PreferenceCategory android:title="@string/preference_prio_subtotal">
+				<ListPreference android:key="priority_subtotal_threshold"
+					android:defaultValue="0" android:title="@string/preference_prioritytotal_title"
+					android:summary="@string/preference_prioritytotal_summary"
+					android:entries="@array/preference_prioritytotal_entries"
+					android:entryValues="@array/preference_prioritytotal_entryvalues"
+					android:dialogTitle="@string/preference_prioritytotal_dialog_title" />
+			    <CheckBoxPreference android:defaultValue="true" android:key="priosubtotal_includes_checked" 
+			    	android:title="@string/preference_priosubtotalchecked_title" 
+			    	android:summaryOn="@string/preference_priosubtotalchecked_on_summary" 
+			    	android:summaryOff="@string/preference_priosubtotalchecked_off_summary"/>					
+			</PreferenceCategory>
 		</PreferenceScreen>
 	</PreferenceCategory>
 	

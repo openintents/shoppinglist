@@ -54,6 +54,11 @@
 			android:layout_weight="1"
 			android:layout_height="wrap_content"
 			android:layout_marginLeft="10dip" />
+		<TextView android:id="@+id/total_3"
+			android:layout_width="0dip"
+			android:layout_weight="1"
+			android:layout_height="wrap_content"
+			android:layout_marginRight="10dip" />
 		<TextView android:id="@+id/total_2"
 			android:layout_width="0dip"
 			android:layout_weight="1"

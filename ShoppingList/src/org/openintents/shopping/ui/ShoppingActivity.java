@@ -974,6 +974,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		tv = (TextView) findViewById(R.id.total_2);
 		mItemsView.setTotalTextView(tv);
 
+		tv = (TextView) findViewById(R.id.total_3);
+		mItemsView.setPrioritySubtotalTextView(tv);
+		
 		tv = (TextView) findViewById(R.id.count);
 		mItemsView.setCountTextView(tv);
 

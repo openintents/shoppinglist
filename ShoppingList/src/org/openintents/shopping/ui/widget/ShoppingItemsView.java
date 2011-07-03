@@ -104,6 +104,7 @@ public class ShoppingItemsView extends ListView {
 	private long mListId;
 
 	private TextView mTotalTextView;
+	private TextView mPriTotalTextView;
 	private TextView mTotalCheckedTextView;
 
 	private Drawable mDefaultDivider;
@@ -1130,6 +1131,10 @@ public class ShoppingItemsView extends ListView {
 		mTotalTextView = tv;
 	}
 
+	public void setPrioritySubtotalTextView(TextView tv) {
+		mPriTotalTextView = tv;
+	}
+	
 	public void setTotalCheckedTextView(TextView tv) {
 		mTotalCheckedTextView = tv;
 	}
@@ -1157,6 +1162,7 @@ public class ShoppingItemsView extends ListView {
 		if (mPriceVisibility != View.VISIBLE) {
 			// If price is not displayed, do not display total
 			mTotalTextView.setVisibility(View.GONE);
+			mPriTotalTextView.setVisibility(View.GONE);
 			mTotalCheckedTextView.setVisibility(View.GONE);
 			return;
 		}
@@ -1169,18 +1175,42 @@ public class ShoppingItemsView extends ListView {
 		mCursorItems.moveToPosition(-1);
 		long total = 0;
 		long totalchecked = 0;
+		long priority_total = 0;
 		long counter = 0;
+		int priority_threshold = PreferenceActivity.getSubtotalByPriorityThreshold(this
+				.getContext());
+		boolean prioIncludesChecked = 
+			PreferenceActivity.prioritySubtotalIncludesChecked(this.getContext());
 		while (mCursorItems.moveToNext()) {
 			long price = getQuantityPrice(mCursorItems);
 			total += price;
-			if (mCursorItems.getLong(ShoppingActivity.mStringItemsSTATUS) == ShoppingContract.Status.BOUGHT) {
+			boolean isChecked = (mCursorItems.getLong(ShoppingActivity.mStringItemsSTATUS) == ShoppingContract.Status.BOUGHT);
+
+			if (isChecked) {
 				totalchecked += price;
 				counter++;
 			}
+			
+			if (priority_threshold != 0 && (prioIncludesChecked || !isChecked)) {
+				String priority_str = mCursorItems.getString(ShoppingActivity.mStringItemsPRIORITY);
+				if (priority_str != null) {
+					int priority = 0;
+					try {
+						priority = Integer.parseInt(priority_str);
+					} catch (NumberFormatException e) {
+						// pretend it's a 0 then...
+					}
+					if (priority != 0 && priority <= priority_threshold) {
+						priority_total += price;
+					}
+				}
+			}		
+			
 		}
 		Log.d(TAG, "Total: " + total + ", Checked: " + totalchecked + "(#" + counter + ")");
 
 		mTotalTextView.setTextColor(mTextColorPrice);
+		mPriTotalTextView.setTextColor(mTextColorPrice);
 		mTotalCheckedTextView.setTextColor(mTextColorPrice);
 		mCountTextView.setTextColor(mTextColorPrice);
 
@@ -1193,6 +1223,17 @@ public class ShoppingItemsView extends ListView {
 			mTotalTextView.setVisibility(View.GONE);
 		}
 
+		if (priority_total != 0) {
+			final int captions[] = {0, R.string.priority1_total, R.string.priority2_total, 
+					R.string.priority3_total, R.string.priority4_total };
+			String s = mPriceFormatter.format(priority_total * 0.01d);
+			s = getContext().getString(captions[priority_threshold], s);
+			mPriTotalTextView.setText(s);
+			mPriTotalTextView.setVisibility(View.VISIBLE);
+		} else {
+			mPriTotalTextView.setVisibility(View.GONE);
+		}
+		
 		if (totalchecked != 0) {
 			String s = mPriceFormatter.format(totalchecked * 0.01d);
 			s = getContext().getString(R.string.total_checked, s);

@@ -11,14 +11,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.text.method.KeyListener;
 import android.text.method.TextKeyListener;
 
-public class PreferenceActivity extends android.preference.PreferenceActivity {
+public class PreferenceActivity extends android.preference.PreferenceActivity implements OnSharedPreferenceChangeListener {
 	private static boolean mBackupManagerAvailable;
 
 
@@ -63,6 +66,10 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
 	public static final String PREFS_MARKET_THEMES = "preference_market_themes";
 	public static final String PREFS_THEME_SET_FOR_ALL = "theme_set_for_all";
 	public static final String PREFS_SCREEN_ADDONS = "preference_screen_addons";
+	public static final String PREFS_PRIOSUBTOTAL = "priority_subtotal_threshold";
+	public static final String PREFS_PRIOSUBTOTAL_DEFAULT = "0";
+	public static final String PREFS_PRIOSUBINCLCHECKED = "priosubtotal_includes_checked";
+	public static final boolean PREFS_PRIOSUBINCLCHECKED_DEFAULT = false;
 
 	public static final int PREFS_CAPITALIZATION_DEFAULT = 1;
 
@@ -72,6 +79,10 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
 			TextKeyListener.Capitalize.NONE,
 			TextKeyListener.Capitalize.SENTENCES,
 			TextKeyListener.Capitalize.WORDS };
+
+	
+	private ListPreference mPrioSubtotal; 
+	private CheckBoxPreference mIncludesChecked;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +95,10 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
 		sp.setEnabled(isMarketAvailable());
 		sp = (PreferenceScreen) findPreference(PREFS_MARKET_THEMES);
 		sp.setEnabled(isMarketAvailable());
+		
+		mPrioSubtotal = (ListPreference) findPreference(PREFS_PRIOSUBTOTAL);
+		mIncludesChecked = (CheckBoxPreference) findPreference(PREFS_PRIOSUBINCLCHECKED);
+		updatePrioSubtotalSummary(getPreferenceScreen().getSharedPreferences());
 	}
 
 	@Override
@@ -96,6 +111,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
 					.findPreference(PREFS_SCREEN_ADDONS);
 			setPreferenceScreen(licensePrefScreen);
 		}
+        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 	}
 
 	@Override
@@ -103,8 +119,21 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
 		if (mBackupManagerAvailable) {
 			new BackupManagerWrapper(this).dataChanged();
 		}
-
+        getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
 		super.onPause();
+	}
+
+	public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+        if (key.equals(PREFS_PRIOSUBTOTAL)) {
+        	updatePrioSubtotalSummary(prefs);
+        }
+	}
+	
+	private void updatePrioSubtotalSummary(SharedPreferences prefs) {
+    	int threshold = getSubtotalByPriorityThreshold(prefs);
+    	CharSequence labels[] = mPrioSubtotal.getEntries();
+        mPrioSubtotal.setSummary(labels[threshold]);
+        mIncludesChecked.setEnabled(threshold != 0);
 	}
 
 	/**
@@ -164,7 +193,31 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
 				.getDefaultSharedPreferences(context);
 		return prefs.getBoolean(PREFS_HIDECHECKED, PREFS_HIDECHECKED_DEFAULT);
 	}
+	
+	private static int getSubtotalByPriorityThreshold(SharedPreferences prefs) {
+		String pref = prefs.getString(PREFS_PRIOSUBTOTAL, PREFS_PRIOSUBTOTAL_DEFAULT);
+		int threshold = 0;
+		try {
+			threshold = Integer.parseInt(pref);
+		} catch (NumberFormatException e) {
+			// Guess somebody messed with the preferences and put a string into
+			// this
+			// field. We'll use the default value then.
+		}
+		return threshold;
+	}
+	
+	public static int getSubtotalByPriorityThreshold(Context context) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		return getSubtotalByPriorityThreshold(prefs);
+	}
 
+	public static boolean prioritySubtotalIncludesChecked(Context context) {
+		SharedPreferences prefs = PreferenceManager
+		.getDefaultSharedPreferences(context);
+		return prefs.getBoolean(PREFS_PRIOSUBINCLCHECKED, PREFS_PRIOSUBINCLCHECKED_DEFAULT);
+	}
+	
 	/**
 	 * Returns a KeyListener for edit texts that will match the capitalization
 	 * preferences of the user.

@@ -78,6 +78,14 @@
         <item>2</item>
     </string-array> 
     
+    <string-array name="preference_prioritytotal_entryvalues">
+    	<item>0</item>
+    	<item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    
     <!-- URL to OI Shopping list extensions on Market -->
     <string name="preference_market_extensions_link">market://search?q=extension oi shopping list</string>
     
