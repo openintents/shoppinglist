@@ -265,6 +265,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private int mState;
 
 	/**
+	 * mode: separate dialog to add items from existing list
+	 */
+	public static final int MODE_PICK_ITEMS_DLG = 3;
+
+	
+	/**
 	 * mode: add items from existing list
 	 */
 	public static final int MODE_ADD_ITEMS = 2;
@@ -273,11 +279,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 * mode: I am in the shop
 	 */
 	public static final int MODE_IN_SHOP = 1;
-
-	/**
-	 * current mode, in shop, or adding items
-	 */
-	private int mMode = MODE_IN_SHOP;
 
 	/**
 	 * URI of current list
@@ -676,7 +677,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			return;
 		}
 
-		if (mMode == MODE_IN_SHOP) {
+		if (mItemsView.mMode == MODE_IN_SHOP) {
 			if (mSensorManager == null) {
 				mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 			}
@@ -1365,20 +1366,18 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		// set menu title for change mode
 		MenuItem menuItem = menu.findItem(MENU_PICK_ITEMS);
-		/*
-		 * if (mMode == MODE_ADD_ITEMS) {
-		 * menuItem.setTitle(R.string.menu_start_shopping);
-		 * menuItem.setIcon(android.R.drawable.ic_menu_myplaces);
-		 * 
-		 * } else
-		 */{
+		
+		if (mItemsView.mMode == MODE_ADD_ITEMS) {
+			menuItem.setTitle(R.string.menu_start_shopping);
+			menuItem.setIcon(android.R.drawable.ic_menu_myplaces); 
+		} else {
 			menu.findItem(MENU_PICK_ITEMS).setTitle(R.string.menu_pick_items);
 			menuItem.setIcon(android.R.drawable.ic_menu_add);
 		}
 
 		// set menu title for change mode
 		menuItem = menu.findItem(MENU_CLEAN_UP_LIST).setVisible(
-				mMode == MODE_IN_SHOP);
+				mItemsView.mMode == MODE_IN_SHOP);
 
 		// Delete list is possible, if we have more than one list:
 		// AND
@@ -1437,13 +1436,16 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			return true;
 
 		case MENU_PICK_ITEMS:
-			// if (mMode == MODE_IN_SHOP) {
-			// mMode = MODE_ADD_ITEMS;
-			// } else {
-			// mMode = MODE_IN_SHOP;
-			// }
-			// onModeChanged();
-			pickItems();
+			if (PreferenceActivity.getUsingPickItemsDlgFromPrefs(getApplicationContext())) {
+				pickItems();
+			} else {
+			  if (mItemsView.mMode == MODE_IN_SHOP) {
+			    mItemsView.mMode = MODE_ADD_ITEMS;
+			  } else {
+			    mItemsView.mMode = MODE_IN_SHOP;
+			  }
+			  onModeChanged();
+			}
 			return true;
 
 		case MENU_SHARE:
@@ -2253,15 +2255,15 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		if (debug)
 			Log.d(TAG, "onModeChanged()");
-		// fillItems();
+		fillItems();
 
-		if (mMode == MODE_IN_SHOP) {
-			// setTitle(getString(R.string.shopping_title,
-			// getCurrentListName()));
+		if (mItemsView.mMode == MODE_IN_SHOP) {
+			setTitle(getString(R.string.shopping_title,
+					getCurrentListName()));
 			registerSensor();
 		} else {
-			// setTitle(getString(R.string.pick_items_titel,
-			// getCurrentListName()));
+			setTitle(getString(R.string.pick_items_titel,
+					getCurrentListName()));
 			unregisterSensor();
 		}
 	}

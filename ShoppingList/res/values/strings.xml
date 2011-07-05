@@ -175,6 +175,9 @@
 	<string name="preference_priosubtotalchecked_title">Include checked items</string>
 	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
 	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
+	<string name="preference_usepickitemsdlg_title">Use "Pick Items" dialog</string>
+	<string name="preference_usepickitemsdlg_on_summary">Add items to list using a dedicated dialog</string>
+	<string name="preference_usepickitemsdlg_off_summary">Switch main list to edit mode to re-add existing items</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Shake to clean up</string>

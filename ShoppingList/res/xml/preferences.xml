@@ -49,6 +49,10 @@
 				<CheckBoxPreference android:key="shake"
 					android:defaultValue="false" android:title="@string/preference_shake_title"
 					android:summary="@string/preference_shake_summary" />
+				<CheckBoxPreference android:key="usepickitemsdlg"
+					android:defaultValue="true" android:title="@string/preference_usepickitemsdlg_title"
+					android:summaryOn="@string/preference_usepickitemsdlg_on_summary"
+					android:summaryOff="@string/preference_usepickitemsdlg_off_summary" />
 			</PreferenceCategory>
 			<PreferenceCategory android:title="@string/preference_appearance">
 				<CheckBoxPreference android:key="showprice"

@@ -284,23 +284,35 @@ public class ShoppingItemsView extends ListView {
 
 			// we have a check box now.. more visual and gets the point across
 			CheckBox c = (CheckBox) view.findViewById(R.id.check);
+			ImageView nc = (ImageView) view.findViewById(R.id.nocheck);
 
 			Log.i(TAG, "bindview: pos = " + cursor.getPosition());
 
 			// set style for check box
 			c.setTag(new Integer(cursor.getPosition()));
+			nc.setTag(new Integer(cursor.getPosition()));
 
 			if (mShowCheckBox) {
-				c.setVisibility(CheckBox.VISIBLE);
-				if ((status == ShoppingContract.Status.BOUGHT && mMode == ShoppingActivity.MODE_IN_SHOP)
-						|| (status == ShoppingContract.Status.WANT_TO_BUY)
-						&& mMode == ShoppingActivity.MODE_ADD_ITEMS) {
-					c.setChecked(true);
-				} else {
-					c.setChecked(false);
+				c.setChecked(status == ShoppingContract.Status.BOUGHT);
+				if (mMode == ShoppingActivity.MODE_IN_SHOP) {
+				    // Always show the checkbox in shopping mode. 
+					// The REMOVED_FROM_LIST items are not shown anyway.
+					c.setVisibility(CheckBox.VISIBLE);
+					nc.setVisibility(ImageView.GONE);
+				} else {  // mMode == ShoppingActivity.MODE_ADD_ITEMS
+					if (status == ShoppingContract.Status.REMOVED_FROM_LIST) {
+						// Show the ghost checkbox
+						c.setVisibility(CheckBox.GONE);
+						nc.setVisibility(ImageView.VISIBLE);
+					} else {
+						// Show the checkbox
+						c.setVisibility(CheckBox.VISIBLE);
+						nc.setVisibility(ImageView.GONE);
+					}
 				}
 			} else {
 				c.setVisibility(CheckBox.GONE);
+				nc.setVisibility(ImageView.GONE);
 			}
 
 			// The parent view knows how to deal with clicks.
@@ -308,13 +320,11 @@ public class ShoppingItemsView extends ListView {
 			// c.setClickable(false);
 
 			c.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					Log.d(TAG, "Click: ");
-					toggleItemBought(cursorpos);
-				}
-
+			   @Override
+			   public void onClick(View v) {
+				   Log.d(TAG, "Click: ");
+				   toggleItemBought(cursorpos);
+			   }
 			});
 
 			// also check around check box
@@ -962,15 +972,35 @@ public class ShoppingItemsView extends ListView {
 		long oldstatus = mCursorItems
 				.getLong(ShoppingActivity.mStringItemsSTATUS);
 
-		// Toggle status:
-		// bought -> want_to_buy
-		// want_to_buy -> bought
-		// removed_from_list -> want_to_buy
+		// Toggle status depending on mode:
 		long newstatus = ShoppingContract.Status.WANT_TO_BUY;
-		if (oldstatus == ShoppingContract.Status.WANT_TO_BUY) {
-			newstatus = ShoppingContract.Status.BOUGHT;
+		
+		if (mMode == ShoppingActivity.MODE_IN_SHOP) {
+			if (oldstatus == ShoppingContract.Status.WANT_TO_BUY) {
+				newstatus = ShoppingContract.Status.BOUGHT;
+			} // else old was BOUGHT, new should be WANT_TO_BUY, which is the default.
+		} else if (mMode == ShoppingActivity.MODE_ADD_ITEMS) { // MODE_ADD_ITEMS
+			// when we are in integrated add items mode, we toggle between all three states:
+			// want_to_buy->bought
+			// bought -> removed_from_list
+			// removed_from_list -> want_to_buy
+			if (oldstatus == ShoppingContract.Status.WANT_TO_BUY) {
+				newstatus = ShoppingContract.Status.BOUGHT;
+			} else if (oldstatus == ShoppingContract.Status.BOUGHT) {
+				newstatus = ShoppingContract.Status.REMOVED_FROM_LIST;
+			} // else old is REMOVE_FROM_LIST, new is WANT_TO_BUY, which is the default.
+		} else if (mMode == ShoppingActivity.MODE_PICK_ITEMS_DLG) {
+			// old behavior of "pick items" was handled by a separate function
+			// which treated the checkbox as toggling between removed from list (unchecked)
+			// and in list but not bought yet (checked). now we have changed the display to 
+			// avoid the ambiguity of the meaning of the checked checkbox, but keep the same 
+			// toggle behavior as before, with this bit of logic from the old function
+			// toggleItemRemovedFromList().
+			if (oldstatus == ShoppingContract.Status.WANT_TO_BUY) {
+				newstatus = ShoppingContract.Status.REMOVED_FROM_LIST;
+			}
 		}
-
+		
 		ContentValues values = new ContentValues();
 		values.put(ShoppingContract.Contains.STATUS, newstatus);
 		Log.d(TAG, "update row " + mCursorItems.getString(0) + ", newstatus "
@@ -978,7 +1008,7 @@ public class ShoppingItemsView extends ListView {
 		getContext().getContentResolver().update(
 				Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI,
 						mCursorItems.getString(0)), values, null, null);
-
+		
 		requery();
 
 		invalidate();
@@ -1011,35 +1041,6 @@ public class ShoppingItemsView extends ListView {
 		requery();
 
 		return !nothingdeleted;
-
-	}
-
-	public void toggleItemRemovedFromList(int pos) {
-		mCursorItems.moveToPosition(pos);
-
-		long oldstatus = mCursorItems
-				.getLong(ShoppingActivity.mStringItemsSTATUS);
-
-		// Toggle status:
-		// bought -> want_to_buy
-		// want_to_buy -> removed_from_list
-		// removed_from_list -> want_to_buy
-		long newstatus = ShoppingContract.Status.WANT_TO_BUY;
-		if (oldstatus == ShoppingContract.Status.WANT_TO_BUY) {
-			newstatus = ShoppingContract.Status.REMOVED_FROM_LIST;
-		}
-
-		ContentValues values = new ContentValues();
-		values.put(ShoppingContract.Contains.STATUS, newstatus);
-		Log.d(TAG, "update row " + mCursorItems.getString(0) + ", newstatus "
-				+ newstatus);
-		getContext().getContentResolver().update(
-				Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI,
-						mCursorItems.getString(0)), values, null, null);
-
-		requery();
-
-		// invalidate();
 
 	}
 

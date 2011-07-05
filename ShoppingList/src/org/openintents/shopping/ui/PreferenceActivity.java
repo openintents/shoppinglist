@@ -69,8 +69,10 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	public static final String PREFS_PRIOSUBTOTAL = "priority_subtotal_threshold";
 	public static final String PREFS_PRIOSUBTOTAL_DEFAULT = "0";
 	public static final String PREFS_PRIOSUBINCLCHECKED = "priosubtotal_includes_checked";
-	public static final boolean PREFS_PRIOSUBINCLCHECKED_DEFAULT = false;
-
+	public static final boolean PREFS_PRIOSUBINCLCHECKED_DEFAULT = true;
+	public static final String PREFS_USEPICKITEMSDLG = "usepickitemsdlg";
+	public static final boolean PREFS_USEPICKITEMSDLG_DEFAULT = true;
+	
 	public static final int PREFS_CAPITALIZATION_DEFAULT = 1;
 
 	public static final String EXTRA_SHOW_GET_ADD_ONS = "show_get_add_ons";
@@ -158,6 +160,12 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	public static boolean getUsingPerStorePricesFromPrefs(Context context) {
 		boolean using = PreferenceManager.getDefaultSharedPreferences(context)
 		.getBoolean(PREFS_PERSTOREPRICES,PREFS_PERSTOREPRICES_DEFAULT);
+		return using;
+	}
+	
+	public static boolean getUsingPickItemsDlgFromPrefs(Context context) {
+		boolean using = PreferenceManager.getDefaultSharedPreferences(context)
+		.getBoolean(PREFS_USEPICKITEMSDLG,PREFS_USEPICKITEMSDLG_DEFAULT);
 		return using;
 	}
 	
