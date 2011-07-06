@@ -979,27 +979,17 @@ public class ShoppingItemsView extends ListView {
 			if (oldstatus == ShoppingContract.Status.WANT_TO_BUY) {
 				newstatus = ShoppingContract.Status.BOUGHT;
 			} // else old was BOUGHT, new should be WANT_TO_BUY, which is the default.
-		} else if (mMode == ShoppingActivity.MODE_ADD_ITEMS) { // MODE_ADD_ITEMS
-			// when we are in integrated add items mode, we toggle between all three states:
-			// want_to_buy->bought
+		} else  { // MODE_ADD_ITEMS or MODE_PICK_ITEMS_DLG
+			// when we are in integrated add items mode, all three states 
+			// might be displayed, but the user can only create two of them.
+			// want_to_buy-> removed_from_list
 			// bought -> removed_from_list
 			// removed_from_list -> want_to_buy
-			if (oldstatus == ShoppingContract.Status.WANT_TO_BUY) {
-				newstatus = ShoppingContract.Status.BOUGHT;
-			} else if (oldstatus == ShoppingContract.Status.BOUGHT) {
+			if (oldstatus == ShoppingContract.Status.WANT_TO_BUY ||
+				oldstatus == ShoppingContract.Status.BOUGHT) {
 				newstatus = ShoppingContract.Status.REMOVED_FROM_LIST;
 			} // else old is REMOVE_FROM_LIST, new is WANT_TO_BUY, which is the default.
-		} else if (mMode == ShoppingActivity.MODE_PICK_ITEMS_DLG) {
-			// old behavior of "pick items" was handled by a separate function
-			// which treated the checkbox as toggling between removed from list (unchecked)
-			// and in list but not bought yet (checked). now we have changed the display to 
-			// avoid the ambiguity of the meaning of the checked checkbox, but keep the same 
-			// toggle behavior as before, with this bit of logic from the old function
-			// toggleItemRemovedFromList().
-			if (oldstatus == ShoppingContract.Status.WANT_TO_BUY) {
-				newstatus = ShoppingContract.Status.REMOVED_FROM_LIST;
-			}
-		}
+		} 
 		
 		ContentValues values = new ContentValues();
 		values.put(ShoppingContract.Contains.STATUS, newstatus);
