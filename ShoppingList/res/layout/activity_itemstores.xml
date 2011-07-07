@@ -23,7 +23,7 @@
 	>
 	<!-- android:background="@drawable/shoppinglist01d" -->
         
-   <org.openintents.shopping.ui.widget.StoreListViewistView android:id="@+id/list_stores" 
+   <org.openintents.shopping.ui.widget.StoreListView android:id="@+id/list_stores" 
 		android:layout_width="fill_parent"
 		android:layout_height="0dip"
 		android:layout_weight="1"
