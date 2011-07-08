@@ -28,11 +28,6 @@ import org.openintents.intents.ShoppingListIntents;
 import org.openintents.provider.Alert;
 import org.openintents.provider.Location.Locations;
 import org.openintents.shopping.R;
-import org.openintents.shopping.R.anim;
-import org.openintents.shopping.R.drawable;
-import org.openintents.shopping.R.id;
-import org.openintents.shopping.R.layout;
-import org.openintents.shopping.R.string;
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
@@ -41,7 +36,6 @@ import org.openintents.shopping.library.provider.ShoppingContract.Lists;
 import org.openintents.shopping.library.provider.ShoppingContract.Status;
 import org.openintents.shopping.library.util.PriceConverter;
 import org.openintents.shopping.library.util.ShoppingUtils;
-import org.openintents.shopping.share.GTalkSender;
 import org.openintents.shopping.ui.dialog.DialogActionListener;
 import org.openintents.shopping.ui.dialog.EditItemDialog;
 import org.openintents.shopping.ui.dialog.NewListDialog;
@@ -55,7 +49,6 @@ import org.openintents.shopping.ui.widget.ShoppingItemsView.DropListener;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.OnCustomClickListener;
 import org.openintents.util.MenuIntentOptionsWithIcons;
 import org.openintents.util.ShakeSensorListener;
-import org.openintents.util.VersionUtils;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -74,7 +67,7 @@ import android.database.Cursor;
 import android.hardware.SensorListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
-import android.os.Build;
+import android.support.v2.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -93,7 +86,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
-import android.view.View.OnTouchListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -1019,7 +1011,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private void createList() {
 
 		// TODO switch layout on screen size, not sdk versions
-		if(android.support.v2.os.Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB){
+		if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB){
 			
 			mShoppingListsView = (ListView) findViewById(android.R.id.list);
 			((ListView)mShoppingListsView)
@@ -1225,8 +1217,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		
 		//Temp- for backward compatibility with OS 3 features 
 		
-		if(android.support.v2.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
-			//Build.VERSION_CODES.HONEYCOMB -- reverted, since integer constant is not defined in older API level. Example:API 9
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
 			try{
 				//setting the value equivalent to desired expression
 				//MenuItem.SHOW_AS_ACTION_IF_ROOM|MenuItem.SHOW_AS_ACTION_WITH_TEXT
@@ -2061,7 +2052,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private long getSelectedListId() {
 		int pos = mShoppingListsView.getSelectedItemPosition();
 		//Temp- Due to architecture requirements of OS 3, the value can not be passed directly
-		if(pos==-1 && android.support.v2.os.Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB){
+		if(pos==-1 && Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB){
 			try {
 				pos=(Integer)mShoppingListsView.getTag();	
 				pos=mCursorShoppingLists.getCount()<=pos?-1:pos;
@@ -2518,7 +2509,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		int pos = mShoppingListsView.getSelectedItemPosition();
 		//Temp- Due to architecture requirements of OS 3, the value can not be passed directly
-		if(pos==-1 && android.support.v2.os.Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB){
+		if(pos==-1 && Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB){
 			try {
 				pos=(Integer)mShoppingListsView.getTag();	
 				pos=mCursorShoppingLists.getCount()<=pos?-1:pos;
@@ -2551,7 +2542,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 * @param adapter
 	 */
 	private void setSpinnerListAdapter(ListAdapter adapter){
-		if(android.support.v2.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){//Temp - restricted for OS3
+		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){//Temp - restricted for OS3
 			mShoppingListsView.setAdapter(adapter);
 		}else{
 			ShoppingListFilterFragment os3=(ShoppingListFilterFragment)getSupportFragmentManager().findFragmentById(R.id.sidelist);
