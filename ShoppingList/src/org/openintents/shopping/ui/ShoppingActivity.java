@@ -1020,9 +1020,13 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 						int position, long id) {
 					if (debug)
 						Log.d(TAG, "ListView: onItemSelected");
-					fillItems();
-					// Now set the theme based on the selected list:
-					mItemsView.setListTheme(loadListTheme());
+					if (id != mItemsView.getListId()) {
+						// No need to requery... same list we had before. 
+						fillItems();
+						// Now set the theme based on the selected list:
+						mItemsView.setListTheme(loadListTheme());
+					}
+
 					((ListView) mShoppingListsView).setItemChecked(position,true);
 					
 				}
@@ -1050,10 +1054,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 						int position, long id) {
 					if (debug)
 						Log.d(TAG, "Spinner: onItemSelected");
-					fillItems();
-					// Now set the theme based on the selected list:
-					mItemsView.setListTheme(loadListTheme());
-					
+					if (id != mItemsView.getListId()) {
+						// No need to requery... same list we had before. 
+						fillItems();
+						// Now set the theme based on the selected list:
+						mItemsView.setListTheme(loadListTheme());
+					}					
 				}
 
 				public void onNothingSelected(AdapterView arg0) {
@@ -2113,7 +2119,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		
 		mShoppingListsView.setSelection(pos);	
 		
-		fillItems();
+		if (getSelectedListId() != mItemsView.getListId()) {
+		   fillItems();
+		}
 		// Now set the theme based on the selected list:
 		mItemsView.setListTheme(loadListTheme());
 		
@@ -2275,6 +2283,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			// and no item is selected.
 			return;
 		}
+		
 		if (debug)
 			Log.d(TAG, "fillItems() for list " + listId);
 		mItemsView.fillItems(this, listId);
@@ -2530,11 +2539,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		} else {
 			newPos = pos + value;
 		}
-		setSelectedListPos(newPos);
-		
-		fillItems();
-		// Now set the theme based on the selected list:
-		mItemsView.setListTheme(loadListTheme());
+		setSelectedListPos(newPos);	
 	}
 	
 	/**

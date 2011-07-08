@@ -576,6 +576,10 @@ public class ShoppingItemsView extends ListView {
 		unregisterContentObserver();
 	}
 
+	public long getListId() {
+		return mListId;
+	}
+	
 	/**
 	 * 
 	 * @param activity
@@ -1002,7 +1006,12 @@ public class ShoppingItemsView extends ListView {
 		
 		requery();
 
-		invalidate();
+		if (mMode == ShoppingActivity.MODE_IN_SHOP) {
+			invalidate();		
+		} else {
+			// in Pick Items mode, we always sort just by name, so changing item 
+			// status will not have changed the order. 
+		}
 	}
 
 	public boolean cleanupList() {
