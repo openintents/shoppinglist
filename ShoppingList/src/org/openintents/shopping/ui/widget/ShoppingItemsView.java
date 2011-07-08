@@ -521,6 +521,7 @@ public class ShoppingItemsView extends ListView {
 
 	}
 
+	private boolean mContentObserverRegistered = false;
 	ContentObserver mContentObserver = new ContentObserver(new Handler()) {
 
 		@Override
@@ -540,6 +541,7 @@ public class ShoppingItemsView extends ListView {
 		}
 
 	};
+	
 	private TextView mCountTextView;
 
 	public ShoppingItemsView(Context context, AttributeSet attrs, int defStyle) {
@@ -669,11 +671,15 @@ public class ShoppingItemsView extends ListView {
 	 * 
 	 */
 	private void registerContentObserver() {
-		getContext().getContentResolver().registerContentObserver(
+		if (mContentObserverRegistered == false) {
+			mContentObserverRegistered = true;
+			getContext().getContentResolver().registerContentObserver(
 				ShoppingContract.Items.CONTENT_URI, true, mContentObserver);
+		}
 	}
 
 	private void unregisterContentObserver() {
+		mContentObserverRegistered = false;
 		getContext().getContentResolver().unregisterContentObserver(
 				mContentObserver);
 	}
