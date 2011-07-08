@@ -601,6 +601,7 @@ public class ShoppingItemsView extends ListView {
 			}
 		} else {
 			selection = "list_id = ? ";
+			sortOrder = "items.name COLLATE NOCASE ASC";
 		}
 
 		if (mCursorItems != null && !mCursorItems.isClosed()) {
@@ -1175,8 +1176,12 @@ public class ShoppingItemsView extends ListView {
 		while (mCursorItems.moveToNext()) {
 			long price = getQuantityPrice(mCursorItems);
 			total += price;
-			boolean isChecked = (mCursorItems.getLong(ShoppingActivity.mStringItemsSTATUS) == ShoppingContract.Status.BOUGHT);
+			long item_status = mCursorItems.getLong(ShoppingActivity.mStringItemsSTATUS);
+			boolean isChecked = (item_status == ShoppingContract.Status.BOUGHT);
 
+			if (item_status == ShoppingContract.Status.REMOVED_FROM_LIST)
+				continue;
+			
 			if (isChecked) {
 				totalchecked += price;
 				counter++;
