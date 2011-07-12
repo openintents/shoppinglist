@@ -270,6 +270,11 @@ public class ShoppingProvider extends ContentProvider {
 		}
 
 		SQLiteDatabase db = mOpenHelper.getReadableDatabase();
+		if (debug) {
+			String qs = qb.buildQuery(projection, selection, null, groupBy, null, orderBy, null);
+			Log.d(TAG, "Query : " + qs);
+		}
+
 		Cursor c = qb.query(db, projection, selection, selectionArgs, groupBy,
 				null, orderBy);
 		c.setNotificationUri(getContext().getContentResolver(), url);

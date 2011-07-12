@@ -28,9 +28,10 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 	 * 7: Release 1.2.7-beta 
 	 * 8: Release 1.2.7-beta
 	 * 9: Release 1.3.0
-     * 10: Release 1.3.1-beta
+         * 10: Release 1.3.1-beta
+         * 11: Release 1.4.0-beta
 	 */
-	static final int DATABASE_VERSION = 10;
+	static final int DATABASE_VERSION = 11;
 
 	public static final String DATABASE_NAME = "shopping.db";
 	
@@ -104,7 +105,8 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				+ "created INTEGER," // V8
 				+ "modified INTEGER" // V8
 				+ ");");
-		
+                db.execSQL("CREATE INDEX itemstores_item_id on itemstores " 
+                           + " ( item_id asc, price asc );"); // V11
 	}
 
 	@Override
@@ -259,8 +261,14 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				/**
 				* case 10:
 				*/
-				break;
-			default:
+                        
+                        break;
+               case 10:
+                   db.execSQL("CREATE INDEX IF NOT EXISTS " 
+                              + " itemstores_item_id on itemstores " 
+                              + " ( item_id asc, price asc );"); // V11
+                   break;
+	       default:
 				Log.w(ShoppingProvider.TAG, "Unknown version " + oldVersion
 						+ ". Creating new database.");
 				db.execSQL("DROP TABLE IF EXISTS items");
