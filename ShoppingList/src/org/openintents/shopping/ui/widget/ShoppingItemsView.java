@@ -1189,13 +1189,13 @@ public class ShoppingItemsView extends ListView {
 		boolean prioIncludesChecked = 
 			PreferenceActivity.prioritySubtotalIncludesChecked(this.getContext());
 		while (mCursorItems.moveToNext()) {
-			long price = getQuantityPrice(mCursorItems);
 			long item_status = mCursorItems.getLong(ShoppingActivity.mStringItemsSTATUS);
 			boolean isChecked = (item_status == ShoppingContract.Status.BOUGHT);
 
 			if (item_status == ShoppingContract.Status.REMOVED_FROM_LIST)
 				continue;
 			
+			long price = getQuantityPrice(mCursorItems);
 			total += price;
 			
 			if (isChecked) {
