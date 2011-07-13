@@ -5,9 +5,9 @@
 	<classpathentry kind="lib" path="libs/OIShoppingListMyBackupPro.jar"/>
 	<classpathentry kind="lib" path="libs/sensorsimulator-lib.jar"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="src" path="OI Distribution Library_src"/>
-	<classpathentry kind="src" path="OI Shopping List Library_src"/>
 	<classpathentry kind="src" path="AndroidSupportV2_src"/>
 	<classpathentry kind="src" path="AndroidSupportV2_honeycomb"/>
+	<classpathentry kind="src" path="OI Shopping List Library_src"/>
+	<classpathentry kind="src" path="OI Distribution Library_src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
