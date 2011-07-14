@@ -15,6 +15,7 @@ import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
 import org.openintents.shopping.library.provider.ShoppingContract.Status;
+import org.openintents.shopping.library.provider.ShoppingContract.Subtotals;
 import org.openintents.shopping.theme.ThemeAttributes;
 import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;
@@ -1178,8 +1179,7 @@ public class ShoppingItemsView extends ListView {
 			// Can happen through onShake() in ShoppingActivity.
 			return;
 		}
-
-		mCursorItems.moveToPosition(-1);
+		
 		long total = 0;
 		long totalchecked = 0;
 		long priority_total = 0;
@@ -1188,7 +1188,26 @@ public class ShoppingItemsView extends ListView {
 				.getContext());
 		boolean prioIncludesChecked = 
 			PreferenceActivity.prioritySubtotalIncludesChecked(this.getContext());
-		while (mCursorItems.moveToNext()) {
+
+		if (false && debug) 
+		{
+			/* This is the old way of computing the totals. Leaving it here for a bit 
+			 * in case some issue comes up. To check whether there is a discrepancy 
+			 * between the old way and the new way with your data, you can change the 
+			 * above false to true, and look in the logcat for two totals.
+			 * 
+			 *  There are two known sources of discrepancy:
+			 *  
+			 *  (1) when "Hide checked items" is set, the old way does not include 
+			 *  checked items in any totals, while the new way does. This is intentional.
+			 *  
+			 *  (2) A discrepancy measured in cents can be caused by a rounding bug in 
+			 *  OI Convert CSV when importing prices from HandyShopper. This bug has 
+			 *  since been fixed. It should be possible to fix your data by exporting
+			 *  in HandyShopper csv format and re-importing that file.
+			 */ 
+			mCursorItems.moveToPosition(-1);
+				while (mCursorItems.moveToNext()) {
 			long item_status = mCursorItems.getLong(ShoppingActivity.mStringItemsSTATUS);
 			boolean isChecked = (item_status == ShoppingContract.Status.BOUGHT);
 
@@ -1219,7 +1238,49 @@ public class ShoppingItemsView extends ListView {
 			}		
 			
 		}
-		Log.d(TAG, "Total: " + total + ", Checked: " + totalchecked + "(#" + counter + ")");
+		Log.d(TAG, "Total (old way): " + total + ", Checked: " + totalchecked + "(#" + counter + ")");
+		
+		total = priority_total = counter = totalchecked = 0;
+		}
+
+		Cursor total_cursor = getContext().getContentResolver().query(
+				Subtotals.CONTENT_URI.buildUpon().appendPath("" + mListId).build(),
+				Subtotals.PROJECTION, null, null, null);
+		total_cursor.moveToPosition(-1);
+		while (total_cursor.moveToNext()) {
+			long item_status = total_cursor.getLong(Subtotals.STATUS_INDEX);
+			boolean isChecked = (item_status == ShoppingContract.Status.BOUGHT);
+
+			if (item_status == ShoppingContract.Status.REMOVED_FROM_LIST)
+				continue;
+	
+			long price = total_cursor.getLong(Subtotals.SUBTOTAL_INDEX);
+			total += price;
+	
+			if (isChecked) {
+				totalchecked += price;
+				counter += total_cursor.getLong(Subtotals.COUNT_INDEX);;
+			}
+	
+			if (priority_threshold != 0 && (prioIncludesChecked || !isChecked)) {
+				String priority_str = total_cursor.getString(Subtotals.PRIORITY_INDEX);
+				if (priority_str != null) {
+					int priority = 0;
+					try {
+						priority = Integer.parseInt(priority_str);
+					} catch (NumberFormatException e) {
+						// pretend it's a 0 then...
+					}
+					if (priority != 0 && priority <= priority_threshold) {
+						priority_total += price;
+					}
+				}
+			}			
+		}	
+		total_cursor.deactivate();
+		total_cursor.close();
+
+		if (debug) Log.d(TAG, "Total: " + total + ", Checked: " + totalchecked + "(#" + counter + ")");
 
 		mTotalTextView.setTextColor(mTextColorPrice);
 		mPriTotalTextView.setTextColor(mTextColorPrice);
