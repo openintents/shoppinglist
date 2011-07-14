@@ -906,5 +906,51 @@ public abstract class ShoppingContract {
 		public static final String[] PROJECTION = { _ID };
 
 	}
+
+	/**
+	 * Virtual table containing subtotals of items by status and priority.
+	 */
+	public static final class Subtotals {
+		/**
+		 * The content:// style URL for this table.
+		 */
+		public static final Uri CONTENT_URI = Uri
+				.parse("content://org.openintents.shopping/subtotals");
+
+        /**
+         * Priority
+         * <P>Type: INTEGER (long)</P>
+         */
+        public static final String PRIORITY = "priority";
+
+        /**
+         * Status
+         * <P>Type: INTEGER (long)</P>
+         */
+        public static final String STATUS = "status";
+
+        /**
+         * Number of items subtotaled in this cell.
+         * <P>Type: INTEGER (long)</P>
+         */
+        public static final String COUNT = "count";
+
+        /**
+         * Subtotal.
+         * <P>Type: INTEGER (long)</P>
+         */
+        public static final String SUBTOTAL = "subtotal";
+
+        /**
+		 * Generic projection map.
+		 */
+		public static final String[] PROJECTION = { PRIORITY, STATUS, COUNT, SUBTOTAL };
+		// index values for use with cursors using the default projection
+		public static final int PRIORITY_INDEX = 0;
+		public static final int STATUS_INDEX = 1;
+		public static final int COUNT_INDEX = 2;
+		public static final int SUBTOTAL_INDEX = 3;
+
+	}
 		
 }

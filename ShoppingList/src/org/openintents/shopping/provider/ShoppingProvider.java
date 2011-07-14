@@ -78,7 +78,7 @@ public class ShoppingProvider extends ContentProvider {
 	private static HashMap<String, String> ITEMSTORES_PROJECTION_MAP;
 	private static HashMap<String, String> NOTES_PROJECTION_MAP;
 	private static HashMap<String, String> UNITS_PROJECTION_MAP;
-
+	private static HashMap<String, String> SUBTOTALS_PROJECTION_MAP;
 
 	// Basic tables
 	private static final int ITEMS = 1;
@@ -98,6 +98,8 @@ public class ShoppingProvider extends ContentProvider {
 	private static final int UNITS_ID = 15;
 	private static final int PREFS = 16;
 	private static final int ITEMSTORES_ITEMID = 17;
+	private static final int SUBTOTALS = 18;
+	private static final int SUBTOTALS_LISTID = 19;
 
 	// Derived tables
 	private static final int CONTAINS_FULL = 101; // combined with items and
@@ -118,6 +120,8 @@ public class ShoppingProvider extends ContentProvider {
 			String[] selectionArgs, String sort) {
 		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
+		long list_id = -1;
+		
 		if (debug) Log.d(TAG, "Query for URL: " + url);
 
 		String defaultOrderBy = null;
@@ -246,7 +250,7 @@ public class ShoppingProvider extends ContentProvider {
 			// asking only for the id of the active list.
 			SharedPreferences sp = getContext().getSharedPreferences(
 					"org.openintents.shopping_preferences", Context.MODE_PRIVATE);
-			long list_id = sp.getInt("lastused", 1);
+			list_id = sp.getInt("lastused", 1);
 			m.addRow(new Object [] {Long.toString(list_id)});
 			return (Cursor)m;
 		case PREFS:
@@ -256,6 +260,32 @@ public class ShoppingProvider extends ContentProvider {
 			String sortOrder = PreferenceActivity.getSortOrderFromPrefs(getContext());
 			m.addRow(new Object [] {sortOrder});
 			return (Cursor)m;
+			
+		case SUBTOTALS_LISTID:
+			list_id = Long.parseLong(url.getPathSegments().get(1));
+			// FALLTHROUGH
+		case SUBTOTALS:
+			if (list_id == -1) {
+				// this gets the wrong answer if user has switched lists in this session.
+				sp = getContext().getSharedPreferences(
+						"org.openintents.shopping_preferences", Context.MODE_PRIVATE);
+				list_id = sp.getInt("lastused", 1);	
+			}
+			qb.setProjectionMap(SUBTOTALS_PROJECTION_MAP);
+			groupBy = "priority, status";
+			if (PreferenceActivity.getUsingPerStorePricesFromPrefs(getContext())) {
+				qb.setTables("(SELECT (min(itemstores.price) * case when length(contains.quantity) == 0 then 1 else contains.quantity end) as qty_price, " + 
+							 "contains.status as status, contains.priority as priority FROM contains, items left outer join itemstores on (items._id = itemstores.item_id) " + 
+							 "WHERE (contains.item_id = items._id AND contains.list_id = " + list_id + " ) AND contains.status != 3 GROUP BY itemstores.item_id) ");
+				
+			} else {
+				qb.setTables("(SELECT (items.price * case when length(contains.quantity) == 0 then 1 else contains.quantity end) as qty_price, " + 
+						     "contains.status as status, contains.priority as priority FROM contains, items " + 
+						     "WHERE (contains.item_id = items._id AND contains.list_id = " + list_id + " ) AND contains.status != 3) ");
+
+			}
+			break;
+			
 		default:
 			throw new IllegalArgumentException("Unknown URL " + url);
 		}
@@ -972,6 +1002,9 @@ public class ShoppingProvider extends ContentProvider {
 		URL_MATCHER.addURI("org.openintents.shopping", "units/#", UNITS_ID);
 		
 		URL_MATCHER.addURI("org.openintents.shopping", "prefs", PREFS);
+		// subtotals for the specified list id, or active list if not specified
+		URL_MATCHER.addURI("org.openintents.shopping", "subtotals/#", SUBTOTALS_LISTID);
+		URL_MATCHER.addURI("org.openintents.shopping", "subtotals", SUBTOTALS);
 
 
 		ITEMS_PROJECTION_MAP = new HashMap<String, String>();
@@ -1099,5 +1132,11 @@ public class ShoppingProvider extends ContentProvider {
 		NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.TAGS, "null as tags");
 		NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.ENCRYPTED, "null as encrypted");
 		NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.THEME, "null as theme");
+		
+		SUBTOTALS_PROJECTION_MAP = new HashMap<String, String>();
+		SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.COUNT, "count() as count");
+		SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.PRIORITY, "priority");
+		SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.SUBTOTAL, "sum(qty_price) as subtotal");
+		SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.STATUS, "status");		
 	}
 }
