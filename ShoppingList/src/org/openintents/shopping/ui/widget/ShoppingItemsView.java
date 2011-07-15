@@ -100,7 +100,10 @@ public class ShoppingItemsView extends ListView {
 			.getNumberInstance(Locale.ENGLISH);
 
 	public int mMode = ShoppingActivity.MODE_IN_SHOP;
-	public Cursor mCursorItems;
+	public Cursor mCursorItems = null;
+	
+	private Activity mCursorActivity = null;
+	
 	private View mThemedBackground;
 	private long mListId;
 
@@ -522,6 +525,18 @@ public class ShoppingItemsView extends ListView {
 
 	}
 
+	private void disposeItemsCursor () {
+		if (mCursorActivity != null) {
+			mCursorActivity.stopManagingCursor(mCursorItems);
+			mCursorActivity = null;
+		}
+		mCursorItems.deactivate();
+		if (!mCursorItems.isClosed()) {
+			mCursorItems.close();
+		}
+		mCursorItems = null;
+	}
+	
 	private boolean mContentObserverRegistered = false;
 	ContentObserver mContentObserver = new ContentObserver(new Handler()) {
 
@@ -535,7 +550,8 @@ public class ShoppingItemsView extends ListView {
 				} catch (IllegalStateException e) {
 					Log.e(TAG, "IllegalStateException ", e);
 					// Somehow the logic is not completely right yet...
-					mCursorItems = null;
+					disposeItemsCursor();
+					
 				}
 			}
 
@@ -611,8 +627,8 @@ public class ShoppingItemsView extends ListView {
 			sortOrder = "items.name COLLATE NOCASE ASC";
 		}
 
-		if (mCursorItems != null && !mCursorItems.isClosed()) {
-			mCursorItems.close();
+		if (mCursorItems != null) {
+			disposeItemsCursor();
 		}
 
 		// Get a cursor for all items that are contained
@@ -620,12 +636,11 @@ public class ShoppingItemsView extends ListView {
 		mCursorItems = getContext().getContentResolver().query(
 				ContainsFull.CONTENT_URI, ShoppingActivity.mStringItems,
 				selection, new String[] { String.valueOf(listId) }, sortOrder);
-		activity.startManagingCursor(mCursorItems);
-
-		registerContentObserver();
 
 		// Activate the following for a striped list.
 		// setupListStripes(mListItems, this);
+		
+		registerContentObserver();
 
 		if (mCursorItems == null) {
 			Log.e(TAG, "missing shopping provider");
@@ -634,6 +649,9 @@ public class ShoppingItemsView extends ListView {
 					new String[] { "no shopping provider" }));
 			return mCursorItems;
 		}
+		mCursorActivity = activity;
+		mCursorActivity.startManagingCursor(mCursorItems);
+
 
 		int layout_row = R.layout.list_item_shopping_item;
 
