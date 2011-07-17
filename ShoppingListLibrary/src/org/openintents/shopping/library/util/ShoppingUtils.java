@@ -30,11 +30,11 @@ public class ShoppingUtils {
 	 * @param name
 	 * @return Item ID or -1 if item does not exist.
 	 */
-	private static long getItemId(Context context, String name) {
+	public static long getItemId(Context context, String name) {
 		long id = -1;
 		
-		Cursor existingItems = context.getContentResolver().query(ShoppingContract.Items.CONTENT_URI,
-				new String[] { ShoppingContract.Items._ID }, "upper(name) = upper(?)",
+		Cursor existingItems = context.getContentResolver().query(Items.CONTENT_URI,
+				new String[] { Items._ID }, "upper(name) = upper(?)",
 				new String[] { name }, null);
 		if (existingItems.getCount() > 0) {
 			existingItems.moveToFirst();
@@ -133,19 +133,29 @@ public class ShoppingUtils {
 		long id = -1;
 		
 		if (!duplicate) {
-			Cursor existingItems = context.getContentResolver().query(Items.CONTENT_URI,
-				new String[] { Items._ID }, "upper(name) = upper(?)",
-				new String[] { name }, null);
-			if (existingItems.getCount() > 0) {
-				existingItems.moveToFirst();
-				id = existingItems.getLong(0);
+			if (id == -1) {
+				id = getItemId(context, name);
 			}
-			existingItems.close();
 			
 			if (id != -1 && !update) {
 				return id;
 			}
 		} 
+		
+		return getItem(context, id, name, tags, price, units, note);
+	}
+	
+	/**
+	 * Gets or creates a new item and returns its id. If the item exists
+	 * already, the existing id is returned. Otherwise a new item is created.
+	 * 
+	 * @param id id of the item to update, or -1 to create a new item.
+	 * @param name
+	 *            New name of the item.
+	 * @return id of the new or existing item.
+	 */
+	public static long getItem(Context context, long id, String name, String tags, 
+			String price, String units, String note) {
 		
 		// now we are either updating or adding.
 		// either way we need some content values.
