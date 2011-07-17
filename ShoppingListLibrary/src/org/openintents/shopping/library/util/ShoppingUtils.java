@@ -134,8 +134,8 @@ public class ShoppingUtils {
 		
 		if (!duplicate) {
 			Cursor existingItems = context.getContentResolver().query(Items.CONTENT_URI,
-				new String[] { Items._ID }, "upper(name) = ?",
-				new String[] { name.toUpperCase() }, null);
+				new String[] { Items._ID }, "upper(name) = upper(?)",
+				new String[] { name }, null);
 			if (existingItems.getCount() > 0) {
 				existingItems.moveToFirst();
 				id = existingItems.getLong(0);
@@ -190,8 +190,8 @@ public class ShoppingUtils {
 	public static long getUnits(Context context, String units) {
 		long id = -1;
 		Cursor existingUnits = context.getContentResolver().query(Units.CONTENT_URI,
-				new String[] { Units._ID }, "upper(name) = ?",
-				new String[] { units.toUpperCase() }, null);
+				new String[] { Units._ID }, "upper(name) = upper(?)",
+				new String[] { units }, null);
 		if (existingUnits.getCount() > 0) {
 			existingUnits.moveToFirst();
 			id = existingUnits.getLong(0);
@@ -227,8 +227,8 @@ public class ShoppingUtils {
 	public static long getList(Context context, final String name) {
 		long id = -1;
 		Cursor existingItems = context.getContentResolver().query(Lists.CONTENT_URI,
-				new String[] { Items._ID }, "upper(name) = ?",
-				new String[] { name.toUpperCase() }, null);
+				new String[] { Items._ID }, "upper(name) = upper(?)",
+				new String[] { name }, null);
 		if (existingItems.getCount() > 0) {
 			existingItems.moveToFirst();
 			id = existingItems.getLong(0);
@@ -262,8 +262,8 @@ public class ShoppingUtils {
 	public static long getStore(Context context, final String name, final long listId) {
 		long id = -1;
 		Cursor existingItems = context.getContentResolver().query(Stores.CONTENT_URI,
-				new String[] { Stores._ID }, "upper(name) = ? AND list_id = ?",
-				new String[] { name.toUpperCase(), String.valueOf(listId) }, null);
+				new String[] { Stores._ID }, "upper(name) = upper(?) AND list_id = ?",
+				new String[] { name, String.valueOf(listId) }, null);
 		if (existingItems.getCount() > 0) {
 			existingItems.moveToFirst();
 			id = existingItems.getLong(0);
