@@ -38,9 +38,24 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>AndroidSupportV2_eclair</name>
+			<type>2</type>
+			<locationURI>_android_AndroidSupportV2_9e14cd1c/eclair</locationURI>
+		</link>
+		<link>
+			<name>AndroidSupportV2_froyo</name>
+			<type>2</type>
+			<locationURI>_android_AndroidSupportV2_9e14cd1c/froyo</locationURI>
+		</link>
+		<link>
 			<name>AndroidSupportV2_honeycomb</name>
 			<type>2</type>
 			<locationURI>_android_AndroidSupportV2_9e14cd1c/honeycomb</locationURI>
+		</link>
+		<link>
+			<name>AndroidSupportV2_honeycomb_mr2</name>
+			<type>2</type>
+			<locationURI>_android_AndroidSupportV2_9e14cd1c/honeycomb_mr2</locationURI>
 		</link>
 		<link>
 			<name>AndroidSupportV2_src</name>
