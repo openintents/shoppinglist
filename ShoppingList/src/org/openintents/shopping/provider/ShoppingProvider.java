@@ -169,7 +169,7 @@ public class ShoppingProvider extends ContentProvider {
 				qb.setProjectionMap(CONTAINS_FULL_CHEAPEST_PROJECTION_MAP);
 				qb.appendWhere("contains.item_id = items._id AND " +
 					 		   "contains.list_id = lists._id");
-				groupBy = "itemstores.item_id";
+				groupBy = "items._id";
 				
 			} else {
 				qb.setTables("contains, items, lists");
