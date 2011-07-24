@@ -231,14 +231,18 @@
     	<item>newest first</item>
         <!-- Preference sort order: Oldest item first -->
     	<item>oldest first</item>
-        <!-- Preference sort order: Sort alphabetically by tags -->
+    	<!-- Preference sort order: Sort alphabetically by tags -->
     	<item>tags alphabetical</item>
+        <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
+    	<item>priority, tags alphabetical</item>
         <!-- Preference sort order: Sort by price, the most expensive first -->
     	<item>most expensive first</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
     	<item>unchecked first, tags alphabetical</item>
     	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
     	<item>unchecked first, priority, alphabetical</item>
+    	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
+    	<item>unchecked first, priority, tags alphabetical</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">

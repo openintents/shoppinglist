@@ -406,6 +406,8 @@ public abstract class ShoppingContract {
 				"items.price DESC, items.name COLLATE NOCASE ASC",
 				"contains.status ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC", // unchecked first, tags alphabetical, but put empty tags last.
 				"contains.status ASC, contains.priority ASC, items.name COLLATE NOCASE ASC", // unchecked first, priority, alphabetical
+				"contains.status ASC, contains.priority ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC", // unchecked first, priority, tags alphabetical, but put empty tags last.
+				"contains.priority ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC", // priority, tags alphabetical, but put empty tags last.
 				};
 		
 	}
