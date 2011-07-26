@@ -108,6 +108,10 @@
 	
 	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
 	<string name="total_checked">Revisado: %s</string>
+    <string name="priority1_total">Priority 1: %s</string>
+    <string name="priority2_total">Priority 1-2: %s</string>
+	<string name="priority3_total">Priority 1-3: %s</string>
+	<string name="priority4_total">Priority 1-4: %s</string>
 	
 	<string name="delete_item_confirm">¿Estás seguro de que deseas eliminar permanentemente este elemento, sus etiquetas, y su precio de todas las listas de compra?</string>
 	<string name="delete">Borrar</string>
@@ -172,6 +176,16 @@
 	<string name="preference_showpriority_summary">Mostrado como columna extra en la lista.</string>
 	<string name="preference_showunits_title">Mostrar unidades</string>
 	<string name="preference_showunits_summary">Mostrado como columna extra en la lista.</string>
+	<string name="preference_prio_subtotal">Subtotal by priority</string>
+	<string name="preference_prioritytotal_title">Subtotal by priority</string>
+	<string name="preference_prioritytotal_summary">No subtotal by priority shown.</string>
+	<string name="preference_prioritytotal_dialog_title">Subtotal by priority</string>
+	<string name="preference_priosubtotalchecked_title">Include checked items</string>
+	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
+	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
+	<string name="preference_usepickitemsdlg_title">Use "Pick Items" dialog</string>
+	<string name="preference_usepickitemsdlg_on_summary">Add items to list using a dedicated dialog</string>
+	<string name="preference_usepickitemsdlg_off_summary">Switch main list to edit mode to re-add existing items</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Sacudir para limpiar</string>
@@ -225,14 +239,26 @@
     	<item>el más reciente primero</item>
         <!-- Preference sort order: Oldest item first -->
     	<item>el último primero</item>
-        <!-- Preference sort order: Sort alphabetically by tags -->
+    	<!-- Preference sort order: Sort alphabetically by tags -->
     	<item>etiquetas alfabeticamente</item>
+        <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
+    	<item>priority, tags alphabetical</item>
         <!-- Preference sort order: Sort by price, the most expensive first -->
     	<item>más costoso primero</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
     	<item>Sin revisar primero, etiquetar alfabéticamente</item>
     	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
     	<item>los no seleccionados primero, por prioridad, por orden alfabético</item>
+    	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
+    	<item>unchecked first, priority, tags alphabetical</item>
+    </string-array>
+    
+    <string-array name="preference_prioritytotal_entries">
+    	<item>Not shown</item>
+    	<item>Priority 1</item>
+    	<item>Priority 1-2</item>
+    	<item>Priority 1-3</item>
+    	<item>Priority 1-4</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">

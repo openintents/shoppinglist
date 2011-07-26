@@ -22,8 +22,9 @@
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
   Abdessamad Derraz https://launchpad.net/~derraz
-  Maxime Gentils https://launchpad.net/~maxime.gentils
+  Bonsoir https://launchpad.net/~bonsoir
   Omega13 https://launchpad.net/~omega13
+  OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101
   Thibault Févry https://launchpad.net/~thibaultfevry
   dommy9111 https://launchpad.net/~bossboss9111
@@ -108,6 +109,10 @@
 	
 	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
 	<string name="total_checked">Coché: %s</string>
+    <string name="priority1_total">Priority 1: %s</string>
+    <string name="priority2_total">Priority 1-2: %s</string>
+	<string name="priority3_total">Priority 1-3: %s</string>
+	<string name="priority4_total">Priority 1-4: %s</string>
 	
 	<string name="delete_item_confirm">Etes vous sûr de vouloir définitivement supprimmer cet élément, son libellé et son prix de toutes les listes ?</string>
 	<string name="delete">Supprimer</string>
@@ -172,6 +177,16 @@
 	<string name="preference_showpriority_summary">Voir comme une colonne supplémentaire dans la liste</string>
 	<string name="preference_showunits_title">Show units</string>
 	<string name="preference_showunits_summary">Voir comme une colonne supplémentaire dans la liste</string>
+	<string name="preference_prio_subtotal">Subtotal by priority</string>
+	<string name="preference_prioritytotal_title">Subtotal by priority</string>
+	<string name="preference_prioritytotal_summary">No subtotal by priority shown.</string>
+	<string name="preference_prioritytotal_dialog_title">Subtotal by priority</string>
+	<string name="preference_priosubtotalchecked_title">Include checked items</string>
+	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
+	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
+	<string name="preference_usepickitemsdlg_title">Use "Pick Items" dialog</string>
+	<string name="preference_usepickitemsdlg_on_summary">Add items to list using a dedicated dialog</string>
+	<string name="preference_usepickitemsdlg_off_summary">Switch main list to edit mode to re-add existing items</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Secouer pour nettoyer</string>
@@ -225,14 +240,26 @@
     	<item>nouveau en premier</item>
         <!-- Preference sort order: Oldest item first -->
     	<item>ancien en premier</item>
-        <!-- Preference sort order: Sort alphabetically by tags -->
+    	<!-- Preference sort order: Sort alphabetically by tags -->
     	<item>Libellé par ordre alphabétique</item>
+        <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
+    	<item>priority, tags alphabetical</item>
         <!-- Preference sort order: Sort by price, the most expensive first -->
     	<item>plus cher en premier</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
     	<item>Non coché en premier, libellé par ordre alphabétique</item>
     	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
     	<item>unchecked first, priority, alphabetical</item>
+    	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
+    	<item>unchecked first, priority, tags alphabetical</item>
+    </string-array>
+    
+    <string-array name="preference_prioritytotal_entries">
+    	<item>Not shown</item>
+    	<item>Priority 1</item>
+    	<item>Priority 1-2</item>
+    	<item>Priority 1-3</item>
+    	<item>Priority 1-4</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">

@@ -101,6 +101,10 @@
 	
 	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
 	<string name="total_checked">已核对: %s</string>
+    <string name="priority1_total">Priority 1: %s</string>
+    <string name="priority2_total">Priority 1-2: %s</string>
+	<string name="priority3_total">Priority 1-3: %s</string>
+	<string name="priority4_total">Priority 1-4: %s</string>
 	
 	<string name="delete_item_confirm">确定要从所有购物列表中永久删除此物品，其标签以及价格吗？</string>
 	<string name="delete">删除</string>
@@ -165,6 +169,16 @@
 	<string name="preference_showpriority_summary">被显示为列表的额外列</string>
 	<string name="preference_showunits_title">Show units</string>
 	<string name="preference_showunits_summary">被显示为列表的额外列</string>
+	<string name="preference_prio_subtotal">Subtotal by priority</string>
+	<string name="preference_prioritytotal_title">Subtotal by priority</string>
+	<string name="preference_prioritytotal_summary">No subtotal by priority shown.</string>
+	<string name="preference_prioritytotal_dialog_title">Subtotal by priority</string>
+	<string name="preference_priosubtotalchecked_title">Include checked items</string>
+	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
+	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
+	<string name="preference_usepickitemsdlg_title">Use "Pick Items" dialog</string>
+	<string name="preference_usepickitemsdlg_on_summary">Add items to list using a dedicated dialog</string>
+	<string name="preference_usepickitemsdlg_off_summary">Switch main list to edit mode to re-add existing items</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">摇动手机以清空列表</string>
@@ -218,14 +232,26 @@
     	<item>优先最新的</item>
         <!-- Preference sort order: Oldest item first -->
     	<item>优先最旧的</item>
-        <!-- Preference sort order: Sort alphabetically by tags -->
+    	<!-- Preference sort order: Sort alphabetically by tags -->
     	<item>按标签的字母顺序排序</item>
+        <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
+    	<item>priority, tags alphabetical</item>
         <!-- Preference sort order: Sort by price, the most expensive first -->
     	<item>优先最贵的</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
     	<item>优先列出未检查物品， 按标签的字母顺序排序</item>
     	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
     	<item>unchecked first, priority, alphabetical</item>
+    	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
+    	<item>unchecked first, priority, tags alphabetical</item>
+    </string-array>
+    
+    <string-array name="preference_prioritytotal_entries">
+    	<item>Not shown</item>
+    	<item>Priority 1</item>
+    	<item>Priority 1-2</item>
+    	<item>Priority 1-3</item>
+    	<item>Priority 1-4</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">

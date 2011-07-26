@@ -100,6 +100,10 @@
 	
 	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
 	<string name="total_checked">Проверени: %s</string>
+    <string name="priority1_total">Priority 1: %s</string>
+    <string name="priority2_total">Priority 1-2: %s</string>
+	<string name="priority3_total">Priority 1-3: %s</string>
+	<string name="priority4_total">Priority 1-4: %s</string>
 	
 	<string name="delete_item_confirm">Дали сте сигурни дека сакате трајно да ја избришете оваа ставка, нејзините ознаки, и цена од сите листи?</string>
 	<string name="delete">Избриши</string>
@@ -164,6 +168,16 @@
 	<string name="preference_showpriority_summary">Прикажано како екстра колона на листата.</string>
 	<string name="preference_showunits_title">Show units</string>
 	<string name="preference_showunits_summary">Прикажано како екстра колона на листата.</string>
+	<string name="preference_prio_subtotal">Subtotal by priority</string>
+	<string name="preference_prioritytotal_title">Subtotal by priority</string>
+	<string name="preference_prioritytotal_summary">No subtotal by priority shown.</string>
+	<string name="preference_prioritytotal_dialog_title">Subtotal by priority</string>
+	<string name="preference_priosubtotalchecked_title">Include checked items</string>
+	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
+	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
+	<string name="preference_usepickitemsdlg_title">Use "Pick Items" dialog</string>
+	<string name="preference_usepickitemsdlg_on_summary">Add items to list using a dedicated dialog</string>
+	<string name="preference_usepickitemsdlg_off_summary">Switch main list to edit mode to re-add existing items</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Затреси за да испразниш</string>
@@ -217,14 +231,26 @@
     	<item>прво најновите</item>
         <!-- Preference sort order: Oldest item first -->
     	<item>прво најстарите</item>
-        <!-- Preference sort order: Sort alphabetically by tags -->
+    	<!-- Preference sort order: Sort alphabetically by tags -->
     	<item>ознаки по азбучен ред</item>
+        <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
+    	<item>priority, tags alphabetical</item>
         <!-- Preference sort order: Sort by price, the most expensive first -->
     	<item>прво најскапите</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
     	<item>unchecked first, tags alphabetical</item>
     	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
     	<item>unchecked first, priority, alphabetical</item>
+    	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
+    	<item>unchecked first, priority, tags alphabetical</item>
+    </string-array>
+    
+    <string-array name="preference_prioritytotal_entries">
+    	<item>Not shown</item>
+    	<item>Priority 1</item>
+    	<item>Priority 1-2</item>
+    	<item>Priority 1-3</item>
+    	<item>Priority 1-4</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
