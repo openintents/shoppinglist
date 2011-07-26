@@ -217,9 +217,10 @@ public class ShoppingProvider extends ContentProvider {
 			break;
 		
 		case ITEMSTORES_ITEMID:
-			// path segment 1 is "item", path segment 2 is item id.
+			// path segment 1 is "item", path segment 2 is item id, path segment 3 is list id.
 			qb.setTables("stores left outer join itemstores on (stores._id = itemstores.store_id and " +
 					"itemstores.item_id = " + url.getPathSegments().get(2) + ")");
+			qb.appendWhere("stores.list_id = " + url.getPathSegments().get(3) );
 			break;
 			
 		case NOTES:
@@ -992,7 +993,7 @@ public class ShoppingProvider extends ContentProvider {
 		URL_MATCHER.addURI("org.openintents.shopping", "itemstores", ITEMSTORES);
 		URL_MATCHER.addURI("org.openintents.shopping", "itemstores/#", 
 				ITEMSTORES_ID);
-		URL_MATCHER.addURI("org.openintents.shopping", "itemstores/item/#", 
+		URL_MATCHER.addURI("org.openintents.shopping", "itemstores/item/#/#", 
 				ITEMSTORES_ITEMID);
 		URL_MATCHER.addURI("org.openintents.shopping", "liststores/#", 
 				STORES_LISTID);

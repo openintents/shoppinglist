@@ -405,7 +405,9 @@ public class StoreListView extends ListView {
 
 		// Get a cursor for all stores
 		mCursorItemstores = getContext().getContentResolver().query(
-				ItemStores.CONTENT_URI.buildUpon().appendPath("item").appendPath(String.valueOf(mItemId)).build(), 
+				ItemStores.CONTENT_URI.buildUpon().appendPath("item").
+				appendPath(String.valueOf(mItemId)).
+				appendPath(String.valueOf(mListId)).build(), 
 				mStringItems, null, null, sortOrder);
 		activity.startManagingCursor(mCursorItemstores);
 
