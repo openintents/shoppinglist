@@ -298,33 +298,19 @@ public class ShoppingItemsView extends ListView {
 			nc.setTag(new Integer(cursor.getPosition()));
 
 			if (mShowCheckBox) {
+				c.setVisibility(CheckBox.VISIBLE);
 				c.setChecked(status == ShoppingContract.Status.BOUGHT);
-				if (mMode == ShoppingActivity.MODE_IN_SHOP) {
-				    // Always show the checkbox in shopping mode. 
-					// The REMOVED_FROM_LIST items are not shown anyway.
-					c.setVisibility(CheckBox.VISIBLE);
-					nc.setVisibility(ImageView.GONE);
-				} else {  // mMode == ShoppingActivity.MODE_ADD_ITEMS
-					if (status == ShoppingContract.Status.REMOVED_FROM_LIST) {
-						// Show the ghost checkbox
-						c.setVisibility(CheckBox.VISIBLE);
-						nc.setVisibility(ImageView.VISIBLE);
-					} else {
-						// Show the checkbox
-						c.setVisibility(CheckBox.VISIBLE);
-						nc.setVisibility(ImageView.GONE);
-					}
-				}
 			} else {
 				c.setVisibility(CheckBox.GONE);
-				if (mMode == ShoppingActivity.MODE_IN_SHOP) {
+			}
+			
+			if (mMode == ShoppingActivity.MODE_IN_SHOP) {
+				nc.setVisibility(ImageView.GONE);
+			} else {  // mMode == ShoppingActivity.MODE_ADD_ITEMS
+				if (status == ShoppingContract.Status.REMOVED_FROM_LIST) {
+					nc.setVisibility(ImageView.VISIBLE);
+				} else {
 					nc.setVisibility(ImageView.GONE);
-				} else {  // mMode == ShoppingActivity.MODE_ADD_ITEMS
-					if (status == ShoppingContract.Status.REMOVED_FROM_LIST) {
-						nc.setVisibility(ImageView.VISIBLE);
-					} else {
-						nc.setVisibility(ImageView.GONE);
-					}
 				}
 			}
 
