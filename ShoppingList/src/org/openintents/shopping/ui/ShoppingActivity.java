@@ -397,6 +397,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	// "cursor items position";
 	private static final String BUNDLE_ITEM_URI = "item uri";
 	private static final String BUNDLE_RELATION_URI = "relation_uri";
+	private static final String BUNDLE_MODE = "mode";
 
 	// Skins --------------------------
 
@@ -589,6 +590,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			if (icicle.containsKey(BUNDLE_RELATION_URI)) {
 				mRelationUri = Uri.parse(icicle.getString(BUNDLE_RELATION_URI));
 			}
+			mItemsView.mMode = icicle.getInt(BUNDLE_MODE);
 		}
 
 		// set focus to the edit line:
@@ -827,6 +829,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		if (mRelationUri != null) {
 			outState.putString(BUNDLE_RELATION_URI, mRelationUri.toString());
 		}
+		outState.putInt(BUNDLE_MODE, mItemsView.mMode);
 
 		mUpdating = false;
 
