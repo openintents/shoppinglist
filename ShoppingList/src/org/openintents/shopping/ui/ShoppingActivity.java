@@ -383,9 +383,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 	private LinearLayout.LayoutParams mLayoutParamsItems;
 	private int mAllowedListHeight; // Height for the list allowed in this view.
-
+	
 	private AutoCompleteTextView mEditText;
-
+	private Button mButton;
+	
 	protected Context mDialogContext;
 
 	// TODO: Set up state information for onFreeze(), ...
@@ -720,7 +721,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			setTitleColor(0xFFAAAAFF);
 		}
 
-		mItemsView.setListTheme(loadListTheme());
+		setListTheme(loadListTheme());
 		mItemsView.onResume();
 
 		// TODO fling disabled for release 1.3.0
@@ -928,13 +929,13 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			}
 		});
 
-		Button button = (Button) findViewById(R.id.button_add_item);
-		button.setOnClickListener(new OnClickListener() {
+		mButton = (Button) findViewById(R.id.button_add_item);
+		mButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				insertNewItem();
 			}
 		});
-		button.setOnLongClickListener(new View.OnLongClickListener() {
+		mButton.setOnLongClickListener(new View.OnLongClickListener() {
 
 			@Override
 			public boolean onLongClick(View v) {
@@ -1043,7 +1044,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 					fillItems(id == mItemsView.getListId());
 					
 					// Now set the theme based on the selected list:
-					mItemsView.setListTheme(loadListTheme());
+					setListTheme(loadListTheme());
 
 					((ListView) mShoppingListsView).setItemChecked(position,true);
 					
@@ -1076,7 +1077,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 					// if a preference has changed since then.
 					fillItems(id == mItemsView.getListId());
 						// Now set the theme based on the selected list:
-					mItemsView.setListTheme(loadListTheme());					
+					setListTheme(loadListTheme());					
 				}
 
 				public void onNothingSelected(AdapterView arg0) {
@@ -1576,9 +1577,20 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		// Now set the theme based on the selected list:
 		saveListTheme(previousTheme);
-		mItemsView.setListTheme(previousTheme);
+		setListTheme(previousTheme);
 
 		return true;
+	}
+
+	private void setListTheme(String theme) {
+		mItemsView.setListTheme(theme);
+		
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			// In Holo themes, apply the theme text color also to the
+			// input box and the button, because the background is semi-transparent.
+			mEditText.setTextColor(mItemsView.mTextColor);
+			mButton.setTextColor(mItemsView.mTextColor);
+		}
 	}
 
 	/**
@@ -1728,7 +1740,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		fillItems(false);
 
 		// Now set the theme based on the selected list:
-		mItemsView.setListTheme(loadListTheme());
+		setListTheme(loadListTheme());
 
 	}
 
@@ -1898,7 +1910,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 	@Override
 	public void onSetTheme(String theme) {
-		mItemsView.setListTheme(theme);
+		setListTheme(theme);
 	}
 
 	@Override
@@ -2140,7 +2152,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		   fillItems(false);
 		}
 		// Now set the theme based on the selected list:
-		mItemsView.setListTheme(loadListTheme());
+		setListTheme(loadListTheme());
 		
 		if (mShoppingListsView instanceof ListView){
 			((ListView) mShoppingListsView).setItemChecked(pos,true);
