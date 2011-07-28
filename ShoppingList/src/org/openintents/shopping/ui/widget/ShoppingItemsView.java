@@ -307,7 +307,7 @@ public class ShoppingItemsView extends ListView {
 				} else {  // mMode == ShoppingActivity.MODE_ADD_ITEMS
 					if (status == ShoppingContract.Status.REMOVED_FROM_LIST) {
 						// Show the ghost checkbox
-						c.setVisibility(CheckBox.GONE);
+						c.setVisibility(CheckBox.VISIBLE);
 						nc.setVisibility(ImageView.VISIBLE);
 					} else {
 						// Show the checkbox
@@ -317,7 +317,15 @@ public class ShoppingItemsView extends ListView {
 				}
 			} else {
 				c.setVisibility(CheckBox.GONE);
-				nc.setVisibility(ImageView.GONE);
+				if (mMode == ShoppingActivity.MODE_IN_SHOP) {
+					nc.setVisibility(ImageView.GONE);
+				} else {  // mMode == ShoppingActivity.MODE_ADD_ITEMS
+					if (status == ShoppingContract.Status.REMOVED_FROM_LIST) {
+						nc.setVisibility(ImageView.VISIBLE);
+					} else {
+						nc.setVisibility(ImageView.GONE);
+					}
+				}
 			}
 
 			// The parent view knows how to deal with clicks.
