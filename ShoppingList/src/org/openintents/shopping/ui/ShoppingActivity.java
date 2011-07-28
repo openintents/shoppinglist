@@ -2281,8 +2281,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	}
 
 	private String getCurrentListName() {
-		return ((Cursor) mShoppingListsView.getSelectedItem())
-				.getString(mStringListFilterNAME);
+		long listId = getSelectedListId();
+		
+		// calling getSelectedListId also updates mCursorShoppingLists:
+		return mCursorShoppingLists.getString(mStringListFilterNAME);
 	}	
 	
 
