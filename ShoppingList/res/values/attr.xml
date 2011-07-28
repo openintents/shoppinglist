@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 
- * Copyright (C) 2009-2010 OpenIntents.org
+ * Copyright (C) 2009-2011 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@
  -->
 
 <!-- 
-  Version: OI Shopping List 1.2.1-beta1
-  Date: 2009-02-07
+  Version: OI Shopping List 1.4
+  Date: 2011-07-28
  -->
  
 <resources>
