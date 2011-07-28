@@ -28,10 +28,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v2.os.Build;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -39,12 +40,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class ThemeDialog extends AlertDialog implements OnClickListener, OnCancelListener, OnItemClickListener {
 	private static final String TAG = "ThemeDialog";
@@ -74,11 +75,18 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 		setInverseBackgroundForced(true);
 		
 		LayoutInflater inflate = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View view;
 		
-		inflate = inflate.cloneInContext(new ContextThemeWrapper(mContext, android.R.style.Theme_Light));
-		
-		final View view = inflate.inflate(R.layout.dialog_theme_settings,
-				null);
+		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
+			// Enforce light theme
+			inflate = inflate.cloneInContext(new ContextThemeWrapper(mContext, android.R.style.Theme_Light));
+			view = inflate.inflate(R.layout.dialog_theme_settings,
+					null);
+		} else {
+			// Use default (Holo) theme
+			view = inflate.inflate(R.layout.dialog_theme_settings,
+					null);
+		}
 		
 		setView(view);
 		
@@ -130,9 +138,16 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 			i++;
 		}
 
-        mListView.setAdapter(new ArrayAdapter<String>(
-        		new ContextThemeWrapper(mContext, android.R.style.Theme_Light),
-                android.R.layout.simple_list_item_single_choice, s));
+		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
+			// Enforce light theme
+	        mListView.setAdapter(new ArrayAdapter<String>(
+	        		new ContextThemeWrapper(mContext, android.R.style.Theme_Light),
+	                android.R.layout.simple_list_item_single_choice, s));
+		} else {
+			// Use default (Holo) theme
+	        mListView.setAdapter(new ArrayAdapter<String>(mContext,
+	                android.R.layout.simple_list_item_single_choice, s));
+		}
         
         mListView.setOnItemClickListener(this);
 	}
