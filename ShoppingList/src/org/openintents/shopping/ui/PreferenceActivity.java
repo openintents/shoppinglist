@@ -23,7 +23,7 @@ import android.text.method.TextKeyListener;
 
 public class PreferenceActivity extends android.preference.PreferenceActivity implements OnSharedPreferenceChangeListener {
 	private static boolean mBackupManagerAvailable;
-
+	public static int updateCount = 0;
 
 	static {
 		try {
@@ -126,6 +126,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	}
 
 	public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+		updateCount++;
         if (key.equals(PREFS_PRIOSUBTOTAL)) {
         	updatePrioSubtotalSummary(prefs);
         }

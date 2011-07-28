@@ -255,6 +255,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 * Current state
 	 */
 	private int mState;
+	
+	/*
+	 * Value of PreferenceActivity.updateCount last time we 
+	 * called fillItems().
+	 */
+	private int lastAppliedPrefChange = -1;
 
 	/**
 	 * mode: separate dialog to add items from existing list
@@ -595,6 +601,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	}
 
 	private int initFromPreferences() {
+	
 		// if set to "last used", override the default list.
 		SharedPreferences sp = getSharedPreferences(
 				"org.openintents.shopping_preferences", MODE_PRIVATE);
@@ -735,7 +742,14 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			// MESSAGE_UPDATE_CURSORS), mUpdateInterval);
 		}
 
-		// fillItems();
+		// OnResume can be called when exiting PreferenceActivity, in 
+		// which case we might need to refresh the list depending on 
+		// which settings were changed. We could be smarter about this,
+		// but for now refresh if /any/ pref has changed.
+		//
+		// actually this call is useless, because list id is generally 
+		// not set by now.
+		//	fillItems(true);
 
 		// TODO ???
 		/*
@@ -1020,12 +1034,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 						int position, long id) {
 					if (debug)
 						Log.d(TAG, "ListView: onItemSelected");
-					if (id != mItemsView.getListId()) {
-						// No need to requery... same list we had before. 
-						fillItems();
-						// Now set the theme based on the selected list:
-						mItemsView.setListTheme(loadListTheme());
-					}
+					// If it's the same list we had before, requery only 
+					// if a preference has changed since then.
+					fillItems(id == mItemsView.getListId());
+					
+					// Now set the theme based on the selected list:
+					mItemsView.setListTheme(loadListTheme());
 
 					((ListView) mShoppingListsView).setItemChecked(position,true);
 					
@@ -1036,7 +1050,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 						Log.d(TAG, "Listview: onNothingSelected: "
 								+ mIsActive);
 					if (mIsActive) {
-						fillItems();
+						fillItems(false);
 					}
 				}
 			});
@@ -1054,12 +1068,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 						int position, long id) {
 					if (debug)
 						Log.d(TAG, "Spinner: onItemSelected");
-					if (id != mItemsView.getListId()) {
-						// No need to requery... same list we had before. 
-						fillItems();
+					// If it's the same list we had before, requery only 
+					// if a preference has changed since then.
+					fillItems(id == mItemsView.getListId());
 						// Now set the theme based on the selected list:
-						mItemsView.setListTheme(loadListTheme());
-					}					
+					mItemsView.setListTheme(loadListTheme());					
 				}
 
 				public void onNothingSelected(AdapterView arg0) {
@@ -1067,7 +1080,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 						Log.d(TAG, "Spinner: onNothingSelected: "
 								+ mIsActive);
 					if (mIsActive) {
-						fillItems();
+						fillItems(false);
 					}
 				}
 			});
@@ -1708,7 +1721,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		// Update view
 		fillListFilter();
-		fillItems();
+		fillItems(false);
 
 		// Now set the theme based on the selected list:
 		mItemsView.setListTheme(loadListTheme());
@@ -2120,7 +2133,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		mShoppingListsView.setSelection(pos);	
 		
 		if (getSelectedListId() != mItemsView.getListId()) {
-		   fillItems();
+		   fillItems(false);
 		}
 		// Now set the theme based on the selected list:
 		mItemsView.setListTheme(loadListTheme());
@@ -2254,7 +2267,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		if (debug)
 			Log.d(TAG, "onModeChanged()");
-		fillItems();
+		fillItems(false);
 
 		if (mItemsView.mMode == MODE_IN_SHOP) {
 			setTitle(getString(R.string.shopping_title,
@@ -2273,10 +2286,15 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	}	
 	
 
-	private void fillItems() {
+	private void fillItems(boolean onlyIfPrefsChanged) {
 		if (debug)
 			Log.d(TAG, "fillItems()");
 
+		if (onlyIfPrefsChanged && 
+			(lastAppliedPrefChange == PreferenceActivity.updateCount)) {
+			return;	
+		}
+		
 		long listId = getSelectedListId();
 		if (listId < 0) {
 			// No valid list - probably view is not active
@@ -2286,8 +2304,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		
 		if (debug)
 			Log.d(TAG, "fillItems() for list " + listId);
+		lastAppliedPrefChange = PreferenceActivity.updateCount;
 		mItemsView.fillItems(this, listId);
-
+		
 		// Insert any pending items received either through intents
 		// or in onActivityResult:
 		if (mExtraItems != null) {
