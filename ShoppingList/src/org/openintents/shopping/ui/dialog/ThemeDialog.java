@@ -49,21 +49,21 @@ import android.widget.ListView;
 
 public class ThemeDialog extends AlertDialog implements OnClickListener, OnCancelListener, OnItemClickListener {
 	private static final String TAG = "ThemeDialog";
-	
+
 	private static final String BUNDLE_THEME = "theme";
-	
+
 	Context mContext;
 	ThemeDialogListener mListener;
 	ListView mListView;
 	CheckBox mCheckBox;
 	List<ThemeInfo> mListInfo;
-	
+
 	public ThemeDialog(Context context) {
 		super(context);
 		mContext = context;
 		init();
 	}
-	
+
 	public ThemeDialog(Context context, ThemeDialogListener listener) {
 		super(context);
 		mContext = context;
@@ -73,10 +73,10 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 
 	private void init() {
 		setInverseBackgroundForced(true);
-		
+
 		LayoutInflater inflate = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view;
-		
+
 		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
 			// Enforce light theme
 			inflate = inflate.cloneInContext(new ContextThemeWrapper(mContext, android.R.style.Theme_Light));
@@ -87,50 +87,50 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 			view = inflate.inflate(R.layout.dialog_theme_settings,
 					null);
 		}
-		
+
 		setView(view);
-		
+
 		mListView = (ListView) view.findViewById(R.id.list1);
 		mListView.setCacheColorHint(0);
 		mListView.setItemsCanFocus(false);
 		mListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-		
+
 		Button b = new Button(mContext);
 		b.setText(R.string.get_more_themes);
 		b.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(mContext, PreferenceActivity.class);
 				i.putExtra(PreferenceActivity.EXTRA_SHOW_GET_ADD_ONS, true);
 				mContext.startActivity(i);
-				
+
 				pressCancel();
 				dismiss();
 			}
 		});
-		
+
 		LinearLayout ll = new LinearLayout(mContext);
 		LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		ll.setPadding(20, 10, 20, 10);
 		ll.addView(b, lp);
 		ll.setGravity(Gravity.CENTER);
 		mListView.addFooterView(ll);
-		
+
 		mCheckBox = (CheckBox) view.findViewById(R.id.check1);
-		
+
 		setTitle(R.string.theme_pick);
-		
+
 		setButton(Dialog.BUTTON_POSITIVE, mContext.getText(R.string.ok), this);
 		setButton(Dialog.BUTTON_NEGATIVE, mContext.getText(R.string.cancel), this);
 		setOnCancelListener(this);
-		
+
 		prepareDialog();
 	}
-	
+
 	public void fillThemes() {
 		mListInfo = ThemeUtils.getThemeInfos(mContext, ThemeShoppingList.SHOPPING_LIST_THEME);
-		
+
 		String[] s = new String[mListInfo.size()];
 		int i = 0;
 		for (ThemeInfo ti : mListInfo) {
@@ -140,30 +140,30 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 
 		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
 			// Enforce light theme
-	        mListView.setAdapter(new ArrayAdapter<String>(
-	        		new ContextThemeWrapper(mContext, android.R.style.Theme_Light),
-	                android.R.layout.simple_list_item_single_choice, s));
+			mListView.setAdapter(new ArrayAdapter<String>(
+					new ContextThemeWrapper(mContext, android.R.style.Theme_Light),
+					android.R.layout.simple_list_item_single_choice, s));
 		} else {
 			// Use default (Holo) theme
-	        mListView.setAdapter(new ArrayAdapter<String>(mContext,
-	                android.R.layout.simple_list_item_single_choice, s));
+			mListView.setAdapter(new ArrayAdapter<String>(mContext,
+					android.R.layout.simple_list_item_single_choice, s));
 		}
-        
-        mListView.setOnItemClickListener(this);
+
+		mListView.setOnItemClickListener(this);
 	}
-	
+
 	public void prepareDialog() {
 		fillThemes();
 		updateList();
 		mCheckBox.setChecked(PreferenceActivity.getThemeSetForAll(mContext));
 	}
-	
+
 	/**
 	 * Set selection to currently used theme.
 	 */
 	private void updateList() {
 		String theme = mListener.onLoadTheme();
-		
+
 		// Check special cases for backward compatibility:
 		if ("1".equals(theme)) {
 			theme = mContext.getResources().getResourceName(
@@ -180,12 +180,12 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 		// in this list (for example got uninstalled).
 		mListView.setItemChecked(-1, false);
 		mListView.setSelection(0);
-		
+
 		int pos = 0;
 		for (ThemeInfo ti : mListInfo) {
 			if (ti.styleName.equals(theme)) {
 				mListView.setItemChecked(pos, true);
-				
+
 				// Move list to show the selected item:
 				mListView.setSelection(pos);
 				break;
@@ -193,11 +193,11 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 			pos++;
 		}
 	}
-	
+
 	@Override
 	public Bundle onSaveInstanceState() {
 		Log.d(TAG, "onSaveInstanceState");
-		
+
 		Bundle b = super.onSaveInstanceState();
 		String theme = getSelectedTheme();
 		b.putString(BUNDLE_THEME, theme);
@@ -209,9 +209,9 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 		super.onRestoreInstanceState(savedInstanceState);
 
 		Log.d(TAG, "onRestore");
-		
+
 		String theme = getSelectedTheme();
-		
+
 		if (savedInstanceState != null) {
 			if (savedInstanceState.containsKey(BUNDLE_THEME)) {
 				theme = savedInstanceState.getString(BUNDLE_THEME);
@@ -219,31 +219,31 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 				Log.d(TAG, "onRestore theme " + theme);
 			}
 		}
-		
+
 		mListener.onSetTheme(theme);
 	}
 
 	public void onClick(DialogInterface dialog, int which) {
-    	if (which == BUTTON_POSITIVE) {
-    		pressOk();
-    	} else if (which == BUTTON_NEGATIVE) {
-    		pressCancel();
-    	}
-		
+		if (which == BUTTON_POSITIVE) {
+			pressOk();
+		} else if (which == BUTTON_NEGATIVE) {
+			pressCancel();
+		}
+
 	}
 
 	@Override
 	public void onCancel(DialogInterface arg0) {
 		pressCancel();
 	}
-	
+
 	public void pressOk() {
 
 		/* User clicked Yes so do some stuff */
 		String theme = getSelectedTheme();
 		mListener.onSaveTheme(theme);
 		mListener.onSetTheme(theme);
-		
+
 		boolean setForAllThemes = mCheckBox.isChecked();
 		PreferenceActivity.setThemeSetForAll(mContext,
 				setForAllThemes);
@@ -254,7 +254,7 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 
 	private String getSelectedTheme() {
 		int pos = mListView.getCheckedItemPosition();
-		
+
 		if (pos != ListView.INVALID_POSITION) {
 			ThemeInfo ti = mListInfo.get(pos);
 			return ti.styleName;
@@ -262,7 +262,7 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 			return null;
 		}
 	}
-	
+
 	public void pressCancel() {
 		/* User clicked No so do some stuff */
 		String theme = mListener.onLoadTheme();
@@ -273,12 +273,12 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		String theme = getSelectedTheme();
-		
+
 		if (theme != null) {
 			mListener.onSetTheme(theme);
 		}
 	}
-	
+
 	public interface ThemeDialogListener {
 		void onSetTheme(String theme);
 		void onSetThemeForAll(String theme);
