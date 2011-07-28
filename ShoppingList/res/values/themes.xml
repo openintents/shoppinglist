@@ -25,6 +25,7 @@
 		<item name="textSizeLarge">28sp</item>
 		<item name="textColor">#FFFFFFFF</item>
 		<item name="textColorPrice">#FFCCCCCC</item>
+		<item name="textColorPriority">#FFCCCCCC</item>
 		<item name="textColorChecked">#FFCCCCCC</item>
 		<item name="textStrikethroughChecked">false</item>
 		<item name="textSuffixUnchecked">@string/empty</item>
@@ -43,6 +44,7 @@
 		<item name="textSizeLarge">25sp</item>
 		<item name="textColor">#FF000000</item>
 		<item name="textColorPrice">#FF444444</item>
+		<item name="textColorPriority">#FFAA8844</item>
 		<item name="textColorChecked">#FF008800</item>
 		<item name="textStrikethroughChecked">true</item>
 		<item name="showCheckBox">false</item>
@@ -59,6 +61,7 @@
 		<item name="textSizeLarge">31sp</item>
 		<item name="textColor">#FFFFFF66</item>
 		<item name="textColorPrice">#FFCCCCCC</item>
+		<item name="textColorPriority">#FFEECC88</item>
 		<item name="textColorChecked">#FF66FF66</item>
 		<item name="textStrikethroughChecked">false</item>
 		<item name="textSuffixChecked">@string/suffix_checked</item>

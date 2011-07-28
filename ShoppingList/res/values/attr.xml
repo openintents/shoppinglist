@@ -51,6 +51,7 @@
 		<attr name="textSizeLarge" format="dimension" />
 		<attr name="textColor" format="color" />
 		<attr name="textColorPrice" format="color" />
+		<attr name="textColorPriority" format="color" />
 		<attr name="textColorChecked" format="color" />
 		<attr name="textStrikethroughChecked" format="boolean" />
 		

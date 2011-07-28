@@ -24,6 +24,7 @@ public class ThemeShoppingList {
 	public static final String textColor = "textColor";
 	public static final String textColorPrice = "textColorPrice";
 	public static final String textColorChecked = "textColorChecked";
+	public static final String textColorPriority = "textColorPriority";
 	public static final String textStrikethroughChecked = "textStrikethroughChecked";
 	public static final String textSuffixUnchecked = "textSuffixUnchecked";
 	public static final String textSuffixChecked = "textSuffixChecked";

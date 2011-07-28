@@ -87,6 +87,7 @@ public class ShoppingItemsView extends ListView {
 	public int mTextColor;
 	public int mTextColorPrice;
 	public int mTextColorChecked;
+	public int mTextColorPriority;
 	public boolean mShowCheckBox;
 	public boolean mShowStrikethrough;
 	public String mTextSuffixUnchecked;
@@ -498,7 +499,7 @@ public class ShoppingItemsView extends ListView {
 				if (mPriorityVisibility == View.VISIBLE  &&
 					!TextUtils.isEmpty(priority)) { 
 					tv.setVisibility(View.VISIBLE); 
-					// tv.setTextColor(mPriceTextColor);  
+					tv.setTextColor(mTextColorPriority);
 					tv.setText("-" + priority + "- "); }
 			    else { 
 				    hideTextView(tv); 
@@ -820,6 +821,10 @@ public class ShoppingItemsView extends ListView {
 
 			mTextColorPrice = ta.getColor(ThemeShoppingList.textColorPrice,
 					android.R.color.white);
+
+			// Use color of price if color of priority has not been defined
+			mTextColorPriority = ta.getColor(ThemeShoppingList.textColorPriority,
+					mTextColorPrice);
 
 			if (size == 0) {
 				mTextSize = getTextSizeTiny(ta);
