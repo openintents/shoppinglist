@@ -50,6 +50,7 @@ import org.openintents.shopping.ui.widget.ShoppingItemsView.OnCustomClickListene
 import org.openintents.util.MenuIntentOptionsWithIcons;
 import org.openintents.util.ShakeSensorListener;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -67,10 +68,10 @@ import android.database.Cursor;
 import android.hardware.SensorListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
-import android.support.v2.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v2.os.Build;
 import android.support.v2.view.MenuCompat;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -2268,6 +2269,16 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		if (debug)
 			Log.d(TAG, "onModeChanged()");
 		fillItems(false);
+		
+		if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB){
+			//invalidateOptionsMenu();
+			try {
+				java.lang.reflect.Method method = Activity.class.getMethod("invalidateOptionsMenu");
+				method.invoke(this);
+			} catch(Exception e) {
+				
+			}
+		}
 
 		if (mItemsView.mMode == MODE_IN_SHOP) {
 			setTitle(getString(R.string.shopping_title,
