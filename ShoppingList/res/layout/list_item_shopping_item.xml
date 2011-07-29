@@ -28,7 +28,7 @@
 	    android:background="@android:drawable/menuitem_background"
         android:gravity="center_vertical"  ><!-- android:clickable = "true" -->
         <ImageView android:id="@+id/nocheck"
-	              android:src="@drawable/ic_menu_add_list"
+	              android:src="@drawable/ic_menu_add"
 	              android:layout_width="wrap_content"
 	              android:layout_height="fill_parent"
 	              android:layout_marginRight="0dip"
