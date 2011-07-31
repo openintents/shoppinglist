@@ -711,20 +711,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		
 		mIsActive = true;
 
-		// Modify our overall title depending on the mode we are running in.
-		if (mState == STATE_MAIN || mState == STATE_VIEW_LIST) {
-			// App name is default
-			// setTitle(getText(R.string.app_name));
-		} else if ((mState == STATE_PICK_ITEM)
-				|| (mState == STATE_GET_CONTENT_ITEM)) {
-			setTitle(getText(R.string.pick_item));
-			setTitleColor(0xFFAAAAFF);
-		}
-
 		getSelectedListId();
 		setListTheme(loadListTheme());
 		applyListTheme();
 		mItemsView.onResume();
+
+		updateTitle();
 
 		// TODO fling disabled for release 1.3.0
 //		mGestureDetector = new GestureDetector(new MyGestureDetector());
@@ -771,6 +763,31 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		if (debug)
 			Log.i(TAG, "Shopping list onResume() finished");
+	}
+
+	private void updateTitle() {
+		// Modify our overall title depending on the mode we are running in.
+		if (mState == STATE_MAIN || mState == STATE_VIEW_LIST) {
+			if (PreferenceActivity.getUsingPickItemsDlgFromPrefs(getApplicationContext())) {
+				// App name is default
+				setTitle(getText(R.string.app_name));
+			} else {
+				// 2 different modes
+				if (mItemsView.mMode == MODE_IN_SHOP) {
+					setTitle(getString(R.string.shopping_title,
+							getCurrentListName()));
+					registerSensor();
+				} else {
+					setTitle(getString(R.string.pick_items_titel,
+							getCurrentListName()));
+					unregisterSensor();
+				}
+			}
+		} else if ((mState == STATE_PICK_ITEM)
+				|| (mState == STATE_GET_CONTENT_ITEM)) {
+			setTitle(getText(R.string.pick_item));
+			setTitleColor(0xFFAAAAFF);
+		}
 	}
 
 	/*
@@ -1044,20 +1061,20 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 					// Update list cursor:
 					getSelectedListId();
-					
+
 					// Set the theme based on the selected list:
 					setListTheme(loadListTheme());
-					
+
 					// If it's the same list we had before, requery only 
 					// if a preference has changed since then.
 					fillItems(id == mItemsView.getListId());
 
 					// Apply the theme after the list has been filled:
 					applyListTheme();
-					
-					
+
+					updateTitle();
+
 					((ListView) mShoppingListsView).setItemChecked(position,true);
-					
 				}
 
 				public void onNothingSelected(AdapterView arg0) {
@@ -1086,14 +1103,16 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 					// Update list cursor:
 					getSelectedListId();
-					
+
 					// Set the theme based on the selected list:
 					setListTheme(loadListTheme());				
-					
+
 					// If it's the same list we had before, requery only 
 					// if a preference has changed since then.
 					fillItems(id == mItemsView.getListId());
-					
+
+					updateTitle();
+
 					// Apply the theme after the list has been filled:
 					applyListTheme();
 				}
@@ -2327,22 +2346,18 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			}
 		}
 
-		if (mItemsView.mMode == MODE_IN_SHOP) {
-			setTitle(getString(R.string.shopping_title,
-					getCurrentListName()));
-			registerSensor();
-		} else {
-			setTitle(getString(R.string.pick_items_titel,
-					getCurrentListName()));
-			unregisterSensor();
-		}
+		updateTitle();
 	}
 
 	private String getCurrentListName() {
 		long listId = getSelectedListId();
 		
 		// calling getSelectedListId also updates mCursorShoppingLists:
-		return mCursorShoppingLists.getString(mStringListFilterNAME);
+		if (listId >= 0) {
+			return mCursorShoppingLists.getString(mStringListFilterNAME);
+		} else {
+			return "";
+		}
 	}	
 	
 
