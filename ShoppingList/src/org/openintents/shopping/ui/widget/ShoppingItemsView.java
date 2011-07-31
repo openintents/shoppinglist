@@ -91,6 +91,7 @@ public class ShoppingItemsView extends ListView {
 	public int mUpdateLastListPosition = 0;
 	public int mLastListPosition;
 	public int mLastListTop;
+	public long mNumChecked = 0;
 	
 	private ThemeAttributes mThemeAttributes;
 	private PackageManager mPackageManager;
@@ -1221,10 +1222,10 @@ public class ShoppingItemsView extends ListView {
 			return;
 		}
 		
+		mNumChecked = 0;
 		long total = 0;
 		long totalchecked = 0;
 		long priority_total = 0;
-		long counter = 0;
 		int priority_threshold = PreferenceActivity.getSubtotalByPriorityThreshold(this
 				.getContext());
 		boolean prioIncludesChecked = 
@@ -1260,7 +1261,7 @@ public class ShoppingItemsView extends ListView {
 			
 			if (isChecked) {
 				totalchecked += price;
-				counter++;
+				mNumChecked++;
 			}
 			
 			if (priority_threshold != 0 && (prioIncludesChecked || !isChecked)) {
@@ -1279,9 +1280,9 @@ public class ShoppingItemsView extends ListView {
 			}		
 			
 		}
-		Log.d(TAG, "Total (old way): " + total + ", Checked: " + totalchecked + "(#" + counter + ")");
+		Log.d(TAG, "Total (old way): " + total + ", Checked: " + totalchecked + "(#" + mNumChecked + ")");
 		
-		total = priority_total = counter = totalchecked = 0;
+		total = priority_total = mNumChecked = totalchecked = 0;
 		}
 
 		Cursor total_cursor = getContext().getContentResolver().query(
@@ -1300,7 +1301,7 @@ public class ShoppingItemsView extends ListView {
 	
 			if (isChecked) {
 				totalchecked += price;
-				counter += total_cursor.getLong(Subtotals.COUNT_INDEX);;
+				mNumChecked += total_cursor.getLong(Subtotals.COUNT_INDEX);;
 			}
 	
 			if (priority_threshold != 0 && (prioIncludesChecked || !isChecked)) {
@@ -1321,7 +1322,7 @@ public class ShoppingItemsView extends ListView {
 		total_cursor.deactivate();
 		total_cursor.close();
 
-		if (debug) Log.d(TAG, "Total: " + total + ", Checked: " + totalchecked + "(#" + counter + ")");
+		if (debug) Log.d(TAG, "Total: " + total + ", Checked: " + totalchecked + "(#" + mNumChecked + ")");
 
 		mTotalTextView.setTextColor(mTextColorPrice);
 		mPriTotalTextView.setTextColor(mTextColorPrice);
@@ -1359,7 +1360,7 @@ public class ShoppingItemsView extends ListView {
 			mCountTextView.setVisibility(View.GONE);
 		}
 		
-		mCountTextView.setText("#" + counter);
+		mCountTextView.setText("#" + mNumChecked);
 	}
 
 	private long getQuantityPrice(Cursor cursor) {

@@ -1427,9 +1427,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			menuItem.setIcon(android.R.drawable.ic_menu_add);
 		}
 
-		// set menu title for change mode
 		menuItem = menu.findItem(MENU_CLEAN_UP_LIST).setEnabled(
-				mItemsView.mMode == MODE_IN_SHOP);
+				mItemsView.mNumChecked > 0);
 
 		// Delete list is possible, if we have more than one list:
 		// AND
