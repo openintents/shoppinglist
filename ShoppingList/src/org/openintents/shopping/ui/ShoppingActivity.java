@@ -721,6 +721,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			setTitleColor(0xFFAAAAFF);
 		}
 
+		getSelectedListId();
 		setListTheme(loadListTheme());
 		applyListTheme();
 		mItemsView.onResume();
