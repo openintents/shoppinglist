@@ -1658,6 +1658,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 						mCursorShoppingLists.getString(0)), values, null, null);
 
 		mCursorShoppingLists.requery();
+		updateTitle();
 		return true;
 	}
 
