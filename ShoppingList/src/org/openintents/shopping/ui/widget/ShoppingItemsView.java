@@ -6,24 +6,18 @@ import java.util.Locale;
 
 import org.openintents.distribution.DownloadAppDialog;
 import org.openintents.shopping.R;
-import org.openintents.shopping.R.color;
-import org.openintents.shopping.R.id;
-import org.openintents.shopping.R.layout;
-import org.openintents.shopping.R.string;
-import org.openintents.shopping.R.style;
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
 import org.openintents.shopping.library.provider.ShoppingContract.Status;
 import org.openintents.shopping.library.provider.ShoppingContract.Subtotals;
+import org.openintents.shopping.library.util.ShoppingUtils;
 import org.openintents.shopping.theme.ThemeAttributes;
 import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;
 import org.openintents.shopping.ui.PreferenceActivity;
 import org.openintents.shopping.ui.ShoppingActivity;
 import org.openintents.shopping.ui.dialog.EditItemDialog;
-import org.openintents.shopping.library.util.ShoppingUtils;
-import org.openintents.util.VersionUtils;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -59,7 +53,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
@@ -309,8 +302,12 @@ public class ShoppingItemsView extends ListView {
 			} else {  // mMode == ShoppingActivity.MODE_ADD_ITEMS
 				if (status == ShoppingContract.Status.REMOVED_FROM_LIST) {
 					nc.setVisibility(ImageView.VISIBLE);
+					if (mShowCheckBox) {
+						// replace check box
+						c.setVisibility(CheckBox.INVISIBLE);
+					}
 				} else {
-					nc.setVisibility(ImageView.GONE);
+					nc.setVisibility(ImageView.INVISIBLE);
 				}
 			}
 
@@ -327,7 +324,7 @@ public class ShoppingItemsView extends ListView {
 			});
 
 			// also check around check box
-			LinearLayout l = (LinearLayout) view
+			RelativeLayout l = (RelativeLayout) view
 					.findViewById(R.id.check_surround);
 
 			l.setOnClickListener(new OnClickListener() {
