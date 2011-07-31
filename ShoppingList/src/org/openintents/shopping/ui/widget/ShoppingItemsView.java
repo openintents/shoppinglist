@@ -32,6 +32,7 @@ import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.Typeface;
@@ -44,6 +45,7 @@ import android.text.TextUtils;
 import android.text.style.StrikethroughSpan;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -89,6 +91,10 @@ public class ShoppingItemsView extends ListView {
 	public int mUpdateLastListPosition = 0;
 	public int mLastListPosition;
 	public int mLastListTop;
+	
+	private ThemeAttributes mThemeAttributes;
+	private PackageManager mPackageManager;
+	private String mPackageName;
 
 	NumberFormat mPriceFormatter = DecimalFormat
 			.getNumberInstance(Locale.ENGLISH);
@@ -652,8 +658,22 @@ public class ShoppingItemsView extends ListView {
 			layout_row = R.layout.list_item_shopping_item_small;
 		}
 
-		mSimpleCursorAdapter adapter = new mSimpleCursorAdapter(this
-				.getContext(),
+		Context context = getContext();
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			// If background is light, we apply the light holo theme to widgets.
+			
+			// determine color from text color:
+			int gray = (Color.red(mTextColor) + Color.green(mTextColor) + Color.blue(mTextColor));
+			if (gray < 3 * 128) {
+				// dark text color <-> light background color => use light holo theme.
+				context = new ContextThemeWrapper(context, android.R.style.Theme_Holo_Light);
+			}
+		}
+
+		
+		mSimpleCursorAdapter adapter = new mSimpleCursorAdapter(
+				context,
 		// Use a template that displays a text view
 				layout_row,
 				// Give the cursor to the list adapter
@@ -746,20 +766,20 @@ public class ShoppingItemsView extends ListView {
 			return false;
 		}
 
-		PackageManager pm = getContext().getPackageManager();
+		mPackageManager = getContext().getPackageManager();
 
-		String packageName = ThemeUtils.getPackageNameFromStyle(styleName);
+		mPackageName = ThemeUtils.getPackageNameFromStyle(styleName);
 
-		if (packageName == null) {
+		if (mPackageName == null) {
 			Log.e(TAG, "Invalid style name: " + styleName);
 			return false;
 		}
 
 		Context c = null;
 		try {
-			c = getContext().createPackageContext(packageName, 0);
+			c = getContext().createPackageContext(mPackageName, 0);
 		} catch (NameNotFoundException e) {
-			Log.e(TAG, "Package for style not found: " + packageName + ", "
+			Log.e(TAG, "Package for style not found: " + mPackageName + ", "
 					+ styleName);
 			return false;
 		}
@@ -774,9 +794,9 @@ public class ShoppingItemsView extends ListView {
 		}
 
 		try {
-			ThemeAttributes ta = new ThemeAttributes(c, packageName, themeid);
+			mThemeAttributes = new ThemeAttributes(c, mPackageName, themeid);
 
-			mTextTypeface = ta.getString(ThemeShoppingList.textTypeface);
+			mTextTypeface = mThemeAttributes.getString(ThemeShoppingList.textTypeface);
 			mCurrentTypeface = null;
 
 			// Look for special cases:
@@ -792,10 +812,10 @@ public class ShoppingItemsView extends ListView {
 			} else if (!TextUtils.isEmpty(mTextTypeface)) {
 
 				try {
-					Log.d(TAG, "Reading typeface: package: " + packageName
+					Log.d(TAG, "Reading typeface: package: " + mPackageName
 							+ ", typeface: " + mTextTypeface);
-					Resources remoteRes = pm
-							.getResourcesForApplication(packageName);
+					Resources remoteRes = mPackageManager
+							.getResourcesForApplication(mPackageName);
 					mCurrentTypeface = Typeface.createFromAsset(remoteRes
 							.getAssets(), mTextTypeface);
 					Log.d(TAG, "Result: " + mCurrentTypeface);
@@ -804,89 +824,42 @@ public class ShoppingItemsView extends ListView {
 				}
 			}
 
-			mTextUpperCaseFont = ta.getBoolean(
+			mTextUpperCaseFont = mThemeAttributes.getBoolean(
 					ThemeShoppingList.textUpperCaseFont, false);
 
-			mTextColor = ta.getColor(ThemeShoppingList.textColor,
+			mTextColor = mThemeAttributes.getColor(ThemeShoppingList.textColor,
 					android.R.color.white);
 
-			mTextColorPrice = ta.getColor(ThemeShoppingList.textColorPrice,
+			mTextColorPrice = mThemeAttributes.getColor(ThemeShoppingList.textColorPrice,
 					android.R.color.white);
 
 			// Use color of price if color of priority has not been defined
-			mTextColorPriority = ta.getColor(ThemeShoppingList.textColorPriority,
+			mTextColorPriority = mThemeAttributes.getColor(ThemeShoppingList.textColorPriority,
 					mTextColorPrice);
 
 			if (size == 0) {
-				mTextSize = getTextSizeTiny(ta);
+				mTextSize = getTextSizeTiny(mThemeAttributes);
 			} else if (size == 1) {
-				mTextSize = getTextSizeSmall(ta);
+				mTextSize = getTextSizeSmall(mThemeAttributes);
 			} else if (size == 2) {
-				mTextSize = getTextSizeMedium(ta);
+				mTextSize = getTextSizeMedium(mThemeAttributes);
 			} else {
-				mTextSize = getTextSizeLarge(ta);
+				mTextSize = getTextSizeLarge(mThemeAttributes);
 			}
 			if (debug)
 				Log.d(TAG, "textSize: " + mTextSize);
 
-			mTextColorChecked = ta.getColor(ThemeShoppingList.textColorChecked,
+			mTextColorChecked = mThemeAttributes.getColor(ThemeShoppingList.textColorChecked,
 					android.R.color.white);
-			mShowCheckBox = ta.getBoolean(ThemeShoppingList.showCheckBox, true);
-			mShowStrikethrough = ta.getBoolean(
+			mShowCheckBox = mThemeAttributes.getBoolean(ThemeShoppingList.showCheckBox, true);
+			mShowStrikethrough = mThemeAttributes.getBoolean(
 					ThemeShoppingList.textStrikethroughChecked, false);
-			mTextSuffixUnchecked = ta
+			mTextSuffixUnchecked = mThemeAttributes
 					.getString(ThemeShoppingList.textSuffixUnchecked);
-			mTextSuffixChecked = ta
+			mTextSuffixChecked = mThemeAttributes
 					.getString(ThemeShoppingList.textSuffixChecked);
 
-			if (mThemedBackground != null) {
-				mBackgroundPadding = ta.getDimensionPixelOffset(
-						ThemeShoppingList.backgroundPadding, -1);
-				int backgroundPaddingLeft = ta.getDimensionPixelOffset(
-						ThemeShoppingList.backgroundPaddingLeft,
-						mBackgroundPadding);
-				int backgroundPaddingTop = ta.getDimensionPixelOffset(
-						ThemeShoppingList.backgroundPaddingTop,
-						mBackgroundPadding);
-				int backgroundPaddingRight = ta.getDimensionPixelOffset(
-						ThemeShoppingList.backgroundPaddingRight,
-						mBackgroundPadding);
-				int backgroundPaddingBottom = ta.getDimensionPixelOffset(
-						ThemeShoppingList.backgroundPaddingBottom,
-						mBackgroundPadding);
-				try {
-					Resources remoteRes = pm
-							.getResourcesForApplication(packageName);
-					int resid = ta.getResourceId(ThemeShoppingList.background,
-							0);
-					if (resid != 0) {
-						Drawable d = remoteRes.getDrawable(resid);
-						mThemedBackground.setBackgroundDrawable(d);
-					} else {
-						// remove background
-						mThemedBackground.setBackgroundResource(0);
-					}
-				} catch (NameNotFoundException e) {
-					Log.e(TAG, "Package not found for Theme background.", e);
-				} catch (Resources.NotFoundException e) {
-					Log.e(TAG, "Resource not found for Theme background.", e);
-				}
-
-				// Apply padding
-				if (mBackgroundPadding >= 0 || backgroundPaddingLeft >= 0
-						|| backgroundPaddingTop >= 0
-						|| backgroundPaddingRight >= 0
-						|| backgroundPaddingBottom >= 0) {
-					mThemedBackground.setPadding(backgroundPaddingLeft,
-							backgroundPaddingTop, backgroundPaddingRight,
-							backgroundPaddingBottom);
-				} else {
-					// 9-patches do the padding automatically
-					// todo clear padding
-				}
-			}
-
-			int divider = ta.getInteger(ThemeShoppingList.divider, 0);
+			int divider = mThemeAttributes.getInteger(ThemeShoppingList.divider, 0);
 
 			Drawable div = null;
 			if (divider > 0) {
@@ -912,6 +885,60 @@ public class ShoppingItemsView extends ListView {
 			Log.e(TAG, "NumberFormatException", e);
 			return false;
 		}
+	}
+	
+	/**
+	 * Must be called after setListTheme();
+	 */
+	public void applyListTheme() {
+		
+		if (mThemedBackground != null) {
+			mBackgroundPadding = mThemeAttributes.getDimensionPixelOffset(
+					ThemeShoppingList.backgroundPadding, -1);
+			int backgroundPaddingLeft = mThemeAttributes.getDimensionPixelOffset(
+					ThemeShoppingList.backgroundPaddingLeft,
+					mBackgroundPadding);
+			int backgroundPaddingTop = mThemeAttributes.getDimensionPixelOffset(
+					ThemeShoppingList.backgroundPaddingTop,
+					mBackgroundPadding);
+			int backgroundPaddingRight = mThemeAttributes.getDimensionPixelOffset(
+					ThemeShoppingList.backgroundPaddingRight,
+					mBackgroundPadding);
+			int backgroundPaddingBottom = mThemeAttributes.getDimensionPixelOffset(
+					ThemeShoppingList.backgroundPaddingBottom,
+					mBackgroundPadding);
+			try {
+				Resources remoteRes = mPackageManager
+						.getResourcesForApplication(mPackageName);
+				int resid = mThemeAttributes.getResourceId(ThemeShoppingList.background,
+						0);
+				if (resid != 0) {
+					Drawable d = remoteRes.getDrawable(resid);
+					mThemedBackground.setBackgroundDrawable(d);
+				} else {
+					// remove background
+					mThemedBackground.setBackgroundResource(0);
+				}
+			} catch (NameNotFoundException e) {
+				Log.e(TAG, "Package not found for Theme background.", e);
+			} catch (Resources.NotFoundException e) {
+				Log.e(TAG, "Resource not found for Theme background.", e);
+			}
+
+			// Apply padding
+			if (mBackgroundPadding >= 0 || backgroundPaddingLeft >= 0
+					|| backgroundPaddingTop >= 0
+					|| backgroundPaddingRight >= 0
+					|| backgroundPaddingBottom >= 0) {
+				mThemedBackground.setPadding(backgroundPaddingLeft,
+						backgroundPaddingTop, backgroundPaddingRight,
+						backgroundPaddingBottom);
+			} else {
+				// 9-patches do the padding automatically
+				// todo clear padding
+			}
+		}
+
 	}
 
 	private float getTextSizeTiny(ThemeAttributes ta) {

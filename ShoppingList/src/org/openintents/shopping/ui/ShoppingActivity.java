@@ -722,6 +722,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		}
 
 		setListTheme(loadListTheme());
+		applyListTheme();
 		mItemsView.onResume();
 
 		// TODO fling disabled for release 1.3.0
@@ -1039,13 +1040,21 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 						int position, long id) {
 					if (debug)
 						Log.d(TAG, "ListView: onItemSelected");
+
+					// Update list cursor:
+					getSelectedListId();
+					
+					// Set the theme based on the selected list:
+					setListTheme(loadListTheme());
+					
 					// If it's the same list we had before, requery only 
 					// if a preference has changed since then.
 					fillItems(id == mItemsView.getListId());
-					
-					// Now set the theme based on the selected list:
-					setListTheme(loadListTheme());
 
+					// Apply the theme after the list has been filled:
+					applyListTheme();
+					
+					
 					((ListView) mShoppingListsView).setItemChecked(position,true);
 					
 				}
@@ -1073,11 +1082,19 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 						int position, long id) {
 					if (debug)
 						Log.d(TAG, "Spinner: onItemSelected");
+
+					// Update list cursor:
+					getSelectedListId();
+					
+					// Set the theme based on the selected list:
+					setListTheme(loadListTheme());				
+					
 					// If it's the same list we had before, requery only 
 					// if a preference has changed since then.
 					fillItems(id == mItemsView.getListId());
-						// Now set the theme based on the selected list:
-					setListTheme(loadListTheme());					
+					
+					// Apply the theme after the list has been filled:
+					applyListTheme();
 				}
 
 				public void onNothingSelected(AdapterView arg0) {
@@ -1578,6 +1595,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		// Now set the theme based on the selected list:
 		saveListTheme(previousTheme);
 		setListTheme(previousTheme);
+		applyListTheme();
 
 		return true;
 	}
@@ -1591,6 +1609,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			mEditText.setTextColor(mItemsView.mTextColor);
 			mButton.setTextColor(mItemsView.mTextColor);
 		}
+	}
+
+	private void applyListTheme() {
+		mItemsView.applyListTheme();
 	}
 
 	/**
@@ -1737,11 +1759,15 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		// Update view
 		fillListFilter();
+		
+		getSelectedListId();
+		
+		// Set the theme based on the selected list:
+		setListTheme(loadListTheme());
+		
 		fillItems(false);
 
-		// Now set the theme based on the selected list:
-		setListTheme(loadListTheme());
-
+		applyListTheme();
 	}
 
 	/** Mark item */
@@ -1911,6 +1937,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	@Override
 	public void onSetTheme(String theme) {
 		setListTheme(theme);
+		applyListTheme();
 	}
 
 	@Override
@@ -2145,14 +2172,18 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	
 	private void setSelectedListPos(int pos){
 		mShoppingListsView.setTag(pos);
-		
+
 		mShoppingListsView.setSelection(pos);	
-		
-		if (getSelectedListId() != mItemsView.getListId()) {
+
+		long id = getSelectedListId();
+
+		// Set the theme based on the selected list:
+		setListTheme(loadListTheme());
+
+		if (id != mItemsView.getListId()) {
 		   fillItems(false);
 		}
-		// Now set the theme based on the selected list:
-		setListTheme(loadListTheme());
+		applyListTheme();
 		
 		if (mShoppingListsView instanceof ListView){
 			((ListView) mShoppingListsView).setItemChecked(pos,true);
