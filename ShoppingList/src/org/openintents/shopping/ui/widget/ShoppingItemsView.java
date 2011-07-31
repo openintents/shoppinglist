@@ -139,6 +139,8 @@ public class ShoppingItemsView extends ListView {
 	private DragListener mDragListener;
 	private DropListener mDropListener;
 
+	private ActionBarListener mActionBarListener;
+	
 	/**
 	 * Extend the SimpleCursorAdapter to strike through items. if STATUS ==
 	 * Shopping.Status.BOUGHT
@@ -582,6 +584,10 @@ public class ShoppingItemsView extends ListView {
 
 		// Remember standard divider
 		mDefaultDivider = getDivider();
+	}
+
+	public void setActionBarListener(ActionBarListener listener) {
+		mActionBarListener = listener;
 	}
 
 	public void onResume() {
@@ -1361,6 +1367,12 @@ public class ShoppingItemsView extends ListView {
 		}
 		
 		mCountTextView.setText("#" + mNumChecked);
+		
+		// Update ActionBar in ShoppingActivity
+		// for the "Clean up list" command.
+		if (mActionBarListener != null) {
+			mActionBarListener.updateActionBar();
+		}
 	}
 
 	private long getQuantityPrice(Cursor cursor) {
@@ -1654,4 +1666,7 @@ public class ShoppingItemsView extends ListView {
 		void remove(int which);
 	}
 
+	public interface ActionBarListener {
+		void updateActionBar();
+	}
 }

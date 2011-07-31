@@ -47,6 +47,7 @@ import org.openintents.shopping.ui.widget.ShoppingItemsView;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.DragListener;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.DropListener;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.OnCustomClickListener;
+import org.openintents.shopping.ui.widget.ShoppingItemsView.ActionBarListener;
 import org.openintents.util.MenuIntentOptionsWithIcons;
 import org.openintents.util.ShakeSensorListener;
 
@@ -112,7 +113,8 @@ import android.widget.Toast;
  * 
  */
 public class ShoppingActivity extends DistributionLibraryFragmentActivity implements
-		ThemeDialogListener, OnCustomClickListener { // implements
+		ThemeDialogListener, OnCustomClickListener,
+		ActionBarListener { // implements
 	// AdapterView.OnItemClickListener
 	// {
 	
@@ -602,6 +604,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		initFromPreferences();
 		// now update title and fill all items
 		onModeChanged();
+		
+		mItemsView.setActionBarListener(this);
 	}
 
 	private int initFromPreferences() {
@@ -2335,18 +2339,34 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		if (debug)
 			Log.d(TAG, "onModeChanged()");
 		fillItems(false);
-		
+
+		compat_invalidateOptionsMenu();
+
+		updateTitle();
+	}
+
+	java.lang.reflect.Method mMethodInvalidateOptionsMenu = null;
+
+	/**
+	 * Update the ActionBar (Honeycomb or higher)
+	 */
+	private void compat_invalidateOptionsMenu() {
 		if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB){
 			//invalidateOptionsMenu();
 			try {
-				java.lang.reflect.Method method = Activity.class.getMethod("invalidateOptionsMenu");
-				method.invoke(this);
+				if (mMethodInvalidateOptionsMenu == null) {
+					mMethodInvalidateOptionsMenu = Activity.class.getMethod("invalidateOptionsMenu");
+				}
+				mMethodInvalidateOptionsMenu.invoke(this);
 			} catch(Exception e) {
-				
+				mMethodInvalidateOptionsMenu = null;
 			}
 		}
+	}
 
-		updateTitle();
+	@Override
+	public void updateActionBar() {
+		compat_invalidateOptionsMenu();
 	}
 
 	private String getCurrentListName() {
@@ -2648,5 +2668,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			os3.setAdapter(adapter);
 		}
 	}
+
 
 }
