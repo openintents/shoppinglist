@@ -28,8 +28,8 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 	 * 7: Release 1.2.7-beta 
 	 * 8: Release 1.2.7-beta
 	 * 9: Release 1.3.0
-         * 10: Release 1.3.1-beta
-         * 11: Release 1.4.0-beta
+	 * 10: Release 1.3.1-beta
+	 * 11: Release 1.4.0-beta
 	 */
 	static final int DATABASE_VERSION = 11;
 
@@ -105,8 +105,8 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				+ "created INTEGER," // V8
 				+ "modified INTEGER" // V8
 				+ ");");
-                db.execSQL("CREATE INDEX itemstores_item_id on itemstores " 
-                           + " ( item_id asc, price asc );"); // V11
+		db.execSQL("CREATE INDEX itemstores_item_id on itemstores "
+				+ " ( item_id asc, price asc );"); // V11
 	}
 
 	@Override
@@ -136,7 +136,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 					// downgrading 3->2,
 					// and then upgrading again 2->3.
 				}
-				// fall through for further upgrades.
+				// NO break; - fall through for further upgrades.
 			case 3:
 				try {
 					db.execSQL("ALTER TABLE items ADD COLUMN "
@@ -145,7 +145,6 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 							+ Items.LOCATION + " VARCHAR;");
 					db.execSQL("ALTER TABLE items ADD COLUMN "
 							+ Items.DUE_DATE + " INTEGER;");
-
 				} catch (SQLException e) {
 					Log.e(ShoppingProvider.TAG, "Error executing SQL: ", e);
 					// If the error is "duplicate column name" then
@@ -154,7 +153,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 					// downgrading 3->2,
 					// and then upgrading again 2->3.
 				}
-				// fall through for further upgrades.
+				// NO break; - fall through for further upgrades.
 			case 4:
 				try {						
 					db.execSQL("CREATE TABLE stores (" + "_id INTEGER PRIMARY KEY," // V5
@@ -174,6 +173,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				} catch (SQLException e) {
 					Log.e(ShoppingProvider.TAG, "Error executing SQL: ", e);
 				}
+				// NO break;
 			case 5:
 				try {				
 					db.execSQL("ALTER TABLE contains ADD COLUMN "
@@ -181,15 +181,15 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				} catch (SQLException e) {
 					Log.e(ShoppingProvider.TAG, "Error executing SQL: ", e);
 				}
-				
-		    case 6:
-		    	try {				
-					db.execSQL("ALTER TABLE items ADD COLUMN "
-							+ Items.NOTE + " VARCHAR;");
+				// NO break;
+			case 6:
+				try {
+					db.execSQL("ALTER TABLE items ADD COLUMN " + Items.NOTE
+							+ " VARCHAR;");
 				} catch (SQLException e) {
 					Log.e(ShoppingProvider.TAG, "Error executing SQL: ", e);
 				}
-
+				// NO break;
 		    case 7:
 		    	try {				
 					db.execSQL("ALTER TABLE items ADD COLUMN "
@@ -204,15 +204,16 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				} catch (SQLException e) {
 					Log.e(ShoppingProvider.TAG, "Error executing SQL: ", e);
 				}
-		    case 8:
-		    	try {
-		    		// There is no simple command in sqlite to change the type of a
-		    		// field.
-		    		// -> copy the whole table to change type of aisle
-		    		//    from INTEGER to VARCHAR.
-		    		// (see http://www.sqlite.org/faq.html#q11 )
-		    		// ("BEGIN TRANSACTION;" and "COMMIT;" are not valid
-		    		//  because we are already within a transaction.)
+				// NO break;
+			case 8:
+				try {
+					// There is no simple command in sqlite to change the type
+					// of a field.
+					// -> copy the whole table to change type of aisle
+					// from INTEGER to VARCHAR.
+					// (see http://www.sqlite.org/faq.html#q11 )
+					// ("BEGIN TRANSACTION;" and "COMMIT;" are not valid
+					// because we are already within a transaction.)
 					//db.execSQL("CREATE TEMPORARY TABLE itemstores_backup("
 					//			+ "_id INTEGER PRIMARY KEY," // V5
 					//			+ "item_id INTEGER," // V5
@@ -241,14 +242,14 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 					//db.execSQL("DROP TABLE itemstores_backup;");
 
 					// Replace "-1" values by "".
-	            	ContentValues values = new ContentValues();
-	            	values.put(ItemStores.AISLE, "");
-	                db.update("itemstores", values, "aisle = '-1'", null);
-					
+					ContentValues values = new ContentValues();
+					values.put(ItemStores.AISLE, "");
+					db.update("itemstores", values, "aisle = '-1'", null);
+
 				} catch (SQLException e) {
 					Log.e(ShoppingProvider.TAG, "Error executing SQL: ", e);
 				}
-
+				// NO break;
 	        case 9:
 		    	try {				
 					db.execSQL("ALTER TABLE itemstores ADD COLUMN "
@@ -257,18 +258,16 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				} catch (SQLException e) {
 					Log.e(ShoppingProvider.TAG, "Error executing SQL: ", e);
 				}
+				// NO break;
+			case 10:
+				db.execSQL("CREATE INDEX IF NOT EXISTS "
+						+ " itemstores_item_id on itemstores "
+						+ " ( item_id asc, price asc );"); // V11
+				// NO break;
 
-				/**
-				* case 10:
-				*/
-                        
-                        break;
-               case 10:
-                   db.execSQL("CREATE INDEX IF NOT EXISTS " 
-                              + " itemstores_item_id on itemstores " 
-                              + " ( item_id asc, price asc );"); // V11
-                   break;
-	       default:
+				// NO break UNTIL HERE!
+				break;
+			default:
 				Log.w(ShoppingProvider.TAG, "Unknown version " + oldVersion
 						+ ". Creating new database.");
 				db.execSQL("DROP TABLE IF EXISTS items");
