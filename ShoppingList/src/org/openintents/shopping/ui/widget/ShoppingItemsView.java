@@ -361,6 +361,20 @@ public class ShoppingItemsView extends ListView {
 				}
 
 			});
+			// Check for clicks on units
+			v = view.findViewById(R.id.units);
+			v.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Log.d(TAG, "Click on units: ");
+					if (mListener != null) {
+						mListener.onCustomClick(cursor, cursorpos,
+								EditItemDialog.FieldType.UNITS);
+					}
+				}
+
+			});
 			// Check for clicks on priority
 			v = view.findViewById(R.id.priority);
 			v.setOnClickListener(new OnClickListener() {
