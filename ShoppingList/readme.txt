@@ -23,9 +23,14 @@ To obtain the current release, visit
 
 ---------------------------------------------------------
 release 1.4
-date: ?
-- support for per-store prices
+date: 2011-08-02
 - support for Tablets - Android 3.0 (patch by Temp)
+- support for the ActionBar (Android 3.0)
+- optionally switch main list to edit mode (activate in advanced settings by turning off "Use Pick Items dialog")
+- basic support for tracking per-store prices (activate in advanced settings)
+- calculate subtotal by priority (activate in advanced settings)
+- fix various issues
+- tweak performance
 
 ---------------------------------------------------------
 release 1.3.1
