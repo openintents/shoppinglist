@@ -1125,6 +1125,7 @@ public class ShoppingProvider extends ContentProvider {
 		ITEMSTORES_PROJECTION_MAP.put(Stores.NAME, "stores.name");
 		ITEMSTORES_PROJECTION_MAP.put(ItemStores.AISLE, "itemstores.aisle");
 		ITEMSTORES_PROJECTION_MAP.put(ItemStores.PRICE, "itemstores.price");
+		ITEMSTORES_PROJECTION_MAP.put(ItemStores.STOCKS_ITEM, "itemstores.stocks_item");
 
 		NOTES_PROJECTION_MAP = new HashMap<String, String>();
 		NOTES_PROJECTION_MAP.put(ShoppingContract.Notes._ID, "items._id");

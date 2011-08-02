@@ -462,7 +462,7 @@ public class ShoppingUtils {
 			existingItems.close();
 
 			// update aisle and price:
-			ContentValues values = new ContentValues(1);
+			ContentValues values = new ContentValues(3);
 			values.put(ItemStores.PRICE, price);
 			values.put(ItemStores.AISLE, aisle);
 			values.put(ItemStores.STOCKS_ITEM, stocksItem);
@@ -478,11 +478,12 @@ public class ShoppingUtils {
 		} else {
 			existingItems.close();
 			// Add item to list:
-			ContentValues values = new ContentValues(2);
+			ContentValues values = new ContentValues(5);
 			values.put(ItemStores.ITEM_ID, itemId);
 			values.put(ItemStores.STORE_ID, storeId);
 			values.put(ItemStores.PRICE, price);
 			values.put(ItemStores.AISLE, aisle);
+			values.put(ItemStores.STOCKS_ITEM, stocksItem);
 			try {
 				Uri uri = context.getContentResolver().insert(
 						ItemStores.CONTENT_URI, values);
