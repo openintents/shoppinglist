@@ -389,7 +389,21 @@ public class ShoppingItemsView extends ListView {
 				}
 
 			});
-			// Check for clicks on priority
+			// Check for clicks on tags
+			v = view.findViewById(R.id.tags);
+			v.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					Log.d(TAG, "Click on tags: ");
+					if (mListener != null) {
+						mListener.onCustomClick(cursor, cursorpos,
+								EditItemDialog.FieldType.TAGS);
+					}
+				}
+
+			});
+			// Check for clicks on note
 			v = view.findViewById(R.id.has_note);
 			v.setOnClickListener(new OnClickListener() {
 

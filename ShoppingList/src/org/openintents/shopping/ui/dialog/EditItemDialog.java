@@ -66,7 +66,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
     
 
 
-    public enum FieldType { ITEMNAME, QUANTITY, PRICE, PRIORITY, UNITS };
+    public enum FieldType { ITEMNAME, QUANTITY, PRICE, PRIORITY, UNITS, TAGS };
     
 	public EditItemDialog(Context context, Uri itemUri, Uri relationUri) {
 		super(context);
@@ -407,6 +407,9 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 			break;
 		case UNITS:
 			focus_field(mUnits, true);
+			break;
+		case TAGS:
+			focus_field(mTags, false);
 			break;
 		case ITEMNAME:
 			focus_field(mEditText, false);
