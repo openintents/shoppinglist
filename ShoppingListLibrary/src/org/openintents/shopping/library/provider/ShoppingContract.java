@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2007-2008 OpenIntents.org
+ * Copyright (C) 2007-2011 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,6 @@ import android.provider.BaseColumns;
 
 /**
  * Definition for content provider related to shopping.
- * 
- * Version corresponds to main version of OI Shopping List.
- * @version 1.2.7
  */
 public abstract class ShoppingContract {
 
@@ -80,7 +77,7 @@ public abstract class ShoppingContract {
 		 * </P>
 		 */
 		public static final String UNITS = "units";
-		
+
 		/**
 		 * Tags for the item
 		 * <P>
@@ -88,7 +85,7 @@ public abstract class ShoppingContract {
 		 * </P>
 		 */
 		public static final String TAGS = "tags";
-		
+
 		/**
 		 * A barcode (EAN or QR)
 		 * <P>
@@ -162,7 +159,6 @@ public abstract class ShoppingContract {
 		public static final int PROJECTION_MODIFIED_DATE = 5;
 		public static final int PROJECTION_ACCESSED_DATE = 6;
 		public static final int PROJECTION_UNITS = 7;
-
 	}
 
 	/**
@@ -331,7 +327,7 @@ public abstract class ShoppingContract {
 		 * </P>
 		 */
 		public static final String PRIORITY = "priority";
-		
+
 		/**
 		 * Status: WANT_TO_BUY or BOUGHT.
 		 * <P>
@@ -385,7 +381,6 @@ public abstract class ShoppingContract {
 		 */
 		public static final String SHARE_MODIFIED_BY = "share_modified_by";
 
-		
 		/**
 		 * sort key with in the list
 		 * <P>
@@ -398,18 +393,32 @@ public abstract class ShoppingContract {
 		 * into this array.
 		 */
 		public static final String[] SORT_ORDERS = {
-				"contains.status ASC, items.name COLLATE NOCASE ASC", // unchecked first, alphabetical
+				// unchecked first, alphabetical
+				"contains.status ASC, items.name COLLATE NOCASE ASC",
+
 				"items.name COLLATE NOCASE ASC",
-				"contains.modified DESC", 
+
+				"contains.modified DESC",
+
 				"contains.modified ASC",
-				"(items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC", // sort by tags, but put empty tags last.
+
+				// sort by tags, but put empty tags last.
+				"(items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC",
+
 				"items.price DESC, items.name COLLATE NOCASE ASC",
-				"contains.status ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC", // unchecked first, tags alphabetical, but put empty tags last.
-				"contains.status ASC, contains.priority ASC, items.name COLLATE NOCASE ASC", // unchecked first, priority, alphabetical
-				"contains.status ASC, contains.priority ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC", // unchecked first, priority, tags alphabetical, but put empty tags last.
-				"contains.priority ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC", // priority, tags alphabetical, but put empty tags last.
-				};
-		
+
+				// unchecked first, tags alphabetical, but put empty tags last.
+				"contains.status ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC",
+
+				// unchecked first, priority, alphabetical
+				"contains.status ASC, contains.priority ASC, items.name COLLATE NOCASE ASC",
+
+				// unchecked first, priority, tags alphabetical, but put empty
+				// tags last.
+				"contains.status ASC, contains.priority ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC",
+
+				// priority, tags alphabetical, but put empty tags last.
+				"contains.priority ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC", };
 	}
 
 	/**
@@ -463,7 +472,7 @@ public abstract class ShoppingContract {
 		 * </P>
 		 */
 		public static final String PRIORITY = "priority";
-		
+
 		/**
 		 * Status: WANT_TO_BUY or BOUGHT.
 		 * <P>
@@ -549,7 +558,7 @@ public abstract class ShoppingContract {
 		 * </P>
 		 */
 		public static final String ITEM_UNITS = "item_units";
-		
+
 		/**
 		 * tags of the item.
 		 * <P>
@@ -557,7 +566,7 @@ public abstract class ShoppingContract {
 		 * </P>
 		 */
 		public static final String ITEM_TAGS = "item_tags";
-		
+
 		// Elements from Lists
 
 		/**
@@ -591,7 +600,7 @@ public abstract class ShoppingContract {
 		 * </P>
 		 */
 		public static final String LOCATION = "location";
-		
+
 		/**
 		 * The timestamp for when the item is due.
 		 * <P>
@@ -599,15 +608,14 @@ public abstract class ShoppingContract {
 		 * </P>
 		 */
 		public static final String DUE_DATE = "due";
-		
+
 		/**
 		 * Whether the item has a note.
 		 * <P>
-		 * Type: INTEGER 
+		 * Type: INTEGER
 		 * </P>
 		 */
 		public static final String ITEM_HAS_NOTE = "item_has_note";
-	
 	}
 
 	/**
@@ -624,10 +632,10 @@ public abstract class ShoppingContract {
 		 * Have bought this item.
 		 */
 		public static final long BOUGHT = 2;
-		
+
 		/**
-		 * Have removed it from the list.
-		 * Won't be deleted, in oder to keep reference for later suggestions.
+		 * Have removed it from the list. Won't be deleted, in oder to keep
+		 * reference for later suggestions.
 		 */
 		public static final long REMOVED_FROM_LIST = 3;
 
@@ -641,7 +649,6 @@ public abstract class ShoppingContract {
 		public static boolean isValid(final long s) {
 			return s == WANT_TO_BUY || s == BOUGHT || s == REMOVED_FROM_LIST;
 		}
-
 	}
 
 	/**
@@ -666,7 +673,7 @@ public abstract class ShoppingContract {
 		 * </P>
 		 */
 		public static final String NAME = "name";
-		
+
 		/**
 		 * The id of the list associated with this store.
 		 * <P>
@@ -692,7 +699,7 @@ public abstract class ShoppingContract {
 		public static final String MODIFIED_DATE = "modified";
 
 	}
-	
+
 	/**
 	 * Items that can be put into shopping lists.
 	 */
@@ -707,7 +714,6 @@ public abstract class ShoppingContract {
 		 * The default sort order for this table.
 		 */
 		public static final String DEFAULT_SORT_ORDER = "item_id ASC";
-
 
 		/**
 		 * The timestamp for when the itemstore record was created.
@@ -732,7 +738,7 @@ public abstract class ShoppingContract {
 		 * </P>
 		 */
 		public static final String ITEM_ID = "item_id";
-		
+
 		/**
 		 * The id of one store that contains item.
 		 * <P>
@@ -748,7 +754,7 @@ public abstract class ShoppingContract {
 		 * </P>
 		 */
 		public static final String AISLE = "aisle";
-		
+
 		/**
 		 * The price of item item_id at store store_id.
 		 * <P>
@@ -756,7 +762,6 @@ public abstract class ShoppingContract {
 		 * </P>
 		 */
 		public static final String PRICE = "price";
-		
 
 		/**
 		 * Whether we expect to find item item_id at store store_id.
@@ -766,7 +771,6 @@ public abstract class ShoppingContract {
 		 */
 		public static final String STOCKS_ITEM = "stocks_item";
 	}
-
 
 	/**
 	 * Completion table for the Units field of Items.
@@ -790,16 +794,16 @@ public abstract class ShoppingContract {
 		 * </P>
 		 */
 		public static final String NAME = "name";
-		
+
 		/**
-		 * The name of the units when quantity == 1, 
-		 * if different from general/plural unit name.
+		 * The name of the units when quantity == 1, if different from
+		 * general/plural unit name.
 		 * <P>
 		 * Type: TEXT
 		 * </P>
 		 */
 		public static final String SINGULAR = "singular";
-		
+
 		/**
 		 * The timestamp for when the unit was created.
 		 * <P>
@@ -815,82 +819,97 @@ public abstract class ShoppingContract {
 		 * </P>
 		 */
 		public static final String MODIFIED_DATE = "modified";
-
 	}
 
-	
 	public static final class Notes implements BaseColumns {
-		
-	    // unlike other tables, this one does not correspond
-		// to its own sql table... it just defines a projection of the items table.
-		
-	    // This class cannot be instantiated
-	    private Notes() {}
 
-	        /**
-	         * The content:// style URL for this table
-	         */
-	        public static final Uri CONTENT_URI = Uri.parse("content://org.openintents.shopping/notes");
-	        
-	        /**
-	         * The MIME type of {@link #CONTENT_URI} providing a directory of notes.
-	         */
-	        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.openintents.notepad.note";
+		// unlike other tables, this one does not correspond
+		// to its own sql table... it just defines a projection of the items
+		// table.
 
-	        /**
-	         * The MIME type of a {@link #CONTENT_URI} sub-directory of a single note.
-	         */
-	        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.openintents.notepad.note";
+		// This class cannot be instantiated
+		private Notes() {
+		}
 
-	        /**
-	         * The title of the note
-	         * <P>Type: TEXT</P>
-	         */
-	        public static final String TITLE = "title";
+		/**
+		 * The content:// style URL for this table
+		 */
+		public static final Uri CONTENT_URI = Uri
+				.parse("content://org.openintents.shopping/notes");
 
-	        /**
-	         * The note itself
-	         * <P>Type: TEXT</P>
-	         */
-	        public static final String NOTE = "note";
+		/**
+		 * The MIME type of {@link #CONTENT_URI} providing a directory of notes.
+		 */
+		public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.openintents.notepad.note";
 
-	        /**
-	         * The timestamp for when the note was created
-	         * <P>Type: INTEGER (long from System.curentTimeMillis())</P>
-	         */
-	        public static final String CREATED_DATE = "created";
+		/**
+		 * The MIME type of a {@link #CONTENT_URI} sub-directory of a single
+		 * note.
+		 */
+		public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.openintents.notepad.note";
 
-	        /**
-	         * The timestamp for when the note was last modified
-	         * <P>Type: INTEGER (long from System.curentTimeMillis())</P>
-	         */
-	        public static final String MODIFIED_DATE = "modified";
-	     
-	        /**
-	         * Tags associated with a note.
-	         * Multiple tags are separated by commas.
-	         * <P>Type: TEXT</P>
-	         * @since 1.1.0
-	         */
-	        public static final String TAGS = "tags";
+		/**
+		 * The title of the note
+		 * <P>
+		 * Type: TEXT
+		 * </P>
+		 */
+		public static final String TITLE = "title";
 
-	        /**
-	         * Whether the note is encrypted.
-	         * 0 = not encrypted. 1 = encrypted.
-	         * <P>Type: INTEGER</P>
-	         * @since 1.1.0
-	         */
-	        public static final String ENCRYPTED = "encrypted";
+		/**
+		 * The note itself
+		 * <P>
+		 * Type: TEXT
+		 * </P>
+		 */
+		public static final String NOTE = "note";
 
-	        /**
-	         * A theme URI.
-	         * <P>Type: TEXT</P>
-	         * @since 1.1.0
-	         */
-	        public static final String THEME = "theme";
-	        
+		/**
+		 * The timestamp for when the note was created
+		 * <P>
+		 * Type: INTEGER (long from System.curentTimeMillis())
+		 * </P>
+		 */
+		public static final String CREATED_DATE = "created";
+
+		/**
+		 * The timestamp for when the note was last modified
+		 * <P>
+		 * Type: INTEGER (long from System.curentTimeMillis())
+		 * </P>
+		 */
+		public static final String MODIFIED_DATE = "modified";
+
+		/**
+		 * Tags associated with a note. Multiple tags are separated by commas.
+		 * <P>
+		 * Type: TEXT
+		 * </P>
+		 * 
+		 * @since 1.1.0
+		 */
+		public static final String TAGS = "tags";
+
+		/**
+		 * Whether the note is encrypted. 0 = not encrypted. 1 = encrypted.
+		 * <P>
+		 * Type: INTEGER
+		 * </P>
+		 * 
+		 * @since 1.1.0
+		 */
+		public static final String ENCRYPTED = "encrypted";
+
+		/**
+		 * A theme URI.
+		 * <P>
+		 * Type: TEXT
+		 * </P>
+		 * 
+		 * @since 1.1.0
+		 */
+		public static final String THEME = "theme";
 	}
-	
 
 	/**
 	 * Virtual table containing the id of the active list.
@@ -906,7 +925,6 @@ public abstract class ShoppingContract {
 		 * Generic projection map.
 		 */
 		public static final String[] PROJECTION = { _ID };
-
 	}
 
 	/**
@@ -919,40 +937,47 @@ public abstract class ShoppingContract {
 		public static final Uri CONTENT_URI = Uri
 				.parse("content://org.openintents.shopping/subtotals");
 
-        /**
-         * Priority
-         * <P>Type: INTEGER (long)</P>
-         */
-        public static final String PRIORITY = "priority";
+		/**
+		 * Priority
+		 * <P>
+		 * Type: INTEGER (long)
+		 * </P>
+		 */
+		public static final String PRIORITY = "priority";
 
-        /**
-         * Status
-         * <P>Type: INTEGER (long)</P>
-         */
-        public static final String STATUS = "status";
+		/**
+		 * Status
+		 * <P>
+		 * Type: INTEGER (long)
+		 * </P>
+		 */
+		public static final String STATUS = "status";
 
-        /**
-         * Number of items subtotaled in this cell.
-         * <P>Type: INTEGER (long)</P>
-         */
-        public static final String COUNT = "count";
+		/**
+		 * Number of items subtotaled in this cell.
+		 * <P>
+		 * Type: INTEGER (long)
+		 * </P>
+		 */
+		public static final String COUNT = "count";
 
-        /**
-         * Subtotal.
-         * <P>Type: INTEGER (long)</P>
-         */
-        public static final String SUBTOTAL = "subtotal";
+		/**
+		 * Subtotal.
+		 * <P>
+		 * Type: INTEGER (long)
+		 * </P>
+		 */
+		public static final String SUBTOTAL = "subtotal";
 
-        /**
+		/**
 		 * Generic projection map.
 		 */
-		public static final String[] PROJECTION = { PRIORITY, STATUS, COUNT, SUBTOTAL };
+		public static final String[] PROJECTION = { PRIORITY, STATUS, COUNT,
+				SUBTOTAL };
 		// index values for use with cursors using the default projection
 		public static final int PRIORITY_INDEX = 0;
 		public static final int STATUS_INDEX = 1;
 		public static final int COUNT_INDEX = 2;
 		public static final int SUBTOTAL_INDEX = 3;
-
 	}
-		
 }
