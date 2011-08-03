@@ -23,7 +23,7 @@ To obtain the current release, visit
 
 ---------------------------------------------------------
 release 1.4
-date: 2011-08-02
+date: 2011-08-04
 - support for Tablets - Android 3.0 (patch by Temp)
 - support for the ActionBar (Android 3.0)
 - optionally switch main list to edit mode (activate in advanced settings by turning off "Use Pick Items dialog")
