@@ -411,6 +411,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 */
 	private Cursor mItemsCursor;
 
+	private static boolean usingListSpinner() {
+		// TODO switch layout on screen size, not sdk versions
+		return 	(Build.VERSION.SDK_INT<Build.VERSION_CODES.HONEYCOMB);
+	}
+	
 	/**
 	 * Remember position for screen orientation change.
 	 */
@@ -749,9 +754,14 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		// which settings were changed. We could be smarter about this,
 		// but for now refresh if /any/ pref has changed.
 		//
-		// actually this call is useless, because list id is generally 
-		// not set by now.
-		//	fillItems(true);
+		// In phone mode list id is generally not set by now, and there will 
+		// soon be a fillItems call triggered by updating the list selector.
+		// However when the embedded list selector is not being used, now might
+		// be a good time to update for pending
+		// preference changes.
+		if (!usingListSpinner()) {
+			fillItems(true);
+		}
 
 		// TODO ???
 		/*
@@ -1053,7 +1063,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private void createList() {
 
 		// TODO switch layout on screen size, not sdk versions
-		if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB){
+		if(!usingListSpinner()){
 			
 			mShoppingListsView = (ListView) findViewById(android.R.id.list);
 			((ListView)mShoppingListsView)
@@ -1282,7 +1292,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		
 		//Temp- for backward compatibility with OS 3 features 
 		
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
+		if(!usingListSpinner()){
 			try{
 				//setting the value equivalent to desired expression
 				//MenuItem.SHOW_AS_ACTION_IF_ROOM|MenuItem.SHOW_AS_ACTION_WITH_TEXT
@@ -1626,7 +1636,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private void setListTheme(String theme) {
 		mItemsView.setListTheme(theme);
 		
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+		if (!usingListSpinner()) {
 			// In Holo themes, apply the theme text color also to the
 			// input box and the button, because the background is semi-transparent.
 			mEditText.setTextColor(mItemsView.mTextColor);
@@ -2138,7 +2148,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private long getSelectedListId() {
 		int pos = mShoppingListsView.getSelectedItemPosition();
 		//Temp- Due to architecture requirements of OS 3, the value can not be passed directly
-		if(pos==-1 && Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB){
+		if(pos==-1 && !usingListSpinner()){
 			try {
 				pos=(Integer)mShoppingListsView.getTag();	
 				pos=mCursorShoppingLists.getCount()<=pos?-1:pos;
@@ -2632,7 +2642,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		int pos = mShoppingListsView.getSelectedItemPosition();
 		//Temp- Due to architecture requirements of OS 3, the value can not be passed directly
-		if(pos==-1 && Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB){
+		if(pos==-1 && !usingListSpinner()){
 			try {
 				pos=(Integer)mShoppingListsView.getTag();	
 				pos=mCursorShoppingLists.getCount()<=pos?-1:pos;
@@ -2661,7 +2671,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 * @param adapter
 	 */
 	private void setSpinnerListAdapter(ListAdapter adapter){
-		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){//Temp - restricted for OS3
+		if(usingListSpinner()){//Temp - restricted for OS3
 			mShoppingListsView.setAdapter(adapter);
 		}else{
 			ShoppingListFilterFragment os3=(ShoppingListFilterFragment)getSupportFragmentManager().findFragmentById(R.id.sidelist);
