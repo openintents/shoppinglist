@@ -782,10 +782,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private void updateTitle() {
 		// Modify our overall title depending on the mode we are running in.
 		if (mState == STATE_MAIN || mState == STATE_VIEW_LIST) {
-			if (PreferenceActivity.getUsingPickItemsDlgFromPrefs(getApplicationContext())) {
-				// App name is default
-				setTitle(getText(R.string.app_name));
-			} else {
+			if (PreferenceActivity.getPickItemsInListFromPrefs(getApplicationContext())) {
 				// 2 different modes
 				if (mItemsView.mMode == MODE_IN_SHOP) {
 					setTitle(getString(R.string.shopping_title,
@@ -796,6 +793,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 							getCurrentListName()));
 					unregisterSensor();
 				}
+			} else {
+				// Only one mode: "Pick items using dialog"
+				// App name is default
+				setTitle(getText(R.string.app_name));
 			}
 		} else if ((mState == STATE_PICK_ITEM)
 				|| (mState == STATE_GET_CONTENT_ITEM)) {
@@ -1501,16 +1502,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			return true;
 
 		case MENU_PICK_ITEMS:
-			if (PreferenceActivity.getUsingPickItemsDlgFromPrefs(getApplicationContext())) {
-				pickItems();
-			} else {
-			  if (mItemsView.mMode == MODE_IN_SHOP) {
-			    mItemsView.mMode = MODE_ADD_ITEMS;
-			  } else {
-			    mItemsView.mMode = MODE_IN_SHOP;
-			  }
-			  onModeChanged();
-			}
+			pickItems();
 			return true;
 
 		case MENU_SHARE:
@@ -1559,6 +1551,19 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 * 
 	 */
 	private void pickItems() {
+		if (PreferenceActivity.getPickItemsInListFromPrefs(getApplicationContext())) {
+			if (mItemsView.mMode == MODE_IN_SHOP) {
+				mItemsView.mMode = MODE_ADD_ITEMS;
+			} else {
+				mItemsView.mMode = MODE_IN_SHOP;
+			}
+			onModeChanged();
+		} else {
+			pickItemsUsingDialog();
+		}
+	}
+	
+	private void pickItemsUsingDialog() {
 		Intent intent;
 		intent = new Intent(this, PickItemsActivity.class);
 		intent.setData(mListUri);

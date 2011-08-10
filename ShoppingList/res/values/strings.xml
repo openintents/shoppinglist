@@ -158,6 +158,7 @@
 	<string name="preference_hidechecked_summary">Immediately hide items checked off.</string>
 	<string name="preference_showprice_title">Show price</string>
 	<string name="preference_showprice_summary">Shown as extra column in list.</string>
+	<string name="preference_perstoreprice">Per-store prices</string>
 	<string name="preference_perstoreprice_title">Track per-store prices</string>
 	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
 	<string name="preference_showtags_title">Show tags</string>
@@ -175,9 +176,9 @@
 	<string name="preference_priosubtotalchecked_title">Include checked items</string>
 	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
 	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
-	<string name="preference_usepickitemsdlg_title">Use "Pick Items" dialog</string>
-	<string name="preference_usepickitemsdlg_on_summary">Add items to list using a dedicated dialog</string>
-	<string name="preference_usepickitemsdlg_off_summary">Switch main list to edit mode to re-add existing items</string>
+	<string name="preference_pickitemsinlist_title">Pick items directly in list</string>
+	<string name="preference_pickitemsinlist_on_summary">Switch main list to edit mode to re-add existing items</string>
+	<string name="preference_pickitemsinlist_off_summary">Add items to list using a dedicated dialog</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Shake to clean up</string>

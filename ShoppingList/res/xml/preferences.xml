@@ -43,24 +43,22 @@
 				<CheckBoxPreference android:key="hidechecked"
 					android:defaultValue="false" android:title="@string/preference_hidechecked_title"
 					android:summary="@string/preference_hidechecked_summary" />
+					<!-- 
 				<CheckBoxPreference android:key="loadlastused"
 					android:defaultValue="true" android:title="@string/preference_loadlastused_title"
-					android:summary="@string/preference_loadlastused_summary" />
+					android:summary="@string/preference_loadlastused_summary" />  -->
 				<CheckBoxPreference android:key="shake"
 					android:defaultValue="false" android:title="@string/preference_shake_title"
 					android:summary="@string/preference_shake_summary" />
-				<CheckBoxPreference android:key="usepickitemsdlg"
-					android:defaultValue="true" android:title="@string/preference_usepickitemsdlg_title"
-					android:summaryOn="@string/preference_usepickitemsdlg_on_summary"
-					android:summaryOff="@string/preference_usepickitemsdlg_off_summary" />
+				<CheckBoxPreference android:key="pickitemsinlist"
+					android:defaultValue="false" android:title="@string/preference_pickitemsinlist_title"
+					android:summaryOn="@string/preference_pickitemsinlist_on_summary"
+					android:summaryOff="@string/preference_pickitemsinlist_off_summary" />
 			</PreferenceCategory>
 			<PreferenceCategory android:title="@string/preference_appearance">
 				<CheckBoxPreference android:key="showprice"
 					android:defaultValue="true" android:title="@string/preference_showprice_title"
 					android:summary="@string/preference_showprice_summary" />
-				<CheckBoxPreference android:key="perstoreprices"
-					android:defaultValue="false" android:title="@string/preference_perstoreprice_title"
-					android:summary="@string/preference_perstoreprice_summary" />
 				<CheckBoxPreference android:key="showtags"
 					android:defaultValue="true" android:title="@string/preference_showtags_title"
 					android:summary="@string/preference_showtags_summary" />\
@@ -70,8 +68,14 @@
 				<CheckBoxPreference android:key="showquantity"
 					android:defaultValue="true" android:title="@string/preference_showquantity_title"
 					android:summary="@string/preference_showquantity_summary" />
-
-			    <CheckBoxPreference android:defaultValue="false" android:key="showpriority" android:title="@string/preference_showpriority_title" android:summary="@string/preference_showpriority_summary"></CheckBoxPreference>
+				<CheckBoxPreference android:defaultValue="true" android:key="showpriority"
+					android:title="@string/preference_showpriority_title"
+					android:summary="@string/preference_showpriority_summary"></CheckBoxPreference>
+			</PreferenceCategory>
+			<PreferenceCategory android:title="@string/preference_perstoreprice">
+				<CheckBoxPreference android:key="perstoreprices"
+					android:defaultValue="false" android:title="@string/preference_perstoreprice_title"
+					android:summary="@string/preference_perstoreprice_summary" />
 			</PreferenceCategory>
 			<PreferenceCategory android:title="@string/preference_prio_subtotal">
 				<ListPreference android:key="priority_subtotal_threshold"

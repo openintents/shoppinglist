@@ -59,7 +59,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	public static final String PREFS_SHOW_UNITS = "showunits";
 	public static final boolean PREFS_SHOW_UNITS_DEFAULT = true;
 	public static final String PREFS_SHOW_PRIORITY = "showpriority";
-	public static final boolean PREFS_SHOW_PRIORITY_DEFAULT = false;
+	public static final boolean PREFS_SHOW_PRIORITY_DEFAULT = true;
 	public static final String PREFS_SHAKE = "shake";
 	public static final boolean PREFS_SHAKE_DEFAULT = false;
 	public static final String PREFS_MARKET_EXTENSIONS = "preference_market_extensions";
@@ -70,8 +70,8 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	public static final String PREFS_PRIOSUBTOTAL_DEFAULT = "0";
 	public static final String PREFS_PRIOSUBINCLCHECKED = "priosubtotal_includes_checked";
 	public static final boolean PREFS_PRIOSUBINCLCHECKED_DEFAULT = true;
-	public static final String PREFS_USEPICKITEMSDLG = "usepickitemsdlg";
-	public static final boolean PREFS_USEPICKITEMSDLG_DEFAULT = true;
+	public static final String PREFS_PICKITEMSINLIST = "pickitemsinlist";
+	public static final boolean PREFS_PICKITEMSINLIST_DEFAULT = false;
 	
 	public static final int PREFS_CAPITALIZATION_DEFAULT = 1;
 
@@ -164,9 +164,9 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 		return using;
 	}
 	
-	public static boolean getUsingPickItemsDlgFromPrefs(Context context) {
+	public static boolean getPickItemsInListFromPrefs(Context context) {
 		boolean using = PreferenceManager.getDefaultSharedPreferences(context)
-		.getBoolean(PREFS_USEPICKITEMSDLG,PREFS_USEPICKITEMSDLG_DEFAULT);
+		.getBoolean(PREFS_PICKITEMSINLIST,PREFS_PICKITEMSINLIST_DEFAULT);
 		return using;
 	}
 	
