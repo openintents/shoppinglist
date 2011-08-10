@@ -38,7 +38,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
+import android.support.v2.os.Build;
 import android.os.Handler;
 import android.text.Spannable;
 import android.text.TextUtils;
@@ -174,7 +174,7 @@ public class ShoppingItemsView extends ListView {
 		@Override
 		public View newView(Context context, Cursor cursor, ViewGroup parent) {
 			View view = super.newView(context, cursor, parent);
-			if (android.support.v2.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.CUPCAKE) {
+			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.CUPCAKE) {
 				view.findViewById(R.id.price).setVisibility(mPriceVisibility);
 				view.findViewById(R.id.tags).setVisibility(mTagsVisibility);
 				view.findViewById(R.id.quantity).setVisibility(mQuantityVisibility);
@@ -456,7 +456,7 @@ public class ShoppingItemsView extends ListView {
 			// Cupcake doesn't compute position for invisible
 			// members of RelativeLayout, so we can't make 
 			// views invisible when running Cupcake.
-			if (android.support.v2.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.CUPCAKE) {
+			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.CUPCAKE) {
 				view.setVisibility(View.GONE);
 			}	
 			view.setText("");
