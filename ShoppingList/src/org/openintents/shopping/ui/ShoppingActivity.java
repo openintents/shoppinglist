@@ -44,10 +44,10 @@ import org.openintents.shopping.ui.dialog.ThemeDialog;
 import org.openintents.shopping.ui.dialog.ThemeDialog.ThemeDialogListener;
 import org.openintents.shopping.ui.tablet.ShoppingListFilterFragment;
 import org.openintents.shopping.ui.widget.ShoppingItemsView;
+import org.openintents.shopping.ui.widget.ShoppingItemsView.ActionBarListener;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.DragListener;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.DropListener;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.OnCustomClickListener;
-import org.openintents.shopping.ui.widget.ShoppingItemsView.ActionBarListener;
 import org.openintents.util.MenuIntentOptionsWithIcons;
 import org.openintents.util.ShakeSensorListener;
 
@@ -74,7 +74,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v2.os.Build;
 import android.support.v2.view.MenuCompat;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -803,6 +805,24 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			setTitle(getText(R.string.pick_item));
 			setTitleColor(0xFFAAAAFF);
 		}
+
+		// also update the button label
+		updateButton();
+	}
+
+	private void updateButton() {
+		if (mItemsView.mMode == MODE_ADD_ITEMS) {
+			String newItem = mEditText.getText().toString();
+			if (TextUtils.isEmpty(newItem)) {
+				// If in "add items" mode and the text field is empty,
+				// set the button text to "Shopping"
+				mButton.setText(R.string.menu_start_shopping);
+			} else {
+				mButton.setText(R.string.add);
+			}
+		} else {
+			mButton.setText(R.string.add);
+		}
 	}
 
 	/*
@@ -957,10 +977,32 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 					mLastKeyAction = key.getAction();
 					return true;
-				}
-				;
+				};
 				return false;
 			}
+		});
+		mEditText.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				if (mItemsView.mMode == MODE_ADD_ITEMS) {
+					// small optimization: Only care about updating
+					// the button label on each key pressed if we
+					// are in "add items" mode.
+					updateButton();
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+			}
+			
 		});
 
 		mButton = (Button) findViewById(R.id.button_add_item);
