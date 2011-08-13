@@ -24,7 +24,6 @@
   Angel Abad https://launchpad.net/~angelabad
   Javier Martínez Arrieta https://launchpad.net/~javote87
   JoseRoberto https://launchpad.net/~joseroberto
-  Joselt Peña https://launchpad.net/~inf3rn41j4p
   OpenIntents devs https://launchpad.net/~openintents-devs
   Paco Molinero https://launchpad.net/~franciscomol
   Peli https://launchpad.net/~peli0101
@@ -67,6 +66,9 @@
 	<string name="menu_edit_item">Editar elemento</string>
 	<string name="menu_auto_add">Auto agregar</string>
 	<string name="menu_item_stores">Stores...</string>
+	<string name="menu_rename_store">Rename store</string>
+	<string name="menu_delete_store">Delete store</string>
+	<string name="confirm_delete_store">Do you really want to delete this store?</string>
 	<string name="no_items_available">No hay elementos disponibles</string>
 	
 	<!-- Remove item from this list, but keep it internally, so that the user
@@ -166,6 +168,7 @@
 	<string name="preference_hidechecked_summary">Ocultar inmediatamente elementos marcados.</string>
 	<string name="preference_showprice_title">Mostrar precio</string>
 	<string name="preference_showprice_summary">Mostrado como columna extra en la lista.</string>
+	<string name="preference_perstoreprice">Per-store prices</string>
 	<string name="preference_perstoreprice_title">Track per-store prices</string>
 	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
 	<string name="preference_showtags_title">Mostrar etiquetas</string>
@@ -183,9 +186,9 @@
 	<string name="preference_priosubtotalchecked_title">Include checked items</string>
 	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
 	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
-	<string name="preference_usepickitemsdlg_title">Use "Pick Items" dialog</string>
-	<string name="preference_usepickitemsdlg_on_summary">Add items to list using a dedicated dialog</string>
-	<string name="preference_usepickitemsdlg_off_summary">Switch main list to edit mode to re-add existing items</string>
+	<string name="preference_pickitemsinlist_title">Pick items directly in list</string>
+	<string name="preference_pickitemsinlist_on_summary">Switch main list to edit mode to re-add existing items</string>
+	<string name="preference_pickitemsinlist_off_summary">Add items to list using a dedicated dialog</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Sacudir para limpiar</string>

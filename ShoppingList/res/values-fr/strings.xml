@@ -21,7 +21,6 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
-  Abdessamad Derraz https://launchpad.net/~derraz
   Bonsoir https://launchpad.net/~bonsoir
   Omega13 https://launchpad.net/~omega13
   OpenIntents devs https://launchpad.net/~openintents-devs
@@ -29,7 +28,6 @@
   Thibault Févry https://launchpad.net/~thibaultfevry
   dommy9111 https://launchpad.net/~bossboss9111
   friedger https://launchpad.net/~friedger
-  kawazzzzzz@yahoo.fr https://launchpad.net/~kawazzzzzz
   viktor https://launchpad.net/~lfraisse</string>
 	
     <!-- Short explanation of the application -->
@@ -68,6 +66,9 @@
 	<string name="menu_edit_item">Modifier l\'élément</string>
 	<string name="menu_auto_add">Ajout automatique</string>
 	<string name="menu_item_stores">Stores...</string>
+	<string name="menu_rename_store">Rename store</string>
+	<string name="menu_delete_store">Delete store</string>
+	<string name="confirm_delete_store">Do you really want to delete this store?</string>
 	<string name="no_items_available">Aucun élément disponible</string>
 	
 	<!-- Remove item from this list, but keep it internally, so that the user
@@ -167,6 +168,7 @@
 	<string name="preference_hidechecked_summary">Cacher immédiatement les éléments cochés</string>
 	<string name="preference_showprice_title">Voir le prix</string>
 	<string name="preference_showprice_summary">Voir comme une colonne supplémentaire dans la liste</string>
+	<string name="preference_perstoreprice">Per-store prices</string>
 	<string name="preference_perstoreprice_title">Track per-store prices</string>
 	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
 	<string name="preference_showtags_title">Voir les libellés</string>
@@ -184,9 +186,9 @@
 	<string name="preference_priosubtotalchecked_title">Include checked items</string>
 	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
 	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
-	<string name="preference_usepickitemsdlg_title">Use "Pick Items" dialog</string>
-	<string name="preference_usepickitemsdlg_on_summary">Add items to list using a dedicated dialog</string>
-	<string name="preference_usepickitemsdlg_off_summary">Switch main list to edit mode to re-add existing items</string>
+	<string name="preference_pickitemsinlist_title">Pick items directly in list</string>
+	<string name="preference_pickitemsinlist_on_summary">Switch main list to edit mode to re-add existing items</string>
+	<string name="preference_pickitemsinlist_off_summary">Add items to list using a dedicated dialog</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Secouer pour nettoyer</string>
