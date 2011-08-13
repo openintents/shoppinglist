@@ -1,73 +1,37 @@
 package org.openintents.shopping.ui.widget;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Locale;
-
-import org.openintents.distribution.DownloadAppDialog;
 import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract;
-import org.openintents.shopping.library.provider.ShoppingContract.Contains;
-import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
 import org.openintents.shopping.library.provider.ShoppingContract.ItemStores;
-import org.openintents.shopping.library.provider.ShoppingContract.Status;
 import org.openintents.shopping.library.provider.ShoppingContract.Stores;
-import org.openintents.shopping.R.id;
-import org.openintents.shopping.R.layout;
-import org.openintents.shopping.theme.ThemeAttributes;
-import org.openintents.shopping.theme.ThemeShoppingList;
-import org.openintents.shopping.theme.ThemeUtils;
-import org.openintents.shopping.ui.PreferenceActivity;
-import org.openintents.shopping.ui.dialog.EditItemDialog;
 import org.openintents.shopping.library.util.PriceConverter;
 import org.openintents.shopping.library.util.ShoppingUtils;
+import org.openintents.shopping.ui.PreferenceActivity;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
-import android.graphics.Bitmap;
-import android.graphics.PixelFormat;
-import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.text.Editable;
-import android.text.Spannable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.text.style.StrikethroughSpan;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
-import android.widget.TextView.OnEditorActionListener;
 import android.widget.TextView;
 
 /**
@@ -98,8 +62,12 @@ public class StoreListView extends ListView {
 			"itemstores." + ItemStores._ID, Stores.NAME, ItemStores.STOCKS_ITEM,
 			ItemStores.PRICE, ItemStores.AISLE, "stores._id as store_id"
 		};
+	final static int cursorColumnID = 0;
+	final static int cursorColumnNAME = 1;
+	final static int cursorColumnSTOCKS_ITEM = 2;
 	final static int cursorColumnPRICE = 3;
 	final static int cursorColumnAISLE = 4;
+	final static int cursorColumnSTORE_ID = 5;
 	
 	private Cursor mCursorItemstores;
 	private long mItemId;
@@ -238,7 +206,7 @@ public class StoreListView extends ListView {
 			super.bindView(view, context, cursor);
 			mBinding = false;
 			
-			boolean status = cursor.getInt(2) != 0;
+			boolean status = cursor.getInt(cursorColumnSTOCKS_ITEM) != 0;
 			final int cursorpos = cursor.getPosition();
 				
 			CheckBox c = (CheckBox) view.findViewById(R.id.check);
@@ -261,6 +229,19 @@ public class StoreListView extends ListView {
 				public void onClick(View v) {
 					Log.d(TAG, "Click: ");
 					toggleItemstore(cursorpos);
+				}
+
+			});
+			
+			TextView t;
+			
+			t = (TextView) view.findViewById(R.id.name);
+			t.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+
+				public void onCreateContextMenu(ContextMenu contextmenu,
+						View view, ContextMenuInfo info) {
+					// Context menus are created in the main activity
+					// ItemStoresActivity
 				}
 
 			});
@@ -369,7 +350,7 @@ public class StoreListView extends ListView {
 						new String[] { storeId,	String.valueOf(mItemId) }, null);
 				if (existingItems.getCount() > 0) {
 					existingItems.moveToFirst();
-					long id = existingItems.getLong(0);
+					long id = existingItems.getLong(cursorColumnID);
 					cr.delete(ItemStores.CONTENT_URI.buildUpon().
 							appendPath(String.valueOf(id)).build(), null, null);
 					existingItems.close();
@@ -472,12 +453,12 @@ public class StoreListView extends ListView {
 		String itemstore_id = null;
 		
 		if (mCursorItemstores.isNull(0)) {
-			long storeId = mCursorItemstores.getLong(5);
+			long storeId = mCursorItemstores.getLong(cursorColumnSTORE_ID);
 			long isid = ShoppingUtils.addItemToStore(getContext(), mItemId, storeId, "", "");
 			itemstore_id = Long.toString(isid);
 		} else {
-			itemstore_id = mCursorItemstores.getString(0);
-			oldstatus = mCursorItemstores.getLong(2);
+			itemstore_id = mCursorItemstores.getString(cursorColumnID);
+			oldstatus = mCursorItemstores.getLong(cursorColumnSTOCKS_ITEM);
 		}
 		
 		// Toggle status:
@@ -508,7 +489,7 @@ public class StoreListView extends ListView {
 		}
 		
 		if (mCursorItemstores.isNull(0)) {
-			long storeId = mCursorItemstores.getLong(5);
+			long storeId = mCursorItemstores.getLong(cursorColumnSTORE_ID);
 			String aisle = "";
 			String price = "";
 			
@@ -530,7 +511,7 @@ public class StoreListView extends ListView {
 			return;
 		}
 			
-		String itemstore_id = mCursorItemstores.getString(0);
+		String itemstore_id = mCursorItemstores.getString(cursorColumnID);
 		Uri uri = Uri.withAppendedPath(ItemStores.CONTENT_URI, itemstore_id);
 		ContentValues cv = new ContentValues();
 		cv.put(mStringItems[column], new_val);
@@ -548,5 +529,27 @@ public class StoreListView extends ListView {
 			Log.d(TAG, "requery()");
 		mCursorItemstores.requery();
 		mDirty = false;
+	}
+	
+	public String getStoreName(int cursorPosition) {
+		String name = "";
+		Cursor c = mCursorItemstores;
+		if (c != null) {
+			if (c.moveToPosition(cursorPosition)) {
+				name = c.getString(cursorColumnNAME);
+			}
+		}
+		return name;
+	}
+
+	public String getStoreId(int cursorPosition) {
+		String id = null;
+		Cursor c = mCursorItemstores;
+		if (c != null) {
+			if (c.moveToPosition(cursorPosition)) {
+				id = c.getString(cursorColumnSTORE_ID);
+			}
+		}
+		return id;
 	}
 }

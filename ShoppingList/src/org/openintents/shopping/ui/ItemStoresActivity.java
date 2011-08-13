@@ -3,33 +3,42 @@ package org.openintents.shopping.ui;
 import java.util.List;
 
 import org.openintents.shopping.R;
-import org.openintents.shopping.R.id;
-import org.openintents.shopping.R.layout;
-import org.openintents.shopping.R.string;
+import org.openintents.shopping.library.provider.ShoppingContract.Stores;
 import org.openintents.shopping.library.util.ShoppingUtils;
 import org.openintents.shopping.ui.dialog.DialogActionListener;
-import org.openintents.shopping.ui.dialog.NewListDialog;
 import org.openintents.shopping.ui.dialog.RenameListDialog;
 import org.openintents.shopping.ui.widget.StoreListView;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 public class ItemStoresActivity extends Activity {
 
 	private static final int DIALOG_NEW_STORE=1;
-	
+	private static final int DIALOG_RENAME_STORE=2;
+
+	public static final int MENU_RENAME_STORE = Menu.FIRST;
+	public static final int MENU_DELETE_STORE = Menu.FIRST + 1;
+
 	long mListId = 0;
 	StoreListView mItemStores = null;
+	
+	int mSelectedStorePosition = 0;
 	
 	public class NewStoreDialog extends RenameListDialog {
 
@@ -46,7 +55,14 @@ public class ItemStoresActivity extends Activity {
 			setTitle(R.string.ask_new_store);
 			setDialogActionListener(listener);
 		}
-		
+
+		public NewStoreDialog(Context context, String name, DialogActionListener listener) {
+			super(context);
+			
+			setTitle(R.string.ask_new_store);
+			setName(name);
+			setDialogActionListener(listener);
+		}
 	}
 	
 	@Override
@@ -57,6 +73,20 @@ public class ItemStoresActivity extends Activity {
 		setContentView(R.layout.activity_itemstores);
 
 		mItemStores = (StoreListView) findViewById(R.id.list_stores);
+
+		mItemStores
+				.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+
+					public void onCreateContextMenu(ContextMenu contextmenu,
+							View view, ContextMenuInfo info) {
+						contextmenu.add(0, MENU_RENAME_STORE, 0,
+								R.string.menu_rename_store)
+								.setShortcut('1', 'r');
+						contextmenu.add(0, MENU_DELETE_STORE, 0,
+								R.string.menu_delete_store).setShortcut('2', 'd');
+					}
+
+				});
 
 		String listId;
 		String itemId; 
@@ -113,8 +143,72 @@ public class ItemStoresActivity extends Activity {
 					mItemStores.requery();
 				}
 			});
+		
+		case DIALOG_RENAME_STORE:
+			return new NewStoreDialog(this, getSelectedStoreName(),
+					new DialogActionListener() {
+
+						public void onAction(String name) {
+							renameStore(name);
+						}
+					});
 		}
 		return super.onCreateDialog(id);
 	}
 	
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog) {
+		super.onPrepareDialog(id, dialog);
+
+		switch (id) {
+		case DIALOG_NEW_STORE:
+			break;
+
+		case DIALOG_RENAME_STORE:
+			((RenameListDialog) dialog).setName(getSelectedStoreName());
+			break;
+		}
+	}
+
+	public boolean onContextItemSelected(MenuItem item) {
+		AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item
+				.getMenuInfo();
+
+		mSelectedStorePosition = menuInfo.position;
+
+		switch (item.getItemId()) {
+		case MENU_RENAME_STORE:
+			showDialog(DIALOG_RENAME_STORE);
+			break;
+
+		case MENU_DELETE_STORE:
+			break;
+		}
+
+		return true;
+	}
+
+	private String getSelectedStoreName() {
+		return mItemStores.getStoreName(mSelectedStorePosition);
+	}
+
+	private void renameStore(String newName) {
+
+		if (TextUtils.isEmpty(newName)) {
+			// User has not provided any name
+			Toast.makeText(this, getString(R.string.please_enter_name),
+					Toast.LENGTH_SHORT).show();
+			return;
+		}
+
+		String storeId = mItemStores.getStoreId(mSelectedStorePosition);
+		ContentValues values = new ContentValues();
+		values.put(Stores.NAME, newName);
+		getContentResolver().update(
+				Uri.withAppendedPath(Stores.CONTENT_URI, storeId), values,
+				null, null);
+
+		mItemStores.requery();
+	}
+
 }
