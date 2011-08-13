@@ -3,6 +3,7 @@ package org.openintents.shopping.ui;
 import java.util.List;
 
 import org.openintents.shopping.R;
+import org.openintents.shopping.library.provider.ShoppingContract.ItemStores;
 import org.openintents.shopping.library.provider.ShoppingContract.Stores;
 import org.openintents.shopping.library.util.ShoppingUtils;
 import org.openintents.shopping.ui.dialog.DialogActionListener;
@@ -10,9 +11,11 @@ import org.openintents.shopping.ui.dialog.RenameListDialog;
 import org.openintents.shopping.ui.widget.StoreListView;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -36,6 +39,7 @@ public class ItemStoresActivity extends Activity {
 	public static final int MENU_DELETE_STORE = Menu.FIRST + 1;
 
 	long mListId = 0;
+	long mItemId = 0;
 	StoreListView mItemStores = null;
 	
 	int mSelectedStorePosition = 0;
@@ -97,6 +101,7 @@ public class ItemStoresActivity extends Activity {
 		itemId = pathSegs.get(num - 1);
 	
 		mListId = Long.parseLong(listId);
+		mItemId = Long.parseLong(itemId);
 		
 		mItemStores.fillItems(this, Long.parseLong(listId), Long.parseLong(itemId));
 		
@@ -182,6 +187,7 @@ public class ItemStoresActivity extends Activity {
 			break;
 
 		case MENU_DELETE_STORE:
+			deleteStoreConfirm();
 			break;
 		}
 
@@ -207,6 +213,53 @@ public class ItemStoresActivity extends Activity {
 		getContentResolver().update(
 				Uri.withAppendedPath(Stores.CONTENT_URI, storeId), values,
 				null, null);
+
+		mItemStores.requery();
+	}
+
+	// TODO: Convert into proper dialog that remains across screen orientation changes.
+	/**
+	 * Confirm 'delete list' command by AlertDialog.
+	 */
+	private void deleteStoreConfirm() {
+		new AlertDialog.Builder(this)
+				// .setIcon(R.drawable.alert_dialog_icon)
+				.setTitle(R.string.confirm_delete_store)
+				.setPositiveButton(R.string.ok,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								// click Ok
+								deleteStore();
+							}
+						})
+				.setNegativeButton(R.string.cancel,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								// click Cancel
+							}
+						})
+				// .create()
+				.show();
+	}
+
+	/**
+	 * Deletes currently selected shopping list.
+	 */
+	private void deleteStore() {
+
+		// TODO: Properly delete a store
+
+		String storeId = mItemStores.getStoreId(mSelectedStorePosition);
+
+		// First delete all items for store
+		getContentResolver().delete(ItemStores.CONTENT_URI,
+				"store_id = " + storeId, null);
+
+		// Then delete currently selected store
+		getContentResolver().delete(Stores.CONTENT_URI, "_id = " + storeId,
+				null);
 
 		mItemStores.requery();
 	}

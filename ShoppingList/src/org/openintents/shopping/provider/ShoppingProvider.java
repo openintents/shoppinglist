@@ -21,7 +21,6 @@ import java.util.HashMap;
 import org.openintents.intents.ProviderIntents;
 import org.openintents.intents.ProviderUtils;
 import org.openintents.shopping.R;
-import org.openintents.shopping.R.string;
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
@@ -747,7 +746,19 @@ public class ShoppingProvider extends ContentProvider {
 			values.putNull("note");
 			count = update(url, values, null, null);
 			break;
+
+		case STORES:
+			affectedRows = ProviderUtils.getAffectedRows(db, "stores", where,
+					whereArgs);
+			count = db.delete("stores", where, whereArgs);
+			break;
 			
+		case ITEMSTORES:
+			affectedRows = ProviderUtils.getAffectedRows(db, "itemstores", where,
+					whereArgs);
+			count = db.delete("itemstores", where, whereArgs);
+			break;
+
 		case ITEMSTORES_ID:
 			segment = url.getPathSegments().get(1); // contains rowId
 			// rowId = Long.parseLong(segment);

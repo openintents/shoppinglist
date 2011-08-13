@@ -1800,13 +1800,14 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		}
 	}
 
+	// TODO: Convert into proper dialog that remains across screen orientation changes.
 	/**
 	 * Confirm 'delete list' command by AlertDialog.
 	 */
 	private void deleteListConfirm() {
 		new AlertDialog.Builder(this)
 				// .setIcon(R.drawable.alert_dialog_icon)
-				.setTitle(R.string.delete_list)
+				.setTitle(R.string.confirm_delete_list)
 				.setPositiveButton(R.string.ok,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,

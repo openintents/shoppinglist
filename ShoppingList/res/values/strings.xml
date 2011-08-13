@@ -61,6 +61,7 @@
 	<string name="menu_item_stores">Stores...</string>
 	<string name="menu_rename_store">Rename store</string>
 	<string name="menu_delete_store">Delete store</string>
+	<string name="confirm_delete_store">Do you really want to delete this store?</string>
 	<string name="no_items_available">No items available</string>
 	
 	<!-- Remove item from this list, but keep it internally, so that the user
