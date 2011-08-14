@@ -1,10 +1,11 @@
 ---------------------------------------------------------
 release 1.4
-date: 2011-08-04
-- support for Tablets - Android 3.0 (patch by Temp)
+date: 2011-08-14
+- support for Tablets with new layout for Android 3.0 (patch by Temp)
 - support for the ActionBar (Android 3.0)
-- optionally switch main list to edit mode (activate in advanced settings by turning off "Use Pick Items dialog")
+- optionally switch main list to edit mode (activate in advanced settings through "Pick items directly in list")
 - basic support for tracking per-store prices (activate in advanced settings)
+- add, rename, delete stores (long-press an item, select "Stores...", then long-press a store name)
 - calculate subtotal by priority (activate in advanced settings)
 - fix various issues
 - tweak performance
