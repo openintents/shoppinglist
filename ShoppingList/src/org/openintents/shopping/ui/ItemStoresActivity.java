@@ -249,14 +249,7 @@ public class ItemStoresActivity extends Activity {
 	 */
 	private void deleteStore() {
 		String storeId = mItemStores.getStoreId(mSelectedStorePosition);
-
-		// First delete all items for store
-		getContentResolver().delete(ItemStores.CONTENT_URI,
-				"store_id = " + storeId, null);
-
-		// Then delete currently selected store
-		getContentResolver().delete(Stores.CONTENT_URI, "_id = " + storeId,
-				null);
+		ShoppingUtils.deleteStore(this, storeId);
 
 		mItemStores.requery();
 	}

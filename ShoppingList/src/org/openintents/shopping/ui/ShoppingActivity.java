@@ -1832,12 +1832,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 */
 	private void deleteList() {
 		String listId = mCursorShoppingLists.getString(0);
-		// First delete all items in list
-		getContentResolver().delete(Contains.CONTENT_URI,
-				"list_id = " + listId, null);
-
-		// Then delete currently selected list
-		getContentResolver().delete(Lists.CONTENT_URI, "_id = " + listId, null);
+		ShoppingUtils.deleteList(this, listId);
 
 		// Update view
 		fillListFilter();
@@ -1911,14 +1906,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	void deleteItem(int position) {
 		Cursor c = mItemsView.mCursorItems;
 		c.moveToPosition(position);
-		// Delete item from all lists
-		// by deleting contains row
-		getContentResolver().delete(Contains.CONTENT_URI, "item_id = ?",
-				new String[] { c.getString(mStringItemsITEMID) });
 
-		// and delete item
-		getContentResolver().delete(Items.CONTENT_URI, "_id = ?",
-				new String[] { c.getString(mStringItemsITEMID) });
+		String listId = mListUri.getLastPathSegment();
+		String itemId = c.getString(mStringItemsITEMID);
+		ShoppingUtils.deleteItem(this, itemId, listId);
 
 		// c.requery();
 		mItemsView.requery();
@@ -1938,19 +1929,15 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		}
 		listId = Integer.parseInt(mListUri.getLastPathSegment());
 
+		int itemId = c.getInt(mStringItemsITEMID);
+		
 		// add item to new list
-		ShoppingUtils.addItemToList(this, c.getInt(mStringItemsITEMID),
+		ShoppingUtils.addItemToList(this, itemId,
 				targetListId, Status.WANT_TO_BUY,
 				c.getString(mStringItemsPRIORITY),
 				c.getString(mStringItemsQUANTITY), false);
 
-		// Delete item from currentList
-		// by deleting contains row
-		getContentResolver().delete(
-				Contains.CONTENT_URI,
-				"item_id = ? and list_id = ?",
-				new String[] { c.getString(mStringItemsITEMID),
-						String.valueOf(listId) });
+		ShoppingUtils.deleteItemFromList(this, "" + itemId, "" + listId);
 
 		mItemsView.requery();
 	}

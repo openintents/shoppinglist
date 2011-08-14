@@ -16,6 +16,9 @@
 
 package org.openintents.shopping.library.util;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.ActiveList;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
@@ -586,4 +589,167 @@ public class ShoppingUtils {
 				.update(Uri.withAppendedPath(Items.CONTENT_URI,
 						String.valueOf(itemId)), values, null, null);
 	}
+
+	/**
+	 * Cleanly deletes an item from a list (from the Contains table), but the
+	 * item itself remains. Afterwards, either the item should be moved to
+	 * another list, or the item should be deleted. Deletion includes itemstores
+	 * and contains.
+	 * 
+	 * @param context
+	 * @param itemId
+	 * @return 1 if the item got deleted, 0 otherwise.
+	 */
+	public static int deleteItemFromList(Context context, String itemId,
+			String listId) {
+		// First delete all itemstores for item
+		// TODO: This unwantedly deletes all itemstores information for the same
+		// itemId on other lists. Restrict deletion to items in this list.
+		context.getContentResolver().delete(ItemStores.CONTENT_URI,
+				"item_id = " + itemId, null);
+
+		// Delete item from currentList by deleting contains row
+		int itemsDeleted = context.getContentResolver().delete(
+				Contains.CONTENT_URI, "item_id = ? and list_id = ?",
+				new String[] { itemId, listId });
+		return itemsDeleted;
+	}
+
+	/**
+	 * Cleanly deletes an item from a particular list if it does not exist on
+	 * any other list. Deletion includes itemstores and the item itself.
+	 * 
+	 * @param context
+	 * @param itemId
+	 * @return 1 if the item got deleted, 0 otherwise.
+	 */
+	public static int deleteItem(Context context, String itemId, String listId) {
+		deleteItemFromList(context, itemId, listId);
+
+		int itemsDeleted = 0;
+		if (!isItemContainedInOtherExistingList(context, itemId)) {
+			// Delete the item itself if it is not contained in an existing list
+			// anymore
+			itemsDeleted = context.getContentResolver().delete(
+					Items.CONTENT_URI, "_id = ?", new String[] { itemId });
+		}
+
+		return itemsDeleted;
+	}
+
+	/**
+	 * Returns true if the item is contained in an existing list. Extra care is
+	 * taken because old contains could be left over from lists that do not
+	 * exist anymore.
+	 * 
+	 * @param context
+	 * @param itemId
+	 * @return
+	 */
+	private static boolean isItemContainedInOtherExistingList(Context context,
+			String itemId) {
+		Cursor c = context.getContentResolver().query(Contains.CONTENT_URI,
+				new String[] { Contains.LIST_ID }, Contains.ITEM_ID + " = ?",
+				new String[] { itemId }, null);
+		if (c != null) {
+			while (c.moveToNext()) {
+				// Item is contained in some list...
+				String listId = c.getString(0);
+				Cursor c2 = context.getContentResolver().query(
+						Lists.CONTENT_URI, new String[] { Lists._ID },
+						Lists._ID + " = ?", new String[] { listId }, null);
+				if (c2 != null) {
+					if (c2.moveToNext()) {
+						// ... and that list exists
+						c2.close();
+						c.close();
+						return true;
+					}
+					c2.close();
+				}
+
+			}
+			c.close();
+		}
+		return false;
+	}
+
+	/**
+	 * Cleanly deletes a store. Deletion includes itemstores and the store
+	 * itself.
+	 * 
+	 * @param context
+	 * @param storeId
+	 * @return 1 if the store got deleted, 0 otherwise.
+	 */
+	public static int deleteStore(Context context, String storeId) {
+		// First delete all items for store
+		context.getContentResolver().delete(ItemStores.CONTENT_URI,
+				"store_id = " + storeId, null);
+
+		// Then delete currently selected store
+		int storesDeleted = context.getContentResolver().delete(
+				Stores.CONTENT_URI, "_id = " + storeId, null);
+		return storesDeleted;
+	}
+
+	/**
+	 * Cleanly deletes a list. Deletion includes stores, itemstores, items, and
+	 * the list itself.
+	 * 
+	 * @param context
+	 * @param listId
+	 * @return 1 if the list got deleted, 0 otherwise.
+	 */
+	public static int deleteList(Context context, String listId) {
+		// Delete all items
+		List<String> itemIds = getItemIdsForList(context, listId);
+		for (String itemId : itemIds) {
+			deleteItem(context, itemId, listId);
+		}
+
+		// Delete all stores
+		List<String> storeIds = getStoreIdsForList(context, listId);
+		for (String storeId : storeIds) {
+			deleteStore(context, storeId);
+		}
+
+		// Then delete currently selected list
+		int rowsDeleted = context.getContentResolver().delete(
+				Lists.CONTENT_URI, "_id = " + listId, null);
+
+		return rowsDeleted;
+	}
+
+	private static List<String> getItemIdsForList(Context context, String listId) {
+		List<String> itemIds = new LinkedList<String>();
+		Cursor c = context.getContentResolver().query(Contains.CONTENT_URI,
+				new String[] { Contains.ITEM_ID }, Contains.LIST_ID + " = ?",
+				new String[] { listId }, null);
+		if (c != null) {
+			while (c.moveToNext()) {
+				String itemId = c.getString(0);
+				itemIds.add(itemId);
+			}
+			c.close();
+		}
+		return itemIds;
+	}
+
+	private static List<String> getStoreIdsForList(Context context,
+			String listId) {
+		List<String> storeIds = new LinkedList<String>();
+		Cursor c = context.getContentResolver().query(Stores.CONTENT_URI,
+				new String[] { Stores._ID }, Stores.LIST_ID + " = ?",
+				new String[] { listId }, null);
+		if (c != null) {
+			while (c.moveToNext()) {
+				String storeId = c.getString(0);
+				storeIds.add(storeId);
+			}
+			c.close();
+		}
+		return storeIds;
+	}
+
 }
