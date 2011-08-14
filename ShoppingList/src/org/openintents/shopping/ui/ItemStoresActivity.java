@@ -245,12 +245,9 @@ public class ItemStoresActivity extends Activity {
 	}
 
 	/**
-	 * Deletes currently selected shopping list.
+	 * Deletes currently selected store.
 	 */
 	private void deleteStore() {
-
-		// TODO: Properly delete a store
-
 		String storeId = mItemStores.getStoreId(mSelectedStorePosition);
 
 		// First delete all items for store
