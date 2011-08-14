@@ -603,10 +603,12 @@ public class ShoppingUtils {
 	public static int deleteItemFromList(Context context, String itemId,
 			String listId) {
 		// First delete all itemstores for item
-		// TODO: This unwantedly deletes all itemstores information for the same
-		// itemId on other lists. Restrict deletion to items in this list.
-		context.getContentResolver().delete(ItemStores.CONTENT_URI,
-				"item_id = " + itemId, null);
+		List<String> itemStoreIds = getItemStoreIdsForList(context, itemId,
+				listId);
+		for (String itemStoreId : itemStoreIds) {
+			context.getContentResolver().delete(ItemStores.CONTENT_URI,
+					"itemstores._id = " + itemStoreId, null);
+		}
 
 		// Delete item from currentList by deleting contains row
 		int itemsDeleted = context.getContentResolver().delete(
@@ -721,35 +723,44 @@ public class ShoppingUtils {
 		return rowsDeleted;
 	}
 
+	private static List<String> getItemStoreIdsForList(Context context,
+			String itemId, String listId) {
+		// Get a cursor for all stores
+		Cursor c = context.getContentResolver().query(
+				ItemStores.CONTENT_URI.buildUpon().appendPath("item")
+						.appendPath(itemId).appendPath(listId).build(),
+				new String[] { "itemstores._id" }, null, null, null);
+		List<String> itemStoreIds = getStringListAndCloseCursor(c, 0);
+		return itemStoreIds;
+	}
+
 	private static List<String> getItemIdsForList(Context context, String listId) {
-		List<String> itemIds = new LinkedList<String>();
 		Cursor c = context.getContentResolver().query(Contains.CONTENT_URI,
 				new String[] { Contains.ITEM_ID }, Contains.LIST_ID + " = ?",
 				new String[] { listId }, null);
-		if (c != null) {
-			while (c.moveToNext()) {
-				String itemId = c.getString(0);
-				itemIds.add(itemId);
-			}
-			c.close();
-		}
+		List<String> itemIds = getStringListAndCloseCursor(c, 0);
 		return itemIds;
 	}
 
 	private static List<String> getStoreIdsForList(Context context,
 			String listId) {
-		List<String> storeIds = new LinkedList<String>();
 		Cursor c = context.getContentResolver().query(Stores.CONTENT_URI,
 				new String[] { Stores._ID }, Stores.LIST_ID + " = ?",
 				new String[] { listId }, null);
+		List<String> storeIds = getStringListAndCloseCursor(c, 0);
+		return storeIds;
+	}
+
+	private static List<String> getStringListAndCloseCursor(Cursor c, int index) {
+		List<String> items = new LinkedList<String>();
 		if (c != null) {
 			while (c.moveToNext()) {
-				String storeId = c.getString(0);
-				storeIds.add(storeId);
+				String item = c.getString(index);
+				items.add(item);
 			}
 			c.close();
 		}
-		return storeIds;
+		return items;
 	}
 
 }
