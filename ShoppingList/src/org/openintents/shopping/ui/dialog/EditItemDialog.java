@@ -133,8 +133,11 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 				   // we should not replace with empty string below.
 					Cursor c = mContext.getContentResolver().query(mItemUri, 
 							new String[] {ShoppingContract.Items.NOTE} , null, null, null);
-					if (c != null && c.moveToFirst()) {
-						mNoteText = c.getString(0);
+					if (c != null) {
+						if (c.moveToFirst()) {
+							mNoteText = c.getString(0);
+						}
+						c.close();
 					}
 				}
 				

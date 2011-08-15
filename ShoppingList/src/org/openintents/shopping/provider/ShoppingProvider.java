@@ -1105,7 +1105,7 @@ public class ShoppingProvider extends ContentProvider {
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.LIST_IMAGE,
 				"lists.image as list_image");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_HAS_NOTE,
-		        "items.note is not NULL as item_has_note");
+		        "items.note is not NULL and items.note <> '' as item_has_note");
 
 		CONTAINS_FULL_CHEAPEST_PROJECTION_MAP = 
 			new HashMap<String, String>(CONTAINS_FULL_PROJECTION_MAP);
