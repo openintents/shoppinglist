@@ -51,12 +51,14 @@ public class ItemStoresActivity extends Activity {
 			super(context);
 			
 			setTitle(R.string.ask_new_store);
+			mEditText.setHint("");
 		}
 		
 		public NewStoreDialog(Context context, DialogActionListener listener) {
 			super(context);
 			
 			setTitle(R.string.ask_new_store);
+			mEditText.setHint("");
 			setDialogActionListener(listener);
 		}
 
@@ -64,6 +66,7 @@ public class ItemStoresActivity extends Activity {
 			super(context);
 			
 			setTitle(R.string.ask_new_store);
+			mEditText.setHint("");
 			setName(name);
 			setDialogActionListener(listener);
 		}
@@ -144,9 +147,9 @@ public class ItemStoresActivity extends Activity {
 			return new NewStoreDialog(this, new DialogActionListener() {
 
 				public void onAction(String name) {
-					ShoppingUtils.getStore(getApplicationContext(), name, mListId);
-					mItemStores.requery();
+					createStore(name);
 				}
+
 			});
 		
 		case DIALOG_RENAME_STORE:
@@ -167,10 +170,11 @@ public class ItemStoresActivity extends Activity {
 
 		switch (id) {
 		case DIALOG_NEW_STORE:
+			((NewStoreDialog) dialog).setName("");
 			break;
 
 		case DIALOG_RENAME_STORE:
-			((RenameListDialog) dialog).setName(getSelectedStoreName());
+			((NewStoreDialog) dialog).setName(getSelectedStoreName());
 			break;
 		}
 	}
@@ -196,6 +200,18 @@ public class ItemStoresActivity extends Activity {
 
 	private String getSelectedStoreName() {
 		return mItemStores.getStoreName(mSelectedStorePosition);
+	}
+
+	private void createStore(String name) {
+		if (TextUtils.isEmpty(name)) {
+			// User has not provided any name
+			Toast.makeText(this, getString(R.string.please_enter_name),
+					Toast.LENGTH_SHORT).show();
+			return;
+		}
+
+		ShoppingUtils.getStore(getApplicationContext(), name, mListId);
+		mItemStores.requery();
 	}
 
 	private void renameStore(String newName) {

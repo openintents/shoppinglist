@@ -16,7 +16,7 @@ public class RenameListDialog extends AlertDialog implements OnClickListener {
 
 	Context mContext;
 
-	EditText mEditText;
+	protected EditText mEditText;
 	
 	DialogActionListener mDialogActionListener;
 	

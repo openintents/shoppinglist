@@ -49,7 +49,7 @@
 				<TextView android:layout_width="fill_parent" android:id="@+id/labeleditunits"
 					android:layout_height="wrap_content" android:layout_weight="1"
 					android:text="@string/units"  />
-				<AutoCompleteTextView android:hint="@string/units" android:id="@+id/editunits"
+				<AutoCompleteTextView android:id="@+id/editunits"
 					android:layout_height="wrap_content" android:layout_width="fill_parent"
 					android:singleLine="true" android:inputType="text"
 					android:layout_below="@+id/labeleditunits" android:completionThreshold="1"/>
