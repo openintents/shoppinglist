@@ -115,7 +115,7 @@
 	<string name="priority3_total">Priority 1-3: %s</string>
 	<string name="priority4_total">Priority 1-4: %s</string>
 	
-	<string name="delete_item_confirm">¿Estás seguro de que deseas eliminar permanentemente este elemento, sus etiquetas, y su precio de todas las listas de compra?</string>
+	<string name="delete_item_confirm">Are you sure you want to permanently delete this item from this shopping lists?</string>
 	<string name="delete">Borrar</string>
 	
 	<!-- Added to an item to indicate it was bought. -->

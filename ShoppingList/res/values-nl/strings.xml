@@ -113,7 +113,7 @@
 	<string name="priority3_total">Priority 1-3: %s</string>
 	<string name="priority4_total">Priority 1-4: %s</string>
 	
-	<string name="delete_item_confirm">Weet u zeker dat u dit item, zijn labels en de prijs permanent wilt wissen van alle boodschappenlijsten?</string>
+	<string name="delete_item_confirm">Are you sure you want to permanently delete this item from this shopping lists?</string>
 	<string name="delete">Verwijderen</string>
 	
 	<!-- Added to an item to indicate it was bought. -->

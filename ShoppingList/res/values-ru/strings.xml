@@ -22,6 +22,7 @@
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
   Alexander Sapronov https://launchpad.net/~warmonger
+  OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101
   ZipUltra https://launchpad.net/~zipultra
   friedger https://launchpad.net/~friedger</string>
@@ -111,7 +112,7 @@
 	<string name="priority3_total">Приоритет 1-3: %s</string>
 	<string name="priority4_total">Приоритет 1-4: %s</string>
 	
-	<string name="delete_item_confirm">Вы действительно желаете удалить навсегда этот элемент из всех списков?</string>
+	<string name="delete_item_confirm">Are you sure you want to permanently delete this item from this shopping lists?</string>
 	<string name="delete">Удалить</string>
 	
 	<!-- Added to an item to indicate it was bought. -->

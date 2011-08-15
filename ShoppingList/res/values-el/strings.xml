@@ -108,7 +108,7 @@
 	<string name="priority3_total">Priority 1-3: %s</string>
 	<string name="priority4_total">Priority 1-4: %s</string>
 	
-	<string name="delete_item_confirm">Είστε βέβαιοι ότι θέλετε να διαγραφεί μόνιμα αυτό το στοιχείο μαζί με τις ετικέτες και την τιμή του από όλες τις λίστες αγορών;</string>
+	<string name="delete_item_confirm">Are you sure you want to permanently delete this item from this shopping lists?</string>
 	<string name="delete">Διαγραφή</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
