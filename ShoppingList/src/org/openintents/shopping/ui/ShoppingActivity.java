@@ -19,6 +19,7 @@ package org.openintents.shopping.ui;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.openintents.OpenIntents;
@@ -39,6 +40,7 @@ import org.openintents.shopping.library.util.PriceConverter;
 import org.openintents.shopping.library.util.ShoppingUtils;
 import org.openintents.shopping.ui.dialog.DialogActionListener;
 import org.openintents.shopping.ui.dialog.EditItemDialog;
+import org.openintents.shopping.ui.dialog.EditItemDialog.OnItemChangedListener;
 import org.openintents.shopping.ui.dialog.NewListDialog;
 import org.openintents.shopping.ui.dialog.RenameListDialog;
 import org.openintents.shopping.ui.dialog.ThemeDialog;
@@ -70,6 +72,7 @@ import android.database.Cursor;
 import android.hardware.SensorListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -101,7 +104,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CursorAdapter;
-import android.widget.FilterQueryProvider;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -117,7 +119,7 @@ import android.widget.Toast;
  */
 public class ShoppingActivity extends DistributionLibraryFragmentActivity implements
 		ThemeDialogListener, OnCustomClickListener,
-		ActionBarListener { // implements
+		ActionBarListener, OnItemChangedListener { // implements
 	// AdapterView.OnItemClickListener
 	// {
 	
@@ -406,13 +408,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private static final String BUNDLE_MODE = "mode";
 
 	// Skins --------------------------
-
-	// private int mTextEntryMenu;
-	/*
-	 * NOTE: mItemsCursor is used for autocomplete Textview, mCursorItems is for
-	 * items in list
-	 */
-	private Cursor mItemsCursor;
 
 	private static boolean usingListSpinner() {
 		// TODO switch layout on screen size, not sdk versions
@@ -915,52 +910,14 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		createList();
 
 		mEditText = (AutoCompleteTextView) findViewById(R.id.autocomplete_add_item);
-		if (mItemsCursor != null) {
-			if (debug)
-				Log.d(TAG, "mItemsCursor managedQuery 1");
-			stopManagingCursor(mItemsCursor);
-			mItemsCursor.close();
-			mItemsCursor = null;
-		}
-		mItemsCursor = managedQuery(Items.CONTENT_URI, new String[] {
-				Items._ID, Items.NAME }, null, null, "name desc");
-		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
-				android.R.layout.simple_dropdown_item_1line, mItemsCursor,
-				new String[] { Items.NAME }, new int[] { android.R.id.text1 });
-		adapter.setStringConversionColumn(1);
-		adapter.setFilterQueryProvider(new FilterQueryProvider() {
-			public Cursor runQuery(CharSequence constraint) {
-				if (mItemsCursor != null) {
-					if (debug)
-						Log.d(TAG, "mItemsCursor managedQuery 2");
-					stopManagingCursor(mItemsCursor);
 
-					// For some reason, closing the cursor seems to post
-					// an invalidation on the background thread and a crash...
-					// so we keep it open.
-					// mItemsCursor.close();
-					// mItemsCursor = null;
-				}
-				mItemsCursor = managedQuery(Items.CONTENT_URI, new String[] {
-						Items._ID, Items.NAME }, "upper(name) like upper(?)",
-						new String[] { "%"
-								+ (constraint == null ? "" : constraint
-										.toString()) + "%" },
-						"name desc");
-				return mItemsCursor;
-			}
-
-		});
-		mEditText.setAdapter(adapter);
+		fillAutoCompleteTextViewAdapter();
+		mEditText.setThreshold(1);
 		mEditText.setOnKeyListener(new OnKeyListener() {
 
 			private int mLastKeyAction = KeyEvent.ACTION_UP;
 
 			public boolean onKey(View v, int keyCode, KeyEvent key) {
-				// Log.i(TAG, "KeyCode: " + keyCode
-				// + " =?= "
-				// +Integer.parseInt(getString(R.string.key_return)) );
-
 				// Shortcut: Instead of pressing the button,
 				// one can also press the "Enter" key.
 				if (debug)
@@ -1236,6 +1193,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 			mItemsView.insertNewItem(this, newItem, null, null, null, null);
 			mEditText.setText("");
+			fillAutoCompleteTextViewAdapter();
 		} else {
 			// Open list to select item from
 			pickItems();
@@ -1921,6 +1879,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		// c.requery();
 		mItemsView.requery();
+		fillAutoCompleteTextViewAdapter();
 	}
 
 	/** move item */
@@ -2167,7 +2126,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			String[] taglist = getTaglist();
 			d.setTagList(taglist);
 
-			d.setRequeryCursor(mItemsView.mCursorItems);
+			d.setOnItemChangedListener(this);
 			break;
 
 		case DIALOG_THEME:
@@ -2460,6 +2419,62 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		if (mExtraItems != null) {
 			insertItemsFromExtras();
 		}
+		
+		// Also refresh AutoCompleteTextView:
+		fillAutoCompleteTextViewAdapter();
+	}
+
+	/**
+	 * Fill input field (AutoCompleteTextView) with suggestions: Unique item
+	 * names from all lists are collected. The adapter is filled in the
+	 * background.
+	 */
+	private void fillAutoCompleteTextViewAdapter() {
+		
+		// TODO: Optimize: This routine is called too often.
+		if (debug) Log.d(TAG, "fill AutoCompleteTextViewAdapter");
+		
+		new AsyncTask<Integer, Integer, ArrayAdapter<String>>() {
+
+			ArrayAdapter<String> adapter;
+
+			@Override
+			protected ArrayAdapter<String> doInBackground(Integer... params) {
+				return fillAutoCompleteAdapter();
+			}
+
+			@Override
+			protected void onPostExecute(ArrayAdapter<String> adapter) {
+				if (mEditText != null) {
+					// use result from doInBackground()
+					mEditText.setAdapter(adapter);
+				}
+			}
+
+			private ArrayAdapter<String> fillAutoCompleteAdapter() {
+				// Create list of item names
+				List<String> autocompleteItems = new LinkedList<String>();
+				Cursor c = getContentResolver().query(Items.CONTENT_URI,
+						new String[] { Items.NAME }, null, null, "name asc");
+				if (c != null) {
+					String lastitem = "";
+					while (c.moveToNext()) {
+						String newitem = c.getString(0);
+						// Only add items if they have not been added previously
+						// (list is sorted)
+						if (!newitem.equals(lastitem)) {
+							autocompleteItems.add(newitem);
+							lastitem = newitem;
+						}
+					}
+					c.close();
+				}
+				return new ArrayAdapter<String>(ShoppingActivity.this,
+						android.R.layout.simple_dropdown_item_1line,
+						autocompleteItems);
+			}
+
+		}.execute();
 	}
 
 	/**
@@ -2722,5 +2737,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		}
 	}
 
+	@Override
+	public void onItemChanged() {
+		mItemsView.mCursorItems.requery();
+		fillAutoCompleteTextViewAdapter();
+	}
 
 }

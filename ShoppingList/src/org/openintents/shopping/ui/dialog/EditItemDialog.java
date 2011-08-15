@@ -57,17 +57,16 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 	TextView mPriceLabel;
 	ImageButton mNote;
 
-    String[] mTagList;
-    
-    /** Cursor to be requeried after modifications */
-    Cursor mRequeryCursor;
-    
-    SimpleCursorAdapter mUnitsAdapter;
-    
+	String[] mTagList;
 
+	OnItemChangedListener mOnItemChangedListener;
 
-    public enum FieldType { ITEMNAME, QUANTITY, PRICE, PRIORITY, UNITS, TAGS };
-    
+	SimpleCursorAdapter mUnitsAdapter;
+
+	public enum FieldType {
+		ITEMNAME, QUANTITY, PRICE, PRIORITY, UNITS, TAGS
+	};
+
 	public EditItemDialog(Context context, Uri itemUri, Uri relationUri) {
 		super(context);
 		mContext = context;
@@ -232,8 +231,8 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
      * Set cursor to be requeried if item is changed.
      * @param c
      */
-    public void setRequeryCursor(Cursor c) {
-    	mRequeryCursor = c;
+    public void setOnItemChangedListener(OnItemChangedListener listener) {
+    	mOnItemChangedListener = listener;
     }
     
 	private void toggleTaglistPopup() {
@@ -382,8 +381,8 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		mContext.getContentResolver().update(mRelationUri, values, null, null);
 		mContext.getContentResolver().notifyChange(mRelationUri, null);
 		
-		if (mRequeryCursor != null) {
-			mRequeryCursor.requery();
+		if (mOnItemChangedListener != null) {
+			mOnItemChangedListener.onItemChanged();
 		}
 	}
 
@@ -421,6 +420,10 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 			break;
 			
 		}
+	}
+	
+	public interface OnItemChangedListener {
+		public void onItemChanged();
 	}
 	
 }
