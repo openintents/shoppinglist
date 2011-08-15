@@ -942,10 +942,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 					// mItemsCursor = null;
 				}
 				mItemsCursor = managedQuery(Items.CONTENT_URI, new String[] {
-						Items._ID, Items.NAME }, "upper(name) like ?",
+						Items._ID, Items.NAME }, "upper(name) like upper(?)",
 						new String[] { "%"
 								+ (constraint == null ? "" : constraint
-										.toString().toUpperCase()) + "%" },
+										.toString()) + "%" },
 						"name desc");
 				return mItemsCursor;
 			}
