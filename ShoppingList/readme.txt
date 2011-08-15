@@ -30,6 +30,7 @@ date: 2011-08-14
 - basic support for tracking per-store prices (activate in advanced settings)
 - add, rename, delete stores (long-press an item, select "Stores...", then long-press a store name)
 - calculate subtotal by priority (activate in advanced settings)
+- remove white space around item names (issue 364)
 - fix various issues
 - tweak performance
 

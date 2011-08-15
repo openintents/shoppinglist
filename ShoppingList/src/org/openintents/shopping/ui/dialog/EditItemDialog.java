@@ -349,6 +349,8 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		String units = mUnits.getText().toString();
 
 		Long priceLong = PriceConverter.getCentPriceFromString(price);
+		
+		text = text.trim();
 
     	// Remove trailing ","
     	tags = tags.trim();

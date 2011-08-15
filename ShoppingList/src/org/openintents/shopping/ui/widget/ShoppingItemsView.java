@@ -1139,6 +1139,8 @@ public class ShoppingItemsView extends ListView {
 	public void insertNewItem(Activity activity, String newItem,
 			String quantity, String priority, String price, String barcode) {
 
+		newItem = newItem.trim();
+
 		long itemId = ShoppingUtils.updateOrCreateItem(getContext(), newItem,
 				null, price, barcode);
 
