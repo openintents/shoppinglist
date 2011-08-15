@@ -15,6 +15,9 @@
 	android:layout_width="fill_parent" android:layout_height="fill_parent">
 	<org.openintents.shopping.ui.widget.ShoppingItemsView
 		android:id="@+id/list_items" android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
+		android:layout_height="0dip" android:layout_weight="1"
 		android:cacheColorHint="#00000000" />
+	<Button android:text="@string/ok" android:id="@+id/button1"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:onClick = "onButton1Click" />
 </LinearLayout>

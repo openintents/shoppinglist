@@ -36,7 +36,9 @@ public class PickItemsActivity extends Activity {
 		// 	}
               // 
 		// });
-
 	}
 
+	public void onButton1Click(View view) {
+		finish();
+	}
 }
