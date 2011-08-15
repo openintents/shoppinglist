@@ -67,7 +67,7 @@ import android.widget.TextView;
  */
 public class ShoppingItemsView extends ListView {
 	private final static String TAG = "ShoppingListView";
-	private final static boolean debug = true;
+	private final static boolean debug = false;
 
 	Typeface mCurrentTypeface = null;
 
@@ -239,7 +239,7 @@ public class ShoppingItemsView extends ListView {
 
 						@Override
 						public void onClick(View v) {
-							Log.d(TAG, "Quantity Click ");
+							if (debug) Log.d(TAG, "Quantity Click ");
 							if (mListener != null) {
 								mListener.onCustomClick(cursor, cursorpos,
 										EditItemDialog.FieldType.QUANTITY);
@@ -293,7 +293,7 @@ public class ShoppingItemsView extends ListView {
 			CheckBox c = (CheckBox) view.findViewById(R.id.check);
 			ImageView nc = (ImageView) view.findViewById(R.id.nocheck);
 
-			Log.i(TAG, "bindview: pos = " + cursor.getPosition());
+			if (debug) Log.i(TAG, "bindview: pos = " + cursor.getPosition());
 
 			// set style for check box
 			c.setTag(new Integer(cursor.getPosition()));
@@ -327,7 +327,7 @@ public class ShoppingItemsView extends ListView {
 			c.setOnClickListener(new OnClickListener() {
 			   @Override
 			   public void onClick(View v) {
-				   Log.d(TAG, "Click: ");
+				   if (debug) Log.d(TAG, "Click: ");
 				   toggleItemBought(cursorpos);
 			   }
 			});
@@ -340,7 +340,7 @@ public class ShoppingItemsView extends ListView {
 
 				@Override
 				public void onClick(View v) {
-					Log.d(TAG, "Click around: ");
+					if (debug) Log.d(TAG, "Click around: ");
 					toggleItemBought(cursorpos);
 				}
 
@@ -353,7 +353,7 @@ public class ShoppingItemsView extends ListView {
 
 				@Override
 				public void onClick(View v) {
-					Log.d(TAG, "Click on price: ");
+					if (debug) Log.d(TAG, "Click on price: ");
 					if (mListener != null) {
 						mListener.onCustomClick(cursor, cursorpos,
 								EditItemDialog.FieldType.PRICE);
@@ -367,7 +367,7 @@ public class ShoppingItemsView extends ListView {
 
 				@Override
 				public void onClick(View v) {
-					Log.d(TAG, "Click on units: ");
+					if (debug) Log.d(TAG, "Click on units: ");
 					if (mListener != null) {
 						mListener.onCustomClick(cursor, cursorpos,
 								EditItemDialog.FieldType.UNITS);
@@ -381,7 +381,7 @@ public class ShoppingItemsView extends ListView {
 
 				@Override
 				public void onClick(View v) {
-					Log.d(TAG, "Click on priority: ");
+					if (debug) Log.d(TAG, "Click on priority: ");
 					if (mListener != null) {
 						mListener.onCustomClick(cursor, cursorpos,
 								EditItemDialog.FieldType.PRIORITY);
@@ -395,7 +395,7 @@ public class ShoppingItemsView extends ListView {
 
 				@Override
 				public void onClick(View v) {
-					Log.d(TAG, "Click on tags: ");
+					if (debug) Log.d(TAG, "Click on tags: ");
 					if (mListener != null) {
 						mListener.onCustomClick(cursor, cursorpos,
 								EditItemDialog.FieldType.TAGS);
@@ -409,7 +409,7 @@ public class ShoppingItemsView extends ListView {
 
 				@Override
 				public void onClick(View v) {
-					Log.d(TAG, "Click on has_note: ");
+					if (debug) Log.d(TAG, "Click on has_note: ");
 					//if (mListener != null) {
 					//	mListener.onCustomClick(cursor, cursorpos,
 					//			EditItemDialog.FieldType.PRIORITY);
@@ -441,7 +441,7 @@ public class ShoppingItemsView extends ListView {
 
 				@Override
 				public void onClick(View v) {
-					Log.d(TAG, "Click on description: ");
+					if (debug) Log.d(TAG, "Click on description: ");
 					if (mListener != null) {
 						mListener.onCustomClick(cursor, cursorpos,
 								EditItemDialog.FieldType.ITEMNAME);
@@ -847,13 +847,13 @@ public class ShoppingItemsView extends ListView {
 			} else if (!TextUtils.isEmpty(mTextTypeface)) {
 
 				try {
-					Log.d(TAG, "Reading typeface: package: " + mPackageName
+					if (debug) Log.d(TAG, "Reading typeface: package: " + mPackageName
 							+ ", typeface: " + mTextTypeface);
 					Resources remoteRes = mPackageManager
 							.getResourcesForApplication(mPackageName);
 					mCurrentTypeface = Typeface.createFromAsset(remoteRes
 							.getAssets(), mTextTypeface);
-					Log.d(TAG, "Result: " + mCurrentTypeface);
+					if (debug) Log.d(TAG, "Result: " + mCurrentTypeface);
 				} catch (NameNotFoundException e) {
 					Log.e(TAG, "Package not found for Typeface", e);
 				}
@@ -1035,7 +1035,7 @@ public class ShoppingItemsView extends ListView {
 				
 				ContentValues values = new ContentValues();
 				values.put(ShoppingContract.Contains.STATUS, newstatus);
-				Log.d(TAG, "update row " + mCursorItems.getString(0) + ", newstatus "
+				if (debug) Log.d(TAG, "update row " + mCursorItems.getString(0) + ", newstatus "
 						+ newstatus);
 				getContext().getContentResolver().update(
 						Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI,
@@ -1081,7 +1081,7 @@ public class ShoppingItemsView extends ListView {
 		
 		ContentValues values = new ContentValues();
 		values.put(ShoppingContract.Contains.STATUS, newstatus);
-		Log.d(TAG, "update row " + mCursorItems.getString(0) + ", newstatus "
+		if (debug) Log.d(TAG, "update row " + mCursorItems.getString(0) + ", newstatus "
 				+ newstatus);
 		getContext().getContentResolver().update(
 				Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI,
@@ -1142,7 +1142,7 @@ public class ShoppingItemsView extends ListView {
 		long itemId = ShoppingUtils.updateOrCreateItem(getContext(), newItem,
 				null, price, barcode);
 
-		Log.i(TAG, "Insert new item. " + " itemId = " + itemId + ", listId = "
+		if (debug) Log.i(TAG, "Insert new item. " + " itemId = " + itemId + ", listId = "
 				+ mListId);
 		ShoppingUtils.addItemToList(getContext(), itemId, mListId, Status.WANT_TO_BUY,
 				priority, quantity, true);
@@ -1314,7 +1314,7 @@ public class ShoppingItemsView extends ListView {
 			}		
 			
 		}
-		Log.d(TAG, "Total (old way): " + total + ", Checked: " + totalchecked + "(#" + mNumChecked + ")");
+		if (debug) Log.d(TAG, "Total (old way): " + total + ", Checked: " + totalchecked + "(#" + mNumChecked + ")");
 		
 		total = priority_total = mNumChecked = totalchecked = 0;
 		}

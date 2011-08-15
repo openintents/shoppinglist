@@ -40,7 +40,9 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	public static final String PREFS_SORTORDER_DEFAULT = "3";
 	public static final String PREFS_FONTSIZE = "fontsize";
 	public static final String PREFS_FONTSIZE_DEFAULT = "2";
+	@Deprecated
 	public static final String PREFS_LOADLASTUSED = "loadlastused";
+	@Deprecated
 	public static final boolean PREFS_LOADLASTUSED_DEFAULT = true;
 	public static final String PREFS_LASTUSED = "lastused";
 	public static final String PREFS_LASTLIST_POSITION = "lastlist_position";

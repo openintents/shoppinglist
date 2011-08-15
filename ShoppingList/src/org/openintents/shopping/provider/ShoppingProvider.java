@@ -20,6 +20,7 @@ import java.util.HashMap;
 
 import org.openintents.intents.ProviderIntents;
 import org.openintents.intents.ProviderUtils;
+import org.openintents.shopping.LogConstants;
 import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
@@ -64,7 +65,7 @@ public class ShoppingProvider extends ContentProvider {
 	private ShoppingDatabase mOpenHelper;
 
 	static final String TAG = "ShoppingProvider";
-	private static final boolean debug = false;
+	private static final boolean debug = false || LogConstants.debug;
 	
 
 	

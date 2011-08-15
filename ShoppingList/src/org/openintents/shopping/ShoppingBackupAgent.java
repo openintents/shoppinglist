@@ -3,7 +3,6 @@ package org.openintents.shopping;
 import java.io.IOException;
 
 import org.openintents.shopping.provider.ShoppingDatabase;
-import org.openintents.shopping.provider.ShoppingProvider;
 
 import android.app.backup.BackupAgentHelper;
 import android.app.backup.BackupDataInput;
@@ -14,6 +13,8 @@ import android.os.ParcelFileDescriptor;
 import android.util.Log;
 
 public class ShoppingBackupAgent extends BackupAgentHelper {
+	private static final String TAG = "ShoppingBackupAgent";
+	private static final boolean debug = false || LogConstants.debug;
 
 	// The name of the SharedPreferences file
 	static final String PREFS = "org.openintents.shopping_preferences";
@@ -25,7 +26,7 @@ public class ShoppingBackupAgent extends BackupAgentHelper {
 
 	// Allocate a helper and add it to the backup agent
 	public void onCreate() {
-		Log.v("shopping backup", "onCreate");
+		if (debug) Log.v(TAG, "onCreate");
 		SharedPreferencesBackupHelper prefsHelper = new SharedPreferencesBackupHelper(
 				this.getApplicationContext(), PREFS);
 		addHelper(PREFS_BACKUP_KEY, prefsHelper);
@@ -38,14 +39,14 @@ public class ShoppingBackupAgent extends BackupAgentHelper {
 	@Override
 	public void onRestore(BackupDataInput data, int appVersionCode,
 			ParcelFileDescriptor newState) throws IOException {
-		Log.v("shopping backup", "onRestore");
+		if (debug) Log.v(TAG, "onRestore");
 		super.onRestore(data, appVersionCode, newState);
 	}
 
 	@Override
 	public void onBackup(ParcelFileDescriptor oldState, BackupDataOutput data,
 			ParcelFileDescriptor newState) throws IOException {
-		Log.v("shopping backup", "onBackup");
+		if (debug) Log.v(TAG, "onBackup");
 		super.onBackup(oldState, data, newState);
 	}
 }

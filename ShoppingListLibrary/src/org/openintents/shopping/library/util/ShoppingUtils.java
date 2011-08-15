@@ -41,6 +41,7 @@ public class ShoppingUtils {
 	 * TAG for logging.
 	 */
 	private static final String TAG = "ShoppingUtils";
+	private static final boolean debug = false;
 
 	/**
 	 * Obtain item id by name.
@@ -102,9 +103,9 @@ public class ShoppingUtils {
 				Uri uri = Uri.withAppendedPath(
 						ShoppingContract.Items.CONTENT_URI, String.valueOf(id));
 				context.getContentResolver().update(uri, values, null, null);
-				Log.i(TAG, "updated item: " + uri);
+				if (debug) Log.d(TAG, "updated item: " + uri);
 			} catch (Exception e) {
-				Log.i(TAG, "Update item failed", e);
+				Log.e(TAG, "Update item failed", e);
 			}
 		}
 
@@ -114,10 +115,10 @@ public class ShoppingUtils {
 			try {
 				Uri uri = context.getContentResolver().insert(
 						ShoppingContract.Items.CONTENT_URI, values);
-				Log.i(TAG, "Insert new item: " + uri);
+				if (debug) Log.d(TAG, "Insert new item: " + uri);
 				id = Long.parseLong(uri.getPathSegments().get(1));
 			} catch (Exception e) {
-				Log.i(TAG, "Insert item failed", e);
+				Log.e(TAG, "Insert item failed", e);
 				// return -1
 			}
 		}
@@ -210,7 +211,7 @@ public class ShoppingUtils {
 			if (id == -1) {
 				Uri uri = context.getContentResolver().insert(
 						Items.CONTENT_URI, values);
-				Log.i(TAG, "Insert new item: " + uri);
+				if (debug) Log.d(TAG, "Insert new item: " + uri);
 				id = Long.parseLong(uri.getPathSegments().get(1));
 			} else {
 				context.getContentResolver().update(
@@ -218,7 +219,7 @@ public class ShoppingUtils {
 								String.valueOf(id)), values, null, null);
 			}
 		} catch (Exception e) {
-			Log.i(TAG, "Insert item failed", e);
+			Log.e(TAG, "Insert item failed", e);
 			// return -1
 		}
 
@@ -243,10 +244,10 @@ public class ShoppingUtils {
 			try {
 				Uri uri = context.getContentResolver().insert(
 						Units.CONTENT_URI, values);
-				Log.i(TAG, "Insert new units: " + uri);
+				if (debug) Log.d(TAG, "Insert new units: " + uri);
 				id = Long.parseLong(uri.getPathSegments().get(1));
 			} catch (Exception e) {
-				Log.i(TAG, "Insert units failed", e);
+				Log.e(TAG, "Insert units failed", e);
 				// return -1
 			}
 		}
@@ -279,10 +280,10 @@ public class ShoppingUtils {
 			try {
 				Uri uri = context.getContentResolver().insert(
 						Lists.CONTENT_URI, values);
-				Log.i(TAG, "Insert new list: " + uri);
+				if (debug) Log.d(TAG, "Insert new list: " + uri);
 				id = Long.parseLong(uri.getPathSegments().get(1));
 			} catch (Exception e) {
-				Log.i(TAG, "insert list failed", e);
+				Log.e(TAG, "insert list failed", e);
 				return -1;
 			}
 		}
@@ -317,10 +318,10 @@ public class ShoppingUtils {
 			try {
 				Uri uri = context.getContentResolver().insert(
 						Stores.CONTENT_URI, values);
-				Log.i(TAG, "Insert new store: " + uri);
+				if (debug) Log.d(TAG, "Insert new store: " + uri);
 				id = Long.parseLong(uri.getPathSegments().get(1));
 			} catch (Exception e) {
-				Log.i(TAG, "insert store failed", e);
+				Log.e(TAG, "insert store failed", e);
 				return -1;
 			}
 		}
@@ -383,16 +384,16 @@ public class ShoppingUtils {
 					String.valueOf(id));
 			try {
 				context.getContentResolver().update(uri, values, null, null);
-				Log.i(TAG, "updated item: " + uri);
+				if (debug) Log.d(TAG, "updated item: " + uri);
 			} catch (Exception e) {
 				try {
 					// Maybe old version of OI Shopping List is installed:
 					values.remove(Contains.PRIORITY);
 					context.getContentResolver()
 							.update(uri, values, null, null);
-					Log.i(TAG, "updated item: " + uri);
+					if (debug) Log.d(TAG, "updated item: " + uri);
 				} catch (Exception e2) {
-					Log.i(TAG, "insert into table 'contains' failed", e2);
+					Log.e(TAG, "insert into table 'contains' failed", e2);
 					id = -1;
 				}
 			}
@@ -418,7 +419,7 @@ public class ShoppingUtils {
 			try {
 				Uri uri = context.getContentResolver().insert(
 						Contains.CONTENT_URI, values);
-				Log.i(TAG, "Insert new entry in 'contains': " + uri);
+				if (debug) Log.d(TAG, "Insert new entry in 'contains': " + uri);
 				id = Long.parseLong(uri.getPathSegments().get(1));
 			} catch (Exception e) {
 				try {
@@ -426,10 +427,10 @@ public class ShoppingUtils {
 					values.remove(Contains.PRIORITY);
 					Uri uri = context.getContentResolver().insert(
 							Contains.CONTENT_URI, values);
-					Log.i(TAG, "Insert new entry in 'contains': " + uri);
+					if (debug) Log.d(TAG, "Insert new entry in 'contains': " + uri);
 					id = Long.parseLong(uri.getPathSegments().get(1));
 				} catch (Exception e2) {
-					Log.i(TAG, "insert into table 'contains' failed", e2);
+					Log.e(TAG, "insert into table 'contains' failed", e2);
 					id = -1;
 				}
 			}
@@ -473,9 +474,9 @@ public class ShoppingUtils {
 				Uri uri = Uri.withAppendedPath(ItemStores.CONTENT_URI,
 						String.valueOf(id));
 				context.getContentResolver().update(uri, values, null, null);
-				Log.i(TAG, "updated itemstore: " + uri);
+				if (debug) Log.d(TAG, "updated itemstore: " + uri);
 			} catch (Exception e) {
-				Log.i(TAG, "Update itemstore failed", e);
+				Log.e(TAG, "Update itemstore failed", e);
 			}
 
 		} else {
@@ -490,10 +491,10 @@ public class ShoppingUtils {
 			try {
 				Uri uri = context.getContentResolver().insert(
 						ItemStores.CONTENT_URI, values);
-				Log.i(TAG, "Insert new entry in 'itemstores': " + uri);
+				if (debug) Log.d(TAG, "Insert new entry in 'itemstores': " + uri);
 				id = Long.parseLong(uri.getPathSegments().get(1));
 			} catch (Exception e) {
-				Log.i(TAG, "insert into table 'itemstores' failed", e);
+				Log.e(TAG, "insert into table 'itemstores' failed", e);
 				id = -1;
 			}
 		}
@@ -538,7 +539,7 @@ public class ShoppingUtils {
 			// The URI requires OI Shopping List 1.3.0 or higher.
 			// Most probably we want to access OI Shopping List 1.2.6 or
 			// earlier.
-			Log.d(TAG, "ActiveList URI not supported", e);
+			Log.e(TAG, "ActiveList URI not supported", e);
 		}
 		return id;
 	}

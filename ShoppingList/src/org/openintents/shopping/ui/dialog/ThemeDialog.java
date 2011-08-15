@@ -18,6 +18,7 @@ package org.openintents.shopping.ui.dialog;
 
 import java.util.List;
 
+import org.openintents.shopping.LogConstants;
 import org.openintents.shopping.R;
 import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;
@@ -49,6 +50,7 @@ import android.widget.ListView;
 
 public class ThemeDialog extends AlertDialog implements OnClickListener, OnCancelListener, OnItemClickListener {
 	private static final String TAG = "ThemeDialog";
+	private static final boolean debug = false || LogConstants.debug;
 
 	private static final String BUNDLE_THEME = "theme";
 
@@ -196,7 +198,7 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 
 	@Override
 	public Bundle onSaveInstanceState() {
-		Log.d(TAG, "onSaveInstanceState");
+		if (debug) Log.d(TAG, "onSaveInstanceState");
 
 		Bundle b = super.onSaveInstanceState();
 		String theme = getSelectedTheme();
@@ -208,7 +210,7 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
 
-		Log.d(TAG, "onRestore");
+		if (debug) Log.d(TAG, "onRestore");
 
 		String theme = getSelectedTheme();
 
@@ -216,7 +218,7 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 			if (savedInstanceState.containsKey(BUNDLE_THEME)) {
 				theme = savedInstanceState.getString(BUNDLE_THEME);
 
-				Log.d(TAG, "onRestore theme " + theme);
+				if (debug) Log.d(TAG, "onRestore theme " + theme);
 			}
 		}
 

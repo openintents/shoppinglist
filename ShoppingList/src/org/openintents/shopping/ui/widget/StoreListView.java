@@ -40,7 +40,7 @@ import android.widget.TextView;
  */
 public class StoreListView extends ListView {
 	private final static String TAG = "StoreListView";
-	private final static boolean debug = true;
+	private final static boolean debug = false;
 
 	Typeface mCurrentTypeface = null;
 
@@ -87,7 +87,7 @@ public class StoreListView extends ListView {
 		}
 		Integer row = (Integer) m_lastView.getTag();
 		if (row != null) {
-			Log.d(TAG, "Text changed to " + val + " @ pos " + row + ", col " + m_lastCol);
+			if (debug) Log.d(TAG, "Text changed to " + val + " @ pos " + row + ", col " + m_lastCol);
 			maybeUpdate(row, m_lastCol, val);
 		}
 		m_lastView = null;
@@ -105,7 +105,7 @@ public class StoreListView extends ListView {
 			EditText mView;
 			
 			public EditTextWatcher (EditText v, int col) {
-				Log.d(TAG, "New EditTextWatcher for " + v.toString() + 
+				if (debug) Log.d(TAG, "New EditTextWatcher for " + v.toString() + 
 						 " col " + col );
 				mView = v;
 				mCol = col;
@@ -211,7 +211,7 @@ public class StoreListView extends ListView {
 				
 			CheckBox c = (CheckBox) view.findViewById(R.id.check);
 
-			Log.i(TAG, "bindview: pos = " + cursor.getPosition());
+			if (debug) Log.i(TAG, "bindview: pos = " + cursor.getPosition());
 
 			// set style for check box
 			c.setTag(new Integer(cursor.getPosition()));
@@ -227,7 +227,7 @@ public class StoreListView extends ListView {
 
 				@Override
 				public void onClick(View v) {
-					Log.d(TAG, "Click: ");
+					if (debug) Log.d(TAG, "Click: ");
 					toggleItemstore(cursorpos);
 				}
 
@@ -466,7 +466,7 @@ public class StoreListView extends ListView {
 		
 		ContentValues values = new ContentValues();
 		values.put(ItemStores.STOCKS_ITEM, newstatus);
-		Log.d(TAG, "update row " + itemstore_id + ", newstatus "
+		if (debug) Log.d(TAG, "update row " + itemstore_id + ", newstatus "
 				+ newstatus);
 		getContext().getContentResolver().update(
 				Uri.withAppendedPath(ShoppingContract.ItemStores.CONTENT_URI,

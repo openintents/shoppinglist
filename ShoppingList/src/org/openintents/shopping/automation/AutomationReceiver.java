@@ -1,6 +1,7 @@
 package org.openintents.shopping.automation;
 
 import org.openintents.intents.ShoppingListIntents;
+import org.openintents.shopping.LogConstants;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,10 +12,11 @@ import android.util.Log;
 public class AutomationReceiver extends BroadcastReceiver {
 
 	private final static String TAG = "AutomationReceiver";
+	private final static boolean debug = false || LogConstants.debug; 
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		Log.i(TAG, "Receive intent: " + intent.toString());
+		if (debug) Log.i(TAG, "Receive intent: " + intent.toString());
 		
 		final String action = intent.getStringExtra(ShoppingListIntents.EXTRA_ACTION);
 		final String dataString = intent.getStringExtra(ShoppingListIntents.EXTRA_DATA);
@@ -22,13 +24,12 @@ public class AutomationReceiver extends BroadcastReceiver {
 		if (dataString != null) {
 			data = Uri.parse(dataString);
 		}
-		Log.i(TAG, "action: " + action + ", data: " + dataString);
+		if (debug) Log.i(TAG, "action: " + action + ", data: " + dataString);
 		
 		if (ShoppingListIntents.TASK_CLEAN_UP_LIST.equals(action)) {
-			// Start countdown.
+			// Clean up list.
 			if (data != null) {
-				// Launch that countdown:
-				Log.i(TAG, "Launch countdown " + data);
+				if (debug) Log.i(TAG, "Clean up list " + data);
 				AutomationActions.cleanUpList(context, data);
 			}
 		}

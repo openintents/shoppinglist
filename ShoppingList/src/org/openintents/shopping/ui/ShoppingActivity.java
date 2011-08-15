@@ -27,6 +27,7 @@ import org.openintents.intents.GeneralIntents;
 import org.openintents.intents.ShoppingListIntents;
 import org.openintents.provider.Alert;
 import org.openintents.provider.Location.Locations;
+import org.openintents.shopping.LogConstants;
 import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
@@ -124,7 +125,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 * TAG for logging.
 	 */
 	private static final String TAG = "ShoppingActivity";
-	private static final boolean debug = false;
+	private static final boolean debug = false || LogConstants.debug;
 
 	public class MyGestureDetector extends SimpleOnGestureListener {
         private static final float DISTANCE_DIP = 16.0f;
@@ -616,15 +617,22 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	}
 
 	private int initFromPreferences() {
-	
-		// if set to "last used", override the default list.
+		
+		boolean loadLastUsed = true;
+
 		SharedPreferences sp = getSharedPreferences(
 				"org.openintents.shopping_preferences", MODE_PRIVATE);
-		final boolean loadLastUsed = sp.getBoolean(
-				PreferenceActivity.PREFS_LOADLASTUSED,
-				PreferenceActivity.PREFS_LOADLASTUSED_DEFAULT);
-
-		Log.e(TAG, "load last used ?" + loadLastUsed);
+		
+		// Always load last list used. This setting got abandoned.
+		if (false) {
+			// if set to "last used", override the default list.
+			loadLastUsed = sp.getBoolean(
+					PreferenceActivity.PREFS_LOADLASTUSED,
+					PreferenceActivity.PREFS_LOADLASTUSED_DEFAULT);
+	
+			if (debug) Log.d(TAG, "load last used ?" + loadLastUsed);
+		}
+		
 		int defaultShoppingList = 1;
 		if (loadLastUsed) {
 			defaultShoppingList = sp.getInt(PreferenceActivity.PREFS_LASTUSED,
@@ -1043,7 +1051,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 			@Override
 			public void drag(int from, int to) {
-				Log.v("DRAG", "" + from + "/" + to);
+				if (debug) Log.v("DRAG", "" + from + "/" + to);
 
 			}
 		});
@@ -1051,7 +1059,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 			@Override
 			public void drop(int from, int to) {
-				Log.v("DRAG", "" + from + "/" + to);
+				if (debug) Log.v("DRAG", "" + from + "/" + to);
 
 			}
 		});
