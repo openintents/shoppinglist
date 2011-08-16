@@ -1896,15 +1896,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		}
 		listId = Integer.parseInt(mListUri.getLastPathSegment());
 
-		int itemId = c.getInt(mStringItemsITEMID);
-		
-		// add item to new list
-		ShoppingUtils.addItemToList(this, itemId,
-				targetListId, Status.WANT_TO_BUY,
-				c.getString(mStringItemsPRIORITY),
-				c.getString(mStringItemsQUANTITY), false);
-
-		ShoppingUtils.deleteItemFromList(this, "" + itemId, "" + listId);
+		// Attach item to new list, preserving all other fields
+		String containsId = c.getString(mStringItemsCONTAINSID);
+		ContentValues cv = new ContentValues(1);
+		cv.put(Contains.LIST_ID, targetListId);
+		getContentResolver().update(Uri.withAppendedPath(Contains.CONTENT_URI, containsId), cv, null, null);
 
 		mItemsView.requery();
 	}
