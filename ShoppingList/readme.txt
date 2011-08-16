@@ -23,7 +23,7 @@ To obtain the current release, visit
 
 ---------------------------------------------------------
 release 1.4
-date: 2011-08-14
+date: 2011-08-16
 - support for Tablets with new layout for Android 3.0 (patch by Temp)
 - support for the ActionBar (Android 3.0)
 - optionally switch main list to edit mode (activate in advanced settings through "Pick items directly in list")
@@ -31,7 +31,7 @@ date: 2011-08-14
 - add, rename, delete stores (long-press an item, select "Stores...", then long-press a store name)
 - calculate subtotal by priority (activate in advanced settings)
 - remove white space around item names (issue 364)
-- fix various issues (issue 351)
+- fix various issues (issues 254, 351, 379)
 - tweak performance
 
 ---------------------------------------------------------

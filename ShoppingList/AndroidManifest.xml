@@ -18,10 +18,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="org.openintents.shopping"
     android:installLocation="auto"
-	android:versionName="1.4-rc1"
-	android:versionCode="10030">
+	android:versionName="1.4-rc2"
+	android:versionCode="10031">
 	<!-- History:
 	 * * * UPDATE ATRACKDOG METADATA BELOW FOR RELEASE CANDIDATES * * *
+	1.4-rc2 [10031]: 2011-08-16
 	1.4-rc1 [10030]: 2011-08-14
 	1.4-beta1 [10029]: 2011-08-04
 	1.4-alpha [10028]: -
@@ -47,7 +48,7 @@
 	
         <!-- aTrackDog metadata --> 
         <meta-data android:name="com.a0soft.gphone.aTrackDog.testVersion"
-           android:value="10030" />
+           android:value="10031" />
         
 		<meta-data android:name="com.google.android.backup.api_key"
     		android:value="AEdPqrEAAAAIyg1-9MfKF9MnoINzk-FPUGiXcqLuHLcMP3PvEg" />
