@@ -32,6 +32,7 @@ import org.openintents.shopping.library.provider.ShoppingContract.Status;
 import org.openintents.shopping.library.provider.ShoppingContract.Stores;
 import org.openintents.shopping.library.provider.ShoppingContract.Units;
 import org.openintents.shopping.ui.PreferenceActivity;
+import org.openintents.shopping.ui.ShoppingActivity;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -258,7 +259,8 @@ public class ShoppingProvider extends ContentProvider {
 			m = new MatrixCursor(projection);
 			// assumes only one projection will ever be used, 
 			// asking only for the id of the active list.
-			String sortOrder = PreferenceActivity.getSortOrderFromPrefs(getContext());
+			String sortOrder = PreferenceActivity.getSortOrderFromPrefs(getContext(), 
+					ShoppingActivity.MODE_IN_SHOP);
 			m.addRow(new Object [] {sortOrder});
 			return (Cursor)m;
 			

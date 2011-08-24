@@ -643,7 +643,7 @@ public class ShoppingItemsView extends ListView {
 
 		mListId = listId;
 		String sortOrder = PreferenceActivity.getSortOrderFromPrefs(this
-				.getContext());
+				.getContext(), mMode);
 		boolean hideBought = PreferenceActivity
 				.getHideCheckedItemsFromPrefs(this.getContext());
 		String selection;
@@ -657,7 +657,6 @@ public class ShoppingItemsView extends ListView {
 			}
 		} else {
 			selection = "list_id = ? ";
-			sortOrder = "items.name COLLATE NOCASE ASC";
 		}
 
 		if (mCursorItems != null) {

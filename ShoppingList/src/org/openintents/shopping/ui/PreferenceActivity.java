@@ -37,7 +37,11 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	private static final String TAG = "PreferenceActivity";
 
 	public static final String PREFS_SORTORDER = "sortorder";
+	public static final String PREFS_PICKITEMS_SORTORDER = "sortorderForPickItems";
+
 	public static final String PREFS_SORTORDER_DEFAULT = "3";
+	public static final String PREFS_PICKITEMS_SORTORDER_DEFAULT = "follow_shopping_mode";
+
 	public static final String PREFS_FONTSIZE = "fontsize";
 	public static final String PREFS_FONTSIZE_DEFAULT = "2";
 	@Deprecated
@@ -179,16 +183,31 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	 * @param context
 	 *            The context to grab the preferences from.
 	 */
-	static public String getSortOrderFromPrefs(Context context) {
+	static public String getSortOrderFromPrefs(Context context, int mode) {
 		int sortOrder = 0;
-		try {
-			sortOrder = Integer.parseInt(PreferenceManager
-					.getDefaultSharedPreferences(context).getString(
+		
+		if (mode != ShoppingActivity.MODE_IN_SHOP) {
+			// use the pick-items-specific value, if there is one
+			try {
+				sortOrder = Integer.parseInt(PreferenceManager
+						.getDefaultSharedPreferences(context).getString(
+								PREFS_PICKITEMS_SORTORDER, PREFS_PICKITEMS_SORTORDER_DEFAULT));			
+			} catch (NumberFormatException e) {
+				// Guess somebody messed with the preferences and put a string into
+				// this field. We'll follow shopping mode then.
+				mode = ShoppingActivity.MODE_IN_SHOP;
+			}
+		}
+
+		if (mode == ShoppingActivity.MODE_IN_SHOP) {
+			try {
+			    sortOrder = Integer.parseInt(PreferenceManager
+			    		.getDefaultSharedPreferences(context).getString(
 							PREFS_SORTORDER, PREFS_SORTORDER_DEFAULT));
-		} catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 			// Guess somebody messed with the preferences and put a string into
-			// this
-			// field. We'll use the default value then.
+			// this field. We'll use the default value then.
+			}
 		}
 
 		if (sortOrder >= 0 && sortOrder < Contains.SORT_ORDERS.length) {
