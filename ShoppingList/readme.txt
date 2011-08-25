@@ -26,6 +26,8 @@ release 1.4.1
 date: 2011-08-20
 
 - fix crash when scanning barcodes (issue 388)
+- fix "clean up list" menu command (issue 386)
+- fix calculation of total price
 
 ---------------------------------------------------------
 release 1.4

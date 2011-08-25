@@ -277,12 +277,12 @@ public class ShoppingProvider extends ContentProvider {
 			qb.setProjectionMap(SUBTOTALS_PROJECTION_MAP);
 			groupBy = "priority, status";
 			if (PreferenceActivity.getUsingPerStorePricesFromPrefs(getContext())) {
-				qb.setTables("(SELECT (min(itemstores.price) * case when length(contains.quantity) == 0 then 1 else contains.quantity end) as qty_price, " + 
+				qb.setTables("(SELECT (min(itemstores.price) * case when ((contains.quantity is null) or (length(contains.quantity) = 0)) then 1 else contains.quantity end) as qty_price, " + 
 							 "contains.status as status, contains.priority as priority FROM contains, items left outer join itemstores on (items._id = itemstores.item_id) " + 
 							 "WHERE (contains.item_id = items._id AND contains.list_id = " + list_id + " ) AND contains.status != 3 GROUP BY itemstores.item_id) ");
 				
 			} else {
-				qb.setTables("(SELECT (items.price * case when length(contains.quantity) == 0 then 1 else contains.quantity end) as qty_price, " + 
+				qb.setTables("(SELECT (items.price * case when ((contains.quantity is null) or (length(contains.quantity) = 0)) then 1 else contains.quantity end) as qty_price, " + 
 						     "contains.status as status, contains.priority as priority FROM contains, items " + 
 						     "WHERE (contains.item_id = items._id AND contains.list_id = " + list_id + " ) AND contains.status != 3) ");
 

@@ -1238,24 +1238,6 @@ public class ShoppingItemsView extends ListView {
 	public void updateTotal() {
 		if (debug)
 			Log.d(TAG, "updateTotal()");
-
-		if (mTotalTextView == null || mTotalCheckedTextView == null) {
-			// Most probably in "Add item" mode where no total is displayed
-			return;
-		}
-
-		if (mPriceVisibility != View.VISIBLE) {
-			// If price is not displayed, do not display total
-			mTotalTextView.setVisibility(View.GONE);
-			mPriTotalTextView.setVisibility(View.GONE);
-			mTotalCheckedTextView.setVisibility(View.GONE);
-			return;
-		}
-
-		if (mCursorItems.isClosed()) {
-			// Can happen through onShake() in ShoppingActivity.
-			return;
-		}
 		
 		mNumChecked = 0;
 		long total = 0;
@@ -1282,7 +1264,11 @@ public class ShoppingItemsView extends ListView {
 			 *  OI Convert CSV when importing prices from HandyShopper. This bug has 
 			 *  since been fixed. It should be possible to fix your data by exporting
 			 *  in HandyShopper csv format and re-importing that file.
-			 */ 
+			 */
+			if (mCursorItems.isClosed()) {
+				// Can happen through onShake() in ShoppingActivity.
+				return;
+			}
 			mCursorItems.moveToPosition(-1);
 				while (mCursorItems.moveToNext()) {
 			long item_status = mCursorItems.getLong(ShoppingActivity.mStringItemsSTATUS);
@@ -1359,6 +1345,25 @@ public class ShoppingItemsView extends ListView {
 
 		if (debug) Log.d(TAG, "Total: " + total + ", Checked: " + totalchecked + "(#" + mNumChecked + ")");
 
+		// Update ActionBar in ShoppingActivity
+		// for the "Clean up list" command
+		if (mActionBarListener != null) {
+			mActionBarListener.updateActionBar();
+		}
+
+		if (mTotalTextView == null || mTotalCheckedTextView == null) {
+			// Most probably in "Add item" mode where no total is displayed
+			return;
+		}
+
+		if (mPriceVisibility != View.VISIBLE) {
+			// If price is not displayed, do not display total
+			mTotalTextView.setVisibility(View.GONE);
+			mPriTotalTextView.setVisibility(View.GONE);
+			mTotalCheckedTextView.setVisibility(View.GONE);
+			return;
+		}
+
 		mTotalTextView.setTextColor(mTextColorPrice);
 		mPriTotalTextView.setTextColor(mTextColorPrice);
 		mTotalCheckedTextView.setTextColor(mTextColorPrice);
@@ -1396,12 +1401,6 @@ public class ShoppingItemsView extends ListView {
 		}
 		
 		mCountTextView.setText("#" + mNumChecked);
-		
-		// Update ActionBar in ShoppingActivity
-		// for the "Clean up list" command.
-		if (mActionBarListener != null) {
-			mActionBarListener.updateActionBar();
-		}
 	}
 
 	private long getQuantityPrice(Cursor cursor) {
