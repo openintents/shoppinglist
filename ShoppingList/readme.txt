@@ -22,6 +22,12 @@ To obtain the current release, visit
   http://www.openintents.org
 
 ---------------------------------------------------------
+release 1.4.1
+date: 2011-08-20
+
+- fix crash when scanning barcodes (issue 388)
+
+---------------------------------------------------------
 release 1.4
 date: 2011-08-20
 - support for Tablets with new layout for Android 3.0 (patch by Temp)

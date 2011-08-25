@@ -2,8 +2,6 @@ package org.openintents.shopping.ui;
 
 import org.openintents.intents.GeneralIntents;
 import org.openintents.shopping.R;
-import org.openintents.shopping.R.drawable;
-import org.openintents.shopping.R.string;
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Lists;
 
@@ -73,7 +71,7 @@ public class ShoppingListsActivity extends ListActivity {
 				Intent intent = new Intent(getIntent());
 				
 				// Add the selected list
-				intent.setClass(this, ShoppingActivity.class);
+				intent.setClass(this, org.openintents.shopping.ShoppingActivity.class);
 				Uri uri = Uri.withAppendedPath(Lists.CONTENT_URI, String
 						.valueOf(id));
 				intent.setData(uri);

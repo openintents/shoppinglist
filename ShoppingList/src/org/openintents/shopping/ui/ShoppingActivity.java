@@ -1481,7 +1481,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		MenuIntentOptionsWithIcons menu2 = new MenuIntentOptionsWithIcons(this,
 				menu);
 		menu2.addIntentOptions(Menu.CATEGORY_ALTERNATIVE, 0, 0,
-				new ComponentName(this, ShoppingActivity.class), null, intent,
+				new ComponentName(this, org.openintents.shopping.ShoppingActivity.class), null, intent,
 				0, null);
 
 		return true;
