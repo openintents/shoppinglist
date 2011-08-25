@@ -1070,12 +1070,11 @@ public class ShoppingItemsView extends ListView {
 			// when we are in integrated add items mode, all three states 
 			// might be displayed, but the user can only create two of them.
 			// want_to_buy-> removed_from_list
-			// bought -> removed_from_list
+			// bought -> want_to_buy
 			// removed_from_list -> want_to_buy
-			if (oldstatus == ShoppingContract.Status.WANT_TO_BUY ||
-				oldstatus == ShoppingContract.Status.BOUGHT) {
+			if (oldstatus == ShoppingContract.Status.WANT_TO_BUY) {
 				newstatus = ShoppingContract.Status.REMOVED_FROM_LIST;
-			} // else old is REMOVE_FROM_LIST, new is WANT_TO_BUY, which is the default.
+			} // else old is REMOVE_FROM_LIST or BOUGHT, new is WANT_TO_BUY, which is the default.
 		} 
 		
 		ContentValues values = new ContentValues();
