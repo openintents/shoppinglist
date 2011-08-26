@@ -158,7 +158,10 @@
 	<string name="preference_fontsize_dialog_title">Elejir tamaño de fuente</string>
 	<string name="preference_sortorder_title">Orden de clasificación</string>
 	<string name="preference_sortorder_summary">Cambiar orden de clasificación de la lista de elementos</string>
+	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
+	<string name="preference_sortorder_for_pick_summary">Change sort order of list items in Pick Items mode.</string>
 	<string name="preference_sortorder_dialog_title">Elejir orden de clasificación</string>
+	<string name="preference_sortorder_for_pick_dialog_title">Choose sort order for Pick Items mode</string>
 	<string name="preference_loadlastused_title">Cargar última lista usada</string>
 	<string name="preference_loadlastused_summary">Siempre comenzar con la lista leída por última vez.</string>
 	<string name="preference_capitalization_title">Capitalización</string>
@@ -189,6 +192,9 @@
 	<string name="preference_pickitemsinlist_title">Pick items directly in list</string>
 	<string name="preference_pickitemsinlist_on_summary">Switch main list to edit mode to re-add existing items</string>
 	<string name="preference_pickitemsinlist_off_summary">Add items to list using a dedicated dialog</string>
+	<string name="preference_samesortforpick_title">Always same sort order</string>
+	<string name="preference_samesortforpick_on_summary">Items are sorted in Pick Items mode just as in Shopping mode.</string>
+	<string name="preference_samesortforpick_off_summary">Sort order for Pick Items mode can be chosen separately.</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Sacudir para limpiar</string>
@@ -201,6 +207,7 @@
     
     <!-- Preference category: General settings -->
     <string name="preference_general">General</string>
+    <string name="preference_pickitems">Pick Items</string>
     
     <string name="preference_appearance">Apariencia</string>
     
