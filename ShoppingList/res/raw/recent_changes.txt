@@ -1,4 +1,13 @@
 ---------------------------------------------------------
+release 1.4.1
+date: 2011-08-27
+
+- choose sort order for Pick Items mode (in advanced settings)
+- fix "clean up list" menu command (issue 386)
+- fix crash when scanning barcodes (issue 388)
+- fix calculation of total price
+
+---------------------------------------------------------
 release 1.4
 date: 2011-08-20
 - support for Tablets with new layout for Android 3.0 (patch by Temp)
@@ -17,19 +26,6 @@ date: 2011-06-11
 - fix crash when shaking phone (issue 313).
 - remember list position (issue 349).
 - update translations.
-
----------------------------------------------------------
-release 1.3.0
-date: 2011-05-28
-- new application icon for Android 2.0 or higher.
-- allow app installation on external storage (requires Android 2.2 or higher)
-- unit can be added to quantity.
-- new field for priority, sort by priority.
-- possibility to add notes (requires OI Notepad).
-- case insensitive sort order.
-- new menu command "mark all items" (patch by Tomek Scieplek)
-- long press to launch barcode scanner
-- translations into various languages (by Alcatel OneTouch), including Brazilian Portugese, Croatian, Greek, Hungarian, Persian (Farsi).
 
 ---------------------------------------------------------
 For the complete list of changes and a list of frequently asked questions, please visit:

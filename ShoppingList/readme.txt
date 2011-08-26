@@ -23,10 +23,11 @@ To obtain the current release, visit
 
 ---------------------------------------------------------
 release 1.4.1
-date: 2011-08-20
+date: 2011-08-27
 
-- fix crash when scanning barcodes (issue 388)
+- choose sort order for Pick Items mode (in advanced settings)
 - fix "clean up list" menu command (issue 386)
+- fix crash when scanning barcodes (issue 388)
 - fix calculation of total price
 
 ---------------------------------------------------------

@@ -18,8 +18,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="org.openintents.shopping"
     android:installLocation="auto"
-	android:versionName="1.4.1-beta1"
-	android:versionCode="10033">
+	android:versionName="1.4.1"
+	android:versionCode="10034">
 	<!-- History:
 	 * * * UPDATE ATRACKDOG METADATA BELOW FOR RELEASE CANDIDATES * * *
 	1.4.1 [10033]: ?
