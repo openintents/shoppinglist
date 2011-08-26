@@ -36,11 +36,14 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 
 	private static final String TAG = "PreferenceActivity";
 
+	public static final String PREFS_SAMESORTFORPICK = "samesortforpick";
+	public static final boolean PREFS_SAMESORTFORPICK_DEFAULT = false;
+	
 	public static final String PREFS_SORTORDER = "sortorder";
 	public static final String PREFS_PICKITEMS_SORTORDER = "sortorderForPickItems";
 
 	public static final String PREFS_SORTORDER_DEFAULT = "3";
-	public static final String PREFS_PICKITEMS_SORTORDER_DEFAULT = "follow_shopping_mode";
+	public static final String PREFS_PICKITEMS_SORTORDER_DEFAULT = "1";
 
 	public static final String PREFS_FONTSIZE = "fontsize";
 	public static final String PREFS_FONTSIZE_DEFAULT = "2";
@@ -91,6 +94,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	
 	private ListPreference mPrioSubtotal; 
 	private CheckBoxPreference mIncludesChecked;
+	private ListPreference mPickItemsSort;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,8 +109,12 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 		sp.setEnabled(isMarketAvailable());
 		
 		mPrioSubtotal = (ListPreference) findPreference(PREFS_PRIOSUBTOTAL);
+		mPickItemsSort = (ListPreference) findPreference(PREFS_PICKITEMS_SORTORDER);
+
 		mIncludesChecked = (CheckBoxPreference) findPreference(PREFS_PRIOSUBINCLCHECKED);
-		updatePrioSubtotalSummary(getPreferenceScreen().getSharedPreferences());
+		SharedPreferences shared = getPreferenceScreen().getSharedPreferences();
+		updatePrioSubtotalSummary(shared);
+		updatePickItemsSortPref(shared);
 	}
 
 	@Override
@@ -136,6 +144,9 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
         if (key.equals(PREFS_PRIOSUBTOTAL)) {
         	updatePrioSubtotalSummary(prefs);
         }
+        if (key.equals(PREFS_SAMESORTFORPICK)) {
+        	updatePickItemsSortPref(prefs);
+        }
 	}
 	
 	private void updatePrioSubtotalSummary(SharedPreferences prefs) {
@@ -143,6 +154,15 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
     	CharSequence labels[] = mPrioSubtotal.getEntries();
         mPrioSubtotal.setSummary(labels[threshold]);
         mIncludesChecked.setEnabled(threshold != 0);
+	}
+	
+	private void updatePickItemsSortPref(SharedPreferences prefs) {
+    	boolean sameSort = prefs.getBoolean(PREFS_SAMESORTFORPICK,
+    			PREFS_SAMESORTFORPICK_DEFAULT);
+        mPickItemsSort.setEnabled(!sameSort);
+        //maybe we should set the label to say the active sort order.
+        //but not tonight.
+    	//CharSequence labels[] = mPickItemsSort.getEntries();
 	}
 
 	/**
@@ -185,6 +205,14 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	 */
 	static public String getSortOrderFromPrefs(Context context, int mode) {
 		int sortOrder = 0;
+		
+		if (mode != ShoppingActivity.MODE_IN_SHOP) {
+		  boolean followShopping = PreferenceManager.getDefaultSharedPreferences(context)
+		.getBoolean(PREFS_SAMESORTFORPICK,PREFS_SAMESORTFORPICK_DEFAULT);
+		  if (followShopping) {
+			  mode = ShoppingActivity.MODE_IN_SHOP;
+		  }
+		}
 		
 		if (mode != ShoppingActivity.MODE_IN_SHOP) {
 			// use the pick-items-specific value, if there is one

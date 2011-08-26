@@ -49,17 +49,10 @@
 				<CheckBoxPreference android:key="shake"
 					android:defaultValue="false" android:title="@string/preference_shake_title"
 					android:summary="@string/preference_shake_summary" />
-				<CheckBoxPreference android:key="pickitemsinlist"
-					android:defaultValue="false" android:title="@string/preference_pickitemsinlist_title"
-					android:summaryOn="@string/preference_pickitemsinlist_on_summary"
-					android:summaryOff="@string/preference_pickitemsinlist_off_summary" />
-				<ListPreference android:key="sortorderForPickItems"
-					android:defaultValue="follow_shopping_mode" android:title="@string/preference_sortorder_for_pick_title"
-					android:summary="@string/preference_sortorder_for_pick_summary"
-					android:entries="@array/preference_sortorder_entries"
-					android:entryValues="@array/preference_sortorder_entryvalues"
-					android:dialogTitle="@string/preference_sortorder_for_pick_dialog_title" />
-			</PreferenceCategory>
+				<CheckBoxPreference android:key="perstoreprices"
+					android:defaultValue="false" android:title="@string/preference_perstoreprice_title"
+					android:summary="@string/preference_perstoreprice_summary" />
+			</PreferenceCategory>					
 			<PreferenceCategory android:title="@string/preference_appearance">
 				<CheckBoxPreference android:key="showprice"
 					android:defaultValue="true" android:title="@string/preference_showprice_title"
@@ -77,10 +70,21 @@
 					android:title="@string/preference_showpriority_title"
 					android:summary="@string/preference_showpriority_summary"></CheckBoxPreference>
 			</PreferenceCategory>
-			<PreferenceCategory android:title="@string/preference_perstoreprice">
-				<CheckBoxPreference android:key="perstoreprices"
-					android:defaultValue="false" android:title="@string/preference_perstoreprice_title"
-					android:summary="@string/preference_perstoreprice_summary" />
+						<PreferenceCategory android:title="@string/preference_pickitems">
+				<CheckBoxPreference android:key="samesortforpick"
+					android:defaultValue="false" android:title="@string/preference_samesortforpick_title"
+					android:summaryOn="@string/preference_samesortforpick_on_summary"
+					android:summaryOff="@string/preference_samesortforpick_off_summary" />
+				<ListPreference android:key="sortorderForPickItems"
+					android:defaultValue="1" android:title="@string/preference_sortorder_for_pick_title"
+					android:summary="@string/preference_sortorder_for_pick_summary"
+					android:entries="@array/preference_sortorder_entries"
+					android:entryValues="@array/preference_sortorder_entryvalues"
+					android:dialogTitle="@string/preference_sortorder_for_pick_dialog_title" />
+				<CheckBoxPreference android:key="pickitemsinlist"
+					android:defaultValue="false" android:title="@string/preference_pickitemsinlist_title"
+					android:summaryOn="@string/preference_pickitemsinlist_on_summary"
+					android:summaryOff="@string/preference_pickitemsinlist_off_summary" />
 			</PreferenceCategory>
 			<PreferenceCategory android:title="@string/preference_prio_subtotal">
 				<ListPreference android:key="priority_subtotal_threshold"
