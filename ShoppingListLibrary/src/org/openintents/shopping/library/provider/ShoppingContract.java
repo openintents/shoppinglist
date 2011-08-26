@@ -418,9 +418,19 @@ public abstract class ShoppingContract {
 				"contains.status ASC, contains.priority ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC",
 
 				// priority, tags alphabetical, but put empty tags last.
-				"contains.priority ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC", };
+				"contains.priority ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC", 
+		};
+	
+		/**
+		 * For each of the above sort orders, does it depend on status?
+		 */
+		public static final boolean[] StatusAffectsSortOrder = {
+			true, false, false, false, false, false, true, true, true, false
+		};	
 	}
 
+
+	
 	/**
 	 * Combined table of contents, items, and lists.
 	 */

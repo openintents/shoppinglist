@@ -203,7 +203,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	 * @param context
 	 *            The context to grab the preferences from.
 	 */
-	static public String getSortOrderFromPrefs(Context context, int mode) {
+	static public int getSortOrderIndexFromPrefs(Context context, int mode) {
 		int sortOrder = 0;
 		
 		if (mode != ShoppingActivity.MODE_IN_SHOP) {
@@ -239,13 +239,29 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 		}
 
 		if (sortOrder >= 0 && sortOrder < Contains.SORT_ORDERS.length) {
-			return Contains.SORT_ORDERS[sortOrder];
+			return sortOrder;
 		}
 
 		// Value out of range - somebody messed with the preferences.
-		return Contains.SORT_ORDERS[0];
+		return 0;
 	}
 
+	static public String getSortOrderFromPrefs(Context context, int mode) {
+		int index = getSortOrderIndexFromPrefs(context, mode);
+		return Contains.SORT_ORDERS[index];
+	}
+	
+	static public boolean prefsStatusAffectsSort(Context context, int mode) {
+		int index = getSortOrderIndexFromPrefs(context, mode);
+		boolean affects = Contains.StatusAffectsSortOrder[index];
+		if (mode == ShoppingActivity.MODE_IN_SHOP && !affects) {
+			// in shopping mode we should also invalidate display when
+			// marking items if we are hiding checked items.
+			affects = getHideCheckedItemsFromPrefs(context);
+		}
+		return affects;
+	}
+	
 	public static boolean getHideCheckedItemsFromPrefs(Context context) {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(context);

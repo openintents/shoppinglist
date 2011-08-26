@@ -1087,12 +1087,9 @@ public class ShoppingItemsView extends ListView {
 		
 		requery();
 
-		if (mMode == ShoppingActivity.MODE_IN_SHOP) {
+		if (PreferenceActivity.prefsStatusAffectsSort(getContext(),  mMode)) {
 			invalidate();		
-		} else {
-			// in Pick Items mode, we always sort just by name, so changing item 
-			// status will not have changed the order. 
-		}
+		} 
 	}
 
 	public boolean cleanupList() {
