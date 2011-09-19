@@ -10,17 +10,21 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.test.InstrumentationTestCase;
+import android.util.Log;
 
 import com.jayway.android.robotium.solo.Solo;
 
 public class TestShoppingActivity extends
 // ActivityInstrumentationTestCase2<ShoppingActivity> {
 		InstrumentationTestCase {
+	
+	private static final String TAG = "TestShoppingActivity";
+	
 	private Solo solo;
 	private Activity activity;
 	private Random random = new Random();
 	
-	public static String barcodescanneritem;
+	public static final String barcodescanneritem = "test_barcodescanner_1234";
 
 	public TestShoppingActivity() {
 		super();
@@ -115,6 +119,9 @@ public class TestShoppingActivity extends
 
 		solo.clickOnText("My shopping list");
 		
+		// Back to Shopping List:
+		solo.assertCurrentActivity("Expected ShoppingActivity activity", "ShoppingActivity");
+		
 		assertTrue(solo.searchText(itemname));
 		
 	}
@@ -123,12 +130,26 @@ public class TestShoppingActivity extends
 	 * Test adding items from menu > Barcode scanner test.
 	 */
 	public void testIntentBarcodeScanner() {
-		barcodescanneritem = "test_barcodescanner_" + random.nextInt(10000);
+		// barcodescanneritem = "test_barcodescanner_" + random.nextInt(10000);
+
+		Log.d(TAG, "Name 1: " + TestShoppingActivity.barcodescanneritem);
+		
+		if (solo.searchText(barcodescanneritem)) {
+			// Item exists already - delete it first:
+			// Now delete the item
+			solo.clickLongOnText(barcodescanneritem);
+			assertTrue(solo.searchText("Delete item permanently"));
+			solo.clickOnText("Delete item permanently");
+			assertTrue(solo.searchText("Are you sure"));
+			solo.clickOnText("Delete");
+		}
 		
 		// item does not exist yet:
 		assertFalse(solo.searchText(barcodescanneritem));
 		
 		solo.clickOnMenuItem("Scan barcode test", true);
+
+		Log.d(TAG, "Name 2: " + TestShoppingActivity.barcodescanneritem);
 		
 		// now item should exist:
 		assertTrue(solo.searchText(barcodescanneritem));

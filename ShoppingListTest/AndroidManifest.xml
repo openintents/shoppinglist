@@ -14,6 +14,7 @@
 		<intent-filter android:label="Scan barcode test">
 			<action android:name="android.intent.action.GET_CONTENT" />
 			<category android:name="android.intent.category.ALTERNATIVE" />
+			<!-- <category android:name="android.intent.category.DEFAULT" /> -->
 			<data android:mimeType="vnd.android.cursor.dir/vnd.openintents.shopping.list" />
 			<data android:mimeType="vnd.android.cursor.item/vnd.openintents.shopping.list" />
 		</intent-filter>

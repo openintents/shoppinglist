@@ -766,6 +766,13 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		// preference changes.
 		if (!usingListSpinner()) {
 			fillItems(true);
+		} else {
+			Log.d(TAG, "Skipping fillItems()");
+
+			// at least add items from extras
+			if (mExtraItems != null) {
+				insertItemsFromExtras();
+			}
 		}
 
 		// TODO ???
@@ -986,11 +993,34 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				intent.setAction(Intent.ACTION_GET_CONTENT);
 				intent.addCategory(Intent.CATEGORY_ALTERNATIVE);
 				try {
-					startActivity(intent);
+					startActivityForResult(intent, REQUEST_CODE_CATEGORY_ALTERNATIVE);
 				} catch (ActivityNotFoundException e) {
 					Log.v(TAG, "barcode scanner not found");
 					return false;
 				}
+				
+				// Instead of calling the class of barcode
+				// scanner directly, a more generic approach would
+				// be to use a general activity picker.
+				// 
+				// TODO: Implement onActivityResult.
+				// Problem: User has to pick activity every time.
+				// Choice should be storeable in Stettings.
+//				Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//				intent.setData(mListUri);
+//				intent.addCategory(Intent.CATEGORY_ALTERNATIVE);
+//
+//				Intent pickIntent = new Intent(Intent.ACTION_PICK_ACTIVITY);
+//				pickIntent.putExtra(Intent.EXTRA_INTENT, intent);
+//				pickIntent.putExtra(Intent.EXTRA_TITLE,
+//						getText(R.string.title_select_item_from));
+//				try {
+//					startActivityForResult(pickIntent,
+//							REQUEST_CODE_CATEGORY_ALTERNATIVE);
+//				} catch (ActivityNotFoundException e) {
+//					Log.v(TAG, "barcode scanner not found");
+//					return false;
+//				}
 				return true;
 			}
 		});
@@ -2393,29 +2423,30 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		if (debug)
 			Log.d(TAG, "fillItems()");
 
-		if (onlyIfPrefsChanged && 
-			(lastAppliedPrefChange == PreferenceActivity.updateCount)) {
-			return;	
-		}
-		
 		long listId = getSelectedListId();
 		if (listId < 0) {
 			// No valid list - probably view is not active
 			// and no item is selected.
+			Log.d(TAG, "fillItems: listId not availalbe");
 			return;
 		}
-		
-		if (debug)
-			Log.d(TAG, "fillItems() for list " + listId);
-		lastAppliedPrefChange = PreferenceActivity.updateCount;
-		mItemsView.fillItems(this, listId);
-		
+
 		// Insert any pending items received either through intents
 		// or in onActivityResult:
 		if (mExtraItems != null) {
 			insertItemsFromExtras();
 		}
-		
+
+		if (onlyIfPrefsChanged
+				&& (lastAppliedPrefChange == PreferenceActivity.updateCount)) {
+			return;
+		}
+
+		if (debug)
+			Log.d(TAG, "fillItems() for list " + listId);
+		lastAppliedPrefChange = PreferenceActivity.updateCount;
+		mItemsView.fillItems(this, listId);
+
 		// Also refresh AutoCompleteTextView:
 		fillAutoCompleteTextViewAdapter();
 	}
