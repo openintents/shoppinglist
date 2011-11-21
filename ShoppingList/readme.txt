@@ -22,6 +22,12 @@ To obtain the current release, visit
   http://www.openintents.org
 
 ---------------------------------------------------------
+release 1.5
+date: ?
+
+- new setting to keep screen orientation (issue 402, GCI patch by Gautam)
+
+---------------------------------------------------------
 release 1.4.1
 date: 2011-08-27
 

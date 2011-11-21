@@ -724,6 +724,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		initFromPreferences();
 		
 		mIsActive = true;
+		
+		this.setRequestedOrientation(PreferenceActivity.getOrientationFromPrefs(this));
 
 		getSelectedListId();
 		setListTheme(loadListTheme());

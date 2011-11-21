@@ -77,6 +77,12 @@
         <item>3</item>
     </string-array>
     
+    <string-array name="preference_orientation_entryvalues">
+    	<item>-1</item>
+    	<item>0</item>
+        <item>1</item>
+    </string-array>
+    
     <string-array name="preference_capitalization_entryvalues">
         <item>0</item>
         <item>1</item>

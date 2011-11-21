@@ -47,6 +47,9 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 
 	public static final String PREFS_FONTSIZE = "fontsize";
 	public static final String PREFS_FONTSIZE_DEFAULT = "2";
+
+	public static final String PREFS_ORIENTATION = "orientation";
+	public static final String PREFS_ORIENTATION_DEFAULT = "-1";
 	@Deprecated
 	public static final String PREFS_LOADLASTUSED = "loadlastused";
 	@Deprecated
@@ -182,6 +185,13 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 				.getDefaultSharedPreferences(context).getString(PREFS_FONTSIZE,
 						PREFS_FONTSIZE_DEFAULT));
 		return size;
+	}
+
+	public static int getOrientationFromPrefs(Context context) {
+		int orientation = Integer.parseInt(PreferenceManager
+				.getDefaultSharedPreferences(context).getString(PREFS_ORIENTATION,
+						PREFS_ORIENTATION_DEFAULT));
+		return orientation;
 	}
 
 	public static boolean getUsingPerStorePricesFromPrefs(Context context) {
