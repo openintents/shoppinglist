@@ -344,15 +344,19 @@ public class ShoppingUtils {
 	 */
 	public static long addItemToList(Context context, final long itemId,
 			final long listId, final long status, String priority,
-			String quantity, final boolean togglestatus) {
+			String quantity, final boolean togglestatus, 
+			final boolean known_new) {
 		long id = -1;
-		Cursor existingItems = context.getContentResolver()
+		Cursor existingItems = null;
+		
+		if (!known_new)
+			existingItems = context.getContentResolver()
 				.query(Contains.CONTENT_URI,
 						new String[] { Contains._ID, Contains.STATUS },
 						"list_id = ? AND item_id = ?",
 						new String[] { String.valueOf(listId),
 								String.valueOf(itemId) }, null);
-		if (existingItems.getCount() > 0) {
+		if (existingItems != null && existingItems.getCount() > 0) {
 			existingItems.moveToFirst();
 			id = existingItems.getLong(0);
 			long oldstatus = existingItems.getLong(1);
@@ -399,7 +403,8 @@ public class ShoppingUtils {
 			}
 
 		} else {
-			existingItems.close();
+			if (existingItems != null)
+				existingItems.close();
 			// Add item to list:
 			ContentValues values = new ContentValues(2);
 			values.put(Contains.ITEM_ID, itemId);
@@ -452,15 +457,18 @@ public class ShoppingUtils {
 	 */
 	public static long addItemToStore(Context context, final long itemId,
 			final long storeId, final boolean stocksItem, final String aisle,
-			final String price) {
+			final String price, boolean known_new) {
 		long id = -1;
-		Cursor existingItems = context.getContentResolver()
+		Cursor existingItems = null;
+		
+		if (!known_new)
+			existingItems = context.getContentResolver()
 				.query(ItemStores.CONTENT_URI,
 						new String[] { ItemStores._ID },
 						"store_id = ? AND item_id = ?",
 						new String[] { String.valueOf(storeId),
 								String.valueOf(itemId) }, null);
-		if (existingItems.getCount() > 0) {
+		if (existingItems != null && existingItems.getCount() > 0) {
 			existingItems.moveToFirst();
 			id = existingItems.getLong(0);
 			existingItems.close();
@@ -480,7 +488,8 @@ public class ShoppingUtils {
 			}
 
 		} else {
-			existingItems.close();
+			if (existingItems != null)
+				existingItems.close();
 			// Add item to list:
 			ContentValues values = new ContentValues(5);
 			values.put(ItemStores.ITEM_ID, itemId);
@@ -514,8 +523,8 @@ public class ShoppingUtils {
 	 * @return id of the "contains" table entry, or -1 if insert failed.
 	 */
 	public static long addItemToStore(Context context, final long itemId,
-			final long storeId, final String aisle, final String price) {
-		return addItemToStore(context, itemId, storeId, true, aisle, price);
+			final long storeId, final String aisle, final String price, boolean known_new) {
+		return addItemToStore(context, itemId, storeId, true, aisle, price, known_new);
 	}
 
 	/**
