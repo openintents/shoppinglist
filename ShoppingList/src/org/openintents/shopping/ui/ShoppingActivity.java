@@ -409,9 +409,22 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 	// Skins --------------------------
 
-	private static boolean usingListSpinner() {
-		// TODO switch layout on screen size, not sdk versions
-		return 	(Build.VERSION.SDK_INT<Build.VERSION_CODES.HONEYCOMB);
+	private boolean usingListSpinner() {
+		
+		// not sure if the version should still be checked... 
+		// what should happen on a Froyo tablet? Still, seems 
+		// likely that the condition below will do something safe.
+		//
+		// if 	(Build.VERSION.SDK_INT<Build.VERSION_CODES.HONEYCOMB)
+		//	return true;
+				
+		
+		// The most foolproof thing we can check here seems to be the
+		// existence of the resource used in tablet mode. If the list 
+		// fragment exists, then Android thinks we are running on 
+		// something tablet-like.
+		return (findViewById(android.R.id.list) == null);
+		
 	}
 	
 	/**
