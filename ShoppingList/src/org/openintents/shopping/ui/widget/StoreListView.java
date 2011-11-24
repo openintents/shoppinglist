@@ -362,7 +362,7 @@ public class StoreListView extends ListView {
 				String price = cv.getAsString("price");
 				String aisle = cv.getAsString("aisle");
 				ShoppingUtils.addItemToStore(getContext(), mItemId, Long.parseLong(storeId), 
-						has_item, aisle, price);
+						has_item, aisle, price, false);
 			}
 		}
 	}
@@ -454,7 +454,7 @@ public class StoreListView extends ListView {
 		
 		if (mCursorItemstores.isNull(0)) {
 			long storeId = mCursorItemstores.getLong(cursorColumnSTORE_ID);
-			long isid = ShoppingUtils.addItemToStore(getContext(), mItemId, storeId, "", "");
+			long isid = ShoppingUtils.addItemToStore(getContext(), mItemId, storeId, "", "", false);
 			itemstore_id = Long.toString(isid);
 		} else {
 			itemstore_id = mCursorItemstores.getString(cursorColumnID);
@@ -499,7 +499,7 @@ public class StoreListView extends ListView {
 			if (column == 4) {
 				aisle = new_val;
 			}
-			ShoppingUtils.addItemToStore(getContext(), mItemId, storeId, aisle, price);
+			ShoppingUtils.addItemToStore(getContext(), mItemId, storeId, aisle, price, false);
 			
 			/* At the corresponding points in the item view, we would requery and invalidate. However that is mainly because the editing
 			 * happens in widgets outside the list view itself, where here it happens in EditTexts directly in the list. So we probably
