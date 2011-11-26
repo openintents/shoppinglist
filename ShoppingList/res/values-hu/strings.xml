@@ -149,6 +149,9 @@
 	<string name="preference_fontsize">Betűméret</string>
 	<string name="preference_fontsize_summary">Betűméret megváltoztatása</string>
 	<string name="preference_fontsize_dialog_title">Betűméret kiválasztása</string>
+	<string name="preference_orientation">Orientation</string>
+	<string name="preference_orientation_summary">Change orientation</string>
+	<string name="preference_orientation_dialog_title">Choose orientation</string>
 	<string name="preference_sortorder_title">Rendezési sorrend</string>
 	<string name="preference_sortorder_summary">A listában található elemek rendezési sorrendjének megváltoztatása</string>
 	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
@@ -273,6 +276,15 @@
     	<item>Alapértelmezett</item>
     	<!-- Preference fontsize: large font size -->
         <item>Nagy</item>
+    </string-array>
+    
+    <string-array name="preference_orientation_entries">
+    	<!-- Preference orientation: default -->
+        <item>Alapértelmezett</item>
+    	<!-- Preference orientation: landscape -->
+    	<item>Landscape</item>
+    	<!-- Preference orientation: portrait -->
+        <item>Portrait</item>
     </string-array>
     
     <string-array name="preference_capitalization_entries">

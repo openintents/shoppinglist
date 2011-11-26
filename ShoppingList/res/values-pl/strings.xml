@@ -152,6 +152,9 @@
 	<string name="preference_fontsize">Rozmiar czcionki</string>
 	<string name="preference_fontsize_summary">Zmień rozmiar czcionki</string>
 	<string name="preference_fontsize_dialog_title">Wybierz rozmiar czcionki</string>
+	<string name="preference_orientation">Orientation</string>
+	<string name="preference_orientation_summary">Change orientation</string>
+	<string name="preference_orientation_dialog_title">Choose orientation</string>
 	<string name="preference_sortorder_title">Porządek sortowania</string>
 	<string name="preference_sortorder_summary">Zmień porządek sortowania elementów listy</string>
 	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
@@ -276,6 +279,15 @@
     	<item>Domyślny</item>
     	<!-- Preference fontsize: large font size -->
         <item>Duży</item>
+    </string-array>
+    
+    <string-array name="preference_orientation_entries">
+    	<!-- Preference orientation: default -->
+        <item>Domyślny</item>
+    	<!-- Preference orientation: landscape -->
+    	<item>Landscape</item>
+    	<!-- Preference orientation: portrait -->
+        <item>Portrait</item>
     </string-array>
     
     <string-array name="preference_capitalization_entries">

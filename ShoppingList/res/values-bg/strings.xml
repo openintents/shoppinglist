@@ -21,6 +21,7 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
+  Kras4ooo https://launchpad.net/~kkrassi1984
   Peli https://launchpad.net/~peli0101</string>
 	
     <!-- Short explanation of the application -->
@@ -35,7 +36,7 @@
 	<string name="new_item">Нов продукт</string>
 	<string name="new_list">Нов списък</string>
 	<string name="send">Изпрати списък</string>
-	<string name="mark_all_items">Mark all items</string>
+	<string name="mark_all_items">Маркирай всички елементи</string>
 	<string name="empty_list_not_sent">Празният списък не е изпратен.</string>
 	<string name="email_not_available">Не се предлага приложение за изпращане.</string>
 	<string name="my_shopping_list">Мой списък за пазаруване</string>
@@ -45,7 +46,7 @@
 	<string name="ask_new_list">Въведи име на новия списък за пазаруване</string>
 	<string name="ask_rename_list">Преименувай списъка за пазаруване</string>
 	<string name="ask_edit_item">Редактирай елемент</string>
-	<string name="ask_new_store">Enter new store name</string>
+	<string name="ask_new_store">Въведи име на нов склад</string>
 	<string name="please_enter_name">Моля, въведете име</string>
 	<string name="no_items_marked">Няма елементи, които да са маркирани като зачеркнати.</string>
 	<string name="confirm_delete_list">Наистина ли искате да изтриете този списък за пазаруване?</string>
@@ -58,11 +59,11 @@
 	<string name="menu_mark_item">Маркирай елемент</string>
 	<string name="menu_edit_item">Редактирай елемент</string>
 	<string name="menu_auto_add">Автоматично добавяне</string>
-	<string name="menu_item_stores">Stores...</string>
-	<string name="menu_rename_store">Rename store</string>
-	<string name="menu_delete_store">Delete store</string>
-	<string name="confirm_delete_store">Do you really want to delete this store?</string>
-	<string name="no_items_available">No items available</string>
+	<string name="menu_item_stores">Сладове..</string>
+	<string name="menu_rename_store">Преименувай склад</string>
+	<string name="menu_delete_store">Изтрии слад</string>
+	<string name="confirm_delete_store">Наистина ли сикате да изтриете този склад</string>
+	<string name="no_items_available">Елементите не са действащи</string>
 	
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
@@ -72,7 +73,7 @@
 	<!-- Delete this item completely. If the user wants to add it again, they
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">Изтрий елемент перманентно</string>
-	<string name="menu_move_item">Move item to other list</string>
+	<string name="menu_move_item">Премести елемент към друг списък</string>
 	<!-- Button label to add an item to the list. -->
 	<string name="add">Добавяне</string>
 	
@@ -86,29 +87,29 @@
 	<string name="shopping_title">%s - Пазаруване</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current item. -->
-	<string name="item_stores_title">%s - Stores</string>
-	<string name="item_stores_activity_label">Edit Item Stores</string>
+	<string name="item_stores_title">%s Складове</string>
+	<string name="item_stores_activity_label">Редактирай елементите на Складовете</string>
 	
 	<string name="tags">Отметки</string>
 	<string name="price">Цена</string>
 	<string name="item">Елемент</string>
 	<string name="quantity">Количество</string>
-	<string name="priority">Priority</string>
-	<string name="has_note">Has Note</string>
-	<string name="units">Units</string>
-	<string name="note">Note</string>
+	<string name="priority">Приоритет</string>
+	<string name="has_note">Има забележка</string>
+	<string name="units">Единици</string>
+	<string name="note">Забележка</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Общо: %s</string>
 	
 	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
 	<string name="total_checked">Проверени: %s</string>
-    <string name="priority1_total">Priority 1: %s</string>
-    <string name="priority2_total">Priority 1-2: %s</string>
-	<string name="priority3_total">Priority 1-3: %s</string>
-	<string name="priority4_total">Priority 1-4: %s</string>
+    <string name="priority1_total">Приоритет 1:%s</string>
+    <string name="priority2_total">Приоритет 1-2:%s</string>
+	<string name="priority3_total">Приоритет 1-3:%s</string>
+	<string name="priority4_total">Приоритет 1-4:%s</string>
 	
-	<string name="delete_item_confirm">Are you sure you want to permanently delete this item from this shopping lists?</string>
+	<string name="delete_item_confirm">Сигурни ли сте, че искате да изтриете завинаги този елемент от този списъци за пазаруване?</string>
 	<string name="delete">Изтриване</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
@@ -149,12 +150,15 @@
 	<string name="preference_fontsize">Размер на шрифт</string>
 	<string name="preference_fontsize_summary">Промени размер на шрифт</string>
 	<string name="preference_fontsize_dialog_title">Избери размер на шрифт</string>
+	<string name="preference_orientation">Orientation</string>
+	<string name="preference_orientation_summary">Change orientation</string>
+	<string name="preference_orientation_dialog_title">Choose orientation</string>
 	<string name="preference_sortorder_title">Сортиране на реда</string>
 	<string name="preference_sortorder_summary">Промени реда на подреждане на елементи от списъка</string>
-	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
-	<string name="preference_sortorder_for_pick_summary">Change sort order of list items in Pick Items mode.</string>
+	<string name="preference_sortorder_for_pick_title">Ред за сортиране - изписване на артикули</string>
+	<string name="preference_sortorder_for_pick_summary">Промяна на реда на сортиране на елементи от списък в режим на изписване на артикули.</string>
 	<string name="preference_sortorder_dialog_title">Избери реда на подреждане</string>
-	<string name="preference_sortorder_for_pick_dialog_title">Choose sort order for Pick Items mode</string>
+	<string name="preference_sortorder_for_pick_dialog_title">Изберете ред на сортиране за режим на изписване на артикули</string>
 	<string name="preference_loadlastused_title">Зареди последно ползван списък</string>
 	<string name="preference_loadlastused_summary">Започвай винаги с последно прегледания списък.</string>
 	<string name="preference_capitalization_title">Главна буква</string>
@@ -164,22 +168,22 @@
 	<string name="preference_hidechecked_summary">Скрий веднага елементи, които са демаркирани.</string>
 	<string name="preference_showprice_title">Покажи цена</string>
 	<string name="preference_showprice_summary">Показано като допълнителна колона в списъка.</string>
-	<string name="preference_perstoreprice">Per-store prices</string>
-	<string name="preference_perstoreprice_title">Track per-store prices</string>
-	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
+	<string name="preference_perstoreprice">Скалад Цени</string>
+	<string name="preference_perstoreprice_title">Проследяване на магазин цени</string>
+	<string name="preference_perstoreprice_summary">Следене на отделни цени за всеки елемент на всеки магазин.</string>
 	<string name="preference_showtags_title">Покажи маркери</string>
 	<string name="preference_showtags_summary">Показано като допълнителна колона в списъка.</string>
 	<string name="preference_showquantity_title">Покажи количество</string>
 	<string name="preference_showquantity_summary">Показано като допълнителна колона в списъка.</string>
-	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_title">Виж приоритети</string>
 	<string name="preference_showpriority_summary">Показано като допълнителна колона в списъка.</string>
-	<string name="preference_showunits_title">Show units</string>
+	<string name="preference_showunits_title">Виж единици</string>
 	<string name="preference_showunits_summary">Показано като допълнителна колона в списъка.</string>
-	<string name="preference_prio_subtotal">Subtotal by priority</string>
-	<string name="preference_prioritytotal_title">Subtotal by priority</string>
+	<string name="preference_prio_subtotal">Междинна сума по приоритет</string>
+	<string name="preference_prioritytotal_title">Междинна сума по приоритет</string>
 	<string name="preference_prioritytotal_summary">No subtotal by priority shown.</string>
-	<string name="preference_prioritytotal_dialog_title">Subtotal by priority</string>
-	<string name="preference_priosubtotalchecked_title">Include checked items</string>
+	<string name="preference_prioritytotal_dialog_title">Междинна сума по приоритет</string>
+	<string name="preference_priosubtotalchecked_title">Включете отметнати елементи</string>
 	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
 	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
 	<string name="preference_pickitemsinlist_title">Pick items directly in list</string>
@@ -273,6 +277,15 @@
     	<item>По подразбиране</item>
     	<!-- Preference fontsize: large font size -->
         <item>Големи</item>
+    </string-array>
+    
+    <string-array name="preference_orientation_entries">
+    	<!-- Preference orientation: default -->
+        <item>По подразбиране</item>
+    	<!-- Preference orientation: landscape -->
+    	<item>Landscape</item>
+    	<!-- Preference orientation: portrait -->
+        <item>Portrait</item>
     </string-array>
     
     <string-array name="preference_capitalization_entries">

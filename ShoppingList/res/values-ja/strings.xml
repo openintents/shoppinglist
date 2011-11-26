@@ -151,6 +151,9 @@
 	<string name="preference_fontsize">フォントサイズ</string>
 	<string name="preference_fontsize_summary">フォントサイズを変更</string>
 	<string name="preference_fontsize_dialog_title">フォントサイズを選択</string>
+	<string name="preference_orientation">Orientation</string>
+	<string name="preference_orientation_summary">Change orientation</string>
+	<string name="preference_orientation_dialog_title">Choose orientation</string>
 	<string name="preference_sortorder_title">ソート順</string>
 	<string name="preference_sortorder_summary">アイテムのソート順を変更</string>
 	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
@@ -275,6 +278,15 @@
     	<item>デフォルト</item>
     	<!-- Preference fontsize: large font size -->
         <item>大</item>
+    </string-array>
+    
+    <string-array name="preference_orientation_entries">
+    	<!-- Preference orientation: default -->
+        <item>デフォルト</item>
+    	<!-- Preference orientation: landscape -->
+    	<item>Landscape</item>
+    	<!-- Preference orientation: portrait -->
+        <item>Portrait</item>
     </string-array>
     
     <string-array name="preference_capitalization_entries">

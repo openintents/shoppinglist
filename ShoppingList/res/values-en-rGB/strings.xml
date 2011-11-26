@@ -21,11 +21,10 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
-  Jocke Pihlström https://launchpad.net/~jockepihlstrom
-  Peli https://launchpad.net/~peli0101</string>
+  Isabell Long https://launchpad.net/~issyl0</string>
 	
     <!-- Short explanation of the application -->
-	<string name="about_comments">OI Shopping list lets you keep track of your shopping items. You can also use it for other kinds of check lists, for example for ToDo lists or party guest lists.</string>
+	<string name="about_comments">OI Shopping list lets you keep track of your shopping items. You can also use it for other kinds of tick lists, for example for ToDo lists or party guest lists.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
@@ -33,67 +32,67 @@
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
 	<string name="app_name">OI Shopping list</string>
 
-	<string name="new_item">Ny post</string>
+	<string name="new_item">New item</string>
 	<string name="new_list">New list</string>
 	<string name="send">Send list</string>
 	<string name="mark_all_items">Mark all items</string>
 	<string name="empty_list_not_sent">Empty list not sent.</string>
 	<string name="email_not_available">No application available for sending.</string>
 	<string name="my_shopping_list">My shopping list</string>
-	<string name="new_list_hint">t ex önskelista, familjelista</string>
+	<string name="new_list_hint">i.e. wishlist, family list</string>
 	<string name="clean_up_list">Clean up list</string>
 	<string name="delete_list">Delete list</string>
 	<string name="ask_new_list">Enter name of new shopping list</string>
 	<string name="ask_rename_list">Rename shopping list</string>
-	<string name="ask_edit_item">Redigera post</string>
-	<string name="ask_new_store">Enter new store name</string>
+	<string name="ask_edit_item">Edit item</string>
+	<string name="ask_new_store">Enter new shop name</string>
 	<string name="please_enter_name">Please enter a name</string>
 	<string name="no_items_marked">No items are marked as crossed out.</string>
 	<string name="confirm_delete_list">Do you really want to delete this shopping list?</string>
 	<string name="no_shopping_provider">Error while accessing shopping lists.</string>
 	<string name="pick_item">Pick an item</string>
 	<string name="pick_list">Pick a list</string>
-	<string name="theme">Tema</string>
+	<string name="theme">Theme</string>
 	<string name="theme_settings">Theme settings</string>
 	<string name="rename_list">Rename list</string>
-	<string name="menu_mark_item">Markera post</string>
-	<string name="menu_edit_item">Redigera post</string>
+	<string name="menu_mark_item">Mark item</string>
+	<string name="menu_edit_item">Edit item</string>
 	<string name="menu_auto_add">Auto add</string>
-	<string name="menu_item_stores">Stores...</string>
-	<string name="menu_rename_store">Rename store</string>
-	<string name="menu_delete_store">Delete store</string>
-	<string name="confirm_delete_store">Do you really want to delete this store?</string>
+	<string name="menu_item_stores">Shops...</string>
+	<string name="menu_rename_store">Rename shop</string>
+	<string name="menu_delete_store">Delete shop</string>
+	<string name="confirm_delete_store">Do you really want to delete this shop?</string>
 	<string name="no_items_available">No items available</string>
 	
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
-	<string name="menu_remove_item">Ta bort post från lista</string>
+	<string name="menu_remove_item">Remove item from list</string>
 	
 	<!-- Delete this item completely. If the user wants to add it again, they
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">Delete item permanently</string>
-	<string name="menu_move_item">Move item to other list</string>
+	<string name="menu_move_item">Move item to another list</string>
 	<!-- Button label to add an item to the list. -->
-	<string name="add">Lägg till</string>
+	<string name="add">Add</string>
 	
 	<string name="menu_pick_items">Pick items</string>
-	<string name="menu_start_shopping">Handlar</string>
+	<string name="menu_start_shopping">Shopping</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="pick_items_titel">%s - Pick items</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="shopping_title">%s - Handla</string>
+	<string name="shopping_title">%s - Shopping</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current item. -->
-	<string name="item_stores_title">%s - Stores</string>
-	<string name="item_stores_activity_label">Edit Item Stores</string>
+	<string name="item_stores_title">%s - Shops</string>
+	<string name="item_stores_activity_label">Edit Item Shops</string>
 	
-	<string name="tags">Nyckelord</string>
-	<string name="price">Pris</string>
-	<string name="item">Post</string>
-	<string name="quantity">Antal</string>
+	<string name="tags">Tags</string>
+	<string name="price">Price</string>
+	<string name="item">Item</string>
+	<string name="quantity">Quantity</string>
 	<string name="priority">Priority</string>
 	<string name="has_note">Has Note</string>
 	<string name="units">Units</string>
@@ -103,14 +102,14 @@
 	<string name="total">Total: %s</string>
 	
 	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
-	<string name="total_checked">Checked: %s</string>
+	<string name="total_checked">Ticked:%s</string>
     <string name="priority1_total">Priority 1: %s</string>
     <string name="priority2_total">Priority 1-2: %s</string>
 	<string name="priority3_total">Priority 1-3: %s</string>
 	<string name="priority4_total">Priority 1-4: %s</string>
 	
-	<string name="delete_item_confirm">Are you sure you want to permanently delete this item from this shopping lists?</string>
-	<string name="delete">Ta bort</string>
+	<string name="delete_item_confirm">Are you sure you want to permanently delete this item from this shopping list?</string>
+	<string name="delete">Delete</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
 	<string name="suffix_checked">... OK</string>
@@ -126,8 +125,8 @@
 	<!-- Title for selecting a theme -->
 	<string name="theme_pick">Pick a theme</string>
 	<string name="theme_description">Choose a theme for this list</string>
-	<string name="theme_default">Standard</string>
-	<string name="theme_classic">Klassisk</string>
+	<string name="theme_default">Default</string>
+	<string name="theme_classic">Classic</string>
 	<string name="theme_bugdroid">Android</string>
 	<string name="theme_classic_export">Classic (from OI Shopping List)</string>
 	<string name="theme_bugdroid_export">Android (from OI Shopping List)</string>
@@ -136,41 +135,41 @@
 	<!-- Button label "OK" -->
 	<string name="ok">OK</string>
 	<!-- Button label "Cancel" -->
-	<string name="cancel">Avbryt</string>
+	<string name="cancel">Cancel</string>
 	<string name="use_theme_for_all_lists">Use this theme for all lists</string>
 	<string name="get_more_themes">Get more themes</string>
 	
 	<!-- preferences -->
-	<string name="preferences">Inställningar</string>
+	<string name="preferences">Settings</string>
 	
-    <string name="preference_application">Applikationsinställningar</string>
+    <string name="preference_application">Application settings</string>
     
-	<string name="preference_unchecked_on_top">Obockat i toppen</string>
-	<string name="preference_unchecked_on_top_summary">Visa alltid obockade poster först</string>
-	<string name="preference_fontsize">Teckenstorlek</string>
-	<string name="preference_fontsize_summary">Ändra teckenstorlek</string>
-	<string name="preference_fontsize_dialog_title">Välj teckenstorlek</string>
+	<string name="preference_unchecked_on_top">Unticked on top</string>
+	<string name="preference_unchecked_on_top_summary">Always show unticked items first</string>
+	<string name="preference_fontsize">Font size</string>
+	<string name="preference_fontsize_summary">Change font size</string>
+	<string name="preference_fontsize_dialog_title">Choose font size</string>
 	<string name="preference_orientation">Orientation</string>
 	<string name="preference_orientation_summary">Change orientation</string>
 	<string name="preference_orientation_dialog_title">Choose orientation</string>
-	<string name="preference_sortorder_title">Sorteringsordning</string>
-	<string name="preference_sortorder_summary">Ändra sorteringsordning av poster</string>
+	<string name="preference_sortorder_title">Sort order</string>
+	<string name="preference_sortorder_summary">Change sort order of list items</string>
 	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
 	<string name="preference_sortorder_for_pick_summary">Change sort order of list items in Pick Items mode.</string>
-	<string name="preference_sortorder_dialog_title">Välj sorteringsordning</string>
+	<string name="preference_sortorder_dialog_title">Choose sort order</string>
 	<string name="preference_sortorder_for_pick_dialog_title">Choose sort order for Pick Items mode</string>
 	<string name="preference_loadlastused_title">Load last list used</string>
 	<string name="preference_loadlastused_summary">Always start with the list viewed last time.</string>
-	<string name="preference_capitalization_title">Versaler</string>
-	<string name="preference_capitalization_summary">Automatisk ändring till versaler</string>
-	<string name="preference_capitalization_dialog_title">Välj typ av versaler</string> 
-	<string name="preference_hidechecked_title">Hide checked items</string>
-	<string name="preference_hidechecked_summary">Immediately hide items checked off.</string>
+	<string name="preference_capitalization_title">Capitalisation</string>
+	<string name="preference_capitalization_summary">Automatic capitalisation of entries</string>
+	<string name="preference_capitalization_dialog_title">Choose capitalisation</string> 
+	<string name="preference_hidechecked_title">Hide ticked items</string>
+	<string name="preference_hidechecked_summary">Immediately hide ticked off items.</string>
 	<string name="preference_showprice_title">Show price</string>
 	<string name="preference_showprice_summary">Shown as extra column in list.</string>
-	<string name="preference_perstoreprice">Per-store prices</string>
-	<string name="preference_perstoreprice_title">Track per-store prices</string>
-	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
+	<string name="preference_perstoreprice">Per-shop prices</string>
+	<string name="preference_perstoreprice_title">Track per-shop prices</string>
+	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each shop.</string>
 	<string name="preference_showtags_title">Show tags</string>
 	<string name="preference_showtags_summary">Shown as extra column in list.</string>
 	<string name="preference_showquantity_title">Show quantity</string>
@@ -183,12 +182,12 @@
 	<string name="preference_prioritytotal_title">Subtotal by priority</string>
 	<string name="preference_prioritytotal_summary">No subtotal by priority shown.</string>
 	<string name="preference_prioritytotal_dialog_title">Subtotal by priority</string>
-	<string name="preference_priosubtotalchecked_title">Include checked items</string>
-	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
-	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
+	<string name="preference_priosubtotalchecked_title">Include ticked off items</string>
+	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes ticked items</string>
+	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes ticked items</string>
 	<string name="preference_pickitemsinlist_title">Pick items directly in list</string>
 	<string name="preference_pickitemsinlist_on_summary">Switch main list to edit mode to re-add existing items</string>
-	<string name="preference_pickitemsinlist_off_summary">Add items to list using a dedicated dialog</string>
+	<string name="preference_pickitemsinlist_off_summary">Add items to list using a dedicated dialog box</string>
 	<string name="preference_samesortforpick_title">Always same sort order</string>
 	<string name="preference_samesortforpick_on_summary">Items are sorted in Pick Items mode just as in Shopping mode.</string>
 	<string name="preference_samesortforpick_off_summary">Sort order for Pick Items mode can be chosen separately.</string>
@@ -197,28 +196,28 @@
 	<string name="preference_shake_title">Shake to clean up</string>
 	
 	<!-- Preference summary: Shake the phone to clean up the list. -->
-	<string name="preference_shake_summary">Skaka telefonen för att rensa listan</string>
+	<string name="preference_shake_summary">Shake the phone to clean up the list.</string>
 	
-    <string name="preference_advanced">Avancerade inställningar</string>
+    <string name="preference_advanced">Advanced settings</string>
     <string name="preference_advanced_summary">Additional settings regarding the appearance.</string>
     
     <!-- Preference category: General settings -->
-    <string name="preference_general">Generellt</string>
+    <string name="preference_general">General</string>
     <string name="preference_pickitems">Pick Items</string>
     
-    <string name="preference_appearance">Utseende</string>
+    <string name="preference_appearance">Appearance</string>
     
     <string name="preference_addons">Add-ons</string>
     <string name="preference_get_addons">Get new add-ons</string>
     <string name="preference_get_addons_summary">Search for extensions and themes online.</string>
-    <string name="preference_get_market_addons">Hämta tillägg från Market</string>
-    <string name="preference_get_developer_addons">Hämta tillägg från OpenIntents</string>
-    <string name="preference_extensions">Tillägg</string>
-    <string name="preference_themes">Teman</string>
-    <string name="preference_market_extensions_summary">Sök efter tillägg på Android Market</string>
-    <string name="preference_market_themes_summary">Sök efter teman på Android Market</string>
-    <string name="preference_developer_extensions_summary">Hämta tillägg från OpenIntents hemsida</string>
-	<string name="preference_developer_themes_summary">Hämta teman från OpenIntents hemsida</string>
+    <string name="preference_get_market_addons">Get add-ons from Market</string>
+    <string name="preference_get_developer_addons">Get add-ons from OpenIntents</string>
+    <string name="preference_extensions">Extensions</string>
+    <string name="preference_themes">Themes</string>
+    <string name="preference_market_extensions_summary">Search for extensions at Android Market.</string>
+    <string name="preference_market_themes_summary">Search for themes at Android Market.</string>
+    <string name="preference_developer_extensions_summary">Get extensions from the OpenIntents homepage.</string>
+	<string name="preference_developer_themes_summary">Get themes from the OpenIntents homepage.</string>
 	
 	<!-- ***************************
 	     Permissions
@@ -226,11 +225,11 @@
 	
 	<!-- OI Shopping list -->
 	<!-- Permission to read shopping lists -->
-	<string name="oi_shopping_permission_read">läs inköpslistor</string>
-	<string name="oi_shopping_permission_read_descr">Tillåter att en applikation läser inköpslistor. Notera att krypterade listor och objekt finns i krypterat format.</string>
+	<string name="oi_shopping_permission_read">read shopping lists</string>
+	<string name="oi_shopping_permission_read_descr">Allows an application to read shopping lists. Note that encrypted lists and items are provided in the encrypted format.</string>
 	<!-- Permission to write to shopping lists -->
-	<string name="oi_shopping_permission_write">skriv inköpslistor</string>
-	<string name="oi_shopping_permission_write_descr">Tillåter en applikation att skapa nya listor och poster eller ändra befintliga.</string>
+	<string name="oi_shopping_permission_write">write shopping lists</string>
+	<string name="oi_shopping_permission_write_descr">Allows an application to create new lists and items or change existing ones.</string>
 	
 	
 	<!-- ***************************
@@ -239,25 +238,25 @@
 	
     <string-array name="preference_sortorder_entries">
     	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
-    	<item>obockat först, alfabetiskt</item>
+    	<item>unticked first, alphabetical</item>
         <!-- Preference sort order: Sort by item name -->
-    	<item>alfabetiskt</item>
+    	<item>alphabetical</item>
         <!-- Preference sort order: Newest item first -->
-    	<item>nyast först</item>
+    	<item>newest first</item>
         <!-- Preference sort order: Oldest item first -->
-    	<item>äldst först</item>
+    	<item>oldest first</item>
     	<!-- Preference sort order: Sort alphabetically by tags -->
-    	<item>taggar alfabetiskt</item>
+    	<item>tags alphabetical</item>
         <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
     	<item>priority, tags alphabetical</item>
         <!-- Preference sort order: Sort by price, the most expensive first -->
-    	<item>dyraste först</item>
+    	<item>most expensive first</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
-    	<item>obockat först, taggar alfabetiskt</item>
+    	<item>unticked first, tags alphabetical</item>
     	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
-    	<item>unchecked first, priority, alphabetical</item>
+    	<item>unticked first, priority, alphabetical</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
-    	<item>unchecked first, priority, tags alphabetical</item>
+    	<item>unticked first, priority, tags alphabetical</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">
@@ -270,18 +269,18 @@
     
     <string-array name="preference_fontsize_entries">
     	<!-- Preference fontsize: tiny font size -->
-        <item>Mycket liten</item>
+        <item>Tiny</item>
     	<!-- Preference fontsize: small font size -->
-        <item>Liten</item>
+        <item>Small</item>
     	<!-- Preference fontsize: default font size-->
-    	<item>Standard</item>
+    	<item>Default</item>
     	<!-- Preference fontsize: large font size -->
-        <item>Stor</item>
+        <item>Large</item>
     </string-array>
     
     <string-array name="preference_orientation_entries">
     	<!-- Preference orientation: default -->
-        <item>Standard</item>
+        <item>Default</item>
     	<!-- Preference orientation: landscape -->
     	<item>Landscape</item>
     	<!-- Preference orientation: portrait -->
@@ -290,11 +289,11 @@
     
     <string-array name="preference_capitalization_entries">
     	<!-- Preference capitalization: No capitalization -->
-        <item>Ingen</item>
+        <item>None</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Per mening</item>
+        <item>Per Sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Per ord</item>
+        <item>Per Word</item>
     </string-array>
 
 	<!-- ***************************
@@ -309,10 +308,10 @@
 	     Automation
 	     *************************** -->
 	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
-	<string name="label_select_action">Välj åtgärd:</string>
+	<string name="label_select_action">Select action:</string>
 	
 	<!-- Label above button that opens a list of all shopping lists to choose from. -->
-	<string name="label_select_list">Välj lista:</string>
+	<string name="label_select_list">Select list:</string>
 	
 	<!-- Arrays -->
 	

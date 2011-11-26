@@ -149,6 +149,9 @@
 	<string name="preference_fontsize">Големина на фонт</string>
 	<string name="preference_fontsize_summary">Промени ја големината на фонтот</string>
 	<string name="preference_fontsize_dialog_title">Избери големина на фонт</string>
+	<string name="preference_orientation">Orientation</string>
+	<string name="preference_orientation_summary">Change orientation</string>
+	<string name="preference_orientation_dialog_title">Choose orientation</string>
 	<string name="preference_sortorder_title">Редослед</string>
 	<string name="preference_sortorder_summary">Промени го редоследот на листата ставки</string>
 	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
@@ -273,6 +276,15 @@
     	<item>Стандардна</item>
     	<!-- Preference fontsize: large font size -->
         <item>Голем</item>
+    </string-array>
+    
+    <string-array name="preference_orientation_entries">
+    	<!-- Preference orientation: default -->
+        <item>Стандардна</item>
+    	<!-- Preference orientation: landscape -->
+    	<item>Landscape</item>
+    	<!-- Preference orientation: portrait -->
+        <item>Portrait</item>
     </string-array>
     
     <string-array name="preference_capitalization_entries">

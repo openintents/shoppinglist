@@ -149,6 +149,9 @@
 	<string name="preference_fontsize">글꼴 크기</string>
 	<string name="preference_fontsize_summary">글꼴 크기 수정</string>
 	<string name="preference_fontsize_dialog_title">글꼴 크기 선택</string>
+	<string name="preference_orientation">Orientation</string>
+	<string name="preference_orientation_summary">Change orientation</string>
+	<string name="preference_orientation_dialog_title">Choose orientation</string>
 	<string name="preference_sortorder_title">정렬 순서</string>
 	<string name="preference_sortorder_summary">Change sort order of list items</string>
 	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
@@ -273,6 +276,15 @@
     	<item>기본값</item>
     	<!-- Preference fontsize: large font size -->
         <item>큰</item>
+    </string-array>
+    
+    <string-array name="preference_orientation_entries">
+    	<!-- Preference orientation: default -->
+        <item>기본값</item>
+    	<!-- Preference orientation: landscape -->
+    	<item>Landscape</item>
+    	<!-- Preference orientation: portrait -->
+        <item>Portrait</item>
     </string-array>
     
     <string-array name="preference_capitalization_entries">

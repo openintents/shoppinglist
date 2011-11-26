@@ -21,95 +21,96 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
+  Florentina Mușat https://launchpad.net/~kuchiki14
   Peli https://launchpad.net/~peli0101
   iulargsb https://launchpad.net/~iulargsb</string>
 	
     <!-- Short explanation of the application -->
-	<string name="about_comments">OI Shopping list lets you keep track of your shopping items. You can also use it for other kinds of check lists, for example for ToDo lists or party guest lists.</string>
+	<string name="about_comments">Lista de cumpărături OI vă permite să urmăriți cumpărăturile. Puteți de asemenea să o utilizați pentru alte tipuri de liste de control, de exemplu pentru liste De făcut sau liste de musafiri pentru petreceri.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Shopping list</string>
+	<string name="app_name">Lista de cumpărături OI</string>
 
-	<string name="new_item">New item</string>
+	<string name="new_item">Articol nou</string>
 	<string name="new_list">Listă nouă</string>
 	<string name="send">Trimite lista</string>
-	<string name="mark_all_items">Mark all items</string>
+	<string name="mark_all_items">Bifează toate articolele</string>
 	<string name="empty_list_not_sent">Nu a fost trimisă lista goală.</string>
 	<string name="email_not_available">Nu există aplicație pentru trimitere.</string>
 	<string name="my_shopping_list">Lista mea de cumpărături</string>
-	<string name="new_list_hint">i.e. wishlist, family list</string>
-	<string name="clean_up_list">Clean up list</string>
+	<string name="new_list_hint">adică listă de dorințe, listă de familie</string>
+	<string name="clean_up_list">Curăță lista</string>
 	<string name="delete_list">Șterge lista</string>
 	<string name="ask_new_list">Introduceți numele listei de cumpărături</string>
 	<string name="ask_rename_list">Redenumește lista de cumpărături</string>
 	<string name="ask_edit_item">Editează element</string>
-	<string name="ask_new_store">Enter new store name</string>
+	<string name="ask_new_store">Introduceți un nume nou de magazin</string>
 	<string name="please_enter_name">Vă rugăm introduceți un nume</string>
-	<string name="no_items_marked">No items are marked as crossed out.</string>
+	<string name="no_items_marked">Nu există articole bifate ca fiind tăiate de pe listă.</string>
 	<string name="confirm_delete_list">Sigur doriți ștergerea acestei liste?</string>
-	<string name="no_shopping_provider">Error while accessing shopping lists.</string>
+	<string name="no_shopping_provider">Eroare în timpul accesării listei de cumpărături.</string>
 	<string name="pick_item">Alegeți un element</string>
 	<string name="pick_list">Alegeți o listă</string>
 	<string name="theme">Temă</string>
-	<string name="theme_settings">Theme settings</string>
-	<string name="rename_list">Rename list</string>
-	<string name="menu_mark_item">Mark item</string>
+	<string name="theme_settings">Configurări temă</string>
+	<string name="rename_list">Redenumește lista</string>
+	<string name="menu_mark_item">Bifează articolul</string>
 	<string name="menu_edit_item">Editează element</string>
-	<string name="menu_auto_add">Auto add</string>
-	<string name="menu_item_stores">Stores...</string>
-	<string name="menu_rename_store">Rename store</string>
-	<string name="menu_delete_store">Delete store</string>
-	<string name="confirm_delete_store">Do you really want to delete this store?</string>
-	<string name="no_items_available">No items available</string>
+	<string name="menu_auto_add">Adaugă automat</string>
+	<string name="menu_item_stores">Magazine...</string>
+	<string name="menu_rename_store">Redenumește magazinul</string>
+	<string name="menu_delete_store">Șterge magazinul</string>
+	<string name="confirm_delete_store">Sigur doriți să ștergeți acest magazin?</string>
+	<string name="no_items_available">Nu există articole disponibile</string>
 	
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
-	<string name="menu_remove_item">Remove item from list</string>
+	<string name="menu_remove_item">Elimină articolul din listă</string>
 	
 	<!-- Delete this item completely. If the user wants to add it again, they
 	     have to enter all the information again. -->
-	<string name="menu_delete_item">Delete item permanently</string>
-	<string name="menu_move_item">Move item to other list</string>
+	<string name="menu_delete_item">Șterge permanent articolul</string>
+	<string name="menu_move_item">Mută articolul în altă listă</string>
 	<!-- Button label to add an item to the list. -->
 	<string name="add">Adaugă</string>
 	
-	<string name="menu_pick_items">Pick items</string>
+	<string name="menu_pick_items">Selectează articole</string>
 	<string name="menu_start_shopping">Cumpărături</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s - Pick items</string>
+	<string name="pick_items_titel">%s - Selectează articole</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="shopping_title">%s - Shopping</string>
+	<string name="shopping_title">%s - Cumpărături</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current item. -->
-	<string name="item_stores_title">%s - Stores</string>
-	<string name="item_stores_activity_label">Edit Item Stores</string>
+	<string name="item_stores_title">%s - Magazine</string>
+	<string name="item_stores_activity_label">Editează magazinele articolului</string>
 	
-	<string name="tags">Tags</string>
+	<string name="tags">Etichete</string>
 	<string name="price">Preț</string>
 	<string name="item">Articol</string>
-	<string name="quantity">Quantity</string>
-	<string name="priority">Priority</string>
-	<string name="has_note">Has Note</string>
-	<string name="units">Units</string>
-	<string name="note">Note</string>
+	<string name="quantity">Cantitate</string>
+	<string name="priority">Prioritate</string>
+	<string name="has_note">Are o notiță</string>
+	<string name="units">Unități</string>
+	<string name="note">Notiță</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Total: %s</string>
 	
 	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
-	<string name="total_checked">Checked: %s</string>
-    <string name="priority1_total">Priority 1: %s</string>
-    <string name="priority2_total">Priority 1-2: %s</string>
-	<string name="priority3_total">Priority 1-3: %s</string>
-	<string name="priority4_total">Priority 1-4: %s</string>
+	<string name="total_checked">Bifat: %s</string>
+    <string name="priority1_total">Prioritate 1: %s</string>
+    <string name="priority2_total">Prioritate 1-2: %s</string>
+	<string name="priority3_total">Prioritate 1-3: %s</string>
+	<string name="priority4_total">Prioritate 1-4: %s</string>
 	
-	<string name="delete_item_confirm">Are you sure you want to permanently delete this item from this shopping lists?</string>
+	<string name="delete_item_confirm">Sigur doriți să ștergeți permanent acest articol din listele de cumpărături?</string>
 	<string name="delete">Șterge</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
@@ -117,105 +118,108 @@
 	<string name="empty"/>
 	
 	<!-- The shortcut is created on the home screen. -->
-	<string name="pick_list_for_shortcut">Pick list for shortcut</string>
+	<string name="pick_list_for_shortcut">Selectează lista pentru scurtătură</string>
 	
 	<!-- Shown if external application wants to insert new items. -->
-	<string name="pick_list_to_insert_items">Pick list to insert items</string>
+	<string name="pick_list_to_insert_items">Selectează listă pentru a introduce articole</string>
 	
 	<!-- Theme related -->
 	<!-- Title for selecting a theme -->
-	<string name="theme_pick">Pick a theme</string>
-	<string name="theme_description">Choose a theme for this list</string>
+	<string name="theme_pick">Selectează o temă</string>
+	<string name="theme_description">Alege o temă pentru această listă</string>
 	<string name="theme_default">Implicit</string>
 	<string name="theme_classic">Clasic</string>
 	<string name="theme_bugdroid">Android</string>
-	<string name="theme_classic_export">Classic (from OI Shopping List)</string>
-	<string name="theme_bugdroid_export">Android (from OI Shopping List)</string>
+	<string name="theme_classic_export">Clasic (din Lista de cumpărături OI)</string>
+	<string name="theme_bugdroid_export">Android (din Lista de cumpărături OI)</string>
 
 	<!--     Dialog box    -->
 	<!-- Button label "OK" -->
 	<string name="ok">OK</string>
 	<!-- Button label "Cancel" -->
 	<string name="cancel">Renunță</string>
-	<string name="use_theme_for_all_lists">Use this theme for all lists</string>
-	<string name="get_more_themes">Get more themes</string>
+	<string name="use_theme_for_all_lists">Utilizează această temă pentru toate listele</string>
+	<string name="get_more_themes">Obține mai multe teme</string>
 	
 	<!-- preferences -->
 	<string name="preferences">Configurări</string>
 	
-    <string name="preference_application">Application settings</string>
+    <string name="preference_application">Configurări aplicație</string>
     
-	<string name="preference_unchecked_on_top">Unchecked on top</string>
-	<string name="preference_unchecked_on_top_summary">Always show unchecked items first</string>
-	<string name="preference_fontsize">Font size</string>
-	<string name="preference_fontsize_summary">Change font size</string>
-	<string name="preference_fontsize_dialog_title">Choose font size</string>
-	<string name="preference_sortorder_title">Sort order</string>
-	<string name="preference_sortorder_summary">Change sort order of list items</string>
-	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
-	<string name="preference_sortorder_for_pick_summary">Change sort order of list items in Pick Items mode.</string>
-	<string name="preference_sortorder_dialog_title">Choose sort order</string>
-	<string name="preference_sortorder_for_pick_dialog_title">Choose sort order for Pick Items mode</string>
-	<string name="preference_loadlastused_title">Load last list used</string>
-	<string name="preference_loadlastused_summary">Always start with the list viewed last time.</string>
-	<string name="preference_capitalization_title">Capitalization</string>
-	<string name="preference_capitalization_summary">Automatic capitalization of entries</string>
-	<string name="preference_capitalization_dialog_title">Choose capitalization</string> 
-	<string name="preference_hidechecked_title">Hide checked items</string>
-	<string name="preference_hidechecked_summary">Immediately hide items checked off.</string>
-	<string name="preference_showprice_title">Show price</string>
-	<string name="preference_showprice_summary">Shown as extra column in list.</string>
-	<string name="preference_perstoreprice">Per-store prices</string>
-	<string name="preference_perstoreprice_title">Track per-store prices</string>
-	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
-	<string name="preference_showtags_title">Show tags</string>
-	<string name="preference_showtags_summary">Shown as extra column in list.</string>
-	<string name="preference_showquantity_title">Show quantity</string>
-	<string name="preference_showquantity_summary">Shown as extra column in list.</string>
-	<string name="preference_showpriority_title">Show priority</string>
-	<string name="preference_showpriority_summary">Shown as extra column in list.</string>
-	<string name="preference_showunits_title">Show units</string>
-	<string name="preference_showunits_summary">Shown as extra column in list.</string>
-	<string name="preference_prio_subtotal">Subtotal by priority</string>
-	<string name="preference_prioritytotal_title">Subtotal by priority</string>
-	<string name="preference_prioritytotal_summary">No subtotal by priority shown.</string>
-	<string name="preference_prioritytotal_dialog_title">Subtotal by priority</string>
-	<string name="preference_priosubtotalchecked_title">Include checked items</string>
-	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
-	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
-	<string name="preference_pickitemsinlist_title">Pick items directly in list</string>
-	<string name="preference_pickitemsinlist_on_summary">Switch main list to edit mode to re-add existing items</string>
-	<string name="preference_pickitemsinlist_off_summary">Add items to list using a dedicated dialog</string>
-	<string name="preference_samesortforpick_title">Always same sort order</string>
-	<string name="preference_samesortforpick_on_summary">Items are sorted in Pick Items mode just as in Shopping mode.</string>
-	<string name="preference_samesortforpick_off_summary">Sort order for Pick Items mode can be chosen separately.</string>
+	<string name="preference_unchecked_on_top">Nebifate în partea de sus</string>
+	<string name="preference_unchecked_on_top_summary">Afișează întotdeauna articolele nebifate la început</string>
+	<string name="preference_fontsize">Dimensiune font</string>
+	<string name="preference_fontsize_summary">Schimbă dimensiunea fontului</string>
+	<string name="preference_fontsize_dialog_title">Alege dimensiunea fontului</string>
+	<string name="preference_orientation">Orientation</string>
+	<string name="preference_orientation_summary">Change orientation</string>
+	<string name="preference_orientation_dialog_title">Choose orientation</string>
+	<string name="preference_sortorder_title">Ordinea de sortare</string>
+	<string name="preference_sortorder_summary">Schimbă ordinea de sortare a articolelor din listă</string>
+	<string name="preference_sortorder_for_pick_title">Ordinea de sortare - Selectează articole</string>
+	<string name="preference_sortorder_for_pick_summary">Schimbă ordinea de sortare a articolelor din listă în modul Selectează articole.</string>
+	<string name="preference_sortorder_dialog_title">Alege ordinea de sortare</string>
+	<string name="preference_sortorder_for_pick_dialog_title">Alege ordinea de sortare pentru modul Selectează articole</string>
+	<string name="preference_loadlastused_title">Încarcă ultima listă utilizată</string>
+	<string name="preference_loadlastused_summary">Începe întotdeauna cu lista vizualizată ultima dată.</string>
+	<string name="preference_capitalization_title">Capitalizare</string>
+	<string name="preference_capitalization_summary">Capitalizare automată a intrărilor</string>
+	<string name="preference_capitalization_dialog_title">Alege capitalizarea</string> 
+	<string name="preference_hidechecked_title">Ascunde articolele bifate</string>
+	<string name="preference_hidechecked_summary">Ascunde imediat articolele bifate.</string>
+	<string name="preference_showprice_title">Afișează prețul</string>
+	<string name="preference_showprice_summary">Afișează ca o coloană extra în listă.</string>
+	<string name="preference_perstoreprice">Prețuri per magazin</string>
+	<string name="preference_perstoreprice_title">Urmărește prețurile per magazin</string>
+	<string name="preference_perstoreprice_summary">Ține evidența prețurilor separate pentru fiecare articol de la fiecare magazin.</string>
+	<string name="preference_showtags_title">Afișează etichetele</string>
+	<string name="preference_showtags_summary">Afișează ca o coloană extra în listă.</string>
+	<string name="preference_showquantity_title">Afișează cantitatea</string>
+	<string name="preference_showquantity_summary">Afișează ca o coloană extra în listă.</string>
+	<string name="preference_showpriority_title">Afișează prioritatea</string>
+	<string name="preference_showpriority_summary">Afișează ca o coloană extra în listă.</string>
+	<string name="preference_showunits_title">Afișează unitățile</string>
+	<string name="preference_showunits_summary">Afișează ca o coloană extra în listă.</string>
+	<string name="preference_prio_subtotal">Subtotal după prioritate</string>
+	<string name="preference_prioritytotal_title">Subtotal după prioritate</string>
+	<string name="preference_prioritytotal_summary">Nu s-a afișat niciun subtotal după prioritate.</string>
+	<string name="preference_prioritytotal_dialog_title">Subtotal după prioritate</string>
+	<string name="preference_priosubtotalchecked_title">Include articolele bifate</string>
+	<string name="preference_priosubtotalchecked_on_summary">Subtotalul după prioritate include articolele bifate</string>
+	<string name="preference_priosubtotalchecked_off_summary">Subtotalul după prioritate exclude articolele bifate</string>
+	<string name="preference_pickitemsinlist_title">Selectează articolele direct în listă</string>
+	<string name="preference_pickitemsinlist_on_summary">Comută lista principală la modul de editare pentru a readăuga articolele existente</string>
+	<string name="preference_pickitemsinlist_off_summary">Adaugă articolele la listă utilizând un dialog special</string>
+	<string name="preference_samesortforpick_title">Întotdeauna aceeași ordine de sortare</string>
+	<string name="preference_samesortforpick_on_summary">Articolele sunt sortate în modul Selectează articole la fel ca în modul Cumpărături.</string>
+	<string name="preference_samesortforpick_off_summary">Ordinea de sortare pentru modul Selectează articole poate fi selectat separat.</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
-	<string name="preference_shake_title">Shake to clean up</string>
+	<string name="preference_shake_title">Scutură pentru a curăța</string>
 	
 	<!-- Preference summary: Shake the phone to clean up the list. -->
-	<string name="preference_shake_summary">Shake the phone to clean up the list.</string>
+	<string name="preference_shake_summary">Scutură telefonul pentru curăța lista.</string>
 	
     <string name="preference_advanced">Configurări avansate</string>
-    <string name="preference_advanced_summary">Additional settings regarding the appearance.</string>
+    <string name="preference_advanced_summary">Configurări adiționale în privința aspectului.</string>
     
     <!-- Preference category: General settings -->
     <string name="preference_general">General</string>
-    <string name="preference_pickitems">Pick Items</string>
+    <string name="preference_pickitems">Selectează articole</string>
     
-    <string name="preference_appearance">Appearance</string>
+    <string name="preference_appearance">Aspect</string>
     
-    <string name="preference_addons">Add-ons</string>
-    <string name="preference_get_addons">Get new add-ons</string>
-    <string name="preference_get_addons_summary">Search for extensions and themes online.</string>
-    <string name="preference_get_market_addons">Get add-ons from Market</string>
-    <string name="preference_get_developer_addons">Get add-ons from OpenIntents</string>
+    <string name="preference_addons">Supliment</string>
+    <string name="preference_get_addons">Obține suplimente noi</string>
+    <string name="preference_get_addons_summary">Caută extensii și teme online.</string>
+    <string name="preference_get_market_addons">Obține suplimente de la Market</string>
+    <string name="preference_get_developer_addons">Obține suplimente de la OpenIntents</string>
     <string name="preference_extensions">Extensii</string>
-    <string name="preference_themes">Themes</string>
-    <string name="preference_market_extensions_summary">Caută extensii pe Android Market</string>
-    <string name="preference_market_themes_summary">Search for themes at Android Market.</string>
-    <string name="preference_developer_extensions_summary">Instalează extensii de pe siteul OpenIntents.</string>
-	<string name="preference_developer_themes_summary">Get themes from the OpenIntents homepage.</string>
+    <string name="preference_themes">Teme</string>
+    <string name="preference_market_extensions_summary">Caută extensii pe Android Market.</string>
+    <string name="preference_market_themes_summary">Caută teme la Android Market.</string>
+    <string name="preference_developer_extensions_summary">Instalează extensii de pe pagina principală OpenIntents.</string>
+	<string name="preference_developer_themes_summary">Obține teme de la pagina principală OpenIntents.</string>
 	
 	<!-- ***************************
 	     Permissions
@@ -227,7 +231,7 @@
 	<string name="oi_shopping_permission_read_descr">Permite unei aplicații să citească listele de cumpărături. Listele criptate sunt oferite în formatul criptat.</string>
 	<!-- Permission to write to shopping lists -->
 	<string name="oi_shopping_permission_write">scrie liste de cumpărături</string>
-	<string name="oi_shopping_permission_write_descr">Allows an application to create new lists and items or change existing ones.</string>
+	<string name="oi_shopping_permission_write_descr">Permite unei aplicații să creeze liste și articole noi sau să le schimbe pe cele existente.</string>
 	
 	
 	<!-- ***************************
@@ -236,77 +240,86 @@
 	
     <string-array name="preference_sortorder_entries">
     	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
-    	<item>unchecked first, alphabetical</item>
+    	<item>nefibate la început, alfabetic</item>
         <!-- Preference sort order: Sort by item name -->
-    	<item>alphabetical</item>
+    	<item>alfabetic</item>
         <!-- Preference sort order: Newest item first -->
-    	<item>newest first</item>
+    	<item>cele mai noi la început</item>
         <!-- Preference sort order: Oldest item first -->
-    	<item>oldest first</item>
+    	<item>cele mai vechi la început</item>
     	<!-- Preference sort order: Sort alphabetically by tags -->
-    	<item>tags alphabetical</item>
+    	<item>alfabetic după etichete</item>
         <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
-    	<item>priority, tags alphabetical</item>
+    	<item>prioritate, alfabetic după etichete</item>
         <!-- Preference sort order: Sort by price, the most expensive first -->
-    	<item>most expensive first</item>
+    	<item>cele mai scumpe la început</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
-    	<item>unchecked first, tags alphabetical</item>
+    	<item>nebifate la început, alfabetic după etichete</item>
     	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
-    	<item>unchecked first, priority, alphabetical</item>
+    	<item>nebifate la început, prioritate, alfabetic</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
-    	<item>unchecked first, priority, tags alphabetical</item>
+    	<item>nebifate la început, prioritate, alfabetic după etichete</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">
-    	<item>Not shown</item>
-    	<item>Priority 1</item>
-    	<item>Priority 1-2</item>
-    	<item>Priority 1-3</item>
-    	<item>Priority 1-4</item>
+    	<item>Nu este afișat</item>
+    	<item>Prioritate 1</item>
+    	<item>Prioritate 1-2</item>
+    	<item>Prioritate 1-3</item>
+    	<item>Prioritate 1-4</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
     	<!-- Preference fontsize: tiny font size -->
-        <item>Tiny</item>
+        <item>Mărunt</item>
     	<!-- Preference fontsize: small font size -->
-        <item>Small</item>
+        <item>Mic</item>
     	<!-- Preference fontsize: default font size-->
     	<item>Implicit</item>
     	<!-- Preference fontsize: large font size -->
-        <item>Large</item>
+        <item>Mare</item>
+    </string-array>
+    
+    <string-array name="preference_orientation_entries">
+    	<!-- Preference orientation: default -->
+        <item>Implicit</item>
+    	<!-- Preference orientation: landscape -->
+    	<item>Landscape</item>
+    	<!-- Preference orientation: portrait -->
+        <item>Portrait</item>
     </string-array>
     
     <string-array name="preference_capitalization_entries">
     	<!-- Preference capitalization: No capitalization -->
-        <item>None</item>
+        <item>Nimic</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Per Sentence</item>
+        <item>Per propoziție</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Per Word</item>
+        <item>Per cuvânt</item>
     </string-array>
 
 	<!-- ***************************
 	     OI Notepad
 	     *************************** -->
 	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
-	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<string name="notepad_not_available">Editarea notițelor articolului necesită Carnețelul OI.</string>
 	<!-- Name of application "OI Notepad". Translations should be consistent. -->
-	<string name="notepad">OI Notepad</string>
+	<string name="notepad">Carnețel OI</string>
 
 	<!-- ***************************
 	     Automation
 	     *************************** -->
 	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
-	<string name="label_select_action">Select action:</string>
+	<string name="label_select_action">Selectează acțiunea:</string>
 	
 	<!-- Label above button that opens a list of all shopping lists to choose from. -->
-	<string name="label_select_list">Select list:</string>
+	<string name="label_select_list">Selectează lista:</string>
 	
 	<!-- Arrays -->
 	
     <string-array name="automation_actions">
     	<!-- Automation action to clean up a list. -->
-    	<item>Clean up list</item>
+    	<item>Curăță lista</item>
     </string-array>
       
 	     

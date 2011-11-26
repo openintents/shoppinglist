@@ -149,6 +149,9 @@
 	<string name="preference_fontsize">Veličina fonta</string>
 	<string name="preference_fontsize_summary">Promjena veličine fonta</string>
 	<string name="preference_fontsize_dialog_title">Odaberite veličinu fonta</string>
+	<string name="preference_orientation">Orientation</string>
+	<string name="preference_orientation_summary">Change orientation</string>
+	<string name="preference_orientation_dialog_title">Choose orientation</string>
 	<string name="preference_sortorder_title">Raspored sortiranja</string>
 	<string name="preference_sortorder_summary">Promjena rasporeda sortiranja stavki popisa</string>
 	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
@@ -273,6 +276,15 @@
     	<item>Zadano</item>
     	<!-- Preference fontsize: large font size -->
         <item>Veliko</item>
+    </string-array>
+    
+    <string-array name="preference_orientation_entries">
+    	<!-- Preference orientation: default -->
+        <item>Zadano</item>
+    	<!-- Preference orientation: landscape -->
+    	<item>Landscape</item>
+    	<!-- Preference orientation: portrait -->
+        <item>Portrait</item>
     </string-array>
     
     <string-array name="preference_capitalization_entries">

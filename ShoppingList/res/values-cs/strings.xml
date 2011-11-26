@@ -150,6 +150,9 @@
 	<string name="preference_fontsize">Velikost písma</string>
 	<string name="preference_fontsize_summary">Změnit velikost písma</string>
 	<string name="preference_fontsize_dialog_title">Zvolte velikost písma</string>
+	<string name="preference_orientation">Orientation</string>
+	<string name="preference_orientation_summary">Change orientation</string>
+	<string name="preference_orientation_dialog_title">Choose orientation</string>
 	<string name="preference_sortorder_title">Třídit objednávku</string>
 	<string name="preference_sortorder_summary">Změnit roztřídění bodů na seznamu</string>
 	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
@@ -274,6 +277,15 @@
     	<item>Výchozí nastavení</item>
     	<!-- Preference fontsize: large font size -->
         <item>Velké</item>
+    </string-array>
+    
+    <string-array name="preference_orientation_entries">
+    	<!-- Preference orientation: default -->
+        <item>Výchozí nastavení</item>
+    	<!-- Preference orientation: landscape -->
+    	<item>Landscape</item>
+    	<!-- Preference orientation: portrait -->
+        <item>Portrait</item>
     </string-array>
     
     <string-array name="preference_capitalization_entries">

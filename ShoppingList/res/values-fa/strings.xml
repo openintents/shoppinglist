@@ -151,6 +151,9 @@
 	<string name="preference_fontsize">اندازه فونت</string>
 	<string name="preference_fontsize_summary">اندازه فونت را تغییر دهید</string>
 	<string name="preference_fontsize_dialog_title">انتخاب اندازه فونت</string>
+	<string name="preference_orientation">Orientation</string>
+	<string name="preference_orientation_summary">Change orientation</string>
+	<string name="preference_orientation_dialog_title">Choose orientation</string>
 	<string name="preference_sortorder_title">تنظیم ترتیب</string>
 	<string name="preference_sortorder_summary">ترتیب موارد لیست را تغییر دهید</string>
 	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
@@ -275,6 +278,15 @@
     	<item>پیش فرض</item>
     	<!-- Preference fontsize: large font size -->
         <item>بزرگ</item>
+    </string-array>
+    
+    <string-array name="preference_orientation_entries">
+    	<!-- Preference orientation: default -->
+        <item>پیش فرض</item>
+    	<!-- Preference orientation: landscape -->
+    	<item>Landscape</item>
+    	<!-- Preference orientation: portrait -->
+        <item>Portrait</item>
     </string-array>
     
     <string-array name="preference_capitalization_entries">
