@@ -25,7 +25,8 @@ To obtain the current release, visit
 release 1.5
 date: ?
 
-- new setting to keep screen orientation (issue 402, GCI patch by Gautam)
+- new setting to keep screen orientation (issue 402, Google code-in task by Gautam)
+- new setting to disable screen lock (Google Code-in task by Kido)
 
 ---------------------------------------------------------
 release 1.4.1
