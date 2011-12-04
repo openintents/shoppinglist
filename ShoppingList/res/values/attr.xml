@@ -73,4 +73,17 @@
 		<attr name="lineMode" format="integer" />
 		<attr name="lineColor" format="color" />
 	</declare-styleable>
+	
+<!-- 
+  Attrs for PopupMenu code borrowed from AOSP ICS source 
+ -->
+  <attr name="listPreferredItemHeightSmall">64dip</attr>
+  <attr name="listPreferredItemPaddingLeft">6dip</attr>
+  <attr name="listPreferredItemPaddingRight">6dip</attr>
+  <attr name="textAppearanceListItemSmall">?android:attr/textAppearanceLarge</attr>
+  <attr name="textAppearanceSmall">@android:style/TextAppearance.Small</attr>
+  <attr name="dropdownListPreferredItemHeight">?android:attr/listPreferredItemHeight</attr>
+  <attr name="popupMenuStyle">@android:style/Widget.PopupMenu</attr>
+  <dimen name="config_prefDialogWidth">320dp</dimen>
+	    
 </resources>

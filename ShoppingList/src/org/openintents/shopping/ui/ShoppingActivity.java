@@ -40,12 +40,14 @@ import org.openintents.shopping.library.util.PriceConverter;
 import org.openintents.shopping.library.util.ShoppingUtils;
 import org.openintents.shopping.ui.dialog.DialogActionListener;
 import org.openintents.shopping.ui.dialog.EditItemDialog;
+import org.openintents.shopping.ui.dialog.EditItemDialog.FieldType;
 import org.openintents.shopping.ui.dialog.EditItemDialog.OnItemChangedListener;
 import org.openintents.shopping.ui.dialog.NewListDialog;
 import org.openintents.shopping.ui.dialog.RenameListDialog;
 import org.openintents.shopping.ui.dialog.ThemeDialog;
 import org.openintents.shopping.ui.dialog.ThemeDialog.ThemeDialogListener;
 import org.openintents.shopping.ui.tablet.ShoppingListFilterFragment;
+import org.openintents.shopping.ui.widget.QuickSelectMenu;
 import org.openintents.shopping.ui.widget.ShoppingItemsView;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.ActionBarListener;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.DragListener;
@@ -108,6 +110,7 @@ import android.widget.CursorAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import org.openintents.shopping.ui.widget.backport.PopupMenu;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -1095,7 +1098,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 			public void onItemClick(AdapterView parent, View v, int pos, long id) {
 				Cursor c = (Cursor) parent.getItemAtPosition(pos);
-				onCustomClick(c, pos, EditItemDialog.FieldType.ITEMNAME);
+				onCustomClick(c, pos, EditItemDialog.FieldType.ITEMNAME, v);
 				// DO NOT CLOSE THIS CURSOR - IT IS A MANAGED ONE.
 				// ---- c.close();
 			}
@@ -1209,11 +1212,13 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		}
 	}
 
-	public void onCustomClick(Cursor c, int pos, EditItemDialog.FieldType field) {
+	public void onCustomClick(Cursor c, int pos, EditItemDialog.FieldType field,
+							  View clicked_view) {
 		if (mState == STATE_PICK_ITEM) {
 			pickItem(c);
 		} else {
 			if (mItemsView.mShowCheckBox) {
+				boolean handled = false;
 				// In default theme, there is an extra check box,
 				// so clicking on anywhere else means to edit the
 				// item.
@@ -1223,8 +1228,17 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 					// should really be a per-list preference
 				{
 					editItemStores(pos);
+					handled = true;
 				}
-				else
+				
+				if ((field == EditItemDialog.FieldType.PRIORITY || 
+					 field == EditItemDialog.FieldType.QUANTITY) &&
+					 PreferenceActivity.getQuickEditModeFromPrefs(this))
+				{
+					handled = QuickEditFieldPopupMenu(c, pos, field, clicked_view);
+				}
+				
+				if (!handled)
 					editItem(pos, field);
 			} else {
 				// For themes without a checkbox, clicking anywhere means
@@ -1232,6 +1246,55 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				mItemsView.toggleItemBought(pos);
 			}
 		}
+	}
+
+	private boolean QuickEditFieldPopupMenu(final Cursor c, final int pos, 
+			final FieldType field, View v) {
+		QuickSelectMenu popup = new QuickSelectMenu(this, v);
+        	
+		Menu menu = popup.getMenu();
+		if (menu == null) {
+			return false;
+		}
+		menu.add("1");
+		menu.add("2");
+		menu.add("3");
+		menu.add("4");
+		menu.add("5");
+		if (field == FieldType.QUANTITY) {
+			menu.add(R.string.otherqty);
+		} 
+		if (field == FieldType.PRIORITY) {
+			menu.add(R.string.otherpri);
+		}
+
+		 popup.setOnItemSelectedListener(new QuickSelectMenu.OnItemSelectedListener() {
+	            public void onItemSelected(CharSequence name) {
+	            	if (name.length() > 1) {
+	            		// Other ... use edit dialog
+	            		editItem(pos, field);	            		
+	            	} else {
+	            		long number = name.charAt(0)-'0';
+	            		ContentValues values = new ContentValues();
+	            		switch (field) {
+	            		case PRIORITY:
+	            			values.put(Contains.PRIORITY, number);
+	            			break;
+	            		case QUANTITY:
+	            			values.put(Contains.QUANTITY, number);
+	            			break;
+	            		}
+	            		mItemsView.mCursorItems.moveToPosition(pos);
+	            		String containsId = mItemsView.mCursorItems.getString(mStringItemsCONTAINSID);
+	            		Uri uri = Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI, containsId);
+	            		getApplicationContext().getContentResolver().update(uri, values, null, null);
+	            		onItemChanged(); // probably overkill
+	            	}
+	            }
+	        });
+		
+		popup.show();
+		return true;
 	}
 
 	/**

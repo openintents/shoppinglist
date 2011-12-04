@@ -18,6 +18,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.support.v2.os.Build;
 import android.text.method.KeyListener;
 import android.text.method.TextKeyListener;
 
@@ -86,6 +87,8 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	public static final boolean PREFS_PRIOSUBINCLCHECKED_DEFAULT = true;
 	public static final String PREFS_PICKITEMSINLIST = "pickitemsinlist";
 	public static final boolean PREFS_PICKITEMSINLIST_DEFAULT = false;
+	public static final String PREFS_QUICKEDITMODE = "quickedit";
+	public static final boolean PREFS_QUICKEDITMODE_DEFAULT = false;
 	
 	public static final int PREFS_CAPITALIZATION_DEFAULT = 1;
 
@@ -117,6 +120,11 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 		mPickItemsSort = (ListPreference) findPreference(PREFS_PICKITEMS_SORTORDER);
 
 		mIncludesChecked = (CheckBoxPreference) findPreference(PREFS_PRIOSUBINCLCHECKED);
+		
+		// Cupcake has problems with Quick Edit Mode. Donut untested.
+		CheckBoxPreference quickedit = (CheckBoxPreference) findPreference(PREFS_QUICKEDITMODE);
+		quickedit.setEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO);
+		
 		SharedPreferences shared = getPreferenceScreen().getSharedPreferences();
 		updatePrioSubtotalSummary(shared);
 		updatePickItemsSortPref(shared);
@@ -199,6 +207,12 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	public static boolean getUsingPerStorePricesFromPrefs(Context context) {
 		boolean using = PreferenceManager.getDefaultSharedPreferences(context)
 		.getBoolean(PREFS_PERSTOREPRICES,PREFS_PERSTOREPRICES_DEFAULT);
+		return using;
+	}
+
+	public static boolean getQuickEditModeFromPrefs(Context context) {
+		boolean using = PreferenceManager.getDefaultSharedPreferences(context)
+		.getBoolean(PREFS_QUICKEDITMODE,PREFS_QUICKEDITMODE_DEFAULT);
 		return using;
 	}
 	

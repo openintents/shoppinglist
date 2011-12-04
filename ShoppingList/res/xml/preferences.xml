@@ -61,6 +61,9 @@
 				<CheckBoxPreference android:key="screenlock"
 					android:defaultValue="false" android:title="@string/preference_screenlock_title"
 					android:summary="@string/preference_screenlock_summary" />
+				<CheckBoxPreference android:key="quickedit" android:summaryOn="@string/preference_quickedit_on_summary"
+					android:title="@string/preference_quickedit"
+					android:summaryOff="@string/preference_quickedit_off_summary"/>
 			</PreferenceCategory>					
 			<PreferenceCategory android:title="@string/preference_appearance">
 				<CheckBoxPreference android:key="showprice"

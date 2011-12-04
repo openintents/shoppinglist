@@ -242,7 +242,7 @@ public class ShoppingItemsView extends ListView {
 							if (debug) Log.d(TAG, "Quantity Click ");
 							if (mListener != null) {
 								mListener.onCustomClick(cursor, cursorpos,
-										EditItemDialog.FieldType.QUANTITY);
+										EditItemDialog.FieldType.QUANTITY, v);
 							}
 						}
 
@@ -356,7 +356,7 @@ public class ShoppingItemsView extends ListView {
 					if (debug) Log.d(TAG, "Click on price: ");
 					if (mListener != null) {
 						mListener.onCustomClick(cursor, cursorpos,
-								EditItemDialog.FieldType.PRICE);
+								EditItemDialog.FieldType.PRICE, v);
 					}
 				}
 
@@ -370,7 +370,7 @@ public class ShoppingItemsView extends ListView {
 					if (debug) Log.d(TAG, "Click on units: ");
 					if (mListener != null) {
 						mListener.onCustomClick(cursor, cursorpos,
-								EditItemDialog.FieldType.UNITS);
+								EditItemDialog.FieldType.UNITS, v);
 					}
 				}
 
@@ -384,7 +384,7 @@ public class ShoppingItemsView extends ListView {
 					if (debug) Log.d(TAG, "Click on priority: ");
 					if (mListener != null) {
 						mListener.onCustomClick(cursor, cursorpos,
-								EditItemDialog.FieldType.PRIORITY);
+								EditItemDialog.FieldType.PRIORITY, v);
 					}
 				}
 
@@ -398,7 +398,7 @@ public class ShoppingItemsView extends ListView {
 					if (debug) Log.d(TAG, "Click on tags: ");
 					if (mListener != null) {
 						mListener.onCustomClick(cursor, cursorpos,
-								EditItemDialog.FieldType.TAGS);
+								EditItemDialog.FieldType.TAGS, v);
 					}
 				}
 
@@ -412,7 +412,7 @@ public class ShoppingItemsView extends ListView {
 					if (debug) Log.d(TAG, "Click on has_note: ");
 					//if (mListener != null) {
 					//	mListener.onCustomClick(cursor, cursorpos,
-					//			EditItemDialog.FieldType.PRIORITY);
+					//			EditItemDialog.FieldType.PRIORITY, v);
 					//}
 					Intent i = new Intent(Intent.ACTION_VIEW);
 					cursor.moveToPosition(cursorpos);
@@ -444,7 +444,7 @@ public class ShoppingItemsView extends ListView {
 					if (debug) Log.d(TAG, "Click on description: ");
 					if (mListener != null) {
 						mListener.onCustomClick(cursor, cursorpos,
-								EditItemDialog.FieldType.ITEMNAME);
+								EditItemDialog.FieldType.ITEMNAME, v);
 					}
 				}
 
@@ -1424,7 +1424,7 @@ public class ShoppingItemsView extends ListView {
 	}
 
 	public interface OnCustomClickListener {
-		public void onCustomClick(Cursor c, int pos, EditItemDialog.FieldType field);
+		public void onCustomClick(Cursor c, int pos, EditItemDialog.FieldType field, View v);
 	}
 
 	@Override
