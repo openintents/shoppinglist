@@ -102,6 +102,9 @@ Launchpad Contributions:
 	<string name="units">Units</string>
 	<string name="note">Note</string>
 	
+	<string name="otherqty">Other Quantity...</string>
+	<string name="otherpri">Other Priority...</string>   
+	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Total: %s</string>
 	
@@ -174,6 +177,10 @@ Launchpad Contributions:
 	<string name="preference_perstoreprice">Per-store prices</string>
 	<string name="preference_perstoreprice_title">Track per-store prices</string>
 	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
+	<string name="preference_screenlock_title">Disable screen lock</string>
+	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
+	<string name="preference_reset_quantity">Reset Quantity</string>
+	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
 	<string name="preference_showtags_title">Show tags</string>
 	<string name="preference_showtags_summary">Shown as extra column in list.</string>
 	<string name="preference_showquantity_title">Show quantity</string>
@@ -203,7 +210,7 @@ Launchpad Contributions:
 	<string name="preference_shake_summary">Shake the phone to clean up the list.</string>
 	
     <string name="preference_advanced">Advanced settings</string>
-    <string name="preference_advanced_summary">Additional settings regarding the appearance.</string>
+    <string name="preference_advanced_summary">Additional settings.</string>
     
     <!-- Preference category: General settings -->
     <string name="preference_general">General</string>
@@ -222,7 +229,11 @@ Launchpad Contributions:
     <string name="preference_market_themes_summary">Search for themes at Android Market.</string>
     <string name="preference_developer_extensions_summary">Get extensions from the OpenIntents homepage.</string>
 	<string name="preference_developer_themes_summary">Get themes from the OpenIntents homepage.</string>
-	
+	<string name="preference_quickedit">Quick Edit Mode</string>
+	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
+	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
+		    
+	    
 	<!-- ***************************
 	     Permissions
 	     *************************** -->

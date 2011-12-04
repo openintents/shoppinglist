@@ -23,6 +23,7 @@
 	<string name="about_translators">Launchpad Contributions:
   Damian Skrodzki https://launchpad.net/~damienix
   Peli https://launchpad.net/~peli0101
+  Piotr Łazarczyk https://launchpad.net/~quazarxd
   Tomasz \'Zen\' Napierala https://launchpad.net/~tzn
   friedger https://launchpad.net/~friedger</string>
 	
@@ -48,7 +49,7 @@
 	<string name="ask_new_list">Wstaw nazwę nowej listy</string>
 	<string name="ask_rename_list">Zmień nazwę listy zakupów</string>
 	<string name="ask_edit_item">Edytuj element</string>
-	<string name="ask_new_store">Enter new store name</string>
+	<string name="ask_new_store">Wprowadź nazwę nowego sklepu</string>
 	<string name="please_enter_name">Wstaw nazwę</string>
 	<string name="no_items_marked">Nie ma elementów wybranych jako zakreślone.</string>
 	<string name="confirm_delete_list">Czy na pewno chcesz usunąć tę listę zakupów?</string>
@@ -61,10 +62,10 @@
 	<string name="menu_mark_item">Zaznacz element</string>
 	<string name="menu_edit_item">Edytuj element</string>
 	<string name="menu_auto_add">Edytuj element</string>
-	<string name="menu_item_stores">Stores...</string>
-	<string name="menu_rename_store">Rename store</string>
-	<string name="menu_delete_store">Delete store</string>
-	<string name="confirm_delete_store">Do you really want to delete this store?</string>
+	<string name="menu_item_stores">Sklepy...</string>
+	<string name="menu_rename_store">Zmień nazwę sklepu</string>
+	<string name="menu_delete_store">Usuń sklep</string>
+	<string name="confirm_delete_store">Czy na pewno chcesz usunąć ten sklep?</string>
 	<string name="no_items_available">Brak elementów</string>
 	
 	<!-- Remove item from this list, but keep it internally, so that the user
@@ -89,8 +90,8 @@
 	<string name="shopping_title">%s - zakupy</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current item. -->
-	<string name="item_stores_title">%s - Stores</string>
-	<string name="item_stores_activity_label">Edit Item Stores</string>
+	<string name="item_stores_title">%s - Sklepy</string>
+	<string name="item_stores_activity_label">Edytuj sklepy</string>
 	
 	<string name="tags">Etykiety</string>
 	<string name="price">Cena</string>
@@ -101,17 +102,20 @@
 	<string name="units">Jednostki</string>
 	<string name="note">Notatka</string>
 	
+	<string name="otherqty">Other Quantity...</string>
+	<string name="otherpri">Other Priority...</string>   
+	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Razem: %s</string>
 	
 	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
 	<string name="total_checked">Zaznaczone: %s</string>
-    <string name="priority1_total">Priority 1: %s</string>
-    <string name="priority2_total">Priority 1-2: %s</string>
-	<string name="priority3_total">Priority 1-3: %s</string>
-	<string name="priority4_total">Priority 1-4: %s</string>
+    <string name="priority1_total">Priorytet 1: %s</string>
+    <string name="priority2_total">Priorytet 1-2: %s</string>
+	<string name="priority3_total">Priorytet 1-3: %s</string>
+	<string name="priority4_total">Priorytet 1-4: %s</string>
 	
-	<string name="delete_item_confirm">Are you sure you want to permanently delete this item from this shopping lists?</string>
+	<string name="delete_item_confirm">Czy na pewno chcesz trwale usunąć ten element z listy zakupów?</string>
 	<string name="delete">Usuń</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
@@ -152,15 +156,15 @@
 	<string name="preference_fontsize">Rozmiar czcionki</string>
 	<string name="preference_fontsize_summary">Zmień rozmiar czcionki</string>
 	<string name="preference_fontsize_dialog_title">Wybierz rozmiar czcionki</string>
-	<string name="preference_orientation">Orientation</string>
-	<string name="preference_orientation_summary">Change orientation</string>
-	<string name="preference_orientation_dialog_title">Choose orientation</string>
+	<string name="preference_orientation">Orientacja</string>
+	<string name="preference_orientation_summary">Zmień orientację</string>
+	<string name="preference_orientation_dialog_title">Wybierz orientację</string>
 	<string name="preference_sortorder_title">Porządek sortowania</string>
 	<string name="preference_sortorder_summary">Zmień porządek sortowania elementów listy</string>
-	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
-	<string name="preference_sortorder_for_pick_summary">Change sort order of list items in Pick Items mode.</string>
+	<string name="preference_sortorder_for_pick_title">Kolejność sortowania - wybierz elementy</string>
+	<string name="preference_sortorder_for_pick_summary">Zmień kolejność sortowania elementów listy</string>
 	<string name="preference_sortorder_dialog_title">Wybierz porządek sortowania</string>
-	<string name="preference_sortorder_for_pick_dialog_title">Choose sort order for Pick Items mode</string>
+	<string name="preference_sortorder_for_pick_dialog_title">Wybierz kolejność sortowania elementów listy</string>
 	<string name="preference_loadlastused_title">Wczytaj ostatno używaną listę</string>
 	<string name="preference_loadlastused_summary">Zawsze rozpoczynaj z ostatnio oglądaną listą.</string>
 	<string name="preference_capitalization_title">Wielkość liter</string>
@@ -170,9 +174,13 @@
 	<string name="preference_hidechecked_summary">Chowaj odznaczane elementy</string>
 	<string name="preference_showprice_title">Pokaż cenę</string>
 	<string name="preference_showprice_summary">Pokaż jako dodatkową kolumnę na liście.</string>
-	<string name="preference_perstoreprice">Per-store prices</string>
-	<string name="preference_perstoreprice_title">Track per-store prices</string>
-	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
+	<string name="preference_perstoreprice">Ceny w sklepie</string>
+	<string name="preference_perstoreprice_title">Śledź ceny w sklepie</string>
+	<string name="preference_perstoreprice_summary">Śledź ceny oddzielnie dla każdego elementu w każdym sklepie.</string>
+	<string name="preference_screenlock_title">Disable screen lock</string>
+	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
+	<string name="preference_reset_quantity">Reset Quantity</string>
+	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
 	<string name="preference_showtags_title">Pokaż etykiety</string>
 	<string name="preference_showtags_summary">Pokaż jako dodatkową kolumnę na liście.</string>
 	<string name="preference_showquantity_title">Pokaż ilość</string>
@@ -181,19 +189,19 @@
 	<string name="preference_showpriority_summary">Pokaż jako dodatkową kolumnę na liście.</string>
 	<string name="preference_showunits_title">Pokazuj jednostki</string>
 	<string name="preference_showunits_summary">Pokaż jako dodatkową kolumnę na liście.</string>
-	<string name="preference_prio_subtotal">Subtotal by priority</string>
-	<string name="preference_prioritytotal_title">Subtotal by priority</string>
-	<string name="preference_prioritytotal_summary">No subtotal by priority shown.</string>
-	<string name="preference_prioritytotal_dialog_title">Subtotal by priority</string>
-	<string name="preference_priosubtotalchecked_title">Include checked items</string>
-	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
-	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
-	<string name="preference_pickitemsinlist_title">Pick items directly in list</string>
-	<string name="preference_pickitemsinlist_on_summary">Switch main list to edit mode to re-add existing items</string>
-	<string name="preference_pickitemsinlist_off_summary">Add items to list using a dedicated dialog</string>
-	<string name="preference_samesortforpick_title">Always same sort order</string>
-	<string name="preference_samesortforpick_on_summary">Items are sorted in Pick Items mode just as in Shopping mode.</string>
-	<string name="preference_samesortforpick_off_summary">Sort order for Pick Items mode can be chosen separately.</string>
+	<string name="preference_prio_subtotal">Razem dla priorytetu</string>
+	<string name="preference_prioritytotal_title">Razem dla priorytetu</string>
+	<string name="preference_prioritytotal_summary">Brak sumy dla priorytetu.</string>
+	<string name="preference_prioritytotal_dialog_title">Razem dla priorytetu</string>
+	<string name="preference_priosubtotalchecked_title">Dodaj sprawdzone elementy</string>
+	<string name="preference_priosubtotalchecked_on_summary">Razem dla priorytetu włączając sprawdzone elementy</string>
+	<string name="preference_priosubtotalchecked_off_summary">Razem dla priorytetu wyłączając sprawdzone elementy</string>
+	<string name="preference_pickitemsinlist_title">Wybierz elementy bezpośrednio w liście</string>
+	<string name="preference_pickitemsinlist_on_summary">Przejdź do trybu edycji, aby ponownie dodawać elementy</string>
+	<string name="preference_pickitemsinlist_off_summary">Dodaj elementy do listy za pomocą oddzielnego formularza</string>
+	<string name="preference_samesortforpick_title">Zawsze ta sama kolejność sortowania</string>
+	<string name="preference_samesortforpick_on_summary">Elementy są posortowane tak samo w wybieraniu elementów i trybie Zakupów.</string>
+	<string name="preference_samesortforpick_off_summary">Kolejność sortowania w wybieraniu elementów można ustawić oddzielnie.</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Potrząśnij, aby wyczyścić</string>
@@ -202,11 +210,11 @@
 	<string name="preference_shake_summary">Potrząśnij telefonem, aby wyczyścić listę.</string>
 	
     <string name="preference_advanced">Ustawienia zaawansowane</string>
-    <string name="preference_advanced_summary">Dodatkowe ustawienia wyglądu</string>
+    <string name="preference_advanced_summary">Additional settings.</string>
     
     <!-- Preference category: General settings -->
     <string name="preference_general">Ogólne</string>
-    <string name="preference_pickitems">Pick Items</string>
+    <string name="preference_pickitems">Wybierz elementy</string>
     
     <string name="preference_appearance">Wygląd</string>
     
@@ -221,7 +229,11 @@
     <string name="preference_market_themes_summary">Szukaj motywów na Android Market</string>
     <string name="preference_developer_extensions_summary">Pobierz rozszerzenia ze strony OpenIntents.</string>
 	<string name="preference_developer_themes_summary">Pobierz motywy ze strony OpenIntents</string>
-	
+	<string name="preference_quickedit">Quick Edit Mode</string>
+	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
+	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
+		    
+	    
 	<!-- ***************************
 	     Permissions
 	     *************************** -->
@@ -251,7 +263,7 @@
     	<!-- Preference sort order: Sort alphabetically by tags -->
     	<item>znaczniki alfabetycznie</item>
         <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
-    	<item>priority, tags alphabetical</item>
+    	<item>priorytet, znaczniki alfabetycznie</item>
         <!-- Preference sort order: Sort by price, the most expensive first -->
     	<item>najdroższe najpierw</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
@@ -259,11 +271,11 @@
     	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
     	<item>nieukończone pierwsze, priorytet, alfabetycznie</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
-    	<item>unchecked first, priority, tags alphabetical</item>
+    	<item>niezaznaczone, priorytet, znaczniki alfabetycznie</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">
-    	<item>Not shown</item>
+    	<item>Nie pokazano</item>
     	<item>Priority 1</item>
     	<item>Priority 1-2</item>
     	<item>Priority 1-3</item>
@@ -285,9 +297,9 @@
     	<!-- Preference orientation: default -->
         <item>Domyślny</item>
     	<!-- Preference orientation: landscape -->
-    	<item>Landscape</item>
+    	<item>Pozioma</item>
     	<!-- Preference orientation: portrait -->
-        <item>Portrait</item>
+        <item>Pionowa</item>
     </string-array>
     
     <string-array name="preference_capitalization_entries">

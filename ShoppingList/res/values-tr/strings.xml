@@ -24,7 +24,9 @@
 
 Launchpad Contributions:
   Huseyin AKSU https://launchpad.net/~huseyinaksu95
+  OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101
+  ariza95 https://launchpad.net/~alirizanazli95
   zeugma https://launchpad.net/~sunder67</string>
 	
     <!-- Short explanation of the application -->
@@ -102,6 +104,9 @@ Launchpad Contributions:
 	<string name="units">Birim</string>
 	<string name="note">Not</string>
 	
+	<string name="otherqty">Other Quantity...</string>
+	<string name="otherpri">Other Priority...</string>   
+	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Toplam: %s</string>
 	
@@ -153,9 +158,9 @@ Launchpad Contributions:
 	<string name="preference_fontsize">Yazı tipi boyutu</string>
 	<string name="preference_fontsize_summary">Yazı boyutunu değiştir</string>
 	<string name="preference_fontsize_dialog_title">Yazı boyutunu seçin</string>
-	<string name="preference_orientation">Orientation</string>
-	<string name="preference_orientation_summary">Change orientation</string>
-	<string name="preference_orientation_dialog_title">Choose orientation</string>
+	<string name="preference_orientation">Sayfa yönü</string>
+	<string name="preference_orientation_summary">Sayfa yönünü değiştir.</string>
+	<string name="preference_orientation_dialog_title">Sayf yönünü  seçiniz.</string>
 	<string name="preference_sortorder_title">Sıralama düzeni</string>
 	<string name="preference_sortorder_summary">Liste öğelerinin sıralanışını değiştir</string>
 	<string name="preference_sortorder_for_pick_title">Sıralanış - Öğe Seçimi</string>
@@ -174,6 +179,10 @@ Launchpad Contributions:
 	<string name="preference_perstoreprice">Mağaza başına fiyatlar</string>
 	<string name="preference_perstoreprice_title">Mağaza başına fiyatları izle</string>
 	<string name="preference_perstoreprice_summary">Öğenin farklı mağazalardaki farklı fiyatlarını takip et</string>
+	<string name="preference_screenlock_title">Disable screen lock</string>
+	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
+	<string name="preference_reset_quantity">Reset Quantity</string>
+	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
 	<string name="preference_showtags_title">Etiketleri göster</string>
 	<string name="preference_showtags_summary">Listede ek kolon olarak göster</string>
 	<string name="preference_showquantity_title">Miktar göster</string>
@@ -203,7 +212,7 @@ Launchpad Contributions:
 	<string name="preference_shake_summary">Temizlemek için telefonu sallayın</string>
 	
     <string name="preference_advanced">Gelişmiş ayarlar</string>
-    <string name="preference_advanced_summary">Görünüşle ilgili ek seçenekler</string>
+    <string name="preference_advanced_summary">Additional settings.</string>
     
     <!-- Preference category: General settings -->
     <string name="preference_general">Genel</string>
@@ -222,7 +231,11 @@ Launchpad Contributions:
     <string name="preference_market_themes_summary">Android Markette temaları arayın.</string>
     <string name="preference_developer_extensions_summary">OpenIntents ana sayfasından  uzantılar al</string>
 	<string name="preference_developer_themes_summary">OpenIntents ana sayfasından temalar al</string>
-	
+	<string name="preference_quickedit">Quick Edit Mode</string>
+	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
+	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
+		    
+	    
 	<!-- ***************************
 	     Permissions
 	     *************************** -->
@@ -286,9 +299,9 @@ Launchpad Contributions:
     	<!-- Preference orientation: default -->
         <item>Ön tanımlı</item>
     	<!-- Preference orientation: landscape -->
-    	<item>Landscape</item>
+    	<item>Yatay</item>
     	<!-- Preference orientation: portrait -->
-        <item>Portrait</item>
+        <item>Dikey</item>
     </string-array>
     
     <string-array name="preference_capitalization_entries">

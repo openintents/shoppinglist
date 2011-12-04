@@ -100,6 +100,9 @@
 	<string name="units">Units</string>
 	<string name="note">Note</string>
 	
+	<string name="otherqty">Other Quantity...</string>
+	<string name="otherpri">Other Priority...</string>   
+	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">合計価格: %s</string>
 	
@@ -172,6 +175,10 @@
 	<string name="preference_perstoreprice">Per-store prices</string>
 	<string name="preference_perstoreprice_title">Track per-store prices</string>
 	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
+	<string name="preference_screenlock_title">Disable screen lock</string>
+	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
+	<string name="preference_reset_quantity">Reset Quantity</string>
+	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
 	<string name="preference_showtags_title">タグを表示</string>
 	<string name="preference_showtags_summary">リストに列を追加表示。</string>
 	<string name="preference_showquantity_title">数量を表示</string>
@@ -201,7 +208,7 @@
 	<string name="preference_shake_summary">端末をシェイクする事でリストをクリーンする。</string>
 	
     <string name="preference_advanced">詳細設定</string>
-    <string name="preference_advanced_summary">表示に関する追加設定。</string>
+    <string name="preference_advanced_summary">Additional settings.</string>
     
     <!-- Preference category: General settings -->
     <string name="preference_general">一般</string>
@@ -220,7 +227,11 @@
     <string name="preference_market_themes_summary">テーマをAndroid Marketから検索</string>
     <string name="preference_developer_extensions_summary">拡張機能をOpenIntentsから検索</string>
 	<string name="preference_developer_themes_summary">テーマをOpenIntentsから取得</string>
-	
+	<string name="preference_quickedit">Quick Edit Mode</string>
+	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
+	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
+		    
+	    
 	<!-- ***************************
 	     Permissions
 	     *************************** -->

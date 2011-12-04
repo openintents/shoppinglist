@@ -104,6 +104,9 @@
 	<string name="units">Eenheden</string>
 	<string name="note">Opmerking</string>
 	
+	<string name="otherqty">Other Quantity...</string>
+	<string name="otherpri">Other Priority...</string>   
+	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Totaal: %s</string>
 	
@@ -176,6 +179,10 @@
 	<string name="preference_perstoreprice">Per-store prices</string>
 	<string name="preference_perstoreprice_title">Track per-store prices</string>
 	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
+	<string name="preference_screenlock_title">Disable screen lock</string>
+	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
+	<string name="preference_reset_quantity">Reset Quantity</string>
+	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
 	<string name="preference_showtags_title">Labels tonen</string>
 	<string name="preference_showtags_summary">Toon als extra kolom in lijst</string>
 	<string name="preference_showquantity_title">Toon aantal</string>
@@ -205,7 +212,7 @@
 	<string name="preference_shake_summary">Schud te telefoon om de lijst op te kuisen.</string>
 	
     <string name="preference_advanced">Geavanceerde instellingen</string>
-    <string name="preference_advanced_summary">Extra instellingen voor weergave</string>
+    <string name="preference_advanced_summary">Additional settings.</string>
     
     <!-- Preference category: General settings -->
     <string name="preference_general">Algemeen</string>
@@ -224,7 +231,11 @@
     <string name="preference_market_themes_summary">Zoek naar thema\'s in de Android Market</string>
     <string name="preference_developer_extensions_summary">Verkrijg extensies vanaf de OpenIntents website.</string>
 	<string name="preference_developer_themes_summary">Meer thema\'s op de OpenIntents website.</string>
-	
+	<string name="preference_quickedit">Quick Edit Mode</string>
+	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
+	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
+		    
+	    
 	<!-- ***************************
 	     Permissions
 	     *************************** -->

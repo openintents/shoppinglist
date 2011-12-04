@@ -100,6 +100,9 @@
 	<string name="units">Unități</string>
 	<string name="note">Notiță</string>
 	
+	<string name="otherqty">Other Quantity...</string>
+	<string name="otherpri">Other Priority...</string>   
+	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Total: %s</string>
 	
@@ -151,9 +154,9 @@
 	<string name="preference_fontsize">Dimensiune font</string>
 	<string name="preference_fontsize_summary">Schimbă dimensiunea fontului</string>
 	<string name="preference_fontsize_dialog_title">Alege dimensiunea fontului</string>
-	<string name="preference_orientation">Orientation</string>
-	<string name="preference_orientation_summary">Change orientation</string>
-	<string name="preference_orientation_dialog_title">Choose orientation</string>
+	<string name="preference_orientation">Orientare</string>
+	<string name="preference_orientation_summary">Schimbă orientarea</string>
+	<string name="preference_orientation_dialog_title">Alege orientarea</string>
 	<string name="preference_sortorder_title">Ordinea de sortare</string>
 	<string name="preference_sortorder_summary">Schimbă ordinea de sortare a articolelor din listă</string>
 	<string name="preference_sortorder_for_pick_title">Ordinea de sortare - Selectează articole</string>
@@ -172,6 +175,10 @@
 	<string name="preference_perstoreprice">Prețuri per magazin</string>
 	<string name="preference_perstoreprice_title">Urmărește prețurile per magazin</string>
 	<string name="preference_perstoreprice_summary">Ține evidența prețurilor separate pentru fiecare articol de la fiecare magazin.</string>
+	<string name="preference_screenlock_title">Disable screen lock</string>
+	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
+	<string name="preference_reset_quantity">Reset Quantity</string>
+	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
 	<string name="preference_showtags_title">Afișează etichetele</string>
 	<string name="preference_showtags_summary">Afișează ca o coloană extra în listă.</string>
 	<string name="preference_showquantity_title">Afișează cantitatea</string>
@@ -201,7 +208,7 @@
 	<string name="preference_shake_summary">Scutură telefonul pentru curăța lista.</string>
 	
     <string name="preference_advanced">Configurări avansate</string>
-    <string name="preference_advanced_summary">Configurări adiționale în privința aspectului.</string>
+    <string name="preference_advanced_summary">Additional settings.</string>
     
     <!-- Preference category: General settings -->
     <string name="preference_general">General</string>
@@ -220,7 +227,11 @@
     <string name="preference_market_themes_summary">Caută teme la Android Market.</string>
     <string name="preference_developer_extensions_summary">Instalează extensii de pe pagina principală OpenIntents.</string>
 	<string name="preference_developer_themes_summary">Obține teme de la pagina principală OpenIntents.</string>
-	
+	<string name="preference_quickedit">Quick Edit Mode</string>
+	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
+	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
+		    
+	    
 	<!-- ***************************
 	     Permissions
 	     *************************** -->
@@ -284,9 +295,9 @@
     	<!-- Preference orientation: default -->
         <item>Implicit</item>
     	<!-- Preference orientation: landscape -->
-    	<item>Landscape</item>
+    	<item>Panoramă</item>
     	<!-- Preference orientation: portrait -->
-        <item>Portrait</item>
+        <item>Portret</item>
     </string-array>
     
     <string-array name="preference_capitalization_entries">
