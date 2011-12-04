@@ -1311,7 +1311,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				// and no item is selected.
 				return;
 			}
-
 			mItemsView.insertNewItem(this, newItem, null, null, null, null);
 			mEditText.setText("");
 			fillAutoCompleteTextViewAdapter();
@@ -2037,6 +2036,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		// Delete item by changing its state
 		ContentValues values = new ContentValues();
 		values.put(Contains.STATUS, Status.REMOVED_FROM_LIST);
+		if (PreferenceActivity.getResetQuantity(getApplicationContext()))
+			values.put(Contains.QUANTITY, "");
 		getContentResolver().update(Contains.CONTENT_URI, values, "_id = ?",
 				new String[] { c.getString(mStringItemsCONTAINSID) });
 

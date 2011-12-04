@@ -98,7 +98,7 @@ public class ShoppingUtils {
 		if (id >= 0) {
 			// Update existing item
 			// (pass 'null' for name: Existing item: no need to change name.)
-			ContentValues values = getContentValues(null, tags, price, barcode);
+			ContentValues values = getContentValues(name, tags, price, barcode);
 			try {
 				Uri uri = Uri.withAppendedPath(
 						ShoppingContract.Items.CONTENT_URI, String.valueOf(id));
@@ -345,7 +345,7 @@ public class ShoppingUtils {
 	public static long addItemToList(Context context, final long itemId,
 			final long listId, final long status, String priority,
 			String quantity, final boolean togglestatus, 
-			final boolean known_new) {
+			final boolean known_new, final boolean resetQuantity) {
 		long id = -1;
 		Cursor existingItems = null;
 		
@@ -379,6 +379,8 @@ public class ShoppingUtils {
 				// Only change quantity if an explicit value has been passed.
 				// (see issue 286)
 				values.put(ShoppingContract.Contains.QUANTITY, quantity);
+			} else {
+				if (resetQuantity) values.put(ShoppingContract.Contains.QUANTITY, "");
 			}
 			if (priority != null) {
 				values.put(ShoppingContract.Contains.PRIORITY, priority);

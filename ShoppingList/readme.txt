@@ -27,6 +27,8 @@ date: ?
 
 - new setting to keep screen orientation (issue 402, Google code-in task by Gautam)
 - new setting to disable screen lock (Google Code-in task by Kido)
+- new setting for quick edit mode for quantity and priority
+- new setting to reset quantity when readding items (Google Code-in task by Shuhao)
 
 ---------------------------------------------------------
 release 1.4.1

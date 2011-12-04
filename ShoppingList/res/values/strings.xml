@@ -175,6 +175,8 @@
 	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
 	<string name="preference_screenlock_title">Disable screen lock</string>
 	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
+	<string name="preference_reset_quantity">Reset Quantity</string>
+	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
 	<string name="preference_showtags_title">Show tags</string>
 	<string name="preference_showtags_summary">Shown as extra column in list.</string>
 	<string name="preference_showquantity_title">Show quantity</string>
@@ -204,7 +206,7 @@
 	<string name="preference_shake_summary">Shake the phone to clean up the list.</string>
 	
     <string name="preference_advanced">Advanced settings</string>
-    <string name="preference_advanced_summary">Additional settings regarding the appearance.</string>
+    <string name="preference_advanced_summary">Additional settings.</string>
     
     <!-- Preference category: General settings -->
     <string name="preference_general">General</string>

@@ -1084,7 +1084,6 @@ public class ShoppingItemsView extends ListView {
 		getContext().getContentResolver().update(
 				Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI,
 						mCursorItems.getString(0)), values, null, null);
-		
 		requery();
 
 		if (PreferenceActivity.prefsStatusAffectsSort(getContext(),  mMode)) {
@@ -1108,6 +1107,8 @@ public class ShoppingItemsView extends ListView {
 			// by changing state
 			ContentValues values = new ContentValues();
 			values.put(Contains.STATUS, Status.REMOVED_FROM_LIST);
+			if (PreferenceActivity.getResetQuantity(getContext()))
+				values.put(Contains.QUANTITY, "");
 			nothingdeleted = getContext().getContentResolver().update(
 					Contains.CONTENT_URI,
 					values,
@@ -1141,8 +1142,9 @@ public class ShoppingItemsView extends ListView {
 
 		if (debug) Log.i(TAG, "Insert new item. " + " itemId = " + itemId + ", listId = "
 				+ mListId);
+		boolean resetQuantity = PreferenceActivity.getResetQuantity(getContext());
 		ShoppingUtils.addItemToList(getContext(), itemId, mListId, Status.WANT_TO_BUY,
-				priority, quantity, true, false);
+				priority, quantity, true, false, resetQuantity);
 
 		fillItems(activity, mListId);
 
