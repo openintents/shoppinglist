@@ -1,9 +1,8 @@
-# Search strings for Market (these are not translated into other languages)
-* Uses OI Voice Note
-* Uses OI ConvertCSV
-* Uses OI About
-* Uses Barcode OI Plugin
-* Uses OI Update
-* Uses My Backup Pro
-* Uses OI Notepad
-* Uses Bites 
+* uses OI Voice Note
+* uses OI ConvertCSV
+* uses OI About
+* uses Barcode OI Plugin
+* uses OI Update
+* uses My Backup Pro
+* uses OI Notepad
+* extension for Bites
