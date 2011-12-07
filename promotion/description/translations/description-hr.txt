@@ -1,0 +1,7 @@
+# Application:
+Popis za kupovinu
+
+# Promo text:
+Popis za kupovinu vam omogućava praćenje vaše kupovine. Isto tako ga možete koristiti za ostale popise - npr. za ToDo popise ili popisa gostiju.
+
+# Description:

@@ -21,6 +21,7 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
+  Dariel Kremov https://launchpad.net/~dkremov
   Kras4ooo https://launchpad.net/~kkrassi1984
   OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101
@@ -102,8 +103,8 @@
 	<string name="units">Единици</string>
 	<string name="note">Забележка</string>
 	
-	<string name="otherqty">Other Quantity...</string>
-	<string name="otherpri">Other Priority...</string>   
+	<string name="otherqty">Друго количество...</string>
+	<string name="otherpri">Друг приоритет...</string>   
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Общо: %s</string>
@@ -177,10 +178,10 @@
 	<string name="preference_perstoreprice">Скалад Цени</string>
 	<string name="preference_perstoreprice_title">Проследяване на магазин цени</string>
 	<string name="preference_perstoreprice_summary">Следене на отделни цени за всеки елемент на всеки магазин.</string>
-	<string name="preference_screenlock_title">Disable screen lock</string>
-	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
-	<string name="preference_reset_quantity">Reset Quantity</string>
-	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
+	<string name="preference_screenlock_title">Деактивирай заключването на екрана</string>
+	<string name="preference_screenlock_summary">Когато е маркино, не позволява на екрана да се заключи.</string>
+	<string name="preference_reset_quantity">Нулирай количеството</string>
+	<string name="preference_reset_quantity_summary">Нулира количеството, когато се добавят отново се добавят артикули.</string>
 	<string name="preference_showtags_title">Покажи маркери</string>
 	<string name="preference_showtags_summary">Показано като допълнителна колона в списъка.</string>
 	<string name="preference_showquantity_title">Покажи количество</string>
@@ -210,7 +211,7 @@
 	<string name="preference_shake_summary">Разклатете телефона за изчистване на списъка.</string>
 	
     <string name="preference_advanced">Допълнителни настройки</string>
-    <string name="preference_advanced_summary">Additional settings.</string>
+    <string name="preference_advanced_summary">Допълнителни настройки</string>
     
     <!-- Preference category: General settings -->
     <string name="preference_general">Обща информация</string>
@@ -229,9 +230,9 @@
     <string name="preference_market_themes_summary">Търсете палитри в Android Market.</string>
     <string name="preference_developer_extensions_summary">Вземете разширения от началната страница на OpenIntents.</string>
 	<string name="preference_developer_themes_summary">Вземете палитри от началната страница на OpenIntents.</string>
-	<string name="preference_quickedit">Quick Edit Mode</string>
-	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
-	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
+	<string name="preference_quickedit">Режим за бърза редакция</string>
+	<string name="preference_quickedit_on_summary">Докоснете стойностите на Приоритет или Количество за меню с обичайните стойности.</string>
+	<string name="preference_quickedit_off_summary">Докосването на стойностите на Приоритет или Количество извиква диалога Редактирай Артикул.</string>
 		    
 	    
 	<!-- ***************************

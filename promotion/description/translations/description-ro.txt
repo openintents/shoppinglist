@@ -1,0 +1,62 @@
+# Application:
+Lista de cumpărături OI
+
+# Promo text:
+Lista de cumpărături OI vă permite să urmăriți cumpărăturile. Puteți de asemenea să o utilizați pentru alte tipuri de liste de control, de exemplu pentru liste De făcut sau liste de musafiri pentru petreceri.
+
+# Description:
+OI Shopping List is a powerful application which makes it easy to create and manage checklists. OI Shopping List makes it easy to add items to a list, check the item off, and remove it from the list. The application can track separate prices for each store that you use, and features a high level of customization. Font size, sort order, list columns, and list cleanup behavior are all settings controlled by the user. All of these features are brought together in a crisp layout that is customizable through a variety of themes. 
+
+Codul sursă al acestei aplicații gratuite și cu sursă deschisă este disponibil la: 
+http://code.google.com/p/openintents
+
+Această aplicație nu conține anunțuri publicitare și nu necesită permisiune la internet. 
+
+Pentru lista completă cu modificări și o listă cu întrebări frecvente, vizitați: 
+http://www.openintents.org
+
+Puteți îmbunătăți traducerea în limba dumneavoastră la Launchpad: 
+https://translations.launchpad.net/openintents/trunk
+
+Caracteristici: 
+* Add, edit and delete lists.
+* Create, delete, and check items quickly and easily.
+* Variety of themes.
+* Customizable font size and sort order.
+* Keep track of separate prices for each store.
+* Customizable list columns.
+
+Available extensions for "OI Shopping List": 
+* Add a recorded message to a note with "OI Voice Notes".
+* Import/export shopping lists with "OI Convert CSV".
+* Arată informaţiile de licenţă cu "OI About".
+* Enter/check items with "Barcode OI Plugin".
+
+Applications that work with "OI Shopping List": 
+* Actualizaţi cu "OI Update".
+* Backup lists with "My Backup Pro".
+* Import ingredients of recipes with "Bites".
+
+Cuvinte cheie: 
+* Shopping, List, Shopping List, Checklist
+* OI, OpenIntents, Open Intents
+
+Versiuni internaționale: 
+IO قائمة التسوق, Lista de cumpărături OI, OI Alışveriş listesi, OI Boodschappenlijst, OI Einkaufsliste, OI Lista Zakupów, OI Lista de Compras, OI Shopping List, OI Shopping list, OI lista della spesa, OI Список покупок, OI списък за пазаруване, OI шопинг листа, OI سېتىۋېلىش تىزىمى, OI 購物清單, OI 购物列表, OI 쇼핑 목록, Ol Seznam nákupů, Popis za kupovinu, Λίστα αγορών OI Shopping list, لیست خرید OI
+
+
+Extensions: 
+* uses OI Voice Note
+* uses OI ConvertCSV
+* uses OI About
+* uses Barcode OI Plugin
+* uses OI Update
+* uses My Backup Pro
+* uses OI Notepad
+* extension for Bites
+
+
+
+
+
+

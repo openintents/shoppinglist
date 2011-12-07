@@ -1,0 +1,7 @@
+# Application:
+OI Shopping list
+
+# Promo text:
+OI Shopping list vos permet de seguir vòstra lista de crompas. Lo podètz utilizar tanben per d'autres tipes de listas, per exemple una lista de causas a far o una lista de convidats.
+
+# Description:

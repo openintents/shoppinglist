@@ -1,0 +1,7 @@
+# Application:
+OI Shopping list
+
+# Promo text:
+OI Shopping list lets you keep track of your shopping items. You can also use it for other kinds of check lists, for example for ToDo lists or party guest lists.
+
+# Description:

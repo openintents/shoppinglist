@@ -1,0 +1,7 @@
+# Application:
+Ol Seznam nákupů
+
+# Promo text:
+Ol Seznam nákupů vám dovoluje sledovat co máte nakoupit. Můžete ho také použít i pro jiné kontrolní seznamy, například seznam denních činností, nebo seznam hostů na večírek.
+
+# Description:

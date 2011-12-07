@@ -22,6 +22,8 @@
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
   Damian Skrodzki https://launchpad.net/~damienix
+  Karolina Kowal https://launchpad.net/~gwiazdeczka11
+  OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101
   Piotr Łazarczyk https://launchpad.net/~quazarxd
   Tomasz \'Zen\' Napierala https://launchpad.net/~tzn
@@ -102,8 +104,8 @@
 	<string name="units">Jednostki</string>
 	<string name="note">Notatka</string>
 	
-	<string name="otherqty">Other Quantity...</string>
-	<string name="otherpri">Other Priority...</string>   
+	<string name="otherqty">Inna Ilość...</string>
+	<string name="otherpri">Inny Priorytet...</string>   
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Razem: %s</string>
@@ -177,10 +179,10 @@
 	<string name="preference_perstoreprice">Ceny w sklepie</string>
 	<string name="preference_perstoreprice_title">Śledź ceny w sklepie</string>
 	<string name="preference_perstoreprice_summary">Śledź ceny oddzielnie dla każdego elementu w każdym sklepie.</string>
-	<string name="preference_screenlock_title">Disable screen lock</string>
-	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
-	<string name="preference_reset_quantity">Reset Quantity</string>
-	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
+	<string name="preference_screenlock_title">Wyłącz blokadę ekranu</string>
+	<string name="preference_screenlock_summary">Zapobiega blokadzie ekranu podczas sprawdzania.</string>
+	<string name="preference_reset_quantity">Resetuj Ilość</string>
+	<string name="preference_reset_quantity_summary">Resetuje ilość podczas dodawania elementów ponownie.</string>
 	<string name="preference_showtags_title">Pokaż etykiety</string>
 	<string name="preference_showtags_summary">Pokaż jako dodatkową kolumnę na liście.</string>
 	<string name="preference_showquantity_title">Pokaż ilość</string>
@@ -210,7 +212,7 @@
 	<string name="preference_shake_summary">Potrząśnij telefonem, aby wyczyścić listę.</string>
 	
     <string name="preference_advanced">Ustawienia zaawansowane</string>
-    <string name="preference_advanced_summary">Additional settings.</string>
+    <string name="preference_advanced_summary">Dodatkowe ustawienia.</string>
     
     <!-- Preference category: General settings -->
     <string name="preference_general">Ogólne</string>
@@ -229,9 +231,9 @@
     <string name="preference_market_themes_summary">Szukaj motywów na Android Market</string>
     <string name="preference_developer_extensions_summary">Pobierz rozszerzenia ze strony OpenIntents.</string>
 	<string name="preference_developer_themes_summary">Pobierz motywy ze strony OpenIntents</string>
-	<string name="preference_quickedit">Quick Edit Mode</string>
-	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
-	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
+	<string name="preference_quickedit">Tryb Szybkiej Edycji</string>
+	<string name="preference_quickedit_on_summary">Dotknij wartości Priorytet lub Ilość w menu dla wspólnych wartości.</string>
+	<string name="preference_quickedit_off_summary">Dotykanie wartości Priorytet lub Ilość wywołuje Edycję Elementu.</string>
 		    
 	    
 	<!-- ***************************

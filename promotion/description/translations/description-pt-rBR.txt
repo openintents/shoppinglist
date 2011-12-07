@@ -1,0 +1,7 @@
+# Application:
+OI Shopping List
+
+# Promo text:
+A OI Shopping List permite que você organize as suas compras. Você também pode usá-la para outros tipos de listas, por exemplo, para listas de tarefas ou de convidados.
+
+# Description:

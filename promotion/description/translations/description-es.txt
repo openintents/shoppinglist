@@ -1,0 +1,7 @@
+# Application:
+OI Lista de Compras
+
+# Promo text:
+La lista de compras OI le permite hacer un seguimiento de sus artículos comprados. También se puede utilizar para otros tipos de listas de verificación, por ejemplo, para las listas de tareas o listas de invitados a la fiesta.
+
+# Description:

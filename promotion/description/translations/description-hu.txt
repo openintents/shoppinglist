@@ -1,0 +1,7 @@
+# Application:
+OI Shopping list
+
+# Promo text:
+Az OI Shopping list segítségével figyelemmel követheti bevásárlási listájának elemeit. Az alkalmazást használhatja egyéb ellenőrzőlistákhoz is, például tennivalókat tartalmazó listákhoz vagy vendéglistákhoz.
+
+# Description:
