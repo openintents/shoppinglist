@@ -23,12 +23,18 @@ To obtain the current release, visit
 
 ---------------------------------------------------------
 release 1.5
-date: ?
+date: 2011-12-08
+
+- support for Android 4.0
+- new setting for quick edit mode for quantity and priority (Android 2.2 and higher)
+
+Thanks to Google Code-in for the following patches:
+(see http://www.google-melange.com/gci/homepage/google/gci2011 )
 
 - new setting to keep screen orientation (issue 402, Google code-in task by Gautam)
 - new setting to disable screen lock (Google Code-in task by Kido)
-- new setting for quick edit mode for quantity and priority
 - new setting to reset quantity when readding items (Google Code-in task by Shuhao)
+- many new translations by Google Code-in students
 
 ---------------------------------------------------------
 release 1.4.1
