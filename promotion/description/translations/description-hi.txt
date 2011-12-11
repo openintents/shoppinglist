@@ -1,11 +1,11 @@
 # Application:
-OI Shopping list
+ओआई शौपिंग लिस्ट
 
 # Promo text:
-OI Shopping list lets you keep track of your shopping items. You can also use it for other kinds of check lists, for example for ToDo lists or party guest lists.
+ओआई शौपिंग लिस्ट आप को आपके खरीदारी आइटमों पर नजर रखने देता है| आप इसको दूसरे प्रकार की नियंत्रण सूची के लिए भी प्रयोग कर सकते हैं उदाहरण के लिए: कार्य सूची या दावत के मेहमानों की सूची
 
 # Description:
-OI Shopping List is a powerful application which makes it easy to create and manage checklists. OI Shopping List makes it easy to add items to a list, check the item off, and remove it from the list. The application can track separate prices for each store that you use, and features a high level of customization. Font size, sort order, list columns, and list cleanup behavior are all settings controlled by the user. All of these features are brought together in a crisp layout that is customizable through a variety of themes. 
+OI खरीददारी सूची एक शक्तिशाली अनुप्रयोग है जो जाँच सूची बनाने के लिए और उसका प्रबंधन करना आसान बनाता है| OI खरीददारी सूची एक सूची के लिए आईटम जोड़ना,उस आईटम को बंद करना और उसे सूची से हटाना आसन बनाती है| यह अनुप्रयोग प्रत्येक दुकान की कीमतों की जानकारी रख सकता है जिसका आप उपयोग करते हैं,और उच्च स्तरीय अनुकूलता दिखता है| फ़ॉन्ट आकार, सॉर्ट क्रम, सूची स्तंभ, और सूची सफाई व्यवहार सभी सेटिंग्स उपयोगकर्ता द्वारा नियंत्रित की जाती हैं| यह सारी सुविधाएँ एक साथ कुरकुरे लेआउट में लाई गयी हैं जो अनुकूलन योग्य है अलग किस्म की थीम्स के द्वारा| 
 
 इस स्वतंत्र और खुला स्रोत अनुप्रयोग का स्रोत कोड यहाँ पर उपलब्ध है: 
 http://code.google.com/p/openintents
@@ -19,33 +19,33 @@ http://www.openintents.org
 https://translations.launchpad.net/openintents/trunk
 
 सुविधाएँ: 
-* Add, edit and delete lists.
-* Create, delete, and check items quickly and easily.
-* Variety of themes.
-* Customizable font size and sort order.
-* Keep track of separate prices for each store.
-* Customizable list columns.
+* जोड़ें, सूचियों को संपादित करें और मिटाएँ|
+* बनाएँ, हटाएँ, और वस्तुओं की जाँच करें जल्दी और आसानी से|
+* थीम्स में विविधता|
+* अनुकूलन फ़ॉन्ट आकार और सॉर्ट क्रम|
+* प्रत्येक दुकान के लिए अलग कीमतों की जानकारी रखें|
+* अनुकूलन सूची स्तंभों|
 
-Available extensions for "OI Shopping List": 
-* Add a recorded message to a note with "OI Voice Notes".
-* Import/export shopping lists with "OI Convert CSV".
-* Show the license information with "OI About".
-* Enter/check items with "Barcode OI Plugin".
+"OI Shopping List" के लिए उपलब्ध एक्सटेंशन: 
+* "OI Voice Notes" के साथ नोट में रिकॉर्ड  किया गया संदेश जोड़ें|
+* "OI Convert CSV" के साथ खरीदारी सूचियों को निर्यात/आयात करें|
+* "OI About" के साथ लाइसेंस जानकारी दिखाएँ .
+* "Barcode OI Plugin" के साथ वस्तुओं को दर्ज/जाँच करें|
 
-Applications that work with "OI Shopping List": 
-* Update with "OI Update".
-* Backup lists with "My Backup Pro".
-* Import ingredients of recipes with "Bites".
+जो अनुप्रयोग "OI Shopping List" के साथ काम करते है: 
+* "OI Update" से अद्यतन करें|
+* सूचियों  को वापस लायें "My Backup Pro" के साथ|
+* "Bites" के साथ व्यंजानो की सामग्री आयात करे|
 
 कीवर्ड: 
-* Shopping, List, Shopping List, Checklist
+* खरीदारी, सूची, खरीदारी सूची,जांचसूची
 * OI, OpenIntents, Open Intents
 
 अंतर्राष्ट्रीय संस्करण: 
-IO قائمة التسوق, Lista de cumpărături OI, OI Alışveriş listesi, OI Boodschappenlijst, OI Einkaufsliste, OI Lista Zakupów, OI Lista de Compras, OI Shopping List, OI Shopping list, OI lista della spesa, OI Список покупок, OI списък за пазаруване, OI шопинг листа, OI سېتىۋېلىش تىزىمى, OI 購物清單, OI 购物列表, OI 쇼핑 목록, Ol Seznam nákupů, Popis za kupovinu, Λίστα αγορών OI Shopping list, لیست خرید OI
+IO قائمة التسوق, Lista de cumpărături OI, OI Alışveriş listesi, OI Boodschappenlijst, OI Einkaufsliste, OI Handleliste, OI Lista Zakupów, OI Lista de Compras, OI Nákupní seznam, OI Shopping List, OI Shopping list, OI lista della spesa, OI Список покупок, OI списък за пазаруване, OI шопинг листа, OI سېتىۋېلىش تىزىمى, OI 購物清單, OI 购物列表, OI 쇼핑 목록, Popis za kupovinu, Λίστα αγορών OI Shopping list, لیست خرید OI, ओआई शौपिंग लिस्ट
 
 
-Extensions: 
+एक्सटेंशन: 
 * uses OI Voice Note
 * uses OI ConvertCSV
 * uses OI About

@@ -1,7 +1,7 @@
 # Application:
-Ol Seznam nákupů
+OI Nákupní seznam
 
 # Promo text:
-Ol Seznam nákupů vám dovoluje sledovat co máte nakoupit. Můžete ho také použít i pro jiné kontrolní seznamy, například seznam denních činností, nebo seznam hostů na večírek.
+S OI Nákupním seznamem přehledně naplánujete, co nakoupit, a v obchodě na nic nezapomenete. Můžete ho použít také pro ostatní druhy kontrolních seznamů, jako například seznam úkolů nebo seznam hostů na večírek.
 
 # Description:
