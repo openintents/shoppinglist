@@ -21,7 +21,13 @@ lists or party guest lists.
 To obtain the current release, visit
   http://www.openintents.org
 
----------------------------------------------------------
+----------------
+release 1.6
+date: ?
+
+- new setting for long press "Add" button (Google Code-in task by Gautam, issue 358)
+
+----------------
 release 1.5
 date: 2011-12-08
 
@@ -36,7 +42,7 @@ Thanks to Google Code-in for the following patches:
 - new setting to reset quantity when readding items (Google Code-in task by Shuhao)
 - many new translations by Google Code-in students
 
----------------------------------------------------------
+----------------
 release 1.4.1
 date: 2011-08-27
 
@@ -45,7 +51,7 @@ date: 2011-08-27
 - fix crash when scanning barcodes (issue 388)
 - fix calculation of total price
 
----------------------------------------------------------
+----------------
 release 1.4
 date: 2011-08-20
 - support for Tablets with new layout for Android 3.0 (patch by Temp)
@@ -58,14 +64,14 @@ date: 2011-08-20
 - fix various issues (issues 254, 351, 379)
 - tweak performance
 
----------------------------------------------------------
+----------------
 release 1.3.1
 date: 2011-06-11
 - fix crash when shaking phone (issue 313).
 - remember list position (issue 349).
 - update translations.
 
----------------------------------------------------------
+----------------
 release 1.3.0
 date: 2011-05-28
 - new application icon for Android 2.0 or higher.
@@ -78,7 +84,7 @@ date: 2011-05-28
 - long press to launch barcode scanner
 - translations into various languages (by Alcatel OneTouch), including Brazilian Portugese, Croatian, Greek, Hungarian, Persian (Farsi).
 
----------------------------------------------------------
+----------------
 release 1.2.6
 date: 2011-01-06
 - move items between lists
@@ -86,12 +92,12 @@ date: 2011-01-06
 - support for xlarge screens
 - launcher icons for different resolutions
 
----------------------------------------------------------
+----------------
 release 1.2.5
 date: 2010-08-05
 - translations: Danish, minor changes
 
----------------------------------------------------------
+----------------
 release 1.2.4
 date: 2010-06-26
 - translations: Argentinien, Czech, Chinese (Simplified),
@@ -105,26 +111,26 @@ date: 2010-06-26
 - checkbox clickable with Dpad.
 - fix bugs #282, #286 and enter key behaviour
 
----------------------------------------------------------
+----------------
 release: 1.2.3
 date: 2010-03-24
 - translations: Russian
 - fix #262, localized prices
 - fix "Done" button for editing items
 
----------------------------------------------------------
+----------------
 release: 1.2.2
 date: 2010-03-06
 - new font size "tiny" (for Droid users).
 
----------------------------------------------------------
+----------------
 release: 1.2.1
 date: 2010-02-21
 - update MyBackupPro support v2.2.1
 - support external themes
 - set theme optionally for all lists
 
----------------------------------------------------------
+----------------
 release: 1.2.0
 date: 2010-01-01
 - add quantity field
@@ -133,7 +139,7 @@ date: 2010-01-01
   on some devices
 - translations: Korean, Romanian
 
----------------------------------------------------------
+----------------
 release: 1.1.2
 date: 2009-10-14
 - translations: French, German, Polish, Spanish
@@ -143,7 +149,7 @@ date: 2009-10-14
   items to be added to a list. Used by Ben Caldwell's
   application Bites.
 
----------------------------------------------------------
+----------------
 release: 1.1.1
 date: 2009-05-28
 
@@ -153,7 +159,7 @@ date: 2009-05-28
   checkbox means to edit the item
 - switch back to multiline display for items and tags
 
----------------------------------------------------------
+----------------
 release: 1.1.0
 date: 2009-05-16
 
@@ -169,7 +175,7 @@ date: 2009-05-16
 - shake the phone to clean up the list
   (turned off by default)
 
----------------------------------------------------------
+----------------
 release: 1.0.3
 date: 2009-02-04
 
@@ -182,7 +188,7 @@ date: 2009-02-04
 - send list.
 - fix issue with dialogs on screen orientation change.
 
----------------------------------------------------------
+----------------
 release: 1.0.2
 date: 2008-11-21
 
@@ -191,13 +197,13 @@ date: 2008-11-21
 - broadcast changes to database so that extensions
   like VoiceNotes can listen.
 
----------------------------------------------------------
+----------------
 release: 1.0.1
 date: 2008-10-27
 
 - fix bug with resources when uploading to Android Market
 
----------------------------------------------------------
+----------------
 release: 1.0.0
 date: 2008-10-25
 
