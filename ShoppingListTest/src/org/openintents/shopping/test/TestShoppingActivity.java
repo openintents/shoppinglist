@@ -125,14 +125,66 @@ public class TestShoppingActivity extends
 		assertTrue(solo.searchText(itemname));
 		
 	}
+	
+	/**
+	 * Test the add for barcode scanner setting
+	 */
+	public void testSettingAddForBarcode() {
+		// Navigate to preferences
+		solo.clickOnMenuItem("Settings");
+		solo.assertCurrentActivity("Expected PreferenceActivity activity", "PreferenceActivity");
+		solo.clickOnText("Advanced settings");
+		
+		// Uncheck the checkbox if it's not checked
+		if (solo.isCheckBoxChecked(3) == true) {
+			solo.clickOnText("Barcode Scanner");
+		}
+		
+		solo.goBackToActivity("ShoppingActivity");
+		
+		// Test that scan barcode intent isn't called
+		solo.clickLongOnText("Add");
+		assertTrue(solo.searchText("Pick items"));
+		assertFalse(solo.searchText("Complete action using"));
+		solo.goBack();
+		
+		// Test that it doesn't appear on short click
+		solo.enterText(0, "Barcode test");
+		solo.clickOnText("Add");
+		assertFalse(solo.searchText("Pick items"));
+		assertFalse(solo.searchText("Complete action using"));
+
+		// Navigate to preferences
+		solo.clickOnMenuItem("Settings");
+		solo.assertCurrentActivity("Expected PreferenceActivity activity", "PreferenceActivity");
+		solo.clickOnText("Advanced settings");
+
+		// Check the checkbox if it's not checked
+		if (solo.isCheckBoxChecked(3) == false) {
+			solo.clickOnText("Barcode Scanner");
+		}
+
+		solo.goBackToActivity("ShoppingActivity");
+		
+		// Test that it doesn't appear on short click
+		solo.enterText(0, "Barcode test");
+		solo.clickOnText("Add");
+		assertFalse(solo.searchText("Pick items"));
+		assertFalse(solo.searchText("Complete action using"));
+		
+		// Test that scan barcode intent is called
+		solo.clickLongOnText("Add");
+		/* NOTE: Robotium cannot test further */
+		//assertFalse(solo.searchText("Pick items"));
+		//assertTrue(solo.searchText("Complete action using"));
+		//solo.goBack();
+	}
 
 	/**
 	 * Test adding items from menu > Barcode scanner test.
 	 */
 	public void testIntentBarcodeScanner() {
-		// barcodescanneritem = "test_barcodescanner_" + random.nextInt(10000);
-
-		Log.d(TAG, "Name 1: " + TestShoppingActivity.barcodescanneritem);
+		Log.d(TAG, "Name 1: " + barcodescanneritem);
 		
 		if (solo.searchText(barcodescanneritem)) {
 			// Item exists already - delete it first:
@@ -147,9 +199,9 @@ public class TestShoppingActivity extends
 		// item does not exist yet:
 		assertFalse(solo.searchText(barcodescanneritem));
 		
-		solo.clickOnMenuItem("Scan barcode test", true);
+		solo.clickOnMenuItem("Scan Barcode", true);
 
-		Log.d(TAG, "Name 2: " + TestShoppingActivity.barcodescanneritem);
+		Log.d(TAG, "Name 2: " + barcodescanneritem);
 		
 		// now item should exist:
 		assertTrue(solo.searchText(barcodescanneritem));

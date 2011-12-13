@@ -3,7 +3,7 @@
       package="org.openintents.shopping.test"
       android:versionCode="1"
       android:versionName="1.0">
-    <uses-sdk android:targetSdkVersion="13" android:minSdkVersion="3" />
+    <uses-sdk android:targetSdkVersion="14" android:minSdkVersion="3" />
     <instrumentation android:targetPackage="org.openintents.shopping" android:name="android.test.InstrumentationTestRunner" />
     <application android:icon="@drawable/icon" android:label="@string/app_name">
 

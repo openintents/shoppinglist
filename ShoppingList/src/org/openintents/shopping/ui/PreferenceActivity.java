@@ -77,6 +77,8 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	public static final boolean PREFS_SCREENLOCK_DEFAULT = false;
 	public static final String PREFS_RESETQUANTITY = "resetquantity";
 	public static final boolean PREFS_RESETQUANTITY_DEFAULT = false;
+	public static final String PREFS_ADDFORBARCODE = "addforbarcode";
+	public static final boolean PREFS_ADDFORBARCODE_DEFAULT = false;
 	public static final String PREFS_SHAKE = "shake";
 	public static final boolean PREFS_SHAKE_DEFAULT = false;
 	public static final String PREFS_MARKET_EXTENSIONS = "preference_market_extensions";
@@ -359,6 +361,11 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	public static boolean getResetQuantity(Context context){
 		return PreferenceManager.getDefaultSharedPreferences(context)
 				.getBoolean(PREFS_RESETQUANTITY, PREFS_RESETQUANTITY_DEFAULT);
+	}
+	
+	public static boolean getAddForBarcode(Context context){
+		return PreferenceManager.getDefaultSharedPreferences(context)
+				.getBoolean(PREFS_ADDFORBARCODE, PREFS_ADDFORBARCODE_DEFAULT);
 	}
 
 	public static void setThemeSetForAll(Context context, boolean setForAll) {

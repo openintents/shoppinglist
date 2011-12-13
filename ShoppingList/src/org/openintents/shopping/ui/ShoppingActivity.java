@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.openintents.OpenIntents;
 import org.openintents.distribution.DistributionLibraryFragmentActivity;
+import org.openintents.distribution.DownloadOIAppDialog;
 import org.openintents.intents.GeneralIntents;
 import org.openintents.intents.ShoppingListIntents;
 import org.openintents.provider.Alert;
@@ -235,6 +236,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private static final int DIALOG_EDIT_ITEM = 4;
 	private static final int DIALOG_DELETE_ITEM = 5;
 	private static final int DIALOG_THEME = 6;
+	public static final int DIALOG_GET_FROM_MARKET = 7;
 
 	private static final int DIALOG_DISTRIBUTION_START = 100; // MUST BE LAST
 
@@ -1018,6 +1020,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 			@Override
 			public boolean onLongClick(View v) {
+				if (PreferenceActivity.getAddForBarcode(getApplicationContext()) == false) {
+					if (debug) Log.v(TAG, "barcode scanner on add button long click disabled");
+					return false;
+				}
+				
 				Intent intent = new Intent();				
 				intent.setData(mListUri);
 				intent.setClassName("org.openintents.barcodescanner", "org.openintents.barcodescanner.BarcodeScanner");
@@ -1026,7 +1033,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				try {
 					startActivityForResult(intent, REQUEST_CODE_CATEGORY_ALTERNATIVE);
 				} catch (ActivityNotFoundException e) {
-					Log.v(TAG, "barcode scanner not found");
+					if (debug) Log.v(TAG, "barcode scanner not found");
+					showDialog(DIALOG_GET_FROM_MARKET);
 					return false;
 				}
 				
@@ -2220,6 +2228,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		case DIALOG_THEME:
 			return new ThemeDialog(this, this);
+			
+		case DIALOG_GET_FROM_MARKET:
+			return new DownloadOIAppDialog(this,
+					DownloadOIAppDialog.OI_BARCODESCANNER);
 		}
 		return super.onCreateDialog(id);
 
@@ -2249,6 +2261,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		case DIALOG_THEME:
 			((ThemeDialog) dialog).prepareDialog();
+			break;
+		case DIALOG_GET_FROM_MARKET:
+			DownloadOIAppDialog.onPrepareDialog(this, dialog);
 			break;
 		}
 	}

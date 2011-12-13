@@ -58,6 +58,9 @@
 				<CheckBoxPreference android:key="perstoreprices"
 					android:defaultValue="false" android:title="@string/preference_perstoreprice_title"
 					android:summary="@string/preference_perstoreprice_summary" />
+				<CheckBoxPreference android:key="addforbarcode" android:title="@string/preference_add_for_barcode"
+					android:summary="@string/preference_add_for_barcode_summary" 
+					android:defaultValue="false"/>
 				<CheckBoxPreference android:key="screenlock"
 					android:defaultValue="false" android:title="@string/preference_screenlock_title"
 					android:summary="@string/preference_screenlock_summary" />
