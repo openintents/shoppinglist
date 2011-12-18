@@ -66,6 +66,12 @@
 					android:hint="0.00"
 					android:singleLine="true" android:numeric="signed|decimal"
 					android:layout_below="@id/labeleditprice" />
+				<Button android:id="@+id/pricestore"
+					android:singleLine="true"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/labeleditprice"
+					android:text="@string/menu_item_stores" />
 			</RelativeLayout>
 		</LinearLayout>
 		<TextView android:layout_width="fill_parent" android:id="@+id/labeledittag"

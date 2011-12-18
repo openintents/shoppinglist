@@ -10,6 +10,7 @@ import org.openintents.shopping.library.provider.ShoppingContract.Units;
 import org.openintents.shopping.library.util.PriceConverter;
 import org.openintents.shopping.library.util.ShoppingUtils;
 import org.openintents.shopping.ui.PreferenceActivity;
+import org.openintents.shopping.ui.ItemStoresActivity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -39,6 +40,7 @@ import android.widget.MultiAutoCompleteTextView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.CursorToStringConverter;
 import android.widget.TextView;
+import android.widget.Button;
 
 public class EditItemDialog extends AlertDialog implements OnClickListener {
 
@@ -50,6 +52,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 	EditText mEditText;
 	MultiAutoCompleteTextView mTags;
 	EditText mPrice;
+	Button mPriceStore;
 	EditText mQuantity;
 	EditText mPriority;
 	AutoCompleteTextView mUnits;
@@ -67,7 +70,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		ITEMNAME, QUANTITY, PRICE, PRIORITY, UNITS, TAGS
 	};
 
-	public EditItemDialog(Context context, Uri itemUri, Uri relationUri) {
+	public EditItemDialog(final Context context, final Uri itemUri, final Uri relationUri, final Uri listItemUri) {
 		super(context);
 		mContext = context;
 		
@@ -119,8 +122,19 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
         });
 	    mUnits.setAdapter(mUnitsAdapter);
 	    mUnits.setThreshold(0);
-
-		mNote = (ImageButton) view.findViewById(R.id.note);	    
+		
+		mPriceStore = (Button) view.findViewById(R.id.pricestore);
+		
+		mPriceStore.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, ItemStoresActivity.class);
+				intent.setData(listItemUri);
+				context.startActivity(intent);
+			}
+		});
+		
+		mNote = (ImageButton) view.findViewById(R.id.note);   
 		mNote.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -319,6 +333,15 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 			}
 			mUnits.setText(units);			
 			
+			boolean trackPerStorePrices = PreferenceActivity.getUsingPerStorePricesFromPrefs(mContext);
+			
+			if(!trackPerStorePrices) {
+				mPrice.setVisibility(View.VISIBLE);
+				mPriceStore.setVisibility(View.GONE);
+			} else {
+				mPrice.setVisibility(View.GONE);
+				mPriceStore.setVisibility(View.VISIBLE);
+			}
 		}
 		c.close();
 	}
@@ -427,3 +450,4 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 	}
 	
 }
+

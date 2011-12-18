@@ -301,7 +301,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 * URI of selected item
 	 */
 	private Uri mItemUri;
-
+	
+	/**
+	 * URI of current list and item
+	 */
+	private Uri mListItemUri;
+	
 	/**
 	 * Definition of the requestCode for the subactivity.
 	 */
@@ -502,6 +507,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		// General Uris:
 		mListUri = ShoppingContract.Lists.CONTENT_URI;
 		mItemUri = ShoppingContract.Items.CONTENT_URI;
+		mListItemUri = ShoppingContract.Items.CONTENT_URI;
 
 		PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 		wl = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "OpenIntents");
@@ -617,6 +623,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			// mTextEntryMenu = icicle.getInt(BUNDLE_TEXT_ENTRY_MENU);
 			// mEditItemPosition = icicle.getInt(BUNDLE_CURSOR_ITEMS_POSITION);
 			mItemUri = Uri.parse(icicle.getString(BUNDLE_ITEM_URI));
+			List<String> pathSegs = mItemUri.getPathSegments();
+			int num = pathSegs.size();
+			mListItemUri = Uri.withAppendedPath(mListUri, pathSegs.get(num - 1));
 			if (icicle.containsKey(BUNDLE_RELATION_URI)) {
 				mRelationUri = Uri.parse(icicle.getString(BUNDLE_RELATION_URI));
 			}
@@ -1963,6 +1972,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		mItemUri = Uri
 				.withAppendedPath(ShoppingContract.Items.CONTENT_URI, "" + itemId);
+		mListItemUri = Uri
+				.withAppendedPath(mListUri, "" + itemId);
 		mRelationUri = Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI, ""
 				+ containsId);
 		mEditItemFocusField = field;
@@ -2204,7 +2215,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 					});
 
 		case DIALOG_EDIT_ITEM:
-			return new EditItemDialog(this, mItemUri, mRelationUri);
+			return new EditItemDialog(this, mItemUri, mRelationUri, mListItemUri);
 
 		case DIALOG_DELETE_ITEM:
 			return new AlertDialog.Builder(this)
