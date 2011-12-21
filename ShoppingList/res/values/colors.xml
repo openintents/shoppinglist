@@ -23,4 +23,5 @@
     <drawable name="gold">#ffd700</drawable>
     <color name="priceTextColor">#FFCCCCCC</color>
     <color name="markTextColor">#FFCCCCCC</color>
+    <color name="widgetBackground">#ebf5fa</color>
 </resources>

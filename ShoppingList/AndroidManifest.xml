@@ -248,6 +248,24 @@
 		<!-- Activities from OI Distribution Library -->
         <activity android:name="org.openintents.distribution.EulaActivity" />
         <activity android:name="org.openintents.distribution.NewVersionActivity" />
+        
+        <!-- Widget -->
+        <receiver 
+            android:name=".widgets.CheckItemsWidget"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="org.openintents.shopping.widgets.ActionCheck" />
+                <action android:name="org.openintents.shopping.widgets.ActionPrevPage" />
+                <action android:name="org.openintents.shopping.widgets.ActionNextPage" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_check_items" />
+        </receiver>
+        <activity android:name=".widgets.CheckItemsWidgetConfig">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+         	</intent-filter>
+     	</activity>
 	</application>	 
 	
 	<!-- required for MyBackupPro: -->

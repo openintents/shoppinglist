@@ -54,12 +54,15 @@ import org.openintents.shopping.ui.widget.ShoppingItemsView.ActionBarListener;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.DragListener;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.DropListener;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.OnCustomClickListener;
+import org.openintents.shopping.widgets.CheckItemsWidget;
 import org.openintents.util.MenuIntentOptionsWithIcons;
 import org.openintents.util.ShakeSensorListener;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProviderInfo;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.ContentUris;
@@ -111,7 +114,6 @@ import android.widget.CursorAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import org.openintents.shopping.ui.widget.backport.PopupMenu;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -643,6 +645,24 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		
 		mItemsView.setActionBarListener(this);
 	}
+	
+	@Override
+    public void onStop() {
+        super.onStop();
+        updateWidgets();
+    }
+    
+    private void updateWidgets() {
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+        int[] a = appWidgetManager.getAppWidgetIds(new ComponentName(this.getPackageName(), CheckItemsWidget.class.getName()));
+        List<AppWidgetProviderInfo> b = appWidgetManager.getInstalledProviders();
+        for (AppWidgetProviderInfo i : b) {
+            if (i.provider.getPackageName().equals(this.getPackageName())) {
+                a = appWidgetManager.getAppWidgetIds(i.provider);
+                new CheckItemsWidget().onUpdate(this, appWidgetManager, a);
+            }
+        }
+    }
 
 	private int initFromPreferences() {
 		

@@ -333,5 +333,8 @@
     	<item>Clean up list</item>
     </string-array>
       
-	     
+	<string name="widget_prev_page">Previous page</string>
+	<string name="widget_next_page">Next page</string>
+	<string name="widget_choose_a_list">Choose a list</string>
+	<string name="widget_no_items">No items on page %d</string>
 </resources> 
