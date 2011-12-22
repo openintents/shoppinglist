@@ -130,21 +130,12 @@
 		    android:textStyle="normal"
     		android:clickable="true"
             android:gravity="center_vertical" />              
-            
-    <ImageView android:id="@+id/has_note"
-               android:layout_width="18dip"
-               android:layout_height="18dip"
-               android:layout_alignParentRight="true"
-               android:layout_centerVertical="true"
-               android:scaleType="centerInside"
-               android:src="@drawable/ic_launcher_notepad_small"
-            /> 
+<!--        	android:layout_toLeftOf="@id/name"-->        
    <TextView android:id="@+id/name"
 			android:textAppearance="?android:attr/textAppearanceLarge"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
         	android:layout_toRightOf="@id/units"
-        	android:layout_toLeftOf="@id/has_note"
         	android:layout_alignParentTop="true"
         	android:layout_alignWithParentIfMissing="true"
             android:layout_marginTop="2dip"
@@ -157,7 +148,15 @@
         android:ellipsize="end"
 			android:layout_marginLeft="27dip"
 			android:layout_marginRight="27dip" -->
-
+	<ImageView android:id="@+id/has_note"
+			   android:layout_width="18dip"
+			   android:layout_height="18dip"
+			   android:layout_toRightOf="@id/name"
+			   android:layout_margin="4dip"
+			   android:layout_alignBottom="@id/name"
+			   android:scaleType="centerInside"
+			   android:src="@drawable/ic_launcher_notepad_small"
+			/> 
 	<TextView android:id="@+id/tags"
 			  android:layout_width="wrap_content"
 			  android:layout_height="wrap_content"
