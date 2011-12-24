@@ -1,13 +1,14 @@
 package org.openintents.shopping.ui;
 
 import org.openintents.shopping.R;
-import org.openintents.shopping.R.string;
-import org.openintents.shopping.R.xml;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.util.BackupManagerWrapper;
 import org.openintents.util.IntentUtils;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -16,11 +17,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.v2.os.Build;
 import android.text.method.KeyListener;
 import android.text.method.TextKeyListener;
+import android.widget.Toast;
 
 public class PreferenceActivity extends android.preference.PreferenceActivity implements OnSharedPreferenceChangeListener {
 	private static boolean mBackupManagerAvailable;
@@ -93,6 +97,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	public static final boolean PREFS_PICKITEMSINLIST_DEFAULT = false;
 	public static final String PREFS_QUICKEDITMODE = "quickedit";
 	public static final boolean PREFS_QUICKEDITMODE_DEFAULT = false;
+	public static final String PREFS_RESET_ALL_SETTINGS = "reset_all_settings";
 	
 	public static final int PREFS_CAPITALIZATION_DEFAULT = 1;
 
@@ -132,6 +137,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 		SharedPreferences shared = getPreferenceScreen().getSharedPreferences();
 		updatePrioSubtotalSummary(shared);
 		updatePickItemsSortPref(shared);
+		resetAllSettings(shared);
 	}
 
 	@Override
@@ -164,6 +170,63 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
         if (key.equals(PREFS_SAMESORTFORPICK)) {
         	updatePickItemsSortPref(prefs);
         }
+	}
+	
+	private void resetAllSettings(final SharedPreferences prefs) {
+	    Preference resetAllSettings = (Preference) findPreference(PREFS_RESET_ALL_SETTINGS);
+        resetAllSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                AlertDialog alert = new AlertDialog.Builder(PreferenceActivity.this).create();
+                alert.setTitle(R.string.preference_reset_all_settings);
+                alert.setMessage(getString(R.string.preference_reset_all_settings_alert));
+                alert.setButton(getString(android.R.string.yes), new OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SharedPreferences.Editor editor = prefs.edit();
+                        //Main
+                        editor.putString(PREFS_FONTSIZE, PREFS_FONTSIZE_DEFAULT);
+                        editor.putString(PREFS_SORTORDER, PREFS_SORTORDER_DEFAULT);
+                        //Main advanced
+                        editor.putString(PREFS_CAPITALIZATION, String.valueOf(PREFS_CAPITALIZATION_DEFAULT));
+                        editor.putString(PREFS_ORIENTATION, PREFS_ORIENTATION_DEFAULT);
+                        editor.putBoolean(PREFS_HIDECHECKED, PREFS_HIDECHECKED_DEFAULT);
+                        editor.putBoolean(PREFS_SHAKE, PREFS_SHAKE_DEFAULT);
+                        editor.putBoolean(PREFS_PERSTOREPRICES, PREFS_PERSTOREPRICES_DEFAULT);
+                        editor.putBoolean(PREFS_ADDFORBARCODE, PREFS_ADDFORBARCODE_DEFAULT);
+                        editor.putBoolean(PREFS_SCREENLOCK, PREFS_SCREENLOCK_DEFAULT);
+                        editor.putBoolean(PREFS_QUICKEDITMODE, PREFS_QUICKEDITMODE_DEFAULT);
+                        editor.putBoolean(PREFS_RESETQUANTITY, PREFS_RESETQUANTITY_DEFAULT);
+                        //Appearance
+                        editor.putBoolean(PREFS_SHOW_PRICE, PREFS_SHOW_PRICE_DEFAULT);
+                        editor.putBoolean(PREFS_SHOW_TAGS, PREFS_SHOW_TAGS_DEFAULT);
+                        editor.putBoolean(PREFS_SHOW_UNITS, PREFS_SHOW_UNITS_DEFAULT);
+                        editor.putBoolean(PREFS_SHOW_QUANTITY, PREFS_SHOW_QUANTITY_DEFAULT);
+                        editor.putBoolean(PREFS_SHOW_PRIORITY, PREFS_SHOW_PRIORITY_DEFAULT);
+                        //Pick items
+                        editor.putBoolean(PREFS_SAMESORTFORPICK, PREFS_SAMESORTFORPICK_DEFAULT);
+                        editor.putString(PREFS_PICKITEMS_SORTORDER, PREFS_PICKITEMS_SORTORDER_DEFAULT);
+                        editor.putBoolean(PREFS_PICKITEMSINLIST, PREFS_PICKITEMSINLIST_DEFAULT);
+                        //Subtotal
+                        editor.putString(PREFS_PRIOSUBTOTAL, PREFS_PRIOSUBTOTAL_DEFAULT);
+                        editor.putBoolean(PREFS_PRIOSUBINCLCHECKED, PREFS_PRIOSUBINCLCHECKED_DEFAULT);
+                        
+                        editor.commit();
+                        
+                        Toast.makeText(PreferenceActivity.this, R.string.preference_reset_all_settings_done, Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+                });
+                alert.setButton2(getString(android.R.string.cancel), new OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        dialog.dismiss();
+                    }
+                });
+                alert.show();
+                return false;
+            }
+        });
 	}
 	
 	private void updatePrioSubtotalSummary(SharedPreferences prefs) {

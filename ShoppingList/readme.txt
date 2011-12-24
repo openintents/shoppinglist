@@ -27,6 +27,7 @@ date: ?
 
 - new setting for long press "Add" button (Google Code-in task by Gautam, issue 358)
 - show "Stores" button when tracking per-store prices (Google Code-in task by Michal Zielinski, issue 359)
+- reset all option in settings (Google Code-in task by Andrey Zaytsev, issue 360)
 
 ----------------
 release 1.5

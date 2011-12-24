@@ -230,7 +230,9 @@
 	<string name="preference_quickedit">Quick Edit Mode</string>
 	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
 	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
-		    
+	<string name="preference_reset_all_settings">Reset all settings</string>
+	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
+	<string name="preference_reset_all_settings_done">All settings have been reset</string>
 	    
 	<!-- ***************************
 	     Permissions
