@@ -43,6 +43,7 @@ import android.content.SharedPreferences;
 import android.content.UriMatcher;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.MatrixCursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -107,6 +108,8 @@ public class ShoppingProvider extends ContentProvider {
 	// lists
 	private static final int CONTAINS_FULL_ID = 102;
 	private static final int ACTIVELIST = 103;
+	// duplicate specified contains record and its item, return ids
+	private static final int CONTAINS_COPYOFID = 104;
 
 	private static final UriMatcher URL_MATCHER;
 
@@ -292,6 +295,10 @@ public class ShoppingProvider extends ContentProvider {
 			}
 			break;
 			
+		case CONTAINS_COPYOFID:
+			long oldContainsId = Long.parseLong(url.getPathSegments().get(2));
+			return copyItemAndContains(projection, oldContainsId);
+			
 		default:
 			throw new IllegalArgumentException("Unknown URL " + url);
 		}
@@ -315,6 +322,70 @@ public class ShoppingProvider extends ContentProvider {
 				null, orderBy);
 		c.setNotificationUri(getContext().getContentResolver(), url);
 		return c;
+	}
+
+	// caller wants us to copy the item and the contains record.
+	// only supported projection is item_id, contains_id of the copy.
+	private Cursor copyItemAndContains(String[] projection, long oldContainsId) {
+		long oldItemId, containsCopyId, itemCopyId;
+		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+		
+		// find the item id from the contains record
+		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+		qb.setTables("contains");
+		qb.appendWhere("_id=" + oldContainsId);
+		Cursor c = qb.query(db, new String[] {Contains.ITEM_ID}, null, null, null, null, null);
+		if (c.getCount() != 1) {
+			return null;
+		}
+		
+		c.moveToFirst();
+		oldItemId = c.getLong(0);
+		c.deactivate();
+		c.close();
+		
+		// read the item
+		qb = new SQLiteQueryBuilder();
+		qb.setTables("items");
+		qb.appendWhere("_id=" + oldItemId);
+		c = qb.query(db, Items.PROJECTION_TO_COPY, null, null, null, null, null);
+		if (c.getCount() != 1) {
+			return null;
+		}
+		c.moveToFirst();
+		ContentValues itemValues = new ContentValues();
+		DatabaseUtils.cursorRowToContentValues(c, itemValues);
+		c.deactivate();
+		c.close();
+		
+		// read the contains record
+		qb = new SQLiteQueryBuilder();
+		qb.setTables("contains");
+		qb.appendWhere("_id=" + oldContainsId);
+		c = qb.query(db, Contains.PROJECTION_TO_COPY, null, null, null, null, null);
+		if (c.getCount() != 1) {
+			return null;
+		}
+		c.moveToFirst();
+		ContentValues containsValues = new ContentValues();
+		DatabaseUtils.cursorRowToContentValues(c, containsValues);
+		c.deactivate();
+		c.close();
+		
+		// insert the item copy
+		validateItemValues(itemValues);
+		itemCopyId = db.insert("items", "items", itemValues);
+
+		// insert the contains record copy
+		containsValues.put(Contains.ITEM_ID, itemCopyId);
+		validateContainsValues(containsValues);
+		containsCopyId = db.insert("contains", "contains", containsValues);
+		
+		// not sure, should we also copy ItemStores records?
+		
+		MatrixCursor m = new MatrixCursor(projection);
+		m.addRow(new Object [] {Long.toString(itemCopyId), Long.toString(containsCopyId)});
+		return (Cursor)m;
 	}
 
 	@Override
@@ -360,8 +431,29 @@ public class ShoppingProvider extends ContentProvider {
 		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
 		long rowID;
 
-		Long now = Long.valueOf(System.currentTimeMillis());
+		validateItemValues(values);
 
+		// TODO: Here we should check, whether item exists already.
+		// (see TagsProvider)
+		// insert the item.
+		rowID = db.insert("items", "items", values);
+		if (rowID > 0) {
+			Uri uri = ContentUris.withAppendedId(Items.CONTENT_URI, rowID);
+			getContext().getContentResolver().notifyChange(uri, null);
+
+			Intent intent = new Intent(ProviderIntents.ACTION_INSERTED);
+			intent.setData(uri);
+			getContext().sendBroadcast(intent);
+
+			return uri;
+		}
+
+		// If everything works, we should not reach the following line:
+		throw new SQLException("Failed to insert row into " + url);
+	}
+
+	private void validateItemValues(ContentValues values) {
+		Long now = Long.valueOf(System.currentTimeMillis());
 		// Make sure that the fields are all set
 		if (!values.containsKey(Items.NAME)) {
 			Resources r = getContext().getResources();
@@ -383,24 +475,6 @@ public class ShoppingProvider extends ContentProvider {
 		if (!values.containsKey(Items.ACCESSED_DATE)) {
 			values.put(Items.ACCESSED_DATE, now);
 		}
-
-		// TODO: Here we should check, whether item exists already.
-		// (see TagsProvider)
-		// insert the item.
-		rowID = db.insert("items", "items", values);
-		if (rowID > 0) {
-			Uri uri = ContentUris.withAppendedId(Items.CONTENT_URI, rowID);
-			getContext().getContentResolver().notifyChange(uri, null);
-
-			Intent intent = new Intent(ProviderIntents.ACTION_INSERTED);
-			intent.setData(uri);
-			getContext().sendBroadcast(intent);
-
-			return uri;
-		}
-
-		// If everything works, we should not reach the following line:
-		throw new SQLException("Failed to insert row into " + url);
 	}
 
 	private Uri insertList(Uri url, ContentValues values) {
@@ -474,7 +548,6 @@ public class ShoppingProvider extends ContentProvider {
 
 	private Uri insertContains(Uri url, ContentValues values) {
 		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-		Long now = Long.valueOf(System.currentTimeMillis());
 		Resources r = Resources.getSystem();
 
 		// Make sure that the fields are all set
@@ -487,39 +560,19 @@ public class ShoppingProvider extends ContentProvider {
 
 		// TODO: Check here that ITEM_ID and LIST_ID
 		// actually exist in the tables.
-
 		if (!values.containsKey(Contains.STATUS)) {
 			values.put(Contains.STATUS, Status.WANT_TO_BUY);
 		} else {
 			// Check here that STATUS is valid.
 			long s = values.getAsInteger(Contains.STATUS);
-
 			if (!Status.isValid(s)) {
 				throw new SQLException("Failed to insert row into " + url
 						+ ": Status " + s + " is not valid.");
 			}
 		}
-
-		if (!values.containsKey(Contains.CREATED_DATE)) {
-			values.put(Contains.CREATED_DATE, now);
-		}
-
-		if (!values.containsKey(Contains.MODIFIED_DATE)) {
-			values.put(Contains.MODIFIED_DATE, now);
-		}
-
-		if (!values.containsKey(Contains.ACCESSED_DATE)) {
-			values.put(Contains.ACCESSED_DATE, now);
-		}
-
-		if (!values.containsKey(Contains.SHARE_CREATED_BY)) {
-			values.put(Contains.SHARE_CREATED_BY, "");
-		}
-
-		if (!values.containsKey(Contains.SHARE_MODIFIED_BY)) {
-			values.put(Contains.SHARE_MODIFIED_BY, "");
-		}
-
+					
+		validateContainsValues(values);
+		
 		// TODO: Here we should check, whether item exists already.
 		// (see TagsProvider)
 
@@ -538,6 +591,30 @@ public class ShoppingProvider extends ContentProvider {
 
 		// If everything works, we should not reach the following line:
 		throw new SQLException("Failed to insert row into " + url);
+	}
+
+	private void validateContainsValues(ContentValues values) {
+		Long now = Long.valueOf(System.currentTimeMillis());
+
+		if (!values.containsKey(Contains.CREATED_DATE)) {
+			values.put(Contains.CREATED_DATE, now);
+		}
+		if (!values.containsKey(Contains.MODIFIED_DATE)) {
+			values.put(Contains.MODIFIED_DATE, now);
+		}
+
+		if (!values.containsKey(Contains.ACCESSED_DATE)) {
+			values.put(Contains.ACCESSED_DATE, now);
+		}
+
+		if (!values.containsKey(Contains.SHARE_CREATED_BY)) {
+			values.put(Contains.SHARE_CREATED_BY, "");
+		}
+
+		if (!values.containsKey(Contains.SHARE_MODIFIED_BY)) {
+			values.put(Contains.SHARE_MODIFIED_BY, "");
+		}
+
 	}
 
 	private Uri insertStore(Uri url, ContentValues values) {
@@ -1001,6 +1078,8 @@ public class ShoppingProvider extends ContentProvider {
 		URL_MATCHER.addURI("org.openintents.shopping", "contains", CONTAINS);
 		URL_MATCHER.addURI("org.openintents.shopping", "contains/#",
 				CONTAINS_ID);
+		URL_MATCHER.addURI("org.openintents.shopping", "contains/copyof/#",
+				CONTAINS_COPYOFID);
 		URL_MATCHER.addURI("org.openintents.shopping", "containsfull",
 				CONTAINS_FULL);
 		URL_MATCHER.addURI("org.openintents.shopping", "containsfull/#",

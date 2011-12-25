@@ -205,6 +205,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 																		// in
 																		// intent
 																		// extras
+	private static final int MENU_COPY_ITEM = Menu.FIRST + 11;
 
 	// TODO: Implement the following menu items
 	// private static final int MENU_EDIT_LIST = Menu.FIRST + 12; // includes
@@ -1155,12 +1156,14 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 								R.string.menu_item_stores).setShortcut('3', 's');
 						contextmenu.add(0, MENU_REMOVE_ITEM_FROM_LIST, 0,
 								R.string.menu_remove_item)
-								.setShortcut('3', 'r');
+								.setShortcut('4', 'r');
+						contextmenu.add(0, MENU_COPY_ITEM, 0,
+								R.string.menu_copy_item).setShortcut('5', 'c');
 						contextmenu.add(0, MENU_DELETE_ITEM, 0,
 								R.string.menu_delete_item)
-								.setShortcut('4', 'd');
+								.setShortcut('6', 'd');
 						contextmenu.add(0, MENU_MOVE_ITEM, 0,
-								R.string.menu_move_item).setShortcut('5', 'l');
+								R.string.menu_move_item).setShortcut('7', 'l');
 					}
 
 				});
@@ -1760,6 +1763,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			startActivityForResult(intent, REQUEST_PICK_LIST);
 			mMoveItemPosition = menuInfo.position;
 			break;
+		case MENU_COPY_ITEM:
+			copyItem(menuInfo.position);
+			break;
 		case MENU_ITEM_STORES:
 			editItemStores(menuInfo.position);
 			break;
@@ -1980,6 +1986,23 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 * 
 	 * @param field
 	 */
+	void editItem(long itemId, long containsId, EditItemDialog.FieldType field) {
+		mItemUri = Uri
+				.withAppendedPath(ShoppingContract.Items.CONTENT_URI, "" + itemId);
+		mListItemUri = Uri
+				.withAppendedPath(mListUri, "" + itemId);
+		mRelationUri = Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI, ""
+				+ containsId);
+		mEditItemFocusField = field;
+
+		showDialog(DIALOG_EDIT_ITEM);		
+	}
+	
+	/**
+	 * Edit item
+	 * 
+	 * @param field
+	 */
 	void editItem(int position, EditItemDialog.FieldType field) {
 		if (debug)
 			Log.d(TAG, "EditItems: Position: " + position);
@@ -1989,18 +2012,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		long itemId = mItemsView.mCursorItems.getLong(mStringItemsITEMID);
 		long containsId = mItemsView.mCursorItems
 				.getLong(mStringItemsCONTAINSID);
-
-		mItemUri = Uri
-				.withAppendedPath(ShoppingContract.Items.CONTENT_URI, "" + itemId);
-		mListItemUri = Uri
-				.withAppendedPath(mListUri, "" + itemId);
-		mRelationUri = Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI, ""
-				+ containsId);
-		mEditItemFocusField = field;
-
-		showDialog(DIALOG_EDIT_ITEM);
+		
+		editItem(itemId, containsId, field);
 	}
-
+	
 	void editItemStores(int position) {
 		if (debug)
 			Log.d(TAG, "EditItemStores: Position: " + position);
@@ -2064,6 +2079,34 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		mItemsView.requery();
 	}
 
+	/** copy item */
+	void copyItem(int position) {
+		Cursor c = mItemsView.mCursorItems;
+		mItemsView.mCursorItems.requery();
+		c.moveToPosition(position);
+		String containsId = c.getString(mStringItemsCONTAINSID);
+		Long newContainsId;
+		Long newItemId;
+		
+		c = getContentResolver().query(
+				Uri.withAppendedPath(Uri.withAppendedPath(Contains.CONTENT_URI, "copyof"), containsId), 
+				new String[] { "item_id", "contains_id" }, null, null, null);
+		
+		if (c.getCount() != 1)
+			return;
+		
+		c.moveToFirst();
+		newItemId = c.getLong(0);
+		newContainsId = c.getLong(1);
+		c.deactivate();
+		c.close();
+		
+		editItem(newItemId, newContainsId, FieldType.ITEMNAME );
+		
+		// mItemsView.requery();
+	}
+	
+	
 	/** removeItemFromList */
 	void removeItemFromList(int position) {
 		Cursor c = mItemsView.mCursorItems;

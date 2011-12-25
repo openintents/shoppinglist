@@ -147,6 +147,10 @@ public abstract class ShoppingContract {
 		 */
 		public static final String[] PROJECTION = { _ID, NAME, IMAGE, PRICE,
 				CREATED_DATE, MODIFIED_DATE, ACCESSED_DATE, UNITS };
+		
+		public static final String[] PROJECTION_TO_COPY = {
+			NAME, IMAGE, PRICE, UNITS, TAGS, BARCODE, LOCATION, NOTE
+		}; 
 
 		/**
 		 * Offset in PROJECTION array.
@@ -426,7 +430,11 @@ public abstract class ShoppingContract {
 		 */
 		public static final boolean[] StatusAffectsSortOrder = {
 			true, false, false, false, false, false, true, true, true, false
-		};	
+		};
+		
+		public static final String[] PROJECTION_TO_COPY = {
+			LIST_ID, QUANTITY, PRIORITY, STATUS
+		}; 
 	}
 
 

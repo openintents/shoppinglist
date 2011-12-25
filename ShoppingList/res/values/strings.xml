@@ -73,6 +73,8 @@
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">Delete item permanently</string>
 	<string name="menu_move_item">Move item to other list</string>
+    <string name="menu_copy_item">Copy item</string>
+	    
 	<!-- Button label to add an item to the list. -->
 	<string name="add">Add</string>
 	
