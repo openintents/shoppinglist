@@ -7,6 +7,7 @@ OI Handleliste
 OI Lista Zakupów
 OI Lista de Compras
 OI Nákupní seznam
+OI Nákupný zoznam
 OI Shopping List
 OI Shopping list
 OI lista della spesa
@@ -19,5 +20,6 @@ OI 购物列表
 OI 쇼핑 목록
 Popis za kupovinu
 Λίστα αγορών OI Shopping list
+רשימת קניות OI
 لیست خرید OI
 ओआई शौपिंग लिस्ट

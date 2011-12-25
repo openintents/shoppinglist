@@ -5,12 +5,12 @@ OI списък за пазаруване
 Списъкът за пазаруване на OI ви позволява да следите вашите покупки. Можете да го използвате за други проверки, например за списъци със задачи или списъци с гости за партита.
 
 # Description:
-OI Shopping List is a powerful application which makes it easy to create and manage checklists. OI Shopping List makes it easy to add items to a list, check the item off, and remove it from the list. The application can track separate prices for each store that you use, and features a high level of customization. Font size, sort order, list columns, and list cleanup behavior are all settings controlled by the user. All of these features are brought together in a crisp layout that is customizable through a variety of themes. 
+OI Shopping List е мощно приложение, с което е лесно да създавате и да управлявате списъци. С OI Shopping List е лесно да добавите артикули към списък, да го отметнете артикул и да го премахнете от списъка. Приложението може да следи различни цени за всеки магазин, който използвате и предлага високо ниво на персонализация. Размера на шрифта, начина на сортиране, колоните на списъка и разчистването на списъка - всички те могат да се настройват от потребителя. Всички тези функции са събрани заедно в ясен изглед, който може да се персонализира благодарение на множеството палитри. 
 
 Изходният код на това безплатно приложение с  отворен код е достъпен на адрес: 
 http://code.google.com/p/openintents
 
-Тази апликация е безплатна и не изисква интернет за ползването и. 
+Това приложение е безплатно и не изисква интернет за ползването ѝ. 
 
 За пълен списък с промените и често задаваните въпроси,моля посетете: 
 http://www.openintents.org
@@ -19,33 +19,33 @@ http://www.openintents.org
 https://translations.launchpad.net/openintents/trunk
 
 Характеристики: 
-* Add, edit and delete lists.
-* Create, delete, and check items quickly and easily.
-* Variety of themes.
-* Customizable font size and sort order.
-* Keep track of separate prices for each store.
-* Customizable list columns.
+* Добавяйте, редактирайте и изтривайте списъци.
+* Създавайте, изтривайте и отмятайте артикули бързо и лесно.
+* Множество палитри.
+* Големината на шрифта и начина на сортиране могат да се настройват.
+* Следете различни цени за всеки магазин.
+* Персонализиране на колоните в списъка
 
-Available extensions for "OI Shopping List": 
-* Add a recorded message to a note with "OI Voice Notes".
-* Import/export shopping lists with "OI Convert CSV".
+Налични разширения за "OI Shopping List": 
+* Добавяне на съобщение записано като бележка, чрез "OI Voice Notes".
+* Внасяне/изнасяне на списъци с покупки, чрез "OI Convert CSV".
 * Покажи информация за лиценза с "OI About".
-* Enter/check items with "Barcode OI Plugin".
+* Въвеждане/проверяване на обекти посредством "Barcode OI Plugin".
 
-Applications that work with "OI Shopping List": 
+Приложения, които работят с "OI Shopping List": 
 * Обновявай с "OI Update".
-* Backup lists with "My Backup Pro".
-* Import ingredients of recipes with "Bites".
+* Архивиране на списъци с "My Backup Pro".
+* Добавяне на съставки за рецепти с "Bites".
 
 Ключови думи: 
-* Shopping, List, Shopping List, Checklist
+* Пазаруване, Списък, Списък за пазаруване, Контролен списък
 * OI, OpenIntents, Open Intents
 
 Международни версии: 
-IO قائمة التسوق, Lista de cumpărături OI, OI Alışveriş listesi, OI Boodschappenlijst, OI Einkaufsliste, OI Handleliste, OI Lista Zakupów, OI Lista de Compras, OI Nákupní seznam, OI Shopping List, OI Shopping list, OI lista della spesa, OI Список покупок, OI списък за пазаруване, OI шопинг листа, OI سېتىۋېلىش تىزىمى, OI 購物清單, OI 购物列表, OI 쇼핑 목록, Popis za kupovinu, Λίστα αγορών OI Shopping list, لیست خرید OI, ओआई शौपिंग लिस्ट
+IO قائمة التسوق, Lista de cumpărături OI, OI Alışveriş listesi, OI Boodschappenlijst, OI Einkaufsliste, OI Handleliste, OI Lista Zakupów, OI Lista de Compras, OI Nákupní seznam, OI Nákupný zoznam, OI Shopping List, OI Shopping list, OI lista della spesa, OI Список покупок, OI списък за пазаруване, OI шопинг листа, OI سېتىۋېلىش تىزىمى, OI 購物清單, OI 购物列表, OI 쇼핑 목록, Popis za kupovinu, Λίστα αγορών OI Shopping list, רשימת קניות OI, لیست خرید OI, ओआई शौपिंग लिस्ट
 
 
-Extensions: 
+Разширения: 
 * uses OI Voice Note
 * uses OI ConvertCSV
 * uses OI About

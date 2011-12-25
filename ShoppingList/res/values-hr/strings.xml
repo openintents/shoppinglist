@@ -73,6 +73,8 @@
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">Trajno obriši stavku</string>
 	<string name="menu_move_item">Move item to other list</string>
+    <string name="menu_copy_item">Copy item</string>
+	    
 	<!-- Button label to add an item to the list. -->
 	<string name="add">Dodaj</string>
 	
@@ -111,7 +113,7 @@
 	<string name="priority3_total">Priority 1-3: %s</string>
 	<string name="priority4_total">Priority 1-4: %s</string>
 	
-	<string name="delete_item_confirm">Are you sure you want to permanently delete this item from this shopping lists?</string>
+	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
 	<string name="delete">Obriši</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
@@ -177,6 +179,8 @@
 	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
 	<string name="preference_reset_quantity">Reset Quantity</string>
 	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
+	<string name="preference_add_for_barcode">Barcode Scanner</string>
+	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
 	<string name="preference_showtags_title">Prikaži oznake</string>
 	<string name="preference_showtags_summary">Prikaži kao dodatni stupac u popisu.</string>
 	<string name="preference_showquantity_title">Prikaži količinu</string>
@@ -228,7 +232,9 @@
 	<string name="preference_quickedit">Quick Edit Mode</string>
 	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
 	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
-		    
+	<string name="preference_reset_all_settings">Reset all settings</string>
+	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
+	<string name="preference_reset_all_settings_done">All settings have been reset</string>
 	    
 	<!-- ***************************
 	     Permissions
@@ -331,5 +337,8 @@
     	<item>Očisti popis</item>
     </string-array>
       
-	     
+	<string name="widget_prev_page">Previous page</string>
+	<string name="widget_next_page">Next page</string>
+	<string name="widget_choose_a_list">Choose a list</string>
+	<string name="widget_no_items">No items on page %d</string>
 </resources>

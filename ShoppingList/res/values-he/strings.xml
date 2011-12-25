@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">Launchpad Contributions:
+  Dvir Oren https://launchpad.net/~dvir0776
+  Neta Oren https://launchpad.net/~netao212
+  Yuval Yogev https://launchpad.net/~yogevyuval</string>
+	
+    <!-- Short explanation of the application -->
+	<string name="about_comments">רשימת קניות OI מאפשרת לך לעקוב אחרי הפריטים שברשימתך. אתה גם יכול להתשמש בזה בשביל סוגים אחרים של 
+רשימות, לדוגמא משימות של דברים לעשות או רשימת הזמנת אורחים למסיבה</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
+	<string name="app_name">רשימת קניות OI</string>
+
+	<string name="new_item">פריט חדש</string>
+	<string name="new_list">רשימה חדשה</string>
+	<string name="send">שלח רשימה</string>
+	<string name="mark_all_items">סמן את כל הפריטים</string>
+	<string name="empty_list_not_sent">רשימה ריקה לא נשלחה</string>
+	<string name="email_not_available">אין יישום שזמין לשליחה.</string>
+	<string name="my_shopping_list">רשימת הקניות שלי</string>
+	<string name="new_list_hint">i.e. רשימת בקשות, רשימת משפחה</string>
+	<string name="clean_up_list">רשימת ניקיון</string>
+	<string name="delete_list">רשימת מחיקה</string>
+	<string name="ask_new_list">הכנס שם של רשימת קניות חדשה</string>
+	<string name="ask_rename_list">שנה שם של רשימת קניות</string>
+	<string name="ask_edit_item">ערוך פריט</string>
+	<string name="ask_new_store">הכנס שם חנות חדשה</string>
+	<string name="please_enter_name">בבקשה הכנס שם</string>
+	<string name="no_items_marked">אין פריטים שסומנו כמחוקים.</string>
+	<string name="confirm_delete_list">האם אתה בטוח שברצונך למחוק את רשימת קניות זו?</string>
+	<string name="no_shopping_provider">שגיאה במהלך כניסה לרשימות קניות.</string>
+	<string name="pick_item">בחר פריט</string>
+	<string name="pick_list">בחר רשימה</string>
+	<string name="theme">ערכת נושא</string>
+	<string name="theme_settings">הגדרות ערכת נושא</string>
+	<string name="rename_list">שנה שם רשימה</string>
+	<string name="menu_mark_item">סמן פריט</string>
+	<string name="menu_edit_item">ערוך פריט</string>
+	<string name="menu_auto_add">הוספה אוטומטית</string>
+	<string name="menu_item_stores">חנויות...</string>
+	<string name="menu_rename_store">שנה שם חנות</string>
+	<string name="menu_delete_store">מחק חנות</string>
+	<string name="confirm_delete_store">האם אתה בטוח כי ברצונך למחוק חנות זו?</string>
+	<string name="no_items_available">אין פריטים זמינים</string>
+	
+	<!-- Remove item from this list, but keep it internally, so that the user
+	     can choose it later for inclusion again. Information like
+	     tags or price will be kept. -->
+	<string name="menu_remove_item">מחק פריט מהרשימה</string>
+	
+	<!-- Delete this item completely. If the user wants to add it again, they
+	     have to enter all the information again. -->
+	<string name="menu_delete_item">מחק פריט לצמיתות</string>
+	<string name="menu_move_item">העבר פריט לרשימה אחרת</string>
+    <string name="menu_copy_item">Copy item</string>
+	    
+	<!-- Button label to add an item to the list. -->
+	<string name="add">הוסף</string>
+	
+	<string name="menu_pick_items">בחר פריטים</string>
+	<string name="menu_start_shopping">קניות</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="pick_items_titel">%s - בחר פריטים</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="shopping_title">%s - קניות</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current item. -->
+	<string name="item_stores_title">%s - חנויות</string>
+	<string name="item_stores_activity_label">ערוך פריטי חנויות</string>
+	
+	<string name="tags">תגיות</string>
+	<string name="price">מחיר</string>
+	<string name="item">פריט</string>
+	<string name="quantity">כמות</string>
+	<string name="priority">עדיפות</string>
+	<string name="has_note">יש הערה</string>
+	<string name="units">יחידות</string>
+	<string name="note">הערה</string>
+	
+	<string name="otherqty">כמות אחרת...</string>
+	<string name="otherpri">עדיפות אחרת...</string>   
+	
+	<!-- Total sum of all prices. \'%s\' is the sum -->
+	<string name="total">סך הכל : %s</string>
+	
+	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+	<string name="total_checked">נבדק : %s</string>
+    <string name="priority1_total">עדיפות 1: %s</string>
+    <string name="priority2_total">עדיפות 1-2: %s</string>
+	<string name="priority3_total">עדיפות 1-3: %s</string>
+	<string name="priority4_total">עדיפות 1-4: %s</string>
+	
+	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
+	<string name="delete">מחק</string>
+	
+	<!-- Added to an item to indicate it was bought. -->
+	<string name="suffix_checked">... אוקיי</string>
+	<string name="empty"/>
+	
+	<!-- The shortcut is created on the home screen. -->
+	<string name="pick_list_for_shortcut">בחר רשימות לקיצור דרך</string>
+	
+	<!-- Shown if external application wants to insert new items. -->
+	<string name="pick_list_to_insert_items">בחר רשימה להכניס פריט</string>
+	
+	<!-- Theme related -->
+	<!-- Title for selecting a theme -->
+	<string name="theme_pick">בחר ערכת נושא</string>
+	<string name="theme_description">בחר ערכת נושא לרשימה זו</string>
+	<string name="theme_default">בררת מחדל</string>
+	<string name="theme_classic">קלאסי</string>
+	<string name="theme_bugdroid">אנדרואיד</string>
+	<string name="theme_classic_export">קלאסי (מרשימת קניות OI)</string>
+	<string name="theme_bugdroid_export">אנדרואיד (מרשימת קניות OI)</string>
+
+	<!--     Dialog box    -->
+	<!-- Button label "OK" -->
+	<string name="ok">אישור</string>
+	<!-- Button label "Cancel" -->
+	<string name="cancel">ביטול</string>
+	<string name="use_theme_for_all_lists">השתמש בערכה זו לכל הרשימות</string>
+	<string name="get_more_themes">התקנת עיצובים נוספים</string>
+	
+	<!-- preferences -->
+	<string name="preferences">הגדרות</string>
+	
+    <string name="preference_application">הגדרות היישום</string>
+    
+	<string name="preference_unchecked_on_top">הפריטים שלא סומנו למעלה</string>
+	<string name="preference_unchecked_on_top_summary">תמיד הצג פריטים שלא סומנו ראשונים</string>
+	<string name="preference_fontsize">גודל הגופן</string>
+	<string name="preference_fontsize_summary">שנה את גודל הגופן</string>
+	<string name="preference_fontsize_dialog_title">בחר גודל פונט</string>
+	<string name="preference_orientation">כיוון</string>
+	<string name="preference_orientation_summary">שנה כיוון</string>
+	<string name="preference_orientation_dialog_title">בחר כיוון</string>
+	<string name="preference_sortorder_title">סדר מיון</string>
+	<string name="preference_sortorder_summary">שנה סדר מיון לפריטי הרשימה</string>
+	<string name="preference_sortorder_for_pick_title">סדר מיון - בחר פריטים</string>
+	<string name="preference_sortorder_for_pick_summary">שנה סדר מיון של כל פריטי הרשימה במצב בחר פריטים.</string>
+	<string name="preference_sortorder_dialog_title">בחר סדר מיון</string>
+	<string name="preference_sortorder_for_pick_dialog_title">בחר סדר מיון עבור מצב בחר פריטים</string>
+	<string name="preference_loadlastused_title">טען את הרשימה האחרונה שהשתמשו בה</string>
+	<string name="preference_loadlastused_summary">התחל תמיד עם הרשימה שהוצגה אחרונה.</string>
+	<string name="preference_capitalization_title">רישיות</string>
+	<string name="preference_capitalization_summary">רישיות אוטומטיות לרשומות</string>
+	<string name="preference_capitalization_dialog_title">בחר רישיות</string> 
+	<string name="preference_hidechecked_title">החבא פריטים שסומנו</string>
+	<string name="preference_hidechecked_summary">החבא מיידית פריטים שסומנו.</string>
+	<string name="preference_showprice_title">הראה מחיר</string>
+	<string name="preference_showprice_summary">מוצג כטור נוסף ברשימה</string>
+	<string name="preference_perstoreprice">מחירים עבור כל חנות</string>
+	<string name="preference_perstoreprice_title">עקוב אחר מחירים עבור כל חנות</string>
+	<string name="preference_perstoreprice_summary">עקוב אחר מחירים נפרדים לכל פריט בכל חנות.</string>
+	<string name="preference_screenlock_title">בטל נעילת מסך</string>
+	<string name="preference_screenlock_summary">מונע נעילת מסך כשזה מסומן.</string>
+	<string name="preference_reset_quantity">מאתחל כמות</string>
+	<string name="preference_reset_quantity_summary">מאתחל כמות כשמוסיף פריטים שוב.</string>
+	<string name="preference_add_for_barcode">Barcode Scanner</string>
+	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
+	<string name="preference_showtags_title">הראה תוויות</string>
+	<string name="preference_showtags_summary">מוצג כטור נוסף ברשימה</string>
+	<string name="preference_showquantity_title">הצג כמות</string>
+	<string name="preference_showquantity_summary">מוצג כטור נוסף ברשימה</string>
+	<string name="preference_showpriority_title">הצג סדר עדיפויות</string>
+	<string name="preference_showpriority_summary">מוצג כטור נוסף ברשימה</string>
+	<string name="preference_showunits_title">הצג יחידות</string>
+	<string name="preference_showunits_summary">מוצג כטור נוסף ברשימה</string>
+	<string name="preference_prio_subtotal">סכום ביניים לפי עדיפות</string>
+	<string name="preference_prioritytotal_title">סכום ביניים לפי עדיפות</string>
+	<string name="preference_prioritytotal_summary">אין סכום ביניים לפי עדיפות מוצג.</string>
+	<string name="preference_prioritytotal_dialog_title">סכום ביניים לפי עדיפות</string>
+	<string name="preference_priosubtotalchecked_title">כלול פריטים שסומנו</string>
+	<string name="preference_priosubtotalchecked_on_summary">סכום ביניים לפי עדיפות כולל פריטים שסומנו</string>
+	<string name="preference_priosubtotalchecked_off_summary">סכום ביניים לפי עדיפות לא כולל פריטים שסומנו</string>
+	<string name="preference_pickitemsinlist_title">בחר פריטים ישירות מהרשימה</string>
+	<string name="preference_pickitemsinlist_on_summary">החלף רשימה ראשית למצב עריכה כדי להוסיף בשנית פריטים קיימים</string>
+	<string name="preference_pickitemsinlist_off_summary">הוסף פריטים לרשימה על ידי שימוש בדיאלוג למטרה זו</string>
+	<string name="preference_samesortforpick_title">השתמש תמיד בסדר מיון קבוע</string>
+	<string name="preference_samesortforpick_on_summary">פריטים מסודרים במצב בחר פריטים בדיוק כמו במצב קניות.</string>
+	<string name="preference_samesortforpick_off_summary">סדר מיון עבור מצב בחר פריט יכול להיבחר בנפרד.</string>
+	
+	<!-- Preference title: Shake the phone to clean up the list. -->
+	<string name="preference_shake_title">נער כדי לנקות</string>
+	
+	<!-- Preference summary: Shake the phone to clean up the list. -->
+	<string name="preference_shake_summary">נער את הטלפון כדי לנקות את הרשימה.</string>
+	
+    <string name="preference_advanced">הגדרות מתקדמות</string>
+    <string name="preference_advanced_summary">הגדרות נוספות.</string>
+    
+    <!-- Preference category: General settings -->
+    <string name="preference_general">כללי</string>
+    <string name="preference_pickitems">בחר פריטים</string>
+    
+    <string name="preference_appearance">חזות</string>
+    
+    <string name="preference_addons">תוספים</string>
+    <string name="preference_get_addons">הורד תוספים חדשים</string>
+    <string name="preference_get_addons_summary">חפש הרחבות וערכות נושא אונליין</string>
+    <string name="preference_get_market_addons">הורד תוספים מהמרקט</string>
+    <string name="preference_get_developer_addons">הורד תוספים מ-OpenIntents</string>
+    <string name="preference_extensions">הרחבות</string>
+    <string name="preference_themes">ערכות עיצוב</string>
+    <string name="preference_market_extensions_summary">חפש הרחבות בשוק האנדרואיד</string>
+    <string name="preference_market_themes_summary">חפש ערכות נושא בשוק האנדרואיד</string>
+    <string name="preference_developer_extensions_summary">השג הרחבות מעמוד הבית של OpenIntents</string>
+	<string name="preference_developer_themes_summary">הורד ערכות נושא מעמוד הבית של OpenIntents</string>
+	<string name="preference_quickedit">מצב עריכה מהירה</string>
+	<string name="preference_quickedit_on_summary">סדר עדיפות נגיעה או ערכי כמות עבור תפריט של ערכים נפוצים.</string>
+	<string name="preference_quickedit_off_summary">עדיפו תנגיעה או ערכי כמות מזמנים את דיאלוג ערוך פריט.</string>
+	<string name="preference_reset_all_settings">Reset all settings</string>
+	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
+	<string name="preference_reset_all_settings_done">All settings have been reset</string>
+	    
+	<!-- ***************************
+	     Permissions
+	     *************************** -->
+	
+	<!-- OI Shopping list -->
+	<!-- Permission to read shopping lists -->
+	<string name="oi_shopping_permission_read">קרא רשימות קנייה</string>
+	<string name="oi_shopping_permission_read_descr">הרשה לאפליקציה לקרוא רשימת קניות. שים לב שרשימות מוצפנות ופריטים מסופקים בפורמט מוצפן.</string>
+	<!-- Permission to write to shopping lists -->
+	<string name="oi_shopping_permission_write">כתוב רשימת קניות</string>
+	<string name="oi_shopping_permission_write_descr">מאפשר ליישום ליצור רשימות חדשות ופריטים או לשנות פריטים קיימים.</string>
+	
+	
+	<!-- ***************************
+	     Preferences
+	     *************************** -->
+	
+    <string-array name="preference_sortorder_entries">
+    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    	<item>פריטים שלא סומנו ראשונים, אלפביתי</item>
+        <!-- Preference sort order: Sort by item name -->
+    	<item>אלפביתי</item>
+        <!-- Preference sort order: Newest item first -->
+    	<item>החדש ביותר ראשון</item>
+        <!-- Preference sort order: Oldest item first -->
+    	<item>הישן ביותר ראשון</item>
+    	<!-- Preference sort order: Sort alphabetically by tags -->
+    	<item>תגיות אלפביתי</item>
+        <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
+    	<item>סדר עדיפות, תגיות אלפביתי</item>
+        <!-- Preference sort order: Sort by price, the most expensive first -->
+    	<item>היקר ביותר קודם</item>
+        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    	<item>פריטים שלא סומנו, תגיות אלפביתי</item>
+    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    	<item>פריטים שלא סומנו, סדר עדיפויות, אלפביתי</item>
+    	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
+    	<item>פריטים שלא סומנו, סדר עדיפויות, תגיות אלפביתי</item>
+    </string-array>
+    
+    <string-array name="preference_prioritytotal_entries">
+    	<item>לא מוצג</item>
+    	<item>עדיפות 1</item>
+    	<item>עדיפות 1-2</item>
+    	<item>עדיפות 1-3</item>
+    	<item>עדיפות 1-4</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entries">
+    	<!-- Preference fontsize: tiny font size -->
+        <item>זעיר</item>
+    	<!-- Preference fontsize: small font size -->
+        <item>קטן</item>
+    	<!-- Preference fontsize: default font size-->
+    	<item>בררת מחדל</item>
+    	<!-- Preference fontsize: large font size -->
+        <item>גדול</item>
+    </string-array>
+    
+    <string-array name="preference_orientation_entries">
+    	<!-- Preference orientation: default -->
+        <item>בררת מחדל</item>
+    	<!-- Preference orientation: landscape -->
+    	<item>נוף</item>
+    	<!-- Preference orientation: portrait -->
+        <item>דיוקן</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entries">
+    	<!-- Preference capitalization: No capitalization -->
+        <item>כלום</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+        <item>עבור כל משפט</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+        <item>עבור כל מילה</item>
+    </string-array>
+
+	<!-- ***************************
+	     OI Notepad
+	     *************************** -->
+	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+	<string name="notepad_not_available">עריכת פריטי פתקיות דורשת פנקס OI.</string>
+	<!-- Name of application "OI Notepad". Translations should be consistent. -->
+	<string name="notepad">פנקס OI</string>
+
+	<!-- ***************************
+	     Automation
+	     *************************** -->
+	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<string name="label_select_action">בחר פעולה:</string>
+	
+	<!-- Label above button that opens a list of all shopping lists to choose from. -->
+	<string name="label_select_list">בחר רשימה:</string>
+	
+	<!-- Arrays -->
+	
+    <string-array name="automation_actions">
+    	<!-- Automation action to clean up a list. -->
+    	<item>רשימת ניקיון</item>
+    </string-array>
+      
+	<string name="widget_prev_page">Previous page</string>
+	<string name="widget_next_page">Next page</string>
+	<string name="widget_choose_a_list">Choose a list</string>
+	<string name="widget_no_items">No items on page %d</string>
+</resources>

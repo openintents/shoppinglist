@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">Launchpad Contributions:
+  Lacko545 https://launchpad.net/~lackorauch</string>
+	
+    <!-- Short explanation of the application -->
+	<string name="about_comments">OI Nákupný zoznam vám umožňuje sledovať vaše nákupné položky. Taktiež ho môžte použiť pre iné druhy zoznamov, napríklad zoznam úloh alebo zoznam hostí na párty.</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
+	<string name="app_name">OI Nákupný zoznam</string>
+
+	<string name="new_item">Nová položka</string>
+	<string name="new_list">Nový zoznam</string>
+	<string name="send">Odoslať zoznam</string>
+	<string name="mark_all_items">Označiť všetky položky</string>
+	<string name="empty_list_not_sent">Prázdny zoznam nebol odoslaný.</string>
+	<string name="email_not_available">Nieje dostupná žiadna aplikácia pre odosielanie.</string>
+	<string name="my_shopping_list">Môj nákupný zoznam</string>
+	<string name="new_list_hint">t.j. zoznam prianí, rodinný zoznam</string>
+	<string name="clean_up_list">Vyčistiť zoznam</string>
+	<string name="delete_list">Zmazať zoznam</string>
+	<string name="ask_new_list">Vložiť názov nového nákupného zoznamu</string>
+	<string name="ask_rename_list">Premenovať nákupný zoznam</string>
+	<string name="ask_edit_item">Upraviť položku</string>
+	<string name="ask_new_store">Vložiť názov nového obchodu</string>
+	<string name="please_enter_name">Prosím vložte názov</string>
+	<string name="no_items_marked">Ani jedna položka nieje označená ako preškrtnutá.</string>
+	<string name="confirm_delete_list">Naozaj chcete zmazať tento nákupný zoznam?</string>
+	<string name="no_shopping_provider">Chyba pri pristupovaní k nákupným zoznamom.</string>
+	<string name="pick_item">Vybrať položku</string>
+	<string name="pick_list">Vybrať zoznam</string>
+	<string name="theme">Téma</string>
+	<string name="theme_settings">Nastavenia témy</string>
+	<string name="rename_list">Premenovať zoznam</string>
+	<string name="menu_mark_item">Označiť položku</string>
+	<string name="menu_edit_item">Upraviť položku</string>
+	<string name="menu_auto_add">Automaticky pridať</string>
+	<string name="menu_item_stores">Obchody...</string>
+	<string name="menu_rename_store">Premenovať obchod</string>
+	<string name="menu_delete_store">Zmazať obchod</string>
+	<string name="confirm_delete_store">Naozaj chcete zmazať tento obchod?</string>
+	<string name="no_items_available">Žiadne položky niesu dostupné</string>
+	
+	<!-- Remove item from this list, but keep it internally, so that the user
+	     can choose it later for inclusion again. Information like
+	     tags or price will be kept. -->
+	<string name="menu_remove_item">Odstrániť položku zo zoznamu</string>
+	
+	<!-- Delete this item completely. If the user wants to add it again, they
+	     have to enter all the information again. -->
+	<string name="menu_delete_item">Zmazať položku permanentne</string>
+	<string name="menu_move_item">Presunúť položku do iného zoznamu</string>
+    <string name="menu_copy_item">Copy item</string>
+	    
+	<!-- Button label to add an item to the list. -->
+	<string name="add">Pridať</string>
+	
+	<string name="menu_pick_items">Vybrať položky</string>
+	<string name="menu_start_shopping">Nakupovanie</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="pick_items_titel">%s - Vybrať položky</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="shopping_title">%s - Nakupovanie</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current item. -->
+	<string name="item_stores_title">%s - Obchody</string>
+	<string name="item_stores_activity_label">Upraviť Obchody Položky</string>
+	
+	<string name="tags">Tagy</string>
+	<string name="price">Cena</string>
+	<string name="item">Položka</string>
+	<string name="quantity">Množstvo</string>
+	<string name="priority">Priorita</string>
+	<string name="has_note">Má Poznámku</string>
+	<string name="units">Jednotky</string>
+	<string name="note">Poznámka</string>
+	
+	<string name="otherqty">Iné Množstvo...</string>
+	<string name="otherpri">Iná Priorita...</string>   
+	
+	<!-- Total sum of all prices. \'%s\' is the sum -->
+	<string name="total">Spolu: %s</string>
+	
+	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+	<string name="total_checked">Začiarknuté: %s</string>
+    <string name="priority1_total">Priorita 1: %s</string>
+    <string name="priority2_total">Priorita 1-2: %s</string>
+	<string name="priority3_total">Priorita 1-3: %s</string>
+	<string name="priority4_total">Priorita 1-4: %s</string>
+	
+	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
+	<string name="delete">Zmazať</string>
+	
+	<!-- Added to an item to indicate it was bought. -->
+	<string name="suffix_checked">... OK</string>
+	<string name="empty"/>
+	
+	<!-- The shortcut is created on the home screen. -->
+	<string name="pick_list_for_shortcut">Vybrať zoznam pre skratku</string>
+	
+	<!-- Shown if external application wants to insert new items. -->
+	<string name="pick_list_to_insert_items">Vyberte zoznam pre vloženie položiek</string>
+	
+	<!-- Theme related -->
+	<!-- Title for selecting a theme -->
+	<string name="theme_pick">Vyberte si tému</string>
+	<string name="theme_description">Vyberte tému pre tento zoznam</string>
+	<string name="theme_default">Predvolená</string>
+	<string name="theme_classic">Klasická</string>
+	<string name="theme_bugdroid">Android</string>
+	<string name="theme_classic_export">Klasická (z OI Nákupného Zoznamu)</string>
+	<string name="theme_bugdroid_export">Android (z OI Nákupného Zoznamu)</string>
+
+	<!--     Dialog box    -->
+	<!-- Button label "OK" -->
+	<string name="ok">OK</string>
+	<!-- Button label "Cancel" -->
+	<string name="cancel">Zrušiť</string>
+	<string name="use_theme_for_all_lists">Použiť túto tému pre všetky zoznamy</string>
+	<string name="get_more_themes">Získať viac tém</string>
+	
+	<!-- preferences -->
+	<string name="preferences">Nastavenia</string>
+	
+    <string name="preference_application">Nastavenia aplikácie</string>
+    
+	<string name="preference_unchecked_on_top">Nezaškrtnuté na vrch</string>
+	<string name="preference_unchecked_on_top_summary">Vždy zobraziť nezaškrtnuté položky prvé</string>
+	<string name="preference_fontsize">Veľkosť písma</string>
+	<string name="preference_fontsize_summary">Zmeniť veľkos písma</string>
+	<string name="preference_fontsize_dialog_title">Vybrať veľkosť písma</string>
+	<string name="preference_orientation">Orientácia</string>
+	<string name="preference_orientation_summary">Zmeniť Orientáciu</string>
+	<string name="preference_orientation_dialog_title">Vybrať Orientáciu</string>
+	<string name="preference_sortorder_title">Poradie triedenia</string>
+	<string name="preference_sortorder_summary">Zmeniť poradie triedenia pre zoznam položiek</string>
+	<string name="preference_sortorder_for_pick_title">Poradie triedenia - Vyber Položiek</string>
+	<string name="preference_sortorder_for_pick_summary">Zmeniť poradie triedenia položiek zoznamu v móde Výberu Položiek</string>
+	<string name="preference_sortorder_dialog_title">Vybrať poradie triedenia</string>
+	<string name="preference_sortorder_for_pick_dialog_title">Vybrať poradie triedenia pre mód Výberu Položiek</string>
+	<string name="preference_loadlastused_title">Načítať posledný použitý zoznam</string>
+	<string name="preference_loadlastused_summary">Vždy po spustení zobraziť naposledy prezeraný zoznam.</string>
+	<string name="preference_capitalization_title">Kapitalizácia</string>
+	<string name="preference_capitalization_summary">Automatická kapitalizácia</string>
+	<string name="preference_capitalization_dialog_title">Vybrať kapitalizáciu</string> 
+	<string name="preference_hidechecked_title">Skryť zaškrtnuté položky</string>
+	<string name="preference_hidechecked_summary">Ihneď skryť zaškrtnuté položky.</string>
+	<string name="preference_showprice_title">Zobraziť cenu</string>
+	<string name="preference_showprice_summary">Zobrazené ako stĺpec navyše v zozname.</string>
+	<string name="preference_perstoreprice">Ceny pre každý obchod</string>
+	<string name="preference_perstoreprice_title">Sledovať ceny pre každý obchod</string>
+	<string name="preference_perstoreprice_summary">Sledovať samostatné ceny pre každú položku v každom obchode.</string>
+	<string name="preference_screenlock_title">Vypnúť uzamykanie obrazovky</string>
+	<string name="preference_screenlock_summary">Ak zaškrtnuté, zabraňuje uzamykaniu obrazovky.</string>
+	<string name="preference_reset_quantity">Obnoviť Kvantitu</string>
+	<string name="preference_reset_quantity_summary">Pri novom pridaní položky obnoví kvantitu.</string>
+	<string name="preference_add_for_barcode">Barcode Scanner</string>
+	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
+	<string name="preference_showtags_title">Zobraziť tagy</string>
+	<string name="preference_showtags_summary">Zobrazené ako stĺpec navyše v zozname.</string>
+	<string name="preference_showquantity_title">Zobraziť kvantitu</string>
+	<string name="preference_showquantity_summary">Zobrazené ako stĺpec navyše v zozname.</string>
+	<string name="preference_showpriority_title">Zobraziť prioritu</string>
+	<string name="preference_showpriority_summary">Zobrazené ako stĺpec navyše v zozname.</string>
+	<string name="preference_showunits_title">Zobraziť jednotky</string>
+	<string name="preference_showunits_summary">Zobrazené ako stĺpec navyše v zozname.</string>
+	<string name="preference_prio_subtotal">Medzisúčet podľa priority</string>
+	<string name="preference_prioritytotal_title">Medzisúčet podľa priority</string>
+	<string name="preference_prioritytotal_summary">Žiadny medzisúčet podľa priority nieje zobrazený.</string>
+	<string name="preference_prioritytotal_dialog_title">Medzisúčet podľa priority</string>
+	<string name="preference_priosubtotalchecked_title">zahrnúť zaškrtnuté položky</string>
+	<string name="preference_priosubtotalchecked_on_summary">Medzisúčet podľa priority zahrňuje zaškrtnuté položky</string>
+	<string name="preference_priosubtotalchecked_off_summary">Medzisúčet podľa priority nezahrňuje zaškrtnuté položky</string>
+	<string name="preference_pickitemsinlist_title">Vebrať položky priamo v zozname</string>
+	<string name="preference_pickitemsinlist_on_summary">Prepnúť hlavný zoznam do módu úpravy pre opätovné pridanie už existujúcich položiek</string>
+	<string name="preference_pickitemsinlist_off_summary">Pridať položky do zoznamu pomocou vyhradeného dialógového okna</string>
+	<string name="preference_samesortforpick_title">Vždy rovnaké poradie triedenia</string>
+	<string name="preference_samesortforpick_on_summary">Položky sú zoradené v móde Výberu Položiek presne tak ako v Nákupnom móde.</string>
+	<string name="preference_samesortforpick_off_summary">Poradie triedenia pre mód Výberu Položiek môže byť zvolené samostatne.</string>
+	
+	<!-- Preference title: Shake the phone to clean up the list. -->
+	<string name="preference_shake_title">Zatriasť pre vyčistenie</string>
+	
+	<!-- Preference summary: Shake the phone to clean up the list. -->
+	<string name="preference_shake_summary">Zatraste telefónom pre vyčistenie zoznamu.</string>
+	
+    <string name="preference_advanced">Pokročílé nastavenia</string>
+    <string name="preference_advanced_summary">Ďalšie nastavenia</string>
+    
+    <!-- Preference category: General settings -->
+    <string name="preference_general">Všeobecné</string>
+    <string name="preference_pickitems">Výber Položiek</string>
+    
+    <string name="preference_appearance">Vzhľad</string>
+    
+    <string name="preference_addons">Doplnky</string>
+    <string name="preference_get_addons">Získať nové doplnky</string>
+    <string name="preference_get_addons_summary">Hľadať rozšírenia a témy online.</string>
+    <string name="preference_get_market_addons">Získať doplnky z Marketu</string>
+    <string name="preference_get_developer_addons">Získať doplnky z OpenIntents</string>
+    <string name="preference_extensions">Rozšírenia</string>
+    <string name="preference_themes">Témy</string>
+    <string name="preference_market_extensions_summary">Hľadať rozšírenia na Android Markete.</string>
+    <string name="preference_market_themes_summary">Hľadať rozšírenia na Android Markete.</string>
+    <string name="preference_developer_extensions_summary">Získať rozšírenia z domovskej stránky OpenIntents.</string>
+	<string name="preference_developer_themes_summary">Získať témy z domovskej stránky OpenIntents.</string>
+	<string name="preference_quickedit">Mód Rýchlej Úpravy</string>
+	<string name="preference_quickedit_on_summary">Stlačte hodnoty Priorita alebo Kvantita pre menu so spoločnými hodnotami.</string>
+	<string name="preference_quickedit_off_summary">Stlačenie hodnôt Priorita alebo Kvantita vyvolá dialóg Úpravy Položky.</string>
+	<string name="preference_reset_all_settings">Reset all settings</string>
+	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
+	<string name="preference_reset_all_settings_done">All settings have been reset</string>
+	    
+	<!-- ***************************
+	     Permissions
+	     *************************** -->
+	
+	<!-- OI Shopping list -->
+	<!-- Permission to read shopping lists -->
+	<string name="oi_shopping_permission_read">čítať nákupné zoznamy</string>
+	<string name="oi_shopping_permission_read_descr">Povolí aplikácii čítať nákupne zoznamy. Pamätajte že zašifrované zoznamy a položky sú uvedené v zašifrovanej podobe.</string>
+	<!-- Permission to write to shopping lists -->
+	<string name="oi_shopping_permission_write">písať nákupné zoznamy</string>
+	<string name="oi_shopping_permission_write_descr">Povolí aplikácii vytvárať nové zoznamy a položky alebo meniť už existujúce zoznamy a položky.</string>
+	
+	
+	<!-- ***************************
+	     Preferences
+	     *************************** -->
+	
+    <string-array name="preference_sortorder_entries">
+    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    	<item>najprv nezaškrtnuté, abecedne</item>
+        <!-- Preference sort order: Sort by item name -->
+    	<item>abecedne</item>
+        <!-- Preference sort order: Newest item first -->
+    	<item>najprv najnovšie</item>
+        <!-- Preference sort order: Oldest item first -->
+    	<item>najprv najstaršie</item>
+    	<!-- Preference sort order: Sort alphabetically by tags -->
+    	<item>tagy abecedne</item>
+        <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
+    	<item>priorita, tagy abecedne</item>
+        <!-- Preference sort order: Sort by price, the most expensive first -->
+    	<item>najprv najdrahšie</item>
+        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    	<item>najprv nezaškrtnuté, tagy abecedne</item>
+    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    	<item>najprv nezaškrtnuté, priorita, abecedne</item>
+    	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
+    	<item>najprv nezaškrtnuté, priorita, tagy abecedne</item>
+    </string-array>
+    
+    <string-array name="preference_prioritytotal_entries">
+    	<item>Nezobrazené</item>
+    	<item>Priorita 1</item>
+    	<item>Priorita 1 - 2</item>
+    	<item>Priorita 1 - 3</item>
+    	<item>Priorita 1 - 4</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entries">
+    	<!-- Preference fontsize: tiny font size -->
+        <item>Drobné</item>
+    	<!-- Preference fontsize: small font size -->
+        <item>Malé</item>
+    	<!-- Preference fontsize: default font size-->
+    	<item>Predvolená</item>
+    	<!-- Preference fontsize: large font size -->
+        <item>Veľké</item>
+    </string-array>
+    
+    <string-array name="preference_orientation_entries">
+    	<!-- Preference orientation: default -->
+        <item>Predvolená</item>
+    	<!-- Preference orientation: landscape -->
+    	<item>Krajina</item>
+    	<!-- Preference orientation: portrait -->
+        <item>Portrét</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entries">
+    	<!-- Preference capitalization: No capitalization -->
+        <item>Žiadna</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+        <item>Pre každú vetu</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+        <item>Pre každé slovo</item>
+    </string-array>
+
+	<!-- ***************************
+	     OI Notepad
+	     *************************** -->
+	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+	<string name="notepad_not_available">Upravovanie poznámok položiek vyžaduje OI Poznámkový blok.</string>
+	<!-- Name of application "OI Notepad". Translations should be consistent. -->
+	<string name="notepad">OI Poznámkový blok</string>
+
+	<!-- ***************************
+	     Automation
+	     *************************** -->
+	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<string name="label_select_action">Vybrať akciu:</string>
+	
+	<!-- Label above button that opens a list of all shopping lists to choose from. -->
+	<string name="label_select_list">Vybrať zoznam:</string>
+	
+	<!-- Arrays -->
+	
+    <string-array name="automation_actions">
+    	<!-- Automation action to clean up a list. -->
+    	<item>Vyčistiť zoznam</item>
+    </string-array>
+      
+	<string name="widget_prev_page">Previous page</string>
+	<string name="widget_next_page">Next page</string>
+	<string name="widget_choose_a_list">Choose a list</string>
+	<string name="widget_no_items">No items on page %d</string>
+</resources>

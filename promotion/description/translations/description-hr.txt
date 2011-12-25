@@ -5,3 +5,58 @@ Popis za kupovinu
 Popis za kupovinu vam omogućava praćenje vaše kupovine. Isto tako ga možete koristiti za ostale popise - npr. za ToDo popise ili popisa gostiju.
 
 # Description:
+OI Lista za kupovinu je odlična aplikacija koja omogućava lako pravljenje i korišcenje lista za ispunjivanje. OI Lista za kupovinu omogućava lako dodavanje predmeta u listu, ispunjavanje, i brisanje sa liste. Aplikacija može pratiti različite cene za svaku prodavnicu koju koristite, i sadrži visok nivo izmena. Veličina fonta, redoslet sortiranja, kolone liste, i čišćenje liste se kontrolišu podešavanjima korisnika. Svi ovi dodatci su skupljeni zajedno u cvrstom rasporedu koji se moze izmeniti kroz razne teme. 
+
+Izvorni kod ovog programa je besplatan i otvoreni izvor aplikacije je dostupan na: 
+http://code.google.com/p/openintents
+
+Ova aplikacija nema reklame i zahtijeva internet konkciju. 
+
+Za punu listu promena i listu ubičaeno pitanih pitanja, molimo posetite: 
+http://www.openintents.org
+
+Možete pomoći u poboljšanju prevoda u vaš jezik na Launchpad-u: 
+https://translations.launchpad.net/openintents/trunk
+
+Značajke: 
+* Dodaj, izmeni ili obriši liste.
+* Napravi, obriši, i pregledaj predmete brzo i lako.
+* Razne teme.
+* Prilagodljiva veličina fonta i redosled.
+* Prati različite cene za svaku prodavnicu.
+* Izmenjive kolone listova.
+
+Dostupni dodatci za "OI Lista za Kupovinu": 
+* Dodaj snimljene poruke u bilješku sa "OI Zvučne Bilješke".
+* Uvezi/izvezi listu za kupovinu sa "OI CSV Konvertorom".
+* Prikaži informacije licence sa "OI About":
+* Unesi/proveri predmete sa "Barcode OI Plugin".
+
+Aplikacije koje rade sa "OI Listom za Kupovinu": 
+* Ažuriraj sa "OI Ažurator".
+* Povrati liste sa "Mz Backup Pro".
+* Uvezi materijal za recepte sa "Bites".
+
+Ključne riječi: 
+* Copy text 	 Shopping, List, Shopping List, Checklist
+* OI, OpenIntents, Open Intents
+
+Internacionalna verzija: 
+IO قائمة التسوق, Lista de cumpărături OI, OI Alışveriş listesi, OI Boodschappenlijst, OI Einkaufsliste, OI Handleliste, OI Lista Zakupów, OI Lista de Compras, OI Nákupní seznam, OI Nákupný zoznam, OI Shopping List, OI Shopping list, OI lista della spesa, OI Список покупок, OI списък за пазаруване, OI шопинг листа, OI سېتىۋېلىش تىزىمى, OI 購物清單, OI 购物列表, OI 쇼핑 목록, Popis za kupovinu, Λίστα αγορών OI Shopping list, רשימת קניות OI, لیست خرید OI, ओआई शौपिंग लिस्ट
+
+
+Dodatci: 
+* uses OI Voice Note
+* uses OI ConvertCSV
+* uses OI About
+* uses Barcode OI Plugin
+* uses OI Update
+* uses My Backup Pro
+* uses OI Notepad
+* extension for Bites
+
+
+
+
+
+

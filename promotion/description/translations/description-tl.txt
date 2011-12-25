@@ -1,0 +1,55 @@
+OI Listahan ng Bilihin ay isang malakas na applikasyon na nagpapadali ng paglikha at mamahala ng mga checklists. OI Listahan ng Bilihin ay nagpapadali na magdagdag ng mga bagay sa listahan, tanggalin ang tsek ng bagay, at alisin ito sa listahan. Ang applikasyon ay maaaring magsubaybay ng iba-ibang presyo para sa bawat tindahan na iyong ginagamit, at tampok ang isang mataas na antas ng pagpapasadya. Laki ng font, pagsasaayos ng pagkakasunod-sunod, mga kulumna ng listahan, at gawi ng paglilinis ng listahan ay lahat ng mga setting na kinokontrol ng gumagamit. Ang lahat na mga tampok na ito ay naipagsasama sa isang sariwang kaayusan na napapasadya sa pamamagitan ng iba't ibang mga tema. 
+
+Ang pinagmulang kodigo ng mga ito ay libre at bukas na pinagkukunang kodigo ng applikasyon ay magagamit sa: 
+http://code.google.com/p/openintents
+
+Ang applikasyon na ito ay walang patalastas at hindi nangangailangan ng pahintulot ng internet. 
+
+Para sa kumpletong listahan ng mga pagbabago at ang listahan ng mga madalas itanong, mangyaring bisitahin ang: 
+http://www.openintents.org
+
+Maaari kang makatulong upang mapabuti ang mga pagsasalin sa iyong wika sa Launchpad: 
+https://translations.launchpad.net/openintents/trunk
+
+Tampok: 
+* Magdagdag, i-edit at mag-alis ng mga listahan.
+* Lumikha, alisin, at suriin ang mga item ng mabilis at madali.
+* Iba't-ibang mga tema.
+* Napapasadya ang laki ng font at pagsasaayos ng pagkakasunod-sunod.
+* Subaybayan ang mga ibat-ibang mga presyo sa bawat tindahan.
+* Napapasadya na mga kolumna ng listahan.
+
+Magagamit na mga ekstensyon para sa "OI Listahan ng Bilihin": 
+* Magdagdag ng isang naitalang mensahe sa isang tala sa "OI Tala na Boses".
+* Import/export listahan ng bilihin with "OI Palitan CSV".
+* Ipakita ang mga impormasyon ng lisensiya sa "OI Tungkol".
+* Ipasok / i-tsek ang mga bagay na may "Barcode OI Plugin".
+
+Applikasyon na gumagana sa "OI Listahan ng Bilihin": 
+* Magbago sa pamamagitan ng "OI Magbago".
+* Listahan ng Backup sa "My Backup Pro".
+* Import ang mga ingredients ng mga recipe sa "Kagat".
+
+Keywords: 
+* Bilihin, Listahan, Listahan ng Bilihin, Checklist
+* OI, OpenIntents, Bukas na Layunin
+
+Internasyonal na mga bersyon: 
+IO قائمة التسوق, Lista de cumpărături OI, OI Alışveriş listesi, OI Boodschappenlijst, OI Einkaufsliste, OI Handleliste, OI Lista Zakupów, OI Lista de Compras, OI Nákupní seznam, OI Nákupný zoznam, OI Shopping List, OI Shopping list, OI lista della spesa, OI Список покупок, OI списък за пазаруване, OI шопинг листа, OI سېتىۋېلىش تىزىمى, OI 購物清單, OI 购物列表, OI 쇼핑 목록, Popis za kupovinu, Λίστα αγορών OI Shopping list, רשימת קניות OI, لیست خرید OI, ओआई शौपिंग लिस्ट
+
+
+Ekstensiyon: 
+* uses OI Voice Note
+* uses OI ConvertCSV
+* uses OI About
+* uses Barcode OI Plugin
+* uses OI Update
+* uses My Backup Pro
+* uses OI Notepad
+* extension for Bites
+
+
+
+
+
+

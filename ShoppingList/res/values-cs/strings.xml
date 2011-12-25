@@ -22,6 +22,7 @@
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
   Matěj Konečný https://launchpad.net/~matejkon
+  OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101
   friedger https://launchpad.net/~friedger</string>
 	
@@ -75,6 +76,8 @@
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">Odstranit položku</string>
 	<string name="menu_move_item">Přesunout položku do jiného seznamu</string>
+    <string name="menu_copy_item">Copy item</string>
+	    
 	<!-- Button label to add an item to the list. -->
 	<string name="add">Přidat</string>
 	
@@ -113,7 +116,7 @@
 	<string name="priority3_total">Priorita 1-3: %s</string>
 	<string name="priority4_total">Priorita 1-4: %s</string>
 	
-	<string name="delete_item_confirm">Opravdu chcete nadobro odstranit tuto položku z tohoto nákupního seznamu?</string>
+	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
 	<string name="delete">Odstranit</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
@@ -165,41 +168,43 @@
 	<string name="preference_sortorder_for_pick_dialog_title">Zvolte pořadí položek pro režim "Vybrat položky"</string>
 	<string name="preference_loadlastused_title">Nahrád naposledy používaný seznam</string>
 	<string name="preference_loadlastused_summary">Vždy začít naposledy zobrazeným seznamem</string>
-	<string name="preference_capitalization_title">Capitalization</string>
+	<string name="preference_capitalization_title">Velká písmena</string>
 	<string name="preference_capitalization_summary">Automaticky zvětšovat písmena u vstupů</string>
 	<string name="preference_capitalization_dialog_title">Zvolte, kde se budou písmenta zvětšovat</string> 
 	<string name="preference_hidechecked_title">Skrýt přeškrtnuté položky</string>
 	<string name="preference_hidechecked_summary">Ihned skrývat přeškrtnuté položky</string>
 	<string name="preference_showprice_title">Zobrazit cenu</string>
 	<string name="preference_showprice_summary">Zobrazeno jako další sloupek seznamu</string>
-	<string name="preference_perstoreprice">Per-store prices</string>
-	<string name="preference_perstoreprice_title">Track per-store prices</string>
-	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
-	<string name="preference_screenlock_title">Disable screen lock</string>
-	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
-	<string name="preference_reset_quantity">Reset Quantity</string>
-	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
+	<string name="preference_perstoreprice">Ceny podle obchodů</string>
+	<string name="preference_perstoreprice_title">Rozlišovat ceny podle obchodů</string>
+	<string name="preference_perstoreprice_summary">Pamatovat si pro každou položku v každém obchodě zvláštní cenu</string>
+	<string name="preference_screenlock_title">Zakázat zamknutí obrazovky</string>
+	<string name="preference_screenlock_summary">Pokud zaškrtnuto, zabraňuje dispeji se zamknout</string>
+	<string name="preference_reset_quantity">Vynulovat množství</string>
+	<string name="preference_reset_quantity_summary">Vynulovat množství při znovupřidávání položek</string>
+	<string name="preference_add_for_barcode">Barcode Scanner</string>
+	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
 	<string name="preference_showtags_title">Ukázat označené</string>
 	<string name="preference_showtags_summary">Zobrazeno jako další sloupek seznamu</string>
 	<string name="preference_showquantity_title">Ukázat množství</string>
 	<string name="preference_showquantity_summary">Zobrazeno jako další sloupek seznamu</string>
-	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_title">Zobrazit prioritu</string>
 	<string name="preference_showpriority_summary">Zobrazeno jako další sloupek seznamu</string>
-	<string name="preference_showunits_title">Show units</string>
+	<string name="preference_showunits_title">Zobrazit jednotky</string>
 	<string name="preference_showunits_summary">Zobrazeno jako další sloupek seznamu</string>
-	<string name="preference_prio_subtotal">Subtotal by priority</string>
-	<string name="preference_prioritytotal_title">Subtotal by priority</string>
-	<string name="preference_prioritytotal_summary">No subtotal by priority shown.</string>
-	<string name="preference_prioritytotal_dialog_title">Subtotal by priority</string>
-	<string name="preference_priosubtotalchecked_title">Include checked items</string>
-	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
-	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
-	<string name="preference_pickitemsinlist_title">Pick items directly in list</string>
-	<string name="preference_pickitemsinlist_on_summary">Switch main list to edit mode to re-add existing items</string>
-	<string name="preference_pickitemsinlist_off_summary">Add items to list using a dedicated dialog</string>
-	<string name="preference_samesortforpick_title">Always same sort order</string>
-	<string name="preference_samesortforpick_on_summary">Items are sorted in Pick Items mode just as in Shopping mode.</string>
-	<string name="preference_samesortforpick_off_summary">Sort order for Pick Items mode can be chosen separately.</string>
+	<string name="preference_prio_subtotal">Mezisoučet podle priority</string>
+	<string name="preference_prioritytotal_title">Mezisoučet podle priority</string>
+	<string name="preference_prioritytotal_summary">Žádný mezisoučet podle priority nezobrazen</string>
+	<string name="preference_prioritytotal_dialog_title">Mezisoučet podle priority</string>
+	<string name="preference_priosubtotalchecked_title">Zahrnout přeškrtnuté položky</string>
+	<string name="preference_priosubtotalchecked_on_summary">Mezisoučet podle priority zahrnuje přeškrtnuté položky</string>
+	<string name="preference_priosubtotalchecked_off_summary">Mezisoučet podle priority nezahrnuje přeškrtnuté položky</string>
+	<string name="preference_pickitemsinlist_title">Zvolit položky přímo v seznamu</string>
+	<string name="preference_pickitemsinlist_on_summary">Přepnout hlavní seznam do režimu úprav pro znovupřidání existujících položek</string>
+	<string name="preference_pickitemsinlist_off_summary">Přidat položky do seznamu pomocí speciálního dialogu</string>
+	<string name="preference_samesortforpick_title">Vždy stejné řazení</string>
+	<string name="preference_samesortforpick_on_summary">V režimu "Zvolit položku" jsou položky řazeny jako v Nákupním režimu.</string>
+	<string name="preference_samesortforpick_off_summary">Řazení pro režim "Zvolit položku" může být zvoleno zvlášť.</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Pro vyčištění zatřást</string>
@@ -208,11 +213,11 @@
 	<string name="preference_shake_summary">Pro vyčištění seznamu zatřást telefonem</string>
 	
     <string name="preference_advanced">Pokročilá nastavení</string>
-    <string name="preference_advanced_summary">Additional settings.</string>
+    <string name="preference_advanced_summary">Doplňková nastavení</string>
     
     <!-- Preference category: General settings -->
     <string name="preference_general">Obecné</string>
-    <string name="preference_pickitems">Pick Items</string>
+    <string name="preference_pickitems">Zvolit položky</string>
     
     <string name="preference_appearance">Vzhled</string>
     
@@ -223,14 +228,16 @@
     <string name="preference_get_developer_addons">Získejte doplňky z OpenIntents</string>
     <string name="preference_extensions">Přídavky</string>
     <string name="preference_themes">Témata</string>
-    <string name="preference_market_extensions_summary">Hledejte přídavky v Android Marketu.</string>
-    <string name="preference_market_themes_summary">Hledejte témata v Android Marketu.</string>
+    <string name="preference_market_extensions_summary">Hledat rozšíření v Android Marketu.</string>
+    <string name="preference_market_themes_summary">Hledat motivy v Android Marketu.</string>
     <string name="preference_developer_extensions_summary">Získejte přídatky z domovské stránky OpenIntents.</string>
 	<string name="preference_developer_themes_summary">Získejte témata z domovské stránky OpenIntents.</string>
-	<string name="preference_quickedit">Quick Edit Mode</string>
-	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
-	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
-		    
+	<string name="preference_quickedit">Režim rýchlých úprav</string>
+	<string name="preference_quickedit_on_summary">Klepněte na prioritu nebo množství pro menu s obvyklými hodnotami.</string>
+	<string name="preference_quickedit_off_summary">Klepnutí na prioritu nebo množství zobrazí dialog "Upravit položku"</string>
+	<string name="preference_reset_all_settings">Reset all settings</string>
+	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
+	<string name="preference_reset_all_settings_done">All settings have been reset</string>
 	    
 	<!-- ***************************
 	     Permissions
@@ -261,23 +268,23 @@
     	<!-- Preference sort order: Sort alphabetically by tags -->
     	<item>alfabeticky podle označení</item>
         <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
-    	<item>priority, tags alphabetical</item>
+    	<item>priorita, abecedně podle štítků</item>
         <!-- Preference sort order: Sort by price, the most expensive first -->
     	<item>nejdražší první</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
     	<item>dát neodškrtnuté první, alfabeticky podle označení</item>
     	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
-    	<item>unchecked first, priority, alphabetical</item>
+    	<item>nejprve nepřeškrtnuté, priorita, abecedně</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
-    	<item>unchecked first, priority, tags alphabetical</item>
+    	<item>nejprve nepřeškrtnuté, priorita, abecedně podle štítků</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">
-    	<item>Not shown</item>
-    	<item>Priority 1</item>
-    	<item>Priority 1-2</item>
-    	<item>Priority 1-3</item>
-    	<item>Priority 1-4</item>
+    	<item>Nezobrazeno</item>
+    	<item>Priorita 1</item>
+    	<item>Priorita 1-2</item>
+    	<item>Priorita 1-3</item>
+    	<item>Priorita 1-4</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
@@ -295,9 +302,9 @@
     	<!-- Preference orientation: default -->
         <item>Výchozí</item>
     	<!-- Preference orientation: landscape -->
-    	<item>Landscape</item>
+    	<item>Na šířku</item>
     	<!-- Preference orientation: portrait -->
-        <item>Portrait</item>
+        <item>Na výšku</item>
     </string-array>
     
     <string-array name="preference_capitalization_entries">
@@ -313,9 +320,9 @@
 	     OI Notepad
 	     *************************** -->
 	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
-	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<string name="notepad_not_available">Úprava poznámek vyžaduje OI Poznámkový blok</string>
 	<!-- Name of application "OI Notepad". Translations should be consistent. -->
-	<string name="notepad">OI Notepad</string>
+	<string name="notepad">OI Poznámkový blok</string>
 
 	<!-- ***************************
 	     Automation
@@ -333,5 +340,8 @@
     	<item>Vyčistit seznam</item>
     </string-array>
       
-	     
+	<string name="widget_prev_page">Previous page</string>
+	<string name="widget_next_page">Next page</string>
+	<string name="widget_choose_a_list">Choose a list</string>
+	<string name="widget_no_items">No items on page %d</string>
 </resources>

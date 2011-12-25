@@ -74,6 +74,8 @@
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">تۈرنى مەڭگۈلۈك ئۆچۈر</string>
 	<string name="menu_move_item">تۈرنى باشقا تىزىمغا يۆتكە</string>
+    <string name="menu_copy_item">Copy item</string>
+	    
 	<!-- Button label to add an item to the list. -->
 	<string name="add">قوش</string>
 	
@@ -99,8 +101,8 @@
 	<string name="units">بىرلىكى</string>
 	<string name="note">ئىزاھات</string>
 	
-	<string name="otherqty">Other Quantity...</string>
-	<string name="otherpri">Other Priority...</string>   
+	<string name="otherqty">باشقا سانى…</string>
+	<string name="otherpri">باشقا ئالدىنلىقى…</string>   
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">جەمئى: %s</string>
@@ -112,7 +114,7 @@
 	<string name="priority3_total">ئالدىنلىق 1-3: %s</string>
 	<string name="priority4_total">ئالدىنلىق 1-4: %s</string>
 	
-	<string name="delete_item_confirm">راستلا بۇ تۈرنى سېتىۋېلىش تىزىمىدىن مەڭگۈلۈك ئۆچۈرەمسىز؟</string>
+	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
 	<string name="delete">ئۆچۈر</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
@@ -153,9 +155,9 @@
 	<string name="preference_fontsize">خەت چوڭلۇقى</string>
 	<string name="preference_fontsize_summary">خەت چوڭلۇقىنى ئۆزگەرت</string>
 	<string name="preference_fontsize_dialog_title">خەت چوڭلۇقىنى تاللاڭ</string>
-	<string name="preference_orientation">Orientation</string>
-	<string name="preference_orientation_summary">Change orientation</string>
-	<string name="preference_orientation_dialog_title">Choose orientation</string>
+	<string name="preference_orientation">يۆنىلىش</string>
+	<string name="preference_orientation_summary">يۆنىلىش ئۆزگەرت</string>
+	<string name="preference_orientation_dialog_title">يۆنىلىش تاللاڭ.</string>
 	<string name="preference_sortorder_title">تەرتىپلەش تەرتىپى</string>
 	<string name="preference_sortorder_summary">تىزىم تۈرلىرىنىڭ تەرتىپلەپ تەرتىپىنى ئۆزگەرتىدۇ</string>
 	<string name="preference_sortorder_for_pick_title">تەرتىپلەش تەرتىپى - تۈر تاللاڭ</string>
@@ -174,10 +176,12 @@
 	<string name="preference_perstoreprice">ھەر بىر دۇكاننىڭ باھاسى</string>
 	<string name="preference_perstoreprice_title">ھەر بىر دۇكاننىڭ باھاسىنى ئىزلا</string>
 	<string name="preference_perstoreprice_summary">ھەر بىر تۈرنىڭ ھەر بىر دۇكاندىكى باھاسىنى ئىزلاشنى داۋاملاشتۇرىدۇ.</string>
-	<string name="preference_screenlock_title">Disable screen lock</string>
+	<string name="preference_screenlock_title">ئېكران قۇلۇپنى چەكلە</string>
 	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
-	<string name="preference_reset_quantity">Reset Quantity</string>
-	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
+	<string name="preference_reset_quantity">سانىنى ئەسلىگە قايتۇر</string>
+	<string name="preference_reset_quantity_summary">تۈرلەرنى قايتا قوشقاندا سانىنى ئەسلىگە قايتۇرىدۇ.</string>
+	<string name="preference_add_for_barcode">Barcode Scanner</string>
+	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
 	<string name="preference_showtags_title">بەلگىنى كۆرسەت</string>
 	<string name="preference_showtags_summary">قوشۇمچە ئىستون سۈپىتىدە تىزىمدا كۆرسىتىدۇ.</string>
 	<string name="preference_showquantity_title">سانىنى كۆرسەت</string>
@@ -207,7 +211,7 @@
 	<string name="preference_shake_summary">تىزىمنى تازىلىغاندا تېلېفوننى تىترەت.</string>
 	
     <string name="preference_advanced">ئالىي تەڭشەك</string>
-    <string name="preference_advanced_summary">Additional settings.</string>
+    <string name="preference_advanced_summary">باشقا تەڭشەكلەر.</string>
     
     <!-- Preference category: General settings -->
     <string name="preference_general">ئادەتتىكى</string>
@@ -229,7 +233,9 @@
 	<string name="preference_quickedit">Quick Edit Mode</string>
 	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
 	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
-		    
+	<string name="preference_reset_all_settings">Reset all settings</string>
+	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
+	<string name="preference_reset_all_settings_done">All settings have been reset</string>
 	    
 	<!-- ***************************
 	     Permissions
@@ -332,5 +338,8 @@
     	<item>تىزىمنى تازىلا</item>
     </string-array>
       
-	     
+	<string name="widget_prev_page">Previous page</string>
+	<string name="widget_next_page">Next page</string>
+	<string name="widget_choose_a_list">Choose a list</string>
+	<string name="widget_no_items">No items on page %d</string>
 </resources>

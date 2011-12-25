@@ -23,6 +23,7 @@
 	<string name="about_translators">Launchpad Contributions:
   Florentina Mușat https://launchpad.net/~kuchiki14
   Peli https://launchpad.net/~peli0101
+  Stelescu Raul https://launchpad.net/~stelescuraul
   iulargsb https://launchpad.net/~iulargsb</string>
 	
     <!-- Short explanation of the application -->
@@ -75,6 +76,8 @@
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">Șterge permanent articolul</string>
 	<string name="menu_move_item">Mută articolul în altă listă</string>
+    <string name="menu_copy_item">Copy item</string>
+	    
 	<!-- Button label to add an item to the list. -->
 	<string name="add">Adaugă</string>
 	
@@ -100,8 +103,8 @@
 	<string name="units">Unități</string>
 	<string name="note">Notiță</string>
 	
-	<string name="otherqty">Other Quantity...</string>
-	<string name="otherpri">Other Priority...</string>   
+	<string name="otherqty">Altă cantitate...</string>
+	<string name="otherpri">Altă prioritate...</string>   
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Total: %s</string>
@@ -113,7 +116,7 @@
 	<string name="priority3_total">Prioritate 1-3: %s</string>
 	<string name="priority4_total">Prioritate 1-4: %s</string>
 	
-	<string name="delete_item_confirm">Sigur doriți să ștergeți permanent acest articol din listele de cumpărături?</string>
+	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
 	<string name="delete">Șterge</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
@@ -175,10 +178,12 @@
 	<string name="preference_perstoreprice">Prețuri per magazin</string>
 	<string name="preference_perstoreprice_title">Urmărește prețurile per magazin</string>
 	<string name="preference_perstoreprice_summary">Ține evidența prețurilor separate pentru fiecare articol de la fiecare magazin.</string>
-	<string name="preference_screenlock_title">Disable screen lock</string>
-	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
-	<string name="preference_reset_quantity">Reset Quantity</string>
-	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
+	<string name="preference_screenlock_title">Dezactivează blocarea ecranului</string>
+	<string name="preference_screenlock_summary">Împiedică ecranul să fie blocat când este bifat.</string>
+	<string name="preference_reset_quantity">Resetează cantitatea</string>
+	<string name="preference_reset_quantity_summary">Resetează cantitatea când se adaugă elemente din nou.</string>
+	<string name="preference_add_for_barcode">Barcode Scanner</string>
+	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
 	<string name="preference_showtags_title">Afișează etichetele</string>
 	<string name="preference_showtags_summary">Afișează ca o coloană extra în listă.</string>
 	<string name="preference_showquantity_title">Afișează cantitatea</string>
@@ -208,7 +213,7 @@
 	<string name="preference_shake_summary">Scutură telefonul pentru curăța lista.</string>
 	
     <string name="preference_advanced">Configurări avansate</string>
-    <string name="preference_advanced_summary">Additional settings.</string>
+    <string name="preference_advanced_summary">Configurări suplimentare.</string>
     
     <!-- Preference category: General settings -->
     <string name="preference_general">General</string>
@@ -227,10 +232,12 @@
     <string name="preference_market_themes_summary">Caută teme la Android Market.</string>
     <string name="preference_developer_extensions_summary">Instalează extensii de pe pagina principală OpenIntents.</string>
 	<string name="preference_developer_themes_summary">Obține teme de la pagina principală OpenIntents.</string>
-	<string name="preference_quickedit">Quick Edit Mode</string>
-	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
-	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
-		    
+	<string name="preference_quickedit">Modul de editare rapid</string>
+	<string name="preference_quickedit_on_summary">Apăsați valorile Prioritate sau Cantitate pentru un meniu al valorilor comune.</string>
+	<string name="preference_quickedit_off_summary">Apasând valorile Prioritate sau Cantitate se convocă dialogul de editare de elemente.</string>
+	<string name="preference_reset_all_settings">Reset all settings</string>
+	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
+	<string name="preference_reset_all_settings_done">All settings have been reset</string>
 	    
 	<!-- ***************************
 	     Permissions
@@ -333,5 +340,8 @@
     	<item>Curăță lista</item>
     </string-array>
       
-	     
+	<string name="widget_prev_page">Previous page</string>
+	<string name="widget_next_page">Next page</string>
+	<string name="widget_choose_a_list">Choose a list</string>
+	<string name="widget_no_items">No items on page %d</string>
 </resources>

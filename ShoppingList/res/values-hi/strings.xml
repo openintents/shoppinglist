@@ -21,6 +21,7 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
+  OpenIntents devs https://launchpad.net/~openintents-devs
   Shitiz Garg https://launchpad.net/~l95s</string>
 	
     <!-- Short explanation of the application -->
@@ -73,6 +74,8 @@
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">आइटम सदा के लिए हटाएँ</string>
 	<string name="menu_move_item">आइटम अन्य सूची में ले जाएँ</string>
+    <string name="menu_copy_item">Copy item</string>
+	    
 	<!-- Button label to add an item to the list. -->
 	<string name="add">जोड़ें</string>
 	
@@ -111,7 +114,7 @@
 	<string name="priority3_total">प्रधानता १-३: %s</string>
 	<string name="priority4_total">प्रधानता १-४: %s</string>
 	
-	<string name="delete_item_confirm">क्या आप हमेशा के लिए यह आइटम को इस स्टोर से हटाना चाहते है?</string>
+	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
 	<string name="delete">हटाएँ</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
@@ -177,6 +180,8 @@
 	<string name="preference_screenlock_summary">अगर चिह्नित, यह स्क्रीन को बंद होने से रोकता है</string>
 	<string name="preference_reset_quantity">मात्रा को शून्य करें</string>
 	<string name="preference_reset_quantity_summary">आइटम जोड़ने पर मात्रा को शून्य करता है</string>
+	<string name="preference_add_for_barcode">Barcode Scanner</string>
+	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
 	<string name="preference_showtags_title">टाग्स दिखाए</string>
 	<string name="preference_showtags_summary">यह सूची में अतिरिक्त खाना के तरह से दिखया जाता है</string>
 	<string name="preference_showquantity_title">मात्रा दिखाए</string>
@@ -228,7 +233,9 @@
 	<string name="preference_quickedit">जल्दी संपादन करने का मोड</string>
 	<string name="preference_quickedit_on_summary">छूने के प्रधानता या मुल्ये मानों मेनू के सामान्य मनो के लिए</string>
 	<string name="preference_quickedit_off_summary">छूने के प्रधानता या मुल्ये मानों आइटम संपादन सवांद के लिए</string>
-		    
+	<string name="preference_reset_all_settings">Reset all settings</string>
+	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
+	<string name="preference_reset_all_settings_done">All settings have been reset</string>
 	    
 	<!-- ***************************
 	     Permissions
@@ -331,5 +338,8 @@
     	<item>सूची खाली करें</item>
     </string-array>
       
-	     
+	<string name="widget_prev_page">Previous page</string>
+	<string name="widget_next_page">Next page</string>
+	<string name="widget_choose_a_list">Choose a list</string>
+	<string name="widget_no_items">No items on page %d</string>
 </resources>
