@@ -82,7 +82,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.PowerManager;
 import android.support.v2.os.Build;
 import android.support.v2.view.MenuCompat;
 import android.text.Editable;
@@ -101,6 +100,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -479,8 +479,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private GestureDetector mGestureDetector;
 	private View.OnTouchListener mGestureListener;
 
-	private PowerManager.WakeLock wl;
-
 	/**
 	 * Called when the activity is first created.
 	 */
@@ -511,9 +509,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		mListUri = ShoppingContract.Lists.CONTENT_URI;
 		mItemUri = ShoppingContract.Items.CONTENT_URI;
 		mListItemUri = ShoppingContract.Items.CONTENT_URI;
-
-		PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-		wl = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "OpenIntents");
 
 		int defaultShoppingList = initFromPreferences();
 
@@ -702,12 +697,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			defaultShoppingList = (int) ShoppingUtils.getDefaultList(this);
 		}
 		if(sp.getBoolean(PreferenceActivity.PREFS_SCREENLOCK, PreferenceActivity.PREFS_SCREENLOCK_DEFAULT)) {
-			wl.acquire();
-		} else {
-			while(wl.isHeld()) { // Release all wake locks
-				wl.release();
-			}
-		}
+			getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		} 
 
 		if (mItemsView != null) {
 			if (sp.getBoolean(PreferenceActivity.PREFS_SHOW_PRICE,
