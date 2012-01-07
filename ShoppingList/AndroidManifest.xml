@@ -52,28 +52,8 @@
 		<meta-data android:name="com.google.android.backup.api_key"
     		android:value="AEdPqrEAAAAIyg1-9MfKF9MnoINzk-FPUGiXcqLuHLcMP3PvEg" />
         
-        <meta-data android:name="org.openintents.metadata.COMMENTS"
-                       android:value="@string/about_comments" />
-        <meta-data android:name="org.openintents.metadata.COPYRIGHT"
-                       android:value="@string/about_copyright" />
-        <meta-data android:name="org.openintents.metadata.AUTHORS"
-                       android:resource="@array/about_authors" />
-        <meta-data android:name="org.openintents.metadata.DOCUMENTERS"
-                       android:resource="@array/about_documenters" />
-        <meta-data android:name="org.openintents.metadata.TRANSLATORS"
-                       android:resource="@string/about_translators" />
-        <meta-data android:name="org.openintents.metadata.ARTISTS"
-                       android:resource="@array/about_artists" />
-        <meta-data android:name="org.openintents.metadata.WEBSITE_LABEL"
-                       android:value="@string/app_name" />
-        <meta-data android:name="org.openintents.metadata.WEBSITE_URL"
-                       android:value="@string/about_website_url" />
-        <meta-data android:name="org.openintents.metadata.LICENSE"
-                       android:resource="@raw/license_short" />
-        <meta-data android:name="org.openintents.metadata.EMAIL"
-                       android:value="@string/about_email" />
-        <meta-data android:name="org.openintents.metadata.RECENT_CHANGES"
-                       android:resource="@raw/recent_changes" />
+		<meta-data android:name="org.openintents.about"
+			android:resource="@xml/about" />
                        
 	    <meta-data android:name="org.openintents.metadata.USES_INTENT"
 	                   android:value="org.openintents.action.SHOW_ABOUT_DIALOG?org.openintents.extra.PACKAGE_NAME=org.openintents.shopping"/>                       
