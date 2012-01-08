@@ -25,14 +25,14 @@
   Jihyeok Seo https://launchpad.net/~limeburst
   OpenIntents devs https://launchpad.net/~openintents-devs</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">OI 쇼핑 목록은 쇼핑 항목을 관리할 수 있게 해 드립니다. 할 일 목록이나 파티 게스트 목록 같은 다른 종류의 목록으로도 사용할 수 있습니다.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI 쇼핑 목록</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">새 아이템</string>
 	<string name="new_list">새 목록</string>
@@ -41,7 +41,7 @@
 	<string name="empty_list_not_sent">목록이 비어 있어 보내지 않았습니다.</string>
 	<string name="email_not_available">보낼 수 있는 앱이 없습니다.</string>
 	<string name="my_shopping_list">나의 쇼핑 목록</string>
-	<string name="new_list_hint">i.e. 가지고 싶은 것 목록, 가족 목록</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">목록 정리하기</string>
 	<string name="delete_list">목록 삭제</string>
 	<string name="ask_new_list">새 쇼핑 목록의 이름을 입력해 주세요</string>
@@ -291,7 +291,7 @@
         <item>아주 작게</item>
     	<!-- Preference fontsize: small font size -->
         <item>작은</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>기본값</item>
     	<!-- Preference fontsize: large font size -->
         <item>큰</item>
@@ -310,9 +310,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>없음</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>문장 첫 글자 대문자로</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>단어 첫 글자 대문자로</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

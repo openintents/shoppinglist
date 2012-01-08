@@ -23,14 +23,14 @@
 	<string name="about_translators">Launchpad Contributions:
   Cédric VALMARY (Tot en òc) https://launchpad.net/~cvalmary</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">OI Shopping list vos permet de seguir vòstra lista de crompas. Lo podètz utilizar tanben per d\'autres tipes de listas, per exemple una lista de causas a far o una lista de convidats.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Shopping list</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">Element novèl</string>
 	<string name="new_list">Lista novèla</string>
@@ -39,7 +39,7 @@
 	<string name="empty_list_not_sent">Lista voida pas mandada</string>
 	<string name="email_not_available">Pas d\'aplicacion disponibla pel mandadadís</string>
 	<string name="my_shopping_list">Ma lista de crompas</string>
-	<string name="new_list_hint">Per ex. present, familha</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">Netejar la lista</string>
 	<string name="delete_list">Suprimir la lista</string>
 	<string name="ask_new_list">Entratz lo nom de la novèla lista de crompas</string>
@@ -289,7 +289,7 @@
         <item>Minuscul</item>
     	<!-- Preference fontsize: small font size -->
         <item>Pichon</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>Per defaut</item>
     	<!-- Preference fontsize: large font size -->
         <item>Grand</item>
@@ -308,9 +308,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>Pas cap</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Per frasa</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Per mot</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

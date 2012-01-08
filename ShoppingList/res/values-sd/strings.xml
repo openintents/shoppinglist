@@ -21,16 +21,17 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
+  OpenIntents devs https://launchpad.net/~openintents-devs
   happynawani https://launchpad.net/~happynawani</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">ओआई शौपिंग लिस्ट तहां खे तहान्जे खरीदारी आइटमों ते नजर रखन डिंडो तव | तहां इन्न्खे बे प्रकार जी नियंत्रण सूची लाये भी प्रयोग करे ता सगो   जियँ: कार्य सूची या दावत जे मेहमानन जी सूची</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI खरीदारी सूची</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">नयो आईटम</string>
 	<string name="new_list">नयी सूची</string>
@@ -39,7 +40,7 @@
 	<string name="empty_list_not_sent">कहली सूची न मोकली</string>
 	<string name="email_not_available">मोक्लाणा लाये  कोई अनुप्रयोग मौजूद  काने</string>
 	<string name="my_shopping_list">मुंजी खरीदारी सूची</string>
-	<string name="new_list_hint">जीयं इच्छा सूची, परिवार सूची</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">सूची खली कयो</string>
 	<string name="delete_list">सूचीय खे मिय्तायो</string>
 	<string name="ask_new_list">नयी खरीदारी सूचीय जो नाम भर्यो</string>
@@ -289,7 +290,7 @@
         <item>नन्हा</item>
     	<!-- Preference fontsize: small font size -->
         <item>छोटा</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>डिफ़ॉल्ट</item>
     	<!-- Preference fontsize: large font size -->
         <item>बड़ा</item>
@@ -308,9 +309,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>कोई नहीं</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>प्रति वाकया</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>प्रति शब्द</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

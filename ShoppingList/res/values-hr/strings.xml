@@ -23,14 +23,14 @@
 	<string name="about_translators">Launchpad Contributions:
   Peli https://launchpad.net/~peli0101</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">Popis za kupovinu vam omogućava praćenje vaše kupovine. Isto tako ga možete koristiti za ostale popise - npr. za ToDo popise ili popisa gostiju.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">Popis za kupovinu</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">Nova stavka</string>
 	<string name="new_list">Novi popis</string>
@@ -39,7 +39,7 @@
 	<string name="empty_list_not_sent">Prazni popis nije poslan.</string>
 	<string name="email_not_available">Nema dostupne aplikacije za slanje.</string>
 	<string name="my_shopping_list">Moj popis za kupovinu</string>
-	<string name="new_list_hint">i.e. popis želja, obitelj</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">Očisti popis</string>
 	<string name="delete_list">Obriši popis</string>
 	<string name="ask_new_list">Unesite ime novog popisa za kupovinu</string>
@@ -289,7 +289,7 @@
         <item>Sitno</item>
     	<!-- Preference fontsize: small font size -->
         <item>Malo</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>Zadano</item>
     	<!-- Preference fontsize: large font size -->
         <item>Veliko</item>
@@ -308,9 +308,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>Bez</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Po rečenici</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Po riječi</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

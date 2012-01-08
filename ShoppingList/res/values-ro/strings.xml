@@ -27,14 +27,14 @@
   Stelescu Raul https://launchpad.net/~stelescuraul
   iulargsb https://launchpad.net/~iulargsb</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">Lista de cumpărături OI vă permite să urmăriți cumpărăturile. Puteți de asemenea să o utilizați pentru alte tipuri de liste de control, de exemplu pentru liste De făcut sau liste de musafiri pentru petreceri.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">Lista de cumpărături OI</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">Articol nou</string>
 	<string name="new_list">Listă nouă</string>
@@ -43,7 +43,7 @@
 	<string name="empty_list_not_sent">Nu a fost trimisă lista goală.</string>
 	<string name="email_not_available">Nu există aplicație pentru trimitere.</string>
 	<string name="my_shopping_list">Lista mea de cumpărături</string>
-	<string name="new_list_hint">adică listă de dorințe, listă de familie</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">Curăță lista</string>
 	<string name="delete_list">Șterge lista</string>
 	<string name="ask_new_list">Introduceți numele listei de cumpărături</string>
@@ -293,7 +293,7 @@
         <item>Mărunt</item>
     	<!-- Preference fontsize: small font size -->
         <item>Mic</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>Implicit</item>
     	<!-- Preference fontsize: large font size -->
         <item>Mare</item>
@@ -312,9 +312,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>Nimic</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Per propoziție</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Per cuvânt</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

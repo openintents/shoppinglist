@@ -30,14 +30,14 @@
   ZipUltra https://launchpad.net/~zipultra
   friedger https://launchpad.net/~friedger</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">"OI Shopping list" предназначен для создания и хранения списков покупок. Вы так же можете использовать программу для других целей, например как список задач.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Список покупок</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">Новый элемент</string>
 	<string name="new_list">Новый список</string>
@@ -46,7 +46,7 @@
 	<string name="empty_list_not_sent">Список пуст.</string>
 	<string name="email_not_available">Нет приложения для отправки.</string>
 	<string name="my_shopping_list">Мой список покупок</string>
-	<string name="new_list_hint">пример: продукты, запчасти, стойматериалы и т.д.</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">Очистить список</string>
 	<string name="delete_list">Удалить список</string>
 	<string name="ask_new_list">Введите имя нового списка покупок</string>
@@ -296,7 +296,7 @@
         <item>Крошечный</item>
     	<!-- Preference fontsize: small font size -->
         <item>Маленький</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>По умолчанию</item>
     	<!-- Preference fontsize: large font size -->
         <item>Большой</item>
@@ -315,9 +315,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>Нет</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Первое слово</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Все слова</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

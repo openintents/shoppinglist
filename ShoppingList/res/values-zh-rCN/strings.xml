@@ -26,14 +26,14 @@
   friedger https://launchpad.net/~friedger
   zhangchun https://launchpad.net/~zhangchun</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">OI 购物列表自动记录您所选购的物品。您也可以将它用作其他方面的核对清单，如未完成列表或者派对客人列表。</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI 购物列表</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">新物品</string>
 	<string name="new_list">新列表</string>
@@ -42,7 +42,7 @@
 	<string name="empty_list_not_sent">不能发送空列表.</string>
 	<string name="email_not_available">无法找到用于传送的应用程序</string>
 	<string name="my_shopping_list">我的购物列表</string>
-	<string name="new_list_hint">例如 愿望表, 家庭表</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">清除列表</string>
 	<string name="delete_list">删除列表</string>
 	<string name="ask_new_list">输入新购物列表的名称</string>
@@ -292,7 +292,7 @@
         <item>微小</item>
     	<!-- Preference fontsize: small font size -->
         <item>小</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>默认</item>
     	<!-- Preference fontsize: large font size -->
         <item>大</item>
@@ -311,9 +311,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>无</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>句首字母大写</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>单词首字母大写</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

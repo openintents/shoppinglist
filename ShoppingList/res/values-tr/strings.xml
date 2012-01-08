@@ -29,14 +29,14 @@ Launchpad Contributions:
   ariza95 https://launchpad.net/~alirizanazli95
   zeugma https://launchpad.net/~sunder67</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">OI Alışveriş listesi sizin alışveriş öğelerinizi izlemenize olanak tanır. Ayrıca yapılacaklar listeleri , konuk listeleri, kontrol listeleri veya diğer türler için de kullanabilirsiniz. Örneğin parti konuk listeleri.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Alışveriş listesi</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">Yeni öğe</string>
 	<string name="new_list">Yeni liste</string>
@@ -45,7 +45,7 @@ Launchpad Contributions:
 	<string name="empty_list_not_sent">Boş liste gönderilemez</string>
 	<string name="email_not_available">Hiçbir uygulama gönderilmeye uygun değil</string>
 	<string name="my_shopping_list">Alışveriş listem</string>
-	<string name="new_list_hint">istekler, aile listesi gibi</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">Listeyi temizle</string>
 	<string name="delete_list">Listeyi sil</string>
 	<string name="ask_new_list">Yeni alışveriş listesinin adını girin</string>
@@ -295,7 +295,7 @@ Launchpad Contributions:
         <item>Minik</item>
     	<!-- Preference fontsize: small font size -->
         <item>Küçük</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>Ön tanımlı</item>
     	<!-- Preference fontsize: large font size -->
         <item>Büyük</item>
@@ -314,9 +314,9 @@ Launchpad Contributions:
     	<!-- Preference capitalization: No capitalization -->
         <item>Hiçbiri</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Cümle Başlarını</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Kelime Başlarını</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

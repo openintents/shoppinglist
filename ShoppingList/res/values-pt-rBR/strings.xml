@@ -23,8 +23,8 @@
 	<string name="about_translators">Launchpad Contributions:
   Peli https://launchpad.net/~peli0101</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">A OI Shopping List permite que você organize as suas compras. Você também pode usá-la para outros tipos de listas, por exemplo, para listas de tarefas ou de convidados.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
@@ -39,7 +39,7 @@
 	<string name="empty_list_not_sent">Lista vazia não enviada.</string>
 	<string name="email_not_available">Nenhum aplicativo disponível para envio.</string>
 	<string name="my_shopping_list">Minha lista de compras</string>
-	<string name="new_list_hint">ou seja, lista de desejos, lista familiar</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">Limpar lista</string>
 	<string name="delete_list">Excluir lista</string>
 	<string name="ask_new_list">Digitar nome da nova lista de compras</string>
@@ -289,7 +289,7 @@
         <item>Muito pequeno</item>
     	<!-- Preference fontsize: small font size -->
         <item>Pequeno</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>Padrão</item>
     	<!-- Preference fontsize: large font size -->
         <item>Grande</item>
@@ -308,9 +308,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>Nenhum</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Por frase</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Por palavra</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

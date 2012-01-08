@@ -1,9 +1,8 @@
 # Application:
-רשימת קניות OI
+OI Shopping List
 
 # Promo text:
-רשימת קניות OI מאפשרת לך לעקוב אחרי הפריטים שברשימתך. אתה גם יכול להתשמש בזה בשביל סוגים אחרים של 
-רשימות, לדוגמא משימות של דברים לעשות או רשימת הזמנת אורחים למסיבה
+Keep track of your shopping items with OI Shopping List.
 
 # Description:
 רשימת קניות OI היא יישום עוצמתי שהופך ניהול ויצירה של רשימות בדיקה לדבר פשוט וקל. רשימת קניות OI הופכת הוספהת פריטים לרשימה, סימון לשלילה של פריט, והסרתו מהרשימה לדבר פשוט וקל. היישום יכול לעקוב אחר מחירים נפרדים עבור כל חנות שאתה משתמש בה, ומכיל רמה גבוהה של עיצוב אישי. גודל כתב, סדר מיון, טורי רשימה, והתנהגות ניקוי הרשימה כולם הגדרות שנשלטו תעל ידי המשתמש. כל התכונות הללו מובאות ביחד במערך קריספי שניתן לעיצוב דרך מגוון של ערכות נושא. 
@@ -43,7 +42,7 @@ https://translations.launchpad.net/openintents/trunk
 * OI, OpenIntents, Open Intents
 
 גרסאות בין-לאומיות: 
-IO قائمة التسوق, Lista de cumpărături OI, OI Alışveriş listesi, OI Boodschappenlijst, OI Einkaufsliste, OI Handleliste, OI Lista Zakupów, OI Lista de Compras, OI Listahan ng Bilihin, OI Nákupní seznam, OI Nákupný zoznam, OI Shopping List, OI Shopping list, OI lista della spesa, OI Список покупок, OI списък за пазаруване, OI шопинг листа, OI سېتىۋېلىش تىزىمى, OI खरीदारी सूची, OI ਸ਼ਾਪਿੰਗ ਸੂਚੀ, OI 購物清單, OI 购物列表, OI 쇼핑 목록, Popis za kupovinu, Λίστα αγορών OI Shopping list, רשימת קניות OI, لیست خرید OI, ओआई शौपिंग लिस्ट
+OI Shopping List
 
 
 הרחבות: 

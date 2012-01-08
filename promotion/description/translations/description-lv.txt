@@ -1,24 +1,17 @@
-# Application:
-OI Shopping List
-
-# Promo text:
-Keep track of your shopping items with OI Shopping List.
-
-# Description:
 OI Shopping List is a powerful application which makes it easy to create and manage checklists. OI Shopping List makes it easy to add items to a list, check the item off, and remove it from the list. The application can track separate prices for each store that you use, and features a high level of customization. Font size, sort order, list columns, and list cleanup behavior are all settings controlled by the user. All of these features are brought together in a crisp layout that is customizable through a variety of themes. 
 
-开放源码应用程序的源代码是： 
+Pirmkods ir bezmaksas un atvērtā pirmkoda aplikācija ir pieejama: 
 http://code.google.com/p/openintents
 
-应用程序的广告是免费的，不需要网络权限。 
+Šī aplikācija ir bezmaksas un tai nevajag interneta atļauju. 
 
-完整列表的更改，请访问： 
+Lai skatītu pilnīgu izmaiņu sarakstu un sarakstu ar biežāk uzdotajiem jautājumiem, lūdzu apmeklējiet: 
 http://www.openintents.org
 
-可以翻译成您的语言： 
+Jūs varat palīdzēt uzlabot tulkojumu savā valodā izmantojot Lounchpad: 
 https://translations.launchpad.net/openintents/trunk
 
-功能 
+Features: 
 * Add, edit and delete lists.
 * Create, delete, and check items quickly and easily.
 * Variety of themes.
@@ -37,11 +30,11 @@ Applications that work with "OI Shopping List":
 * Backup lists with "My Backup Pro".
 * Import ingredients of recipes with "Bites".
 
-关键字： 
+Keywords: 
 * Shopping, List, Shopping List, Checklist
 * OI, OpenIntents, Open Intents
 
-国际版本： 
+International versions: 
 OI Shopping List
 
 

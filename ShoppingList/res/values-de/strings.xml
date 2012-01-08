@@ -31,14 +31,14 @@
   friedger https://launchpad.net/~friedger
   markus.ruderman https://launchpad.net/~markus-ruderman</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">Mit der OI Einkaufsliste haben Sie Ihre Einkäufe im Griff. Sie können aber auch andere Listen erstellen, wie zum Beispiel eine Aufgabenliste oder eine Gästeliste für die Party.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Einkaufsliste</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">Neuer Eintrag</string>
 	<string name="new_list">Neue Liste</string>
@@ -47,7 +47,7 @@
 	<string name="empty_list_not_sent">Leere Liste wurde nicht gesendet.</string>
 	<string name="email_not_available">Keine Anwendung zum Senden vorhanden.</string>
 	<string name="my_shopping_list">Meine Einkaufsliste</string>
-	<string name="new_list_hint">z.B. Wunschliste, Familienliste</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">Liste aufräumen</string>
 	<string name="delete_list">Liste löschen</string>
 	<string name="ask_new_list">Name der neuen Liste eingeben</string>
@@ -86,11 +86,11 @@
 	<!-- Button label to add an item to the list. -->
 	<string name="add">Hinzufügen</string>
 	
-	<string name="menu_pick_items">Eintrag auswählen</string>
+	<string name="menu_pick_items">Einträge auswählen</string>
 	<string name="menu_start_shopping">Einkaufen</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s - Eintrag auswählen</string>
+	<string name="pick_items_titel">%s - Einträge auswählen</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - Einkaufen</string>
@@ -297,7 +297,7 @@
         <item>Sehr klein</item>
     	<!-- Preference fontsize: small font size -->
         <item>Klein</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>Standard</item>
     	<!-- Preference fontsize: large font size -->
         <item>Groß</item>
@@ -316,9 +316,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>Keine</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Pro Satz</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Pro Wort</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

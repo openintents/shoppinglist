@@ -1,8 +1,8 @@
 # Application:
-OI Lista de Compras
+OI Shopping List
 
 # Promo text:
-La lista de compras OI le permite hacer un seguimiento de sus artículos comprados. También se puede utilizar para otros tipos de listas de verificación, por ejemplo, para las listas de tareas o listas de invitados a la fiesta.
+Keep track of your shopping items with OI Shopping List.
 
 # Description:
 OI Shopping List, es una potente aplicación que hace fácil crear y gestionar listas de la compra. OI Shopping List hace que sea fácil agregar elementos a una lista de compras, marcar los productos, o quitarlos de la lista. La aplicación puede monitorizar los precios por separado para cada tienda que utilice, contando con un alto nivel de personalización. El tamaño de la fuente, el orden de los elementos, las columnas de la lista, y el comportamiento de borrado automático de la lista son valores que pueden ser controlados por el usuario. Todas estas características se organizan en un diseño claro que se puede personalizar a través de una gran variedad de temas. 
@@ -42,7 +42,7 @@ Palabras clave:
 * OI, OpenIntents, Open Intents
 
 Versiones internacionales: 
-IO قائمة التسوق, Lista de cumpărături OI, OI Alışveriş listesi, OI Boodschappenlijst, OI Einkaufsliste, OI Handleliste, OI Lista Zakupów, OI Lista de Compras, OI Listahan ng Bilihin, OI Nákupní seznam, OI Nákupný zoznam, OI Shopping List, OI Shopping list, OI lista della spesa, OI Список покупок, OI списък за пазаруване, OI шопинг листа, OI سېتىۋېلىش تىزىمى, OI खरीदारी सूची, OI ਸ਼ਾਪਿੰਗ ਸੂਚੀ, OI 購物清單, OI 购物列表, OI 쇼핑 목록, Popis za kupovinu, Λίστα αγορών OI Shopping list, רשימת קניות OI, لیست خرید OI, ओआई शौपिंग लिस्ट
+OI Shopping List
 
 
 Complementos: 

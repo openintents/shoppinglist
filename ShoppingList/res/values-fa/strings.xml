@@ -25,14 +25,14 @@
   Peli https://launchpad.net/~peli0101
   reza kia https://launchpad.net/~kia1349</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">لیست خرید OI به شما اجازه می دهد موارد خرید خود را ردیابی کنید. همچنین می توانید از آن برای سایر لیست های بررسی بعنوان مثال برای لیست های ToDo یا لیست های مهمان نیز استفاده کنید.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">لیست خرید OI</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">مورد جدید</string>
 	<string name="new_list">لیست جدید</string>
@@ -41,7 +41,7 @@
 	<string name="empty_list_not_sent">لیست خالی ارسال نمی شود.</string>
 	<string name="email_not_available">برنامه ای برای ارسال موجود نیست.</string>
 	<string name="my_shopping_list">لیست خرید من</string>
-	<string name="new_list_hint">برای مثال لیست دلخواه، لیست خانواده</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">پاک کردن لیست</string>
 	<string name="delete_list">حذف لیست</string>
 	<string name="ask_new_list">نام لیست خرید جدید را وارد کنید</string>
@@ -291,7 +291,7 @@
         <item>بسیار کوچک</item>
     	<!-- Preference fontsize: small font size -->
         <item>کوچک</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>پیش فرض</item>
     	<!-- Preference fontsize: large font size -->
         <item>بزرگ</item>
@@ -310,9 +310,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>هیچ کدام</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>هر جمله</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>هر واژه</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

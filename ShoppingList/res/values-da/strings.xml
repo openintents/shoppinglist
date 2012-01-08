@@ -25,8 +25,8 @@
 Launchpad Contributions:
   Mads Peter Rommedahl https://launchpad.net/~lhademmor</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">OI Shopping List lader dig holde styr på din indkøbsliste. Du kan også bruge den til andre slags lister, for eksempel huskelister eller gæstelister til en fest.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
@@ -41,7 +41,7 @@ Launchpad Contributions:
 	<string name="empty_list_not_sent">Tom liste ikke sendt</string>
 	<string name="email_not_available">Ingen programmer til rådighed til at kunne sende</string>
 	<string name="my_shopping_list">Min indkøbsliste</string>
-	<string name="new_list_hint">f.eks. ønskeliste, familieliste</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">Ryd op i liste</string>
 	<string name="delete_list">Slet liste</string>
 	<string name="ask_new_list">Indtast navn på ny indkøbsliste</string>
@@ -291,7 +291,7 @@ Launchpad Contributions:
         <item>Meget lille</item>
     	<!-- Preference fontsize: small font size -->
         <item>Lille</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>Default</item>
     	<!-- Preference fontsize: large font size -->
         <item>Stor</item>
@@ -310,9 +310,9 @@ Launchpad Contributions:
     	<!-- Preference capitalization: No capitalization -->
         <item>Ingen</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Pr. sætning</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Pr. ord</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

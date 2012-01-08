@@ -21,16 +21,17 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
+  OpenIntents devs https://launchpad.net/~openintents-devs
   abc https://launchpad.net/~abc-g</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">Ang OI Listahan ng Bilihin ay nagbibigay-daan para masubaybayan mo ang iyong mga bilihin. Maaari mo ring gamitin ito para sa iba pang mga uri ng mga tseklist, halimbawa para sa mga ToDo listahan o mga listahan ng bisita ng parti.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Listahan ng Bilihin</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">Bagong bagay</string>
 	<string name="new_list">Bagong listahan</string>
@@ -39,7 +40,7 @@
 	<string name="empty_list_not_sent">Ang walang laman na listahan ay hindi naipadala.</string>
 	<string name="email_not_available">Walang applikasyon na magagamit para sa pagpapadala.</string>
 	<string name="my_shopping_list">Ang aking listahan ng bilihin</string>
-	<string name="new_list_hint">ibig sabihin wishlist, listahan ng pamilya</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">Linisin ang listahan</string>
 	<string name="delete_list">Alisin ang listahan</string>
 	<string name="ask_new_list">Ipasok ang pangalan ng bagong listahan ng bilihin</string>
@@ -289,7 +290,7 @@
         <item>Katiting</item>
     	<!-- Preference fontsize: small font size -->
         <item>Maliit</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>Default</item>
     	<!-- Preference fontsize: large font size -->
         <item>Malaki</item>
@@ -308,9 +309,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>Wala</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Bawat Pangungusap</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Bawat Salita</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

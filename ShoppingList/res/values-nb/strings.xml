@@ -24,14 +24,14 @@
   Arne Tobias Malkenes Ødegaard https://launchpad.net/~arne-tobias
   OpenIntents devs https://launchpad.net/~openintents-devs</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">OI Handleliste lar deg holde styr på det du skal handle. Du kan også bruke applikasjonen til andre typer sjekklister, for eksempel huskelister eller gjestelister.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Handleliste</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">Nytt punkt</string>
 	<string name="new_list">Ny liste</string>
@@ -40,7 +40,7 @@
 	<string name="empty_list_not_sent">Tom liste ikke sendt.</string>
 	<string name="email_not_available">Ingen applikasjon tilgjengelig for sending.</string>
 	<string name="my_shopping_list">Min handleliste</string>
-	<string name="new_list_hint">f. eks. ønskeliste, familieliste</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">Rydd opp i liste</string>
 	<string name="delete_list">Slett liste</string>
 	<string name="ask_new_list">Skriv navnet på den nye handlelisten</string>
@@ -290,7 +290,7 @@
         <item>Veldig liten</item>
     	<!-- Preference fontsize: small font size -->
         <item>Liten</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>Standard</item>
     	<!-- Preference fontsize: large font size -->
         <item>Stor</item>
@@ -309,9 +309,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>Ingen</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Hver setning</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Hvert ord</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

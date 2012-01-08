@@ -1,7 +1,7 @@
 # Application:
-Λίστα αγορών OI Shopping list
+OI Shopping List
 
 # Promo text:
-Η λίστα αγορών OI Shopping list σας δίνει τη δυνατότητα να παρακολουθείτε τις αγορές σας. Μπορείτε επίσης να χρησιμοποιήσετε την εφαρμογή για πολλές ακόμη λίστες, όπως για παράδειγμα, λίστες υποχρεώσεων ή λίστες προσκεκλημένων.
+Keep track of your shopping items with OI Shopping List.
 
 # Description:

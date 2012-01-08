@@ -1,8 +1,8 @@
 # Application:
-Popis za kupovinu
+OI Shopping List
 
 # Promo text:
-Popis za kupovinu vam omogućava praćenje vaše kupovine. Isto tako ga možete koristiti za ostale popise - npr. za ToDo popise ili popisa gostiju.
+Keep track of your shopping items with OI Shopping List.
 
 # Description:
 OI Lista za kupovinu je odlična aplikacija koja omogućava lako pravljenje i korišcenje lista za ispunjivanje. OI Lista za kupovinu omogućava lako dodavanje predmeta u listu, ispunjavanje, i brisanje sa liste. Aplikacija može pratiti različite cene za svaku prodavnicu koju koristite, i sadrži visok nivo izmena. Veličina fonta, redoslet sortiranja, kolone liste, i čišćenje liste se kontrolišu podešavanjima korisnika. Svi ovi dodatci su skupljeni zajedno u cvrstom rasporedu koji se moze izmeniti kroz razne teme. 
@@ -42,7 +42,7 @@ Ključne riječi:
 * OI, OpenIntents, Open Intents
 
 Internacionalna verzija: 
-IO قائمة التسوق, Lista de cumpărături OI, OI Alışveriş listesi, OI Boodschappenlijst, OI Einkaufsliste, OI Handleliste, OI Lista Zakupów, OI Lista de Compras, OI Listahan ng Bilihin, OI Nákupní seznam, OI Nákupný zoznam, OI Shopping List, OI Shopping list, OI lista della spesa, OI Список покупок, OI списък за пазаруване, OI шопинг листа, OI سېتىۋېلىش تىزىمى, OI खरीदारी सूची, OI ਸ਼ਾਪਿੰਗ ਸੂਚੀ, OI 購物清單, OI 购物列表, OI 쇼핑 목록, Popis za kupovinu, Λίστα αγορών OI Shopping list, רשימת קניות OI, لیست خرید OI, ओआई शौपिंग लिस्ट
+OI Shopping List
 
 
 Dodatci: 

@@ -26,15 +26,14 @@
   OpenIntents devs https://launchpad.net/~openintents-devs
   Yuval Yogev https://launchpad.net/~yogevyuval</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">רשימת קניות OI מאפשרת לך לעקוב אחרי הפריטים שברשימתך. אתה גם יכול להתשמש בזה בשביל סוגים אחרים של 
-רשימות, לדוגמא משימות של דברים לעשות או רשימת הזמנת אורחים למסיבה</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">רשימת קניות OI</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">פריט חדש</string>
 	<string name="new_list">רשימה חדשה</string>
@@ -43,7 +42,7 @@
 	<string name="empty_list_not_sent">רשימה ריקה לא נשלחה</string>
 	<string name="email_not_available">אין יישום שזמין לשליחה.</string>
 	<string name="my_shopping_list">רשימת הקניות שלי</string>
-	<string name="new_list_hint">i.e. רשימת בקשות, רשימת משפחה</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">רשימת ניקיון</string>
 	<string name="delete_list">רשימת מחיקה</string>
 	<string name="ask_new_list">הכנס שם של רשימת קניות חדשה</string>
@@ -293,7 +292,7 @@
         <item>זעיר</item>
     	<!-- Preference fontsize: small font size -->
         <item>קטן</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>בררת מחדל</item>
     	<!-- Preference fontsize: large font size -->
         <item>גדול</item>
@@ -312,9 +311,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>כלום</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>עבור כל משפט</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>עבור כל מילה</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

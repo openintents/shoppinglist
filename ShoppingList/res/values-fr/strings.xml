@@ -30,14 +30,14 @@
   friedger https://launchpad.net/~friedger
   viktor https://launchpad.net/~lfraisse</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">OI Shopping list vous permet de suivre votre liste de course. Vous pouvez aussi l\'utiliser pour d\'autres types de listes, par exemple une liste de chose à faire ou une liste d\'invités.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Shopping list</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">Nouvel élément</string>
 	<string name="new_list">Nouvelle liste</string>
@@ -46,7 +46,7 @@
 	<string name="empty_list_not_sent">Liste vide non envoyée</string>
 	<string name="email_not_available">Non disponible pour l\'envoi.</string>
 	<string name="my_shopping_list">Ma liste de courses</string>
-	<string name="new_list_hint">Par ex. cadeau, famille</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">Nettoyer la liste</string>
 	<string name="delete_list">Supprimer la liste</string>
 	<string name="ask_new_list">Entrez le nom de la nouvelle liste de courses</string>
@@ -296,7 +296,7 @@
         <item>Très petite</item>
     	<!-- Preference fontsize: small font size -->
         <item>Petit</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>Défaut</item>
     	<!-- Preference fontsize: large font size -->
         <item>Grand</item>
@@ -315,9 +315,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>Aucun</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Par phrase</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Par mot</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

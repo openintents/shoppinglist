@@ -28,14 +28,14 @@
   Stefani Soyanova https://launchpad.net/~stefi-stoyanova95
   kosyo https://launchpad.net/~kosyokk</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">Списъкът за пазаруване на OI ви позволява да следите вашите покупки. Можете да го използвате за други проверки, например за списъци със задачи или списъци с гости за партита.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI списък за пазаруване</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">Нов продукт</string>
 	<string name="new_list">Нов списък</string>
@@ -44,7 +44,7 @@
 	<string name="empty_list_not_sent">Празният списък не е изпратен.</string>
 	<string name="email_not_available">Не се предлага приложение за изпращане.</string>
 	<string name="my_shopping_list">Мой списък за пазаруване</string>
-	<string name="new_list_hint">напр. списък с желания, семеен списък</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">Почисти списък</string>
 	<string name="delete_list">Изтрий списък</string>
 	<string name="ask_new_list">Въведи име на новия списък за пазаруване</string>
@@ -294,7 +294,7 @@
         <item>Най-малки</item>
     	<!-- Preference fontsize: small font size -->
         <item>Малки</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>По подразбиране</item>
     	<!-- Preference fontsize: large font size -->
         <item>Големи</item>
@@ -313,9 +313,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>Без</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>На изречение</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>На дума</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

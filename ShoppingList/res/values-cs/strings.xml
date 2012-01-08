@@ -26,14 +26,14 @@
   Peli https://launchpad.net/~peli0101
   friedger https://launchpad.net/~friedger</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">S OI Nákupním seznamem přehledně naplánujete, co nakoupit, a v obchodě na nic nezapomenete. Můžete ho použít také pro ostatní druhy kontrolních seznamů, jako například seznam úkolů nebo seznam hostů na večírek.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Nákupní seznam</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">Nová položka</string>
 	<string name="new_list">Nový seznam</string>
@@ -42,7 +42,7 @@
 	<string name="empty_list_not_sent">Prázdný seznam nebyl poslán</string>
 	<string name="email_not_available">Pro odeslání není k dispozici žádná aplikace</string>
 	<string name="my_shopping_list">Můj nákupní seznam</string>
-	<string name="new_list_hint">Např. K Vánocům nebo Pečivo</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">Vyčistit seznam</string>
 	<string name="delete_list">Odstranit seznam</string>
 	<string name="ask_new_list">Vložte jméno nového nákupního seznamu</string>
@@ -292,7 +292,7 @@
         <item>Malinké</item>
     	<!-- Preference fontsize: small font size -->
         <item>Malé</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>Výchozí</item>
     	<!-- Preference fontsize: large font size -->
         <item>Velké</item>
@@ -311,9 +311,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>Nic</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Každou větu</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Každé slovo</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

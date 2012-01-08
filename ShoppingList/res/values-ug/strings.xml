@@ -24,14 +24,14 @@
   OpenIntents devs https://launchpad.net/~openintents-devs
   Sahran https://launchpad.net/~sahran</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">OI سېتىۋېلىش تىزىمى سېتىۋالغان تۈرلىرىڭىزنى ئىزلىشىڭىزغا يول قويىدۇ. ئۇنى باشقا تىزىمنى تەكشۈرۈشكە ئىشلەتسىڭىزمۇ بولىدۇ، مەسىلەن: بىجىرىدىغان ئىشلار تىزىمى ياكى يىغىلىش مېھمانلىرى تىزىمى</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI سېتىۋېلىش تىزىمى</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">يېڭى تۈر</string>
 	<string name="new_list">يېڭى تىزىم</string>
@@ -40,7 +40,7 @@
 	<string name="empty_list_not_sent">تىزىم بوش يوللىمىدى.</string>
 	<string name="email_not_available">يوللاشقا ئىشلىتىدىغان قوللىنىشچان پىروگرامما يوق.</string>
 	<string name="my_shopping_list">سېتىۋېلىش تىزىمىم</string>
-	<string name="new_list_hint">يەنى ئارزۇدىكى تىزىم، ئائىلە تىزىمى</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">تىزىمنى تازىلا</string>
 	<string name="delete_list">تىزىمنى ئۆچۈر</string>
 	<string name="ask_new_list">يېڭى سېتىۋېلىش تىزىمىغا ئات كىرگۈزۈڭ</string>
@@ -290,7 +290,7 @@
         <item>كىچىكرەك</item>
     	<!-- Preference fontsize: small font size -->
         <item>كىچىك</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>كۆڭۈلدىكى</item>
     	<!-- Preference fontsize: large font size -->
         <item>چوڭ</item>
@@ -309,9 +309,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>يوق</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>ھەر بىر جۈملە</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>ھەر بىر سۆز</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

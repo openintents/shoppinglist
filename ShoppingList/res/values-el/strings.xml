@@ -23,14 +23,14 @@
 	<string name="about_translators">Launchpad Contributions:
   Peli https://launchpad.net/~peli0101</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">Η λίστα αγορών OI Shopping list σας δίνει τη δυνατότητα να παρακολουθείτε τις αγορές σας. Μπορείτε επίσης να χρησιμοποιήσετε την εφαρμογή για πολλές ακόμη λίστες, όπως για παράδειγμα, λίστες υποχρεώσεων ή λίστες προσκεκλημένων.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">Λίστα αγορών OI Shopping list</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">Νέο στοιχείο</string>
 	<string name="new_list">Νέα λίστα</string>
@@ -39,7 +39,7 @@
 	<string name="empty_list_not_sent">Κενή λίστα. Δεν εστάλη.</string>
 	<string name="email_not_available">Δεν υπάρχει εφαρμογή για αποστολή.</string>
 	<string name="my_shopping_list">Η λίστα αγορών μου</string>
-	<string name="new_list_hint">π.χ. λίστα επιθυμιών, οικογενειακή λίστα</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">Εκκαθάριση λίστας</string>
 	<string name="delete_list">Διαγραφή λίστας</string>
 	<string name="ask_new_list">Εισαγάγετε το όνομα της νέας λίστας αγορών</string>
@@ -289,7 +289,7 @@
         <item>Ελάχιστο</item>
     	<!-- Preference fontsize: small font size -->
         <item>Μικρό</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>Προεπιλογή</item>
     	<!-- Preference fontsize: large font size -->
         <item>Μεγάλο</item>
@@ -308,9 +308,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>Καμία</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Ανά πρόταση</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Ανά λέξη</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

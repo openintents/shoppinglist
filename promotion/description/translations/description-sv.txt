@@ -1,7 +1,7 @@
 # Application:
-OI Shopping list
+OI Shopping List
 
 # Promo text:
-Med OI Shopping List kan du hålla koll på det du köper. Du kan också använda den för andra typer av checklistor, t.ex. för ToDo listor eller gästlistor till fester.
+Keep track of your shopping items with OI Shopping List.
 
 # Description:

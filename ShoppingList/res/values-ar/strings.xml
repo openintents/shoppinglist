@@ -28,14 +28,14 @@ Launchpad Contributions:
   friedger https://launchpad.net/~friedger
   kenn dhia https://launchpad.net/~kendhia</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">قائمة التسوق OIتساعدك على تعقب مشترياتك. بامكانك أيضا استعمالها في جميع قوائم المراحعات مثلا  في قائمة الأعمال أو قوائم الحفلات.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">IO قائمة التسوق</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">عنصر جديد</string>
 	<string name="new_list">قائمة جديدة</string>
@@ -44,7 +44,7 @@ Launchpad Contributions:
 	<string name="empty_list_not_sent">لا يمكن ارسال قائمة قارغة</string>
 	<string name="email_not_available">لا يوجد أي تطبيق متوفر للارسال.</string>
 	<string name="my_shopping_list">قائمتي للتسوق</string>
-	<string name="new_list_hint">مثلا قائمة الأمنبيات ، قائمة العائلة</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">نظف القائمة</string>
 	<string name="delete_list">أحذف القائمة</string>
 	<string name="ask_new_list">أدخل اسم القائمة الجديدة</string>
@@ -294,7 +294,7 @@ Launchpad Contributions:
         <item>صغير جدًا</item>
     	<!-- Preference fontsize: small font size -->
         <item>صغير</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>القيم الافتراضية</item>
     	<!-- Preference fontsize: large font size -->
         <item>واسع</item>
@@ -313,9 +313,9 @@ Launchpad Contributions:
     	<!-- Preference capitalization: No capitalization -->
         <item>لاشيء</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>لكل جملة</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>لكل كلمة</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

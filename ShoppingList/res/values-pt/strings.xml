@@ -27,14 +27,14 @@ Launchpad Contributions:
   Tiago Silva https://launchpad.net/~tiagosilva
   friedger https://launchpad.net/~friedger</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">OI Shopping list lets you keep track of your shopping items. You can also use it for other kinds of check lists, for example for ToDo lists or party guest lists.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Shopping list</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">Novo item</string>
 	<string name="new_list">Nova lista</string>
@@ -43,7 +43,7 @@ Launchpad Contributions:
 	<string name="empty_list_not_sent">Empty list not sent.</string>
 	<string name="email_not_available">No application available for sending.</string>
 	<string name="my_shopping_list">My shopping list</string>
-	<string name="new_list_hint">i.e. wishlist, family list</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">Clean up list</string>
 	<string name="delete_list">Delete list</string>
 	<string name="ask_new_list">Enter name of new shopping list</string>
@@ -293,8 +293,8 @@ Launchpad Contributions:
         <item>Tiny</item>
     	<!-- Preference fontsize: small font size -->
         <item>Small</item>
-    	<!-- Preference fontsize: default font size-->
-    	<item>Default</item>
+    	<!-- Preference fontsize: default font size -->
+    	<item>Default </item>
     	<!-- Preference fontsize: large font size -->
         <item>Large</item>
     </string-array>
@@ -312,9 +312,9 @@ Launchpad Contributions:
     	<!-- Preference capitalization: No capitalization -->
         <item>None</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Per Sentence</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Per Word</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

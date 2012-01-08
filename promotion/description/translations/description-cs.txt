@@ -1,8 +1,8 @@
 # Application:
-OI Nákupní seznam
+OI Shopping List
 
 # Promo text:
-S OI Nákupním seznamem přehledně naplánujete, co nakoupit, a v obchodě na nic nezapomenete. Můžete ho použít také pro ostatní druhy kontrolních seznamů, jako například seznam úkolů nebo seznam hostů na večírek.
+Keep track of your shopping items with OI Shopping List.
 
 # Description:
 OI Nákupní seznam zjednodušuje vytváření a správu kontrolních seznamů. Po stažení OI Nákupního seznamu už nikdy nebude jednoduší přidávat položky do seznamu, odškrtávat ty položky nebo je odstraňovat se seznamu. Aplikace umožňuje uchovávat ceny pro každý obchod zvlášť a vyznačuje se vysokou úrovní přizpůsobení. Velikost písma, pořadí řazení, sloupce seznamu a chování úklidu seznamu jsou všechno nastavení kontrolovaná uživatelem. Všechny tyto vlastnosti Vám přinášíme ve svěžím rozhraní, které je přizpůsobitelné množstvím různých motivů. 
@@ -42,7 +42,7 @@ Klíčová slova:
 * OI, OpenIntents, Open Intents
 
 Mezinárodní verze: 
-IO قائمة التسوق, Lista de cumpărături OI, OI Alışveriş listesi, OI Boodschappenlijst, OI Einkaufsliste, OI Handleliste, OI Lista Zakupów, OI Lista de Compras, OI Listahan ng Bilihin, OI Nákupní seznam, OI Nákupný zoznam, OI Shopping List, OI Shopping list, OI lista della spesa, OI Список покупок, OI списък за пазаруване, OI шопинг листа, OI سېتىۋېلىش تىزىمى, OI खरीदारी सूची, OI ਸ਼ਾਪਿੰਗ ਸੂਚੀ, OI 購物清單, OI 购物列表, OI 쇼핑 목록, Popis za kupovinu, Λίστα αγορών OI Shopping list, רשימת קניות OI, لیست خرید OI, ओआई शौपिंग लिस्ट
+OI Shopping List
 
 
 Rozšíření: 

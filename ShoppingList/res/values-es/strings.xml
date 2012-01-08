@@ -32,14 +32,14 @@
   Walter Reindeer Martinez H https://launchpad.net/~waltereindeerm
   friedger https://launchpad.net/~friedger</string>
 	
-    <!-- Short explanation of the application -->
-	<string name="about_comments">La lista de compras OI le permite hacer un seguimiento de sus artículos comprados. También se puede utilizar para otros tipos de listas de verificación, por ejemplo, para las listas de tareas o listas de invitados a la fiesta.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Lista de Compras</string>
+	<string name="app_name">OI Shopping List</string>
 
 	<string name="new_item">Nuevo elemento</string>
 	<string name="new_list">Nueva lista</string>
@@ -48,7 +48,7 @@
 	<string name="empty_list_not_sent">Lista vacía no enviada</string>
 	<string name="email_not_available">Aplicación no disponible para enviar.</string>
 	<string name="my_shopping_list">Mi lista de compras</string>
-	<string name="new_list_hint">p.e. lista de deseos, lista de familia</string>
+	<string name="new_list_hint">e.g. wishlist, family list</string>
 	<string name="clean_up_list">Limpiar lista</string>
 	<string name="delete_list">Borrar lista</string>
 	<string name="ask_new_list">Escriba el nombre de la nueva lista de compra</string>
@@ -298,7 +298,7 @@
         <item>Muy pequeño</item>
     	<!-- Preference fontsize: small font size -->
         <item>Pequeño</item>
-    	<!-- Preference fontsize: default font size-->
+    	<!-- Preference fontsize: default font size -->
     	<item>Predeterminado</item>
     	<!-- Preference fontsize: large font size -->
         <item>Grande</item>
@@ -317,9 +317,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>Ninguna</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Por frase</item>
+        <item>Per sentence</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Por palabra</item>
+        <item>Per word</item>
     </string-array>
 
 	<!-- ***************************

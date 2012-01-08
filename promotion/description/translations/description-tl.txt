@@ -1,8 +1,8 @@
 # Application:
-OI Listahan ng Bilihin
+OI Shopping List
 
 # Promo text:
-Ang OI Listahan ng Bilihin ay nagbibigay-daan para masubaybayan mo ang iyong mga bilihin. Maaari mo ring gamitin ito para sa iba pang mga uri ng mga tseklist, halimbawa para sa mga ToDo listahan o mga listahan ng bisita ng parti.
+Keep track of your shopping items with OI Shopping List.
 
 # Description:
 OI Listahan ng Bilihin ay isang malakas na applikasyon na nagpapadali ng paglikha at mamahala ng mga checklists. OI Listahan ng Bilihin ay nagpapadali na magdagdag ng mga bagay sa listahan, tanggalin ang tsek ng bagay, at alisin ito sa listahan. Ang applikasyon ay maaaring magsubaybay ng iba-ibang presyo para sa bawat tindahan na iyong ginagamit, at tampok ang isang mataas na antas ng pagpapasadya. Laki ng font, pagsasaayos ng pagkakasunod-sunod, mga kulumna ng listahan, at gawi ng paglilinis ng listahan ay lahat ng mga setting na kinokontrol ng gumagamit. Ang lahat na mga tampok na ito ay naipagsasama sa isang sariwang kaayusan na napapasadya sa pamamagitan ng iba't ibang mga tema. 
@@ -42,7 +42,7 @@ Keywords:
 * OI, OpenIntents, Bukas na Layunin
 
 Internasyonal na mga bersyon: 
-IO قائمة التسوق, Lista de cumpărături OI, OI Alışveriş listesi, OI Boodschappenlijst, OI Einkaufsliste, OI Handleliste, OI Lista Zakupów, OI Lista de Compras, OI Listahan ng Bilihin, OI Nákupní seznam, OI Nákupný zoznam, OI Shopping List, OI Shopping list, OI lista della spesa, OI Список покупок, OI списък за пазаруване, OI шопинг листа, OI سېتىۋېلىش تىزىمى, OI खरीदारी सूची, OI ਸ਼ਾਪਿੰਗ ਸੂਚੀ, OI 購物清單, OI 购物列表, OI 쇼핑 목록, Popis za kupovinu, Λίστα αγορών OI Shopping list, רשימת קניות OI, لیست خرید OI, ओआई शौपिंग लिस्ट
+OI Shopping List
 
 
 Ekstensiyon: 
