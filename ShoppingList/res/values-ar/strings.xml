@@ -23,6 +23,7 @@
 	<string name="about_translators">This is a dummy translation so that the credits are counted as translated.
 
 Launchpad Contributions:
+  OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101
   friedger https://launchpad.net/~friedger
   kenn dhia https://launchpad.net/~kendhia</string>
@@ -77,7 +78,7 @@ Launchpad Contributions:
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">أحذف العنصر باستمرار</string>
 	<string name="menu_move_item">أنقل العنصر الى قائمة أخرى</string>
-    <string name="menu_copy_item">Copy item</string>
+    <string name="menu_copy_item">نسخ عنصر</string>
 	    
 	<!-- Button label to add an item to the list. -->
 	<string name="add">إضافة</string>
@@ -117,7 +118,7 @@ Launchpad Contributions:
 	<string name="priority3_total">الأولوية 1-3 : %s</string>
 	<string name="priority4_total">الأولوية 1-4: %s</string>
 	
-	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
+	<string name="delete_item_confirm">هل انت متأكد من رغبتك في حذف هذا العنصر باستمرار ؟</string>
 	<string name="delete">احذف</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
@@ -164,7 +165,7 @@ Launchpad Contributions:
 	<string name="preference_sortorder_title">أمر الترتيب</string>
 	<string name="preference_sortorder_summary">تغيير  أمر ترتيب قائمة العناصر</string>
 	<string name="preference_sortorder_for_pick_title">أمر ترتيب-اختر العناصر</string>
-	<string name="preference_sortorder_for_pick_summary">تغيير أمر ترتيب قائمة العناصر في اختيار صيغة العناصر.</string>
+	<string name="preference_sortorder_for_pick_summary">تغيير فرز قائمة العناصر في اختيار وضع  العناصر.</string>
 	<string name="preference_sortorder_dialog_title">اختر أمر الترتيب</string>
 	<string name="preference_sortorder_for_pick_dialog_title">اختر أمر الترتيب من أجل اختيار صيغة العناصر</string>
 	<string name="preference_loadlastused_title">عرض آخر قائمة مستعملة</string>
@@ -178,11 +179,11 @@ Launchpad Contributions:
 	<string name="preference_showprice_summary">أظهر على شكل خانة اضافية في القائمة.</string>
 	<string name="preference_perstoreprice">Per-store prices</string>
 	<string name="preference_perstoreprice_title">Track per-store prices</string>
-	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
-	<string name="preference_screenlock_title">Disable screen lock</string>
-	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
-	<string name="preference_reset_quantity">Reset Quantity</string>
-	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
+	<string name="preference_perstoreprice_summary">تتبع الأسعار المنفصلة لكل عنصر في كل متجر</string>
+	<string name="preference_screenlock_title">تعطيل قفل الشاشة</string>
+	<string name="preference_screenlock_summary">منع الشاشة من الايقاف عند التحديد.</string>
+	<string name="preference_reset_quantity">اعادة الكمية</string>
+	<string name="preference_reset_quantity_summary">اعادة الكمية عند اضافة عناصرمرة أخرى.</string>
 	<string name="preference_add_for_barcode">Barcode Scanner</string>
 	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
 	<string name="preference_showtags_title">أظهر الوسوم</string>
@@ -193,52 +194,52 @@ Launchpad Contributions:
 	<string name="preference_showpriority_summary">أظهر على شكل خانة اضافية في القائمة.</string>
 	<string name="preference_showunits_title">أظهر الوحدات</string>
 	<string name="preference_showunits_summary">أظهر على شكل خانة اضافية في القائمة.</string>
-	<string name="preference_prio_subtotal">Subtotal by priority</string>
-	<string name="preference_prioritytotal_title">Subtotal by priority</string>
-	<string name="preference_prioritytotal_summary">No subtotal by priority shown.</string>
-	<string name="preference_prioritytotal_dialog_title">Subtotal by priority</string>
-	<string name="preference_priosubtotalchecked_title">Include checked items</string>
+	<string name="preference_prio_subtotal">المجموع حسب الأولوية</string>
+	<string name="preference_prioritytotal_title">المجموع حسب الأولوية</string>
+	<string name="preference_prioritytotal_summary">لم يظهر أي مجموع حسب الأولوية</string>
+	<string name="preference_prioritytotal_dialog_title">المجموع حسب الأولوية</string>
+	<string name="preference_priosubtotalchecked_title">شمل العناصر المحددة</string>
 	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
 	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
-	<string name="preference_pickitemsinlist_title">Pick items directly in list</string>
+	<string name="preference_pickitemsinlist_title">اختيار العناصر مباشرة في القائمة</string>
 	<string name="preference_pickitemsinlist_on_summary">Switch main list to edit mode to re-add existing items</string>
 	<string name="preference_pickitemsinlist_off_summary">Add items to list using a dedicated dialog</string>
 	<string name="preference_samesortforpick_title">السماح ببعض اوامر الترتيب</string>
-	<string name="preference_samesortforpick_on_summary">Items are sorted in Pick Items mode just as in Shopping mode.</string>
+	<string name="preference_samesortforpick_on_summary">تم فرز العناصر بطريقة اختيار العناصر كما في وضع  التسوق.</string>
 	<string name="preference_samesortforpick_off_summary">Sort order for Pick Items mode can be chosen separately.</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
-	<string name="preference_shake_title">Shake to clean up</string>
+	<string name="preference_shake_title">هز للتنظيف</string>
 	
 	<!-- Preference summary: Shake the phone to clean up the list. -->
-	<string name="preference_shake_summary">Shake the phone to clean up the list.</string>
+	<string name="preference_shake_summary">هز الهاتف لتنظيف القائمة.</string>
 	
     <string name="preference_advanced">إعدادات متقدمة</string>
-    <string name="preference_advanced_summary">Additional settings.</string>
+    <string name="preference_advanced_summary">الاعدادات الاضافية.</string>
     
     <!-- Preference category: General settings -->
     <string name="preference_general">عام</string>
-    <string name="preference_pickitems">Pick Items</string>
+    <string name="preference_pickitems">اختر العناصر</string>
     
     <string name="preference_appearance">المظهر</string>
     
     <string name="preference_addons">إضافات</string>
     <string name="preference_get_addons">أحصل الى اضافات جديدة</string>
-    <string name="preference_get_addons_summary">Search for extensions and themes online.</string>
-    <string name="preference_get_market_addons">Get add-ons from Market</string>
-    <string name="preference_get_developer_addons">Get add-ons from OpenIntents</string>
+    <string name="preference_get_addons_summary">البحث عن الملحقات  والثيمات اونلاين</string>
+    <string name="preference_get_market_addons">الحصول على الاضافات من المتجر</string>
+    <string name="preference_get_developer_addons">الحصول على الاضافات من OpenIntents</string>
     <string name="preference_extensions">الملحقات</string>
     <string name="preference_themes">الثيمات</string>
-    <string name="preference_market_extensions_summary">Search for extensions at Android Market.</string>
-    <string name="preference_market_themes_summary">Search for themes at Android Market.</string>
-    <string name="preference_developer_extensions_summary">Get extensions from the OpenIntents homepage.</string>
-	<string name="preference_developer_themes_summary">Get themes from the OpenIntents homepage.</string>
-	<string name="preference_quickedit">Quick Edit Mode</string>
+    <string name="preference_market_extensions_summary">البحث عن الملحقات  في متجر أندرويد</string>
+    <string name="preference_market_themes_summary">البحث عن الثيمات في متجر أندرويد</string>
+    <string name="preference_developer_extensions_summary">الحصول على الملحقات من الصفحة الرئيسية لـ OpenIntents</string>
+	<string name="preference_developer_themes_summary">الحصول على الثيمات  من الصفحة الرئيسية لـ OpenIntents</string>
+	<string name="preference_quickedit">صيغة التعديل السريع</string>
 	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
 	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
-	<string name="preference_reset_all_settings">Reset all settings</string>
-	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
-	<string name="preference_reset_all_settings_done">All settings have been reset</string>
+	<string name="preference_reset_all_settings">اعادة جميع الاعدادات</string>
+	<string name="preference_reset_all_settings_alert">هل أنت متأكد من رغبتك في اعادة جميع الاعدادات ؟ لا يمكن التراجع عنه.</string>    
+	<string name="preference_reset_all_settings_done">تم اعادة جميع الاعدادات</string>
 	    
 	<!-- ***************************
 	     Permissions
@@ -246,11 +247,11 @@ Launchpad Contributions:
 	
 	<!-- OI Shopping list -->
 	<!-- Permission to read shopping lists -->
-	<string name="oi_shopping_permission_read">read shopping lists</string>
-	<string name="oi_shopping_permission_read_descr">Allows an application to read shopping lists. Note that encrypted lists and items are provided in the encrypted format.</string>
+	<string name="oi_shopping_permission_read">قراءة قوائم التسوق</string>
+	<string name="oi_shopping_permission_read_descr">السماح للتطبيق بقراءة قوائم التسوق. القوائم والعناصرالمشفرة تقدم مشفرة.</string>
 	<!-- Permission to write to shopping lists -->
-	<string name="oi_shopping_permission_write">write shopping lists</string>
-	<string name="oi_shopping_permission_write_descr">Allows an application to create new lists and items or change existing ones.</string>
+	<string name="oi_shopping_permission_write">كتابة قوائم التسوق</string>
+	<string name="oi_shopping_permission_write_descr">السماح لتطبيق بانشاء قوائم أو عناصر جديدة أو تغير الموجودة مسبقا.</string>
 	
 	
 	<!-- ***************************
@@ -259,9 +260,9 @@ Launchpad Contributions:
 	
     <string-array name="preference_sortorder_entries">
     	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
-    	<item>unchecked first, alphabetical</item>
+    	<item>الغير محددة أولا، أبجديا</item>
         <!-- Preference sort order: Sort by item name -->
-    	<item>alphabetical</item>
+    	<item>أبجديا</item>
         <!-- Preference sort order: Newest item first -->
     	<item>الأحدث أولا</item>
         <!-- Preference sort order: Oldest item first -->
@@ -273,15 +274,15 @@ Launchpad Contributions:
         <!-- Preference sort order: Sort by price, the most expensive first -->
     	<item>الأغلى أولا</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
-    	<item>unchecked first, tags alphabetical</item>
+    	<item>الغير محددة أولا، العلامات أبجديا</item>
     	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
-    	<item>unchecked first, priority, alphabetical</item>
+    	<item>الغير محددة أولا،الأولوية، أبجديا</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
-    	<item>unchecked first, priority, tags alphabetical</item>
+    	<item>الغير محددة أولا، االأولوية العلامات أبجديا</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">
-    	<item>Not shown</item>
+    	<item>لا يظهر</item>
     	<item>الأولوية1</item>
     	<item>الأولوية 1-2</item>
     	<item>الأولوية 1-3</item>
@@ -303,25 +304,25 @@ Launchpad Contributions:
     	<!-- Preference orientation: default -->
         <item>القيم الافتراضية</item>
     	<!-- Preference orientation: landscape -->
-    	<item>Landscape</item>
+    	<item>المشهد</item>
     	<!-- Preference orientation: portrait -->
-        <item>Portrait</item>
+        <item>لوحة</item>
     </string-array>
     
     <string-array name="preference_capitalization_entries">
     	<!-- Preference capitalization: No capitalization -->
         <item>لاشيء</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Per Sentence</item>
+        <item>لكل جملة</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Per Word</item>
+        <item>لكل كلمة</item>
     </string-array>
 
 	<!-- ***************************
 	     OI Notepad
 	     *************************** -->
 	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
-	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<string name="notepad_not_available">تعديل ملاحظات العنصر يحتاج الى مفكرة OI</string>
 	<!-- Name of application "OI Notepad". Translations should be consistent. -->
 	<string name="notepad">مفكرةOI</string>
 
@@ -341,8 +342,8 @@ Launchpad Contributions:
     	<item>نظف القائمة</item>
     </string-array>
       
-	<string name="widget_prev_page">Previous page</string>
-	<string name="widget_next_page">Next page</string>
-	<string name="widget_choose_a_list">Choose a list</string>
-	<string name="widget_no_items">No items on page %d</string>
+	<string name="widget_prev_page">الصفحة السابقة</string>
+	<string name="widget_next_page">الصفحة التالية</string>
+	<string name="widget_choose_a_list">اختر قائمة</string>
+	<string name="widget_no_items">لا يوجد أي عناصر في الصفحة  %d</string>
 </resources>

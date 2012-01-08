@@ -2,6 +2,6 @@
 OI Shopping list
 
 # Promo text:
-OI Shopping list lets you keep track of your shopping items. You can also use it for other kinds of check lists, for example for ToDo lists or party guest lists.
+Med OI Shopping List kan du hålla koll på det du köper. Du kan också använda den för andra typer av checklistor, t.ex. för ToDo listor eller gästlistor till fester.
 
 # Description:

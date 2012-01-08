@@ -5,3 +5,58 @@ OI Nákupní seznam
 S OI Nákupním seznamem přehledně naplánujete, co nakoupit, a v obchodě na nic nezapomenete. Můžete ho použít také pro ostatní druhy kontrolních seznamů, jako například seznam úkolů nebo seznam hostů na večírek.
 
 # Description:
+OI Nákupní seznam zjednodušuje vytváření a správu kontrolních seznamů. Po stažení OI Nákupního seznamu už nikdy nebude jednoduší přidávat položky do seznamu, odškrtávat ty položky nebo je odstraňovat se seznamu. Aplikace umožňuje uchovávat ceny pro každý obchod zvlášť a vyznačuje se vysokou úrovní přizpůsobení. Velikost písma, pořadí řazení, sloupce seznamu a chování úklidu seznamu jsou všechno nastavení kontrolovaná uživatelem. Všechny tyto vlastnosti Vám přinášíme ve svěžím rozhraní, které je přizpůsobitelné množstvím různých motivů. 
+
+Zdrojové kód této open source aplikace je dostupný na stránkách: 
+http://code.google.com/p/openintents
+
+Tato aplikace je bez reklam a nevyžaduje přístup k internetu. 
+
+Pro úplný seznam změn a seznam často kladených dotazů navštivte prosím: 
+http://www.openintents.org
+
+Můžete také pomoci zlepšit překlad do Vašeho jazyka na Launchpadu: 
+https://translations.launchpad.net/openintents/trunk
+
+Vlastnosti: 
+* Přidává, upravuje a maže seznamy.
+* Vytváří, odstraňuje a zaškrtává položky svižně a jednoduše.
+* Množství motivů.
+* Přizpůsobitelná velikost písma a pořadí řazení.
+* Může uchovávat cenu pro každý obchod zvlášť.
+* Přizpůsobitelné sloupce seznamu.
+
+Dostupná rozšíření pro OI Seznam nákupů: 
+* Přidat nahranou zprávu k poznámce s OI Hlasovými poznámkami.
+* Importovat/exportovat nákupní seznamy s OI Převést do CSV
+* Zobrazit licenční infomace s OI Infem.
+* Vložit/zaškrtnout položky s pluginem "OI Čárový kód".
+
+Aplikace, které pracují s OI Nákupním seznamem: 
+* Aktualizovat s OI Update.
+* Zálohovat seznamy s "My Backup Pro".
+* Importovat ingredience receptů s "Bites".
+
+Klíčová slova: 
+* Shopping, List, Shopping List, Checklist, kontrolní seznam, todo, todo list, todolist, nákupní seznam, seznam
+* OI, OpenIntents, Open Intents
+
+Mezinárodní verze: 
+IO قائمة التسوق, Lista de cumpărături OI, OI Alışveriş listesi, OI Boodschappenlijst, OI Einkaufsliste, OI Handleliste, OI Lista Zakupów, OI Lista de Compras, OI Listahan ng Bilihin, OI Nákupní seznam, OI Nákupný zoznam, OI Shopping List, OI Shopping list, OI lista della spesa, OI Список покупок, OI списък за пазаруване, OI шопинг листа, OI سېتىۋېلىش تىزىمى, OI खरीदारी सूची, OI ਸ਼ਾਪਿੰਗ ਸੂਚੀ, OI 購物清單, OI 购物列表, OI 쇼핑 목록, Popis za kupovinu, Λίστα αγορών OI Shopping list, רשימת קניות OI, لیست خرید OI, ओआई शौपिंग लिस्ट
+
+
+Rozšíření: 
+* uses OI Voice Note
+* uses OI ConvertCSV
+* uses OI About
+* uses Barcode OI Plugin
+* uses OI Update
+* uses My Backup Pro
+* uses OI Notepad
+* extension for Bites
+
+
+
+
+
+

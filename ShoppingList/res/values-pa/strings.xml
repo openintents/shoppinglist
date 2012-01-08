@@ -21,33 +21,31 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
-  Isabell Long https://launchpad.net/~issyl0
-  OpenIntents devs https://launchpad.net/~openintents-devs
-  happynawani https://launchpad.net/~happynawani</string>
+  Atharva Lath https://launchpad.net/~atharvalath96</string>
 	
     <!-- Short explanation of the application -->
-	<string name="about_comments">OI Shopping list lets you keep track of your shopping items. You can also use it for other kinds of tick lists, for example for ToDo lists or party guest lists.</string>
+	<string name="about_comments">OI ਸ਼ਾਪਿੰਗ ਸੂਚੀ ਦੀ ਮਦਦ ਵਲੋਂ ਤੁਸੀ ਆਪਣੀ ਖਰੀਦਾਰੀ ਆਇਟਮ ਦਾ ਟ੍ਰੈਕ ਰੱਖਣਾ .  ਤੂੰ ਵੀ ਇਹ ਚੇਕ ਸੂਚੀਆਂ  ਦੇ ਹੋਰ ਪ੍ਰਕਾਰ ਲਈ ਵਰਤੋ ਕਰ ਸੱਕਦੇ ਹੋ ToDo ਸੂਚੀਆਂ ਜਾਂ ਪਾਰਟੀ ਮਹਿਮਾਨ ਸੂਚੀ ਲਈ ਉਦਾਹਰਣ  ਦੇ ਲਈ.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Shopping list</string>
+	<string name="app_name">OI ਸ਼ਾਪਿੰਗ ਸੂਚੀ</string>
 
-	<string name="new_item">New item</string>
-	<string name="new_list">New list</string>
-	<string name="send">Send list</string>
-	<string name="mark_all_items">Mark all items</string>
-	<string name="empty_list_not_sent">Empty list not sent.</string>
-	<string name="email_not_available">No application available for sending.</string>
-	<string name="my_shopping_list">My shopping list</string>
-	<string name="new_list_hint">i.e. wishlist, family list</string>
-	<string name="clean_up_list">Clean up list</string>
-	<string name="delete_list">Delete list</string>
-	<string name="ask_new_list">Enter name of new shopping list</string>
+	<string name="new_item">ਨਵਾ ਆਇਟਮ</string>
+	<string name="new_list">ਨਵੀ ਸੂਚੀ</string>
+	<string name="send">ਸੂਚੀ ਭੇਜੇ</string>
+	<string name="mark_all_items">ਸਾਰੇ ਆਇਟਮ ਮਾਰਕ ਕਰ</string>
+	<string name="empty_list_not_sent">ਖਾਲੀ ਸੂਚੀ ਨਹੀਂ ਭੇਜਿਆ .</string>
+	<string name="email_not_available">ਰ ਸੈਟਿੰਗ ਨਹੀ ਬਦਲੀ</string>
+	<string name="my_shopping_list">ਮੇਰਾ ਖਰੀਦਾਰੀ ਦੀ ਸੂਚੀ</string>
+	<string name="new_list_hint">ਅਰਥਾਤ ਇੱਛਾ ਸੂਚੀ ,  ਪਰਵਾਰ ਸੂਚੀ</string>
+	<string name="clean_up_list">ਸੂਚੀ ਸਾਫ਼</string>
+	<string name="delete_list">ਸੂਚੀ ਹਟਾਵਾਂ</string>
+	<string name="ask_new_list">ਨਵੀਂ ਖਰੀਦਾਰੀ ਦੀ ਸੂਚੀ  ਦੇ ਨਾਮ ਦਰਜ ਕਰੋਏ</string>
 	<string name="ask_rename_list">Rename shopping list</string>
 	<string name="ask_edit_item">Edit item</string>
-	<string name="ask_new_store">Enter new shop name</string>
+	<string name="ask_new_store">Enter new store name</string>
 	<string name="please_enter_name">Please enter a name</string>
 	<string name="no_items_marked">No items are marked as crossed out.</string>
 	<string name="confirm_delete_list">Do you really want to delete this shopping list?</string>
@@ -60,10 +58,10 @@
 	<string name="menu_mark_item">Mark item</string>
 	<string name="menu_edit_item">Edit item</string>
 	<string name="menu_auto_add">Auto add</string>
-	<string name="menu_item_stores">Shops...</string>
-	<string name="menu_rename_store">Rename shop</string>
-	<string name="menu_delete_store">Delete shop</string>
-	<string name="confirm_delete_store">Do you really want to delete this shop?</string>
+	<string name="menu_item_stores">Stores...</string>
+	<string name="menu_rename_store">Rename store</string>
+	<string name="menu_delete_store">Delete store</string>
+	<string name="confirm_delete_store">Do you really want to delete this store?</string>
 	<string name="no_items_available">No items available</string>
 	
 	<!-- Remove item from this list, but keep it internally, so that the user
@@ -74,7 +72,7 @@
 	<!-- Delete this item completely. If the user wants to add it again, they
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">Delete item permanently</string>
-	<string name="menu_move_item">Move item to another list</string>
+	<string name="menu_move_item">Move item to other list</string>
     <string name="menu_copy_item">Copy item</string>
 	    
 	<!-- Button label to add an item to the list. -->
@@ -90,8 +88,8 @@
 	<string name="shopping_title">%s - Shopping</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current item. -->
-	<string name="item_stores_title">%s - Shops</string>
-	<string name="item_stores_activity_label">Edit Item Shops</string>
+	<string name="item_stores_title">%s - Stores</string>
+	<string name="item_stores_activity_label">Edit Item Stores</string>
 	
 	<string name="tags">Tags</string>
 	<string name="price">Price</string>
@@ -109,7 +107,7 @@
 	<string name="total">Total: %s</string>
 	
 	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
-	<string name="total_checked">Ticked:%s</string>
+	<string name="total_checked">Checked: %s</string>
     <string name="priority1_total">Priority 1: %s</string>
     <string name="priority2_total">Priority 1-2: %s</string>
 	<string name="priority3_total">Priority 1-3: %s</string>
@@ -151,8 +149,8 @@
 	
     <string name="preference_application">Application settings</string>
     
-	<string name="preference_unchecked_on_top">Unticked on top</string>
-	<string name="preference_unchecked_on_top_summary">Always show unticked items first</string>
+	<string name="preference_unchecked_on_top">Unchecked on top</string>
+	<string name="preference_unchecked_on_top_summary">Always show unchecked items first</string>
 	<string name="preference_fontsize">Font size</string>
 	<string name="preference_fontsize_summary">Change font size</string>
 	<string name="preference_fontsize_dialog_title">Choose font size</string>
@@ -167,17 +165,17 @@
 	<string name="preference_sortorder_for_pick_dialog_title">Choose sort order for Pick Items mode</string>
 	<string name="preference_loadlastused_title">Load last list used</string>
 	<string name="preference_loadlastused_summary">Always start with the list viewed last time.</string>
-	<string name="preference_capitalization_title">Capitalisation</string>
-	<string name="preference_capitalization_summary">Automatic capitalisation of entries</string>
-	<string name="preference_capitalization_dialog_title">Choose capitalisation</string> 
-	<string name="preference_hidechecked_title">Hide ticked items</string>
-	<string name="preference_hidechecked_summary">Immediately hide ticked off items.</string>
+	<string name="preference_capitalization_title">Capitalization</string>
+	<string name="preference_capitalization_summary">Automatic capitalization of entries</string>
+	<string name="preference_capitalization_dialog_title">Choose capitalization</string> 
+	<string name="preference_hidechecked_title">Hide checked items</string>
+	<string name="preference_hidechecked_summary">Immediately hide items checked off.</string>
 	<string name="preference_showprice_title">Show price</string>
 	<string name="preference_showprice_summary">Shown as extra column in list.</string>
-	<string name="preference_perstoreprice">Per-shop prices</string>
-	<string name="preference_perstoreprice_title">Track per-shop prices</string>
-	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each shop.</string>
-	<string name="preference_screenlock_title">nobble screen lock</string>
+	<string name="preference_perstoreprice">Per-store prices</string>
+	<string name="preference_perstoreprice_title">Track per-store prices</string>
+	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
+	<string name="preference_screenlock_title">Disable screen lock</string>
 	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
 	<string name="preference_reset_quantity">Reset Quantity</string>
 	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
@@ -195,12 +193,12 @@
 	<string name="preference_prioritytotal_title">Subtotal by priority</string>
 	<string name="preference_prioritytotal_summary">No subtotal by priority shown.</string>
 	<string name="preference_prioritytotal_dialog_title">Subtotal by priority</string>
-	<string name="preference_priosubtotalchecked_title">Include ticked off items</string>
-	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes ticked items</string>
-	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes ticked items</string>
+	<string name="preference_priosubtotalchecked_title">Include checked items</string>
+	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
+	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
 	<string name="preference_pickitemsinlist_title">Pick items directly in list</string>
 	<string name="preference_pickitemsinlist_on_summary">Switch main list to edit mode to re-add existing items</string>
-	<string name="preference_pickitemsinlist_off_summary">Add items to list using a dedicated dialog box</string>
+	<string name="preference_pickitemsinlist_off_summary">Add items to list using a dedicated dialog</string>
 	<string name="preference_samesortforpick_title">Always same sort order</string>
 	<string name="preference_samesortforpick_on_summary">Items are sorted in Pick Items mode just as in Shopping mode.</string>
 	<string name="preference_samesortforpick_off_summary">Sort order for Pick Items mode can be chosen separately.</string>
@@ -233,7 +231,7 @@
 	<string name="preference_developer_themes_summary">Get themes from the OpenIntents homepage.</string>
 	<string name="preference_quickedit">Quick Edit Mode</string>
 	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
-	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialogue.</string>
+	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
 	<string name="preference_reset_all_settings">Reset all settings</string>
 	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
 	<string name="preference_reset_all_settings_done">All settings have been reset</string>
@@ -257,7 +255,7 @@
 	
     <string-array name="preference_sortorder_entries">
     	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
-    	<item>unticked first, alphabetical</item>
+    	<item>unchecked first, alphabetical</item>
         <!-- Preference sort order: Sort by item name -->
     	<item>alphabetical</item>
         <!-- Preference sort order: Newest item first -->
@@ -271,11 +269,11 @@
         <!-- Preference sort order: Sort by price, the most expensive first -->
     	<item>most expensive first</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
-    	<item>unticked first, tags alphabetical</item>
+    	<item>unchecked first, tags alphabetical</item>
     	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
-    	<item>unticked first, priority, alphabetical</item>
+    	<item>unchecked first, priority, alphabetical</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
-    	<item>unticked first, priority, tags alphabetical</item>
+    	<item>unchecked first, priority, tags alphabetical</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">
@@ -336,7 +334,7 @@
 	
     <string-array name="automation_actions">
     	<!-- Automation action to clean up a list. -->
-    	<item>Clean up list</item>
+    	<item>ਸੂਚੀ ਸਾਫ਼</item>
     </string-array>
       
 	<string name="widget_prev_page">Previous page</string>

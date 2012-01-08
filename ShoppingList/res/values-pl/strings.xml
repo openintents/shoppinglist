@@ -27,6 +27,7 @@
   Peli https://launchpad.net/~peli0101
   Piotr Łazarczyk https://launchpad.net/~quazarxd
   Tomasz \'Zen\' Napierala https://launchpad.net/~tzn
+  Tomasz Zieliński https://launchpad.net/~tomek0517
   friedger https://launchpad.net/~friedger</string>
 	
     <!-- Short explanation of the application -->
@@ -79,7 +80,7 @@
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">Usuń element na stałe</string>
 	<string name="menu_move_item">Przenieś wpis do innej listy</string>
-    <string name="menu_copy_item">Copy item</string>
+    <string name="menu_copy_item">Kopiuj element</string>
 	    
 	<!-- Button label to add an item to the list. -->
 	<string name="add">Dodaj</string>
@@ -119,7 +120,7 @@
 	<string name="priority3_total">Priorytet 1-3: %s</string>
 	<string name="priority4_total">Priorytet 1-4: %s</string>
 	
-	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
+	<string name="delete_item_confirm">Czy na pewno chcesz trwale usunąć ten element?</string>
 	<string name="delete">Usuń</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
@@ -185,8 +186,8 @@
 	<string name="preference_screenlock_summary">Zapobiega blokadzie ekranu podczas sprawdzania.</string>
 	<string name="preference_reset_quantity">Resetuj Ilość</string>
 	<string name="preference_reset_quantity_summary">Resetuje ilość podczas dodawania elementów ponownie.</string>
-	<string name="preference_add_for_barcode">Barcode Scanner</string>
-	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
+	<string name="preference_add_for_barcode">Skaner kodów kreskowych</string>
+	<string name="preference_add_for_barcode_summary">Przytrzymaj przycisk Dodaj, aby uruchomić Barcode OI Plugin (jeśli jest zainstalowany).</string>
 	<string name="preference_showtags_title">Pokaż etykiety</string>
 	<string name="preference_showtags_summary">Pokaż jako dodatkową kolumnę na liście.</string>
 	<string name="preference_showquantity_title">Pokaż ilość</string>
@@ -238,9 +239,9 @@
 	<string name="preference_quickedit">Tryb Szybkiej Edycji</string>
 	<string name="preference_quickedit_on_summary">Dotknij wartości Priorytet lub Ilość w menu dla wspólnych wartości.</string>
 	<string name="preference_quickedit_off_summary">Dotykanie wartości Priorytet lub Ilość wywołuje Edycję Elementu.</string>
-	<string name="preference_reset_all_settings">Reset all settings</string>
-	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
-	<string name="preference_reset_all_settings_done">All settings have been reset</string>
+	<string name="preference_reset_all_settings">Resetuj wszystkie ustawienia</string>
+	<string name="preference_reset_all_settings_alert">Czy na pewno chcesz zresetować wszystkie ustawienia? Nie będzie można cofnąć.</string>    
+	<string name="preference_reset_all_settings_done">Wszystkie ustawienia zostały zresetowane</string>
 	    
 	<!-- ***************************
 	     Permissions
@@ -343,8 +344,8 @@
     	<item>Wyczyść listę</item>
     </string-array>
       
-	<string name="widget_prev_page">Previous page</string>
-	<string name="widget_next_page">Next page</string>
-	<string name="widget_choose_a_list">Choose a list</string>
-	<string name="widget_no_items">No items on page %d</string>
+	<string name="widget_prev_page">Poprzednia strona</string>
+	<string name="widget_next_page">Następna strona</string>
+	<string name="widget_choose_a_list">Wybierz listę</string>
+	<string name="widget_no_items">Brak elementów na stronie %d</string>
 </resources>

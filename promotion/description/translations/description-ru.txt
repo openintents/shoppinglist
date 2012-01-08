@@ -5,7 +5,7 @@ OI Список покупок
 "OI Shopping list" предназначен для создания и хранения списков покупок. Вы так же можете использовать программу для других целей, например как список задач.
 
 # Description:
-OI Shopping List is a powerful application which makes it easy to create and manage checklists. OI Shopping List makes it easy to add items to a list, check the item off, and remove it from the list. The application can track separate prices for each store that you use, and features a high level of customization. Font size, sort order, list columns, and list cleanup behavior are all settings controlled by the user. All of these features are brought together in a crisp layout that is customizable through a variety of themes. 
+OI Shopping List это мощное приложение позволяющее легко создавать и управлять списками. OI Shopping List позволяет легко добавлять элементы в список, отмечать их выполненными, и удалять их из списка. Приложение может отслеживать расценки для каждого магазина, который вы используете, и имеет высокий уровень настройки. Размер шрифта, порядок сортировки списка столбцов, и порядок очистки списка - это все параметры контролируемые пользователем. Все эти функции объединяются в четкий интерфейс, который настраивается с помощью различных тем. 
 
 Исходный код этой программы является свободным и открытым. Доступен по адресу: 
 http://code.google.com/p/openintents
@@ -19,33 +19,33 @@ http://www.openintents.org
 https://translations.launchpad.net/openintents/trunk
 
 Возможности: 
-* Add, edit and delete lists.
-* Create, delete, and check items quickly and easily.
-* Variety of themes.
-* Customizable font size and sort order.
-* Keep track of separate prices for each store.
-* Customizable list columns.
+* Добавление, изменение и удаление списков.
+* Создание, удаление и отметка элементов быстро и легко.
+* Множество тем
+* Настраиваемый размер шрифта и порядок сортировки.
+* Следите за отдельными ценами для каждого магазина.
+* Настраиваемые столбцы списка.
 
-Available extensions for "OI Shopping List": 
-* Add a recorded message to a note with "OI Voice Notes".
-* Import/export shopping lists with "OI Convert CSV".
-* Show the license information with "OI About".
-* Enter/check items with "Barcode OI Plugin".
+Доступные дополнения для "OI Shopping List": 
+* Добавить записанное сообщение к заметке с помощью "OI Voice Notes".
+* Импорт / экспорт списков покупок с помощью "OI Convert CSV".
+* Показать информацию о лицензии с помощью "OI About".
+* Ввод / проверка элементов с помощью "Barcode OI Plugin".
 
-Applications that work with "OI Shopping List": 
+Приложения работающие с "OI Shopping List": 
 * Обновить с помощью "OI Update".
-* Backup lists with "My Backup Pro".
-* Import ingredients of recipes with "Bites".
+* Резервное копирование списков с помощью "My Backup Pro".
+* Импорт ингредиентов рецептов с помощью "Bites".
 
 Ключевые слова: 
 * Shopping, List, Shopping List, Checklist
 * OI, OpenIntents, Open Intents
 
 Переведенные версии: 
-IO قائمة التسوق, Lista de cumpărături OI, OI Alışveriş listesi, OI Boodschappenlijst, OI Einkaufsliste, OI Handleliste, OI Lista Zakupów, OI Lista de Compras, OI Nákupní seznam, OI Nákupný zoznam, OI Shopping List, OI Shopping list, OI lista della spesa, OI Список покупок, OI списък за пазаруване, OI шопинг листа, OI سېتىۋېلىش تىزىمى, OI 購物清單, OI 购物列表, OI 쇼핑 목록, Popis za kupovinu, Λίστα αγορών OI Shopping list, רשימת קניות OI, لیست خرید OI, ओआई शौपिंग लिस्ट
+IO قائمة التسوق, Lista de cumpărături OI, OI Alışveriş listesi, OI Boodschappenlijst, OI Einkaufsliste, OI Handleliste, OI Lista Zakupów, OI Lista de Compras, OI Listahan ng Bilihin, OI Nákupní seznam, OI Nákupný zoznam, OI Shopping List, OI Shopping list, OI lista della spesa, OI Список покупок, OI списък за пазаруване, OI шопинг листа, OI سېتىۋېلىش تىزىمى, OI खरीदारी सूची, OI ਸ਼ਾਪਿੰਗ ਸੂਚੀ, OI 購物清單, OI 购物列表, OI 쇼핑 목록, Popis za kupovinu, Λίστα αγορών OI Shopping list, רשימת קניות OI, لیست خرید OI, ओआई शौपिंग लिस्ट
 
 
-Extensions: 
+Дополнения: 
 * uses OI Voice Note
 * uses OI ConvertCSV
 * uses OI About

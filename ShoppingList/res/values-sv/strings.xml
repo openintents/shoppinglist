@@ -25,7 +25,7 @@
   Peli https://launchpad.net/~peli0101</string>
 	
     <!-- Short explanation of the application -->
-	<string name="about_comments">OI Shopping list lets you keep track of your shopping items. You can also use it for other kinds of check lists, for example for ToDo lists or party guest lists.</string>
+	<string name="about_comments">Med OI Shopping List kan du hålla koll på det du köper. Du kan också använda den för andra typer av checklistor, t.ex. för ToDo listor eller gästlistor till fester.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
@@ -34,36 +34,36 @@
 	<string name="app_name">OI Shopping list</string>
 
 	<string name="new_item">Ny post</string>
-	<string name="new_list">New list</string>
-	<string name="send">Send list</string>
+	<string name="new_list">Ny lista</string>
+	<string name="send">Skicka lista</string>
 	<string name="mark_all_items">Mark all items</string>
-	<string name="empty_list_not_sent">Empty list not sent.</string>
-	<string name="email_not_available">No application available for sending.</string>
-	<string name="my_shopping_list">My shopping list</string>
+	<string name="empty_list_not_sent">Tom lista ej skickad</string>
+	<string name="email_not_available">Ingen applikation tillgänglig för att skicka</string>
+	<string name="my_shopping_list">Min inköpslista</string>
 	<string name="new_list_hint">t ex önskelista, familjelista</string>
-	<string name="clean_up_list">Clean up list</string>
-	<string name="delete_list">Delete list</string>
-	<string name="ask_new_list">Enter name of new shopping list</string>
-	<string name="ask_rename_list">Rename shopping list</string>
+	<string name="clean_up_list">Rensa lista</string>
+	<string name="delete_list">Ta bort lista</string>
+	<string name="ask_new_list">Skriv in nytt namn på inköpslista</string>
+	<string name="ask_rename_list">Byt namn på inköpslista</string>
 	<string name="ask_edit_item">Redigera post</string>
 	<string name="ask_new_store">Enter new store name</string>
-	<string name="please_enter_name">Please enter a name</string>
-	<string name="no_items_marked">No items are marked as crossed out.</string>
-	<string name="confirm_delete_list">Do you really want to delete this shopping list?</string>
-	<string name="no_shopping_provider">Error while accessing shopping lists.</string>
-	<string name="pick_item">Pick an item</string>
-	<string name="pick_list">Pick a list</string>
+	<string name="please_enter_name">Ange ett namn</string>
+	<string name="no_items_marked">Inga poster är markerade som avbockade</string>
+	<string name="confirm_delete_list">Vill du verkligen ta bort den här inköpslistan</string>
+	<string name="no_shopping_provider">Fel vid åtkomst till inköpslistor.</string>
+	<string name="pick_item">Välj en post</string>
+	<string name="pick_list">Välj en lista</string>
 	<string name="theme">Tema</string>
-	<string name="theme_settings">Theme settings</string>
-	<string name="rename_list">Rename list</string>
+	<string name="theme_settings">Tema inställningar</string>
+	<string name="rename_list">Byt namn på lista</string>
 	<string name="menu_mark_item">Markera post</string>
 	<string name="menu_edit_item">Redigera post</string>
-	<string name="menu_auto_add">Auto add</string>
+	<string name="menu_auto_add">Lägg till automatiskt</string>
 	<string name="menu_item_stores">Stores...</string>
 	<string name="menu_rename_store">Rename store</string>
 	<string name="menu_delete_store">Delete store</string>
 	<string name="confirm_delete_store">Do you really want to delete this store?</string>
-	<string name="no_items_available">No items available</string>
+	<string name="no_items_available">Inga poster tillgängliga</string>
 	
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
@@ -72,18 +72,18 @@
 	
 	<!-- Delete this item completely. If the user wants to add it again, they
 	     have to enter all the information again. -->
-	<string name="menu_delete_item">Delete item permanently</string>
+	<string name="menu_delete_item">Ta bort post permanent</string>
 	<string name="menu_move_item">Move item to other list</string>
     <string name="menu_copy_item">Copy item</string>
 	    
 	<!-- Button label to add an item to the list. -->
 	<string name="add">Lägg till</string>
 	
-	<string name="menu_pick_items">Pick items</string>
+	<string name="menu_pick_items">Välj poster</string>
 	<string name="menu_start_shopping">Handlar</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s - Pick items</string>
+	<string name="pick_items_titel">%s - Välj poster</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - Handla</string>
@@ -108,7 +108,7 @@
 	<string name="total">Total: %s</string>
 	
 	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
-	<string name="total_checked">Checked: %s</string>
+	<string name="total_checked">Avbockat: %s</string>
     <string name="priority1_total">Priority 1: %s</string>
     <string name="priority2_total">Priority 1-2: %s</string>
 	<string name="priority3_total">Priority 1-3: %s</string>
@@ -122,28 +122,28 @@
 	<string name="empty"/>
 	
 	<!-- The shortcut is created on the home screen. -->
-	<string name="pick_list_for_shortcut">Pick list for shortcut</string>
+	<string name="pick_list_for_shortcut">Välj lista för genväg</string>
 	
 	<!-- Shown if external application wants to insert new items. -->
-	<string name="pick_list_to_insert_items">Pick list to insert items</string>
+	<string name="pick_list_to_insert_items">Välj lista för att infoga poster</string>
 	
 	<!-- Theme related -->
 	<!-- Title for selecting a theme -->
-	<string name="theme_pick">Pick a theme</string>
-	<string name="theme_description">Choose a theme for this list</string>
+	<string name="theme_pick">Välj ett tema</string>
+	<string name="theme_description">Välj ett tema för denna listan</string>
 	<string name="theme_default">Standard</string>
 	<string name="theme_classic">Klassisk</string>
 	<string name="theme_bugdroid">Android</string>
-	<string name="theme_classic_export">Classic (from OI Shopping List)</string>
-	<string name="theme_bugdroid_export">Android (from OI Shopping List)</string>
+	<string name="theme_classic_export">Klassisk (från OI Shopping List)</string>
+	<string name="theme_bugdroid_export">Android (från OI Shopping List)</string>
 
 	<!--     Dialog box    -->
 	<!-- Button label "OK" -->
 	<string name="ok">OK</string>
 	<!-- Button label "Cancel" -->
 	<string name="cancel">Avbryt</string>
-	<string name="use_theme_for_all_lists">Use this theme for all lists</string>
-	<string name="get_more_themes">Get more themes</string>
+	<string name="use_theme_for_all_lists">Använd detta tema för alla listor</string>
+	<string name="get_more_themes">Hämta mer teman</string>
 	
 	<!-- preferences -->
 	<string name="preferences">Inställningar</string>
@@ -164,15 +164,15 @@
 	<string name="preference_sortorder_for_pick_summary">Change sort order of list items in Pick Items mode.</string>
 	<string name="preference_sortorder_dialog_title">Välj sorteringsordning</string>
 	<string name="preference_sortorder_for_pick_dialog_title">Choose sort order for Pick Items mode</string>
-	<string name="preference_loadlastused_title">Load last list used</string>
-	<string name="preference_loadlastused_summary">Always start with the list viewed last time.</string>
+	<string name="preference_loadlastused_title">Ladda senaste listan</string>
+	<string name="preference_loadlastused_summary">Starta alltid med senaste listan</string>
 	<string name="preference_capitalization_title">Versaler</string>
 	<string name="preference_capitalization_summary">Automatisk ändring till versaler</string>
 	<string name="preference_capitalization_dialog_title">Välj typ av versaler</string> 
-	<string name="preference_hidechecked_title">Hide checked items</string>
-	<string name="preference_hidechecked_summary">Immediately hide items checked off.</string>
-	<string name="preference_showprice_title">Show price</string>
-	<string name="preference_showprice_summary">Shown as extra column in list.</string>
+	<string name="preference_hidechecked_title">Göm bockade poster</string>
+	<string name="preference_hidechecked_summary">Göm genast bockade poster</string>
+	<string name="preference_showprice_title">Visa pris</string>
+	<string name="preference_showprice_summary">Visa som extra kolumn i listan</string>
 	<string name="preference_perstoreprice">Per-store prices</string>
 	<string name="preference_perstoreprice_title">Track per-store prices</string>
 	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
@@ -182,14 +182,14 @@
 	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
 	<string name="preference_add_for_barcode">Barcode Scanner</string>
 	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
-	<string name="preference_showtags_title">Show tags</string>
-	<string name="preference_showtags_summary">Shown as extra column in list.</string>
-	<string name="preference_showquantity_title">Show quantity</string>
-	<string name="preference_showquantity_summary">Shown as extra column in list.</string>
+	<string name="preference_showtags_title">Visa taggar</string>
+	<string name="preference_showtags_summary">Visa som extra kolumn i listan</string>
+	<string name="preference_showquantity_title">Visa antal</string>
+	<string name="preference_showquantity_summary">Visa som extra kolumn i listan</string>
 	<string name="preference_showpriority_title">Show priority</string>
-	<string name="preference_showpriority_summary">Shown as extra column in list.</string>
+	<string name="preference_showpriority_summary">Visa som extra kolumn i listan</string>
 	<string name="preference_showunits_title">Show units</string>
-	<string name="preference_showunits_summary">Shown as extra column in list.</string>
+	<string name="preference_showunits_summary">Visa som extra kolumn i listan</string>
 	<string name="preference_prio_subtotal">Subtotal by priority</string>
 	<string name="preference_prioritytotal_title">Subtotal by priority</string>
 	<string name="preference_prioritytotal_summary">No subtotal by priority shown.</string>
@@ -205,7 +205,7 @@
 	<string name="preference_samesortforpick_off_summary">Sort order for Pick Items mode can be chosen separately.</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
-	<string name="preference_shake_title">Shake to clean up</string>
+	<string name="preference_shake_title">Skaka för att rensa</string>
 	
 	<!-- Preference summary: Shake the phone to clean up the list. -->
 	<string name="preference_shake_summary">Skaka telefonen för att rensa listan</string>
@@ -219,9 +219,9 @@
     
     <string name="preference_appearance">Utseende</string>
     
-    <string name="preference_addons">Add-ons</string>
-    <string name="preference_get_addons">Get new add-ons</string>
-    <string name="preference_get_addons_summary">Search for extensions and themes online.</string>
+    <string name="preference_addons">Tillägg</string>
+    <string name="preference_get_addons">Hämta nya tillägg</string>
+    <string name="preference_get_addons_summary">Sök tillägg och teman online</string>
     <string name="preference_get_market_addons">Hämta tillägg från Market</string>
     <string name="preference_get_developer_addons">Hämta tillägg från OpenIntents</string>
     <string name="preference_extensions">Tillägg</string>
@@ -335,7 +335,7 @@
 	
     <string-array name="automation_actions">
     	<!-- Automation action to clean up a list. -->
-    	<item>Clean up list</item>
+    	<item>Rensa lista</item>
     </string-array>
       
 	<string name="widget_prev_page">Previous page</string>

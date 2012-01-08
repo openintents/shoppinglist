@@ -21,7 +21,9 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
-  Jihyeok Seo https://launchpad.net/~limeburst</string>
+  CSro https://launchpad.net/~choongsan
+  Jihyeok Seo https://launchpad.net/~limeburst
+  OpenIntents devs https://launchpad.net/~openintents-devs</string>
 	
     <!-- Short explanation of the application -->
 	<string name="about_comments">OI 쇼핑 목록은 쇼핑 항목을 관리할 수 있게 해 드립니다. 할 일 목록이나 파티 게스트 목록 같은 다른 종류의 목록으로도 사용할 수 있습니다.</string>

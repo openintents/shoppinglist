@@ -1,17 +1,17 @@
 OI Shopping List is a powerful application which makes it easy to create and manage checklists. OI Shopping List makes it easy to add items to a list, check the item off, and remove it from the list. The application can track separate prices for each store that you use, and features a high level of customization. Font size, sort order, list columns, and list cleanup behavior are all settings controlled by the user. All of these features are brought together in a crisp layout that is customizable through a variety of themes. 
 
-The source code of this free and open source application is available at: 
+Lähdekoodi tämän ilmaisen ja avoimen lähdekoodin sovellus on saatavilla osoitteessa: 
 http://code.google.com/p/openintents
 
-This application is ad free and does not require the internet permission. 
+Tämä sovellus on mainos ilmainen eikä vaadi internet lupaa. 
 
-For the complete list of changes and a list of frequently asked questions, please visit: 
+Täydellinen luettelo muutoksista ja luettelo usein kysyttyihin kysymyksiin osoitteessa: 
 http://www.openintents.org
 
-You can help to improve the translation into your language at Launchpad: 
+Voit auttaa parantamaan käännös omalla kielelläsi Launchpad: 
 https://translations.launchpad.net/openintents/trunk
 
-Features: 
+Ominaisuudet: 
 * Add, edit and delete lists.
 * Create, delete, and check items quickly and easily.
 * Variety of themes.
@@ -30,12 +30,12 @@ Applications that work with "OI Shopping List":
 * Backup lists with "My Backup Pro".
 * Import ingredients of recipes with "Bites".
 
-Keywords: 
+Avainsanat: 
 * Shopping, List, Shopping List, Checklist
 * OI, OpenIntents, Open Intents
 
-International versions: 
-IO قائمة التسوق, Lista de cumpărături OI, OI Alışveriş listesi, OI Boodschappenlijst, OI Einkaufsliste, OI Handleliste, OI Lista Zakupów, OI Lista de Compras, OI Nákupní seznam, OI Nákupný zoznam, OI Shopping List, OI Shopping list, OI lista della spesa, OI Список покупок, OI списък за пазаруване, OI шопинг листа, OI سېتىۋېلىش تىزىمى, OI 購物清單, OI 购物列表, OI 쇼핑 목록, Popis za kupovinu, Λίστα αγορών OI Shopping list, רשימת קניות OI, لیست خرید OI, ओआई शौपिंग लिस्ट
+Kansainvälinen versiot: 
+IO قائمة التسوق, Lista de cumpărături OI, OI Alışveriş listesi, OI Boodschappenlijst, OI Einkaufsliste, OI Handleliste, OI Lista Zakupów, OI Lista de Compras, OI Listahan ng Bilihin, OI Nákupní seznam, OI Nákupný zoznam, OI Shopping List, OI Shopping list, OI lista della spesa, OI Список покупок, OI списък за пазаруване, OI шопинг листа, OI سېتىۋېلىش تىزىمى, OI खरीदारी सूची, OI ਸ਼ਾਪਿੰਗ ਸੂਚੀ, OI 購物清單, OI 购物列表, OI 쇼핑 목록, Popis za kupovinu, Λίστα αγορών OI Shopping list, רשימת קניות OI, لیست خرید OI, ओआई शौपिंग लिस्ट
 
 
 Extensions: 

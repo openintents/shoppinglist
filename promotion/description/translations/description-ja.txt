@@ -2,6 +2,61 @@
 OI Shopping list
 
 # Promo text:
-OI Shopping list lets you keep track of your shopping items. You can also use it for other kinds of check lists, for example for ToDo lists or party guest lists.
+OI ショッピングリストを使ってショッピングアイテムを記録できます。他にもパーティーのゲストリストや ToDo リストなどのチェックリストにも使えます。
 
 # Description:
+OI Shopping List is a powerful application which makes it easy to create and manage checklists. OI Shopping List makes it easy to add items to a list, check the item off, and remove it from the list. The application can track separate prices for each store that you use, and features a high level of customization. Font size, sort order, list columns, and list cleanup behavior are all settings controlled by the user. All of these features are brought together in a crisp layout that is customizable through a variety of themes. 
+
+この無料でオープンソースのアプリケーションのソースコードは以下の場所から取得できます： 
+http://code.google.com/p/openintents
+
+このアプリケーションは広告を含まず、インターネット許可を必要としません。 
+
+すべての変更リストや質問リストを見るには： 
+http://www.openintents.org
+
+あなたもこの言語の翻訳を Launchpad で改善することができます： 
+https://translations.launchpad.net/openintents/trunk
+
+機能： 
+* リストを追加・変数・削除。
+* アイテムをすばやく簡単に作成・削除・チェック。
+* 様々なテーマ。
+* カスタマイズ可能なフォントサイズと並べ替え順序。
+* 各店の別々の値段を記録する。
+* カスタマイズ可能なリスト列。
+
+"OI ショッピングリスト" で利用可能な拡張子： 
+* "OI ボイスノート" でノートに録音したメッセージを追加。
+* "OI CSV 変換" でショッピングリストをインポート・エクスポート。
+* "OI 情報" のライセンス情報を表示する。
+* "OI バーコードプラグイン" でアイテムを入力・チェック。
+
+"OI ショッピングリスト" と動作するアプリケーション： 
+* "OI アップデート" でアップデート。
+* "マイバックアッププロ" でリストをバックアップ。
+* "Bites"でレシピの材料をインポート。
+
+キーワード: 
+* ショッピング、リスト、ショッピングリスト、チェックリスト
+* OI, OpenIntents, Open Intents
+
+国際バージョン： 
+IO قائمة التسوق, Lista de cumpărături OI, OI Alışveriş listesi, OI Boodschappenlijst, OI Einkaufsliste, OI Handleliste, OI Lista Zakupów, OI Lista de Compras, OI Listahan ng Bilihin, OI Nákupní seznam, OI Nákupný zoznam, OI Shopping List, OI Shopping list, OI lista della spesa, OI Список покупок, OI списък за пазаруване, OI шопинг листа, OI سېتىۋېلىش تىزىمى, OI खरीदारी सूची, OI ਸ਼ਾਪਿੰਗ ਸੂਚੀ, OI 購物清單, OI 购物列表, OI 쇼핑 목록, Popis za kupovinu, Λίστα αγορών OI Shopping list, רשימת קניות OI, لیست خرید OI, ओआई शौपिंग लिस्ट
+
+
+拡張子： 
+* uses OI Voice Note
+* uses OI ConvertCSV
+* uses OI About
+* uses Barcode OI Plugin
+* uses OI Update
+* uses My Backup Pro
+* uses OI Notepad
+* extension for Bites
+
+
+
+
+
+

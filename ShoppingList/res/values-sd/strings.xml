@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">Launchpad Contributions:
+  happynawani https://launchpad.net/~happynawani</string>
+	
+    <!-- Short explanation of the application -->
+	<string name="about_comments">ओआई शौपिंग लिस्ट तहां खे तहान्जे खरीदारी आइटमों ते नजर रखन डिंडो तव | तहां इन्न्खे बे प्रकार जी नियंत्रण सूची लाये भी प्रयोग करे ता सगो   जियँ: कार्य सूची या दावत जे मेहमानन जी सूची</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
+	<string name="app_name">OI खरीदारी सूची</string>
+
+	<string name="new_item">नयो आईटम</string>
+	<string name="new_list">नयी सूची</string>
+	<string name="send">सूची मोकिल्यो</string>
+	<string name="mark_all_items">सड़े आईतामन ते निशान ठायो</string>
+	<string name="empty_list_not_sent">कहली सूची न मोकली</string>
+	<string name="email_not_available">मोक्लाणा लाये  कोई अनुप्रयोग मौजूद  काने</string>
+	<string name="my_shopping_list">मुंजी खरीदारी सूची</string>
+	<string name="new_list_hint">जीयं इच्छा सूची, परिवार सूची</string>
+	<string name="clean_up_list">सूची खली कयो</string>
+	<string name="delete_list">सूचीय खे मिय्तायो</string>
+	<string name="ask_new_list">नयी खरीदारी सूचीय जो नाम भर्यो</string>
+	<string name="ask_rename_list">खरीदारी सूची जो नाम बदल्यो</string>
+	<string name="ask_edit_item">आइटम सम्पादित कयो</string>
+	<string name="ask_new_store">नए स्टोर जो नाम भर्यो</string>
+	<string name="please_enter_name">कृपया कोई नाम भर्यो</string>
+	<string name="no_items_marked">कड़े भी आइटम खे कटयो काने</string>
+	<string name="confirm_delete_list">\?शा तहां सहिया में इन्ह खरीदारी सूची को मितायाँ ता चाह्यो</string>
+	<string name="no_shopping_provider">खरीदारी सूची खे खोलंदे समय त्रुटी थी वाई</string>
+	<string name="pick_item">कोई भी आईटम खड्यों</string>
+	<string name="pick_list">कोई भी सूची खड्यों</string>
+	<string name="theme">विषयवस्तु</string>
+	<string name="theme_settings">विषयवस्तु सेटिंग</string>
+	<string name="rename_list">सूची अयो नाम बदलो</string>
+	<string name="menu_mark_item">आईटम ते निशान लगायो</string>
+	<string name="menu_edit_item">आइटम सम्पादित कयो</string>
+	<string name="menu_auto_add">स्वत: जोड़</string>
+	<string name="menu_item_stores">स्टोर्स...</string>
+	<string name="menu_rename_store">स्टोर जो नाम बदल्यो</string>
+	<string name="menu_delete_store">स्टोर खे मिटायो</string>
+	<string name="confirm_delete_store">शा तहां सहियमें इन्ह स्टोर खे मितायण ता चाह्यो</string>
+	<string name="no_items_available">कोई आइटम मोजूद काने</string>
+	
+	<!-- Remove item from this list, but keep it internally, so that the user
+	     can choose it later for inclusion again. Information like
+	     tags or price will be kept. -->
+	<string name="menu_remove_item">इन्ह आइटम खे सूचीय माँ हटायो</string>
+	
+	<!-- Delete this item completely. If the user wants to add it again, they
+	     have to enter all the information again. -->
+	<string name="menu_delete_item">आईटम खे हमेशा लाये मिटायो</string>
+	<string name="menu_move_item">आईटम खे बी सूचीय में मोक्ल्यो</string>
+    <string name="menu_copy_item">आईटम खे कॉपी कयो</string>
+	    
+	<!-- Button label to add an item to the list. -->
+	<string name="add">जोड्यो</string>
+	
+	<string name="menu_pick_items">आईटम खे खंड्यो</string>
+	<string name="menu_start_shopping">खरीदारी</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="pick_items_titel">s - आइटम चुन्द्यो%</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="shopping_title">s - खरीदारी %</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current item. -->
+	<string name="item_stores_title">s - स्टोर्स%</string>
+	<string name="item_stores_activity_label">आइटम स्टोर खे सम्पादित कयो</string>
+	
+	<string name="tags">टैग्स</string>
+	<string name="price">कीमत</string>
+	<string name="item">आइटम</string>
+	<string name="quantity">मात्रा</string>
+	<string name="priority">प्रधानता</string>
+	<string name="has_note">व्याख्या तस</string>
+	<string name="units">इकाईयाँ</string>
+	<string name="note">व्याख्या</string>
+	
+	<string name="otherqty">बी मात्रा</string>
+	<string name="otherpri">बी प्रधानता</string>   
+	
+	<!-- Total sum of all prices. \'%s\' is the sum -->
+	<string name="total">कुल: %s</string>
+	
+	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+	<string name="total_checked">जांच थ्यल  :%s</string>
+    <string name="priority1_total">प्रधानता १: %s</string>
+    <string name="priority2_total">प्रधानता १-२: %s</string>
+	<string name="priority3_total">प्रधानता १-३: %s</string>
+	<string name="priority4_total">प्रधानता १-४: %s</string>
+	
+	<string name="delete_item_confirm">\?शा तहन्जो पक्को तावकी तहां ईयो आईटम मितायण ता चाह्यो</string>
+	<string name="delete">मिटायो</string>
+	
+	<!-- Added to an item to indicate it was bought. -->
+	<string name="suffix_checked">ठीक आ</string>
+	<string name="empty"/>
+	
+	<!-- The shortcut is created on the home screen. -->
+	<string name="pick_list_for_shortcut">शोर्त्चुत जे लाये सूची चुन्द्यो</string>
+	
+	<!-- Shown if external application wants to insert new items. -->
+	<string name="pick_list_to_insert_items">आइटम खे जोडन लाये सूची चुन्दयो</string>
+	
+	<!-- Theme related -->
+	<!-- Title for selecting a theme -->
+	<string name="theme_pick">विषयवस्तु खद्यो</string>
+	<string name="theme_description">इन्ह सूचीय लाये विषयवस्तु चुन्दयो</string>
+	<string name="theme_default">डिफ़ॉल्ट</string>
+	<string name="theme_classic">क्लासिक</string>
+	<string name="theme_bugdroid">अंद्रोइड</string>
+	<string name="theme_classic_export">(क्लास्सिक (OI खरीदारी सुचिय माँ</string>
+	<string name="theme_bugdroid_export">(अंद्रोइड (OI खरीदारी सुचिय माँ</string>
+
+	<!--     Dialog box    -->
+	<!-- Button label "OK" -->
+	<string name="ok">ठीक आ</string>
+	<!-- Button label "Cancel" -->
+	<string name="cancel">|रद्द क्यो</string>
+	<string name="use_theme_for_all_lists">सभीन सूच्युन लाये इन्ह विषयवस्तु जो प्रयोग कयो</string>
+	<string name="get_more_themes">बियून भी विषयवस्तु खंदी अच्चो</string>
+	
+	<!-- preferences -->
+	<string name="preferences">सेटिंग्स</string>
+	
+    <string name="preference_application">अनुप्रयोग सेटिंग</string>
+    
+	<string name="preference_unchecked_on_top">बिना जांच थ्यल वारा मथ्थे आहिन</string>
+	<string name="preference_unchecked_on_top_summary">हमेशा बिना जांच थ्यल वारा पेरों दिखारीन्दो कर</string>
+	<string name="preference_fontsize">फ़ॉन्ट आकार</string>
+	<string name="preference_fontsize_summary">फ़ॉन्टयो आकार बदलयो</string>
+	<string name="preference_fontsize_dialog_title">फ़ॉन्टयो आकार चुन्द्यो</string>
+	<string name="preference_orientation">दिशा</string>
+	<string name="preference_orientation_summary">दिशा बदल्यो</string>
+	<string name="preference_orientation_dialog_title">दिशा चुन्दयो</string>
+	<string name="preference_sortorder_title">अलग करणयो क्रम</string>
+	<string name="preference_sortorder_summary">सूचीयो आइटम जोअलग करण वारो क्रम बदल्यो</string>
+	<string name="preference_sortorder_for_pick_title">अलग करण वारो क्रम - आइटम चुन्दयो</string>
+	<string name="preference_sortorder_for_pick_summary">आइटम चुनने वारे मोड जो अलग करण वारो क्रम बदल्यो</string>
+	<string name="preference_sortorder_dialog_title">अलग करण वारो क्रम चुन्दयो</string>
+	<string name="preference_sortorder_for_pick_dialog_title">पिक्कआईटम मोड़े जे लाये अलग करण वारो क्रम चुन्दयो</string>
+	<string name="preference_loadlastused_title">आखरी बार इस्तेमाल थ्यलसूची खोल्यो</string>
+	<string name="preference_loadlastused_summary">हमेशा आखरी बार दिठ्यल आइटम सां शुरू कयो</string>
+	<string name="preference_capitalization_title">केपिटलाइजेशन</string>
+	<string name="preference_capitalization_summary">सदन आइटमन खे पंजो पांड कापितालिज़ कयो</string>
+	<string name="preference_capitalization_dialog_title">कैपिटलाइज़ेशन चुन्दयो</string> 
+	<string name="preference_hidechecked_title">जांच थ्यल्वारे आईटमन खे लिकायो</string>
+	<string name="preference_hidechecked_summary">जेका आईटम चेक थीवाया उन्हन खे तुरंत  ही लिकाए षड्यो</string>
+	<string name="preference_showprice_title">कीमत दिखार्यो</string>
+	<string name="preference_showprice_summary">हिक्क बियो भी कोलुम सूचीय में दिखार्यो</string>
+	<string name="preference_perstoreprice">प्रति-स्टोर कीमत</string>
+	<string name="preference_perstoreprice_title">प्रति-स्टोर कीमत ते नज़र रख्यो</string>
+	<string name="preference_perstoreprice_summary">हर हिक्क आइटम जी अलग किमात्युं ते नज़र रख्यो</string>
+	<string name="preference_screenlock_title">स्क्रीन ताले खे  बंद क्यों</string>
+	<string name="preference_screenlock_summary">जांच थाय्न्द खां पो स्क्रीन खे लोकक थ्यंद खा  बचाईन्दो आ</string>
+	<string name="preference_reset_quantity">मात्रा खे वारी सां सेट कयो</string>
+	<string name="preference_reset_quantity_summary">आइटमन खे जोदंडे समय मात्राखे वारी सां सेट कयो</string>
+	<string name="preference_add_for_barcode">बारकोड स्कैनर</string>
+	<string name="preference_add_for_barcode_summary">बारकोड ओई प्लगइन खे चालू करण लाये जोड्यो बट्टन खे देर तारिण दबायो</string>
+	<string name="preference_showtags_title">टाग्स दिखार्यो</string>
+	<string name="preference_showtags_summary">हिक्क बियो भी कोलुम सूचीय में दिखार्यो</string>
+	<string name="preference_showquantity_title">मात्रा दिखार्यो</string>
+	<string name="preference_showquantity_summary">हिक्क बियो भी कोलुम सूचीय में दिखार्यो</string>
+	<string name="preference_showpriority_title">प्रथानता दिखार्यो</string>
+	<string name="preference_showpriority_summary">हिक्क बियो भी कोलुम सूचीय में दिखार्यो</string>
+	<string name="preference_showunits_title">इकाई दिखार्यो</string>
+	<string name="preference_showunits_summary">हिक्क बियो भी कोलुम सूचीय में दिखार्यो</string>
+	<string name="preference_prio_subtotal">प्रथानता जे तौर ते उप-योग</string>
+	<string name="preference_prioritytotal_title">प्रथानता जे तौर ते उप-योग</string>
+	<string name="preference_prioritytotal_summary">प्रथानता जे तौर ते कोई भी उप-योग नथी दिखारे</string>
+	<string name="preference_prioritytotal_dialog_title">प्रथानता जे तौर ते उप-योग</string>
+	<string name="preference_priosubtotalchecked_title">जांच थ्यल वारा आईटम भी जोड्यो</string>
+	<string name="preference_priosubtotalchecked_on_summary">प्रथानता जे तौर ते उप-योग में जांच थ्यल आईटम भी जूद्यल आहिन</string>
+	<string name="preference_priosubtotalchecked_off_summary">प्रथानता जे तौर ते उप-योग में जांच थ्यल आईटम भी जूद्यल कानन</string>
+	<string name="preference_pickitemsinlist_title">सीधो सहु सूची में आईटम खद्यो</string>
+	<string name="preference_pickitemsinlist_on_summary">मौजूदा आइटम खे जोड़न लाये मुख्य सूची खे  संपादन मोड में कयो</string>
+	<string name="preference_pickitemsinlist_off_summary">समर्पित डायलोग जो इस्तेमाल कयो आइटम सूची में जोड़न लाये</string>
+	<string name="preference_samesortforpick_title">हमेशा ईहोही अलग करण वारो  क्रम</string>
+	<string name="preference_samesortforpick_on_summary">आइटमून जो अलग करण वारो  क्रमआइटम चुनना मोड में शौपिंग मोड जी तरह ही हून्दो आ</string>
+	<string name="preference_samesortforpick_off_summary">आइटम चुनदना जो अलग करण वारो क्रम अलग अलग चुनि ता सगो</string>
+	
+	<!-- Preference title: Shake the phone to clean up the list. -->
+	<string name="preference_shake_title">मितायण लाये हिलायोस</string>
+	
+	<!-- Preference summary: Shake the phone to clean up the list. -->
+	<string name="preference_shake_summary">सूची मितायण लाये फोने खे हिलायोस</string>
+	
+    <string name="preference_advanced">उन्नत सेटिंग्स</string>
+    <string name="preference_advanced_summary">अतरिक्त सेटिंग्स</string>
+    
+    <!-- Preference category: General settings -->
+    <string name="preference_general">सामान्य</string>
+    <string name="preference_pickitems">आईटम चुन्दयो</string>
+    
+    <string name="preference_appearance">प्रकटीकरण</string>
+    
+    <string name="preference_addons">आड-ओंस</string>
+    <string name="preference_get_addons">नया आड-ओंस वठो</string>
+    <string name="preference_get_addons_summary">विस्तारों अऊँ विषयों खे ऑनलाइन गोल्यो</string>
+    <string name="preference_get_market_addons">आड-ओंस बाजार मां वठो</string>
+    <string name="preference_get_developer_addons">आड-ओंस OpenIntents मां वठो</string>
+    <string name="preference_extensions">एक्सटेंशन्स</string>
+    <string name="preference_themes">थीम्स</string>
+    <string name="preference_market_extensions_summary">Android बाजार में एक्सटेंशन खे गोल्यो</string>
+    <string name="preference_market_themes_summary">अंद्रोइड बाजार में थीम्स गोल्यो</string>
+    <string name="preference_developer_extensions_summary">OpenIntents मुखपृष्ठ मां एक्सटेंशन प्राप्त कयो</string>
+	<string name="preference_developer_themes_summary">OpenIntents मुखपृष्ठ मां थीम्स प्राप्त कयो</string>
+	<string name="preference_quickedit">जल्दी संपादन कयो मोड</string>
+	<string name="preference_quickedit_on_summary">शूअद्न जी प्रधानता या मुल्य मानों मेनू जे सामान्य मनो जे लाये</string>
+	<string name="preference_quickedit_off_summary">शूअद्न जी प्रधानता या मुल्य मानों आईटम संपादन संवाद जे लाये</string>
+	<string name="preference_reset_all_settings">सद्यूं सैटिंग्स वारी सन सेट कयो</string>
+	<string name="preference_reset_all_settings_alert">शा तहां सहिय में सद्यूं सेटिंग्स बदलन ता चाह्यो?पो ईयो सही न थीन्दोवा</string>    
+	<string name="preference_reset_all_settings_done">सद्यूं सेटिंग्स वारी  सन सेट  थी वायूं</string>
+	    
+	<!-- ***************************
+	     Permissions
+	     *************************** -->
+	
+	<!-- OI Shopping list -->
+	<!-- Permission to read shopping lists -->
+	<string name="oi_shopping_permission_read">खरीदारी  सूची पड्यो</string>
+	<string name="oi_shopping_permission_read_descr">कोई भी  अनुप्रयोग खे खरीदारी सूची पढ़न जी अनुमति डिंडो आ|नोट कयो कि एन्क्रिप्टेड सुचियूं अऊँ आइटम एन्क्रिप्टेड स्वरूप में ही प्रदान थीन्दी आ</string>
+	<!-- Permission to write to shopping lists -->
+	<string name="oi_shopping_permission_write">खरीदारी सूची  लिख्यो</string>
+	<string name="oi_shopping_permission_write_descr">अनुप्रयोग खे नयो आइटम या सूची जोड़न या सम्पादित करण जी अनुमति दीन्दो आ</string>
+	
+	
+	<!-- ***************************
+	     Preferences
+	     *************************** -->
+	
+    <string-array name="preference_sortorder_entries">
+    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    	<item>जांच न थ्यल वारा पहरोंवर्णमाला</item>
+        <!-- Preference sort order: Sort by item name -->
+    	<item>वर्णमाला</item>
+        <!-- Preference sort order: Newest item first -->
+    	<item>नया वारा पहरों</item>
+        <!-- Preference sort order: Oldest item first -->
+    	<item>पुराणा वारा पहरों</item>
+    	<!-- Preference sort order: Sort alphabetically by tags -->
+    	<item>टाग्स वर्णमाला जी तोर ते</item>
+        <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
+    	<item>प्रधानता,टाग्स वर्णमाला जी तोर ते</item>
+        <!-- Preference sort order: Sort by price, the most expensive first -->
+    	<item>सभनी खां मेहंगा पहरों</item>
+        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    	<item>जांच न थ्यल वारा पहरों ,टाग्स वर्णमाला जी तौर ते</item>
+    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    	<item>जांच न थ्यल वारा पहरों ,प्रधानता, वर्णमाला</item>
+    	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
+    	<item>जांच न थ्यल वारा पहरों ,प्रधानता, टाग्स वर्णमाला के तोर पे</item>
+    </string-array>
+    
+    <string-array name="preference_prioritytotal_entries">
+    	<item>नयी दिखाया</item>
+    	<item>प्रधानता १</item>
+    	<item>प्रधानता १-२</item>
+    	<item>प्रधानता १-३</item>
+    	<item>प्रधानता १-४</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entries">
+    	<!-- Preference fontsize: tiny font size -->
+        <item>नन्हा</item>
+    	<!-- Preference fontsize: small font size -->
+        <item>छोटा</item>
+    	<!-- Preference fontsize: default font size-->
+    	<item>डिफ़ॉल्ट</item>
+    	<!-- Preference fontsize: large font size -->
+        <item>बड़ा</item>
+    </string-array>
+    
+    <string-array name="preference_orientation_entries">
+    	<!-- Preference orientation: default -->
+        <item>डिफ़ॉल्ट</item>
+    	<!-- Preference orientation: landscape -->
+    	<item>परिदृश्य</item>
+    	<!-- Preference orientation: portrait -->
+        <item>पोर्ट्रेट</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entries">
+    	<!-- Preference capitalization: No capitalization -->
+        <item>कोई नहीं</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+        <item>प्रति वाकया</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+        <item>प्रति शब्द</item>
+    </string-array>
+
+	<!-- ***************************
+	     OI Notepad
+	     *************************** -->
+	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+	<string name="notepad_not_available">आइटम सम्पादित करण लाये OI नोत्पाड ज़रूरी आ</string>
+	<!-- Name of application "OI Notepad". Translations should be consistent. -->
+	<string name="notepad">OI नोटपैड</string>
+
+	<!-- ***************************
+	     Automation
+	     *************************** -->
+	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<string name="label_select_action">क्रिया चुन्दयो</string>
+	
+	<!-- Label above button that opens a list of all shopping lists to choose from. -->
+	<string name="label_select_list">सूची चुन्दयो</string>
+	
+	<!-- Arrays -->
+	
+    <string-array name="automation_actions">
+    	<!-- Automation action to clean up a list. -->
+    	<item>सूची खली कयो</item>
+    </string-array>
+      
+	<string name="widget_prev_page">पिछलो पृष्ठ</string>
+	<string name="widget_next_page">अगलो  पृष्ठ</string>
+	<string name="widget_choose_a_list">हिक्क सूची चुन्दयो</string>
+	<string name="widget_no_items">पृष्ठ %d  ते कोई भी आईटम काने</string>
+</resources>

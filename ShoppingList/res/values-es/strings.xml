@@ -22,6 +22,7 @@
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
   Angel Abad https://launchpad.net/~angelabad
+  Fitoschido https://launchpad.net/~fitoschido
   Javier Martínez Arrieta https://launchpad.net/~javote87
   JoseRoberto https://launchpad.net/~joseroberto
   OpenIntents devs https://launchpad.net/~openintents-devs
@@ -43,7 +44,7 @@
 	<string name="new_item">Nuevo elemento</string>
 	<string name="new_list">Nueva lista</string>
 	<string name="send">Enviar lista</string>
-	<string name="mark_all_items">Mark all items</string>
+	<string name="mark_all_items">Marcar todos los temas</string>
 	<string name="empty_list_not_sent">Lista vacía no enviada</string>
 	<string name="email_not_available">Aplicación no disponible para enviar.</string>
 	<string name="my_shopping_list">Mi lista de compras</string>
@@ -53,7 +54,7 @@
 	<string name="ask_new_list">Escriba el nombre de la nueva lista de compra</string>
 	<string name="ask_rename_list">Cambie el nombre de la lista de compra</string>
 	<string name="ask_edit_item">Editar elemento</string>
-	<string name="ask_new_store">Enter new store name</string>
+	<string name="ask_new_store">Introduzca el nombre de la nueva tienda</string>
 	<string name="please_enter_name">Por favor, ingrese un nombre</string>
 	<string name="no_items_marked">No hay elementos marcados como cruzados.</string>
 	<string name="confirm_delete_list">¿Estás seguro que quieres eliminar esta lista de compras?</string>
@@ -66,10 +67,10 @@
 	<string name="menu_mark_item">Marcar elemento</string>
 	<string name="menu_edit_item">Editar elemento</string>
 	<string name="menu_auto_add">Auto agregar</string>
-	<string name="menu_item_stores">Stores...</string>
-	<string name="menu_rename_store">Rename store</string>
-	<string name="menu_delete_store">Delete store</string>
-	<string name="confirm_delete_store">Do you really want to delete this store?</string>
+	<string name="menu_item_stores">Tiendas ...</string>
+	<string name="menu_rename_store">Cambiar el nombre de tienda</string>
+	<string name="menu_delete_store">Eliminar tienda</string>
+	<string name="confirm_delete_store">¿Realmente quiere eliminar esta tienda?</string>
 	<string name="no_items_available">No hay elementos disponibles</string>
 	
 	<!-- Remove item from this list, but keep it internally, so that the user
@@ -81,7 +82,7 @@
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">Borrar elemento permanentemente</string>
 	<string name="menu_move_item">Mover el elemento a otra lista</string>
-    <string name="menu_copy_item">Copy item</string>
+    <string name="menu_copy_item">Copiar elemento</string>
 	    
 	<!-- Button label to add an item to the list. -->
 	<string name="add">Agregar</string>
@@ -96,7 +97,7 @@
 	<string name="shopping_title">%s - Compras</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current item. -->
-	<string name="item_stores_title">%s - Stores</string>
+	<string name="item_stores_title">%s - Tiendas</string>
 	<string name="item_stores_activity_label">Edit Item Stores</string>
 	
 	<string name="tags">Etiquetas</string>
@@ -108,20 +109,20 @@
 	<string name="units">Unidades</string>
 	<string name="note">Nota</string>
 	
-	<string name="otherqty">Other Quantity...</string>
-	<string name="otherpri">Other Priority...</string>   
+	<string name="otherqty">Otra cantidad…</string>
+	<string name="otherpri">Otra prioridad…</string>   
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Total: %s</string>
 	
 	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
 	<string name="total_checked">Revisado: %s</string>
-    <string name="priority1_total">Priority 1: %s</string>
-    <string name="priority2_total">Priority 1-2: %s</string>
-	<string name="priority3_total">Priority 1-3: %s</string>
-	<string name="priority4_total">Priority 1-4: %s</string>
+    <string name="priority1_total">Prioridad 1: %s</string>
+    <string name="priority2_total">Prioridad 1-2: %s</string>
+	<string name="priority3_total">Prioridad 1-3: %s</string>
+	<string name="priority4_total">Prioridad 1-4: %s</string>
 	
-	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
+	<string name="delete_item_confirm">¿Está seguro de querer eliminar este elemento permanentemente?</string>
 	<string name="delete">Borrar</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
@@ -162,9 +163,9 @@
 	<string name="preference_fontsize">Tamaño de la fuente</string>
 	<string name="preference_fontsize_summary">Cambiar tamaño de la fuente</string>
 	<string name="preference_fontsize_dialog_title">Elejir tamaño de fuente</string>
-	<string name="preference_orientation">Orientation</string>
-	<string name="preference_orientation_summary">Change orientation</string>
-	<string name="preference_orientation_dialog_title">Choose orientation</string>
+	<string name="preference_orientation">Orientación</string>
+	<string name="preference_orientation_summary">Cambiar orientación</string>
+	<string name="preference_orientation_dialog_title">Elegir orientación</string>
 	<string name="preference_sortorder_title">Orden de clasificación</string>
 	<string name="preference_sortorder_summary">Cambiar orden de clasificación de la lista de elementos</string>
 	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
@@ -185,9 +186,9 @@
 	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
 	<string name="preference_screenlock_title">Disable screen lock</string>
 	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
-	<string name="preference_reset_quantity">Reset Quantity</string>
+	<string name="preference_reset_quantity">Restablecer cantidad</string>
 	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
-	<string name="preference_add_for_barcode">Barcode Scanner</string>
+	<string name="preference_add_for_barcode">Lector de códigos de barras</string>
 	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
 	<string name="preference_showtags_title">Mostrar etiquetas</string>
 	<string name="preference_showtags_summary">Mostrado como columna extra en la lista.</string>
@@ -197,10 +198,10 @@
 	<string name="preference_showpriority_summary">Mostrado como columna extra en la lista.</string>
 	<string name="preference_showunits_title">Mostrar unidades</string>
 	<string name="preference_showunits_summary">Mostrado como columna extra en la lista.</string>
-	<string name="preference_prio_subtotal">Subtotal by priority</string>
-	<string name="preference_prioritytotal_title">Subtotal by priority</string>
+	<string name="preference_prio_subtotal">Subtotal por prioridad</string>
+	<string name="preference_prioritytotal_title">Subtotal por prioridad</string>
 	<string name="preference_prioritytotal_summary">No subtotal by priority shown.</string>
-	<string name="preference_prioritytotal_dialog_title">Subtotal by priority</string>
+	<string name="preference_prioritytotal_dialog_title">Subtotal por prioridad</string>
 	<string name="preference_priosubtotalchecked_title">Include checked items</string>
 	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
 	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
@@ -237,12 +238,12 @@
     <string name="preference_market_themes_summary">Buscar temas en Android Market.</string>
     <string name="preference_developer_extensions_summary">Obtener extensiones desde la página principal de OpenIntents</string>
 	<string name="preference_developer_themes_summary">Obtener temas de la web de OpenIntents</string>
-	<string name="preference_quickedit">Quick Edit Mode</string>
+	<string name="preference_quickedit">Modo de edición rápida</string>
 	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
 	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
-	<string name="preference_reset_all_settings">Reset all settings</string>
-	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
-	<string name="preference_reset_all_settings_done">All settings have been reset</string>
+	<string name="preference_reset_all_settings">Restablecer todas las configuraciones</string>
+	<string name="preference_reset_all_settings_alert">¿Realmente quiere restablecer todas las configuraciones? Esto no se puede deshacer.</string>    
+	<string name="preference_reset_all_settings_done">Todas las configuraciones se han restablecido</string>
 	    
 	<!-- ***************************
 	     Permissions
@@ -285,11 +286,11 @@
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">
-    	<item>Not shown</item>
-    	<item>Priority 1</item>
-    	<item>Priority 1-2</item>
-    	<item>Priority 1-3</item>
-    	<item>Priority 1-4</item>
+    	<item>No se muestra</item>
+    	<item>Prioridad 1</item>
+    	<item>Prioridad 1-2</item>
+    	<item>Prioridad 1-3</item>
+    	<item>Prioridad 1-4</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
@@ -307,9 +308,9 @@
     	<!-- Preference orientation: default -->
         <item>Predeterminado</item>
     	<!-- Preference orientation: landscape -->
-    	<item>Landscape</item>
+    	<item>Horizontal</item>
     	<!-- Preference orientation: portrait -->
-        <item>Portrait</item>
+        <item>Vertical</item>
     </string-array>
     
     <string-array name="preference_capitalization_entries">
@@ -345,8 +346,8 @@
     	<item>Limpiar lista</item>
     </string-array>
       
-	<string name="widget_prev_page">Previous page</string>
-	<string name="widget_next_page">Next page</string>
-	<string name="widget_choose_a_list">Choose a list</string>
-	<string name="widget_no_items">No items on page %d</string>
+	<string name="widget_prev_page">Página anterior</string>
+	<string name="widget_next_page">Página siguiente</string>
+	<string name="widget_choose_a_list">Elija una lista</string>
+	<string name="widget_no_items">No hay elementos en la página %d</string>
 </resources>

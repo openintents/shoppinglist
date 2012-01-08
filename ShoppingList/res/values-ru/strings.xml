@@ -24,6 +24,7 @@
   Alexander \'FONTER\' Zinin https://launchpad.net/~spore-09
   Alexander Sapronov https://launchpad.net/~warmonger
   Andrey Zaytsev https://launchpad.net/~a.einsam
+  Evgrafov Vladimir https://launchpad.net/~evgrafov-vladimir
   OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101
   ZipUltra https://launchpad.net/~zipultra
@@ -185,8 +186,8 @@
 	<string name="preference_screenlock_summary">Предотвращает блокирование экрана во время проверок.</string>
 	<string name="preference_reset_quantity">Сброс Количества</string>
 	<string name="preference_reset_quantity_summary">Сбрасывать Количество при добавлении элементов</string>
-	<string name="preference_add_for_barcode">Barcode Scanner</string>
-	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
+	<string name="preference_add_for_barcode">Cканер Штрих-кода</string>
+	<string name="preference_add_for_barcode_summary">Длительное нажатие на кнопку Добавить для запуска Barcode OI Plugin (если установлен).</string>
 	<string name="preference_showtags_title">Показывать метки</string>
 	<string name="preference_showtags_summary">Отображать как дополнительную колонку в списке.</string>
 	<string name="preference_showquantity_title">Показывать количество</string>
@@ -238,9 +239,9 @@
 	<string name="preference_quickedit">Режим Быстрого Редактирования</string>
 	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
 	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
-	<string name="preference_reset_all_settings">Reset all settings</string>
-	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
-	<string name="preference_reset_all_settings_done">All settings have been reset</string>
+	<string name="preference_reset_all_settings">Сбросить все настройки</string>
+	<string name="preference_reset_all_settings_alert">Вы действительно хотите СБРОСИТЬ ВСЕ настройки? Это действие не может быть отменено.</string>    
+	<string name="preference_reset_all_settings_done">Все настройки сброшены</string>
 	    
 	<!-- ***************************
 	     Permissions
@@ -343,8 +344,8 @@
     	<item>Очистить список</item>
     </string-array>
       
-	<string name="widget_prev_page">Previous page</string>
-	<string name="widget_next_page">Next page</string>
-	<string name="widget_choose_a_list">Choose a list</string>
-	<string name="widget_no_items">No items on page %d</string>
+	<string name="widget_prev_page">Предыдущая страница</string>
+	<string name="widget_next_page">Следующая страница</string>
+	<string name="widget_choose_a_list">Выбрать список</string>
+	<string name="widget_no_items">Нет элементов на странице %d</string>
 </resources>

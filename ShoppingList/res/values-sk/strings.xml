@@ -21,7 +21,9 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
-  Lacko545 https://launchpad.net/~lackorauch</string>
+  Lacko545 https://launchpad.net/~lackorauch
+  Marek Dobransky https://launchpad.net/~marekdobr
+  OpenIntents devs https://launchpad.net/~openintents-devs</string>
 	
     <!-- Short explanation of the application -->
 	<string name="about_comments">OI Nákupný zoznam vám umožňuje sledovať vaše nákupné položky. Taktiež ho môžte použiť pre iné druhy zoznamov, napríklad zoznam úloh alebo zoznam hostí na párty.</string>
@@ -73,7 +75,7 @@
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">Zmazať položku permanentne</string>
 	<string name="menu_move_item">Presunúť položku do iného zoznamu</string>
-    <string name="menu_copy_item">Copy item</string>
+    <string name="menu_copy_item">Kopírovať položku</string>
 	    
 	<!-- Button label to add an item to the list. -->
 	<string name="add">Pridať</string>
@@ -113,7 +115,7 @@
 	<string name="priority3_total">Priorita 1-3: %s</string>
 	<string name="priority4_total">Priorita 1-4: %s</string>
 	
-	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
+	<string name="delete_item_confirm">Ste si istý, že chcete trvalo odstrániť túto položku?</string>
 	<string name="delete">Zmazať</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
@@ -179,8 +181,8 @@
 	<string name="preference_screenlock_summary">Ak zaškrtnuté, zabraňuje uzamykaniu obrazovky.</string>
 	<string name="preference_reset_quantity">Obnoviť Kvantitu</string>
 	<string name="preference_reset_quantity_summary">Pri novom pridaní položky obnoví kvantitu.</string>
-	<string name="preference_add_for_barcode">Barcode Scanner</string>
-	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
+	<string name="preference_add_for_barcode">Skener čiarových kódov</string>
+	<string name="preference_add_for_barcode_summary">Podržte tlačidlo Pridať pre spustenie Pluginu Čítačka čiarových kódov OI (ak je nainštalovaná)</string>
 	<string name="preference_showtags_title">Zobraziť tagy</string>
 	<string name="preference_showtags_summary">Zobrazené ako stĺpec navyše v zozname.</string>
 	<string name="preference_showquantity_title">Zobraziť kvantitu</string>
@@ -232,9 +234,9 @@
 	<string name="preference_quickedit">Mód Rýchlej Úpravy</string>
 	<string name="preference_quickedit_on_summary">Stlačte hodnoty Priorita alebo Kvantita pre menu so spoločnými hodnotami.</string>
 	<string name="preference_quickedit_off_summary">Stlačenie hodnôt Priorita alebo Kvantita vyvolá dialóg Úpravy Položky.</string>
-	<string name="preference_reset_all_settings">Reset all settings</string>
-	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
-	<string name="preference_reset_all_settings_done">All settings have been reset</string>
+	<string name="preference_reset_all_settings">Obnoviť všetky nastavenia</string>
+	<string name="preference_reset_all_settings_alert">Naozaj chcete OBNOVIŤ VŠETKY nastavenia? Nemôže to byť anulované.</string>    
+	<string name="preference_reset_all_settings_done">Všetky nastavenia boli obnovené</string>
 	    
 	<!-- ***************************
 	     Permissions
@@ -337,8 +339,8 @@
     	<item>Vyčistiť zoznam</item>
     </string-array>
       
-	<string name="widget_prev_page">Previous page</string>
-	<string name="widget_next_page">Next page</string>
-	<string name="widget_choose_a_list">Choose a list</string>
-	<string name="widget_no_items">No items on page %d</string>
+	<string name="widget_prev_page">Predchádzajúca strana</string>
+	<string name="widget_next_page">Ďalšia strana</string>
+	<string name="widget_choose_a_list">Vyberte si list</string>
+	<string name="widget_no_items">Žiadne položky na strane %d</string>
 </resources>
