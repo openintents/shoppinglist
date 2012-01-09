@@ -1320,6 +1320,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	            		Uri uri = Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI, containsId);
 	            		getApplicationContext().getContentResolver().update(uri, values, null, null);
 	            		onItemChanged(); // probably overkill
+	            		mItemsView.updateTotal();
 	            	}
 	            }
 	        });
