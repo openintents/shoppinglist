@@ -21,6 +21,7 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
+  Nikola Miljkovic https://launchpad.net/~milja1337
   Peli https://launchpad.net/~peli0101</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
@@ -30,9 +31,9 @@
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Shopping List</string>
+	<string name="app_name">OI Lista za kupovinu</string>
 
-	<string name="new_item">Nova stavka</string>
+	<string name="new_item">Novi predmet</string>
 	<string name="new_list">Novi popis</string>
 	<string name="send">Pošalji popis</string>
 	<string name="mark_all_items">Mark all items</string>

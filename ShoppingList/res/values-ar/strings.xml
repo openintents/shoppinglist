@@ -25,17 +25,16 @@
 Launchpad Contributions:
   OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101
-  friedger https://launchpad.net/~friedger
   kenn dhia https://launchpad.net/~kendhia</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
-	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
+	<string name="about_comments">تتبع عناصر قائمة تسوقك مع قائمة تسوق OI.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Shopping List</string>
+	<string name="app_name">"قائمة التسوق OI</string>
 
 	<string name="new_item">عنصر جديد</string>
 	<string name="new_list">قائمة جديدة</string>
@@ -44,7 +43,7 @@ Launchpad Contributions:
 	<string name="empty_list_not_sent">لا يمكن ارسال قائمة قارغة</string>
 	<string name="email_not_available">لا يوجد أي تطبيق متوفر للارسال.</string>
 	<string name="my_shopping_list">قائمتي للتسوق</string>
-	<string name="new_list_hint">e.g. wishlist, family list</string>
+	<string name="new_list_hint">مثلا قائمة الأمنيات، قائمة العائلة</string>
 	<string name="clean_up_list">نظف القائمة</string>
 	<string name="delete_list">أحذف القائمة</string>
 	<string name="ask_new_list">أدخل اسم القائمة الجديدة</string>
@@ -177,15 +176,15 @@ Launchpad Contributions:
 	<string name="preference_hidechecked_summary">الغاء اخفاء العناصر المحددة بسرعة.</string>
 	<string name="preference_showprice_title">أظهر السعر</string>
 	<string name="preference_showprice_summary">أظهر على شكل خانة اضافية في القائمة.</string>
-	<string name="preference_perstoreprice">Per-store prices</string>
-	<string name="preference_perstoreprice_title">Track per-store prices</string>
+	<string name="preference_perstoreprice">الأسعار لكل-متجر</string>
+	<string name="preference_perstoreprice_title">تتبع أسعار كل-متجر</string>
 	<string name="preference_perstoreprice_summary">تتبع الأسعار المنفصلة لكل عنصر في كل متجر</string>
 	<string name="preference_screenlock_title">تعطيل قفل الشاشة</string>
 	<string name="preference_screenlock_summary">منع الشاشة من الايقاف عند التحديد.</string>
 	<string name="preference_reset_quantity">اعادة الكمية</string>
 	<string name="preference_reset_quantity_summary">اعادة الكمية عند اضافة عناصرمرة أخرى.</string>
-	<string name="preference_add_for_barcode">Barcode Scanner</string>
-	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
+	<string name="preference_add_for_barcode">ماسح الباركود</string>
+	<string name="preference_add_for_barcode_summary">الظغط لمدة طويلة على  زر الاضافة لتشغيل باركود OI المساعد(اذا كان مثبت).</string>
 	<string name="preference_showtags_title">أظهر الوسوم</string>
 	<string name="preference_showtags_summary">أظهر على شكل خانة اضافية في القائمة.</string>
 	<string name="preference_showquantity_title">أظهر الكمية</string>
@@ -199,14 +198,14 @@ Launchpad Contributions:
 	<string name="preference_prioritytotal_summary">لم يظهر أي مجموع حسب الأولوية</string>
 	<string name="preference_prioritytotal_dialog_title">المجموع حسب الأولوية</string>
 	<string name="preference_priosubtotalchecked_title">شمل العناصر المحددة</string>
-	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
-	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
+	<string name="preference_priosubtotalchecked_on_summary">المجموع الفرعي بالأولوية يشمل العناصر المحددة</string>
+	<string name="preference_priosubtotalchecked_off_summary">المجموعة الفرعية بالأولوية لا يستبعد العناصر المحددة</string>
 	<string name="preference_pickitemsinlist_title">اختيار العناصر مباشرة في القائمة</string>
-	<string name="preference_pickitemsinlist_on_summary">Switch main list to edit mode to re-add existing items</string>
-	<string name="preference_pickitemsinlist_off_summary">Add items to list using a dedicated dialog</string>
+	<string name="preference_pickitemsinlist_on_summary">تغيير القائمة الرئيسية الى وضعية التعديل لاضافة عناصر موجودة</string>
+	<string name="preference_pickitemsinlist_off_summary">اضافة عناصر الى قائمة باستعمال حوار مخصص</string>
 	<string name="preference_samesortforpick_title">السماح ببعض اوامر الترتيب</string>
 	<string name="preference_samesortforpick_on_summary">تم فرز العناصر بطريقة اختيار العناصر كما في وضع  التسوق.</string>
-	<string name="preference_samesortforpick_off_summary">Sort order for Pick Items mode can be chosen separately.</string>
+	<string name="preference_samesortforpick_off_summary">ترتيب من أجل  وضع اختيار العناصر بمكن اختيارة منفصلا</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">هز للتنظيف</string>
@@ -235,8 +234,8 @@ Launchpad Contributions:
     <string name="preference_developer_extensions_summary">الحصول على الملحقات من الصفحة الرئيسية لـ OpenIntents</string>
 	<string name="preference_developer_themes_summary">الحصول على الثيمات  من الصفحة الرئيسية لـ OpenIntents</string>
 	<string name="preference_quickedit">صيغة التعديل السريع</string>
-	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
-	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
+	<string name="preference_quickedit_on_summary">لمس الاولوية أو قيم الكمية لقائمة القيم المشتركة.</string>
+	<string name="preference_quickedit_off_summary">لمس الأولوية أو قيم الكمية يستدعي علبة حوار تعديل العنصر.</string>
 	<string name="preference_reset_all_settings">اعادة جميع الاعدادات</string>
 	<string name="preference_reset_all_settings_alert">هل أنت متأكد من رغبتك في اعادة جميع الاعدادات ؟ لا يمكن التراجع عنه.</string>    
 	<string name="preference_reset_all_settings_done">تم اعادة جميع الاعدادات</string>
@@ -313,9 +312,9 @@ Launchpad Contributions:
     	<!-- Preference capitalization: No capitalization -->
         <item>لاشيء</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Per sentence</item>
+        <item>لكل جملة</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Per word</item>
+        <item>لكل كلمة</item>
     </string-array>
 
 	<!-- ***************************

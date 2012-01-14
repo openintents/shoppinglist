@@ -1,8 +1,8 @@
 # Application:
-OI Shopping List
+OI खरीदारी सूची
 
 # Promo text:
-Keep track of your shopping items with OI Shopping List.
+अपने खरीदारी के सामान का ट्रेक रखें OI शौपिंग लिस्ट के साथ.
 
 # Description:
 OI खरीददारी सूची एक शक्तिशाली अनुप्रयोग है जो जाँच सूची बनाने के लिए और उसका प्रबंधन करना आसान बनाता है| OI खरीददारी सूची एक सूची के लिए आईटम जोड़ना,उस आईटम को बंद करना और उसे सूची से हटाना आसन बनाती है| यह अनुप्रयोग प्रत्येक दुकान की कीमतों की जानकारी रख सकता है जिसका आप उपयोग करते हैं,और उच्च स्तरीय अनुकूलता दिखता है| फ़ॉन्ट आकार, सॉर्ट क्रम, सूची स्तंभ, और सूची सफाई व्यवहार सभी सेटिंग्स उपयोगकर्ता द्वारा नियंत्रित की जाती हैं| यह सारी सुविधाएँ एक साथ कुरकुरे लेआउट में लाई गयी हैं जो अनुकूलन योग्य है अलग किस्म की थीम्स के द्वारा| 
@@ -42,7 +42,7 @@ https://translations.launchpad.net/openintents/trunk
 * OI, OpenIntents, Open Intents
 
 अंतर्राष्ट्रीय संस्करण: 
-OI Shopping List
+"قائمة التسوق OI, Llista de compra d'OI, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Shopping List, OI Списък за Пазаруване, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, OI ショッピングリスト
 
 
 एक्सटेंशन: 

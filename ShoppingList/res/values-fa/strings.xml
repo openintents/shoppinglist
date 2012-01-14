@@ -23,16 +23,18 @@
 	<string name="about_translators">Launchpad Contributions:
   OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101
-  reza kia https://launchpad.net/~kia1349</string>
+  oren https://launchpad.net/~ahujaaditya92
+  reza kia https://launchpad.net/~kia1349
+  vishal panjwani https://launchpad.net/~vishal-panjwani15</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
-	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
+	<string name="about_comments">پیگیری از اقلام خرید خود را با لیست خرید OI.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Shopping List</string>
+	<string name="app_name">OI لیست خرید</string>
 
 	<string name="new_item">مورد جدید</string>
 	<string name="new_list">لیست جدید</string>
@@ -41,13 +43,13 @@
 	<string name="empty_list_not_sent">لیست خالی ارسال نمی شود.</string>
 	<string name="email_not_available">برنامه ای برای ارسال موجود نیست.</string>
 	<string name="my_shopping_list">لیست خرید من</string>
-	<string name="new_list_hint">e.g. wishlist, family list</string>
+	<string name="new_list_hint">به عنوان مثالفهرست علاقمندیها، لیست خانواده</string>
 	<string name="clean_up_list">پاک کردن لیست</string>
 	<string name="delete_list">حذف لیست</string>
 	<string name="ask_new_list">نام لیست خرید جدید را وارد کنید</string>
 	<string name="ask_rename_list">نام لیست خرید را تغییر دهید</string>
 	<string name="ask_edit_item">ویرایش مورد</string>
-	<string name="ask_new_store">Enter new store name</string>
+	<string name="ask_new_store">نام فروشگاه جدید را وارد کنید</string>
 	<string name="please_enter_name">لطفاً یک نام وارد کنید</string>
 	<string name="no_items_marked">زمان خط زدن هیچ موردی علامتگذاری نشده است.</string>
 	<string name="confirm_delete_list">آیا واقعاً می خواهید این لیست خرید را حذف کنید؟</string>
@@ -60,10 +62,10 @@
 	<string name="menu_mark_item">علامتگذاری مورد</string>
 	<string name="menu_edit_item">ویرایش مورد</string>
 	<string name="menu_auto_add">افزودن خودکار</string>
-	<string name="menu_item_stores">Stores...</string>
-	<string name="menu_rename_store">Rename store</string>
-	<string name="menu_delete_store">Delete store</string>
-	<string name="confirm_delete_store">Do you really want to delete this store?</string>
+	<string name="menu_item_stores">فروشگاه...</string>
+	<string name="menu_rename_store">تغییر نام فروشگاه</string>
+	<string name="menu_delete_store">حذف فروشگاه</string>
+	<string name="confirm_delete_store">آیا شما واقعا می خواهید به حذف این فروشگاه؟</string>
 	<string name="no_items_available">هيچ موردي وجود ندارد</string>
 	
 	<!-- Remove item from this list, but keep it internally, so that the user
@@ -75,7 +77,7 @@
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">مورد را برای همیشه حذف کنید</string>
 	<string name="menu_move_item">انتقال مورد به يك ليست ديگر</string>
-    <string name="menu_copy_item">Copy item</string>
+    <string name="menu_copy_item">آیتم کپی</string>
 	    
 	<!-- Button label to add an item to the list. -->
 	<string name="add">اضافه کردن</string>
@@ -90,8 +92,8 @@
 	<string name="shopping_title">%s - خرید</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current item. -->
-	<string name="item_stores_title">%s - Stores</string>
-	<string name="item_stores_activity_label">Edit Item Stores</string>
+	<string name="item_stores_title">فروشگاهی-s%</string>
+	<string name="item_stores_activity_label">ویرایش فروشگاه مورد</string>
 	
 	<string name="tags">برچسب ها</string>
 	<string name="price">قیمت</string>
@@ -102,20 +104,20 @@
 	<string name="units">واحدها</string>
 	<string name="note">یادداشت</string>
 	
-	<string name="otherqty">Other Quantity...</string>
-	<string name="otherpri">Other Priority...</string>   
+	<string name="otherqty">مقدار دیگر...</string>
+	<string name="otherpri">اولویت دیگر...</string>   
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">جمع كل: %s</string>
 	
 	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
 	<string name="total_checked">بررسی شد: %s</string>
-    <string name="priority1_total">Priority 1: %s</string>
-    <string name="priority2_total">Priority 1-2: %s</string>
-	<string name="priority3_total">Priority 1-3: %s</string>
-	<string name="priority4_total">Priority 1-4: %s</string>
+    <string name="priority1_total">اولویت 1 :s%</string>
+    <string name="priority2_total">اولویت 1-2 :s%</string>
+	<string name="priority3_total">اولویت 1-3 :s%</string>
+	<string name="priority4_total">اولویت 1-4 :s%</string>
 	
-	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
+	<string name="delete_item_confirm">آیا شما مطمئن هستید که می خواهید به طور دائم حذف این آیتم؟</string>
 	<string name="delete">حذف</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
@@ -156,15 +158,15 @@
 	<string name="preference_fontsize">اندازه فونت</string>
 	<string name="preference_fontsize_summary">اندازه فونت را تغییر دهید</string>
 	<string name="preference_fontsize_dialog_title">انتخاب اندازه فونت</string>
-	<string name="preference_orientation">Orientation</string>
-	<string name="preference_orientation_summary">Change orientation</string>
-	<string name="preference_orientation_dialog_title">Choose orientation</string>
+	<string name="preference_orientation">جحت</string>
+	<string name="preference_orientation_summary">جهت تغییر</string>
+	<string name="preference_orientation_dialog_title">را انتخاب کنید جهت گیری</string>
 	<string name="preference_sortorder_title">تنظیم ترتیب</string>
 	<string name="preference_sortorder_summary">ترتیب موارد لیست را تغییر دهید</string>
-	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
-	<string name="preference_sortorder_for_pick_summary">Change sort order of list items in Pick Items mode.</string>
+	<string name="preference_sortorder_for_pick_title">مرتب سازی بر اساس سفارش - آیتم های انتخاب</string>
+	<string name="preference_sortorder_for_pick_summary">تغییر ترتیب بندی از اقلام لیست را در حالت آیتم ها را انتخاب.</string>
 	<string name="preference_sortorder_dialog_title">انتخاب ترتیب</string>
-	<string name="preference_sortorder_for_pick_dialog_title">Choose sort order for Pick Items mode</string>
+	<string name="preference_sortorder_for_pick_dialog_title">ترتیب بندی از نوع را انتخاب کنید برای حالت آیتم ها را انتخاب</string>
 	<string name="preference_loadlastused_title">بارگیری آخرین لیست استفاده شده</string>
 	<string name="preference_loadlastused_summary">همیشه با لیستی که آخرین بار مشاهده شده شروع کنید.</string>
 	<string name="preference_capitalization_title">نوشتن با حروف بزرگ</string>
@@ -174,15 +176,15 @@
 	<string name="preference_hidechecked_summary">فوراً موارد علامت زده شده را مخفی کنید.</string>
 	<string name="preference_showprice_title">نشان دادن قیمت</string>
 	<string name="preference_showprice_summary">بعنوان ستون اضافی در لیست نشان داده می شود.</string>
-	<string name="preference_perstoreprice">Per-store prices</string>
-	<string name="preference_perstoreprice_title">Track per-store prices</string>
-	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
-	<string name="preference_screenlock_title">Disable screen lock</string>
-	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
-	<string name="preference_reset_quantity">Reset Quantity</string>
-	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
-	<string name="preference_add_for_barcode">Barcode Scanner</string>
-	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
+	<string name="preference_perstoreprice">در هر فروشگاه قیمت</string>
+	<string name="preference_perstoreprice_title">پیگیری قیمت در هر فروشگاه</string>
+	<string name="preference_perstoreprice_summary">پیگیری قیمت های جداگانه برای هر آیتم در هر فروشگاه.</string>
+	<string name="preference_screenlock_title">غیر فعال کردن قفل صفحه نمایش</string>
+	<string name="preference_screenlock_summary">جلوگیری از صفحه نمایش قفل شده است زمانی که چک.</string>
+	<string name="preference_reset_quantity">بازنشانی مقدار</string>
+	<string name="preference_reset_quantity_summary">تنظیم مجدد مقدار در هنگام اضافه کردن آیتم دوباره.</string>
+	<string name="preference_add_for_barcode">اسکنر بارکد</string>
+	<string name="preference_add_for_barcode_summary">باد و دکمه ی بارکد پلاگین OI برای شروع (در صورت نصب) را فشار دهید.</string>
 	<string name="preference_showtags_title">نشان دادن برچسب ها</string>
 	<string name="preference_showtags_summary">بعنوان ستون اضافی در لیست نشان داده می شود.</string>
 	<string name="preference_showquantity_title">نشان دادن کمیت</string>
@@ -191,19 +193,19 @@
 	<string name="preference_showpriority_summary">بعنوان ستون اضافی در لیست نشان داده می شود.</string>
 	<string name="preference_showunits_title">نمايش واحدها</string>
 	<string name="preference_showunits_summary">بعنوان ستون اضافی در لیست نشان داده می شود.</string>
-	<string name="preference_prio_subtotal">Subtotal by priority</string>
-	<string name="preference_prioritytotal_title">Subtotal by priority</string>
-	<string name="preference_prioritytotal_summary">No subtotal by priority shown.</string>
-	<string name="preference_prioritytotal_dialog_title">Subtotal by priority</string>
-	<string name="preference_priosubtotalchecked_title">Include checked items</string>
-	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
-	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
-	<string name="preference_pickitemsinlist_title">Pick items directly in list</string>
-	<string name="preference_pickitemsinlist_on_summary">Switch main list to edit mode to re-add existing items</string>
-	<string name="preference_pickitemsinlist_off_summary">Add items to list using a dedicated dialog</string>
-	<string name="preference_samesortforpick_title">Always same sort order</string>
-	<string name="preference_samesortforpick_on_summary">Items are sorted in Pick Items mode just as in Shopping mode.</string>
-	<string name="preference_samesortforpick_off_summary">Sort order for Pick Items mode can be chosen separately.</string>
+	<string name="preference_prio_subtotal">رسانی توسط اولویت</string>
+	<string name="preference_prioritytotal_title">رسانی توسط اولویت</string>
+	<string name="preference_prioritytotal_summary">بدون زیرکل توسط اولویت نشان داده شده است.</string>
+	<string name="preference_prioritytotal_dialog_title">رسانی توسط اولویت</string>
+	<string name="preference_priosubtotalchecked_title">شامل آیتم های چک</string>
+	<string name="preference_priosubtotalchecked_on_summary">رسانی توسط اولویت شامل آیتم های چک</string>
+	<string name="preference_priosubtotalchecked_off_summary">آیتم های چک شده رسانی توسط اولویت مستثنی</string>
+	<string name="preference_pickitemsinlist_title">انتخاب اقلام به طور مستقیم در لیست</string>
+	<string name="preference_pickitemsinlist_on_summary">تغییر لیست اصلی را ویرایش و از حالت به دوباره اضافه کردن آیتم های موجود</string>
+	<string name="preference_pickitemsinlist_off_summary">اضافه کردن آیتم به لیست با استفاده از گفت و گو اختصاصی</string>
+	<string name="preference_samesortforpick_title">همیشه نظم مرتب کردن بر اساس همان</string>
+	<string name="preference_samesortforpick_on_summary">این آیتم ها را در حالت آیتم ها را انتخاب فقط به عنوان در حالت خرید مرتب شده اند</string>
+	<string name="preference_samesortforpick_off_summary">مرتب سازی بر اساس سفارش برای انتخاب حالت مورد به طور جداگانه می تواند انتخاب شود</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">برای پاک کردن تکان دهید</string>
@@ -212,11 +214,11 @@
 	<string name="preference_shake_summary">برای پاک کردن لیست تلفن را تکان دهید.</string>
 	
     <string name="preference_advanced">تنظیمات پیشرفته</string>
-    <string name="preference_advanced_summary">Additional settings.</string>
+    <string name="preference_advanced_summary">اضافی در تنظیمات.</string>
     
     <!-- Preference category: General settings -->
     <string name="preference_general">عمومی</string>
-    <string name="preference_pickitems">Pick Items</string>
+    <string name="preference_pickitems">انتخاب آیتم ها</string>
     
     <string name="preference_appearance">ظاهر</string>
     
@@ -231,12 +233,12 @@
     <string name="preference_market_themes_summary">در Android Market به جستجوی تم ها بپردازید.</string>
     <string name="preference_developer_extensions_summary">از صفحه اصلی OpenIntents پسوندها را به دست آورید.</string>
 	<string name="preference_developer_themes_summary">از صفحه اصلی OpenIntents تم ها را به دست آورید.</string>
-	<string name="preference_quickedit">Quick Edit Mode</string>
-	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
-	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
-	<string name="preference_reset_all_settings">Reset all settings</string>
-	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
-	<string name="preference_reset_all_settings_done">All settings have been reset</string>
+	<string name="preference_quickedit">دسترسی سریع حالت ویرایش</string>
+	<string name="preference_quickedit_on_summary">لمس اولویت یا ارزش مقدار برای یک منو از ارزش های مشترک.</string>
+	<string name="preference_quickedit_off_summary">دست زدن به اولویت یا ارزش مقدار احضار محاوره ای مورد ویرایش.</string>
+	<string name="preference_reset_all_settings">بازنشانی تمام تنظیمات</string>
+	<string name="preference_reset_all_settings_alert">آیا شما واقعا می خواهید به تجدید همه تنظیمات؟ این را نمی توان لغو شد.</string>    
+	<string name="preference_reset_all_settings_done">تمام تنظیمات مربوط به مجددا تنظیم</string>
 	    
 	<!-- ***************************
 	     Permissions
@@ -267,7 +269,7 @@
     	<!-- Preference sort order: Sort alphabetically by tags -->
     	<item>برچسب ها الفبایی</item>
         <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
-    	<item>priority, tags alphabetical</item>
+    	<item>اولویت، برچسب ها بر اساس حروف الفبا</item>
         <!-- Preference sort order: Sort by price, the most expensive first -->
     	<item>ابتدا گران ترین ها</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
@@ -275,15 +277,15 @@
     	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
     	<item>ابتدا علامت نخورده ها باشد، اولويت ، برچسب ها به ترتیب حروف الفبا</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
-    	<item>unchecked first, priority, tags alphabetical</item>
+    	<item>بدون کنترل، اولویت، برچسب ها بر اساس حروف الفبا</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">
-    	<item>Not shown</item>
-    	<item>Priority 1</item>
-    	<item>Priority 1-2</item>
-    	<item>Priority 1-3</item>
-    	<item>Priority 1-4</item>
+    	<item>نشان داده نشده است</item>
+    	<item>اولویت 1</item>
+    	<item>اولویت 1-2</item>
+    	<item>اولویت 1-3</item>
+    	<item>اولویت 1-4</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
@@ -301,18 +303,18 @@
     	<!-- Preference orientation: default -->
         <item>پیش فرض</item>
     	<!-- Preference orientation: landscape -->
-    	<item>Landscape</item>
+    	<item>افقی</item>
     	<!-- Preference orientation: portrait -->
-        <item>Portrait</item>
+        <item>عمودی</item>
     </string-array>
     
     <string-array name="preference_capitalization_entries">
     	<!-- Preference capitalization: No capitalization -->
         <item>هیچ کدام</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Per sentence</item>
+        <item>در هر جمله</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Per word</item>
+        <item>هر کلمه</item>
     </string-array>
 
 	<!-- ***************************
@@ -339,8 +341,8 @@
     	<item>پاک کردن لیست</item>
     </string-array>
       
-	<string name="widget_prev_page">Previous page</string>
-	<string name="widget_next_page">Next page</string>
-	<string name="widget_choose_a_list">Choose a list</string>
-	<string name="widget_no_items">No items on page %d</string>
+	<string name="widget_prev_page">صفحه قبلی</string>
+	<string name="widget_next_page">صفحه بعدی</string>
+	<string name="widget_choose_a_list">یک لیست را انتخاب کنید</string>
+	<string name="widget_no_items">هیچ مطلبی در صفحه d%</string>
 </resources>

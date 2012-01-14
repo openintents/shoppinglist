@@ -1,3 +1,10 @@
+# Application:
+Llista de compra d'OI
+
+# Promo text:
+Porta un registre dels teus elements de compra amb la llista de compra d'OI.
+
+# Description:
 La llista de compra d'OI és una aplicació potent que fa fàcil crear i controlar llistes de coses a fer. La llista de compra d'OI fa ben fàcil afegir elements a una llista, activar l'element, i treure'l de la llista. L'aplicació pot controlar diverses peces separades per a cada botiga que utilitzes, i té un alt nivell de personalització. La mida de lletra, ordenació, columnes de la llista i comportament de la neteja de la llista són preferències controlables per l'usuari. Totes aquestes característiques s'ajunten en un disseny que és personalitzable per mitjà d'un grapat de temes. 
 
 El codi font d'això és lliure i l'aplicació de codi obert està disponible a: 
@@ -35,7 +42,7 @@ Paraules clau:
 * OI, OpenIntents, Open Intents
 
 Versions internacionals: 
-OI Shopping List
+"قائمة التسوق OI, Llista de compra d'OI, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Shopping List, OI Списък за Пазаруване, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, OI ショッピングリスト
 
 
 Extensions: 

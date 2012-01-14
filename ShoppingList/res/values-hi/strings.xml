@@ -21,17 +21,18 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
+  Atharva Lath https://launchpad.net/~atharvalath96
   OpenIntents devs https://launchpad.net/~openintents-devs
   Shitiz Garg https://launchpad.net/~l95s</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
-	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
+	<string name="about_comments">अपने खरीदारी के सामान का ट्रेक रखें OI शौपिंग लिस्ट के साथ.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Shopping List</string>
+	<string name="app_name">OI खरीदारी सूची</string>
 
 	<string name="new_item">नयी चीज़</string>
 	<string name="new_list">नयी सूची</string>
@@ -40,7 +41,7 @@
 	<string name="empty_list_not_sent">खाली सूची नहीं भेजी गई</string>
 	<string name="email_not_available">भेजने के लिए कोई अनुप्रयोग उपलब्ध नहीं है</string>
 	<string name="my_shopping_list">मेरी खरीदारी सूची</string>
-	<string name="new_list_hint">e.g. wishlist, family list</string>
+	<string name="new_list_hint">उदाहरण इच्छा सूची, परियार की लिस्ट</string>
 	<string name="clean_up_list">सूची खाली करें</string>
 	<string name="delete_list">सूची मिटाएँ</string>
 	<string name="ask_new_list">नयी खरीदारी सूची का नाम भरें</string>
@@ -74,7 +75,7 @@
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">आइटम सदा के लिए हटाएँ</string>
 	<string name="menu_move_item">आइटम अन्य सूची में ले जाएँ</string>
-    <string name="menu_copy_item">Copy item</string>
+    <string name="menu_copy_item">चीज़ को कोपी करें</string>
 	    
 	<!-- Button label to add an item to the list. -->
 	<string name="add">जोड़ें</string>
@@ -114,7 +115,7 @@
 	<string name="priority3_total">प्रधानता १-३: %s</string>
 	<string name="priority4_total">प्रधानता १-४: %s</string>
 	
-	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
+	<string name="delete_item_confirm">क्या आप पक्का से इस चीज़ को हमेशा के लिए हटाना चाहते हैं?</string>
 	<string name="delete">हटाएँ</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
@@ -180,8 +181,8 @@
 	<string name="preference_screenlock_summary">अगर चिह्नित, यह स्क्रीन को बंद होने से रोकता है</string>
 	<string name="preference_reset_quantity">मात्रा को शून्य करें</string>
 	<string name="preference_reset_quantity_summary">आइटम जोड़ने पर मात्रा को शून्य करता है</string>
-	<string name="preference_add_for_barcode">Barcode Scanner</string>
-	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
+	<string name="preference_add_for_barcode">बारकोड स्केनर</string>
+	<string name="preference_add_for_barcode_summary">एड्ड बटन को दबाएँ रखें बारकोड OI प्लगइन ऑफ शुरू करने के लिए (अगर है तो).</string>
 	<string name="preference_showtags_title">टाग्स दिखाए</string>
 	<string name="preference_showtags_summary">यह सूची में अतिरिक्त खाना के तरह से दिखया जाता है</string>
 	<string name="preference_showquantity_title">मात्रा दिखाए</string>
@@ -233,9 +234,9 @@
 	<string name="preference_quickedit">जल्दी संपादन करने का मोड</string>
 	<string name="preference_quickedit_on_summary">छूने के प्रधानता या मुल्ये मानों मेनू के सामान्य मनो के लिए</string>
 	<string name="preference_quickedit_off_summary">छूने के प्रधानता या मुल्ये मानों आइटम संपादन सवांद के लिए</string>
-	<string name="preference_reset_all_settings">Reset all settings</string>
-	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
-	<string name="preference_reset_all_settings_done">All settings have been reset</string>
+	<string name="preference_reset_all_settings">सारी सेटिंग्स को रिसेट करें</string>
+	<string name="preference_reset_all_settings_alert">क्या आप पक्का से सारी सेटिंग्स को रिसेट करना कहते हैं? यह वापस नहीं आ सकता.</string>    
+	<string name="preference_reset_all_settings_done">सारी सेट्टिंग रिसेट हो चुकी है</string>
 	    
 	<!-- ***************************
 	     Permissions
@@ -309,9 +310,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>कोई नहीं</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Per sentence</item>
+        <item>हर एक वाक्य</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Per word</item>
+        <item>हर एक शब्द</item>
     </string-array>
 
 	<!-- ***************************
@@ -338,8 +339,8 @@
     	<item>सूची खाली करें</item>
     </string-array>
       
-	<string name="widget_prev_page">Previous page</string>
-	<string name="widget_next_page">Next page</string>
-	<string name="widget_choose_a_list">Choose a list</string>
-	<string name="widget_no_items">No items on page %d</string>
+	<string name="widget_prev_page">पिछला पृष्ठ</string>
+	<string name="widget_next_page">अगला पृष्ठ</string>
+	<string name="widget_choose_a_list">एक लिस्ट को चुने</string>
+	<string name="widget_no_items">पेज पर कोई आइटम नहीं है %d</string>
 </resources>

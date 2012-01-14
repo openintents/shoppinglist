@@ -21,6 +21,7 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
+  Anthony Harrington https://launchpad.net/~untaintableangel
   Isabell Long https://launchpad.net/~issyl0
   OpenIntents devs https://launchpad.net/~openintents-devs
   happynawani https://launchpad.net/~happynawani</string>
@@ -182,7 +183,7 @@
 	<string name="preference_reset_quantity">Reset Quantity</string>
 	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
 	<string name="preference_add_for_barcode">Barcode Scanner</string>
-	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
+	<string name="preference_add_for_barcode_summary">Hold down on the Add button to start Barcode OI Plugin (if installed).</string>
 	<string name="preference_showtags_title">Show tags</string>
 	<string name="preference_showtags_summary">Shown as extra column in list.</string>
 	<string name="preference_showquantity_title">Show quantity</string>

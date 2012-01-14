@@ -25,13 +25,13 @@
   OpenIntents devs https://launchpad.net/~openintents-devs</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
-	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
+	<string name="about_comments">Hold spor på dine handlepunkter med OI Handliste.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Shopping List</string>
+	<string name="app_name">OI Handleliste</string>
 
 	<string name="new_item">Nytt punkt</string>
 	<string name="new_list">Ny liste</string>
@@ -40,7 +40,7 @@
 	<string name="empty_list_not_sent">Tom liste ikke sendt.</string>
 	<string name="email_not_available">Ingen applikasjon tilgjengelig for sending.</string>
 	<string name="my_shopping_list">Min handleliste</string>
-	<string name="new_list_hint">e.g. wishlist, family list</string>
+	<string name="new_list_hint">f.eks. ønskeliste, familieliste</string>
 	<string name="clean_up_list">Rydd opp i liste</string>
 	<string name="delete_list">Slett liste</string>
 	<string name="ask_new_list">Skriv navnet på den nye handlelisten</string>
@@ -309,9 +309,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>Ingen</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Per sentence</item>
+        <item>Hver setning</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Per word</item>
+        <item>Hvert ord</item>
     </string-array>
 
 	<!-- ***************************

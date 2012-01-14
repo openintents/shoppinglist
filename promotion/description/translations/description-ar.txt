@@ -1,8 +1,8 @@
 # Application:
-OI Shopping List
+"قائمة التسوق OI
 
 # Promo text:
-Keep track of your shopping items with OI Shopping List.
+تتبع عناصر قائمة تسوقك مع قائمة تسوق OI.
 
 # Description:
 OI هو تطبيق قوية مما يجعل من السهل إنشاء وإدارة قوائم الاختيار من "قائمة التسوق". OI قائمة التسوق يجعل من السهل إضافة عناصر إلى قائمة، والتحقق من هذا البند، وإزالته من القائمة. يمكنك تعقب التطبيق أسعار منفصلة لكل مخزن التي تستخدمها، وميزات مستوى عال من مخصص. ترتيب الفرز وأعمدة القائمة، حجم الخط والسلوك "تنظيف" قائمة بكافة إعدادات التحكم من قبل المستخدم. كافة هذه الميزات جمعت في تخطيط هش قابل للتخصيص من خلال مجموعة متنوعة من المواضيع. 
@@ -42,7 +42,7 @@ https://translations.launchpad.net/openintents/trunk
 * المقاصد مفتوحة OI, OpenIntents
 
 الإصدارات الدولية: 
-OI Shopping List
+"قائمة التسوق OI, Llista de compra d'OI, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Shopping List, OI Списък за Пазаруване, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, OI ショッピングリスト
 
 
 ملحقات: 

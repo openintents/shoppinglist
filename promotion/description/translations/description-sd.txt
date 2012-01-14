@@ -42,7 +42,7 @@ OI  खरीदारी सूची " जे लाये उपलब्ध 
 * OI, OpenIntents, Open Intents
 
 अंतर्राष्ट्रीय संस्करण: 
-OI Shopping List
+"قائمة التسوق OI, Llista de compra d'OI, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Shopping List, OI Списък за Пазаруване, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, OI ショッピングリスト
 
 
 एक्सटेंशन: 

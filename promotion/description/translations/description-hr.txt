@@ -1,5 +1,5 @@
 # Application:
-OI Shopping List
+OI Lista za kupovinu
 
 # Promo text:
 Keep track of your shopping items with OI Shopping List.
@@ -42,7 +42,7 @@ Ključne riječi:
 * OI, OpenIntents, Open Intents
 
 Internacionalna verzija: 
-OI Shopping List
+"قائمة التسوق OI, Llista de compra d'OI, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Shopping List, OI Списък за Пазаруване, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, OI ショッピングリスト
 
 
 Dodatci: 

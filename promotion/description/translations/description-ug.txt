@@ -1,11 +1,11 @@
 # Application:
-OI Shopping List
+OI سېتىۋېلىش تىزىمى
 
 # Promo text:
 Keep track of your shopping items with OI Shopping List.
 
 # Description:
-OI Shopping List is a powerful application which makes it easy to create and manage checklists. OI Shopping List makes it easy to add items to a list, check the item off, and remove it from the list. The application can track separate prices for each store that you use, and features a high level of customization. Font size, sort order, list columns, and list cleanup behavior are all settings controlled by the user. All of these features are brought together in a crisp layout that is customizable through a variety of themes. 
+OI Shopping List is a powerful application which makes it easy to create and manage checklists. OI Shopping List makes it easy to add items to a list, check the item off, and remove it from the list. The application can track separate prices for each store that you use, and features a high level of customization. خەت نۇسخا چوڭلۇقى، تەرتىپلەش تەرتىپى، تىزىم ئىستونى ۋە تىزىم تازىلاش مەشغۇلاتلىرىنىڭ ھەممە تەڭشەكلىرىنى ئىشلەتكۈچى تىزگىنلەيدۇ. All of these features are brought together in a crisp layout that is customizable through a variety of themes. 
 
 كودى ئوچۇق بۇ ئەپنىڭ ئەسلى كودى: 
 http://code.google.com/p/openintents
@@ -26,23 +26,23 @@ https://translations.launchpad.net/openintents/trunk
 * Keep track of separate prices for each store.
 * ئۆزلەشتۈرگىلى بولىدىغان تىزىم ئىستونلىرى.
 
-Available extensions for "OI Shopping List": 
+«OI سېتىۋېلىش تىزىمى» نىڭ ئىشلىتىلىشچان كېڭەيتىلمىلىرى: 
 * Add a recorded message to a note with "OI Voice Notes".
 * Import/export shopping lists with "OI Convert CSV".
 * «OI ھەققىدە» ئىجازەت ئۇچۇرىنى كۆرسىتىدۇ.
 * Enter/check items with "Barcode OI Plugin".
 
-Applications that work with "OI Shopping List": 
+«OI سېتىۋېلىش تىزىمى» دا ئىشلەيدىغان ئەپلەر: 
 * «OI يېڭىلاش»تا يېڭىلايدۇ.
 * Backup lists with "My Backup Pro".
 * Import ingredients of recipes with "Bites".
 
 ھالقىلىق سۆزلەر: 
-* Shopping, List, Shopping List, Checklist
+* سېتىۋېلىش، تىزىم، سېتىۋېلىش تىزىمى، تەكشۈرۈش تىزىمى
 * OI, OpenIntents, Open Intents
 
 خەلقئارا نەشرى: 
-OI Shopping List
+"قائمة التسوق OI, Llista de compra d'OI, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Shopping List, OI Списък за Пазаруване, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, OI ショッピングリスト
 
 
 كەڭەيتىلمەلەر: 

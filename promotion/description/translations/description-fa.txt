@@ -1,7 +1,7 @@
 # Application:
-OI Shopping List
+OI لیست خرید
 
 # Promo text:
-Keep track of your shopping items with OI Shopping List.
+پیگیری از اقلام خرید خود را با لیست خرید OI.
 
 # Description:

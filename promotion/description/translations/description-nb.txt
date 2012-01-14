@@ -1,51 +1,51 @@
 # Application:
-OI Shopping List
+OI Handleliste
 
 # Promo text:
-Keep track of your shopping items with OI Shopping List.
+Hold spor på dine handlepunkter med OI Handliste.
 
 # Description:
-OI Shopping List is a powerful application which makes it easy to create and manage checklists. OI Shopping List makes it easy to add items to a list, check the item off, and remove it from the list. The application can track separate prices for each store that you use, and features a high level of customization. Font size, sort order, list columns, and list cleanup behavior are all settings controlled by the user. All of these features are brought together in a crisp layout that is customizable through a variety of themes. 
+OI Handleliste er en kraftig applikasjon som gjør det lett å opprette og administrere sjekklister. OI Handleliste gjør det enkelt å legge til punkter til en liste, krysse punktet av, og fjerne det fra listen. Applikasjonen kan spore seperate priser for hver butikk du bruker, og har en høy grad av tilpasning. Skriftstørrelse, sorteringsrekkefølge, listekolonner og oppførsel for rydding er alle innstillinger kontrollert av brukeren. Alle disse funksjonene blir ført sammen i en tydelig utforming som er egendefinerbar gjennom en variasjon med temaer. 
 
-The source code of this free and open source application is available at: 
+Kildekoden til denne gratis applikasjonen med åpen kildekode er tilgjengelig hos: 
 http://code.google.com/p/openintents
 
-This application is ad free and does not require the internet permission. 
+Denne applikasjonen er reklamefri og trenger ikke inter 
 
-For the complete list of changes and a list of frequently asked questions, please visit: 
+For den komplette listen med endringer og en liste over vanlige spørsmål, vennligst besøk: 
 http://www.openintents.org
 
-You can help to improve the translation into your language at Launchpad: 
+Du kan hjelpe til med å forbedre oversettelsen 
 https://translations.launchpad.net/openintents/trunk
 
-Features: 
-* Add, edit and delete lists.
-* Create, delete, and check items quickly and easily.
-* Variety of themes.
-* Customizable font size and sort order.
-* Keep track of separate prices for each store.
-* Customizable list columns.
+Funksjoner: 
+* Legg til, rediger og slett lister.
+* Opprett, slett og kryss av oppføringer raskt og enkelt.
+* Variasjon i temaer.
+* Egendefinerbar skriftstørrelse og sorteringsrekkefølge.
+* Hold styr på seperate priser for hver butikk.
+* Egendefinerbare listekolonner.
 
-Available extensions for "OI Shopping List": 
-* Add a recorded message to a note with "OI Voice Notes".
-* Import/export shopping lists with "OI Convert CSV".
-* Show the license information with "OI About".
-* Enter/check items with "Barcode OI Plugin".
+Tilgjengelige utvidelser for "OI Handleliste": 
+* Legg til en innspilt melding til et notat med " OI Voice Notes".
+* Importer/eksporter handlelister med "OI Konverter CSV".
+* Vis lisensinformasjonen med "OI Info".
+* Skriv inn/kryss av punkter med "Barcode OI Plugin".
 
-Applications that work with "OI Shopping List": 
-* Update with "OI Update".
-* Backup lists with "My Backup Pro".
-* Import ingredients of recipes with "Bites".
+Applikasjoner som fungerer med "OI Handleliste": 
+* Oppdater med "OI Oppdater".
+* Sikkerhetskopier lister med "My Backup Pro".
+* Importer ingredienser i oppskrifter med "Bites".
 
-Keywords: 
-* Shopping, List, Shopping List, Checklist
+Nøkkelord: 
+* Handling, Liste, Handleliste, Sjekkliste
 * OI, OpenIntents, Open Intents
 
-International versions: 
-OI Shopping List
+Internasjonal versjoner: 
+"قائمة التسوق OI, Llista de compra d'OI, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Shopping List, OI Списък за Пазаруване, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, OI ショッピングリスト
 
 
-Extensions: 
+Utvidelser: 
 * uses OI Voice Note
 * uses OI ConvertCSV
 * uses OI About

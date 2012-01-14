@@ -1,8 +1,8 @@
 # Application:
-OI Shopping List
+OI Списък за Пазаруване
 
 # Promo text:
-Keep track of your shopping items with OI Shopping List.
+Следете списъка си с артикули за пазаруване с OI Списък за Пазаруване.
 
 # Description:
 OI Shopping List е мощно приложение, с което е лесно да създавате и да управлявате списъци. С OI Shopping List е лесно да добавите артикули към списък, да го отметнете артикул и да го премахнете от списъка. Приложението може да следи различни цени за всеки магазин, който използвате и предлага високо ниво на персонализация. Размера на шрифта, начина на сортиране, колоните на списъка и разчистването на списъка - всички те могат да се настройват от потребителя. Всички тези функции са събрани заедно в ясен изглед, който може да се персонализира благодарение на множеството палитри. 
@@ -42,7 +42,7 @@ https://translations.launchpad.net/openintents/trunk
 * OI, OpenIntents, Open Intents
 
 Международни версии: 
-OI Shopping List
+"قائمة التسوق OI, Llista de compra d'OI, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Shopping List, OI Списък за Пазаруване, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, OI ショッピングリスト
 
 
 Разширения: 

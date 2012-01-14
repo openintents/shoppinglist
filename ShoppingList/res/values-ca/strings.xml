@@ -21,157 +21,156 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
-  Atharva Lath https://launchpad.net/~atharvalath96
-  OpenIntents devs https://launchpad.net/~openintents-devs</string>
+  Joan Creus https://launchpad.net/~joan-creus-c</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
-	<string name="about_comments">ਆਪਣੇ ਪੁਰਾਨਾ ਖਰੀਦਦਾਰੀ ਸੂਚੀ  ਦੇ ਨਾਲ ਖਰੀਦਾਰੀ ਆਇਟਮ ਦਾ ਟ੍ਰੈਕ ਰੱਖੋ .</string>
+	<string name="about_comments">Porta un registre dels teus elements de compra amb la llista de compra d\'OI.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ</string>
+	<string name="app_name">Llista de compra d\'OI</string>
 
-	<string name="new_item">ਨਵਾ ਆਇਟਮ</string>
-	<string name="new_list">ਨਵੀ ਸੂਚੀ</string>
-	<string name="send">ਸੂਚੀ ਭੇਜੇ</string>
-	<string name="mark_all_items">ਸਾਰੇ ਆਇਟਮ ਮਾਰਕ ਕਰ</string>
-	<string name="empty_list_not_sent">ਖਾਲੀ ਸੂਚੀ ਨਹੀਂ ਭੇਜਿਆ .</string>
-	<string name="email_not_available">ਰ ਸੈਟਿੰਗ ਨਹੀ ਬਦਲੀ</string>
-	<string name="my_shopping_list">ਮੇਰਾ ਖਰੀਦਾਰੀ ਦੀ ਸੂਚੀ</string>
-	<string name="new_list_hint">ਉਦਾਹਰਣਾਰਥ ਇੱਛਾਸੂਚੀ, ਪਰਵਾਰ ਦੀ ਸੂਚੀ</string>
-	<string name="clean_up_list">ਸੂਚੀ ਸਾਫ਼</string>
-	<string name="delete_list">ਸੂਚੀ ਹਟਾਵਾਂ</string>
-	<string name="ask_new_list">ਨਵੀਂ ਖਰੀਦਾਰੀ ਦੀ ਸੂਚੀ  ਦੇ ਨਾਮ ਦਰਜ ਕਰੋਏ</string>
-	<string name="ask_rename_list">ਨਾਮ ਬਦਲੀਆਂ ਖਰੀਦਾਰੀ ਸੂਚੀ</string>
-	<string name="ask_edit_item">ਆਇਟਮ ਸੰਪਾਦਤ ਕਰੋਏ</string>
-	<string name="ask_new_store">ਨਵਾਂ ਸਟੋਰ ਨਾਮ ਦਰਜ ਕਰੋਏ</string>
-	<string name="please_enter_name">ਕ੍ਰਿਪਾ ਇੱਕ ਨਾਮ ਦਰਜ ਕਰੋਏ</string>
-	<string name="no_items_marked">ਕੋਈ ਆਇਟਮ ਨਹੀਂ ਹੈ  ਦੇ ਰੂਪ ਵਿੱਚ ਬਾਹਰ ਪਾਰ ਕਰ ਚਿਹਨਿਤ ਕਰ ਰਹੇ ਹਨ .</string>
-	<string name="confirm_delete_list">ਕੀ ਤੁਸੀ ਵਾਸਤਵ ਵਿੱਚ ਇਸ ਖਰੀਦਾਰੀ ਦੀ ਸੂਚੀ ਨੂੰ ਵਿਡਾਰਨ ਚਾਹੁੰਦੇ ਹੋ ?</string>
-	<string name="no_shopping_provider">ਜਦੋਂ ਕਿ ਸ਼ਾਪਿੰਗ ਸੂਚੀ ਤੱਕ ਪਹੁੰਚਣ ਵਿੱਚ ਖਾਮੀਂ .</string>
-	<string name="pick_item">ਇੱਕ ਆਇਟਮ ਚੁੱਕੋ</string>
-	<string name="pick_list">ਇੱਕ ਸੂਚੀ ਚੁੱਕੋ</string>
-	<string name="theme">ਥੀਮ</string>
-	<string name="theme_settings">ਥੀਮ ਸੇਟਿੰਗਸ</string>
-	<string name="rename_list">ਸੂਚੀ ਦਾ ਨਾਮ ਬਦਲੀਆਂ</string>
-	<string name="menu_mark_item">ਮਾਰਕ ਆਇਟਮ</string>
-	<string name="menu_edit_item">ਆਇਟਮ ਸੰਪਾਦਤ ਕਰੋਏ</string>
-	<string name="menu_auto_add">ਜੋੜ ਆਟੋ</string>
-	<string name="menu_item_stores">ਭੰਡਾਰ...</string>
-	<string name="menu_rename_store">ਨਾਮ ਬਦਲੀਆਂ ਦੁਕਾਨ</string>
-	<string name="menu_delete_store">ਦੁਕਾਨ ਹਟਾਵਾਂ</string>
-	<string name="confirm_delete_store">ਕੀ ਤੁਸੀ ਵਾਸਤਵ ਵਿੱਚ ਇਸ ਦੁਕਾਨ ਨੂੰ ਨਸ਼ਟ ਕਰਣਾ ਚਾਹੁੰਦੇ ਹੋ ?</string>
-	<string name="no_items_available">ਕੋਈ ਆਈਟਮ ਉਪਲੱਬਧ ਨਹੀਂ</string>
+	<string name="new_item">Nou element</string>
+	<string name="new_list">Nova llista</string>
+	<string name="send">Enviar llista</string>
+	<string name="mark_all_items">Marcar tots els elements</string>
+	<string name="empty_list_not_sent">No s\'ha enviat la llista buida.</string>
+	<string name="email_not_available">No hi ha cap aplicació disponible per enviar.</string>
+	<string name="my_shopping_list">La meva llista de compra</string>
+	<string name="new_list_hint">p.e. llista de desitgos, llista de família</string>
+	<string name="clean_up_list">Netejar llista</string>
+	<string name="delete_list">Eliminar llista</string>
+	<string name="ask_new_list">Escriu el nom de la nova llista de compra</string>
+	<string name="ask_rename_list">Reanomenar llista de compra</string>
+	<string name="ask_edit_item">Edita l\'element</string>
+	<string name="ask_new_store">Escriu un nom de botiga nou</string>
+	<string name="please_enter_name">Si us plau entreu un nom</string>
+	<string name="no_items_marked">No s\'ha marcat cap element com a ratllat.</string>
+	<string name="confirm_delete_list">Esteu segurs que voleu eliminar aquesta llista de compra?</string>
+	<string name="no_shopping_provider">Error accedint a les llistes decompra.</string>
+	<string name="pick_item">Escull un element</string>
+	<string name="pick_list">Escull una llista</string>
+	<string name="theme">Tema</string>
+	<string name="theme_settings">Preferències de tema</string>
+	<string name="rename_list">Reanomena llista</string>
+	<string name="menu_mark_item">Marcar element</string>
+	<string name="menu_edit_item">Edita l\'element</string>
+	<string name="menu_auto_add">Afegeix automàticament</string>
+	<string name="menu_item_stores">Botigues...</string>
+	<string name="menu_rename_store">Reanomena botiga</string>
+	<string name="menu_delete_store">Eliminar botiga</string>
+	<string name="confirm_delete_store">Esteu segurs que voleu eliminar aquesta botiga?</string>
+	<string name="no_items_available">Cap element disponible</string>
 	
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
-	<string name="menu_remove_item">ਸੂਚੀ ਵਲੋਂ ਆਇਟਮ ਕੱਢੀਏ</string>
+	<string name="menu_remove_item">Elimina l\'element de la llista</string>
 	
 	<!-- Delete this item completely. If the user wants to add it again, they
 	     have to enter all the information again. -->
-	<string name="menu_delete_item">ਆਇਟਮ ਸਥਾਈ ਰੂਪ ਵਲੋਂ ਹਟਾਵਾਂ</string>
-	<string name="menu_move_item">ਹੋਰ ਸੂਚੀ ਲਈ ਆਇਟਮ ਲੈ ਜਾਓ</string>
-    <string name="menu_copy_item">ਨਕਲ ਬਨਾਓ ਆਇਟਮ</string>
+	<string name="menu_delete_item">Elimina l\'element permanentment</string>
+	<string name="menu_move_item">Mou element a l\'altra llista</string>
+    <string name="menu_copy_item">Copiar element</string>
 	    
 	<!-- Button label to add an item to the list. -->
-	<string name="add">ਸ਼ਾਮਿਲ</string>
+	<string name="add">Afegir</string>
 	
-	<string name="menu_pick_items">ਆਇਟਮ ਚੁੱਕੋ</string>
-	<string name="menu_start_shopping">ਖਰੀਦਦਾਰੀ</string>
-	
-	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s- ਆਇਟਮ ਚੁੱਕੋ</string>
+	<string name="menu_pick_items">Escull elements</string>
+	<string name="menu_start_shopping">Compres</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="shopping_title">%s- ਖਰੀਦਾਰੀ</string>
+	<string name="pick_items_titel">%s - Escull elements</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="shopping_title">%s - Compres</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current item. -->
-	<string name="item_stores_title">%s- ਭੰਡਾਰ</string>
-	<string name="item_stores_activity_label">ਆਇਟਮ ਸਟੋਰ ਸੰਪਾਦਤ ਕਰੋਏ</string>
+	<string name="item_stores_title">%s - Botigues</string>
+	<string name="item_stores_activity_label">Edit Item Stores</string>
 	
-	<string name="tags">ਟੈਗ</string>
-	<string name="price">ਮੁੱਲ</string>
-	<string name="item">ਆਈਟਮ</string>
-	<string name="quantity">ਮਾਤਰਾ</string>
-	<string name="priority">ਦਰਜਾ</string>
-	<string name="has_note">ਨੋਟ ਹੈ</string>
-	<string name="units">ਯੂਨਿਟ</string>
-	<string name="note">ਨੋਟ</string>
+	<string name="tags">Tags</string>
+	<string name="price">Price</string>
+	<string name="item">Item</string>
+	<string name="quantity">Quantity</string>
+	<string name="priority">Priority</string>
+	<string name="has_note">Has Note</string>
+	<string name="units">Units</string>
+	<string name="note">Note</string>
 	
-	<string name="otherqty">ਹੋਰ ਮਾਤਰਾ...</string>
-	<string name="otherpri">ਹੋਰ ਅਗੇਤ...</string>   
+	<string name="otherqty">Other Quantity...</string>
+	<string name="otherpri">Other Priority...</string>   
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
-	<string name="total">ਕੁਲ: %s</string>
+	<string name="total">Total: %s</string>
 	
 	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
-	<string name="total_checked">ਜਾਂਚ: %s</string>
-    <string name="priority1_total">1 ਅਗੇਤ: %s</string>
-    <string name="priority2_total">1-2 ਅਗੇਤ: %s</string>
-	<string name="priority3_total">1-3 ਅਗੇਤ: %s</string>
-	<string name="priority4_total">1-4 ਅਗੇਤ: %s</string>
+	<string name="total_checked">Checked: %s</string>
+    <string name="priority1_total">Priority 1: %s</string>
+    <string name="priority2_total">Priority 1-2: %s</string>
+	<string name="priority3_total">Priority 1-3: %s</string>
+	<string name="priority4_total">Priority 1-4: %s</string>
 	
-	<string name="delete_item_confirm">ਕੀ ਤੁਸੀਂ ਇਹ ਆਈਟਮ ਨੂੰ ਹਮੇਸ਼ਾਂ ਲਈ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
-	<string name="delete">ਹਟਾਉ</string>
+	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
+	<string name="delete">Delete</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
-	<string name="suffix_checked">...ਠੀਕ ਹੈ</string>
+	<string name="suffix_checked">... OK</string>
 	<string name="empty"/>
 	
 	<!-- The shortcut is created on the home screen. -->
-	<string name="pick_list_for_shortcut">ਸ਼ਾਰਟਕਟ ਲਈ ਸੂਚੀ ਚੁੱਕੋ</string>
+	<string name="pick_list_for_shortcut">Pick list for shortcut</string>
 	
 	<!-- Shown if external application wants to insert new items. -->
 	<string name="pick_list_to_insert_items">Pick list to insert items</string>
 	
 	<!-- Theme related -->
 	<!-- Title for selecting a theme -->
-	<string name="theme_pick">ਥੀਮ ਓਠਾਏ</string>
-	<string name="theme_description">ਇਸ ਸੂਚੀ ਲਈ ਇੱਕ ਵਿਸ਼ਾ ਚੁਨੇਂ</string>
-	<string name="theme_default">ਡਿਫਾਲਟ</string>
-	<string name="theme_classic">ਕਲਾਸਿਕ</string>
+	<string name="theme_pick">Pick a theme</string>
+	<string name="theme_description">Choose a theme for this list</string>
+	<string name="theme_default">Default</string>
+	<string name="theme_classic">Classic</string>
 	<string name="theme_bugdroid">Android</string>
-	<string name="theme_classic_export">ਕਲਾਸਿਕ  ( OI ਖਰੀਦਾਰੀ ਸੂਚੀ ਵਲੋਂ )</string>
+	<string name="theme_classic_export">Classic (from OI Shopping List)</string>
 	<string name="theme_bugdroid_export">Android (from OI Shopping List)</string>
 
 	<!--     Dialog box    -->
 	<!-- Button label "OK" -->
 	<string name="ok">OK</string>
 	<!-- Button label "Cancel" -->
-	<string name="cancel">ਰਁਦ ਕਰੋ</string>
-	<string name="use_theme_for_all_lists">ਸਭੀ ਲਿਸਟੋ ਤੇ ਲਿਏ ਯੇ ਥੀਮ ਦਾ ਇਸਤਮਾਲ ਕਰੇ</string>
-	<string name="get_more_themes">ਓਰ ਥੀਮ ਲਾਏ</string>
+	<string name="cancel">Cancel</string>
+	<string name="use_theme_for_all_lists">Use this theme for all lists</string>
+	<string name="get_more_themes">Get more themes</string>
 	
 	<!-- preferences -->
-	<string name="preferences">ਸੈਟਿੰਗ</string>
+	<string name="preferences">Settings</string>
 	
-    <string name="preference_application">ਅਨੁਪ੍ਰਯੋਗ ਸੇਟਿੰਗਸ</string>
+    <string name="preference_application">Application settings</string>
     
-	<string name="preference_unchecked_on_top">ਸਿਖਰ ਉੱਤੇ ਅਨਿਯੰਤ੍ਰਿਤ</string>
-	<string name="preference_unchecked_on_top_summary">ਹਮੇਸ਼ਾ ਅਨਿਯੰਤ੍ਰਿਤ ਆਇਟਮ ਪਹਿਲਾ ਸ਼ੋ</string>
-	<string name="preference_fontsize">ਫੋਂਟ ਸਾਈਜ਼</string>
-	<string name="preference_fontsize_summary">ਫੋਂਟ ਸਾਈਜ਼ ਬਦਲੇ</string>
-	<string name="preference_fontsize_dialog_title">ਫੋਂਟ ਸਾਈਜ਼ ਚੁਨੇ</string>
-	<string name="preference_orientation">ਸਥਿਤੀ</string>
-	<string name="preference_orientation_summary">ਬਦਲੀਆਂ ਅਭਿਵਿੰਨਿਆਸ</string>
-	<string name="preference_orientation_dialog_title">ਉਂਮੁਖੀਕਰਣ ਚੁਨੇਂ</string>
-	<string name="preference_sortorder_title">ਕ੍ਰਮ ਪੈਟਰਨ</string>
-	<string name="preference_sortorder_summary">ਸੂਚੀ ਆਇਟੰਸ  ਦੇ ਸਾਰਟ ਕ੍ਰਮ ਬਦਲੀਆਂ</string>
-	<string name="preference_sortorder_for_pick_title">ਸਾਰਟ ਕ੍ਰਮ - ਕੋਇਲ ਆਇਟਮ</string>
-	<string name="preference_sortorder_for_pick_summary">ਸਾਰਟ ਕ੍ਰਮ - ਕੋਇਲ ਆਇਟਮਉਠਾਓ ਆਇਟਮ ਮੋੜ ਵਿੱਚ ਸੂਚੀ ਆਇਟੰਸ  ਦੇ ਸਾਰਟ ਕ੍ਰਮ ਬਦਲਨਾ.</string>
-	<string name="preference_sortorder_dialog_title">ਸਾਰਟ ਕ੍ਰਮ ਚੁਨੇਂ</string>
-	<string name="preference_sortorder_for_pick_dialog_title">ਚੁੱਕੋ ਆਇਟਮ ਮੋੜ ਲਈ ਸਾਰਟ ਕ੍ਰਮ ਚੁਨੇਂ</string>
-	<string name="preference_loadlastused_title">ਲੋਡ ਅੰਤਮ ਸੂਚੀ</string>
-	<string name="preference_loadlastused_summary">ਹਮੇਸ਼ਾ ਪਿੱਛਲੀ ਵਾਰ ਵੇਖੀ ਗਈ ਸੂਚੀ  ਦੇ ਨਾਲ ਸ਼ੁਰੂ .</string>
-	<string name="preference_capitalization_title">ਪੂੰਜੀਕਰਣ</string>
-	<string name="preference_capitalization_summary">ਪ੍ਰਵਿਸ਼ਟੀਆਂ ਦਾ ਸਵੈਕਰ ਕੈਪਿਟਲਾਇਜੇਸ਼ਨ</string>
-	<string name="preference_capitalization_dialog_title">ਕੈਪਿਟਲਾਇਜੇਸ਼ਨ ਚੁਨੇਂ</string> 
-	<string name="preference_hidechecked_title">ਜਾਂਚ ਆਇਟਮ ਛਿਪਾਏਂ</string>
-	<string name="preference_hidechecked_summary">ਤੁਰੰਤ ਬੰਦ ਦੀ ਜਾਂਚ ਆਇਟਮ ਛਿਪਾਉਣਾ .</string>
-	<string name="preference_showprice_title">ਮੁੱਲ ਦਿਖਾਵਾਂ</string>
+	<string name="preference_unchecked_on_top">Unchecked on top</string>
+	<string name="preference_unchecked_on_top_summary">Always show unchecked items first</string>
+	<string name="preference_fontsize">Font size</string>
+	<string name="preference_fontsize_summary">Change font size</string>
+	<string name="preference_fontsize_dialog_title">Choose font size</string>
+	<string name="preference_orientation">Orientation</string>
+	<string name="preference_orientation_summary">Change orientation</string>
+	<string name="preference_orientation_dialog_title">Choose orientation</string>
+	<string name="preference_sortorder_title">Sort order</string>
+	<string name="preference_sortorder_summary">Change sort order of list items</string>
+	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
+	<string name="preference_sortorder_for_pick_summary">Change sort order of list items in Pick Items mode.</string>
+	<string name="preference_sortorder_dialog_title">Choose sort order</string>
+	<string name="preference_sortorder_for_pick_dialog_title">Choose sort order for Pick Items mode</string>
+	<string name="preference_loadlastused_title">Load last list used</string>
+	<string name="preference_loadlastused_summary">Always start with the list viewed last time.</string>
+	<string name="preference_capitalization_title">Capitalization</string>
+	<string name="preference_capitalization_summary">Automatic capitalization of entries</string>
+	<string name="preference_capitalization_dialog_title">Choose capitalization</string> 
+	<string name="preference_hidechecked_title">Hide checked items</string>
+	<string name="preference_hidechecked_summary">Immediately hide items checked off.</string>
+	<string name="preference_showprice_title">Show price</string>
 	<string name="preference_showprice_summary">Shown as extra column in list.</string>
 	<string name="preference_perstoreprice">Per-store prices</string>
 	<string name="preference_perstoreprice_title">Track per-store prices</string>
@@ -291,14 +290,14 @@
     	<!-- Preference fontsize: small font size -->
         <item>Small</item>
     	<!-- Preference fontsize: default font size -->
-    	<item>ਡਿਫਾਲਟ</item>
+    	<item>Default </item>
     	<!-- Preference fontsize: large font size -->
         <item>Large</item>
     </string-array>
     
     <string-array name="preference_orientation_entries">
     	<!-- Preference orientation: default -->
-        <item>ਡਿਫਾਲਟ</item>
+        <item>Default</item>
     	<!-- Preference orientation: landscape -->
     	<item>Landscape</item>
     	<!-- Preference orientation: portrait -->
@@ -335,7 +334,7 @@
 	
     <string-array name="automation_actions">
     	<!-- Automation action to clean up a list. -->
-    	<item>ਸੂਚੀ ਸਾਫ਼</item>
+    	<item>Netejar llista</item>
     </string-array>
       
 	<string name="widget_prev_page">Previous page</string>

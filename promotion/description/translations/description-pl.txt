@@ -1,8 +1,8 @@
 # Application:
-OI Shopping List
+OI Lista zakupów
 
 # Promo text:
-Keep track of your shopping items with OI Shopping List.
+Zarządzaj swoimi listami zakupów używając OI Lista zakupów.
 
 # Description:
 Lista zakupów Ol to potężna aplikacja, która umożliwia łatwe tworzenie i zarządzanie listami kontrolnymi. Lista zakupów OI ułatwia dodawanie elementów do listy, zaznacz element, usuń go z listy. Aplikacja może śledzić oddzielne cen dla każdego sklepu, którego używasz, i oferuje wysoki poziom personalizacji. Rozmiar czcionki, porządek sortowania, kolumny listy, a zachowanie podczas czyszczenia listy są wszystkie ustawienia kontrolowane przez użytkownika. Wszystkie te funkcje są połączone w wyraźny układ, który można dostosować do różnych motywów. 
@@ -42,7 +42,7 @@ Słowa kluczowe:
 * OI, OpenIntents, Open Intents
 
 Wersje międzynarodowe: 
-OI Shopping List
+"قائمة التسوق OI, Llista de compra d'OI, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Shopping List, OI Списък за Пазаруване, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, OI ショッピングリスト
 
 
 Rozszerzenia: 

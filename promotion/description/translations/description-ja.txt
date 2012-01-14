@@ -1,8 +1,8 @@
 # Application:
-OI Shopping List
+OI ショッピングリスト
 
 # Promo text:
-Keep track of your shopping items with OI Shopping List.
+OI ショッピングリスト でショッピングアイテムを記録することができます。
 
 # Description:
 OI ショッピングリストはチェックリストの作成・管理を簡単にする強力なアプリケーションです。 OI ショッピングリストはアイテムをリストに追加、チェックやリストから削除するのを簡単にします。 このアプリケーションは使用する各店の別々の値段をトラックすることができ、高度なカスタマイズができます。 フォントサイズ、並べ替え順序、リスト列やリストクリーンアップ動作はすべてユーザーがコントロールできる設定です。 これらの機能はすべて鮮明で様々なテーマでカスタマイズ可能なレイアウトで集結されています。 
@@ -42,7 +42,7 @@ https://translations.launchpad.net/openintents/trunk
 * OI, OpenIntents, Open Intents
 
 国際バージョン： 
-OI Shopping List
+"قائمة التسوق OI, Llista de compra d'OI, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Shopping List, OI Списък за Пазаруване, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, OI ショッピングリスト
 
 
 拡張子： 
