@@ -619,9 +619,9 @@ public class ShoppingItemsView extends ListView {
 	}
 
 	public void onResume() {
-
 		// Content observer registered at fillItems()
 		// registerContentObserver();
+		setFastScrollEnabled(PreferenceActivity.getFastScrollEnabledFromPrefs(getContext()));
 	}
 
 	public void onPause() {

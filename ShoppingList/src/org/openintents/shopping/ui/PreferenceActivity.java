@@ -64,6 +64,8 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	public static final String PREFS_LASTLIST_TOP = "lastlist_top";
 	public static final String PREFS_HIDECHECKED = "hidechecked";
 	public static final boolean PREFS_HIDECHECKED_DEFAULT = false;
+	public static final String PREFS_FASTSCROLL = "fastscroll";
+	public static final boolean PREFS_FASTSCROLL_DEFAULT = false;
 	public static final String PREFS_CAPITALIZATION = "capitalization";
 	public static final String PREFS_SHOW_PRICE = "showprice";
 	public static final boolean PREFS_SHOW_PRICE_DEFAULT = true;
@@ -191,6 +193,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
                         editor.putString(PREFS_CAPITALIZATION, String.valueOf(PREFS_CAPITALIZATION_DEFAULT));
                         editor.putString(PREFS_ORIENTATION, PREFS_ORIENTATION_DEFAULT);
                         editor.putBoolean(PREFS_HIDECHECKED, PREFS_HIDECHECKED_DEFAULT);
+                        editor.putBoolean(PREFS_FASTSCROLL, PREFS_FASTSCROLL_DEFAULT);
                         editor.putBoolean(PREFS_SHAKE, PREFS_SHAKE_DEFAULT);
                         editor.putBoolean(PREFS_PERSTOREPRICES, PREFS_PERSTOREPRICES_DEFAULT);
                         editor.putBoolean(PREFS_ADDFORBARCODE, PREFS_ADDFORBARCODE_DEFAULT);
@@ -359,6 +362,12 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		return prefs.getBoolean(PREFS_HIDECHECKED, PREFS_HIDECHECKED_DEFAULT);
+	}
+	
+	public static boolean getFastScrollEnabledFromPrefs(Context context) {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(context);
+		return prefs.getBoolean(PREFS_FASTSCROLL, PREFS_FASTSCROLL_DEFAULT);
 	}
 	
 	private static int getSubtotalByPriorityThreshold(SharedPreferences prefs) {
