@@ -24,6 +24,7 @@
   Bernd Schlapsi https://launchpad.net/~bernd-sch
   Dennis Baudys https://launchpad.net/~thecondordb
   Fabian Riechsteiner https://launchpad.net/~ruffy91-gmail
+  Hans https://launchpad.net/~hans-wuerstchen42
   OpenIntents devs https://launchpad.net/~openintents-devs
   Patrick Eigensatz https://launchpad.net/~p.eigensatz
   Peli https://launchpad.net/~peli0101
@@ -32,13 +33,13 @@
   markus.ruderman https://launchpad.net/~markus-ruderman</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
-	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
+	<string name="about_comments">Die OI Einkaufsliste ist Ihre Gedächtnishilfe beim Einkaufen.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Shopping List</string>
+	<string name="app_name">OI Einkaufsliste</string>
 
 	<string name="new_item">Neuer Eintrag</string>
 	<string name="new_list">Neue Liste</string>
@@ -47,7 +48,7 @@
 	<string name="empty_list_not_sent">Leere Liste wurde nicht gesendet.</string>
 	<string name="email_not_available">Keine Anwendung zum Senden vorhanden.</string>
 	<string name="my_shopping_list">Meine Einkaufsliste</string>
-	<string name="new_list_hint">e.g. wishlist, family list</string>
+	<string name="new_list_hint">z.B. Wunschliste, Haushaltsliste</string>
 	<string name="clean_up_list">Liste aufräumen</string>
 	<string name="delete_list">Liste löschen</string>
 	<string name="ask_new_list">Name der neuen Liste eingeben</string>
@@ -81,7 +82,7 @@
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">Eintrag vollständig löschen</string>
 	<string name="menu_move_item">Eintrag in andere Liste verschieben</string>
-    <string name="menu_copy_item">Copy item</string>
+    <string name="menu_copy_item">Eintrag kopieren</string>
 	    
 	<!-- Button label to add an item to the list. -->
 	<string name="add">Hinzufügen</string>
@@ -121,7 +122,7 @@
 	<string name="priority3_total">Wichtig 1-3: %s</string>
 	<string name="priority4_total">Wichtig 1-4: %s</string>
 	
-	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
+	<string name="delete_item_confirm">Sind Sie sicher, dass Sie dieses Element dauerhaft löschen möchten?</string>
 	<string name="delete">Löschen</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
@@ -174,10 +175,12 @@
 	<string name="preference_loadlastused_title">Verwendete Liste merken</string>
 	<string name="preference_loadlastused_summary">Immer die zuletzt benutzte Liste verwenden</string>
 	<string name="preference_capitalization_title">Großschreibung</string>
-	<string name="preference_capitalization_summary">Großschreibung automatisch setzen</string>
+	<string name="preference_capitalization_summary">Automatische Großschreibung der Einträge</string>
 	<string name="preference_capitalization_dialog_title">Großschreibung auswählen</string> 
 	<string name="preference_hidechecked_title">Ausgewählten Eintrag verbergen</string>
 	<string name="preference_hidechecked_summary">Erledigte Einträge sofort verbergen</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">Preis anzeigen</string>
 	<string name="preference_showprice_summary">Wird als separate Spalte in der Liste angezeigt</string>
 	<string name="preference_perstoreprice">Preise je Geschäft</string>
@@ -188,7 +191,7 @@
 	<string name="preference_reset_quantity">Anzahl zurücksetzen</string>
 	<string name="preference_reset_quantity_summary">Setzt die Anzahl zurück, wenn weitere Items hinzugefügt werden.</string>
 	<string name="preference_add_for_barcode">Barcode Scanner</string>
-	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
+	<string name="preference_add_for_barcode_summary">Drücken Sie lange auf Hinzufügen um das "Barcode OI Plugin" (falls es installiert ist) zu starten.</string>
 	<string name="preference_showtags_title">Stichwörter anzeigen</string>
 	<string name="preference_showtags_summary">Wird als separate Spalte in der Liste angezeigt</string>
 	<string name="preference_showquantity_title">Menge anzeigen</string>
@@ -240,9 +243,9 @@
 	<string name="preference_quickedit">Schneller Editiermodus</string>
 	<string name="preference_quickedit_on_summary">Wählen Sie die Werte für Priorität oder Anzahl aus einem Menü aus.</string>
 	<string name="preference_quickedit_off_summary">Das Auswählen der Priorität oder der Anzahl ruft den Item Editierdialog auf.</string>
-	<string name="preference_reset_all_settings">Reset all settings</string>
-	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
-	<string name="preference_reset_all_settings_done">All settings have been reset</string>
+	<string name="preference_reset_all_settings">Alle Einstellungen zurücksetzen</string>
+	<string name="preference_reset_all_settings_alert">Wollen Sie wirklich alle Einstellungen zurücksetzen? Dies kann nicht rückgängig gemacht werden.</string>    
+	<string name="preference_reset_all_settings_done">Alle Einstellungen wurden zurückgesetzt</string>
 	    
 	<!-- ***************************
 	     Permissions
@@ -316,9 +319,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>Keine</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Per sentence</item>
+        <item>Nach jeden Satz</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Per word</item>
+        <item>Nach jeden Wort</item>
     </string-array>
 
 	<!-- ***************************
@@ -345,8 +348,8 @@
     	<item>Liste aufräumen</item>
     </string-array>
       
-	<string name="widget_prev_page">Previous page</string>
-	<string name="widget_next_page">Next page</string>
-	<string name="widget_choose_a_list">Choose a list</string>
-	<string name="widget_no_items">No items on page %d</string>
+	<string name="widget_prev_page">Vorherige Seite</string>
+	<string name="widget_next_page">Nächste Seite</string>
+	<string name="widget_choose_a_list">Liste auswählen</string>
+	<string name="widget_no_items">Keine Einträge auf der Seite %d</string>
 </resources>

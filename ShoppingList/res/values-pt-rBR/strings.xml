@@ -170,6 +170,8 @@
 	<string name="preference_capitalization_dialog_title">Escolher capitalização</string> 
 	<string name="preference_hidechecked_title">Ocultar itens marcados</string>
 	<string name="preference_hidechecked_summary">Ocultar imediatamente os itens desmarcados.</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">Mostrar preço</string>
 	<string name="preference_showprice_summary">Mostrar como coluna extra na lista.</string>
 	<string name="preference_perstoreprice">Per-store prices</string>

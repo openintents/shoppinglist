@@ -170,6 +170,8 @@
 	<string name="preference_capitalization_dialog_title">Causir la mesa en majusculas</string> 
 	<string name="preference_hidechecked_title">Amagar los elements marcats</string>
 	<string name="preference_hidechecked_summary">Amagar immediatament los elements amagats</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">Veire lo prètz</string>
 	<string name="preference_showprice_summary">Veire coma una colomna suplementària dins la lista</string>
 	<string name="preference_perstoreprice">Per-store prices</string>

@@ -5,9 +5,9 @@ OI Lista zakupów
 Zarządzaj swoimi listami zakupów używając OI Lista zakupów.
 
 # Description:
-Lista zakupów Ol to potężna aplikacja, która umożliwia łatwe tworzenie i zarządzanie listami kontrolnymi. Lista zakupów OI ułatwia dodawanie elementów do listy, zaznacz element, usuń go z listy. Aplikacja może śledzić oddzielne cen dla każdego sklepu, którego używasz, i oferuje wysoki poziom personalizacji. Rozmiar czcionki, porządek sortowania, kolumny listy, a zachowanie podczas czyszczenia listy są wszystkie ustawienia kontrolowane przez użytkownika. Wszystkie te funkcje są połączone w wyraźny układ, który można dostosować do różnych motywów. 
+OI Lista zakupów to potężna aplikacja, która umożliwia łatwe tworzenie i zarządzanie listami kontrolnymi. OI Lista zakupów ułatwia dodawanie elementów do listy, zaznaczanie i usuwanie ich z listy. Aplikacja może śledzić oddzielne cen dla każdego sklepu, którego używasz, i oferuje wysoki poziom personalizacji. Rozmiar czcionki, porządek sortowania, kolumny list, i zachowanie podczas czyszczenia list to ustawienia kontrolowane przez użytkownika. Wszystkie te funkcje są połączone w wyraźny wygląd, który można zmieniać za pomocą różnych motywów. 
 
-Kod źródłowy tej darmowej i open-source-owej aplikacji jest dostępny pod adresem: 
+Kod źródłowy tej darmowej i open-source'owej aplikacji jest dostępny pod adresem: 
 http://code.google.com/p/openintents
 
 Ta aplikacja jest darmowa i nie wymaga dostępu do internetu. 
@@ -20,29 +20,29 @@ https://translations.launchpad.net/openintents/trunk
 
 Cechy: 
 * Dodawaj, edytuj i usuwaj listy.
-* Tworzenie, usuwanie i sprawdzanie pozycji szybko i łatwo.
-* Różnorodność tematów
+* Twórz, usuwaj i sprawdzaj pozycje szybko i łatwo.
+* Różnorodność motywów.
 * Możliwość dostosowania rozmiaru czcionki oraz porządku sortowania.
 * Śledź oddzielnie ceny dla każdego sklepu.
 * Dostosuj kolumny listy.
 
-Dostępne rozszerzenia do "Listy zakupów Ol": 
-* Dodaj nagraną wiadomość do notatki używając "Ol Voice Notes".
-* Import/eksport list zakupów z "Ol Convert CSV".
-* Pokaż informacje licencyjne z "O Ol".
-* Wprowadź/sprawdź pozycje używając "Barcode Ol Plugin".
+Dostępne rozszerzenia dla "OI Lista zakupów": 
+* Dodaj nagraną wiadomość do notatki używając "OI Voice Notes".
+* Import/eksport list zakupów z "OI Konwertuj CSV".
+* Pokaż informacje licencyjne za pomocą "OI About".
+* Wprowadź/sprawdź pozycje używając "Barcode OI Plugin".
 
-Aplikacje, które pracują z "Ol Shopping List": 
-* Aktualizuj z "OI Uptade".
-* Kopia zapasowa list z "My Backup Pro".
-* Importuj składniki przepisów z "Bites".
+Aplikacje działające z "OI Lista zakupów": 
+* Aktualizuj za pomocą "OI Uptade".
+* Twórz kopie zapasowe list używając "My Backup Pro".
+* Importuj składniki przepisów używając "Bites".
 
 Słowa kluczowe: 
 * Zakupy, Lista, Lista zakupów, Lista kontrolna
 * OI, OpenIntents, Open Intents
 
 Wersje międzynarodowe: 
-"قائمة التسوق OI, Llista de compra d'OI, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Shopping List, OI Списък за Пазаруване, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, OI ショッピングリスト
+Listă de cumpărături OI, Llista de compra d'OI, OI ショッピングリスト, OI Einkaufsliste, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Shopping List, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI Λίστα Αγορών, OI Пакупкі, OI Списък за Пазаруване, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, "قائمة التسوق OI
 
 
 Rozszerzenia: 

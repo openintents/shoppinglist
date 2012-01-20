@@ -175,6 +175,8 @@
 	<string name="preference_capitalization_dialog_title">Избери писане с главни букви</string> 
 	<string name="preference_hidechecked_title">Скрий маркирани елементи</string>
 	<string name="preference_hidechecked_summary">Скрий веднага елементи, които са демаркирани.</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">Покажи цена</string>
 	<string name="preference_showprice_summary">Показано като допълнителна колона в списъка.</string>
 	<string name="preference_perstoreprice">Скалад Цени</string>

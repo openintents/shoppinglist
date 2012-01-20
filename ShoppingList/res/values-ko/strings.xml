@@ -172,6 +172,8 @@
 	<string name="preference_capitalization_dialog_title">대문자 바꾸기 선택</string> 
 	<string name="preference_hidechecked_title">체크된 항목 숨기기</string>
 	<string name="preference_hidechecked_summary">체크된 항목을 바로 숨깁니다.</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">가격 보이기</string>
 	<string name="preference_showprice_summary">목록에서 새로운 열로 보입니다.</string>
 	<string name="preference_perstoreprice">가게별 가격</string>

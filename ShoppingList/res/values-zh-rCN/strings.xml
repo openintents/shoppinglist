@@ -173,6 +173,8 @@
 	<string name="preference_capitalization_dialog_title">选择大写</string> 
 	<string name="preference_hidechecked_title">隐藏已检查物品</string>
 	<string name="preference_hidechecked_summary">立即隐藏已检查物品。</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">显示价格</string>
 	<string name="preference_showprice_summary">被显示为列表的额外列</string>
 	<string name="preference_perstoreprice">每个商店的价格</string>

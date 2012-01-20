@@ -173,6 +173,8 @@
 	<string name="preference_capitalization_dialog_title">בחר רישיות</string> 
 	<string name="preference_hidechecked_title">החבא פריטים שסומנו</string>
 	<string name="preference_hidechecked_summary">החבא מיידית פריטים שסומנו.</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">הראה מחיר</string>
 	<string name="preference_showprice_summary">מוצג כטור נוסף ברשימה</string>
 	<string name="preference_perstoreprice">מחירים עבור כל חנות</string>

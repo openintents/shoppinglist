@@ -21,7 +21,8 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
-  Joan Creus https://launchpad.net/~joan-creus-c</string>
+  Joan Creus https://launchpad.net/~joan-creus-c
+  OpenIntents devs https://launchpad.net/~openintents-devs</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
 	<string name="about_comments">Porta un registre dels teus elements de compra amb la llista de compra d\'OI.</string>
@@ -89,90 +90,92 @@
 	
 	<!-- Title supplement. \'%s\' is the name of the current item. -->
 	<string name="item_stores_title">%s - Botigues</string>
-	<string name="item_stores_activity_label">Edit Item Stores</string>
+	<string name="item_stores_activity_label">Edita botigues d\'elements</string>
 	
-	<string name="tags">Tags</string>
-	<string name="price">Price</string>
-	<string name="item">Item</string>
-	<string name="quantity">Quantity</string>
-	<string name="priority">Priority</string>
-	<string name="has_note">Has Note</string>
-	<string name="units">Units</string>
-	<string name="note">Note</string>
+	<string name="tags">Etiquetes</string>
+	<string name="price">Preu</string>
+	<string name="item">Element</string>
+	<string name="quantity">Quantitat</string>
+	<string name="priority">Prioritat</string>
+	<string name="has_note">Té una nota</string>
+	<string name="units">Unitats</string>
+	<string name="note">Nota</string>
 	
-	<string name="otherqty">Other Quantity...</string>
-	<string name="otherpri">Other Priority...</string>   
+	<string name="otherqty">Una altra quantitat...</string>
+	<string name="otherpri">Una altra prioritat...</string>   
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Total: %s</string>
 	
 	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
-	<string name="total_checked">Checked: %s</string>
-    <string name="priority1_total">Priority 1: %s</string>
-    <string name="priority2_total">Priority 1-2: %s</string>
-	<string name="priority3_total">Priority 1-3: %s</string>
-	<string name="priority4_total">Priority 1-4: %s</string>
+	<string name="total_checked">Comprovats: %s</string>
+    <string name="priority1_total">Prioritat 1: %s</string>
+    <string name="priority2_total">Prioritat 1-2: %s</string>
+	<string name="priority3_total">Prioritat 1-3: %s</string>
+	<string name="priority4_total">Prioritat 1-4: %s</string>
 	
-	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
-	<string name="delete">Delete</string>
+	<string name="delete_item_confirm">Esteu segur que voleu suprimir permanentment aquest element?</string>
+	<string name="delete">Elimina</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
-	<string name="suffix_checked">... OK</string>
+	<string name="suffix_checked">... D\'acord</string>
 	<string name="empty"/>
 	
 	<!-- The shortcut is created on the home screen. -->
-	<string name="pick_list_for_shortcut">Pick list for shortcut</string>
+	<string name="pick_list_for_shortcut">Escull una llista per la drecera</string>
 	
 	<!-- Shown if external application wants to insert new items. -->
-	<string name="pick_list_to_insert_items">Pick list to insert items</string>
+	<string name="pick_list_to_insert_items">Escull una llista per inserir elements</string>
 	
 	<!-- Theme related -->
 	<!-- Title for selecting a theme -->
-	<string name="theme_pick">Pick a theme</string>
-	<string name="theme_description">Choose a theme for this list</string>
-	<string name="theme_default">Default</string>
-	<string name="theme_classic">Classic</string>
+	<string name="theme_pick">Escull un tema</string>
+	<string name="theme_description">Escull un tema per aquesta llista</string>
+	<string name="theme_default">Per defecte</string>
+	<string name="theme_classic">Clàssic</string>
 	<string name="theme_bugdroid">Android</string>
-	<string name="theme_classic_export">Classic (from OI Shopping List)</string>
-	<string name="theme_bugdroid_export">Android (from OI Shopping List)</string>
+	<string name="theme_classic_export">Clàssic (de la llista de compra d\'OI)</string>
+	<string name="theme_bugdroid_export">Android (de la llista de compra d\'OI)</string>
 
 	<!--     Dialog box    -->
 	<!-- Button label "OK" -->
-	<string name="ok">OK</string>
+	<string name="ok">D\'acord</string>
 	<!-- Button label "Cancel" -->
-	<string name="cancel">Cancel</string>
-	<string name="use_theme_for_all_lists">Use this theme for all lists</string>
-	<string name="get_more_themes">Get more themes</string>
+	<string name="cancel">Cancel·la</string>
+	<string name="use_theme_for_all_lists">Utilitza aquest tema per a totes les llistes</string>
+	<string name="get_more_themes">Aconsegueix més temes</string>
 	
 	<!-- preferences -->
-	<string name="preferences">Settings</string>
+	<string name="preferences">Preferències</string>
 	
-    <string name="preference_application">Application settings</string>
+    <string name="preference_application">Preferències de l\'aplicació</string>
     
-	<string name="preference_unchecked_on_top">Unchecked on top</string>
-	<string name="preference_unchecked_on_top_summary">Always show unchecked items first</string>
-	<string name="preference_fontsize">Font size</string>
-	<string name="preference_fontsize_summary">Change font size</string>
-	<string name="preference_fontsize_dialog_title">Choose font size</string>
-	<string name="preference_orientation">Orientation</string>
-	<string name="preference_orientation_summary">Change orientation</string>
-	<string name="preference_orientation_dialog_title">Choose orientation</string>
-	<string name="preference_sortorder_title">Sort order</string>
-	<string name="preference_sortorder_summary">Change sort order of list items</string>
-	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
-	<string name="preference_sortorder_for_pick_summary">Change sort order of list items in Pick Items mode.</string>
-	<string name="preference_sortorder_dialog_title">Choose sort order</string>
-	<string name="preference_sortorder_for_pick_dialog_title">Choose sort order for Pick Items mode</string>
-	<string name="preference_loadlastused_title">Load last list used</string>
-	<string name="preference_loadlastused_summary">Always start with the list viewed last time.</string>
-	<string name="preference_capitalization_title">Capitalization</string>
-	<string name="preference_capitalization_summary">Automatic capitalization of entries</string>
-	<string name="preference_capitalization_dialog_title">Choose capitalization</string> 
-	<string name="preference_hidechecked_title">Hide checked items</string>
-	<string name="preference_hidechecked_summary">Immediately hide items checked off.</string>
-	<string name="preference_showprice_title">Show price</string>
-	<string name="preference_showprice_summary">Shown as extra column in list.</string>
-	<string name="preference_perstoreprice">Per-store prices</string>
+	<string name="preference_unchecked_on_top">No activat a dalt</string>
+	<string name="preference_unchecked_on_top_summary">Mostra sempre els elements no activats primer</string>
+	<string name="preference_fontsize">Mida de la lletra</string>
+	<string name="preference_fontsize_summary">Canvia la mida de la lletra</string>
+	<string name="preference_fontsize_dialog_title">Escull la mida de la lletra</string>
+	<string name="preference_orientation">Orientació</string>
+	<string name="preference_orientation_summary">Canvia l\'orientació</string>
+	<string name="preference_orientation_dialog_title">Escull l\'orientació</string>
+	<string name="preference_sortorder_title">Criteri d\'ordenació</string>
+	<string name="preference_sortorder_summary">Canvia el criteri d\'ordenació dels elements de la llista</string>
+	<string name="preference_sortorder_for_pick_title">Criteri d\'ordenació - Escull elements</string>
+	<string name="preference_sortorder_for_pick_summary">Canvieu el criteri d\'ordenació dels elements de la llista en el mode Escull Elements</string>
+	<string name="preference_sortorder_dialog_title">Escull el criteri d\'ordenació</string>
+	<string name="preference_sortorder_for_pick_dialog_title">Escull el criteri d\'ordenació per al mode Escull Elements</string>
+	<string name="preference_loadlastused_title">Carrega l\'última llista emprada</string>
+	<string name="preference_loadlastused_summary">Compença sempre amb la llista vista l\'últim cop.</string>
+	<string name="preference_capitalization_title">Majúscules</string>
+	<string name="preference_capitalization_summary">Afegeix majúscula inicial automàticament a les entrades</string>
+	<string name="preference_capitalization_dialog_title">Escull criteri de majúscules</string> 
+	<string name="preference_hidechecked_title">Amaga elements activats</string>
+	<string name="preference_hidechecked_summary">Amaga immediatament els elements activats.</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
+	<string name="preference_showprice_title">Mostra el preu</string>
+	<string name="preference_showprice_summary">Mostrat com a columna addicional a la llista.</string>
+	<string name="preference_perstoreprice">Preus per botiga</string>
 	<string name="preference_perstoreprice_title">Track per-store prices</string>
 	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
 	<string name="preference_screenlock_title">Disable screen lock</string>
@@ -182,13 +185,13 @@
 	<string name="preference_add_for_barcode">Barcode Scanner</string>
 	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
 	<string name="preference_showtags_title">Show tags</string>
-	<string name="preference_showtags_summary">Shown as extra column in list.</string>
+	<string name="preference_showtags_summary">Mostrat com a columna addicional a la llista.</string>
 	<string name="preference_showquantity_title">Show quantity</string>
-	<string name="preference_showquantity_summary">Shown as extra column in list.</string>
+	<string name="preference_showquantity_summary">Mostrat com a columna addicional a la llista.</string>
 	<string name="preference_showpriority_title">Show priority</string>
-	<string name="preference_showpriority_summary">Shown as extra column in list.</string>
+	<string name="preference_showpriority_summary">Mostrat com a columna addicional a la llista.</string>
 	<string name="preference_showunits_title">Show units</string>
-	<string name="preference_showunits_summary">Shown as extra column in list.</string>
+	<string name="preference_showunits_summary">Mostrat com a columna addicional a la llista.</string>
 	<string name="preference_prio_subtotal">Subtotal by priority</string>
 	<string name="preference_prioritytotal_title">Subtotal by priority</string>
 	<string name="preference_prioritytotal_summary">No subtotal by priority shown.</string>
@@ -290,14 +293,14 @@
     	<!-- Preference fontsize: small font size -->
         <item>Small</item>
     	<!-- Preference fontsize: default font size -->
-    	<item>Default </item>
+    	<item>Per defecte</item>
     	<!-- Preference fontsize: large font size -->
         <item>Large</item>
     </string-array>
     
     <string-array name="preference_orientation_entries">
     	<!-- Preference orientation: default -->
-        <item>Default</item>
+        <item>Per defecte</item>
     	<!-- Preference orientation: landscape -->
     	<item>Landscape</item>
     	<!-- Preference orientation: portrait -->

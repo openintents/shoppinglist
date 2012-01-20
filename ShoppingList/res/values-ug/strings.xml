@@ -171,6 +171,8 @@
 	<string name="preference_capitalization_dialog_title">چوڭ يېزىلىش تاللاڭ</string> 
 	<string name="preference_hidechecked_title">تاللانغان تۈرلەرنى يوشۇر</string>
 	<string name="preference_hidechecked_summary">تاللانغان تۈرلەرنى تېزلىكتە يوشۇرىدۇ.</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">باھانى كۆرسەت</string>
 	<string name="preference_showprice_summary">قوشۇمچە ئىستون سۈپىتىدە تىزىمدا كۆرسىتىدۇ.</string>
 	<string name="preference_perstoreprice">ھەر بىر دۇكاننىڭ باھاسى</string>

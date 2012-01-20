@@ -178,6 +178,8 @@
 	<string name="preference_capitalization_dialog_title">Wybierz wielkość liter</string> 
 	<string name="preference_hidechecked_title">Ukryj odznaczone elementy</string>
 	<string name="preference_hidechecked_summary">Chowaj odznaczane elementy</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">Pokaż cenę</string>
 	<string name="preference_showprice_summary">Pokaż jako dodatkową kolumnę na liście.</string>
 	<string name="preference_perstoreprice">Ceny w sklepie</string>
@@ -233,10 +235,10 @@
     <string name="preference_get_developer_addons">Pobierz dodatki z OpenIntents</string>
     <string name="preference_extensions">Rozszerzenia</string>
     <string name="preference_themes">Motywy</string>
-    <string name="preference_market_extensions_summary">Szukaj rozszerzeń na Android Market</string>
-    <string name="preference_market_themes_summary">Szukaj motywów na Android Market</string>
+    <string name="preference_market_extensions_summary">Szukaj rozszerzeń w Android Market</string>
+    <string name="preference_market_themes_summary">Szukaj motywów w Android Market.</string>
     <string name="preference_developer_extensions_summary">Pobierz rozszerzenia ze strony OpenIntents.</string>
-	<string name="preference_developer_themes_summary">Pobierz motywy ze strony OpenIntents</string>
+	<string name="preference_developer_themes_summary">Pobierz motywy ze strony OpenIntents.</string>
 	<string name="preference_quickedit">Tryb Szybkiej Edycji</string>
 	<string name="preference_quickedit_on_summary">Dotknij wartości Priorytet lub Ilość w menu dla wspólnych wartości.</string>
 	<string name="preference_quickedit_off_summary">Dotykanie wartości Priorytet lub Ilość wywołuje Edycję Elementu.</string>
@@ -251,7 +253,7 @@
 	<!-- OI Shopping list -->
 	<!-- Permission to read shopping lists -->
 	<string name="oi_shopping_permission_read">czytanie list zakupów</string>
-	<string name="oi_shopping_permission_read_descr">Pozwala aplikacji czytać listy zakupów. Warto odnotować, że listy i elementy zaszyfrowane będą dostępne w formie zaszyfrowanej.</string>
+	<string name="oi_shopping_permission_read_descr">Pozwala aplikacji czytać listy zakupów. Zwróć uwagę, że listy i elementy zaszyfrowane będą dostępne w formie zaszyfrowanej.</string>
 	<!-- Permission to write to shopping lists -->
 	<string name="oi_shopping_permission_write">zapis list zakupów</string>
 	<string name="oi_shopping_permission_write_descr">Pozwala aplikacji tworzyć nowe listy i ich elementy oraz modyfikować istniejące.</string>

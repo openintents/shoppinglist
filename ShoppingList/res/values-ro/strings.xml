@@ -28,13 +28,13 @@
   iulargsb https://launchpad.net/~iulargsb</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
-	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
+	<string name="about_comments">Țineți evidența articolelor de cumpărături cu Listă de cumpărături OI.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Shopping List</string>
+	<string name="app_name">Listă de cumpărături OI</string>
 
 	<string name="new_item">Articol nou</string>
 	<string name="new_list">Listă nouă</string>
@@ -43,7 +43,7 @@
 	<string name="empty_list_not_sent">Nu a fost trimisă lista goală.</string>
 	<string name="email_not_available">Nu există aplicație pentru trimitere.</string>
 	<string name="my_shopping_list">Lista mea de cumpărături</string>
-	<string name="new_list_hint">e.g. wishlist, family list</string>
+	<string name="new_list_hint">adică listă de dorințe, listă de familie</string>
 	<string name="clean_up_list">Curăță lista</string>
 	<string name="delete_list">Șterge lista</string>
 	<string name="ask_new_list">Introduceți numele listei de cumpărături</string>
@@ -77,7 +77,7 @@
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">Șterge permanent articolul</string>
 	<string name="menu_move_item">Mută articolul în altă listă</string>
-    <string name="menu_copy_item">Copy item</string>
+    <string name="menu_copy_item">Copiază elementul</string>
 	    
 	<!-- Button label to add an item to the list. -->
 	<string name="add">Adaugă</string>
@@ -117,7 +117,7 @@
 	<string name="priority3_total">Prioritate 1-3: %s</string>
 	<string name="priority4_total">Prioritate 1-4: %s</string>
 	
-	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
+	<string name="delete_item_confirm">Sigur doriți să ștergeți permanent acest element?</string>
 	<string name="delete">Șterge</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
@@ -174,6 +174,8 @@
 	<string name="preference_capitalization_dialog_title">Alege capitalizarea</string> 
 	<string name="preference_hidechecked_title">Ascunde articolele bifate</string>
 	<string name="preference_hidechecked_summary">Ascunde imediat articolele bifate.</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">Afișează prețul</string>
 	<string name="preference_showprice_summary">Afișează ca o coloană extra în listă.</string>
 	<string name="preference_perstoreprice">Prețuri per magazin</string>
@@ -183,8 +185,8 @@
 	<string name="preference_screenlock_summary">Împiedică ecranul să fie blocat când este bifat.</string>
 	<string name="preference_reset_quantity">Resetează cantitatea</string>
 	<string name="preference_reset_quantity_summary">Resetează cantitatea când se adaugă elemente din nou.</string>
-	<string name="preference_add_for_barcode">Barcode Scanner</string>
-	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
+	<string name="preference_add_for_barcode">Scanner pentru cod de bare</string>
+	<string name="preference_add_for_barcode_summary">Mențineți apăsat butonul Adaugă pentru a porni Modulul pentru Cod de bare OI (dacă este instalat).</string>
 	<string name="preference_showtags_title">Afișează etichetele</string>
 	<string name="preference_showtags_summary">Afișează ca o coloană extra în listă.</string>
 	<string name="preference_showquantity_title">Afișează cantitatea</string>
@@ -236,9 +238,9 @@
 	<string name="preference_quickedit">Modul de editare rapid</string>
 	<string name="preference_quickedit_on_summary">Apăsați valorile Prioritate sau Cantitate pentru un meniu al valorilor comune.</string>
 	<string name="preference_quickedit_off_summary">Apasând valorile Prioritate sau Cantitate se convocă dialogul de editare de elemente.</string>
-	<string name="preference_reset_all_settings">Reset all settings</string>
-	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
-	<string name="preference_reset_all_settings_done">All settings have been reset</string>
+	<string name="preference_reset_all_settings">Restabilește toate configurările</string>
+	<string name="preference_reset_all_settings_alert">Sigur doriți să RESTABILIȚI TOATE configurările? Această acțiune nu poate fi anulată.</string>    
+	<string name="preference_reset_all_settings_done">Toate configurările au fost restabilite</string>
 	    
 	<!-- ***************************
 	     Permissions
@@ -312,9 +314,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>Nimic</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Per sentence</item>
+        <item>Per propoziție</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Per word</item>
+        <item>Per cuvânt</item>
     </string-array>
 
 	<!-- ***************************
@@ -341,8 +343,8 @@
     	<item>Curăță lista</item>
     </string-array>
       
-	<string name="widget_prev_page">Previous page</string>
-	<string name="widget_next_page">Next page</string>
-	<string name="widget_choose_a_list">Choose a list</string>
-	<string name="widget_no_items">No items on page %d</string>
+	<string name="widget_prev_page">Pagina anterioară</string>
+	<string name="widget_next_page">Pagina următoare</string>
+	<string name="widget_choose_a_list">Alege o listă</string>
+	<string name="widget_no_items">Nu există elemente pe pagina %d</string>
 </resources>

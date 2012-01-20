@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">Launchpad Contributions:
+  Alexander Geroimenko https://launchpad.net/~geroimenko</string>
+	
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Сачыце за таварамі пры дапамозе OI Пакупкі.</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
+	<string name="app_name">OI Пакупкі</string>
+
+	<string name="new_item">Новы элемент</string>
+	<string name="new_list">Новы спіс</string>
+	<string name="send">Даслаць спіс</string>
+	<string name="mark_all_items">Адзначыць усе элементы</string>
+	<string name="empty_list_not_sent">Пусты спіс не дасланы.</string>
+	<string name="email_not_available">Няма даступнага прыкладання для адпраўкі.</string>
+	<string name="my_shopping_list">Мой спіс пакупак</string>
+	<string name="new_list_hint">напрыклад спіс жаданняў, спіс членаў сям\'і</string>
+	<string name="clean_up_list">Ачысціць спіс</string>
+	<string name="delete_list">Выдаліць спіс</string>
+	<string name="ask_new_list">Увядзіце назву новага спісу пакупак</string>
+	<string name="ask_rename_list">Змяніць назву спісу пакупак</string>
+	<string name="ask_edit_item">Рэдагаваць элемент</string>
+	<string name="ask_new_store">Увядзіце новую назву магазіна</string>
+	<string name="please_enter_name">Калі ласка, увядзіце назву</string>
+	<string name="no_items_marked">Няма пазначаных элементаў.</string>
+	<string name="confirm_delete_list">Вы ўпэўнены, што жадаеце выдаліць гэты спіс пакупак?</string>
+	<string name="no_shopping_provider">Не ўдалося атрымаць доступ да спіса пакупак.</string>
+	<string name="pick_item">Выбар элемента</string>
+	<string name="pick_list">Выбар спісу</string>
+	<string name="theme">Тэма</string>
+	<string name="theme_settings">Параметры тэмы</string>
+	<string name="rename_list">Змяніць назву спіса</string>
+	<string name="menu_mark_item">Адзначыць элемент</string>
+	<string name="menu_edit_item">Рэдагаваць элемент</string>
+	<string name="menu_auto_add">Аўтаматычнае даданне</string>
+	<string name="menu_item_stores">Магазіны...</string>
+	<string name="menu_rename_store">Змяніць назву магазіна</string>
+	<string name="menu_delete_store">Выдаліць магазін</string>
+	<string name="confirm_delete_store">Вы ўпэўнены, што жадаеце выдаліць гэты магазін?</string>
+	<string name="no_items_available">Няма даступных элементаў</string>
+	
+	<!-- Remove item from this list, but keep it internally, so that the user
+	     can choose it later for inclusion again. Information like
+	     tags or price will be kept. -->
+	<string name="menu_remove_item">Выдаліць элемент з спісу</string>
+	
+	<!-- Delete this item completely. If the user wants to add it again, they
+	     have to enter all the information again. -->
+	<string name="menu_delete_item">Выдаліць элемент назаўсёды</string>
+	<string name="menu_move_item">Перамесціць у іншы спіс</string>
+    <string name="menu_copy_item">Скапіраваць элемент</string>
+	    
+	<!-- Button label to add an item to the list. -->
+	<string name="add">Дадаць</string>
+	
+	<string name="menu_pick_items">Выбар элементаў</string>
+	<string name="menu_start_shopping">Пакупкі</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="pick_items_titel">%s - Абрана элементаў</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="shopping_title">%s - Спіс</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current item. -->
+	<string name="item_stores_title">%s - Магазіны</string>
+	<string name="item_stores_activity_label">Рэдагаваць магазін</string>
+	
+	<string name="tags">Тэгі</string>
+	<string name="price">Кошт</string>
+	<string name="item">Элемент</string>
+	<string name="quantity">Колькасць</string>
+	<string name="priority">Прыярытэт</string>
+	<string name="has_note">Ёсць нататка</string>
+	<string name="units">Адзінкі вымярэння</string>
+	<string name="note">Нататка</string>
+	
+	<string name="otherqty">Іншая колькасць...</string>
+	<string name="otherpri">Іншы прыярытэт...</string>   
+	
+	<!-- Total sum of all prices. \'%s\' is the sum -->
+	<string name="total">Усяго: %s</string>
+	
+	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+	<string name="total_checked">Сума: %s</string>
+    <string name="priority1_total">Прыярытэт 1: %s</string>
+    <string name="priority2_total">Прыярытэт 1-2: %s</string>
+	<string name="priority3_total">Прыярытэт 1-3: %s</string>
+	<string name="priority4_total">Прыярытэт 1-4: %s</string>
+	
+	<string name="delete_item_confirm">Вы ўпэўнены, што жадаеце назаўсёды выдаліць гэты элемент?</string>
+	<string name="delete">Выдаліць</string>
+	
+	<!-- Added to an item to indicate it was bought. -->
+	<string name="suffix_checked">... OK</string>
+	<string name="empty"/>
+	
+	<!-- The shortcut is created on the home screen. -->
+	<string name="pick_list_for_shortcut">Выбар спісу для ярлыка</string>
+	
+	<!-- Shown if external application wants to insert new items. -->
+	<string name="pick_list_to_insert_items">Выбар спісу для дадання элементу</string>
+	
+	<!-- Theme related -->
+	<!-- Title for selecting a theme -->
+	<string name="theme_pick">Абраць тэму</string>
+	<string name="theme_description">Абярыце тэму для гэтага спісу</string>
+	<string name="theme_default">Па змаўчанні</string>
+	<string name="theme_classic">Класічны</string>
+	<string name="theme_bugdroid">Android</string>
+	<string name="theme_classic_export">Класічны (з OI Пакупкі)</string>
+	<string name="theme_bugdroid_export">Android (з OI Пакупкі)</string>
+
+	<!--     Dialog box    -->
+	<!-- Button label "OK" -->
+	<string name="ok">OK</string>
+	<!-- Button label "Cancel" -->
+	<string name="cancel">Адмяніць</string>
+	<string name="use_theme_for_all_lists">Выкарыстоўваць дадзеную тэму для ўсіх спісаў</string>
+	<string name="get_more_themes">Атрымаць больш тэм</string>
+	
+	<!-- preferences -->
+	<string name="preferences">Настройкі</string>
+	
+    <string name="preference_application">Настройкі прыкладання</string>
+    
+	<string name="preference_unchecked_on_top">Неадзначаны ўверсе</string>
+	<string name="preference_unchecked_on_top_summary">Заўсёды паказваць неадзначаныя элементы першымі</string>
+	<string name="preference_fontsize">Памер шрыфта</string>
+	<string name="preference_fontsize_summary">Змяніць памер шрыфта</string>
+	<string name="preference_fontsize_dialog_title">Выбраць памер шрыфта</string>
+	<string name="preference_orientation">Арыентацыя</string>
+	<string name="preference_orientation_summary">Змяніць арыэнтацыю</string>
+	<string name="preference_orientation_dialog_title">Абярыце арыентацыю</string>
+	<string name="preference_sortorder_title">Парадак сартавання</string>
+	<string name="preference_sortorder_summary">Змяніць парадак сартавання элементаў спісу</string>
+	<string name="preference_sortorder_for_pick_title">Тып сартыроўкі - Атрыманыя тавары</string>
+	<string name="preference_sortorder_for_pick_summary">Змяніць тып сартавання ў рэжыме адзначэння набытых рэчаў.</string>
+	<string name="preference_sortorder_dialog_title">Выберыце парадак сартавання</string>
+	<string name="preference_sortorder_for_pick_dialog_title">Выбраць тып сартавання пры адзначэнні набытых рэчаў</string>
+	<string name="preference_loadlastused_title">Загружаць апошні спіс</string>
+	<string name="preference_loadlastused_summary">Заўсёды пачынаць з загрузкі апошняга спісу.</string>
+	<string name="preference_capitalization_title">Рэгістр</string>
+	<string name="preference_capitalization_summary">Аўтаматычны набор загалоўных літар ў назвах</string>
+	<string name="preference_capitalization_dialog_title">Выбар рэгістра</string> 
+	<string name="preference_hidechecked_title">Схаваць адзначаныя элементы</string>
+	<string name="preference_hidechecked_summary">Хаваць элементы спісу адразу пасля выбару.</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
+	<string name="preference_showprice_title">Паказваць цану</string>
+	<string name="preference_showprice_summary">Адлюстроўваць як дадатковую калонку ў спісе.</string>
+	<string name="preference_perstoreprice">Цэны па магазінах</string>
+	<string name="preference_perstoreprice_title">Сачыць за цэнамі у магазінах</string>
+	<string name="preference_perstoreprice_summary">Сачыць за цэнамі асобна на кожны тавар у кожным магазіне.</string>
+	<string name="preference_screenlock_title">Адключыць блакіроўку экрана</string>
+	<string name="preference_screenlock_summary">Прадухіляе блакіраванне экрана падчас праверак.</string>
+	<string name="preference_reset_quantity">Скінуць колькасць</string>
+	<string name="preference_reset_quantity_summary">Скідваць колькасць пры даданні элементаў.</string>
+	<string name="preference_add_for_barcode">Сканэр штрых-кода</string>
+	<string name="preference_add_for_barcode_summary">Доўгі націск на кнопку Дадаць для запуску Barcode OI Plugin (калі ўсталяваны).</string>
+	<string name="preference_showtags_title">Паказваць тэгі</string>
+	<string name="preference_showtags_summary">Адлюстроўваць як дадатковую калонку ў спісе.</string>
+	<string name="preference_showquantity_title">Паказваць колькасць</string>
+	<string name="preference_showquantity_summary">Адлюстроўваць як дадатковую калонку ў спісе.</string>
+	<string name="preference_showpriority_title">Паказваць прыярытэт</string>
+	<string name="preference_showpriority_summary">Адлюстроўваць як дадатковую калонку ў спісе.</string>
+	<string name="preference_showunits_title">Паказваць адзінкі вымярэння</string>
+	<string name="preference_showunits_summary">Адлюстроўваць як дадатковую калонку ў спісе.</string>
+	<string name="preference_prio_subtotal">Вынік па прыярытэту</string>
+	<string name="preference_prioritytotal_title">Вынік па прыярытэту</string>
+	<string name="preference_prioritytotal_summary">Няма інфармацыі па выніку для адлюстравання</string>
+	<string name="preference_prioritytotal_dialog_title">Вынік па прыярытэту</string>
+	<string name="preference_priosubtotalchecked_title">Дадаць адзначаныя элементы</string>
+	<string name="preference_priosubtotalchecked_on_summary">Прамежкавы вынік уключае адзначаныя элементы</string>
+	<string name="preference_priosubtotalchecked_off_summary">Прамежкавы вынік выключае адзначаныя элементы</string>
+	<string name="preference_pickitemsinlist_title">Адзначаць набытыя рэчы прама ў спісе</string>
+	<string name="preference_pickitemsinlist_on_summary">Пераключыцца ў рэжым рэдагавання для паўторнага дадання тавараў</string>
+	<string name="preference_pickitemsinlist_off_summary">Дадайце тавары ў спіс, выкарыстоўваючы асобную форму</string>
+	<string name="preference_samesortforpick_title">Заўсёды сартаваць таксама</string>
+	<string name="preference_samesortforpick_on_summary">Спіс тавараў пры адзначэнні набытых рэчаў будзе сартавацца таксама, як і ў рэжыме пакупкі.</string>
+	<string name="preference_samesortforpick_off_summary">Вы можаце выбраць асобны тып сартавання пры адзначэнні набытых рэчаў.</string>
+	
+	<!-- Preference title: Shake the phone to clean up the list. -->
+	<string name="preference_shake_title">Ачыстка трасянінай</string>
+	
+	<!-- Preference summary: Shake the phone to clean up the list. -->
+	<string name="preference_shake_summary">Патрасіце тэлефон как ачысціць спіс.</string>
+	
+    <string name="preference_advanced">Палепшаныя настройкі</string>
+    <string name="preference_advanced_summary">Дадатковыя настройкі.</string>
+    
+    <!-- Preference category: General settings -->
+    <string name="preference_general">Асноўныя</string>
+    <string name="preference_pickitems">Адзначыць набытыя тавары</string>
+    
+    <string name="preference_appearance">Знешні выгляд</string>
+    
+    <string name="preference_addons">Дапаўненні</string>
+    <string name="preference_get_addons">Усталяваць новыя дапаўненні</string>
+    <string name="preference_get_addons_summary">Пошук пашырэнняў і тэм ў інтэрнэце.</string>
+    <string name="preference_get_market_addons">Усталяваць дапаўненні з Market</string>
+    <string name="preference_get_developer_addons">Усталяваць дапаўненні з OpenIntents</string>
+    <string name="preference_extensions">Пашырэнні</string>
+    <string name="preference_themes">Тэмы</string>
+    <string name="preference_market_extensions_summary">Пошук пашырэнняў у Android Market.</string>
+    <string name="preference_market_themes_summary">Пошук тэм у Android Market.</string>
+    <string name="preference_developer_extensions_summary">Усталяваць пашырэнні з хатняй старонцы OpenIntents.</string>
+	<string name="preference_developer_themes_summary">Усталяваць тэмы з хатняй старонцы OpenIntents.</string>
+	<string name="preference_quickedit">Рэжым хуткага рэдагавання</string>
+	<string name="preference_quickedit_on_summary">Сэнсарны прыярытэт, або колькасныя величыні для меню агульных величын.</string>
+	<string name="preference_quickedit_off_summary">Сэнсарны прыярытэт, або колькасныя величыні выклікаюць дыялог змянення элементу.</string>
+	<string name="preference_reset_all_settings">Скінуць усе настройкі</string>
+	<string name="preference_reset_all_settings_alert">Вы ўпэўнены, што жадаеце СКІНУЦЬ УСЕ настройкі? Гэта незваротнае дзеянне.</string>    
+	<string name="preference_reset_all_settings_done">Усе настройскі скінуты</string>
+	    
+	<!-- ***************************
+	     Permissions
+	     *************************** -->
+	
+	<!-- OI Shopping list -->
+	<!-- Permission to read shopping lists -->
+	<string name="oi_shopping_permission_read">чытанне спісу пакупак</string>
+	<string name="oi_shopping_permission_read_descr">Дазволіць прыкладанню чытаць нататкі. Заўвага: зашыфраваныя спісы і элементы прадастаўляюцца ў зашыфраваным фармаце.</string>
+	<!-- Permission to write to shopping lists -->
+	<string name="oi_shopping_permission_write">запіс спісаў пакупак</string>
+	<string name="oi_shopping_permission_write_descr">Дазволіць прыкладанню ствараць новыя спісы і элементы ці змяняць існуючыя.</string>
+	
+	
+	<!-- ***************************
+	     Preferences
+	     *************************** -->
+	
+    <string-array name="preference_sortorder_entries">
+    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    	<item>неадзначаныя спачатку, па алфавіту</item>
+        <!-- Preference sort order: Sort by item name -->
+    	<item>па алфавіту</item>
+        <!-- Preference sort order: Newest item first -->
+    	<item>новыя спачатку</item>
+        <!-- Preference sort order: Oldest item first -->
+    	<item>старыя спачатку</item>
+    	<!-- Preference sort order: Sort alphabetically by tags -->
+    	<item>тэгі па алфавіту</item>
+        <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
+    	<item>прыярытэт, тэгі па алфавіту</item>
+        <!-- Preference sort order: Sort by price, the most expensive first -->
+    	<item>самыя дарагія спачатку</item>
+        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    	<item>неадзначаныя спачатку, тэгі па алфавіту</item>
+    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    	<item>неадзначаныя спачатку, прыярытэт, па алфавіту</item>
+    	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
+    	<item>неадзначаныя спачатку, прыярытэт, тэгі па алфавіту</item>
+    </string-array>
+    
+    <string-array name="preference_prioritytotal_entries">
+    	<item>Няма элементаў для адлюстравання</item>
+    	<item>Прыярытэт 1</item>
+    	<item>Прыярытэт 1-2</item>
+    	<item>Прыярытэт 1-3</item>
+    	<item>Прыярытэт 1-4</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entries">
+    	<!-- Preference fontsize: tiny font size -->
+        <item>Маленечкі</item>
+    	<!-- Preference fontsize: small font size -->
+        <item>Малы</item>
+    	<!-- Preference fontsize: default font size -->
+    	<item>Па змаўчанні</item>
+    	<!-- Preference fontsize: large font size -->
+        <item>Вялікі</item>
+    </string-array>
+    
+    <string-array name="preference_orientation_entries">
+    	<!-- Preference orientation: default -->
+        <item>Па змаўчанні</item>
+    	<!-- Preference orientation: landscape -->
+    	<item>Альбомная</item>
+    	<!-- Preference orientation: portrait -->
+        <item>Партрэтная</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entries">
+    	<!-- Preference capitalization: No capitalization -->
+        <item>Няма</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+        <item>Па сказу</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+        <item>Па слову</item>
+    </string-array>
+
+	<!-- ***************************
+	     OI Notepad
+	     *************************** -->
+	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+	<string name="notepad_not_available">Рэдагаванне нататак элементаў патрабуе OI Нататнік.</string>
+	<!-- Name of application "OI Notepad". Translations should be consistent. -->
+	<string name="notepad">OI Нататнік</string>
+
+	<!-- ***************************
+	     Automation
+	     *************************** -->
+	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<string name="label_select_action">Абярыце дзеянне:</string>
+	
+	<!-- Label above button that opens a list of all shopping lists to choose from. -->
+	<string name="label_select_list">Абярыце спіс:</string>
+	
+	<!-- Arrays -->
+	
+    <string-array name="automation_actions">
+    	<!-- Automation action to clean up a list. -->
+    	<item>Ачысціць спіс</item>
+    </string-array>
+      
+	<string name="widget_prev_page">Папярэдняя старонка</string>
+	<string name="widget_next_page">Наступная старонка</string>
+	<string name="widget_choose_a_list">Абярыце спіс</string>
+	<string name="widget_no_items">Няма элементаў на старонцы %d</string>
+</resources>

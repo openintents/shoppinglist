@@ -42,7 +42,7 @@ Keywords:
 * OI, OpenIntents, Open Intents
 
 International versions: 
-"قائمة التسوق OI, Llista de compra d'OI, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Shopping List, OI Списък за Пазаруване, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, OI ショッピングリスト
+Listă de cumpărături OI, Llista de compra d'OI, OI ショッピングリスト, OI Einkaufsliste, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Shopping List, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI Λίστα Αγορών, OI Пакупкі, OI Списък за Пазаруване, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, "قائمة التسوق OI
 
 
 Extensions: 

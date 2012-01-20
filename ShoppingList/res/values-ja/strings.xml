@@ -174,6 +174,8 @@
 	<string name="preference_capitalization_dialog_title">大文字化の方法を選択</string> 
 	<string name="preference_hidechecked_title">チェックしたアイテムを隠す</string>
 	<string name="preference_hidechecked_summary">チェックしたアイテムを直ちに隠す。</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">価格を表示</string>
 	<string name="preference_showprice_summary">リストに列を追加表示。</string>
 	<string name="preference_perstoreprice">店ごとの値段</string>

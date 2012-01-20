@@ -176,6 +176,8 @@
 	<string name="preference_capitalization_dialog_title">Kies hoodletter gebruik</string> 
 	<string name="preference_hidechecked_title">Verberg voltooide items</string>
 	<string name="preference_hidechecked_summary">Direct voltooide items verbergen</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">Toon prijs</string>
 	<string name="preference_showprice_summary">Toon als extra kolom in lijst</string>
 	<string name="preference_perstoreprice">Per winkel-prijzen</string>

@@ -1,8 +1,8 @@
 # Application:
-OI Shopping List
+Listă de cumpărături OI
 
 # Promo text:
-Keep track of your shopping items with OI Shopping List.
+Țineți evidența articolelor de cumpărături cu Listă de cumpărături OI.
 
 # Description:
 Lista de cumpărături OI este o aplicaţie puternică și care simplifică gestionarea și crearea listelor de verificare. Lista de cumpărături OI simplifică adăugarea unui produs pe o listă, debifați produsul şi scoateţi-l din listă. Aplicația poate urmări separat preţuri pentru fiecare magazin pe care îl utilizaţi, şi dispune de un nivel ridicat de personalizare. Dimensiunea fontului, ordinea de sortare, coloanele listă, şi comportamentul listei de curățare sunt toate setările controlate de către utilizator. Toate aceste caracteristici sunt reunite într-un aspect proaspăt care este personalizabil printr-o varietate de teme. 
@@ -42,7 +42,7 @@ Cuvinte cheie:
 * OI, OpenIntents, Open Intents
 
 Versiuni internaționale: 
-"قائمة التسوق OI, Llista de compra d'OI, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Shopping List, OI Списък за Пазаруване, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, OI ショッピングリスト
+Listă de cumpărături OI, Llista de compra d'OI, OI ショッピングリスト, OI Einkaufsliste, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Shopping List, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI Λίστα Αγορών, OI Пакупкі, OI Списък за Пазаруване, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, "قائمة التسوق OI
 
 
 Extensii: 

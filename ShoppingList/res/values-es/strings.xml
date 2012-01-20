@@ -180,6 +180,8 @@
 	<string name="preference_capitalization_dialog_title">Elejir capitalización</string> 
 	<string name="preference_hidechecked_title">Ocultar elementos revisados</string>
 	<string name="preference_hidechecked_summary">Ocultar inmediatamente elementos marcados.</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">Mostrar precio</string>
 	<string name="preference_showprice_summary">Mostrado como columna extra en la lista.</string>
 	<string name="preference_perstoreprice">Precios por tienda</string>

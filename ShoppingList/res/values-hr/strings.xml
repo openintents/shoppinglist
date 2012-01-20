@@ -22,6 +22,7 @@
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
   Nikola Miljkovic https://launchpad.net/~milja1337
+  OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
@@ -171,6 +172,8 @@
 	<string name="preference_capitalization_dialog_title">Odaberite velika slova</string> 
 	<string name="preference_hidechecked_title">Sakrij označene stavke</string>
 	<string name="preference_hidechecked_summary">Odmah sakrij stavke koje su odrađene.</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">Prikaži cijenu</string>
 	<string name="preference_showprice_summary">Prikaži kao dodatni stupac u popisu.</string>
 	<string name="preference_perstoreprice">Per-store prices</string>

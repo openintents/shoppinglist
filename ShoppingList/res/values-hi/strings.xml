@@ -172,6 +172,8 @@
 	<string name="preference_capitalization_dialog_title">कैपिटलाइज़ेशन चुने</string> 
 	<string name="preference_hidechecked_title">चिह्नित आइटम को छुपाये</string>
 	<string name="preference_hidechecked_summary">चिन्हित आइटम को एकदम से छुपाये</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">मुल्ये दिखाए</string>
 	<string name="preference_showprice_summary">यह सूची में अतिरिक्त खाना के तरह से दिखया जाता है</string>
 	<string name="preference_perstoreprice">प्रति-स्टोर मुल्ये</string>

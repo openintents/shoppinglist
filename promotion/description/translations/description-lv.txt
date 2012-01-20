@@ -22,11 +22,11 @@ Funkcijas:
 Available extensions for "OI Shopping List": 
 * Add a recorded message to a note with "OI Voice Notes".
 * Import/export shopping lists with "OI Convert CSV".
-* Parādīt licenzes informāciju ar "OI About".
+* Parādīt licenzes informāciju ar "OI Paskaidrojumi".
 * Enter/check items with "Barcode OI Plugin".
 
 Applications that work with "OI Shopping List": 
-* Atjauniniet ar "OI Update".
+* Atjauniniet ar "OI Atjauninājumi".
 * Backup lists with "My Backup Pro".
 * Import ingredients of recipes with "Bites".
 
@@ -35,7 +35,7 @@ Atslēgvārdi:
 * OI, OpenIntents, Open Intents
 
 Starptautiskās versijas: 
-"قائمة التسوق OI, Llista de compra d'OI, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Shopping List, OI Списък за Пазаруване, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, OI ショッピングリスト
+Listă de cumpărături OI, Llista de compra d'OI, OI ショッピングリスト, OI Einkaufsliste, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Shopping List, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI Λίστα Αγορών, OI Пакупкі, OI Списък за Пазаруване, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, "قائمة التسوق OI
 
 
 Extensions: 

@@ -171,6 +171,8 @@
 	<string name="preference_capitalization_dialog_title">Velg store forbokstaver</string> 
 	<string name="preference_hidechecked_title">Gjem kryssede punkter</string>
 	<string name="preference_hidechecked_summary">Gjem kryssede punkter med en gang.</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">Vis pris</string>
 	<string name="preference_showprice_summary">Vist som ekstra kolonne i liste.</string>
 	<string name="preference_perstoreprice">Priser per butikk</string>

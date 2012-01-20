@@ -177,6 +177,8 @@
 	<string name="preference_capitalization_dialog_title">Choisir la capitalisation</string> 
 	<string name="preference_hidechecked_title">Cacher les éléments cochés</string>
 	<string name="preference_hidechecked_summary">Cacher immédiatement les éléments cochés</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">Voir le prix</string>
 	<string name="preference_showprice_summary">Voir comme une colonne supplémentaire dans la liste</string>
 	<string name="preference_perstoreprice">Per-store prices</string>

@@ -172,6 +172,8 @@
 	<string name="preference_capitalization_dialog_title">Vybrať kapitalizáciu</string> 
 	<string name="preference_hidechecked_title">Skryť zaškrtnuté položky</string>
 	<string name="preference_hidechecked_summary">Ihneď skryť zaškrtnuté položky.</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">Zobraziť cenu</string>
 	<string name="preference_showprice_summary">Zobrazené ako stĺpec navyše v zozname.</string>
 	<string name="preference_perstoreprice">Ceny pre každý obchod</string>

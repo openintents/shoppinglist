@@ -22,16 +22,17 @@
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
   OpenIntents devs https://launchpad.net/~openintents-devs
-  happynawani https://launchpad.net/~happynawani</string>
+  happynawani https://launchpad.net/~happynawani
+  vishal panjwani https://launchpad.net/~vishal-panjwani15</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
-	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
+	<string name="about_comments">पेंजी खरीदारी जे सामान जो ट्रेक राख्यो OI शौपिंग लिस्ट सां गडद</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Shopping List</string>
+	<string name="app_name">OI खरीदारी सूची</string>
 
 	<string name="new_item">नयो आईटम</string>
 	<string name="new_list">नयी सूची</string>
@@ -40,7 +41,7 @@
 	<string name="empty_list_not_sent">कहली सूची न मोकली</string>
 	<string name="email_not_available">मोक्लाणा लाये  कोई अनुप्रयोग मौजूद  काने</string>
 	<string name="my_shopping_list">मुंजी खरीदारी सूची</string>
-	<string name="new_list_hint">e.g. wishlist, family list</string>
+	<string name="new_list_hint">उदाहरणार्थ इच्छासूची, परिवार जी सूची</string>
 	<string name="clean_up_list">सूची खली कयो</string>
 	<string name="delete_list">सूचीय खे मिय्तायो</string>
 	<string name="ask_new_list">नयी खरीदारी सूचीय जो नाम भर्यो</string>
@@ -171,6 +172,8 @@
 	<string name="preference_capitalization_dialog_title">कैपिटलाइज़ेशन चुन्दयो</string> 
 	<string name="preference_hidechecked_title">जांच थ्यल्वारे आईटमन खे लिकायो</string>
 	<string name="preference_hidechecked_summary">जेका आईटम चेक थीवाया उन्हन खे तुरंत  ही लिकाए षड्यो</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">कीमत दिखार्यो</string>
 	<string name="preference_showprice_summary">हिक्क बियो भी कोलुम सूचीय में दिखार्यो</string>
 	<string name="preference_perstoreprice">प्रति-स्टोर कीमत</string>
@@ -309,9 +312,9 @@
     	<!-- Preference capitalization: No capitalization -->
         <item>कोई नहीं</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Per sentence</item>
+        <item>प्रत्येक वाक्य</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Per word</item>
+        <item>प्रत्येक शब्द</item>
     </string-array>
 
 	<!-- ***************************

@@ -171,6 +171,8 @@
 	<string name="preference_capitalization_dialog_title">ਕੈਪਿਟਲਾਇਜੇਸ਼ਨ ਚੁਨੇਂ</string> 
 	<string name="preference_hidechecked_title">ਜਾਂਚ ਆਇਟਮ ਛਿਪਾਏਂ</string>
 	<string name="preference_hidechecked_summary">ਤੁਰੰਤ ਬੰਦ ਦੀ ਜਾਂਚ ਆਇਟਮ ਛਿਪਾਉਣਾ .</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
 	<string name="preference_showprice_title">ਮੁੱਲ ਦਿਖਾਵਾਂ</string>
 	<string name="preference_showprice_summary">Shown as extra column in list.</string>
 	<string name="preference_perstoreprice">Per-store prices</string>
