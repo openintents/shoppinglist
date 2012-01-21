@@ -25,6 +25,8 @@ To obtain the current release, visit
 release 1.6
 date: ?
 
+- PLEASE READ THIS: The font size has been adjusted for high-density devices. Please use menu > settings > font size to set the desired size (see issue 427)
+
 - new setting for long press "Add" button (Google Code-in task by Gautam, issue 358)
 - show "Stores" button when tracking per-store prices (Google Code-in task by Michal Zielinski, issue 359)
 - reset all option in settings (Google Code-in task by Andrey Zaytsev, issue 360)

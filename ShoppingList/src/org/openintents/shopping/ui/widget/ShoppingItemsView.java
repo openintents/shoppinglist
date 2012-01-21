@@ -45,6 +45,7 @@ import android.text.TextUtils;
 import android.text.style.StrikethroughSpan;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -216,7 +217,7 @@ public class ShoppingItemsView extends ListView {
 			t.setTypeface(mCurrentTypeface);
 
 			// Set size
-			t.setTextSize(mTextSize);
+			t.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
 
 			// Check for upper case:
 			if (mTextUpperCaseFont) {
