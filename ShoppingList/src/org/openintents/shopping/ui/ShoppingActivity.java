@@ -1450,6 +1450,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 
+		/*
 		int MENU_ACTION_WITH_TEXT=0;
 		
 		//Temp- for backward compatibility with OS 3 features 
@@ -1468,6 +1469,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			}
 			
 		}
+		*/
 		
 		// Add menu option for auto adding items from string array in intent
 		// extra if they exist		
@@ -1481,11 +1483,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		// Standard menu
 		item=menu.add(0, MENU_NEW_LIST, 0, R.string.new_list)
 				.setIcon(R.drawable.ic_menu_add_list).setShortcut('0', 'n');
-		MenuCompat.setShowAsAction(item, MENU_ACTION_WITH_TEXT);
+		//MenuCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
 		item=menu.add(0, MENU_CLEAN_UP_LIST, 0, R.string.clean_up_list)
-				.setIcon(R.drawable.ic_menu_clean_up).setShortcut('1', 'c');
-		MenuCompat.setShowAsAction(item, MENU_ACTION_WITH_TEXT);
-		
+				.setIcon(R.drawable.ic_menu_cleanup).setShortcut('1', 'c');
+		MenuCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
 		menu.add(0, MENU_PICK_ITEMS, 0, R.string.menu_pick_items)
 				.setIcon(android.R.drawable.ic_menu_add).setShortcut('2', 'p');
@@ -1500,18 +1502,15 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				.setIcon(android.R.drawable.ic_menu_manage)
 				.setShortcut('3', 't');
 
-		item=menu.add(0, MENU_PREFERENCES, 0, R.string.preferences)
+		menu.add(0, MENU_PREFERENCES, 0, R.string.preferences)
 				.setIcon(android.R.drawable.ic_menu_preferences)
 				.setShortcut('4', 'p');
-		MenuCompat.setShowAsAction(item, MENU_ACTION_WITH_TEXT);
 
-		item=menu.add(0, MENU_RENAME_LIST, 0, R.string.rename_list)
+		menu.add(0, MENU_RENAME_LIST, 0, R.string.rename_list)
 				.setIcon(android.R.drawable.ic_menu_edit).setShortcut('5', 'r');
-		MenuCompat.setShowAsAction(item, MENU_ACTION_WITH_TEXT);
 
 		menu.add(0, MENU_DELETE_LIST, 0, R.string.delete_list)
 				.setIcon(android.R.drawable.ic_menu_delete);
-		MenuCompat.setShowAsAction(item, MENU_ACTION_WITH_TEXT);
 
 		menu.add(0, MENU_SEND, 0, R.string.send)
 				.setIcon(android.R.drawable.ic_menu_send).setShortcut('7', 's');
@@ -1525,7 +1524,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		menu.add(0, MENU_MARK_ALL_ITEMS, 0, R.string.mark_all_items)
 				.setIcon(android.R.drawable.ic_menu_agenda)
 				.setShortcut('9', 'm');
-		MenuCompat.setShowAsAction(item, MENU_ACTION_WITH_TEXT);
 		
 
 		// Add distribution menu items last.
