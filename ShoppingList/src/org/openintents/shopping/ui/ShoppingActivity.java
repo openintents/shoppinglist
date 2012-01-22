@@ -100,6 +100,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -1802,17 +1803,34 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 	private void setListTheme(String theme) {
 		mItemsView.setListTheme(theme);
-		
-		if (!usingListSpinner()) {
-			// In Holo themes, apply the theme text color also to the
-			// input box and the button, because the background is semi-transparent.
-			mEditText.setTextColor(mItemsView.mTextColor);
-			mButton.setTextColor(mItemsView.mTextColor);
-		}
 	}
 
 	private void applyListTheme() {
 		mItemsView.applyListTheme();
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			// In Holo themes, apply the theme text color also to the
+			// input box and the button, because the background is semi-transparent.
+			mEditText.setTextColor(mItemsView.mTextColor);
+			mButton.setTextColor(mItemsView.mTextColor);
+			if (mShoppingListsView instanceof Spinner) {
+				View view = ((Spinner) mShoppingListsView).getChildAt(0);
+				setSpinnerTextColorInHoloTheme(view);
+			}
+		}
+	}
+
+	/**
+	 * For holo themes with transparent widgets, 
+	 * set font color of the spinner using theme color.
+	 * @param view
+	 */
+	private void setSpinnerTextColorInHoloTheme(View view) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			if (view instanceof TextView) {
+				((TextView) view).setTextColor(mItemsView.mTextColor);
+			}
+		}
 	}
 
 	/**
@@ -2523,7 +2541,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		SimpleCursorAdapter adapter;
 		
 		if (mShoppingListsView instanceof Spinner){
-		adapter = new SimpleCursorAdapter(this,
+		adapter = new MySimpleCursorAdapter(this,
 				// Use a template that displays a text view
 				android.R.layout.simple_spinner_item,
 				// Give the cursor to the list adapter
@@ -2542,6 +2560,22 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 //		mSpinnerListFilter.setAdapter(adapter);//Temp- redirected through method
 		setSpinnerListAdapter(adapter);
 
+	}
+	
+	class MySimpleCursorAdapter extends SimpleCursorAdapter {
+
+		public MySimpleCursorAdapter(Context context, int layout, Cursor c,
+				String[] from, int[] to) {
+			super(context, layout, c, from, to);
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			View view = super.getView(position, convertView, parent);
+			setSpinnerTextColorInHoloTheme(view);
+			return view;
+		}
+		
 	}
 
 	private void onModeChanged() {

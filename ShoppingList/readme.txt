@@ -27,10 +27,16 @@ date: ?
 
 - PLEASE READ THIS: The font size has been adjusted for high-density devices. Please use menu > settings > font size to set the desired size (see issue 427)
 
+Thanks to Google Code-in for the following patches:
+(see http://www.google-melange.com/gci/homepage/google/gci2011 )
+
 - new setting for long press "Add" button (Google Code-in task by Gautam, issue 358)
 - show "Stores" button when tracking per-store prices (Google Code-in task by Michal Zielinski, issue 359)
 - reset all option in settings (Google Code-in task by Andrey Zaytsev, issue 360)
 - fixed bug with disable screen lock (Google Code-in task by Darriel, issue 431)
+- many new translations by Google Code-in students
+
+- fix font color in list title and text entry field (issue 452)
 
 ----------------
 release 1.5
@@ -38,10 +44,6 @@ date: 2011-12-08
 
 - support for Android 4.0
 - new setting for quick edit mode for quantity and priority (Android 2.2 and higher)
-
-Thanks to Google Code-in for the following patches:
-(see http://www.google-melange.com/gci/homepage/google/gci2011 )
-
 - new setting to keep screen orientation (issue 402, Google code-in task by Gautam)
 - new setting to disable screen lock (Google Code-in task by Kido)
 - new setting to reset quantity when readding items (Google Code-in task by Shuhao)
