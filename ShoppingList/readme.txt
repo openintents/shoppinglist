@@ -27,16 +27,16 @@ date: ?
 
 - PLEASE READ THIS: The font size has been adjusted for high-density devices. Please use menu > settings > font size to set the desired size (see issue 427)
 
-Thanks to Google Code-in for the following patches:
+Thanks to Google Code-in for many of the following patches:
 (see http://www.google-melange.com/gci/homepage/google/gci2011 )
 
 - new setting for long press "Add" button (Google Code-in task by Gautam, issue 358)
 - show "Stores" button when tracking per-store prices (Google Code-in task by Michal Zielinski, issue 359)
 - reset all option in settings (Google Code-in task by Andrey Zaytsev, issue 360)
 - fixed bug with disable screen lock (Google Code-in task by Darriel, issue 431)
-- many new translations by Google Code-in students
-
 - fix font color in list title and text entry field (issue 452)
+
+- new icons and translations by Google Code-in students
 
 ----------------
 release 1.5
