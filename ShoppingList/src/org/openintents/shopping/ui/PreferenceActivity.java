@@ -99,6 +99,9 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	public static final boolean PREFS_PICKITEMSINLIST_DEFAULT = false;
 	public static final String PREFS_QUICKEDITMODE = "quickedit";
 	public static final boolean PREFS_QUICKEDITMODE_DEFAULT = false;
+	public static final String PREFS_USE_FILTERS = "use_filters";
+	public static final boolean PREFS_USE_FILTERS_DEFAULT = false;
+	
 	public static final String PREFS_RESET_ALL_SETTINGS = "reset_all_settings";
 	
 	public static final int PREFS_CAPITALIZATION_DEFAULT = 1;
@@ -135,6 +138,8 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 		// Cupcake has problems with Quick Edit Mode. Donut untested.
 		CheckBoxPreference quickedit = (CheckBoxPreference) findPreference(PREFS_QUICKEDITMODE);
 		quickedit.setEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO);
+		CheckBoxPreference usefilters = (CheckBoxPreference) findPreference(PREFS_USE_FILTERS);
+		usefilters.setEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO);
 		
 		SharedPreferences shared = getPreferenceScreen().getSharedPreferences();
 		updatePrioSubtotalSummary(shared);
@@ -199,6 +204,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
                         editor.putBoolean(PREFS_ADDFORBARCODE, PREFS_ADDFORBARCODE_DEFAULT);
                         editor.putBoolean(PREFS_SCREENLOCK, PREFS_SCREENLOCK_DEFAULT);
                         editor.putBoolean(PREFS_QUICKEDITMODE, PREFS_QUICKEDITMODE_DEFAULT);
+                        editor.putBoolean(PREFS_USE_FILTERS, PREFS_USE_FILTERS_DEFAULT);
                         editor.putBoolean(PREFS_RESETQUANTITY, PREFS_RESETQUANTITY_DEFAULT);
                         //Appearance
                         editor.putBoolean(PREFS_SHOW_PRICE, PREFS_SHOW_PRICE_DEFAULT);
@@ -283,6 +289,12 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	public static boolean getQuickEditModeFromPrefs(Context context) {
 		boolean using = PreferenceManager.getDefaultSharedPreferences(context)
 		.getBoolean(PREFS_QUICKEDITMODE,PREFS_QUICKEDITMODE_DEFAULT);
+		return using;
+	}
+	
+	public static boolean getUsingFiltersFromPrefs(Context context) {
+		boolean using = PreferenceManager.getDefaultSharedPreferences(context)
+		.getBoolean(PREFS_USE_FILTERS,PREFS_USE_FILTERS_DEFAULT);
 		return using;
 	}
 	

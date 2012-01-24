@@ -70,8 +70,9 @@ public class QuickSelectMenu
          * This method will be invoked when an item is selected.
          *
          * @param item {@link CharSequence} that was selected
+         * @param id 
          */
-        public void onItemSelected(CharSequence item);
+        public void onItemSelected(CharSequence item, int id);
     }
     
 	public void setOnItemSelectedListener(OnItemSelectedListener listener) {
@@ -92,7 +93,8 @@ public class QuickSelectMenu
 	     
 	public boolean onMenuItemClickImpl(MenuItem item) {
 		CharSequence name = item.getTitle();
-		this.mItemSelectedListener.onItemSelected(name);
+		int id = item.getItemId();
+		this.mItemSelectedListener.onItemSelected(name, id);
 		return true;
 	}
 }

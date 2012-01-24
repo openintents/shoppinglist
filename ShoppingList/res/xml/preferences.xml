@@ -70,6 +70,9 @@
 				<CheckBoxPreference android:key="quickedit" android:summaryOn="@string/preference_quickedit_on_summary"
 					android:title="@string/preference_quickedit"
 					android:summaryOff="@string/preference_quickedit_off_summary"/>
+				<CheckBoxPreference android:key="use_filters"
+					android:defaultValue="false" android:title="@string/preference_usefilters_title"
+					android:summary="@string/preference_usefilters_summary" />
 				<CheckBoxPreference android:key="resetquantity" android:title="@string/preference_reset_quantity"
 					android:summary="@string/preference_reset_quantity_summary" 
 					android:defaultValue="false"/>

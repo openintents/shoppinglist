@@ -283,6 +283,26 @@ public abstract class ShoppingContract {
 		 * Available since release 0.1.6.
 		 */
 		public static final String SKIN_COLOR_STRIKETHROUGH = "skin_color_strikethrough";
+		
+		/**
+		 * ID of store to filter in list, -1 to show all stores.
+		 * 
+		 * <P>
+		 * Type: INTEGER (long)
+		 * </P>
+		 * Available since release 1.6.
+		 */
+		public static final String STORE_FILTER = "store_filter";
+		
+		/**
+		 * Tag text to filter in list.
+		 * 
+		 * <P>
+		 * Type: TEXT
+		 * </P>
+		 * Available since release 1.6.
+		 */
+		public static final String TAGS_FILTER = "tags_filter";
 	}
 
 	/**
@@ -715,6 +735,9 @@ public abstract class ShoppingContract {
 		 * </P>
 		 */
 		public static final String MODIFIED_DATE = "modified";
+		
+		public static final Uri QUERY_BY_LIST_URI = Uri
+				.parse("content://org.openintents.shopping/liststores");
 
 	}
 

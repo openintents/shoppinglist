@@ -76,6 +76,8 @@ public class ShoppingProvider extends ContentProvider {
 	private static HashMap<String, String> CONTAINS_PROJECTION_MAP;
 	private static HashMap<String, String> CONTAINS_FULL_PROJECTION_MAP;
 	private static HashMap<String, String> CONTAINS_FULL_CHEAPEST_PROJECTION_MAP;
+	private static HashMap<String, String> CONTAINS_FULL_STORE_PROJECTION_MAP;
+
 	private static HashMap<String, String> STORES_PROJECTION_MAP;
 	private static HashMap<String, String> ITEMSTORES_PROJECTION_MAP;
 	private static HashMap<String, String> NOTES_PROJECTION_MAP;
@@ -110,6 +112,8 @@ public class ShoppingProvider extends ContentProvider {
 	private static final int ACTIVELIST = 103;
 	// duplicate specified contains record and its item, return ids
 	private static final int CONTAINS_COPYOFID = 104;
+	
+	private static final int TAGS_LISTID = 105;
 
 	private static final UriMatcher URL_MATCHER;
 
@@ -168,7 +172,34 @@ public class ShoppingProvider extends ContentProvider {
 
 		case CONTAINS_FULL:
 			
-			if (PreferenceActivity.getUsingPerStorePricesFromPrefs(getContext())) {
+			// all callers pass list id as selection_args[0]. perhaps not so 
+			// nice to depend on that, but... need to choose the projection map 
+			// based on the list's store filter.
+			if (PreferenceActivity.getUsingFiltersFromPrefs(getContext()) &&
+				listUsesStoreFilter(selectionArgs[0])) {
+				// actually there are two ways we could do the query when filtering by stores. perhaps 
+				// we should offer both. for now choose the first one...
+				if (true)
+				{
+					// show only items which have corresponding records in itemstores
+					qb.setTables("contains, items, lists, itemstores");
+					qb.setProjectionMap(CONTAINS_FULL_STORE_PROJECTION_MAP);
+					qb.appendWhere("contains.item_id = items._id AND " +
+					 		   "contains.list_id = lists._id AND " + 
+							   "items._id = itemstores.item_id AND " +
+					 		   "lists.store_filter = itemstores.store_id");
+				} else {
+					// this query is not quite right, but the idea is
+					// show all items, but only show prices from the selected store.
+					qb.setTables("contains, items, lists left outer join itemstores on (items._id = itemstores.item_id)");
+					qb.setProjectionMap(CONTAINS_FULL_STORE_PROJECTION_MAP);
+					qb.appendWhere("contains.item_id = items._id AND " +
+						 		   "contains.list_id = lists._id AND " + 
+								   "items._id = itemstores.item_id AND " +
+						 		   "lists.store_filter = itemstores.store_id");	
+				}
+				
+			} else if (PreferenceActivity.getUsingPerStorePricesFromPrefs(getContext())) {
 				qb.setTables("contains, items, lists left outer join itemstores on (items._id = itemstores.item_id)");
 				qb.setProjectionMap(CONTAINS_FULL_CHEAPEST_PROJECTION_MAP);
 				qb.appendWhere("contains.item_id = items._id AND " +
@@ -183,6 +214,10 @@ public class ShoppingProvider extends ContentProvider {
 				
 			}
 			defaultOrderBy = ContainsFull.DEFAULT_SORT_ORDER;
+			String tagFilter = getListTagsFilter(selectionArgs[0]); 
+			if (!TextUtils.isEmpty(tagFilter)) {
+				qb.appendWhere(" AND item_tags like '%" + tagFilter + "%'");
+			}
 			break;
 
 		case CONTAINS_FULL_ID:
@@ -206,6 +241,17 @@ public class ShoppingProvider extends ContentProvider {
 			qb.setTables("stores");
 			qb.setProjectionMap(STORES_PROJECTION_MAP);
 			qb.appendWhere("list_id=" + url.getPathSegments().get(1));
+			break;
+			
+		case TAGS_LISTID:
+			// this is for querying tags regardless of filters.
+			// might want to restrict the projection map.
+			qb.setTables("contains, items, lists");
+			qb.setProjectionMap(CONTAINS_FULL_PROJECTION_MAP);
+			qb.appendWhere("contains.item_id = items._id AND " +
+			 		       "contains.list_id = lists._id AND " +
+			 		       "contains.list_id=" + url.getPathSegments().get(1));
+			groupBy = "items.tags";
 			break;
 			
 		case ITEMSTORES:
@@ -322,6 +368,42 @@ public class ShoppingProvider extends ContentProvider {
 				null, orderBy);
 		c.setNotificationUri(getContext().getContentResolver(), url);
 		return c;
+	}
+
+	private boolean listUsesStoreFilter(String listId) {
+		SQLiteDatabase db = mOpenHelper.getReadableDatabase();
+		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+		qb.setTables("lists");
+		qb.appendWhere("_id=" + listId);
+		Cursor c = qb.query(db, new String[] {Lists.STORE_FILTER}, null, null, null, null, null);
+		if (c.getCount() != 1) {
+			return false;
+		}
+		
+		c.moveToFirst();
+		long storeId = c.getLong(0);
+		c.deactivate();
+		c.close();
+		
+		return (storeId != -1); 
+	}
+	
+	private String getListTagsFilter(String listId) {
+		SQLiteDatabase db = mOpenHelper.getReadableDatabase();
+		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+		qb.setTables("lists");
+		qb.appendWhere("_id=" + listId);
+		Cursor c = qb.query(db, new String[] {Lists.TAGS_FILTER}, null, null, null, null, null);
+		if (c.getCount() != 1) {
+			return null;
+		}
+		
+		c.moveToFirst();
+		String tag = c.getString(0);
+		c.deactivate();
+		c.close();
+		
+		return (tag); 
 	}
 
 	// caller wants us to copy the item and the contains record.
@@ -1093,6 +1175,8 @@ public class ShoppingProvider extends ContentProvider {
 				ITEMSTORES_ITEMID);
 		URL_MATCHER.addURI("org.openintents.shopping", "liststores/#", 
 				STORES_LISTID);
+		URL_MATCHER.addURI("org.openintents.shopping", "listtags/#", 
+				TAGS_LISTID);
 		URL_MATCHER.addURI("org.openintents.shopping", "notes", NOTES);
 		URL_MATCHER.addURI("org.openintents.shopping", "notes/#", NOTE_ID);
 		URL_MATCHER.addURI("org.openintents.shopping", "units", UNITS);
@@ -1196,6 +1280,11 @@ public class ShoppingProvider extends ContentProvider {
 		CONTAINS_FULL_CHEAPEST_PROJECTION_MAP.put(ContainsFull.ITEM_PRICE, 
 				"min(itemstores.price) as item_price");
 
+		CONTAINS_FULL_STORE_PROJECTION_MAP = 
+				new HashMap<String, String>(CONTAINS_FULL_PROJECTION_MAP);
+		CONTAINS_FULL_STORE_PROJECTION_MAP.put(ContainsFull.ITEM_PRICE, 
+					"itemstores.price as item_price");
+		
 		UNITS_PROJECTION_MAP = new HashMap<String, String>();
 		UNITS_PROJECTION_MAP.put(Units._ID, "units._id");
 		UNITS_PROJECTION_MAP.put(Units.CREATED_DATE, "units.created");

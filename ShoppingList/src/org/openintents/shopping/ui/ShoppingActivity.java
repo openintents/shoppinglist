@@ -34,9 +34,11 @@ import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
+import org.openintents.shopping.library.provider.ShoppingContract.ItemStores;
 import org.openintents.shopping.library.provider.ShoppingContract.Items;
 import org.openintents.shopping.library.provider.ShoppingContract.Lists;
 import org.openintents.shopping.library.provider.ShoppingContract.Status;
+import org.openintents.shopping.library.provider.ShoppingContract.Stores;
 import org.openintents.shopping.library.util.PriceConverter;
 import org.openintents.shopping.library.util.ShoppingUtils;
 import org.openintents.shopping.ui.dialog.DialogActionListener;
@@ -296,6 +298,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 */
 	public static final int MODE_IN_SHOP = 1;
 
+	private boolean mEditingFilter = false;
+	
 	/**
 	 * URI of current list
 	 */
@@ -408,6 +412,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	
 	private AutoCompleteTextView mEditText;
 	private Button mButton;
+	private View mFilterLayout = null;
+	private Button mStoresFilter = null;
+	private Button mTagsFilter = null;
+	private Button mListFilter = null;
 	
 	protected Context mDialogContext;
 
@@ -737,6 +745,23 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		mUseSensor = sp.getBoolean(PreferenceActivity.PREFS_SHAKE,
 				PreferenceActivity.PREFS_SHAKE_DEFAULT);
+		
+
+		boolean nowEditingFilter = sp.getBoolean(PreferenceActivity.PREFS_USE_FILTERS, 
+				PreferenceActivity.PREFS_USE_FILTERS_DEFAULT);
+		if (nowEditingFilter && mCursorShoppingLists != null) {
+			// spinner is not used, so need to update the cursor to the proper 
+			// list now, so that getSelectedListId() will know what's up.
+			// this is a bit of a hack; could instead decouple the spinner 
+			// more cleanly, or make the filter mode list widget also an 
+			// AdapterView and make getSelectedListId() use it.
+			setSelectedListId(defaultShoppingList);
+		}		
+		if (mStoresFilter != null &&
+			mEditingFilter != nowEditingFilter) {
+			updateFilterWidgets();
+			fillItems(false);
+		}
 
 		return defaultShoppingList;
 	}
@@ -780,12 +805,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		
 		this.setRequestedOrientation(PreferenceActivity.getOrientationFromPrefs(this));
 
-		getSelectedListId();
-		setListTheme(loadListTheme());
-		applyListTheme();
+		if (getSelectedListId() != -1) {
+		   setListTheme(loadListTheme());
+		   applyListTheme();
+  		   updateTitle();
+		}
 		mItemsView.onResume();
-
-		updateTitle();
 
 		// TODO fling disabled for release 1.3.0
 //		mGestureDetector = new GestureDetector(new MyGestureDetector());
@@ -856,14 +881,17 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 							getCurrentListName()));
 					registerSensor();
 				} else {
-					setTitle(getString(R.string.pick_items_titel,
+					setTitle(getString(R.string.pick_items_title,
 							getCurrentListName()));
 					unregisterSensor();
 				}
 			} else {
 				// Only one mode: "Pick items using dialog"
-				// App name is default
-				setTitle(getText(R.string.app_name));
+				// App name is default. But if using filters, include list name too.
+				if (PreferenceActivity.getUsingFiltersFromPrefs(this))
+				   setTitle(getCurrentListName() + " - " + getText(R.string.app_name));
+				else
+				   setTitle(getText(R.string.app_name));
 			}
 		} else if ((mState == STATE_PICK_ITEM)
 				|| (mState == STATE_GET_CONTENT_ITEM)) {
@@ -920,8 +948,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		SharedPreferences sp = getSharedPreferences(
 				"org.openintents.shopping_preferences", MODE_PRIVATE);
 		SharedPreferences.Editor editor = sp.edit();
-		editor.putInt(PreferenceActivity.PREFS_LASTUSED, new Long(
-				getSelectedListId()).intValue());
+		// need to do something about the fact that the spinner is driving this
+		// even though it isn't always used. also the long vs int is fishy.
+		// but for now, just don't overwrite previous setting with -1.
+		int list_id = new Long(getSelectedListId()).intValue();
+		if (list_id != -1)
+		   editor.putInt(PreferenceActivity.PREFS_LASTUSED, list_id);
 		editor.putInt(PreferenceActivity.PREFS_LASTLIST_POSITION, listposition);
 		editor.putInt(PreferenceActivity.PREFS_LASTLIST_TOP, listtop);
 		editor.commit();
@@ -1241,6 +1273,186 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 					}
 				}
 			});
+
+			mListFilter = (Button)findViewById(R.id.listfilter);
+			if (mListFilter != null) {
+			  mListFilter.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					showListFilter(v);					
+				}});
+			}
+		}
+		
+		mStoresFilter = (Button)findViewById(R.id.storefilter);
+		mStoresFilter.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				showStoresFilter(v);					
+			}});
+		mTagsFilter = (Button)findViewById(R.id.tagfilter);
+		mTagsFilter.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				showTagsFilter(v);					
+			}});
+	}
+
+
+	protected void showListFilter(final View v) {
+		QuickSelectMenu popup = new QuickSelectMenu(this, v);
+    	int i_list;
+    	
+		Menu menu = popup.getMenu();
+		if (menu == null) {
+			return;
+		}
+		
+		// get the list of lists
+		mCursorShoppingLists.requery();
+		int count = mCursorShoppingLists.getCount();
+		mCursorShoppingLists.moveToFirst();
+		for (i_list = 0; i_list < count; i_list ++) {
+			String name = mCursorShoppingLists.getString(mStringListFilterNAME);
+			menu.add(0, i_list, Menu.NONE, name);
+			mCursorShoppingLists.moveToNext();
+		}
+		
+		popup.setOnItemSelectedListener(new QuickSelectMenu.OnItemSelectedListener() {
+	            public void onItemSelected(CharSequence name, int pos) {
+	            	setSelectedListPos(pos);
+	            }
+	        });
+		
+		popup.show();
+	}
+	
+	protected void showStoresFilter(final View v) {
+		QuickSelectMenu popup = new QuickSelectMenu(this, v);
+    	
+		Menu menu = popup.getMenu();
+		if (menu == null) {
+			return;
+		}
+		Cursor c = getContentResolver().query(
+				Stores.QUERY_BY_LIST_URI.buildUpon().
+					appendPath(this.mListUri.getLastPathSegment()).build(), 
+				new String[] {Stores._ID, Stores.NAME},
+				null, null, "stores.name COLLATE NOCASE ASC");
+		int i_store, count = c.getCount();
+		if (count == 0) {
+			c.deactivate();
+			c.close();
+			Toast.makeText(this, R.string.no_stores_available,
+					Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
+		// prepend the "no filter" option
+		menu.add(0, -1, Menu.NONE, R.string.unfiltered);
+
+		// get the list of stores
+		c.moveToFirst();
+		for (i_store = 0; i_store < count; i_store ++) {
+			long id = c.getLong(0);
+			String name = c.getString(1);
+			menu.add(0, (int) id, Menu.NONE, name);
+			c.moveToNext();
+		}
+		c.deactivate();
+		c.close();
+		
+		popup.setOnItemSelectedListener(new QuickSelectMenu.OnItemSelectedListener() {
+	            public void onItemSelected(CharSequence name, int id) {
+	        		// set the selected store filter
+	        		// update the filter summary? not until filter region collapsed.
+	            	ContentValues values = new ContentValues();
+	        		values.put(Lists.STORE_FILTER, (long)id);
+	        		getContentResolver().update(mListUri, values, null,	null);
+	        		if (id == -1)
+		        		((Button)v).setText(R.string.stores);
+	        		else
+	        			((Button)v).setText(name);
+	        		fillItems(false);
+	            }
+	        });
+		
+		 popup.show();
+	}
+
+
+protected void showTagsFilter(final View v) {
+		QuickSelectMenu popup = new QuickSelectMenu(this, v);
+		
+		Menu menu = popup.getMenu();
+		if (menu == null) {
+			return;
+		}
+    	String[] tags = getTaglist(mListUri.getLastPathSegment());
+		int i_tag, count = tags.length;
+		
+		if (count == 0) {
+			Toast.makeText(this, R.string.no_tags_available,
+					Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
+		// prepend the "no filter" option
+		menu.add(0, -1, Menu.NONE, R.string.unfiltered);
+
+		for (i_tag = 0; i_tag < count; i_tag ++) {
+			menu.add(tags[i_tag]);
+		}
+		
+		popup.setOnItemSelectedListener(new QuickSelectMenu.OnItemSelectedListener() {
+	            public void onItemSelected(CharSequence name, int id) {
+	        		// set the selected tags filter
+	            	ContentValues values = new ContentValues();
+	        		values.put(Lists.TAGS_FILTER, id == -1 ? "" : (String) name);
+	        		getContentResolver().update(mListUri, values, null,	null);
+	        		if (id == -1)
+		        		((Button)v).setText(R.string.tags);
+	        		else
+	        			((Button)v).setText(name);
+	        		fillItems(false);
+	            }
+	        });
+		
+		 popup.show();
+	}
+
+	
+	protected void updateFilterWidgets() {
+		mEditingFilter = PreferenceActivity.getUsingFiltersFromPrefs(this);
+
+		mStoresFilter.setVisibility(mEditingFilter ? View.VISIBLE : View.GONE);
+		mTagsFilter.setVisibility(mEditingFilter ? View.VISIBLE : View.GONE);
+		
+		boolean showListFilter = mEditingFilter;
+		if (!usingListSpinner()) {
+			// Tablet mode: always show ListView
+			showListFilter = false;
+		}
+		if (mListFilter != null)
+		  mListFilter.setVisibility(showListFilter ? View.VISIBLE : View.GONE);
+		// spinner goes the opposite way
+		if (mShoppingListsView != null) 
+			mShoppingListsView.setVisibility(showListFilter ? View.GONE : View.VISIBLE);
+
+		if (mEditingFilter) {
+			String storeName = ShoppingUtils.getListFilterStoreName(this, mListUri);
+			if (storeName != null)
+				mStoresFilter.setText(storeName);
+			else
+				mStoresFilter.setText(R.string.stores);
+			String tagFilter = ShoppingUtils.getListTagsFilter(this, mListUri);
+			if (tagFilter != null)
+				mTagsFilter.setText(tagFilter);
+			else
+				mTagsFilter.setText(R.string.tags);
 		}
 	}
 
@@ -1301,7 +1513,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		}
 
 		 popup.setOnItemSelectedListener(new QuickSelectMenu.OnItemSelectedListener() {
-	            public void onItemSelected(CharSequence name) {
+	            public void onItemSelected(CharSequence name, int id) {
+	            	// TODO: use a flavor of menu.add which takes id, 
+	            	// then identifying the selection becomes easier here.
+	            	
 	            	if (name.length() > 1) {
 	            		// Other ... use edit dialog
 	            		editItem(pos, field);	            		
@@ -2362,7 +2577,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 * @return ID of selected shopping list.
 	 */
 	private long getSelectedListId() {
-		int pos = mShoppingListsView.getSelectedItemPosition();
+		int pos = mShoppingListsView.getSelectedItemPosition(); 
 		//Temp- Due to architecture requirements of OS 3, the value can not be passed directly
 		if(pos==-1 && !usingListSpinner()){
 			try {
@@ -2434,7 +2649,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		   fillItems(false);
 		}
 		applyListTheme();
-		
+		updateTitle();
 		if (mShoppingListsView instanceof ListView){
 			((ListView) mShoppingListsView).setItemChecked(pos,true);
 		}
@@ -2641,6 +2856,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			insertItemsFromExtras();
 		}
 
+		updateFilterWidgets();
+		
 		if (onlyIfPrefsChanged
 				&& (lastAppliedPrefChange == PreferenceActivity.updateCount)) {
 			return;
@@ -2708,6 +2925,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		}.execute();
 	}
 
+
 	/**
 	 * Create list of tags.
 	 * 
@@ -2718,9 +2936,32 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 * @return
 	 */
 	String[] getTaglist() {
-		Cursor c = getContentResolver().query(ShoppingContract.Items.CONTENT_URI,
-				new String[] { ShoppingContract.Items.TAGS }, null, null,
-				ShoppingContract.Items.DEFAULT_SORT_ORDER);
+		return getTaglist(null);
+	}
+	
+	/**
+	 * Create list of tags.
+	 * 
+	 * Tags for notes can be comma-separated. Here we create a list of the
+	 * unique tags.
+	 * 
+	 * @param c
+	 * @return
+	 */
+	String[] getTaglist(String listId) {		
+		Cursor c;
+
+		if (listId == null) {
+			c = getContentResolver().query(ShoppingContract.Items.CONTENT_URI,
+					new String[] { ShoppingContract.Items.TAGS }, null, null,
+					ShoppingContract.Items.DEFAULT_SORT_ORDER);
+		} else {
+			Uri uri = Uri.parse("content://org.openintents.shopping/listtags").buildUpon().appendPath(listId).build();
+			c = getContentResolver().query(uri,
+					new String[] { ShoppingContract.ContainsFull.ITEM_TAGS }, 
+					null, null,	null);
+		}
+		
 		// Create a set of all tags (every tag should only appear once).
 		HashSet<String> tagset = new HashSet<String>();
 		c.moveToPosition(-1);

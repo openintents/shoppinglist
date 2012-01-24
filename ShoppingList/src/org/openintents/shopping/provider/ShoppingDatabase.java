@@ -19,6 +19,7 @@ package org.openintents.shopping.provider;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.shopping.library.provider.ShoppingContract.ItemStores;
 import org.openintents.shopping.library.provider.ShoppingContract.Items;
+import org.openintents.shopping.library.provider.ShoppingContract.Lists;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -46,7 +47,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 	 * 10: Release 1.3.1-beta
 	 * 11: Release 1.4.0-beta
 	 */
-	static final int DATABASE_VERSION = 11;
+	static final int DATABASE_VERSION = 12;
 
 	public static final String DATABASE_NAME = "shopping.db";
 	
@@ -84,7 +85,9 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				+ "skin_background VARCHAR," // V2
 				+ "skin_font VARCHAR," // V2
 				+ "skin_color INTEGER," // V2
-				+ "skin_color_strikethrough INTEGER" // V2					
+				+ "skin_color_strikethrough INTEGER," // V2	
+				+ "store_filter INTEGER DEFAULT -1," // V12
+				+ "tags_filter VARCHAR" // V12
 				+ ");");
 		db.execSQL("CREATE TABLE contains (" + "_id INTEGER PRIMARY KEY," // V1
 				+ "item_id INTEGER," // V1
@@ -277,6 +280,16 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				db.execSQL("CREATE INDEX IF NOT EXISTS "
 						+ " itemstores_item_id on itemstores "
 						+ " ( item_id asc, price asc );"); // V11
+				// NO break;
+			case 11:
+				try {
+					db.execSQL("ALTER TABLE lists ADD COLUMN "
+							+ Lists.STORE_FILTER + " INTEGER DEFAULT -1;");
+					db.execSQL("ALTER TABLE lists ADD COLUMN "
+							+ Lists.TAGS_FILTER + " VARCHAR;");
+				} catch (SQLException e) {
+					Log.e(ShoppingProvider.TAG, "Error executing SQL: ", e);
+				}
 				// NO break;
 
 				// NO break UNTIL HERE!

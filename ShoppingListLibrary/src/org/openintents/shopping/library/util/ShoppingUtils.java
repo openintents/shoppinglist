@@ -774,5 +774,48 @@ public class ShoppingUtils {
 		}
 		return items;
 	}
+	
+	public static String getListFilterStoreName(Context context, Uri list_uri) {
+		String filter = null;
+		String store_id;
+		Cursor c = context.getContentResolver().query(list_uri,
+				new String[] { Lists.STORE_FILTER }, null, null, null);
+		if (c.getCount() > 0) {
+			c.moveToFirst();
+			store_id = c.getString(0);
+			c.deactivate();
+			c.close();
+		
+			if (store_id.length() > 0) {
+				c = context.getContentResolver().query(Stores.CONTENT_URI,
+					new String[] { Stores.NAME }, "_id = ?", new String[] {store_id}, null);
+				if (c != null) {
+				  if (c.getCount() >0) {
+					  c.moveToFirst();
+					  filter = c.getString(0);
+				  }
+				  c.deactivate();
+				  c.close();
+				}
+			}
+		}	
+		return filter;
+	}
+	public static String getListTagsFilter(Context context, Uri list_uri) {
+		String filter = null;
+		Cursor c = context.getContentResolver().query(list_uri,
+				new String[] { Lists.TAGS_FILTER }, null, null, null);
+		if (c.getCount() > 0) {
+			c.moveToFirst();
+			filter = c.getString(0);
+			c.deactivate();
+			c.close();
+		
+			if (filter != null && filter.length() == 0) {
+				filter = null;
+			}
+		}	
+		return filter;
+	}
 
 }
