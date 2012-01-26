@@ -85,12 +85,13 @@ public class TestShoppingActivity extends
 	
 	public void testUiAddItem() {
 		String itemname = "testitem_add_" + random.nextInt(10000);
-		
+		String add = getAppString(org.openintents.shopping.R.string.add);
+
 		// Enter item
 		solo.enterText(0, itemname);
 
 		// Click on button
-		solo.clickOnButton("Add");
+		solo.clickOnButton(add);
 
 		// Verify that item got added
 		assertTrue(solo.searchText(itemname));
@@ -98,23 +99,25 @@ public class TestShoppingActivity extends
 	
 	public void testUiDeleteItemPermanently() {
 		String itemname = "testitem_delete_" + random.nextInt(10000);
+		String add = getAppString(org.openintents.shopping.R.string.add);
+		
 		solo.enterText(0, itemname);
-		solo.clickOnButton("Add");
+		solo.clickOnButton(add);
 		assertTrue(solo.searchText(itemname));
 		
 		// Now delete the item
 		solo.clickLongOnText(itemname);
 
 		// Make sure context menu opened:
-		assertTrue(solo.searchText("Edit item"));
-		assertTrue(solo.searchText("Mark item"));
+		assertTrue(solo.searchText(getAppString(org.openintents.shopping.R.string.menu_edit_item)));
+		assertTrue(solo.searchText(getAppString(org.openintents.shopping.R.string.menu_mark_item)));
 
-		solo.clickOnText("Delete item permanently");
+		solo.clickOnText(getAppString(org.openintents.shopping.R.string.menu_delete_item));
 
 		// Make sure user is asked before this
-		assertTrue(solo.searchText("Are you sure"));
+		assertTrue(solo.searchText(getAppString(org.openintents.shopping.R.string.delete_item_confirm)));
 
-		solo.clickOnText("Delete");
+		solo.clickOnText(getAppString(org.openintents.shopping.R.string.delete));
 
 		assertFalse(solo.searchText(itemname));
 	}
