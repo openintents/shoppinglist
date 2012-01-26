@@ -65,7 +65,9 @@
 	<string name="menu_delete_store">Zmazať obchod</string>
 	<string name="confirm_delete_store">Naozaj chcete zmazať tento obchod?</string>
 	<string name="no_items_available">Žiadne položky niesu dostupné</string>
-	
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
@@ -84,7 +86,7 @@
 	<string name="menu_start_shopping">Nakupovanie</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s - Vybrať položky</string>
+	<string name="pick_items_title">%s - Vybrať položky</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - Nakupovanie</string>
@@ -101,9 +103,12 @@
 	<string name="has_note">Má Poznámku</string>
 	<string name="units">Jednotky</string>
 	<string name="note">Poznámka</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
 	
 	<string name="otherqty">Iné Množstvo...</string>
 	<string name="otherpri">Iná Priorita...</string>   
+	<string name="unfiltered">(Unfiltered)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Spolu: %s</string>
@@ -181,6 +186,8 @@
 	<string name="preference_perstoreprice_summary">Sledovať samostatné ceny pre každú položku v každom obchode.</string>
 	<string name="preference_screenlock_title">Vypnúť uzamykanie obrazovky</string>
 	<string name="preference_screenlock_summary">Ak zaškrtnuté, zabraňuje uzamykaniu obrazovky.</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
 	<string name="preference_reset_quantity">Obnoviť Kvantitu</string>
 	<string name="preference_reset_quantity_summary">Pri novom pridaní položky obnoví kvantitu.</string>
 	<string name="preference_add_for_barcode">Skener čiarových kódov</string>

@@ -64,7 +64,9 @@
 	<string name="menu_delete_store">ਦੁਕਾਨ ਹਟਾਵਾਂ</string>
 	<string name="confirm_delete_store">ਕੀ ਤੁਸੀ ਵਾਸਤਵ ਵਿੱਚ ਇਸ ਦੁਕਾਨ ਨੂੰ ਨਸ਼ਟ ਕਰਣਾ ਚਾਹੁੰਦੇ ਹੋ ?</string>
 	<string name="no_items_available">ਕੋਈ ਆਈਟਮ ਉਪਲੱਬਧ ਨਹੀਂ</string>
-	
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
@@ -83,7 +85,7 @@
 	<string name="menu_start_shopping">ਖਰੀਦਦਾਰੀ</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s- ਆਇਟਮ ਚੁੱਕੋ</string>
+	<string name="pick_items_title">%s- ਆਇਟਮ ਚੁੱਕੋ</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s- ਖਰੀਦਾਰੀ</string>
@@ -100,9 +102,12 @@
 	<string name="has_note">ਨੋਟ ਹੈ</string>
 	<string name="units">ਯੂਨਿਟ</string>
 	<string name="note">ਨੋਟ</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
 	
 	<string name="otherqty">ਹੋਰ ਮਾਤਰਾ...</string>
 	<string name="otherpri">ਹੋਰ ਅਗੇਤ...</string>   
+	<string name="unfiltered">(Unfiltered)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">ਕੁਲ: %s</string>
@@ -180,6 +185,8 @@
 	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
 	<string name="preference_screenlock_title">Disable screen lock</string>
 	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
 	<string name="preference_reset_quantity">Reset Quantity</string>
 	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
 	<string name="preference_add_for_barcode">Barcode Scanner</string>

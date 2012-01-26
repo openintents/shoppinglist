@@ -68,7 +68,9 @@ Launchpad Contributions:
 	<string name="menu_delete_store">Mağazayı sil</string>
 	<string name="confirm_delete_store">Bu mağazayı silmek istediğinizden emin misiniz?</string>
 	<string name="no_items_available">Hiçbir öğe mevcut değil</string>
-	
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
@@ -87,7 +89,7 @@ Launchpad Contributions:
 	<string name="menu_start_shopping">Alışveriş</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s - Öğeleri seçin</string>
+	<string name="pick_items_title">%s - Öğeleri seçin</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - Alışveriş</string>
@@ -104,9 +106,12 @@ Launchpad Contributions:
 	<string name="has_note">Not var</string>
 	<string name="units">Birim</string>
 	<string name="note">Not</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
 	
 	<string name="otherqty">Diğer Miktar...</string>
 	<string name="otherpri">Diğer Öncelik...</string>   
+	<string name="unfiltered">(Unfiltered)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Toplam: %s</string>
@@ -184,6 +189,8 @@ Launchpad Contributions:
 	<string name="preference_perstoreprice_summary">Öğenin farklı mağazalardaki farklı fiyatlarını takip et</string>
 	<string name="preference_screenlock_title">Ekran kilidi devre dışı bırakın.</string>
 	<string name="preference_screenlock_summary">Seçildiğinde ekranın kilitlenmesini engeller.</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
 	<string name="preference_reset_quantity">Miktarı sıfırlayın</string>
 	<string name="preference_reset_quantity_summary">Yeniden öğeler eklediğinizde miktar sıfırlanır.</string>
 	<string name="preference_add_for_barcode">Barcode Scanner</string>

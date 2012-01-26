@@ -67,7 +67,9 @@ Launchpad Contributions:
 	<string name="menu_delete_store">أحذف المتجر</string>
 	<string name="confirm_delete_store">هل أنت متأكد من رغبتك في حذف هذا المتجر  ؟</string>
 	<string name="no_items_available">لا يوجد أي عنصر متوفر</string>
-	
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
@@ -86,7 +88,7 @@ Launchpad Contributions:
 	<string name="menu_start_shopping">التسوق</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s - اختر العناصر</string>
+	<string name="pick_items_title">%s - اختر العناصر</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - التسوق</string>
@@ -103,9 +105,12 @@ Launchpad Contributions:
 	<string name="has_note">له ملاحظات</string>
 	<string name="units">الوحدات</string>
 	<string name="note">الملاحظة</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
 	
 	<string name="otherqty">كمية أخرى...</string>
 	<string name="otherpri">أولوية أخرى...</string>   
+	<string name="unfiltered">(Unfiltered)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">المجموع: %s</string>
@@ -183,6 +188,8 @@ Launchpad Contributions:
 	<string name="preference_perstoreprice_summary">تتبع الأسعار المنفصلة لكل عنصر في كل متجر</string>
 	<string name="preference_screenlock_title">تعطيل قفل الشاشة</string>
 	<string name="preference_screenlock_summary">منع الشاشة من الايقاف عند التحديد.</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
 	<string name="preference_reset_quantity">اعادة الكمية</string>
 	<string name="preference_reset_quantity_summary">اعادة الكمية عند اضافة عناصرمرة أخرى.</string>
 	<string name="preference_add_for_barcode">ماسح الباركود</string>

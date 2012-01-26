@@ -65,7 +65,9 @@
 	<string name="menu_delete_store">स्टोर खे मिटायो</string>
 	<string name="confirm_delete_store">शा तहां सहियमें इन्ह स्टोर खे मितायण ता चाह्यो</string>
 	<string name="no_items_available">कोई आइटम मोजूद काने</string>
-	
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
@@ -84,7 +86,7 @@
 	<string name="menu_start_shopping">खरीदारी</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">s - आइटम चुन्द्यो%</string>
+	<string name="pick_items_title">s - आइटम चुन्द्यो%</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">s - खरीदारी %</string>
@@ -101,9 +103,12 @@
 	<string name="has_note">व्याख्या तस</string>
 	<string name="units">इकाईयाँ</string>
 	<string name="note">व्याख्या</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
 	
 	<string name="otherqty">बी मात्रा</string>
 	<string name="otherpri">बी प्रधानता</string>   
+	<string name="unfiltered">(Unfiltered)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">कुल: %s</string>
@@ -181,6 +186,8 @@
 	<string name="preference_perstoreprice_summary">हर हिक्क आइटम जी अलग किमात्युं ते नज़र रख्यो</string>
 	<string name="preference_screenlock_title">स्क्रीन ताले खे  बंद क्यों</string>
 	<string name="preference_screenlock_summary">जांच थाय्न्द खां पो स्क्रीन खे लोकक थ्यंद खा  बचाईन्दो आ</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
 	<string name="preference_reset_quantity">मात्रा खे वारी सां सेट कयो</string>
 	<string name="preference_reset_quantity_summary">आइटमन खे जोदंडे समय मात्राखे वारी सां सेट कयो</string>
 	<string name="preference_add_for_barcode">बारकोड स्कैनर</string>

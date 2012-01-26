@@ -30,7 +30,8 @@
   Peli https://launchpad.net/~peli0101
   SpaceCafé https://launchpad.net/~spacecafe
   friedger https://launchpad.net/~friedger
-  markus.ruderman https://launchpad.net/~markus-ruderman</string>
+  markus.ruderman https://launchpad.net/~markus-ruderman
+  mrx5682 https://launchpad.net/~mrx5682</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
 	<string name="about_comments">Die OI Einkaufsliste ist Ihre Gedächtnishilfe beim Einkaufen.</string>
@@ -72,7 +73,9 @@
 	<string name="menu_delete_store">Geschäft löschen</string>
 	<string name="confirm_delete_store">Geschäft wirklich löschen?</string>
 	<string name="no_items_available">Keine Einträge vorhanden</string>
-	
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
@@ -91,7 +94,7 @@
 	<string name="menu_start_shopping">Einkaufen</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s - Einträge auswählen</string>
+	<string name="pick_items_title">%s - Einträge auswählen</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - Einkaufen</string>
@@ -108,9 +111,12 @@
 	<string name="has_note">mit Notiz</string>
 	<string name="units">Maßeinheiten</string>
 	<string name="note">Bemerkung</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
 	
 	<string name="otherqty">Andere Anzahl...</string>
 	<string name="otherpri">Andere Priorität...</string>   
+	<string name="unfiltered">(Unfiltered)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Summe: %s</string>
@@ -179,8 +185,8 @@
 	<string name="preference_capitalization_dialog_title">Großschreibung auswählen</string> 
 	<string name="preference_hidechecked_title">Ausgewählten Eintrag verbergen</string>
 	<string name="preference_hidechecked_summary">Erledigte Einträge sofort verbergen</string>
-	<string name="preference_fastscroll_title">Fast Scrolling</string>
-	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
+	<string name="preference_fastscroll_title">Schnelles Scrollen</string>
+	<string name="preference_fastscroll_summary">Die Scrollsteuerung erscheint wenn 35 oder mehr Einträge gescrollt werden</string>
 	<string name="preference_showprice_title">Preis anzeigen</string>
 	<string name="preference_showprice_summary">Wird als separate Spalte in der Liste angezeigt</string>
 	<string name="preference_perstoreprice">Preise je Geschäft</string>
@@ -188,6 +194,8 @@
 	<string name="preference_perstoreprice_summary">Seperate Preise für jedes Item in jedem Shop verfolgen.</string>
 	<string name="preference_screenlock_title">Bildschirmsperre deaktivieren</string>
 	<string name="preference_screenlock_summary">Wenn aktiviert, wird der Bildschirm nicht mehr gesperrt.</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
 	<string name="preference_reset_quantity">Anzahl zurücksetzen</string>
 	<string name="preference_reset_quantity_summary">Setzt die Anzahl zurück, wenn weitere Items hinzugefügt werden.</string>
 	<string name="preference_add_for_barcode">Barcode Scanner</string>

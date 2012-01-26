@@ -64,7 +64,9 @@
 	<string name="menu_delete_store">Slett butikk</string>
 	<string name="confirm_delete_store">Vil du virkelig slette denne butikken?</string>
 	<string name="no_items_available">Ingen punkter tilgjengelige</string>
-	
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
@@ -83,7 +85,7 @@
 	<string name="menu_start_shopping">Handling</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s - Velg punkter</string>
+	<string name="pick_items_title">%s - Velg punkter</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - Handling</string>
@@ -100,9 +102,12 @@
 	<string name="has_note">Har notat</string>
 	<string name="units">Enheter</string>
 	<string name="note">Notat</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
 	
 	<string name="otherqty">Annet antall...</string>
 	<string name="otherpri">Annen prioritet...</string>   
+	<string name="unfiltered">(Unfiltered)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Totalsum: %s</string>
@@ -180,6 +185,8 @@
 	<string name="preference_perstoreprice_summary">Hold styr på seperate priser for hvert punkt i hver butikk.</string>
 	<string name="preference_screenlock_title">Deaktiver skjermlås</string>
 	<string name="preference_screenlock_summary">Hindrer skjermen fra å bli låst når krysset.</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
 	<string name="preference_reset_quantity">Tilbakestill antall</string>
 	<string name="preference_reset_quantity_summary">Tilbakestiller antall når nye punkter blir lagt til.</string>
 	<string name="preference_add_for_barcode">Strekkodeleser</string>

@@ -68,7 +68,9 @@
 	<string name="menu_delete_store">Изтрии слад</string>
 	<string name="confirm_delete_store">Наистина ли сикате да изтриете този склад</string>
 	<string name="no_items_available">Елементите не са действащи</string>
-	
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
@@ -87,7 +89,7 @@
 	<string name="menu_start_shopping">Пазаруване</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s - Избери елементи</string>
+	<string name="pick_items_title">%s - Избери елементи</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - Пазаруване</string>
@@ -104,9 +106,12 @@
 	<string name="has_note">Има забележка</string>
 	<string name="units">Единици</string>
 	<string name="note">Забележка</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
 	
 	<string name="otherqty">Друго количество...</string>
 	<string name="otherpri">Друг приоритет...</string>   
+	<string name="unfiltered">(Unfiltered)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Общо: %s</string>
@@ -184,6 +189,8 @@
 	<string name="preference_perstoreprice_summary">Следене на отделни цени за всеки елемент на всеки магазин.</string>
 	<string name="preference_screenlock_title">Деактивирай заключването на екрана</string>
 	<string name="preference_screenlock_summary">Когато е маркино, не позволява на екрана да се заключи.</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
 	<string name="preference_reset_quantity">Нулирай количеството</string>
 	<string name="preference_reset_quantity_summary">Нулира количеството, когато се добавят отново се добавят артикули.</string>
 	<string name="preference_add_for_barcode">Баркод Скенер</string>

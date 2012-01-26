@@ -66,7 +66,9 @@
 	<string name="menu_delete_store">מחק חנות</string>
 	<string name="confirm_delete_store">האם אתה בטוח כי ברצונך למחוק חנות זו?</string>
 	<string name="no_items_available">אין פריטים זמינים</string>
-	
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
@@ -85,7 +87,7 @@
 	<string name="menu_start_shopping">קניות</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s - בחר פריטים</string>
+	<string name="pick_items_title">%s - בחר פריטים</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - קניות</string>
@@ -102,9 +104,12 @@
 	<string name="has_note">יש הערה</string>
 	<string name="units">יחידות</string>
 	<string name="note">הערה</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
 	
 	<string name="otherqty">כמות אחרת...</string>
 	<string name="otherpri">עדיפות אחרת...</string>   
+	<string name="unfiltered">(Unfiltered)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">סך הכל : %s</string>
@@ -182,6 +187,8 @@
 	<string name="preference_perstoreprice_summary">עקוב אחר מחירים נפרדים לכל פריט בכל חנות.</string>
 	<string name="preference_screenlock_title">בטל נעילת מסך</string>
 	<string name="preference_screenlock_summary">מונע נעילת מסך כשזה מסומן.</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
 	<string name="preference_reset_quantity">מאתחל כמות</string>
 	<string name="preference_reset_quantity_summary">מאתחל כמות כשמוסיף פריטים שוב.</string>
 	<string name="preference_add_for_barcode">Barcode Scanner</string>

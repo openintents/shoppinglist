@@ -67,7 +67,9 @@
 	<string name="menu_delete_store">店を削除する</string>
 	<string name="confirm_delete_store">本当にこの店を削除したいですか？</string>
 	<string name="no_items_available">利用できるアイテムはありません</string>
-	
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
@@ -86,7 +88,7 @@
 	<string name="menu_start_shopping">ショッピング</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s - アイテムを選択</string>
+	<string name="pick_items_title">%s - アイテムを選択</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - ショッピング</string>
@@ -103,9 +105,12 @@
 	<string name="has_note">ノートがある</string>
 	<string name="units">単位</string>
 	<string name="note">ノート</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
 	
 	<string name="otherqty">他の個数...</string>
 	<string name="otherpri">他の優先度...</string>   
+	<string name="unfiltered">(Unfiltered)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">合計価格: %s</string>
@@ -183,6 +188,8 @@
 	<string name="preference_perstoreprice_summary">各店の個別のアイテムの値段を記録する</string>
 	<string name="preference_screenlock_title">スクリーンロックを無効にする</string>
 	<string name="preference_screenlock_summary">チェックされているとスクリーンがロックされるのを防ぎます。</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
 	<string name="preference_reset_quantity">量をリセット</string>
 	<string name="preference_reset_quantity_summary">アイテムを再追加するときに個数をリセットします。</string>
 	<string name="preference_add_for_barcode">バーコードスキャナー</string>

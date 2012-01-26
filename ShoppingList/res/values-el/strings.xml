@@ -22,6 +22,7 @@
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
   Giannis Konstantinidis https://launchpad.net/~giankonstantinidis
+  OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
@@ -64,7 +65,9 @@
 	<string name="menu_delete_store">Διαγραφή καταστήματος</string>
 	<string name="confirm_delete_store">Θέλετε σίγουρα να διαγράψετε αυτό το κατάστημα;</string>
 	<string name="no_items_available">Δεν υπάρχουν διαθέσιμα αντικείμενα</string>
-	
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
@@ -83,7 +86,7 @@
 	<string name="menu_start_shopping">Αγορές</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s - Επιλογή στοιχείων</string>
+	<string name="pick_items_title">%s - Επιλογή στοιχείων</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - Αγορές</string>
@@ -100,9 +103,12 @@
 	<string name="has_note">Έχει Σημείωση</string>
 	<string name="units">Μονάδες</string>
 	<string name="note">Σημείωση</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
 	
 	<string name="otherqty">Άλλη Ποσότητα...</string>
 	<string name="otherpri">Άλλη Προτεραιότητα...</string>   
+	<string name="unfiltered">(Unfiltered)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Σύνολο: %s</string>
@@ -180,6 +186,8 @@
 	<string name="preference_perstoreprice_summary">Παρακολουθήστε τις διαφορετικές τιμές για κάθε αντικείμενο σε κάθε κατάστημα.</string>
 	<string name="preference_screenlock_title">Απενεργοποίηση του κλειδώματος οθόνης</string>
 	<string name="preference_screenlock_summary">Αποτρέπει το κλείδωμα της οθόνης όταν είναι επιλεγμένο.</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
 	<string name="preference_reset_quantity">Επαναφορά Ποσότητας</string>
 	<string name="preference_reset_quantity_summary">Επαναφέρει την ποσότητα κατά την προσθήκη αντικειμένων ξανά.</string>
 	<string name="preference_add_for_barcode">Σαρωτής Γραμμωτού Κώδικα</string>

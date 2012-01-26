@@ -65,7 +65,9 @@
 	<string name="menu_delete_store">가게 삭제하기</string>
 	<string name="confirm_delete_store">이 가게를 삭제하시겠습니까?</string>
 	<string name="no_items_available">항목이 없습니다</string>
-	
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
@@ -84,7 +86,7 @@
 	<string name="menu_start_shopping">쇼핑</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s - 항목을 고르세요</string>
+	<string name="pick_items_title">%s - 항목을 고르세요</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - 쇼핑</string>
@@ -101,9 +103,12 @@
 	<string name="has_note">메모가 있습니다</string>
 	<string name="units">단위</string>
 	<string name="note">메모</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
 	
 	<string name="otherqty">다른 수량...</string>
 	<string name="otherpri">다른 우선순위...</string>   
+	<string name="unfiltered">(Unfiltered)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">합계: %s</string>
@@ -181,6 +186,8 @@
 	<string name="preference_perstoreprice_summary">각 항목과 가게에 대한 가격을 추적합니다.</string>
 	<string name="preference_screenlock_title">화면 잠금 끄기</string>
 	<string name="preference_screenlock_summary">체크된 경우 화면이 잠기는 것을 방지합니다.</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
 	<string name="preference_reset_quantity">수량 초기화</string>
 	<string name="preference_reset_quantity_summary">항목을 다시 추가할 경우 수량을 초기화 합니다.</string>
 	<string name="preference_add_for_barcode">Barcode Scanner</string>

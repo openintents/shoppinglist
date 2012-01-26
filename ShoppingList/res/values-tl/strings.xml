@@ -64,7 +64,9 @@
 	<string name="menu_delete_store">Alisin ang tindahan</string>
 	<string name="confirm_delete_store">Gusto mo ba talagang alisin ang tindahan na ito?</string>
 	<string name="no_items_available">Walang mga bagay na magagamit</string>
-	
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
@@ -83,7 +85,7 @@
 	<string name="menu_start_shopping">Pamimili</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s - Pumili ng mga bagay</string>
+	<string name="pick_items_title">%s - Pumili ng mga bagay</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - Pamimili</string>
@@ -100,9 +102,12 @@
 	<string name="has_note">May Tala</string>
 	<string name="units">Mga Yunit</string>
 	<string name="note">Tala</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
 	
 	<string name="otherqty">Ibang Bilang...</string>
 	<string name="otherpri">Ibang Prioridad</string>   
+	<string name="unfiltered">(Unfiltered)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Total: %s</string>
@@ -180,6 +185,8 @@
 	<string name="preference_perstoreprice_summary">Mag-subaybay ng ibat-ibang mga presyo para sa bawat bagay sa bawat tindahan.</string>
 	<string name="preference_screenlock_title">Huwag paganahin ang screen lock</string>
 	<string name="preference_screenlock_summary">Pinipigilan ang screen na ma-lock kapag may tsek.</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
 	<string name="preference_reset_quantity">I-reset ang Dami</string>
 	<string name="preference_reset_quantity_summary">I-reset ang dami kapag muling nagdadagdag ng mga bagay.</string>
 	<string name="preference_add_for_barcode">Barcode Scanner</string>

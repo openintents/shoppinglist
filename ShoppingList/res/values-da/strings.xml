@@ -65,7 +65,9 @@ Launchpad Contributions:
 	<string name="menu_delete_store">Delete store</string>
 	<string name="confirm_delete_store">Do you really want to delete this store?</string>
 	<string name="no_items_available">Ingen tilgængelige varer</string>
-	
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
@@ -84,7 +86,7 @@ Launchpad Contributions:
 	<string name="menu_start_shopping">Indkøb</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s - Vælg varer</string>
+	<string name="pick_items_title">%s - Vælg varer</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - Indkøb</string>
@@ -101,9 +103,12 @@ Launchpad Contributions:
 	<string name="has_note">Has Note</string>
 	<string name="units">Units</string>
 	<string name="note">Note</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
 	
 	<string name="otherqty">Other Quantity...</string>
 	<string name="otherpri">Other Priority...</string>   
+	<string name="unfiltered">(Unfiltered)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">I alt: %s</string>
@@ -181,6 +186,8 @@ Launchpad Contributions:
 	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
 	<string name="preference_screenlock_title">Disable screen lock</string>
 	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
 	<string name="preference_reset_quantity">Reset Quantity</string>
 	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
 	<string name="preference_add_for_barcode">Barcode Scanner</string>

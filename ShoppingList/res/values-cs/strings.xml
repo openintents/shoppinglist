@@ -67,7 +67,9 @@
 	<string name="menu_delete_store">Odstranit obchod</string>
 	<string name="confirm_delete_store">Opravdu chcete odstranit tento obchod?</string>
 	<string name="no_items_available">Žádné položky nejsou k dispozici</string>
-	
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
@@ -86,7 +88,7 @@
 	<string name="menu_start_shopping">Nakupování</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s - Zvolit položky</string>
+	<string name="pick_items_title">%s - Zvolit položky</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - Nakupování</string>
@@ -103,9 +105,12 @@
 	<string name="has_note">Má poznámku</string>
 	<string name="units">Jednotky</string>
 	<string name="note">Poznámka</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
 	
 	<string name="otherqty">Jiné množství...</string>
 	<string name="otherpri">Jiná priorita...</string>   
+	<string name="unfiltered">(Unfiltered)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Celkem: %s</string>
@@ -183,6 +188,8 @@
 	<string name="preference_perstoreprice_summary">Pamatovat si pro každou položku v každém obchodě zvláštní cenu</string>
 	<string name="preference_screenlock_title">Zakázat zamknutí obrazovky</string>
 	<string name="preference_screenlock_summary">Pokud zaškrtnuto, zabraňuje dispeji se zamknout</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
 	<string name="preference_reset_quantity">Vynulovat množství</string>
 	<string name="preference_reset_quantity_summary">Vynulovat množství při znovupřidávání položek</string>
 	<string name="preference_add_for_barcode">Skener čárových kódů</string>

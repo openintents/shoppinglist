@@ -67,7 +67,9 @@
 	<string name="menu_delete_store">حذف فروشگاه</string>
 	<string name="confirm_delete_store">آیا شما واقعا می خواهید به حذف این فروشگاه؟</string>
 	<string name="no_items_available">هيچ موردي وجود ندارد</string>
-	
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
@@ -86,7 +88,7 @@
 	<string name="menu_start_shopping">خرید</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s - انتخاب موارد</string>
+	<string name="pick_items_title">%s - انتخاب موارد</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - خرید</string>
@@ -103,9 +105,12 @@
 	<string name="has_note">يادداشت دارد</string>
 	<string name="units">واحدها</string>
 	<string name="note">یادداشت</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
 	
 	<string name="otherqty">مقدار دیگر...</string>
 	<string name="otherpri">اولویت دیگر...</string>   
+	<string name="unfiltered">(Unfiltered)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">جمع كل: %s</string>
@@ -183,6 +188,8 @@
 	<string name="preference_perstoreprice_summary">پیگیری قیمت های جداگانه برای هر آیتم در هر فروشگاه.</string>
 	<string name="preference_screenlock_title">غیر فعال کردن قفل صفحه نمایش</string>
 	<string name="preference_screenlock_summary">جلوگیری از صفحه نمایش قفل شده است زمانی که چک.</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
 	<string name="preference_reset_quantity">بازنشانی مقدار</string>
 	<string name="preference_reset_quantity_summary">تنظیم مجدد مقدار در هنگام اضافه کردن آیتم دوباره.</string>
 	<string name="preference_add_for_barcode">اسکنر بارکد</string>

@@ -21,7 +21,8 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
-  Alexander Geroimenko https://launchpad.net/~geroimenko</string>
+  Alexander Geroimenko https://launchpad.net/~geroimenko
+  OpenIntents devs https://launchpad.net/~openintents-devs</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
 	<string name="about_comments">Сачыце за таварамі пры дапамозе OI Пакупкі.</string>
@@ -63,7 +64,9 @@
 	<string name="menu_delete_store">Выдаліць магазін</string>
 	<string name="confirm_delete_store">Вы ўпэўнены, што жадаеце выдаліць гэты магазін?</string>
 	<string name="no_items_available">Няма даступных элементаў</string>
-	
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
@@ -82,7 +85,7 @@
 	<string name="menu_start_shopping">Пакупкі</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s - Абрана элементаў</string>
+	<string name="pick_items_title">%s - Абрана элементаў</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - Спіс</string>
@@ -99,9 +102,12 @@
 	<string name="has_note">Ёсць нататка</string>
 	<string name="units">Адзінкі вымярэння</string>
 	<string name="note">Нататка</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
 	
 	<string name="otherqty">Іншая колькасць...</string>
 	<string name="otherpri">Іншы прыярытэт...</string>   
+	<string name="unfiltered">(Unfiltered)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Усяго: %s</string>
@@ -179,6 +185,8 @@
 	<string name="preference_perstoreprice_summary">Сачыць за цэнамі асобна на кожны тавар у кожным магазіне.</string>
 	<string name="preference_screenlock_title">Адключыць блакіроўку экрана</string>
 	<string name="preference_screenlock_summary">Прадухіляе блакіраванне экрана падчас праверак.</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
 	<string name="preference_reset_quantity">Скінуць колькасць</string>
 	<string name="preference_reset_quantity_summary">Скідваць колькасць пры даданні элементаў.</string>
 	<string name="preference_add_for_barcode">Сканэр штрых-кода</string>

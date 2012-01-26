@@ -71,7 +71,9 @@
 	<string name="menu_delete_store">Usuń sklep</string>
 	<string name="confirm_delete_store">Czy na pewno chcesz usunąć ten sklep?</string>
 	<string name="no_items_available">Brak elementów</string>
-	
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
@@ -90,7 +92,7 @@
 	<string name="menu_start_shopping">Zakupy</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_titel">%s - wybierz elementy</string>
+	<string name="pick_items_title">%s - wybierz elementy</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
 	<string name="shopping_title">%s - zakupy</string>
@@ -107,9 +109,12 @@
 	<string name="has_note">Ma notatkę</string>
 	<string name="units">Jednostki</string>
 	<string name="note">Notatka</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
 	
 	<string name="otherqty">Inna Ilość...</string>
 	<string name="otherpri">Inny Priorytet...</string>   
+	<string name="unfiltered">(Unfiltered)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Razem: %s</string>
@@ -187,6 +192,8 @@
 	<string name="preference_perstoreprice_summary">Śledź ceny oddzielnie dla każdego elementu w każdym sklepie.</string>
 	<string name="preference_screenlock_title">Wyłącz blokadę ekranu</string>
 	<string name="preference_screenlock_summary">Zapobiega blokadzie ekranu podczas sprawdzania.</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
 	<string name="preference_reset_quantity">Resetuj Ilość</string>
 	<string name="preference_reset_quantity_summary">Resetuje ilość podczas dodawania elementów ponownie.</string>
 	<string name="preference_add_for_barcode">Skaner kodów kreskowych</string>
