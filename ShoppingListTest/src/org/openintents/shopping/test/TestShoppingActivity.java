@@ -49,7 +49,7 @@ public class TestShoppingActivity extends
 
 	protected void tearDown() throws Exception {
 		try {
-			this.solo.finalize();
+			this.solo.finishOpenedActivities();
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
