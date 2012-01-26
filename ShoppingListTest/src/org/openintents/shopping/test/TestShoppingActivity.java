@@ -57,6 +57,32 @@ public class TestShoppingActivity extends
 		super.tearDown();
 	}
 
+	private String getAppString(int resId) {
+		return activity.getString(resId);
+	}
+	
+	public void test000Eula() {
+		String accept = getAppString(org.openintents.distribution.R.string.oi_distribution_eula_accept);
+		String cancel = getAppString(org.openintents.distribution.R.string.oi_distribution_eula_refuse);
+		boolean existsAccept = solo.searchButton(accept);
+		boolean existsCancel = solo.searchButton(cancel);
+		
+		if (existsAccept && existsCancel) {
+			solo.clickOnButton(accept);
+		}
+	}
+
+	public void test001RecentChanges() {
+		String recentChanges = getAppString(org.openintents.distribution.R.string.oi_distribution_newversion_recent_changes);
+		String cont = getAppString(org.openintents.distribution.R.string.oi_distribution_newversion_continue);
+		boolean existsRecentChanges = solo.searchText(recentChanges);
+		boolean existsCont = solo.searchButton(cont);
+		
+		if (existsRecentChanges && existsCont) {
+			solo.clickOnButton(cont);
+		}
+	}
+	
 	public void testUiAddItem() {
 		String itemname = "testitem_add_" + random.nextInt(10000);
 		
