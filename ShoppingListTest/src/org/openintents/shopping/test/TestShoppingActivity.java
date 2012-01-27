@@ -219,16 +219,25 @@ public class TestShoppingActivity extends
 			// Item exists already - delete it first:
 			// Now delete the item
 			solo.clickLongOnText(barcodescanneritem);
-			assertTrue(solo.searchText("Delete item permanently"));
-			solo.clickOnText("Delete item permanently");
-			assertTrue(solo.searchText("Are you sure"));
-			solo.clickOnText("Delete");
+			String delete_item_permanently = getAppString(org.openintents.shopping.R.string.menu_delete_item);
+			assertTrue(solo.searchText(delete_item_permanently));
+			solo.clickOnText(delete_item_permanently);
+			assertTrue(solo.searchText(getAppString(org.openintents.shopping.R.string.delete_item_confirm)));
+			solo.clickOnButton(getAppString(org.openintents.shopping.R.string.delete));
 		}
 		
 		// item does not exist yet:
 		assertFalse(solo.searchText(barcodescanneritem));
 		
-		solo.clickOnMenuItem("Scan Barcode", true);
+		// "Scan barcode test" is defined in Manifest of this Test project
+		String scan_barcode_test = "Scan barcode test";
+		
+		// The following does not always click on the correct menu item:
+		//solo.clickOnMenuItem(scan_barcode_test, true);
+		
+		// Workaround: Open menu manually:
+		solo.sendKey(Solo.MENU);
+		solo.clickOnText(scan_barcode_test);
 
 		Log.d(TAG, "Name 2: " + barcodescanneritem);
 		
