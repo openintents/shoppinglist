@@ -23,9 +23,10 @@ To obtain the current release, visit
 
 ----------------
 release 1.6
-date: 2012-01-25
+date: 2012-01-29
 
 - PLEASE READ THIS: The font size has been adjusted for high-density devices. Please use menu > settings > font size to set the desired size (see issue 427)
+
 - Filter by store or tags. (Enable in advanced preferences.)
 - Fast scrolling support. (Enable in advanced preferences.)
 - Copy Item added to long-press menu.

@@ -1,17 +1,23 @@
 ----------------
 release 1.6
-date: 2012-01-25
+date: 2012-01-29
 
 - PLEASE READ THIS: The font size has been adjusted for high-density devices. Please use menu > settings > font size to set the desired size (see issue 427)
+
+- Filter by store or tags. (Enable in advanced preferences.)
+- Fast scrolling support. (Enable in advanced preferences.)
+- Copy Item added to long-press menu.
 
 Thanks to Google Code-in for many of the following patches:
 (see http://www.google-melange.com/gci/homepage/google/gci2011 )
 
+- Widget. (Google Code-In task by Andrey Zaytsev.)
 - new setting for long press "Add" button (Google Code-in task by Gautam, issue 358)
 - show "Stores" button when tracking per-store prices (Google Code-in task by Michal Zielinski, issue 359)
 - reset all option in settings (Google Code-in task by Andrey Zaytsev, issue 360)
 - fixed bug with disable screen lock (Google Code-in task by Darriel, issue 431)
 - fix font color in list title and text entry field (issue 452)
+- Update totals after changing quantity with Quick Edit.
 
 - new icons and translations by Google Code-in students
 
