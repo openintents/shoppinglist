@@ -67,8 +67,8 @@
 	<string name="menu_delete_store">Șterge magazinul</string>
 	<string name="confirm_delete_store">Sigur doriți să ștergeți acest magazin?</string>
 	<string name="no_items_available">Nu există articole disponibile</string>
-	<string name="no_stores_available">No stores available for this list</string>
-	<string name="no_tags_available">No tags available for this list</string>
+	<string name="no_stores_available">Nu există magazine disponibile pentru această listă</string>
+	<string name="no_tags_available">Nu există etichete disponibile pentru această listă</string>
 	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
@@ -105,12 +105,12 @@
 	<string name="has_note">Are o notiță</string>
 	<string name="units">Unități</string>
 	<string name="note">Notiță</string>
-	<string name="stores">Stores</string>
-	<string name="list">List</string>
+	<string name="stores">Magazine</string>
+	<string name="list">Listă</string>
 	
 	<string name="otherqty">Altă cantitate...</string>
 	<string name="otherpri">Altă prioritate...</string>   
-	<string name="unfiltered">(Unfiltered)</string>
+	<string name="unfiltered">(Nefiltrat)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Total: %s</string>
@@ -179,8 +179,8 @@
 	<string name="preference_capitalization_dialog_title">Alege capitalizarea</string> 
 	<string name="preference_hidechecked_title">Ascunde articolele bifate</string>
 	<string name="preference_hidechecked_summary">Ascunde imediat articolele bifate.</string>
-	<string name="preference_fastscroll_title">Fast Scrolling</string>
-	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
+	<string name="preference_fastscroll_title">Derulare rapidă</string>
+	<string name="preference_fastscroll_summary">Operatorul de derulare apare atunci când se derulează 35 sau mai multe elemente.</string>
 	<string name="preference_showprice_title">Afișează prețul</string>
 	<string name="preference_showprice_summary">Afișează ca o coloană extra în listă.</string>
 	<string name="preference_perstoreprice">Prețuri per magazin</string>
@@ -188,8 +188,8 @@
 	<string name="preference_perstoreprice_summary">Ține evidența prețurilor separate pentru fiecare articol de la fiecare magazin.</string>
 	<string name="preference_screenlock_title">Dezactivează blocarea ecranului</string>
 	<string name="preference_screenlock_summary">Împiedică ecranul să fie blocat când este bifat.</string>
-	<string name="preference_usefilters_title">Filters</string>
-	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
+	<string name="preference_usefilters_title">Filtre</string>
+	<string name="preference_usefilters_summary">Listele pot fi filtrate după etichete sau magazine.</string>
 	<string name="preference_reset_quantity">Resetează cantitatea</string>
 	<string name="preference_reset_quantity_summary">Resetează cantitatea când se adaugă elemente din nou.</string>
 	<string name="preference_add_for_barcode">Scanner pentru cod de bare</string>

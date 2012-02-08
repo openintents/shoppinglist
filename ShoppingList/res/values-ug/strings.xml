@@ -64,8 +64,8 @@
 	<string name="menu_delete_store">دۇكان ئۆچۈر</string>
 	<string name="confirm_delete_store">بۇ دۇكاننى راستلا ئۆچۈرەمسىز؟</string>
 	<string name="no_items_available">ئىشلىتىلىشچان تۈر يوق</string>
-	<string name="no_stores_available">No stores available for this list</string>
-	<string name="no_tags_available">No tags available for this list</string>
+	<string name="no_stores_available">بۇ تىزىمدا دۇكان يوق</string>
+	<string name="no_tags_available">بۇ تىزىمنىڭ بەلگىسى يوق</string>
 	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
@@ -102,12 +102,12 @@
 	<string name="has_note">ئىزاھاتى بار</string>
 	<string name="units">بىرلىكى</string>
 	<string name="note">ئىزاھات</string>
-	<string name="stores">Stores</string>
-	<string name="list">List</string>
+	<string name="stores">دۇكانلار</string>
+	<string name="list">تىزىم</string>
 	
 	<string name="otherqty">باشقا سانى…</string>
 	<string name="otherpri">باشقا ئالدىنلىقى…</string>   
-	<string name="unfiltered">(Unfiltered)</string>
+	<string name="unfiltered">(سۈزۈلمىگەن)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">جەمئى: %s</string>
@@ -185,8 +185,8 @@
 	<string name="preference_perstoreprice_summary">ھەر بىر تۈرنىڭ ھەر بىر دۇكاندىكى باھاسىنى ئىزلاشنى داۋاملاشتۇرىدۇ.</string>
 	<string name="preference_screenlock_title">ئېكران قۇلۇپنى چەكلە</string>
 	<string name="preference_screenlock_summary">تەكشۈرۈلۈۋاتقاندا ئېكران قۇلۇپلاشنىڭ ئالدىنى ئالىدۇ.</string>
-	<string name="preference_usefilters_title">Filters</string>
-	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
+	<string name="preference_usefilters_title">سۈزگۈچلەر</string>
+	<string name="preference_usefilters_summary">تىزىملارنى بەلگە ياكى دۇكانلار بويىچە سۈزگىلى بولىدۇ.</string>
 	<string name="preference_reset_quantity">سانىنى ئەسلىگە قايتۇر</string>
 	<string name="preference_reset_quantity_summary">تۈرلەرنى قايتا قوشقاندا سانىنى ئەسلىگە قايتۇرىدۇ.</string>
 	<string name="preference_add_for_barcode">تاياقچە كود تاراغۇچ</string>

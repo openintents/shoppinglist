@@ -29,6 +29,7 @@
   Patrick Eigensatz https://launchpad.net/~p.eigensatz
   Peli https://launchpad.net/~peli0101
   SpaceCafé https://launchpad.net/~spacecafe
+  appricoo https://launchpad.net/~appricoo
   friedger https://launchpad.net/~friedger
   markus.ruderman https://launchpad.net/~markus-ruderman
   mrx5682 https://launchpad.net/~mrx5682</string>
@@ -73,8 +74,8 @@
 	<string name="menu_delete_store">Geschäft löschen</string>
 	<string name="confirm_delete_store">Geschäft wirklich löschen?</string>
 	<string name="no_items_available">Keine Einträge vorhanden</string>
-	<string name="no_stores_available">No stores available for this list</string>
-	<string name="no_tags_available">No tags available for this list</string>
+	<string name="no_stores_available">Für diese Liste sind keine Geschäfte verfügbar</string>
+	<string name="no_tags_available">Keine Schlagworte für diese Liste verfügbar</string>
 	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
@@ -111,12 +112,12 @@
 	<string name="has_note">mit Notiz</string>
 	<string name="units">Maßeinheiten</string>
 	<string name="note">Bemerkung</string>
-	<string name="stores">Stores</string>
-	<string name="list">List</string>
+	<string name="stores">Läden</string>
+	<string name="list">Liste</string>
 	
 	<string name="otherqty">Andere Anzahl...</string>
 	<string name="otherpri">Andere Priorität...</string>   
-	<string name="unfiltered">(Unfiltered)</string>
+	<string name="unfiltered">(Ungefiltert)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Summe: %s</string>
@@ -194,8 +195,8 @@
 	<string name="preference_perstoreprice_summary">Seperate Preise für jedes Item in jedem Shop verfolgen.</string>
 	<string name="preference_screenlock_title">Bildschirmsperre deaktivieren</string>
 	<string name="preference_screenlock_summary">Wenn aktiviert, wird der Bildschirm nicht mehr gesperrt.</string>
-	<string name="preference_usefilters_title">Filters</string>
-	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
+	<string name="preference_usefilters_title">Filter</string>
+	<string name="preference_usefilters_summary">Einkaufslisten können nach Tags und Läden gefiltert werden.</string>
 	<string name="preference_reset_quantity">Anzahl zurücksetzen</string>
 	<string name="preference_reset_quantity_summary">Setzt die Anzahl zurück, wenn weitere Items hinzugefügt werden.</string>
 	<string name="preference_add_for_barcode">Barcode Scanner</string>
