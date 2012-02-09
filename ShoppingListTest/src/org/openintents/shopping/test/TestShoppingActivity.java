@@ -75,6 +75,7 @@ public class TestShoppingActivity extends
 	public void test001RecentChanges() {
 		String recentChanges = getAppString(org.openintents.distribution.R.string.oi_distribution_newversion_recent_changes);
 		String cont = getAppString(org.openintents.distribution.R.string.oi_distribution_newversion_continue);
+		while(solo.scrollUp());
 		boolean existsRecentChanges = solo.searchText(recentChanges);
 		boolean existsCont = solo.searchButton(cont);
 		
