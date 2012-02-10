@@ -23,6 +23,8 @@
 	<string name="about_translators">This is a dummy translation so that the credits are counted as translated.
 
 Launchpad Contributions:
+  José Carlos Marques https://launchpad.net/~jcabrantesm
+  OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101
   Sérgio Marques https://launchpad.net/~sergio+marques
   Tiago Silva https://launchpad.net/~tiagosilva</string>
@@ -45,13 +47,13 @@ Launchpad Contributions:
 	<string name="my_shopping_list">A minha lista de compras</string>
 	<string name="new_list_hint">ex.: intenções, lista familiar</string>
 	<string name="clean_up_list">Apagar lista</string>
-	<string name="delete_list">Eliminar lista</string>
-	<string name="ask_new_list">Indique o nome da lista de compras</string>
-	<string name="ask_rename_list">Mudar nome da lista de compras</string>
+	<string name="delete_list">Apagar lista</string>
+	<string name="ask_new_list">Indique o nome da nova lista</string>
+	<string name="ask_rename_list">Alterar o nome da lista</string>
 	<string name="ask_edit_item">Editar item</string>
-	<string name="ask_new_store">Indique o nome da loja</string>
+	<string name="ask_new_store">Indique o nome na nova loja</string>
 	<string name="please_enter_name">Por favor, indique um nome</string>
-	<string name="no_items_marked">Sem itens riscados.</string>
+	<string name="no_items_marked">Não há itens seleccionados</string>
 	<string name="confirm_delete_list">Pretende eliminar esta lista de compras?</string>
 	<string name="no_shopping_provider">Erro ao aceder às listas de compras.</string>
 	<string name="pick_item">Escolha um item</string>

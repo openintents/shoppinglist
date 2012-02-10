@@ -21,7 +21,8 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
-  FiReSTaRT https://launchpad.net/~dlyh</string>
+  FiReSTaRT https://launchpad.net/~dlyh
+  OpenIntents devs https://launchpad.net/~openintents-devs</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
 	<string name="about_comments">Пратите куповне ставке са ОИ Куповном Листом</string>
