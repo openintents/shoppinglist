@@ -2194,8 +2194,8 @@ protected void showTagsFilter(final View v) {
 		setListTheme(loadListTheme());
 		
 		fillItems(false);
-
 		applyListTheme();
+  	    updateTitle();
 	}
 
 	/** Mark item */
