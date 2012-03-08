@@ -519,7 +519,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		mItemUri = ShoppingContract.Items.CONTENT_URI;
 		mListItemUri = ShoppingContract.Items.CONTENT_URI;
 
-		int defaultShoppingList = initFromPreferences();
+		int defaultShoppingList = getLastUsedListFromPrefs();
 
 		// Handle the calling intent
 		final Intent intent = getIntent();
@@ -669,42 +669,34 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
         }
     }
 
-	private int initFromPreferences() {
+    // used at startup, otherwise use getSelectedListId
+    private int getLastUsedListFromPrefs() {
+    	
+    	SharedPreferences sp = getSharedPreferences(
+				"org.openintents.shopping_preferences", MODE_PRIVATE);
 		
-		boolean loadLastUsed = true;
-
+    	return sp.getInt(PreferenceActivity.PREFS_LASTUSED,1);
+    }
+    
+	private void initFromPreferences() {
+		
 		SharedPreferences sp = getSharedPreferences(
 				"org.openintents.shopping_preferences", MODE_PRIVATE);
 		
-		// Always load last list used. This setting got abandoned.
-		if (false) {
-			// if set to "last used", override the default list.
-			loadLastUsed = sp.getBoolean(
-					PreferenceActivity.PREFS_LOADLASTUSED,
-					PreferenceActivity.PREFS_LOADLASTUSED_DEFAULT);
-	
-			if (debug) Log.d(TAG, "load last used ?" + loadLastUsed);
-		}
 		
-		int defaultShoppingList = 1;
-		if (loadLastUsed) {
-			defaultShoppingList = sp.getInt(PreferenceActivity.PREFS_LASTUSED,
-					1);
-			if (mItemsView != null) {
-				// UGLY WORKAROUND:
-				// On screen orientation changes, fillItems() is called twice.
-				// That is why we have to set the list position twice.
-				mItemsView.mUpdateLastListPosition = 2;
-				
-				mItemsView.mLastListPosition = sp.getInt(PreferenceActivity.PREFS_LASTLIST_POSITION, 0);
-				mItemsView.mLastListTop = sp.getInt(PreferenceActivity.PREFS_LASTLIST_TOP, 0);
+		if (mItemsView != null) {
+			// UGLY WORKAROUND:
+			// On screen orientation changes, fillItems() is called twice.
+			// That is why we have to set the list position twice.
+			mItemsView.mUpdateLastListPosition = 2;
+			
+			mItemsView.mLastListPosition = sp.getInt(PreferenceActivity.PREFS_LASTLIST_POSITION, 0);
+			mItemsView.mLastListTop = sp.getInt(PreferenceActivity.PREFS_LASTLIST_TOP, 0);
 
-				if (debug) Log.d(TAG, "Load list position: pos: " + mItemsView.mLastListPosition
-						+ ", top: " + mItemsView.mLastListTop);
-			}
-		} else {
-			defaultShoppingList = (int) ShoppingUtils.getDefaultList(this);
+			if (debug) Log.d(TAG, "Load list position: pos: " + mItemsView.mLastListPosition
+					+ ", top: " + mItemsView.mLastListTop);
 		}
+			
 		if(sp.getBoolean(PreferenceActivity.PREFS_SCREENLOCK, PreferenceActivity.PREFS_SCREENLOCK_DEFAULT)) {
 			getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		} 
@@ -746,24 +738,13 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		mUseSensor = sp.getBoolean(PreferenceActivity.PREFS_SHAKE,
 				PreferenceActivity.PREFS_SHAKE_DEFAULT);
 		
-
 		boolean nowEditingFilter = sp.getBoolean(PreferenceActivity.PREFS_USE_FILTERS, 
-				PreferenceActivity.PREFS_USE_FILTERS_DEFAULT);
-		if (nowEditingFilter && mCursorShoppingLists != null) {
-			// spinner is not used, so need to update the cursor to the proper 
-			// list now, so that getSelectedListId() will know what's up.
-			// this is a bit of a hack; could instead decouple the spinner 
-			// more cleanly, or make the filter mode list widget also an 
-			// AdapterView and make getSelectedListId() use it.
-			setSelectedListId(defaultShoppingList);
-		}		
+				PreferenceActivity.PREFS_USE_FILTERS_DEFAULT);		
 		if (mStoresFilter != null &&
 			mEditingFilter != nowEditingFilter) {
 			updateFilterWidgets();
 			fillItems(false);
 		}
-
-		return defaultShoppingList;
 	}
 
 	private void registerSensor() {
