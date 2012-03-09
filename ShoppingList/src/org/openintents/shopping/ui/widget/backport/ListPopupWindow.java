@@ -30,6 +30,7 @@ import android.view.View.MeasureSpec;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.AbsListView.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
@@ -1100,14 +1101,8 @@ public class ListPopupWindow {
             return maxHeight + padding;
         }
 
-        // TODO: compute the height based on menu contents
-        // measureheightofchildren not defined. cheating for now, because initial use cases 
-        // always have the same number of children. 
-        // height 32, 6 children in current cases, 
-        final int listContent = 32 * 6; 
-        
-        // mDropDownList.measure(widthMeasureSpec, heightMeasureSpec)    .measureHeightOfChildren(MeasureSpec.UNSPECIFIED,
-        //        0, 0 /* ListView.NO_POSITION */, maxHeight - otherHeights, -1);
+        final int listContent = measureHeightOfChildren(MeasureSpec.UNSPECIFIED,
+                0, NO_POSITION, maxHeight - otherHeights, -1);
         // add padding only if the list has items in it, that way we don't show
         // the popup if it is not needed
         if (listContent > 0) otherHeights += padding;
@@ -1115,6 +1110,129 @@ public class ListPopupWindow {
         return listContent + otherHeights;
     }
 
+    // from ICS ListView
+    static final int NO_POSITION = -1;
+    
+    
+    private void measureScrapChild(View child, int position, int widthMeasureSpec, Rect padding) {
+        LayoutParams p = (LayoutParams) child.getLayoutParams();
+        if (p == null) {
+            p = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT, 0);
+            child.setLayoutParams(p);
+        }
+        // p.viewType = mAdapter.getItemViewType(position);
+        // p.forceAdd = true; 
+
+        int childWidthSpec = ViewGroup.getChildMeasureSpec(widthMeasureSpec,
+                padding.left + padding.right, p.width);
+        int lpHeight = p.height;
+        int childHeightSpec;
+        if (lpHeight > 0) {
+            childHeightSpec = MeasureSpec.makeMeasureSpec(lpHeight, MeasureSpec.EXACTLY);
+        } else {
+            childHeightSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
+        }
+        child.measure(childWidthSpec, childHeightSpec);
+    }
+
+    /**
+     * This method borrowed from ICS ListView.
+     * 
+     * Measures the height of the given range of children (inclusive) and
+     * returns the height with this ListView's padding and divider heights
+     * included. If maxHeight is provided, the measuring will stop when the
+     * current height reaches maxHeight.
+     *
+     * @param widthMeasureSpec The width measure spec to be given to a child's
+     *            {@link View#measure(int, int)}.
+     * @param startPosition The position of the first child to be shown.
+     * @param endPosition The (inclusive) position of the last child to be
+     *            shown. Specify {@link #NO_POSITION} if the last child should be
+     *            the last available child from the adapter.
+     * @param maxHeight The maximum height that will be returned (if all the
+     *            children don't fit in this value, this value will be
+     *            returned).
+     * @param disallowPartialChildPosition In general, whether the returned
+     *            height should only contain entire children. This is more
+     *            powerful--it is the first inclusive position at which partial
+     *            children will not be allowed. Example: it looks nice to have
+     *            at least 3 completely visible children, and in portrait this
+     *            will most likely fit; but in landscape there could be times
+     *            when even 2 children can not be completely shown, so a value
+     *            of 2 (remember, inclusive) would be good (assuming
+     *            startPosition is 0).
+     * @return The height of this ListView with the given children.
+     */
+    final int measureHeightOfChildren(int widthMeasureSpec, int startPosition, int endPosition,
+            final int maxHeight, int disallowPartialChildPosition) {
+
+    	Rect padding = new Rect();
+    	// not sure if this is the right padding to use...
+    	mPopup.getBackground().getPadding(padding);
+    	
+        final ListAdapter adapter = mAdapter;
+        if (adapter == null) {
+            return padding.top + padding.bottom;
+        }
+
+        // Include the padding of the list
+        int returnedHeight = padding.top + padding.bottom;
+        final int dividerHeight = 0; // ((mDividerHeight > 0) && mDivider != null) ? mDividerHeight : 0;
+        // The previous height value that was less than maxHeight and contained
+        // no partial children
+        int prevHeightWithoutPartialChild = 0;
+        int i;
+        View child;
+
+        // mItemCount - 1 since endPosition parameter is inclusive
+        endPosition = (endPosition == NO_POSITION) ? adapter.getCount() - 1 : endPosition;
+        // final AbsListView.RecycleBin recycleBin = mRecycler;
+        // final boolean recyle = recycleOnMeasure();
+        // final boolean[] isScrap = mIsScrap;
+
+        for (i = startPosition; i <= endPosition; ++i) {
+            // child = mDropDownList.obtainView(i);
+
+            child = mAdapter.getView(i, null, mDropDownList);
+            
+            measureScrapChild(child, i, widthMeasureSpec, padding);
+
+            if (i > 0) {
+                // Count the divider for all but one child
+                returnedHeight += dividerHeight;
+            }
+
+            // Recycle the view before we possibly return from the method
+            // if (recyle && recycleBin.shouldRecycleViewType(
+            //         ((LayoutParams) child.getLayoutParams()).viewType)) {
+            //    recycleBin.addScrapView(child, -1);
+            // }
+
+            returnedHeight += child.getMeasuredHeight();
+
+            if (returnedHeight >= maxHeight) {
+                // We went over, figure out which height to return.  If returnedHeight > maxHeight,
+                // then the i'th position did not fit completely.
+                return (disallowPartialChildPosition >= 0) // Disallowing is enabled (> -1)
+                            && (i > disallowPartialChildPosition) // We've past the min pos
+                            && (prevHeightWithoutPartialChild > 0) // We have a prev height
+                            && (returnedHeight != maxHeight) // i'th child did not fit completely
+                        ? prevHeightWithoutPartialChild
+                        : maxHeight;
+            }
+
+            if ((disallowPartialChildPosition >= 0) && (i >= disallowPartialChildPosition)) {
+                prevHeightWithoutPartialChild = returnedHeight;
+            }
+        }
+
+        // At this point, we went through the range of children, and they each
+        // completely fit, so return the returnedHeight
+        return returnedHeight;
+    }
+
+    
     /**
      * <p>Wrapper class for a ListView. This wrapper can hijack the focus to
      * make sure the list uses the appropriate drawables and states when
@@ -1223,6 +1341,7 @@ public class ListPopupWindow {
         public boolean hasFocus() {
             return mHijackFocus || super.hasFocus();
         }
+        
     }
 
     private class PopupDataSetObserver extends DataSetObserver {
