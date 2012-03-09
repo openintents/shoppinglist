@@ -46,6 +46,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 
 	Context mContext;
 	Uri mItemUri;
+	Uri mListItemUri;
 	long mItemId = 0;
 	String mNoteText = null;
 	
@@ -129,7 +130,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(context, ItemStoresActivity.class);
-				intent.setData(listItemUri);
+				intent.setData(mListItemUri);
 				context.startActivity(intent);
 			}
 		});
@@ -199,7 +200,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		//setIcon(android.R.drawable.ic_menu_edit);
 		setTitle(R.string.ask_edit_item);
 		
-		setItemUri(itemUri);
+		setItemUri(itemUri,listItemUri);
 		setRelationUri(relationUri);
 		
 		setButton(context.getText(R.string.ok), this);
@@ -310,8 +311,9 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 
 	private Uri mRelationUri;
 			
-	public void setItemUri(Uri itemUri) {
+	public void setItemUri(Uri itemUri, Uri listItemUri) {
 		mItemUri = itemUri;
+		mListItemUri = listItemUri;
 		
 		Cursor c = mContext.getContentResolver().query(mItemUri, 
 				mProjection, null, null, null);

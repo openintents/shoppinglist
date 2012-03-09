@@ -2526,7 +2526,7 @@ protected void showTagsFilter(final View v) {
 
 		case DIALOG_EDIT_ITEM:
 			EditItemDialog d = (EditItemDialog) dialog;
-			d.setItemUri(mItemUri);
+			d.setItemUri(mItemUri,mListItemUri);
 			d.setRelationUri(mRelationUri);
 			d.setFocusField(mEditItemFocusField);
 
