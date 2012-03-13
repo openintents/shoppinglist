@@ -69,6 +69,13 @@
         <item>7</item>
         <item>8</item>
     </string-array>
+
+    <string-array name="preference_sortorder_slistsvalues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
     
     <string-array name="preference_fontsize_entryvalues">
     	<item>0</item>

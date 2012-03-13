@@ -430,6 +430,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private static final String BUNDLE_RELATION_URI = "relation_uri";
 	private static final String BUNDLE_MODE = "mode";
 
+	private String mSortOrder;
+
 	// Skins --------------------------
 
 	private boolean usingListSpinner() {
@@ -496,6 +498,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		super.onCreate(icicle);
 		if (debug)
 			Log.d(TAG, "Shopping list onCreate()");
+
+		mSortOrder = PreferenceActivity.getShoppingListSortOrderFromPrefs(this);
 
 		mDistribution.setFirst(MENU_DISTRIBUTION_START,
 				DIALOG_DISTRIBUTION_START);
@@ -695,6 +699,14 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 			if (debug) Log.d(TAG, "Load list position: pos: " + mItemsView.mLastListPosition
 					+ ", top: " + mItemsView.mLastListTop);
+
+            // selected list must be set after changing ordering
+			String sortOrder = PreferenceActivity.getShoppingListSortOrderFromPrefs(this);
+			if (!mSortOrder.equals(sortOrder)) {
+			    mSortOrder = sortOrder;
+                fillListFilter();
+                setSelectedListId(getLastUsedListFromPrefs());
+			}
 		}
 			
 		if(sp.getBoolean(PreferenceActivity.PREFS_SCREENLOCK, PreferenceActivity.PREFS_SCREENLOCK_DEFAULT)) {
@@ -2642,8 +2654,9 @@ protected void showTagsFilter(final View v) {
      */
 	private void fillListFilter() {
 		// Get a cursor with all lists
+	    
 		mCursorShoppingLists = getContentResolver().query(Lists.CONTENT_URI,
-				mStringListFilter, null, null, Lists.DEFAULT_SORT_ORDER);
+				mStringListFilter, null, null, mSortOrder);
 		startManagingCursor(mCursorShoppingLists);
 
 		if (mCursorShoppingLists == null) {

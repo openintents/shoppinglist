@@ -24,7 +24,7 @@ public class ShoppingListsActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 
 		Cursor cursor = managedQuery(ShoppingContract.Lists.CONTENT_URI, new String[] {
-				Lists._ID, Lists.NAME }, null, null, Lists.DEFAULT_SORT_ORDER);
+				Lists._ID, Lists.NAME }, null, null, PreferenceActivity.getShoppingListSortOrderFromPrefs(this));
 		setListAdapter(new SimpleCursorAdapter(this,
 				android.R.layout.simple_list_item_1, cursor,
 				new String[] { Lists.NAME }, new int[] { android.R.id.text1 }));

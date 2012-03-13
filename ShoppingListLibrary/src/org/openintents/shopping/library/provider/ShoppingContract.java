@@ -303,6 +303,13 @@ public abstract class ShoppingContract {
 		 * Available since release 1.6.
 		 */
 		public static final String TAGS_FILTER = "tags_filter";
+		
+		public static final String[] SORT_ORDERS = new String[] {
+		    "UPPER("+NAME+") ASC",
+		    "UPPER("+NAME+") DESC",
+		    CREATED_DATE+" DESC",
+		    CREATED_DATE+" ASC"
+		};
 	}
 
 	/**

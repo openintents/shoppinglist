@@ -2,6 +2,7 @@ package org.openintents.shopping.ui;
 
 import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
+import org.openintents.shopping.library.provider.ShoppingContract.Lists;
 import org.openintents.util.BackupManagerWrapper;
 import org.openintents.util.IntentUtils;
 
@@ -49,6 +50,9 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 
 	public static final String PREFS_SORTORDER_DEFAULT = "3";
 	public static final String PREFS_PICKITEMS_SORTORDER_DEFAULT = "1";
+
+	public static final String PREFS_SORTORDER_SHOPPINGLISTS = "sortorderForShoppingLists";
+	public static final String PREFS_SORTORDER_SHOPPINGLISTS_DEFAULT = "0";
 
 	public static final String PREFS_FONTSIZE = "fontsize";
 	public static final String PREFS_FONTSIZE_DEFAULT = "2";
@@ -216,6 +220,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
                         editor.putBoolean(PREFS_SAMESORTFORPICK, PREFS_SAMESORTFORPICK_DEFAULT);
                         editor.putString(PREFS_PICKITEMS_SORTORDER, PREFS_PICKITEMS_SORTORDER_DEFAULT);
                         editor.putBoolean(PREFS_PICKITEMSINLIST, PREFS_PICKITEMSINLIST_DEFAULT);
+                        editor.putString(PREFS_SORTORDER_SHOPPINGLISTS, PREFS_SORTORDER_SHOPPINGLISTS_DEFAULT);
                         //Subtotal
                         editor.putString(PREFS_PRIOSUBTOTAL, PREFS_PRIOSUBTOTAL_DEFAULT);
                         editor.putBoolean(PREFS_PRIOSUBINCLCHECKED, PREFS_PRIOSUBINCLCHECKED_DEFAULT);
@@ -370,6 +375,15 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 		return affects;
 	}
 	
+    public static String getShoppingListSortOrderFromPrefs(Context context) {
+        int index = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(context).getString(PREFS_SORTORDER_SHOPPINGLISTS, PREFS_SORTORDER_SHOPPINGLISTS_DEFAULT)); 
+        if (index >= 0 && index < Lists.SORT_ORDERS.length) {
+            return Lists.SORT_ORDERS[index];
+        }
+        
+        return Lists.DEFAULT_SORT_ORDER;
+    }
+    
 	public static boolean getHideCheckedItemsFromPrefs(Context context) {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(context);
