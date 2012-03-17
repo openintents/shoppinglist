@@ -22,6 +22,12 @@ To obtain the current release, visit
   http://www.openintents.org
 
 ----------------
+release 1.7
+date: ?
+
+- Sort list of lists (patch by Stanley F. for Google Summer of Code 2012)
+
+----------------
 release 1.6
 date: 2012-01-29
 
