@@ -245,4 +245,41 @@ public class TestShoppingActivity extends
 		// now item should exist:
 		assertTrue(solo.searchText(barcodescanneritem));
 	}
+	
+	public void testMoveToAnotherList() {
+		
+		String newListName = "New Test List";
+		String movedItemName = "testitem_move_" + random.nextInt(10000);
+		
+		// Create new list
+		solo.clickOnMenuItem(getAppString(org.openintents.shopping.R.string.new_list));
+		solo.enterText(0, newListName);
+		solo.clickOnButton("OK");
+		assertTrue(solo.searchText(newListName));
+		
+		// Add the test item and make sure it is added
+		solo.enterText(0, movedItemName);
+		solo.clickOnButton(getAppString(org.openintents.shopping.R.string.add));
+		assertTrue(solo.searchText(movedItemName));
+		
+		// Move the item to the first shopping list in the list
+		solo.clickLongOnText(movedItemName);
+		solo.clickOnText(getAppString(org.openintents.shopping.R.string.menu_move_item));
+		solo.clickInList(0);
+		
+		// Make sure that the item was moved
+		assertFalse(solo.searchText(movedItemName));
+		
+		/* 
+		 * For some reason 0 selects the second item so we use -1
+		 * See: http://code.google.com/p/robotium/issues/detail?id=114
+		 * The workarounds suggested at: http://code.google.com/p/robotium/wiki/QuestionsAndAnswers
+		 * don't seem to work.
+		 */
+		solo.pressSpinnerItem(0, -1);
+		
+		assertTrue(solo.searchText(movedItemName));
+		
+	}
+	
 }
