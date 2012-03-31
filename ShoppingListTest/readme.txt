@@ -24,3 +24,4 @@ release 1.7
 date: ?
 
 - move item to another list (patch by Nick Nikolaou).
+- fix testIntentBarcodeScanner test (patch by Stanley F).

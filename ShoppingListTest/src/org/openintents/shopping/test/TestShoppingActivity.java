@@ -238,6 +238,26 @@ public class TestShoppingActivity extends
 		
 		// Workaround: Open menu manually:
 		solo.sendKey(Solo.MENU);
+		if (!solo.searchText(scan_barcode_test)) {
+			try {
+				Class<?> internalR = Class.forName("com.android.internal.R");
+				for (Class<?> clazz : internalR.getDeclaredClasses()) {
+					if (clazz.getSimpleName().equals("string")) {
+						int menuMoreId = clazz.getDeclaredField("more_item_label").getInt(null);
+						solo.clickOnText(getAppString(menuMoreId));
+						break;
+					}
+				}
+			} catch (ClassNotFoundException e) {
+				Log.e(TAG, e.toString());
+			} catch (IllegalArgumentException e) {
+				Log.e(TAG, e.toString());
+			} catch (IllegalAccessException e) {
+				Log.e(TAG, e.toString());
+			} catch (NoSuchFieldException e) {
+				Log.e(TAG, e.toString());
+			}
+		}
 		solo.clickOnText(scan_barcode_test);
 
 		Log.d(TAG, "Name 2: " + barcodescanneritem);
