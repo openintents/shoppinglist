@@ -233,12 +233,22 @@ public class TestShoppingActivity extends
 		// "Scan barcode test" is defined in Manifest of this Test project
 		String scan_barcode_test = "Scan barcode test";
 		
-		// The following does not always click on the correct menu item:
+		// The following does not always click on the correct menu item in Android 4.0:
 		//solo.clickOnMenuItem(scan_barcode_test, true);
 		
 		// Workaround: Open menu manually:
+		clickOnMenuItem(scan_barcode_test);
+
+		Log.d(TAG, "Name 2: " + barcodescanneritem);
+		
+		// now item should exist:
+		assertTrue(solo.searchText(barcodescanneritem));
+	}
+
+	/** Workaround if solo.clickOnMenuItem() does not work */
+	private void clickOnMenuItem(String text) {
 		solo.sendKey(Solo.MENU);
-		if (!solo.searchText(scan_barcode_test)) {
+		if (!solo.searchText(text)) {
 			try {
 				Class<?> internalR = Class.forName("com.android.internal.R");
 				for (Class<?> clazz : internalR.getDeclaredClasses()) {
@@ -258,12 +268,7 @@ public class TestShoppingActivity extends
 				Log.e(TAG, e.toString());
 			}
 		}
-		solo.clickOnText(scan_barcode_test);
-
-		Log.d(TAG, "Name 2: " + barcodescanneritem);
-		
-		// now item should exist:
-		assertTrue(solo.searchText(barcodescanneritem));
+		solo.clickOnText(text);
 	}
 	
 	public void testMoveToAnotherList() {
