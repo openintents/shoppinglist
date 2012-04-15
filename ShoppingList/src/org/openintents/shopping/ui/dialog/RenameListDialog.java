@@ -59,6 +59,9 @@ public class RenameListDialog extends AlertDialog implements OnClickListener {
 	
 	public void setName(String name) {
 		mEditText.setText(name);
+		
+		//To move cursor position to the end of list's name
+		mEditText.setSelection(name.length());
 	}
 	
 	public void setDialogActionListener(DialogActionListener listener) {
