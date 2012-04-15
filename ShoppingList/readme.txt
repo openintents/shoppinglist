@@ -26,6 +26,7 @@ release 1.7
 date: ?
 
 - Sort list of lists (patch by Stanley F. for Google Summer of Code 2012)
+- Set cursor to end in "rename list" dialog (patch by Alex Yaremenko)
 
 ----------------
 release 1.6

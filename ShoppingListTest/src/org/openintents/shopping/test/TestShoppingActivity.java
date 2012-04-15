@@ -307,4 +307,26 @@ public class TestShoppingActivity extends
 		
 	}
 	
+	public void testRenameItem()
+	{
+		int rndInt = random.nextInt(10000);
+		String itemname = "not_rename" + rndInt;
+		String newitemname = "rename" + rndInt;
+		String add = getAppString(org.openintents.shopping.R.string.add);
+
+		solo.enterText(0, itemname);
+		solo.clickOnButton(add);
+
+		assertTrue(solo.searchText(itemname));
+		
+		solo.clickOnText(itemname);
+		
+		assertTrue(solo.searchEditText(itemname));
+
+		solo.clearEditText(0);
+		solo.enterText(0, newitemname);
+		solo.clickOnButton(0);
+		
+		assertTrue(solo.searchText(newitemname));
+	}
 }

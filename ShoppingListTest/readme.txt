@@ -25,3 +25,4 @@ date: ?
 
 - move item to another list (patch by Nick Nikolaou).
 - fix testIntentBarcodeScanner test (patch by Stanley F).
+- test to rename a list item (patch by Alex Yaremenko)
