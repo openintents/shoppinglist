@@ -18,7 +18,7 @@ http://www.openintents.org
 Sie können uns mit der Verbesserung der Übersetzung in ihre Sprache auf Launchpad unterstützen: 
 https://translations.launchpad.net/openintents/trunk
 
-Eigentschaften: 
+Leistungsmerkmale: 
 * Listen hinzufügen, verändern und löschen.
 * Schnell und einfach Items erstellen, löschen, abhacken
 * Eine Vielzahl von Themen.

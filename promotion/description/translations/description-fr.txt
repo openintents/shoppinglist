@@ -2,7 +2,7 @@
 OI Shopping List
 
 # Promo text:
-Keep track of your shopping items with OI Shopping List.
+Garder une trace de vos courses avec OI Shopping List.
 
 # Description:
 OI Shopping Liste est une application puissante qui le rend facile de créer et gérer des listes de contrôle OI Shopping Liste, il est facile d'ajouter des éléments à une liste, cochez l'élément off, et le retirer de la liste. L'application permet de suivre des prix distincts pour chaque magasin que vous utilisez, et dispose d'un haut niveau de personnalisation. Taille de la police, l'ordre de tri, colonnes de la liste, et le comportement de nettoyage de liste sont tous les paramètres contrôlés par l'utilisateur. Toutes ces caractéristiques sont réunies dans une mise en croustillante qui est personnalisable grâce à une variété de thèmes. 
