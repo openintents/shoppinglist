@@ -171,6 +171,9 @@
 	<string name="preference_sortorder_for_pick_summary">在选择物品模式，更改物品清单的排列顺序</string>
 	<string name="preference_sortorder_dialog_title">选择排列顺序</string>
 	<string name="preference_sortorder_for_pick_dialog_title">为选择物品模式，挑选排列顺序</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">加载上次使用的列表</string>
 	<string name="preference_loadlastused_summary">总是默认打开上次浏览的列表。</string>
 	<string name="preference_capitalization_title">大写</string>
@@ -286,6 +289,17 @@
     	<item>未经检查的优先，按字母顺序排列</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
     	<item>未经检查的优先，按字母顺序排列优先</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>优先最新的</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>优先最旧的</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">

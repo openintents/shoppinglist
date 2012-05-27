@@ -173,6 +173,9 @@ Launchpad Contributions:
 	<string name="preference_sortorder_for_pick_summary">Liste sıralanışını Öğe Seçimi şeklinde ayarla</string>
 	<string name="preference_sortorder_dialog_title">Sıralanışı seç</string>
 	<string name="preference_sortorder_for_pick_dialog_title">Öğe Seçimi sıralanışını seç</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">Kullanılan son listeyi yükle</string>
 	<string name="preference_loadlastused_summary">Her zaman son görüntülenen listeyle başla</string>
 	<string name="preference_capitalization_title">Büyük Harfle başlama</string>
@@ -288,6 +291,17 @@ Launchpad Contributions:
     	<item>işaretlenmemişler önce, önceliğe göre alfabetik</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
     	<item>işaretlenmemişler önce, önceliğe göre etiketlerin alfabetik sırası</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>ne yenisi önce</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>en eskisi önce</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">

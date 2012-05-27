@@ -172,6 +172,9 @@
 	<string name="preference_sortorder_for_pick_summary">Schimbă ordinea de sortare a articolelor din listă în modul Selectează articole.</string>
 	<string name="preference_sortorder_dialog_title">Alege ordinea de sortare</string>
 	<string name="preference_sortorder_for_pick_dialog_title">Alege ordinea de sortare pentru modul Selectează articole</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">Încarcă ultima listă utilizată</string>
 	<string name="preference_loadlastused_summary">Începe întotdeauna cu lista vizualizată ultima dată.</string>
 	<string name="preference_capitalization_title">Capitalizare</string>
@@ -287,6 +290,17 @@
     	<item>nebifate la început, prioritate, alfabetic</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
     	<item>nebifate la început, prioritate, alfabetic după etichete</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>cele mai noi la început</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>cele mai vechi la început</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">

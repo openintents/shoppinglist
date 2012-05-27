@@ -169,6 +169,9 @@
 	<string name="preference_sortorder_for_pick_summary">Endre sorteringsrekkefølge på listepunkter i punktvelgingsmodus.</string>
 	<string name="preference_sortorder_dialog_title">Velg sorteringsrekkefølge</string>
 	<string name="preference_sortorder_for_pick_dialog_title">Velg sorteringsrekkefølge for punktvelgingsmodus</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">Last sist brukte liste</string>
 	<string name="preference_loadlastused_summary">Alltid start med den sist viste listen.</string>
 	<string name="preference_capitalization_title">Store forbokstaver</string>
@@ -284,6 +287,17 @@
     	<item>ukrysset først, prioritet, alfabetisk</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
     	<item>ukrysset først, prioritet, merker alfabetisk</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>nyest først</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>eldst først</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">

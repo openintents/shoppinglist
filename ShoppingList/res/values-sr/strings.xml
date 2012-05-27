@@ -169,6 +169,9 @@
 	<string name="preference_sortorder_for_pick_summary">Промените редослед ставки у  режиму Бирања Ставки</string>
 	<string name="preference_sortorder_dialog_title">Изаберите редослед</string>
 	<string name="preference_sortorder_for_pick_dialog_title">Изаберите редослед  у  режиму Бирања Ставки</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">Учитавање задње кориштене листе</string>
 	<string name="preference_loadlastused_summary">Увек почети са задњом кориштеном листом</string>
 	<string name="preference_capitalization_title">Велика Слова</string>
@@ -284,6 +287,17 @@
     	<item>прво нештиклиране, па по приоритету па по абецедном реду</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
     	<item>прво нештиклиране, па по приоритету па по ознакама по абецедном реду</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>прво најновије</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>прво најстарије</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">

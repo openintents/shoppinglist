@@ -173,6 +173,9 @@
 	<string name="preference_sortorder_for_pick_summary">Změňte, podle čeho se budou řadit položky seznamu v režimu "Vybrat položky"</string>
 	<string name="preference_sortorder_dialog_title">Zvolte pořadí položek</string>
 	<string name="preference_sortorder_for_pick_dialog_title">Zvolte pořadí položek pro režim "Vybrat položky"</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">Nahrád naposledy používaný seznam</string>
 	<string name="preference_loadlastused_summary">Vždy začít naposledy zobrazeným seznamem</string>
 	<string name="preference_capitalization_title">Velká písmena</string>
@@ -288,6 +291,17 @@
     	<item>nejprve nepřeškrtnuté, priorita, abecedně</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
     	<item>nejprve nepřeškrtnuté, priorita, abecedně podle štítků</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>nejprve nejnovější</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>nejprve nejstarší</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">

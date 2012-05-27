@@ -175,6 +175,9 @@
 	<string name="preference_sortorder_for_pick_summary">Изменить тип сортировки в режиме отметки купленных вещей</string>
 	<string name="preference_sortorder_dialog_title">Выбрать порядок сортировки</string>
 	<string name="preference_sortorder_for_pick_dialog_title">Выбрать тип сортировки при отмечании купленных вещей</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">Загружать последний список</string>
 	<string name="preference_loadlastused_summary">Всегда открывать список использовавшийся перед закрытием программы.</string>
 	<string name="preference_capitalization_title">Регистр</string>
@@ -290,6 +293,17 @@
     	<item>невыполненные первые, приоритету, в алфавитном порядке</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
     	<item>невыполненные первые, приоритету, тегам в алфавитном порядке</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>Сначала новые</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>сначала старые</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">

@@ -21,6 +21,7 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
+  Andres3d https://launchpad.net/~andresven2005
   Angel Abad https://launchpad.net/~angelabad
   Fitoschido https://launchpad.net/~fitoschido
   Javier Martínez Arrieta https://launchpad.net/~javote87
@@ -73,8 +74,8 @@
 	<string name="menu_delete_store">Eliminar tienda</string>
 	<string name="confirm_delete_store">¿Realmente quiere eliminar esta tienda?</string>
 	<string name="no_items_available">No hay elementos disponibles</string>
-	<string name="no_stores_available">No stores available for this list</string>
-	<string name="no_tags_available">No tags available for this list</string>
+	<string name="no_stores_available">No hay tiendas disponibles para ésta lista</string>
+	<string name="no_tags_available">No hay etiquetas disponibles para esta lista</string>
 	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
@@ -111,12 +112,12 @@
 	<string name="has_note">Tiene nota</string>
 	<string name="units">Unidades</string>
 	<string name="note">Nota</string>
-	<string name="stores">Stores</string>
-	<string name="list">List</string>
+	<string name="stores">Tiendas</string>
+	<string name="list">Lista</string>
 	
 	<string name="otherqty">Otra cantidad…</string>
 	<string name="otherpri">Otra prioridad…</string>   
-	<string name="unfiltered">(Unfiltered)</string>
+	<string name="unfiltered">(Sin filtrar)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Total: %s</string>
@@ -178,6 +179,9 @@
 	<string name="preference_sortorder_for_pick_summary">Cambiar el orden de los artículos en el modo Escoger Elementos.</string>
 	<string name="preference_sortorder_dialog_title">Elejir orden de clasificación</string>
 	<string name="preference_sortorder_for_pick_dialog_title">Cambiar el orden en el modo Escoger Elementos</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">Cargar última lista usada</string>
 	<string name="preference_loadlastused_summary">Siempre comenzar con la lista leída por última vez.</string>
 	<string name="preference_capitalization_title">Capitalización</string>
@@ -185,8 +189,8 @@
 	<string name="preference_capitalization_dialog_title">Elejir capitalización</string> 
 	<string name="preference_hidechecked_title">Ocultar elementos revisados</string>
 	<string name="preference_hidechecked_summary">Ocultar inmediatamente elementos marcados.</string>
-	<string name="preference_fastscroll_title">Fast Scrolling</string>
-	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
+	<string name="preference_fastscroll_title">Desplazamiento rápido</string>
+	<string name="preference_fastscroll_summary">La barra de desplazamiento se muestra cuando hay 35 iteams o más.</string>
 	<string name="preference_showprice_title">Mostrar precio</string>
 	<string name="preference_showprice_summary">Mostrado como columna extra en la lista.</string>
 	<string name="preference_perstoreprice">Precios por tienda</string>
@@ -194,8 +198,8 @@
 	<string name="preference_perstoreprice_summary">Controlar precios por separado para cada artículo en cada tienda</string>
 	<string name="preference_screenlock_title">Desactivar bloqueo de pantalla</string>
 	<string name="preference_screenlock_summary">Previene el bloqueo de pantalla cuando está activo.</string>
-	<string name="preference_usefilters_title">Filters</string>
-	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
+	<string name="preference_usefilters_title">Filtros</string>
+	<string name="preference_usefilters_summary">Las listas se pueden filtrar por etiquetas o por tiendas.</string>
 	<string name="preference_reset_quantity">Restablecer cantidad</string>
 	<string name="preference_reset_quantity_summary">Reinicia la cantidad al añadir elementos de nuevo.</string>
 	<string name="preference_add_for_barcode">Lector de códigos de barras</string>
@@ -293,6 +297,17 @@
     	<item>los no seleccionados primero, por prioridad, por orden alfabético</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
     	<item>sin marcar, prioridad, etiquetas, alfabético</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>el más reciente primero</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>el último primero</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">

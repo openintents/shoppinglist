@@ -170,6 +170,9 @@
 	<string name="preference_sortorder_for_pick_summary">항목 고르기 상태에서 목록 항목의 정렬 순서를 바꾸세요.</string>
 	<string name="preference_sortorder_dialog_title">정렬 순서 선택</string>
 	<string name="preference_sortorder_for_pick_dialog_title">항목 선택 모드에서의 정렬 순서를 고르세요</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">최근 사용 목록 불러오기</string>
 	<string name="preference_loadlastused_summary">앱 실행 시 항상 최근 사용한 목록 열기</string>
 	<string name="preference_capitalization_title">대문자로 바꾸기</string>
@@ -285,6 +288,17 @@
     	<item>체크되지 않은 항목 먼저, 우산 순위, 알파벳 순</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
     	<item>체크되지 않은 항목 먼저, 우선 순위, 태그 일파벳 순</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>최근 항목 순</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>오래된 항목 순</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">

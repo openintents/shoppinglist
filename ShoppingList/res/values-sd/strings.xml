@@ -170,6 +170,9 @@
 	<string name="preference_sortorder_for_pick_summary">आइटम चुनने वारे मोड जो अलग करण वारो क्रम बदल्यो</string>
 	<string name="preference_sortorder_dialog_title">अलग करण वारो क्रम चुन्दयो</string>
 	<string name="preference_sortorder_for_pick_dialog_title">पिक्कआईटम मोड़े जे लाये अलग करण वारो क्रम चुन्दयो</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">आखरी बार इस्तेमाल थ्यलसूची खोल्यो</string>
 	<string name="preference_loadlastused_summary">हमेशा आखरी बार दिठ्यल आइटम सां शुरू कयो</string>
 	<string name="preference_capitalization_title">केपिटलाइजेशन</string>
@@ -285,6 +288,17 @@
     	<item>जांच न थ्यल वारा पहरों ,प्रधानता, वर्णमाला</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
     	<item>जांच न थ्यल वारा पहरों ,प्रधानता, टाग्स वर्णमाला के तोर पे</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>नया वारा पहरों</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>पुराणा वारा पहरों</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">

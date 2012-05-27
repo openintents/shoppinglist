@@ -170,6 +170,9 @@
 	<string name="preference_sortorder_for_pick_summary">Αλλαγή της σειράς ταξινόμησης των αντικειμένων λίστας στη λειτουργία Επιλογής Αντικειμένων.</string>
 	<string name="preference_sortorder_dialog_title">Επιλογή σειράς ταξινόμησης</string>
 	<string name="preference_sortorder_for_pick_dialog_title">Επιλογή σειράς ταξινόμησης για τη λειτουργία Επιλογής Αντικειμένων.</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">Φόρτωση της πιο πρόσφατης λίστας</string>
 	<string name="preference_loadlastused_summary">Έναρξη πάντα με τη λίστα που προβλήθηκε τελευταία.</string>
 	<string name="preference_capitalization_title">Κεφαλαιοποίηση</string>
@@ -285,6 +288,17 @@
     	<item>μη σημειωμένα αρχικά, προτεραιότητα, αλφαβητικά</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
     	<item>μη σημειωμένα αρχικά, προτεραιότητα, αλφαβητικά κατά ετικέτα</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>πιο πρόσφατα</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>παλαιότερα</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">

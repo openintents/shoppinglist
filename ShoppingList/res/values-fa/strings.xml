@@ -172,6 +172,9 @@
 	<string name="preference_sortorder_for_pick_summary">تغییر ترتیب بندی از اقلام لیست را در حالت آیتم ها را انتخاب.</string>
 	<string name="preference_sortorder_dialog_title">انتخاب ترتیب</string>
 	<string name="preference_sortorder_for_pick_dialog_title">ترتیب بندی از نوع را انتخاب کنید برای حالت آیتم ها را انتخاب</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">بارگیری آخرین لیست استفاده شده</string>
 	<string name="preference_loadlastused_summary">همیشه با لیستی که آخرین بار مشاهده شده شروع کنید.</string>
 	<string name="preference_capitalization_title">نوشتن با حروف بزرگ</string>
@@ -287,6 +290,17 @@
     	<item>ابتدا علامت نخورده ها باشد، اولويت ، برچسب ها به ترتیب حروف الفبا</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
     	<item>بدون کنترل، اولویت، برچسب ها بر اساس حروف الفبا</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>ابتدا جدیدترین</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>ابتدا قدیمی ترین</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">

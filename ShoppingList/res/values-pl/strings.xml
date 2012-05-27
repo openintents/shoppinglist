@@ -176,6 +176,9 @@
 	<string name="preference_sortorder_for_pick_summary">Zmień kolejność sortowania elementów listy</string>
 	<string name="preference_sortorder_dialog_title">Wybierz porządek sortowania</string>
 	<string name="preference_sortorder_for_pick_dialog_title">Wybierz kolejność sortowania elementów listy</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">Wczytaj ostatno używaną listę</string>
 	<string name="preference_loadlastused_summary">Zawsze rozpoczynaj z ostatnio oglądaną listą.</string>
 	<string name="preference_capitalization_title">Wielkość liter</string>
@@ -291,6 +294,17 @@
     	<item>nieukończone pierwsze, priorytet, alfabetycznie</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
     	<item>niezaznaczone, priorytet, znaczniki alfabetycznie</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>najpierw najnowsze</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>najpierw najstarsze</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">

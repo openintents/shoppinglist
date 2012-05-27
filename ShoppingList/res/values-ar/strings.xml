@@ -23,6 +23,7 @@
 	<string name="about_translators">This is a dummy translation so that the credits are counted as translated.
 
 Launchpad Contributions:
+  Mohamed Alaa https://launchpad.net/~m-alaa8
   OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101
   kenn dhia https://launchpad.net/~kendhia</string>
@@ -67,8 +68,8 @@ Launchpad Contributions:
 	<string name="menu_delete_store">أحذف المتجر</string>
 	<string name="confirm_delete_store">هل أنت متأكد من رغبتك في حذف هذا المتجر  ؟</string>
 	<string name="no_items_available">لا يوجد أي عنصر متوفر</string>
-	<string name="no_stores_available">No stores available for this list</string>
-	<string name="no_tags_available">No tags available for this list</string>
+	<string name="no_stores_available">لا توجد مخازن متاحة لهذه القائمة</string>
+	<string name="no_tags_available">لا توجد علامات متاحة لهذه القائمة</string>
 	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
@@ -105,12 +106,12 @@ Launchpad Contributions:
 	<string name="has_note">له ملاحظات</string>
 	<string name="units">الوحدات</string>
 	<string name="note">الملاحظة</string>
-	<string name="stores">Stores</string>
-	<string name="list">List</string>
+	<string name="stores">المخازن</string>
+	<string name="list">قائمة</string>
 	
 	<string name="otherqty">كمية أخرى...</string>
 	<string name="otherpri">أولوية أخرى...</string>   
-	<string name="unfiltered">(Unfiltered)</string>
+	<string name="unfiltered">(دون ترشيح)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">المجموع: %s</string>
@@ -172,6 +173,9 @@ Launchpad Contributions:
 	<string name="preference_sortorder_for_pick_summary">تغيير فرز قائمة العناصر في اختيار وضع  العناصر.</string>
 	<string name="preference_sortorder_dialog_title">اختر أمر الترتيب</string>
 	<string name="preference_sortorder_for_pick_dialog_title">اختر أمر الترتيب من أجل اختيار صيغة العناصر</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">عرض آخر قائمة مستعملة</string>
 	<string name="preference_loadlastused_summary">دائما ابدأ بعرض آخر قائمة مستعملة.</string>
 	<string name="preference_capitalization_title">الكتابة بأحرف كبيرة</string>
@@ -179,8 +183,8 @@ Launchpad Contributions:
 	<string name="preference_capitalization_dialog_title">اختر الكتابة بأحرف كبيرة</string> 
 	<string name="preference_hidechecked_title">أخف العناصر المحددة</string>
 	<string name="preference_hidechecked_summary">الغاء اخفاء العناصر المحددة بسرعة.</string>
-	<string name="preference_fastscroll_title">Fast Scrolling</string>
-	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
+	<string name="preference_fastscroll_title">التمرير السريع</string>
+	<string name="preference_fastscroll_summary">مقبض التمرير يظهر عند تمرير 35 عنصر أو أكثر.</string>
 	<string name="preference_showprice_title">أظهر السعر</string>
 	<string name="preference_showprice_summary">أظهر على شكل خانة اضافية في القائمة.</string>
 	<string name="preference_perstoreprice">الأسعار لكل-متجر</string>
@@ -188,8 +192,8 @@ Launchpad Contributions:
 	<string name="preference_perstoreprice_summary">تتبع الأسعار المنفصلة لكل عنصر في كل متجر</string>
 	<string name="preference_screenlock_title">تعطيل قفل الشاشة</string>
 	<string name="preference_screenlock_summary">منع الشاشة من الايقاف عند التحديد.</string>
-	<string name="preference_usefilters_title">Filters</string>
-	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
+	<string name="preference_usefilters_title">المرشحات</string>
+	<string name="preference_usefilters_summary">يمكن تصفية القوائم من قبل علامات أو مخازن.</string>
 	<string name="preference_reset_quantity">اعادة الكمية</string>
 	<string name="preference_reset_quantity_summary">اعادة الكمية عند اضافة عناصرمرة أخرى.</string>
 	<string name="preference_add_for_barcode">ماسح الباركود</string>
@@ -287,6 +291,17 @@ Launchpad Contributions:
     	<item>الغير محددة أولا،الأولوية، أبجديا</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
     	<item>الغير محددة أولا، االأولوية العلامات أبجديا</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>الأحدث أولا</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>الأقدم اولا</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">
