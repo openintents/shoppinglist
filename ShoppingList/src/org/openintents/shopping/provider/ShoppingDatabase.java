@@ -35,22 +35,15 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 	 * 
 	 * The various versions were introduced in the following releases:
 	 * 
-	 * 1: Release 0.1.1
-	 * 2: Release 0.1.6
-	 * 3: Release 1.0.4-beta
-	 * 4: Release 1.0.4-beta
-	 * 5: Release 1.2.7-beta 
-	 * 6: Release 1.2.7-beta 
-	 * 7: Release 1.2.7-beta 
-	 * 8: Release 1.2.7-beta
-	 * 9: Release 1.3.0
-	 * 10: Release 1.3.1-beta
+	 * 1: Release 0.1.1 2: Release 0.1.6 3: Release 1.0.4-beta 4: Release
+	 * 1.0.4-beta 5: Release 1.2.7-beta 6: Release 1.2.7-beta 7: Release
+	 * 1.2.7-beta 8: Release 1.2.7-beta 9: Release 1.3.0 10: Release 1.3.1-beta
 	 * 11: Release 1.4.0-beta
 	 */
 	static final int DATABASE_VERSION = 12;
 
 	public static final String DATABASE_NAME = "shopping.db";
-	
+
 	ShoppingDatabase(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
@@ -72,7 +65,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				+ "due INTEGER," // V4
 				+ "created INTEGER," // V1
 				+ "modified INTEGER," // V1
-				+ "accessed INTEGER" // V1					
+				+ "accessed INTEGER" // V1
 				+ ");");
 		db.execSQL("CREATE TABLE lists (" + "_id INTEGER PRIMARY KEY," // V1
 				+ "name VARCHAR," // V1
@@ -85,7 +78,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				+ "skin_background VARCHAR," // V2
 				+ "skin_font VARCHAR," // V2
 				+ "skin_color INTEGER," // V2
-				+ "skin_color_strikethrough INTEGER," // V2	
+				+ "skin_color_strikethrough INTEGER," // V2
 				+ "store_filter INTEGER DEFAULT -1," // V12
 				+ "tags_filter VARCHAR" // V12
 				+ ");");
@@ -111,7 +104,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE itemstores(" + "_id INTEGER PRIMARY KEY," // V5
 				+ "item_id INTEGER," // V5
 				+ "store_id INTEGER," // V5
-				+ "stocks_item INTEGER DEFAULT 1," //V10
+				+ "stocks_item INTEGER DEFAULT 1," // V10
 				+ "aisle INTEGER," // V5
 				+ "price INTEGER," // V5
 				+ "created INTEGER," // V5
@@ -130,8 +123,8 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-		Log.w(ShoppingProvider.TAG, "Upgrading database from version " + oldVersion + " to "
-				+ newVersion + ".");
+		Log.w(ShoppingProvider.TAG, "Upgrading database from version "
+				+ oldVersion + " to " + newVersion + ".");
 		if (newVersion > oldVersion) {
 			// Upgrade
 			switch (oldVersion) {
@@ -140,10 +133,10 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				// It seems SQLite3 only allows to add one column at a time,
 				// so we need three SQL statements:
 				try {
-					db.execSQL("ALTER TABLE items ADD COLUMN "
-							+ Items.PRICE + " INTEGER;");
-					db.execSQL("ALTER TABLE items ADD COLUMN "
-							+ Items.TAGS + " VARCHAR;");
+					db.execSQL("ALTER TABLE items ADD COLUMN " + Items.PRICE
+							+ " INTEGER;");
+					db.execSQL("ALTER TABLE items ADD COLUMN " + Items.TAGS
+							+ " VARCHAR;");
 					db.execSQL("ALTER TABLE contains ADD COLUMN "
 							+ Contains.SORT_KEY + " INTEGER;");
 				} catch (SQLException e) {
@@ -157,12 +150,12 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				// NO break; - fall through for further upgrades.
 			case 3:
 				try {
-					db.execSQL("ALTER TABLE items ADD COLUMN "
-							+ Items.BARCODE + " VARCHAR;");
-					db.execSQL("ALTER TABLE items ADD COLUMN "
-							+ Items.LOCATION + " VARCHAR;");
-					db.execSQL("ALTER TABLE items ADD COLUMN "
-							+ Items.DUE_DATE + " INTEGER;");
+					db.execSQL("ALTER TABLE items ADD COLUMN " + Items.BARCODE
+							+ " VARCHAR;");
+					db.execSQL("ALTER TABLE items ADD COLUMN " + Items.LOCATION
+							+ " VARCHAR;");
+					db.execSQL("ALTER TABLE items ADD COLUMN " + Items.DUE_DATE
+							+ " INTEGER;");
 				} catch (SQLException e) {
 					Log.e(ShoppingProvider.TAG, "Error executing SQL: ", e);
 					// If the error is "duplicate column name" then
@@ -174,13 +167,15 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				// NO break; - fall through for further upgrades.
 			case 4:
 				try {
-					db.execSQL("CREATE TABLE stores (" + "_id INTEGER PRIMARY KEY," // V5
+					db.execSQL("CREATE TABLE stores ("
+							+ "_id INTEGER PRIMARY KEY," // V5
 							+ "name VARCHAR, " // V5
 							+ "list_id INTEGER," // V5
 							+ "created INTEGER," // V5
 							+ "modified INTEGER" // V5
 							+ ");");
-					db.execSQL("CREATE TABLE itemstores(" + "_id INTEGER PRIMARY KEY," // V5
+					db.execSQL("CREATE TABLE itemstores("
+							+ "_id INTEGER PRIMARY KEY," // V5
 							+ "item_id INTEGER," // V5
 							+ "store_id INTEGER," // V5
 							+ "aisle INTEGER," // V5
@@ -210,15 +205,16 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				// NO break;
 			case 7:
 				try {
-					db.execSQL("ALTER TABLE items ADD COLUMN "
-							+ Items.UNITS + " VARCHAR;");
-					db.execSQL("CREATE TABLE units (" + "_id INTEGER PRIMARY KEY," // V8
+					db.execSQL("ALTER TABLE items ADD COLUMN " + Items.UNITS
+							+ " VARCHAR;");
+					db.execSQL("CREATE TABLE units ("
+							+ "_id INTEGER PRIMARY KEY," // V8
 							+ "name VARCHAR, " // V8
-							+ "singular VARCHAR, " // V8	
+							+ "singular VARCHAR, " // V8
 							+ "created INTEGER," // V8
 							+ "modified INTEGER" // V8
 							+ ");");
-					
+
 				} catch (SQLException e) {
 					Log.e(ShoppingProvider.TAG, "Error executing SQL: ", e);
 				}
@@ -232,32 +228,32 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 					// (see http://www.sqlite.org/faq.html#q11 )
 					// ("BEGIN TRANSACTION;" and "COMMIT;" are not valid
 					// because we are already within a transaction.)
-					//db.execSQL("CREATE TEMPORARY TABLE itemstores_backup("
-					//			+ "_id INTEGER PRIMARY KEY," // V5
-					//			+ "item_id INTEGER," // V5
-					//			+ "store_id INTEGER," // V5
-					//			+ "aisle INTEGER," // V5:INTEGER, (V9:VARCHAR)
-					//			+ "price INTEGER," // V5
-					//			+ "created INTEGER," // V5
-					//			+ "modified INTEGER" // V5
-					//			+ ");");
-					//db.execSQL("INSERT INTO itemstores_backup SELECT "
-					//			+ "_id,item_id,store_id,aisle,price,created,modified"
-					//			+ " FROM itemstores;");
-					//db.execSQL("DROP TABLE itemstores;");
-					//db.execSQL("CREATE TABLE itemstores("
-					//			+ "_id INTEGER PRIMARY KEY," // V5
-					//			+ "item_id INTEGER," // V5
-					//			+ "store_id INTEGER," // V5
-					//			+ "aisle VARCHAR," // (V5:INTEGER), V9
-					//			+ "price INTEGER," // V5
-					//			+ "created INTEGER," // V5
-					//			+ "modified INTEGER" // V5
-					//			+ ");");
-					//db.execSQL("INSERT INTO itemstores SELECT "
-					//			+ "_id,item_id,store_id,aisle,price,created,modified"
-					//			+ " FROM itemstores_backup;");
-					//db.execSQL("DROP TABLE itemstores_backup;");
+					// db.execSQL("CREATE TEMPORARY TABLE itemstores_backup("
+					// + "_id INTEGER PRIMARY KEY," // V5
+					// + "item_id INTEGER," // V5
+					// + "store_id INTEGER," // V5
+					// + "aisle INTEGER," // V5:INTEGER, (V9:VARCHAR)
+					// + "price INTEGER," // V5
+					// + "created INTEGER," // V5
+					// + "modified INTEGER" // V5
+					// + ");");
+					// db.execSQL("INSERT INTO itemstores_backup SELECT "
+					// + "_id,item_id,store_id,aisle,price,created,modified"
+					// + " FROM itemstores;");
+					// db.execSQL("DROP TABLE itemstores;");
+					// db.execSQL("CREATE TABLE itemstores("
+					// + "_id INTEGER PRIMARY KEY," // V5
+					// + "item_id INTEGER," // V5
+					// + "store_id INTEGER," // V5
+					// + "aisle VARCHAR," // (V5:INTEGER), V9
+					// + "price INTEGER," // V5
+					// + "created INTEGER," // V5
+					// + "modified INTEGER" // V5
+					// + ");");
+					// db.execSQL("INSERT INTO itemstores SELECT "
+					// + "_id,item_id,store_id,aisle,price,created,modified"
+					// + " FROM itemstores_backup;");
+					// db.execSQL("DROP TABLE itemstores_backup;");
 
 					// Replace "-1" values by "".
 					ContentValues values = new ContentValues();
@@ -271,7 +267,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				try {
 					db.execSQL("ALTER TABLE itemstores ADD COLUMN "
 							+ ItemStores.STOCKS_ITEM + " INTEGER DEFAULT 1;");
-					
+
 				} catch (SQLException e) {
 					Log.e(ShoppingProvider.TAG, "Error executing SQL: ", e);
 				}

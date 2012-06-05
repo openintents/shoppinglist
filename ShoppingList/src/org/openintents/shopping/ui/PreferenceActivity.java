@@ -27,7 +27,8 @@ import android.text.method.KeyListener;
 import android.text.method.TextKeyListener;
 import android.widget.Toast;
 
-public class PreferenceActivity extends android.preference.PreferenceActivity implements OnSharedPreferenceChangeListener {
+public class PreferenceActivity extends android.preference.PreferenceActivity
+		implements OnSharedPreferenceChangeListener {
 	private static boolean mBackupManagerAvailable;
 	public static int updateCount = 0;
 
@@ -44,7 +45,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 
 	public static final String PREFS_SAMESORTFORPICK = "samesortforpick";
 	public static final boolean PREFS_SAMESORTFORPICK_DEFAULT = false;
-	
+
 	public static final String PREFS_SORTORDER = "sortorder";
 	public static final String PREFS_PICKITEMS_SORTORDER = "sortorderForPickItems";
 
@@ -105,9 +106,9 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	public static final boolean PREFS_QUICKEDITMODE_DEFAULT = false;
 	public static final String PREFS_USE_FILTERS = "use_filters";
 	public static final boolean PREFS_USE_FILTERS_DEFAULT = false;
-	
+
 	public static final String PREFS_RESET_ALL_SETTINGS = "reset_all_settings";
-	
+
 	public static final int PREFS_CAPITALIZATION_DEFAULT = 1;
 
 	public static final String EXTRA_SHOW_GET_ADD_ONS = "show_get_add_ons";
@@ -117,8 +118,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 			TextKeyListener.Capitalize.SENTENCES,
 			TextKeyListener.Capitalize.WORDS };
 
-	
-	private ListPreference mPrioSubtotal; 
+	private ListPreference mPrioSubtotal;
 	private CheckBoxPreference mIncludesChecked;
 	private ListPreference mPickItemsSort;
 
@@ -133,18 +133,20 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 		sp.setEnabled(isMarketAvailable());
 		sp = (PreferenceScreen) findPreference(PREFS_MARKET_THEMES);
 		sp.setEnabled(isMarketAvailable());
-		
+
 		mPrioSubtotal = (ListPreference) findPreference(PREFS_PRIOSUBTOTAL);
 		mPickItemsSort = (ListPreference) findPreference(PREFS_PICKITEMS_SORTORDER);
 
 		mIncludesChecked = (CheckBoxPreference) findPreference(PREFS_PRIOSUBINCLCHECKED);
-		
+
 		// Cupcake has problems with Quick Edit Mode. Donut untested.
 		CheckBoxPreference quickedit = (CheckBoxPreference) findPreference(PREFS_QUICKEDITMODE);
-		quickedit.setEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO);
+		quickedit
+				.setEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO);
 		CheckBoxPreference usefilters = (CheckBoxPreference) findPreference(PREFS_USE_FILTERS);
-		usefilters.setEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO);
-		
+		usefilters
+				.setEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO);
+
 		SharedPreferences shared = getPreferenceScreen().getSharedPreferences();
 		updatePrioSubtotalSummary(shared);
 		updatePickItemsSortPref(shared);
@@ -161,7 +163,8 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 					.findPreference(PREFS_SCREEN_ADDONS);
 			setPreferenceScreen(licensePrefScreen);
 		}
-        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+		getPreferenceScreen().getSharedPreferences()
+				.registerOnSharedPreferenceChangeListener(this);
 	}
 
 	@Override
@@ -169,94 +172,135 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 		if (mBackupManagerAvailable) {
 			new BackupManagerWrapper(this).dataChanged();
 		}
-        getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+		getPreferenceScreen().getSharedPreferences()
+				.unregisterOnSharedPreferenceChangeListener(this);
 		super.onPause();
 	}
 
 	public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
 		updateCount++;
-        if (key.equals(PREFS_PRIOSUBTOTAL)) {
-        	updatePrioSubtotalSummary(prefs);
-        }
-        if (key.equals(PREFS_SAMESORTFORPICK)) {
-        	updatePickItemsSortPref(prefs);
-        }
+		if (key.equals(PREFS_PRIOSUBTOTAL)) {
+			updatePrioSubtotalSummary(prefs);
+		}
+		if (key.equals(PREFS_SAMESORTFORPICK)) {
+			updatePickItemsSortPref(prefs);
+		}
 	}
-	
+
 	private void resetAllSettings(final SharedPreferences prefs) {
-	    Preference resetAllSettings = (Preference) findPreference(PREFS_RESET_ALL_SETTINGS);
-        resetAllSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                AlertDialog alert = new AlertDialog.Builder(PreferenceActivity.this).create();
-                alert.setTitle(R.string.preference_reset_all_settings);
-                alert.setMessage(getString(R.string.preference_reset_all_settings_alert));
-                alert.setButton(getString(android.R.string.yes), new OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        SharedPreferences.Editor editor = prefs.edit();
-                        //Main
-                        editor.putString(PREFS_FONTSIZE, PREFS_FONTSIZE_DEFAULT);
-                        editor.putString(PREFS_SORTORDER, PREFS_SORTORDER_DEFAULT);
-                        //Main advanced
-                        editor.putString(PREFS_CAPITALIZATION, String.valueOf(PREFS_CAPITALIZATION_DEFAULT));
-                        editor.putString(PREFS_ORIENTATION, PREFS_ORIENTATION_DEFAULT);
-                        editor.putBoolean(PREFS_HIDECHECKED, PREFS_HIDECHECKED_DEFAULT);
-                        editor.putBoolean(PREFS_FASTSCROLL, PREFS_FASTSCROLL_DEFAULT);
-                        editor.putBoolean(PREFS_SHAKE, PREFS_SHAKE_DEFAULT);
-                        editor.putBoolean(PREFS_PERSTOREPRICES, PREFS_PERSTOREPRICES_DEFAULT);
-                        editor.putBoolean(PREFS_ADDFORBARCODE, PREFS_ADDFORBARCODE_DEFAULT);
-                        editor.putBoolean(PREFS_SCREENLOCK, PREFS_SCREENLOCK_DEFAULT);
-                        editor.putBoolean(PREFS_QUICKEDITMODE, PREFS_QUICKEDITMODE_DEFAULT);
-                        editor.putBoolean(PREFS_USE_FILTERS, PREFS_USE_FILTERS_DEFAULT);
-                        editor.putBoolean(PREFS_RESETQUANTITY, PREFS_RESETQUANTITY_DEFAULT);
-                        //Appearance
-                        editor.putBoolean(PREFS_SHOW_PRICE, PREFS_SHOW_PRICE_DEFAULT);
-                        editor.putBoolean(PREFS_SHOW_TAGS, PREFS_SHOW_TAGS_DEFAULT);
-                        editor.putBoolean(PREFS_SHOW_UNITS, PREFS_SHOW_UNITS_DEFAULT);
-                        editor.putBoolean(PREFS_SHOW_QUANTITY, PREFS_SHOW_QUANTITY_DEFAULT);
-                        editor.putBoolean(PREFS_SHOW_PRIORITY, PREFS_SHOW_PRIORITY_DEFAULT);
-                        //Pick items
-                        editor.putBoolean(PREFS_SAMESORTFORPICK, PREFS_SAMESORTFORPICK_DEFAULT);
-                        editor.putString(PREFS_PICKITEMS_SORTORDER, PREFS_PICKITEMS_SORTORDER_DEFAULT);
-                        editor.putBoolean(PREFS_PICKITEMSINLIST, PREFS_PICKITEMSINLIST_DEFAULT);
-                        editor.putString(PREFS_SORTORDER_SHOPPINGLISTS, PREFS_SORTORDER_SHOPPINGLISTS_DEFAULT);
-                        //Subtotal
-                        editor.putString(PREFS_PRIOSUBTOTAL, PREFS_PRIOSUBTOTAL_DEFAULT);
-                        editor.putBoolean(PREFS_PRIOSUBINCLCHECKED, PREFS_PRIOSUBINCLCHECKED_DEFAULT);
-                        
-                        editor.commit();
-                        
-                        Toast.makeText(PreferenceActivity.this, R.string.preference_reset_all_settings_done, Toast.LENGTH_LONG).show();
-                        finish();
-                    }
-                });
-                alert.setButton2(getString(android.R.string.cancel), new OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which){
-                        dialog.dismiss();
-                    }
-                });
-                alert.show();
-                return false;
-            }
-        });
+		Preference resetAllSettings = (Preference) findPreference(PREFS_RESET_ALL_SETTINGS);
+		resetAllSettings
+				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+					@Override
+					public boolean onPreferenceClick(Preference preference) {
+						AlertDialog alert = new AlertDialog.Builder(
+								PreferenceActivity.this).create();
+						alert.setTitle(R.string.preference_reset_all_settings);
+						alert.setMessage(getString(R.string.preference_reset_all_settings_alert));
+						alert.setButton(getString(android.R.string.yes),
+								new OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										SharedPreferences.Editor editor = prefs
+												.edit();
+										// Main
+										editor.putString(PREFS_FONTSIZE,
+												PREFS_FONTSIZE_DEFAULT);
+										editor.putString(PREFS_SORTORDER,
+												PREFS_SORTORDER_DEFAULT);
+										// Main advanced
+										editor.putString(
+												PREFS_CAPITALIZATION,
+												String.valueOf(PREFS_CAPITALIZATION_DEFAULT));
+										editor.putString(PREFS_ORIENTATION,
+												PREFS_ORIENTATION_DEFAULT);
+										editor.putBoolean(PREFS_HIDECHECKED,
+												PREFS_HIDECHECKED_DEFAULT);
+										editor.putBoolean(PREFS_FASTSCROLL,
+												PREFS_FASTSCROLL_DEFAULT);
+										editor.putBoolean(PREFS_SHAKE,
+												PREFS_SHAKE_DEFAULT);
+										editor.putBoolean(PREFS_PERSTOREPRICES,
+												PREFS_PERSTOREPRICES_DEFAULT);
+										editor.putBoolean(PREFS_ADDFORBARCODE,
+												PREFS_ADDFORBARCODE_DEFAULT);
+										editor.putBoolean(PREFS_SCREENLOCK,
+												PREFS_SCREENLOCK_DEFAULT);
+										editor.putBoolean(PREFS_QUICKEDITMODE,
+												PREFS_QUICKEDITMODE_DEFAULT);
+										editor.putBoolean(PREFS_USE_FILTERS,
+												PREFS_USE_FILTERS_DEFAULT);
+										editor.putBoolean(PREFS_RESETQUANTITY,
+												PREFS_RESETQUANTITY_DEFAULT);
+										// Appearance
+										editor.putBoolean(PREFS_SHOW_PRICE,
+												PREFS_SHOW_PRICE_DEFAULT);
+										editor.putBoolean(PREFS_SHOW_TAGS,
+												PREFS_SHOW_TAGS_DEFAULT);
+										editor.putBoolean(PREFS_SHOW_UNITS,
+												PREFS_SHOW_UNITS_DEFAULT);
+										editor.putBoolean(PREFS_SHOW_QUANTITY,
+												PREFS_SHOW_QUANTITY_DEFAULT);
+										editor.putBoolean(PREFS_SHOW_PRIORITY,
+												PREFS_SHOW_PRIORITY_DEFAULT);
+										// Pick items
+										editor.putBoolean(
+												PREFS_SAMESORTFORPICK,
+												PREFS_SAMESORTFORPICK_DEFAULT);
+										editor.putString(
+												PREFS_PICKITEMS_SORTORDER,
+												PREFS_PICKITEMS_SORTORDER_DEFAULT);
+										editor.putBoolean(
+												PREFS_PICKITEMSINLIST,
+												PREFS_PICKITEMSINLIST_DEFAULT);
+										editor.putString(
+												PREFS_SORTORDER_SHOPPINGLISTS,
+												PREFS_SORTORDER_SHOPPINGLISTS_DEFAULT);
+										// Subtotal
+										editor.putString(PREFS_PRIOSUBTOTAL,
+												PREFS_PRIOSUBTOTAL_DEFAULT);
+										editor.putBoolean(
+												PREFS_PRIOSUBINCLCHECKED,
+												PREFS_PRIOSUBINCLCHECKED_DEFAULT);
+
+										editor.commit();
+
+										Toast.makeText(
+												PreferenceActivity.this,
+												R.string.preference_reset_all_settings_done,
+												Toast.LENGTH_LONG).show();
+										finish();
+									}
+								});
+						alert.setButton2(getString(android.R.string.cancel),
+								new OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										dialog.dismiss();
+									}
+								});
+						alert.show();
+						return false;
+					}
+				});
 	}
-	
+
 	private void updatePrioSubtotalSummary(SharedPreferences prefs) {
-    	int threshold = getSubtotalByPriorityThreshold(prefs);
-    	CharSequence labels[] = mPrioSubtotal.getEntries();
-        mPrioSubtotal.setSummary(labels[threshold]);
-        mIncludesChecked.setEnabled(threshold != 0);
+		int threshold = getSubtotalByPriorityThreshold(prefs);
+		CharSequence labels[] = mPrioSubtotal.getEntries();
+		mPrioSubtotal.setSummary(labels[threshold]);
+		mIncludesChecked.setEnabled(threshold != 0);
 	}
-	
+
 	private void updatePickItemsSortPref(SharedPreferences prefs) {
-    	boolean sameSort = prefs.getBoolean(PREFS_SAMESORTFORPICK,
-    			PREFS_SAMESORTFORPICK_DEFAULT);
-        mPickItemsSort.setEnabled(!sameSort);
-        //maybe we should set the label to say the active sort order.
-        //but not tonight.
-    	//CharSequence labels[] = mPickItemsSort.getEntries();
+		boolean sameSort = prefs.getBoolean(PREFS_SAMESORTFORPICK,
+				PREFS_SAMESORTFORPICK_DEFAULT);
+		mPickItemsSort.setEnabled(!sameSort);
+		// maybe we should set the label to say the active sort order.
+		// but not tonight.
+		// CharSequence labels[] = mPickItemsSort.getEntries();
 	}
 
 	/**
@@ -280,35 +324,36 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 
 	public static int getOrientationFromPrefs(Context context) {
 		int orientation = Integer.parseInt(PreferenceManager
-				.getDefaultSharedPreferences(context).getString(PREFS_ORIENTATION,
-						PREFS_ORIENTATION_DEFAULT));
+				.getDefaultSharedPreferences(context).getString(
+						PREFS_ORIENTATION, PREFS_ORIENTATION_DEFAULT));
 		return orientation;
 	}
 
 	public static boolean getUsingPerStorePricesFromPrefs(Context context) {
 		boolean using = PreferenceManager.getDefaultSharedPreferences(context)
-		.getBoolean(PREFS_PERSTOREPRICES,PREFS_PERSTOREPRICES_DEFAULT);
+				.getBoolean(PREFS_PERSTOREPRICES, PREFS_PERSTOREPRICES_DEFAULT);
 		return using;
 	}
 
 	public static boolean getQuickEditModeFromPrefs(Context context) {
 		boolean using = PreferenceManager.getDefaultSharedPreferences(context)
-		.getBoolean(PREFS_QUICKEDITMODE,PREFS_QUICKEDITMODE_DEFAULT);
+				.getBoolean(PREFS_QUICKEDITMODE, PREFS_QUICKEDITMODE_DEFAULT);
 		return using;
 	}
-	
+
 	public static boolean getUsingFiltersFromPrefs(Context context) {
 		boolean using = PreferenceManager.getDefaultSharedPreferences(context)
-		.getBoolean(PREFS_USE_FILTERS,PREFS_USE_FILTERS_DEFAULT);
+				.getBoolean(PREFS_USE_FILTERS, PREFS_USE_FILTERS_DEFAULT);
 		return using;
 	}
-	
+
 	public static boolean getPickItemsInListFromPrefs(Context context) {
 		boolean using = PreferenceManager.getDefaultSharedPreferences(context)
-		.getBoolean(PREFS_PICKITEMSINLIST,PREFS_PICKITEMSINLIST_DEFAULT);
+				.getBoolean(PREFS_PICKITEMSINLIST,
+						PREFS_PICKITEMSINLIST_DEFAULT);
 		return using;
 	}
-	
+
 	/**
 	 * Returns the sort order for the notes list based on the user preferences.
 	 * Performs error-checking.
@@ -318,23 +363,27 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 	 */
 	static public int getSortOrderIndexFromPrefs(Context context, int mode) {
 		int sortOrder = 0;
-		
+
 		if (mode != ShoppingActivity.MODE_IN_SHOP) {
-		  boolean followShopping = PreferenceManager.getDefaultSharedPreferences(context)
-		.getBoolean(PREFS_SAMESORTFORPICK,PREFS_SAMESORTFORPICK_DEFAULT);
-		  if (followShopping) {
-			  mode = ShoppingActivity.MODE_IN_SHOP;
-		  }
+			boolean followShopping = PreferenceManager
+					.getDefaultSharedPreferences(context).getBoolean(
+							PREFS_SAMESORTFORPICK,
+							PREFS_SAMESORTFORPICK_DEFAULT);
+			if (followShopping) {
+				mode = ShoppingActivity.MODE_IN_SHOP;
+			}
 		}
-		
+
 		if (mode != ShoppingActivity.MODE_IN_SHOP) {
 			// use the pick-items-specific value, if there is one
 			try {
 				sortOrder = Integer.parseInt(PreferenceManager
 						.getDefaultSharedPreferences(context).getString(
-								PREFS_PICKITEMS_SORTORDER, PREFS_PICKITEMS_SORTORDER_DEFAULT));			
+								PREFS_PICKITEMS_SORTORDER,
+								PREFS_PICKITEMS_SORTORDER_DEFAULT));
 			} catch (NumberFormatException e) {
-				// Guess somebody messed with the preferences and put a string into
+				// Guess somebody messed with the preferences and put a string
+				// into
 				// this field. We'll follow shopping mode then.
 				mode = ShoppingActivity.MODE_IN_SHOP;
 			}
@@ -342,12 +391,13 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 
 		if (mode == ShoppingActivity.MODE_IN_SHOP) {
 			try {
-			    sortOrder = Integer.parseInt(PreferenceManager
-			    		.getDefaultSharedPreferences(context).getString(
-							PREFS_SORTORDER, PREFS_SORTORDER_DEFAULT));
+				sortOrder = Integer.parseInt(PreferenceManager
+						.getDefaultSharedPreferences(context).getString(
+								PREFS_SORTORDER, PREFS_SORTORDER_DEFAULT));
 			} catch (NumberFormatException e) {
-			// Guess somebody messed with the preferences and put a string into
-			// this field. We'll use the default value then.
+				// Guess somebody messed with the preferences and put a string
+				// into
+				// this field. We'll use the default value then.
 			}
 		}
 
@@ -363,7 +413,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 		int index = getSortOrderIndexFromPrefs(context, mode);
 		return Contains.SORT_ORDERS[index];
 	}
-	
+
 	static public boolean prefsStatusAffectsSort(Context context, int mode) {
 		int index = getSortOrderIndexFromPrefs(context, mode);
 		boolean affects = Contains.StatusAffectsSortOrder[index];
@@ -374,30 +424,34 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 		}
 		return affects;
 	}
-	
-    public static String getShoppingListSortOrderFromPrefs(Context context) {
-        int index = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(context).getString(PREFS_SORTORDER_SHOPPINGLISTS, PREFS_SORTORDER_SHOPPINGLISTS_DEFAULT)); 
-        if (index >= 0 && index < Lists.SORT_ORDERS.length) {
-            return Lists.SORT_ORDERS[index];
-        }
-        
-        return Lists.DEFAULT_SORT_ORDER;
-    }
-    
+
+	public static String getShoppingListSortOrderFromPrefs(Context context) {
+		int index = Integer.parseInt(PreferenceManager
+				.getDefaultSharedPreferences(context).getString(
+						PREFS_SORTORDER_SHOPPINGLISTS,
+						PREFS_SORTORDER_SHOPPINGLISTS_DEFAULT));
+		if (index >= 0 && index < Lists.SORT_ORDERS.length) {
+			return Lists.SORT_ORDERS[index];
+		}
+
+		return Lists.DEFAULT_SORT_ORDER;
+	}
+
 	public static boolean getHideCheckedItemsFromPrefs(Context context) {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		return prefs.getBoolean(PREFS_HIDECHECKED, PREFS_HIDECHECKED_DEFAULT);
 	}
-	
+
 	public static boolean getFastScrollEnabledFromPrefs(Context context) {
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		return prefs.getBoolean(PREFS_FASTSCROLL, PREFS_FASTSCROLL_DEFAULT);
 	}
-	
+
 	private static int getSubtotalByPriorityThreshold(SharedPreferences prefs) {
-		String pref = prefs.getString(PREFS_PRIOSUBTOTAL, PREFS_PRIOSUBTOTAL_DEFAULT);
+		String pref = prefs.getString(PREFS_PRIOSUBTOTAL,
+				PREFS_PRIOSUBTOTAL_DEFAULT);
 		int threshold = 0;
 		try {
 			threshold = Integer.parseInt(pref);
@@ -408,18 +462,20 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 		}
 		return threshold;
 	}
-	
+
 	public static int getSubtotalByPriorityThreshold(Context context) {
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(context);
 		return getSubtotalByPriorityThreshold(prefs);
 	}
 
 	public static boolean prioritySubtotalIncludesChecked(Context context) {
 		SharedPreferences prefs = PreferenceManager
-		.getDefaultSharedPreferences(context);
-		return prefs.getBoolean(PREFS_PRIOSUBINCLCHECKED, PREFS_PRIOSUBINCLCHECKED_DEFAULT);
+				.getDefaultSharedPreferences(context);
+		return prefs.getBoolean(PREFS_PRIOSUBINCLCHECKED,
+				PREFS_PRIOSUBINCLCHECKED_DEFAULT);
 	}
-	
+
 	/**
 	 * Returns a KeyListener for edit texts that will match the capitalization
 	 * preferences of the user.
@@ -455,13 +511,13 @@ public class PreferenceActivity extends android.preference.PreferenceActivity im
 				.getDefaultSharedPreferences(context);
 		return prefs.getBoolean(PREFS_THEME_SET_FOR_ALL, false);
 	}
-	
-	public static boolean getResetQuantity(Context context){
+
+	public static boolean getResetQuantity(Context context) {
 		return PreferenceManager.getDefaultSharedPreferences(context)
 				.getBoolean(PREFS_RESETQUANTITY, PREFS_RESETQUANTITY_DEFAULT);
 	}
-	
-	public static boolean getAddForBarcode(Context context){
+
+	public static boolean getAddForBarcode(Context context) {
 		return PreferenceManager.getDefaultSharedPreferences(context)
 				.getBoolean(PREFS_ADDFORBARCODE, PREFS_ADDFORBARCODE_DEFAULT);
 	}

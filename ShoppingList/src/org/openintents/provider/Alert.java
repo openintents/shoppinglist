@@ -235,12 +235,13 @@ public class Alert {
 			String id = c
 					.getString(c.getColumnIndexOrThrow(ManagedService._ID));
 			ContentValues values = new ContentValues();
-			values.put(ManagedService.TIME_INTERVALL, Long
-					.toString(timeIntervall));
-			values.put(ManagedService.DO_ROAMING, Boolean
-					.toString(useWhileRoaming));
-			mContentResolver.update(Uri.withAppendedPath(
-					ManagedService.CONTENT_URI, id), values, null, null);
+			values.put(ManagedService.TIME_INTERVALL,
+					Long.toString(timeIntervall));
+			values.put(ManagedService.DO_ROAMING,
+					Boolean.toString(useWhileRoaming));
+			mContentResolver.update(
+					Uri.withAppendedPath(ManagedService.CONTENT_URI, id),
+					values, null, null);
 		} else {
 			// insert
 			cv = new ContentValues();

@@ -14,7 +14,8 @@ import android.view.MenuItem;
  * Adds intent options with icons.
  * 
  * This code is retrieved from this message:
- * http://groups.google.com/group/android-developers/browse_frm/thread/3fed25cdda765b02
+ * http://groups.google.com/group/android
+ * -developers/browse_frm/thread/3fed25cdda765b02
  * 
  */
 public class MenuIntentOptionsWithIcons {
@@ -44,9 +45,9 @@ public class MenuIntentOptionsWithIcons {
 			rintent.setComponent(new ComponentName(
 					ri.activityInfo.applicationInfo.packageName,
 					ri.activityInfo.name));
-			final MenuItem item = mMenu.add(group, id, categoryOrder,
-					ri.loadLabel(pm)).setIcon(ri.loadIcon(pm)).setIntent(
-					rintent);
+			final MenuItem item = mMenu
+					.add(group, id, categoryOrder, ri.loadLabel(pm))
+					.setIcon(ri.loadIcon(pm)).setIntent(rintent);
 			if (outSpecificItems != null && ri.specificIndex >= 0) {
 				outSpecificItems[ri.specificIndex] = item;
 			}

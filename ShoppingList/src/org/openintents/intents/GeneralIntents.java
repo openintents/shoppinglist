@@ -12,5 +12,5 @@ public class GeneralIntents {
 	 * 
 	 */
 	public static final String ACTION_INSERT_FROM_EXTRAS = "org.openintents.action.INSERT_FROM_EXTRAS";
-	
+
 }

@@ -127,12 +127,12 @@ import android.widget.Toast;
  * Displays a shopping list.
  * 
  */
-public class ShoppingActivity extends DistributionLibraryFragmentActivity implements
-		ThemeDialogListener, OnCustomClickListener,
+public class ShoppingActivity extends DistributionLibraryFragmentActivity
+		implements ThemeDialogListener, OnCustomClickListener,
 		ActionBarListener, OnItemChangedListener { // implements
 	// AdapterView.OnItemClickListener
 	// {
-	
+
 	/**
 	 * TAG for logging.
 	 */
@@ -140,47 +140,56 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private static final boolean debug = false || LogConstants.debug;
 
 	public class MyGestureDetector extends SimpleOnGestureListener {
-        private static final float DISTANCE_DIP = 16.0f;
-        private static final float PATH_DIP = 40.0f;
-        // convert dip measurements to pixels
-        final float scale = getResources().getDisplayMetrics().density;
-        int scaledDistance = (int) (DISTANCE_DIP * scale + 0.5f);
-        int scaledPath = (int) (PATH_DIP * scale + 0.5f);
-        // For more information about touch gestures and screens support, see:
-        // http://developer.android.com/resources/articles/gestures.html
-        // http://developer.android.com/reference/android/gesture/package-summary.html
-        // http://developer.android.com/guide/practices/screens_support.html try {
+		private static final float DISTANCE_DIP = 16.0f;
+		private static final float PATH_DIP = 40.0f;
+		// convert dip measurements to pixels
+		final float scale = getResources().getDisplayMetrics().density;
+		int scaledDistance = (int) (DISTANCE_DIP * scale + 0.5f);
+		int scaledPath = (int) (PATH_DIP * scale + 0.5f);
 
-        @Override
-	        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        	if (e1 == null || e2 == null) return false;
+		// For more information about touch gestures and screens support, see:
+		// http://developer.android.com/resources/articles/gestures.html
+		// http://developer.android.com/reference/android/gesture/package-summary.html
+		// http://developer.android.com/guide/practices/screens_support.html try
+		// {
 
-        	 try {
-        		 DisplayMetrics dm = getResources().getDisplayMetrics();
+		@Override
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+				float velocityY) {
+			if (e1 == null || e2 == null)
+				return false;
 
-        		 int REL_SWIPE_MIN_DISTANCE = (int)(SWIPE_MIN_DISTANCE * dm.densityDpi / 160.0f);
-        		 int REL_SWIPE_MAX_OFF_PATH = (int)(SWIPE_MAX_OFF_PATH * dm.densityDpi / 160.0f);
-        		 int REL_SWIPE_THRESHOLD_VELOCITY = (int)(SWIPE_THRESHOLD_VELOCITY * dm.densityDpi / 160.0f);
+			try {
+				DisplayMetrics dm = getResources().getDisplayMetrics();
 
+				int REL_SWIPE_MIN_DISTANCE = (int) (SWIPE_MIN_DISTANCE
+						* dm.densityDpi / 160.0f);
+				int REL_SWIPE_MAX_OFF_PATH = (int) (SWIPE_MAX_OFF_PATH
+						* dm.densityDpi / 160.0f);
+				int REL_SWIPE_THRESHOLD_VELOCITY = (int) (SWIPE_THRESHOLD_VELOCITY
+						* dm.densityDpi / 160.0f);
 
-	                if (Math.abs(e1.getY() - e2.getY()) > REL_SWIPE_MAX_OFF_PATH)
-	                    return false;
-	                // right to left swipe
-	                if(e1.getX() - e2.getX() > REL_SWIPE_MIN_DISTANCE && Math.abs(velocityX) > REL_SWIPE_THRESHOLD_VELOCITY) {
-	                    Toast.makeText(ShoppingActivity.this, "Left Swipe", Toast.LENGTH_SHORT).show();
-	                    changeList(-1);
-	                }  else if (e2.getX() - e1.getX() > REL_SWIPE_MIN_DISTANCE && Math.abs(velocityX) > REL_SWIPE_THRESHOLD_VELOCITY) {
-	                    Toast.makeText(ShoppingActivity.this, "Right Swipe", Toast.LENGTH_SHORT).show();
-	                    changeList(1);
-	                }
-	            } catch (Exception e) {
-	                // nothing
-	            }
-	            return false;
-	        }
+				if (Math.abs(e1.getY() - e2.getY()) > REL_SWIPE_MAX_OFF_PATH)
+					return false;
+				// right to left swipe
+				if (e1.getX() - e2.getX() > REL_SWIPE_MIN_DISTANCE
+						&& Math.abs(velocityX) > REL_SWIPE_THRESHOLD_VELOCITY) {
+					Toast.makeText(ShoppingActivity.this, "Left Swipe",
+							Toast.LENGTH_SHORT).show();
+					changeList(-1);
+				} else if (e2.getX() - e1.getX() > REL_SWIPE_MIN_DISTANCE
+						&& Math.abs(velocityX) > REL_SWIPE_THRESHOLD_VELOCITY) {
+					Toast.makeText(ShoppingActivity.this, "Right Swipe",
+							Toast.LENGTH_SHORT).show();
+					changeList(1);
+				}
+			} catch (Exception e) {
+				// nothing
+			}
+			return false;
+		}
 
 	}
-
 
 	private static final int SWIPE_MIN_DISTANCE = 120;
 	private static final int SWIPE_MAX_OFF_PATH = 250;
@@ -275,10 +284,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 * Current state
 	 */
 	private int mState;
-	
+
 	/*
-	 * Value of PreferenceActivity.updateCount last time we 
-	 * called fillItems().
+	 * Value of PreferenceActivity.updateCount last time we called fillItems().
 	 */
 	private int lastAppliedPrefChange = -1;
 
@@ -287,7 +295,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 */
 	public static final int MODE_PICK_ITEMS_DLG = 3;
 
-	
 	/**
 	 * mode: add items from existing list
 	 */
@@ -299,7 +306,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	public static final int MODE_IN_SHOP = 1;
 
 	private boolean mEditingFilter = false;
-	
+
 	/**
 	 * URI of current list
 	 */
@@ -309,12 +316,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 * URI of selected item
 	 */
 	private Uri mItemUri;
-	
+
 	/**
 	 * URI of current list and item
 	 */
 	private Uri mListItemUri;
-	
+
 	/**
 	 * Definition of the requestCode for the subactivity.
 	 */
@@ -370,7 +377,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	/**
 	 * Private members connected to list of shopping lists
 	 */
-	//	Temp - making it generic for tablet compatibility
+	// Temp - making it generic for tablet compatibility
 	private AdapterView mShoppingListsView;
 	private Cursor mCursorShoppingLists;
 	private static final String[] mStringListFilter = new String[] { Lists._ID,
@@ -386,8 +393,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private ShoppingItemsView mItemsView;
 	// private Cursor mCursorItems;
 
-	public static final String[] mStringItems = new String[] { ContainsFull._ID,
-			ContainsFull.ITEM_NAME, ContainsFull.ITEM_IMAGE,
+	public static final String[] mStringItems = new String[] {
+			ContainsFull._ID, ContainsFull.ITEM_NAME, ContainsFull.ITEM_IMAGE,
 			ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,
 			ContainsFull.QUANTITY, ContainsFull.STATUS, ContainsFull.ITEM_ID,
 			ContainsFull.SHARE_CREATED_BY, ContainsFull.SHARE_MODIFIED_BY,
@@ -409,14 +416,14 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 	private LinearLayout.LayoutParams mLayoutParamsItems;
 	private int mAllowedListHeight; // Height for the list allowed in this view.
-	
+
 	private AutoCompleteTextView mEditText;
 	private Button mButton;
 	private View mFilterLayout = null;
 	private Button mStoresFilter = null;
 	private Button mTagsFilter = null;
 	private Button mListFilter = null;
-	
+
 	protected Context mDialogContext;
 
 	// TODO: Set up state information for onFreeze(), ...
@@ -435,23 +442,22 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	// Skins --------------------------
 
 	private boolean usingListSpinner() {
-		
-		// not sure if the version should still be checked... 
-		// what should happen on a Froyo tablet? Still, seems 
+
+		// not sure if the version should still be checked...
+		// what should happen on a Froyo tablet? Still, seems
 		// likely that the condition below will do something safe.
 		//
-		// if 	(Build.VERSION.SDK_INT<Build.VERSION_CODES.HONEYCOMB)
-		//	return true;
-				
-		
+		// if (Build.VERSION.SDK_INT<Build.VERSION_CODES.HONEYCOMB)
+		// return true;
+
 		// The most foolproof thing we can check here seems to be the
-		// existence of the resource used in tablet mode. If the list 
-		// fragment exists, then Android thinks we are running on 
+		// existence of the resource used in tablet mode. If the list
+		// fragment exists, then Android thinks we are running on
 		// something tablet-like.
 		return (findViewById(android.R.id.list) == null);
-		
+
 	}
-	
+
 	/**
 	 * Remember position for screen orientation change.
 	 */
@@ -534,16 +540,16 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			// Main action
 			mState = STATE_MAIN;
 
-			mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, ""
-					+ defaultShoppingList);
+			mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI,
+					"" + defaultShoppingList);
 
 			intent.setData(mListUri);
 		} else if (Intent.ACTION_MAIN.equals(action)) {
 			// Main action
 			mState = STATE_MAIN;
 
-			mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, ""
-					+ defaultShoppingList);
+			mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI,
+					"" + defaultShoppingList);
 
 			intent.setData(mListUri);
 
@@ -571,13 +577,13 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		} else if (Intent.ACTION_PICK.equals(action)) {
 			mState = STATE_PICK_ITEM;
 
-			mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, ""
-					+ defaultShoppingList);
+			mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI,
+					"" + defaultShoppingList);
 		} else if (Intent.ACTION_GET_CONTENT.equals(action)) {
 			mState = STATE_GET_CONTENT_ITEM;
 
-			mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, ""
-					+ defaultShoppingList);
+			mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI,
+					"" + defaultShoppingList);
 		} else if (GeneralIntents.ACTION_INSERT_FROM_EXTRAS.equals(action)) {
 			if (ShoppingListIntents.TYPE_STRING_ARRAYLIST_SHOPPING.equals(type)) {
 				/*
@@ -587,8 +593,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				 */
 				getShoppingExtras(intent);
 				mState = STATE_MAIN;
-				mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, ""
-						+ defaultShoppingList);
+				mListUri = Uri.withAppendedPath(
+						ShoppingContract.Lists.CONTENT_URI, ""
+								+ defaultShoppingList);
 				intent.setData(mListUri);
 			} else if (intent.getDataString().startsWith(
 					ShoppingContract.Lists.CONTENT_URI.toString())) {
@@ -636,7 +643,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			mItemUri = Uri.parse(icicle.getString(BUNDLE_ITEM_URI));
 			List<String> pathSegs = mItemUri.getPathSegments();
 			int num = pathSegs.size();
-			mListItemUri = Uri.withAppendedPath(mListUri, pathSegs.get(num - 1));
+			mListItemUri = Uri
+					.withAppendedPath(mListUri, pathSegs.get(num - 1));
 			if (icicle.containsKey(BUNDLE_RELATION_URI)) {
 				mRelationUri = Uri.parse(icicle.getString(BUNDLE_RELATION_URI));
 			}
@@ -651,67 +659,75 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		initFromPreferences();
 		// now update title and fill all items
 		onModeChanged();
-		
+
 		mItemsView.setActionBarListener(this);
 	}
-	
-	@Override
-    public void onStop() {
-        super.onStop();
-        updateWidgets();
-    }
-    
-    private void updateWidgets() {
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
-        int[] a = appWidgetManager.getAppWidgetIds(new ComponentName(this.getPackageName(), CheckItemsWidget.class.getName()));
-        List<AppWidgetProviderInfo> b = appWidgetManager.getInstalledProviders();
-        for (AppWidgetProviderInfo i : b) {
-            if (i.provider.getPackageName().equals(this.getPackageName())) {
-                a = appWidgetManager.getAppWidgetIds(i.provider);
-                new CheckItemsWidget().onUpdate(this, appWidgetManager, a);
-            }
-        }
-    }
 
-    // used at startup, otherwise use getSelectedListId
-    private int getLastUsedListFromPrefs() {
-    	
-    	SharedPreferences sp = getSharedPreferences(
-				"org.openintents.shopping_preferences", MODE_PRIVATE);
-		
-    	return sp.getInt(PreferenceActivity.PREFS_LASTUSED,1);
-    }
-    
-	private void initFromPreferences() {
-		
+	@Override
+	public void onStop() {
+		super.onStop();
+		updateWidgets();
+	}
+
+	private void updateWidgets() {
+		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+		int[] a = appWidgetManager.getAppWidgetIds(new ComponentName(this
+				.getPackageName(), CheckItemsWidget.class.getName()));
+		List<AppWidgetProviderInfo> b = appWidgetManager
+				.getInstalledProviders();
+		for (AppWidgetProviderInfo i : b) {
+			if (i.provider.getPackageName().equals(this.getPackageName())) {
+				a = appWidgetManager.getAppWidgetIds(i.provider);
+				new CheckItemsWidget().onUpdate(this, appWidgetManager, a);
+			}
+		}
+	}
+
+	// used at startup, otherwise use getSelectedListId
+	private int getLastUsedListFromPrefs() {
+
 		SharedPreferences sp = getSharedPreferences(
 				"org.openintents.shopping_preferences", MODE_PRIVATE);
-		
-		
+
+		return sp.getInt(PreferenceActivity.PREFS_LASTUSED, 1);
+	}
+
+	private void initFromPreferences() {
+
+		SharedPreferences sp = getSharedPreferences(
+				"org.openintents.shopping_preferences", MODE_PRIVATE);
+
 		if (mItemsView != null) {
 			// UGLY WORKAROUND:
 			// On screen orientation changes, fillItems() is called twice.
 			// That is why we have to set the list position twice.
 			mItemsView.mUpdateLastListPosition = 2;
-			
-			mItemsView.mLastListPosition = sp.getInt(PreferenceActivity.PREFS_LASTLIST_POSITION, 0);
-			mItemsView.mLastListTop = sp.getInt(PreferenceActivity.PREFS_LASTLIST_TOP, 0);
 
-			if (debug) Log.d(TAG, "Load list position: pos: " + mItemsView.mLastListPosition
-					+ ", top: " + mItemsView.mLastListTop);
+			mItemsView.mLastListPosition = sp.getInt(
+					PreferenceActivity.PREFS_LASTLIST_POSITION, 0);
+			mItemsView.mLastListTop = sp.getInt(
+					PreferenceActivity.PREFS_LASTLIST_TOP, 0);
 
-            // selected list must be set after changing ordering
-			String sortOrder = PreferenceActivity.getShoppingListSortOrderFromPrefs(this);
+			if (debug)
+				Log.d(TAG, "Load list position: pos: "
+						+ mItemsView.mLastListPosition + ", top: "
+						+ mItemsView.mLastListTop);
+
+			// selected list must be set after changing ordering
+			String sortOrder = PreferenceActivity
+					.getShoppingListSortOrderFromPrefs(this);
 			if (!mSortOrder.equals(sortOrder)) {
-			    mSortOrder = sortOrder;
-                fillListFilter();
-                setSelectedListId(getLastUsedListFromPrefs());
+				mSortOrder = sortOrder;
+				fillListFilter();
+				setSelectedListId(getLastUsedListFromPrefs());
 			}
 		}
-			
-		if(sp.getBoolean(PreferenceActivity.PREFS_SCREENLOCK, PreferenceActivity.PREFS_SCREENLOCK_DEFAULT)) {
-			getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		} 
+
+		if (sp.getBoolean(PreferenceActivity.PREFS_SCREENLOCK,
+				PreferenceActivity.PREFS_SCREENLOCK_DEFAULT)) {
+			getWindow()
+					.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		}
 
 		if (mItemsView != null) {
 			if (sp.getBoolean(PreferenceActivity.PREFS_SHOW_PRICE,
@@ -749,11 +765,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		mUseSensor = sp.getBoolean(PreferenceActivity.PREFS_SHAKE,
 				PreferenceActivity.PREFS_SHAKE_DEFAULT);
-		
-		boolean nowEditingFilter = sp.getBoolean(PreferenceActivity.PREFS_USE_FILTERS, 
-				PreferenceActivity.PREFS_USE_FILTERS_DEFAULT);		
-		if (mStoresFilter != null &&
-			mEditingFilter != nowEditingFilter) {
+
+		boolean nowEditingFilter = sp.getBoolean(
+				PreferenceActivity.PREFS_USE_FILTERS,
+				PreferenceActivity.PREFS_USE_FILTERS_DEFAULT);
+		if (mStoresFilter != null && mEditingFilter != nowEditingFilter) {
 			updateFilterWidgets();
 			fillItems(false);
 		}
@@ -793,30 +809,31 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		// Reload preferences, in case something changed
 		initFromPreferences();
-		
+
 		mIsActive = true;
-		
-		this.setRequestedOrientation(PreferenceActivity.getOrientationFromPrefs(this));
+
+		this.setRequestedOrientation(PreferenceActivity
+				.getOrientationFromPrefs(this));
 
 		if (getSelectedListId() != -1) {
-		   setListTheme(loadListTheme());
-		   applyListTheme();
-  		   updateTitle();
+			setListTheme(loadListTheme());
+			applyListTheme();
+			updateTitle();
 		}
 		mItemsView.onResume();
 
 		// TODO fling disabled for release 1.3.0
-//		mGestureDetector = new GestureDetector(new MyGestureDetector());
-//		mGestureListener = new OnTouchListener() {
-//			public boolean onTouch(View view, MotionEvent e) {
-//				if (mGestureDetector.onTouchEvent(e)) {
-//                    return true;
-//                }
-//				return false;
-//			}
-//		};
-//		mListItemsView.setOnTouchListener(mGestureListener);
-				
+		// mGestureDetector = new GestureDetector(new MyGestureDetector());
+		// mGestureListener = new OnTouchListener() {
+		// public boolean onTouch(View view, MotionEvent e) {
+		// if (mGestureDetector.onTouchEvent(e)) {
+		// return true;
+		// }
+		// return false;
+		// }
+		// };
+		// mListItemsView.setOnTouchListener(mGestureListener);
+
 		mEditText
 				.setKeyListener(PreferenceActivity
 						.getCapitalizationKeyListenerFromPrefs(getApplicationContext()));
@@ -827,12 +844,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			// MESSAGE_UPDATE_CURSORS), mUpdateInterval);
 		}
 
-		// OnResume can be called when exiting PreferenceActivity, in 
-		// which case we might need to refresh the list depending on 
+		// OnResume can be called when exiting PreferenceActivity, in
+		// which case we might need to refresh the list depending on
 		// which settings were changed. We could be smarter about this,
 		// but for now refresh if /any/ pref has changed.
 		//
-		// In phone mode list id is generally not set by now, and there will 
+		// In phone mode list id is generally not set by now, and there will
 		// soon be a fillItems call triggered by updating the list selector.
 		// However when the embedded list selector is not being used, now might
 		// be a good time to update for pending
@@ -867,7 +884,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private void updateTitle() {
 		// Modify our overall title depending on the mode we are running in.
 		if (mState == STATE_MAIN || mState == STATE_VIEW_LIST) {
-			if (PreferenceActivity.getPickItemsInListFromPrefs(getApplicationContext())) {
+			if (PreferenceActivity
+					.getPickItemsInListFromPrefs(getApplicationContext())) {
 				// 2 different modes
 				if (mItemsView.mMode == MODE_IN_SHOP) {
 					setTitle(getString(R.string.shopping_title,
@@ -880,11 +898,13 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 				}
 			} else {
 				// Only one mode: "Pick items using dialog"
-				// App name is default. But if using filters, include list name too.
+				// App name is default. But if using filters, include list name
+				// too.
 				if (PreferenceActivity.getUsingFiltersFromPrefs(this))
-				   setTitle(getCurrentListName() + " - " + getText(R.string.app_name));
+					setTitle(getCurrentListName() + " - "
+							+ getText(R.string.app_name));
 				else
-				   setTitle(getText(R.string.app_name));
+					setTitle(getText(R.string.app_name));
 			}
 		} else if ((mState == STATE_PICK_ITEM)
 				|| (mState == STATE_GET_CONTENT_ITEM)) {
@@ -935,9 +955,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		int listposition = mItemsView.getFirstVisiblePosition();
 		View v = mItemsView.getChildAt(0);
 		int listtop = (v == null) ? 0 : v.getTop();
-		if (debug) Log.d(TAG, "Save list position: pos: " + listposition
-				+ ", top: " + listtop);
-		
+		if (debug)
+			Log.d(TAG, "Save list position: pos: " + listposition + ", top: "
+					+ listtop);
+
 		SharedPreferences sp = getSharedPreferences(
 				"org.openintents.shopping_preferences", MODE_PRIVATE);
 		SharedPreferences.Editor editor = sp.edit();
@@ -946,7 +967,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		// but for now, just don't overwrite previous setting with -1.
 		int list_id = new Long(getSelectedListId()).intValue();
 		if (list_id != -1)
-		   editor.putInt(PreferenceActivity.PREFS_LASTUSED, list_id);
+			editor.putInt(PreferenceActivity.PREFS_LASTUSED, list_id);
 		editor.putInt(PreferenceActivity.PREFS_LASTLIST_POSITION, listposition);
 		editor.putInt(PreferenceActivity.PREFS_LASTLIST_TOP, listtop);
 		editor.commit();
@@ -954,7 +975,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		/*
 		 * // Unregister refresh intent receiver
 		 * unregisterReceiver(mIntentReceiver);
-		 * 
 		 */
 
 		mItemsView.onPause();
@@ -993,7 +1013,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	 */
 	private void createView() {
 
-		//Temp-create either Spinner or List based upon the Display
+		// Temp-create either Spinner or List based upon the Display
 		createList();
 
 		mEditText = (AutoCompleteTextView) findViewById(R.id.autocomplete_add_item);
@@ -1029,7 +1049,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 					mLastKeyAction = key.getAction();
 					return true;
-				};
+				}
+				;
 				return false;
 			}
 		});
@@ -1054,7 +1075,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
 			}
-			
+
 		});
 
 		mButton = (Button) findViewById(R.id.button_add_item);
@@ -1067,46 +1088,52 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 			@Override
 			public boolean onLongClick(View v) {
-				if (PreferenceActivity.getAddForBarcode(getApplicationContext()) == false) {
-					if (debug) Log.v(TAG, "barcode scanner on add button long click disabled");
+				if (PreferenceActivity
+						.getAddForBarcode(getApplicationContext()) == false) {
+					if (debug)
+						Log.v(TAG,
+								"barcode scanner on add button long click disabled");
 					return false;
 				}
-				
-				Intent intent = new Intent();				
+
+				Intent intent = new Intent();
 				intent.setData(mListUri);
-				intent.setClassName("org.openintents.barcodescanner", "org.openintents.barcodescanner.BarcodeScanner");
+				intent.setClassName("org.openintents.barcodescanner",
+						"org.openintents.barcodescanner.BarcodeScanner");
 				intent.setAction(Intent.ACTION_GET_CONTENT);
 				intent.addCategory(Intent.CATEGORY_ALTERNATIVE);
 				try {
-					startActivityForResult(intent, REQUEST_CODE_CATEGORY_ALTERNATIVE);
+					startActivityForResult(intent,
+							REQUEST_CODE_CATEGORY_ALTERNATIVE);
 				} catch (ActivityNotFoundException e) {
-					if (debug) Log.v(TAG, "barcode scanner not found");
+					if (debug)
+						Log.v(TAG, "barcode scanner not found");
 					showDialog(DIALOG_GET_FROM_MARKET);
 					return false;
 				}
-				
+
 				// Instead of calling the class of barcode
 				// scanner directly, a more generic approach would
 				// be to use a general activity picker.
-				// 
+				//
 				// TODO: Implement onActivityResult.
 				// Problem: User has to pick activity every time.
 				// Choice should be storeable in Stettings.
-//				Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-//				intent.setData(mListUri);
-//				intent.addCategory(Intent.CATEGORY_ALTERNATIVE);
-//
-//				Intent pickIntent = new Intent(Intent.ACTION_PICK_ACTIVITY);
-//				pickIntent.putExtra(Intent.EXTRA_INTENT, intent);
-//				pickIntent.putExtra(Intent.EXTRA_TITLE,
-//						getText(R.string.title_select_item_from));
-//				try {
-//					startActivityForResult(pickIntent,
-//							REQUEST_CODE_CATEGORY_ALTERNATIVE);
-//				} catch (ActivityNotFoundException e) {
-//					Log.v(TAG, "barcode scanner not found");
-//					return false;
-//				}
+				// Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+				// intent.setData(mListUri);
+				// intent.addCategory(Intent.CATEGORY_ALTERNATIVE);
+				//
+				// Intent pickIntent = new Intent(Intent.ACTION_PICK_ACTIVITY);
+				// pickIntent.putExtra(Intent.EXTRA_INTENT, intent);
+				// pickIntent.putExtra(Intent.EXTRA_TITLE,
+				// getText(R.string.title_select_item_from));
+				// try {
+				// startActivityForResult(pickIntent,
+				// REQUEST_CODE_CATEGORY_ALTERNATIVE);
+				// } catch (ActivityNotFoundException e) {
+				// Log.v(TAG, "barcode scanner not found");
+				// return false;
+				// }
 				return true;
 			}
 		});
@@ -1124,7 +1151,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 			@Override
 			public void drag(int from, int to) {
-				if (debug) Log.v("DRAG", "" + from + "/" + to);
+				if (debug)
+					Log.v("DRAG", "" + from + "/" + to);
 
 			}
 		});
@@ -1132,7 +1160,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 			@Override
 			public void drop(int from, int to) {
-				if (debug) Log.v("DRAG", "" + from + "/" + to);
+				if (debug)
+					Log.v("DRAG", "" + from + "/" + to);
 
 			}
 		});
@@ -1145,7 +1174,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 
 		tv = (TextView) findViewById(R.id.total_3);
 		mItemsView.setPrioritySubtotalTextView(tv);
-		
+
 		tv = (TextView) findViewById(R.id.count);
 		mItemsView.setCountTextView(tv);
 
@@ -1170,7 +1199,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 						contextmenu.add(0, MENU_MARK_ITEM, 0,
 								R.string.menu_mark_item).setShortcut('2', 'm');
 						contextmenu.add(0, MENU_ITEM_STORES, 0,
-								R.string.menu_item_stores).setShortcut('3', 's');
+								R.string.menu_item_stores)
+								.setShortcut('3', 's');
 						contextmenu.add(0, MENU_REMOVE_ITEM_FROM_LIST, 0,
 								R.string.menu_remove_item)
 								.setShortcut('4', 'r');
@@ -1189,152 +1219,150 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 	private void createList() {
 
 		// TODO switch layout on screen size, not sdk versions
-		if(!usingListSpinner()){
-			
+		if (!usingListSpinner()) {
+
 			mShoppingListsView = (ListView) findViewById(android.R.id.list);
-			((ListView)mShoppingListsView)
-			.setOnItemSelectedListener(new OnItemSelectedListener() {
-				public void onItemSelected(AdapterView parent, View v,
-						int position, long id) {
-					if (debug)
-						Log.d(TAG, "ListView: onItemSelected");
+			((ListView) mShoppingListsView)
+					.setOnItemSelectedListener(new OnItemSelectedListener() {
+						public void onItemSelected(AdapterView parent, View v,
+								int position, long id) {
+							if (debug)
+								Log.d(TAG, "ListView: onItemSelected");
 
-					// Update list cursor:
-					getSelectedListId();
+							// Update list cursor:
+							getSelectedListId();
 
-					// Set the theme based on the selected list:
-					setListTheme(loadListTheme());
+							// Set the theme based on the selected list:
+							setListTheme(loadListTheme());
 
-					// If it's the same list we had before, requery only 
-					// if a preference has changed since then.
-					fillItems(id == mItemsView.getListId());
+							// If it's the same list we had before, requery only
+							// if a preference has changed since then.
+							fillItems(id == mItemsView.getListId());
 
-					// Apply the theme after the list has been filled:
-					applyListTheme();
+							// Apply the theme after the list has been filled:
+							applyListTheme();
 
-					updateTitle();
+							updateTitle();
 
-					((ListView) mShoppingListsView).setItemChecked(position,true);
-				}
+							((ListView) mShoppingListsView).setItemChecked(
+									position, true);
+						}
 
-				public void onNothingSelected(AdapterView arg0) {
-					if (debug)
-						Log.d(TAG, "Listview: onNothingSelected: "
-								+ mIsActive);
-					if (mIsActive) {
-						fillItems(false);
-					}
-				}
-			});
+						public void onNothingSelected(AdapterView arg0) {
+							if (debug)
+								Log.d(TAG, "Listview: onNothingSelected: "
+										+ mIsActive);
+							if (mIsActive) {
+								fillItems(false);
+							}
+						}
+					});
 
-			
-			
-			
-
-
-		}else{
+		} else {
 			mShoppingListsView = (Spinner) findViewById(R.id.spinner_listfilter);
-			((Spinner)mShoppingListsView)
-			.setOnItemSelectedListener(new OnItemSelectedListener() {
-				public void onItemSelected(AdapterView parent, View v,
-						int position, long id) {
-					if (debug)
-						Log.d(TAG, "Spinner: onItemSelected");
+			((Spinner) mShoppingListsView)
+					.setOnItemSelectedListener(new OnItemSelectedListener() {
+						public void onItemSelected(AdapterView parent, View v,
+								int position, long id) {
+							if (debug)
+								Log.d(TAG, "Spinner: onItemSelected");
 
-					// Update list cursor:
-					getSelectedListId();
+							// Update list cursor:
+							getSelectedListId();
 
-					// Set the theme based on the selected list:
-					setListTheme(loadListTheme());				
+							// Set the theme based on the selected list:
+							setListTheme(loadListTheme());
 
-					// If it's the same list we had before, requery only 
-					// if a preference has changed since then.
-					fillItems(id == mItemsView.getListId());
+							// If it's the same list we had before, requery only
+							// if a preference has changed since then.
+							fillItems(id == mItemsView.getListId());
 
-					updateTitle();
+							updateTitle();
 
-					// Apply the theme after the list has been filled:
-					applyListTheme();
-				}
+							// Apply the theme after the list has been filled:
+							applyListTheme();
+						}
 
-				public void onNothingSelected(AdapterView arg0) {
-					if (debug)
-						Log.d(TAG, "Spinner: onNothingSelected: "
-								+ mIsActive);
-					if (mIsActive) {
-						fillItems(false);
-					}
-				}
-			});
+						public void onNothingSelected(AdapterView arg0) {
+							if (debug)
+								Log.d(TAG, "Spinner: onNothingSelected: "
+										+ mIsActive);
+							if (mIsActive) {
+								fillItems(false);
+							}
+						}
+					});
 
-			mListFilter = (Button)findViewById(R.id.listfilter);
+			mListFilter = (Button) findViewById(R.id.listfilter);
 			if (mListFilter != null) {
-			  mListFilter.setOnClickListener(new OnClickListener() {
+				mListFilter.setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					showListFilter(v);					
-				}});
+					@Override
+					public void onClick(View v) {
+						showListFilter(v);
+					}
+				});
 			}
 		}
-		
-		mStoresFilter = (Button)findViewById(R.id.storefilter);
+
+		mStoresFilter = (Button) findViewById(R.id.storefilter);
 		mStoresFilter.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				showStoresFilter(v);					
-			}});
-		mTagsFilter = (Button)findViewById(R.id.tagfilter);
+				showStoresFilter(v);
+			}
+		});
+		mTagsFilter = (Button) findViewById(R.id.tagfilter);
 		mTagsFilter.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				showTagsFilter(v);					
-			}});
+				showTagsFilter(v);
+			}
+		});
 	}
-
 
 	protected void showListFilter(final View v) {
 		QuickSelectMenu popup = new QuickSelectMenu(this, v);
-    	int i_list;
-    	
+		int i_list;
+
 		Menu menu = popup.getMenu();
 		if (menu == null) {
 			return;
 		}
-		
+
 		// get the list of lists
 		mCursorShoppingLists.requery();
 		int count = mCursorShoppingLists.getCount();
 		mCursorShoppingLists.moveToFirst();
-		for (i_list = 0; i_list < count; i_list ++) {
+		for (i_list = 0; i_list < count; i_list++) {
 			String name = mCursorShoppingLists.getString(mStringListFilterNAME);
 			menu.add(0, i_list, Menu.NONE, name);
 			mCursorShoppingLists.moveToNext();
 		}
-		
+
 		popup.setOnItemSelectedListener(new QuickSelectMenu.OnItemSelectedListener() {
-	            public void onItemSelected(CharSequence name, int pos) {
-	            	setSelectedListPos(pos);
-	            }
-	        });
-		
+			public void onItemSelected(CharSequence name, int pos) {
+				setSelectedListPos(pos);
+			}
+		});
+
 		popup.show();
 	}
-	
+
 	protected void showStoresFilter(final View v) {
 		QuickSelectMenu popup = new QuickSelectMenu(this, v);
-    	
+
 		Menu menu = popup.getMenu();
 		if (menu == null) {
 			return;
 		}
-		Cursor c = getContentResolver().query(
-				Stores.QUERY_BY_LIST_URI.buildUpon().
-					appendPath(this.mListUri.getLastPathSegment()).build(), 
-				new String[] {Stores._ID, Stores.NAME},
-				null, null, "stores.name COLLATE NOCASE ASC");
+		Cursor c = getContentResolver()
+				.query(Stores.QUERY_BY_LIST_URI.buildUpon()
+						.appendPath(this.mListUri.getLastPathSegment()).build(),
+						new String[] { Stores._ID, Stores.NAME }, null, null,
+						"stores.name COLLATE NOCASE ASC");
 		int i_store, count = c.getCount();
 		if (count == 0) {
 			c.deactivate();
@@ -1343,13 +1371,13 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 					Toast.LENGTH_SHORT).show();
 			return;
 		}
-		
+
 		// prepend the "no filter" option
 		menu.add(0, -1, Menu.NONE, R.string.unfiltered);
 
 		// get the list of stores
 		c.moveToFirst();
-		for (i_store = 0; i_store < count; i_store ++) {
+		for (i_store = 0; i_store < count; i_store++) {
 			long id = c.getLong(0);
 			String name = c.getString(1);
 			menu.add(0, (int) id, Menu.NONE, name);
@@ -1357,86 +1385,87 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity implem
 		}
 		c.deactivate();
 		c.close();
-		
+
 		popup.setOnItemSelectedListener(new QuickSelectMenu.OnItemSelectedListener() {
-	            public void onItemSelected(CharSequence name, int id) {
-	        		// set the selected store filter
-	        		// update the filter summary? not until filter region collapsed.
-	            	ContentValues values = new ContentValues();
-	        		values.put(Lists.STORE_FILTER, (long)id);
-	        		getContentResolver().update(mListUri, values, null,	null);
-	        		if (id == -1)
-		        		((Button)v).setText(R.string.stores);
-	        		else
-	        			((Button)v).setText(name);
-	        		fillItems(false);
-	            }
-	        });
-		
-		 popup.show();
+			public void onItemSelected(CharSequence name, int id) {
+				// set the selected store filter
+				// update the filter summary? not until filter region collapsed.
+				ContentValues values = new ContentValues();
+				values.put(Lists.STORE_FILTER, (long) id);
+				getContentResolver().update(mListUri, values, null, null);
+				if (id == -1)
+					((Button) v).setText(R.string.stores);
+				else
+					((Button) v).setText(name);
+				fillItems(false);
+			}
+		});
+
+		popup.show();
 	}
 
-
-protected void showTagsFilter(final View v) {
+	protected void showTagsFilter(final View v) {
 		QuickSelectMenu popup = new QuickSelectMenu(this, v);
-		
+
 		Menu menu = popup.getMenu();
 		if (menu == null) {
 			return;
 		}
-    	String[] tags = getTaglist(mListUri.getLastPathSegment());
+		String[] tags = getTaglist(mListUri.getLastPathSegment());
 		int i_tag, count = tags.length;
-		
+
 		if (count == 0) {
-			Toast.makeText(this, R.string.no_tags_available,
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.no_tags_available, Toast.LENGTH_SHORT)
+					.show();
 			return;
 		}
-		
+
 		// prepend the "no filter" option
 		menu.add(0, -1, Menu.NONE, R.string.unfiltered);
 
-		for (i_tag = 0; i_tag < count; i_tag ++) {
+		for (i_tag = 0; i_tag < count; i_tag++) {
 			menu.add(tags[i_tag]);
 		}
-		
+
 		popup.setOnItemSelectedListener(new QuickSelectMenu.OnItemSelectedListener() {
-	            public void onItemSelected(CharSequence name, int id) {
-	        		// set the selected tags filter
-	            	ContentValues values = new ContentValues();
-	        		values.put(Lists.TAGS_FILTER, id == -1 ? "" : (String) name);
-	        		getContentResolver().update(mListUri, values, null,	null);
-	        		if (id == -1)
-		        		((Button)v).setText(R.string.tags);
-	        		else
-	        			((Button)v).setText(name);
-	        		fillItems(false);
-	            }
-	        });
-		
-		 popup.show();
+			public void onItemSelected(CharSequence name, int id) {
+				// set the selected tags filter
+				ContentValues values = new ContentValues();
+				values.put(Lists.TAGS_FILTER, id == -1 ? "" : (String) name);
+				getContentResolver().update(mListUri, values, null, null);
+				if (id == -1)
+					((Button) v).setText(R.string.tags);
+				else
+					((Button) v).setText(name);
+				fillItems(false);
+			}
+		});
+
+		popup.show();
 	}
 
-	
 	protected void updateFilterWidgets() {
 		mEditingFilter = PreferenceActivity.getUsingFiltersFromPrefs(this);
 
 		mStoresFilter.setVisibility(mEditingFilter ? View.VISIBLE : View.GONE);
 		mTagsFilter.setVisibility(mEditingFilter ? View.VISIBLE : View.GONE);
-		
+
 		boolean showListFilter = mEditingFilter;
 		if (!usingListSpinner()) {
 			// Tablet mode: always show ListView
 			showListFilter = false;
 		}
 		if (mListFilter != null)
-		  mListFilter.setVisibility(showListFilter ? View.VISIBLE : View.GONE);
+			mListFilter
+					.setVisibility(showListFilter ? View.VISIBLE : View.GONE);
 		// spinner goes the opposite way
-		if (mShoppingListsView != null) 
-			mShoppingListsView.setVisibility(showListFilter ? View.GONE : View.VISIBLE);
+		if (mShoppingListsView != null)
+			mShoppingListsView.setVisibility(showListFilter ? View.GONE
+					: View.VISIBLE);
 
 		if (mEditingFilter) {
-			String storeName = ShoppingUtils.getListFilterStoreName(this, mListUri);
+			String storeName = ShoppingUtils.getListFilterStoreName(this,
+					mListUri);
 			if (storeName != null)
 				mStoresFilter.setText(storeName);
 			else
@@ -1449,8 +1478,8 @@ protected void showTagsFilter(final View v) {
 		}
 	}
 
-	public void onCustomClick(Cursor c, int pos, EditItemDialog.FieldType field,
-							  View clicked_view) {
+	public void onCustomClick(Cursor c, int pos,
+			EditItemDialog.FieldType field, View clicked_view) {
 		if (mState == STATE_PICK_ITEM) {
 			pickItem(c);
 		} else {
@@ -1459,22 +1488,22 @@ protected void showTagsFilter(final View v) {
 				// In default theme, there is an extra check box,
 				// so clicking on anywhere else means to edit the
 				// item.
-				
-				if (field == EditItemDialog.FieldType.PRICE &&
-					PreferenceActivity.getUsingPerStorePricesFromPrefs(this))
-					// should really be a per-list preference
+
+				if (field == EditItemDialog.FieldType.PRICE
+						&& PreferenceActivity
+								.getUsingPerStorePricesFromPrefs(this))
+				// should really be a per-list preference
 				{
 					editItemStores(pos);
 					handled = true;
 				}
-				
-				if ((field == EditItemDialog.FieldType.PRIORITY || 
-					 field == EditItemDialog.FieldType.QUANTITY) &&
-					 PreferenceActivity.getQuickEditModeFromPrefs(this))
-				{
-					handled = QuickEditFieldPopupMenu(c, pos, field, clicked_view);
+
+				if ((field == EditItemDialog.FieldType.PRIORITY || field == EditItemDialog.FieldType.QUANTITY)
+						&& PreferenceActivity.getQuickEditModeFromPrefs(this)) {
+					handled = QuickEditFieldPopupMenu(c, pos, field,
+							clicked_view);
 				}
-				
+
 				if (!handled)
 					editItem(pos, field);
 			} else {
@@ -1485,10 +1514,10 @@ protected void showTagsFilter(final View v) {
 		}
 	}
 
-	private boolean QuickEditFieldPopupMenu(final Cursor c, final int pos, 
+	private boolean QuickEditFieldPopupMenu(final Cursor c, final int pos,
 			final FieldType field, View v) {
 		QuickSelectMenu popup = new QuickSelectMenu(this, v);
-        	
+
 		Menu menu = popup.getMenu();
 		if (menu == null) {
 			return false;
@@ -1500,40 +1529,43 @@ protected void showTagsFilter(final View v) {
 		menu.add("5");
 		if (field == FieldType.QUANTITY) {
 			menu.add(R.string.otherqty);
-		} 
+		}
 		if (field == FieldType.PRIORITY) {
 			menu.add(R.string.otherpri);
 		}
 
-		 popup.setOnItemSelectedListener(new QuickSelectMenu.OnItemSelectedListener() {
-	            public void onItemSelected(CharSequence name, int id) {
-	            	// TODO: use a flavor of menu.add which takes id, 
-	            	// then identifying the selection becomes easier here.
-	            	
-	            	if (name.length() > 1) {
-	            		// Other ... use edit dialog
-	            		editItem(pos, field);	            		
-	            	} else {
-	            		long number = name.charAt(0)-'0';
-	            		ContentValues values = new ContentValues();
-	            		switch (field) {
-	            		case PRIORITY:
-	            			values.put(Contains.PRIORITY, number);
-	            			break;
-	            		case QUANTITY:
-	            			values.put(Contains.QUANTITY, number);
-	            			break;
-	            		}
-	            		mItemsView.mCursorItems.moveToPosition(pos);
-	            		String containsId = mItemsView.mCursorItems.getString(mStringItemsCONTAINSID);
-	            		Uri uri = Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI, containsId);
-	            		getApplicationContext().getContentResolver().update(uri, values, null, null);
-	            		onItemChanged(); // probably overkill
-	            		mItemsView.updateTotal();
-	            	}
-	            }
-	        });
-		
+		popup.setOnItemSelectedListener(new QuickSelectMenu.OnItemSelectedListener() {
+			public void onItemSelected(CharSequence name, int id) {
+				// TODO: use a flavor of menu.add which takes id,
+				// then identifying the selection becomes easier here.
+
+				if (name.length() > 1) {
+					// Other ... use edit dialog
+					editItem(pos, field);
+				} else {
+					long number = name.charAt(0) - '0';
+					ContentValues values = new ContentValues();
+					switch (field) {
+					case PRIORITY:
+						values.put(Contains.PRIORITY, number);
+						break;
+					case QUANTITY:
+						values.put(Contains.QUANTITY, number);
+						break;
+					}
+					mItemsView.mCursorItems.moveToPosition(pos);
+					String containsId = mItemsView.mCursorItems
+							.getString(mStringItemsCONTAINSID);
+					Uri uri = Uri.withAppendedPath(
+							ShoppingContract.Contains.CONTENT_URI, containsId);
+					getApplicationContext().getContentResolver().update(uri,
+							values, null, null);
+					onItemChanged(); // probably overkill
+					mItemsView.updateTotal();
+				}
+			}
+		});
+
 		popup.show();
 		return true;
 	}
@@ -1577,7 +1609,8 @@ protected void showTagsFilter(final View v) {
 		mExtraListUri = null;
 		if ((intent.getDataString() != null)
 				&& (intent.getDataString()
-						.startsWith(ShoppingContract.Lists.CONTENT_URI.toString()))) {
+						.startsWith(ShoppingContract.Lists.CONTENT_URI
+								.toString()))) {
 			// We received a valid shopping list URI.
 
 			// Set current list to received list:
@@ -1643,8 +1676,8 @@ protected void showTagsFilter(final View v) {
 	 */
 	private void pickItem(Cursor c) {
 		long itemId = c.getLong(mStringItemsITEMID);
-		Uri url = ContentUris
-				.withAppendedId(ShoppingContract.Items.CONTENT_URI, itemId);
+		Uri url = ContentUris.withAppendedId(
+				ShoppingContract.Items.CONTENT_URI, itemId);
 
 		Intent intent = new Intent();
 		intent.setData(url);
@@ -1659,47 +1692,44 @@ protected void showTagsFilter(final View v) {
 		super.onCreateOptionsMenu(menu);
 
 		/*
-		int MENU_ACTION_WITH_TEXT=0;
-		
-		//Temp- for backward compatibility with OS 3 features 
-		
-		if(!usingListSpinner()){
-			try{
-				//setting the value equivalent to desired expression
-				//MenuItem.SHOW_AS_ACTION_IF_ROOM|MenuItem.SHOW_AS_ACTION_WITH_TEXT
-				java.lang.reflect.Field field=MenuItem.class.getDeclaredField("SHOW_AS_ACTION_IF_ROOM");
-				MENU_ACTION_WITH_TEXT=field.getInt(MenuItem.class);
-				field=MenuItem.class.getDeclaredField("SHOW_AS_ACTION_WITH_TEXT");
-				MENU_ACTION_WITH_TEXT|=field.getInt(MenuItem.class);				
-			}catch(Exception e){
-				//reset value irrespective of cause
-				MENU_ACTION_WITH_TEXT=0;
-			}
-			
-		}
-		*/
-		
+		 * int MENU_ACTION_WITH_TEXT=0;
+		 * 
+		 * //Temp- for backward compatibility with OS 3 features
+		 * 
+		 * if(!usingListSpinner()){ try{ //setting the value equivalent to
+		 * desired expression
+		 * //MenuItem.SHOW_AS_ACTION_IF_ROOM|MenuItem.SHOW_AS_ACTION_WITH_TEXT
+		 * java.lang.reflect.Field
+		 * field=MenuItem.class.getDeclaredField("SHOW_AS_ACTION_IF_ROOM");
+		 * MENU_ACTION_WITH_TEXT=field.getInt(MenuItem.class);
+		 * field=MenuItem.class.getDeclaredField("SHOW_AS_ACTION_WITH_TEXT");
+		 * MENU_ACTION_WITH_TEXT|=field.getInt(MenuItem.class); }catch(Exception
+		 * e){ //reset value irrespective of cause MENU_ACTION_WITH_TEXT=0; }
+		 * 
+		 * }
+		 */
+
 		// Add menu option for auto adding items from string array in intent
-		// extra if they exist		
+		// extra if they exist
 		if (mExtraItems != null) {
 			menu.add(0, MENU_INSERT_FROM_EXTRAS, 0, R.string.menu_auto_add)
 					.setIcon(android.R.drawable.ic_menu_upload);
 		}
 
-		//Temp - Temporary item holder for compatibility framework
-		MenuItem item=null;
+		// Temp - Temporary item holder for compatibility framework
+		MenuItem item = null;
 		// Standard menu
-		item=menu.add(0, MENU_NEW_LIST, 0, R.string.new_list)
+		item = menu.add(0, MENU_NEW_LIST, 0, R.string.new_list)
 				.setIcon(R.drawable.ic_menu_add_list).setShortcut('0', 'n');
-		//MenuCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_IF_ROOM);
+		// MenuCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
-		item=menu.add(0, MENU_CLEAN_UP_LIST, 0, R.string.clean_up_list)
+		item = menu.add(0, MENU_CLEAN_UP_LIST, 0, R.string.clean_up_list)
 				.setIcon(R.drawable.ic_menu_cleanup).setShortcut('1', 'c');
-		MenuCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		MenuCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_IF_ROOM
+				| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
 		menu.add(0, MENU_PICK_ITEMS, 0, R.string.menu_pick_items)
 				.setIcon(android.R.drawable.ic_menu_add).setShortcut('2', 'p');
-		
 
 		/*
 		 * menu.add(0, MENU_SHARE, 0, R.string.share)
@@ -1717,8 +1747,8 @@ protected void showTagsFilter(final View v) {
 		menu.add(0, MENU_RENAME_LIST, 0, R.string.rename_list)
 				.setIcon(android.R.drawable.ic_menu_edit).setShortcut('5', 'r');
 
-		menu.add(0, MENU_DELETE_LIST, 0, R.string.delete_list)
-				.setIcon(android.R.drawable.ic_menu_delete);
+		menu.add(0, MENU_DELETE_LIST, 0, R.string.delete_list).setIcon(
+				android.R.drawable.ic_menu_delete);
 
 		menu.add(0, MENU_SEND, 0, R.string.send)
 				.setIcon(android.R.drawable.ic_menu_send).setShortcut('7', 's');
@@ -1728,11 +1758,10 @@ protected void showTagsFilter(final View v) {
 					.setIcon(android.R.drawable.ic_menu_mylocation)
 					.setShortcut('8', 'l');
 		}
-		
+
 		menu.add(0, MENU_MARK_ALL_ITEMS, 0, R.string.mark_all_items)
 				.setIcon(android.R.drawable.ic_menu_agenda)
 				.setShortcut('9', 'm');
-		
 
 		// Add distribution menu items last.
 		mDistribution.onCreateOptionsMenu(menu);
@@ -1799,10 +1828,10 @@ protected void showTagsFilter(final View v) {
 
 		// set menu title for change mode
 		MenuItem menuItem = menu.findItem(MENU_PICK_ITEMS);
-		
+
 		if (mItemsView.mMode == MODE_ADD_ITEMS) {
 			menuItem.setTitle(R.string.menu_start_shopping);
-			menuItem.setIcon(android.R.drawable.ic_menu_myplaces); 
+			menuItem.setIcon(android.R.drawable.ic_menu_myplaces);
 		} else {
 			menu.findItem(MENU_PICK_ITEMS).setTitle(R.string.menu_pick_items);
 			menuItem.setIcon(android.R.drawable.ic_menu_add);
@@ -1839,8 +1868,9 @@ protected void showTagsFilter(final View v) {
 		MenuIntentOptionsWithIcons menu2 = new MenuIntentOptionsWithIcons(this,
 				menu);
 		menu2.addIntentOptions(Menu.CATEGORY_ALTERNATIVE, 0, 0,
-				new ComponentName(this, org.openintents.shopping.ShoppingActivity.class), null, intent,
-				0, null);
+				new ComponentName(this,
+						org.openintents.shopping.ShoppingActivity.class), null,
+				intent, 0, null);
 
 		return true;
 	}
@@ -1917,7 +1947,8 @@ protected void showTagsFilter(final View v) {
 	 * 
 	 */
 	private void pickItems() {
-		if (PreferenceActivity.getPickItemsInListFromPrefs(getApplicationContext())) {
+		if (PreferenceActivity
+				.getPickItemsInListFromPrefs(getApplicationContext())) {
 			if (mItemsView.mMode == MODE_IN_SHOP) {
 				mItemsView.mMode = MODE_ADD_ITEMS;
 			} else {
@@ -1928,7 +1959,7 @@ protected void showTagsFilter(final View v) {
 			pickItemsUsingDialog();
 		}
 	}
-	
+
 	private void pickItemsUsingDialog() {
 		Intent intent;
 		intent = new Intent(this, PickItemsActivity.class);
@@ -2016,7 +2047,8 @@ protected void showTagsFilter(final View v) {
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			// In Holo themes, apply the theme text color also to the
-			// input box and the button, because the background is semi-transparent.
+			// input box and the button, because the background is
+			// semi-transparent.
 			mEditText.setTextColor(mItemsView.mTextColor);
 			mButton.setTextColor(mItemsView.mTextColor);
 			if (mShoppingListsView instanceof Spinner) {
@@ -2027,8 +2059,9 @@ protected void showTagsFilter(final View v) {
 	}
 
 	/**
-	 * For holo themes with transparent widgets, 
-	 * set font color of the spinner using theme color.
+	 * For holo themes with transparent widgets, set font color of the spinner
+	 * using theme color.
+	 * 
 	 * @param view
 	 */
 	private void setSpinnerTextColorInHoloTheme(View view) {
@@ -2144,7 +2177,8 @@ protected void showTagsFilter(final View v) {
 		}
 	}
 
-	// TODO: Convert into proper dialog that remains across screen orientation changes.
+	// TODO: Convert into proper dialog that remains across screen orientation
+	// changes.
 	/**
 	 * Confirm 'delete list' command by AlertDialog.
 	 */
@@ -2180,15 +2214,15 @@ protected void showTagsFilter(final View v) {
 
 		// Update view
 		fillListFilter();
-		
+
 		getSelectedListId();
-		
+
 		// Set the theme based on the selected list:
 		setListTheme(loadListTheme());
-		
+
 		fillItems(false);
 		applyListTheme();
-  	    updateTitle();
+		updateTitle();
 	}
 
 	/** Mark item */
@@ -2202,17 +2236,16 @@ protected void showTagsFilter(final View v) {
 	 * @param field
 	 */
 	void editItem(long itemId, long containsId, EditItemDialog.FieldType field) {
-		mItemUri = Uri
-				.withAppendedPath(ShoppingContract.Items.CONTENT_URI, "" + itemId);
-		mListItemUri = Uri
-				.withAppendedPath(mListUri, "" + itemId);
-		mRelationUri = Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI, ""
-				+ containsId);
+		mItemUri = Uri.withAppendedPath(ShoppingContract.Items.CONTENT_URI, ""
+				+ itemId);
+		mListItemUri = Uri.withAppendedPath(mListUri, "" + itemId);
+		mRelationUri = Uri.withAppendedPath(
+				ShoppingContract.Contains.CONTENT_URI, "" + containsId);
 		mEditItemFocusField = field;
 
-		showDialog(DIALOG_EDIT_ITEM);		
+		showDialog(DIALOG_EDIT_ITEM);
 	}
-	
+
 	/**
 	 * Edit item
 	 * 
@@ -2227,10 +2260,10 @@ protected void showTagsFilter(final View v) {
 		long itemId = mItemsView.mCursorItems.getLong(mStringItemsITEMID);
 		long containsId = mItemsView.mCursorItems
 				.getLong(mStringItemsCONTAINSID);
-		
+
 		editItem(itemId, containsId, field);
 	}
-	
+
 	void editItemStores(int position) {
 		if (debug)
 			Log.d(TAG, "EditItemStores: Position: " + position);
@@ -2238,13 +2271,14 @@ protected void showTagsFilter(final View v) {
 		mItemsView.mCursorItems.moveToPosition(position);
 		// mEditItemPosition = position;
 		long itemId = mItemsView.mCursorItems.getLong(mStringItemsITEMID);
-	
+
 		Intent intent;
 		intent = new Intent(this, ItemStoresActivity.class);
-		intent.setData(mListUri.buildUpon().appendPath(String.valueOf(itemId)).build());
+		intent.setData(mListUri.buildUpon().appendPath(String.valueOf(itemId))
+				.build());
 		startActivity(intent);
 	}
-	
+
 	int mDeleteItemPosition;
 
 	/** delete item */
@@ -2289,7 +2323,9 @@ protected void showTagsFilter(final View v) {
 		String containsId = c.getString(mStringItemsCONTAINSID);
 		ContentValues cv = new ContentValues(1);
 		cv.put(Contains.LIST_ID, targetListId);
-		getContentResolver().update(Uri.withAppendedPath(Contains.CONTENT_URI, containsId), cv, null, null);
+		getContentResolver().update(
+				Uri.withAppendedPath(Contains.CONTENT_URI, containsId), cv,
+				null, null);
 
 		mItemsView.requery();
 	}
@@ -2302,26 +2338,27 @@ protected void showTagsFilter(final View v) {
 		String containsId = c.getString(mStringItemsCONTAINSID);
 		Long newContainsId;
 		Long newItemId;
-		
+
 		c = getContentResolver().query(
-				Uri.withAppendedPath(Uri.withAppendedPath(Contains.CONTENT_URI, "copyof"), containsId), 
-				new String[] { "item_id", "contains_id" }, null, null, null);
-		
+				Uri.withAppendedPath(
+						Uri.withAppendedPath(Contains.CONTENT_URI, "copyof"),
+						containsId), new String[] { "item_id", "contains_id" },
+				null, null, null);
+
 		if (c.getCount() != 1)
 			return;
-		
+
 		c.moveToFirst();
 		newItemId = c.getLong(0);
 		newContainsId = c.getLong(1);
 		c.deactivate();
 		c.close();
-		
-		editItem(newItemId, newContainsId, FieldType.ITEMNAME );
-		
+
+		editItem(newItemId, newContainsId, FieldType.ITEMNAME);
+
 		// mItemsView.requery();
 	}
-	
-	
+
 	/** removeItemFromList */
 	void removeItemFromList(int position) {
 		Cursor c = mItemsView.mCursorItems;
@@ -2493,7 +2530,8 @@ protected void showTagsFilter(final View v) {
 					});
 
 		case DIALOG_EDIT_ITEM:
-			return new EditItemDialog(this, mItemUri, mRelationUri, mListItemUri);
+			return new EditItemDialog(this, mItemUri, mRelationUri,
+					mListItemUri);
 
 		case DIALOG_DELETE_ITEM:
 			return new AlertDialog.Builder(this)
@@ -2517,7 +2555,7 @@ protected void showTagsFilter(final View v) {
 
 		case DIALOG_THEME:
 			return new ThemeDialog(this, this);
-			
+
 		case DIALOG_GET_FROM_MARKET:
 			return new DownloadOIAppDialog(this,
 					DownloadOIAppDialog.OI_BARCODESCANNER);
@@ -2538,7 +2576,7 @@ protected void showTagsFilter(final View v) {
 
 		case DIALOG_EDIT_ITEM:
 			EditItemDialog d = (EditItemDialog) dialog;
-			d.setItemUri(mItemUri,mListItemUri);
+			d.setItemUri(mItemUri, mListItemUri);
 			d.setRelationUri(mRelationUri);
 			d.setFocusField(mEditItemFocusField);
 
@@ -2570,14 +2608,15 @@ protected void showTagsFilter(final View v) {
 	 * @return ID of selected shopping list.
 	 */
 	private long getSelectedListId() {
-		int pos = mShoppingListsView.getSelectedItemPosition(); 
-		//Temp- Due to architecture requirements of OS 3, the value can not be passed directly
-		if(pos==-1 && !usingListSpinner()){
+		int pos = mShoppingListsView.getSelectedItemPosition();
+		// Temp- Due to architecture requirements of OS 3, the value can not be
+		// passed directly
+		if (pos == -1 && !usingListSpinner()) {
 			try {
-				pos=(Integer)mShoppingListsView.getTag();	
-				pos=mCursorShoppingLists.getCount()<=pos?-1:pos;
+				pos = (Integer) mShoppingListsView.getTag();
+				pos = mCursorShoppingLists.getCount() <= pos ? -1 : pos;
 			} catch (Exception e) {
-//				e.printStackTrace();
+				// e.printStackTrace();
 			}
 		}
 		if (pos < 0) {
@@ -2591,8 +2630,8 @@ protected void showTagsFilter(final View v) {
 
 		long listId = mCursorShoppingLists.getLong(mStringListFilterID);
 
-		mListUri = Uri
-				.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, "" + listId);
+		mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, ""
+				+ listId);
 
 		getIntent().setData(mListUri);
 
@@ -2627,11 +2666,11 @@ protected void showTagsFilter(final View v) {
 			}
 		}
 	}
-	
-	private void setSelectedListPos(int pos){
+
+	private void setSelectedListPos(int pos) {
 		mShoppingListsView.setTag(pos);
 
-		mShoppingListsView.setSelection(pos);	
+		mShoppingListsView.setSelection(pos);
 
 		long id = getSelectedListId();
 
@@ -2639,33 +2678,32 @@ protected void showTagsFilter(final View v) {
 		setListTheme(loadListTheme());
 
 		if (id != mItemsView.getListId()) {
-		   fillItems(false);
+			fillItems(false);
 		}
 		applyListTheme();
 		updateTitle();
-		if (mShoppingListsView instanceof ListView){
-			((ListView) mShoppingListsView).setItemChecked(pos,true);
+		if (mShoppingListsView instanceof ListView) {
+			((ListView) mShoppingListsView).setItemChecked(pos, true);
 		}
 	}
-	
 
 	/**
      *
      */
 	private void fillListFilter() {
 		// Get a cursor with all lists
-	    
+
 		mCursorShoppingLists = getContentResolver().query(Lists.CONTENT_URI,
 				mStringListFilter, null, null, mSortOrder);
 		startManagingCursor(mCursorShoppingLists);
 
 		if (mCursorShoppingLists == null) {
 			Log.e(TAG, "missing shopping provider");
-			ArrayAdapter adapter=new ArrayAdapter(this,
+			ArrayAdapter adapter = new ArrayAdapter(this,
 					android.R.layout.simple_spinner_item,
 					new String[] { getString(R.string.no_shopping_provider) });
 			setSpinnerListAdapter(adapter);
-			
+
 			return;
 		}
 
@@ -2746,15 +2784,15 @@ protected void showTagsFilter(final View v) {
 		 */
 
 		SimpleCursorAdapter adapter;
-		
-		if (mShoppingListsView instanceof Spinner){
-		adapter = new MySimpleCursorAdapter(this,
-				// Use a template that displays a text view
-				android.R.layout.simple_spinner_item,
-				// Give the cursor to the list adapter
-				mCursorShoppingLists, new String[] { Lists.NAME },
-				new int[] { android.R.id.text1 });
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+		if (mShoppingListsView instanceof Spinner) {
+			adapter = new MySimpleCursorAdapter(this,
+					// Use a template that displays a text view
+					android.R.layout.simple_spinner_item,
+					// Give the cursor to the list adapter
+					mCursorShoppingLists, new String[] { Lists.NAME },
+					new int[] { android.R.id.text1 });
+			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		} else {
 			// mShoppingListView is a ListView
 			adapter = new SimpleCursorAdapter(this,
@@ -2764,11 +2802,12 @@ protected void showTagsFilter(final View v) {
 					mCursorShoppingLists, new String[] { Lists.NAME },
 					new int[] { R.id.text1 });
 		}
-//		mSpinnerListFilter.setAdapter(adapter);//Temp- redirected through method
+		// mSpinnerListFilter.setAdapter(adapter);//Temp- redirected through
+		// method
 		setSpinnerListAdapter(adapter);
 
 	}
-	
+
 	class MySimpleCursorAdapter extends SimpleCursorAdapter {
 
 		public MySimpleCursorAdapter(Context context, int layout, Cursor c,
@@ -2782,7 +2821,7 @@ protected void showTagsFilter(final View v) {
 			setSpinnerTextColorInHoloTheme(view);
 			return view;
 		}
-		
+
 	}
 
 	private void onModeChanged() {
@@ -2802,14 +2841,15 @@ protected void showTagsFilter(final View v) {
 	 * Update the ActionBar (Honeycomb or higher)
 	 */
 	private void compat_invalidateOptionsMenu() {
-		if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.HONEYCOMB){
-			//invalidateOptionsMenu();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			// invalidateOptionsMenu();
 			try {
 				if (mMethodInvalidateOptionsMenu == null) {
-					mMethodInvalidateOptionsMenu = Activity.class.getMethod("invalidateOptionsMenu");
+					mMethodInvalidateOptionsMenu = Activity.class
+							.getMethod("invalidateOptionsMenu");
 				}
 				mMethodInvalidateOptionsMenu.invoke(this);
-			} catch(Exception e) {
+			} catch (Exception e) {
 				mMethodInvalidateOptionsMenu = null;
 			}
 		}
@@ -2822,15 +2862,14 @@ protected void showTagsFilter(final View v) {
 
 	private String getCurrentListName() {
 		long listId = getSelectedListId();
-		
+
 		// calling getSelectedListId also updates mCursorShoppingLists:
 		if (listId >= 0) {
 			return mCursorShoppingLists.getString(mStringListFilterNAME);
 		} else {
 			return "";
 		}
-	}	
-	
+	}
 
 	private void fillItems(boolean onlyIfPrefsChanged) {
 		if (debug)
@@ -2851,7 +2890,7 @@ protected void showTagsFilter(final View v) {
 		}
 
 		updateFilterWidgets();
-		
+
 		if (onlyIfPrefsChanged
 				&& (lastAppliedPrefChange == PreferenceActivity.updateCount)) {
 			return;
@@ -2872,10 +2911,11 @@ protected void showTagsFilter(final View v) {
 	 * background.
 	 */
 	private void fillAutoCompleteTextViewAdapter() {
-		
+
 		// TODO: Optimize: This routine is called too often.
-		if (debug) Log.d(TAG, "fill AutoCompleteTextViewAdapter");
-		
+		if (debug)
+			Log.d(TAG, "fill AutoCompleteTextViewAdapter");
+
 		new AsyncTask<Integer, Integer, ArrayAdapter<String>>() {
 
 			ArrayAdapter<String> adapter;
@@ -2919,7 +2959,6 @@ protected void showTagsFilter(final View v) {
 		}.execute();
 	}
 
-
 	/**
 	 * Create list of tags.
 	 * 
@@ -2932,7 +2971,7 @@ protected void showTagsFilter(final View v) {
 	String[] getTaglist() {
 		return getTaglist(null);
 	}
-	
+
 	/**
 	 * Create list of tags.
 	 * 
@@ -2942,7 +2981,7 @@ protected void showTagsFilter(final View v) {
 	 * @param c
 	 * @return
 	 */
-	String[] getTaglist(String listId) {		
+	String[] getTaglist(String listId) {
 		Cursor c;
 
 		if (listId == null) {
@@ -2950,12 +2989,13 @@ protected void showTagsFilter(final View v) {
 					new String[] { ShoppingContract.Items.TAGS }, null, null,
 					ShoppingContract.Items.DEFAULT_SORT_ORDER);
 		} else {
-			Uri uri = Uri.parse("content://org.openintents.shopping/listtags").buildUpon().appendPath(listId).build();
+			Uri uri = Uri.parse("content://org.openintents.shopping/listtags")
+					.buildUpon().appendPath(listId).build();
 			c = getContentResolver().query(uri,
-					new String[] { ShoppingContract.ContainsFull.ITEM_TAGS }, 
-					null, null,	null);
+					new String[] { ShoppingContract.ContainsFull.ITEM_TAGS },
+					null, null, null);
 		}
-		
+
 		// Create a set of all tags (every tag should only appear once).
 		HashSet<String> tagset = new HashSet<String>();
 		c.moveToPosition(-1);
@@ -2982,7 +3022,6 @@ protected void showTagsFilter(final View v) {
 		// 3. Convert it to String array
 		return list.toArray(new String[0]);
 	}
-
 
 	/**
 	 * Tests whether the current list is shared via GTalk. (not local sharing!)
@@ -3098,13 +3137,14 @@ protected void showTagsFilter(final View v) {
 				// TODO ???
 				Bundle extras = data.getExtras();
 
-				String sharename = extras.getString(ShoppingContract.Lists.SHARE_NAME);
+				String sharename = extras
+						.getString(ShoppingContract.Lists.SHARE_NAME);
 				String contacts = extras
 						.getString(ShoppingContract.Lists.SHARE_CONTACTS);
 
 				if (debug)
 					Log.i(TAG, "Received bundle: sharename: " + sharename
-							+ ", contacts: " + contacts);				
+							+ ", contacts: " + contacts);
 
 				// Here we also send the current content of the list
 				// to all recipients.
@@ -3165,11 +3205,12 @@ protected void showTagsFilter(final View v) {
 	public void changeList(int value) {
 
 		int pos = mShoppingListsView.getSelectedItemPosition();
-		//Temp- Due to architecture requirements of OS 3, the value can not be passed directly
-		if(pos==-1 && !usingListSpinner()){
+		// Temp- Due to architecture requirements of OS 3, the value can not be
+		// passed directly
+		if (pos == -1 && !usingListSpinner()) {
 			try {
-				pos=(Integer)mShoppingListsView.getTag();	
-				pos=mCursorShoppingLists.getCount()<=pos?-1:pos;
+				pos = (Integer) mShoppingListsView.getTag();
+				pos = mCursorShoppingLists.getCount() <= pos ? -1 : pos;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -3187,18 +3228,21 @@ protected void showTagsFilter(final View v) {
 		} else {
 			newPos = pos + value;
 		}
-		setSelectedListPos(newPos);	
+		setSelectedListPos(newPos);
 	}
-	
+
 	/**
-	 * With the requirement of OS3, making an intermediary decision depending upon the widget
+	 * With the requirement of OS3, making an intermediary decision depending
+	 * upon the widget
+	 * 
 	 * @param adapter
 	 */
-	private void setSpinnerListAdapter(ListAdapter adapter){
-		if(usingListSpinner()){//Temp - restricted for OS3
+	private void setSpinnerListAdapter(ListAdapter adapter) {
+		if (usingListSpinner()) {// Temp - restricted for OS3
 			mShoppingListsView.setAdapter(adapter);
-		}else{
-			ShoppingListFilterFragment os3=(ShoppingListFilterFragment)getSupportFragmentManager().findFragmentById(R.id.sidelist);
+		} else {
+			ShoppingListFilterFragment os3 = (ShoppingListFilterFragment) getSupportFragmentManager()
+					.findFragmentById(R.id.sidelist);
 			os3.setAdapter(adapter);
 		}
 	}

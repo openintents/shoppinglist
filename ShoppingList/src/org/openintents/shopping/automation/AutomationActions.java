@@ -14,7 +14,7 @@ public class AutomationActions {
 
 		if (uri != null) {
 			long id = Integer.parseInt(uri.getLastPathSegment());
-			
+
 			// by changing state
 			ContentValues values = new ContentValues();
 			values.put(Contains.STATUS, Status.REMOVED_FROM_LIST);

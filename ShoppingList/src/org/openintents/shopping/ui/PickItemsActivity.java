@@ -28,23 +28,26 @@ public class PickItemsActivity extends Activity {
 
 		String listId = getIntent().getData().getLastPathSegment();
 		mListItems.fillItems(this, Long.parseLong(listId));
-		//mListItems.setListTheme(ShoppingListView.MARK_CHECKBOX);
+		// mListItems.setListTheme(ShoppingListView.MARK_CHECKBOX);
 		mListItems.setListTheme("1");
 		// mListItems.setOnItemClickListener(new OnItemClickListener() {
-              // 
-		// 	public void onItemClick(AdapterView parent, View v, int pos, long id) {
-		// 		mListItems.toggleItemRemovedFromList(pos);
-		// 		v.invalidate();
-		// 	}
-              // 
+
+		//
+		// public void onItemClick(AdapterView parent, View v, int pos, long id)
+		// {
+		// mListItems.toggleItemRemovedFromList(pos);
+		// v.invalidate();
+		// }
+
+		//
 		// });
-		
+
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.DONUT) {
 			// setting android:onClick in activity_pick_items.xml does not work
 			// yet for Android 1.5
 			Button b = (Button) findViewById(R.id.button1);
 			b.setOnClickListener(new Button.OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
 					onButton1Click(v);

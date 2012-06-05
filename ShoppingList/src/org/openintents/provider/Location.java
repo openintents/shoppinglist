@@ -76,7 +76,8 @@ public class Location {
 		public static final String MODIFIED_DATE = "modified";
 
 		/**
-		 * bundle/extra key for pick action, containing location uri with scheme geo: 
+		 * bundle/extra key for pick action, containing location uri with scheme
+		 * geo:
 		 */
 		public static final String EXTRA_GEO = "geo";
 	}
@@ -108,16 +109,18 @@ public class Location {
 
 	public int deleteLocation(long id) {
 
-		return mResolver.delete(ContentUris.withAppendedId(
-				Locations.CONTENT_URI, id), null, null);
+		return mResolver.delete(
+				ContentUris.withAppendedId(Locations.CONTENT_URI, id), null,
+				null);
 
 	}
 
 	public Point getPoint(long id) {
 		Point p = null;
-		Cursor cursor = mResolver.query(ContentUris.withAppendedId(
-				Locations.CONTENT_URI, id), new String[] { Locations._ID,
-				Locations.LATITUDE, Locations.LONGITUDE }, null, null,
+		Cursor cursor = mResolver.query(
+				ContentUris.withAppendedId(Locations.CONTENT_URI, id),
+				new String[] { Locations._ID, Locations.LATITUDE,
+						Locations.LONGITUDE }, null, null,
 				Locations.DEFAULT_SORT_ORDER);
 		if (cursor.moveToNext()) {
 			int lat = Double.valueOf(cursor.getDouble(1) * 1E6).intValue();
@@ -130,31 +133,36 @@ public class Location {
 	}
 
 	/**
-	 * @deprecated !! Warning !! Cursor has to be closed by caller.
-	 * Alternative API desired.
+	 * @deprecated !! Warning !! Cursor has to be closed by caller. Alternative
+	 *             API desired.
 	 * @param locationId
 	 * @return
 	 */
 	public Cursor queryExtras(long locationId) {
-		Builder uri = Locations.CONTENT_URI.buildUpon().appendPath(
-				String.valueOf(locationId)).appendPath(Extras.URI_PATH_EXTRAS);
+		Builder uri = Locations.CONTENT_URI.buildUpon()
+				.appendPath(String.valueOf(locationId))
+				.appendPath(Extras.URI_PATH_EXTRAS);
 		return mResolver.query(uri.build(), new String[] { Extras._ID,
-				Extras.KEY, Extras.VALUE}, null, null, Extras.KEY + "," + Extras.VALUE);
+				Extras.KEY, Extras.VALUE }, null, null, Extras.KEY + ","
+				+ Extras.VALUE);
 	}
-	
-	public void updateExtras(long locationId, long extrasId, ContentValues values){
-		
+
+	public void updateExtras(long locationId, long extrasId,
+			ContentValues values) {
+
 	}
 
 	public int deleteExtra(long extraId) {
-		return mResolver.delete(ContentUris.withAppendedId(Extras.CONTENT_URI,
-				extraId), null, null);
+		return mResolver.delete(
+				ContentUris.withAppendedId(Extras.CONTENT_URI, extraId), null,
+				null);
 
 	}
 
 	public Uri addExtra(long locationId) {
-		Builder uri = Locations.CONTENT_URI.buildUpon().appendPath(
-				String.valueOf(locationId)).appendPath(Extras.URI_PATH_EXTRAS);
+		Builder uri = Locations.CONTENT_URI.buildUpon()
+				.appendPath(String.valueOf(locationId))
+				.appendPath(Extras.URI_PATH_EXTRAS);
 		return mResolver.insert(uri.build(), null);
 
 	}

@@ -34,6 +34,6 @@ public abstract class ShakeSensorListener implements SensorListener {
 		}
 	}
 
-	public abstract void onShake() ;
+	public abstract void onShake();
 
 }

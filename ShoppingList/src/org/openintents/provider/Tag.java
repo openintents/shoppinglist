@@ -197,8 +197,9 @@ public class Tag {
 		values.put(Tags.URI_2, content);
 
 		try {
-			Uri uri = Tags.CONTENT_URI.buildUpon().appendQueryParameter(
-					Tags.QUERY_UNIQUE_TAG, "true").build();
+			Uri uri = Tags.CONTENT_URI.buildUpon()
+					.appendQueryParameter(Tags.QUERY_UNIQUE_TAG, "true")
+					.build();
 			mContext.getContentResolver().insert(uri, values);
 		} catch (Exception e) {
 			Log.i(TAG, "insert failed", e);
@@ -209,8 +210,8 @@ public class Tag {
 	 * cursor over contentUriStrings is returned where the content is tagged
 	 * with the given tag.
 	 * 
-	 * @deprecated !! WARNING !! Cursor has to be closed by caller.
-	 * Alternative API desired.
+	 * @deprecated !! WARNING !! Cursor has to be closed by caller. Alternative
+	 *             API desired.
 	 * 
 	 * @param tag
 	 * @param contentUri
@@ -227,8 +228,8 @@ public class Tag {
 	/**
 	 * cursor over tags with all tags for the given content is returned.
 	 * 
-	 * @deprecated !! WARNING !! Cursor has to be closed by caller.
-	 * Alternative API desired.
+	 * @deprecated !! WARNING !! Cursor has to be closed by caller. Alternative
+	 *             API desired.
 	 * 
 	 * @param tag
 	 * @param contentUri
@@ -259,19 +260,18 @@ public class Tag {
 	/**
 	 * cursor over tags with all tags for the given content is returned.
 	 * 
-	 * @deprecated !! WARNING !! Cursor has to be closed by caller.
-	 * Alternative API desired.
+	 * @deprecated !! WARNING !! Cursor has to be closed by caller. Alternative
+	 *             API desired.
 	 * 
 	 * @param contentUriPrefix
 	 * @return
 	 */
 	public Cursor findTagsForContentType(String contentUriPrefix) {
-		Uri uri = Contents.CONTENT_URI.buildUpon().appendQueryParameter(
-				Tags.DISTINCT, "true").build();
+		Uri uri = Contents.CONTENT_URI.buildUpon()
+				.appendQueryParameter(Tags.DISTINCT, "true").build();
 		Cursor c = mContext
 				.getContentResolver()
-				.query(
-						uri,
+				.query(uri,
 						new String[] { Contents._ID, Contents.URI },
 						"exists(select * from content content2, tag tag where content2.uri like ? and content2._id = tag.content_id and content._id = tag.tag_id)",
 						new String[] { contentUriPrefix + "%" }, "content.uri");
@@ -281,8 +281,8 @@ public class Tag {
 	/**
 	 * Get a cursor with all tags
 	 * 
-	 * @deprecated !! WARNING !! Cursor has to be closed by caller.
-	 * Alternative API desired.
+	 * @deprecated !! WARNING !! Cursor has to be closed by caller. Alternative
+	 *             API desired.
 	 * 
 	 * @return
 	 */
@@ -297,16 +297,15 @@ public class Tag {
 	 * Get a cursor with all used tags, i.e. at least one content has been
 	 * tagged with this tag.
 	 * 
-	 * @deprecated !! WARNING !! Cursor has to be closed by caller.
-	 * Alternative API desired.
+	 * @deprecated !! WARNING !! Cursor has to be closed by caller. Alternative
+	 *             API desired.
 	 * 
 	 * @return
 	 */
 	public Cursor findAllUsedTags() {
 		Cursor c = mContext
 				.getContentResolver()
-				.query(
-						Contents.CONTENT_URI,
+				.query(Contents.CONTENT_URI,
 						new String[] { Contents._ID, Contents.URI,
 								Contents.TYPE },
 						"type like 'TAG%' and (select count(*) from tag where tag.tag_id = content._id) > 0",

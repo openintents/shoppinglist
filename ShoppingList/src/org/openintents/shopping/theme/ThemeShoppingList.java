@@ -1,11 +1,10 @@
 package org.openintents.shopping.theme;
 
-
 public class ThemeShoppingList {
 
 	// For Shopping list theme
 	// (move to separate class eventually)
-	
+
 	public static final String SHOPPING_LIST_THEME = "org.openintents.shoppinglist";
 
 	public static final String background = "background";
@@ -29,7 +28,7 @@ public class ThemeShoppingList {
 	public static final String textSuffixUnchecked = "textSuffixUnchecked";
 	public static final String textSuffixChecked = "textSuffixChecked";
 	public static final String showCheckBox = "showCheckBox";
-	
+
 	public static final String lineMode = "lineMode";
 	public static final String lineColor = "lineColor";
 }

@@ -55,12 +55,10 @@ import android.util.Log;
 /**
  * Provides access to a database of shopping items and shopping lists.
  * 
- * ShoppingProvider maintains the following tables: 
- * * items: items you want to buy 
- * * lists: shopping lists ("My shopping list",	"Bob's shopping list") 
- * * contains: which item/list/(recipe) is contained in which shopping list. 
- * * stores: 
- * * itemstores: (which store carries which item) 
+ * ShoppingProvider maintains the following tables: * items: items you want to
+ * buy * lists: shopping lists ("My shopping list", "Bob's shopping list") *
+ * contains: which item/list/(recipe) is contained in which shopping list. *
+ * stores: * itemstores: (which store carries which item)
  */
 public class ShoppingProvider extends ContentProvider {
 
@@ -68,9 +66,7 @@ public class ShoppingProvider extends ContentProvider {
 
 	static final String TAG = "ShoppingProvider";
 	private static final boolean debug = false || LogConstants.debug;
-	
 
-	
 	private static HashMap<String, String> ITEMS_PROJECTION_MAP;
 	private static HashMap<String, String> LISTS_PROJECTION_MAP;
 	private static HashMap<String, String> CONTAINS_PROJECTION_MAP;
@@ -112,7 +108,7 @@ public class ShoppingProvider extends ContentProvider {
 	private static final int ACTIVELIST = 103;
 	// duplicate specified contains record and its item, return ids
 	private static final int CONTAINS_COPYOFID = 104;
-	
+
 	private static final int TAGS_LISTID = 105;
 
 	private static final UriMatcher URL_MATCHER;
@@ -129,14 +125,15 @@ public class ShoppingProvider extends ContentProvider {
 		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
 		long list_id = -1;
-		
-		if (debug) Log.d(TAG, "Query for URL: " + url);
+
+		if (debug)
+			Log.d(TAG, "Query for URL: " + url);
 
 		String defaultOrderBy = null;
 		String groupBy = null;
 
 		switch (URL_MATCHER.match(url)) {
-		
+
 		case ITEMS:
 			qb.setTables("items");
 			qb.setProjectionMap(ITEMS_PROJECTION_MAP);
@@ -171,50 +168,53 @@ public class ShoppingProvider extends ContentProvider {
 			break;
 
 		case CONTAINS_FULL:
-			
-			// all callers pass list id as selection_args[0]. perhaps not so 
-			// nice to depend on that, but... need to choose the projection map 
+
+			// all callers pass list id as selection_args[0]. perhaps not so
+			// nice to depend on that, but... need to choose the projection map
 			// based on the list's store filter.
-			if (PreferenceActivity.getUsingFiltersFromPrefs(getContext()) &&
-				listUsesStoreFilter(selectionArgs[0])) {
-				// actually there are two ways we could do the query when filtering by stores. perhaps 
+			if (PreferenceActivity.getUsingFiltersFromPrefs(getContext())
+					&& listUsesStoreFilter(selectionArgs[0])) {
+				// actually there are two ways we could do the query when
+				// filtering by stores. perhaps
 				// we should offer both. for now choose the first one...
-				if (true)
-				{
-					// show only items which have corresponding records in itemstores
+				if (true) {
+					// show only items which have corresponding records in
+					// itemstores
 					qb.setTables("contains, items, lists, itemstores");
 					qb.setProjectionMap(CONTAINS_FULL_STORE_PROJECTION_MAP);
-					qb.appendWhere("contains.item_id = items._id AND " +
-					 		   "contains.list_id = lists._id AND " + 
-							   "items._id = itemstores.item_id AND " +
-					 		   "lists.store_filter = itemstores.store_id");
+					qb.appendWhere("contains.item_id = items._id AND "
+							+ "contains.list_id = lists._id AND "
+							+ "items._id = itemstores.item_id AND "
+							+ "lists.store_filter = itemstores.store_id");
 				} else {
 					// this query is not quite right, but the idea is
-					// show all items, but only show prices from the selected store.
+					// show all items, but only show prices from the selected
+					// store.
 					qb.setTables("contains, items, lists left outer join itemstores on (items._id = itemstores.item_id)");
 					qb.setProjectionMap(CONTAINS_FULL_STORE_PROJECTION_MAP);
-					qb.appendWhere("contains.item_id = items._id AND " +
-						 		   "contains.list_id = lists._id AND " + 
-								   "items._id = itemstores.item_id AND " +
-						 		   "lists.store_filter = itemstores.store_id");	
+					qb.appendWhere("contains.item_id = items._id AND "
+							+ "contains.list_id = lists._id AND "
+							+ "items._id = itemstores.item_id AND "
+							+ "lists.store_filter = itemstores.store_id");
 				}
-				
-			} else if (PreferenceActivity.getUsingPerStorePricesFromPrefs(getContext())) {
+
+			} else if (PreferenceActivity
+					.getUsingPerStorePricesFromPrefs(getContext())) {
 				qb.setTables("contains, items, lists left outer join itemstores on (items._id = itemstores.item_id)");
 				qb.setProjectionMap(CONTAINS_FULL_CHEAPEST_PROJECTION_MAP);
-				qb.appendWhere("contains.item_id = items._id AND " +
-					 		   "contains.list_id = lists._id");
+				qb.appendWhere("contains.item_id = items._id AND "
+						+ "contains.list_id = lists._id");
 				groupBy = "items._id";
-				
+
 			} else {
 				qb.setTables("contains, items, lists");
 				qb.setProjectionMap(CONTAINS_FULL_PROJECTION_MAP);
-				qb.appendWhere("contains.item_id = items._id AND " +
-					 		   "contains.list_id = lists._id");
-				
+				qb.appendWhere("contains.item_id = items._id AND "
+						+ "contains.list_id = lists._id");
+
 			}
 			defaultOrderBy = ContainsFull.DEFAULT_SORT_ORDER;
-			String tagFilter = getListTagsFilter(selectionArgs[0]); 
+			String tagFilter = getListTagsFilter(selectionArgs[0]);
 			if (!TextUtils.isEmpty(tagFilter)) {
 				qb.appendWhere(" AND item_tags like '%" + tagFilter + "%'");
 			}
@@ -223,10 +223,10 @@ public class ShoppingProvider extends ContentProvider {
 		case CONTAINS_FULL_ID:
 			qb.setTables("contains, items, lists");
 			qb.appendWhere("_id=" + url.getPathSegments().get(1));
-			qb.appendWhere("contains.item_id = items._id AND " +
-			 		   "contains.list_id = lists._id");
+			qb.appendWhere("contains.item_id = items._id AND "
+					+ "contains.list_id = lists._id");
 			break;
-			
+
 		case STORES:
 			qb.setTables("stores");
 			qb.setProjectionMap(STORES_PROJECTION_MAP);
@@ -242,37 +242,40 @@ public class ShoppingProvider extends ContentProvider {
 			qb.setProjectionMap(STORES_PROJECTION_MAP);
 			qb.appendWhere("list_id=" + url.getPathSegments().get(1));
 			break;
-			
+
 		case TAGS_LISTID:
 			// this is for querying tags regardless of filters.
 			// might want to restrict the projection map.
 			qb.setTables("contains, items, lists");
 			qb.setProjectionMap(CONTAINS_FULL_PROJECTION_MAP);
-			qb.appendWhere("contains.item_id = items._id AND " +
-			 		       "contains.list_id = lists._id AND " +
-			 		       "contains.list_id=" + url.getPathSegments().get(1));
+			qb.appendWhere("contains.item_id = items._id AND "
+					+ "contains.list_id = lists._id AND " + "contains.list_id="
+					+ url.getPathSegments().get(1));
 			groupBy = "items.tags";
 			break;
-			
+
 		case ITEMSTORES:
 			qb.setTables("itemstores, items, stores");
 			qb.setProjectionMap(ITEMSTORES_PROJECTION_MAP);
 			qb.appendWhere("itemstores.item_id = items._id AND itemstores.store_id = stores._id");
 			break;
-			
+
 		case ITEMSTORES_ID:
 			qb.setTables("itemstores, items, stores");
 			qb.appendWhere("_id=" + url.getPathSegments().get(1));
 			qb.appendWhere("itemstores.item_id = items._id AND itemstores.store_id = stores._id");
 			break;
-		
+
 		case ITEMSTORES_ITEMID:
-			// path segment 1 is "item", path segment 2 is item id, path segment 3 is list id.
-			qb.setTables("stores left outer join itemstores on (stores._id = itemstores.store_id and " +
-					"itemstores.item_id = " + url.getPathSegments().get(2) + ")");
-			qb.appendWhere("stores.list_id = " + url.getPathSegments().get(3) );
+			// path segment 1 is "item", path segment 2 is item id, path segment
+			// 3 is list id.
+			qb.setTables("stores left outer join itemstores on (stores._id = itemstores.store_id and "
+					+ "itemstores.item_id = "
+					+ url.getPathSegments().get(2)
+					+ ")");
+			qb.appendWhere("stores.list_id = " + url.getPathSegments().get(3));
 			break;
-			
+
 		case NOTES:
 			qb.setTables("items");
 			qb.setProjectionMap(NOTES_PROJECTION_MAP);
@@ -294,57 +297,66 @@ public class ShoppingProvider extends ContentProvider {
 			qb.setProjectionMap(UNITS_PROJECTION_MAP);
 			qb.appendWhere("_id=" + url.getPathSegments().get(1));
 			break;
-		
+
 		case ACTIVELIST:
 			MatrixCursor m = new MatrixCursor(projection);
-			// assumes only one projection will ever be used, 
+			// assumes only one projection will ever be used,
 			// asking only for the id of the active list.
 			SharedPreferences sp = getContext().getSharedPreferences(
-					"org.openintents.shopping_preferences", Context.MODE_PRIVATE);
+					"org.openintents.shopping_preferences",
+					Context.MODE_PRIVATE);
 			list_id = sp.getInt("lastused", 1);
-			m.addRow(new Object [] {Long.toString(list_id)});
-			return (Cursor)m;
+			m.addRow(new Object[] { Long.toString(list_id) });
+			return (Cursor) m;
 		case PREFS:
 			m = new MatrixCursor(projection);
-			// assumes only one projection will ever be used, 
+			// assumes only one projection will ever be used,
 			// asking only for the id of the active list.
-			String sortOrder = PreferenceActivity.getSortOrderFromPrefs(getContext(), 
-					ShoppingActivity.MODE_IN_SHOP);
-			m.addRow(new Object [] {sortOrder});
-			return (Cursor)m;
-			
+			String sortOrder = PreferenceActivity.getSortOrderFromPrefs(
+					getContext(), ShoppingActivity.MODE_IN_SHOP);
+			m.addRow(new Object[] { sortOrder });
+			return (Cursor) m;
+
 		case SUBTOTALS_LISTID:
 			list_id = Long.parseLong(url.getPathSegments().get(1));
 			// FALLTHROUGH
 		case SUBTOTALS:
 			if (list_id == -1) {
-				// this gets the wrong answer if user has switched lists in this session.
+				// this gets the wrong answer if user has switched lists in this
+				// session.
 				sp = getContext().getSharedPreferences(
-						"org.openintents.shopping_preferences", Context.MODE_PRIVATE);
-				list_id = sp.getInt("lastused", 1);	
+						"org.openintents.shopping_preferences",
+						Context.MODE_PRIVATE);
+				list_id = sp.getInt("lastused", 1);
 			}
 			qb.setProjectionMap(SUBTOTALS_PROJECTION_MAP);
 			groupBy = "priority, status";
-			if (PreferenceActivity.getUsingPerStorePricesFromPrefs(getContext())) {
-				// status added to "group by" to cover the case where there are no store prices 
-				// for any checked items. still need to count them separately so Clean List 
+			if (PreferenceActivity
+					.getUsingPerStorePricesFromPrefs(getContext())) {
+				// status added to "group by" to cover the case where there are
+				// no store prices
+				// for any checked items. still need to count them separately so
+				// Clean List
 				// can be ungreyed.
-				qb.setTables("(SELECT (min(itemstores.price) * case when ((contains.quantity is null) or (length(contains.quantity) = 0)) then 1 else contains.quantity end) as qty_price, " + 
-							 "contains.status as status, contains.priority as priority FROM contains, items left outer join itemstores on (items._id = itemstores.item_id) " + 
-							 "WHERE (contains.item_id = items._id AND contains.list_id = " + list_id + " ) AND contains.status != 3 GROUP BY itemstores.item_id, status) ");
-				
+				qb.setTables("(SELECT (min(itemstores.price) * case when ((contains.quantity is null) or (length(contains.quantity) = 0)) then 1 else contains.quantity end) as qty_price, "
+						+ "contains.status as status, contains.priority as priority FROM contains, items left outer join itemstores on (items._id = itemstores.item_id) "
+						+ "WHERE (contains.item_id = items._id AND contains.list_id = "
+						+ list_id
+						+ " ) AND contains.status != 3 GROUP BY itemstores.item_id, status) ");
+
 			} else {
-				qb.setTables("(SELECT (items.price * case when ((contains.quantity is null) or (length(contains.quantity) = 0)) then 1 else contains.quantity end) as qty_price, " + 
-						     "contains.status as status, contains.priority as priority FROM contains, items " + 
-						     "WHERE (contains.item_id = items._id AND contains.list_id = " + list_id + " ) AND contains.status != 3) ");
+				qb.setTables("(SELECT (items.price * case when ((contains.quantity is null) or (length(contains.quantity) = 0)) then 1 else contains.quantity end) as qty_price, "
+						+ "contains.status as status, contains.priority as priority FROM contains, items "
+						+ "WHERE (contains.item_id = items._id AND contains.list_id = "
+						+ list_id + " ) AND contains.status != 3) ");
 
 			}
 			break;
-			
+
 		case CONTAINS_COPYOFID:
 			long oldContainsId = Long.parseLong(url.getPathSegments().get(2));
 			return copyItemAndContains(projection, oldContainsId);
-			
+
 		default:
 			throw new IllegalArgumentException("Unknown URL " + url);
 		}
@@ -360,7 +372,8 @@ public class ShoppingProvider extends ContentProvider {
 
 		SQLiteDatabase db = mOpenHelper.getReadableDatabase();
 		if (debug) {
-			String qs = qb.buildQuery(projection, selection, null, groupBy, null, orderBy, null);
+			String qs = qb.buildQuery(projection, selection, null, groupBy,
+					null, orderBy, null);
 			Log.d(TAG, "Query : " + qs);
 		}
 
@@ -375,35 +388,37 @@ public class ShoppingProvider extends ContentProvider {
 		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 		qb.setTables("lists");
 		qb.appendWhere("_id=" + listId);
-		Cursor c = qb.query(db, new String[] {Lists.STORE_FILTER}, null, null, null, null, null);
+		Cursor c = qb.query(db, new String[] { Lists.STORE_FILTER }, null,
+				null, null, null, null);
 		if (c.getCount() != 1) {
 			return false;
 		}
-		
+
 		c.moveToFirst();
 		long storeId = c.getLong(0);
 		c.deactivate();
 		c.close();
-		
-		return (storeId != -1); 
+
+		return (storeId != -1);
 	}
-	
+
 	private String getListTagsFilter(String listId) {
 		SQLiteDatabase db = mOpenHelper.getReadableDatabase();
 		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 		qb.setTables("lists");
 		qb.appendWhere("_id=" + listId);
-		Cursor c = qb.query(db, new String[] {Lists.TAGS_FILTER}, null, null, null, null, null);
+		Cursor c = qb.query(db, new String[] { Lists.TAGS_FILTER }, null, null,
+				null, null, null);
 		if (c.getCount() != 1) {
 			return null;
 		}
-		
+
 		c.moveToFirst();
 		String tag = c.getString(0);
 		c.deactivate();
 		c.close();
-		
-		return (tag); 
+
+		return (tag);
 	}
 
 	// caller wants us to copy the item and the contains record.
@@ -411,21 +426,22 @@ public class ShoppingProvider extends ContentProvider {
 	private Cursor copyItemAndContains(String[] projection, long oldContainsId) {
 		long oldItemId, containsCopyId, itemCopyId;
 		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-		
+
 		// find the item id from the contains record
 		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 		qb.setTables("contains");
 		qb.appendWhere("_id=" + oldContainsId);
-		Cursor c = qb.query(db, new String[] {Contains.ITEM_ID}, null, null, null, null, null);
+		Cursor c = qb.query(db, new String[] { Contains.ITEM_ID }, null, null,
+				null, null, null);
 		if (c.getCount() != 1) {
 			return null;
 		}
-		
+
 		c.moveToFirst();
 		oldItemId = c.getLong(0);
 		c.deactivate();
 		c.close();
-		
+
 		// read the item
 		qb = new SQLiteQueryBuilder();
 		qb.setTables("items");
@@ -439,12 +455,13 @@ public class ShoppingProvider extends ContentProvider {
 		DatabaseUtils.cursorRowToContentValues(c, itemValues);
 		c.deactivate();
 		c.close();
-		
+
 		// read the contains record
 		qb = new SQLiteQueryBuilder();
 		qb.setTables("contains");
 		qb.appendWhere("_id=" + oldContainsId);
-		c = qb.query(db, Contains.PROJECTION_TO_COPY, null, null, null, null, null);
+		c = qb.query(db, Contains.PROJECTION_TO_COPY, null, null, null, null,
+				null);
 		if (c.getCount() != 1) {
 			return null;
 		}
@@ -453,7 +470,7 @@ public class ShoppingProvider extends ContentProvider {
 		DatabaseUtils.cursorRowToContentValues(c, containsValues);
 		c.deactivate();
 		c.close();
-		
+
 		// insert the item copy
 		validateItemValues(itemValues);
 		itemCopyId = db.insert("items", "items", itemValues);
@@ -462,12 +479,13 @@ public class ShoppingProvider extends ContentProvider {
 		containsValues.put(Contains.ITEM_ID, itemCopyId);
 		validateContainsValues(containsValues);
 		containsCopyId = db.insert("contains", "contains", containsValues);
-		
+
 		// not sure, should we also copy ItemStores records?
-		
+
 		MatrixCursor m = new MatrixCursor(projection);
-		m.addRow(new Object [] {Long.toString(itemCopyId), Long.toString(containsCopyId)});
-		return (Cursor)m;
+		m.addRow(new Object[] { Long.toString(itemCopyId),
+				Long.toString(containsCopyId) });
+		return (Cursor) m;
 	}
 
 	@Override
@@ -497,13 +515,13 @@ public class ShoppingProvider extends ContentProvider {
 
 		case STORES:
 			return insertStore(url, values);
-			
+
 		case ITEMSTORES:
 			return insertItemStore(url, values);
 
 		case UNITS:
 			return insertUnits(url, values);
-			
+
 		default:
 			throw new IllegalArgumentException("Unknown URL " + url);
 		}
@@ -652,9 +670,9 @@ public class ShoppingProvider extends ContentProvider {
 						+ ": Status " + s + " is not valid.");
 			}
 		}
-					
+
 		validateContainsValues(values);
-		
+
 		// TODO: Here we should check, whether item exists already.
 		// (see TagsProvider)
 
@@ -759,7 +777,7 @@ public class ShoppingProvider extends ContentProvider {
 
 		if (!values.containsKey(ItemStores.PRICE)) {
 			values.put(ItemStores.PRICE, -1);
-		} 
+		}
 		if (!values.containsKey(ItemStores.AISLE)) {
 			values.putNull(ItemStores.AISLE);
 		}
@@ -771,7 +789,6 @@ public class ShoppingProvider extends ContentProvider {
 		if (!values.containsKey(ItemStores.MODIFIED_DATE)) {
 			values.put(ItemStores.MODIFIED_DATE, now);
 		}
-
 
 		// TODO: Here we should check, whether item exists already.
 		// (see TagsProvider)
@@ -917,10 +934,10 @@ public class ShoppingProvider extends ContentProvider {
 					whereArgs);
 			count = db.delete("stores", where, whereArgs);
 			break;
-			
+
 		case ITEMSTORES:
-			affectedRows = ProviderUtils.getAffectedRows(db, "itemstores", where,
-					whereArgs);
+			affectedRows = ProviderUtils.getAffectedRows(db, "itemstores",
+					where, whereArgs);
 			count = db.delete("itemstores", where, whereArgs);
 			break;
 
@@ -933,12 +950,12 @@ public class ShoppingProvider extends ContentProvider {
 				whereString = "";
 			}
 
-			affectedRows = ProviderUtils.getAffectedRows(db, "itemstores", "_id="
-					+ segment + whereString, whereArgs);
+			affectedRows = ProviderUtils.getAffectedRows(db, "itemstores",
+					"_id=" + segment + whereString, whereArgs);
 			count = db.delete("itemstores", "_id=" + segment + whereString,
 					whereArgs);
 			break;
-			
+
 		default:
 			throw new IllegalArgumentException("Unknown URL " + url);
 		}
@@ -956,11 +973,12 @@ public class ShoppingProvider extends ContentProvider {
 	@Override
 	public int update(Uri url, ContentValues values, String where,
 			String[] whereArgs) {
-		if (debug) Log.d(TAG, "update called for: " + url);
+		if (debug)
+			Log.d(TAG, "update called for: " + url);
 		SQLiteDatabase db = mOpenHelper.getWritableDatabase();
 		int count;
 		Uri secondUri = null;
-		
+
 		// long rowId;
 		switch (URL_MATCHER.match(url)) {
 		case ITEMS:
@@ -987,7 +1005,7 @@ public class ShoppingProvider extends ContentProvider {
 
 			count = db.update("items", values, "_id=" + segment + whereString,
 					whereArgs);
-			secondUri  = ShoppingContract.Items.CONTENT_URI;
+			secondUri = ShoppingContract.Items.CONTENT_URI;
 			break;
 
 		case LISTS:
@@ -1027,7 +1045,7 @@ public class ShoppingProvider extends ContentProvider {
 		case STORES:
 			count = db.update("stores", values, where, whereArgs);
 			break;
-			
+
 		case STORES_ID:
 			segment = url.getPathSegments().get(1); // contains rowId
 			// rowId = Long.parseLong(segment);
@@ -1036,14 +1054,14 @@ public class ShoppingProvider extends ContentProvider {
 			} else {
 				whereString = "";
 			}
-			count = db.update("stores", values, "_id=" + segment
-					+ whereString, whereArgs);
+			count = db.update("stores", values, "_id=" + segment + whereString,
+					whereArgs);
 			break;
 
 		case ITEMSTORES:
 			count = db.update("itemstores", values, where, whereArgs);
 			break;
-			
+
 		case ITEMSTORES_ID:
 			segment = url.getPathSegments().get(1); // contains rowId
 			// rowId = Long.parseLong(segment);
@@ -1055,7 +1073,7 @@ public class ShoppingProvider extends ContentProvider {
 			count = db.update("itemstores", values, "_id=" + segment
 					+ whereString, whereArgs);
 			break;
-	
+
 		case UNITS:
 			count = db.update("units", values, where, whereArgs);
 			break;
@@ -1068,8 +1086,8 @@ public class ShoppingProvider extends ContentProvider {
 			} else {
 				whereString = "";
 			}
-			count = db.update("units", values, "_id=" + segment
-					+ whereString, whereArgs);
+			count = db.update("units", values, "_id=" + segment + whereString,
+					whereArgs);
 			break;
 
 		default:
@@ -1078,10 +1096,10 @@ public class ShoppingProvider extends ContentProvider {
 		}
 
 		getContext().getContentResolver().notifyChange(url, null);
-		if (secondUri != null){
+		if (secondUri != null) {
 			getContext().getContentResolver().notifyChange(secondUri, null);
 		}
-		
+
 		Intent intent = new Intent(ProviderIntents.ACTION_MODIFIED);
 		intent.setData(url);
 		getContext().sendBroadcast(intent);
@@ -1122,12 +1140,12 @@ public class ShoppingProvider extends ContentProvider {
 		case STORES_ID:
 		case STORES_LISTID:
 			return "vnd.android.cursor.item/vnd.openintents.shopping.stores";
-			
+
 		case NOTES:
-			return ShoppingContract.Notes.CONTENT_TYPE; 
-		case NOTE_ID: 
+			return ShoppingContract.Notes.CONTENT_TYPE;
+		case NOTE_ID:
 			return ShoppingContract.Notes.CONTENT_ITEM_TYPE;
-			
+
 		case ITEMSTORES:
 			return "vnd.android.cursor.dir/vnd.openintents.shopping.itemstores";
 		case ITEMSTORES_ID:
@@ -1139,12 +1157,11 @@ public class ShoppingProvider extends ContentProvider {
 			return "vnd.android.cursor.dir/vnd.openintents.shopping.units";
 		case UNITS_ID:
 			return "vnd.android.cursor.item/vnd.openintents.shopping.units";
-		
+
 		case ACTIVELIST:
 			// not sure this is quite right
 			return "vnd.android.cursor.item/vnd.openintents.shopping.list";
 
-			
 		default:
 			throw new IllegalArgumentException("Unknown URL " + url);
 		}
@@ -1155,7 +1172,8 @@ public class ShoppingProvider extends ContentProvider {
 		URL_MATCHER.addURI("org.openintents.shopping", "items", ITEMS);
 		URL_MATCHER.addURI("org.openintents.shopping", "items/#", ITEM_ID);
 		URL_MATCHER.addURI("org.openintents.shopping", "lists", LISTS);
-		URL_MATCHER.addURI("org.openintents.shopping", "lists/active", ACTIVELIST);
+		URL_MATCHER.addURI("org.openintents.shopping", "lists/active",
+				ACTIVELIST);
 		URL_MATCHER.addURI("org.openintents.shopping", "lists/#", LIST_ID);
 		URL_MATCHER.addURI("org.openintents.shopping", "contains", CONTAINS);
 		URL_MATCHER.addURI("org.openintents.shopping", "contains/#",
@@ -1168,32 +1186,33 @@ public class ShoppingProvider extends ContentProvider {
 				CONTAINS_FULL_ID);
 		URL_MATCHER.addURI("org.openintents.shopping", "stores", STORES);
 		URL_MATCHER.addURI("org.openintents.shopping", "stores/#", STORES_ID);
-		URL_MATCHER.addURI("org.openintents.shopping", "itemstores", ITEMSTORES);
-		URL_MATCHER.addURI("org.openintents.shopping", "itemstores/#", 
+		URL_MATCHER
+				.addURI("org.openintents.shopping", "itemstores", ITEMSTORES);
+		URL_MATCHER.addURI("org.openintents.shopping", "itemstores/#",
 				ITEMSTORES_ID);
-		URL_MATCHER.addURI("org.openintents.shopping", "itemstores/item/#/#", 
+		URL_MATCHER.addURI("org.openintents.shopping", "itemstores/item/#/#",
 				ITEMSTORES_ITEMID);
-		URL_MATCHER.addURI("org.openintents.shopping", "liststores/#", 
+		URL_MATCHER.addURI("org.openintents.shopping", "liststores/#",
 				STORES_LISTID);
-		URL_MATCHER.addURI("org.openintents.shopping", "listtags/#", 
+		URL_MATCHER.addURI("org.openintents.shopping", "listtags/#",
 				TAGS_LISTID);
 		URL_MATCHER.addURI("org.openintents.shopping", "notes", NOTES);
 		URL_MATCHER.addURI("org.openintents.shopping", "notes/#", NOTE_ID);
 		URL_MATCHER.addURI("org.openintents.shopping", "units", UNITS);
 		URL_MATCHER.addURI("org.openintents.shopping", "units/#", UNITS_ID);
-		
+
 		URL_MATCHER.addURI("org.openintents.shopping", "prefs", PREFS);
 		// subtotals for the specified list id, or active list if not specified
-		URL_MATCHER.addURI("org.openintents.shopping", "subtotals/#", SUBTOTALS_LISTID);
+		URL_MATCHER.addURI("org.openintents.shopping", "subtotals/#",
+				SUBTOTALS_LISTID);
 		URL_MATCHER.addURI("org.openintents.shopping", "subtotals", SUBTOTALS);
-
 
 		ITEMS_PROJECTION_MAP = new HashMap<String, String>();
 		ITEMS_PROJECTION_MAP.put(Items._ID, "items._id");
 		ITEMS_PROJECTION_MAP.put(Items.NAME, "items.name");
 		ITEMS_PROJECTION_MAP.put(Items.IMAGE, "items.image");
 		ITEMS_PROJECTION_MAP.put(Items.PRICE, "items.price");
-		ITEMS_PROJECTION_MAP.put(Items.UNITS, "items.units");		
+		ITEMS_PROJECTION_MAP.put(Items.UNITS, "items.units");
 		ITEMS_PROJECTION_MAP.put(Items.TAGS, "items.tags");
 		ITEMS_PROJECTION_MAP.put(Items.BARCODE, "items.barcode");
 		ITEMS_PROJECTION_MAP.put(Items.LOCATION, "items.location");
@@ -1237,7 +1256,8 @@ public class ShoppingProvider extends ContentProvider {
 				"contains.share_modified_by");
 
 		CONTAINS_FULL_PROJECTION_MAP = new HashMap<String, String>();
-		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull._ID, "contains._id as _id");
+		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull._ID,
+				"contains._id as _id");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_ID,
 				"contains.item_id");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.LIST_ID,
@@ -1245,7 +1265,7 @@ public class ShoppingProvider extends ContentProvider {
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.QUANTITY,
 				"contains.quantity as quantity");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.PRIORITY,
-		"contains.priority as priority");
+				"contains.priority as priority");
 		CONTAINS_FULL_PROJECTION_MAP
 				.put(ContainsFull.STATUS, "contains.status");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.CREATED_DATE,
@@ -1265,26 +1285,26 @@ public class ShoppingProvider extends ContentProvider {
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_PRICE,
 				"items.price as item_price");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_UNITS,
-		        "items.units as item_units");
+				"items.units as item_units");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_TAGS,
-		        "items.tags as item_tags");
+				"items.tags as item_tags");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.LIST_NAME,
 				"lists.name as list_name");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.LIST_IMAGE,
 				"lists.image as list_image");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_HAS_NOTE,
-		        "items.note is not NULL and items.note <> '' as item_has_note");
+				"items.note is not NULL and items.note <> '' as item_has_note");
 
-		CONTAINS_FULL_CHEAPEST_PROJECTION_MAP = 
-			new HashMap<String, String>(CONTAINS_FULL_PROJECTION_MAP);
-		CONTAINS_FULL_CHEAPEST_PROJECTION_MAP.put(ContainsFull.ITEM_PRICE, 
+		CONTAINS_FULL_CHEAPEST_PROJECTION_MAP = new HashMap<String, String>(
+				CONTAINS_FULL_PROJECTION_MAP);
+		CONTAINS_FULL_CHEAPEST_PROJECTION_MAP.put(ContainsFull.ITEM_PRICE,
 				"min(itemstores.price) as item_price");
 
-		CONTAINS_FULL_STORE_PROJECTION_MAP = 
-				new HashMap<String, String>(CONTAINS_FULL_PROJECTION_MAP);
-		CONTAINS_FULL_STORE_PROJECTION_MAP.put(ContainsFull.ITEM_PRICE, 
-					"itemstores.price as item_price");
-		
+		CONTAINS_FULL_STORE_PROJECTION_MAP = new HashMap<String, String>(
+				CONTAINS_FULL_PROJECTION_MAP);
+		CONTAINS_FULL_STORE_PROJECTION_MAP.put(ContainsFull.ITEM_PRICE,
+				"itemstores.price as item_price");
+
 		UNITS_PROJECTION_MAP = new HashMap<String, String>();
 		UNITS_PROJECTION_MAP.put(Units._ID, "units._id");
 		UNITS_PROJECTION_MAP.put(Units.CREATED_DATE, "units.created");
@@ -1301,29 +1321,36 @@ public class ShoppingProvider extends ContentProvider {
 
 		ITEMSTORES_PROJECTION_MAP = new HashMap<String, String>();
 		ITEMSTORES_PROJECTION_MAP.put(ItemStores._ID, "itemstores._id");
-		ITEMSTORES_PROJECTION_MAP.put(ItemStores.CREATED_DATE, 
+		ITEMSTORES_PROJECTION_MAP.put(ItemStores.CREATED_DATE,
 				"itemstores.created");
-		ITEMSTORES_PROJECTION_MAP.put(ItemStores.MODIFIED_DATE, 
+		ITEMSTORES_PROJECTION_MAP.put(ItemStores.MODIFIED_DATE,
 				"itemstores.modified");
 		ITEMSTORES_PROJECTION_MAP.put(ItemStores.ITEM_ID, "itemstores.item_id");
-		ITEMSTORES_PROJECTION_MAP.put(ItemStores.STORE_ID, "itemstores.store_id");
+		ITEMSTORES_PROJECTION_MAP.put(ItemStores.STORE_ID,
+				"itemstores.store_id");
 		ITEMSTORES_PROJECTION_MAP.put(Stores.NAME, "stores.name");
 		ITEMSTORES_PROJECTION_MAP.put(ItemStores.AISLE, "itemstores.aisle");
 		ITEMSTORES_PROJECTION_MAP.put(ItemStores.PRICE, "itemstores.price");
-		ITEMSTORES_PROJECTION_MAP.put(ItemStores.STOCKS_ITEM, "itemstores.stocks_item");
+		ITEMSTORES_PROJECTION_MAP.put(ItemStores.STOCKS_ITEM,
+				"itemstores.stocks_item");
 
 		NOTES_PROJECTION_MAP = new HashMap<String, String>();
 		NOTES_PROJECTION_MAP.put(ShoppingContract.Notes._ID, "items._id");
 		NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.NOTE, "items.note");
 		NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.TITLE, "null as title");
 		NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.TAGS, "null as tags");
-		NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.ENCRYPTED, "null as encrypted");
+		NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.ENCRYPTED,
+				"null as encrypted");
 		NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.THEME, "null as theme");
-		
+
 		SUBTOTALS_PROJECTION_MAP = new HashMap<String, String>();
-		SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.COUNT, "count() as count");
-		SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.PRIORITY, "priority");
-		SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.SUBTOTAL, "sum(qty_price) as subtotal");
-		SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.STATUS, "status");		
+		SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.COUNT,
+				"count() as count");
+		SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.PRIORITY,
+				"priority");
+		SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.SUBTOTAL,
+				"sum(qty_price) as subtotal");
+		SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.STATUS,
+				"status");
 	}
 }

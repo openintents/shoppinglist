@@ -32,8 +32,8 @@ import android.widget.Toast;
 
 public class ItemStoresActivity extends Activity {
 
-	private static final int DIALOG_NEW_STORE=1;
-	private static final int DIALOG_RENAME_STORE=2;
+	private static final int DIALOG_NEW_STORE = 1;
+	private static final int DIALOG_RENAME_STORE = 2;
 
 	public static final int MENU_RENAME_STORE = Menu.FIRST;
 	public static final int MENU_DELETE_STORE = Menu.FIRST + 1;
@@ -41,37 +41,37 @@ public class ItemStoresActivity extends Activity {
 	long mListId = 0;
 	long mItemId = 0;
 	StoreListView mItemStores = null;
-	
+
 	int mSelectedStorePosition = 0;
-	
+
 	public class NewStoreDialog extends RenameListDialog {
 
-		
 		public NewStoreDialog(Context context) {
 			super(context);
-			
+
 			setTitle(R.string.ask_new_store);
 			mEditText.setHint("");
 		}
-		
+
 		public NewStoreDialog(Context context, DialogActionListener listener) {
 			super(context);
-			
+
 			setTitle(R.string.ask_new_store);
 			mEditText.setHint("");
 			setDialogActionListener(listener);
 		}
 
-		public NewStoreDialog(Context context, String name, DialogActionListener listener) {
+		public NewStoreDialog(Context context, String name,
+				DialogActionListener listener) {
 			super(context);
-			
+
 			setTitle(R.string.ask_new_store);
 			mEditText.setHint("");
 			setName(name);
 			setDialogActionListener(listener);
 		}
 	}
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -87,57 +87,62 @@ public class ItemStoresActivity extends Activity {
 					public void onCreateContextMenu(ContextMenu contextmenu,
 							View view, ContextMenuInfo info) {
 						contextmenu.add(0, MENU_RENAME_STORE, 0,
-								R.string.menu_rename_store)
-								.setShortcut('1', 'r');
+								R.string.menu_rename_store).setShortcut('1',
+								'r');
 						contextmenu.add(0, MENU_DELETE_STORE, 0,
-								R.string.menu_delete_store).setShortcut('2', 'd');
+								R.string.menu_delete_store).setShortcut('2',
+								'd');
 					}
 
 				});
 
 		String listId;
-		String itemId; 
-		
+		String itemId;
+
 		List<String> pathSegs = getIntent().getData().getPathSegments();
 		int num = pathSegs.size();
 		listId = pathSegs.get(num - 2);
 		itemId = pathSegs.get(num - 1);
-	
+
 		mListId = Long.parseLong(listId);
 		mItemId = Long.parseLong(itemId);
-		
-		mItemStores.fillItems(this, Long.parseLong(listId), Long.parseLong(itemId));
-		
-		String itemname = ShoppingUtils.getItemName(this, Long.parseLong(itemId));
+
+		mItemStores.fillItems(this, Long.parseLong(listId),
+				Long.parseLong(itemId));
+
+		String itemname = ShoppingUtils.getItemName(this,
+				Long.parseLong(itemId));
 		setTitle(itemname + " @ ...");
-		
+
 		Button b = (Button) findViewById(R.id.button_ok);
-		b.setOnClickListener(new OnClickListener(){
+		b.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				mItemStores.applyUpdate();
 				finish();
-			}});
+			}
+		});
 		b = (Button) findViewById(R.id.button_cancel);
-		b.setOnClickListener(new OnClickListener(){
+		b.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				mItemStores.undoChanges();
 				finish();
-			}});
+			}
+		});
 		b = (Button) findViewById(R.id.button_add_store);
-		b.setOnClickListener(new OnClickListener(){
+		b.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				showDialog(DIALOG_NEW_STORE);
-			}});
+			}
+		});
 
 	}
 
-	
 	@Override
 	protected Dialog onCreateDialog(int id) {
 
@@ -151,7 +156,7 @@ public class ItemStoresActivity extends Activity {
 				}
 
 			});
-		
+
 		case DIALOG_RENAME_STORE:
 			return new NewStoreDialog(this, getSelectedStoreName(),
 					new DialogActionListener() {
@@ -163,7 +168,7 @@ public class ItemStoresActivity extends Activity {
 		}
 		return super.onCreateDialog(id);
 	}
-	
+
 	@Override
 	protected void onPrepareDialog(int id, Dialog dialog) {
 		super.onPrepareDialog(id, dialog);
@@ -233,7 +238,8 @@ public class ItemStoresActivity extends Activity {
 		mItemStores.requery();
 	}
 
-	// TODO: Convert into proper dialog that remains across screen orientation changes.
+	// TODO: Convert into proper dialog that remains across screen orientation
+	// changes.
 	/**
 	 * Confirm 'delete list' command by AlertDialog.
 	 */

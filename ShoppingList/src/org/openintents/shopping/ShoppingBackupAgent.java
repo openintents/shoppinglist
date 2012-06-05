@@ -26,7 +26,8 @@ public class ShoppingBackupAgent extends BackupAgentHelper {
 
 	// Allocate a helper and add it to the backup agent
 	public void onCreate() {
-		if (debug) Log.v(TAG, "onCreate");
+		if (debug)
+			Log.v(TAG, "onCreate");
 		SharedPreferencesBackupHelper prefsHelper = new SharedPreferencesBackupHelper(
 				this.getApplicationContext(), PREFS);
 		addHelper(PREFS_BACKUP_KEY, prefsHelper);
@@ -39,14 +40,16 @@ public class ShoppingBackupAgent extends BackupAgentHelper {
 	@Override
 	public void onRestore(BackupDataInput data, int appVersionCode,
 			ParcelFileDescriptor newState) throws IOException {
-		if (debug) Log.v(TAG, "onRestore");
+		if (debug)
+			Log.v(TAG, "onRestore");
 		super.onRestore(data, appVersionCode, newState);
 	}
 
 	@Override
 	public void onBackup(ParcelFileDescriptor oldState, BackupDataOutput data,
 			ParcelFileDescriptor newState) throws IOException {
-		if (debug) Log.v(TAG, "onBackup");
+		if (debug)
+			Log.v(TAG, "onBackup");
 		super.onBackup(oldState, data, newState);
 	}
 }

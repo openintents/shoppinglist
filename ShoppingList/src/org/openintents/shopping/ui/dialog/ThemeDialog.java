@@ -48,7 +48,8 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-public class ThemeDialog extends AlertDialog implements OnClickListener, OnCancelListener, OnItemClickListener {
+public class ThemeDialog extends AlertDialog implements OnClickListener,
+		OnCancelListener, OnItemClickListener {
 	private static final String TAG = "ThemeDialog";
 	private static final boolean debug = false || LogConstants.debug;
 
@@ -76,18 +77,18 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 	private void init() {
 		setInverseBackgroundForced(true);
 
-		LayoutInflater inflate = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		LayoutInflater inflate = (LayoutInflater) mContext
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view;
 
-		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
 			// Enforce light theme
-			inflate = inflate.cloneInContext(new ContextThemeWrapper(mContext, android.R.style.Theme_Light));
-			view = inflate.inflate(R.layout.dialog_theme_settings,
-					null);
+			inflate = inflate.cloneInContext(new ContextThemeWrapper(mContext,
+					android.R.style.Theme_Light));
+			view = inflate.inflate(R.layout.dialog_theme_settings, null);
 		} else {
 			// Use default (Holo) theme
-			view = inflate.inflate(R.layout.dialog_theme_settings,
-					null);
+			view = inflate.inflate(R.layout.dialog_theme_settings, null);
 		}
 
 		setView(view);
@@ -113,7 +114,8 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 		});
 
 		LinearLayout ll = new LinearLayout(mContext);
-		LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT,
+				LayoutParams.WRAP_CONTENT);
 		ll.setPadding(20, 10, 20, 10);
 		ll.addView(b, lp);
 		ll.setGravity(Gravity.CENTER);
@@ -124,14 +126,16 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 		setTitle(R.string.theme_pick);
 
 		setButton(Dialog.BUTTON_POSITIVE, mContext.getText(R.string.ok), this);
-		setButton(Dialog.BUTTON_NEGATIVE, mContext.getText(R.string.cancel), this);
+		setButton(Dialog.BUTTON_NEGATIVE, mContext.getText(R.string.cancel),
+				this);
 		setOnCancelListener(this);
 
 		prepareDialog();
 	}
 
 	public void fillThemes() {
-		mListInfo = ThemeUtils.getThemeInfos(mContext, ThemeShoppingList.SHOPPING_LIST_THEME);
+		mListInfo = ThemeUtils.getThemeInfos(mContext,
+				ThemeShoppingList.SHOPPING_LIST_THEME);
 
 		String[] s = new String[mListInfo.size()];
 		int i = 0;
@@ -140,10 +144,11 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 			i++;
 		}
 
-		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
 			// Enforce light theme
 			mListView.setAdapter(new ArrayAdapter<String>(
-					new ContextThemeWrapper(mContext, android.R.style.Theme_Light),
+					new ContextThemeWrapper(mContext,
+							android.R.style.Theme_Light),
 					android.R.layout.simple_list_item_single_choice, s));
 		} else {
 			// Use default (Holo) theme
@@ -198,7 +203,8 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 
 	@Override
 	public Bundle onSaveInstanceState() {
-		if (debug) Log.d(TAG, "onSaveInstanceState");
+		if (debug)
+			Log.d(TAG, "onSaveInstanceState");
 
 		Bundle b = super.onSaveInstanceState();
 		String theme = getSelectedTheme();
@@ -210,7 +216,8 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
 
-		if (debug) Log.d(TAG, "onRestore");
+		if (debug)
+			Log.d(TAG, "onRestore");
 
 		String theme = getSelectedTheme();
 
@@ -218,7 +225,8 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 			if (savedInstanceState.containsKey(BUNDLE_THEME)) {
 				theme = savedInstanceState.getString(BUNDLE_THEME);
 
-				if (debug) Log.d(TAG, "onRestore theme " + theme);
+				if (debug)
+					Log.d(TAG, "onRestore theme " + theme);
 			}
 		}
 
@@ -247,8 +255,7 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 		mListener.onSetTheme(theme);
 
 		boolean setForAllThemes = mCheckBox.isChecked();
-		PreferenceActivity.setThemeSetForAll(mContext,
-				setForAllThemes);
+		PreferenceActivity.setThemeSetForAll(mContext, setForAllThemes);
 		if (setForAllThemes) {
 			mListener.onSetThemeForAll(theme);
 		}
@@ -283,8 +290,11 @@ public class ThemeDialog extends AlertDialog implements OnClickListener, OnCance
 
 	public interface ThemeDialogListener {
 		void onSetTheme(String theme);
+
 		void onSetThemeForAll(String theme);
+
 		String onLoadTheme();
+
 		void onSaveTheme(String theme);
 	}
 }

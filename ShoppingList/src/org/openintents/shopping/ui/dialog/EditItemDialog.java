@@ -1,6 +1,5 @@
 package org.openintents.shopping.ui.dialog;
 
-
 import org.openintents.distribution.DownloadAppDialog;
 import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract;
@@ -49,7 +48,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 	Uri mListItemUri;
 	long mItemId = 0;
 	String mNoteText = null;
-	
+
 	EditText mEditText;
 	MultiAutoCompleteTextView mTags;
 	EditText mPrice;
@@ -71,61 +70,64 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		ITEMNAME, QUANTITY, PRICE, PRIORITY, UNITS, TAGS
 	};
 
-	public EditItemDialog(final Context context, final Uri itemUri, final Uri relationUri, final Uri listItemUri) {
+	public EditItemDialog(final Context context, final Uri itemUri,
+			final Uri relationUri, final Uri listItemUri) {
 		super(context);
 		mContext = context;
-		
+
 		LayoutInflater inflater = LayoutInflater.from(context);
-		final View view = inflater
-				.inflate(R.layout.dialog_edit_item, null);
+		final View view = inflater.inflate(R.layout.dialog_edit_item, null);
 		setView(view);
 
 		mEditText = (EditText) view.findViewById(R.id.edittext);
 		mTags = (MultiAutoCompleteTextView) view.findViewById(R.id.edittags);
 		mPrice = (EditText) view.findViewById(R.id.editprice);
-		mQuantity= (EditText) view.findViewById(R.id.editquantity);
-		mPriority= (EditText) view.findViewById(R.id.editpriority);
+		mQuantity = (EditText) view.findViewById(R.id.editquantity);
+		mPriority = (EditText) view.findViewById(R.id.editpriority);
 		mUnits = (AutoCompleteTextView) view.findViewById(R.id.editunits);
 
-	    mUnitsAdapter = new SimpleCursorAdapter(mContext,
-	    		android.R.layout.simple_dropdown_item_1line,
-				null,
+		mUnitsAdapter = new SimpleCursorAdapter(mContext,
+				android.R.layout.simple_dropdown_item_1line, null,
 				// Map the units name...
 				new String[] { Units.NAME },
 				// to the view defined in the XML template
 				new int[] { android.R.id.text1 });
-	    mUnitsAdapter.setCursorToStringConverter(new CursorToStringConverter() {
-            public String convertToString(android.database.Cursor cursor) {
-                return cursor.getString(1);
-            }
-        });
-	    mUnitsAdapter.setFilterQueryProvider(new FilterQueryProvider() {
-            public Cursor runQuery(CharSequence constraint) {
-                // Search for units whose names begin with the specified letters.
-            	String query = null;
-            	String[] args = null;
-            	
-            	if (constraint != null) {
-            		// query = "units." + Units.NAME + " like '?%' ";
-            		// args = new String[] {(constraint != null ? constraint.toString() : null)} ;
-            		// http://code.google.com/p/android/issues/detail?id=3153
-            		//
-            		// workaround:
-            		query = "units." + Units.NAME + " like '" + constraint.toString() + "%' ";
-            	}
-            	
-                Cursor cursor = mContext.getContentResolver().query(Units.CONTENT_URI, 
-        				new String[] { Units._ID, Units.NAME }, 
-        				query, args, Units.NAME);
-               
-                return cursor;
-            }
-        });
-	    mUnits.setAdapter(mUnitsAdapter);
-	    mUnits.setThreshold(0);
-		
+		mUnitsAdapter.setCursorToStringConverter(new CursorToStringConverter() {
+			public String convertToString(android.database.Cursor cursor) {
+				return cursor.getString(1);
+			}
+		});
+		mUnitsAdapter.setFilterQueryProvider(new FilterQueryProvider() {
+			public Cursor runQuery(CharSequence constraint) {
+				// Search for units whose names begin with the specified
+				// letters.
+				String query = null;
+				String[] args = null;
+
+				if (constraint != null) {
+					// query = "units." + Units.NAME + " like '?%' ";
+					// args = new String[] {(constraint != null ?
+					// constraint.toString() : null)} ;
+					// http://code.google.com/p/android/issues/detail?id=3153
+					//
+					// workaround:
+					query = "units." + Units.NAME + " like '"
+							+ constraint.toString() + "%' ";
+				}
+
+				Cursor cursor = mContext.getContentResolver().query(
+						Units.CONTENT_URI,
+						new String[] { Units._ID, Units.NAME }, query, args,
+						Units.NAME);
+
+				return cursor;
+			}
+		});
+		mUnits.setAdapter(mUnitsAdapter);
+		mUnits.setThreshold(0);
+
 		mPriceStore = (Button) view.findViewById(R.id.pricestore);
-		
+
 		mPriceStore.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -134,19 +136,21 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 				context.startActivity(intent);
 			}
 		});
-		
-		mNote = (ImageButton) view.findViewById(R.id.note);   
+
+		mNote = (ImageButton) view.findViewById(R.id.note);
 		mNote.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Uri uri = ContentUris.withAppendedId(ShoppingContract.Notes.CONTENT_URI, mItemId);
-				
+				Uri uri = ContentUris.withAppendedId(
+						ShoppingContract.Notes.CONTENT_URI, mItemId);
+
 				if (mNoteText == null) {
-				   // Maybe an earlier edit activity added it? If so, 
-				   // we should not replace with empty string below.
-					Cursor c = mContext.getContentResolver().query(mItemUri, 
-							new String[] {ShoppingContract.Items.NOTE} , null, null, null);
+					// Maybe an earlier edit activity added it? If so,
+					// we should not replace with empty string below.
+					Cursor c = mContext.getContentResolver().query(mItemUri,
+							new String[] { ShoppingContract.Items.NOTE }, null,
+							null, null);
 					if (c != null) {
 						if (c.moveToFirst()) {
 							mNoteText = c.getString(0);
@@ -154,25 +158,24 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 						c.close();
 					}
 				}
-				
+
 				if (mNoteText == null) {
 					// can't edit a null note, put an empty one instead.
 					ContentValues values = new ContentValues();
 					values.put("note", "");
-					mContext.getContentResolver().update(mItemUri, values, null, null);
+					mContext.getContentResolver().update(mItemUri, values,
+							null, null);
 					mContext.getContentResolver().notifyChange(mItemUri, null);
 				}
-									
+
 				Intent i = new Intent(Intent.ACTION_VIEW);
 				i.setData(uri);
 				try {
-				    mContext.startActivity(i);
+					mContext.startActivity(i);
 				} catch (ActivityNotFoundException e) {
-					Dialog g = new DownloadAppDialog(mContext, 
-							R.string.notepad_not_available, 
-							R.string.notepad, 
-							R.string.notepad_package, 
-							R.string.notepad_website);
+					Dialog g = new DownloadAppDialog(mContext,
+							R.string.notepad_not_available, R.string.notepad,
+							R.string.notepad_package, R.string.notepad_website);
 					g.show();
 				}
 			}
@@ -182,7 +185,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		mPriceLabel = (TextView) view.findViewById(R.id.labeleditprice);
 
 		final KeyListener kl = PreferenceActivity
-			.getCapitalizationKeyListenerFromPrefs(context);
+				.getCapitalizationKeyListenerFromPrefs(context);
 		mEditText.setKeyListener(kl);
 		mTags.setKeyListener(kl);
 
@@ -191,65 +194,58 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		mTags.setThreshold(0);
 		mTags.setOnClickListener(new View.OnClickListener() {
 
-				public void onClick(View v) {
-					toggleTaglistPopup();
-				}
+			public void onClick(View v) {
+				toggleTaglistPopup();
+			}
 
-			});
-	        
-		//setIcon(android.R.drawable.ic_menu_edit);
+		});
+
+		// setIcon(android.R.drawable.ic_menu_edit);
 		setTitle(R.string.ask_edit_item);
-		
-		setItemUri(itemUri,listItemUri);
+
+		setItemUri(itemUri, listItemUri);
 		setRelationUri(relationUri);
-		
+
 		setButton(context.getText(R.string.ok), this);
 		setButton2(context.getText(R.string.cancel), this);
-		
-		
+
 		/*
-		setButton(R.string.ok,
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog,
-							int whichButton) {
+		 * setButton(R.string.ok, new DialogInterface.OnClickListener() { public
+		 * void onClick(DialogInterface dialog, int whichButton) {
+		 * 
+		 * dialog.dismiss(); doTextEntryDialogAction(mTextEntryMenu, (Dialog)
+		 * dialog);
+		 * 
+		 * } }).setNegativeButton(R.string.cancel, new
+		 * DialogInterface.OnClickListener() { public void
+		 * onClick(DialogInterface dialog, int whichButton) {
+		 * 
+		 * dialog.cancel(); } }).create();
+		 */
 
-						dialog.dismiss();
-						doTextEntryDialogAction(mTextEntryMenu,
-								(Dialog) dialog);
-
-					}
-				}).setNegativeButton(R.string.cancel,
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog,
-							int whichButton) {
-
-						dialog.cancel();
-					}
-				}).create();
-				*/
-		
 		mQuantity.addTextChangedListener(mTextWatcher);
 		mPrice.addTextChangedListener(mTextWatcher);
 	}
 
-    public void setTagList(String[] taglist) {
-    	mTagList = taglist;
+	public void setTagList(String[] taglist) {
+		mTagList = taglist;
 
-	    if (taglist != null) {
-	        ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,
-	                android.R.layout.simple_dropdown_item_1line, mTagList);
-	        mTags.setAdapter(adapter);
-	    }
-    }
-    
-    /**
-     * Set cursor to be requeried if item is changed.
-     * @param c
-     */
-    public void setOnItemChangedListener(OnItemChangedListener listener) {
-    	mOnItemChangedListener = listener;
-    }
-    
+		if (taglist != null) {
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,
+					android.R.layout.simple_dropdown_item_1line, mTagList);
+			mTags.setAdapter(adapter);
+		}
+	}
+
+	/**
+	 * Set cursor to be requeried if item is changed.
+	 * 
+	 * @param c
+	 */
+	public void setOnItemChangedListener(OnItemChangedListener listener) {
+		mOnItemChangedListener = listener;
+	}
+
 	private void toggleTaglistPopup() {
 		if (mTags.isPopupShowing()) {
 			mTags.dismissDropDown();
@@ -257,7 +253,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 			mTags.showDropDown();
 		}
 	}
-	
+
 	private TextWatcher mTextWatcher = new TextWatcher() {
 
 		@Override
@@ -274,9 +270,9 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		public void onTextChanged(CharSequence s, int start, int before,
 				int count) {
 		}
-		
+
 	};
-	
+
 	void updateQuantityPrice() {
 		try {
 			double price = Double.parseDouble(mPrice.getText().toString());
@@ -285,38 +281,34 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 				double quantity = Double.parseDouble(quantityString);
 				price = quantity * price;
 				String s = PriceConverter.mPriceFormatter.format(price);
-				mPriceLabel.setText(mContext.getText(R.string.price) + ": " + s);
+				mPriceLabel
+						.setText(mContext.getText(R.string.price) + ": " + s);
 				return;
 			}
 		} catch (NumberFormatException e) {
 			// do nothing
 		}
-		
+
 		// Otherwise show default label:
 		mPriceLabel.setText(mContext.getText(R.string.price));
 	}
-	
-	private final String[] mProjection = { 
-			ShoppingContract.Items.NAME,
-			ShoppingContract.Items.TAGS,
-			ShoppingContract.Items.PRICE,
-			ShoppingContract.Items.NOTE,
-			ShoppingContract.Items._ID,
-			ShoppingContract.Items.UNITS
-	};
-	private final String[] mRelationProjection = { 
+
+	private final String[] mProjection = { ShoppingContract.Items.NAME,
+			ShoppingContract.Items.TAGS, ShoppingContract.Items.PRICE,
+			ShoppingContract.Items.NOTE, ShoppingContract.Items._ID,
+			ShoppingContract.Items.UNITS };
+	private final String[] mRelationProjection = {
 			ShoppingContract.Contains.QUANTITY,
-			ShoppingContract.Contains.PRIORITY
-	};
+			ShoppingContract.Contains.PRIORITY };
 
 	private Uri mRelationUri;
-			
+
 	public void setItemUri(Uri itemUri, Uri listItemUri) {
 		mItemUri = itemUri;
 		mListItemUri = listItemUri;
-		
-		Cursor c = mContext.getContentResolver().query(mItemUri, 
-				mProjection, null, null, null);
+
+		Cursor c = mContext.getContentResolver().query(mItemUri, mProjection,
+				null, null, null);
 		if (c != null && c.moveToFirst()) {
 			String text = c.getString(0);
 			String tags = c.getString(1);
@@ -325,19 +317,20 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 			mNoteText = c.getString(3);
 			mItemId = c.getLong(4);
 			String units = c.getString(5);
-			
+
 			mEditText.setText(text);
 			mTags.setText(tags);
 			mPrice.setText(price);
-			
+
 			if (units == null) {
 				units = "";
 			}
-			mUnits.setText(units);			
-			
-			boolean trackPerStorePrices = PreferenceActivity.getUsingPerStorePricesFromPrefs(mContext);
-			
-			if(!trackPerStorePrices) {
+			mUnits.setText(units);
+
+			boolean trackPerStorePrices = PreferenceActivity
+					.getUsingPerStorePricesFromPrefs(mContext);
+
+			if (!trackPerStorePrices) {
 				mPrice.setVisibility(View.VISIBLE);
 				mPriceStore.setVisibility(View.GONE);
 			} else {
@@ -348,25 +341,26 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		c.close();
 	}
 
-	public void setRelationUri(Uri relationUri){
+	public void setRelationUri(Uri relationUri) {
 		mRelationUri = relationUri;
-		Cursor c= mContext.getContentResolver().query(mRelationUri, mRelationProjection, null, null, null);
-		if (c != null && c.moveToFirst()){
+		Cursor c = mContext.getContentResolver().query(mRelationUri,
+				mRelationProjection, null, null, null);
+		if (c != null && c.moveToFirst()) {
 			String quantity = c.getString(0);
 			mQuantity.setText(quantity);
 			String priority = c.getString(1);
 			mPriority.setText(priority);
 		}
-		c.close();		
+		c.close();
 	}
 
 	public void onClick(DialogInterface dialog, int which) {
-    	if (which == BUTTON1) {
-    		editItem();
-    	}
-		
+		if (which == BUTTON1) {
+			editItem();
+		}
+
 	}
-	
+
 	void editItem() {
 		String text = mEditText.getText().toString();
 		String tags = mTags.getText().toString();
@@ -376,16 +370,16 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		String units = mUnits.getText().toString();
 
 		Long priceLong = PriceConverter.getCentPriceFromString(price);
-		
+
 		text = text.trim();
 
-    	// Remove trailing ","
-    	tags = tags.trim();
-    	if (tags.endsWith(",")) {
-    		tags = tags.substring(0, tags.length() - 1);
-    	}
-    	tags = tags.trim();
-    	
+		// Remove trailing ","
+		tags = tags.trim();
+		if (tags.endsWith(",")) {
+			tags = tags.substring(0, tags.length() - 1);
+		}
+		tags = tags.trim();
+
 		ContentValues values = new ContentValues();
 		values.put(Items.NAME, text);
 		values.put(Items.TAGS, tags);
@@ -405,32 +399,33 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 
 		mContext.getContentResolver().update(mRelationUri, values, null, null);
 		mContext.getContentResolver().notifyChange(mRelationUri, null);
-		
+
 		if (mOnItemChangedListener != null) {
 			mOnItemChangedListener.onItemChanged();
 		}
 	}
 
-	private void focus_field (EditText e, Boolean selectAll) {
-		InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+	private void focus_field(EditText e, Boolean selectAll) {
+		InputMethodManager imm = (InputMethodManager) mContext
+				.getSystemService(Context.INPUT_METHOD_SERVICE);
 		if (selectAll)
 			e.selectAll();
 		if (e.requestFocus())
 			// this part doesn't seem to work:
-		    imm.showSoftInput(e, 0);
+			imm.showSoftInput(e, 0);
 		imm.toggleSoftInputFromWindow(e.getWindowToken(), 0, 0);
 	}
-	
+
 	public void setFocusField(FieldType focusField) {
 
-		switch(focusField) {
+		switch (focusField) {
 		// hack, need to share some values with ShoppingActivity.
-		case QUANTITY: 
+		case QUANTITY:
 			focus_field(mQuantity, true);
 			break;
-		case PRIORITY: 
+		case PRIORITY:
 			focus_field(mPriority, true);
-			break;	
+			break;
 		case PRICE:
 			focus_field(mPrice, true);
 			break;
@@ -443,13 +438,12 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		case ITEMNAME:
 			focus_field(mEditText, false);
 			break;
-			
+
 		}
 	}
-	
+
 	public interface OnItemChangedListener {
 		public void onItemChanged();
 	}
-	
-}
 
+}

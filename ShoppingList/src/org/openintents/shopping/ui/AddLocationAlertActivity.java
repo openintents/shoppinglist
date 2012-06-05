@@ -37,123 +37,124 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 /**
  * Allows to edit the share settings for a shopping list.
  */
-public class AddLocationAlertActivity extends Activity 
-	implements OnClickListener {
+public class AddLocationAlertActivity extends Activity implements
+		OnClickListener {
 	/**
-     * TAG for logging.
-     */
-    private static final String TAG = "AddLocationAlertActivity";
-    
-    private static final int REQUEST_PICK_LOC = 1;
-	
-    
-    TextView mAlertAdded;
-    TextView mTags;
-    TextView mLocation;
-    
-    Uri mShoppingListUri;
+	 * TAG for logging.
+	 */
+	private static final String TAG = "AddLocationAlertActivity";
+
+	private static final int REQUEST_PICK_LOC = 1;
+
+	TextView mAlertAdded;
+	TextView mTags;
+	TextView mLocation;
+
+	Uri mShoppingListUri;
 
 	private Tag mTag;
-    
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
 
-        mTag = new Tag(this);
-        
-        setContentView(R.layout.activity_add_location_alert);
+	@Override
+	public void onCreate(Bundle icicle) {
+		super.onCreate(icicle);
 
-        // Get the uri of the list
-        mShoppingListUri = getIntent().getData();
+		mTag = new Tag(this);
 
-        // Set up click handlers for the text field and button
-        mAlertAdded = (TextView) this.findViewById(R.id.alert_added_text);
-        mTags = (TextView) this.findViewById(R.id.tags);
-        mLocation = (TextView) this.findViewById(R.id.location);
-        
-        Button picklocation = (Button) this.findViewById(R.id.picklocation);
-        picklocation.setOnClickListener(this);
+		setContentView(R.layout.activity_add_location_alert);
 
-        /*
-        Button addlocationalert = (Button) this.findViewById(R.id.addlocationalert);
-        addlocationalert.setOnClickListener(this);
-         */
-        
-        Button viewalerts = (Button) this.findViewById(R.id.viewalerts);
-        viewalerts.setOnClickListener(this);
+		// Get the uri of the list
+		mShoppingListUri = getIntent().getData();
 
-    }
+		// Set up click handlers for the text field and button
+		mAlertAdded = (TextView) this.findViewById(R.id.alert_added_text);
+		mTags = (TextView) this.findViewById(R.id.tags);
+		mLocation = (TextView) this.findViewById(R.id.location);
 
-    public void onClick(final View v)
-    {
-        switch (v.getId()) {
-        case R.id.picklocation:
-        	pickLocation();
-        	break;
-        //case R.id.addlocationalert:
-        //	addLocationAlert();
-        //	break;
-        case R.id.viewalerts:
-        	viewAlerts();
-        	break;
-        default:
-        	// Don't know what to do - do nothing.	
-        	Log.e(TAG, "AddLocationAlertActivity: Unexpedted view id clicked.");
-        }
-    }
-    
-    @Override
-    protected void onResume() {
-        super.onResume();
+		Button picklocation = (Button) this.findViewById(R.id.picklocation);
+		picklocation.setOnClickListener(this);
 
-    }
+		/*
+		 * Button addlocationalert = (Button)
+		 * this.findViewById(R.id.addlocationalert);
+		 * addlocationalert.setOnClickListener(this);
+		 */
 
-    @Override
-    protected void onPause() {
-        super.onPause();
+		Button viewalerts = (Button) this.findViewById(R.id.viewalerts);
+		viewalerts.setOnClickListener(this);
 
-        // TODO Here we should store temporary information
-       	
-    }
+	}
 
-    public void pickLocation() {
-    	// Call the pick location activity
-    	Intent intent;
-		
-    	intent = new Intent(Intent.ACTION_PICK, Locations.CONTENT_URI);
-    	try {
-    		startActivityForResult(intent, REQUEST_PICK_LOC);
-    	} catch (ActivityNotFoundException e) {
-    		Toast.makeText(this, R.string.locations_not_installed, Toast.LENGTH_SHORT).show();
-    		Log.e(TAG, "Locations not installed", e);
-    	}
-    }
-    
-    public void addLocationAlert() {
-    	// Add location into database
-    	addAlert(mLocation.getText().toString(), null, Intent.ACTION_VIEW,
-    			null, mShoppingListUri.toString());
-    }
-    
-    public void viewAlerts() {
-    	// View list of alerts
+	public void onClick(final View v) {
+		switch (v.getId()) {
+		case R.id.picklocation:
+			pickLocation();
+			break;
+		// case R.id.addlocationalert:
+		// addLocationAlert();
+		// break;
+		case R.id.viewalerts:
+			viewAlerts();
+			break;
+		default:
+			// Don't know what to do - do nothing.
+			Log.e(TAG, "AddLocationAlertActivity: Unexpedted view id clicked.");
+		}
+	}
 
-    	Intent intent = new Intent(Intent.ACTION_VIEW, Alert.Generic.CONTENT_URI);
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+
+		// TODO Here we should store temporary information
+
+	}
+
+	public void pickLocation() {
+		// Call the pick location activity
+		Intent intent;
+
+		intent = new Intent(Intent.ACTION_PICK, Locations.CONTENT_URI);
+		try {
+			startActivityForResult(intent, REQUEST_PICK_LOC);
+		} catch (ActivityNotFoundException e) {
+			Toast.makeText(this, R.string.locations_not_installed,
+					Toast.LENGTH_SHORT).show();
+			Log.e(TAG, "Locations not installed", e);
+		}
+	}
+
+	public void addLocationAlert() {
+		// Add location into database
+		addAlert(mLocation.getText().toString(), null, Intent.ACTION_VIEW,
+				null, mShoppingListUri.toString());
+	}
+
+	public void viewAlerts() {
+		// View list of alerts
+
+		Intent intent = new Intent(Intent.ACTION_VIEW,
+				Alert.Generic.CONTENT_URI);
 		try {
 			startActivity(intent);
-    	} catch (ActivityNotFoundException e) {
-    		Toast.makeText(this, R.string.alerts_not_installed, Toast.LENGTH_SHORT).show();
-    		Log.e(TAG, "Alerts not installed", e);
-    	}
-    }
-    
-    /// TODO: Simply copied this routine from LocationsView.java.
-    // This should be a convenience function in the alerts provider!
-    private void addAlert(String locationUri, String data, String actionName,
+		} catch (ActivityNotFoundException e) {
+			Toast.makeText(this, R.string.alerts_not_installed,
+					Toast.LENGTH_SHORT).show();
+			Log.e(TAG, "Alerts not installed", e);
+		}
+	}
+
+	// / TODO: Simply copied this routine from LocationsView.java.
+	// This should be a convenience function in the alerts provider!
+	private void addAlert(String locationUri, String data, String actionName,
 			String type, String uri) {
 
 		ContentValues values = new ContentValues();
@@ -167,34 +168,31 @@ public class AddLocationAlertActivity extends Activity
 		// getContentResolver().insert(Alert.Location.CONTENT_URI, values);
 		// using alert.insert will register alerts automatically.
 		Uri result = Alert.insert(Alert.Location.CONTENT_URI, values);
-		int textId; 
-		if (uri != null){
+		int textId;
+		if (uri != null) {
 			textId = R.string.alert_added;
-			
+
 			mAlertAdded.setText(getString(R.string.location_alert_added));
 		} else {
 			textId = R.string.alert_not_added;
-			
+
 			mAlertAdded.setText(getString(R.string.alert_not_added));
 		}
-		Toast.makeText(this, textId, Toast.LENGTH_SHORT)
-		.show();
-
+		Toast.makeText(this, textId, Toast.LENGTH_SHORT).show();
 
 	}
-    
-    
-    @Override
+
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK) {
 			switch (requestCode) {
-			
+
 			case REQUEST_PICK_LOC:
 				/*
-				mLocation.setText(bundle.getString(Locations.EXTRA_GEO));
-				mTags.setText(mTag.findTags(data, ", "));
-				*/
-								
+				 * mLocation.setText(bundle.getString(Locations.EXTRA_GEO));
+				 * mTags.setText(mTag.findTags(data, ", "));
+				 */
+
 				String geo = data.getStringExtra(Locations.EXTRA_GEO);
 				mLocation.setText(geo);
 				mTags.setText(mTag.findTags(data.getDataString(), ", "));
@@ -203,5 +201,5 @@ public class AddLocationAlertActivity extends Activity
 			}
 		}
 	}
-    	
+
 }
