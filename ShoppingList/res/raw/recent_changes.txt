@@ -1,4 +1,11 @@
 ----------------
+release 1.7
+date: ?
+
+- Sort list of lists (patch by Stanley F. for Google Summer of Code 2012)
+- Set cursor to end in "rename list" dialog (patch by Alex Yaremenko)
+
+----------------
 release 1.6
 date: 2012-01-29
 
@@ -31,15 +38,6 @@ date: 2011-12-08
 - new setting to disable screen lock (Google Code-in task by Kido)
 - new setting to reset quantity when readding items (Google Code-in task by Shuhao)
 - many new translations by Google Code-in students
-
-----------------
-release 1.4.1
-date: 2011-08-27
-
-- choose sort order for Pick Items mode (in advanced settings)
-- fix "clean up list" menu command (issue 386)
-- fix crash when scanning barcodes (issue 388)
-- fix calculation of total price
 
 ----------------
 For the complete list of changes and a list of frequently asked questions, please visit:

@@ -55,7 +55,7 @@
 	</style>
 
 	<style name="Theme.ShoppingList.Android" parent="Theme.ShoppingList">
-		<item name="background">@drawable/theme_android</item>
+		<!-- item name="background">@drawable/theme_android</item -->
 		<item name="backgroundPadding">0dip</item>
 		<item name="divider">0</item>
 		<item name="textTypeface">fonts/Crysta.ttf</item>
