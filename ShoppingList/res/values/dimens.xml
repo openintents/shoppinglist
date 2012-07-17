@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- GridLayout stuff -->
+    <!-- The default gap between components in a layout. -->
+    <dimen name="default_gap">16dip</dimen>
+
+</resources>
