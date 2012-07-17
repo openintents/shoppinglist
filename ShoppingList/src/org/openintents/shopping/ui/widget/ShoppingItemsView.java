@@ -453,6 +453,20 @@ public class ShoppingItemsView extends ListView {
 				}
 
 			});
+			else
+				view.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						if (debug) Log.d(TAG, "Click on item grid: ");
+						if (mListener != null) {
+							mListener.onCustomClick(cursor, cursorpos,
+									EditItemDialog.FieldType.ITEMNAME, v);
+						}
+					}
+
+				});
+
 
 		}
 
