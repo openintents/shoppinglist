@@ -22,7 +22,7 @@
     android:orientation="horizontal"
     gridlayout:columnCount="7"
     gridlayout:columnOrderPreserved="false"
-    gridlayout:useDefaultMargins="true" >	
+    gridlayout:useDefaultMargins="false" >	
 	<RelativeLayout android:id="@+id/check_surround"
 			android:layout_width="wrap_content"
 			android:layout_height="fill_parent"
@@ -110,8 +110,9 @@
 <!--        	android:layout_toLeftOf="@id/name"-->        
    <TextView android:id="@+id/name"
 			android:textAppearance="?android:attr/textAppearanceLarge"
-			android:layout_width="wrap_content"
+			android:layout_width="0dip"
 			android:layout_height="wrap_content"
+			android:layout_gravity="fill_horizontal"
         	android:layout_toRightOf="@id/units"
         	android:layout_alignParentTop="true"
         	android:layout_alignWithParentIfMissing="true"
@@ -119,6 +120,7 @@
 			android:gravity="center_vertical"
 			android:textStyle="normal"
 			android:bufferType="spannable"
+			gridlayout:layout_columnSpan="3"
 			 />
 			 <!-- 
         android:singleLine="true"
@@ -133,26 +135,16 @@
 			   android:layout_alignBottom="@id/name"
 			   android:scaleType="centerInside"
 			   android:src="@drawable/ic_launcher_notepad_small"
+			   android:layout_column="6"
 			/> 
 
-    <TextView android:id="@+id/price"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_alignParentTop="true"
-              android:layout_alignParentBottom="true"
-              android:layout_alignParentRight="true"
-              android:layout_marginTop="2dip"
-			  android:layout_marginLeft="10dip"
-              android:gravity="center_vertical"
-              android:visibility="visible"/>             
-             <!-- 
-            android:layout_marginTop="8dip"
-            android:layout_marginBottom="8dip" -->
    	<TextView android:id="@+id/tags"
 			  android:layout_width="wrap_content"
 			  android:layout_height="wrap_content"
 			  android:layout_marginLeft = "10dip"
-            gridlayout:layout_columnSpan="3"
+            gridlayout:layout_columnSpan="4"
+            android:layout_column="1"
+            
 	    	android:layout_toRightOf="@id/check"        	
         	android:layout_below="@id/name"
         	android:layout_alignParentBottom="true"
@@ -163,5 +155,19 @@
         	android:layout_toRightOf="@id/quantity"  
         android:singleLine="true"
         android:ellipsize="end" -->
+    <TextView android:id="@+id/price"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentTop="true"
+              android:layout_alignParentBottom="true"
+              android:layout_alignParentRight="true"
+              android:layout_marginTop="2dip"
+			  android:layout_marginLeft="10dip"
+              android:gravity="center_vertical"
+              android:layout_column="6"
+              android:visibility="visible"/>             
+             <!-- 
+            android:layout_marginTop="8dip"
+            android:layout_marginBottom="8dip" -->
 
 </org.openintents.shopping.ui.widget.backport.GridLayout>
