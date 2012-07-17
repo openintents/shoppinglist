@@ -14,18 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  -->
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="horizontal"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" >
-	
+<org.openintents.shopping.ui.widget.backport.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:gridlayout="http://schemas.android.com/apk/res/org.openintents.shopping"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    gridlayout:alignmentMode="alignBounds"
+    android:orientation="horizontal"
+    gridlayout:columnCount="7"
+    gridlayout:columnOrderPreserved="false"
+    gridlayout:useDefaultMargins="true" >	
 	<RelativeLayout android:id="@+id/check_surround"
 			android:layout_width="wrap_content"
 			android:layout_height="fill_parent"
 			android:paddingLeft="20dip"
 			android:paddingRight="10dip"
 	        android:focusable="false"
+	        gridlayout:layout_rowSpan="3"
 	        android:background="@android:drawable/menuitem_background"
             android:gravity="center_vertical" ><!-- android:clickable = "true" -->
 	    <CheckBox android:id="@+id/check"
@@ -49,20 +53,6 @@
 	              android:gravity="center_vertical"
 	            />
 	</RelativeLayout>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		      android:id="@+id/description"
-              android:layout_width="0dip"
-              android:layout_weight="1"
-              android:layout_height="wrap_content"
-              android:paddingRight="20dip"
-    		  android:focusable="true"
-    		  android:clickable="true"
-    		  android:longClickable="true"
-    		  android:background="@android:drawable/menuitem_background">
-              <!-- 
-              android:layout_height="wrap_content"
-              android:minHeight="?android:attr/listPreferredItemHeight"
-                -->
     <!-- 
     <ImageView android:id="@+id/image"
                android:layout_width="12px"
@@ -172,5 +162,4 @@
         android:singleLine="true"
         android:ellipsize="end" -->
 
-</RelativeLayout>
-</LinearLayout>
+</org.openintents.shopping.ui.widget.backport.GridLayout>

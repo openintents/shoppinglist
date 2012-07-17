@@ -18,6 +18,7 @@ import org.openintents.shopping.theme.ThemeUtils;
 import org.openintents.shopping.ui.PreferenceActivity;
 import org.openintents.shopping.ui.ShoppingActivity;
 import org.openintents.shopping.ui.dialog.EditItemDialog;
+import org.openintents.shopping.ui.widget.backport.GridLayout;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -190,6 +191,7 @@ public class ShoppingItemsView extends ListView {
 				view.findViewById(R.id.units).setVisibility(View.VISIBLE);
 				view.findViewById(R.id.priority).setVisibility(View.VISIBLE);
 			}
+			((GridLayout)view).notifyChildVisibilityChanged();
 			return view;
 		}
 
@@ -438,6 +440,7 @@ public class ShoppingItemsView extends ListView {
 			RelativeLayout r = (RelativeLayout) view
 					.findViewById(R.id.description);
 
+			if (r != null)
 			r.setOnClickListener(new OnClickListener() {
 
 				@Override
