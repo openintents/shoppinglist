@@ -120,7 +120,9 @@
 			android:gravity="center_vertical"
 			android:textStyle="normal"
 			android:bufferType="spannable"
-			gridlayout:layout_columnSpan="3"
+			gridlayout:layout_columnSpan="2"
+			gridlayout:layout_rowSpan="2"
+			
 			 />
 			 <!-- 
         android:singleLine="true"
@@ -132,6 +134,7 @@
 			   android:layout_height="18dip"
 			   android:layout_toRightOf="@id/name"
 			   android:layout_margin="4dip"
+			   android:layout_marginTop="8dip"
 			   android:layout_alignBottom="@id/name"
 			   android:scaleType="centerInside"
 			   android:src="@drawable/ic_launcher_notepad_small"
@@ -165,6 +168,7 @@
 			  android:layout_marginLeft="10dip"
               android:gravity="center_vertical"
               android:layout_column="6"
+              android:layout_gravity="bottom"
               android:visibility="visible"/>             
              <!-- 
             android:layout_marginTop="8dip"
