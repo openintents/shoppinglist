@@ -41,7 +41,11 @@ import android.net.Uri;
 import android.support.v2.os.Build;
 import android.os.Handler;
 import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.ImageSpan;
 import android.text.style.StrikethroughSpan;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -204,7 +208,10 @@ public class ShoppingItemsView extends ListView {
 
 			long status = cursor.getLong(ShoppingActivity.mStringItemsSTATUS);
 			final int cursorpos = cursor.getPosition();
+			Integer tag = new Integer(cursorpos);
 
+			view.setTag(tag);
+			
 			int styled_as_name [] = {R.id.name, R.id.units, R.id.quantity};
 			int i;
 			
@@ -215,6 +222,7 @@ public class ShoppingItemsView extends ListView {
 			// set style for name view
 			// Set font
 			t.setTypeface(mCurrentTypeface);
+			t.setTag(tag);
 
 			// Set size
 			t.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
@@ -404,40 +412,12 @@ public class ShoppingItemsView extends ListView {
 				}
 
 			});
-			// Check for clicks on note
-			v = view.findViewById(R.id.has_note);
-			v.setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					if (debug) Log.d(TAG, "Click on has_note: ");
-					//if (mListener != null) {
-					//	mListener.onCustomClick(cursor, cursorpos,
-					//			EditItemDialog.FieldType.PRIORITY, v);
-					//}
-					Intent i = new Intent(Intent.ACTION_VIEW);
-					cursor.moveToPosition(cursorpos);
-					long note_id = cursor.getLong(ShoppingActivity.mStringItemsITEMID);
-					Uri uri = ContentUris.withAppendedId(ShoppingContract.Notes.CONTENT_URI, note_id);
-					i.setData(uri);
-					try {
-					    context.startActivity(i);
-					} catch (ActivityNotFoundException e) {
-						// we could add a simple edit note dialog, but for now...
-						Dialog g = new DownloadAppDialog(context, 
-								R.string.notepad_not_available, 
-								R.string.notepad, 
-								R.string.notepad_package, 
-								R.string.notepad_website);
-						g.show();
-					}
-				}
-
-			});
 			// Check for clicks on item text
 			RelativeLayout r = (RelativeLayout) view
 					.findViewById(R.id.description);
 
+			r.setTag(cursorpos);
 			r.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -466,10 +446,51 @@ public class ShoppingItemsView extends ListView {
 		public boolean setViewValue(View view, Cursor cursor, int i) {
 			int id = view.getId();
 			if (id == R.id.name) {
+				int has_note = cursor
+						.getInt(ShoppingActivity.mStringItemsITEMHASNOTE);
 				String name = cursor
 						.getString(ShoppingActivity.mStringItemsITEMNAME);
 				TextView tv = (TextView) view;
-				tv.setText(name);
+				if (has_note == 0)
+				  tv.setText(name);
+				else
+				{
+					SpannableString name_with_note = new SpannableString(name + "   ");
+					int start = name.length() + 1;
+					int end = start + 2;
+					// TODO: use a different icon for large layout
+					Drawable d = getResources().getDrawable(R.drawable.ic_launcher_notepad_small);
+					float ratio = d.getIntrinsicWidth() / d.getIntrinsicHeight();
+				    d.setBounds(0, 0, (int)(ratio * mTextSize), (int)mTextSize); 
+		            ImageSpan imgspan = new ImageSpan(d, ImageSpan.ALIGN_BASELINE); 
+		            name_with_note.setSpan(imgspan, start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+		            ClickableSpan cs = new ClickableSpan() {
+		                public void onClick(View view) {
+							Intent i = new Intent(Intent.ACTION_VIEW);
+							int cursorpos = (Integer) view.getTag();
+		                	if (debug) Log.d(TAG, "Click on has_note: " + cursorpos);
+							mCursorItems.moveToPosition(cursorpos);
+							long note_id = mCursorItems.getLong(ShoppingActivity.mStringItemsITEMID);
+							Uri uri = ContentUris.withAppendedId(ShoppingContract.Notes.CONTENT_URI, note_id);
+							i.setData(uri);
+							Context context = getContext();
+							try {
+							    context.startActivity(i);
+							} catch (ActivityNotFoundException e) {
+								// we could add a simple edit note dialog, but for now...
+								Dialog g = new DownloadAppDialog(context, 
+										R.string.notepad_not_available, 
+										R.string.notepad, 
+										R.string.notepad_package, 
+										R.string.notepad_website);
+								g.show();
+							}
+		                }
+		            };
+		            name_with_note.setSpan(cs, start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+		            tv.setText(name_with_note);
+		            tv.setMovementMethod(LinkMovementMethod.getInstance());
+				}
 				return true;
 			} else if (id == R.id.price) {
 				long price = getQuantityPrice(cursor);
@@ -534,15 +555,6 @@ public class ShoppingItemsView extends ListView {
 				    hideTextView(tv); 
 			    } 
 				return true; 
-			} else if (id == R.id.has_note) { 
-				int has_note = cursor
-				.getInt(ShoppingActivity.mStringItemsITEMHASNOTE);
-				if (has_note == 0) {
-					view.setVisibility(View.GONE);  
-				} else {
-				    view.setVisibility(View.VISIBLE); 
-				}
-				return true;
 			} else {
 				return false;
 			}
