@@ -493,24 +493,27 @@ public class ShoppingItemsView extends ListView {
 				String name = cursor
 						.getString(ShoppingActivity.mStringItemsITEMNAME);
 				TextView tv = (TextView) view;
+				SpannableString name_etc = null;
 				if (has_note == 0)
-				  tv.setText(name);
+				{
+					name_etc = new SpannableString(name);
+		            name_etc.setSpan(new ClickableItemSpan(), 0, name.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+				}
 				else
 				{
-					SpannableString name_with_note = new SpannableString(name + "   ");
-					int start = name.length() + 1;
-					int end = start + 2;
-					// TODO: use a different icon for large layout
+					name_etc = new SpannableString(name + "   ");
+					int note_start = name.length() + 1;
+					int note_end = note_start + 2;
 					Drawable d = getResources().getDrawable(R.drawable.ic_launcher_notepad_small);
 					float ratio = d.getIntrinsicWidth() / d.getIntrinsicHeight();
 				    d.setBounds(0, 0, (int)(ratio * mTextSize), (int)mTextSize); 
 		            ImageSpan imgspan = new ImageSpan(d, ImageSpan.ALIGN_BASELINE); 
-		            name_with_note.setSpan(imgspan, start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-		            name_with_note.setSpan(new ClickableNoteSpan(), start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-		            name_with_note.setSpan(new ClickableItemSpan(), 0, start, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-		            tv.setText(name_with_note);
-		            tv.setMovementMethod(LinkMovementMethod.getInstance());
+		            name_etc.setSpan(imgspan, note_start, note_end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+		            name_etc.setSpan(new ClickableNoteSpan(), note_start, note_end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+		            name_etc.setSpan(new ClickableItemSpan(), 0, note_start, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
 				}
+	            tv.setText(name_etc);
+	            tv.setMovementMethod(LinkMovementMethod.getInstance());
 				return true;
 			} else if (id == R.id.price) {
 				long price = getQuantityPrice(cursor);
@@ -752,11 +755,11 @@ public class ShoppingItemsView extends ListView {
 														 */
 				ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,  
 				ContainsFull.QUANTITY, ContainsFull.PRIORITY,
-				ContainsFull.ITEM_HAS_NOTE, ContainsFull.ITEM_UNITS				
+				ContainsFull.ITEM_UNITS				
 				},
 				// the view defined in the XML template
 				new int[] { R.id.name, /* R.id.image_URI, */R.id.tags,
-						R.id.price, R.id.quantity, R.id.priority, R.id.has_note, R.id.units });
+						R.id.price, R.id.quantity, R.id.priority, R.id.units });
 		setAdapter(adapter);
 
 		// called in requery():
