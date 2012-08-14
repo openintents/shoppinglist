@@ -42,6 +42,7 @@ import android.support.v2.os.Build;
 import android.os.Handler;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
@@ -443,6 +444,47 @@ public class ShoppingItemsView extends ListView {
 			view.setText("");
 		}
 		
+		private class ClickableNoteSpan extends ClickableSpan {
+            public void onClick(View view) {
+				Intent i = new Intent(Intent.ACTION_VIEW);
+				int cursorpos = (Integer) view.getTag();
+            	if (debug) Log.d(TAG, "Click on has_note: " + cursorpos);
+				mCursorItems.moveToPosition(cursorpos);
+				long note_id = mCursorItems.getLong(ShoppingActivity.mStringItemsITEMID);
+				Uri uri = ContentUris.withAppendedId(ShoppingContract.Notes.CONTENT_URI, note_id);
+				i.setData(uri);
+				Context context = getContext();
+				try {
+				    context.startActivity(i);
+				} catch (ActivityNotFoundException e) {
+					// we could add a simple edit note dialog, but for now...
+					Dialog g = new DownloadAppDialog(context, 
+							R.string.notepad_not_available, 
+							R.string.notepad, 
+							R.string.notepad_package, 
+							R.string.notepad_website);
+					g.show();
+				}
+            }			
+		}
+		
+		private class ClickableItemSpan extends ClickableSpan {
+            public void onClick(View view) {
+				if (debug) Log.d(TAG, "Click on description: ");
+				if (mListener != null) {
+					int cursorpos = (Integer) view.getTag();
+					mListener.onCustomClick(mCursorItems, cursorpos,
+							EditItemDialog.FieldType.ITEMNAME, view);
+				}
+				
+            }
+            
+        	public void updateDrawState (TextPaint ds) {
+        		// Override the parent's method to avoid having the text 
+        		// in this span look like a link.
+			}
+		}
+		
 		public boolean setViewValue(View view, Cursor cursor, int i) {
 			int id = view.getId();
 			if (id == R.id.name) {
@@ -464,30 +506,8 @@ public class ShoppingItemsView extends ListView {
 				    d.setBounds(0, 0, (int)(ratio * mTextSize), (int)mTextSize); 
 		            ImageSpan imgspan = new ImageSpan(d, ImageSpan.ALIGN_BASELINE); 
 		            name_with_note.setSpan(imgspan, start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-		            ClickableSpan cs = new ClickableSpan() {
-		                public void onClick(View view) {
-							Intent i = new Intent(Intent.ACTION_VIEW);
-							int cursorpos = (Integer) view.getTag();
-		                	if (debug) Log.d(TAG, "Click on has_note: " + cursorpos);
-							mCursorItems.moveToPosition(cursorpos);
-							long note_id = mCursorItems.getLong(ShoppingActivity.mStringItemsITEMID);
-							Uri uri = ContentUris.withAppendedId(ShoppingContract.Notes.CONTENT_URI, note_id);
-							i.setData(uri);
-							Context context = getContext();
-							try {
-							    context.startActivity(i);
-							} catch (ActivityNotFoundException e) {
-								// we could add a simple edit note dialog, but for now...
-								Dialog g = new DownloadAppDialog(context, 
-										R.string.notepad_not_available, 
-										R.string.notepad, 
-										R.string.notepad_package, 
-										R.string.notepad_website);
-								g.show();
-							}
-		                }
-		            };
-		            name_with_note.setSpan(cs, start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+		            name_with_note.setSpan(new ClickableNoteSpan(), start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+		            name_with_note.setSpan(new ClickableItemSpan(), 0, start, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
 		            tv.setText(name_with_note);
 		            tv.setMovementMethod(LinkMovementMethod.getInstance());
 				}
