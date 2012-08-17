@@ -487,6 +487,19 @@ public class ShoppingItemsView extends ListView {
 		
 		public boolean setViewValue(View view, Cursor cursor, int i) {
 			int id = view.getId();
+			long price = 0;
+			boolean hasPrice = false;
+			String tags = null;
+			boolean hasTags = false;
+			if (mPriceVisibility == View.VISIBLE) {  
+				price = getQuantityPrice(cursor);
+				hasPrice = (price != 0);
+			}
+			if (mTagsVisibility == View.VISIBLE) {
+				tags = cursor.getString(ShoppingActivity.mStringItemsITEMTAGS);
+				hasTags = !TextUtils.isEmpty(tags);
+			}
+
 			if (id == R.id.name) {
 				int has_note = cursor
 						.getInt(ShoppingActivity.mStringItemsITEMHASNOTE);
@@ -514,11 +527,15 @@ public class ShoppingItemsView extends ListView {
 				}
 	            tv.setText(name_etc);
 	            tv.setMovementMethod(LinkMovementMethod.getInstance());
+	            if (hasPrice && ! hasTags) {
+	            	// don't overlap the price
+	            	RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams)tv.getLayoutParams();
+	            	rlp.addRule(RelativeLayout.LEFT_OF, R.id.price);
+	            }
 				return true;
 			} else if (id == R.id.price) {
-				long price = getQuantityPrice(cursor);
 				TextView tv = (TextView) view;
-				if (mPriceVisibility == View.VISIBLE && price != 0) {
+				if (hasPrice) {
 					tv.setVisibility(View.VISIBLE);
 					String s = mPriceFormatter.format(price * 0.01d);
 					tv.setTextColor(mTextColorPrice);
@@ -528,13 +545,17 @@ public class ShoppingItemsView extends ListView {
 				}
 				return true;
 			} else if (id == R.id.tags) {
-				String tags = cursor
-						.getString(ShoppingActivity.mStringItemsITEMTAGS);
+				
 				TextView tv = (TextView) view;
-				if (mTagsVisibility == View.VISIBLE && !TextUtils.isEmpty(tags)) {
+				if (hasTags) {
 					tv.setVisibility(View.VISIBLE);
 					tv.setTextColor(mTextColorPrice);
 					tv.setText(tags);
+					if (hasPrice) {
+			           	// don't overlap the price
+			           	RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams)tv.getLayoutParams();
+			           	rlp.addRule(RelativeLayout.LEFT_OF, R.id.price);
+			        }
 				} else {
 					hideTextView(tv);
 				}
