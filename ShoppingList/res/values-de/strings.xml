@@ -29,6 +29,7 @@
   Patrick Eigensatz https://launchpad.net/~p.eigensatz
   Peli https://launchpad.net/~peli0101
   SpaceCafé https://launchpad.net/~spacecafe
+  Stanley https://launchpad.net/~wurfkeks
   appricoo https://launchpad.net/~appricoo
   friedger https://launchpad.net/~friedger
   markus.ruderman https://launchpad.net/~markus-ruderman
@@ -179,9 +180,9 @@
 	<string name="preference_sortorder_for_pick_summary">Sortierung der Einträge im Auswahlmodus ändern.</string>
 	<string name="preference_sortorder_dialog_title">Wählen Sie eine Sortierung</string>
 	<string name="preference_sortorder_for_pick_dialog_title">Sortierung im Auswahlmodus ändern</string>
-	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
-	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
-	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
+	<string name="preference_sortorder_for_shopping_lists">Sortierung der EInkaufslisten</string>
+	<string name="preference_sortorder_for_slists_summary">Sortierung der Einkaufslisten ändern</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Wähle die Sortierreihenfolge</string>
 	<string name="preference_loadlastused_title">Verwendete Liste merken</string>
 	<string name="preference_loadlastused_summary">Immer die zuletzt benutzte Liste verwenden</string>
 	<string name="preference_capitalization_title">Großschreibung</string>
@@ -301,9 +302,9 @@
     
     <string-array name="preference_sortorder_slists">
         <!-- Preference sort order: Sort by list name in ascending order -->
-        <item>alphabetical ascending</item>
+        <item>Alphabetisch aufsteigend</item>
         <!-- Preference sort order: Sort by list name in descending order -->
-        <item>alphabetical descending</item>
+        <item>Alphabetisch absteigend</item>
         <!-- Preference sort order: Newest list first -->
         <item>neueste zuerst</item>
         <!-- Preference sort order: Oldest list first -->
