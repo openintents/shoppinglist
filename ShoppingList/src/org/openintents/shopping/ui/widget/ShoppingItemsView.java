@@ -36,6 +36,7 @@ import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v2.os.Build;
@@ -507,7 +508,7 @@ public class ShoppingItemsView extends ListView {
 						.getString(ShoppingActivity.mStringItemsITEMNAME);
 				TextView tv = (TextView) view;
 				SpannableString name_etc = null;
-				if (has_note == 0)
+				if (has_note == 0 && (hasPrice == false || hasTags))
 				{
 					name_etc = new SpannableString(name);
 		            name_etc.setSpan(new ClickableItemSpan(), 0, name.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
@@ -516,22 +517,30 @@ public class ShoppingItemsView extends ListView {
 				{
 					name_etc = new SpannableString(name + "   ");
 					int note_start = name.length() + 1;
-					int note_end = note_start + 2;
-					Drawable d = getResources().getDrawable(R.drawable.ic_launcher_notepad_small);
-					float ratio = d.getIntrinsicWidth() / d.getIntrinsicHeight();
-				    d.setBounds(0, 0, (int)(ratio * mTextSize), (int)mTextSize); 
-		            ImageSpan imgspan = new ImageSpan(d, ImageSpan.ALIGN_BASELINE); 
-		            name_etc.setSpan(imgspan, note_start, note_end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-		            name_etc.setSpan(new ClickableNoteSpan(), note_start, note_end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
 		            name_etc.setSpan(new ClickableItemSpan(), 0, note_start, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+					int note_end = note_start + ((hasPrice && !hasTags) ? 1 : 2);
+					if (has_note != 0) {
+						Drawable d = getResources().getDrawable(R.drawable.ic_launcher_notepad_small);
+						float ratio = d.getIntrinsicWidth() / d.getIntrinsicHeight();
+						d.setBounds(0, 0, (int)(ratio * mTextSize), (int)mTextSize); 
+						ImageSpan noteimgspan = new ImageSpan(d, ImageSpan.ALIGN_BASELINE); 
+						name_etc.setSpan(noteimgspan, note_start, note_end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+						name_etc.setSpan(new ClickableNoteSpan(), note_start, note_end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+					} else {
+						note_end = note_start;
+					}
+		            if (hasPrice && !hasTags) {
+		            	int price_start = note_end;
+		            	int price_end = price_start + 1;
+		            	ColorDrawable price_overlay = new ColorDrawable();
+		            	price_overlay.setAlpha(0);
+		            	price_overlay.setBounds(0, 0, 20 /*fixme*/, (int)mTextSize);
+		            	ImageSpan priceimgspan = new ImageSpan(price_overlay, ImageSpan.ALIGN_BASELINE);
+		            	name_etc.setSpan(priceimgspan, price_start, price_end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+		            }
 				}
 	            tv.setText(name_etc);
 	            tv.setMovementMethod(LinkMovementMethod.getInstance());
-	            if (hasPrice && ! hasTags) {
-	            	// don't overlap the price
-	            	RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams)tv.getLayoutParams();
-	            	rlp.addRule(RelativeLayout.LEFT_OF, R.id.price);
-	            }
 				return true;
 			} else if (id == R.id.price) {
 				TextView tv = (TextView) view;
