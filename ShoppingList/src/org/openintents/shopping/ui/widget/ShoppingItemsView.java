@@ -155,6 +155,121 @@ public class ShoppingItemsView extends ListView {
 	public class mSimpleCursorAdapter extends SimpleCursorAdapter implements
 			ViewBinder {
 
+		private class mItemRowState {
+			public View     mParentView;
+			public TextView mNameView;
+			public TextView mQuantityView;
+			public TextView mUnitsView;
+			public TextView mPriceView;
+			public TextView mPriorityView;
+			public TextView mTagsView;
+			public CheckBox mCheckView;
+			public ImageView mNoCheckView;
+			
+			public Cursor  mCursor; 
+			public int     mCursorPos;
+			
+			private class mItemClickListener implements OnClickListener {
+				private String mLogMessage;
+				private EditItemDialog.FieldType mFieldType;
+				public void onClick(View v) {
+					if (debug) Log.d(TAG, mLogMessage);
+					if (mListener != null) {
+						mItemRowState state = (mItemRowState) v.getTag();
+						mListener.onCustomClick(state.mCursor, state.mCursorPos,
+								mFieldType, v);
+					}
+				}
+				
+				public mItemClickListener (String logMessage, EditItemDialog.FieldType fieldType) {
+					mLogMessage = logMessage;
+					mFieldType = fieldType;
+				}
+			}
+			
+			private class mItemToggleListener implements OnClickListener {
+				private String mLogMessage;
+				public void onClick(View v) {
+					if (debug) Log.d(TAG, mLogMessage);
+					mItemRowState state = (mItemRowState) v.getTag();
+					toggleItemBought(state.mCursorPos);
+				}
+				
+				public mItemToggleListener (String logMessage) {
+					mLogMessage = logMessage;
+				}
+			}
+			
+			public mItemRowState(View view)
+			{
+				// This class is here to initialize state information related
+				// to a single reusable item row, to reduce the amount of 
+				// setup that needs to be done each time the row is reused.
+				//
+				// Callbacks can be bound up-front here if they depend on cursor position.
+				
+				mParentView = view;
+				mNameView =     (TextView) view.findViewById(R.id.name);
+				mPriceView =    (TextView) view.findViewById(R.id.price);
+				mTagsView =     (TextView) view.findViewById(R.id.tags);
+				mQuantityView = (TextView) view.findViewById(R.id.quantity);
+				mUnitsView =    (TextView) view.findViewById(R.id.units);
+				mPriorityView = (TextView) view.findViewById(R.id.priority);
+				mCheckView = (CheckBox) view.findViewById(R.id.check);
+				mNoCheckView = (ImageView) view.findViewById(R.id.nocheck);
+
+				mParentView.setTag(this);
+				mNameView.setTag(this);
+				mPriceView.setTag(this);
+				mTagsView.setTag(this);
+				mQuantityView.setTag(this);
+				mUnitsView.setTag(this);
+				mPriorityView.setTag(this);
+				mCheckView.setTag(this);
+				mNoCheckView.setTag(this);
+				
+				mQuantityView.setOnClickListener(new mItemClickListener("Quantity Click ", 
+						EditItemDialog.FieldType.QUANTITY));
+				mPriceView.setOnClickListener(new mItemClickListener("Click on price: ",
+						EditItemDialog.FieldType.PRICE));
+				mUnitsView.setOnClickListener(new mItemClickListener("Click on units: ",
+						EditItemDialog.FieldType.UNITS));
+				mPriorityView.setOnClickListener(new mItemClickListener("Click on priority: ",
+						EditItemDialog.FieldType.PRIORITY));
+				mTagsView.setOnClickListener(new mItemClickListener("Click on tags: ",
+						EditItemDialog.FieldType.TAGS));
+				
+				mCheckView.setOnClickListener(new mItemToggleListener("Click: "));
+				// also check around check box
+				RelativeLayout l = (RelativeLayout) view.findViewById(R.id.check_surround);
+				l.setTag(this);
+				l.setOnClickListener(new mItemToggleListener("Click around: "));
+				
+
+				// Check for clicks on and around item text
+				RelativeLayout r = (RelativeLayout) view.findViewById(R.id.description);
+				r.setTag(this);
+				r.setOnClickListener(new mItemClickListener("Click on description: ",
+						EditItemDialog.FieldType.ITEMNAME));
+				
+				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.CUPCAKE) {
+					mPriceView.setVisibility(mPriceVisibility);
+					mTagsView.setVisibility(mTagsVisibility);
+					mQuantityView.setVisibility(mQuantityVisibility);
+					mUnitsView.setVisibility(mUnitsVisibility);
+					mPriorityView.setVisibility(mPriorityVisibility);
+				} else {
+					// avoid problems on Cupcake with views positioned relative to 
+					// invisible views
+					mPriceView.setVisibility(View.VISIBLE);
+					mTagsView.setVisibility(View.VISIBLE);
+					mQuantityView.setVisibility(View.VISIBLE);
+					mUnitsView.setVisibility(View.VISIBLE);
+					mPriorityView.setVisibility(View.VISIBLE);
+				}
+			}
+		}
+		
 		/**
 		 * Constructor simply calls super class.
 		 * 
@@ -181,21 +296,7 @@ public class ShoppingItemsView extends ListView {
 		@Override
 		public View newView(Context context, Cursor cursor, ViewGroup parent) {
 			View view = super.newView(context, cursor, parent);
-			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.CUPCAKE) {
-				view.findViewById(R.id.price).setVisibility(mPriceVisibility);
-				view.findViewById(R.id.tags).setVisibility(mTagsVisibility);
-				view.findViewById(R.id.quantity).setVisibility(mQuantityVisibility);
-				view.findViewById(R.id.units).setVisibility(mUnitsVisibility);
-				view.findViewById(R.id.priority).setVisibility(mPriorityVisibility);
-			} else {
-				// avoid problems on Cupcake with views positioned relative to 
-				// invisible views
-				view.findViewById(R.id.price).setVisibility(View.VISIBLE);
-				view.findViewById(R.id.tags).setVisibility(View.VISIBLE);
-				view.findViewById(R.id.quantity).setVisibility(View.VISIBLE);
-				view.findViewById(R.id.units).setVisibility(View.VISIBLE);
-				view.findViewById(R.id.priority).setVisibility(View.VISIBLE);
-			}
+			mItemRowState rowState = new mItemRowState(view); // sets view tags
 			return view;
 		}
 
@@ -209,71 +310,45 @@ public class ShoppingItemsView extends ListView {
 			super.bindView(view, context, cursor);
 
 			long status = cursor.getLong(ShoppingActivity.mStringItemsSTATUS);
-			final int cursorpos = cursor.getPosition();
-			Integer tag = new Integer(cursorpos);
+			mItemRowState state = (mItemRowState) view.getTag();
+			state.mCursorPos = cursor.getPosition();
+			state.mCursor = cursor;
 
-			view.setTag(tag);
-			
-			int styled_as_name [] = {R.id.name, R.id.units, R.id.quantity};
+
+			// set style for name view and friends
+			TextView styled_as_name [] = {state.mNameView, state.mUnitsView, state.mQuantityView};
 			int i;
-			
 			for (i = 0; i < styled_as_name.length; i++) {
-				int res_id = styled_as_name[i];
-				TextView t = (TextView) view.findViewById(res_id);
+				TextView t = styled_as_name[i];
 
-			// set style for name view
-			// Set font
-			t.setTypeface(mCurrentTypeface);
-			t.setTag(tag);
+				// Set font
+				t.setTypeface(mCurrentTypeface);
 
-			// Set size
-			t.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
+				// Set size
+				t.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
 
-			// Check for upper case:
-			if (mTextUpperCaseFont) {
-				// Only upper case should be displayed
-				CharSequence cs = t.getText();
-				t.setText(cs.toString().toUpperCase());
-			}
-
-			t.setTextColor(mTextColor);
-
-				if (res_id == R.id.quantity) {
-					
-					if ( TextUtils.isEmpty(t.getText()) && 
-						mQuantityVisibility == View.VISIBLE) {
-					// mixed feelings about this.
-					//   t.setText("1 "); 
-					}
-					
-					t.setOnClickListener(new OnClickListener() {
-
-						@Override
-						public void onClick(View v) {
-							if (debug) Log.d(TAG, "Quantity Click ");
-							if (mListener != null) {
-								mListener.onCustomClick(cursor, cursorpos,
-										EditItemDialog.FieldType.QUANTITY, v);
-							}
-						}
-
-					});
+				// Check for upper case:
+				if (mTextUpperCaseFont) {
+					// Only upper case should be displayed
+					CharSequence cs = t.getText();
+					t.setText(cs.toString().toUpperCase());
 				}
+
+				t.setTextColor(mTextColor);
 				
-				
-			if (status == ShoppingContract.Status.BOUGHT) {
-				t.setTextColor(mTextColorChecked);
+				if (status == ShoppingContract.Status.BOUGHT) {
+					t.setTextColor(mTextColorChecked);
 
-				if (mShowStrikethrough) {
-					// We have bought the item,
-					// so we strike it through:
+					if (mShowStrikethrough) {
+						// We have bought the item,
+						// so we strike it through:
 
-					// First convert text to 'spannable'
-					t.setText(t.getText(), TextView.BufferType.SPANNABLE);
-					Spannable str = (Spannable) t.getText();
+						// First convert text to 'spannable'
+						t.setText(t.getText(), TextView.BufferType.SPANNABLE);
+						Spannable str = (Spannable) t.getText();
 
-					// Strikethrough
-					str.setSpan(new StrikethroughSpan(), 0, str.length(),
+						// Strikethrough
+						str.setSpan(new StrikethroughSpan(), 0, str.length(),
 							Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 					// apply color
@@ -285,154 +360,47 @@ public class ShoppingItemsView extends ListView {
 					// (getResources().getColor(R.color.darkgreen)), 0,
 					// str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 					// color: 0x33336600
-				}
+					}
 
-					if (res_id == R.id.name && mTextSuffixChecked != null) {
-					// very simple
-					t.append(mTextSuffixChecked);
-				}
+					if (i == 0 && mTextSuffixChecked != null) {
+						// very simple
+						t.append(mTextSuffixChecked);
+					}
 
-			} else {
+				} else {
 				// item not bought:
-					if (res_id == R.id.name && mTextSuffixUnchecked != null) {
+					if (i == 0 && mTextSuffixUnchecked != null) {
 					t.append(mTextSuffixUnchecked);
 				}
-			}
+				}
 			}
 
 			// we have a check box now.. more visual and gets the point across
-			CheckBox c = (CheckBox) view.findViewById(R.id.check);
-			ImageView nc = (ImageView) view.findViewById(R.id.nocheck);
 
 			if (debug) Log.i(TAG, "bindview: pos = " + cursor.getPosition());
 
 			// set style for check box
-			c.setTag(new Integer(cursor.getPosition()));
-			nc.setTag(new Integer(cursor.getPosition()));
 
 			if (mShowCheckBox) {
-				c.setVisibility(CheckBox.VISIBLE);
-				c.setChecked(status == ShoppingContract.Status.BOUGHT);
+				state.mCheckView.setVisibility(CheckBox.VISIBLE);
+				state.mCheckView.setChecked(status == ShoppingContract.Status.BOUGHT);
 			} else {
-				c.setVisibility(CheckBox.GONE);
+				state.mCheckView.setVisibility(CheckBox.GONE);
 			}
 			
 			if (mMode == ShoppingActivity.MODE_IN_SHOP) {
-				nc.setVisibility(ImageView.GONE);
+				state.mNoCheckView.setVisibility(ImageView.GONE);
 			} else {  // mMode == ShoppingActivity.MODE_ADD_ITEMS
 				if (status == ShoppingContract.Status.REMOVED_FROM_LIST) {
-					nc.setVisibility(ImageView.VISIBLE);
+					state.mNoCheckView.setVisibility(ImageView.VISIBLE);
 					if (mShowCheckBox) {
 						// replace check box
-						c.setVisibility(CheckBox.INVISIBLE);
+						state.mCheckView.setVisibility(CheckBox.INVISIBLE);
 					}
 				} else {
-					nc.setVisibility(ImageView.INVISIBLE);
+					state.mNoCheckView.setVisibility(ImageView.INVISIBLE);
 				}
 			}
-
-			// The parent view knows how to deal with clicks.
-			// We just pass the click through.
-			// c.setClickable(false);
-
-			c.setOnClickListener(new OnClickListener() {
-			   @Override
-			   public void onClick(View v) {
-				   if (debug) Log.d(TAG, "Click: ");
-				   toggleItemBought(cursorpos);
-			   }
-			});
-
-			// also check around check box
-			RelativeLayout l = (RelativeLayout) view
-					.findViewById(R.id.check_surround);
-
-			l.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					if (debug) Log.d(TAG, "Click around: ");
-					toggleItemBought(cursorpos);
-				}
-
-			});
-
-			// Check for clicks on price
-			View v;
-			v = view.findViewById(R.id.price);
-			v.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					if (debug) Log.d(TAG, "Click on price: ");
-					if (mListener != null) {
-						mListener.onCustomClick(cursor, cursorpos,
-								EditItemDialog.FieldType.PRICE, v);
-					}
-				}
-
-			});
-			// Check for clicks on units
-			v = view.findViewById(R.id.units);
-			v.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					if (debug) Log.d(TAG, "Click on units: ");
-					if (mListener != null) {
-						mListener.onCustomClick(cursor, cursorpos,
-								EditItemDialog.FieldType.UNITS, v);
-					}
-				}
-
-			});
-			// Check for clicks on priority
-			v = view.findViewById(R.id.priority);
-			v.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					if (debug) Log.d(TAG, "Click on priority: ");
-					if (mListener != null) {
-						mListener.onCustomClick(cursor, cursorpos,
-								EditItemDialog.FieldType.PRIORITY, v);
-					}
-				}
-
-			});
-			// Check for clicks on tags
-			v = view.findViewById(R.id.tags);
-			v.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					if (debug) Log.d(TAG, "Click on tags: ");
-					if (mListener != null) {
-						mListener.onCustomClick(cursor, cursorpos,
-								EditItemDialog.FieldType.TAGS, v);
-					}
-				}
-
-			});
-
-			// Check for clicks on item text
-			RelativeLayout r = (RelativeLayout) view
-					.findViewById(R.id.description);
-
-			r.setTag(cursorpos);
-			r.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					if (debug) Log.d(TAG, "Click on description: ");
-					if (mListener != null) {
-						mListener.onCustomClick(cursor, cursorpos,
-								EditItemDialog.FieldType.ITEMNAME, v);
-					}
-				}
-
-			});
-
 		}
 
 		private void hideTextView(TextView view) {
@@ -448,7 +416,8 @@ public class ShoppingItemsView extends ListView {
 		private class ClickableNoteSpan extends ClickableSpan {
             public void onClick(View view) {
 				Intent i = new Intent(Intent.ACTION_VIEW);
-				int cursorpos = (Integer) view.getTag();
+				mItemRowState state = (mItemRowState) view.getTag();
+				int cursorpos = state.mCursorPos;
             	if (debug) Log.d(TAG, "Click on has_note: " + cursorpos);
 				mCursorItems.moveToPosition(cursorpos);
 				long note_id = mCursorItems.getLong(ShoppingActivity.mStringItemsITEMID);
@@ -473,7 +442,8 @@ public class ShoppingItemsView extends ListView {
             public void onClick(View view) {
 				if (debug) Log.d(TAG, "Click on description: ");
 				if (mListener != null) {
-					int cursorpos = (Integer) view.getTag();
+					mItemRowState state = (mItemRowState) view.getTag();
+					int cursorpos = state.mCursorPos;
 					mListener.onCustomClick(mCursorItems, cursorpos,
 							EditItemDialog.FieldType.ITEMNAME, view);
 				}
