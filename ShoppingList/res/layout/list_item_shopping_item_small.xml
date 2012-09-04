@@ -82,18 +82,7 @@
               android:layout_marginBottom="-10dip"
               android:layout_marginRight="0dip"
               android:layout_marginTop="8dip"
-              android:layout_marginBottom="8dip" -->
-  
-    <TextView android:id="@+id/price"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_alignParentTop="true"
-              android:layout_alignParentBottom="true"
-              android:layout_alignParentRight="true"
-              android:layout_marginTop="2dip"
-			  android:layout_marginLeft="10dip"
-              android:gravity="center_vertical"
-              android:visibility="visible"/>             
+              android:layout_marginBottom="8dip" -->            
              <!-- 
             android:layout_marginTop="8dip"
             android:layout_marginBottom="8dip" -->
@@ -158,6 +147,16 @@
         	android:layout_alignWithParentIfMissing="true"
 			  android:gravity="top"
 			  android:visibility="gone"/>
+	    <TextView android:id="@+id/price"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentTop="true"
+              android:layout_alignParentBottom="true"
+              android:layout_alignParentRight="true"
+              android:layout_marginTop="2dip"
+			  android:layout_marginLeft="10dip"
+              android:gravity="center_vertical"
+              android:visibility="visible"/> 
         <!-- 
         	android:layout_toRightOf="@id/quantity"  
         android:singleLine="true"
