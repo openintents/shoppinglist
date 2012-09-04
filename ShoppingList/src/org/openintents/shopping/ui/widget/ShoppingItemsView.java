@@ -462,6 +462,7 @@ public class ShoppingItemsView extends ListView {
 			boolean hasPrice = false;
 			String tags = null;
 			boolean hasTags = false;
+			mItemRowState state = (mItemRowState) view.getTag();
 			if (mPriceVisibility == View.VISIBLE) {  
 				price = getQuantityPrice(cursor);
 				hasPrice = (price != 0);
@@ -504,7 +505,7 @@ public class ShoppingItemsView extends ListView {
 		            	int price_end = price_start + 1;
 		            	ColorDrawable price_overlay = new ColorDrawable();
 		            	price_overlay.setAlpha(0);
-		            	price_overlay.setBounds(0, 0, 20 /*fixme*/, (int)mTextSize);
+		            	price_overlay.setBounds(0, 0, state.mPriceView.getMeasuredWidth(), (int)mTextSize);
 		            	ImageSpan priceimgspan = new ImageSpan(price_overlay, ImageSpan.ALIGN_BASELINE);
 		            	name_etc.setSpan(priceimgspan, price_start, price_end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
 		            }
