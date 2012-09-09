@@ -42,7 +42,7 @@ Applications that work with "OI Shopping List":
 * OI, OpenIntents, Open Intents
 
 Перекладзеныя версіі: 
-Listă de cumpărături OI, Llista de compra d'OI, OI ショッピングリスト, OI Einkaufsliste, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Shopping List, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI Λίστα Αγορών, OI Пакупкі, OI Списък за Пазаруване, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, "قائمة التسوق OI, ОИ Куповна Листа
+"قائمة التسوق OI, Listă de cumpărături OI, Llista de compra d'OI, OI Einkaufsliste, OI Handleliste, OI Lista za kupovinu, OI Lista zakupów, OI Nákupní seznam, OI Nákupný Zoznam, OI Ostoslista, OI Shopping List, OI Λίστα Αγορών, OI Листа за купување, OI Пакупкі, OI Списък за Пазаруване, OI سېتىۋېلىش تىزىمى, OI لیست خرید, OI खरीदारी सूची, OI ਸ਼ੋਪਿੰਗ ਲਿਸਟ, OI ショッピングリスト, ОИ Куповна Листа
 
 
 Extensions: 

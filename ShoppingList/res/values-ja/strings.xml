@@ -172,6 +172,9 @@
 	<string name="preference_sortorder_for_pick_summary">アイテム選択モードでリストアイテムの並び替え順序を変更</string>
 	<string name="preference_sortorder_dialog_title">ソート順を選択</string>
 	<string name="preference_sortorder_for_pick_dialog_title">アイテム選択モードの並べ替え順序を選択</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">最後に表示したリストを表示</string>
 	<string name="preference_loadlastused_summary">アプリケーション起動時には前回終了時に表示していたリストを表示します。</string>
 	<string name="preference_capitalization_title">大文字化</string>
@@ -287,6 +290,17 @@
     	<item>チェックされていない項目、優先度、アルファベット順</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
     	<item>チェックされていない項目、優先度、タグ (アルファベット順)</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>新しいアイテム順</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>古いアイテム順</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">

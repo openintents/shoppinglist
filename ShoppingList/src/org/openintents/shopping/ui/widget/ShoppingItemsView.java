@@ -41,7 +41,12 @@ import android.net.Uri;
 import android.support.v2.os.Build;
 import android.os.Handler;
 import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.TextPaint;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.ImageSpan;
 import android.text.style.StrikethroughSpan;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -206,17 +211,31 @@ public class ShoppingItemsView extends ListView {
 
 			long status = cursor.getLong(ShoppingActivity.mStringItemsSTATUS);
 			final int cursorpos = cursor.getPosition();
+			Integer tag = new Integer(cursorpos);
 
+<<<<<<< HEAD
 			int styled_as_name[] = { R.id.name, R.id.units, R.id.quantity };
+=======
+			view.setTag(tag);
+			
+			int styled_as_name [] = {R.id.name, R.id.units, R.id.quantity};
+>>>>>>> 906ded9b6ce411193978571fd386ba5829e00412
 			int i;
 
 			for (i = 0; i < styled_as_name.length; i++) {
 				int res_id = styled_as_name[i];
 				TextView t = (TextView) view.findViewById(res_id);
 
+<<<<<<< HEAD
 				// set style for name view
 				// Set font
 				t.setTypeface(mCurrentTypeface);
+=======
+			// set style for name view
+			// Set font
+			t.setTypeface(mCurrentTypeface);
+			t.setTag(tag);
+>>>>>>> 906ded9b6ce411193978571fd386ba5829e00412
 
 				// Set size
 				t.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
@@ -413,10 +432,8 @@ public class ShoppingItemsView extends ListView {
 				}
 
 			});
-			// Check for clicks on note
-			v = view.findViewById(R.id.has_note);
-			v.setOnClickListener(new OnClickListener() {
 
+<<<<<<< HEAD
 				@Override
 				public void onClick(View v) {
 					if (debug)
@@ -446,10 +463,13 @@ public class ShoppingItemsView extends ListView {
 				}
 
 			});
+=======
+>>>>>>> 906ded9b6ce411193978571fd386ba5829e00412
 			// Check for clicks on item text
 			RelativeLayout r = (RelativeLayout) view
 					.findViewById(R.id.description);
 
+			r.setTag(cursorpos);
 			r.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -475,14 +495,81 @@ public class ShoppingItemsView extends ListView {
 			}
 			view.setText("");
 		}
+<<<<<<< HEAD
 
+=======
+		
+		private class ClickableNoteSpan extends ClickableSpan {
+            public void onClick(View view) {
+				Intent i = new Intent(Intent.ACTION_VIEW);
+				int cursorpos = (Integer) view.getTag();
+            	if (debug) Log.d(TAG, "Click on has_note: " + cursorpos);
+				mCursorItems.moveToPosition(cursorpos);
+				long note_id = mCursorItems.getLong(ShoppingActivity.mStringItemsITEMID);
+				Uri uri = ContentUris.withAppendedId(ShoppingContract.Notes.CONTENT_URI, note_id);
+				i.setData(uri);
+				Context context = getContext();
+				try {
+				    context.startActivity(i);
+				} catch (ActivityNotFoundException e) {
+					// we could add a simple edit note dialog, but for now...
+					Dialog g = new DownloadAppDialog(context, 
+							R.string.notepad_not_available, 
+							R.string.notepad, 
+							R.string.notepad_package, 
+							R.string.notepad_website);
+					g.show();
+				}
+            }			
+		}
+		
+		private class ClickableItemSpan extends ClickableSpan {
+            public void onClick(View view) {
+				if (debug) Log.d(TAG, "Click on description: ");
+				if (mListener != null) {
+					int cursorpos = (Integer) view.getTag();
+					mListener.onCustomClick(mCursorItems, cursorpos,
+							EditItemDialog.FieldType.ITEMNAME, view);
+				}
+				
+            }
+            
+        	public void updateDrawState (TextPaint ds) {
+        		// Override the parent's method to avoid having the text 
+        		// in this span look like a link.
+			}
+		}
+		
+>>>>>>> 906ded9b6ce411193978571fd386ba5829e00412
 		public boolean setViewValue(View view, Cursor cursor, int i) {
 			int id = view.getId();
 			if (id == R.id.name) {
+				int has_note = cursor
+						.getInt(ShoppingActivity.mStringItemsITEMHASNOTE);
 				String name = cursor
 						.getString(ShoppingActivity.mStringItemsITEMNAME);
 				TextView tv = (TextView) view;
-				tv.setText(name);
+				SpannableString name_etc = null;
+				if (has_note == 0)
+				{
+					name_etc = new SpannableString(name);
+		            name_etc.setSpan(new ClickableItemSpan(), 0, name.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+				}
+				else
+				{
+					name_etc = new SpannableString(name + "   ");
+					int note_start = name.length() + 1;
+					int note_end = note_start + 2;
+					Drawable d = getResources().getDrawable(R.drawable.ic_launcher_notepad_small);
+					float ratio = d.getIntrinsicWidth() / d.getIntrinsicHeight();
+				    d.setBounds(0, 0, (int)(ratio * mTextSize), (int)mTextSize); 
+		            ImageSpan imgspan = new ImageSpan(d, ImageSpan.ALIGN_BASELINE); 
+		            name_etc.setSpan(imgspan, note_start, note_end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+		            name_etc.setSpan(new ClickableNoteSpan(), note_start, note_end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+		            name_etc.setSpan(new ClickableItemSpan(), 0, note_start, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+				}
+	            tv.setText(name_etc);
+	            tv.setMovementMethod(LinkMovementMethod.getInstance());
 				return true;
 			} else if (id == R.id.price) {
 				long price = getQuantityPrice(cursor);
@@ -547,6 +634,7 @@ public class ShoppingItemsView extends ListView {
 						&& !TextUtils.isEmpty(priority)) {
 					tv.setVisibility(View.VISIBLE);
 					tv.setTextColor(mTextColorPriority);
+<<<<<<< HEAD
 					tv.setText("-" + priority + "- ");
 				} else {
 					hideTextView(tv);
@@ -561,6 +649,13 @@ public class ShoppingItemsView extends ListView {
 					view.setVisibility(View.VISIBLE);
 				}
 				return true;
+=======
+					tv.setText("-" + priority + "- "); }
+			    else { 
+				    hideTextView(tv); 
+			    } 
+				return true; 
+>>>>>>> 906ded9b6ce411193978571fd386ba5829e00412
 			} else {
 				return false;
 			}
@@ -739,6 +834,7 @@ public class ShoppingItemsView extends ListView {
 														 * ContainsFull.ITEM_IMAGE
 														 * ,
 														 */
+<<<<<<< HEAD
 				ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,
 						ContainsFull.QUANTITY, ContainsFull.PRIORITY,
 						ContainsFull.ITEM_HAS_NOTE, ContainsFull.ITEM_UNITS },
@@ -746,6 +842,15 @@ public class ShoppingItemsView extends ListView {
 				new int[] { R.id.name, /* R.id.image_URI, */R.id.tags,
 						R.id.price, R.id.quantity, R.id.priority,
 						R.id.has_note, R.id.units });
+=======
+				ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,  
+				ContainsFull.QUANTITY, ContainsFull.PRIORITY,
+				ContainsFull.ITEM_UNITS				
+				},
+				// the view defined in the XML template
+				new int[] { R.id.name, /* R.id.image_URI, */R.id.tags,
+						R.id.price, R.id.quantity, R.id.priority, R.id.units });
+>>>>>>> 906ded9b6ce411193978571fd386ba5829e00412
 		setAdapter(adapter);
 
 		// called in requery():

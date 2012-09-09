@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 */bin
 */gen
 */build-private.properties
 */local.properties
 */release
+=======
+*/bin/
+*/gen/
+*/build-private.properties
+*/local.properties
+
+>>>>>>> 906ded9b6ce411193978571fd386ba5829e00412

@@ -71,8 +71,8 @@
 	<string name="menu_delete_store">Usuń sklep</string>
 	<string name="confirm_delete_store">Czy na pewno chcesz usunąć ten sklep?</string>
 	<string name="no_items_available">Brak elementów</string>
-	<string name="no_stores_available">No stores available for this list</string>
-	<string name="no_tags_available">No tags available for this list</string>
+	<string name="no_stores_available">Brak dostępnych sklepów dla tej listy</string>
+	<string name="no_tags_available">Brak dostępnych tagów dla tej listy</string>
 	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
@@ -109,12 +109,12 @@
 	<string name="has_note">Ma notatkę</string>
 	<string name="units">Jednostki</string>
 	<string name="note">Notatka</string>
-	<string name="stores">Stores</string>
-	<string name="list">List</string>
+	<string name="stores">Sklepy</string>
+	<string name="list">Lista</string>
 	
 	<string name="otherqty">Inna Ilość...</string>
 	<string name="otherpri">Inny Priorytet...</string>   
-	<string name="unfiltered">(Unfiltered)</string>
+	<string name="unfiltered">(niefiltrowane)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Razem: %s</string>
@@ -176,6 +176,9 @@
 	<string name="preference_sortorder_for_pick_summary">Zmień kolejność sortowania elementów listy</string>
 	<string name="preference_sortorder_dialog_title">Wybierz porządek sortowania</string>
 	<string name="preference_sortorder_for_pick_dialog_title">Wybierz kolejność sortowania elementów listy</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">Wczytaj ostatno używaną listę</string>
 	<string name="preference_loadlastused_summary">Zawsze rozpoczynaj z ostatnio oglądaną listą.</string>
 	<string name="preference_capitalization_title">Wielkość liter</string>
@@ -183,8 +186,8 @@
 	<string name="preference_capitalization_dialog_title">Wybierz wielkość liter</string> 
 	<string name="preference_hidechecked_title">Ukryj odznaczone elementy</string>
 	<string name="preference_hidechecked_summary">Chowaj odznaczane elementy</string>
-	<string name="preference_fastscroll_title">Fast Scrolling</string>
-	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
+	<string name="preference_fastscroll_title">Szybkie Przewijanie</string>
+	<string name="preference_fastscroll_summary">Przycisk przewijania pojawia się podczas przewijania co najmniej 35 elementów.</string>
 	<string name="preference_showprice_title">Pokaż cenę</string>
 	<string name="preference_showprice_summary">Pokaż jako dodatkową kolumnę na liście.</string>
 	<string name="preference_perstoreprice">Ceny w sklepie</string>
@@ -192,8 +195,8 @@
 	<string name="preference_perstoreprice_summary">Śledź ceny oddzielnie dla każdego elementu w każdym sklepie.</string>
 	<string name="preference_screenlock_title">Wyłącz blokadę ekranu</string>
 	<string name="preference_screenlock_summary">Zapobiega blokadzie ekranu podczas sprawdzania.</string>
-	<string name="preference_usefilters_title">Filters</string>
-	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
+	<string name="preference_usefilters_title">Filtry</string>
+	<string name="preference_usefilters_summary">Listy mogą być filtrowane za pomocą tagów lub sklepów.</string>
 	<string name="preference_reset_quantity">Resetuj Ilość</string>
 	<string name="preference_reset_quantity_summary">Resetuje ilość podczas dodawania elementów ponownie.</string>
 	<string name="preference_add_for_barcode">Skaner kodów kreskowych</string>
@@ -291,6 +294,17 @@
     	<item>nieukończone pierwsze, priorytet, alfabetycznie</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
     	<item>niezaznaczone, priorytet, znaczniki alfabetycznie</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>najpierw najnowsze</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>najpierw najstarsze</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">

@@ -61,7 +61,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				+ "tags VARCHAR," // V3
 				+ "barcode VARCHAR," // V4
 				+ "location VARCHAR," // V4
-				+ "note VARCHAR" // V7
+				+ "note VARCHAR," // V7
 				+ "due INTEGER," // V4
 				+ "created INTEGER," // V1
 				+ "modified INTEGER," // V1

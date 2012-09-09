@@ -27,6 +27,9 @@ date: ?
 
 - Sort list of lists (patch by Stanley F. for Google Summer of Code 2012)
 - Set cursor to end in "rename list" dialog (patch by Alex Yaremenko)
+- Fix list shortcut when filters are active.
+- Fix Stores button in Edit Items dialog (issue 510)
+- Filter and QuickEdit menus make better use of screen space on pre-ICS devices.
 
 ----------------
 release 1.6

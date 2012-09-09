@@ -21,11 +21,13 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
+  Carl Fredrik Sima https://launchpad.net/~cf-sima
   Jocke Pihlström https://launchpad.net/~jockepihlstrom
-  Peli https://launchpad.net/~peli0101</string>
+  Peli https://launchpad.net/~peli0101
+  Rikard Edgren https://launchpad.net/~rikard-edgren</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
-	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
+	<string name="about_comments">Håll koll på dina inköpsvaror med hjälp av OI Shopping List</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
@@ -36,17 +38,17 @@
 	<string name="new_item">Ny post</string>
 	<string name="new_list">Ny lista</string>
 	<string name="send">Skicka lista</string>
-	<string name="mark_all_items">Mark all items</string>
+	<string name="mark_all_items">Markera alla varor</string>
 	<string name="empty_list_not_sent">Tom lista ej skickad</string>
 	<string name="email_not_available">Ingen applikation tillgänglig för att skicka</string>
 	<string name="my_shopping_list">Min inköpslista</string>
-	<string name="new_list_hint">e.g. wishlist, family list</string>
+	<string name="new_list_hint">t. ex. önskelista, familjelista</string>
 	<string name="clean_up_list">Rensa lista</string>
 	<string name="delete_list">Ta bort lista</string>
 	<string name="ask_new_list">Skriv in nytt namn på inköpslista</string>
 	<string name="ask_rename_list">Byt namn på inköpslista</string>
 	<string name="ask_edit_item">Redigera post</string>
-	<string name="ask_new_store">Enter new store name</string>
+	<string name="ask_new_store">Skriv in en ny affär</string>
 	<string name="please_enter_name">Ange ett namn</string>
 	<string name="no_items_marked">Inga poster är markerade som avbockade</string>
 	<string name="confirm_delete_list">Vill du verkligen ta bort den här inköpslistan</string>
@@ -59,13 +61,13 @@
 	<string name="menu_mark_item">Markera post</string>
 	<string name="menu_edit_item">Redigera post</string>
 	<string name="menu_auto_add">Lägg till automatiskt</string>
-	<string name="menu_item_stores">Stores...</string>
-	<string name="menu_rename_store">Rename store</string>
-	<string name="menu_delete_store">Delete store</string>
-	<string name="confirm_delete_store">Do you really want to delete this store?</string>
+	<string name="menu_item_stores">Affärer...</string>
+	<string name="menu_rename_store">Byt namn på affär</string>
+	<string name="menu_delete_store">Ta bort affär</string>
+	<string name="confirm_delete_store">Vill du verkligen ta bort affären?</string>
 	<string name="no_items_available">Inga poster tillgängliga</string>
-	<string name="no_stores_available">No stores available for this list</string>
-	<string name="no_tags_available">No tags available for this list</string>
+	<string name="no_stores_available">Inga affärer tillgängliga för den här listan</string>
+	<string name="no_tags_available">Inga etiketter tillgängliga för den här listan</string>
 	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
@@ -75,13 +77,13 @@
 	<!-- Delete this item completely. If the user wants to add it again, they
 	     have to enter all the information again. -->
 	<string name="menu_delete_item">Ta bort post permanent</string>
-	<string name="menu_move_item">Move item to other list</string>
-    <string name="menu_copy_item">Copy item</string>
+	<string name="menu_move_item">Flytta vara till annan lista</string>
+    <string name="menu_copy_item">Kopiera vara</string>
 	    
 	<!-- Button label to add an item to the list. -->
 	<string name="add">Lägg till</string>
 	
-	<string name="menu_pick_items">Välj poster</string>
+	<string name="menu_pick_items">Välj varor</string>
 	<string name="menu_start_shopping">Handlar</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
@@ -91,35 +93,35 @@
 	<string name="shopping_title">%s - Handla</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current item. -->
-	<string name="item_stores_title">%s - Stores</string>
-	<string name="item_stores_activity_label">Edit Item Stores</string>
+	<string name="item_stores_title">%s - Affärer</string>
+	<string name="item_stores_activity_label">Ändra affärer</string>
 	
-	<string name="tags">Nyckelord</string>
+	<string name="tags">Etiketter</string>
 	<string name="price">Pris</string>
-	<string name="item">Post</string>
-	<string name="quantity">Antal</string>
-	<string name="priority">Priority</string>
-	<string name="has_note">Has Note</string>
-	<string name="units">Units</string>
-	<string name="note">Note</string>
-	<string name="stores">Stores</string>
-	<string name="list">List</string>
+	<string name="item">Vara</string>
+	<string name="quantity">Kvantitet</string>
+	<string name="priority">Prioritet</string>
+	<string name="has_note">Har anteckning</string>
+	<string name="units">Enhet</string>
+	<string name="note">Anteckning</string>
+	<string name="stores">Affärer</string>
+	<string name="list">Lista</string>
 	
-	<string name="otherqty">Other Quantity...</string>
-	<string name="otherpri">Other Priority...</string>   
-	<string name="unfiltered">(Unfiltered)</string>
+	<string name="otherqty">Annan kvantitet...</string>
+	<string name="otherpri">Annan prioritet...</string>   
+	<string name="unfiltered">(Ofiltrerad)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Total: %s</string>
 	
 	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
 	<string name="total_checked">Avbockat: %s</string>
-    <string name="priority1_total">Priority 1: %s</string>
-    <string name="priority2_total">Priority 1-2: %s</string>
-	<string name="priority3_total">Priority 1-3: %s</string>
-	<string name="priority4_total">Priority 1-4: %s</string>
+    <string name="priority1_total">Prioritet 1: %s</string>
+    <string name="priority2_total">Prioritet 1-2: %s</string>
+	<string name="priority3_total">Prioritet 1-3: %s</string>
+	<string name="priority4_total">Prioritet 1-4: %s</string>
 	
-	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
+	<string name="delete_item_confirm">Är du säker på att du permanent vill ta bort den här varan?</string>
 	<string name="delete">Ta bort</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
@@ -160,15 +162,18 @@
 	<string name="preference_fontsize">Teckenstorlek</string>
 	<string name="preference_fontsize_summary">Ändra teckenstorlek</string>
 	<string name="preference_fontsize_dialog_title">Välj teckenstorlek</string>
-	<string name="preference_orientation">Orientation</string>
-	<string name="preference_orientation_summary">Change orientation</string>
-	<string name="preference_orientation_dialog_title">Choose orientation</string>
+	<string name="preference_orientation">Orientering</string>
+	<string name="preference_orientation_summary">Byt orientering</string>
+	<string name="preference_orientation_dialog_title">Välj orientering</string>
 	<string name="preference_sortorder_title">Sorteringsordning</string>
 	<string name="preference_sortorder_summary">Ändra sorteringsordning av poster</string>
-	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
-	<string name="preference_sortorder_for_pick_summary">Change sort order of list items in Pick Items mode.</string>
+	<string name="preference_sortorder_for_pick_title">Sorteringsordning - Välj Varor</string>
+	<string name="preference_sortorder_for_pick_summary">Ändra sorteringsordning för varor i Varuväljläge.</string>
 	<string name="preference_sortorder_dialog_title">Välj sorteringsordning</string>
-	<string name="preference_sortorder_for_pick_dialog_title">Choose sort order for Pick Items mode</string>
+	<string name="preference_sortorder_for_pick_dialog_title">Välj sorteringsordning för Varuväljläge</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">Ladda senaste listan</string>
 	<string name="preference_loadlastused_summary">Starta alltid med senaste listan</string>
 	<string name="preference_capitalization_title">Versaler</string>
@@ -176,42 +181,42 @@
 	<string name="preference_capitalization_dialog_title">Välj typ av versaler</string> 
 	<string name="preference_hidechecked_title">Göm bockade poster</string>
 	<string name="preference_hidechecked_summary">Göm genast bockade poster</string>
-	<string name="preference_fastscroll_title">Fast Scrolling</string>
-	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
+	<string name="preference_fastscroll_title">Snabbrullning</string>
+	<string name="preference_fastscroll_summary">Rullhandtag visar sig när 35 eller fler varor visas.</string>
 	<string name="preference_showprice_title">Visa pris</string>
 	<string name="preference_showprice_summary">Visa som extra kolumn i listan</string>
-	<string name="preference_perstoreprice">Per-store prices</string>
-	<string name="preference_perstoreprice_title">Track per-store prices</string>
-	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
-	<string name="preference_screenlock_title">Disable screen lock</string>
-	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
-	<string name="preference_usefilters_title">Filters</string>
-	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
-	<string name="preference_reset_quantity">Reset Quantity</string>
-	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
-	<string name="preference_add_for_barcode">Barcode Scanner</string>
-	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
+	<string name="preference_perstoreprice">Priser per affär</string>
+	<string name="preference_perstoreprice_title">Spåra priser per affär</string>
+	<string name="preference_perstoreprice_summary">Spåra individuella priser för varje enskild vara och varje enskild affär.</string>
+	<string name="preference_screenlock_title">Stäng av skärmlås</string>
+	<string name="preference_screenlock_summary">Förhindrar att skärmen kan låsas.</string>
+	<string name="preference_usefilters_title">Filter</string>
+	<string name="preference_usefilters_summary">Listor kan filtreras med hjälp av taggar eller affärer.</string>
+	<string name="preference_reset_quantity">Nollställningskvantitet</string>
+	<string name="preference_reset_quantity_summary">Nollställer antalet varor när antalet går över den valda siffran.</string>
+	<string name="preference_add_for_barcode">Streckkodsscanner</string>
+	<string name="preference_add_for_barcode_summary">Håll in Lägg Till-knappen för att starta Barcode OI Plugin (om den är installerad)</string>
 	<string name="preference_showtags_title">Visa taggar</string>
 	<string name="preference_showtags_summary">Visa som extra kolumn i listan</string>
 	<string name="preference_showquantity_title">Visa antal</string>
 	<string name="preference_showquantity_summary">Visa som extra kolumn i listan</string>
-	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_title">Visa prioritet</string>
 	<string name="preference_showpriority_summary">Visa som extra kolumn i listan</string>
-	<string name="preference_showunits_title">Show units</string>
+	<string name="preference_showunits_title">Visa enhet</string>
 	<string name="preference_showunits_summary">Visa som extra kolumn i listan</string>
-	<string name="preference_prio_subtotal">Subtotal by priority</string>
-	<string name="preference_prioritytotal_title">Subtotal by priority</string>
-	<string name="preference_prioritytotal_summary">No subtotal by priority shown.</string>
-	<string name="preference_prioritytotal_dialog_title">Subtotal by priority</string>
-	<string name="preference_priosubtotalchecked_title">Include checked items</string>
-	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
-	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
-	<string name="preference_pickitemsinlist_title">Pick items directly in list</string>
-	<string name="preference_pickitemsinlist_on_summary">Switch main list to edit mode to re-add existing items</string>
-	<string name="preference_pickitemsinlist_off_summary">Add items to list using a dedicated dialog</string>
-	<string name="preference_samesortforpick_title">Always same sort order</string>
-	<string name="preference_samesortforpick_on_summary">Items are sorted in Pick Items mode just as in Shopping mode.</string>
-	<string name="preference_samesortforpick_off_summary">Sort order for Pick Items mode can be chosen separately.</string>
+	<string name="preference_prio_subtotal">Delresultat med prioritet</string>
+	<string name="preference_prioritytotal_title">Delresultat med prioritet</string>
+	<string name="preference_prioritytotal_summary">Inget delresultat med prioritet visat.</string>
+	<string name="preference_prioritytotal_dialog_title">Delresultat med prioritet</string>
+	<string name="preference_priosubtotalchecked_title">Inkludera markerade varor</string>
+	<string name="preference_priosubtotalchecked_on_summary">Delresultat med prioritet inkluderar markerade varor</string>
+	<string name="preference_priosubtotalchecked_off_summary">Delresultat med prioritet exkluderar markerade varor</string>
+	<string name="preference_pickitemsinlist_title">Välj varor direkt i listan</string>
+	<string name="preference_pickitemsinlist_on_summary">Byt till ändringsläge för huvudlistan för lägga till redan inlagda varor</string>
+	<string name="preference_pickitemsinlist_off_summary">Lägg till varor till listan via en dedikerad dialogruta</string>
+	<string name="preference_samesortforpick_title">Alltid samma sortering</string>
+	<string name="preference_samesortforpick_on_summary">Varor blir sorterade i Varuväljläget precis som i Shoppingläget.</string>
+	<string name="preference_samesortforpick_off_summary">Sorteringsordningen för Varuväljläget kan bli vald separat.</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Skaka för att rensa</string>
@@ -220,11 +225,11 @@
 	<string name="preference_shake_summary">Skaka telefonen för att rensa listan</string>
 	
     <string name="preference_advanced">Avancerade inställningar</string>
-    <string name="preference_advanced_summary">Additional settings.</string>
+    <string name="preference_advanced_summary">Ytterligare inställningar.</string>
     
     <!-- Preference category: General settings -->
     <string name="preference_general">Generellt</string>
-    <string name="preference_pickitems">Pick Items</string>
+    <string name="preference_pickitems">Välj varor</string>
     
     <string name="preference_appearance">Utseende</string>
     
@@ -239,12 +244,12 @@
     <string name="preference_market_themes_summary">Sök efter teman på Android Market</string>
     <string name="preference_developer_extensions_summary">Hämta tillägg från OpenIntents hemsida</string>
 	<string name="preference_developer_themes_summary">Hämta teman från OpenIntents hemsida</string>
-	<string name="preference_quickedit">Quick Edit Mode</string>
-	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
-	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
-	<string name="preference_reset_all_settings">Reset all settings</string>
-	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
-	<string name="preference_reset_all_settings_done">All settings have been reset</string>
+	<string name="preference_quickedit">Snabbändringsläge</string>
+	<string name="preference_quickedit_on_summary">Tryck på värdena för Prioritet eller Antal i listan för att visa en meny med de vanligaste värdena.</string>
+	<string name="preference_quickedit_off_summary">Ett tryck på värdena för Prioritet eller Antal i listan visar Ändra Varor dialogen.</string>
+	<string name="preference_reset_all_settings">Återställ alla inställningar</string>
+	<string name="preference_reset_all_settings_alert">Vill du verkligen ÅTERSTÄLLA ALLA inställningar? Det går ej att göra detta ogjort.</string>    
+	<string name="preference_reset_all_settings_done">All inställningar har blivit återställda</string>
 	    
 	<!-- ***************************
 	     Permissions
@@ -275,23 +280,34 @@
     	<!-- Preference sort order: Sort alphabetically by tags -->
     	<item>taggar alfabetiskt</item>
         <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
-    	<item>priority, tags alphabetical</item>
+    	<item>prioritet, etiketter i alfabetsordning</item>
         <!-- Preference sort order: Sort by price, the most expensive first -->
     	<item>dyraste först</item>
         <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
     	<item>obockat först, taggar alfabetiskt</item>
     	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
-    	<item>unchecked first, priority, alphabetical</item>
+    	<item>omarkerade varor  först, prioritet, alfabetisk ordning</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
-    	<item>unchecked first, priority, tags alphabetical</item>
+    	<item>omarkerade varor  först, prioritet, etiketter i alfabetisk ordning</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>nyast först</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>äldst först</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">
-    	<item>Not shown</item>
-    	<item>Priority 1</item>
-    	<item>Priority 1-2</item>
-    	<item>Priority 1-3</item>
-    	<item>Priority 1-4</item>
+    	<item>Inte visad</item>
+    	<item>Prioritet 1</item>
+    	<item>Prioritet 1-2</item>
+    	<item>Prioritet 1-3</item>
+    	<item>Prioritet 1-4</item>
     </string-array>
     
     <string-array name="preference_fontsize_entries">
@@ -309,25 +325,25 @@
     	<!-- Preference orientation: default -->
         <item>Standard</item>
     	<!-- Preference orientation: landscape -->
-    	<item>Landscape</item>
+    	<item>Landskapsläge</item>
     	<!-- Preference orientation: portrait -->
-        <item>Portrait</item>
+        <item>Porträttläge</item>
     </string-array>
     
     <string-array name="preference_capitalization_entries">
     	<!-- Preference capitalization: No capitalization -->
         <item>Ingen</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Per sentence</item>
+        <item>Per mening</item>
     	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Per word</item>
+        <item>Per ord</item>
     </string-array>
 
 	<!-- ***************************
 	     OI Notepad
 	     *************************** -->
 	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
-	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<string name="notepad_not_available">Ändring av varunoteringar kräver att OI Notepad är installerat.</string>
 	<!-- Name of application "OI Notepad". Translations should be consistent. -->
 	<string name="notepad">OI Notepad</string>
 
@@ -347,8 +363,8 @@
     	<item>Rensa lista</item>
     </string-array>
       
-	<string name="widget_prev_page">Previous page</string>
-	<string name="widget_next_page">Next page</string>
-	<string name="widget_choose_a_list">Choose a list</string>
-	<string name="widget_no_items">No items on page %d</string>
+	<string name="widget_prev_page">Föregående sida</string>
+	<string name="widget_next_page">Nästa sida</string>
+	<string name="widget_choose_a_list">Välj en lista</string>
+	<string name="widget_no_items">Inga varor på sida %d</string>
 </resources>

@@ -173,6 +173,9 @@
 	<string name="preference_sortorder_for_pick_summary">Промяна на реда на сортиране на елементи от списък в режим на изписване на артикули.</string>
 	<string name="preference_sortorder_dialog_title">Избери реда на подреждане</string>
 	<string name="preference_sortorder_for_pick_dialog_title">Изберете ред на сортиране за режим на изписване на артикули</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">Зареди последно ползван списък</string>
 	<string name="preference_loadlastused_summary">Започвай винаги с последно прегледания списък.</string>
 	<string name="preference_capitalization_title">Главна буква</string>
@@ -288,6 +291,17 @@
     	<item>немаркирани първо, по приоритет, по азбучен ред</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
     	<item>немаркирани първо, по приоритет, тагове по азбучен ред</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>първо най-новите</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>първо най-старите</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">

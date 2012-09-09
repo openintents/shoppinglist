@@ -21,169 +21,168 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
-  Joan Creus https://launchpad.net/~joan-creus-c
-  OpenIntents devs https://launchpad.net/~openintents-devs</string>
+  emp https://launchpad.net/~emp500</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
-	<string name="about_comments">Porta un registre dels teus elements de compra amb la llista de compra d\'OI.</string>
+	<string name="about_comments">Pidä kirjaa sinun ostoksistasi OI Ostoslistan avulla.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
 	     *************************** -->
 	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">Llista de compra d\'OI</string>
+	<string name="app_name">OI Ostoslista</string>
 
-	<string name="new_item">Nou element</string>
-	<string name="new_list">Nova llista</string>
-	<string name="send">Enviar llista</string>
-	<string name="mark_all_items">Marcar tots els elements</string>
-	<string name="empty_list_not_sent">No s\'ha enviat la llista buida.</string>
-	<string name="email_not_available">No hi ha cap aplicació disponible per enviar.</string>
-	<string name="my_shopping_list">La meva llista de compra</string>
-	<string name="new_list_hint">p.e. llista de desitgos, llista de família</string>
-	<string name="clean_up_list">Netejar llista</string>
-	<string name="delete_list">Eliminar llista</string>
-	<string name="ask_new_list">Escriu el nom de la nova llista de compra</string>
-	<string name="ask_rename_list">Reanomenar llista de compra</string>
-	<string name="ask_edit_item">Edita l\'element</string>
-	<string name="ask_new_store">Escriu un nom de botiga nou</string>
-	<string name="please_enter_name">Si us plau entreu un nom</string>
-	<string name="no_items_marked">No s\'ha marcat cap element com a ratllat.</string>
-	<string name="confirm_delete_list">Esteu segurs que voleu eliminar aquesta llista de compra?</string>
-	<string name="no_shopping_provider">Error accedint a les llistes decompra.</string>
-	<string name="pick_item">Escull un element</string>
-	<string name="pick_list">Escull una llista</string>
-	<string name="theme">Tema</string>
-	<string name="theme_settings">Preferències de tema</string>
-	<string name="rename_list">Reanomena llista</string>
-	<string name="menu_mark_item">Marcar element</string>
-	<string name="menu_edit_item">Edita l\'element</string>
-	<string name="menu_auto_add">Afegeix automàticament</string>
-	<string name="menu_item_stores">Botigues...</string>
-	<string name="menu_rename_store">Reanomena botiga</string>
-	<string name="menu_delete_store">Eliminar botiga</string>
-	<string name="confirm_delete_store">Esteu segurs que voleu eliminar aquesta botiga?</string>
-	<string name="no_items_available">Cap element disponible</string>
-	<string name="no_stores_available">No stores available for this list</string>
-	<string name="no_tags_available">No tags available for this list</string>
+	<string name="new_item">Uusi esine</string>
+	<string name="new_list">Uusi lista</string>
+	<string name="send">Lähetä lista</string>
+	<string name="mark_all_items">Merkitse kaikki esineet</string>
+	<string name="empty_list_not_sent">Tyhjää listaa ei lähetetty.</string>
+	<string name="email_not_available">Ei löytynyt ohjelmaa, jolla voisi lähettää</string>
+	<string name="my_shopping_list">Minun ostoslistani</string>
+	<string name="new_list_hint">esim. toivelista, perhelista</string>
+	<string name="clean_up_list">Tyhjennä lista</string>
+	<string name="delete_list">Poista lista</string>
+	<string name="ask_new_list">Syötä uuden ostoslistan nimi</string>
+	<string name="ask_rename_list">Uudelleennimeä ostoslista</string>
+	<string name="ask_edit_item">Muokkaa kohdetta</string>
+	<string name="ask_new_store">Syötä uusi kaupan nimi</string>
+	<string name="please_enter_name">Ole hyvä, ja syötä nimi</string>
+	<string name="no_items_marked">Ei kohteita jotka ovat merkittyjä</string>
+	<string name="confirm_delete_list">Oletko aivan varma, että haluat poistaa tämän ostoslistan?</string>
+	<string name="no_shopping_provider">Virhe noudettaessa ostoslistaa.</string>
+	<string name="pick_item">Valitse esine</string>
+	<string name="pick_list">Valitse lista</string>
+	<string name="theme">Teema</string>
+	<string name="theme_settings">Teema-asetukset</string>
+	<string name="rename_list">Uudelleennimeä lista</string>
+	<string name="menu_mark_item">Merkitse kohta</string>
+	<string name="menu_edit_item">Muokkaa kohdetta</string>
+	<string name="menu_auto_add">Automaattinen lisääminen</string>
+	<string name="menu_item_stores">Kaupat...</string>
+	<string name="menu_rename_store">Uudelleennimeä kauppa</string>
+	<string name="menu_delete_store">Poista kauppa</string>
+	<string name="confirm_delete_store">Oletko aivan varma, että haluat poistaa tämän kaupan?</string>
+	<string name="no_items_available">Ei kohteita saatavilla</string>
+	<string name="no_stores_available">Ei kauppoja saatavilla tähän listaan</string>
+	<string name="no_tags_available">Ei tageja saatavilla tälle listalle</string>
 	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
 	     tags or price will be kept. -->
-	<string name="menu_remove_item">Elimina l\'element de la llista</string>
+	<string name="menu_remove_item">Poista kohde listalta (tagit ja hinta pysyvät)</string>
 	
 	<!-- Delete this item completely. If the user wants to add it again, they
 	     have to enter all the information again. -->
-	<string name="menu_delete_item">Elimina l\'element permanentment</string>
-	<string name="menu_move_item">Mou element a l\'altra llista</string>
-    <string name="menu_copy_item">Copiar element</string>
+	<string name="menu_delete_item">Poista kohde listalta pysyvästi</string>
+	<string name="menu_move_item">Siirrä kohde toiselle listalle</string>
+    <string name="menu_copy_item">Kopioi kohde</string>
 	    
 	<!-- Button label to add an item to the list. -->
-	<string name="add">Afegir</string>
+	<string name="add">Lisää</string>
 	
-	<string name="menu_pick_items">Escull elements</string>
-	<string name="menu_start_shopping">Compres</string>
-	
-	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_title">%s - Escull elements</string>
+	<string name="menu_pick_items">Valitse kohteita</string>
+	<string name="menu_start_shopping">Ostoksilla</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="shopping_title">%s - Compres</string>
+	<string name="pick_items_title">%s - Valitse kohteita</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="shopping_title">%s - Ostokset</string>
 	
 	<!-- Title supplement. \'%s\' is the name of the current item. -->
-	<string name="item_stores_title">%s - Botigues</string>
-	<string name="item_stores_activity_label">Edita botigues d\'elements</string>
+	<string name="item_stores_title">%s - Kaupat</string>
+	<string name="item_stores_activity_label">Muokkaa kohteen kauppoja</string>
 	
-	<string name="tags">Etiquetes</string>
-	<string name="price">Preu</string>
-	<string name="item">Element</string>
-	<string name="quantity">Quantitat</string>
-	<string name="priority">Prioritat</string>
-	<string name="has_note">Té una nota</string>
-	<string name="units">Unitats</string>
-	<string name="note">Nota</string>
-	<string name="stores">Stores</string>
-	<string name="list">List</string>
+	<string name="tags">Tagit</string>
+	<string name="price">Hinta</string>
+	<string name="item">Kohde</string>
+	<string name="quantity">Määrä</string>
+	<string name="priority">Tärkeysjärjestys</string>
+	<string name="has_note">on huomautus</string>
+	<string name="units">Yksikköä</string>
+	<string name="note">Huomautus</string>
+	<string name="stores">Kaupat</string>
+	<string name="list">Lista</string>
 	
-	<string name="otherqty">Una altra quantitat...</string>
-	<string name="otherpri">Una altra prioritat...</string>   
-	<string name="unfiltered">(Unfiltered)</string>
+	<string name="otherqty">Muu määrä...</string>
+	<string name="otherpri">Muu tärkeysjärjestys...</string>   
+	<string name="unfiltered">(ei suodatettu)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
-	<string name="total">Total: %s</string>
+	<string name="total">Yhteensä: %s</string>
 	
 	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
-	<string name="total_checked">Comprovats: %s</string>
-    <string name="priority1_total">Prioritat 1: %s</string>
-    <string name="priority2_total">Prioritat 1-2: %s</string>
-	<string name="priority3_total">Prioritat 1-3: %s</string>
-	<string name="priority4_total">Prioritat 1-4: %s</string>
+	<string name="total_checked">Checked: %s</string>
+    <string name="priority1_total">Priority 1: %s</string>
+    <string name="priority2_total">Priority 1-2: %s</string>
+	<string name="priority3_total">Priority 1-3: %s</string>
+	<string name="priority4_total">Priority 1-4: %s</string>
 	
-	<string name="delete_item_confirm">Esteu segur que voleu suprimir permanentment aquest element?</string>
-	<string name="delete">Elimina</string>
+	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
+	<string name="delete">Delete</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
-	<string name="suffix_checked">... D\'acord</string>
+	<string name="suffix_checked">... OK</string>
 	<string name="empty"/>
 	
 	<!-- The shortcut is created on the home screen. -->
-	<string name="pick_list_for_shortcut">Escull una llista per la drecera</string>
+	<string name="pick_list_for_shortcut">Pick list for shortcut</string>
 	
 	<!-- Shown if external application wants to insert new items. -->
-	<string name="pick_list_to_insert_items">Escull una llista per inserir elements</string>
+	<string name="pick_list_to_insert_items">Pick list to insert items</string>
 	
 	<!-- Theme related -->
 	<!-- Title for selecting a theme -->
-	<string name="theme_pick">Escull un tema</string>
-	<string name="theme_description">Escull un tema per aquesta llista</string>
-	<string name="theme_default">Per defecte</string>
-	<string name="theme_classic">Clàssic</string>
+	<string name="theme_pick">Pick a theme</string>
+	<string name="theme_description">Choose a theme for this list</string>
+	<string name="theme_default">Default</string>
+	<string name="theme_classic">Classic</string>
 	<string name="theme_bugdroid">Android</string>
-	<string name="theme_classic_export">Clàssic (de la llista de compra d\'OI)</string>
-	<string name="theme_bugdroid_export">Android (de la llista de compra d\'OI)</string>
+	<string name="theme_classic_export">Classic (from OI Shopping List)</string>
+	<string name="theme_bugdroid_export">Android (from OI Shopping List)</string>
 
 	<!--     Dialog box    -->
 	<!-- Button label "OK" -->
-	<string name="ok">D\'acord</string>
+	<string name="ok">OK</string>
 	<!-- Button label "Cancel" -->
-	<string name="cancel">Cancel·la</string>
-	<string name="use_theme_for_all_lists">Utilitza aquest tema per a totes les llistes</string>
-	<string name="get_more_themes">Aconsegueix més temes</string>
+	<string name="cancel">Cancel</string>
+	<string name="use_theme_for_all_lists">Use this theme for all lists</string>
+	<string name="get_more_themes">Get more themes</string>
 	
 	<!-- preferences -->
-	<string name="preferences">Preferències</string>
+	<string name="preferences">Settings</string>
 	
-    <string name="preference_application">Preferències de l\'aplicació</string>
+    <string name="preference_application">Application settings</string>
     
-	<string name="preference_unchecked_on_top">No activat a dalt</string>
-	<string name="preference_unchecked_on_top_summary">Mostra sempre els elements no activats primer</string>
-	<string name="preference_fontsize">Mida de la lletra</string>
-	<string name="preference_fontsize_summary">Canvia la mida de la lletra</string>
-	<string name="preference_fontsize_dialog_title">Escull la mida de la lletra</string>
-	<string name="preference_orientation">Orientació</string>
-	<string name="preference_orientation_summary">Canvia l\'orientació</string>
-	<string name="preference_orientation_dialog_title">Escull l\'orientació</string>
-	<string name="preference_sortorder_title">Criteri d\'ordenació</string>
-	<string name="preference_sortorder_summary">Canvia el criteri d\'ordenació dels elements de la llista</string>
-	<string name="preference_sortorder_for_pick_title">Criteri d\'ordenació - Escull elements</string>
-	<string name="preference_sortorder_for_pick_summary">Canvieu el criteri d\'ordenació dels elements de la llista en el mode Escull Elements</string>
-	<string name="preference_sortorder_dialog_title">Escull el criteri d\'ordenació</string>
-	<string name="preference_sortorder_for_pick_dialog_title">Escull el criteri d\'ordenació per al mode Escull Elements</string>
+	<string name="preference_unchecked_on_top">Unchecked on top</string>
+	<string name="preference_unchecked_on_top_summary">Always show unchecked items first</string>
+	<string name="preference_fontsize">Font size</string>
+	<string name="preference_fontsize_summary">Change font size</string>
+	<string name="preference_fontsize_dialog_title">Choose font size</string>
+	<string name="preference_orientation">Orientation</string>
+	<string name="preference_orientation_summary">Change orientation</string>
+	<string name="preference_orientation_dialog_title">Choose orientation</string>
+	<string name="preference_sortorder_title">Sort order</string>
+	<string name="preference_sortorder_summary">Change sort order of list items</string>
+	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
+	<string name="preference_sortorder_for_pick_summary">Change sort order of list items in Pick Items mode.</string>
+	<string name="preference_sortorder_dialog_title">Choose sort order</string>
+	<string name="preference_sortorder_for_pick_dialog_title">Choose sort order for Pick Items mode</string>
 	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
 	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
 	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
-	<string name="preference_loadlastused_title">Carrega l\'última llista emprada</string>
-	<string name="preference_loadlastused_summary">Compença sempre amb la llista vista l\'últim cop.</string>
-	<string name="preference_capitalization_title">Majúscules</string>
-	<string name="preference_capitalization_summary">Afegeix majúscula inicial automàticament a les entrades</string>
-	<string name="preference_capitalization_dialog_title">Escull criteri de majúscules</string> 
-	<string name="preference_hidechecked_title">Amaga elements activats</string>
-	<string name="preference_hidechecked_summary">Amaga immediatament els elements activats.</string>
+	<string name="preference_loadlastused_title">Load last list used</string>
+	<string name="preference_loadlastused_summary">Always start with the list viewed last time.</string>
+	<string name="preference_capitalization_title">Capitalization</string>
+	<string name="preference_capitalization_summary">Automatic capitalization of entries</string>
+	<string name="preference_capitalization_dialog_title">Choose capitalization</string> 
+	<string name="preference_hidechecked_title">Hide checked items</string>
+	<string name="preference_hidechecked_summary">Immediately hide items checked off.</string>
 	<string name="preference_fastscroll_title">Fast Scrolling</string>
 	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
-	<string name="preference_showprice_title">Mostra el preu</string>
-	<string name="preference_showprice_summary">Mostrat com a columna addicional a la llista.</string>
-	<string name="preference_perstoreprice">Preus per botiga</string>
+	<string name="preference_showprice_title">Show price</string>
+	<string name="preference_showprice_summary">Shown as extra column in list.</string>
+	<string name="preference_perstoreprice">Per-store prices</string>
 	<string name="preference_perstoreprice_title">Track per-store prices</string>
 	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
 	<string name="preference_screenlock_title">Disable screen lock</string>
@@ -195,13 +194,13 @@
 	<string name="preference_add_for_barcode">Barcode Scanner</string>
 	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
 	<string name="preference_showtags_title">Show tags</string>
-	<string name="preference_showtags_summary">Mostrat com a columna addicional a la llista.</string>
+	<string name="preference_showtags_summary">Shown as extra column in list.</string>
 	<string name="preference_showquantity_title">Show quantity</string>
-	<string name="preference_showquantity_summary">Mostrat com a columna addicional a la llista.</string>
+	<string name="preference_showquantity_summary">Shown as extra column in list.</string>
 	<string name="preference_showpriority_title">Show priority</string>
-	<string name="preference_showpriority_summary">Mostrat com a columna addicional a la llista.</string>
+	<string name="preference_showpriority_summary">Shown as extra column in list.</string>
 	<string name="preference_showunits_title">Show units</string>
-	<string name="preference_showunits_summary">Mostrat com a columna addicional a la llista.</string>
+	<string name="preference_showunits_summary">Shown as extra column in list.</string>
 	<string name="preference_prio_subtotal">Subtotal by priority</string>
 	<string name="preference_prioritytotal_title">Subtotal by priority</string>
 	<string name="preference_prioritytotal_summary">No subtotal by priority shown.</string>
@@ -314,14 +313,14 @@
     	<!-- Preference fontsize: small font size -->
         <item>Small</item>
     	<!-- Preference fontsize: default font size -->
-    	<item>Per defecte</item>
+    	<item>Default </item>
     	<!-- Preference fontsize: large font size -->
         <item>Large</item>
     </string-array>
     
     <string-array name="preference_orientation_entries">
     	<!-- Preference orientation: default -->
-        <item>Per defecte</item>
+        <item>Default</item>
     	<!-- Preference orientation: landscape -->
     	<item>Landscape</item>
     	<!-- Preference orientation: portrait -->
@@ -358,7 +357,7 @@
 	
     <string-array name="automation_actions">
     	<!-- Automation action to clean up a list. -->
-    	<item>Netejar llista</item>
+    	<item>Tyhjennä lista</item>
     </string-array>
       
 	<string name="widget_prev_page">Previous page</string>

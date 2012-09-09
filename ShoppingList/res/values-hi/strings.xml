@@ -23,6 +23,7 @@
 	<string name="about_translators">Launchpad Contributions:
   Atharva Lath https://launchpad.net/~atharvalath96
   OpenIntents devs https://launchpad.net/~openintents-devs
+  Prateek Arora https://launchpad.net/~prateekandroid
   Shitiz Garg https://launchpad.net/~l95s</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
@@ -65,8 +66,8 @@
 	<string name="menu_delete_store">स्टोर हटाएँ</string>
 	<string name="confirm_delete_store">क्या आप सचमुच इस स्टोर को हटाना चाहते हैं</string>
 	<string name="no_items_available">कोई आइटम मोजूद नहीं है</string>
-	<string name="no_stores_available">No stores available for this list</string>
-	<string name="no_tags_available">No tags available for this list</string>
+	<string name="no_stores_available">इस सूची के लिए कोई दुकान उपलब्ध नहीं है</string>
+	<string name="no_tags_available">इस सूची के लिए कोई उपनाम  उपलब्ध नहीं है</string>
 	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
@@ -103,12 +104,12 @@
 	<string name="has_note">व्याख्या है</string>
 	<string name="units">इकाइयों</string>
 	<string name="note">व्याख्या</string>
-	<string name="stores">Stores</string>
-	<string name="list">List</string>
+	<string name="stores">दुकानें</string>
+	<string name="list">सूची</string>
 	
 	<string name="otherqty">दूसरी मात्रा</string>
 	<string name="otherpri">दूसरी प्रधानता</string>   
-	<string name="unfiltered">(Unfiltered)</string>
+	<string name="unfiltered">(बिना छना हुआ)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">कुल: %s</string>
@@ -170,6 +171,9 @@
 	<string name="preference_sortorder_for_pick_summary">आइटम चुनने के मोड का क्रम बद्ध बदलिए</string>
 	<string name="preference_sortorder_dialog_title">क्रम बद्ध चुनिए</string>
 	<string name="preference_sortorder_for_pick_dialog_title">आइटम चुनने के मोड का क्रम बद्ध चुनिए</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">आखरी इस्तेमाल किये गयी सूची खोलिए</string>
 	<string name="preference_loadlastused_summary">हमेशा आखरी देखे गए आइटम से शुरू करो</string>
 	<string name="preference_capitalization_title">कैपिटलाइज़ेशन</string>
@@ -177,8 +181,8 @@
 	<string name="preference_capitalization_dialog_title">कैपिटलाइज़ेशन चुने</string> 
 	<string name="preference_hidechecked_title">चिह्नित आइटम को छुपाये</string>
 	<string name="preference_hidechecked_summary">चिन्हित आइटम को एकदम से छुपाये</string>
-	<string name="preference_fastscroll_title">Fast Scrolling</string>
-	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
+	<string name="preference_fastscroll_title">तेज  कुंडलन</string>
+	<string name="preference_fastscroll_summary">कुंडलन के लिए हत्था तभी दिखेगा जब आप ३५ या उस से अधिक चीजों की सूची पर कुंडलन करेंगे।</string>
 	<string name="preference_showprice_title">मुल्ये दिखाए</string>
 	<string name="preference_showprice_summary">यह सूची में अतिरिक्त खाना के तरह से दिखया जाता है</string>
 	<string name="preference_perstoreprice">प्रति-स्टोर मुल्ये</string>
@@ -186,8 +190,8 @@
 	<string name="preference_perstoreprice_summary">हर एक आइटम के अलग मूलुये पर नज़र रखें</string>
 	<string name="preference_screenlock_title">स्क्रीन तले को बंद करें</string>
 	<string name="preference_screenlock_summary">अगर चिह्नित, यह स्क्रीन को बंद होने से रोकता है</string>
-	<string name="preference_usefilters_title">Filters</string>
-	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
+	<string name="preference_usefilters_title">छलनी</string>
+	<string name="preference_usefilters_summary">सूचियाँ उपनाम या दुकानों के नाम से छानी जा सकती हैं।</string>
 	<string name="preference_reset_quantity">मात्रा को शून्य करें</string>
 	<string name="preference_reset_quantity_summary">आइटम जोड़ने पर मात्रा को शून्य करता है</string>
 	<string name="preference_add_for_barcode">बारकोड स्केनर</string>
@@ -285,6 +289,17 @@
     	<item>अचिन्हित पहले, प्रधानता, वर्णमाला</item>
     	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
     	<item>अचिन्हित पहले, प्रधानता, टाग्स वर्णमाला के तोर पे</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>नया सबसे पहले</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>पुराना सबसे पहले</item>
     </string-array>
     
     <string-array name="preference_prioritytotal_entries">
