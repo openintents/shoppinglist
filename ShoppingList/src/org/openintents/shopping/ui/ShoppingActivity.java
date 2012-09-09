@@ -512,7 +512,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
 		// Check whether EULA has been accepted
 		// or information about new version can be presented.
-		if (mDistribution.showEulaOrNewVersion()) {
+		if (false && mDistribution.showEulaOrNewVersion()) {
 			return;
 		}
 

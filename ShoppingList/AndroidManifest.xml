@@ -18,11 +18,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="org.openintents.shopping"
     android:installLocation="auto"
-	android:versionName="1.7-rc1"
-	android:versionCode="10038">
+	android:versionName="1.7.0.3"
+	android:versionCode="10040">
 	<!-- History:
 	 * * * UPDATE ATRACKDOG METADATA BELOW FOR RELEASE CANDIDATES * * *
-	1.7 [10038]: 2012-06-07
+	1.7.0.3 [10040]: 2012-09-08
+	1.7.0.1 (-rc1) [10038]: 2012-06-07
 	1.6 [10037]: 2012-01-29
 	1.6-rc1 [10036]: 2012-01-25
 	1.5 [10035]: 2011-12-08
@@ -42,7 +43,7 @@
 	1.1.0 [10006]: 2009-05-16
 	1.0.3 [10004]: 2009-02-04  -->
 	
-	<uses-sdk android:minSdkVersion="3" android:targetSdkVersion="15"/>
+	<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="15"/>
 	<uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
 	 
 	<application android:icon="@drawable/ic_launcher_shoppinglist" android:label="@string/app_name"
@@ -64,6 +65,9 @@
 	    <meta-data android:name="org.openintents.themes"
 	        android:resource="@xml/themes"
 	      />
+	    
+	    <meta-data android:name="hideMarketLink"
+	        android:value="true"/>
 	      
 		<provider android:name="org.openintents.shopping.provider.ShoppingProvider"
 			android:authorities="org.openintents.shopping" />
