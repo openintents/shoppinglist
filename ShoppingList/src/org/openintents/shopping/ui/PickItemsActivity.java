@@ -23,13 +23,13 @@ public class PickItemsActivity extends Activity {
 
 		setContentView(R.layout.activity_pick_items);
 
-		final ShoppingItemsView mListItems = (ShoppingItemsView) findViewById(R.id.list_items);
-		mListItems.mMode = ShoppingActivity.MODE_PICK_ITEMS_DLG;
+		final ShoppingItemsView listItems = (ShoppingItemsView) findViewById(R.id.list_items);
+		listItems.mMode = ShoppingActivity.MODE_PICK_ITEMS_DLG;
 
 		String listId = getIntent().getData().getLastPathSegment();
-		mListItems.fillItems(this, Long.parseLong(listId));
+		listItems.fillItems(this, Long.parseLong(listId));
 		// mListItems.setListTheme(ShoppingListView.MARK_CHECKBOX);
-		mListItems.setListTheme("1");
+		listItems.setListTheme("1");
 		// mListItems.setOnItemClickListener(new OnItemClickListener() {
 
 		//
