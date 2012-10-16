@@ -1956,6 +1956,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 			}
 			onModeChanged();
 		} else {
+			if (mItemsView.mMode != MODE_IN_SHOP) {
+				mItemsView.mMode = MODE_IN_SHOP;
+				onModeChanged();
+			}
 			pickItemsUsingDialog();
 		}
 	}

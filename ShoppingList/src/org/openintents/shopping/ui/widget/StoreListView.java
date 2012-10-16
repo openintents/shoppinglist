@@ -35,7 +35,7 @@ import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
 
 /**
- * View to show a shopping list with its items
+ * View to show a list of stores for a specific item
  * 
  */
 public class StoreListView extends ListView {

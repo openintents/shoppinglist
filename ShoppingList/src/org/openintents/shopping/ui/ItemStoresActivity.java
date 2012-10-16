@@ -30,6 +30,12 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.Toast;
 
+/**
+ * UI for showing and editing stores for a specific item
+ * 
+ * @author OpenIntents
+ *
+ */
 public class ItemStoresActivity extends Activity {
 
 	private static final int DIALOG_NEW_STORE = 1;
