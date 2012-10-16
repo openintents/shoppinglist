@@ -23,7 +23,7 @@ To obtain the current release, visit
 
 ----------------
 release 1.7
-date: ?
+date: 2012-10-16
 
 - Sort list of lists (patch by Stanley F. for Google Summer of Code 2012)
 - Set cursor to end in "rename list" dialog (patch by Alex Yaremenko)

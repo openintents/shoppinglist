@@ -420,9 +420,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	private AutoCompleteTextView mEditText;
 	private Button mButton;
 	private View mFilterLayout = null;
-	private Button mStoresFilter = null;
-	private Button mTagsFilter = null;
-	private Button mListFilter = null;
+	private Button mStoresFilterButton = null;
+	private Button mTagsFilterButton = null;
+	private Button mShoppingListsFilterButton = null;
 
 	protected Context mDialogContext;
 
@@ -769,7 +769,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		boolean nowEditingFilter = sp.getBoolean(
 				PreferenceActivity.PREFS_USE_FILTERS,
 				PreferenceActivity.PREFS_USE_FILTERS_DEFAULT);
-		if (mStoresFilter != null && mEditingFilter != nowEditingFilter) {
+		if (mStoresFilterButton != null && mEditingFilter != nowEditingFilter) {
 			updateFilterWidgets();
 			fillItems(false);
 		}
@@ -1293,9 +1293,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 						}
 					});
 
-			mListFilter = (Button) findViewById(R.id.listfilter);
-			if (mListFilter != null) {
-				mListFilter.setOnClickListener(new OnClickListener() {
+			mShoppingListsFilterButton = (Button) findViewById(R.id.listfilter);
+			if (mShoppingListsFilterButton != null) {
+				mShoppingListsFilterButton.setOnClickListener(new OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
@@ -1305,16 +1305,16 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 			}
 		}
 
-		mStoresFilter = (Button) findViewById(R.id.storefilter);
-		mStoresFilter.setOnClickListener(new OnClickListener() {
+		mStoresFilterButton = (Button) findViewById(R.id.storefilter);
+		mStoresFilterButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				showStoresFilter(v);
 			}
 		});
-		mTagsFilter = (Button) findViewById(R.id.tagfilter);
-		mTagsFilter.setOnClickListener(new OnClickListener() {
+		mTagsFilterButton = (Button) findViewById(R.id.tagfilter);
+		mTagsFilterButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -1447,16 +1447,16 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	protected void updateFilterWidgets() {
 		mEditingFilter = PreferenceActivity.getUsingFiltersFromPrefs(this);
 
-		mStoresFilter.setVisibility(mEditingFilter ? View.VISIBLE : View.GONE);
-		mTagsFilter.setVisibility(mEditingFilter ? View.VISIBLE : View.GONE);
+		mStoresFilterButton.setVisibility(mEditingFilter ? View.VISIBLE : View.GONE);
+		mTagsFilterButton.setVisibility(mEditingFilter ? View.VISIBLE : View.GONE);
 
 		boolean showListFilter = mEditingFilter;
 		if (!usingListSpinner()) {
 			// Tablet mode: always show ListView
 			showListFilter = false;
 		}
-		if (mListFilter != null)
-			mListFilter
+		if (mShoppingListsFilterButton != null)
+			mShoppingListsFilterButton
 					.setVisibility(showListFilter ? View.VISIBLE : View.GONE);
 		// spinner goes the opposite way
 		if (mShoppingListsView != null)
@@ -1467,14 +1467,14 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 			String storeName = ShoppingUtils.getListFilterStoreName(this,
 					mListUri);
 			if (storeName != null)
-				mStoresFilter.setText(storeName);
+				mStoresFilterButton.setText(storeName);
 			else
-				mStoresFilter.setText(R.string.stores);
+				mStoresFilterButton.setText(R.string.stores);
 			String tagFilter = ShoppingUtils.getListTagsFilter(this, mListUri);
 			if (tagFilter != null)
-				mTagsFilter.setText(tagFilter);
+				mTagsFilterButton.setText(tagFilter);
 			else
-				mTagsFilter.setText(R.string.tags);
+				mTagsFilterButton.setText(R.string.tags);
 		}
 	}
 
@@ -2790,7 +2790,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		SimpleCursorAdapter adapter;
 
 		if (mShoppingListsView instanceof Spinner) {
-			adapter = new MySimpleCursorAdapter(this,
+			adapter = new HoloThemeSimpleCursorAdapter(this,
 					// Use a template that displays a text view
 					android.R.layout.simple_spinner_item,
 					// Give the cursor to the list adapter
@@ -2812,9 +2812,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
 	}
 
-	class MySimpleCursorAdapter extends SimpleCursorAdapter {
+	class HoloThemeSimpleCursorAdapter extends SimpleCursorAdapter {
 
-		public MySimpleCursorAdapter(Context context, int layout, Cursor c,
+		public HoloThemeSimpleCursorAdapter(Context context, int layout, Cursor c,
 				String[] from, int[] to) {
 			super(context, layout, c, from, to);
 		}
