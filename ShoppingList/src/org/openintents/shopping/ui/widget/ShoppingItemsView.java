@@ -461,6 +461,7 @@ public class ShoppingItemsView extends ListView {
 			long price = 0;
 			boolean hasPrice = false;
 			String tags = null;
+			String priceString = null;
 			boolean hasTags = false;
 			mItemRowState state = (mItemRowState) view.getTag();
 			if (mPriceVisibility == View.VISIBLE) {  
@@ -500,12 +501,20 @@ public class ShoppingItemsView extends ListView {
 					} else {
 						note_end = note_start;
 					}
+					if (hasPrice) {
+						// set price text while setting name, so that correct size is known below
+						priceString = mPriceFormatter.format(price * 0.01d);
+						state.mPriceView.setText(priceString);
+					}
 		            if (hasPrice && !hasTags) {
 		            	int price_start = note_end;
 		            	int price_end = price_start + 1;
+		            	TextPaint paint = state.mPriceView.getPaint();
+		            	Rect bounds = new Rect();
 		            	ColorDrawable price_overlay = new ColorDrawable();
 		            	price_overlay.setAlpha(0);
-		            	price_overlay.setBounds(0, 0, state.mPriceView.getMeasuredWidth(), (int)mTextSize);
+		            	paint.getTextBounds(priceString, 0, priceString.length(), bounds);
+		            	price_overlay.setBounds(0, 0, bounds.width(), bounds.height());
 		            	ImageSpan priceimgspan = new ImageSpan(price_overlay, ImageSpan.ALIGN_BASELINE);
 		            	name_etc.setSpan(priceimgspan, price_start, price_end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
 		            }
@@ -517,9 +526,7 @@ public class ShoppingItemsView extends ListView {
 				TextView tv = (TextView) view;
 				if (hasPrice) {
 					tv.setVisibility(View.VISIBLE);
-					String s = mPriceFormatter.format(price * 0.01d);
 					tv.setTextColor(mTextColorPrice);
-					tv.setText(s);
 				} else {
 					hideTextView(tv);
 				}
