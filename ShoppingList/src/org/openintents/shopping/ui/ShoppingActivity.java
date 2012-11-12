@@ -720,6 +720,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 				mSortOrder = sortOrder;
 				fillListFilter();
 				setSelectedListId(getLastUsedListFromPrefs());
+			} else if (getSelectedListId() == -1) {
+				setSelectedListId(getLastUsedListFromPrefs());
 			}
 		}
 
