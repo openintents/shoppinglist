@@ -76,6 +76,10 @@
 				<CheckBoxPreference android:key="resetquantity" android:title="@string/preference_reset_quantity"
 					android:summary="@string/preference_reset_quantity_summary" 
 					android:defaultValue="false"/>
+				<CheckBoxPreference android:key="autocomplete_only_this_list" android:title="@string/preference_complete_by_list_title"
+					android:summaryOn="@string/preference_complete_by_list_on_summary"
+					android:summaryOff="@string/preference_complete_by_list_off_summary" 
+					android:defaultValue="false"/>
 				<Preference android:key="reset_all_settings" android:title="@string/preference_reset_all_settings" />
 			</PreferenceCategory>
 			<PreferenceCategory android:title="@string/preference_appearance">

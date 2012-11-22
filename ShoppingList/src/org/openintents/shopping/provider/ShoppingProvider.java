@@ -100,6 +100,7 @@ public class ShoppingProvider extends ContentProvider {
 	private static final int ITEMSTORES_ITEMID = 17;
 	private static final int SUBTOTALS = 18;
 	private static final int SUBTOTALS_LISTID = 19;
+	private static final int CONTAINS_FULL_LISTID = 20;
 
 	// Derived tables
 	private static final int CONTAINS_FULL = 101; // combined with items and
@@ -133,7 +134,7 @@ public class ShoppingProvider extends ContentProvider {
 		String groupBy = null;
 
 		switch (URL_MATCHER.match(url)) {
-
+					
 		case ITEMS:
 			qb.setTables("items");
 			qb.setProjectionMap(ITEMS_PROJECTION_MAP);
@@ -144,7 +145,7 @@ public class ShoppingProvider extends ContentProvider {
 			qb.setTables("items");
 			qb.appendWhere("_id=" + url.getPathSegments().get(1));
 			break;
-
+			
 		case LISTS:
 			qb.setTables("lists");
 			qb.setProjectionMap(LISTS_PROJECTION_MAP);
@@ -227,6 +228,14 @@ public class ShoppingProvider extends ContentProvider {
 					+ "contains.list_id = lists._id");
 			break;
 
+		case CONTAINS_FULL_LISTID:
+			list_id = Long.parseLong(url.getPathSegments().get(2));
+			qb.setTables("contains, items, lists");
+			qb.appendWhere("contains.item_id = items._id AND " +
+			 		   	   "contains.list_id = lists._id AND " +
+					       "lists._id = " + list_id);
+			break;
+				
 		case STORES:
 			qb.setTables("stores");
 			qb.setProjectionMap(STORES_PROJECTION_MAP);
@@ -1134,6 +1143,9 @@ public class ShoppingProvider extends ContentProvider {
 		case CONTAINS_FULL_ID:
 			return "vnd.android.cursor.item/vnd.openintents.shopping.containsfull";
 
+		case CONTAINS_FULL_LISTID:
+			return "vnd.android.cursor.dir/vnd.openintents.shopping.containsfull";
+
 		case STORES:
 			return "vnd.android.cursor.dir/vnd.openintents.shopping.stores";
 
@@ -1184,6 +1196,8 @@ public class ShoppingProvider extends ContentProvider {
 				CONTAINS_FULL);
 		URL_MATCHER.addURI("org.openintents.shopping", "containsfull/#",
 				CONTAINS_FULL_ID);
+		URL_MATCHER.addURI("org.openintents.shopping", "containsfull/list/#",
+				CONTAINS_FULL_LISTID);
 		URL_MATCHER.addURI("org.openintents.shopping", "stores", STORES);
 		URL_MATCHER.addURI("org.openintents.shopping", "stores/#", STORES_ID);
 		URL_MATCHER

@@ -190,6 +190,9 @@
 	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
 	<string name="preference_usefilters_title">Filters</string>
 	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
+	<string name="preference_complete_by_list_title">Limit item name completion</string>
+	<string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
+	<string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
 	<string name="preference_reset_quantity">Reset Quantity</string>
 	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
 	<string name="preference_add_for_barcode">Barcode Scanner</string>

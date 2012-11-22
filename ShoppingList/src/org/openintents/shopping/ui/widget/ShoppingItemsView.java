@@ -1211,10 +1211,15 @@ public class ShoppingItemsView extends ListView {
 	public void insertNewItem(Activity activity, String newItem,
 			String quantity, String priority, String price, String barcode) {
 
+		String list_id = null;
+		if (PreferenceActivity.getCompleteFromCurrentListOnlyFromPrefs(getContext())) {
+			list_id = String.valueOf(mListId);
+		}
+		
 		newItem = newItem.trim();
 
 		long itemId = ShoppingUtils.updateOrCreateItem(getContext(), newItem,
-				null, price, barcode);
+				null, price, barcode, list_id);
 
 		if (debug) Log.i(TAG, "Insert new item. " + " itemId = " + itemId + ", listId = "
 				+ mListId);

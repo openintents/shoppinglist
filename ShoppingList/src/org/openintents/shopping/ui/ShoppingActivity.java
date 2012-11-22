@@ -776,6 +776,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 			updateFilterWidgets();
 			fillItems(false);
 		}
+		
+		if (PreferenceActivity.getCompletionSettingChanged(this)) {
+			fillAutoCompleteTextViewAdapter();
+		}
 	}
 
 	private void registerSensor() {
@@ -2931,18 +2935,23 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	 * background.
 	 */
 	private void fillAutoCompleteTextViewAdapter() {
-
+		boolean limit_selections = PreferenceActivity.getCompleteFromCurrentListOnlyFromPrefs(this);
+		String listId = null;
+		if (limit_selections) {
+		  listId = mListUri.getLastPathSegment();
+		}
+		
 		// TODO: Optimize: This routine is called too often.
 		if (debug)
 			Log.d(TAG, "fill AutoCompleteTextViewAdapter");
 
-		new AsyncTask<Integer, Integer, ArrayAdapter<String>>() {
+		new AsyncTask<String, Integer, ArrayAdapter<String>>() {
 
 			ArrayAdapter<String> adapter;
 
 			@Override
-			protected ArrayAdapter<String> doInBackground(Integer... params) {
-				return fillAutoCompleteAdapter();
+			protected ArrayAdapter<String> doInBackground(String... params) {
+				return fillAutoCompleteAdapter(params[0]);
 			}
 
 			@Override
@@ -2953,11 +2962,20 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 				}
 			}
 
-			private ArrayAdapter<String> fillAutoCompleteAdapter() {
+			private ArrayAdapter<String> fillAutoCompleteAdapter(String listId) {
 				// Create list of item names
+				Uri uri; 
+				String retCol;
+				if (listId == null) {
+					uri = Items.CONTENT_URI;
+					retCol = Items.NAME;
+				} else {
+				    uri = Uri.parse("content://org.openintents.shopping/containsfull/list").buildUpon().
+						  appendPath(listId).build();
+				    retCol = "items.name";
+				}
 				List<String> autocompleteItems = new LinkedList<String>();
-				Cursor c = getContentResolver().query(Items.CONTENT_URI,
-						new String[] { Items.NAME }, null, null, "name asc");
+				Cursor c = getContentResolver().query(uri, new String[] { retCol }, null, null, retCol + " asc");
 				if (c != null) {
 					String lastitem = "";
 					while (c.moveToNext()) {
@@ -2976,7 +2994,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 						autocompleteItems);
 			}
 
-		}.execute();
+		}.execute(listId);
 	}
 
 	/**

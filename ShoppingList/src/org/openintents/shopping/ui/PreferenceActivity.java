@@ -106,6 +106,8 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 	public static final boolean PREFS_QUICKEDITMODE_DEFAULT = false;
 	public static final String PREFS_USE_FILTERS = "use_filters";
 	public static final boolean PREFS_USE_FILTERS_DEFAULT = false;
+	public static final String PREFS_CURRENT_LIST_COMPLETE = "autocomplete_only_this_list";
+	public static final boolean PREFS_CURRENT_LIST_COMPLETE_DEFAULT = false;
 
 	public static final String PREFS_RESET_ALL_SETTINGS = "reset_all_settings";
 
@@ -121,6 +123,8 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 	private ListPreference mPrioSubtotal;
 	private CheckBoxPreference mIncludesChecked;
 	private ListPreference mPickItemsSort;
+	
+	private static boolean mFilterCompletionChanged = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -165,6 +169,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 		}
 		getPreferenceScreen().getSharedPreferences()
 				.registerOnSharedPreferenceChangeListener(this);
+		mFilterCompletionChanged = false;
 	}
 
 	@Override
@@ -184,6 +189,9 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 		}
 		if (key.equals(PREFS_SAMESORTFORPICK)) {
 			updatePickItemsSortPref(prefs);
+		}
+		if (key.equals(PREFS_CURRENT_LIST_COMPLETE)) {
+			mFilterCompletionChanged = true;
 		}
 	}
 
@@ -264,6 +272,8 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 												PREFS_PRIOSUBINCLCHECKED,
 												PREFS_PRIOSUBINCLCHECKED_DEFAULT);
 
+                        editor.putBoolean(PREFS_CURRENT_LIST_COMPLETE, PREFS_CURRENT_LIST_COMPLETE_DEFAULT);
+
 										editor.commit();
 
 										Toast.makeText(
@@ -329,6 +339,17 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 		return orientation;
 	}
 
+	public static boolean getCompleteFromCurrentListOnlyFromPrefs(Context context) {
+		boolean filter = PreferenceManager
+				.getDefaultSharedPreferences(context).getBoolean(PREFS_CURRENT_LIST_COMPLETE,
+						PREFS_CURRENT_LIST_COMPLETE_DEFAULT);
+		return filter;
+	}
+	
+	public static boolean getCompletionSettingChanged(Context context) {
+		return mFilterCompletionChanged;
+	}
+	
 	public static boolean getUsingPerStorePricesFromPrefs(Context context) {
 		boolean using = PreferenceManager.getDefaultSharedPreferences(context)
 				.getBoolean(PREFS_PERSTOREPRICES, PREFS_PERSTOREPRICES_DEFAULT);

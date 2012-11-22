@@ -65,6 +65,21 @@ public class ShoppingUtils {
 		return id;
 	}
 
+	public static long getItemIdForList(Context context, String name, String list_id) {
+		long id = -1;
+
+		Cursor existingItems = context.getContentResolver().query(
+				Uri.parse("content://org.openintents.shopping/containsfull"), new String[] { Contains.ITEM_ID },
+				"list_id = ? and upper(items.name) = upper(?)", new String[] { list_id, name }, null);
+		if (existingItems.getCount() > 0) {
+			existingItems.moveToFirst();
+			id = existingItems.getLong(0);
+		}
+		;
+		existingItems.close();
+		return id;
+	}
+	
 	public static String getItemName(Context context, long itemId) {
 		String name = "";
 		Cursor existingItems = context.getContentResolver().query(
@@ -92,8 +107,13 @@ public class ShoppingUtils {
 	 * @return id of the new or existing item.
 	 */
 	public static long updateOrCreateItem(Context context, String name,
-			String tags, String price, String barcode) {
-		long id = getItemId(context, name);
+			String tags, String price, String barcode, String list_id) {
+		long id;
+		
+		if (list_id == null)
+			id = getItemId(context, name);
+		else
+			id = getItemIdForList(context, name, list_id);
 
 		if (id >= 0) {
 			// Update existing item
