@@ -19,7 +19,7 @@
 	package="org.openintents.shopping"
     android:installLocation="auto"
 	android:versionName="1.7.0.6"
-	android:versionCode="10042">
+	android:versionCode="10043">
 	<!-- History:
 	 * * * UPDATE ATRACKDOG METADATA BELOW FOR RELEASE CANDIDATES * * *
 	1.7.0.6 [10042]: 2012-11-26
