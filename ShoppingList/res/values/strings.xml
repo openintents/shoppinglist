@@ -36,6 +36,7 @@
 	<string name="new_list">New list</string>
 	<string name="send">Send list</string>
 	<string name="mark_all_items">Mark all items</string>
+	<string name="unmark_all_items">Unmark all items</string>
 	<string name="empty_list_not_sent">Empty list not sent.</string>
 	<string name="email_not_available">No application available for sending.</string>
 	<string name="my_shopping_list">My shopping list</string>

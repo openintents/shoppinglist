@@ -635,6 +635,10 @@ public class ShoppingItemsView extends ListView {
 	};
 	
 	private TextView mCountTextView;
+	/**
+	 * 3-state flag for toggle all: true = all marked, false = all unmarked, null = neither nor
+	 */
+	private Boolean mMarkedAllStatus;
 
 	public ShoppingItemsView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -1063,21 +1067,40 @@ public class ShoppingItemsView extends ListView {
 
 	}
 	
-	public void toggleOnAllItems(){
+	/**
+	 * set the status of all items according to the parameter
+	 * @param on if true all want_to_buy items are set to bought, if false all bought items are set to want_to_buy
+	 * 
+	 */
+	public void toggleAllItems(boolean on){
 		for(int i=0;i<mCursorItems.getCount();i++){
 			mCursorItems.moveToPosition(i);
 			
 			long oldstatus = mCursorItems
 					.getLong(ShoppingActivity.mStringItemsSTATUS);
 			
-			// Toggle status:
+
+			// Toggle status ON:
 			// bought -> bought
 			// want_to_buy -> bought
-			// removed_from_list -> want_to_buy
-			long newstatus = ShoppingContract.Status.WANT_TO_BUY;
-			if(oldstatus == ShoppingContract.Status.WANT_TO_BUY){
+			// removed_from_list -> removed_from_list
+			
+			// Toggle status OFF:
+			// bought -> want_to_buy
+			// want_to_buy -> want_to_buy
+			// removed_from_list -> removed_from_list
+			
+			long newstatus;
+			boolean doUpdate;
+			if (on){				
 				newstatus = ShoppingContract.Status.BOUGHT;
-				
+				doUpdate = (oldstatus == ShoppingContract.Status.WANT_TO_BUY);
+			} else {
+				newstatus = ShoppingContract.Status.WANT_TO_BUY;	
+				doUpdate = (oldstatus == ShoppingContract.Status.BOUGHT);
+			}
+			
+			if(doUpdate){				
 				ContentValues values = new ContentValues();
 				values.put(ShoppingContract.Contains.STATUS, newstatus);
 				if (debug) Log.d(TAG, "update row " + mCursorItems.getString(0) + ", newstatus "
@@ -1091,7 +1114,8 @@ public class ShoppingItemsView extends ListView {
 		
 		requery();
 
-		invalidate();
+		invalidate();	
+		mMarkedAllStatus = on;
 	}
 	
 	public void toggleItemBought(int position) {
@@ -1135,8 +1159,14 @@ public class ShoppingItemsView extends ListView {
 		if (PreferenceActivity.prefsStatusAffectsSort(getContext(),  mMode)) {
 			invalidate();		
 		} 
+		
+		mMarkedAllStatus = null;
 	}
 
+	public Boolean getMarkedAllStatus(){
+		return mMarkedAllStatus;
+	}
+	
 	public boolean cleanupList() {
 
 		boolean nothingdeleted = true;

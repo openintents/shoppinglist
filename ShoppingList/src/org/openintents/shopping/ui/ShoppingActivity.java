@@ -239,6 +239,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	private static final int MENU_MOVE_ITEM = Menu.FIRST + 20;
 	private static final int MENU_MARK_ALL_ITEMS = Menu.FIRST + 21;
 	private static final int MENU_ITEM_STORES = Menu.FIRST + 22;
+	private static final int MENU_UNMARK_ALL_ITEMS = Menu.FIRST + 23;
 
 	private static final int MENU_DISTRIBUTION_START = Menu.FIRST + 100; // MUST
 																			// BE
@@ -1765,6 +1766,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 				.setIcon(android.R.drawable.ic_menu_agenda)
 				.setShortcut('9', 'm');
 
+		menu.add(0, MENU_UNMARK_ALL_ITEMS, 0, R.string.unmark_all_items);
+
 		// Add distribution menu items last.
 		mDistribution.onCreateOptionsMenu(menu);
 
@@ -1775,7 +1778,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
 		return true;
 	}
-
+	
 	/**
 	 * Check whether an application exists that handles the pick activity.
 	 * 
@@ -1839,6 +1842,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 			menuItem.setIcon(android.R.drawable.ic_menu_add);
 		}
 
+		menuItem = menu.findItem(MENU_MARK_ALL_ITEMS).setVisible(mItemsView.getMarkedAllStatus() == null || !mItemsView.getMarkedAllStatus());
+		menuItem = menu.findItem(MENU_UNMARK_ALL_ITEMS).setVisible(mItemsView.getMarkedAllStatus() != null && mItemsView.getMarkedAllStatus());
+		
 		menuItem = menu.findItem(MENU_CLEAN_UP_LIST).setEnabled(
 				mItemsView.mNumChecked > 0);
 
@@ -1926,8 +1932,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 			insertItemsFromExtras();
 			return true;
 		case MENU_MARK_ALL_ITEMS:
-			mItemsView.toggleOnAllItems();
+			mItemsView.toggleAllItems(true);
 			return true;
+		case MENU_UNMARK_ALL_ITEMS:
+			mItemsView.toggleAllItems(false);
 		}
 		if (debug)
 			Log.d(TAG, "Start intent group id : " + item.getGroupId());
