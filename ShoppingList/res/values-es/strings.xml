@@ -180,9 +180,9 @@
 	<string name="preference_sortorder_for_pick_summary">Cambiar el orden de los artículos en el modo Escoger Elementos.</string>
 	<string name="preference_sortorder_dialog_title">Elejir orden de clasificación</string>
 	<string name="preference_sortorder_for_pick_dialog_title">Cambiar el orden en el modo Escoger Elementos</string>
-	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
-	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
-	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
+	<string name="preference_sortorder_for_shopping_lists">Tipo de orden - Listas de la compra</string>
+	<string name="preference_sortorder_for_slists_summary">Modificar tipo de orden o listas de la compra.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Cambiar tipo de orden para listas de la compra</string>
 	<string name="preference_loadlastused_title">Cargar última lista usada</string>
 	<string name="preference_loadlastused_summary">Siempre comenzar con la lista leída por última vez.</string>
 	<string name="preference_capitalization_title">Capitalización</string>
