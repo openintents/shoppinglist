@@ -2065,6 +2065,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 			// semi-transparent.
 			mEditText.setTextColor(mItemsView.mTextColor);
 			mButton.setTextColor(mItemsView.mTextColor);
+			if (mStoresFilterButton != null)
+			  mStoresFilterButton.setTextColor(mItemsView.mTextColor);
+			if (mTagsFilterButton != null)
+			  mTagsFilterButton.setTextColor(mItemsView.mTextColor);
+			if (mShoppingListsFilterButton != null)
+			  mShoppingListsFilterButton.setTextColor(mItemsView.mTextColor);
 			if (mShoppingListsView instanceof Spinner) {
 				View view = ((Spinner) mShoppingListsView).getChildAt(0);
 				setSpinnerTextColorInHoloTheme(view);
