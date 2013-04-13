@@ -212,14 +212,14 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		/*
 		 * setButton(R.string.ok, new DialogInterface.OnClickListener() { public
 		 * void onClick(DialogInterface dialog, int whichButton) {
-		 * 
+		 *
 		 * dialog.dismiss(); doTextEntryDialogAction(mTextEntryMenu, (Dialog)
 		 * dialog);
-		 * 
+		 *
 		 * } }).setNegativeButton(R.string.cancel, new
 		 * DialogInterface.OnClickListener() { public void
 		 * onClick(DialogInterface dialog, int whichButton) {
-		 * 
+		 *
 		 * dialog.cancel(); } }).create();
 		 */
 
@@ -239,7 +239,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 
 	/**
 	 * Set cursor to be requeried if item is changed.
-	 * 
+	 *
 	 * @param c
 	 */
 	public void setOnItemChangedListener(OnItemChangedListener listener) {
@@ -381,7 +381,8 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		tags = tags.trim();
 
 		ContentValues values = new ContentValues();
-		values.put(Items.NAME, text);
+		if(!text.equalsIgnoreCase(""))
+			values.put(Items.NAME, text);
 		values.put(Items.TAGS, tags);
 		if (price != null) {
 			values.put(Items.PRICE, priceLong);
