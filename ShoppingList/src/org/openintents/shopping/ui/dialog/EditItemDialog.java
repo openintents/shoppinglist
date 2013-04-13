@@ -8,8 +8,8 @@ import org.openintents.shopping.library.provider.ShoppingContract.Items;
 import org.openintents.shopping.library.provider.ShoppingContract.Units;
 import org.openintents.shopping.library.util.PriceConverter;
 import org.openintents.shopping.library.util.ShoppingUtils;
-import org.openintents.shopping.ui.PreferenceActivity;
 import org.openintents.shopping.ui.ItemStoresActivity;
+import org.openintents.shopping.ui.PreferenceActivity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -32,6 +32,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FilterQueryProvider;
 import android.widget.ImageButton;
@@ -39,7 +40,7 @@ import android.widget.MultiAutoCompleteTextView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.CursorToStringConverter;
 import android.widget.TextView;
-import android.widget.Button;
+import android.widget.Toast;
 
 public class EditItemDialog extends AlertDialog implements OnClickListener {
 
@@ -381,7 +382,8 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		tags = tags.trim();
 
 		ContentValues values = new ContentValues();
-		values.put(Items.NAME, text);
+		if(!text.equalsIgnoreCase(""))
+			values.put(Items.NAME, text);
 		values.put(Items.TAGS, tags);
 		if (price != null) {
 			values.put(Items.PRICE, priceLong);

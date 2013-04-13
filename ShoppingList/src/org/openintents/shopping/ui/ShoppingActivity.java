@@ -1581,7 +1581,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	 * Inserts new item from edit box into currently selected shopping list.
 	 */
 	private void insertNewItem() {
-		String newItem = mEditText.getText().toString();
+		String newItem = mEditText.getText().toString().trim();
 
 		// Only add if there is something to add:
 		if (newItem.compareTo("") != 0) {
@@ -2033,7 +2033,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	 *         because user has not given any name.
 	 */
 	private boolean createNewList(String name) {
-
+		name=name.trim();
 		if (name.equals("")) {
 			// User has not provided any name
 			Toast.makeText(this, getString(R.string.please_enter_name),
@@ -2103,7 +2103,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	 *         because user has not given any name.
 	 */
 	private boolean renameList(String newName) {
-
+		newName=newName.trim();
 		if (newName.equals("")) {
 			// User has not provided any name
 			Toast.makeText(this, getString(R.string.please_enter_name),
@@ -2259,6 +2259,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	 * 
 	 * @param field
 	 */
+	@SuppressWarnings("deprecation")
 	void editItem(long itemId, long containsId, EditItemDialog.FieldType field) {
 		mItemUri = Uri.withAppendedPath(ShoppingContract.Items.CONTENT_URI, ""
 				+ itemId);
@@ -2727,7 +2728,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 					android.R.layout.simple_spinner_item,
 					new String[] { getString(R.string.no_shopping_provider) });
 			setSpinnerListAdapter(adapter);
-
 			return;
 		}
 
@@ -2735,7 +2735,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 			// We have to create default shopping list:
 			long listId = ShoppingUtils.getList(this,
 					getText(R.string.my_shopping_list).toString());
-
 			// Check if insertion really worked. Otherwise
 			// we may end up in infinite recursion.
 			if (listId < 0) {
@@ -2993,7 +2992,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 						android.R.layout.simple_dropdown_item_1line,
 						autocompleteItems);
 			}
-
 		}.execute(listId);
 	}
 
@@ -3285,6 +3283,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onItemChanged() {
 		mItemsView.mCursorItems.requery();
