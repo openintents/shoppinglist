@@ -8,8 +8,13 @@ import org.openintents.shopping.library.provider.ShoppingContract.Items;
 import org.openintents.shopping.library.provider.ShoppingContract.Units;
 import org.openintents.shopping.library.util.PriceConverter;
 import org.openintents.shopping.library.util.ShoppingUtils;
+<<<<<<< HEAD
 import org.openintents.shopping.ui.PreferenceActivity;
 import org.openintents.shopping.ui.ItemStoresActivity;
+=======
+import org.openintents.shopping.ui.ItemStoresActivity;
+import org.openintents.shopping.ui.PreferenceActivity;
+>>>>>>> parent of 837efb7... Revert "No empty string can now be added as a list item"
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -32,6 +37,10 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+<<<<<<< HEAD
+=======
+import android.widget.Button;
+>>>>>>> parent of 837efb7... Revert "No empty string can now be added as a list item"
 import android.widget.EditText;
 import android.widget.FilterQueryProvider;
 import android.widget.ImageButton;
@@ -39,7 +48,11 @@ import android.widget.MultiAutoCompleteTextView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.CursorToStringConverter;
 import android.widget.TextView;
+<<<<<<< HEAD
 import android.widget.Button;
+=======
+import android.widget.Toast;
+>>>>>>> parent of 837efb7... Revert "No empty string can now be added as a list item"
 
 public class EditItemDialog extends AlertDialog implements OnClickListener {
 
@@ -212,6 +225,16 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		/*
 		 * setButton(R.string.ok, new DialogInterface.OnClickListener() { public
 		 * void onClick(DialogInterface dialog, int whichButton) {
+<<<<<<< HEAD
+		 *
+		 * dialog.dismiss(); doTextEntryDialogAction(mTextEntryMenu, (Dialog)
+		 * dialog);
+		 *
+		 * } }).setNegativeButton(R.string.cancel, new
+		 * DialogInterface.OnClickListener() { public void
+		 * onClick(DialogInterface dialog, int whichButton) {
+		 *
+=======
 		 * 
 		 * dialog.dismiss(); doTextEntryDialogAction(mTextEntryMenu, (Dialog)
 		 * dialog);
@@ -220,6 +243,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		 * DialogInterface.OnClickListener() { public void
 		 * onClick(DialogInterface dialog, int whichButton) {
 		 * 
+>>>>>>> parent of 837efb7... Revert "No empty string can now be added as a list item"
 		 * dialog.cancel(); } }).create();
 		 */
 
@@ -239,7 +263,11 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 
 	/**
 	 * Set cursor to be requeried if item is changed.
+<<<<<<< HEAD
+	 *
+=======
 	 * 
+>>>>>>> parent of 837efb7... Revert "No empty string can now be added as a list item"
 	 * @param c
 	 */
 	public void setOnItemChangedListener(OnItemChangedListener listener) {
@@ -381,7 +409,8 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		tags = tags.trim();
 
 		ContentValues values = new ContentValues();
-		values.put(Items.NAME, text);
+		if(!text.equalsIgnoreCase(""))
+			values.put(Items.NAME, text);
 		values.put(Items.TAGS, tags);
 		if (price != null) {
 			values.put(Items.PRICE, priceLong);
