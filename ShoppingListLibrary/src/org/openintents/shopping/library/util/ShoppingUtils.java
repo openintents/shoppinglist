@@ -22,6 +22,7 @@ import java.util.List;
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.ActiveList;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
+import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
 import org.openintents.shopping.library.provider.ShoppingContract.ItemStores;
 import org.openintents.shopping.library.provider.ShoppingContract.Items;
 import org.openintents.shopping.library.provider.ShoppingContract.Lists;
@@ -836,6 +837,26 @@ public class ShoppingUtils {
 			}
 		}	
 		return filter;
+	}
+	
+	public static String getUncheckedFirstItem(Context ctx){
+		long listId = getDefaultList(ctx);
+		String name = "";
+		String units = "";
+		String quantity = "";
+		Cursor existingItems = ctx.getContentResolver().query(
+				ContainsFull.CONTENT_URI,
+				new String[] { ContainsFull.ITEM_NAME, ContainsFull.ITEM_UNITS, ContainsFull.QUANTITY}, ContainsFull.LIST_ID + " = ? AND " + ContainsFull.STATUS + " = ?",
+				new String[] { String.valueOf(listId), String.valueOf(Status.WANT_TO_BUY) }, null);
+		if (existingItems.getCount() > 0) {
+			existingItems.moveToFirst();
+			name = existingItems.getString(0);
+			units = existingItems.getString(1);
+			quantity = existingItems.getString(2);
+		}
+		;
+		existingItems.close();
+		return name + "(" + quantity + " " + units + ")";
 	}
 
 }

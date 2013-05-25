@@ -39,10 +39,9 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.v2.os.Build;
+import android.os.Build;
 import android.os.Handler;
 import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
 import android.text.TextUtils;
@@ -68,6 +67,11 @@ import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
+
+import com.google.android.gms.games.GamesClient;
+import com.google.android.gms.games.multiplayer.realtime.Room;
+import com.google.android.gms.games.multiplayer.realtime.RoomConfig;
+import com.google.android.gms.games.multiplayer.realtime.RoomUpdateListener;
 
 /**
  * View to show a shopping list with its items
@@ -148,6 +152,8 @@ public class ShoppingItemsView extends ListView {
 	private DropListener mDropListener;
 
 	private ActionBarListener mActionBarListener;
+	
+	private GamesClient mGamesClient;
 	
 	/**
 	 * Extend the SimpleCursorAdapter to strike through items. if STATUS ==
@@ -662,6 +668,7 @@ public class ShoppingItemsView extends ListView {
 
 		// Remember standard divider
 		mDefaultDivider = getDivider();
+		
 	}
 
 	public void setActionBarListener(ActionBarListener listener) {
@@ -1146,6 +1153,33 @@ public class ShoppingItemsView extends ListView {
 				newstatus = ShoppingContract.Status.REMOVED_FROM_LIST;
 			} // else old is REMOVE_FROM_LIST or BOUGHT, new is WANT_TO_BUY, which is the default.
 		} 
+		
+		RoomConfig roomConfig = RoomConfig.builder(new RoomUpdateListener() {
+			
+			@Override
+			public void onRoomCreated(int statusCode, Room room) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onRoomConnected(int statusCode, Room room) {				
+				
+			}
+			
+			@Override
+			public void onLeftRoom(int statusCode, String roomId) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onJoinedRoom(int statusCode, Room room) {
+				// TODO Auto-generated method stub
+				
+			}
+		}).build();
+		mGamesClient.createRoom(roomConfig);
 		
 		ContentValues values = new ContentValues();
 		values.put(ShoppingContract.Contains.STATUS, newstatus);

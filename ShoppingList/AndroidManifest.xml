@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
 	* Copyright (C) 2007-2011 OpenIntents.org
 	*
 	* Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,15 +12,17 @@
 	* distributed under the License is distributed on an "AS IS" BASIS,
 	* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 	* See the License for the specific language governing permissions and
-	* limitations under the License.
+	* limitations under the License.
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="org.openintents.shopping"
+    package="org.openintents.shopping"
     android:installLocation="auto"
-	android:versionName="1.7.0.6"
-	android:versionCode="10043">
-	<!-- History:
+    android:versionCode="10043"
+    android:versionName="1.7.0.6" >
+
+    <!--
+    History:
 	 * * * UPDATE ATRACKDOG METADATA BELOW FOR RELEASE CANDIDATES * * *
 	1.7.0.6 [10042]: 2012-11-26
 	1.7.0.4 [10041]: 2012-10-16
@@ -43,235 +45,289 @@
 	1.1.2 [10009]: 2009-10-14
 	1.1.1 [10008]: 2009-05-27
 	1.1.0 [10006]: 2009-05-16
-	1.0.3 [10004]: 2009-02-04  -->
-	
-	<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="17"/>
-	<uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
-	 
-	<application android:icon="@drawable/ic_launcher_shoppinglist" android:label="@string/app_name"
-		android:backupAgent="ShoppingBackupAgent">
-	
-        <!-- aTrackDog metadata --> 
-        <meta-data android:name="com.a0soft.gphone.aTrackDog.testVersion"
-           android:value="10036" />
-        
-		<meta-data android:name="com.google.android.backup.api_key"
-    		android:value="AEdPqrEAAAAIyg1-9MfKF9MnoINzk-FPUGiXcqLuHLcMP3PvEg" />
-        
-		<meta-data android:name="org.openintents.about"
-			android:resource="@xml/about" />
-                       
-	    <meta-data android:name="org.openintents.metadata.USES_INTENT"
-	                   android:value="org.openintents.action.SHOW_ABOUT_DIALOG?org.openintents.extra.PACKAGE_NAME=org.openintents.shopping"/>                       
+	1.0.3 [10004]: 2009-02-04
+    -->
 
-	    <meta-data android:name="org.openintents.themes"
-	        android:resource="@xml/themes"
-	      />
-	    
-	    <meta-data android:name="hideMarketLink"
-	        android:value="false"/>
-	      
-		<provider android:name="org.openintents.shopping.provider.ShoppingProvider"
-			android:authorities="org.openintents.shopping" />
-        <provider android:name="org.openintents.shopping.backup.MyBackupPro"  
-            android:authorities="org.openintents.shopping.backup.MyBackupPro"
-        /> 
-        <!-- Permissions not yet active! Activate permissions in one of the following releases.
+    <uses-sdk
+        android:minSdkVersion="4"
+        android:targetSdkVersion="17" />
+
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
+    <application
+        android:backupAgent="ShoppingBackupAgent"
+        android:icon="@drawable/ic_launcher_shoppinglist"
+        android:label="@string/app_name" >
+
+        <!-- aTrackDog metadata -->
+        <meta-data
+            android:name="com.a0soft.gphone.aTrackDog.testVersion"
+            android:value="10036" />
+        <meta-data
+            android:name="com.google.android.backup.api_key"
+            android:value="AEdPqrEAAAAIyg1-9MfKF9MnoINzk-FPUGiXcqLuHLcMP3PvEg" />
+        <meta-data
+            android:name="org.openintents.about"
+            android:resource="@xml/about" />
+        <meta-data
+            android:name="org.openintents.metadata.USES_INTENT"
+            android:value="org.openintents.action.SHOW_ABOUT_DIALOG?org.openintents.extra.PACKAGE_NAME=org.openintents.shopping" />
+        <meta-data
+            android:name="org.openintents.themes"
+            android:resource="@xml/themes" />
+        <meta-data
+            android:name="hideMarketLink"
+            android:value="false" />
+        <meta-data
+            android:name="com.google.android.gms.games.APP_ID"
+            android:value="@string/app_id" />
+
+        <provider
+            android:name="org.openintents.shopping.provider.ShoppingProvider"
+            android:authorities="org.openintents.shopping" />
+        <provider
+            android:name="org.openintents.shopping.backup.MyBackupPro"
+            android:authorities="org.openintents.shopping.backup.MyBackupPro" />
+        <!--
+             Permissions not yet active! Activate permissions in one of the following releases.
         	(Give time to extensions to implement permissions.)
         	android:readPermission="org.openintents.shopping.READ_PERMISSION"
-			android:writePermission="org.openintents.shopping.WRITE_PERMISSION"
-         -->
-		
-		<!-- Shopping activity -->
-		<activity android:name=".ShoppingActivity"
-			android:label="@string/app_name" 
-			android:windowSoftInputMode="stateHidden|adjustResize" >
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<category android:name="org.openintents.category.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
-			
-			<intent-filter>
-				<action android:name="android.intent.action.VIEW" />
-				<action android:name="android.intent.action.PICK" />
-				<action android:name="android.intent.action.INSERT" />
+			android:writePermission="org.openintents.shopping.WRITE_PERMISSION"
+        -->
+
+
+        <!-- Shopping activity -->
+        <activity
+            android:name=".ShoppingActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
-				<data android:mimeType="vnd.android.cursor.dir/vnd.openintents.shopping.item" />
-			</intent-filter>
-			<intent-filter>
-				<action android:name="android.intent.action.VIEW" />
-				<action android:name="android.intent.action.EDIT" />
+                <category android:name="org.openintents.category.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.PICK" />
+                <action android:name="android.intent.action.INSERT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.dir/vnd.openintents.shopping.item" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
                 <action android:name="android.intent.action.GET_CONTENT" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<data android:mimeType="vnd.android.cursor.item/vnd.openintents.shopping.item" />
-			</intent-filter>
-			<intent-filter>
-				<action android:name="android.intent.action.VIEW" />
-				<action android:name="android.intent.action.EDIT" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<data android:mimeType="vnd.android.cursor.item/vnd.openintents.shopping.list" />
-			</intent-filter>
-			<!-- 
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.openintents.shopping.item" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.openintents.shopping.list" />
+            </intent-filter>
+            <!--
 			<intent-filter>
                 <action android:name="org.openintents.action.INSERT_FROM_EXTRAS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="org.openintents.type/string.arraylist.shopping" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity android:name=".multi.MultiShoppingActivity" >
+        </activity>
+        <activity android:name=".ui.ShoppingListsActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.PICK" />
+                <action android:name="android.intent.action.INSERT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.dir/vnd.openintents.shopping.list" />
             </intent-filter>
-             -->
-		</activity>
-		
-		<activity android:name=".ui.ShoppingListsActivity">
-			<intent-filter>
-				<action android:name="android.intent.action.VIEW" />
-				<action android:name="android.intent.action.PICK" />
-				<action android:name="android.intent.action.INSERT" />
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+
                 <category android:name="android.intent.category.DEFAULT" />
-				<data android:mimeType="vnd.android.cursor.dir/vnd.openintents.shopping.list" />
-			</intent-filter>
-			<intent-filter>
-				<action android:name="android.intent.action.CREATE_SHORTCUT" />
-                <category android:name="android.intent.category.DEFAULT" />
-			</intent-filter>
-			<intent-filter>
+            </intent-filter>
+            <intent-filter>
                 <action android:name="org.openintents.action.INSERT_FROM_EXTRAS" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <!-- <category android:name="android.intent.category.ALTERNATIVE" /> -->
                 <data android:mimeType="org.openintents.type/string.arraylist.shopping" />
             </intent-filter>
-		</activity>
-		
-		<activity android:name=".share.ListShareSettingsActivity" 
-				android:label="@string/share_settings"
-				android:theme="@android:style/Theme.Dialog"
-				>
-				<!-- android:icon="@android:drawable/ic_menu_share" -->
-            <!-- This activity implements an alternative action that can be
+        </activity>
+        <activity
+            android:name=".share.ListShareSettingsActivity"
+            android:label="@string/share_settings"
+            android:theme="@android:style/Theme.Dialog" >
+
+            <!-- android:icon="@android:drawable/ic_menu_share" -->
+            <!--
+                 This activity implements an alternative action that can be
                  performed on notes: editing their title.  It can be used as
                  a default operation if the user invokes this action, and is
-                 available as an alternative action for any note data. -->
-            <intent-filter android:label="@string/share"
-            	>
-            	<!-- android:icon="@android:drawable/ic_menu_share" -->
+                 available as an alternative action for any note data.
+            -->
+            <intent-filter android:label="@string/share" >
+
+                <!-- android:icon="@android:drawable/ic_menu_share" -->
                 <!-- Edit the share settings. -->
                 <action android:name="org.openintents.action.SET_SHARE_SETTINGS" />
                 <!-- DEFAULT: execute if being directly invoked. -->
                 <category android:name="android.intent.category.DEFAULT" />
-                <!-- ALTERNATIVE: show as an alternative action when the user is
-                     working with this type of data. -->
-                <!-- <category android:name="android.intent.category.ALTERNATIVE" />  -->
-                <!-- SELECTED_ALTERNATIVE: show as an alternative action the user
-                     can perform when selecting this type of data. -->
+                <!--
+                     ALTERNATIVE: show as an alternative action when the user is
+                     working with this type of data.
+                -->
+                <!-- <category android:name="android.intent.category.ALTERNATIVE" /> -->
+                <!--
+                     SELECTED_ALTERNATIVE: show as an alternative action the user
+                     can perform when selecting this type of data.
+                -->
                 <!-- <category android:name="android.intent.category.SELECTED_ALTERNATIVE" /> -->
                 <!-- This is the data type we operate on. -->
                 <data android:mimeType="vnd.android.cursor.item/vnd.openintents.shopping.list" />
             </intent-filter>
         </activity>
-        
-        <!-- 
+
+        <!--
 		<activity android:name=".shopping.share.ThemeSettingsActivity" 
 				android:label="@string/theme_settings"
 				android:theme="@android:style/Theme.Dialog"
 				android:icon="@drawable/shoppinglisttheme001a">
-				TODO commented out for new sdk, if needed recover from svn
-        -->				
+				TODO commented out for new sdk, if needed recover from svn
+        -->
 
-		<activity android:name=".ui.AddLocationAlertActivity" 
-				android:label="@string/add_location_alert"
-				android:theme="@android:style/Theme.Dialog"
-				>
-				<!-- android:icon="@android:drawable/ic_menu_mylocation" -->
-            <intent-filter android:label="@string/add_location_alert"
-            	>
-            	<!-- android:icon="@android:drawable/ic_menu_mylocation" -->
+        <activity
+            android:name=".ui.AddLocationAlertActivity"
+            android:label="@string/add_location_alert"
+            android:theme="@android:style/Theme.Dialog" >
+
+            <!-- android:icon="@android:drawable/ic_menu_mylocation" -->
+            <intent-filter android:label="@string/add_location_alert" >
+
+                <!-- android:icon="@android:drawable/ic_menu_mylocation" -->
                 <!-- Edit the share settings. -->
                 <action android:name="org.openintents.action.ADD_LOCATION_ALERT" />
                 <!-- DEFAULT: execute if being directly invoked. -->
                 <category android:name="android.intent.category.DEFAULT" />
-                <!-- ALTERNATIVE: show as an alternative action when the user is
-                     working with this type of data. -->
-                <!-- <category android:name="android.intent.category.ALTERNATIVE" />  -->
-                <!-- SELECTED_ALTERNATIVE: show as an alternative action the user
-                     can perform when selecting this type of data. -->
+                <!--
+                     ALTERNATIVE: show as an alternative action when the user is
+                     working with this type of data.
+                -->
+                <!-- <category android:name="android.intent.category.ALTERNATIVE" /> -->
+                <!--
+                     SELECTED_ALTERNATIVE: show as an alternative action the user
+                     can perform when selecting this type of data.
+                -->
                 <!-- <category android:name="android.intent.category.SELECTED_ALTERNATIVE" /> -->
                 <!-- This is the data type we operate on. -->
                 <data android:mimeType="vnd.android.cursor.item/vnd.openintents.shopping.list" />
             </intent-filter>
         </activity>
-        
-        <!-- GTalk support for shopping list -->
-        <!-- SHARE actions can only supply cursor.dir data, because the
-             item IDs will be different on the sender and on the receiver side.
-             All information about items and lists is carried in the bundle. -->
-             <!-- 
-             TODO commented out for new sdk, if needed recover from svn
-        <receiver android:name=".shopping.share.GTalkReceiver">
-         -->
 
-        <activity android:name=".automation.EditAutomationActivity"
-        	android:label="@string/app_name">
+        <!-- GTalk support for shopping list -->
+        <!--
+             SHARE actions can only supply cursor.dir data, because the
+             item IDs will be different on the sender and on the receiver side.
+             All information about items and lists is carried in the bundle.
+        -->
+        <!--
+             TODO commented out for new sdk, if needed recover from svn
+        <receiver android:name=".shopping.share.GTalkReceiver">
+        -->
+
+        <activity
+            android:name=".automation.EditAutomationActivity"
+            android:label="@string/app_name" >
             <intent-filter>
-        		<action android:name="org.openintents.action.EDIT_AUTOMATION" />
+                <action android:name="org.openintents.action.EDIT_AUTOMATION" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        
-        <receiver android:name=".automation.AutomationReceiver">
-        	<intent-filter>
-        		<action android:name="org.openintents.action.RUN_AUTOMATION" />
-        	</intent-filter>
+
+        <receiver android:name=".automation.AutomationReceiver" >
+            <intent-filter>
+                <action android:name="org.openintents.action.RUN_AUTOMATION" />
+            </intent-filter>
         </receiver>
 
-        <activity android:name=".ui.PreferenceActivity" android:label="@string/preferences">
-        </activity> 
-        <activity android:name=".ui.PickItemsActivity" 
-        android:label="@string/menu_pick_items"
-        android:theme="@android:style/Theme.Dialog">
-        </activity> 
-        <activity android:name=".ui.ItemStoresActivity" 
-        android:label="@string/item_stores_activity_label"
-        android:theme="@android:style/Theme.Dialog">
-        </activity> 
-        
-		<!-- Activities from OI Distribution Library -->
+        <activity
+            android:name=".ui.PreferenceActivity"
+            android:label="@string/preferences" >
+        </activity>
+        <activity
+            android:name=".ui.PickItemsActivity"
+            android:label="@string/menu_pick_items"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name=".ui.ItemStoresActivity"
+            android:label="@string/item_stores_activity_label"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+
+        <!-- Activities from OI Distribution Library -->
         <activity android:name="org.openintents.distribution.EulaActivity" />
         <activity android:name="org.openintents.distribution.NewVersionActivity" />
-        
+
         <!-- Widget -->
-        <receiver 
+        <receiver
             android:name=".widgets.CheckItemsWidget"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="org.openintents.shopping.widgets.ActionCheck" />
                 <action android:name="org.openintents.shopping.widgets.ActionPrevPage" />
                 <action android:name="org.openintents.shopping.widgets.ActionNextPage" />
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_check_items" />
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_check_items" />
         </receiver>
-        <activity android:name=".widgets.CheckItemsWidgetConfig">
+
+        <activity android:name=".widgets.CheckItemsWidgetConfig" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-         	</intent-filter>
-     	</activity>
-        <meta-data android:value="false" android:name="hideMarketLink"/>
-	</application>	 
-	
-	<!-- required for MyBackupPro: -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> 
-    
-	<uses-permission android:name="org.openintents.shopping.READ_PERMISSION" />
-	<uses-permission android:name="org.openintents.shopping.WRITE_PERMISSION" />
-	<permission android:name="org.openintents.shopping.READ_PERMISSION"
-		android:label="@string/oi_shopping_permission_read"
-		android:description="@string/oi_shopping_permission_read_descr"
-		android:permissionGroup="android.permission-group.PERSONAL_INFO"
-		android:protectionLevel="normal" />
-	<permission android:name="org.openintents.shopping.WRITE_PERMISSION"
-		android:label="@string/oi_shopping_permission_write"
-		android:description="@string/oi_shopping_permission_write_descr"
-		android:permissionGroup="android.permission-group.PERSONAL_INFO"
-		android:protectionLevel="normal" />
-	
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="hideMarketLink"
+            android:value="false" />
+    </application>
+
+    <!-- required for MyBackupPro: -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="org.openintents.shopping.READ_PERMISSION" />
+    <uses-permission android:name="org.openintents.shopping.WRITE_PERMISSION" />
+
+    <permission
+        android:name="org.openintents.shopping.READ_PERMISSION"
+        android:description="@string/oi_shopping_permission_read_descr"
+        android:label="@string/oi_shopping_permission_read"
+        android:permissionGroup="android.permission-group.PERSONAL_INFO"
+        android:protectionLevel="normal" />
+    <permission
+        android:name="org.openintents.shopping.WRITE_PERMISSION"
+        android:description="@string/oi_shopping_permission_write_descr"
+        android:label="@string/oi_shopping_permission_write"
+        android:permissionGroup="android.permission-group.PERSONAL_INFO"
+        android:protectionLevel="normal" />
+
 </manifest>

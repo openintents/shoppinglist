@@ -1,18 +1,13 @@
 package org.openintents.shopping.ui;
 
 import org.openintents.shopping.R;
-import org.openintents.shopping.R.id;
-import org.openintents.shopping.R.layout;
 import org.openintents.shopping.ui.widget.ShoppingItemsView;
 
 import android.app.Activity;
-import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v2.os.Build;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class PickItemsActivity extends Activity {
 

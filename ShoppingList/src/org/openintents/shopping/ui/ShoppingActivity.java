@@ -34,13 +34,13 @@ import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
-import org.openintents.shopping.library.provider.ShoppingContract.ItemStores;
 import org.openintents.shopping.library.provider.ShoppingContract.Items;
 import org.openintents.shopping.library.provider.ShoppingContract.Lists;
 import org.openintents.shopping.library.provider.ShoppingContract.Status;
 import org.openintents.shopping.library.provider.ShoppingContract.Stores;
 import org.openintents.shopping.library.util.PriceConverter;
 import org.openintents.shopping.library.util.ShoppingUtils;
+import org.openintents.shopping.multi.MultiShoppingActivity;
 import org.openintents.shopping.ui.dialog.DialogActionListener;
 import org.openintents.shopping.ui.dialog.EditItemDialog;
 import org.openintents.shopping.ui.dialog.EditItemDialog.FieldType;
@@ -81,11 +81,11 @@ import android.hardware.SensorListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v2.os.Build;
-import android.support.v2.view.MenuCompat;
+import android.support.v4.view.MenuCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -121,6 +121,9 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 /**
  * 
@@ -240,6 +243,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	private static final int MENU_MARK_ALL_ITEMS = Menu.FIRST + 21;
 	private static final int MENU_ITEM_STORES = Menu.FIRST + 22;
 	private static final int MENU_UNMARK_ALL_ITEMS = Menu.FIRST + 23;
+	private static final int MENU_SIGN_IN = Menu.FIRST + 24;
+	private static final int MENU_SIGN_OUT = Menu.FIRST + 25;
+	private static final int MENU_INVITE_FRIENDS = Menu.FIRST + 26;
+	private static final int MENU_SEE_INVITATIONS = Menu.FIRST + 27;
 
 	private static final int MENU_DISTRIBUTION_START = Menu.FIRST + 100; // MUST
 																			// BE
@@ -437,6 +444,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	private static final String BUNDLE_ITEM_URI = "item uri";
 	private static final String BUNDLE_RELATION_URI = "relation_uri";
 	private static final String BUNDLE_MODE = "mode";
+	private static final int REQUEST_GMS_ERROR_DIALOG = 100;
 
 	private String mSortOrder;
 
@@ -807,13 +815,18 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	}
 
 	@Override
-	protected void onResume() {
+	protected void onResume() {		
 		if (debug)
 			Log.i(TAG, "Shopping list onResume() 1");
 		super.onResume();
 		if (debug)
 			Log.i(TAG, "Shopping list onResume() 2");
 
+		int errorCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+		if (errorCode != ConnectionResult.SUCCESS){
+			GooglePlayServicesUtil.getErrorDialog(errorCode, this, REQUEST_GMS_ERROR_DIALOG).show();
+		}
+		
 		// Reload preferences, in case something changed
 		initFromPreferences();
 
@@ -1772,6 +1785,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
 		menu.add(0, MENU_UNMARK_ALL_ITEMS, 0, R.string.unmark_all_items);
 
+		menu.add(0, MENU_SIGN_IN, 0, R.string.sign_in);
+
 		// Add distribution menu items last.
 		mDistribution.onCreateOptionsMenu(menu);
 
@@ -1821,10 +1836,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		super.onPrepareOptionsMenu(menu);
-
-		// TODO: Add item-specific menu items (see NotesList.java example)
-		// like edit, strike-through, delete.
+		super.onPrepareOptionsMenu(menu);		
 
 		// Add menu option for auto adding items from string array in intent
 		// extra if they exist
@@ -1842,7 +1854,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 			menuItem.setTitle(R.string.menu_start_shopping);
 			menuItem.setIcon(android.R.drawable.ic_menu_myplaces);
 		} else {
-			menu.findItem(MENU_PICK_ITEMS).setTitle(R.string.menu_pick_items);
+			menuItem.setTitle(R.string.menu_pick_items);
 			menuItem.setIcon(android.R.drawable.ic_menu_add);
 		}
 
@@ -1938,8 +1950,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		case MENU_MARK_ALL_ITEMS:
 			mItemsView.toggleAllItems(true);
 			return true;
-		case MENU_UNMARK_ALL_ITEMS:
-			mItemsView.toggleAllItems(false);
+		case MENU_SIGN_IN:
+			startActivity(new Intent(this, MultiShoppingActivity.class));
 		}
 		if (debug)
 			Log.d(TAG, "Start intent group id : " + item.getGroupId());

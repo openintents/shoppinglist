@@ -1,17 +1,10 @@
 package org.openintents.shopping.ui.widget;
 
-import org.openintents.shopping.library.provider.ShoppingContract;
-import org.openintents.shopping.library.provider.ShoppingContract.Contains;
-import org.openintents.shopping.ui.widget.QuickSelectMenu.OnItemSelectedListener;
-
-import android.content.ContentValues;
 import android.content.Context;
-import android.net.Uri;
-import android.support.v2.os.Build;
+import android.os.Build;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.PopupMenu;
 
 /* This class exposes a subset of PopupMenu functionality, and chooses whether 
  * to use the platform PopupMenu (on Honeycomb or above) or a backported version.

@@ -116,4 +116,5 @@
     <!-- URL to OI Shopping list themes-->
     <string name="preference_developer_themes_link">http://www.openintents.org/en/shoppinglist#themes</string>
 	
+    <string name="app_id">703644649962</string>
 </resources> 
