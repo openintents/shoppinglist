@@ -155,6 +155,17 @@
         	android:layout_alignWithParentIfMissing="true"
 			  android:gravity="top"
 			  android:visibility="gone"/>
+	<TextView android:id="@+id/mDateview"
+			  android:layout_width="wrap_content"
+			  android:layout_height="wrap_content"
+			  android:layout_marginLeft = "10dip"
+        	android:layout_toLeftOf="@+id/price"  
+        	android:layout_toRightOf="@+id/tags"   
+        	android:layout_below="@+id/name"       	
+        	android:layout_alignParentBottom="true"
+        	android:layout_alignWithParentIfMissing="true"
+			  android:gravity="center_vertical"
+			  android:visibility="visible"/>
    <TextView android:id="@+id/price"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"

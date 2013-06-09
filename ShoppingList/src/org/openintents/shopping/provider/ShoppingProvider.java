@@ -1230,7 +1230,6 @@ public class ShoppingProvider extends ContentProvider {
 		ITEMS_PROJECTION_MAP.put(Items.TAGS, "items.tags");
 		ITEMS_PROJECTION_MAP.put(Items.BARCODE, "items.barcode");
 		ITEMS_PROJECTION_MAP.put(Items.LOCATION, "items.location");
-		ITEMS_PROJECTION_MAP.put(Items.DUE_DATE, "items.due");
 		ITEMS_PROJECTION_MAP.put(Items.CREATED_DATE, "items.created");
 		ITEMS_PROJECTION_MAP.put(Items.MODIFIED_DATE, "items.modified");
 		ITEMS_PROJECTION_MAP.put(Items.ACCESSED_DATE, "items.accessed");
@@ -1257,7 +1256,7 @@ public class ShoppingProvider extends ContentProvider {
 		CONTAINS_PROJECTION_MAP.put(Contains.LIST_ID, "contains.list_id");
 		CONTAINS_PROJECTION_MAP.put(Contains.QUANTITY, "contains.quantity");
 		CONTAINS_PROJECTION_MAP.put(Contains.PRIORITY, "contains.priority");
-
+		CONTAINS_PROJECTION_MAP.put(Contains.DUE_DATE, "contains.due");
 		CONTAINS_PROJECTION_MAP.put(Contains.STATUS, "contains.status");
 		CONTAINS_PROJECTION_MAP.put(Contains.CREATED_DATE, "contains.created");
 		CONTAINS_PROJECTION_MAP
@@ -1284,6 +1283,8 @@ public class ShoppingProvider extends ContentProvider {
 				.put(ContainsFull.STATUS, "contains.status");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.CREATED_DATE,
 				"contains.created");
+		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.DUE_DATE,
+				"contains.due");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.MODIFIED_DATE,
 				"contains.modified");
 		CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ACCESSED_DATE,

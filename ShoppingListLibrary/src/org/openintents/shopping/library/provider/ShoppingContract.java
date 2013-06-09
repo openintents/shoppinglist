@@ -134,13 +134,6 @@ public abstract class ShoppingContract {
 		 */
 		public static final String ACCESSED_DATE = "accessed";
 
-		/**
-		 * The timestamp for when the item is due.
-		 * <P>
-		 * Type: INTEGER (long)
-		 * </P>
-		 */
-		public static final String DUE_DATE = "due";
 
 		/**
 		 * Generic projection map.
@@ -316,6 +309,7 @@ public abstract class ShoppingContract {
 	 * Information which list contains which items/lists/(recipes)
 	 */
 	public static final class Contains implements BaseColumns {
+		public static final String DUEDATE="duedate";
 		/**
 		 * The content:// style URL for this table.
 		 */

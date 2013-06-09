@@ -166,7 +166,7 @@ public class ShoppingItemsView extends ListView {
 			public TextView mTagsView;
 			public CheckBox mCheckView;
 			public ImageView mNoCheckView;
-			
+			public TextView mDateview;
 			public Cursor  mCursor; 
 			public int     mCursorPos;
 			
@@ -218,7 +218,7 @@ public class ShoppingItemsView extends ListView {
 				mPriorityView = (TextView) view.findViewById(R.id.priority);
 				mCheckView = (CheckBox) view.findViewById(R.id.check);
 				mNoCheckView = (ImageView) view.findViewById(R.id.nocheck);
-
+                mDateview = (TextView) view.findViewById(R.id.mDateview);
 				mParentView.setTag(this);
 				mNameView.setTag(this);
 				mPriceView.setTag(this);
@@ -228,7 +228,7 @@ public class ShoppingItemsView extends ListView {
 				mPriorityView.setTag(this);
 				mCheckView.setTag(this);
 				mNoCheckView.setTag(this);
-				
+				mDateview.setTag(this);
 				mQuantityView.setOnClickListener(new mItemClickListener("Quantity Click ", 
 						EditItemDialog.FieldType.QUANTITY));
 				mPriceView.setOnClickListener(new mItemClickListener("Click on price: ",
@@ -239,6 +239,8 @@ public class ShoppingItemsView extends ListView {
 						EditItemDialog.FieldType.PRIORITY));
 				mTagsView.setOnClickListener(new mItemClickListener("Click on tags: ",
 						EditItemDialog.FieldType.TAGS));
+				mDateview.setOnClickListener(new mItemClickListener("Click on Dates: ",
+						EditItemDialog.FieldType.DATE));
 				
 				mCheckView.setOnClickListener(new mItemToggleListener("Click: "));
 				// also check around check box
@@ -533,7 +535,14 @@ public class ShoppingItemsView extends ListView {
 					hideTextView(tv);
 				}
 				return true;
-			} else if (id == R.id.tags) {
+			}
+			else if (id == R.id.mDateview) {
+				TextView tv = (TextView) view;
+				String date = cursor.getString(ShoppingActivity.mStringItemsDATE);
+				tv.setText(date);
+				return true;
+			}
+			else if (id == R.id.tags) {
 				
 				TextView tv = (TextView) view;
 				if (hasTags) {
@@ -769,11 +778,11 @@ public class ShoppingItemsView extends ListView {
 														 */
 				ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,  
 				ContainsFull.QUANTITY, ContainsFull.PRIORITY,
-				ContainsFull.ITEM_UNITS				
+				ContainsFull.ITEM_UNITS	, ContainsFull.DUE_DATE
 				},
 				// the view defined in the XML template
 				new int[] { R.id.name, /* R.id.image_URI, */R.id.tags,
-						R.id.price, R.id.quantity, R.id.priority, R.id.units });
+						R.id.price, R.id.quantity, R.id.priority, R.id.units , R.id.mDateview});
 		setAdapter(adapter);
 
 		// called in requery():

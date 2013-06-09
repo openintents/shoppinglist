@@ -40,7 +40,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 	 * 1.2.7-beta 8: Release 1.2.7-beta 9: Release 1.3.0 10: Release 1.3.1-beta
 	 * 11: Release 1.4.0-beta
 	 */
-	static final int DATABASE_VERSION = 12;
+	static final int DATABASE_VERSION = 13;
 
 	public static final String DATABASE_NAME = "shopping.db";
 
@@ -93,7 +93,8 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				+ "share_created_by VARCHAR," // V2
 				+ "share_modified_by VARCHAR," // V2
 				+ "sort_key INTEGER," // V3
-				+ "priority INTEGER" // V6
+				+ "priority INTEGER," // V6
+				+ "duedate VARCHAR" // V13
 				+ ");");
 		db.execSQL("CREATE TABLE stores (" + "_id INTEGER PRIMARY KEY," // V5
 				+ "name VARCHAR, " // V5
@@ -154,8 +155,6 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 							+ " VARCHAR;");
 					db.execSQL("ALTER TABLE items ADD COLUMN " + Items.LOCATION
 							+ " VARCHAR;");
-					db.execSQL("ALTER TABLE items ADD COLUMN " + Items.DUE_DATE
-							+ " INTEGER;");
 				} catch (SQLException e) {
 					Log.e(ShoppingProvider.TAG, "Error executing SQL: ", e);
 					// If the error is "duplicate column name" then
@@ -287,7 +286,13 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 					Log.e(ShoppingProvider.TAG, "Error executing SQL: ", e);
 				}
 				// NO break;
-
+			case 12:
+				try {
+					db.execSQL("ALTER TABLE contains ADD COLUMN "
+							+ Contains.DUEDATE + " VARCHAR;");
+				} catch (SQLException e) {
+					Log.e(ShoppingProvider.TAG, "Error executing SQL: ", e);
+				}
 				// NO break UNTIL HERE!
 				break;
 			default:

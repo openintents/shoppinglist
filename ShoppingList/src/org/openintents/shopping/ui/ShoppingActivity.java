@@ -244,7 +244,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	private static final int MENU_DISTRIBUTION_START = Menu.FIRST + 100; // MUST
 																			// BE
 																			// LAST
-
+    public static String date;
 	private static final int DIALOG_ABOUT = 1;
 	// private static final int DIALOG_TEXT_ENTRY = 2;
 	private static final int DIALOG_NEW_LIST = 2;
@@ -400,7 +400,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 			ContainsFull.QUANTITY, ContainsFull.STATUS, ContainsFull.ITEM_ID,
 			ContainsFull.SHARE_CREATED_BY, ContainsFull.SHARE_MODIFIED_BY,
 			ContainsFull.PRIORITY, ContainsFull.ITEM_HAS_NOTE,
-			ContainsFull.ITEM_UNITS };
+			ContainsFull.ITEM_UNITS , ContainsFull.DUE_DATE};
 	static final int mStringItemsCONTAINSID = 0;
 	public static final int mStringItemsITEMNAME = 1;
 	static final int mStringItemsITEMIMAGE = 2;
@@ -414,7 +414,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	public static final int mStringItemsPRIORITY = 10;
 	public static final int mStringItemsITEMHASNOTE = 11;
 	public static final int mStringItemsITEMUNITS = 12;
-
+    public static final int mStringItemsDATE = 13;
 	private LinearLayout.LayoutParams mLayoutParamsItems;
 	private int mAllowedListHeight; // Height for the list allowed in this view.
 
@@ -3142,7 +3142,25 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	 *      android.os.Bundle)
 	 */
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+		if(requestCode==6){
+			if(resultCode==RESULT_OK){
+
+				Bundle b = data.getExtras();
+				String dateandtime = b
+						.getString("datetime");
+				
+				
+				EditItemDialog e = new EditItemDialog(this, mItemUri, mRelationUri,
+							mListItemUri);
+				e.show();
+				e.mDate.setText(dateandtime);
+				e.editItem();
+			}
+                }
+
+
 		if (debug)
 			Log.i(TAG, "ShoppingView: onActivityResult. ");
 

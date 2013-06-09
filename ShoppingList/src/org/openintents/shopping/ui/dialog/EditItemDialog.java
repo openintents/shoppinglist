@@ -2,6 +2,7 @@ package org.openintents.shopping.ui.dialog;
 
 import org.openintents.distribution.DownloadAppDialog;
 import org.openintents.shopping.R;
+import org.openintents.shopping.ShoppingActivity;
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.shopping.library.provider.ShoppingContract.Items;
@@ -12,8 +13,11 @@ import org.openintents.shopping.ui.PreferenceActivity;
 import org.openintents.shopping.ui.ItemStoresActivity;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.app.Dialog;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -41,22 +45,22 @@ import android.widget.SimpleCursorAdapter.CursorToStringConverter;
 import android.widget.TextView;
 import android.widget.Button;
 
-public class EditItemDialog extends AlertDialog implements OnClickListener {
+public class EditItemDialog extends AlertDialog  implements OnClickListener {
 
-	Context mContext;
+	 public Context mContext;
 	Uri mItemUri;
 	Uri mListItemUri;
 	long mItemId = 0;
 	String mNoteText = null;
-
 	EditText mEditText;
 	MultiAutoCompleteTextView mTags;
 	EditText mPrice;
 	Button mPriceStore;
 	EditText mQuantity;
 	EditText mPriority;
+	public EditText mDate;
+	ImageButton mCal;
 	AutoCompleteTextView mUnits;
-
 	TextView mPriceLabel;
 	ImageButton mNote;
 
@@ -67,7 +71,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 	SimpleCursorAdapter mUnitsAdapter;
 
 	public enum FieldType {
-		ITEMNAME, QUANTITY, PRICE, PRIORITY, UNITS, TAGS
+		ITEMNAME, QUANTITY, PRICE, PRIORITY, UNITS, TAGS , DATE
 	};
 
 	public EditItemDialog(final Context context, final Uri itemUri,
@@ -85,8 +89,32 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		mQuantity = (EditText) view.findViewById(R.id.editquantity);
 		mPriority = (EditText) view.findViewById(R.id.editpriority);
 		mUnits = (AutoCompleteTextView) view.findViewById(R.id.editunits);
-
-		mUnitsAdapter = new SimpleCursorAdapter(mContext,
+        mDate = (EditText) view.findViewById(R.id.datev);
+        mCal=(ImageButton) view.findViewById(R.id.cal);
+        mCal.setOnClickListener(new View.OnClickListener() {
+            
+			@Override
+			public void onClick(View v) {
+				
+				Intent intent = new Intent(Intent.ACTION_PICK);
+				intent.setComponent(new ComponentName(
+				   "org.openintents.calendarpicker"
+				   ,"org.openintents.calendarpicker.activity.MonthActivity"));
+				intent.setType("text/datetime");
+				try {
+					((Activity)mContext).startActivityForResult(intent , 6) ;
+					editItem();
+					dismiss();
+             		} catch (Exception e) {
+					e.printStackTrace();
+					Dialog g = new DownloadAppDialog(mContext,R.string.calnotavailable,
+							R.string.calendar,
+							R.string.calenderpackage, R.string.calenderwebsite);
+					g.show();	
+				}
+			}			
+		});
+	mUnitsAdapter = new SimpleCursorAdapter(mContext,
 				android.R.layout.simple_dropdown_item_1line, null,
 				// Map the units name...
 				new String[] { Units.NAME },
@@ -299,7 +327,8 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 			ShoppingContract.Items.UNITS };
 	private final String[] mRelationProjection = {
 			ShoppingContract.Contains.QUANTITY,
-			ShoppingContract.Contains.PRIORITY };
+			ShoppingContract.Contains.PRIORITY ,
+			ShoppingContract.Contains.DUE_DATE};
 
 	private Uri mRelationUri;
 
@@ -350,7 +379,9 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 			mQuantity.setText(quantity);
 			String priority = c.getString(1);
 			mPriority.setText(priority);
-		}
+			String datex =c.getString(2);
+			mDate.setText(datex);
+				}
 		c.close();
 	}
 
@@ -361,14 +392,15 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 
 	}
 
-	void editItem() {
+	public void editItem() {
 		String text = mEditText.getText().toString();
 		String tags = mTags.getText().toString();
 		String price = mPrice.getText().toString();
 		String quantity = mQuantity.getText().toString();
 		String priority = mPriority.getText().toString();
 		String units = mUnits.getText().toString();
-
+		String date = mDate.getText().toString();
+        
 		Long priceLong = PriceConverter.getCentPriceFromString(price);
 
 		text = text.trim();
@@ -396,6 +428,7 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		values.clear();
 		values.put(Contains.QUANTITY, quantity);
 		values.put(Contains.PRIORITY, priority);
+		values.put(Contains.DUE_DATE, date);
 
 		mContext.getContentResolver().update(mRelationUri, values, null, null);
 		mContext.getContentResolver().notifyChange(mRelationUri, null);
@@ -422,6 +455,9 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
 		// hack, need to share some values with ShoppingActivity.
 		case QUANTITY:
 			focus_field(mQuantity, true);
+			break;
+		case DATE:
+			focus_field(mDate , true);
 			break;
 		case PRIORITY:
 			focus_field(mPriority, true);
