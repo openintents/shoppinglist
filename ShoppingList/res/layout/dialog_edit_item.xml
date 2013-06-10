@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<!--
-		* Copyright (C) 2007-2008 OpenIntents.org * * Licensed under the
+		* Copyright (C) 2007-2013 OpenIntents.org * * Licensed under the
 		Apache License, Version 2.0 (the "License"); * you may not use this
 		file except in compliance with the License. * You may obtain a copy of
 		the License at * * http://www.apache.org/licenses/LICENSE-2.0 * *
@@ -95,6 +95,7 @@
 				android:layout_weight="1"
 				android:layout_height="wrap_content"
 				android:layout_marginRight="5dip" >
+
 				<TextView android:layout_width="fill_parent" android:id="@+id/labeleditpriority"
 					android:layout_height="wrap_content" android:layout_weight="1"
 					android:text="@string/priority"  />
@@ -103,6 +104,26 @@
 					android:singleLine="true" android:inputType="number"
 					android:layout_below="@+id/labeleditpriority"/>
 		</RelativeLayout>
+
+		<RelativeLayout
+		    android:layout_width="0dip"
+		    android:layout_height="wrap_content"
+		    android:layout_marginRight="5dip"
+		    android:layout_weight="1" >
+
+				<TextView android:layout_width="fill_parent" android:id="@+id/date"
+					android:layout_height="wrap_content" android:layout_weight="1"
+					android:text=""  />
+		    <ImageButton
+		        android:id="@+id/cal"
+			   android:src="@drawable/ic_calpicker"
+			   android:layout_width="fill_parent"
+			   android:layout_height="wrap_content"
+			   android:layout_below="@id/date"
+			   android:scaleType="centerInside"
+		         />
+		</RelativeLayout>
+
 		<RelativeLayout
 				android:layout_width="0dip"
 				android:layout_weight="1"
@@ -120,61 +141,6 @@
 			/> 
 		</RelativeLayout>
 			</LinearLayout>
-			<LinearLayout  android:id="@+id/calender_and_label"
-     android:orientation="horizontal"
-      android:layout_width="fill_parent" android:layout_height="wrap_content"
-      android:layout_below="@id/priority_and_note" >
-	
-   <RelativeLayout
-      android:layout_width="0dip"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="5dip" >
-        <TextView android:layout_width="fill_parent" android:id="@+id/duedate"
- 	          android:layout_height="wrap_content" android:layout_weight="1"
-          android:text="Due Date"  />
-	
-        <EditText
-            android:id="@+id/datev"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/duedate"
-            android:clickable="true"
-            android:onClick="onClick"
-            android:paddingTop="10dp"
-            android:text=""
-            android:textAppearance="?android:attr/textAppearanceLarge" />
- 		
-        </RelativeLayout>
-    <RelativeLayout
-       android:layout_width="0dip"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-       android:layout_marginRight="5dip" >
-	
-          <TextView	
-              android:id="@+id/callable"
- 	
-             android:layout_width="fill_parent"
- 	 	
-             android:layout_height="wrap_content"
-            android:layout_weight="1"
-             android:text="Calendar Picker" />
-	
-        <ImageButton	
-            android:id="@+id/cal"
-            android:layout_width="fill_parent"	
-            android:layout_height="wrap_content"
-             android:layout_below="@id/callable"	 	    
-            android:scaleType="centerInside"
- 		
-           android:src="@drawable/icon" />
- 	 
- 	     </RelativeLayout>
- 	 	      </LinearLayout>
 	    <!--
 			android:capitalize="words"
 		-->

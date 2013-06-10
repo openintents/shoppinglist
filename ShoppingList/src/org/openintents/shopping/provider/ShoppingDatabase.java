@@ -62,7 +62,6 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				+ "barcode VARCHAR," // V4
 				+ "location VARCHAR," // V4
 				+ "note VARCHAR," // V7
-				+ "due INTEGER," // V4
 				+ "created INTEGER," // V1
 				+ "modified INTEGER," // V1
 				+ "accessed INTEGER" // V1
@@ -94,7 +93,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				+ "share_modified_by VARCHAR," // V2
 				+ "sort_key INTEGER," // V3
 				+ "priority INTEGER," // V6
-				+ "duedate VARCHAR" // V13
+				+ "due INTEGER" // V13
 				+ ");");
 		db.execSQL("CREATE TABLE stores (" + "_id INTEGER PRIMARY KEY," // V5
 				+ "name VARCHAR, " // V5
@@ -289,7 +288,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 			case 12:
 				try {
 					db.execSQL("ALTER TABLE contains ADD COLUMN "
-							+ Contains.DUEDATE + " VARCHAR;");
+							+ Contains.DUE_DATE + " INTEGER;");
 				} catch (SQLException e) {
 					Log.e(ShoppingProvider.TAG, "Error executing SQL: ", e);
 				}

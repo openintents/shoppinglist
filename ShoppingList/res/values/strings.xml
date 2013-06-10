@@ -370,7 +370,7 @@
 	<string name="widget_choose_a_list">Choose a list</string>
 	<string name="widget_no_items">No items on page %d</string>
 	<string name="calendar">OI Calendar Picker</string>
-	<string name="calnotavailable">Adding Date requires OI Calender Picker.</string>
-	<string name="calenderpackage">org.openintents.calendarpicker</string>
-	<string name="calenderwebsite">http://www.openintents.org/en/calendarpicker</string>
+	<string name="calnotavailable">Adding Date requires OI Calendar Picker.</string>
+	<string name="calendarpackage">org.openintents.calendarpicker</string>
+	<string name="calendarwebsite">http://www.openintents.org/en/calendarpicker</string>
 </resources> 

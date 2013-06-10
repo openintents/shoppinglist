@@ -309,7 +309,6 @@ public abstract class ShoppingContract {
 	 * Information which list contains which items/lists/(recipes)
 	 */
 	public static final class Contains implements BaseColumns {
-		public static final String DUEDATE="duedate";
 		/**
 		 * The content:// style URL for this table.
 		 */
@@ -406,6 +405,14 @@ public abstract class ShoppingContract {
 		 */
 		public static final String SHARE_MODIFIED_BY = "share_modified_by";
 
+		/**
+		 * The timestamp for when the item is due.
+		 * <P>
+		 * Type: INTEGER (long)
+		 * </P>
+		 */
+		public static final String DUE_DATE = "due";
+		
 		/**
 		 * sort key with in the list
 		 * <P>

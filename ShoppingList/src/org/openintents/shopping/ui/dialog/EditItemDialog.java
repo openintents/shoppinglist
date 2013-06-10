@@ -58,7 +58,7 @@ public class EditItemDialog extends AlertDialog  implements OnClickListener {
 	Button mPriceStore;
 	EditText mQuantity;
 	EditText mPriority;
-	public EditText mDate;
+	public TextView mDate;
 	ImageButton mCal;
 	AutoCompleteTextView mUnits;
 	TextView mPriceLabel;
@@ -89,7 +89,7 @@ public class EditItemDialog extends AlertDialog  implements OnClickListener {
 		mQuantity = (EditText) view.findViewById(R.id.editquantity);
 		mPriority = (EditText) view.findViewById(R.id.editpriority);
 		mUnits = (AutoCompleteTextView) view.findViewById(R.id.editunits);
-        mDate = (EditText) view.findViewById(R.id.datev);
+        mDate = (TextView) view.findViewById(R.id.date);
         mCal=(ImageButton) view.findViewById(R.id.cal);
         mCal.setOnClickListener(new View.OnClickListener() {
             
@@ -109,7 +109,7 @@ public class EditItemDialog extends AlertDialog  implements OnClickListener {
 					e.printStackTrace();
 					Dialog g = new DownloadAppDialog(mContext,R.string.calnotavailable,
 							R.string.calendar,
-							R.string.calenderpackage, R.string.calenderwebsite);
+							R.string.calendarpackage, R.string.calendarwebsite);
 					g.show();	
 				}
 			}			
@@ -455,9 +455,6 @@ public class EditItemDialog extends AlertDialog  implements OnClickListener {
 		// hack, need to share some values with ShoppingActivity.
 		case QUANTITY:
 			focus_field(mQuantity, true);
-			break;
-		case DATE:
-			focus_field(mDate , true);
 			break;
 		case PRIORITY:
 			focus_field(mPriority, true);
