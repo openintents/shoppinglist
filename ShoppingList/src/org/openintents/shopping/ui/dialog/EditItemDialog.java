@@ -63,6 +63,7 @@ public class EditItemDialog extends AlertDialog  implements OnClickListener {
 	EditText mPriority;
 	public TextView mDate;
 	ImageButton mCal;
+	long mDateAsTime = 0;
 	AutoCompleteTextView mUnits;
 	TextView mPriceLabel;
 	ImageButton mNote;
@@ -104,8 +105,10 @@ public class EditItemDialog extends AlertDialog  implements OnClickListener {
 				   "org.openintents.calendarpicker"
 				   ,"org.openintents.calendarpicker.activity.MonthActivity"));
 				intent.setType("text/datetime");
+				if (mDateAsTime != 0) 
+				    intent.putExtra("epoch", mDateAsTime);
 				try {
-					((Activity)mContext).startActivityForResult(intent , 6) ;
+					((Activity)mContext).startActivityForResult(intent , ShoppingActivity.REQUEST_CALENDARPICKER_PICK_DATE) ;
 					editItem();
 					dismiss();
              		} catch (Exception e) {
@@ -382,11 +385,11 @@ public class EditItemDialog extends AlertDialog  implements OnClickListener {
 			mQuantity.setText(quantity);
 			String priority = c.getString(1);
 			mPriority.setText(priority);
-			long dateAsTime = c.getLong(2);
-			if (dateAsTime == 0) {
+			mDateAsTime = c.getLong(2);
+			if (mDateAsTime == 0) {
 				mDate.setText(""); // should set it to translated string Due Date
 			} else {
-				Date date = new Date(dateAsTime);
+				Date date = new Date(mDateAsTime);
 				mDate.setText(SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT).format(date));
 			}
 		}
