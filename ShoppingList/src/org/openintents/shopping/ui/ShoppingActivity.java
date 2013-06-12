@@ -328,6 +328,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	 */
 	static final private int SUBACTIVITY_LIST_SHARE_SETTINGS = 0;
 
+	static final public int REQUEST_CALENDARPICKER_PICK_DATE = 6;
+	
 	/**
 	 * Definition for message handler:
 	 */
@@ -3144,21 +3146,24 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-		if(requestCode==6){
+		if(requestCode==REQUEST_CALENDARPICKER_PICK_DATE){
 			if(resultCode==RESULT_OK){
 
 				Bundle b = data.getExtras();
-				String dateandtime = b
-						.getString("datetime");
+				long dateandtime = b.getLong("epoch", 0);
 				
-				
+				// set value
+				ContentValues values = new ContentValues();
+				values.put(Contains.DUE_DATE, dateandtime);
+				getContentResolver().update(mRelationUri, values, null, null);
+				getContentResolver().notifyChange(mRelationUri, null);
+
+				// now restart edit dialog, since calendar picker dismissed it
 				EditItemDialog e = new EditItemDialog(this, mItemUri, mRelationUri,
 							mListItemUri);
 				e.show();
-				e.mDate.setText(dateandtime);
-				e.editItem();
 			}
-                }
+		}
 
 
 		if (debug)

@@ -49,8 +49,7 @@
 	              android:gravity="center_vertical"
 		        />
 	</RelativeLayout>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/description"
+<RelativeLayout android:id="@+id/description"
               android:layout_width="0dip"
               android:layout_weight="1"
               android:layout_height="wrap_content"
@@ -95,7 +94,6 @@
     <TextView android:id="@+id/priority"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_toRightOf="@id/check"
               
 			  android:layout_marginTop="18dip"
 			  android:layout_marginLeft="2dip"
@@ -148,14 +146,14 @@
 	<TextView android:id="@+id/tags"
 			  android:layout_width="wrap_content"
 			  android:layout_height="wrap_content"
-			  android:layout_marginLeft = "10dip"
-        	android:layout_toRightOf="@id/check"        	
+			  android:layout_marginLeft = "10dip"      	
         	android:layout_below="@id/name"
         	android:layout_alignParentBottom="true"
+        	android:layout_alignParentLeft="true"
         	android:layout_alignWithParentIfMissing="true"
 			  android:gravity="top"
 			  android:visibility="gone"/>
-	<TextView android:id="@+id/mDateview"
+	<TextView android:id="@+id/date"
 			  android:layout_width="wrap_content"
 			  android:layout_height="wrap_content"
 			  android:layout_marginLeft = "10dip"

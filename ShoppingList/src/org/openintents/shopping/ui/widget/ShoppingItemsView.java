@@ -1,7 +1,10 @@
 package org.openintents.shopping.ui.widget;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import org.openintents.distribution.DownloadAppDialog;
@@ -129,6 +132,9 @@ public class ShoppingItemsView extends ListView {
 	private int mCoordOffset; // the difference between screen coordinates and
 								// coordinates in this view
 
+	private Date mDate;
+	private DateFormat mDateFormat;
+	
 	private WindowManager mWindowManager;
 	private WindowManager.LayoutParams mWindowParams;
 	private Rect mTempRect = new Rect();
@@ -166,7 +172,7 @@ public class ShoppingItemsView extends ListView {
 			public TextView mTagsView;
 			public CheckBox mCheckView;
 			public ImageView mNoCheckView;
-			public TextView mDateview;
+			public TextView mDateView;
 			public Cursor  mCursor; 
 			public int     mCursorPos;
 			
@@ -218,7 +224,7 @@ public class ShoppingItemsView extends ListView {
 				mPriorityView = (TextView) view.findViewById(R.id.priority);
 				mCheckView = (CheckBox) view.findViewById(R.id.check);
 				mNoCheckView = (ImageView) view.findViewById(R.id.nocheck);
-                mDateview = (TextView) view.findViewById(R.id.mDateview);
+                mDateView = (TextView) view.findViewById(R.id.date);
 				mParentView.setTag(this);
 				mNameView.setTag(this);
 				mPriceView.setTag(this);
@@ -228,7 +234,7 @@ public class ShoppingItemsView extends ListView {
 				mPriorityView.setTag(this);
 				mCheckView.setTag(this);
 				mNoCheckView.setTag(this);
-				mDateview.setTag(this);
+				mDateView.setTag(this);
 				mQuantityView.setOnClickListener(new mItemClickListener("Quantity Click ", 
 						EditItemDialog.FieldType.QUANTITY));
 				mPriceView.setOnClickListener(new mItemClickListener("Click on price: ",
@@ -239,7 +245,7 @@ public class ShoppingItemsView extends ListView {
 						EditItemDialog.FieldType.PRIORITY));
 				mTagsView.setOnClickListener(new mItemClickListener("Click on tags: ",
 						EditItemDialog.FieldType.TAGS));
-				mDateview.setOnClickListener(new mItemClickListener("Click on Dates: ",
+				mDateView.setOnClickListener(new mItemClickListener("Click on Dates: ",
 						EditItemDialog.FieldType.DATE));
 				
 				mCheckView.setOnClickListener(new mItemToggleListener("Click: "));
@@ -493,6 +499,9 @@ public class ShoppingItemsView extends ListView {
 			}
 
 			if (id == R.id.name) {
+				long dateAsTime = cursor.getLong(ShoppingActivity.mStringItemsDATE);
+				boolean hasDate = (dateAsTime != 0);
+				String dateString = null;
 				boolean hasNote = cursor
 						.getInt(ShoppingActivity.mStringItemsITEMHASNOTE) != 0;
 				String name = cursor
@@ -508,12 +517,25 @@ public class ShoppingItemsView extends ListView {
 					ImageSpan noteimgspan = new ImageSpan(d, ImageSpan.ALIGN_BASELINE); 
 					name_etc.appendSpannedString(noteimgspan, new ClickableNoteSpan(), "\u00A0");
 				}
-				
-				if (hasPrice && !hasTags)
+				if (hasPrice)
 				{
 					// set price text while setting name, so that correct size is known below
 					priceString = mPriceFormatter.format(price * 0.01d);
 					state.mPriceView.setText(priceString);
+				}
+				if (hasDate)
+				{
+					mDate.setTime(dateAsTime);
+					dateString = mDateFormat.format(mDate);
+					state.mDateView.setText(dateString);
+					state.mDateView.setVisibility(View.VISIBLE);
+				}
+				else
+				{
+					state.mDateView.setVisibility(View.GONE);
+				}
+				if (hasPrice && !hasTags)
+				{
 				   	TextPaint paint = state.mPriceView.getPaint();
 		           	Rect bounds = new Rect();
 		           	ColorDrawable price_overlay = new ColorDrawable();
@@ -522,6 +544,7 @@ public class ShoppingItemsView extends ListView {
 		           	price_overlay.setBounds(0, 0, bounds.width(), bounds.height());
 		           	ImageSpan priceimgspan = new ImageSpan(price_overlay, ImageSpan.ALIGN_BASELINE);
 		           	name_etc.appendSpannedString(priceimgspan, " ");
+		           	
 		        }
 	            tv.setText(name_etc);
 	            tv.setMovementMethod(LinkMovementMethod.getInstance());
@@ -534,12 +557,6 @@ public class ShoppingItemsView extends ListView {
 				} else {
 					hideTextView(tv);
 				}
-				return true;
-			}
-			else if (id == R.id.mDateview) {
-				TextView tv = (TextView) view;
-				String date = cursor.getString(ShoppingActivity.mStringItemsDATE);
-				tv.setText(date);
 				return true;
 			}
 			else if (id == R.id.tags) {
@@ -671,6 +688,8 @@ public class ShoppingItemsView extends ListView {
 
 		// Remember standard divider
 		mDefaultDivider = getDivider();
+		mDateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT);
+		mDate = new Date();
 	}
 
 	public void setActionBarListener(ActionBarListener listener) {
@@ -778,11 +797,11 @@ public class ShoppingItemsView extends ListView {
 														 */
 				ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,  
 				ContainsFull.QUANTITY, ContainsFull.PRIORITY,
-				ContainsFull.ITEM_UNITS	, ContainsFull.DUE_DATE
+				ContainsFull.ITEM_UNITS	
 				},
 				// the view defined in the XML template
 				new int[] { R.id.name, /* R.id.image_URI, */R.id.tags,
-						R.id.price, R.id.quantity, R.id.priority, R.id.units , R.id.mDateview});
+						R.id.price, R.id.quantity, R.id.priority, R.id.units });
 		setAdapter(adapter);
 
 		// called in requery():

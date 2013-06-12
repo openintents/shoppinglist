@@ -451,6 +451,8 @@ public abstract class ShoppingContract {
 
 				// priority, tags alphabetical, but put empty tags last.
 				"contains.priority ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC", 
+				
+				"contains.due, items.name COLLATE NOCASE ASC"
 		};
 	
 		/**

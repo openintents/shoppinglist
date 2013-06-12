@@ -1,5 +1,8 @@
 package org.openintents.shopping.ui.dialog;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 import org.openintents.distribution.DownloadAppDialog;
 import org.openintents.shopping.R;
 import org.openintents.shopping.ShoppingActivity;
@@ -379,9 +382,14 @@ public class EditItemDialog extends AlertDialog  implements OnClickListener {
 			mQuantity.setText(quantity);
 			String priority = c.getString(1);
 			mPriority.setText(priority);
-			String datex =c.getString(2);
-			mDate.setText(datex);
-				}
+			long dateAsTime = c.getLong(2);
+			if (dateAsTime == 0) {
+				mDate.setText(""); // should set it to translated string Due Date
+			} else {
+				Date date = new Date(dateAsTime);
+				mDate.setText(SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT).format(date));
+			}
+		}
 		c.close();
 	}
 
@@ -399,7 +407,7 @@ public class EditItemDialog extends AlertDialog  implements OnClickListener {
 		String quantity = mQuantity.getText().toString();
 		String priority = mPriority.getText().toString();
 		String units = mUnits.getText().toString();
-		String date = mDate.getText().toString();
+		// date is handled in activity result instead of here
         
 		Long priceLong = PriceConverter.getCentPriceFromString(price);
 
@@ -428,7 +436,6 @@ public class EditItemDialog extends AlertDialog  implements OnClickListener {
 		values.clear();
 		values.put(Contains.QUANTITY, quantity);
 		values.put(Contains.PRIORITY, priority);
-		values.put(Contains.DUE_DATE, date);
 
 		mContext.getContentResolver().update(mRelationUri, values, null, null);
 		mContext.getContentResolver().notifyChange(mRelationUri, null);
