@@ -943,8 +943,13 @@ public class ShoppingItemsView extends ListView {
 			mTextSuffixChecked = mThemeAttributes
 					.getString(ThemeShoppingList.textSuffixChecked);
 
-			int divider = mThemeAttributes.getInteger(ThemeShoppingList.divider, 0);
-
+			// field was named divider, until a conflict with the appcompat library 
+			// forced us to rename it. To continue to support old themes, check for
+			// shopping_divider first, but if it's not found, check for divider also.
+			int divider = mThemeAttributes.getInteger(ThemeShoppingList.shopping_divider, 0);
+			if (divider == 0)
+				divider = mThemeAttributes.getInteger(ThemeShoppingList.divider, 0);
+			
 			Drawable div = null;
 			if (divider > 0) {
 				div = getResources().getDrawable(divider);

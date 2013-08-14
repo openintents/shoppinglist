@@ -21,7 +21,7 @@
 	<style name="Theme.ShoppingList" parent="Theme">
 		<item name="background">?android:background</item>
 		<item name="backgroundPadding">0dip</item>
-		<item name="divider">0</item>
+		<item name="shopping_divider">0</item>
 		<item name="textTypeface"></item>
 		<item name="textUpperCaseFont">false</item>
 		<item name="textSizeSmall">18sp</item>
@@ -40,7 +40,7 @@
 	<style name="Theme.ShoppingList.Classic" parent="Theme.ShoppingList">
 		<item name="background">@drawable/shoppinglist01d</item>
 		<item name="backgroundPadding">-1px</item>
-		<item name="divider">-1</item>
+		<item name="shopping_divider">-1</item>
 		<item name="textTypeface">fonts/AnkeHand.ttf</item>
 		<item name="textUpperCaseFont">false</item>
 		<item name="textSizeSmall">15sp</item>
@@ -57,7 +57,7 @@
 	<style name="Theme.ShoppingList.Android" parent="Theme.ShoppingList">
 		<!-- item name="background">@drawable/theme_android</item -->
 		<item name="backgroundPadding">0dip</item>
-		<item name="divider">0</item>
+		<item name="shopping_divider">0</item>
 		<item name="textTypeface">fonts/Crysta.ttf</item>
 		<item name="textUpperCaseFont">true</item>
 		<item name="textSizeSmall">21sp</item>

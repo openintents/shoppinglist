@@ -14,6 +14,7 @@ public class ThemeShoppingList {
 	public static final String backgroundPaddingRight = "backgroundPaddingRight";
 	public static final String backgroundPaddingBottom = "backgroundPaddingBottom";
 	public static final String divider = "divider";
+	public static final String shopping_divider = "shopping_divider";
 	public static final String textTypeface = "textTypeface";
 	public static final String textUpperCaseFont = "textUpperCaseFont";
 	public static final String textSizeTiny = "textSizeTiny";

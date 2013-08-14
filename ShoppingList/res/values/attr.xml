@@ -35,7 +35,7 @@
 		<attr name="backgroundPaddingRight" format="dimension" />
 		<attr name="backgroundPaddingBottom" format="dimension" />
 		
-		<attr name="divider" format="integer" />
+		<attr name="shopping_divider" format="integer" />
 		
 		<!-- Type face can be one of "monospace", "serif", "sans"
 			or it can be the path to a font in the assets folder,
