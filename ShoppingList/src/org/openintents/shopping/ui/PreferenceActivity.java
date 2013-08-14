@@ -22,7 +22,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.support.v2.os.Build;
+import android.os.Build;
 import android.text.method.KeyListener;
 import android.text.method.TextKeyListener;
 import android.widget.Toast;
