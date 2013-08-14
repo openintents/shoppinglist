@@ -143,14 +143,6 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 
 		mIncludesChecked = (CheckBoxPreference) findPreference(PREFS_PRIOSUBINCLCHECKED);
 
-		// Cupcake has problems with Quick Edit Mode. Donut untested.
-		CheckBoxPreference quickedit = (CheckBoxPreference) findPreference(PREFS_QUICKEDITMODE);
-		quickedit
-				.setEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO);
-		CheckBoxPreference usefilters = (CheckBoxPreference) findPreference(PREFS_USE_FILTERS);
-		usefilters
-				.setEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO);
-
 		SharedPreferences shared = getPreferenceScreen().getSharedPreferences();
 		updatePrioSubtotalSummary(shared);
 		updatePickItemsSortPref(shared);
