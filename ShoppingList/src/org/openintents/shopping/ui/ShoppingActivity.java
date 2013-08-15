@@ -75,6 +75,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.hardware.SensorListener;
@@ -86,6 +87,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Build;
 import android.support.v4.view.MenuCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -392,6 +395,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	private static final int mStringListFilterSKINBACKGROUND = 5;
 
 	private ShoppingItemsView mItemsView;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerListsView;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private CharSequence mTitle, mDrawerTitle;
+
 	// private Cursor mCursorItems;
 
 	public static final String[] mStringItems = new String[] {
@@ -622,6 +630,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
 		// populate the lists
 		fillListFilter();
+		
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);
 
 		// Get last part of URI:
 		int selectList;
@@ -663,6 +674,19 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
 		mItemsView.setActionBarListener(this);
 	}
+
+	@Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+	@Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
 
 	@Override
 	public void onStop() {
@@ -1225,7 +1249,59 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
 	private void createList() {
 
-		// TODO switch layout on screen size, not sdk versions
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		mDrawerListsView = (ListView) findViewById(R.id.left_drawer);
+		
+        mTitle = mDrawerTitle = getTitle();
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                getSupportActionBar().setTitle(mTitle);
+                compat_invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                getSupportActionBar().setTitle(mDrawerTitle);
+                compat_invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+
+        // Set the drawer toggle as the DrawerListener
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+		
+		mDrawerListsView.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView parent, View v,
+					int position, long id) {
+				if (debug)
+					Log.d(TAG, "ListView: onItemSelected");
+
+				// Update list cursor:
+				mShoppingListsView.setSelection(position);
+				getSelectedListId();
+
+				// Set the theme based on the selected list:
+				setListTheme(loadListTheme());
+
+				// If it's the same list we had before, requery only
+				// if a preference has changed since then.
+				fillItems(id == mItemsView.getListId());
+
+				// Apply the theme after the list has been filled:
+				applyListTheme();
+
+				updateTitle();
+
+				mDrawerListsView.setItemChecked(position, true);
+			    mDrawerLayout.closeDrawer(mDrawerListsView);
+			}
+		});
+		
+		// TODO probably can obsolete the below; tablet mode should also use 
+		// the drawer rather than a separate fragment
 		if (!usingListSpinner()) {
 
 			mShoppingListsView = (ListView) findViewById(android.R.id.list);
@@ -1464,11 +1540,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		}
 		if (mShoppingListsFilterButton != null)
 			mShoppingListsFilterButton
-					.setVisibility(showListFilter ? View.VISIBLE : View.GONE);
+					.setVisibility(View.GONE);
 		// spinner goes the opposite way
 		if (mShoppingListsView != null)
-			mShoppingListsView.setVisibility(showListFilter ? View.GONE
-					: View.VISIBLE);
+			mShoppingListsView.setVisibility(View.GONE);
 
 		if (mEditingFilter) {
 			String storeName = ShoppingUtils.getListFilterStoreName(this,
@@ -1823,6 +1898,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
 
+        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerListsView);
+        // TODO: supposed to hide content-related actions when the drawer is open.
+
+		
 		// TODO: Add item-specific menu items (see NotesList.java example)
 		// like edit, strike-through, delete.
 
@@ -1953,6 +2032,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 					REQUEST_CODE_CATEGORY_ALTERNATIVE);
 			return true;
 		}
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
 		return super.onOptionsItemSelected(item);
 
 	}
@@ -3276,6 +3358,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	 * @param adapter
 	 */
 	private void setSpinnerListAdapter(ListAdapter adapter) {
+		mDrawerListsView.setAdapter(adapter);
 		if (usingListSpinner()) {// Temp - restricted for OS3
 			mShoppingListsView.setAdapter(adapter);
 		} else {

@@ -142,6 +142,9 @@
 	<string name="theme_classic_export">Classic (from OI Shopping List)</string>
 	<string name="theme_bugdroid_export">Android (from OI Shopping List)</string>
 
+        <string name="drawer_open">Open navigation drawer</string>
+        <string name="drawer_close">Close navigation drawer</string>
+
 	<!--     Dialog box    -->
 	<!-- Button label "OK" -->
 	<string name="ok">OK</string>
