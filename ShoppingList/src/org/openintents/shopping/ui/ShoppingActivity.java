@@ -398,7 +398,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListsView;
     private ActionBarDrawerToggle mDrawerToggle;
-    private CharSequence mTitle, mDrawerTitle;
+    private CharSequence mTitle, mDrawerTitle, mSubTitle;
 
 	// private Cursor mCursorItems;
 
@@ -914,35 +914,32 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
 	private void updateTitle() {
 		// Modify our overall title depending on the mode we are running in.
+		// In most cases, "title" is the name of the current list, and subtitle
+		// depends on the mode -- shopping vs pick items, for example.
+		
+		mTitle = getCurrentListName();
+		mSubTitle = getText(R.string.app_name);
+		
 		if (mState == STATE_MAIN || mState == STATE_VIEW_LIST) {
 			if (PreferenceActivity
 					.getPickItemsInListFromPrefs(getApplicationContext())) {
 				// 2 different modes
 				if (mItemsView.mMode == MODE_IN_SHOP) {
-					setTitle(getString(R.string.shopping_title,
-							getCurrentListName()));
 					registerSensor();
 				} else {
-					setTitle(getString(R.string.pick_items_title,
-							getCurrentListName()));
+					mSubTitle = getString(R.string.menu_pick_items);
 					unregisterSensor();
 				}
-			} else {
-				// Only one mode: "Pick items using dialog"
-				// App name is default. But if using filters, include list name
-				// too.
-				if (PreferenceActivity.getUsingFiltersFromPrefs(this))
-					setTitle(getCurrentListName() + " - "
-							+ getText(R.string.app_name));
-				else
-					setTitle(getText(R.string.app_name));
-			}
+			} 
 		} else if ((mState == STATE_PICK_ITEM)
 				|| (mState == STATE_GET_CONTENT_ITEM)) {
-			setTitle(getText(R.string.pick_item));
+			mSubTitle = (getText(R.string.pick_item));
 			setTitleColor(0xFFAAAAFF);
 		}
 
+		getSupportActionBar().setTitle(mTitle);
+		getSupportActionBar().setSubtitle(mSubTitle);
+		
 		// also update the button label
 		updateButton();
 	}
@@ -1259,12 +1256,14 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 getSupportActionBar().setTitle(mTitle);
+                getSupportActionBar().setSubtitle(mSubTitle);
                 compat_invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
             /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
                 getSupportActionBar().setTitle(mDrawerTitle);
+                getSupportActionBar().setSubtitle(null);
                 compat_invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
