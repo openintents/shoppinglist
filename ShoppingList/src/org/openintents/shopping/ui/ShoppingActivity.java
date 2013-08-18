@@ -2805,7 +2805,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		if (mCursorShoppingLists == null) {
 			Log.e(TAG, "missing shopping provider");
 			ArrayAdapter adapter = new ArrayAdapter(this,
-					android.R.layout.simple_spinner_item,
+					R.layout.list_item_shopping_list,
 					new String[] { getString(R.string.no_shopping_provider) });
 			setSpinnerListAdapter(adapter);
 
@@ -2893,11 +2893,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		if (mShoppingListsView instanceof Spinner) {
 			adapter = new HoloThemeSimpleCursorAdapter(this,
 					// Use a template that displays a text view
-					android.R.layout.simple_spinner_item,
+					R.layout.list_item_shopping_list,
 					// Give the cursor to the list adapter
 					mCursorShoppingLists, new String[] { Lists.NAME },
-					new int[] { android.R.id.text1 });
-			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+					new int[] { R.id.text1 });
+			// adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		} else {
 			// mShoppingListView is a ListView
 			adapter = new SimpleCursorAdapter(this,
