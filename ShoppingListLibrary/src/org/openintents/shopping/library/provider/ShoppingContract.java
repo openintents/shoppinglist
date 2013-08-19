@@ -310,6 +310,17 @@ public abstract class ShoppingContract {
 		    CREATED_DATE+" DESC",
 		    CREATED_DATE+" ASC"
 		};
+		
+		/**
+		 * ID of sort order to use for this list, null to follow prefs.
+		 * 
+		 * <P>
+		 * Type: INTEGER (long)
+		 * </P>
+		 * Available since release 2.0.
+		 */
+		public static final String ITEMS_SORT = "items_sort";
+		
 	}
 
 	/**

@@ -3,6 +3,7 @@ package org.openintents.shopping.ui;
 import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.shopping.library.provider.ShoppingContract.Lists;
+import org.openintents.shopping.library.util.ShoppingUtils;
 import org.openintents.util.BackupManagerWrapper;
 import org.openintents.util.IntentUtils;
 
@@ -108,6 +109,8 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 	public static final boolean PREFS_USE_FILTERS_DEFAULT = false;
 	public static final String PREFS_CURRENT_LIST_COMPLETE = "autocomplete_only_this_list";
 	public static final boolean PREFS_CURRENT_LIST_COMPLETE_DEFAULT = false;
+	public static final String PREFS_SORT_PER_LIST = "perListSort";
+	public static final boolean PREFS_SORT_PER_LIST_DEFAULT = false;
 
 	public static final String PREFS_RESET_ALL_SETTINGS = "reset_all_settings";
 
@@ -265,6 +268,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 												PREFS_PRIOSUBINCLCHECKED_DEFAULT);
 
                         editor.putBoolean(PREFS_CURRENT_LIST_COMPLETE, PREFS_CURRENT_LIST_COMPLETE_DEFAULT);
+                        editor.putBoolean(PREFS_SORT_PER_LIST, PREFS_SORT_PER_LIST_DEFAULT);
 
 										editor.commit();
 
@@ -366,6 +370,13 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 						PREFS_PICKITEMSINLIST_DEFAULT);
 		return using;
 	}
+	
+	public static boolean getUsingPerListSortFromPrefs(Context context) {
+		boolean perListSort = PreferenceManager.getDefaultSharedPreferences(context)
+				.getBoolean(PREFS_SORT_PER_LIST,
+						PREFS_SORT_PER_LIST_DEFAULT);
+		return perListSort;
+	}
 
 	/**
 	 * Returns the sort order for the notes list based on the user preferences.
@@ -374,7 +385,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 	 * @param context
 	 *            The context to grab the preferences from.
 	 */
-	static public int getSortOrderIndexFromPrefs(Context context, int mode) {
+	static public int getSortOrderIndexFromPrefs(Context context, int mode, long listId) {
 		int sortOrder = 0;
 
 		if (mode != ShoppingActivity.MODE_IN_SHOP) {
@@ -403,6 +414,23 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 		}
 
 		if (mode == ShoppingActivity.MODE_IN_SHOP) {
+			
+			boolean set = false;
+			if (PreferenceActivity.getUsingPerListSortFromPrefs(context)) {
+				String sortOrderStr = ShoppingUtils.getListSortOrder(context, 
+						listId);
+				if (sortOrderStr != null) 
+					try {
+						sortOrder = Integer.parseInt(sortOrderStr);
+						set = true;
+					} catch (NumberFormatException e) {
+						// Guess somebody messed with the preferences and put a string
+						// into
+						// this field. We'll use the default value then.
+					}
+			}
+				
+			if (set == false)
 			try {
 				sortOrder = Integer.parseInt(PreferenceManager
 						.getDefaultSharedPreferences(context).getString(
@@ -420,6 +448,11 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 
 		// Value out of range - somebody messed with the preferences.
 		return 0;
+	}
+	
+	static public int getSortOrderIndexFromPrefs(Context context, int mode) {
+		long listId = ShoppingUtils.getDefaultList(context);
+		return getSortOrderIndexFromPrefs(context, mode, listId);
 	}
 
 	static public String getSortOrderFromPrefs(Context context, int mode) {

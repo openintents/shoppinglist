@@ -40,7 +40,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 	 * 1.2.7-beta 8: Release 1.2.7-beta 9: Release 1.3.0 10: Release 1.3.1-beta
 	 * 11: Release 1.4.0-beta
 	 */
-	static final int DATABASE_VERSION = 12;
+	static final int DATABASE_VERSION = 13;
 
 	public static final String DATABASE_NAME = "shopping.db";
 
@@ -81,6 +81,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				+ "skin_color_strikethrough INTEGER," // V2
 				+ "store_filter INTEGER DEFAULT -1," // V12
 				+ "tags_filter VARCHAR" // V12
+                + "items_sort INTEGER" // V13
 				+ ");");
 		db.execSQL("CREATE TABLE contains (" + "_id INTEGER PRIMARY KEY," // V1
 				+ "item_id INTEGER," // V1
@@ -287,7 +288,15 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 					Log.e(ShoppingProvider.TAG, "Error executing SQL: ", e);
 				}
 				// NO break;
-
+			case 12:
+				try {
+					db.execSQL("ALTER TABLE lists ADD COLUMN "
+						+ Lists.ITEMS_SORT + " INTEGER;");
+				} catch (SQLException e) {
+					Log.e(ShoppingProvider.TAG, "Error executing SQL: ", e);
+				}
+				// NO break;
+				
 				// NO break UNTIL HERE!
 				break;
 			default:

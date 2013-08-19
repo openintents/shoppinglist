@@ -86,7 +86,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Build;
-import android.support.v4.view.MenuCompat;
+import android.support.v4.view.ActionProvider;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.text.Editable;
@@ -101,7 +102,9 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.MotionEvent;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
@@ -221,6 +224,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 																		// intent
 																		// extras
 	private static final int MENU_COPY_ITEM = Menu.FIRST + 11;
+	private static final int MENU_SORT_LIST = Menu.FIRST + 12;
 
 	// TODO: Implement the following menu items
 	// private static final int MENU_EDIT_LIST = Menu.FIRST + 12; // includes
@@ -447,6 +451,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	private static final String BUNDLE_MODE = "mode";
 
 	private String mSortOrder;
+	
+	private ListSortActionProvider mListSortActionProvider;
 
 	// Skins --------------------------
 
@@ -958,6 +964,32 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 			mButton.setText(R.string.add);
 		}
 	}
+	
+	private void saveActiveList (boolean savePos) {
+		SharedPreferences sp = getSharedPreferences(
+				"org.openintents.shopping_preferences", MODE_PRIVATE);
+		SharedPreferences.Editor editor = sp.edit();
+		// need to do something about the fact that the spinner is driving this
+		// even though it isn't always used. also the long vs int is fishy.
+		// but for now, just don't overwrite previous setting with -1.
+		int list_id = new Long(getSelectedListId()).intValue();
+		if (list_id != -1)
+			editor.putInt(PreferenceActivity.PREFS_LASTUSED, list_id);
+		// Save position and pixel position of first visible item
+		// of current shopping list
+		int listposition = mItemsView.getFirstVisiblePosition();
+		if (savePos) {
+			View v = mItemsView.getChildAt(0);
+			int listtop = (v == null) ? 0 : v.getTop();
+			if (debug)
+			Log.d(TAG, "Save list position: pos: " + listposition + ", top: "
+					+ listtop);
+
+			editor.putInt(PreferenceActivity.PREFS_LASTLIST_POSITION, listposition);
+			editor.putInt(PreferenceActivity.PREFS_LASTLIST_TOP, listtop);
+		}
+		editor.commit();	
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -978,27 +1010,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
 		unregisterSensor();
 
-		// Save position and pixel position of first visible item
-		// of current shopping list
-		int listposition = mItemsView.getFirstVisiblePosition();
-		View v = mItemsView.getChildAt(0);
-		int listtop = (v == null) ? 0 : v.getTop();
-		if (debug)
-			Log.d(TAG, "Save list position: pos: " + listposition + ", top: "
-					+ listtop);
-
-		SharedPreferences sp = getSharedPreferences(
-				"org.openintents.shopping_preferences", MODE_PRIVATE);
-		SharedPreferences.Editor editor = sp.edit();
-		// need to do something about the fact that the spinner is driving this
-		// even though it isn't always used. also the long vs int is fishy.
-		// but for now, just don't overwrite previous setting with -1.
-		int list_id = new Long(getSelectedListId()).intValue();
-		if (list_id != -1)
-			editor.putInt(PreferenceActivity.PREFS_LASTUSED, list_id);
-		editor.putInt(PreferenceActivity.PREFS_LASTLIST_POSITION, listposition);
-		editor.putInt(PreferenceActivity.PREFS_LASTLIST_TOP, listtop);
-		editor.commit();
+		saveActiveList(true);
 		// TODO ???
 		/*
 		 * // Unregister refresh intent receiver
@@ -1799,6 +1811,15 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
 		// Temp - Temporary item holder for compatibility framework
 		MenuItem item = null;
+		
+		item = menu.add(0, MENU_SORT_LIST, 0, R.string.menu_sort_list)
+				.setIcon(android.R.drawable.ic_menu_sort_alphabetically);
+		MenuItemCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_ALWAYS
+				| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		if (mListSortActionProvider == null)
+			mListSortActionProvider = new ListSortActionProvider(this);
+		MenuItemCompat.setActionProvider(item, mListSortActionProvider);
+		
 		// Standard menu
 		item = menu.add(0, MENU_NEW_LIST, 0, R.string.new_list)
 				.setIcon(R.drawable.ic_menu_add_list).setShortcut('0', 'n');
@@ -1806,7 +1827,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
 		item = menu.add(0, MENU_CLEAN_UP_LIST, 0, R.string.clean_up_list)
 				.setIcon(R.drawable.ic_menu_cleanup).setShortcut('1', 'c');
-		MenuCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_IF_ROOM
+		MenuItemCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_IF_ROOM
 				| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
 		menu.add(0, MENU_PICK_ITEMS, 0, R.string.menu_pick_items)
@@ -3373,4 +3394,67 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		fillAutoCompleteTextViewAdapter();
 	}
 
+	private class ListSortActionProvider extends ActionProvider implements OnMenuItemClickListener {
+
+		private Context mContext;
+		private String mSortLabels[];
+		private String mSortVals[];
+		private Integer mSortValInts[];
+		
+		public ListSortActionProvider(Context context) {
+			super(context);
+			mContext = context;
+			mSortLabels = mContext.getResources().getStringArray(R.array.preference_sortorder_entries);
+			mSortVals = mContext.getResources().getStringArray(R.array.preference_sortorder_entryvalues);
+			mSortValInts = new Integer[mSortVals.length];
+			for (int i = 0; i < mSortVals.length; i ++) 
+				mSortValInts[i] = Integer.parseInt(mSortVals[i]);
+		}
+
+		@Override
+		public View onCreateActionView() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		@Override
+		public boolean hasSubMenu() {
+	 			return true;
+		}
+		
+		public void onPrepareSubMenu(SubMenu subMenu) {
+		   int i;
+		   saveActiveList(false);
+		   subMenu.clear();
+		   int curSort = PreferenceActivity.getSortOrderIndexFromPrefs(mContext, MODE_IN_SHOP);
+		   for (i = 0; i < mSortLabels.length; i ++) {
+			   subMenu.add(1, i, i, mSortLabels[i]).setOnMenuItemClickListener(this)
+			   .setChecked(mSortValInts[i]==curSort);
+		   }		  
+		   subMenu.setGroupCheckable(1,true,true);
+		}
+		
+		public boolean overridesItemVisibility() {
+			return true;
+		}
+		
+		public boolean isVisible () {
+			boolean vis = true;
+		    if (mItemsView.mMode != MODE_IN_SHOP) 
+		    	vis = false;
+		    else if (PreferenceActivity.getUsingPerListSortFromPrefs(mContext) == false)
+				vis = false;
+			return vis;
+		}
+		
+		public boolean onMenuItemClick(MenuItem item) {
+			int sortOrderNum = Integer.parseInt(mSortVals[item.getItemId()]);
+			// String sortOrder = Contains.SORT_ORDERS[sortOrderNum];
+			ContentValues values = new ContentValues();
+			values.put(Lists.ITEMS_SORT, sortOrderNum);
+			getContentResolver().update(mListUri, values, null, null);
+			fillItems(false);
+			return true;
+		}
+	}
 }

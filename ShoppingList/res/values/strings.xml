@@ -83,7 +83,8 @@
 	
 	<string name="menu_pick_items">Pick items</string>
 	<string name="menu_start_shopping">Shopping</string>
-	
+	<string name="menu_sort_list">Sort</string>
+		
 	<!-- Title supplement. '%s' is the name of the current list. -->
 	<string name="pick_items_title">%s - Pick items</string>
 	
@@ -218,9 +219,12 @@
 	<string name="preference_pickitemsinlist_title">Pick items directly in list</string>
 	<string name="preference_pickitemsinlist_on_summary">Switch main list to edit mode to re-add existing items</string>
 	<string name="preference_pickitemsinlist_off_summary">Add items to list using a dedicated dialog</string>
-	<string name="preference_samesortforpick_title">Always same sort order</string>
+	<string name="preference_samesortforpick_title">Same sort for Pick Items</string>
 	<string name="preference_samesortforpick_on_summary">Items are sorted in Pick Items mode just as in Shopping mode.</string>
 	<string name="preference_samesortforpick_off_summary">Sort order for Pick Items mode can be chosen separately.</string>
+	<string name="preference_perListSort_title">Per-list sorting</string>
+	<string name="preference_perListSort_on_summary">Each list saves its own sort order, controlled from the action bar.</string>
+	<string name="preference_perListSort_off_summary">Sort order for all lists is the same, set via Settings.</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Shake to clean up</string>
@@ -233,7 +237,7 @@
     
     <!-- Preference category: General settings -->
     <string name="preference_general">General</string>
-    <string name="preference_pickitems">Pick Items</string>
+    <string name="preference_sorting">Sorting</string>
     
     <string name="preference_appearance">Appearance</string>
     

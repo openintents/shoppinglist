@@ -148,7 +148,7 @@ public class ShoppingItemsView extends ListView {
 	private DropListener mDropListener;
 
 	private ActionBarListener mActionBarListener;
-	
+		
 	/**
 	 * Extend the SimpleCursorAdapter to strike through items. if STATUS ==
 	 * Shopping.Status.BOUGHT
@@ -781,7 +781,7 @@ public class ShoppingItemsView extends ListView {
 
 		return mCursorItems;
 	}
-
+	
 	/**
 	 * 
 	 */

@@ -1250,6 +1250,7 @@ public class ShoppingProvider extends ContentProvider {
 		LISTS_PROJECTION_MAP.put(Lists.SKIN_COLOR, "lists.skin_color");
 		LISTS_PROJECTION_MAP.put(Lists.SKIN_COLOR_STRIKETHROUGH,
 				"lists.skin_color_strikethrough");
+		LISTS_PROJECTION_MAP.put(Lists.ITEMS_SORT, "lists.items_sort");
 
 		CONTAINS_PROJECTION_MAP = new HashMap<String, String>();
 		CONTAINS_PROJECTION_MAP.put(Contains._ID, "contains._id");

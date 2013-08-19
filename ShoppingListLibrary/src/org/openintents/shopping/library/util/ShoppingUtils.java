@@ -838,4 +838,23 @@ public class ShoppingUtils {
 		return filter;
 	}
 
+	public static String getListSortOrder(Context context, long list_id) {
+		String sort = null;
+		Uri list_uri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI,
+				Long.toString(list_id));
+		Cursor c = context.getContentResolver().query(list_uri,
+				new String[] { Lists.ITEMS_SORT }, null, null, null);
+		if (c.getCount() > 0) {
+			c.moveToFirst();
+			sort = c.getString(0);
+			c.deactivate();
+			c.close();
+		
+			if (sort != null && sort.length() == 0) {
+				sort = null;
+			}
+		}	
+		return sort;
+	}
+	
 }
