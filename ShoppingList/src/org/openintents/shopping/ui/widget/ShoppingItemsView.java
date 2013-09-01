@@ -696,7 +696,7 @@ public class ShoppingItemsView extends ListView {
 
 		mListId = listId;
 		String sortOrder = PreferenceActivity.getSortOrderFromPrefs(this
-				.getContext(), mMode);
+				.getContext(), mMode, listId);
 		boolean hideBought = PreferenceActivity
 				.getHideCheckedItemsFromPrefs(this.getContext());
 		String selection;

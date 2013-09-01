@@ -460,6 +460,11 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 		return Contains.SORT_ORDERS[index];
 	}
 
+	static public String getSortOrderFromPrefs(Context context, int mode, long listId) {
+		int index = getSortOrderIndexFromPrefs(context, mode, listId);
+		return Contains.SORT_ORDERS[index];
+	}
+	
 	static public boolean prefsStatusAffectsSort(Context context, int mode) {
 		int index = getSortOrderIndexFromPrefs(context, mode);
 		boolean affects = Contains.StatusAffectsSortOrder[index];
