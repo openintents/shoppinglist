@@ -507,11 +507,14 @@ public class ShoppingItemsView extends ListView {
 					name_etc.appendSpannedString(noteimgspan, new ClickableNoteSpan(), "\u00A0");
 				}
 				
-				if (hasPrice && !hasTags)
+				if (hasPrice)
 				{
 					// set price text while setting name, so that correct size is known below
 					priceString = mPriceFormatter.format(price * 0.01d);
 					state.mPriceView.setText(priceString);
+				}
+				if (hasPrice && !hasTags)
+				{
 				   	TextPaint paint = state.mPriceView.getPaint();
 		           	Rect bounds = new Rect();
 		           	ColorDrawable price_overlay = new ColorDrawable();
