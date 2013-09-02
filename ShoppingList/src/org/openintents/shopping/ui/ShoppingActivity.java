@@ -78,6 +78,7 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.database.DataSetObserver;
 import android.hardware.SensorListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
@@ -100,6 +101,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
@@ -120,8 +122,11 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.HeaderViewListAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
+import android.widget.ListView.FixedViewInfo;
+import android.widget.WrapperListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
@@ -1282,34 +1287,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-		
-		mDrawerListsView.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView parent, View v,
-					int position, long id) {
-				if (debug)
-					Log.d(TAG, "ListView: onItemSelected");
-
-				// Update list cursor:
-				mShoppingListsView.setSelection(position);
-				getSelectedListId();
-
-				// Set the theme based on the selected list:
-				setListTheme(loadListTheme());
-
-				// If it's the same list we had before, requery only
-				// if a preference has changed since then.
-				fillItems(id == mItemsView.getListId());
-
-				// Apply the theme after the list has been filled:
-				applyListTheme();
-
-				updateTitle();
-
-				mDrawerListsView.setItemChecked(position, true);
-			    mDrawerLayout.closeDrawer(mDrawerListsView);
-			}
-		});
 		
 		// TODO probably can obsolete the below; tablet mode should also use 
 		// the drawer rather than a separate fragment
@@ -1821,8 +1798,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		MenuItemCompat.setActionProvider(item, mListSortActionProvider);
 		
 		// Standard menu
-		item = menu.add(0, MENU_NEW_LIST, 0, R.string.new_list)
-				.setIcon(R.drawable.ic_menu_add_list).setShortcut('0', 'n');
+		
+		// tentatively moved "new list" to drawer
+		//item = menu.add(0, MENU_NEW_LIST, 0, R.string.new_list)
+		//		.setIcon(R.drawable.ic_menu_add_list).setShortcut('0', 'n');
 		// MenuCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
 		item = menu.add(0, MENU_CLEAN_UP_LIST, 0, R.string.clean_up_list)
@@ -1831,7 +1810,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 				| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
 		menu.add(0, MENU_PICK_ITEMS, 0, R.string.menu_pick_items)
-				.setIcon(android.R.drawable.ic_menu_add).setShortcut('2', 'p');
+				.setIcon(android.R.drawable.ic_menu_add).setShortcut('2', 'p').
+				// tentatively replaced by buttons in drawer.
+				setVisible(false);
 
 		/*
 		 * menu.add(0, MENU_SHARE, 0, R.string.share)
@@ -3371,6 +3352,189 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		setSelectedListPos(newPos);
 	}
 
+	private class DrawerListAdapter implements WrapperListAdapter, OnItemClickListener {
+
+		private ListAdapter mAdapter = null;
+		private int mNumAboveList = 3;
+		private int mNumBelowList = 1;
+		private int mWrappedViewTypeNum;
+		private int mViewTypeNum;
+		private int [] mHeaderItemTypes;
+		LayoutInflater mInflater;
+		
+		public DrawerListAdapter(Context context, ListAdapter adapter) {
+			mAdapter = adapter;
+			mViewTypeNum = mWrappedViewTypeNum = mAdapter.getViewTypeCount();
+	        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		}
+
+		@Override
+		public boolean areAllItemsEnabled() {
+			return false;
+		}
+
+		@Override
+		public boolean isEnabled(int position) {
+			int list_pos, post_pos;
+			int list_count = mAdapter.getCount();
+			if (position < mNumAboveList) {
+				return (position != 2); // not the "Lists" header
+			} else if ((list_pos = position - mNumAboveList) < list_count){
+				// actual list entries can be selected
+			} else {
+				post_pos = list_pos - list_count;
+				// New List button can be selected
+			}
+			return true;
+		}
+
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return mAdapter.getCount() + mNumAboveList + mNumBelowList;
+		}
+
+		@Override
+		public Object getItem(int position) {
+			int list_pos, post_pos;
+			int list_count = mAdapter.getCount();
+			if (position < mNumAboveList) {
+			} else if ((list_pos = position - mNumAboveList) < list_count){
+				return mAdapter.getItem(list_pos);
+			} else {
+				post_pos = list_pos - list_count;
+			}
+			return null;
+		}
+
+		@Override
+		public long getItemId(int position) {
+			int list_pos, post_pos;
+			int list_count = mAdapter.getCount();
+			if (position < mNumAboveList) {
+			
+			} else if ((list_pos = position - mNumAboveList) < list_count){
+				return mAdapter.getItemId(list_pos);
+			} else {
+				post_pos = list_pos - list_count;
+			}
+			return -1;
+		}
+
+		@Override
+		public int getItemViewType(int position) {
+			int list_pos, post_pos;
+			int list_count = mAdapter.getCount();
+			if (position < mNumAboveList) {			  
+			} else if ((list_pos = position - mNumAboveList) < list_count){
+				return mAdapter.getItemViewType(list_pos);
+			} 
+			return IGNORE_ITEM_VIEW_TYPE;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			int list_pos, post_pos;
+			int list_count = mAdapter.getCount();
+  	        View v = null;	
+
+			if (position < mNumAboveList) {
+			  switch(position) {
+			  case 0: 
+				  v = mInflater.inflate(R.layout.drawer_item_radio, parent, false);
+				  ((TextView)v).setText(R.string.menu_pick_items);
+				  break;
+			  case 1:
+				  v = mInflater.inflate(R.layout.drawer_item_radio, parent, false);
+				  ((TextView)v).setText(R.string.menu_start_shopping);
+				  break;
+			  case 2:
+				  v = mInflater.inflate(R.layout.drawer_item_header, parent, false);
+				  ((TextView)v).setText(R.string.list); // fix me
+				  break;
+			  }
+			} else if ((list_pos = position - mNumAboveList) < list_count){
+				return mAdapter.getView(list_pos, convertView, parent);
+			} else {
+				post_pos = list_pos - list_count;
+				v = mInflater.inflate(R.layout.drawer_item_radio, parent, false);
+				((TextView)v).setText(R.string.new_list);
+			}
+			return v;
+		}
+
+		@Override
+		public int getViewTypeCount() {
+			return mViewTypeNum;
+		}
+
+		@Override
+		public boolean hasStableIds() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean isEmpty() {
+			return false;
+		}
+
+		@Override
+		public void registerDataSetObserver(DataSetObserver observer) {
+			mAdapter.registerDataSetObserver(observer);
+		}
+
+		@Override
+		public void unregisterDataSetObserver(DataSetObserver observer) {
+			mAdapter.unregisterDataSetObserver(observer);
+		}
+
+		@Override
+		public ListAdapter getWrappedAdapter() {
+			return mAdapter;
+		}
+		
+		public void onItemClick(AdapterView parent, View v,
+				int position, long id) {
+			if (debug)
+				Log.d(TAG, "DrawerListAdapter: onItemClick");
+			
+			int list_pos, post_pos;
+			int list_count = mAdapter.getCount();
+			if (position < mNumAboveList) {		
+				// Pick Items or Shopping selected
+			    mDrawerLayout.closeDrawer(mDrawerListsView);
+				mItemsView.mMode = (position == 0) ?  MODE_ADD_ITEMS : MODE_IN_SHOP;	
+				mDrawerListsView.setItemChecked(position, true);
+				mDrawerListsView.setItemChecked(1 -position, false);
+				onModeChanged();
+				// need to toggle the radio buttons too
+			} else if ((list_pos = position - mNumAboveList) < list_count){		
+				// Update list cursor:
+				mShoppingListsView.setSelection(list_pos);
+				getSelectedListId();
+	
+				// Set the theme based on the selected list:
+				setListTheme(loadListTheme());
+	
+				// If it's the same list we had before, requery only
+				// if a preference has changed since then.
+				fillItems(id == mItemsView.getListId());
+	
+				// Apply the theme after the list has been filled:
+				applyListTheme();
+	
+				updateTitle();
+	
+				mDrawerListsView.setItemChecked(position, true);
+			    mDrawerLayout.closeDrawer(mDrawerListsView);
+			} else {
+			    mDrawerLayout.closeDrawer(mDrawerListsView);
+				showDialog(DIALOG_NEW_LIST);
+			}			
+		}
+	}
+	
 	/**
 	 * With the requirement of OS3, making an intermediary decision depending
 	 * upon the widget
@@ -3378,7 +3542,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	 * @param adapter
 	 */
 	private void setSpinnerListAdapter(ListAdapter adapter) {
-		mDrawerListsView.setAdapter(adapter);
+		DrawerListAdapter adapterWrapper = (new DrawerListAdapter(this, adapter));
+		mDrawerListsView.setAdapter(adapterWrapper);
+		mDrawerListsView.setOnItemClickListener(adapterWrapper);
 		if (usingListSpinner()) {// Temp - restricted for OS3
 			mShoppingListsView.setAdapter(adapter);
 		} else {
