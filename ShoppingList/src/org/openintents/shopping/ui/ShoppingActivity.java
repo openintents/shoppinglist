@@ -1642,8 +1642,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 					if (debug)
 						Log.d(TAG, "set new list: " + listId);
 					setSelectedListId((int) listId);
-					mItemsView.fillItems(this, listId);
 				}
+				mItemsView.fillItems(this, listId);
 			}
 
 			int max = mExtraItems.size();
