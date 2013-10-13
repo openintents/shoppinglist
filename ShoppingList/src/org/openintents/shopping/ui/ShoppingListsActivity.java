@@ -1,6 +1,12 @@
 package org.openintents.shopping.ui;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
+
 import org.openintents.intents.GeneralIntents;
+import org.openintents.intents.ShoppingListIntents;
 import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Lists;
@@ -30,12 +36,40 @@ public class ShoppingListsActivity extends ListActivity {
 				new String[] { Lists.NAME }, new int[] { android.R.id.text1 }));
 
 		Intent intent = getIntent();
-		if (intent.getAction().equals(Intent.ACTION_CREATE_SHORTCUT)) {
+		String action = intent.getAction();
+		String type = intent.getType();
+		if (action.equals(Intent.ACTION_CREATE_SHORTCUT)) {
 			setTitle(R.string.pick_list_for_shortcut);
 		}
-		if (intent.getAction().equals(GeneralIntents.ACTION_INSERT_FROM_EXTRAS)) {
+		if (action.equals(GeneralIntents.ACTION_INSERT_FROM_EXTRAS)) {
 			setTitle(R.string.pick_list_to_insert_items);
 		}
+		String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+		if (Intent.ACTION_SEND.equals(action) && "text/plain".equals(type) && sharedText != null) {
+			setTitle(R.string.pick_list_to_insert_items);
+			// from now on handle this as an ACTION_INSERT_FROM_EXTRAS
+			// for each line in the shared text, an item will be added
+			intent.setAction(GeneralIntents.ACTION_INSERT_FROM_EXTRAS);
+			intent.setType(ShoppingListIntents.TYPE_STRING_ARRAYLIST_SHOPPING);
+			ArrayList<String> data = readSharedText(intent, sharedText);
+			intent.putStringArrayListExtra("org.openintents.extra.STRING_ARRAYLIST_SHOPPING", data);
+		}
+
+	}
+
+	private ArrayList<String> readSharedText(Intent intent, String sharedText) {
+		ArrayList<String> data = new ArrayList<String>();
+		BufferedReader reader = new BufferedReader(new StringReader(sharedText));
+		String line;
+		try {
+			while ((line = reader.readLine()) != null) {
+				data.add(line);
+			}
+
+			reader.close();
+		} catch (IOException e) {
+		}
+		return data;
 	}
 
 	@Override
