@@ -1228,7 +1228,7 @@ public class ShoppingItemsView extends ListView {
 				+ mListId);
 		boolean resetQuantity = PreferenceActivity.getResetQuantity(getContext());
 		ShoppingUtils.addItemToList(getContext(), itemId, mListId, Status.WANT_TO_BUY,
-				priority, quantity, true, false, resetQuantity);
+				priority, quantity, true, true, resetQuantity);
 
 		fillItems(activity, mListId);
 
