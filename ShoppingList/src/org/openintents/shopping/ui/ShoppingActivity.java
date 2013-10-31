@@ -60,6 +60,7 @@ import org.openintents.shopping.widgets.CheckItemsWidget;
 import org.openintents.util.MenuIntentOptionsWithIcons;
 import org.openintents.util.ShakeSensorListener;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -670,16 +671,28 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		updateWidgets();
 	}
 
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void updateWidgets() {
 		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
-		int[] a = appWidgetManager.getAppWidgetIds(new ComponentName(this
-				.getPackageName(), CheckItemsWidget.class.getName()));
-		List<AppWidgetProviderInfo> b = appWidgetManager
-				.getInstalledProviders();
-		for (AppWidgetProviderInfo i : b) {
-			if (i.provider.getPackageName().equals(this.getPackageName())) {
-				a = appWidgetManager.getAppWidgetIds(i.provider);
-				new CheckItemsWidget().onUpdate(this, appWidgetManager, a);
+		if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
+			int[] a = appWidgetManager.getAppWidgetIds(new ComponentName(this
+					.getPackageName(), CheckItemsWidget.class.getName()));
+			List<AppWidgetProviderInfo> b = appWidgetManager
+					.getInstalledProviders();
+			for (AppWidgetProviderInfo i : b) {
+				if (i.provider.getPackageName().equals(this.getPackageName())) {
+					a = appWidgetManager.getAppWidgetIds(i.provider);
+					new CheckItemsWidget().onUpdate(this, appWidgetManager, a);
+				}
+			}
+		} else {
+			List<AppWidgetProviderInfo> providers = appWidgetManager
+					.getInstalledProviders();
+			for (AppWidgetProviderInfo providerInfo : providers) {
+				int[] a = appWidgetManager
+						.getAppWidgetIds(providerInfo.provider);
+				appWidgetManager.notifyAppWidgetViewDataChanged(a,
+						R.id.items_list);
 			}
 		}
 	}
