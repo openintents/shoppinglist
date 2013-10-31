@@ -2,15 +2,15 @@ package org.openintents.shopping.widgets;
 
 import android.appwidget.AppWidgetProvider;
 
-public class CheckItemsWidgetConfig extends AbstractCheckItemsWidgetConfig {
+public class ListItemsWidgetConfig extends AbstractCheckItemsWidgetConfig {
 
 	@Override
 	protected Class<? extends AppWidgetProvider> getWidgetClass() {
-		return CheckItemsWidget.class;
+		return ListItemsWidgetProvider.class;
 	}
 
 	@Override
 	protected AppWidgetProvider createNewWidget() {
-		return new CheckItemsWidget();
+		return new ListItemsWidgetProvider();
 	}
 }
