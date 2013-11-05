@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	android:gravity="top|fill_horizontal"
+	android:background="@drawable/widget_check_items">
+
+	<ImageButton
+		android:id="@+id/button_go_to_app"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true"
+		android:background="@null"
+		android:src="@drawable/ic_launcher_shoppinglist"/>
+
+	<TextView
+		android:id="@+id/list_name"
+		android:layout_width="match_parent"
+		android:layout_height="fill_parent"
+		android:layout_alignBottom="@id/button_go_to_app"
+		android:layout_marginLeft="5dp"
+		android:layout_toLeftOf="@+id/button_go_to_preferences"
+		android:layout_toRightOf="@id/button_go_to_app"
+		android:gravity="center_vertical"
+		android:text="@string/app_name"
+		android:textColor="@color/black"/>
+
+	<ImageButton
+		android:id="@+id/button_go_to_preferences"
+		android:layout_width="wrap_content"
+		android:layout_height="fill_parent"
+		android:layout_alignBottom="@id/button_go_to_app"
+		android:layout_alignParentRight="true"
+		android:background="@null"
+		android:src="@android:drawable/ic_menu_preferences"/>
+
+	<FrameLayout
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:layout_below="@id/button_go_to_app">
+
+		<ListView
+			android:id="@+id/items_list"
+			android:layout_height="match_parent"
+			android:layout_width="match_parent"
+			android:padding="10dp"/>
+
+		<TextView
+			android:id="@+id/empty_view"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/no_items_available"
+			android:layout_gravity="center"
+			android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+	</FrameLayout>
+
+</RelativeLayout>
+
