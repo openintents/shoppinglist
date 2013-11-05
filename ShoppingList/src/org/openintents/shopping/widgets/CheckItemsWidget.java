@@ -46,8 +46,6 @@ public class CheckItemsWidget extends AppWidgetProvider {
 					AppWidgetManager.INVALID_APPWIDGET_ID);
 			SharedPreferences sharedPreferences = context.getSharedPreferences(
 					CheckItemsWidgetConfig.PREFS, 0);
-			long listId = sharedPreferences.getLong(
-					String.valueOf(widgetId), -1);
 
 			Integer id = new Integer(0);
 			Integer page = new Integer(0);
@@ -55,17 +53,8 @@ public class CheckItemsWidget extends AppWidgetProvider {
 					|| intent.getAction().equals(ACTION_UNCHECK)) {
 				id = extras.getInt("id", 0);
 				if (id != 0) {
-					ContentValues values = new ContentValues();
-					if (intent.getAction().equals(ACTION_CHECK))
-						values.put(ShoppingContract.Contains.STATUS,
-								ShoppingContract.Status.BOUGHT);
-					else
-						values.put(ShoppingContract.Contains.STATUS,
-								ShoppingContract.Status.WANT_TO_BUY);
-					context.getContentResolver().update(
-							Uri.withAppendedPath(
-									ShoppingContract.Contains.CONTENT_URI,
-									String.valueOf(id)), values, null, null);
+					boolean check = intent.getAction().equals(ACTION_CHECK);
+					toggleStatus(context, id, check);
 				}
 
 			} else if (intent.getAction().equals(ACTION_NEXT_PAGE))
@@ -93,21 +82,25 @@ public class CheckItemsWidget extends AppWidgetProvider {
 			if (intent.getAction().equals(ACTION_TOGGLE_STATE)) {
 				long itemID = intent.getLongExtra(ITEM_ID, 0);
 				boolean check = intent.getBooleanExtra(MARK_CHECKED, true);
-				ContentValues values = new ContentValues();
-				if (check)
-					values.put(ShoppingContract.Contains.STATUS,
-							ShoppingContract.Status.BOUGHT);
-				else
-					values.put(ShoppingContract.Contains.STATUS,
-							ShoppingContract.Status.WANT_TO_BUY);
-				context.getContentResolver().update(
-						Uri.withAppendedPath(
-								ShoppingContract.Contains.CONTENT_URI,
-								String.valueOf(itemID)), values, null, null);
+				toggleStatus(context, itemID, check);
 			}
 
 		}
 		updateWidgets(context);
+	}
+
+	private void toggleStatus(Context context, long id, boolean check) {
+		ContentValues values = new ContentValues();
+		if (check)
+			values.put(ShoppingContract.Contains.STATUS,
+					ShoppingContract.Status.BOUGHT);
+		else
+			values.put(ShoppingContract.Contains.STATUS,
+					ShoppingContract.Status.WANT_TO_BUY);
+		context.getContentResolver().update(
+				Uri.withAppendedPath(
+						ShoppingContract.Contains.CONTENT_URI,
+						String.valueOf(id)), values, null, null);
 	}
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -225,39 +218,8 @@ public class CheckItemsWidget extends AppWidgetProvider {
 
 				i++;
 			}
-			/*
-			 * Icon
-			 */
-			Intent intentGoToApp = new Intent(context, ShoppingActivity.class);
-			intentGoToApp.setAction(Intent.ACTION_VIEW);
-			intentGoToApp.setData(Uri.withAppendedPath(
-					ShoppingContract.Lists.CONTENT_URI, "" + listId));
-			PendingIntent pendingIntentGoToApp = PendingIntent.getActivity(
-					context, 0, intentGoToApp,
-					PendingIntent.FLAG_UPDATE_CURRENT);
 
-			/*
-			 * List title
-			 */
-			String title = getTitle(context, listId);
-			views.setTextViewText(R.id.list_name, title);
-			views.setOnClickPendingIntent(R.id.list_name, pendingIntentGoToApp);
-			views.setOnClickPendingIntent(R.id.button_go_to_app,
-					pendingIntentGoToApp);
-
-			/*
-			 * Preference button
-			 */
-			Intent intentPreferences = new Intent(context,
-					CheckItemsWidgetConfig.class);
-			intentPreferences.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-					widgetId);
-			intentPreferences.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
-			PendingIntent pendingIntentPreferences = PendingIntent.getActivity(
-					context, 0, intentPreferences,
-					PendingIntent.FLAG_UPDATE_CURRENT);
-			views.setOnClickPendingIntent(R.id.button_go_to_preferences,
-					pendingIntentPreferences);
+			installCommonIntents(context, listId, widgetId, views);
 
 			/*
 			 * Prev page
@@ -292,34 +254,8 @@ public class CheckItemsWidget extends AppWidgetProvider {
 		return views;
 	}
 
-	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-	private RemoteViews buildUpdateHoneyComb(Context context, long listId,
-			int widgetId) {
-		Intent svcIntent = new Intent(context, ListWidgetService.class);
-
-		svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
-		svcIntent.setData(Uri.parse(svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
-
-		RemoteViews widget = new RemoteViews(context.getPackageName(),
-				R.layout.widget_check_items);
-
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			widget.setRemoteAdapter(R.id.items_list, svcIntent);
-		} else {
-			widget.setRemoteAdapter(widgetId, R.id.items_list, svcIntent);
-		}
-
-		widget.setEmptyView(R.id.items_list, R.id.empty_view);
-
-		Intent clickIntent = new Intent(context, CheckItemsWidget.class);
-		clickIntent.setAction(ACTION_TOGGLE_STATE);
-		clickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
-
-		PendingIntent clickPI = PendingIntent.getBroadcast(context, 0,
-				clickIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-		widget.setPendingIntentTemplate(R.id.items_list, clickPI);
-
+	private void installCommonIntents(Context context, long listId,
+			int widgetId, RemoteViews widget) {
 		/*
 		 * Icon
 		 */
@@ -353,8 +289,38 @@ public class CheckItemsWidget extends AppWidgetProvider {
 				PendingIntent.FLAG_UPDATE_CURRENT);
 		widget.setOnClickPendingIntent(R.id.button_go_to_preferences,
 				pendingIntentPreferences);
-		return widget;
+	}
 
+	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+	private RemoteViews buildUpdateHoneyComb(Context context, long listId,
+			int widgetId) {
+		Intent svcIntent = new Intent(context, ListWidgetService.class);
+
+		svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
+		svcIntent.setData(Uri.parse(svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
+
+		RemoteViews widget = new RemoteViews(context.getPackageName(),
+				R.layout.widget_check_items);
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+			widget.setRemoteAdapter(R.id.items_list, svcIntent);
+		} else {
+			widget.setRemoteAdapter(widgetId, R.id.items_list, svcIntent);
+		}
+
+		widget.setEmptyView(R.id.items_list, R.id.empty_view);
+
+		Intent clickIntent = new Intent(context, CheckItemsWidget.class);
+		clickIntent.setAction(ACTION_TOGGLE_STATE);
+		clickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
+
+		PendingIntent clickPI = PendingIntent.getBroadcast(context, 0,
+				clickIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+		widget.setPendingIntentTemplate(R.id.items_list, clickPI);
+
+		installCommonIntents(context, listId, widgetId, widget);
+		return widget;
 	}
 
 	/*
