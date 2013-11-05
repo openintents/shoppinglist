@@ -6,6 +6,7 @@ import org.openintents.shopping.R;
 import org.openintents.shopping.ShoppingActivity;
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
+import org.openintents.shopping.library.provider.ShoppingContract.Status;
 import org.openintents.shopping.ui.PreferenceActivity;
 
 import android.app.PendingIntent;
@@ -26,6 +27,7 @@ public class CheckItemsWidget extends AppWidgetProvider {
 	private final static int LIMIT_ITEMS = 5;
 	private final static String PREFS = "check_items_widget";
 	private final static String ACTION_CHECK = "ActionCheck";
+	private final static String ACTION_UNCHECK = "ActionUnCheck";
 	private final static String ACTION_NEXT_PAGE = "ActionNextPage";
 	private final static String ACTION_PREV_PAGE = "ActionPrevPage";
 
@@ -40,7 +42,8 @@ public class CheckItemsWidget extends AppWidgetProvider {
 
 			Integer id = new Integer(0);
 			Integer page = new Integer(0);
-			if (intent.getAction().equals(ACTION_CHECK))
+			if (intent.getAction().equals(ACTION_CHECK) ||
+			    intent.getAction().equals(ACTION_UNCHECK) )
 				id = extras.getInt("id", 0);
 			else if (intent.getAction().equals(ACTION_NEXT_PAGE))
 				page = 1;
@@ -68,8 +71,12 @@ public class CheckItemsWidget extends AppWidgetProvider {
 
 			if (id != 0) {
 				ContentValues values = new ContentValues();
-				values.put(ShoppingContract.Contains.STATUS,
-						ShoppingContract.Status.BOUGHT);
+				if (intent.getAction().equals(ACTION_CHECK))
+					values.put(ShoppingContract.Contains.STATUS,
+							ShoppingContract.Status.BOUGHT);
+				else
+					values.put(ShoppingContract.Contains.STATUS,
+							ShoppingContract.Status.WANT_TO_BUY);
 				context.getContentResolver().update(
 						Uri.withAppendedPath(
 								ShoppingContract.Contains.CONTENT_URI,
@@ -145,12 +152,30 @@ public class CheckItemsWidget extends AppWidgetProvider {
 				views.setTextViewText(viewId, cursor.getString(cursor
 						.getColumnIndex(ContainsFull.ITEM_NAME)));
 
-				Intent intentCheckService = new Intent(context,
-						CheckItemsWidget.class);
-				intentCheckService.putExtra("widgetId", widgetId);
-				intentCheckService.putExtra("id",
-						Integer.valueOf(cursor.getString(0)));
-				intentCheckService.setAction(ACTION_CHECK);
+				Intent intentCheckService;
+
+				if (ShoppingContract.Status.WANT_TO_BUY != cursor.getInt(cursor
+						.getColumnIndex(ContainsFull.STATUS))) {
+					views.setTextColor(
+							viewId,
+							context.getResources().getColor(
+									R.color.strikethrough));
+					intentCheckService = new Intent(context,
+							CheckItemsWidget.class);
+					intentCheckService.putExtra("widgetId", widgetId);
+					intentCheckService.putExtra("id",
+							Integer.valueOf(cursor.getString(0)));
+					intentCheckService.setAction(ACTION_UNCHECK);
+				} else {
+					views.setTextColor(viewId,
+							context.getResources().getColor(R.color.black));
+					intentCheckService = new Intent(context,
+							CheckItemsWidget.class);
+					intentCheckService.putExtra("widgetId", widgetId);
+					intentCheckService.putExtra("id",
+							Integer.valueOf(cursor.getString(0)));
+					intentCheckService.setAction(ACTION_CHECK);
+				}
 
 				PendingIntent pendingIntent = PendingIntent.getBroadcast(
 						context, Integer.valueOf(cursor.getString(0)),
@@ -254,9 +279,9 @@ public class CheckItemsWidget extends AppWidgetProvider {
 	public static Cursor fillItems(Context context, long listId) {
 		String sortOrder = PreferenceActivity.getSortOrderFromPrefs(context,
 				ShoppingActivity.MODE_IN_SHOP);
-		String selection = "list_id = ? AND "
-				+ ShoppingContract.Contains.STATUS + " == "
-				+ ShoppingContract.Status.WANT_TO_BUY;
+		String selection = "list_id = ?  AND "
+				+ ShoppingContract.ContainsFull.STATUS + " <> "
+				+ ShoppingContract.Status.REMOVED_FROM_LIST;
 
 		Cursor cursor = context.getContentResolver().query(
 				ContainsFull.CONTENT_URI, ShoppingActivity.mStringItems,

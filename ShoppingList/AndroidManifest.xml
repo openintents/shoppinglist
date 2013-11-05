@@ -250,6 +250,7 @@
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="org.openintents.shopping.widgets.ActionCheck" />
+                <action android:name="org.openintents.shopping.widgets.ActionUnCheck" />
                 <action android:name="org.openintents.shopping.widgets.ActionPrevPage" />
                 <action android:name="org.openintents.shopping.widgets.ActionNextPage" />
             </intent-filter>
