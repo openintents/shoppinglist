@@ -59,7 +59,7 @@ public class ListWidgetService extends RemoteViewsService {
 					item.name = cursor.getString(cursor
 							.getColumnIndex(ContainsFull.ITEM_NAME));
 					item.id = cursor.getLong(cursor
-							.getColumnIndex(ContainsFull.ITEM_ID));
+							.getColumnIndex(ContainsFull._ID));
 					item.bought = cursor.getInt(cursor
 							.getColumnIndex(ContainsFull.STATUS)) == ShoppingContract.Status.BOUGHT;
 					items.add(item);
