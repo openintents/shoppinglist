@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ShoppingListGlassExtensionLibrariesGooglePlayServicesUnspecified.aar-libs-google-play-services.jar-google-play-services">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/GlassExtension/build/exploded-bundles/ShoppingListGlassExtensionLibrariesGooglePlayServicesUnspecified.aar/libs/google-play-services.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
