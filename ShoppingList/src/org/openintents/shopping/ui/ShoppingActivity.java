@@ -3436,17 +3436,24 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		public View getView(int position, View convertView, ViewGroup parent) {
 			int list_pos, post_pos;
 			int list_count = mAdapter.getCount();
-  	        View v = null;	
+  	        View v = null;
+  	        View v2 = null;
 
 			if (position < mNumAboveList) {
 			  switch(position) {
-			  case 0: 
+			  case 1: 
 				  v = mInflater.inflate(R.layout.drawer_item_radio, parent, false);
-				  ((TextView)v).setText(R.string.menu_pick_items);
+                  v2 = v.findViewById(R.id.text1);
+				  ((TextView)v2).setText(R.string.menu_pick_items);
+				  v2 = v.findViewById(R.id.mode_radio_button);
+				  v2.setSelected(mItemsView.mMode == MODE_ADD_ITEMS);
 				  break;
-			  case 1:
+			  case 0:
 				  v = mInflater.inflate(R.layout.drawer_item_radio, parent, false);
-				  ((TextView)v).setText(R.string.menu_start_shopping);
+                  v2 = v.findViewById(R.id.text1);
+				  ((TextView)v2).setText(R.string.menu_start_shopping);
+				  v2 = v.findViewById(R.id.mode_radio_button);
+				  v2.setSelected(mItemsView.mMode == MODE_IN_SHOP);
 				  break;
 			  case 2:
 				  v = mInflater.inflate(R.layout.drawer_item_header, parent, false);
@@ -3454,11 +3461,13 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 				  break;
 			  }
 			} else if ((list_pos = position - mNumAboveList) < list_count){
-				return mAdapter.getView(list_pos, convertView, parent);
+				int curListPos = mShoppingListsView.getSelectedItemPosition();
+				v = mAdapter.getView(list_pos, convertView, parent);
 			} else {
 				post_pos = list_pos - list_count;
-				v = mInflater.inflate(R.layout.drawer_item_radio, parent, false);
-				((TextView)v).setText(R.string.new_list);
+				v = mInflater.inflate(R.layout.drawer_item_list, parent, false);
+				v2 = v.findViewById(R.id.text1);
+				((TextView)v2).setText(R.string.new_list);
 			}
 			return v;
 		}
@@ -3499,12 +3508,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 			if (debug)
 				Log.d(TAG, "DrawerListAdapter: onItemClick");
 			
-			int list_pos, post_pos;
+			int list_pos;
 			int list_count = mAdapter.getCount();
 			if (position < mNumAboveList) {		
 				// Pick Items or Shopping selected
 			    mDrawerLayout.closeDrawer(mDrawerListsView);
-				mItemsView.mMode = (position == 0) ?  MODE_ADD_ITEMS : MODE_IN_SHOP;	
+				mItemsView.mMode = (position == 1) ?  MODE_ADD_ITEMS : MODE_IN_SHOP;	
 				mDrawerListsView.setItemChecked(position, true);
 				mDrawerListsView.setItemChecked(1 -position, false);
 				onModeChanged();
