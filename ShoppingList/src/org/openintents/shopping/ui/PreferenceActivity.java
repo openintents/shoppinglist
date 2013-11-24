@@ -365,10 +365,11 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 	}
 
 	public static boolean getPickItemsInListFromPrefs(Context context) {
-		boolean using = PreferenceManager.getDefaultSharedPreferences(context)
-				.getBoolean(PREFS_PICKITEMSINLIST,
-						PREFS_PICKITEMSINLIST_DEFAULT);
-		return using;
+		// boolean using = PreferenceManager.getDefaultSharedPreferences(context)
+		//		.getBoolean(PREFS_PICKITEMSINLIST,
+		//				PREFS_PICKITEMSINLIST_DEFAULT);
+		// return using;
+		return true;
 	}
 	
 	public static boolean getUsingPerListSortFromPrefs(Context context) {
