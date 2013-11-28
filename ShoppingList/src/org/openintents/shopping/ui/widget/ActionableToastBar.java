@@ -1,4 +1,6 @@
 /**
+ * borrowed from the KitKat UnifiedEmail app source 
+ *
  * Copyright (c) 2011, Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,7 +15,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.mail.ui;
+package org.openintents.shopping.ui.widget;
+
+import org.openintents.shopping.R;
+import org.openintents.shopping.ui.ToastBarOperation;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
@@ -27,7 +32,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.mail.R;
 
 /**
  * A custom {@link View} that exposes an action to the user.

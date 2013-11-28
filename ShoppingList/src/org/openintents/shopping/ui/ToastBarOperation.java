@@ -1,4 +1,6 @@
 /*******************************************************************************
+ *      borrowed from AOSP UnifiedEmail app
+ *
  *      Copyright (C) 2011 Google Inc.
  *      Licensed to The Android Open Source Project.
  *
@@ -14,14 +16,14 @@
  *      See the License for the specific language governing permissions and
  *      limitations under the License.
  *******************************************************************************/
-package com.android.mail.ui;
+package org.openintents.shopping.ui;
 
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+import org.openintents.shopping.ui.widget.ActionableToastBar;
 
-import com.android.mail.R;
-import com.android.mail.providers.Folder;
+import org.openintents.shopping.R;
 
 /**
  * A simple holder class that stores the information to undo the application of a folder.
@@ -34,7 +36,6 @@ public class ToastBarOperation implements Parcelable,
     private final int mCount;
     private final boolean mBatch;
     private final int mType;
-    private final Folder mFolder;
 
     /**
      * Create a ToastBarOperation
@@ -42,17 +43,12 @@ public class ToastBarOperation implements Parcelable,
      * @param count Number of conversations this action would be applied to.
      * @param menuId res id identifying the menu item tapped; used to determine what action was
      *        performed
-     * @param operationFolder The {@link Folder} upon which the operation was run. This may be
-     *        <code>null</code>, but is required in {@link #getDescription(Context)} for certain
-     *        actions.
      */
-    public ToastBarOperation(int count, int menuId, int type, boolean batch,
-            final Folder operationFolder) {
+    public ToastBarOperation(int count, int menuId, int type, boolean batch) {
         mCount = count;
         mAction = menuId;
         mBatch = batch;
         mType = type;
-        mFolder = operationFolder;
     }
 
     public int getType() {
@@ -68,7 +64,6 @@ public class ToastBarOperation implements Parcelable,
         mAction = in.readInt();
         mBatch = in.readInt() != 0;
         mType = in.readInt();
-        mFolder = in.readParcelable(loader);
     }
 
     @Override
@@ -83,8 +78,6 @@ public class ToastBarOperation implements Parcelable,
         sb.append(mBatch);
         sb.append(" mType=");
         sb.append(mType);
-        sb.append(" mFolder=");
-        sb.append(mFolder);
         sb.append("}");
         return sb.toString();
     }
@@ -95,26 +88,27 @@ public class ToastBarOperation implements Parcelable,
         dest.writeInt(mAction);
         dest.writeInt(mBatch ? 1 : 0);
         dest.writeInt(mType);
-        dest.writeParcelable(mFolder, 0);
     }
 
-    public static final ClassLoaderCreator<ToastBarOperation> CREATOR =
-            new ClassLoaderCreator<ToastBarOperation>() {
-        @Override
-        public ToastBarOperation createFromParcel(final Parcel source) {
-            return createFromParcel(source, null);
-        }
-
-        @Override
-        public ToastBarOperation[] newArray(final int size) {
-            return new ToastBarOperation[size];
-        }
-
-        @Override
-        public ToastBarOperation createFromParcel(final Parcel source, final ClassLoader loader) {
-            return new ToastBarOperation(source, loader);
-        }
-    };
+    // ClassLoaderCreator requires API 13 and we are trying to stick with 7.
+    // Probably we don't need this anyway?
+//    public static final ClassLoaderCreator<ToastBarOperation> CREATOR =
+//            new ClassLoaderCreator<ToastBarOperation>() {
+//        @Override
+//        public ToastBarOperation createFromParcel(final Parcel source) {
+//            return createFromParcel(source, null);
+//        }
+//
+//        @Override
+//        public ToastBarOperation[] newArray(final int size) {
+//            return new ToastBarOperation[size];
+//        }
+//
+//        @Override
+//        public ToastBarOperation createFromParcel(final Parcel source, final ClassLoader loader) {
+//            return new ToastBarOperation(source, loader);
+//        }
+//    };
 
     /**
      * Get a string description of the operation that will be performed
@@ -122,29 +116,9 @@ public class ToastBarOperation implements Parcelable,
      */
     public String getDescription(Context context) {
         final int resId;
-        if (mAction == R.id.delete) {
-            resId = R.plurals.conversation_deleted;
-        } else if (mAction == R.id.remove_folder) {
-            return context.getString(R.string.folder_removed, mFolder.name);
-        } else if (mAction == R.id.change_folders) {
-            resId = R.plurals.conversation_folder_changed;
-        } else if (mAction == R.id.move_folder) {
-            return context.getString(R.string.conversation_folder_moved, mFolder.name);
-        } else if (mAction == R.id.archive) {
-            resId = R.plurals.conversation_archived;
-        } else if (mAction == R.id.report_spam) {
-            resId = R.plurals.conversation_spammed;
-        } else if (mAction == R.id.mark_not_spam) {
-            resId = R.plurals.conversation_not_spam;
-        } else if (mAction == R.id.mark_not_important) {
-            resId = R.plurals.conversation_not_important;
-        } else if (mAction == R.id.mute) {
-            resId = R.plurals.conversation_muted;
-        } else if (mAction == R.id.remove_star) {
-            resId = R.plurals.conversation_unstarred;
-        } else if (mAction == R.id.report_phishing) {
+        /* if (mAction == R.id. ) {
             resId = R.plurals.conversation_phished;
-        } else {
+        } else */ {
             resId = -1;
         }
         final String desc = (resId == -1) ? "" :
@@ -152,16 +126,11 @@ public class ToastBarOperation implements Parcelable,
         return desc;
     }
 
-    public String getSingularDescription(Context context, Folder folder) {
-        if (mAction == R.id.remove_folder) {
-            return context.getString(R.string.folder_removed, folder.name);
-        }
-        final int resId;
-        if (mAction ==  R.id.delete) {
-            resId = R.string.deleted;
-        } else if (mAction == R.id.archive) {
-            resId = R.string.archived;
-        } else {
+    public String getSingularDescription(Context context) {
+    	final int resId;
+        /* if (mAction == R.id.) {
+            resId = R.string.;
+        } else */ {
             resId = -1;
         }
         return (resId == -1) ? "" : context.getString(resId);

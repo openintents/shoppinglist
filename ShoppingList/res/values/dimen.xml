@@ -9,4 +9,5 @@
     <dimen name="list_list_item_left_offset">9dp</dimen>
     <dimen name="list_list_item_start_margin">7dp</dimen>
     <dimen name="list_list_item_end_margin">8dp</dimen>
+    <dimen name="undo_text_padding">16dip</dimen>
 </resources>
