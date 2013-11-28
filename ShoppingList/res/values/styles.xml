@@ -1,0 +1,13 @@
+<resources>
+    <!-- Undo bar styles -->
+    <style name="AbstractUndoTextStyle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#aaaaaa</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="UndoTextStyle" parent="AbstractUndoTextStyle">
+        <item name="android:paddingRight">@dimen/undo_text_padding</item>
+    </style>
+    <!-- End undo bar styles -->
+</resources>
