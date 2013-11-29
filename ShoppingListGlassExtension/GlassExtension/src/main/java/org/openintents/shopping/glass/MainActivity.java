@@ -21,17 +21,19 @@ import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.auth.UserRecoverableAuthException;
 import com.google.android.gms.common.AccountPicker;
 
-import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class MainActivity extends Activity {
-    private static final String TAG = "Glass";
+    private static final String TAG = "MainActivity";
+    private static final boolean debug = true;
+
     private static final String PARAM_AUTH_TOKEN =
             "com.example.mirror.android.AUTH_TOKEN";
 
@@ -69,6 +71,7 @@ public class MainActivity extends Activity {
         } catch (PackageManager.NameNotFoundException e) {
             mInvalideShoppingVersion = true;
         }
+        if (debug) { Log.d(TAG, "mInvalideShoppingVersion="+mInvalideShoppingVersion); }
 
 
         // Define our layout
@@ -116,6 +119,7 @@ public class MainActivity extends Activity {
         mNewCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (debug) { Log.d(TAG, "mInvalideShoppingVersion="+mInvalideShoppingVersion); }
                 createNewTimelineItem(mNewCardEditText.getText().toString());
             }
         });

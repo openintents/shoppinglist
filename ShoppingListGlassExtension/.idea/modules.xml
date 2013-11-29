@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GlassExtension/GlassExtension.iml" filepath="$PROJECT_DIR$/GlassExtension/GlassExtension.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libraries/GooglePlayServices/GooglePlayServices.iml" filepath="$PROJECT_DIR$/libraries/GooglePlayServices/GooglePlayServices.iml" />
       <module fileurl="file://$PROJECT_DIR$/ShoppingListGlassExtension.iml" filepath="$PROJECT_DIR$/ShoppingListGlassExtension.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libraries/libraries.iml" filepath="$PROJECT_DIR$/libraries/libraries.iml" />
     </modules>
   </component>
 </project>

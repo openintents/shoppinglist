@@ -21,13 +21,14 @@ configurations {
 }
 
 dependencies {
-    compile files('libs/android-support-v4.jar')
+//    compile files('libs/android-support-v4.jar')
+    compile project(':libraries:GooglePlayServices')
 
     // Require the Google APIs Client Library
     compile 'com.google.api-client:google-api-client:1.15.0-rc'
     compile 'com.google.api-client:google-api-client-android:1.15.0-rc'
     compile 'com.google.apis:google-api-services-mirror:v1-rev11-1.15.0-rc'
-    compile 'com.google.android.gms:play-services:+'
+//    compile 'com.google.android.gms:play-services:+'
 }
 
 

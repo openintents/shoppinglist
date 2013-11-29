@@ -1,14 +1,14 @@
 package org.openintents.shopping.provider;
 
 
-import org.openintents.shopping.Shopping;
-import org.openintents.shopping.Shopping.Status;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
+
+import org.openintents.shopping.Shopping;
+import org.openintents.shopping.Shopping.Status;
 
 public class ShoppingUtils {
     /**

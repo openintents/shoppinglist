@@ -1,1 +1,2 @@
 include ':GlassExtension'
+include ':libraries:GooglePlayServices'

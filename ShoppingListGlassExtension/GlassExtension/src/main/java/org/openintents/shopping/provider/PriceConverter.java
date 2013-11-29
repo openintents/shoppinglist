@@ -1,11 +1,11 @@
 package org.openintents.shopping.provider;
 
+import android.text.TextUtils;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
-
-import android.text.TextUtils;
 
 public class PriceConverter {
 
