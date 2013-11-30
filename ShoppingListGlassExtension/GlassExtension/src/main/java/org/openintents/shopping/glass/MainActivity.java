@@ -2,7 +2,10 @@ package org.openintents.shopping.glass;
 
 import android.accounts.AccountManager;
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -20,13 +23,22 @@ import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.auth.UserRecoverableAuthException;
 import com.google.android.gms.common.AccountPicker;
+import com.google.api.client.util.IOUtils;
 
+import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -36,6 +48,9 @@ public class MainActivity extends Activity {
 
     private static final String PARAM_AUTH_TOKEN =
             "com.example.mirror.android.AUTH_TOKEN";
+
+    public static final String PREF_OAUTH_TOKEN = "OAUTH_TOKEN";
+    public static final String PREF_LAST_MIRROR_ID = "LAST_MIRROR_ID";
 
     private static final int REQUEST_ACCOUNT_PICKER = 1;
     private static final int REQUEST_AUTHORIZATION = 2;
@@ -58,6 +73,8 @@ public class MainActivity extends Activity {
     private ImageButton mNewCardButton;
     private EditText mNewCardEditText;
     private boolean mInvalideShoppingVersion;
+    private String mLastMirrorId;
+    private OIShoppingListSender sender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +106,27 @@ public class MainActivity extends Activity {
         } else {
             mStartAuthButton.setEnabled(true);
             mExpireTokenButton.setEnabled(false);
+        }
+
+        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        String oauthToken = prefs.getString(PREF_OAUTH_TOKEN, null);
+        if (oauthToken != null)
+        {
+            if (debug) Log.d(TAG, "got OAUTH_TOKEN="+oauthToken);
+            mAuthToken = oauthToken;
+            mExpireTokenButton.setEnabled(true);
+            mStartAuthButton.setEnabled(false);
+        } else {
+            if (debug) Log.d(TAG, "no save OAUTH_TOKEN");
+        }
+
+        String lastMirrorId = prefs.getString(PREF_LAST_MIRROR_ID, null);
+        if (lastMirrorId != null)
+        {
+            if (debug) Log.d(TAG, "got LAST_MIRROR_ID="+lastMirrorId);
+            mLastMirrorId=lastMirrorId;
+        } else {
+            mLastMirrorId=null;
         }
 
         mStartAuthButton.setOnClickListener(new View.OnClickListener() {
@@ -123,7 +161,8 @@ public class MainActivity extends Activity {
                 createNewTimelineItem(mNewCardEditText.getText().toString());
             }
         });
-
+        sender=new OIShoppingListSender();
+        sender.initSender(getApplicationContext());
     }
 
     @Override
@@ -169,15 +208,28 @@ public class MainActivity extends Activity {
         }
     }
 
+    private JSONObject buildShoppingCard() throws JSONException {
+        JSONObject card=new JSONObject();
+        String html="<article><section>";
+        html+="<ul class=\"text-x-small\">";
+        String text="";
+        String[] items=sender.getItems();
+        for (String item : items) {
+            text+=item+" ";
+            html+="<li>"+item+"</li>\n";
+        }
+        html+="</ul></section><footer>\n<p>OI Shopping List</p>\n</footer></article>";
+        card.put("html", html);
+        card.put("text", text);
+        return card;
+    }
     private void createNewTimelineItem(String message) {
         if (!TextUtils.isEmpty(mAuthToken)) {
-            if (!TextUtils.isEmpty(message)) {
                 try {
                     JSONObject notification = new JSONObject();
                     notification.put("level", "DEFAULT"); // Play a chime
 
-                    JSONObject json = new JSONObject();
-                    json.put("text", message);
+                    JSONObject json = buildShoppingCard();
                     json.put("notification", notification);
 
                     MirrorApiClient client = MirrorApiClient.getInstance(this);
@@ -185,9 +237,36 @@ public class MainActivity extends Activity {
                         @Override
                         public void onSuccess(HttpResponse response) {
                             try {
-                                Log.v(TAG, "onSuccess: " + EntityUtils.toString(response.getEntity()));
+                                /*
+                                BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+                                StringBuilder builder = new StringBuilder();
+                                for (String line = null; (line = reader.readLine()) != null;) {
+                                    builder.append(line).append("\n");
+                                }
+                                JSONTokener tokener = new JSONTokener(builder.toString());
+                                JSONArray finalResult = new JSONArray(tokener);
+                                Log.d(TAG, "finalResult="+finalResult);
+                                */
+                                InputStream inputStream = response.getEntity().getContent();
+                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                IOUtils.copy(inputStream, baos);
+                                JSONObject jsonObject = new JSONObject(baos.toString());
+//                                if (debug) Log.d(TAG, "jsonObject="+jsonObject);
+//                                Log.v(TAG, "onSuccess: " + EntityUtils.toString(response.getEntity()));
+                                String id=jsonObject.getString("id");
+                                if (debug) Log.d(TAG, "id="+id);
+
+                                if (id!=null && (id.length()>0)) {
+                                    SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+                                    editor.putString(PREF_LAST_MIRROR_ID, id);
+                                    editor.commit();
+                                    if (debug) Log.d(TAG, "saved LAST_MIRROR_ID="+id);
+                                    mLastMirrorId=id;
+                                }
                             } catch (IOException e1) {
                                 // Pass
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
                             Toast.makeText(MainActivity.this, "Created new timeline item",
                                     Toast.LENGTH_SHORT).show();
@@ -208,10 +287,6 @@ public class MainActivity extends Activity {
                     Toast.makeText(this, "Sorry, can't serialize that to JSON",
                             Toast.LENGTH_SHORT).show();
                 }
-            } else {
-                Toast.makeText(this, "Sorry, can't create an empty timeline item",
-                        Toast.LENGTH_SHORT).show();
-            }
         } else {
             Toast.makeText(this, "Sorry, can't create a new timeline card without a token",
                     Toast.LENGTH_LONG).show();
@@ -225,6 +300,11 @@ public class MainActivity extends Activity {
             mExpireTokenButton.setEnabled(true);
             mStartAuthButton.setEnabled(false);
             Toast.makeText(this, "New token result", Toast.LENGTH_SHORT).show();
+
+            SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+            editor.putString(PREF_OAUTH_TOKEN, token);
+            editor.commit();
+            if (debug) Log.d(TAG, "saved OAUTH_TOKEN="+token);
         } else {
             mExpireTokenButton.setEnabled(false);
             mStartAuthButton.setEnabled(true);

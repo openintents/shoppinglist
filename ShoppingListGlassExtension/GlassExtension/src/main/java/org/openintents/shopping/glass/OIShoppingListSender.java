@@ -1,6 +1,6 @@
 package org.openintents.shopping.glass;
 
-import android.app.Activity;
+import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.util.Log;
@@ -11,9 +11,10 @@ import org.openintents.shopping.provider.ThemeUtils2;
 
 public class OIShoppingListSender {
     private static final String LOG_TAG = "OIShoppingListSender";
+    private static final boolean debug = true;
     private boolean mInvalideShoppingVersion;
     private Cursor mShoppingListIds;
-    private Activity context;
+    private Context context;
     private int mShoppingListPos;
     private int mPos;
     private ContentObserver mContentObserver;
@@ -21,6 +22,11 @@ public class OIShoppingListSender {
     private String mShoppingListName;
     private Cursor mExistingItems;
 
+    public void initSender(Context context) {
+        if (debug) Log.d(LOG_TAG, "initSender("+context+")");
+        this.context = context;
+        initShoppingLists(true);
+    }
     private void initShoppingLists(boolean setDefault) {
 
         if (mInvalideShoppingVersion) {
@@ -51,17 +57,89 @@ public class OIShoppingListSender {
 
         setCurrentShoppingListId(mShoppingListPos);
 
-        //context.refreshCursor();
 
+/*        mContentObserver = new ShoppingObserver(null);
         context.getContentResolver().registerContentObserver(Shopping.Contains.CONTENT_URI,
                 true, mContentObserver);
         context.getContentResolver().registerContentObserver(Shopping.ContainsFull.CONTENT_URI,
                 true, mContentObserver);
         context.getContentResolver().registerContentObserver(
                 Shopping.Items.CONTENT_URI, true, mContentObserver);
-
+*/
         mPos = 0;
+        refreshCursor();
+        if (mExistingItems != null) {
+            int count=mExistingItems.getCount();
+            if (debug) Log.d(LOG_TAG, "count="+count);
+            while(mPos<count){
+                Item item=getItem(mPos);
+                if (debug) Log.d(LOG_TAG, "item="+item.item);
+                mPos++;
+            }
+        }
+    }
+/*
+    class ShoppingObserver extends ContentObserver {
 
+        public ShoppingObserver(Handler handler) {
+
+            super(handler);
+
+        }
+        @Override
+        public boolean deliverSelfNotifications() {
+            return super.deliverSelfNotifications();
+        }
+        @Override
+        public void onChange(boolean selfChange) {
+            super.onChange(selfChange);
+        }
+    };
+*/
+    public String[] getItems() {
+
+        if (mExistingItems==null) {
+            return new String[0];
+        }
+
+        int count=mExistingItems.getCount();
+        String[] items=new String[count];
+        if (count>0) {
+            int position=0;
+            while(position<count){
+                Item item=getItem(position);
+                if (debug) Log.d(LOG_TAG, "item="+item.item);
+                items[position]=item.item;
+                position++;
+            }
+
+        }
+
+        return items;
+    }
+    public String buildShoppingCard() {
+        String card="";
+        card+="<article>";
+        card+="<section>";
+        if (mExistingItems != null) {
+            int count=mExistingItems.getCount();
+            if (debug) Log.d(LOG_TAG, "count="+count);
+            if (count==0) {
+                return "Nothing in shopping list.";
+            }
+            int position=0;
+            card+="<li>";
+            while(position<count){
+                Item item=getItem(position);
+                if (debug) Log.d(LOG_TAG, "item="+item.item);
+                card += "<ul>"+item.item+"</ul>\n";
+                position++;
+            }
+            card+="</li>";
+        }
+        card+="</section>";
+        card+="</article>";
+        return card;
     }
 
     private void setCurrentShoppingListId(int mShoppingListPos2) {
@@ -73,6 +151,7 @@ public class OIShoppingListSender {
         ThemeUtils2.setRemoteStyle(context, mShoppingListIds.getString(1), 14,
                 true);
         mShoppingListName = mShoppingListIds.getString(2);
+        if (debug) Log.d(LOG_TAG, "mShoppingListName: " + mShoppingListName);
 
     }
 
@@ -103,6 +182,7 @@ public class OIShoppingListSender {
                                     String.valueOf(Shopping.Status.WANT_TO_BUY)},
                             null);
 
+            if (debug) Log.d(LOG_TAG, "mExistingItems=" + mExistingItems);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -32,7 +32,6 @@ public class ShoppingUtils {
             existingItems.moveToFirst();
             id = existingItems.getLong(0);
         }
-        ;
         existingItems.close();
         return id;
     }
