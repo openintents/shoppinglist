@@ -117,6 +117,7 @@ public class OIShoppingListSender {
 
         return items;
     }
+    /*
     public String buildShoppingCard() {
         String card="";
         card+="<article>";
@@ -140,7 +141,7 @@ public class OIShoppingListSender {
         card+="</section>";
         card+="</article>";
         return card;
-    }
+    }*/
 
     private void setCurrentShoppingListId(int mShoppingListPos2) {
         mShoppingListIds.moveToPosition(mShoppingListPos);
@@ -155,7 +156,7 @@ public class OIShoppingListSender {
 
     }
 
-    private void refreshCursor() {
+    public void refreshCursor() {
 
         Log.d(LOG_TAG, "refreshCursor() called");
         try {

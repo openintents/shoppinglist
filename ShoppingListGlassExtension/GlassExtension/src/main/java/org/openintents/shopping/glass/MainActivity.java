@@ -210,9 +210,10 @@ public class MainActivity extends Activity {
 
     private JSONObject buildShoppingCard() throws JSONException {
         JSONObject card=new JSONObject();
-        String html="<article><section>";
+        String html="<article class=\"auto-paginate\"><section>";
         html+="<ul class=\"text-x-small\">";
         String text="";
+        sender.refreshCursor();
         String[] items=sender.getItems();
         for (String item : items) {
             text+=item+" ";
@@ -223,6 +224,7 @@ public class MainActivity extends Activity {
         card.put("text", text);
         return card;
     }
+
     private void createNewTimelineItem(String message) {
         if (!TextUtils.isEmpty(mAuthToken)) {
                 try {
@@ -233,26 +235,14 @@ public class MainActivity extends Activity {
                     json.put("notification", notification);
 
                     MirrorApiClient client = MirrorApiClient.getInstance(this);
-                    client.createTimelineItem(mAuthToken, json, new MirrorApiClient.Callback() {
+                    MirrorApiClient.Callback callback=new MirrorApiClient.Callback() {
                         @Override
                         public void onSuccess(HttpResponse response) {
                             try {
-                                /*
-                                BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-                                StringBuilder builder = new StringBuilder();
-                                for (String line = null; (line = reader.readLine()) != null;) {
-                                    builder.append(line).append("\n");
-                                }
-                                JSONTokener tokener = new JSONTokener(builder.toString());
-                                JSONArray finalResult = new JSONArray(tokener);
-                                Log.d(TAG, "finalResult="+finalResult);
-                                */
                                 InputStream inputStream = response.getEntity().getContent();
                                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                                 IOUtils.copy(inputStream, baos);
                                 JSONObject jsonObject = new JSONObject(baos.toString());
-//                                if (debug) Log.d(TAG, "jsonObject="+jsonObject);
-//                                Log.v(TAG, "onSuccess: " + EntityUtils.toString(response.getEntity()));
                                 String id=jsonObject.getString("id");
                                 if (debug) Log.d(TAG, "id="+id);
 
@@ -275,14 +265,34 @@ public class MainActivity extends Activity {
                         @Override
                         public void onFailure(HttpResponse response, Throwable e) {
                             try {
-                                Log.v(TAG, "onFailure: " + EntityUtils.toString(response.getEntity()));
+                                InputStream inputStream = response.getEntity().getContent();
+                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                IOUtils.copy(inputStream, baos);
+                                JSONObject jsonObject = new JSONObject(baos.toString());
+                                JSONObject error = jsonObject.getJSONObject("error");
+                                String message=error.getString("message");
+                                if (debug) Log.d(TAG,"jsonObject="+jsonObject);
+//                                if (debug) Log.d(TAG, "onFailure: " + EntityUtils.toString(response.getEntity()));
+                                if (message!=null && (message.contentEquals("Not Found"))) {
+                                    if (debug) Log.d(TAG,"last id was not found");
+                                    mLastMirrorId=null;
+                                }
                             } catch (IOException e1) {
                                 // Pass
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
                             }
                             Toast.makeText(MainActivity.this, "Failed to create new timeline item",
                                     Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    };
+
+                    if (mLastMirrorId!=null) {
+                        if (debug) Log.d(TAG,"update using "+mLastMirrorId);
+                        client.updateTimelineItem(mAuthToken, json, callback, mLastMirrorId);
+                    } else {
+                        client.createTimelineItem(mAuthToken, json, callback);
+                    }
                 } catch (JSONException e) {
                     Toast.makeText(this, "Sorry, can't serialize that to JSON",
                             Toast.LENGTH_SHORT).show();

@@ -6,6 +6,7 @@ import android.os.Handler;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
@@ -53,6 +54,53 @@ public class MirrorApiClient {
         try {
             final HttpPost request = new HttpPost();
             request.setURI(new URI(BASE_URL + "timeline"));
+            request.addHeader("Content-Type", "application/json");
+            request.addHeader("Authorization", String.format("Bearer %s", token));
+            request.setEntity(new StringEntity(json.toString()));
+
+            // Execute the request on a background thread
+            mThreadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        final HttpResponse response = mClient.execute(request);
+                        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    callback.onSuccess(response);
+                                }
+                            });
+                        } else {
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    callback.onFailure(response, null);
+                                }
+                            });
+                        }
+                    } catch (final IOException e) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                callback.onFailure(null, e);
+                            }
+                        });
+                    }
+                }
+            });
+        } catch (UnsupportedEncodingException e) {
+            // Note: This should never happen
+        } catch (URISyntaxException e) {
+            // Note: This should never happen
+        }
+    }
+
+    public void updateTimelineItem(String token, JSONObject json,
+                                   final Callback callback, String id) {
+        try {
+            final HttpPut request = new HttpPut();
+            request.setURI(new URI(BASE_URL + "timeline/" + id));
             request.addHeader("Content-Type", "application/json");
             request.addHeader("Authorization", String.format("Bearer %s", token));
             request.setEntity(new StringEntity(json.toString()));
