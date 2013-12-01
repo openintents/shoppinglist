@@ -1,4 +1,14 @@
 ----------------
+release 1.8
+date: 2013-12-??
+
+- Add OI Shopping List to the "share" menu of other apps to import text lists. (RuthAlk)
+- Unmark All context menu item
+- Avoid overlapping text of price and description
+- Fix issues with Add button sometimes not adding.
+- Fix text color on filter buttons.
+
+----------------
 release 1.7
 date: 2012-10-16
 
