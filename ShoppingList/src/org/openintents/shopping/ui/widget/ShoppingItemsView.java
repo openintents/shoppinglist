@@ -17,6 +17,8 @@ import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;
 import org.openintents.shopping.ui.PreferenceActivity;
 import org.openintents.shopping.ui.ShoppingActivity;
+import org.openintents.shopping.ui.ToastBarSingleItemStatusOperation;
+import org.openintents.shopping.ui.UndoListener;
 import org.openintents.shopping.ui.dialog.EditItemDialog;
 
 import android.app.Activity;
@@ -147,8 +149,10 @@ public class ShoppingItemsView extends ListView {
 	private DragListener mDragListener;
 	private DropListener mDropListener;
 
-	private ActionBarListener mActionBarListener;
-		
+	private ActionBarListener mActionBarListener = null;
+	private UndoListener mUndoListener = null;
+	private ActionableToastBar mToastBar;
+	
 	/**
 	 * Extend the SimpleCursorAdapter to strike through items. if STATUS ==
 	 * Shopping.Status.BOUGHT
@@ -636,7 +640,7 @@ public class ShoppingItemsView extends ListView {
 		}
 
 	};
-	
+
 	private TextView mCountTextView;
 	/**
 	 * 3-state flag for toggle all: true = all marked, false = all unmarked, null = neither nor
@@ -667,8 +671,13 @@ public class ShoppingItemsView extends ListView {
 		mDefaultDivider = getDivider();
 	}
 
+
 	public void setActionBarListener(ActionBarListener listener) {
 		mActionBarListener = listener;
+	}
+	
+	public void setUndoListener(UndoListener listener) {
+		mUndoListener = listener;
 	}
 
 	public void onResume() {
@@ -1155,16 +1164,26 @@ public class ShoppingItemsView extends ListView {
 			} // else old is REMOVE_FROM_LIST or BOUGHT, new is WANT_TO_BUY, which is the default.
 		} 
 		
+		String item_id = mCursorItems.getString(0);
 		ContentValues values = new ContentValues();
 		values.put(ShoppingContract.Contains.STATUS, newstatus);
 		if (debug) Log.d(TAG, "update row " + mCursorItems.getString(0) + ", newstatus "
 				+ newstatus);
 		getContext().getContentResolver().update(
 				Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI,
-						mCursorItems.getString(0)), values, null, null);
+						item_id), values, null, null);
+		boolean affectsSort = PreferenceActivity.prefsStatusAffectsSort(getContext(),  mMode);
+		boolean hidesItem = true /* TODO */;
+		if (mUndoListener != null && (affectsSort || hidesItem)) {
+			String item_name = mCursorItems.getString(ShoppingActivity.mStringItemsITEMNAME);
+			ToastBarSingleItemStatusOperation op = new ToastBarSingleItemStatusOperation(this, getContext(),
+					item_id, item_name, oldstatus, newstatus, 0, false);
+			mUndoListener.onUndoAvailable(op);
+		}
+
 		requery();
 
-		if (PreferenceActivity.prefsStatusAffectsSort(getContext(),  mMode)) {
+		if (affectsSort) {
 			invalidate();		
 		} 
 		
@@ -1649,6 +1668,13 @@ public class ShoppingItemsView extends ListView {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
+		
+	    if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+	        if (mToastBar != null && !mToastBar.isEventInToastBar(ev)) {
+	            mToastBar.hide(true /* animated */, false /* actionClicked */);
+	        }
+	    }
+		
 		if ((mDragListener != null || mDropListener != null)
 				&& mDragView != null) {
 			int action = ev.getAction();
@@ -1783,5 +1809,9 @@ public class ShoppingItemsView extends ListView {
 
 	public interface ActionBarListener {
 		void updateActionBar();
+	}
+
+	public void setToastBar(ActionableToastBar toastBar) {
+		mToastBar = toastBar;
 	}
 }

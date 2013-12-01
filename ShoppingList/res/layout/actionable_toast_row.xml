@@ -32,7 +32,7 @@
         android:ellipsize="end"
         android:gravity="center_vertical"
         android:paddingLeft="16dip"
-        android:singleLine="true"
+        android:singleLine="false"
         android:text="@string/stores"
         android:textColor="@android:color/white"
         android:textSize="16sp" />

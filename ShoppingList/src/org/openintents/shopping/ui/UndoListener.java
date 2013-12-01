@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.android.mail.ui;
+package org.openintents.shopping.ui;
 
 /**
  * Classes that can undo an operation should implement this interface.

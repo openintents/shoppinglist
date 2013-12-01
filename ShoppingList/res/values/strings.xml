@@ -105,6 +105,7 @@
 	<string name="note">Note</string>
 	<string name="stores">Stores</string>
 	<string name="list">List</string>
+        <string name="undo">Undo</string>
 	
 	<string name="otherqty">Other Quantity...</string>
 	<string name="otherpri">Other Priority...</string>   
@@ -154,6 +155,9 @@
 	<string name="use_theme_for_all_lists">Use this theme for all lists</string>
 	<string name="get_more_themes">Get more themes</string>
 	
+	<string name="undoable_marked_item">Marked "%1$s"</string>
+	<string name="undoable_unmarked_item">Unmarked "%1$s"</string>
+		
 	<!-- preferences -->
 	<string name="preferences">Settings</string>
 	
@@ -347,6 +351,7 @@
         <item>Per word</item>
     </string-array>
 
+   
 	<!-- ***************************
 	     OI Notepad
 	     *************************** -->

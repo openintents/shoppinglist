@@ -50,12 +50,14 @@ import org.openintents.shopping.ui.dialog.RenameListDialog;
 import org.openintents.shopping.ui.dialog.ThemeDialog;
 import org.openintents.shopping.ui.dialog.ThemeDialog.ThemeDialogListener;
 import org.openintents.shopping.ui.tablet.ShoppingListFilterFragment;
+import org.openintents.shopping.ui.widget.ActionableToastBar;
 import org.openintents.shopping.ui.widget.QuickSelectMenu;
 import org.openintents.shopping.ui.widget.ShoppingItemsView;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.ActionBarListener;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.DragListener;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.DropListener;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.OnCustomClickListener;
+import org.openintents.shopping.ui.UndoListener;
 import org.openintents.shopping.widgets.CheckItemsWidget;
 import org.openintents.util.MenuIntentOptionsWithIcons;
 import org.openintents.util.ShakeSensorListener;
@@ -140,7 +142,8 @@ import android.widget.Toast;
  */
 public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		implements ThemeDialogListener, OnCustomClickListener,
-		ActionBarListener, OnItemChangedListener { // implements
+		ActionBarListener, OnItemChangedListener, 
+		UndoListener { // implements
 	// AdapterView.OnItemClickListener
 	// {
 
@@ -408,6 +411,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     private ListView mDrawerListsView;
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mTitle, mDrawerTitle, mSubTitle;
+    protected ActionableToastBar mToastBar;
 
 	// private Cursor mCursorItems;
 
@@ -684,6 +688,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		onModeChanged();
 
 		mItemsView.setActionBarListener(this);
+		mItemsView.setUndoListener(this);
 	}
 
 	@Override
@@ -1186,10 +1191,13 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		mLayoutParamsItems = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.FILL_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
+		
+        mToastBar = (ActionableToastBar) findViewById(R.id.toast_bar);
 
 		mItemsView = (ShoppingItemsView) findViewById(R.id.list_items);
 		mItemsView.setThemedBackground(findViewById(R.id.background));
 		mItemsView.setCustomClickListener(this);
+		mItemsView.setToastBar(mToastBar);
 
 		mItemsView.setItemsCanFocus(true);
 		mItemsView.setDragListener(new DragListener() {
@@ -3631,5 +3639,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 			fillItems(false);
 			return true;
 		}
+	}
+
+	@Override
+	public void onUndoAvailable(ToastBarOperation undoOp) {
+		mToastBar.show(null, 0, undoOp.getDescription(this), 
+				true, R.string.undo, true, undoOp);
 	}
 }

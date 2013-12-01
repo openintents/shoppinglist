@@ -22,7 +22,9 @@ import org.openintents.shopping.ui.ToastBarOperation;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -36,6 +38,7 @@ import android.widget.TextView;
 /**
  * A custom {@link View} that exposes an action to the user.
  */
+@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH) /* TODO */
 public class ActionableToastBar extends LinearLayout {
     private boolean mHidden = false;
     private Animator mShowAnimation;
@@ -124,7 +127,7 @@ public class ActionableToastBar extends LinearLayout {
         mActionButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View widget) {
-                if (op.shouldTakeOnActionClickedPrecedence()) {
+                if (listener == null || op.shouldTakeOnActionClickedPrecedence()) {
                     op.onActionClicked(getContext());
                 } else {
                     listener.onActionClicked(getContext());

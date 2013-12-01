@@ -28,14 +28,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<LinearLayout 
+      <LinearLayout 
 	android:id="@+id/background"
 	android:orientation="vertical" 
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	>
 	<!-- android:background="@drawable/shoppinglist01d" -->
-    <LinearLayout android:id="@+id/filters"
+        <LinearLayout android:id="@+id/filters"
 	android:orientation="horizontal" 
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="fill_parent"
         	android:drawSelectorOnTop="true" />
-    <Button android:id = "@+id/listfilter" 
+        <Button android:id = "@+id/listfilter" 
 			android:layout_width="wrap_content"
 			android:layout_weight="1"
 			android:layout_height="fill_parent"
@@ -58,20 +58,21 @@
 			android:layout_height="fill_parent"
 			android:text="@string/tags"
     	/>
-    <Button android:id = "@+id/storefilter" 
+        <Button android:id = "@+id/storefilter" 
 			android:layout_width="wrap_content"
 			android:layout_weight="1"
 			android:layout_height="fill_parent"
 			android:text="@string/stores"
     	/>	
-    </LinearLayout>
-    <org.openintents.shopping.ui.widget.ShoppingItemsView android:id="@+id/list_items" 
-		android:layout_width="fill_parent"
-		android:layout_height="0dip"
-		android:layout_weight="1"
-        android:cacheColorHint="#00000000"
-		/>
-		<!-- 
+      </LinearLayout>
+      <org.openintents.shopping.ui.widget.ShoppingItemsView 
+          android:id="@+id/list_items" 
+	  android:layout_width="fill_parent"
+	  android:layout_height="0dip"
+	  android:layout_weight="1"
+          android:cacheColorHint="#00000000"
+	  />
+      <!-- 
         android:transcriptMode="alwaysScroll"
 		android:transcriptMode="normal"
 		android:stackFromBottom="true"
@@ -118,7 +119,10 @@
 			android:text="@string/add" />
 	</LinearLayout>
 	
-</LinearLayout>
+      </LinearLayout>
+      <org.openintents.shopping.ui.widget.ActionableToastBar
+          android:id="@+id/toast_bar"
+          style="@style/ToastBarStyle" />
     </FrameLayout>
     <!-- android:layout_gravity="start" tells DrawerLayout to treat
          this as a sliding drawer on the left side for left-to-right
