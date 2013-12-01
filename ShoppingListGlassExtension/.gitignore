@@ -1,5 +1,6 @@
 .gradle
 /local.properties
 /.idea/workspace.xml
+/.idea/dictionaries/
 .DS_Store
 /libraries/GooglePlayServices/build
