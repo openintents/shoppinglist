@@ -17,6 +17,7 @@ import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;
 import org.openintents.shopping.ui.PreferenceActivity;
 import org.openintents.shopping.ui.ShoppingActivity;
+import org.openintents.shopping.ui.ToastBarMultipleItemStatusOperation;
 import org.openintents.shopping.ui.ToastBarSingleItemStatusOperation;
 import org.openintents.shopping.ui.UndoListener;
 import org.openintents.shopping.ui.dialog.EditItemDialog;
@@ -1090,6 +1091,13 @@ public class ShoppingItemsView extends ListView {
 	 * 
 	 */
 	public void toggleAllItems(boolean on){
+		int op_type = on ? ToastBarMultipleItemStatusOperation.MARK_ALL : ToastBarMultipleItemStatusOperation.UNMARK_ALL;
+		ToastBarMultipleItemStatusOperation op = null;
+		
+		if (mUndoListener != null)
+			op = new ToastBarMultipleItemStatusOperation(this, mCursorActivity, 
+				op_type, mListId, false);
+		
 		for(int i=0;i<mCursorItems.getCount();i++){
 			mCursorItems.moveToPosition(i);
 			
@@ -1132,6 +1140,8 @@ public class ShoppingItemsView extends ListView {
 		requery();
 
 		invalidate();	
+		if (mUndoListener != null)
+			mUndoListener.onUndoAvailable(op);
 		mMarkedAllStatus = on;
 	}
 	
@@ -1197,31 +1207,30 @@ public class ShoppingItemsView extends ListView {
 	public boolean cleanupList() {
 
 		boolean nothingdeleted = true;
-		if (false) {
-			// by deleteing items
+		
+		ToastBarMultipleItemStatusOperation op = null;
+		if (mUndoListener != null)
+			op = new ToastBarMultipleItemStatusOperation(this, mCursorActivity, 
+					ToastBarMultipleItemStatusOperation.CLEAN_LIST, mListId, false);
+		
 
-			nothingdeleted = getContext().getContentResolver().delete(
-					ShoppingContract.Contains.CONTENT_URI,
-					ShoppingContract.Contains.LIST_ID + " = " + mListId + " AND "
-							+ ShoppingContract.Contains.STATUS + " = "
-							+ ShoppingContract.Status.BOUGHT, null) == 0;
-
-		} else {
-			// by changing state
-			ContentValues values = new ContentValues();
-			values.put(Contains.STATUS, Status.REMOVED_FROM_LIST);
-			if (PreferenceActivity.getResetQuantity(getContext()))
-				values.put(Contains.QUANTITY, "");
-			nothingdeleted = getContext().getContentResolver().update(
-					Contains.CONTENT_URI,
-					values,
-					ShoppingContract.Contains.LIST_ID + " = " + mListId + " AND "
-							+ ShoppingContract.Contains.STATUS + " = "
-							+ ShoppingContract.Status.BOUGHT, null) == 0;
-		}
-
+		// by changing state
+		ContentValues values = new ContentValues();
+		values.put(Contains.STATUS, Status.REMOVED_FROM_LIST);
+		if (PreferenceActivity.getResetQuantity(getContext()))
+			values.put(Contains.QUANTITY, "");
+		nothingdeleted = getContext().getContentResolver().update(
+				Contains.CONTENT_URI,
+				values,
+				ShoppingContract.Contains.LIST_ID + " = " + mListId + " AND "
+						+ ShoppingContract.Contains.STATUS + " = "
+						+ ShoppingContract.Status.BOUGHT, null) == 0;
+		
 		requery();
 
+		if (mUndoListener != null)
+			mUndoListener.onUndoAvailable(op);
+		
 		return !nothingdeleted;
 
 	}
@@ -1813,5 +1822,10 @@ public class ShoppingItemsView extends ListView {
 
 	public void setToastBar(ActionableToastBar toastBar) {
 		mToastBar = toastBar;
+	}
+	
+	public void unsetMarkedAll()
+	{
+		this.mMarkedAllStatus = false;
 	}
 }

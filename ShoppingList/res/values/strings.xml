@@ -155,9 +155,20 @@
 	<string name="use_theme_for_all_lists">Use this theme for all lists</string>
 	<string name="get_more_themes">Get more themes</string>
 	
-	<string name="undoable_marked_item">Marked "%1$s"</string>
-	<string name="undoable_unmarked_item">Unmarked "%1$s"</string>
-		
+	<string name="undoable_marked_item">Marked \"%1$s\"</string>
+	<string name="undoable_unmarked_item">Unmarked \"%1$s\"</string>
+	<plurals name="undoable_unmark_all">
+	    <item quantity="one">Unmarked %1$d item.</item>
+	    <item quantity="other">Unmarked %1$d items.</item></plurals>
+    <plurals name="undoable_mark_all">
+	    <item quantity="one">Marked %1$d item.</item>
+	    <item quantity="other">Marked %1$d items.</item></plurals>
+	    
+	<plurals name="undoable_clean_list">
+	    <item quantity="one">Removed %1$d item. Use \"Pick Items\" to reuse some later.</item>
+	    <item quantity="other">Removed %1$d items. Use \"Pick Items\" to reuse some later.</item>
+	    </plurals>
+				
 	<!-- preferences -->
 	<string name="preferences">Settings</string>
 	
