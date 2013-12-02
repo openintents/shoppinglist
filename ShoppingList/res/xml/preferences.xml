@@ -73,6 +73,10 @@
 				<CheckBoxPreference android:key="use_filters"
 					android:defaultValue="false" android:title="@string/preference_usefilters_title"
 					android:summary="@string/preference_usefilters_summary" />
+				<CheckBoxPreference android:key="holosearch" android:title="@string/preference_holo_search_title"
+					android:summaryOn="@string/preference_holo_search_on_summary" 
+					android:summaryOff="@string/preference_holo_search_off_summary" 
+					android:defaultValue="true"/>
 				<CheckBoxPreference android:key="resetquantity" android:title="@string/preference_reset_quantity"
 					android:summary="@string/preference_reset_quantity_summary" 
 					android:defaultValue="false"/>

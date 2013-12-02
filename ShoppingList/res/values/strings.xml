@@ -84,6 +84,7 @@
 	<string name="menu_pick_items">Pick items</string>
 	<string name="menu_start_shopping">Shopping</string>
 	<string name="menu_sort_list">Sort</string>
+	<string name="menu_search_add">Search / Add items</string>
 		
 	<!-- Title supplement. '%s' is the name of the current list. -->
 	<string name="pick_items_title">%s - Pick items</string>
@@ -212,6 +213,9 @@
 	<string name="preference_complete_by_list_title">Limit item name completion</string>
 	<string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
 	<string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
+	<string name="preference_holo_search_title">Search/add items in action bar</string>
+	<string name="preference_holo_search_on_summary">Use the search icon in the action bar to switch to search/add mode. </string>
+	<string name="preference_holo_search_off_summary">Dedicated search/add text input remains on the bottom of the screen.</string>
 	<string name="preference_reset_quantity">Reset Quantity</string>
 	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
 	<string name="preference_add_for_barcode">Barcode Scanner</string>

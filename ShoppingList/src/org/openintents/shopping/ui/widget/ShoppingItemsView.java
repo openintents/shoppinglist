@@ -71,6 +71,7 @@ import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
+import android.support.v4.widget.SearchViewCompat;
 
 /**
  * View to show a shopping list with its items
@@ -112,6 +113,9 @@ public class ShoppingItemsView extends ListView {
 			.getNumberInstance(Locale.ENGLISH);
 
 	public int mMode = ShoppingActivity.MODE_IN_SHOP;
+	private String mFilter = null;
+	private boolean mInSearch = false;
+	private int mModeBeforeSearch; 
 	public Cursor mCursorItems = null;
 	
 	private Activity mCursorActivity = null;
@@ -608,6 +612,57 @@ public class ShoppingItemsView extends ListView {
 
 	}
 
+	private class searchQueryListener extends SearchViewCompat.OnQueryTextListenerCompat {
+		 public boolean onQueryTextChange(String query) {
+			 if (SearchViewCompat.isIconified(mSearchView))
+				 return false;
+			 if (mInSearch == false) {
+			    mInSearch = true;
+			    mModeBeforeSearch = mMode;
+			    mMode = ShoppingActivity.MODE_ADD_ITEMS;
+			 }
+			 if (query.length() == 0) {
+				 mFilter = null;				 
+			 } else {
+				 mFilter = query;
+			 }
+			 fillItems(mCursorActivity, mListId);
+			// invalidate();
+			 return true;
+	     }
+		 public boolean onQueryTextSubmit(String query) {
+			 if (query.length() > 0) {
+			     insertNewItem(mCursorActivity, query, null, null, null, null);
+			     SearchViewCompat.setQuery(mSearchView, "", false);
+			 }
+	         return true;
+	     }	
+	}
+	private class searchDismissedListener extends SearchViewCompat.OnCloseListenerCompat {
+        public boolean onClose() {
+        	mInSearch = false;
+        	mFilter = null;
+        	mMode = mModeBeforeSearch;
+        	fillItems(mCursorActivity, mListId);
+        	// invalidate();
+            return false;
+        }	
+	}
+	
+	private View mSearchView = null;
+	
+	public View getSearchView() {
+		if (PreferenceActivity.getUsingHoloSearchFromPrefs(getContext())) {
+			mSearchView = SearchViewCompat.newSearchView(mCursorActivity);
+			if (mSearchView != null){ 
+				SearchViewCompat.setSubmitButtonEnabled(mSearchView, true);
+				SearchViewCompat.setOnQueryTextListener(mSearchView, new searchQueryListener());
+				SearchViewCompat.setOnCloseListener(mSearchView, new searchDismissedListener());
+			}
+		}
+		return mSearchView;
+	}
+	
 	private void disposeItemsCursor () {
 		if (mCursorActivity != null) {
 			mCursorActivity.stopManagingCursor(mCursorItems);
@@ -710,7 +765,11 @@ public class ShoppingItemsView extends ListView {
 		boolean hideBought = PreferenceActivity
 				.getHideCheckedItemsFromPrefs(this.getContext());
 		String selection;
-		if (mMode == ShoppingActivity.MODE_IN_SHOP) {
+		String[] selection_args = new String[] { String.valueOf(listId)};
+		if (mFilter != null) {
+			selection = "list_id = ? AND " + ShoppingContract.ContainsFull.ITEM_NAME + 
+					" like '%" + mFilter + "%'";
+		} else if (mMode == ShoppingActivity.MODE_IN_SHOP) {
 			if (hideBought) {
 				selection = "list_id = ? AND " + ShoppingContract.Contains.STATUS
 						+ " == " + ShoppingContract.Status.WANT_TO_BUY;
@@ -730,7 +789,7 @@ public class ShoppingItemsView extends ListView {
 		// in currently selected shopping list.
 		mCursorItems = getContext().getContentResolver().query(
 				ContainsFull.CONTENT_URI, ShoppingActivity.mStringItems,
-				selection, new String[] { String.valueOf(listId) }, sortOrder);
+				selection, selection_args, sortOrder);
 
 		// Activate the following for a striped list.
 		// setupListStripes(mListItems, this);
@@ -1462,7 +1521,7 @@ public class ShoppingItemsView extends ListView {
 
 		// Update ActionBar in ShoppingActivity
 		// for the "Clean up list" command
-		if (mActionBarListener != null) {
+		if (mActionBarListener != null && !mInSearch) {
 			mActionBarListener.updateActionBar();
 		}
 

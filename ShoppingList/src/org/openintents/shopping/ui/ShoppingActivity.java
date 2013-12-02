@@ -92,6 +92,7 @@ import android.os.Build;
 import android.support.v4.view.ActionProvider;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SearchViewCompat;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -233,13 +234,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 																		// extras
 	private static final int MENU_COPY_ITEM = Menu.FIRST + 11;
 	private static final int MENU_SORT_LIST = Menu.FIRST + 12;
+	private static final int MENU_SEARCH_ADD = Menu.FIRST + 13;
 
-	// TODO: Implement the following menu items
-	// private static final int MENU_EDIT_LIST = Menu.FIRST + 12; // includes
-	// rename
-	// private static final int MENU_SORT = Menu.FIRST + 13; // sort
-	// alphabetically
-	// or modified
+	// TODO: obsolete pick items button, now in drawer
 	private static final int MENU_PICK_ITEMS = Menu.FIRST + 14; // pick from
 	// previously
 	// used items
@@ -441,7 +438,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
 	private AutoCompleteTextView mEditText;
 	private Button mButton;
-	private View mFilterLayout = null;
+	private View mAddPanel = null;
 	private Button mStoresFilterButton = null;
 	private Button mTagsFilterButton = null;
 	private Button mShoppingListsFilterButton = null;
@@ -1066,6 +1063,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		// Temp-create either Spinner or List based upon the Display
 		createList();
 
+		mAddPanel = findViewById(R.id.add_panel);
 		mEditText = (AutoCompleteTextView) findViewById(R.id.autocomplete_add_item);
 
 		fillAutoCompleteTextViewAdapter();
@@ -1794,8 +1792,16 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 					.setIcon(android.R.drawable.ic_menu_upload);
 		}
 
-		// Temp - Temporary item holder for compatibility framework
 		MenuItem item = null;
+
+		View searchView = mItemsView.getSearchView();
+		if (searchView != null) {
+			item = menu.add(0, MENU_SEARCH_ADD, 0, R.string.menu_search_add)
+				.setIcon(android.R.drawable.ic_menu_search);
+			MenuItemCompat.setActionView(item, searchView);
+			MenuItemCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_ALWAYS);
+		}
+		mAddPanel.setVisibility(searchView == null ? View.VISIBLE : View.GONE);
 		
 		item = menu.add(0, MENU_SORT_LIST, 0, R.string.menu_sort_list)
 				.setIcon(android.R.drawable.ic_menu_sort_alphabetically);
@@ -1908,6 +1914,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		super.onPrepareOptionsMenu(menu);
 
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerListsView);
+        boolean holoSearch = PreferenceActivity.getUsingHoloSearchFromPrefs(this);
         // TODO: supposed to hide content-related actions when the drawer is open.
 
 		
@@ -1932,6 +1939,13 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		} else {
 			menu.findItem(MENU_PICK_ITEMS).setTitle(R.string.menu_pick_items);
 			menuItem.setIcon(android.R.drawable.ic_menu_add);
+		}
+		
+		menuItem = menu.findItem(MENU_SEARCH_ADD); 
+		if (menuItem != null) {
+			menuItem.setVisible(holoSearch);
+			if (!holoSearch)
+				mAddPanel.setVisibility(View.VISIBLE);
 		}
 
 		menuItem = menu.findItem(MENU_MARK_ALL_ITEMS).setVisible(mItemsView.getMarkedAllStatus() == null || !mItemsView.getMarkedAllStatus());

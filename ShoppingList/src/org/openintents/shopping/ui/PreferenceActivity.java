@@ -111,6 +111,8 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 	public static final boolean PREFS_CURRENT_LIST_COMPLETE_DEFAULT = false;
 	public static final String PREFS_SORT_PER_LIST = "perListSort";
 	public static final boolean PREFS_SORT_PER_LIST_DEFAULT = false;
+	public static final String PREFS_HOLO_SEARCH = "holosearch";
+	public static final boolean PREFS_HOLO_SEARCH_DEFAULT = true;
 
 	public static final String PREFS_RESET_ALL_SETTINGS = "reset_all_settings";
 
@@ -236,6 +238,8 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 												PREFS_USE_FILTERS_DEFAULT);
 										editor.putBoolean(PREFS_RESETQUANTITY,
 												PREFS_RESETQUANTITY_DEFAULT);
+										editor.putBoolean(PREFS_HOLO_SEARCH,
+												PREFS_HOLO_SEARCH_DEFAULT);
 										// Appearance
 										editor.putBoolean(PREFS_SHOW_PRICE,
 												PREFS_SHOW_PRICE_DEFAULT);
@@ -361,6 +365,12 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 	public static boolean getUsingFiltersFromPrefs(Context context) {
 		boolean using = PreferenceManager.getDefaultSharedPreferences(context)
 				.getBoolean(PREFS_USE_FILTERS, PREFS_USE_FILTERS_DEFAULT);
+		return using;
+	}
+
+	public static boolean getUsingHoloSearchFromPrefs(Context context) {
+		boolean using = PreferenceManager.getDefaultSharedPreferences(context)
+				.getBoolean(PREFS_HOLO_SEARCH, PREFS_HOLO_SEARCH_DEFAULT);
 		return using;
 	}
 
