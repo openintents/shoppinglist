@@ -1,3 +1,4 @@
+This extension is based on https://github.com/twaddington/mirror-quickstart-android
 
 The extension must be registered with the Google API's in order to 
 allow it to communicate with Google.
@@ -25,12 +26,12 @@ app. You can do this in your app's API project in the [Google APIs Console][3].
 3. Select the **API Access** tab in your API project, and click
    **Create an OAuth 2.0 client ID.**
 4. In the **Branding Information** section, provide a name for your application
-   (e.g. "Mirror Quickstart Sample"), and click **Next.**
+   (e.g. "OI Shopping List Glass Extension"), and click **Next.**
   - Providing a product logo or a homepage URL is optional.
 5. In the **Client ID Settings** section, do the following:
   1. Select **Installed application** for the **Application type.**
   2. Select **Android** for the **Installed application type.**
-  3. Type "com.example.mirror.android" in **Package name.**
+  3. Type "org.openintents.shopping.glass" in **Package name.**
   4. Paste the SHA-1 fingerprint generated in Step 1 into the
      **Signing certificate fingerprint.**
   5. Click **Create Client ID.**

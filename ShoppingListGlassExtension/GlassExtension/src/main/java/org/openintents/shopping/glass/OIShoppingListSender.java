@@ -12,7 +12,7 @@ import org.openintents.shopping.provider.ThemeUtils2;
 public class OIShoppingListSender {
     private static final String LOG_TAG = "OIShoppingListSender";
     private static final boolean debug = true;
-    private boolean mInvalideShoppingVersion;
+//    private boolean mInvalideShoppingVersion;
     private Cursor mShoppingListIds;
     private Context context;
     private int mShoppingListPos;
@@ -27,17 +27,36 @@ public class OIShoppingListSender {
         this.context = context;
         initShoppingLists(true);
     }
+
+    public String[] getLists() {
+        Cursor listsIds = ShoppingUtils.getListsIds(context);
+        int count=listsIds.getCount();
+        if (debug) Log.d(LOG_TAG, "count="+count);
+        String[] lists=new String[count];
+        int pos=0;
+        if (listsIds.moveToFirst()) {
+            do {
+                long listId = listsIds.getLong(0);
+                String listName = listsIds.getString(2);
+                if (debug) Log.d(LOG_TAG, "list: " + listId + " " + listName);
+                lists[pos]=listName;
+                pos++;
+            } while (listsIds.moveToNext());
+        }
+        return lists;
+    }
+
     private void initShoppingLists(boolean setDefault) {
 
-        if (mInvalideShoppingVersion) {
-            return;
-        }
+//        if (mInvalideShoppingVersion) {
+//            return;
+//        }
 
         mShoppingListIds = ShoppingUtils.getListsIds(context);
 
         if (setDefault) {
             long activeListId = ShoppingUtils.getDefaultList(context);
-            Log.d(LOG_TAG, "active list " + activeListId);
+            if (debug) Log.d(LOG_TAG, "active list " + activeListId);
 
             mShoppingListPos = 0;
             int count = 0;
@@ -47,7 +66,7 @@ public class OIShoppingListSender {
                     long id = mShoppingListIds.getLong(0);
                     if (id == activeListId) {
                         mShoppingListPos = count;
-                        Log.d(LOG_TAG, "active list pos " + count);
+                        if (debug) Log.d(LOG_TAG, "active list pos " + count);
                         break;
                     }
                     count++;

@@ -16,34 +16,30 @@
             style="?android:listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Card to Timeline"/>
+            android:text="@string/labelSendToTimeline"/>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/new_card_message"
-                android:layout_width="0dp"
+            <Spinner
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:inputType="textCapSentences"
-                android:maxLines="1"
-                android:hint="Message"/>
+                android:id="@+id/lists_spinner" />
 
-            <ImageButton
-                android:id="@+id/new_card_button"
-                style="?android:borderlessButtonStyle"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="4dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="Send"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_btn_send"/>
         </LinearLayout>
+        <ImageButton
+            android:id="@+id/new_card_button"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_marginTop="4dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/Send"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_btn_send"/>
+
 
     </LinearLayout>
 

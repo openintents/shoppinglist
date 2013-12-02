@@ -2,8 +2,6 @@ package org.openintents.shopping.glass;
 
 import android.accounts.AccountManager;
 import android.app.Activity;
-import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -14,9 +12,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.GoogleAuthException;
@@ -25,20 +24,15 @@ import com.google.android.gms.auth.UserRecoverableAuthException;
 import com.google.android.gms.common.AccountPicker;
 import com.google.api.client.util.IOUtils;
 
-import org.apache.http.Header;
 import org.apache.http.HttpResponse;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -46,8 +40,7 @@ public class MainActivity extends Activity {
     private static final String TAG = "MainActivity";
     private static final boolean debug = true;
 
-    private static final String PARAM_AUTH_TOKEN =
-            "com.example.mirror.android.AUTH_TOKEN";
+    private static final String PARAM_AUTH_TOKEN = "AUTH_TOKEN";
 
     public static final String PREF_OAUTH_TOKEN = "OAUTH_TOKEN";
     public static final String PREF_LAST_MIRROR_ID = "LAST_MIRROR_ID";
@@ -71,10 +64,10 @@ public class MainActivity extends Activity {
     private Button mStartAuthButton;
     private Button mExpireTokenButton;
     private ImageButton mNewCardButton;
-    private EditText mNewCardEditText;
     private boolean mInvalideShoppingVersion;
     private String mLastMirrorId;
     private OIShoppingListSender sender;
+    private Spinner listsSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +91,6 @@ public class MainActivity extends Activity {
         mStartAuthButton = (Button) findViewById(R.id.oauth_button);
         mExpireTokenButton = (Button) findViewById(R.id.oauth_expire_button);
         mNewCardButton = (ImageButton) findViewById(R.id.new_card_button);
-        mNewCardEditText = (EditText) findViewById(R.id.new_card_message);
 
         // Restore any saved instance state
         if (savedInstanceState != null) {
@@ -147,10 +139,8 @@ public class MainActivity extends Activity {
                 if (!TextUtils.isEmpty(mAuthToken)) {
                     // Expire the token, if any
                     GoogleAuthUtil.invalidateToken(MainActivity.this, mAuthToken);
-                    mAuthToken = null;
-                    mExpireTokenButton.setEnabled(false);
-                    mStartAuthButton.setEnabled(true);
                 }
+                saveCredentials(null);
             }
         });
 
@@ -158,11 +148,14 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 if (debug) { Log.d(TAG, "mInvalideShoppingVersion="+mInvalideShoppingVersion); }
-                createNewTimelineItem(mNewCardEditText.getText().toString());
+                createNewTimelineItem();
             }
         });
         sender=new OIShoppingListSender();
         sender.initSender(getApplicationContext());
+
+        listsSpinner = (Spinner) findViewById(R.id.lists_spinner);
+        updateListsSpinner();
     }
 
     @Override
@@ -208,6 +201,25 @@ public class MainActivity extends Activity {
         }
     }
 
+    public void updateListsSpinner() {
+
+        String[] lists=sender.getLists();
+
+        List<String> list = new ArrayList<String>();
+        if (lists.length>0) {
+            for(int i=0; i<lists.length; i++) {
+                list.add(lists[i]);
+            }
+        } else {
+            list.add("No shopping lists");
+            listsSpinner.setEnabled(false);
+        }
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+            android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        listsSpinner.setAdapter(dataAdapter);
+    }
+
     private JSONObject buildShoppingCard() throws JSONException {
         JSONObject card=new JSONObject();
         String html="<article class=\"auto-paginate\"><section>";
@@ -225,7 +237,7 @@ public class MainActivity extends Activity {
         return card;
     }
 
-    private void createNewTimelineItem(String message) {
+    private void createNewTimelineItem() {
         if (!TextUtils.isEmpty(mAuthToken)) {
                 try {
                     JSONObject notification = new JSONObject();
@@ -238,6 +250,7 @@ public class MainActivity extends Activity {
                     MirrorApiClient.Callback callback=new MirrorApiClient.Callback() {
                         @Override
                         public void onSuccess(HttpResponse response) {
+                            String timelineAction="Updated";
                             try {
                                 InputStream inputStream = response.getEntity().getContent();
                                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -247,18 +260,21 @@ public class MainActivity extends Activity {
                                 if (debug) Log.d(TAG, "id="+id);
 
                                 if (id!=null && (id.length()>0)) {
-                                    SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
-                                    editor.putString(PREF_LAST_MIRROR_ID, id);
-                                    editor.commit();
-                                    if (debug) Log.d(TAG, "saved LAST_MIRROR_ID="+id);
-                                    mLastMirrorId=id;
+                                    if (!TextUtils.equals(mLastMirrorId,id)) {
+                                        SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+                                        editor.putString(PREF_LAST_MIRROR_ID, id);
+                                        editor.commit();
+                                        if (debug) Log.d(TAG, "saved LAST_MIRROR_ID="+id);
+                                        mLastMirrorId=id;
+                                        timelineAction="Created new";
+                                    }
                                 }
                             } catch (IOException e1) {
                                 // Pass
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            Toast.makeText(MainActivity.this, "Created new timeline item",
+                            Toast.makeText(MainActivity.this, timelineAction+" timeline item",
                                     Toast.LENGTH_SHORT).show();
                         }
 
@@ -273,9 +289,13 @@ public class MainActivity extends Activity {
                                 String message=error.getString("message");
                                 if (debug) Log.d(TAG,"jsonObject="+jsonObject);
 //                                if (debug) Log.d(TAG, "onFailure: " + EntityUtils.toString(response.getEntity()));
-                                if (message!=null && (message.contentEquals("Not Found"))) {
-                                    if (debug) Log.d(TAG,"last id was not found");
-                                    mLastMirrorId=null;
+                                if (message!=null) {
+                                    if (message.contentEquals("Not Found")) {
+                                        if (debug) Log.d(TAG,"last id was not found");
+                                        mLastMirrorId=null;
+                                    } else if (message.contentEquals("Invalid Credentials")) {
+                                        saveCredentials(null);
+                                    }
                                 }
                             } catch (IOException e1) {
                                 // Pass
@@ -305,21 +325,28 @@ public class MainActivity extends Activity {
 
     private void onTokenResult(String token) {
         Log.d(TAG, "onTokenResult: " + token);
+        saveCredentials(token);
         if (!TextUtils.isEmpty(token)) {
+            Toast.makeText(this, "New token result", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Sorry, invalid token result", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void saveCredentials(String token) {
+        if (TextUtils.isEmpty(token)) {
+            mAuthToken = null;
+            mExpireTokenButton.setEnabled(false);
+            mStartAuthButton.setEnabled(true);
+        } else {
             mAuthToken = token;
             mExpireTokenButton.setEnabled(true);
             mStartAuthButton.setEnabled(false);
-            Toast.makeText(this, "New token result", Toast.LENGTH_SHORT).show();
-
-            SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
-            editor.putString(PREF_OAUTH_TOKEN, token);
-            editor.commit();
-            if (debug) Log.d(TAG, "saved OAUTH_TOKEN="+token);
-        } else {
-            mExpireTokenButton.setEnabled(false);
-            mStartAuthButton.setEnabled(true);
-            Toast.makeText(this, "Sorry, invalid token result", Toast.LENGTH_SHORT).show();
         }
+        SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+        editor.putString(PREF_OAUTH_TOKEN, token);
+        editor.commit();
+        if (debug) Log.d(TAG, "saved OAUTH_TOKEN="+token);
     }
 
     private void fetchTokenForAccount(final String account) {
