@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -42,6 +43,7 @@ public class MainActivity extends Activity {
 
     private static final String PARAM_AUTH_TOKEN = "AUTH_TOKEN";
 
+    public static final String PREF_OAUTH_ACCOUNT = "OAUTH_ACCOUNT";
     public static final String PREF_OAUTH_TOKEN = "OAUTH_TOKEN";
     public static final String PREF_LAST_MIRROR_ID = "LAST_MIRROR_ID";
 
@@ -68,6 +70,7 @@ public class MainActivity extends Activity {
     private String mLastMirrorId;
     private OIShoppingListSender sender;
     private Spinner listsSpinner;
+    private long selectedListId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,6 +159,14 @@ public class MainActivity extends Activity {
 
         listsSpinner = (Spinner) findViewById(R.id.lists_spinner);
         updateListsSpinner();
+        listsSpinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+
+        prefs = getPreferences(MODE_PRIVATE);
+        String account = prefs.getString(PREF_OAUTH_ACCOUNT, null);
+        if (account!=null) {
+            fetchTokenForAccount(account);
+        }
+
     }
 
     @Override
@@ -182,7 +193,11 @@ public class MainActivity extends Activity {
                     String type = data.getStringExtra(
                             AccountManager.KEY_ACCOUNT_TYPE);
 
-                    // TODO: Cache the chosen account
+                    SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+                    editor.putString(PREF_OAUTH_ACCOUNT, account);
+                    editor.commit();
+                    if (debug) Log.d(TAG, "saved OAUTH_ACCOUNT="+account);
+
                     Log.i(TAG, String.format("User selected account %s of type %s",
                             account, type));
                     fetchTokenForAccount(account);
@@ -220,7 +235,24 @@ public class MainActivity extends Activity {
         listsSpinner.setAdapter(dataAdapter);
     }
 
+    public class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
+            if (debug) Log.d(TAG, "OnItemSelectedListener : " +
+                    parent.getItemAtPosition(pos).toString() + " " + pos);
+            selectedListId = pos;
+            sender.setActiveListId(selectedListId);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
+            selectedListId = -1;
+        }
+
+    }
+
     private JSONObject buildShoppingCard() throws JSONException {
+
         JSONObject card=new JSONObject();
         String html="<article class=\"auto-paginate\"><section>";
         html+="<ul class=\"text-x-small\">";
@@ -235,6 +267,48 @@ public class MainActivity extends Activity {
         card.put("html", html);
         card.put("text", text);
         return card;
+    }
+
+    private void checkToken() {
+        if (!TextUtils.isEmpty(mAuthToken)) {
+            if (debug) Log.d(TAG, "checking token: "+mAuthToken);
+            MirrorApiClient client = MirrorApiClient.getInstance(this);
+            MirrorApiClient.Callback callback=new MirrorApiClient.Callback() {
+                @Override
+                public void onSuccess(HttpResponse response) {
+                    try {
+                        InputStream inputStream = response.getEntity().getContent();
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        IOUtils.copy(inputStream, baos);
+                        JSONObject jsonObject = new JSONObject(baos.toString());
+                    } catch (IOException e1) {
+                        // Pass
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(HttpResponse response, Throwable e) {
+                    try {
+                        InputStream inputStream = response.getEntity().getContent();
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        IOUtils.copy(inputStream, baos);
+                        JSONObject jsonObject = new JSONObject(baos.toString());
+                        JSONObject error = jsonObject.getJSONObject("error");
+                        String message=error.getString("message");
+                        if (debug) Log.d(TAG,"jsonObject="+jsonObject);
+//                                if (debug) Log.d(TAG, "onFailure: " + EntityUtils.toString(response.getEntity()));
+                    } catch (IOException e1) {
+                        // Pass
+                    } catch (JSONException e1) {
+                        e1.printStackTrace();
+                    }
+                    saveCredentials(null);
+                }
+            };
+            client.validateToken(mAuthToken, callback);
+        }
     }
 
     private void createNewTimelineItem() {

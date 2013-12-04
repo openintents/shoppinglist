@@ -5,6 +5,7 @@ import android.os.Handler;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
@@ -21,6 +22,7 @@ import java.util.concurrent.Executors;
 
 public class MirrorApiClient {
     private static final String BASE_URL = "https://www.googleapis.com/mirror/v1/";
+    private static final String TOKENINFO_URL = "https://www.googleapis.com/oauth2/v1/tokeninfo";
     private static final int CONNECT_TIMEOUT = 2500;
     private static final int REQUEST_TIMEOUT = 5000;
     private static MirrorApiClient sInstance;
@@ -138,6 +140,48 @@ public class MirrorApiClient {
             });
         } catch (UnsupportedEncodingException e) {
             // Note: This should never happen
+        } catch (URISyntaxException e) {
+            // Note: This should never happen
+        }
+    }
+
+    public void validateToken(String token,
+                              final Callback callback) {
+        try {
+            final HttpGet request = new HttpGet();
+            request.setURI(new URI(TOKENINFO_URL + "?access_token=" + token));
+
+            // Execute the request on a background thread
+            mThreadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        final HttpResponse response = mClient.execute(request);
+                        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    callback.onSuccess(response);
+                                }
+                            });
+                        } else {
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    callback.onFailure(response, null);
+                                }
+                            });
+                        }
+                    } catch (final IOException e) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                callback.onFailure(null, e);
+                            }
+                        });
+                    }
+                }
+            });
         } catch (URISyntaxException e) {
             // Note: This should never happen
         }

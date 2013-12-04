@@ -10,12 +10,11 @@ import org.openintents.shopping.provider.ShoppingUtils;
 import org.openintents.shopping.provider.ThemeUtils2;
 
 public class OIShoppingListSender {
-    private static final String LOG_TAG = "OIShoppingListSender";
+    private static final String TAG = "OIShoppingListSender";
     private static final boolean debug = true;
 //    private boolean mInvalideShoppingVersion;
     private Cursor mShoppingListIds;
     private Context context;
-    private int mShoppingListPos;
     private int mPos;
     private ContentObserver mContentObserver;
     private long mShoppingListId;
@@ -23,7 +22,7 @@ public class OIShoppingListSender {
     private Cursor mExistingItems;
 
     public void initSender(Context context) {
-        if (debug) Log.d(LOG_TAG, "initSender("+context+")");
+        if (debug) Log.d(TAG, "initSender("+context+")");
         this.context = context;
         initShoppingLists(true);
     }
@@ -31,19 +30,28 @@ public class OIShoppingListSender {
     public String[] getLists() {
         Cursor listsIds = ShoppingUtils.getListsIds(context);
         int count=listsIds.getCount();
-        if (debug) Log.d(LOG_TAG, "count="+count);
+        if (debug) Log.d(TAG, "count="+count);
         String[] lists=new String[count];
         int pos=0;
         if (listsIds.moveToFirst()) {
             do {
                 long listId = listsIds.getLong(0);
                 String listName = listsIds.getString(2);
-                if (debug) Log.d(LOG_TAG, "list: " + listId + " " + listName);
+                if (debug) Log.d(TAG, "list: " + listId + " " + listName);
                 lists[pos]=listName;
                 pos++;
             } while (listsIds.moveToNext());
         }
         return lists;
+    }
+
+    public void setActiveListId(long id) {
+        if (debug) Log.d(TAG, "setActiveListId("+id+")");
+        if (id>mShoppingListIds.getCount()) {
+            if (debug) Log.d(TAG,"trying to set to bad id");
+            return;
+        }
+        setCurrentShoppingListId((int) id);
     }
 
     private void initShoppingLists(boolean setDefault) {
@@ -56,17 +64,15 @@ public class OIShoppingListSender {
 
         if (setDefault) {
             long activeListId = ShoppingUtils.getDefaultList(context);
-            if (debug) Log.d(LOG_TAG, "active list " + activeListId);
+            if (debug) Log.d(TAG, "active list " + activeListId);
 
-            mShoppingListPos = 0;
             int count = 0;
             if (mShoppingListIds.moveToFirst()) {
                 do {
 
                     long id = mShoppingListIds.getLong(0);
                     if (id == activeListId) {
-                        mShoppingListPos = count;
-                        if (debug) Log.d(LOG_TAG, "active list pos " + count);
+                        if (debug) Log.d(TAG, "active list pos " + count);
                         break;
                     }
                     count++;
@@ -74,7 +80,8 @@ public class OIShoppingListSender {
             }
         }
 
-        setCurrentShoppingListId(mShoppingListPos);
+        // default to the first list
+        setCurrentShoppingListId(0);
 
 
 /*        mContentObserver = new ShoppingObserver(null);
@@ -89,10 +96,10 @@ public class OIShoppingListSender {
         refreshCursor();
         if (mExistingItems != null) {
             int count=mExistingItems.getCount();
-            if (debug) Log.d(LOG_TAG, "count="+count);
+            if (debug) Log.d(TAG, "count="+count);
             while(mPos<count){
                 Item item=getItem(mPos);
-                if (debug) Log.d(LOG_TAG, "item="+item.item);
+                if (debug) Log.d(TAG, "item="+item.item);
                 mPos++;
             }
         }
@@ -127,7 +134,7 @@ public class OIShoppingListSender {
             int position=0;
             while(position<count){
                 Item item=getItem(position);
-                if (debug) Log.d(LOG_TAG, "item="+item.item);
+                if (debug) Log.d(TAG, "item="+item.item);
                 items[position]=item.item;
                 position++;
             }
@@ -136,48 +143,22 @@ public class OIShoppingListSender {
 
         return items;
     }
-    /*
-    public String buildShoppingCard() {
-        String card="";
-        card+="<article>";
-        card+="<section>";
-        if (mExistingItems != null) {
-            int count=mExistingItems.getCount();
-            if (debug) Log.d(LOG_TAG, "count="+count);
-            if (count==0) {
-                return "Nothing in shopping list.";
-            }
-            int position=0;
-            card+="<li>";
-            while(position<count){
-                Item item=getItem(position);
-                if (debug) Log.d(LOG_TAG, "item="+item.item);
-                card += "<ul>"+item.item+"</ul>\n";
-                position++;
-            }
-            card+="</li>";
-        }
-        card+="</section>";
-        card+="</article>";
-        return card;
-    }*/
 
     private void setCurrentShoppingListId(int mShoppingListPos2) {
-        mShoppingListIds.moveToPosition(mShoppingListPos);
+        mShoppingListIds.moveToPosition(mShoppingListPos2);
         if (mShoppingListIds.getCount() > 0) {
             mShoppingListId = mShoppingListIds.getLong(0);
         }
-        Log.d(LOG_TAG, "mShoppingListId: " + mShoppingListId);
+        Log.d(TAG, "mShoppingListId: " + mShoppingListId);
         ThemeUtils2.setRemoteStyle(context, mShoppingListIds.getString(1), 14,
                 true);
         mShoppingListName = mShoppingListIds.getString(2);
-        if (debug) Log.d(LOG_TAG, "mShoppingListName: " + mShoppingListName);
-
+        if (debug) Log.d(TAG, "mShoppingListName: " + mShoppingListName);
     }
 
     public void refreshCursor() {
 
-        Log.d(LOG_TAG, "refreshCursor() called");
+        Log.d(TAG, "refreshCursor() called");
         try {
             if (mExistingItems != null) {
                 mExistingItems.close();
@@ -202,7 +183,7 @@ public class OIShoppingListSender {
                                     String.valueOf(Shopping.Status.WANT_TO_BUY)},
                             null);
 
-            if (debug) Log.d(LOG_TAG, "mExistingItems=" + mExistingItems);
+            if (debug) Log.d(TAG, "mExistingItems=" + mExistingItems);
         } catch (Exception e) {
             e.printStackTrace();
         }
