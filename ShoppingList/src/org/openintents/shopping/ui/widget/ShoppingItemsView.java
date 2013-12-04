@@ -652,10 +652,12 @@ public class ShoppingItemsView extends ListView {
 	private View mSearchView = null;
 	
 	public View getSearchView() {
-		if (PreferenceActivity.getUsingHoloSearchFromPrefs(getContext())) {
+                Context context = getContext();
+		if (PreferenceActivity.getUsingHoloSearchFromPrefs(context)) {
 			mSearchView = SearchViewCompat.newSearchView(mCursorActivity);
 			if (mSearchView != null){ 
 				SearchViewCompat.setSubmitButtonEnabled(mSearchView, true);
+                                SearchViewCompat.setInputType(mSearchView, PreferenceActivity.getSearchInputTypeFromPrefs(context));
 				SearchViewCompat.setOnQueryTextListener(mSearchView, new searchQueryListener());
 				SearchViewCompat.setOnCloseListener(mSearchView, new searchDismissedListener());
 			}
@@ -1607,6 +1609,13 @@ public class ShoppingItemsView extends ListView {
 
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
+
+	    if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+	        if (mToastBar != null && !mToastBar.isEventInToastBar(ev)) {
+	            mToastBar.hide(true /* animated */, false /* actionClicked */);
+	        }
+	    }
+
 		if (mDragAndDropEnabled ) {
 			if (mDragListener != null || mDropListener != null) {
 				switch (ev.getAction()) {
@@ -1736,12 +1745,6 @@ public class ShoppingItemsView extends ListView {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
-		
-	    if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-	        if (mToastBar != null && !mToastBar.isEventInToastBar(ev)) {
-	            mToastBar.hide(true /* animated */, false /* actionClicked */);
-	        }
-	    }
 		
 		if ((mDragListener != null || mDropListener != null)
 				&& mDragView != null) {

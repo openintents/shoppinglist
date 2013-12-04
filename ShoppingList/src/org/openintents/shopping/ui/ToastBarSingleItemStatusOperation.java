@@ -42,10 +42,18 @@ public class ToastBarSingleItemStatusOperation extends ToastBarOperation {
 	public String getSingularDescription(Context context) {
 		int resId;
 		
-		if (mNewStatus == ShoppingContract.Status.WANT_TO_BUY) {
-			resId = R.string.undoable_unmarked_item;
+		if (mShoppingItemsView.mMode == ShoppingActivity.MODE_ADD_ITEMS) {
+		   if (mNewStatus == ShoppingContract.Status.WANT_TO_BUY) {
+			   resId = R.string.undoable_added_item;
+		   } else {
+			   resId = R.string.undoable_removed_item;
+		   }
 		} else {
-			resId = R.string.undoable_marked_item;
+		   if (mNewStatus == ShoppingContract.Status.WANT_TO_BUY) {
+			   resId = R.string.undoable_unmarked_item;
+		   } else {
+		   	   resId = R.string.undoable_marked_item;
+		   }
 		}
 		return String.format(context.getResources().getString(resId), mItemName);
 	}

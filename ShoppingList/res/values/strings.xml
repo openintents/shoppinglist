@@ -158,6 +158,9 @@
 	
 	<string name="undoable_marked_item">Marked \"%1$s\"</string>
 	<string name="undoable_unmarked_item">Unmarked \"%1$s\"</string>
+	<string name="undoable_added_item">Added \"%1$s\"</string>
+	<string name="undoable_removed_item">Removed \"%1$s\"</string>
+		
 	<plurals name="undoable_unmark_all">
 	    <item quantity="one">Unmarked %1$d item.</item>
 	    <item quantity="other">Unmarked %1$d items.</item></plurals>

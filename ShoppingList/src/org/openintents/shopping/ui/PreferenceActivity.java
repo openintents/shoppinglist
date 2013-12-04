@@ -24,6 +24,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.os.Build;
+import android.text.InputType;
 import android.text.method.KeyListener;
 import android.text.method.TextKeyListener;
 import android.widget.Toast;
@@ -124,6 +125,10 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 			TextKeyListener.Capitalize.NONE,
 			TextKeyListener.Capitalize.SENTENCES,
 			TextKeyListener.Capitalize.WORDS };
+        private static final int smCapitalizationInputTypes[] = {
+            InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL, 
+            InputType.TYPE_TEXT_FLAG_CAP_SENTENCES,
+            InputType.TYPE_TEXT_FLAG_CAP_WORDS };
 
 	private ListPreference mPrioSubtotal;
 	private CheckBoxPreference mIncludesChecked;
@@ -566,6 +571,35 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 
 		return new TextKeyListener(smCapitalizationSettings[capitalization],
 				true);
+	}
+
+	/**
+	 * Returns InputType for the search bar based on the capitalization
+	 * preferences of the user.
+	 * 
+	 * @ param context The context to grab the preferences from.
+	 */
+	static public int getSearchInputTypeFromPrefs(
+			Context context) {
+		int capitalization = PREFS_CAPITALIZATION_DEFAULT;
+		try {
+			capitalization = Integer.parseInt(PreferenceManager
+					.getDefaultSharedPreferences(context).getString(
+							PREFS_CAPITALIZATION,
+							Integer.toString(PREFS_CAPITALIZATION_DEFAULT)));
+		} catch (NumberFormatException e) {
+			// Guess somebody messed with the preferences and put a string
+			// into this
+			// field. We'll use the default value then.
+		}
+
+		if (capitalization < 0
+				|| capitalization > smCapitalizationSettings.length) {
+			// Value out of range - somebody messed with the preferences.
+			capitalization = PREFS_CAPITALIZATION_DEFAULT;
+		}
+
+		return smCapitalizationInputTypes[capitalization];
 	}
 
 	public static boolean getThemeSetForAll(Context context) {
