@@ -52,10 +52,8 @@ public class MainActivity extends Activity {
 
     private static final String GLASS_TIMELINE_SCOPE =
             "https://www.googleapis.com/auth/glass.timeline";
-    private static final String GLASS_LOCATION_SCOPE =
-            "https://www.googleapis.com/auth/glass.location";
-    private static final String SCOPE = String.format("oauth2: %s %s",
-            GLASS_TIMELINE_SCOPE, GLASS_LOCATION_SCOPE);
+    private static final String SCOPE = String.format("oauth2: %s",
+            GLASS_TIMELINE_SCOPE);
 
     private static ExecutorService sThreadPool =
             Executors.newSingleThreadExecutor();
