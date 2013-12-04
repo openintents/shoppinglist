@@ -354,13 +354,14 @@ public class MainActivity extends Activity {
 
                         @Override
                         public void onFailure(HttpResponse response, Throwable e) {
+                            String message="";
                             try {
                                 InputStream inputStream = response.getEntity().getContent();
                                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                                 IOUtils.copy(inputStream, baos);
                                 JSONObject jsonObject = new JSONObject(baos.toString());
                                 JSONObject error = jsonObject.getJSONObject("error");
-                                String message=error.getString("message");
+                                message=error.getString("message");
                                 if (debug) Log.d(TAG,"jsonObject="+jsonObject);
 //                                if (debug) Log.d(TAG, "onFailure: " + EntityUtils.toString(response.getEntity()));
                                 if (message!=null) {
@@ -376,7 +377,7 @@ public class MainActivity extends Activity {
                             } catch (JSONException e1) {
                                 e1.printStackTrace();
                             }
-                            Toast.makeText(MainActivity.this, "Failed to create new timeline item",
+                            Toast.makeText(MainActivity.this, "Failed to create new timeline item: "+message,
                                     Toast.LENGTH_SHORT).show();
                         }
                     };
