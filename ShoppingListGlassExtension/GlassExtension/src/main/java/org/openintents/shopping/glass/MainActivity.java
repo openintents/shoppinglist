@@ -154,6 +154,16 @@ public class MainActivity extends Activity {
         });
         sender=new OIShoppingListSender();
         sender.initSender(getApplicationContext());
+        OIShoppingListSender.ContentCallback callback;
+        callback = new OIShoppingListSender.ContentCallback() {
+            @Override
+            public void onChange() {
+                if (debug) Log.d(TAG, "onChange()");
+                createNewTimelineItem();
+            }
+        };
+
+        sender.registerObserver(callback);
 
         listsSpinner = (Spinner) findViewById(R.id.lists_spinner);
         updateListsSpinner();
@@ -179,6 +189,10 @@ public class MainActivity extends Activity {
         return true;
     }
 
+    protected void onDestroy() {
+        super.onDestroy();
+        if (sender!=null) sender.unregisterObserver();
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
@@ -296,7 +310,6 @@ public class MainActivity extends Activity {
                         JSONObject error = jsonObject.getJSONObject("error");
                         String message=error.getString("message");
                         if (debug) Log.d(TAG,"jsonObject="+jsonObject);
-//                                if (debug) Log.d(TAG, "onFailure: " + EntityUtils.toString(response.getEntity()));
                     } catch (IOException e1) {
                         // Pass
                     } catch (JSONException e1) {
@@ -309,7 +322,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    private void createNewTimelineItem() {
+    public void createNewTimelineItem() {
         if (!TextUtils.isEmpty(mAuthToken)) {
                 try {
                     JSONObject notification = new JSONObject();

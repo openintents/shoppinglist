@@ -3,6 +3,8 @@ package org.openintents.shopping.glass;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.net.Uri;
+import android.os.Handler;
 import android.util.Log;
 
 import org.openintents.shopping.Shopping;
@@ -15,10 +17,9 @@ public class OIShoppingListSender {
 //    private boolean mInvalideShoppingVersion;
     private Cursor mShoppingListIds;
     private Context context;
-    private int mPos;
     private ContentObserver mContentObserver;
+    private ContentCallback contentCallback;
     private long mShoppingListId;
-    private String mShoppingListName;
     private Cursor mExistingItems;
 
     public void initSender(Context context) {
@@ -83,15 +84,7 @@ public class OIShoppingListSender {
         // default to the first list
         setCurrentShoppingListId(0);
 
-
-/*        mContentObserver = new ShoppingObserver(null);
-        context.getContentResolver().registerContentObserver(Shopping.Contains.CONTENT_URI,
-                true, mContentObserver);
-        context.getContentResolver().registerContentObserver(Shopping.ContainsFull.CONTENT_URI,
-                true, mContentObserver);
-        context.getContentResolver().registerContentObserver(
-                Shopping.Items.CONTENT_URI, true, mContentObserver);
-*/
+        int mPos;
         mPos = 0;
         refreshCursor();
         if (mExistingItems != null) {
@@ -104,24 +97,51 @@ public class OIShoppingListSender {
             }
         }
     }
-/*
+
+    public void registerObserver(ContentCallback callback) {
+        contentCallback = callback;
+        mContentObserver = new ShoppingObserver(null);
+        context.getContentResolver().registerContentObserver(Shopping.Contains.CONTENT_URI,
+                true, mContentObserver);
+        context.getContentResolver().registerContentObserver(Shopping.ContainsFull.CONTENT_URI,
+                true, mContentObserver);
+        context.getContentResolver().registerContentObserver(
+                Shopping.Items.CONTENT_URI, true, mContentObserver);
+    }
+
+    public void unregisterObserver() {
+        if (mContentObserver!=null) {
+            context.getContentResolver().
+                unregisterContentObserver(mContentObserver);
+        }
+    }
+
     class ShoppingObserver extends ContentObserver {
 
         public ShoppingObserver(Handler handler) {
-
             super(handler);
-
         }
         @Override
         public boolean deliverSelfNotifications() {
+            if (debug) Log.d(TAG, "deliverSelfNotifications()");
             return super.deliverSelfNotifications();
         }
         @Override
         public void onChange(boolean selfChange) {
             super.onChange(selfChange);
+            if (debug) Log.d(TAG, "onChange("+selfChange+")");
         }
-    };
-*/
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            if (debug) Log.d(TAG, "onChange("+selfChange+","+uri+")");
+            contentCallback.onChange();
+        }
+    }
+
+    public static interface ContentCallback {
+        public void onChange();
+    }
+
     public String[] getItems() {
 
         if (mExistingItems==null) {
@@ -134,7 +154,7 @@ public class OIShoppingListSender {
             int position=0;
             while(position<count){
                 Item item=getItem(position);
-                if (debug) Log.d(TAG, "item="+item.item);
+                if (debug) Log.d(TAG, "items["+position+"]="+item.item);
                 items[position]=item.item;
                 position++;
             }
@@ -152,6 +172,7 @@ public class OIShoppingListSender {
         Log.d(TAG, "mShoppingListId: " + mShoppingListId);
         ThemeUtils2.setRemoteStyle(context, mShoppingListIds.getString(1), 14,
                 true);
+        String mShoppingListName;
         mShoppingListName = mShoppingListIds.getString(2);
         if (debug) Log.d(TAG, "mShoppingListName: " + mShoppingListName);
     }
@@ -163,7 +184,7 @@ public class OIShoppingListSender {
             if (mExistingItems != null) {
                 mExistingItems.close();
             }
-            String sortOrder = "contains.modified_date"; //
+//            String sortOrder = "contains.modified_date"; //
 
             mExistingItems = context.getContentResolver()
                     .query(
@@ -194,7 +215,7 @@ public class OIShoppingListSender {
 
         Item result = null;
         if (mExistingItems != null) {
-            mExistingItems.requery();
+//            refreshCursor();
             mExistingItems.moveToPosition(pos);
             if (mExistingItems.getCount() > 0) {
 
@@ -215,17 +236,11 @@ public class OIShoppingListSender {
 
         private Item(String id, String item, String tags, int quantity,
                      int bought) {
+            this.id = id;
             this.item = item;
             this.tags = tags;
             this.quantity = quantity;
-            if (bought == 1) {
-
-                this.bought = false;
-            } else {
-
-                this.bought = true;
-
-            }
+            this.bought = bought != 1;
         }
 
         public String id;
