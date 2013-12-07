@@ -266,16 +266,16 @@ public class MainActivity extends Activity {
     private JSONObject buildShoppingCard() throws JSONException {
 
         JSONObject card=new JSONObject();
-        String html="<article class=\"auto-paginate\"><section>";
-        html+="<ul class=\"text-x-small\">";
+        String html="<article><section>";
+        html+="<table>";
         String text="";
         sender.refreshCursor();
         String[] items=sender.getItems();
         for (String item : items) {
             text+=item+" ";
-            html+="<li>"+item+"</li>\n";
+            html+="<tr><td>"+item+"</td></tr>";
         }
-        html+="</ul></section><footer>\n<p>OI Shopping List</p>\n</footer></article>";
+        html+="</table></section><footer>\n<p>OI Shopping List</p>\n</footer></article>";
         card.put("html", html);
         card.put("text", text);
         return card;
@@ -287,17 +287,7 @@ public class MainActivity extends Activity {
             MirrorApiClient client = MirrorApiClient.getInstance(this);
             MirrorApiClient.Callback callback=new MirrorApiClient.Callback() {
                 @Override
-                public void onSuccess(HttpResponse response) {
-                    try {
-                        InputStream inputStream = response.getEntity().getContent();
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        IOUtils.copy(inputStream, baos);
-                        JSONObject jsonObject = new JSONObject(baos.toString());
-                    } catch (IOException e1) {
-                        // Pass
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                public void onSuccess(HttpResponse response, JSONObject jsonObject) {
                 }
 
                 @Override
@@ -334,13 +324,9 @@ public class MainActivity extends Activity {
                     MirrorApiClient client = MirrorApiClient.getInstance(this);
                     MirrorApiClient.Callback callback=new MirrorApiClient.Callback() {
                         @Override
-                        public void onSuccess(HttpResponse response) {
+                        public void onSuccess(HttpResponse response, JSONObject jsonObject) {
                             String timelineAction="Updated";
                             try {
-                                InputStream inputStream = response.getEntity().getContent();
-                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                IOUtils.copy(inputStream, baos);
-                                JSONObject jsonObject = new JSONObject(baos.toString());
                                 String id=jsonObject.getString("id");
                                 if (debug) Log.d(TAG, "id="+id);
 
@@ -354,8 +340,6 @@ public class MainActivity extends Activity {
                                         timelineAction="Created new";
                                     }
                                 }
-                            } catch (IOException e1) {
-                                // Pass
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

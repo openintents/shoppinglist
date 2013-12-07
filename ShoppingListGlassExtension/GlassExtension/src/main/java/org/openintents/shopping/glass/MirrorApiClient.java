@@ -3,6 +3,8 @@ package org.openintents.shopping.glass;
 import android.content.Context;
 import android.os.Handler;
 
+import com.google.api.client.util.IOUtils;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpGet;
@@ -11,9 +13,12 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -67,10 +72,15 @@ public class MirrorApiClient {
                     try {
                         final HttpResponse response = mClient.execute(request);
                         if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                            InputStream inputStream = response.getEntity().getContent();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            IOUtils.copy(inputStream, baos);
+                            final JSONObject jsonObject = new JSONObject(baos.toString());
+
                             mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    callback.onSuccess(response);
+                                    callback.onSuccess(response, jsonObject);
                                 }
                             });
                         } else {
@@ -82,6 +92,13 @@ public class MirrorApiClient {
                             });
                         }
                     } catch (final IOException e) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                callback.onFailure(null, e);
+                            }
+                        });
+                    } catch (final JSONException e) {
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -114,10 +131,15 @@ public class MirrorApiClient {
                     try {
                         final HttpResponse response = mClient.execute(request);
                         if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                            InputStream inputStream = response.getEntity().getContent();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            IOUtils.copy(inputStream, baos);
+                            final JSONObject jsonObject = new JSONObject(baos.toString());
+
                             mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    callback.onSuccess(response);
+                                    callback.onSuccess(response, jsonObject);
                                 }
                             });
                         } else {
@@ -129,6 +151,13 @@ public class MirrorApiClient {
                             });
                         }
                     } catch (final IOException e) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                callback.onFailure(null, e);
+                            }
+                        });
+                    } catch (final JSONException e) {
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -161,7 +190,7 @@ public class MirrorApiClient {
                             mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    callback.onSuccess(response);
+                                    callback.onSuccess(response,null);
                                 }
                             });
                         } else {
@@ -188,7 +217,7 @@ public class MirrorApiClient {
     }
 
     public static interface Callback {
-        public void onSuccess(HttpResponse response);
+        public void onSuccess(HttpResponse response, JSONObject jsonObject);
         public void onFailure(HttpResponse response, Throwable e);
     }
 }
