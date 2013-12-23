@@ -87,9 +87,6 @@ public class ToastBarMultipleItemStatusOperation extends ToastBarOperation {
 		} finally {
 			
 		}
-		if (mType == MARK_ALL) {
-			mShoppingItemsView.unsetMarkedAll();
-		}
 		mShoppingItemsView.requery();
 		mShoppingItemsView.invalidate();
 	}

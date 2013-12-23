@@ -104,6 +104,7 @@ public class ShoppingItemsView extends ListView {
 	public int mLastListPosition;
 	public int mLastListTop;
 	public long mNumChecked = 0;
+	public long mNumUnchecked = 0;
 	
 	private ThemeAttributes mThemeAttributes;
 	private PackageManager mPackageManager;
@@ -700,10 +701,6 @@ public class ShoppingItemsView extends ListView {
 	};
 
 	private TextView mCountTextView;
-	/**
-	 * 3-state flag for toggle all: true = all marked, false = all unmarked, null = neither nor
-	 */
-	private Boolean mMarkedAllStatus;
 
 	public ShoppingItemsView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -1203,7 +1200,6 @@ public class ShoppingItemsView extends ListView {
 		invalidate();	
 		if (mUndoListener != null)
 			mUndoListener.onUndoAvailable(op);
-		mMarkedAllStatus = on;
 	}
 	
 	public void toggleItemBought(int position) {
@@ -1257,12 +1253,6 @@ public class ShoppingItemsView extends ListView {
 		if (affectsSort) {
 			invalidate();		
 		} 
-		
-		mMarkedAllStatus = null;
-	}
-
-	public Boolean getMarkedAllStatus(){
-		return mMarkedAllStatus;
 	}
 	
 	public boolean cleanupList() {
@@ -1415,7 +1405,7 @@ public class ShoppingItemsView extends ListView {
 		if (debug)
 			Log.d(TAG, "updateTotal()");
 		
-		mNumChecked = 0;
+		mNumChecked = mNumUnchecked = 0;
 		long total = 0;
 		long totalchecked = 0;
 		long priority_total = 0;
@@ -1423,64 +1413,6 @@ public class ShoppingItemsView extends ListView {
 				.getContext());
 		boolean prioIncludesChecked = 
 			PreferenceActivity.prioritySubtotalIncludesChecked(this.getContext());
-
-		if (false && debug) 
-		{
-			/* This is the old way of computing the totals. Leaving it here for a bit 
-			 * in case some issue comes up. To check whether there is a discrepancy 
-			 * between the old way and the new way with your data, you can change the 
-			 * above false to true, and look in the logcat for two totals.
-			 * 
-			 *  There are two known sources of discrepancy:
-			 *  
-			 *  (1) when "Hide checked items" is set, the old way does not include 
-			 *  checked items in any totals, while the new way does. This is intentional.
-			 *  
-			 *  (2) A discrepancy measured in cents can be caused by a rounding bug in 
-			 *  OI Convert CSV when importing prices from HandyShopper. This bug has 
-			 *  since been fixed. It should be possible to fix your data by exporting
-			 *  in HandyShopper csv format and re-importing that file.
-			 */
-			if (mCursorItems.isClosed()) {
-				// Can happen through onShake() in ShoppingActivity.
-				return;
-			}
-			mCursorItems.moveToPosition(-1);
-				while (mCursorItems.moveToNext()) {
-			long item_status = mCursorItems.getLong(ShoppingActivity.mStringItemsSTATUS);
-			boolean isChecked = (item_status == ShoppingContract.Status.BOUGHT);
-
-			if (item_status == ShoppingContract.Status.REMOVED_FROM_LIST)
-				continue;
-			
-			long price = getQuantityPrice(mCursorItems);
-			total += price;
-			
-			if (isChecked) {
-				totalchecked += price;
-				mNumChecked++;
-			}
-			
-			if (priority_threshold != 0 && (prioIncludesChecked || !isChecked)) {
-				String priority_str = mCursorItems.getString(ShoppingActivity.mStringItemsPRIORITY);
-				if (priority_str != null) {
-					int priority = 0;
-					try {
-						priority = Integer.parseInt(priority_str);
-					} catch (NumberFormatException e) {
-						// pretend it's a 0 then...
-					}
-					if (priority != 0 && priority <= priority_threshold) {
-						priority_total += price;
-					}
-				}
-			}		
-			
-		}
-		if (debug) Log.d(TAG, "Total (old way): " + total + ", Checked: " + totalchecked + "(#" + mNumChecked + ")");
-		
-		total = priority_total = mNumChecked = totalchecked = 0;
-		}
 
 		Cursor total_cursor = getContext().getContentResolver().query(
 				Subtotals.CONTENT_URI.buildUpon().appendPath("" + mListId).build(),
@@ -1498,7 +1430,9 @@ public class ShoppingItemsView extends ListView {
 	
 			if (isChecked) {
 				totalchecked += price;
-				mNumChecked += total_cursor.getLong(Subtotals.COUNT_INDEX);;
+				mNumChecked += total_cursor.getLong(Subtotals.COUNT_INDEX);
+			} else if (item_status == ShoppingContract.Status.WANT_TO_BUY) {
+				mNumUnchecked += total_cursor.getLong(Subtotals.COUNT_INDEX);
 			}
 	
 			if (priority_threshold != 0 && (prioIncludesChecked || !isChecked)) {
@@ -1886,8 +1820,4 @@ public class ShoppingItemsView extends ListView {
 		mToastBar = toastBar;
 	}
 	
-	public void unsetMarkedAll()
-	{
-		this.mMarkedAllStatus = false;
-	}
 }

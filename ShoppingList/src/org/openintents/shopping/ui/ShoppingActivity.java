@@ -1948,8 +1948,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 				mAddPanel.setVisibility(View.VISIBLE);
 		}
 
-		menuItem = menu.findItem(MENU_MARK_ALL_ITEMS).setVisible(mItemsView.getMarkedAllStatus() == null || !mItemsView.getMarkedAllStatus());
-		menuItem = menu.findItem(MENU_UNMARK_ALL_ITEMS).setVisible(mItemsView.getMarkedAllStatus() != null && mItemsView.getMarkedAllStatus());
+		menuItem = menu.findItem(MENU_MARK_ALL_ITEMS).setVisible(mItemsView.mNumUnchecked > 0);
+		menuItem = menu.findItem(MENU_UNMARK_ALL_ITEMS).setVisible(mItemsView.mNumChecked > 0);
 		
 		menuItem = menu.findItem(MENU_CLEAN_UP_LIST).setEnabled(
 				mItemsView.mNumChecked > 0).setVisible(! drawerOpen);
