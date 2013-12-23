@@ -1943,7 +1943,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		
 		menuItem = menu.findItem(MENU_SEARCH_ADD); 
 		if (menuItem != null) {
-			menuItem.setVisible(holoSearch);
+			menuItem.setVisible(holoSearch && !drawerOpen);
 			if (!holoSearch)
 				mAddPanel.setVisibility(View.VISIBLE);
 		}
@@ -1952,7 +1952,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		menuItem = menu.findItem(MENU_UNMARK_ALL_ITEMS).setVisible(mItemsView.getMarkedAllStatus() != null && mItemsView.getMarkedAllStatus());
 		
 		menuItem = menu.findItem(MENU_CLEAN_UP_LIST).setEnabled(
-				mItemsView.mNumChecked > 0);
+				mItemsView.mNumChecked > 0).setVisible(! drawerOpen);
 
 		// Delete list is possible, if we have more than one list:
 		// AND
@@ -3641,6 +3641,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		    	vis = false;
 		    else if (PreferenceActivity.getUsingPerListSortFromPrefs(mContext) == false)
 				vis = false;
+		    if (mDrawerLayout.isDrawerOpen(mDrawerListsView))
+		    	vis = false;
 			return vis;
 		}
 		
