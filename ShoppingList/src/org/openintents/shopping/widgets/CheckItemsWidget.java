@@ -8,6 +8,7 @@ import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
 import org.openintents.shopping.ui.PreferenceActivity;
 
+import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -19,36 +20,48 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.RemoteViews;
 
 public class CheckItemsWidget extends AppWidgetProvider {
 	private final static int LIMIT_ITEMS = 5;
-	private final static String PREFS = "check_items_widget";
 	private final static String ACTION_CHECK = "ActionCheck";
+	private final static String ACTION_UNCHECK = "ActionUnCheck";
+	private final static String ACTION_TOGGLE_STATE = "ActionToggleState";
+	public static final String ITEM_ID = "ITEM_ID";
+	public static final String MARK_CHECKED = "MARK_CHECKED";
 	private final static String ACTION_NEXT_PAGE = "ActionNextPage";
 	private final static String ACTION_PREV_PAGE = "ActionPrevPage";
 
+	private final static boolean isHoneyComb = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
+
 	@Override
 	public void onReceive(Context context, Intent intent) {
+		Bundle extras = intent.getExtras();
 		super.onReceive(context, intent);
 
-		Bundle extras = intent.getExtras();
 		if (extras != null) {
 			int widgetId = extras.getInt("widgetId",
 					AppWidgetManager.INVALID_APPWIDGET_ID);
+			SharedPreferences sharedPreferences = context.getSharedPreferences(
+					CheckItemsWidgetConfig.PREFS, 0);
 
 			Integer id = new Integer(0);
 			Integer page = new Integer(0);
-			if (intent.getAction().equals(ACTION_CHECK))
+			if (intent.getAction().equals(ACTION_CHECK)
+					|| intent.getAction().equals(ACTION_UNCHECK)) {
 				id = extras.getInt("id", 0);
-			else if (intent.getAction().equals(ACTION_NEXT_PAGE))
+				if (id != 0) {
+					boolean check = intent.getAction().equals(ACTION_CHECK);
+					toggleStatus(context, id, check);
+				}
+
+			} else if (intent.getAction().equals(ACTION_NEXT_PAGE))
 				page = 1;
 			else if (intent.getAction().equals(ACTION_PREV_PAGE))
 				page = -1;
 
-			SharedPreferences sharedPreferences = context.getSharedPreferences(
-					PREFS, 0);
 
 			if (page != 0) {
 				int pagePreference = sharedPreferences.getInt(
@@ -66,39 +79,60 @@ public class CheckItemsWidget extends AppWidgetProvider {
 				sharedPreferencesEditor.commit();
 			}
 
-			if (id != 0) {
-				ContentValues values = new ContentValues();
-				values.put(ShoppingContract.Contains.STATUS,
-						ShoppingContract.Status.BOUGHT);
-				context.getContentResolver().update(
-						Uri.withAppendedPath(
-								ShoppingContract.Contains.CONTENT_URI,
-								String.valueOf(id)), values, null, null);
+			if (intent.getAction().equals(ACTION_TOGGLE_STATE)) {
+				long itemID = intent.getLongExtra(ITEM_ID, 0);
+				boolean check = intent.getBooleanExtra(MARK_CHECKED, true);
+				toggleStatus(context, itemID, check);
 			}
+
 		}
 		updateWidgets(context);
 	}
 
+	private void toggleStatus(Context context, long id, boolean check) {
+		ContentValues values = new ContentValues();
+		if (check)
+			values.put(ShoppingContract.Contains.STATUS,
+					ShoppingContract.Status.BOUGHT);
+		else
+			values.put(ShoppingContract.Contains.STATUS,
+					ShoppingContract.Status.WANT_TO_BUY);
+		context.getContentResolver().update(
+				Uri.withAppendedPath(
+						ShoppingContract.Contains.CONTENT_URI,
+						String.valueOf(id)), values, null, null);
+	}
+
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void updateWidgets(Context context) {
 		AppWidgetManager appWidgetManager = AppWidgetManager
 				.getInstance(context);
-		int[] a = appWidgetManager.getAppWidgetIds(new ComponentName(context
-				.getPackageName(), CheckItemsWidget.class.getName()));
-		List<AppWidgetProviderInfo> b = appWidgetManager
-				.getInstalledProviders();
-		for (AppWidgetProviderInfo i : b) {
-			if (i.provider.getPackageName().equals(context.getPackageName())) {
-				a = appWidgetManager.getAppWidgetIds(i.provider);
-				new CheckItemsWidget().onUpdate(context, appWidgetManager, a);
+		if (isHoneyComb) {
+			int[] a = appWidgetManager.getAppWidgetIds(new ComponentName(context, CheckItemsWidget.class));
+			appWidgetManager.notifyAppWidgetViewDataChanged(a, R.id.items_list);
+		} else {
+			int[] a = appWidgetManager.getAppWidgetIds(new ComponentName(context
+									.getPackageName(), CheckItemsWidget.class.getName()));
+			List<AppWidgetProviderInfo> b = appWidgetManager
+					.getInstalledProviders();
+			for (AppWidgetProviderInfo i : b) {
+				if (i.provider.getPackageName()
+						.equals(context.getPackageName())) {
+					a = appWidgetManager.getAppWidgetIds(i.provider);
+					new CheckItemsWidget().onUpdate(context, appWidgetManager,
+							a);
+				}
 			}
 		}
+
 	}
 
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	public void onUpdate(final Context context,
 			AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 		SharedPreferences sharedPreferences = context.getSharedPreferences(
-				PREFS, 0);
+				CheckItemsWidgetConfig.PREFS, 0);
 
 		for (int widgetId : appWidgetIds) {
 			long listId = sharedPreferences.getLong(String.valueOf(widgetId),
@@ -109,12 +143,19 @@ public class CheckItemsWidget extends AppWidgetProvider {
 				RemoteViews updateView = buildUpdate(context, listId, widgetId,
 						page);
 				appWidgetManager.updateAppWidget(widgetId, updateView);
+				if (isHoneyComb) {
+					appWidgetManager.notifyAppWidgetViewDataChanged(widgetId, R.id.items_list);
+				}
 			}
 		}
 	}
 
 	public RemoteViews buildUpdate(Context context, long listId, int widgetId,
 			int page) {
+		if (isHoneyComb) {
+			return buildUpdateHoneyComb(context, listId, widgetId);
+		}
+
 		RemoteViews views = new RemoteViews(context.getPackageName(),
 				R.layout.widget_check_items);
 
@@ -145,12 +186,30 @@ public class CheckItemsWidget extends AppWidgetProvider {
 				views.setTextViewText(viewId, cursor.getString(cursor
 						.getColumnIndex(ContainsFull.ITEM_NAME)));
 
-				Intent intentCheckService = new Intent(context,
-						CheckItemsWidget.class);
-				intentCheckService.putExtra("widgetId", widgetId);
-				intentCheckService.putExtra("id",
-						Integer.valueOf(cursor.getString(0)));
-				intentCheckService.setAction(ACTION_CHECK);
+				Intent intentCheckService;
+
+				if (ShoppingContract.Status.WANT_TO_BUY != cursor.getInt(cursor
+						.getColumnIndex(ContainsFull.STATUS))) {
+					views.setTextColor(
+							viewId,
+							context.getResources().getColor(
+									R.color.strikethrough));
+					intentCheckService = new Intent(context,
+							CheckItemsWidget.class);
+					intentCheckService.putExtra("widgetId", widgetId);
+					intentCheckService.putExtra("id",
+							Integer.valueOf(cursor.getString(0)));
+					intentCheckService.setAction(ACTION_UNCHECK);
+				} else {
+					views.setTextColor(viewId,
+							context.getResources().getColor(R.color.black));
+					intentCheckService = new Intent(context,
+							CheckItemsWidget.class);
+					intentCheckService.putExtra("widgetId", widgetId);
+					intentCheckService.putExtra("id",
+							Integer.valueOf(cursor.getString(0)));
+					intentCheckService.setAction(ACTION_CHECK);
+				}
 
 				PendingIntent pendingIntent = PendingIntent.getBroadcast(
 						context, Integer.valueOf(cursor.getString(0)),
@@ -159,42 +218,8 @@ public class CheckItemsWidget extends AppWidgetProvider {
 
 				i++;
 			}
-			/*
-			 * Icon
-			 */
-			Intent intentGoToApp = new Intent(context, ShoppingActivity.class);
-			intentGoToApp.setAction(Intent.ACTION_VIEW);
-			intentGoToApp.setData(Uri.withAppendedPath(
-					ShoppingContract.Lists.CONTENT_URI, "" + listId));
-			PendingIntent pendingIntentGoToApp = PendingIntent.getActivity(
-					context, 0, intentGoToApp,
-					PendingIntent.FLAG_UPDATE_CURRENT);
 
-			/*
-			 * List title
-			 */
-			String title = getTitle(
-					context,
-					Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, ""
-							+ listId));
-			views.setTextViewText(R.id.list_name, title);
-			views.setOnClickPendingIntent(R.id.list_name, pendingIntentGoToApp);
-			views.setOnClickPendingIntent(R.id.button_go_to_app,
-					pendingIntentGoToApp);
-
-			/*
-			 * Preference button
-			 */
-			Intent intentPreferences = new Intent(context,
-					CheckItemsWidgetConfig.class);
-			intentPreferences.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-					widgetId);
-			intentPreferences.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
-			PendingIntent pendingIntentPreferences = PendingIntent.getActivity(
-					context, 0, intentPreferences,
-					PendingIntent.FLAG_UPDATE_CURRENT);
-			views.setOnClickPendingIntent(R.id.button_go_to_preferences,
-					pendingIntentPreferences);
+			installCommonIntents(context, listId, widgetId, views);
 
 			/*
 			 * Prev page
@@ -229,10 +254,81 @@ public class CheckItemsWidget extends AppWidgetProvider {
 		return views;
 	}
 
+	private void installCommonIntents(Context context, long listId,
+			int widgetId, RemoteViews widget) {
+		/*
+		 * Icon
+		 */
+		Intent intentGoToApp = new Intent(context, ShoppingActivity.class);
+		intentGoToApp.setAction(Intent.ACTION_VIEW);
+		intentGoToApp.setData(Uri.withAppendedPath(
+				ShoppingContract.Lists.CONTENT_URI, "" + listId));
+		PendingIntent pendingIntentGoToApp = PendingIntent.getActivity(context,
+				0, intentGoToApp, PendingIntent.FLAG_UPDATE_CURRENT);
+
+		/*
+		 * List title
+		 */
+		String title = getTitle(context, listId);
+
+		widget.setTextViewText(R.id.list_name, title);
+		widget.setOnClickPendingIntent(R.id.list_name, pendingIntentGoToApp);
+		widget.setOnClickPendingIntent(R.id.button_go_to_app,
+				pendingIntentGoToApp);
+
+		/*
+		 * Preference button
+		 */
+		Intent intentPreferences = new Intent(context,
+				CheckItemsWidgetConfig.class);
+		intentPreferences.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+				widgetId);
+		intentPreferences.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+		PendingIntent pendingIntentPreferences = PendingIntent.getActivity(
+				context, 0, intentPreferences,
+				PendingIntent.FLAG_UPDATE_CURRENT);
+		widget.setOnClickPendingIntent(R.id.button_go_to_preferences,
+				pendingIntentPreferences);
+	}
+
+	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+	private RemoteViews buildUpdateHoneyComb(Context context, long listId,
+			int widgetId) {
+		Intent svcIntent = new Intent(context, ListWidgetService.class);
+
+		svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
+		svcIntent.setData(Uri.parse(svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
+
+		RemoteViews widget = new RemoteViews(context.getPackageName(),
+				R.layout.widget_check_items);
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+			widget.setRemoteAdapter(R.id.items_list, svcIntent);
+		} else {
+			widget.setRemoteAdapter(widgetId, R.id.items_list, svcIntent);
+		}
+
+		widget.setEmptyView(R.id.items_list, R.id.empty_view);
+
+		Intent clickIntent = new Intent(context, CheckItemsWidget.class);
+		clickIntent.setAction(ACTION_TOGGLE_STATE);
+		clickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
+
+		PendingIntent clickPI = PendingIntent.getBroadcast(context, 0,
+				clickIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+		widget.setPendingIntentTemplate(R.id.items_list, clickPI);
+
+		installCommonIntents(context, listId, widgetId, widget);
+		return widget;
+	}
+
 	/*
 	 * Get from ShoppingListsActivity class
 	 */
-	private String getTitle(Context context, Uri uri) {
+	private String getTitle(Context context, long listID) {
+		Uri uri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, ""
+				+ listID);
 		Cursor c = context.getContentResolver().query(uri,
 				new String[] { ShoppingContract.Lists.NAME }, null, null, null);
 		if (c != null && c.moveToFirst()) {
@@ -254,9 +350,9 @@ public class CheckItemsWidget extends AppWidgetProvider {
 	public static Cursor fillItems(Context context, long listId) {
 		String sortOrder = PreferenceActivity.getSortOrderFromPrefs(context,
 				ShoppingActivity.MODE_IN_SHOP);
-		String selection = "list_id = ? AND "
-				+ ShoppingContract.Contains.STATUS + " == "
-				+ ShoppingContract.Status.WANT_TO_BUY;
+		String selection = "list_id = ?  AND "
+				+ ShoppingContract.ContainsFull.STATUS + " <> "
+				+ ShoppingContract.Status.REMOVED_FROM_LIST;
 
 		Cursor cursor = context.getContentResolver().query(
 				ContainsFull.CONTENT_URI, ShoppingActivity.mStringItems,

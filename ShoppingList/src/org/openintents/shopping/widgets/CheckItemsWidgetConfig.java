@@ -7,6 +7,7 @@ import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Lists;
 import org.openintents.shopping.ui.PreferenceActivity;
 
+import android.annotation.TargetApi;
 import android.app.ListActivity;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
@@ -14,14 +15,16 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 public class CheckItemsWidgetConfig extends ListActivity {
-	private final static String PREFS = "check_items_widget";
+	public final static String PREFS = "check_items_widget";
 	private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
+	private final static boolean isHoneyComb = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +68,16 @@ public class CheckItemsWidgetConfig extends ListActivity {
 		finish();
 	}
 
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void updateWidgets() {
 		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
 		int[] a = appWidgetManager.getAppWidgetIds(new ComponentName(
 				getPackageName(), CheckItemsWidget.class.getName()));
 		List<AppWidgetProviderInfo> b = appWidgetManager
 				.getInstalledProviders();
+		if (isHoneyComb) {
+			appWidgetManager.notifyAppWidgetViewDataChanged(a, R.id.items_list);
+		}
 		for (AppWidgetProviderInfo i : b) {
 			if (i.provider.getPackageName().equals(getPackageName())) {
 				a = appWidgetManager.getAppWidgetIds(i.provider);

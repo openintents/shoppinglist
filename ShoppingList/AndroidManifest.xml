@@ -251,17 +251,25 @@
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="org.openintents.shopping.widgets.ActionCheck" />
+                <action android:name="org.openintents.shopping.widgets.ActionUnCheck" />
                 <action android:name="org.openintents.shopping.widgets.ActionPrevPage" />
                 <action android:name="org.openintents.shopping.widgets.ActionNextPage" />
-            </intent-filter>
+                <action android:name="org.openintents.shopping.widgets.ActionToggleState" />
+                </intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_check_items" />
         </receiver>
         <activity android:name=".widgets.CheckItemsWidgetConfig">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-         	</intent-filter>
-     	</activity>
-        <meta-data android:value="false" android:name="hideMarketLink"/>
+            </intent-filter>
+        </activity>
+        <service
+            android:name="org.openintents.shopping.widgets.ListWidgetService"
+            android:enabled="true"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            android:exported = "false" />
+
+		<meta-data android:value="false" android:name="hideMarketLink"/>
 	</application>	 
 	
 	<!-- required for MyBackupPro: -->
