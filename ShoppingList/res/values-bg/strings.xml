@@ -22,6 +22,7 @@
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
   Dariel Kremov https://launchpad.net/~dkremov
+  Ivaylo Malinov https://launchpad.net/~iv-malinov
   Kras4ooo https://launchpad.net/~kkrassi1984
   OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101
@@ -41,6 +42,7 @@
 	<string name="new_list">Нов списък</string>
 	<string name="send">Изпрати списък</string>
 	<string name="mark_all_items">Маркирай всички елементи</string>
+	<string name="unmark_all_items">Unmark all items</string>
 	<string name="empty_list_not_sent">Празният списък не е изпратен.</string>
 	<string name="email_not_available">Не се предлага приложение за изпращане.</string>
 	<string name="my_shopping_list">Мой списък за пазаруване</string>
@@ -68,8 +70,8 @@
 	<string name="menu_delete_store">Изтрии слад</string>
 	<string name="confirm_delete_store">Наистина ли сикате да изтриете този склад</string>
 	<string name="no_items_available">Елементите не са действащи</string>
-	<string name="no_stores_available">No stores available for this list</string>
-	<string name="no_tags_available">No tags available for this list</string>
+	<string name="no_stores_available">Никакви налични магазини за този списък</string>
+	<string name="no_tags_available">Няма налични етикети за този списък</string>
 	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
@@ -106,12 +108,12 @@
 	<string name="has_note">Има забележка</string>
 	<string name="units">Единици</string>
 	<string name="note">Забележка</string>
-	<string name="stores">Stores</string>
-	<string name="list">List</string>
+	<string name="stores">Магазини</string>
+	<string name="list">Списък</string>
 	
 	<string name="otherqty">Друго количество...</string>
 	<string name="otherpri">Друг приоритет...</string>   
-	<string name="unfiltered">(Unfiltered)</string>
+	<string name="unfiltered">(Нефилтрирано)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Общо: %s</string>
@@ -173,9 +175,9 @@
 	<string name="preference_sortorder_for_pick_summary">Промяна на реда на сортиране на елементи от списък в режим на изписване на артикули.</string>
 	<string name="preference_sortorder_dialog_title">Избери реда на подреждане</string>
 	<string name="preference_sortorder_for_pick_dialog_title">Изберете ред на сортиране за режим на изписване на артикули</string>
-	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
-	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
-	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
+	<string name="preference_sortorder_for_shopping_lists">Ред на подредба - Списък за пазаруване</string>
+	<string name="preference_sortorder_for_slists_summary">Смяна реда на подредба на списъка за пазаруване</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Избор на реда на подредба на списъка за пазаруване</string>
 	<string name="preference_loadlastused_title">Зареди последно ползван списък</string>
 	<string name="preference_loadlastused_summary">Започвай винаги с последно прегледания списък.</string>
 	<string name="preference_capitalization_title">Главна буква</string>
@@ -183,8 +185,8 @@
 	<string name="preference_capitalization_dialog_title">Избери писане с главни букви</string> 
 	<string name="preference_hidechecked_title">Скрий маркирани елементи</string>
 	<string name="preference_hidechecked_summary">Скрий веднага елементи, които са демаркирани.</string>
-	<string name="preference_fastscroll_title">Fast Scrolling</string>
-	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
+	<string name="preference_fastscroll_title">Бързо превъртане</string>
+	<string name="preference_fastscroll_summary">Бутона за превъртане се появява когато превъртите 35 артикула или повече.</string>
 	<string name="preference_showprice_title">Покажи цена</string>
 	<string name="preference_showprice_summary">Показано като допълнителна колона в списъка.</string>
 	<string name="preference_perstoreprice">Скалад Цени</string>
@@ -192,8 +194,11 @@
 	<string name="preference_perstoreprice_summary">Следене на отделни цени за всеки елемент на всеки магазин.</string>
 	<string name="preference_screenlock_title">Деактивирай заключването на екрана</string>
 	<string name="preference_screenlock_summary">Когато е маркино, не позволява на екрана да се заключи.</string>
-	<string name="preference_usefilters_title">Filters</string>
-	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
+	<string name="preference_usefilters_title">Филтри</string>
+	<string name="preference_usefilters_summary">Списъка може да се филтрира по етикети или магазини.</string>
+	<string name="preference_complete_by_list_title">Limit item name completion</string>
+	<string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
+	<string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
 	<string name="preference_reset_quantity">Нулирай количеството</string>
 	<string name="preference_reset_quantity_summary">Нулира количеството, когато се добавят отново се добавят артикули.</string>
 	<string name="preference_add_for_barcode">Баркод Скенер</string>
@@ -295,9 +300,9 @@
     
     <string-array name="preference_sortorder_slists">
         <!-- Preference sort order: Sort by list name in ascending order -->
-        <item>alphabetical ascending</item>
+        <item>азбучен възходящ</item>
         <!-- Preference sort order: Sort by list name in descending order -->
-        <item>alphabetical descending</item>
+        <item>азбучен низходящ</item>
         <!-- Preference sort order: Newest list first -->
         <item>първо най-новите</item>
         <!-- Preference sort order: Oldest list first -->

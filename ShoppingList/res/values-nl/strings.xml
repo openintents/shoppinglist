@@ -27,6 +27,7 @@
   Menno Vogel https://launchpad.net/~mennovogel90
   OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101
+  Toon van Gerwen https://launchpad.net/~toon-vg
   friedger https://launchpad.net/~friedger</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
@@ -42,6 +43,7 @@
 	<string name="new_list">Nieuwe lijst</string>
 	<string name="send">Verzend lijst</string>
 	<string name="mark_all_items">Markeer alle items</string>
+	<string name="unmark_all_items">Unmark all items</string>
 	<string name="empty_list_not_sent">Lege lijst niet verzonden.</string>
 	<string name="email_not_available">Geen toepassing beschikbaar om te verzenden.</string>
 	<string name="my_shopping_list">Mijn boodschappenlijst</string>
@@ -108,11 +110,11 @@
 	<string name="units">Eenheden</string>
 	<string name="note">Opmerking</string>
 	<string name="stores">Stores</string>
-	<string name="list">List</string>
+	<string name="list">Lijst</string>
 	
-	<string name="otherqty">Other Quantity...</string>
-	<string name="otherpri">Other Priority...</string>   
-	<string name="unfiltered">(Unfiltered)</string>
+	<string name="otherqty">Andere kwaliteiten</string>
+	<string name="otherpri">Andere prioriteiten</string>   
+	<string name="unfiltered">(ongesorteerd)</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">Totaal: %s</string>
@@ -124,7 +126,7 @@
 	<string name="priority3_total">Prioriteit 1-3: %s</string>
 	<string name="priority4_total">Prioriteit 1-4: %s</string>
 	
-	<string name="delete_item_confirm">Are you sure you want to permanently delete this item?</string>
+	<string name="delete_item_confirm">Weet u zeker dat u dit item voorgoed wilt verwijderen?</string>
 	<string name="delete">Verwijderen</string>
 	
 	<!-- Added to an item to indicate it was bought. -->
@@ -165,16 +167,16 @@
 	<string name="preference_fontsize">Tekengrootte</string>
 	<string name="preference_fontsize_summary">Wijzig tekengrootte</string>
 	<string name="preference_fontsize_dialog_title">Kies tekengrootte</string>
-	<string name="preference_orientation">Orientation</string>
-	<string name="preference_orientation_summary">Change orientation</string>
-	<string name="preference_orientation_dialog_title">Choose orientation</string>
+	<string name="preference_orientation">Oriëntatie</string>
+	<string name="preference_orientation_summary">Oriëntatie wijzigen</string>
+	<string name="preference_orientation_dialog_title">Oriëntatie selecteren</string>
 	<string name="preference_sortorder_title">Sorteer volgorde</string>
 	<string name="preference_sortorder_summary">Wijzig sorteer volgorde van lijst items</string>
-	<string name="preference_sortorder_for_pick_title">Sort order - Pick Items</string>
+	<string name="preference_sortorder_for_pick_title">Sorteer volgorde - Selecteer items</string>
 	<string name="preference_sortorder_for_pick_summary">Change sort order of list items in Pick Items mode.</string>
 	<string name="preference_sortorder_dialog_title">Kies sorteer volgorde</string>
 	<string name="preference_sortorder_for_pick_dialog_title">Choose sort order for Pick Items mode</string>
-	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_shopping_lists">Sorteer volgorde - Boodschappenlijst</string>
 	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
 	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
 	<string name="preference_loadlastused_title">Laad laatst gebruikte lijst</string>
@@ -195,6 +197,9 @@
 	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
 	<string name="preference_usefilters_title">Filters</string>
 	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
+	<string name="preference_complete_by_list_title">Limit item name completion</string>
+	<string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
+	<string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
 	<string name="preference_reset_quantity">Reset Quantity</string>
 	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
 	<string name="preference_add_for_barcode">Barcode Scanner</string>

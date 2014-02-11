@@ -25,7 +25,7 @@
   Sahran https://launchpad.net/~sahran</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
-	<string name="about_comments">Keep track of your shopping items with OI Shopping List.</string>
+	<string name="about_comments">مال تىزىمىڭىزدىكى تۈرلەرنى OI مال تىزىمىدا ئىز قوغلاشنى ساقلاپ قالىدۇ.</string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
@@ -37,6 +37,7 @@
 	<string name="new_list">يېڭى تىزىم</string>
 	<string name="send">تىزىم يوللا</string>
 	<string name="mark_all_items">ھەممە تۈرگە بەلگە سال</string>
+	<string name="unmark_all_items">Unmark all items</string>
 	<string name="empty_list_not_sent">تىزىم بوش يوللىمىدى.</string>
 	<string name="email_not_available">يوللاشقا ئىشلىتىدىغان قوللىنىشچان پىروگرامما يوق.</string>
 	<string name="my_shopping_list">سېتىۋېلىش تىزىمىم</string>
@@ -169,9 +170,9 @@
 	<string name="preference_sortorder_for_pick_summary">تۈر تاللاش ھالىتىدىكى تۈر تىزىمىنىڭ تەرتىپلەش تەرتىپىنى ئۆزگەرتىدۇ.</string>
 	<string name="preference_sortorder_dialog_title">تەرتىپلەش تەرتىپىنى تاللاڭ</string>
 	<string name="preference_sortorder_for_pick_dialog_title">تۈر تاللاش ھالىتىنىڭ تەرتىپلەش تەرتىپىنى تاللاڭ</string>
-	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
-	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
-	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
+	<string name="preference_sortorder_for_shopping_lists">تەرتىپلەش تەرتىپى - مال تىزىمى</string>
+	<string name="preference_sortorder_for_slists_summary">مال تىزىمى ۋە تەرتىپلەش تەرتىپىنى ئۆزگەرتىدۇ.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">مال تىزىمىنىڭ تەرتىپلەش تەرتىپىنى تاللاڭ</string>
 	<string name="preference_loadlastused_title">ئاخىرقى قېتىم ئىشلەتكەننى يۈكلە</string>
 	<string name="preference_loadlastused_summary">ھەمىشە ئاخىرقى قېتىم كۆرسەتكەن تىزىمنى باشلا</string>
 	<string name="preference_capitalization_title">چوڭ كىچىك يېزىلىش</string>
@@ -180,7 +181,7 @@
 	<string name="preference_hidechecked_title">تاللانغان تۈرلەرنى يوشۇر</string>
 	<string name="preference_hidechecked_summary">تاللانغان تۈرلەرنى تېزلىكتە يوشۇرىدۇ.</string>
 	<string name="preference_fastscroll_title">تېز دومىلىتىش</string>
-	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
+	<string name="preference_fastscroll_summary">تۈر سانى 35 ياكى ئۇنىڭدىن ئېشىپ كەتكەندە سۈرگۈچنى كۆرسىتىدۇ.</string>
 	<string name="preference_showprice_title">باھانى كۆرسەت</string>
 	<string name="preference_showprice_summary">قوشۇمچە ئىستون سۈپىتىدە تىزىمدا كۆرسىتىدۇ.</string>
 	<string name="preference_perstoreprice">ھەر بىر دۇكاننىڭ باھاسى</string>
@@ -190,6 +191,9 @@
 	<string name="preference_screenlock_summary">تەكشۈرۈلۈۋاتقاندا ئېكران قۇلۇپلاشنىڭ ئالدىنى ئالىدۇ.</string>
 	<string name="preference_usefilters_title">سۈزگۈچلەر</string>
 	<string name="preference_usefilters_summary">تىزىملارنى بەلگە ياكى دۇكانلار بويىچە سۈزگىلى بولىدۇ.</string>
+	<string name="preference_complete_by_list_title">Limit item name completion</string>
+	<string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
+	<string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
 	<string name="preference_reset_quantity">سانىنى ئەسلىگە قايتۇر</string>
 	<string name="preference_reset_quantity_summary">تۈرلەرنى قايتا قوشقاندا سانىنى ئەسلىگە قايتۇرىدۇ.</string>
 	<string name="preference_add_for_barcode">تاياقچە كود تاراغۇچ</string>
@@ -244,7 +248,7 @@
 	<string name="preference_developer_themes_summary">OpenIntents تورتۇرادىن ئۆرنەككە ئېرىشىدۇ.</string>
 	<string name="preference_quickedit">تېز تەھرىرلەش ھالىتى</string>
 	<string name="preference_quickedit_on_summary">ئادەتتىكى قىممەتبەۇ بىر تىزىملىكنىڭ چېكىش ئالدىنلىقى ياكى مىقدار قىممىتى.</string>
-	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
+	<string name="preference_quickedit_off_summary">سەزگۈچ ئالدىنلىقى ياكى سانلىق قىممەتنى تۈر تەھرىرلەش سۆزلەشكۈدە توپلايدۇ.</string>
 	<string name="preference_reset_all_settings">ھەممە تەڭشەكلەرنى ئەسلىگە قايتۇر</string>
 	<string name="preference_reset_all_settings_alert">ھەممە تەڭشەكلەرنى راستىنلا ئەسلىگە قايتۇرامسىز؟ بۇ مەشغۇلاتنى كەينىگە ياندۇرغىلى بولمايدۇ.</string>    
 	<string name="preference_reset_all_settings_done">ھەممە تەڭشەكلەر ئەسلىگە قايتۇرۇلىدۇ</string>
@@ -291,9 +295,9 @@
     
     <string-array name="preference_sortorder_slists">
         <!-- Preference sort order: Sort by list name in ascending order -->
-        <item>alphabetical ascending</item>
+        <item>ئېلىپبەلىك ئۆسكۈچى تەرتىپ</item>
         <!-- Preference sort order: Sort by list name in descending order -->
-        <item>alphabetical descending</item>
+        <item>ئېلىپبەلىك كېمەيگۈچى تەرتىپ</item>
         <!-- Preference sort order: Newest list first -->
         <item>يېڭىسى ئالدىدا</item>
         <!-- Preference sort order: Oldest list first -->

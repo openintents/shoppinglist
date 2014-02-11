@@ -21,15 +21,17 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
-  Damian Skrodzki https://launchpad.net/~damienix
+  Kacper Mościcki https://launchpad.net/~kacper-moscicki
   Karolina Kowal https://launchpad.net/~gwiazdeczka11
   OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101
   Piotr Łazarczyk https://launchpad.net/~quazarxd
   Tomasz \'Zen\' Napierala https://launchpad.net/~tzn
   Tomasz Zieliński https://launchpad.net/~tomek0517
+  damienix https://launchpad.net/~damienix
   friedger https://launchpad.net/~friedger
-  zielmicha https://launchpad.net/~michal-zielinscy</string>
+  zielmicha https://launchpad.net/~michal-zielinscy
+  Łukasz Cieliński https://launchpad.net/~lukasc-t</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
 	<string name="about_comments">Zarządzaj swoimi listami zakupów używając OI Lista zakupów.</string>
@@ -44,6 +46,7 @@
 	<string name="new_list">Nowa lista</string>
 	<string name="send">Wyślij listę</string>
 	<string name="mark_all_items">Zaznacz wszystko</string>
+	<string name="unmark_all_items">Unmark all items</string>
 	<string name="empty_list_not_sent">Nie wysłano pustej listy.</string>
 	<string name="email_not_available">Brak aplikacji służącej wysłaniu.</string>
 	<string name="my_shopping_list">Moja lista zakupów</string>
@@ -176,9 +179,9 @@
 	<string name="preference_sortorder_for_pick_summary">Zmień kolejność sortowania elementów listy</string>
 	<string name="preference_sortorder_dialog_title">Wybierz porządek sortowania</string>
 	<string name="preference_sortorder_for_pick_dialog_title">Wybierz kolejność sortowania elementów listy</string>
-	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
-	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
-	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
+	<string name="preference_sortorder_for_shopping_lists">Ustawienia sortowania dla Listy zakupów</string>
+	<string name="preference_sortorder_for_slists_summary">Zmień sposób sortowania List zakupów</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Wybierz sposób sortowania List zakupów</string>
 	<string name="preference_loadlastused_title">Wczytaj ostatno używaną listę</string>
 	<string name="preference_loadlastused_summary">Zawsze rozpoczynaj z ostatnio oglądaną listą.</string>
 	<string name="preference_capitalization_title">Wielkość liter</string>
@@ -197,6 +200,9 @@
 	<string name="preference_screenlock_summary">Zapobiega blokadzie ekranu podczas sprawdzania.</string>
 	<string name="preference_usefilters_title">Filtry</string>
 	<string name="preference_usefilters_summary">Listy mogą być filtrowane za pomocą tagów lub sklepów.</string>
+	<string name="preference_complete_by_list_title">Limit item name completion</string>
+	<string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
+	<string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
 	<string name="preference_reset_quantity">Resetuj Ilość</string>
 	<string name="preference_reset_quantity_summary">Resetuje ilość podczas dodawania elementów ponownie.</string>
 	<string name="preference_add_for_barcode">Skaner kodów kreskowych</string>
@@ -298,9 +304,9 @@
     
     <string-array name="preference_sortorder_slists">
         <!-- Preference sort order: Sort by list name in ascending order -->
-        <item>alphabetical ascending</item>
+        <item>Alfabetycznie rosnąco</item>
         <!-- Preference sort order: Sort by list name in descending order -->
-        <item>alphabetical descending</item>
+        <item>Alfabetycznie malejąco</item>
         <!-- Preference sort order: Newest list first -->
         <item>najpierw najnowsze</item>
         <!-- Preference sort order: Oldest list first -->

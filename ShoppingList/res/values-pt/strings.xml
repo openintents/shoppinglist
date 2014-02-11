@@ -42,18 +42,19 @@ Launchpad Contributions:
 	<string name="new_list">Nova lista</string>
 	<string name="send">Enviar lista</string>
 	<string name="mark_all_items">Marcar todos os itens</string>
+	<string name="unmark_all_items">Unmark all items</string>
 	<string name="empty_list_not_sent">Lista vazia não enviada.</string>
 	<string name="email_not_available">Não possui a aplicação de envio.</string>
 	<string name="my_shopping_list">A minha lista de compras</string>
 	<string name="new_list_hint">ex.: intenções, lista familiar</string>
-	<string name="clean_up_list">Apagar lista</string>
-	<string name="delete_list">Apagar lista</string>
+	<string name="clean_up_list">Limpar lista</string>
+	<string name="delete_list">Eliminar lista</string>
 	<string name="ask_new_list">Indique o nome da nova lista</string>
-	<string name="ask_rename_list">Alterar o nome da lista</string>
+	<string name="ask_rename_list">Mudar nome da lista</string>
 	<string name="ask_edit_item">Editar item</string>
 	<string name="ask_new_store">Indique o nome na nova loja</string>
-	<string name="please_enter_name">Por favor, indique um nome</string>
-	<string name="no_items_marked">Não há itens seleccionados</string>
+	<string name="please_enter_name">Por favor indique um nome</string>
+	<string name="no_items_marked">Não existem itens riscados</string>
 	<string name="confirm_delete_list">Pretende eliminar esta lista de compras?</string>
 	<string name="no_shopping_provider">Erro ao aceder às listas de compras.</string>
 	<string name="pick_item">Escolha um item</string>
@@ -174,9 +175,9 @@ Launchpad Contributions:
 	<string name="preference_sortorder_for_pick_summary">Alterar ordenação dos itens da lista no modo de escolha de itens.</string>
 	<string name="preference_sortorder_dialog_title">Escolha a ordenação</string>
 	<string name="preference_sortorder_for_pick_dialog_title">Escolha a ordenação para o modo de escolha de itens.</string>
-	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
-	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
-	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
+	<string name="preference_sortorder_for_shopping_lists">Ordem - Lista de compras</string>
+	<string name="preference_sortorder_for_slists_summary">Alterar ordem das listas de compras</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Alterar ordem das listas de compras</string>
 	<string name="preference_loadlastused_title">Carregar última lista utilizada</string>
 	<string name="preference_loadlastused_summary">Abrir sempre a última lista visualizada.</string>
 	<string name="preference_capitalization_title">Capitalização</string>
@@ -195,6 +196,9 @@ Launchpad Contributions:
 	<string name="preference_screenlock_summary">Se ativa, impede o bloqueio do ecrã.</string>
 	<string name="preference_usefilters_title">Filtros</string>
 	<string name="preference_usefilters_summary">As listas podem ser filtradas por "tags" ou lojas.</string>
+	<string name="preference_complete_by_list_title">Limit item name completion</string>
+	<string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
+	<string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
 	<string name="preference_reset_quantity">Redefinir quantidade</string>
 	<string name="preference_reset_quantity_summary">Repõe a quantidade ao adicionar itens.</string>
 	<string name="preference_add_for_barcode">Analisador de código de barras</string>
@@ -296,9 +300,9 @@ Launchpad Contributions:
     
     <string-array name="preference_sortorder_slists">
         <!-- Preference sort order: Sort by list name in ascending order -->
-        <item>alphabetical ascending</item>
+        <item>alfabeticamente ascendente</item>
         <!-- Preference sort order: Sort by list name in descending order -->
-        <item>alphabetical descending</item>
+        <item>alfabeticamente descendente</item>
         <!-- Preference sort order: Newest list first -->
         <item>mais recentes primeiro</item>
         <!-- Preference sort order: Oldest list first -->
@@ -363,7 +367,7 @@ Launchpad Contributions:
 	
     <string-array name="automation_actions">
     	<!-- Automation action to clean up a list. -->
-    	<item>Apagar lista</item>
+    	<item>Limpar lista</item>
     </string-array>
       
 	<string name="widget_prev_page">Página anterior</string>

@@ -21,6 +21,7 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
+  Maziar Bouali https://launchpad.net/~mbooali
   OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101
   oren https://launchpad.net/~ahujaaditya92
@@ -40,6 +41,7 @@
 	<string name="new_list">لیست جدید</string>
 	<string name="send">ارسال لیست</string>
 	<string name="mark_all_items">نشانه دار كردن تمام موارد</string>
+	<string name="unmark_all_items">Unmark all items</string>
 	<string name="empty_list_not_sent">لیست خالی ارسال نمی شود.</string>
 	<string name="email_not_available">برنامه ای برای ارسال موجود نیست.</string>
 	<string name="my_shopping_list">لیست خرید من</string>
@@ -67,8 +69,8 @@
 	<string name="menu_delete_store">حذف فروشگاه</string>
 	<string name="confirm_delete_store">آیا شما واقعا می خواهید به حذف این فروشگاه؟</string>
 	<string name="no_items_available">هيچ موردي وجود ندارد</string>
-	<string name="no_stores_available">No stores available for this list</string>
-	<string name="no_tags_available">No tags available for this list</string>
+	<string name="no_stores_available">برای این لیست هیچ فروشگاهی وجود ندارد</string>
+	<string name="no_tags_available">برچسبی برای این لیست وجود ندارد</string>
 	    
 	<!-- Remove item from this list, but keep it internally, so that the user
 	     can choose it later for inclusion again. Information like
@@ -105,12 +107,12 @@
 	<string name="has_note">يادداشت دارد</string>
 	<string name="units">واحدها</string>
 	<string name="note">یادداشت</string>
-	<string name="stores">Stores</string>
-	<string name="list">List</string>
+	<string name="stores">فروشگاه ها</string>
+	<string name="list">لیست</string>
 	
 	<string name="otherqty">مقدار دیگر...</string>
 	<string name="otherpri">اولویت دیگر...</string>   
-	<string name="unfiltered">(Unfiltered)</string>
+	<string name="unfiltered">غربال نشده</string>
 	
 	<!-- Total sum of all prices. \'%s\' is the sum -->
 	<string name="total">جمع كل: %s</string>
@@ -172,9 +174,9 @@
 	<string name="preference_sortorder_for_pick_summary">تغییر ترتیب بندی از اقلام لیست را در حالت آیتم ها را انتخاب.</string>
 	<string name="preference_sortorder_dialog_title">انتخاب ترتیب</string>
 	<string name="preference_sortorder_for_pick_dialog_title">ترتیب بندی از نوع را انتخاب کنید برای حالت آیتم ها را انتخاب</string>
-	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
-	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
-	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
+	<string name="preference_sortorder_for_shopping_lists">تر تیب نمایش-لیست های خرید</string>
+	<string name="preference_sortorder_for_slists_summary">تغییر ترتیب لیست های خرید</string>
+	<string name="preference_sortorder_for_slists_dialog_title">انتخاب ترتیب لیست های خرید</string>
 	<string name="preference_loadlastused_title">بارگیری آخرین لیست استفاده شده</string>
 	<string name="preference_loadlastused_summary">همیشه با لیستی که آخرین بار مشاهده شده شروع کنید.</string>
 	<string name="preference_capitalization_title">نوشتن با حروف بزرگ</string>
@@ -182,8 +184,8 @@
 	<string name="preference_capitalization_dialog_title">انتخاب حروف بزرگ</string> 
 	<string name="preference_hidechecked_title">مخفی کردن موارد بررسی شده</string>
 	<string name="preference_hidechecked_summary">فوراً موارد علامت زده شده را مخفی کنید.</string>
-	<string name="preference_fastscroll_title">Fast Scrolling</string>
-	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
+	<string name="preference_fastscroll_title">پیمودن سریع</string>
+	<string name="preference_fastscroll_summary">اسکرول بار وقتی تعداد از 35 تا بیشتر شد نمایش بده</string>
 	<string name="preference_showprice_title">نشان دادن قیمت</string>
 	<string name="preference_showprice_summary">بعنوان ستون اضافی در لیست نشان داده می شود.</string>
 	<string name="preference_perstoreprice">در هر فروشگاه قیمت</string>
@@ -191,8 +193,11 @@
 	<string name="preference_perstoreprice_summary">پیگیری قیمت های جداگانه برای هر آیتم در هر فروشگاه.</string>
 	<string name="preference_screenlock_title">غیر فعال کردن قفل صفحه نمایش</string>
 	<string name="preference_screenlock_summary">جلوگیری از صفحه نمایش قفل شده است زمانی که چک.</string>
-	<string name="preference_usefilters_title">Filters</string>
-	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
+	<string name="preference_usefilters_title">فیلترها</string>
+	<string name="preference_usefilters_summary">لیست ها میتوانند با اساس برچسب ها و فروشگاه ها فیلتر شوند</string>
+	<string name="preference_complete_by_list_title">Limit item name completion</string>
+	<string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
+	<string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
 	<string name="preference_reset_quantity">بازنشانی مقدار</string>
 	<string name="preference_reset_quantity_summary">تنظیم مجدد مقدار در هنگام اضافه کردن آیتم دوباره.</string>
 	<string name="preference_add_for_barcode">اسکنر بارکد</string>
@@ -294,9 +299,9 @@
     
     <string-array name="preference_sortorder_slists">
         <!-- Preference sort order: Sort by list name in ascending order -->
-        <item>alphabetical ascending</item>
+        <item>الفبایی صعودی</item>
         <!-- Preference sort order: Sort by list name in descending order -->
-        <item>alphabetical descending</item>
+        <item>الفبایی نزولی</item>
         <!-- Preference sort order: Newest list first -->
         <item>ابتدا جدیدترین</item>
         <!-- Preference sort order: Oldest list first -->

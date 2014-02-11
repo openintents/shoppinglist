@@ -22,7 +22,8 @@
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
   Abdessamad Derraz https://launchpad.net/~derraz
-  Bonsoir https://launchpad.net/~bonsoir
+  Bonsoir https://launchpad.net/~bonsoir-deactivatedaccount
+  Hélion du Mas des Bourboux https://launchpad.net/~helion331990
   Omega13 https://launchpad.net/~omega13
   OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101
@@ -47,6 +48,7 @@
 	<string name="new_list">Nouvelle liste</string>
 	<string name="send">Envoyer la liste</string>
 	<string name="mark_all_items">Sélectionner tous les éléments</string>
+	<string name="unmark_all_items">Unmark all items</string>
 	<string name="empty_list_not_sent">Liste vide non envoyée</string>
 	<string name="email_not_available">Non disponible pour l\'envoi.</string>
 	<string name="my_shopping_list">Ma liste de courses</string>
@@ -109,7 +111,7 @@
 	<string name="item">Elément</string>
 	<string name="quantity">Quantité</string>
 	<string name="priority">Priorité</string>
-	<string name="has_note">Has Note</string>
+	<string name="has_note">A une note</string>
 	<string name="units">Unités</string>
 	<string name="note">Note</string>
 	<string name="stores">Boutiques</string>
@@ -200,6 +202,9 @@
 	<string name="preference_screenlock_summary">Cocher pour éviter le verrouillage d\'écran</string>
 	<string name="preference_usefilters_title">Filtres</string>
 	<string name="preference_usefilters_summary">Les listes peuvent être filtrée par tags ou boutiques.</string>
+	<string name="preference_complete_by_list_title">Limit item name completion</string>
+	<string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
+	<string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
 	<string name="preference_reset_quantity">Réinitialiser la quantité</string>
 	<string name="preference_reset_quantity_summary">Réinitialise la quantité quand on rajoute à nouveau des produits</string>
 	<string name="preference_add_for_barcode">Scanneur de code barre</string>

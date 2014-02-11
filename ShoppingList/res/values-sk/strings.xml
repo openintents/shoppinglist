@@ -23,7 +23,8 @@
 	<string name="about_translators">Launchpad Contributions:
   Lacko545 https://launchpad.net/~lackorauch
   Marek Dobransky https://launchpad.net/~marekdobr
-  OpenIntents devs https://launchpad.net/~openintents-devs</string>
+  OpenIntents devs https://launchpad.net/~openintents-devs
+  friedger https://launchpad.net/~friedger</string>
 	
     <!-- Short explanation of the application (max. 80 characters) -->
 	<string name="about_comments">Sledujte svoje nákupné položky pomocou OI Nákupný Zoznam.</string>
@@ -38,6 +39,7 @@
 	<string name="new_list">Nový zoznam</string>
 	<string name="send">Odoslať zoznam</string>
 	<string name="mark_all_items">Označiť všetky položky</string>
+	<string name="unmark_all_items">Unmark all items</string>
 	<string name="empty_list_not_sent">Prázdny zoznam nebol odoslaný.</string>
 	<string name="email_not_available">Nieje dostupná žiadna aplikácia pre odosielanie.</string>
 	<string name="my_shopping_list">Môj nákupný zoznam</string>
@@ -180,7 +182,7 @@
 	<string name="preference_capitalization_dialog_title">Vybrať kapitalizáciu</string> 
 	<string name="preference_hidechecked_title">Skryť zaškrtnuté položky</string>
 	<string name="preference_hidechecked_summary">Ihneď skryť zaškrtnuté položky.</string>
-	<string name="preference_fastscroll_title">Rýchle rolovanie</string>
+	<string name="preference_fastscroll_title">Rýchle prejdite</string>
 	<string name="preference_fastscroll_summary">Prejdite uško sa objaví pri listovaní 35 položiek alebo viac.</string>
 	<string name="preference_showprice_title">Zobraziť cenu</string>
 	<string name="preference_showprice_summary">Zobrazené ako stĺpec navyše v zozname.</string>
@@ -191,6 +193,9 @@
 	<string name="preference_screenlock_summary">Ak zaškrtnuté, zabraňuje uzamykaniu obrazovky.</string>
 	<string name="preference_usefilters_title">Filtre</string>
 	<string name="preference_usefilters_summary">Zoznamy možno filtrovať podľa značiek či skladov.</string>
+	<string name="preference_complete_by_list_title">Limit item name completion</string>
+	<string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
+	<string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
 	<string name="preference_reset_quantity">Obnoviť Kvantitu</string>
 	<string name="preference_reset_quantity_summary">Pri novom pridaní položky obnoví kvantitu.</string>
 	<string name="preference_add_for_barcode">Skener čiarových kódov</string>

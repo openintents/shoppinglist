@@ -21,6 +21,7 @@
 	
 	<!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
+  A S Alam https://launchpad.net/~aalam-users
   Atharva Lath https://launchpad.net/~atharvalath96
   OpenIntents devs https://launchpad.net/~openintents-devs</string>
 	
@@ -37,6 +38,7 @@
 	<string name="new_list">ਨਵੀ ਸੂਚੀ</string>
 	<string name="send">ਸੂਚੀ ਭੇਜੇ</string>
 	<string name="mark_all_items">ਸਾਰੇ ਆਇਟਮ ਮਾਰਕ ਕਰ</string>
+	<string name="unmark_all_items">Unmark all items</string>
 	<string name="empty_list_not_sent">ਖਾਲੀ ਸੂਚੀ ਨਹੀਂ ਭੇਜਿਆ .</string>
 	<string name="email_not_available">ਰ ਸੈਟਿੰਗ ਨਹੀ ਬਦਲੀ</string>
 	<string name="my_shopping_list">ਮੇਰਾ ਖਰੀਦਾਰੀ ਦੀ ਸੂਚੀ</string>
@@ -146,50 +148,53 @@
 	<!-- Button label "OK" -->
 	<string name="ok">OK</string>
 	<!-- Button label "Cancel" -->
-	<string name="cancel">ਰਁਦ ਕਰੋ</string>
-	<string name="use_theme_for_all_lists">ਸਭੀ ਲਿਸਟੋ ਤੇ ਲਿਏ ਯੇ ਥੀਮ ਦਾ ਇਸਤਮਾਲ ਕਰੇ</string>
-	<string name="get_more_themes">ਓਰ ਥੀਮ ਲਾਏ</string>
+	<string name="cancel">ਰੱਦ ਕਰੋ</string>
+	<string name="use_theme_for_all_lists">ਸਭ ਸੂਚੀਆਂ ਲਈ ਇਹ ਥਈਮ ਵਰਤੋਂ</string>
+	<string name="get_more_themes">ਹੋਰ ਥੀਮ ਲਵੋ</string>
 	
 	<!-- preferences -->
 	<string name="preferences">ਸੈਟਿੰਗ</string>
 	
-    <string name="preference_application">ਅਨੁਪ੍ਰਯੋਗ ਸੇਟਿੰਗਸ</string>
+    <string name="preference_application">ਐਪਲੀਕੇਸ਼ਨ ਸੈਟਿੰਗ</string>
     
-	<string name="preference_unchecked_on_top">ਸਿਖਰ ਉੱਤੇ ਅਨਿਯੰਤ੍ਰਿਤ</string>
-	<string name="preference_unchecked_on_top_summary">ਹਮੇਸ਼ਾ ਅਨਿਯੰਤ੍ਰਿਤ ਆਇਟਮ ਪਹਿਲਾ ਸ਼ੋ</string>
-	<string name="preference_fontsize">ਫੋਂਟ ਸਾਈਜ਼</string>
-	<string name="preference_fontsize_summary">ਫੋਂਟ ਸਾਈਜ਼ ਬਦਲੇ</string>
-	<string name="preference_fontsize_dialog_title">ਫੋਂਟ ਸਾਈਜ਼ ਚੁਨੇ</string>
-	<string name="preference_orientation">ਸਥਿਤੀ</string>
-	<string name="preference_orientation_summary">ਬਦਲੀਆਂ ਅਭਿਵਿੰਨਿਆਸ</string>
-	<string name="preference_orientation_dialog_title">ਉਂਮੁਖੀਕਰਣ ਚੁਨੇਂ</string>
-	<string name="preference_sortorder_title">ਕ੍ਰਮ ਪੈਟਰਨ</string>
+	<string name="preference_unchecked_on_top">ਸਿਖਰ ਉੱਤੇ ਨਾ-ਚੁਣੇ</string>
+	<string name="preference_unchecked_on_top_summary">ਨਾ-ਚੁਣੀਆਂ ਆਈਟਮਾਂ ਹਮੇਸ਼ਾ ਪਹਿਲਾਂ ਵੇਖਾਓ</string>
+	<string name="preference_fontsize">ਫੋਂਟ ਆਕਾਰ</string>
+	<string name="preference_fontsize_summary">ਫੋਂਟ ਆਕਾਰ ਬਦਲੋ</string>
+	<string name="preference_fontsize_dialog_title">ਫੋਟ ਆਕਾਰ ਚੁਣੋ</string>
+	<string name="preference_orientation">ਹਾਲਤ</string>
+	<string name="preference_orientation_summary">ਸਥਿਤੀ ਬਦਲੋ</string>
+	<string name="preference_orientation_dialog_title">ਸਥਿਤੀ ਚੁਣੋ</string>
+	<string name="preference_sortorder_title">ਕ੍ਰਮਬੱਧ ਕ੍ਰਮ</string>
 	<string name="preference_sortorder_summary">ਸੂਚੀ ਆਇਟੰਸ  ਦੇ ਸਾਰਟ ਕ੍ਰਮ ਬਦਲੀਆਂ</string>
 	<string name="preference_sortorder_for_pick_title">ਸਾਰਟ ਕ੍ਰਮ - ਕੋਇਲ ਆਇਟਮ</string>
 	<string name="preference_sortorder_for_pick_summary">ਸਾਰਟ ਕ੍ਰਮ - ਕੋਇਲ ਆਇਟਮਉਠਾਓ ਆਇਟਮ ਮੋੜ ਵਿੱਚ ਸੂਚੀ ਆਇਟੰਸ  ਦੇ ਸਾਰਟ ਕ੍ਰਮ ਬਦਲਨਾ.</string>
 	<string name="preference_sortorder_dialog_title">ਸਾਰਟ ਕ੍ਰਮ ਚੁਨੇਂ</string>
 	<string name="preference_sortorder_for_pick_dialog_title">ਚੁੱਕੋ ਆਇਟਮ ਮੋੜ ਲਈ ਸਾਰਟ ਕ੍ਰਮ ਚੁਨੇਂ</string>
 	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
-	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
-	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
+	<string name="preference_sortorder_for_slists_summary">ਖਰੀਦ ਸੂਚੀਆਂ ਦੀ ਕ੍ਰਮਬੱਧ ਢੰਗ ਬਦਲੋ</string>
+	<string name="preference_sortorder_for_slists_dialog_title">ਖਰੀਦ ਸੂਚੀਆਂ ਲਈ ਕ੍ਰਮਬੱਧ ਢੰਗ ਚੁਣੋ</string>
 	<string name="preference_loadlastused_title">ਲੋਡ ਅੰਤਮ ਸੂਚੀ</string>
 	<string name="preference_loadlastused_summary">ਹਮੇਸ਼ਾ ਪਿੱਛਲੀ ਵਾਰ ਵੇਖੀ ਗਈ ਸੂਚੀ  ਦੇ ਨਾਲ ਸ਼ੁਰੂ .</string>
 	<string name="preference_capitalization_title">ਪੂੰਜੀਕਰਣ</string>
-	<string name="preference_capitalization_summary">ਪ੍ਰਵਿਸ਼ਟੀਆਂ ਦਾ ਸਵੈਕਰ ਕੈਪਿਟਲਾਇਜੇਸ਼ਨ</string>
-	<string name="preference_capitalization_dialog_title">ਕੈਪਿਟਲਾਇਜੇਸ਼ਨ ਚੁਨੇਂ</string> 
-	<string name="preference_hidechecked_title">ਜਾਂਚ ਆਇਟਮ ਛਿਪਾਏਂ</string>
+	<string name="preference_capitalization_summary">ਐਂਟਰੀਆਂ ਨੂੰ ਆਪਣੇ-ਆਪ ਹੀ ਵੱਡੇ ਬਣਾਓ</string>
+	<string name="preference_capitalization_dialog_title">ਵੱਡੇ ਅੱਖਰ ਚੁਣੋ</string> 
+	<string name="preference_hidechecked_title">ਨਾ-ਚੁਣੀਆਂ ਆਈਟਮਾਂ ਓਹਲੇ</string>
 	<string name="preference_hidechecked_summary">ਤੁਰੰਤ ਬੰਦ ਦੀ ਜਾਂਚ ਆਇਟਮ ਛਿਪਾਉਣਾ .</string>
 	<string name="preference_fastscroll_title">Fast Scrolling</string>
 	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
-	<string name="preference_showprice_title">ਮੁੱਲ ਦਿਖਾਵਾਂ</string>
+	<string name="preference_showprice_title">ਮੁੱਲ ਵੇਖਾਓ</string>
 	<string name="preference_showprice_summary">Shown as extra column in list.</string>
 	<string name="preference_perstoreprice">Per-store prices</string>
 	<string name="preference_perstoreprice_title">Track per-store prices</string>
 	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
-	<string name="preference_screenlock_title">Disable screen lock</string>
+	<string name="preference_screenlock_title">ਸਕਰੀਨ ਲਾਕ ਆਯੋਗ ਕਰੋ</string>
 	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
-	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_title">ਫਿਲਟਰ</string>
 	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
+	<string name="preference_complete_by_list_title">Limit item name completion</string>
+	<string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
+	<string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
 	<string name="preference_reset_quantity">Reset Quantity</string>
 	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
 	<string name="preference_add_for_barcode">Barcode Scanner</string>
