@@ -267,13 +267,27 @@ public class MainActivity extends Activity {
 
         JSONObject card=new JSONObject();
         String html="<article><section>";
-        html+="<table>";
+        html+="<table class=\"text-auto-size\">";
         String text="";
         sender.refreshCursor();
         String[] items=sender.getItems();
-        for (String item : items) {
-            text+=item+" ";
-            html+="<tr><td>"+item+"</td></tr>";
+        int count=items.length;
+        int rightSideStart=count/2;
+        if ( count>0 && (count % 2 == 1)) {
+            rightSideStart++;
+        }
+        if (debug) Log.d(TAG,"rightSideStart="+rightSideStart);
+        for (int i=0; i<rightSideStart; i++) {
+            String item1=items[i];
+            String item2="";
+            int rightSide=i+rightSideStart;
+            text+=item1+" ";
+            if ((count>1) && (rightSide<count)) {
+                item2=items[rightSide];
+                text+=item2+" ";
+            }
+            if (debug) Log.d(TAG, "i="+i+" count="+count+" item1="+item1+" item2="+item2);
+            html+="<tr><td>"+item1+"</td><td>"+item2+"</td></tr>";
         }
         html+="</table></section><footer>\n<p>OI Shopping List</p>\n</footer></article>";
         card.put("html", html);

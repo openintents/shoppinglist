@@ -80,7 +80,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
 				+ "skin_color INTEGER," // V2
 				+ "skin_color_strikethrough INTEGER," // V2
 				+ "store_filter INTEGER DEFAULT -1," // V12
-				+ "tags_filter VARCHAR" // V12
+				+ "tags_filter VARCHAR," // V12
                 + "items_sort INTEGER" // V13
 				+ ");");
 		db.execSQL("CREATE TABLE contains (" + "_id INTEGER PRIMARY KEY," // V1
