@@ -1,6 +1,6 @@
 ----------------
 release 1.8
-date: 2013-12-??
+date: 2014-02-11
 
 - Add OI Shopping List to the "share" menu of other apps to import text lists. (RuthAlk)
 - Unmark All context menu item
@@ -40,17 +40,6 @@ Thanks to Google Code-in for many of the following patches:
 - Update totals after changing quantity with Quick Edit.
 
 - new icons and translations by Google Code-in students
-
-----------------
-release 1.5
-date: 2011-12-08
-
-- support for Android 4.0
-- new setting for quick edit mode for quantity and priority (Android 2.2 and higher)
-- new setting to keep screen orientation (issue 402, Google code-in task by Gautam)
-- new setting to disable screen lock (Google Code-in task by Kido)
-- new setting to reset quantity when readding items (Google Code-in task by Shuhao)
-- many new translations by Google Code-in students
 
 ----------------
 For the complete list of changes and a list of frequently asked questions, please visit:

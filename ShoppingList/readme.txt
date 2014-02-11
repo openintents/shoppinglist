@@ -23,7 +23,7 @@ To obtain the current release, visit
 
 ----------------
 release 1.8
-date: 2013-12-??
+date: 2014-02-11
 
 - Add OI Shopping List to the "share" menu of other apps to import text lists. (RuthAlk)
 - Unmark All context menu item
