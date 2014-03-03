@@ -627,7 +627,11 @@ public class ShoppingItemsView extends ListView {
 			 } else {
 				 mFilter = query;
 			 }
+                         if (mToastBar != null) {
+                             mToastBar.hide(true /* animated */, false /* actionClicked */);
+                         }
 			 fillItems(mCursorActivity, mListId);
+
 			// invalidate();
 			 return true;
 	     }
@@ -636,6 +640,9 @@ public class ShoppingItemsView extends ListView {
 			     insertNewItem(mCursorActivity, query, null, null, null, null);
 			     SearchViewCompat.setQuery(mSearchView, "", false);
 			 }
+                         if (mToastBar != null) {
+                             mToastBar.hide(true /* animated */, false /* actionClicked */);
+                         }
 	         return true;
 	     }	
 	}
@@ -644,6 +651,9 @@ public class ShoppingItemsView extends ListView {
         	mInSearch = false;
         	mFilter = null;
         	mMode = mModeBeforeSearch;
+                if (mToastBar != null) {
+                        mToastBar.hide(true /* animated */, false /* actionClicked */);
+                }
         	fillItems(mCursorActivity, mListId);
         	// invalidate();
             return false;
