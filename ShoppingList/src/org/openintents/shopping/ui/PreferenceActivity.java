@@ -3,6 +3,7 @@ package org.openintents.shopping.ui;
 import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.shopping.library.provider.ShoppingContract.Lists;
+import org.openintents.shopping.library.util.ShoppingUtils;
 import org.openintents.util.BackupManagerWrapper;
 import org.openintents.util.IntentUtils;
 
@@ -22,7 +23,8 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.support.v2.os.Build;
+import android.os.Build;
+import android.text.InputType;
 import android.text.method.KeyListener;
 import android.text.method.TextKeyListener;
 import android.widget.Toast;
@@ -108,6 +110,10 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 	public static final boolean PREFS_USE_FILTERS_DEFAULT = false;
 	public static final String PREFS_CURRENT_LIST_COMPLETE = "autocomplete_only_this_list";
 	public static final boolean PREFS_CURRENT_LIST_COMPLETE_DEFAULT = false;
+	public static final String PREFS_SORT_PER_LIST = "perListSort";
+	public static final boolean PREFS_SORT_PER_LIST_DEFAULT = false;
+	public static final String PREFS_HOLO_SEARCH = "holosearch";
+	public static final boolean PREFS_HOLO_SEARCH_DEFAULT = true;
 
 	public static final String PREFS_RESET_ALL_SETTINGS = "reset_all_settings";
 
@@ -119,6 +125,10 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 			TextKeyListener.Capitalize.NONE,
 			TextKeyListener.Capitalize.SENTENCES,
 			TextKeyListener.Capitalize.WORDS };
+        private static final int smCapitalizationInputTypes[] = {
+            InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL, 
+            InputType.TYPE_TEXT_FLAG_CAP_SENTENCES,
+            InputType.TYPE_TEXT_FLAG_CAP_WORDS };
 
 	private ListPreference mPrioSubtotal;
 	private CheckBoxPreference mIncludesChecked;
@@ -142,14 +152,6 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 		mPickItemsSort = (ListPreference) findPreference(PREFS_PICKITEMS_SORTORDER);
 
 		mIncludesChecked = (CheckBoxPreference) findPreference(PREFS_PRIOSUBINCLCHECKED);
-
-		// Cupcake has problems with Quick Edit Mode. Donut untested.
-		CheckBoxPreference quickedit = (CheckBoxPreference) findPreference(PREFS_QUICKEDITMODE);
-		quickedit
-				.setEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO);
-		CheckBoxPreference usefilters = (CheckBoxPreference) findPreference(PREFS_USE_FILTERS);
-		usefilters
-				.setEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO);
 
 		SharedPreferences shared = getPreferenceScreen().getSharedPreferences();
 		updatePrioSubtotalSummary(shared);
@@ -241,6 +243,8 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 												PREFS_USE_FILTERS_DEFAULT);
 										editor.putBoolean(PREFS_RESETQUANTITY,
 												PREFS_RESETQUANTITY_DEFAULT);
+										editor.putBoolean(PREFS_HOLO_SEARCH,
+												PREFS_HOLO_SEARCH_DEFAULT);
 										// Appearance
 										editor.putBoolean(PREFS_SHOW_PRICE,
 												PREFS_SHOW_PRICE_DEFAULT);
@@ -273,6 +277,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 												PREFS_PRIOSUBINCLCHECKED_DEFAULT);
 
                         editor.putBoolean(PREFS_CURRENT_LIST_COMPLETE, PREFS_CURRENT_LIST_COMPLETE_DEFAULT);
+                        editor.putBoolean(PREFS_SORT_PER_LIST, PREFS_SORT_PER_LIST_DEFAULT);
 
 										editor.commit();
 
@@ -368,11 +373,25 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 		return using;
 	}
 
-	public static boolean getPickItemsInListFromPrefs(Context context) {
+	public static boolean getUsingHoloSearchFromPrefs(Context context) {
 		boolean using = PreferenceManager.getDefaultSharedPreferences(context)
-				.getBoolean(PREFS_PICKITEMSINLIST,
-						PREFS_PICKITEMSINLIST_DEFAULT);
+				.getBoolean(PREFS_HOLO_SEARCH, PREFS_HOLO_SEARCH_DEFAULT);
 		return using;
+	}
+
+	public static boolean getPickItemsInListFromPrefs(Context context) {
+		// boolean using = PreferenceManager.getDefaultSharedPreferences(context)
+		//		.getBoolean(PREFS_PICKITEMSINLIST,
+		//				PREFS_PICKITEMSINLIST_DEFAULT);
+		// return using;
+		return true;
+	}
+	
+	public static boolean getUsingPerListSortFromPrefs(Context context) {
+		boolean perListSort = PreferenceManager.getDefaultSharedPreferences(context)
+				.getBoolean(PREFS_SORT_PER_LIST,
+						PREFS_SORT_PER_LIST_DEFAULT);
+		return perListSort;
 	}
 
 	/**
@@ -382,7 +401,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 	 * @param context
 	 *            The context to grab the preferences from.
 	 */
-	static public int getSortOrderIndexFromPrefs(Context context, int mode) {
+	static public int getSortOrderIndexFromPrefs(Context context, int mode, long listId) {
 		int sortOrder = 0;
 
 		if (mode != ShoppingActivity.MODE_IN_SHOP) {
@@ -411,6 +430,23 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 		}
 
 		if (mode == ShoppingActivity.MODE_IN_SHOP) {
+			
+			boolean set = false;
+			if (PreferenceActivity.getUsingPerListSortFromPrefs(context)) {
+				String sortOrderStr = ShoppingUtils.getListSortOrder(context, 
+						listId);
+				if (sortOrderStr != null) 
+					try {
+						sortOrder = Integer.parseInt(sortOrderStr);
+						set = true;
+					} catch (NumberFormatException e) {
+						// Guess somebody messed with the preferences and put a string
+						// into
+						// this field. We'll use the default value then.
+					}
+			}
+				
+			if (set == false)
 			try {
 				sortOrder = Integer.parseInt(PreferenceManager
 						.getDefaultSharedPreferences(context).getString(
@@ -429,12 +465,22 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 		// Value out of range - somebody messed with the preferences.
 		return 0;
 	}
+	
+	static public int getSortOrderIndexFromPrefs(Context context, int mode) {
+		long listId = ShoppingUtils.getDefaultList(context);
+		return getSortOrderIndexFromPrefs(context, mode, listId);
+	}
 
 	static public String getSortOrderFromPrefs(Context context, int mode) {
 		int index = getSortOrderIndexFromPrefs(context, mode);
 		return Contains.SORT_ORDERS[index];
 	}
 
+	static public String getSortOrderFromPrefs(Context context, int mode, long listId) {
+		int index = getSortOrderIndexFromPrefs(context, mode, listId);
+		return Contains.SORT_ORDERS[index];
+	}
+	
 	static public boolean prefsStatusAffectsSort(Context context, int mode) {
 		int index = getSortOrderIndexFromPrefs(context, mode);
 		boolean affects = Contains.StatusAffectsSortOrder[index];
@@ -525,6 +571,35 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 
 		return new TextKeyListener(smCapitalizationSettings[capitalization],
 				true);
+	}
+
+	/**
+	 * Returns InputType for the search bar based on the capitalization
+	 * preferences of the user.
+	 * 
+	 * @ param context The context to grab the preferences from.
+	 */
+	static public int getSearchInputTypeFromPrefs(
+			Context context) {
+		int capitalization = PREFS_CAPITALIZATION_DEFAULT;
+		try {
+			capitalization = Integer.parseInt(PreferenceManager
+					.getDefaultSharedPreferences(context).getString(
+							PREFS_CAPITALIZATION,
+							Integer.toString(PREFS_CAPITALIZATION_DEFAULT)));
+		} catch (NumberFormatException e) {
+			// Guess somebody messed with the preferences and put a string
+			// into this
+			// field. We'll use the default value then.
+		}
+
+		if (capitalization < 0
+				|| capitalization > smCapitalizationSettings.length) {
+			// Value out of range - somebody messed with the preferences.
+			capitalization = PREFS_CAPITALIZATION_DEFAULT;
+		}
+
+		return smCapitalizationInputTypes[capitalization];
 	}
 
 	public static boolean getThemeSetForAll(Context context) {

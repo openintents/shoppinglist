@@ -30,6 +30,7 @@ public abstract class ShoppingContract {
 	private static final String TAG = "Shopping";
 	public static final String ITEM_TYPE = "vnd.android.cursor.item/vnd.openintents.shopping.item";
 	public static final String QUERY_ITEMS_WITH_STATE = "itemsWithState";
+	public static final String AUTHORITY = "org.openintents.shopping";
 
 	/**
 	 * Items that can be put into shopping lists.
