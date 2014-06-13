@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+ 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/background"
+	android:orientation="vertical" 
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	>
+	
+ 	<LinearLayout 
+ 		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+		
+		<View
+			android:layout_width="48dip"
+			android:layout_height="48dip" 				
+			android:background="@android:drawable/ic_menu_mylocation"
+			android:layout_marginLeft="3dip"
+			android:layout_marginRight="1dip" 
+			/>
+		<TextView
+		    android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content" 
+		    android:text="@string/add_location_alert_description"
+		    android:layout_marginTop="2dip"
+			/>
+		
+	</LinearLayout>
+
+		
+	<Button android:id="@+id/picklocation" 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		android:text="@string/pick_location" 
+		android:layout_marginTop="3dip"
+		android:layout_marginBottom="1dip" />
+		<!-- 
+	<Button android:id="@+id/addlocationalert" 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/add_location_alert" /> -->
+		
+	<TextView android:id="@+id/alert_added_text"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" 
+		 />
+	
+	<TextView android:id="@+id/location" 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" />
+	<TextView android:id="@+id/tags"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content" />
+		
+	<Button android:id="@+id/viewalerts" 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/view_alerts"
+		android:layout_marginBottom="10dip" />
+		
+</LinearLayout>

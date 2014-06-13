@@ -1,0 +1,2 @@
+include ':ShoppingListLibrary'
+include ':ShoppingList'

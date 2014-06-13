@@ -1,0 +1,33 @@
+apply plugin: 'android'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.1.0"
+
+    defaultConfig {
+        applicationId "org.openintents.shopping"
+        minSdkVersion 7
+        targetSdkVersion 19
+
+        testApplicationId "org.openintents.shopping.test"
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
+    }
+
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile project(':ShoppingListLibrary')
+    compile 'org.openintents:distribution-lib:1.0.+'
+    compile 'com.android.support:appcompat-v7:+'
+    compile files('libs/sensorsimulator-lib.jar')
+    compile files('libs/OIShoppingListMyBackupPro.jar')
+    androidTestCompile 'com.jayway.android.robotium:robotium-solo:4.3.1'
+    androidTestCompile 'com.jayway.android.robotium:robotium-solo:3.1'
+    androidTestCompile files('libs/polidea_test_runner_1.2.jar')
+}

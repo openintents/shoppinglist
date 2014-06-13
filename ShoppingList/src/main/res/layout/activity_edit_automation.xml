@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+	>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+    <LinearLayout
+	    android:orientation="horizontal"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    >
+	    <ImageView
+	    	android:src="@drawable/ic_launcher_shoppinglist"
+	    	android:layout_height="wrap_content"
+	    	android:layout_width="wrap_content"
+	        android:layout_gravity="center_vertical"
+	    	/>
+	    <TextView android:id="@+id/command"
+	    	android:layout_height="wrap_content"
+	        android:layout_width="wrap_content"
+	        android:layout_gravity="center_vertical"
+		    android:textAppearance="?android:attr/textAppearanceLarge"
+		    />
+	</LinearLayout>
+    
+    <TextView android:id="@+id/select_action"
+    	android:text="@string/label_select_action"
+    	android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_vertical"
+	    android:textAppearance="?android:attr/textAppearanceLarge"
+	    android:layout_marginTop="10dip"
+	    />
+	<Spinner android:id="@+id/spinner_action"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+        android:drawSelectorOnTop="true" />
+		
+    <TextView android:id="@+id/select_list"
+    	android:text="@string/label_select_list"
+    	android:layout_height="fill_parent"
+        android:layout_width="wrap_content"
+	    android:textAppearance="?android:attr/textAppearanceLarge"
+	    android:layout_marginTop="10dip"
+	    />
+        
+	<Button android:id="@+id/button_list"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"  />
+		
+    <LinearLayout
+	    android:orientation="horizontal"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:background="@android:color/darker_gray"
+	    android:layout_marginTop="15dip"
+	    >
+	    
+		<Button android:id="@+id/button_ok"
+			android:text="@android:string/ok"
+			android:layout_width="0dip"
+			android:layout_weight="1"
+			android:layout_height="wrap_content"
+	   		android:layout_marginTop="2dip"
+	   		android:layout_marginBottom="2dip"  />
+			
+		<Button android:id="@+id/button_cancel"
+			android:text="@android:string/cancel"
+			android:layout_width="0dip"
+			android:layout_weight="1"
+			android:layout_height="wrap_content"
+	    	android:layout_marginTop="2dip"
+	   		android:layout_marginBottom="2dip"  />
+	</LinearLayout>
+</LinearLayout>
+</ScrollView>
