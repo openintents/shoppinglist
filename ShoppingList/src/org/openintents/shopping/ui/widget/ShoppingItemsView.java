@@ -17,6 +17,9 @@ import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;
 import org.openintents.shopping.ui.PreferenceActivity;
 import org.openintents.shopping.ui.ShoppingActivity;
+import org.openintents.shopping.ui.ToastBarMultipleItemStatusOperation;
+import org.openintents.shopping.ui.ToastBarSingleItemStatusOperation;
+import org.openintents.shopping.ui.UndoListener;
 import org.openintents.shopping.ui.dialog.EditItemDialog;
 
 import android.app.Activity;
@@ -39,7 +42,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.v2.os.Build;
+import android.os.Build;
 import android.os.Handler;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -68,6 +71,7 @@ import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
+import android.support.v4.widget.SearchViewCompat;
 
 /**
  * View to show a shopping list with its items
@@ -100,6 +104,7 @@ public class ShoppingItemsView extends ListView {
 	public int mLastListPosition;
 	public int mLastListTop;
 	public long mNumChecked = 0;
+	public long mNumUnchecked = 0;
 	
 	private ThemeAttributes mThemeAttributes;
 	private PackageManager mPackageManager;
@@ -109,6 +114,9 @@ public class ShoppingItemsView extends ListView {
 			.getNumberInstance(Locale.ENGLISH);
 
 	public int mMode = ShoppingActivity.MODE_IN_SHOP;
+	private String mFilter = null;
+	private boolean mInSearch = false;
+	private int mModeBeforeSearch; 
 	public Cursor mCursorItems = null;
 	
 	private Activity mCursorActivity = null;
@@ -147,7 +155,9 @@ public class ShoppingItemsView extends ListView {
 	private DragListener mDragListener;
 	private DropListener mDropListener;
 
-	private ActionBarListener mActionBarListener;
+	private ActionBarListener mActionBarListener = null;
+	private UndoListener mUndoListener = null;
+	private ActionableToastBar mToastBar;
 	
 	/**
 	 * Extend the SimpleCursorAdapter to strike through items. if STATUS ==
@@ -603,6 +613,69 @@ public class ShoppingItemsView extends ListView {
 
 	}
 
+	private class searchQueryListener extends SearchViewCompat.OnQueryTextListenerCompat {
+		 public boolean onQueryTextChange(String query) {
+			 if (SearchViewCompat.isIconified(mSearchView))
+				 return false;
+			 if (mInSearch == false) {
+			    mInSearch = true;
+			    mModeBeforeSearch = mMode;
+			    mMode = ShoppingActivity.MODE_ADD_ITEMS;
+			 }
+			 if (query.length() == 0) {
+				 mFilter = null;				 
+			 } else {
+				 mFilter = query;
+			 }
+                         if (mToastBar != null) {
+                             mToastBar.hide(true /* animated */, false /* actionClicked */);
+                         }
+			 fillItems(mCursorActivity, mListId);
+
+			// invalidate();
+			 return true;
+	     }
+		 public boolean onQueryTextSubmit(String query) {
+			 if (query.length() > 0) {
+			     insertNewItem(mCursorActivity, query, null, null, null, null);
+			     SearchViewCompat.setQuery(mSearchView, "", false);
+			 }
+                         if (mToastBar != null) {
+                             mToastBar.hide(true /* animated */, false /* actionClicked */);
+                         }
+	         return true;
+	     }	
+	}
+	private class searchDismissedListener extends SearchViewCompat.OnCloseListenerCompat {
+        public boolean onClose() {
+        	mInSearch = false;
+        	mFilter = null;
+        	mMode = mModeBeforeSearch;
+                if (mToastBar != null) {
+                        mToastBar.hide(true /* animated */, false /* actionClicked */);
+                }
+        	fillItems(mCursorActivity, mListId);
+        	// invalidate();
+            return false;
+        }	
+	}
+	
+	private View mSearchView = null;
+	
+	public View getSearchView() {
+                Context context = getContext();
+		if (PreferenceActivity.getUsingHoloSearchFromPrefs(context)) {
+			mSearchView = SearchViewCompat.newSearchView(mCursorActivity);
+			if (mSearchView != null){ 
+				SearchViewCompat.setSubmitButtonEnabled(mSearchView, true);
+                                SearchViewCompat.setInputType(mSearchView, PreferenceActivity.getSearchInputTypeFromPrefs(context));
+				SearchViewCompat.setOnQueryTextListener(mSearchView, new searchQueryListener());
+				SearchViewCompat.setOnCloseListener(mSearchView, new searchDismissedListener());
+			}
+		}
+		return mSearchView;
+	}
+	
 	private void disposeItemsCursor () {
 		if (mCursorActivity != null) {
 			mCursorActivity.stopManagingCursor(mCursorItems);
@@ -636,12 +709,8 @@ public class ShoppingItemsView extends ListView {
 		}
 
 	};
-	
+
 	private TextView mCountTextView;
-	/**
-	 * 3-state flag for toggle all: true = all marked, false = all unmarked, null = neither nor
-	 */
-	private Boolean mMarkedAllStatus;
 
 	public ShoppingItemsView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -667,8 +736,13 @@ public class ShoppingItemsView extends ListView {
 		mDefaultDivider = getDivider();
 	}
 
+
 	public void setActionBarListener(ActionBarListener listener) {
 		mActionBarListener = listener;
+	}
+	
+	public void setUndoListener(UndoListener listener) {
+		mUndoListener = listener;
 	}
 
 	public void onResume() {
@@ -696,11 +770,15 @@ public class ShoppingItemsView extends ListView {
 
 		mListId = listId;
 		String sortOrder = PreferenceActivity.getSortOrderFromPrefs(this
-				.getContext(), mMode);
+				.getContext(), mMode, listId);
 		boolean hideBought = PreferenceActivity
 				.getHideCheckedItemsFromPrefs(this.getContext());
 		String selection;
-		if (mMode == ShoppingActivity.MODE_IN_SHOP) {
+		String[] selection_args = new String[] { String.valueOf(listId)};
+		if (mFilter != null) {
+			selection = "list_id = ? AND " + ShoppingContract.ContainsFull.ITEM_NAME + 
+					" like '%" + mFilter + "%'";
+		} else if (mMode == ShoppingActivity.MODE_IN_SHOP) {
 			if (hideBought) {
 				selection = "list_id = ? AND " + ShoppingContract.Contains.STATUS
 						+ " == " + ShoppingContract.Status.WANT_TO_BUY;
@@ -720,7 +798,7 @@ public class ShoppingItemsView extends ListView {
 		// in currently selected shopping list.
 		mCursorItems = getContext().getContentResolver().query(
 				ContainsFull.CONTENT_URI, ShoppingActivity.mStringItems,
-				selection, new String[] { String.valueOf(listId) }, sortOrder);
+				selection, selection_args, sortOrder);
 
 		// Activate the following for a striped list.
 		// setupListStripes(mListItems, this);
@@ -784,7 +862,7 @@ public class ShoppingItemsView extends ListView {
 
 		return mCursorItems;
 	}
-
+	
 	/**
 	 * 
 	 */
@@ -946,8 +1024,13 @@ public class ShoppingItemsView extends ListView {
 			mTextSuffixChecked = mThemeAttributes
 					.getString(ThemeShoppingList.textSuffixChecked);
 
-			int divider = mThemeAttributes.getInteger(ThemeShoppingList.divider, 0);
-
+			// field was named divider, until a conflict with the appcompat library 
+			// forced us to rename it. To continue to support old themes, check for
+			// shopping_divider first, but if it's not found, check for divider also.
+			int divider = mThemeAttributes.getInteger(ThemeShoppingList.shopping_divider, 0);
+			if (divider == 0)
+				divider = mThemeAttributes.getInteger(ThemeShoppingList.divider, 0);
+			
 			Drawable div = null;
 			if (divider > 0) {
 				div = getResources().getDrawable(divider);
@@ -1076,6 +1159,13 @@ public class ShoppingItemsView extends ListView {
 	 * 
 	 */
 	public void toggleAllItems(boolean on){
+		int op_type = on ? ToastBarMultipleItemStatusOperation.MARK_ALL : ToastBarMultipleItemStatusOperation.UNMARK_ALL;
+		ToastBarMultipleItemStatusOperation op = null;
+		
+		if (mUndoListener != null)
+			op = new ToastBarMultipleItemStatusOperation(this, mCursorActivity, 
+				op_type, mListId, false);
+		
 		for(int i=0;i<mCursorItems.getCount();i++){
 			mCursorItems.moveToPosition(i);
 			
@@ -1118,7 +1208,8 @@ public class ShoppingItemsView extends ListView {
 		requery();
 
 		invalidate();	
-		mMarkedAllStatus = on;
+		if (mUndoListener != null)
+			mUndoListener.onUndoAvailable(op);
 	}
 	
 	public void toggleItemBought(int position) {
@@ -1150,54 +1241,57 @@ public class ShoppingItemsView extends ListView {
 			} // else old is REMOVE_FROM_LIST or BOUGHT, new is WANT_TO_BUY, which is the default.
 		} 
 		
+		String item_id = mCursorItems.getString(0);
 		ContentValues values = new ContentValues();
 		values.put(ShoppingContract.Contains.STATUS, newstatus);
 		if (debug) Log.d(TAG, "update row " + mCursorItems.getString(0) + ", newstatus "
 				+ newstatus);
 		getContext().getContentResolver().update(
 				Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI,
-						mCursorItems.getString(0)), values, null, null);
+						item_id), values, null, null);
+		boolean affectsSort = PreferenceActivity.prefsStatusAffectsSort(getContext(),  mMode);
+		boolean hidesItem = true /* TODO */;
+		if (mUndoListener != null && (affectsSort || hidesItem)) {
+			String item_name = mCursorItems.getString(ShoppingActivity.mStringItemsITEMNAME);
+			ToastBarSingleItemStatusOperation op = new ToastBarSingleItemStatusOperation(this, getContext(),
+					item_id, item_name, oldstatus, newstatus, 0, false);
+			mUndoListener.onUndoAvailable(op);
+		}
+
 		requery();
 
-		if (PreferenceActivity.prefsStatusAffectsSort(getContext(),  mMode)) {
+		if (affectsSort) {
 			invalidate();		
 		} 
-		
-		mMarkedAllStatus = null;
-	}
-
-	public Boolean getMarkedAllStatus(){
-		return mMarkedAllStatus;
 	}
 	
 	public boolean cleanupList() {
 
 		boolean nothingdeleted = true;
-		if (false) {
-			// by deleteing items
+		
+		ToastBarMultipleItemStatusOperation op = null;
+		if (mUndoListener != null)
+			op = new ToastBarMultipleItemStatusOperation(this, mCursorActivity, 
+					ToastBarMultipleItemStatusOperation.CLEAN_LIST, mListId, false);
+		
 
-			nothingdeleted = getContext().getContentResolver().delete(
-					ShoppingContract.Contains.CONTENT_URI,
-					ShoppingContract.Contains.LIST_ID + " = " + mListId + " AND "
-							+ ShoppingContract.Contains.STATUS + " = "
-							+ ShoppingContract.Status.BOUGHT, null) == 0;
-
-		} else {
-			// by changing state
-			ContentValues values = new ContentValues();
-			values.put(Contains.STATUS, Status.REMOVED_FROM_LIST);
-			if (PreferenceActivity.getResetQuantity(getContext()))
-				values.put(Contains.QUANTITY, "");
-			nothingdeleted = getContext().getContentResolver().update(
-					Contains.CONTENT_URI,
-					values,
-					ShoppingContract.Contains.LIST_ID + " = " + mListId + " AND "
-							+ ShoppingContract.Contains.STATUS + " = "
-							+ ShoppingContract.Status.BOUGHT, null) == 0;
-		}
-
+		// by changing state
+		ContentValues values = new ContentValues();
+		values.put(Contains.STATUS, Status.REMOVED_FROM_LIST);
+		if (PreferenceActivity.getResetQuantity(getContext()))
+			values.put(Contains.QUANTITY, "");
+		nothingdeleted = getContext().getContentResolver().update(
+				Contains.CONTENT_URI,
+				values,
+				ShoppingContract.Contains.LIST_ID + " = " + mListId + " AND "
+						+ ShoppingContract.Contains.STATUS + " = "
+						+ ShoppingContract.Status.BOUGHT, null) == 0;
+		
 		requery();
 
+		if (mUndoListener != null)
+			mUndoListener.onUndoAvailable(op);
+		
 		return !nothingdeleted;
 
 	}
@@ -1321,7 +1415,7 @@ public class ShoppingItemsView extends ListView {
 		if (debug)
 			Log.d(TAG, "updateTotal()");
 		
-		mNumChecked = 0;
+		mNumChecked = mNumUnchecked = 0;
 		long total = 0;
 		long totalchecked = 0;
 		long priority_total = 0;
@@ -1329,64 +1423,6 @@ public class ShoppingItemsView extends ListView {
 				.getContext());
 		boolean prioIncludesChecked = 
 			PreferenceActivity.prioritySubtotalIncludesChecked(this.getContext());
-
-		if (false && debug) 
-		{
-			/* This is the old way of computing the totals. Leaving it here for a bit 
-			 * in case some issue comes up. To check whether there is a discrepancy 
-			 * between the old way and the new way with your data, you can change the 
-			 * above false to true, and look in the logcat for two totals.
-			 * 
-			 *  There are two known sources of discrepancy:
-			 *  
-			 *  (1) when "Hide checked items" is set, the old way does not include 
-			 *  checked items in any totals, while the new way does. This is intentional.
-			 *  
-			 *  (2) A discrepancy measured in cents can be caused by a rounding bug in 
-			 *  OI Convert CSV when importing prices from HandyShopper. This bug has 
-			 *  since been fixed. It should be possible to fix your data by exporting
-			 *  in HandyShopper csv format and re-importing that file.
-			 */
-			if (mCursorItems.isClosed()) {
-				// Can happen through onShake() in ShoppingActivity.
-				return;
-			}
-			mCursorItems.moveToPosition(-1);
-				while (mCursorItems.moveToNext()) {
-			long item_status = mCursorItems.getLong(ShoppingActivity.mStringItemsSTATUS);
-			boolean isChecked = (item_status == ShoppingContract.Status.BOUGHT);
-
-			if (item_status == ShoppingContract.Status.REMOVED_FROM_LIST)
-				continue;
-			
-			long price = getQuantityPrice(mCursorItems);
-			total += price;
-			
-			if (isChecked) {
-				totalchecked += price;
-				mNumChecked++;
-			}
-			
-			if (priority_threshold != 0 && (prioIncludesChecked || !isChecked)) {
-				String priority_str = mCursorItems.getString(ShoppingActivity.mStringItemsPRIORITY);
-				if (priority_str != null) {
-					int priority = 0;
-					try {
-						priority = Integer.parseInt(priority_str);
-					} catch (NumberFormatException e) {
-						// pretend it's a 0 then...
-					}
-					if (priority != 0 && priority <= priority_threshold) {
-						priority_total += price;
-					}
-				}
-			}		
-			
-		}
-		if (debug) Log.d(TAG, "Total (old way): " + total + ", Checked: " + totalchecked + "(#" + mNumChecked + ")");
-		
-		total = priority_total = mNumChecked = totalchecked = 0;
-		}
 
 		Cursor total_cursor = getContext().getContentResolver().query(
 				Subtotals.CONTENT_URI.buildUpon().appendPath("" + mListId).build(),
@@ -1404,7 +1440,9 @@ public class ShoppingItemsView extends ListView {
 	
 			if (isChecked) {
 				totalchecked += price;
-				mNumChecked += total_cursor.getLong(Subtotals.COUNT_INDEX);;
+				mNumChecked += total_cursor.getLong(Subtotals.COUNT_INDEX);
+			} else if (item_status == ShoppingContract.Status.WANT_TO_BUY) {
+				mNumUnchecked += total_cursor.getLong(Subtotals.COUNT_INDEX);
 			}
 	
 			if (priority_threshold != 0 && (prioIncludesChecked || !isChecked)) {
@@ -1429,7 +1467,7 @@ public class ShoppingItemsView extends ListView {
 
 		// Update ActionBar in ShoppingActivity
 		// for the "Clean up list" command
-		if (mActionBarListener != null) {
+		if (mActionBarListener != null && !mInSearch) {
 			mActionBarListener.updateActionBar();
 		}
 
@@ -1515,6 +1553,13 @@ public class ShoppingItemsView extends ListView {
 
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
+
+	    if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+	        if (mToastBar != null && !mToastBar.isEventInToastBar(ev)) {
+	            mToastBar.hide(true /* animated */, false /* actionClicked */);
+	        }
+	    }
+
 		if (mDragAndDropEnabled ) {
 			if (mDragListener != null || mDropListener != null) {
 				switch (ev.getAction()) {
@@ -1644,6 +1689,7 @@ public class ShoppingItemsView extends ListView {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
+		
 		if ((mDragListener != null || mDropListener != null)
 				&& mDragView != null) {
 			int action = ev.getAction();
@@ -1779,4 +1825,9 @@ public class ShoppingItemsView extends ListView {
 	public interface ActionBarListener {
 		void updateActionBar();
 	}
+
+	public void setToastBar(ActionableToastBar toastBar) {
+		mToastBar = toastBar;
+	}
+	
 }

@@ -7,7 +7,7 @@ import org.openintents.shopping.ui.widget.QuickSelectMenu.OnItemSelectedListener
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
-import android.support.v2.os.Build;
+import android.os.Build;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,52 +18,25 @@ import android.widget.PopupMenu;
  */
 public class QuickSelectMenu {
 
-	android.widget.PopupMenu mImplPlatform = null;
-	org.openintents.shopping.ui.widget.backport.PopupMenu mImplBackport = null;
+	android.support.v7.widget.PopupMenu mImplPlatform = null;
 
-	private enum ImplMode {
-		PLATFORM, BACKPORT, NONE
-	};
-
-	ImplMode mMode = ImplMode.NONE;
 	private OnItemSelectedListener mItemSelectedListener;
 
 	public QuickSelectMenu(Context context, View anchor) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			mMode = ImplMode.PLATFORM;
-			mImplPlatform = new android.widget.PopupMenu(context, anchor);
+			mImplPlatform = new android.support.v7.widget.PopupMenu(context, anchor);
 			mImplPlatform
-					.setOnMenuItemClickListener(new android.widget.PopupMenu.OnMenuItemClickListener() {
+					.setOnMenuItemClickListener(new android.support.v7.widget.PopupMenu.OnMenuItemClickListener() {
 						@Override
 						public boolean onMenuItemClick(MenuItem item) {
 							return onMenuItemClickImpl(item);
 						}
 					});
-		} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
-			mMode = ImplMode.BACKPORT;
-			mImplBackport = new org.openintents.shopping.ui.widget.backport.PopupMenu(
-					context, anchor);
-			mImplBackport
-					.setOnMenuItemClickListener(new org.openintents.shopping.ui.widget.backport.PopupMenu.OnMenuItemClickListener() {
-						@Override
-						public boolean onMenuItemClick(MenuItem item) {
-							return onMenuItemClickImpl(item);
-						}
-					});
-		}
 	}
 
 	// not sure if we want to expose this or just an add() method.
 	public Menu getMenu() {
-		if (mMode == ImplMode.PLATFORM) {
 			Menu menu = mImplPlatform.getMenu();
 			return menu;
-		}
-		if (mMode == ImplMode.BACKPORT) {
-			Menu menu = mImplBackport.getMenu();
-			return menu;
-		}
-		return null;
 	}
 
 	/**
@@ -86,12 +59,7 @@ public class QuickSelectMenu {
 	}
 
 	public void show() {
-		if (mMode == ImplMode.PLATFORM) {
 			mImplPlatform.show();
-		}
-		if (mMode == ImplMode.BACKPORT) {
-			mImplBackport.show();
-		}
 	}
 
 	// popup.setOnMenuItemClickListener(new

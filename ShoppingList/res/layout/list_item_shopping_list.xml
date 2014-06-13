@@ -19,8 +19,8 @@
     android:background="?android:attr/activatedBackgroundIndicator"
 	>
         <TextView android:id="@+id/text1"
+            android:textAppearance="?android:attr/textAppearanceListItemSmall"
             android:layout_width="fill_parent"
-            android:textSize="18sp"
             android:padding="10dip"
             android:layout_height="wrap_content"/>
 </FrameLayout>

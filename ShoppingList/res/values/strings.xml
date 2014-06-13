@@ -83,7 +83,9 @@
 	
 	<string name="menu_pick_items">Pick items</string>
 	<string name="menu_start_shopping">Shopping</string>
-	
+	<string name="menu_sort_list">Sort</string>
+	<string name="menu_search_add">Search / Add items</string>
+		
 	<!-- Title supplement. '%s' is the name of the current list. -->
 	<string name="pick_items_title">%s - Pick items</string>
 	
@@ -104,6 +106,7 @@
 	<string name="note">Note</string>
 	<string name="stores">Stores</string>
 	<string name="list">List</string>
+        <string name="undo">Undo</string>
 	
 	<string name="otherqty">Other Quantity...</string>
 	<string name="otherpri">Other Priority...</string>   
@@ -142,6 +145,9 @@
 	<string name="theme_classic_export">Classic (from OI Shopping List)</string>
 	<string name="theme_bugdroid_export">Android (from OI Shopping List)</string>
 
+        <string name="drawer_open">Open navigation drawer</string>
+        <string name="drawer_close">Close navigation drawer</string>
+
 	<!--     Dialog box    -->
 	<!-- Button label "OK" -->
 	<string name="ok">OK</string>
@@ -150,6 +156,23 @@
 	<string name="use_theme_for_all_lists">Use this theme for all lists</string>
 	<string name="get_more_themes">Get more themes</string>
 	
+	<string name="undoable_marked_item">Marked \"%1$s\"</string>
+	<string name="undoable_unmarked_item">Unmarked \"%1$s\"</string>
+	<string name="undoable_added_item">Added \"%1$s\"</string>
+	<string name="undoable_removed_item">Removed \"%1$s\"</string>
+		
+	<plurals name="undoable_unmark_all">
+	    <item quantity="one">Unmarked %1$d item.</item>
+	    <item quantity="other">Unmarked %1$d items.</item></plurals>
+    <plurals name="undoable_mark_all">
+	    <item quantity="one">Marked %1$d item.</item>
+	    <item quantity="other">Marked %1$d items.</item></plurals>
+	    
+	<plurals name="undoable_clean_list">
+	    <item quantity="one">Removed %1$d item. Use \"Pick Items\" to reuse some later.</item>
+	    <item quantity="other">Removed %1$d items. Use \"Pick Items\" to reuse some later.</item>
+	    </plurals>
+				
 	<!-- preferences -->
 	<string name="preferences">Settings</string>
 	
@@ -193,6 +216,9 @@
 	<string name="preference_complete_by_list_title">Limit item name completion</string>
 	<string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
 	<string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
+	<string name="preference_holo_search_title">Search/add items in action bar</string>
+	<string name="preference_holo_search_on_summary">Use the search icon in the action bar to switch to search/add mode. </string>
+	<string name="preference_holo_search_off_summary">Dedicated search/add text input remains on the bottom of the screen.</string>
 	<string name="preference_reset_quantity">Reset Quantity</string>
 	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
 	<string name="preference_add_for_barcode">Barcode Scanner</string>
@@ -215,9 +241,12 @@
 	<string name="preference_pickitemsinlist_title">Pick items directly in list</string>
 	<string name="preference_pickitemsinlist_on_summary">Switch main list to edit mode to re-add existing items</string>
 	<string name="preference_pickitemsinlist_off_summary">Add items to list using a dedicated dialog</string>
-	<string name="preference_samesortforpick_title">Always same sort order</string>
+	<string name="preference_samesortforpick_title">Same sort for Pick Items</string>
 	<string name="preference_samesortforpick_on_summary">Items are sorted in Pick Items mode just as in Shopping mode.</string>
 	<string name="preference_samesortforpick_off_summary">Sort order for Pick Items mode can be chosen separately.</string>
+	<string name="preference_perListSort_title">Per-list sorting</string>
+	<string name="preference_perListSort_on_summary">Each list saves its own sort order, controlled from the action bar.</string>
+	<string name="preference_perListSort_off_summary">Sort order for all lists is the same, set via Settings.</string>
 	
 	<!-- Preference title: Shake the phone to clean up the list. -->
 	<string name="preference_shake_title">Shake to clean up</string>
@@ -230,7 +259,7 @@
     
     <!-- Preference category: General settings -->
     <string name="preference_general">General</string>
-    <string name="preference_pickitems">Pick Items</string>
+    <string name="preference_sorting">Sorting</string>
     
     <string name="preference_appearance">Appearance</string>
     
@@ -340,6 +369,7 @@
         <item>Per word</item>
     </string-array>
 
+   
 	<!-- ***************************
 	     OI Notepad
 	     *************************** -->

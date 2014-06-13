@@ -1,0 +1,44 @@
+<!--
+  Copyright 2011 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:minHeight="@dimen/mode_item_minimum_height"
+   >
+	<!--  android:background="@drawable/mode_item"  -->
+    <ImageView
+        android:id="@+id/mode_radio_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/mode_item_left_margin"
+        android:src="@drawable/mode_radio_button"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_toRightOf="@id/mode_radio_button"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_marginLeft="@dimen/mode_item_left_margin"
+        android:layout_marginRight="@dimen/mode_item_right_margin"
+        android:layout_centerVertical="true"
+        android:includeFontPadding="false"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <!--   android:textColor="@color/mode_item_text_color" -->
+</RelativeLayout>

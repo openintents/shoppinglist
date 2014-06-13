@@ -50,12 +50,14 @@ import org.openintents.shopping.ui.dialog.RenameListDialog;
 import org.openintents.shopping.ui.dialog.ThemeDialog;
 import org.openintents.shopping.ui.dialog.ThemeDialog.ThemeDialogListener;
 import org.openintents.shopping.ui.tablet.ShoppingListFilterFragment;
+import org.openintents.shopping.ui.widget.ActionableToastBar;
 import org.openintents.shopping.ui.widget.QuickSelectMenu;
 import org.openintents.shopping.ui.widget.ShoppingItemsView;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.ActionBarListener;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.DragListener;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.DropListener;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.OnCustomClickListener;
+import org.openintents.shopping.ui.UndoListener;
 import org.openintents.shopping.widgets.CheckItemsWidget;
 import org.openintents.util.MenuIntentOptionsWithIcons;
 import org.openintents.util.ShakeSensorListener;
@@ -75,8 +77,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.database.DataSetObserver;
 import android.hardware.SensorListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
@@ -84,8 +88,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v2.os.Build;
-import android.support.v2.view.MenuCompat;
+import android.os.Build;
+import android.support.v4.view.ActionProvider;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SearchViewCompat;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -96,9 +104,12 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.MotionEvent;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
@@ -114,8 +125,11 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.HeaderViewListAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
+import android.widget.ListView.FixedViewInfo;
+import android.widget.WrapperListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
@@ -129,7 +143,8 @@ import android.widget.Toast;
  */
 public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		implements ThemeDialogListener, OnCustomClickListener,
-		ActionBarListener, OnItemChangedListener { // implements
+		ActionBarListener, OnItemChangedListener, 
+		UndoListener { // implements
 	// AdapterView.OnItemClickListener
 	// {
 
@@ -218,13 +233,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 																		// intent
 																		// extras
 	private static final int MENU_COPY_ITEM = Menu.FIRST + 11;
+	private static final int MENU_SORT_LIST = Menu.FIRST + 12;
+	private static final int MENU_SEARCH_ADD = Menu.FIRST + 13;
 
-	// TODO: Implement the following menu items
-	// private static final int MENU_EDIT_LIST = Menu.FIRST + 12; // includes
-	// rename
-	// private static final int MENU_SORT = Menu.FIRST + 13; // sort
-	// alphabetically
-	// or modified
+	// TODO: obsolete pick items button, now in drawer
 	private static final int MENU_PICK_ITEMS = Menu.FIRST + 14; // pick from
 	// previously
 	// used items
@@ -392,6 +404,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	private static final int mStringListFilterSKINBACKGROUND = 5;
 
 	private ShoppingItemsView mItemsView;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerListsView;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private CharSequence mTitle, mDrawerTitle, mSubTitle;
+    protected ActionableToastBar mToastBar;
+
 	// private Cursor mCursorItems;
 
 	public static final String[] mStringItems = new String[] {
@@ -420,7 +438,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
 	private AutoCompleteTextView mEditText;
 	private Button mButton;
-	private View mFilterLayout = null;
+	private View mAddPanel = null;
 	private Button mStoresFilterButton = null;
 	private Button mTagsFilterButton = null;
 	private Button mShoppingListsFilterButton = null;
@@ -439,6 +457,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	private static final String BUNDLE_MODE = "mode";
 
 	private String mSortOrder;
+	
+	private ListSortActionProvider mListSortActionProvider;
 
 	// Skins --------------------------
 
@@ -622,6 +642,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
 		// populate the lists
 		fillListFilter();
+		
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setHomeButtonEnabled(true);
 
 		// Get last part of URI:
 		int selectList;
@@ -662,7 +685,21 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		onModeChanged();
 
 		mItemsView.setActionBarListener(this);
+		mItemsView.setUndoListener(this);
 	}
+
+	@Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+	@Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
 
 	@Override
 	public void onStop() {
@@ -890,35 +927,32 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
 	private void updateTitle() {
 		// Modify our overall title depending on the mode we are running in.
+		// In most cases, "title" is the name of the current list, and subtitle
+		// depends on the mode -- shopping vs pick items, for example.
+		
+		mTitle = getCurrentListName();
+		mSubTitle = getText(R.string.app_name);
+		
 		if (mState == STATE_MAIN || mState == STATE_VIEW_LIST) {
 			if (PreferenceActivity
 					.getPickItemsInListFromPrefs(getApplicationContext())) {
 				// 2 different modes
 				if (mItemsView.mMode == MODE_IN_SHOP) {
-					setTitle(getString(R.string.shopping_title,
-							getCurrentListName()));
 					registerSensor();
 				} else {
-					setTitle(getString(R.string.pick_items_title,
-							getCurrentListName()));
+					mSubTitle = getString(R.string.menu_pick_items);
 					unregisterSensor();
 				}
-			} else {
-				// Only one mode: "Pick items using dialog"
-				// App name is default. But if using filters, include list name
-				// too.
-				if (PreferenceActivity.getUsingFiltersFromPrefs(this))
-					setTitle(getCurrentListName() + " - "
-							+ getText(R.string.app_name));
-				else
-					setTitle(getText(R.string.app_name));
-			}
+			} 
 		} else if ((mState == STATE_PICK_ITEM)
 				|| (mState == STATE_GET_CONTENT_ITEM)) {
-			setTitle(getText(R.string.pick_item));
+			mSubTitle = (getText(R.string.pick_item));
 			setTitleColor(0xFFAAAAFF);
 		}
 
+		getSupportActionBar().setTitle(mTitle);
+		getSupportActionBar().setSubtitle(mSubTitle);
+		
 		// also update the button label
 		updateButton();
 	}
@@ -936,6 +970,32 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		} else {
 			mButton.setText(R.string.add);
 		}
+	}
+	
+	private void saveActiveList (boolean savePos) {
+		SharedPreferences sp = getSharedPreferences(
+				"org.openintents.shopping_preferences", MODE_PRIVATE);
+		SharedPreferences.Editor editor = sp.edit();
+		// need to do something about the fact that the spinner is driving this
+		// even though it isn't always used. also the long vs int is fishy.
+		// but for now, just don't overwrite previous setting with -1.
+		int list_id = new Long(getSelectedListId()).intValue();
+		if (list_id != -1)
+			editor.putInt(PreferenceActivity.PREFS_LASTUSED, list_id);
+		// Save position and pixel position of first visible item
+		// of current shopping list
+		int listposition = mItemsView.getFirstVisiblePosition();
+		if (savePos) {
+			View v = mItemsView.getChildAt(0);
+			int listtop = (v == null) ? 0 : v.getTop();
+			if (debug)
+			Log.d(TAG, "Save list position: pos: " + listposition + ", top: "
+					+ listtop);
+
+			editor.putInt(PreferenceActivity.PREFS_LASTLIST_POSITION, listposition);
+			editor.putInt(PreferenceActivity.PREFS_LASTLIST_TOP, listtop);
+		}
+		editor.commit();	
 	}
 
 	/*
@@ -957,27 +1017,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
 		unregisterSensor();
 
-		// Save position and pixel position of first visible item
-		// of current shopping list
-		int listposition = mItemsView.getFirstVisiblePosition();
-		View v = mItemsView.getChildAt(0);
-		int listtop = (v == null) ? 0 : v.getTop();
-		if (debug)
-			Log.d(TAG, "Save list position: pos: " + listposition + ", top: "
-					+ listtop);
-
-		SharedPreferences sp = getSharedPreferences(
-				"org.openintents.shopping_preferences", MODE_PRIVATE);
-		SharedPreferences.Editor editor = sp.edit();
-		// need to do something about the fact that the spinner is driving this
-		// even though it isn't always used. also the long vs int is fishy.
-		// but for now, just don't overwrite previous setting with -1.
-		int list_id = new Long(getSelectedListId()).intValue();
-		if (list_id != -1)
-			editor.putInt(PreferenceActivity.PREFS_LASTUSED, list_id);
-		editor.putInt(PreferenceActivity.PREFS_LASTLIST_POSITION, listposition);
-		editor.putInt(PreferenceActivity.PREFS_LASTLIST_TOP, listtop);
-		editor.commit();
+		saveActiveList(true);
 		// TODO ???
 		/*
 		 * // Unregister refresh intent receiver
@@ -1023,6 +1063,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		// Temp-create either Spinner or List based upon the Display
 		createList();
 
+		mAddPanel = findViewById(R.id.add_panel);
 		mEditText = (AutoCompleteTextView) findViewById(R.id.autocomplete_add_item);
 
 		fillAutoCompleteTextViewAdapter();
@@ -1148,10 +1189,13 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		mLayoutParamsItems = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.FILL_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
+		
+        mToastBar = (ActionableToastBar) findViewById(R.id.toast_bar);
 
 		mItemsView = (ShoppingItemsView) findViewById(R.id.list_items);
 		mItemsView.setThemedBackground(findViewById(R.id.background));
 		mItemsView.setCustomClickListener(this);
+		mItemsView.setToastBar(mToastBar);
 
 		mItemsView.setItemsCanFocus(true);
 		mItemsView.setDragListener(new DragListener() {
@@ -1225,7 +1269,33 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
 	private void createList() {
 
-		// TODO switch layout on screen size, not sdk versions
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		mDrawerListsView = (ListView) findViewById(R.id.left_drawer);
+		
+        mTitle = mDrawerTitle = getTitle();
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                getSupportActionBar().setTitle(mTitle);
+                getSupportActionBar().setSubtitle(mSubTitle);
+                compat_invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                getSupportActionBar().setTitle(mDrawerTitle);
+                getSupportActionBar().setSubtitle(null);
+                compat_invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+
+        // Set the drawer toggle as the DrawerListener
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+		
+		// TODO probably can obsolete the below; tablet mode should also use 
+		// the drawer rather than a separate fragment
 		if (!usingListSpinner()) {
 
 			mShoppingListsView = (ListView) findViewById(android.R.id.list);
@@ -1464,11 +1534,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		}
 		if (mShoppingListsFilterButton != null)
 			mShoppingListsFilterButton
-					.setVisibility(showListFilter ? View.VISIBLE : View.GONE);
+					.setVisibility(View.GONE);
 		// spinner goes the opposite way
 		if (mShoppingListsView != null)
-			mShoppingListsView.setVisibility(showListFilter ? View.GONE
-					: View.VISIBLE);
+			mShoppingListsView.setVisibility(View.GONE);
 
 		if (mEditingFilter) {
 			String storeName = ShoppingUtils.getListFilterStoreName(this,
@@ -1723,20 +1792,41 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 					.setIcon(android.R.drawable.ic_menu_upload);
 		}
 
-		// Temp - Temporary item holder for compatibility framework
 		MenuItem item = null;
+
+		View searchView = mItemsView.getSearchView();
+		if (searchView != null) {
+			item = menu.add(0, MENU_SEARCH_ADD, 0, R.string.menu_search_add)
+				.setIcon(android.R.drawable.ic_menu_search);
+			MenuItemCompat.setActionView(item, searchView);
+			MenuItemCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_ALWAYS);
+		}
+		mAddPanel.setVisibility(searchView == null ? View.VISIBLE : View.GONE);
+		
+		item = menu.add(0, MENU_SORT_LIST, 0, R.string.menu_sort_list)
+				.setIcon(android.R.drawable.ic_menu_sort_alphabetically);
+		MenuItemCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_ALWAYS
+				| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		if (mListSortActionProvider == null)
+			mListSortActionProvider = new ListSortActionProvider(this);
+		MenuItemCompat.setActionProvider(item, mListSortActionProvider);
+		
 		// Standard menu
-		item = menu.add(0, MENU_NEW_LIST, 0, R.string.new_list)
-				.setIcon(R.drawable.ic_menu_add_list).setShortcut('0', 'n');
+		
+		// tentatively moved "new list" to drawer
+		//item = menu.add(0, MENU_NEW_LIST, 0, R.string.new_list)
+		//		.setIcon(R.drawable.ic_menu_add_list).setShortcut('0', 'n');
 		// MenuCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
 		item = menu.add(0, MENU_CLEAN_UP_LIST, 0, R.string.clean_up_list)
 				.setIcon(R.drawable.ic_menu_cleanup).setShortcut('1', 'c');
-		MenuCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_IF_ROOM
+		MenuItemCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_IF_ROOM
 				| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
 		menu.add(0, MENU_PICK_ITEMS, 0, R.string.menu_pick_items)
-				.setIcon(android.R.drawable.ic_menu_add).setShortcut('2', 'p');
+				.setIcon(android.R.drawable.ic_menu_add).setShortcut('2', 'p').
+				// tentatively replaced by buttons in drawer.
+				setVisible(false);
 
 		/*
 		 * menu.add(0, MENU_SHARE, 0, R.string.share)
@@ -1823,6 +1913,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
 
+        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerListsView);
+        boolean holoSearch = PreferenceActivity.getUsingHoloSearchFromPrefs(this);
+        // TODO: supposed to hide content-related actions when the drawer is open.
+
+		
 		// TODO: Add item-specific menu items (see NotesList.java example)
 		// like edit, strike-through, delete.
 
@@ -1845,12 +1940,19 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 			menu.findItem(MENU_PICK_ITEMS).setTitle(R.string.menu_pick_items);
 			menuItem.setIcon(android.R.drawable.ic_menu_add);
 		}
+		
+		menuItem = menu.findItem(MENU_SEARCH_ADD); 
+		if (menuItem != null) {
+			menuItem.setVisible(holoSearch && !drawerOpen);
+			if (!holoSearch)
+				mAddPanel.setVisibility(View.VISIBLE);
+		}
 
-		menuItem = menu.findItem(MENU_MARK_ALL_ITEMS).setVisible(mItemsView.getMarkedAllStatus() == null || !mItemsView.getMarkedAllStatus());
-		menuItem = menu.findItem(MENU_UNMARK_ALL_ITEMS).setVisible(mItemsView.getMarkedAllStatus() != null && mItemsView.getMarkedAllStatus());
+		menuItem = menu.findItem(MENU_MARK_ALL_ITEMS).setVisible(mItemsView.mNumUnchecked > 0);
+		menuItem = menu.findItem(MENU_UNMARK_ALL_ITEMS).setVisible(mItemsView.mNumChecked > 0);
 		
 		menuItem = menu.findItem(MENU_CLEAN_UP_LIST).setEnabled(
-				mItemsView.mNumChecked > 0);
+				mItemsView.mNumChecked > 0).setVisible(! drawerOpen);
 
 		// Delete list is possible, if we have more than one list:
 		// AND
@@ -1953,6 +2055,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 					REQUEST_CODE_CATEGORY_ALTERNATIVE);
 			return true;
 		}
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
 		return super.onOptionsItemSelected(item);
 
 	}
@@ -2724,7 +2829,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		if (mCursorShoppingLists == null) {
 			Log.e(TAG, "missing shopping provider");
 			ArrayAdapter adapter = new ArrayAdapter(this,
-					android.R.layout.simple_spinner_item,
+					R.layout.list_item_shopping_list,
 					new String[] { getString(R.string.no_shopping_provider) });
 			setSpinnerListAdapter(adapter);
 
@@ -2812,11 +2917,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		if (mShoppingListsView instanceof Spinner) {
 			adapter = new HoloThemeSimpleCursorAdapter(this,
 					// Use a template that displays a text view
-					android.R.layout.simple_spinner_item,
+					R.layout.list_item_shopping_list,
 					// Give the cursor to the list adapter
 					mCursorShoppingLists, new String[] { Lists.NAME },
-					new int[] { android.R.id.text1 });
-			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+					new int[] { R.id.text1 });
+			// adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		} else {
 			// mShoppingListView is a ListView
 			adapter = new SimpleCursorAdapter(this,
@@ -3269,6 +3374,198 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		setSelectedListPos(newPos);
 	}
 
+	private class DrawerListAdapter implements WrapperListAdapter, OnItemClickListener {
+
+		private ListAdapter mAdapter = null;
+		private int mNumAboveList = 3;
+		private int mNumBelowList = 1;
+		private int mWrappedViewTypeNum;
+		private int mViewTypeNum;
+		private int [] mHeaderItemTypes;
+		LayoutInflater mInflater;
+		
+		public DrawerListAdapter(Context context, ListAdapter adapter) {
+			mAdapter = adapter;
+			mViewTypeNum = mWrappedViewTypeNum = mAdapter.getViewTypeCount();
+	        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		}
+
+		@Override
+		public boolean areAllItemsEnabled() {
+			return false;
+		}
+
+		@Override
+		public boolean isEnabled(int position) {
+			int list_pos, post_pos;
+			int list_count = mAdapter.getCount();
+			if (position < mNumAboveList) {
+				return (position != 2); // not the "Lists" header
+			} else if ((list_pos = position - mNumAboveList) < list_count){
+				// actual list entries can be selected
+			} else {
+				post_pos = list_pos - list_count;
+				// New List button can be selected
+			}
+			return true;
+		}
+
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return mAdapter.getCount() + mNumAboveList + mNumBelowList;
+		}
+
+		@Override
+		public Object getItem(int position) {
+			int list_pos, post_pos;
+			int list_count = mAdapter.getCount();
+			if (position < mNumAboveList) {
+			} else if ((list_pos = position - mNumAboveList) < list_count){
+				return mAdapter.getItem(list_pos);
+			} else {
+				post_pos = list_pos - list_count;
+			}
+			return null;
+		}
+
+		@Override
+		public long getItemId(int position) {
+			int list_pos, post_pos;
+			int list_count = mAdapter.getCount();
+			if (position < mNumAboveList) {
+			
+			} else if ((list_pos = position - mNumAboveList) < list_count){
+				return mAdapter.getItemId(list_pos);
+			} else {
+				post_pos = list_pos - list_count;
+			}
+			return -1;
+		}
+
+		@Override
+		public int getItemViewType(int position) {
+			int list_pos, post_pos;
+			int list_count = mAdapter.getCount();
+			if (position < mNumAboveList) {			  
+			} else if ((list_pos = position - mNumAboveList) < list_count){
+				return mAdapter.getItemViewType(list_pos);
+			} 
+			return IGNORE_ITEM_VIEW_TYPE;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			int list_pos, post_pos;
+			int list_count = mAdapter.getCount();
+  	        View v = null;
+  	        View v2 = null;
+
+			if (position < mNumAboveList) {
+			  switch(position) {
+			  case 1: 
+				  v = mInflater.inflate(R.layout.drawer_item_radio, parent, false);
+                  v2 = v.findViewById(R.id.text1);
+				  ((TextView)v2).setText(R.string.menu_pick_items);
+				  v2 = v.findViewById(R.id.mode_radio_button);
+				  v2.setSelected(mItemsView.mMode == MODE_ADD_ITEMS);
+				  break;
+			  case 0:
+				  v = mInflater.inflate(R.layout.drawer_item_radio, parent, false);
+                  v2 = v.findViewById(R.id.text1);
+				  ((TextView)v2).setText(R.string.menu_start_shopping);
+				  v2 = v.findViewById(R.id.mode_radio_button);
+				  v2.setSelected(mItemsView.mMode == MODE_IN_SHOP);
+				  break;
+			  case 2:
+				  v = mInflater.inflate(R.layout.drawer_item_header, parent, false);
+				  ((TextView)v).setText(R.string.list); // fix me
+				  break;
+			  }
+			} else if ((list_pos = position - mNumAboveList) < list_count){
+				int curListPos = mShoppingListsView.getSelectedItemPosition();
+				v = mAdapter.getView(list_pos, convertView, parent);
+			} else {
+				post_pos = list_pos - list_count;
+				v = mInflater.inflate(R.layout.drawer_item_list, parent, false);
+				v2 = v.findViewById(R.id.text1);
+				((TextView)v2).setText(R.string.new_list);
+			}
+			return v;
+		}
+
+		@Override
+		public int getViewTypeCount() {
+			return mViewTypeNum;
+		}
+
+		@Override
+		public boolean hasStableIds() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean isEmpty() {
+			return false;
+		}
+
+		@Override
+		public void registerDataSetObserver(DataSetObserver observer) {
+			mAdapter.registerDataSetObserver(observer);
+		}
+
+		@Override
+		public void unregisterDataSetObserver(DataSetObserver observer) {
+			mAdapter.unregisterDataSetObserver(observer);
+		}
+
+		@Override
+		public ListAdapter getWrappedAdapter() {
+			return mAdapter;
+		}
+		
+		public void onItemClick(AdapterView parent, View v,
+				int position, long id) {
+			if (debug)
+				Log.d(TAG, "DrawerListAdapter: onItemClick");
+			
+			int list_pos;
+			int list_count = mAdapter.getCount();
+			if (position < mNumAboveList) {		
+				// Pick Items or Shopping selected
+			    mDrawerLayout.closeDrawer(mDrawerListsView);
+				mItemsView.mMode = (position == 1) ?  MODE_ADD_ITEMS : MODE_IN_SHOP;	
+				mDrawerListsView.setItemChecked(position, true);
+				mDrawerListsView.setItemChecked(1 -position, false);
+				onModeChanged();
+				// need to toggle the radio buttons too
+			} else if ((list_pos = position - mNumAboveList) < list_count){		
+				// Update list cursor:
+				mShoppingListsView.setSelection(list_pos);
+				getSelectedListId();
+	
+				// Set the theme based on the selected list:
+				setListTheme(loadListTheme());
+	
+				// If it's the same list we had before, requery only
+				// if a preference has changed since then.
+				fillItems(id == mItemsView.getListId());
+	
+				// Apply the theme after the list has been filled:
+				applyListTheme();
+	
+				updateTitle();
+	
+				mDrawerListsView.setItemChecked(position, true);
+			    mDrawerLayout.closeDrawer(mDrawerListsView);
+			} else {
+			    mDrawerLayout.closeDrawer(mDrawerListsView);
+				showDialog(DIALOG_NEW_LIST);
+			}			
+		}
+	}
+	
 	/**
 	 * With the requirement of OS3, making an intermediary decision depending
 	 * upon the widget
@@ -3276,6 +3573,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	 * @param adapter
 	 */
 	private void setSpinnerListAdapter(ListAdapter adapter) {
+		DrawerListAdapter adapterWrapper = (new DrawerListAdapter(this, adapter));
+		mDrawerListsView.setAdapter(adapterWrapper);
+		mDrawerListsView.setOnItemClickListener(adapterWrapper);
 		if (usingListSpinner()) {// Temp - restricted for OS3
 			mShoppingListsView.setAdapter(adapter);
 		} else {
@@ -3291,4 +3591,75 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		fillAutoCompleteTextViewAdapter();
 	}
 
+	private class ListSortActionProvider extends ActionProvider implements OnMenuItemClickListener {
+
+		private Context mContext;
+		private String mSortLabels[];
+		private String mSortVals[];
+		private Integer mSortValInts[];
+		
+		public ListSortActionProvider(Context context) {
+			super(context);
+			mContext = context;
+			mSortLabels = mContext.getResources().getStringArray(R.array.preference_sortorder_entries);
+			mSortVals = mContext.getResources().getStringArray(R.array.preference_sortorder_entryvalues);
+			mSortValInts = new Integer[mSortVals.length];
+			for (int i = 0; i < mSortVals.length; i ++) 
+				mSortValInts[i] = Integer.parseInt(mSortVals[i]);
+		}
+
+		@Override
+		public View onCreateActionView() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		@Override
+		public boolean hasSubMenu() {
+	 			return true;
+		}
+		
+		public void onPrepareSubMenu(SubMenu subMenu) {
+		   int i;
+		   saveActiveList(false);
+		   subMenu.clear();
+		   int curSort = PreferenceActivity.getSortOrderIndexFromPrefs(mContext, MODE_IN_SHOP);
+		   for (i = 0; i < mSortLabels.length; i ++) {
+			   subMenu.add(1, i, i, mSortLabels[i]).setOnMenuItemClickListener(this)
+			   .setChecked(mSortValInts[i]==curSort);
+		   }		  
+		   subMenu.setGroupCheckable(1,true,true);
+		}
+		
+		public boolean overridesItemVisibility() {
+			return true;
+		}
+		
+		public boolean isVisible () {
+			boolean vis = true;
+		    if (mItemsView.mMode != MODE_IN_SHOP) 
+		    	vis = false;
+		    else if (PreferenceActivity.getUsingPerListSortFromPrefs(mContext) == false)
+				vis = false;
+		    if (mDrawerLayout.isDrawerOpen(mDrawerListsView))
+		    	vis = false;
+			return vis;
+		}
+		
+		public boolean onMenuItemClick(MenuItem item) {
+			int sortOrderNum = Integer.parseInt(mSortVals[item.getItemId()]);
+			// String sortOrder = Contains.SORT_ORDERS[sortOrderNum];
+			ContentValues values = new ContentValues();
+			values.put(Lists.ITEMS_SORT, sortOrderNum);
+			getContentResolver().update(mListUri, values, null, null);
+			fillItems(false);
+			return true;
+		}
+	}
+
+	@Override
+	public void onUndoAvailable(ToastBarOperation undoOp) {
+		mToastBar.show(null, 0, undoOp.getDescription(this), 
+				true, R.string.undo, true, undoOp);
+	}
 }
