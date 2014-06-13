@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	<string name="about_copyright">Copyright © 2008-2011 OpenIntents</string> 
+	<string name="about_website_url">http://www.openintents.org</string>
+	<string name="about_email">support@openintents.org</string>
+	
+    <string-array name="about_authors"><!-- Add your name here if you helped out -->
+        <item>Peli</item>
+    </string-array>
+    
+    <string-array name="about_documenters"><!-- Add your name here if you helped out -->
+        <!-- <item></item> -->
+    </string-array>
+    
+    <string-array name="about_translators"><!-- Add your name here if you helped out, but only in the arrays.xml for the localization that you helped to translate into! -->
+        <!-- <item></item>  -->
+    </string-array>
+    
+    <string-array name="about_artists"><!-- Add your name here if you helped out -->
+        <item>Peli</item>
+    </string-array>
+    
+	
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Update -->
+	<string name="oi_distribution_update_checker_package">org.openintents.updatechecker</string>
+    <string name="oi_distribution_update_checker_website">http://www.openintents.org/en/node/203</string><!-- 203 = OI Update -->
+	
+	<!-- About -->
+    <string name="oi_distribution_aboutapp_package">org.openintents.about</string>
+    <string name="oi_distribution_aboutapp_website">http://www.openintents.org/en/node/202</string><!-- 202 = OI About -->
+	
+	<!-- Support -->
+    <string name="oi_distribution_supportapp_package">org.openintents.support</string>
+    <string name="oi_distribution_supportapp_website">http://www.openintents.org/en/node/202</string><!-- 202 = OI Support -->
+	
+    <!-- Barcode plugin -->
+    <string name="oi_distribution_barcodescanner_package">org.openintents.barcodescanner</string>
+    <string name="oi_distribution_barcodescanner_website">http://www.openintents.org/en/node/679</string>
+	
+    <!-- File Manager -->
+    <string name="oi_distribution_filemanager_package">org.openintents.filemanager</string>
+    <string name="oi_distribution_filemanager_website">http://www.openintents.org/en/filemanager</string>
+	
+	<!-- Safe -->
+    <string name="oi_distribution_safe_package">org.openintents.safe</string>
+    <string name="oi_distribution_safe_website">http://www.openintents.org/en/safe</string>
+	
+</resources>

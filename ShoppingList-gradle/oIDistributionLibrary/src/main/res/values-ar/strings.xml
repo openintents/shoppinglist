@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="oi_distribution_app_name">مكتبة توزيعات OI</string>
+    
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">Launchpad Contributions:
+  OpenIntents devs https://launchpad.net/~openintents-devs
+  kenn dhia https://launchpad.net/~kendhia</string>
+	
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->	
+	<!-- EULA (End user license agreement). %s is an application name, e.g. "OI Notepad EULA". 
+		Translation should be short, since this is a title. -->
+	<string name="oi_distribution_eula_title">%s EULA</string>
+	
+	<!-- EULA welcome message. %s is an application name, e.g. "... (EULA) for OI Notepad".
+		Translation can be as long as required. -->
+	<string name="oi_distribution_eula_message">رجاءا قم بقراءة والموافقة على اتفاقية رخصة المستعمل النهائية(EULA) من أجل %s.</string>
+	
+	<!-- Button: Accept terms of EULA. -->
+	<string name="oi_distribution_eula_accept">موافق</string>
+	
+	<!-- Button: Refuse terms of EULA. -->
+	<string name="oi_distribution_eula_refuse">الغاء</string>
+	
+	<!-- New version -->
+	<!-- Application name and version. %1$s is the application name (e.g. "OI Notepad") and %2$s is the version number (e.g. "1.2.0").
+	Keep unmodified, unless your language requires that the version number is displayed first. -->
+	<string name="oi_distribution_name_and_version">%1$s %2$s</string>
+	
+	<!-- Welcome message. %s is an application name. -->
+	<string name="oi_distribution_newversion_message">أهلا بكم في النسخة الجديدة من.%s</string>
+	
+	<string name="oi_distribution_newversion_recent_changes">التغييرات الأخيرة .</string>
+	
+	<!-- Button: Continue to main application. -->
+	<string name="oi_distribution_newversion_continue">أكمل</string>
+	
+	<!-- Update -->
+	<!-- Menu command to look for updates. -->
+    <string name="oi_distribution_menu_update">تحقق من التحديثات</string>
+	<string name="oi_distribution_update_box_text">تحقق يدويا من التحديثات أو استعمل تحديث  OI للتنبيهات التلقائية.</string>
+	<string name="oi_distribution_update_check_now">تحقق الآن</string>
+	<string name="oi_distribution_update_get_updater">أحصل على محدث OI</string>
+	<string name="oi_distribution_update_error">تحميل التطبيقات غير متوفر.</string>
+	
+    <!-- Name of the application "OI Update". Translations of the application name should be consistent. -->
+    <string name="oi_distribution_update_app">تحديث OI</string>
+    
+    <!-- About -->
+    <!-- Menu command to open the "about" or "info" dialog. -->
+    <string name="oi_distribution_about">عن</string>
+    <!-- %s is the version number (e.g. "1.2.1") -->
+	<string name="oi_distribution_aboutapp_not_available">لا يوجد أي ملحق متوفر لعرض المعلومات(الاتصالات، المشاركون، الرخصة).</string>
+    
+    <!-- Button text: Get the application "OI About". Translations of the application name should be consistent. -->
+    <string name="oi_distribution_aboutapp_get">أحصل على عن OI</string>
+    
+    <!-- Name of the application "OI About". Translations of the application name should be consistent. -->
+    <string name="oi_distribution_aboutapp">عن OI</string>
+    
+   	<!-- Support -->
+    <string name="oi_distribution_supportapp_not_available">No compatible extension available to display full info (Help/FAQ, Contact Developers, Feature request, Donations).</string>
+    <string name="oi_distribution_supportapp_get">Get OI Support</string>
+	<string name="oi_distribution_supportapp">OI Support</string>
+    <string name="oi_distribution_support">Support</string>
+    
+    
+    <!-- Name of the application "Barcode OI Plugin". Translations of the application name should be consistent.  -->
+    <string name="oi_distribution_barcodescanner">باركود OI المساعد</string>
+    <!-- Dialog message. -->
+    <string name="oi_distribution_barcodescanner_not_available">لا يوجد أي ماسح باركود متوفر.</string>
+    
+    <!-- Name of the application "OI File Manager". Translations of the application name should be consistent.  -->
+    <string name="oi_distribution_filemanager">مديرالملفات OI</string>
+    <!-- Dialog message. -->
+    <string name="oi_distribution_filemanager_not_available">لا يوجد أي مدير ملفات متوافق متوفر.</string>
+    
+    <!-- Safe -->
+    <!-- Name of the application "OI Safe". Translations of the application name should be consistent.  -->
+    <string name="oi_distribution_safe">حماية OI</string>
+    <!-- Dialog message. -->
+    <string name="oi_distribution_safe_not_available">لا يوجد أي تطبيق تشفير متوافق متوفر.</string>
+    <string name="oi_distribution_safe_not_available_decrypt">لا يوجد أي تطبيق متوفر  لفك التشفير .\n\n انتبه: يجب عليك استرجاع كلمة المرور الرئيسية من ملف نسخة احتياطية لتتمكن من الدخول الى البيانات السابقة المشفرة .</string>
+    
+    <!-- Dialog message: %s is the name of an application (e.g. "OI Notepad"). -->
+    <string name="oi_distribution_download_market_message">رجاءاقم بتحميل %s من المتجر أو موقعOpenIntents  .</string>
+    <!-- Dialog message: %s is the name of an application (e.g. "OI Notepad"). -->
+    <string name="oi_distribution_download_message">رجاءا قم بالتحميل %s من موقع OpenIntents.</string>
+    <!-- Dialog button: download the suggested application from Android Market. -->
+    <string name="oi_distribution_download_market">تحميل من السوق</string>
+    <!-- Dialog button: download the suggested application from the developer web site. -->
+    <string name="oi_distribution_download_web">تحميل من الانترنت</string>
+	<!-- Dialog title: %s is the name of an application (e.g. "OI Notepad"). -->
+    <string name="oi_distribution_download_title">حمل %s</string>
+	
+	<!-- %s is an application name (e.g. "OI About can be used with the following applications:") -->
+	<string name="oi_distribution_info_activity_text">لا يمكن استعماله مع التطبيقات التالية : %s</string>
+	<!-- %s is an application name (e.g. "Launch OI Notepad") -->
+    <string name="oi_distribution_info_launch">شغل %s</string>
+    <!-- %1$s is the current application name. %2$s is another application name, and %3$s is the other application\'s version name
+    (e.g. "OI About requires OI Notepad 1.2.0 or higher.") -->
+	<string name="oi_distribution_info_not_available">%1$s يطلب %2$s %3$s أو أعلى.</string>
+	<!-- Title of a dialog. -->
+	<string name="oi_distribution_info_instructions">التعليمات</string>
+	<!-- Error message -->
+	<string name="oi_distribution_launch_error">لا تستطيع تشغيل التطبيق</string>
+	
+</resources>

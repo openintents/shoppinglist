@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="oi_distribution_app_name">OI Размеркавальная бібліятэка</string>
+    
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">Launchpad Contributions:
+  Alexander Geroimenko https://launchpad.net/~geroimenko
+  OpenIntents devs https://launchpad.net/~openintents-devs</string>
+	
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->	
+	<!-- EULA (End user license agreement). %s is an application name, e.g. "OI Notepad EULA". 
+		Translation should be short, since this is a title. -->
+	<string name="oi_distribution_eula_title">Пагадненне карыстальніка %s</string>
+	
+	<!-- EULA welcome message. %s is an application name, e.g. "... (EULA) for OI Notepad".
+		Translation can be as long as required. -->
+	<string name="oi_distribution_eula_message">Калі ласка, прачытайце і прыміце пагадненне карыстальніка для %s.</string>
+	
+	<!-- Button: Accept terms of EULA. -->
+	<string name="oi_distribution_eula_accept">Прыняць</string>
+	
+	<!-- Button: Refuse terms of EULA. -->
+	<string name="oi_distribution_eula_refuse">Адмяніць</string>
+	
+	<!-- New version -->
+	<!-- Application name and version. %1$s is the application name (e.g. "OI Notepad") and %2$s is the version number (e.g. "1.2.0").
+	Keep unmodified, unless your language requires that the version number is displayed first. -->
+	<string name="oi_distribution_name_and_version">%1$s %2$s</string>
+	
+	<!-- Welcome message. %s is an application name. -->
+	<string name="oi_distribution_newversion_message">Сардэчна запрашаем у новую версію %s.</string>
+	
+	<string name="oi_distribution_newversion_recent_changes">Апошнія змяненні:</string>
+	
+	<!-- Button: Continue to main application. -->
+	<string name="oi_distribution_newversion_continue">Далей</string>
+	
+	<!-- Update -->
+	<!-- Menu command to look for updates. -->
+    <string name="oi_distribution_menu_update">Праверка абнаўленняў</string>
+	<string name="oi_distribution_update_box_text">Праверце абнаўленні ўручную, ці ўсталюйце OI Абнаўленні для аўтаматычнай праверкі.</string>
+	<string name="oi_distribution_update_check_now">Праверыць зараз</string>
+	<string name="oi_distribution_update_get_updater">Атрымаць OI Абнаўленні</string>
+	<string name="oi_distribution_update_error">Запампоўка прыкладання недаступна.</string>
+	
+    <!-- Name of the application "OI Update". Translations of the application name should be consistent. -->
+    <string name="oi_distribution_update_app">OI Абнаўленні</string>
+    
+    <!-- About -->
+    <!-- Menu command to open the "about" or "info" dialog. -->
+    <string name="oi_distribution_about">А праграме</string>
+    <!-- %s is the version number (e.g. "1.2.1") -->
+	<string name="oi_distribution_aboutapp_not_available">Няма даступнага сумяшчальнага пашырэння для адлюстравання поўнай інфармацыі (кантакты, ліцэнзія).</string>
+    
+    <!-- Button text: Get the application "OI About". Translations of the application name should be consistent. -->
+    <string name="oi_distribution_aboutapp_get">Атрымаць OI А праграме</string>
+    
+    <!-- Name of the application "OI About". Translations of the application name should be consistent. -->
+    <string name="oi_distribution_aboutapp">OI А праграме</string>
+    
+   	<!-- Support -->
+    <string name="oi_distribution_supportapp_not_available">No compatible extension available to display full info (Help/FAQ, Contact Developers, Feature request, Donations).</string>
+    <string name="oi_distribution_supportapp_get">Get OI Support</string>
+	<string name="oi_distribution_supportapp">OI Support</string>
+    <string name="oi_distribution_support">Support</string>
+    
+    
+    <!-- Name of the application "Barcode OI Plugin". Translations of the application name should be consistent.  -->
+    <string name="oi_distribution_barcodescanner">Barcode OI Plugin</string>
+    <!-- Dialog message. -->
+    <string name="oi_distribution_barcodescanner_not_available">No compatible barcode scanner is available.</string>
+    
+    <!-- Name of the application "OI File Manager". Translations of the application name should be consistent.  -->
+    <string name="oi_distribution_filemanager">OI Файл-мэнэджар</string>
+    <!-- Dialog message. -->
+    <string name="oi_distribution_filemanager_not_available">Няма даступнага сумяшчальнага файлавага мэнэджэру.</string>
+    
+    <!-- Safe -->
+    <!-- Name of the application "OI Safe". Translations of the application name should be consistent.  -->
+    <string name="oi_distribution_safe">OI Сэйф</string>
+    <!-- Dialog message. -->
+    <string name="oi_distribution_safe_not_available">Няма даступнага сумяшчальнага прыкладання для кадавання.</string>
+    <string name="oi_distribution_safe_not_available_decrypt">Няма даступнага сумяшчальнага прыкладання для дэкадавання.\n\nПадказка: Вам патрэбна будзе аднавіць мастэр ключ да рэзервовай копіі, каб атрымаць доступ да закадаванай інфармацыі.</string>
+    
+    <!-- Dialog message: %s is the name of an application (e.g. "OI Notepad"). -->
+    <string name="oi_distribution_download_market_message">Калі ласка, запампуйце %s з Market, або з сайта OpenIntents.</string>
+    <!-- Dialog message: %s is the name of an application (e.g. "OI Notepad"). -->
+    <string name="oi_distribution_download_message">Калі ласка, запампуйце %s з сайта OpenIntents.</string>
+    <!-- Dialog button: download the suggested application from Android Market. -->
+    <string name="oi_distribution_download_market">Запампаваць з Market</string>
+    <!-- Dialog button: download the suggested application from the developer web site. -->
+    <string name="oi_distribution_download_web">Анлайн запампоўка</string>
+	<!-- Dialog title: %s is the name of an application (e.g. "OI Notepad"). -->
+    <string name="oi_distribution_download_title">Запампоўка %s</string>
+	
+	<!-- %s is an application name (e.g. "OI About can be used with the following applications:") -->
+	<string name="oi_distribution_info_activity_text">%s можа быць выкарыстаны разам з наступнымі прыкладаннямі:</string>
+	<!-- %s is an application name (e.g. "Launch OI Notepad") -->
+    <string name="oi_distribution_info_launch">Запуск %s</string>
+    <!-- %1$s is the current application name. %2$s is another application name, and %3$s is the other application\'s version name
+    (e.g. "OI About requires OI Notepad 1.2.0 or higher.") -->
+	<string name="oi_distribution_info_not_available">%1$s патрабуе %2$s %3$s ці вышэй.</string>
+	<!-- Title of a dialog. -->
+	<string name="oi_distribution_info_instructions">Інструкцыі</string>
+	<!-- Error message -->
+	<string name="oi_distribution_launch_error">Прыкладанне не можа быць запушчана.</string>
+	
+</resources>

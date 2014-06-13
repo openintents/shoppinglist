@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">Launchpad Contributions:
+  Arne Tobias Malkenes Ødegaard https://launchpad.net/~arne-tobias
+  OpenIntents devs https://launchpad.net/~openintents-devs</string>
+	
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Hold spor på dine handlepunkter med OI Handliste.</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
+	<string name="app_name">OI Handleliste</string>
+
+	<string name="new_item">Nytt punkt</string>
+	<string name="new_list">Ny liste</string>
+	<string name="send">Send liste</string>
+	<string name="mark_all_items">Marker alle punkter</string>
+	<string name="unmark_all_items">Unmark all items</string>
+	<string name="empty_list_not_sent">Tom liste ikke sendt.</string>
+	<string name="email_not_available">Ingen applikasjon tilgjengelig for sending.</string>
+	<string name="my_shopping_list">Min handleliste</string>
+	<string name="new_list_hint">f.eks. ønskeliste, familieliste</string>
+	<string name="clean_up_list">Rydd opp i liste</string>
+	<string name="delete_list">Slett liste</string>
+	<string name="ask_new_list">Skriv navnet på den nye handlelisten</string>
+	<string name="ask_rename_list">Gi handleliste nytt navn</string>
+	<string name="ask_edit_item">Rediger punkt</string>
+	<string name="ask_new_store">Skriv nytt navn på butikk</string>
+	<string name="please_enter_name">Vennligst velg et navn</string>
+	<string name="no_items_marked">Ingen punkter er markert som utkrysset.</string>
+	<string name="confirm_delete_list">Vil du virkelig slette denne handlelisten?</string>
+	<string name="no_shopping_provider">Feil ved å få tilgang til handlelister.</string>
+	<string name="pick_item">Velg et punkt</string>
+	<string name="pick_list">Velg en liste</string>
+	<string name="theme">Tema</string>
+	<string name="theme_settings">Temainnstillinger</string>
+	<string name="rename_list">Gi liste nytt navn</string>
+	<string name="menu_mark_item">Marker punkt</string>
+	<string name="menu_edit_item">Rediger punkt</string>
+	<string name="menu_auto_add">Legg til automatisk</string>
+	<string name="menu_item_stores">Butikker...</string>
+	<string name="menu_rename_store">Gi butikk nytt navn</string>
+	<string name="menu_delete_store">Slett butikk</string>
+	<string name="confirm_delete_store">Vil du virkelig slette denne butikken?</string>
+	<string name="no_items_available">Ingen punkter tilgjengelige</string>
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
+	<!-- Remove item from this list, but keep it internally, so that the user
+	     can choose it later for inclusion again. Information like
+	     tags or price will be kept. -->
+	<string name="menu_remove_item">Fjern punkt fra liste</string>
+	
+	<!-- Delete this item completely. If the user wants to add it again, they
+	     have to enter all the information again. -->
+	<string name="menu_delete_item">Slett punkt for alltid</string>
+	<string name="menu_move_item">Flytt punkt til annen liste</string>
+    <string name="menu_copy_item">Kopier punkt</string>
+	    
+	<!-- Button label to add an item to the list. -->
+	<string name="add">Legg til</string>
+	
+	<string name="menu_pick_items">Velg punkter</string>
+	<string name="menu_start_shopping">Handling</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="pick_items_title">%s - Velg punkter</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="shopping_title">%s - Handling</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current item. -->
+	<string name="item_stores_title">%s - Butikker</string>
+	<string name="item_stores_activity_label">Rediger butikkpunkter</string>
+	
+	<string name="tags">Merker</string>
+	<string name="price">Pris</string>
+	<string name="item">Punkt</string>
+	<string name="quantity">Antall</string>
+	<string name="priority">Prioritet</string>
+	<string name="has_note">Har notat</string>
+	<string name="units">Enheter</string>
+	<string name="note">Notat</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
+	
+	<string name="otherqty">Annet antall...</string>
+	<string name="otherpri">Annen prioritet...</string>   
+	<string name="unfiltered">(Unfiltered)</string>
+	
+	<!-- Total sum of all prices. \'%s\' is the sum -->
+	<string name="total">Totalsum: %s</string>
+	
+	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+	<string name="total_checked">Sum av krysset: %s</string>
+    <string name="priority1_total">Prioritet 1: %s</string>
+    <string name="priority2_total">Prioritet 1-2: %s</string>
+	<string name="priority3_total">Prioritet 1-3: %s</string>
+	<string name="priority4_total">Prioritet 1-4: %s</string>
+	
+	<string name="delete_item_confirm">VIl du slette dette punktet for alltid?</string>
+	<string name="delete">Slett</string>
+	
+	<!-- Added to an item to indicate it was bought. -->
+	<string name="suffix_checked">... OK</string>
+	<string name="empty"/>
+	
+	<!-- The shortcut is created on the home screen. -->
+	<string name="pick_list_for_shortcut">Velg liste for snarvei</string>
+	
+	<!-- Shown if external application wants to insert new items. -->
+	<string name="pick_list_to_insert_items">Velg liste for å sette inn punkter</string>
+	
+	<!-- Theme related -->
+	<!-- Title for selecting a theme -->
+	<string name="theme_pick">Velg et tema</string>
+	<string name="theme_description">Velg et tema for denne listen</string>
+	<string name="theme_default">Standard</string>
+	<string name="theme_classic">Klassisk</string>
+	<string name="theme_bugdroid">Android</string>
+	<string name="theme_classic_export">Klassisk (fra OI Handleliste)</string>
+	<string name="theme_bugdroid_export">Android (fra OI Handleliste)</string>
+
+	<!--     Dialog box    -->
+	<!-- Button label "OK" -->
+	<string name="ok">OK</string>
+	<!-- Button label "Cancel" -->
+	<string name="cancel">Avbryt</string>
+	<string name="use_theme_for_all_lists">Bruk dette temaet for alle lister</string>
+	<string name="get_more_themes">Hent flere temaer</string>
+	
+	<!-- preferences -->
+	<string name="preferences">Innstillinger</string>
+	
+    <string name="preference_application">Applikasjonsinnstillinger</string>
+    
+	<string name="preference_unchecked_on_top">Ukrysset på toppen</string>
+	<string name="preference_unchecked_on_top_summary">Vis alltid ukryssede punkter først</string>
+	<string name="preference_fontsize">Skriftstørrelse</string>
+	<string name="preference_fontsize_summary">Endre skriftstørrelse</string>
+	<string name="preference_fontsize_dialog_title">Velg skriftstørrelse</string>
+	<string name="preference_orientation">Orientering</string>
+	<string name="preference_orientation_summary">Endre orientering</string>
+	<string name="preference_orientation_dialog_title">Velg orientering</string>
+	<string name="preference_sortorder_title">Sorteringsrekkefølge</string>
+	<string name="preference_sortorder_summary">Endre sorteringsrekkefølge på listepunkter</string>
+	<string name="preference_sortorder_for_pick_title">Sorteringsrekkefølge - Velg punkter</string>
+	<string name="preference_sortorder_for_pick_summary">Endre sorteringsrekkefølge på listepunkter i punktvelgingsmodus.</string>
+	<string name="preference_sortorder_dialog_title">Velg sorteringsrekkefølge</string>
+	<string name="preference_sortorder_for_pick_dialog_title">Velg sorteringsrekkefølge for punktvelgingsmodus</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
+	<string name="preference_loadlastused_title">Last sist brukte liste</string>
+	<string name="preference_loadlastused_summary">Alltid start med den sist viste listen.</string>
+	<string name="preference_capitalization_title">Store forbokstaver</string>
+	<string name="preference_capitalization_summary">Legg automatisk til store forbokstaver i oppføringer</string>
+	<string name="preference_capitalization_dialog_title">Velg store forbokstaver</string> 
+	<string name="preference_hidechecked_title">Gjem kryssede punkter</string>
+	<string name="preference_hidechecked_summary">Gjem kryssede punkter med en gang.</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
+	<string name="preference_showprice_title">Vis pris</string>
+	<string name="preference_showprice_summary">Vist som ekstra kolonne i liste.</string>
+	<string name="preference_perstoreprice">Priser per butikk</string>
+	<string name="preference_perstoreprice_title">Følg med på priser per butikk</string>
+	<string name="preference_perstoreprice_summary">Hold styr på seperate priser for hvert punkt i hver butikk.</string>
+	<string name="preference_screenlock_title">Deaktiver skjermlås</string>
+	<string name="preference_screenlock_summary">Hindrer skjermen fra å bli låst når krysset.</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
+	<string name="preference_complete_by_list_title">Limit item name completion</string>
+	<string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
+	<string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
+	<string name="preference_reset_quantity">Tilbakestill antall</string>
+	<string name="preference_reset_quantity_summary">Tilbakestiller antall når nye punkter blir lagt til.</string>
+	<string name="preference_add_for_barcode">Strekkodeleser</string>
+	<string name="preference_add_for_barcode_summary">Hold inne Legg Til-knappen for å starte OI Strekkode-tillegget (hvis installert).</string>
+	<string name="preference_showtags_title">Vis merker</string>
+	<string name="preference_showtags_summary">Vist som ekstra kolonne i liste.</string>
+	<string name="preference_showquantity_title">Vis antall</string>
+	<string name="preference_showquantity_summary">Vist som ekstra kolonne i liste.</string>
+	<string name="preference_showpriority_title">Vis prioritet</string>
+	<string name="preference_showpriority_summary">Vist som ekstra kolonne i liste.</string>
+	<string name="preference_showunits_title">Vis enheter</string>
+	<string name="preference_showunits_summary">Vist som ekstra kolonne i liste.</string>
+	<string name="preference_prio_subtotal">Delsum etter prioritet</string>
+	<string name="preference_prioritytotal_title">Delsum etter prioritet</string>
+	<string name="preference_prioritytotal_summary">Ingen delsum etter prioritet vist.</string>
+	<string name="preference_prioritytotal_dialog_title">Delsum etter prioritet</string>
+	<string name="preference_priosubtotalchecked_title">Inkluder kryssede oppføringer</string>
+	<string name="preference_priosubtotalchecked_on_summary">Delsum etter prioritet inkluderer kryssede punkter</string>
+	<string name="preference_priosubtotalchecked_off_summary">Delsum etter prioritet ekskluderer kryssede punkter</string>
+	<string name="preference_pickitemsinlist_title">Velg punkter direkte i liste</string>
+	<string name="preference_pickitemsinlist_on_summary">Bytt hovedliste til redigeringsmodus for å legge til eksisterende punkter</string>
+	<string name="preference_pickitemsinlist_off_summary">Legg punkter til en liste ved å bruke en dedikert dialog</string>
+	<string name="preference_samesortforpick_title">Alltid samme sorteringsrekkefølge</string>
+	<string name="preference_samesortforpick_on_summary">Punkter er sorterte i punktvelgingsmodus akkurat som i handlingsmodus</string>
+	<string name="preference_samesortforpick_off_summary">Sorteringsrekkefølge for punktvelgingsmodus kan bli valgt seperat.</string>
+	
+	<!-- Preference title: Shake the phone to clean up the list. -->
+	<string name="preference_shake_title">Rist for å rydde opp</string>
+	
+	<!-- Preference summary: Shake the phone to clean up the list. -->
+	<string name="preference_shake_summary">Rist telefonen for å rydde opp i listen.</string>
+	
+    <string name="preference_advanced">Avanserte innstillinger</string>
+    <string name="preference_advanced_summary">Ekstra innstillinger.</string>
+    
+    <!-- Preference category: General settings -->
+    <string name="preference_general">Generelt</string>
+    <string name="preference_pickitems">Velg punkter</string>
+    
+    <string name="preference_appearance">Utseende</string>
+    
+    <string name="preference_addons">Tillegg</string>
+    <string name="preference_get_addons">Få nye tillegg</string>
+    <string name="preference_get_addons_summary">Søk etter utvidelser og temaer på nettet.</string>
+    <string name="preference_get_market_addons">Hent tillegg fra Android Marked</string>
+    <string name="preference_get_developer_addons">Hent tillegg fra OpenIntents</string>
+    <string name="preference_extensions">Utvidelser</string>
+    <string name="preference_themes">Temaer</string>
+    <string name="preference_market_extensions_summary">Søk etter utvidelser i Android Marked.</string>
+    <string name="preference_market_themes_summary">Søk etter temaer i Android Marked.</string>
+    <string name="preference_developer_extensions_summary">Hent utvidelser fra OpenIntents sin hjemmeside.</string>
+	<string name="preference_developer_themes_summary">Hent temaer fra OpenIntents sin hjemmeside.</string>
+	<string name="preference_quickedit">Rask redigeringsmodus</string>
+	<string name="preference_quickedit_on_summary">Rør prioritet- eller antallsverdi for en meny med vanlige verdier.</string>
+	<string name="preference_quickedit_off_summary">Røring ved prioritet- eller antallsverdier tilkaller dialogen for redigering av punkter.</string>
+	<string name="preference_reset_all_settings">Tilbakestill alle innstillinger</string>
+	<string name="preference_reset_all_settings_alert">Vil du virkelig TILBAKESTILLE ALLE innstillinger? Dette kan ikke angres.</string>    
+	<string name="preference_reset_all_settings_done">Alle innstillinger har blitt tilbakestilt</string>
+	    
+	<!-- ***************************
+	     Permissions
+	     *************************** -->
+	
+	<!-- OI Shopping list -->
+	<!-- Permission to read shopping lists -->
+	<string name="oi_shopping_permission_read">les handlelister</string>
+	<string name="oi_shopping_permission_read_descr">Tillater en applikasjon å lese handlelister. Krypterte lister og punkter blir gitt i det krypterte formatet.</string>
+	<!-- Permission to write to shopping lists -->
+	<string name="oi_shopping_permission_write">skriv handlelister</string>
+	<string name="oi_shopping_permission_write_descr">Tillater en applikasjon å skape nye lister og punkter eller endre eksisterende.</string>
+	
+	
+	<!-- ***************************
+	     Preferences
+	     *************************** -->
+	
+    <string-array name="preference_sortorder_entries">
+    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    	<item>ukrysset først, alfabetisk</item>
+        <!-- Preference sort order: Sort by item name -->
+    	<item>alfabetisk</item>
+        <!-- Preference sort order: Newest item first -->
+    	<item>nyest først</item>
+        <!-- Preference sort order: Oldest item first -->
+    	<item>eldst først</item>
+    	<!-- Preference sort order: Sort alphabetically by tags -->
+    	<item>merker alfabetisk</item>
+        <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
+    	<item>prioritet, merker alfabetisk</item>
+        <!-- Preference sort order: Sort by price, the most expensive first -->
+    	<item>dyrest først</item>
+        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    	<item>ukrysset først, merker alfabetisk</item>
+    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    	<item>ukrysset først, prioritet, alfabetisk</item>
+    	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
+    	<item>ukrysset først, prioritet, merker alfabetisk</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>nyest først</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>eldst først</item>
+    </string-array>
+    
+    <string-array name="preference_prioritytotal_entries">
+    	<item>Ikke vist</item>
+    	<item>Prioritet 1</item>
+    	<item>Prioritet 1-2</item>
+    	<item>Prioritet 1-3</item>
+    	<item>Prioritet 1-4</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entries">
+    	<!-- Preference fontsize: tiny font size -->
+        <item>Veldig liten</item>
+    	<!-- Preference fontsize: small font size -->
+        <item>Liten</item>
+    	<!-- Preference fontsize: default font size -->
+    	<item>Standard</item>
+    	<!-- Preference fontsize: large font size -->
+        <item>Stor</item>
+    </string-array>
+    
+    <string-array name="preference_orientation_entries">
+    	<!-- Preference orientation: default -->
+        <item>Standard</item>
+    	<!-- Preference orientation: landscape -->
+    	<item>Liggende</item>
+    	<!-- Preference orientation: portrait -->
+        <item>Stående</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entries">
+    	<!-- Preference capitalization: No capitalization -->
+        <item>Ingen</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+        <item>Hver setning</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+        <item>Hvert ord</item>
+    </string-array>
+
+	<!-- ***************************
+	     OI Notepad
+	     *************************** -->
+	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+	<string name="notepad_not_available">Redigering av punktnotater krever OI Notatblokk</string>
+	<!-- Name of application "OI Notepad". Translations should be consistent. -->
+	<string name="notepad">OI Notatblokk</string>
+
+	<!-- ***************************
+	     Automation
+	     *************************** -->
+	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<string name="label_select_action">Velg handling:</string>
+	
+	<!-- Label above button that opens a list of all shopping lists to choose from. -->
+	<string name="label_select_list">Velg liste:</string>
+	
+	<!-- Arrays -->
+	
+    <string-array name="automation_actions">
+    	<!-- Automation action to clean up a list. -->
+    	<item>Rydd opp i liste</item>
+    </string-array>
+      
+	<string name="widget_prev_page">Forrige side</string>
+	<string name="widget_next_page">Neste side</string>
+	<string name="widget_choose_a_list">Velg en liste</string>
+	<string name="widget_no_items">Ingen punkter på side %d</string>
+</resources>

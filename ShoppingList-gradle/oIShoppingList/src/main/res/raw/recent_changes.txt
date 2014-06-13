@@ -1,0 +1,52 @@
+----------------
+release 1.8
+date: 2014-02-11
+
+- Add OI Shopping List to the "share" menu of other apps to import text lists. (RuthAlk)
+- Unmark All context menu item
+- Avoid overlapping text of price and description
+- Fix issues with Add button sometimes not adding.
+- Fix text color on filter buttons.
+
+----------------
+release 1.7
+date: 2012-10-16
+
+- Sort list of lists (patch by Stanley F. for Google Summer of Code 2012)
+- Set cursor to end in "rename list" dialog (patch by Alex Yaremenko)
+- Fix list shortcut when filters are active.
+- Fix Stores button in Edit Items dialog (issue 510)
+- Filter and QuickEdit menus make better use of screen space on pre-ICS devices.
+
+----------------
+release 1.6
+date: 2012-01-29
+
+- PLEASE READ THIS: The font size has been adjusted for high-density devices. Please use menu > settings > font size to set the desired size (see issue 427)
+
+- Filter by store or tags. (Enable in advanced preferences.)
+- Fast scrolling support. (Enable in advanced preferences.)
+- Copy Item added to long-press menu.
+
+Thanks to Google Code-in for many of the following patches:
+(see http://www.google-melange.com/gci/homepage/google/gci2011 )
+
+- Widget. (Google Code-In task by Andrey Zaytsev.)
+- new setting for long press "Add" button (Google Code-in task by Gautam, issue 358)
+- show "Stores" button when tracking per-store prices (Google Code-in task by Michal Zielinski, issue 359)
+- reset all option in settings (Google Code-in task by Andrey Zaytsev, issue 360)
+- fixed bug with disable screen lock (Google Code-in task by Darriel, issue 431)
+- fix font color in list title and text entry field (issue 452)
+- Update totals after changing quantity with Quick Edit.
+
+- new icons and translations by Google Code-in students
+
+----------------
+For the complete list of changes and a list of frequently asked questions, please visit:
+http://www.openintents.org
+
+You can help to improve the translation into your language at Launchpad:
+https://translations.launchpad.net/openintents/trunk
+
+The source code of this free and open source application is available at:
+http://code.google.com/p/openintents

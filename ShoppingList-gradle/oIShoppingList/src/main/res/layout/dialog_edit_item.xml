@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!--
+		* Copyright (C) 2007-2008 OpenIntents.org * * Licensed under the
+		Apache License, Version 2.0 (the "License"); * you may not use this
+		file except in compliance with the License. * You may obtain a copy of
+		the License at * * http://www.apache.org/licenses/LICENSE-2.0 * *
+		Unless required by applicable law or agreed to in writing, software *
+		distributed under the License is distributed on an "AS IS" BASIS, *
+		WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+		implied. * See the License for the specific language governing
+		permissions and * limitations under the License.
+	-->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="fill_parent" android:layout_width="fill_parent">
+	<RelativeLayout
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:padding="5dip">
+		<EditText android:id="@+id/edittext" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:text=""
+			android:hint="@string/item"
+			android:inputType="text" />
+		<!--
+			android:layout_weight="1"
+			android:capitalize="words"
+		-->
+		<LinearLayout  android:id="@+id/quantity_and_price"
+			android:orientation="horizontal"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:layout_below="@id/edittext" >
+			<RelativeLayout
+				android:layout_width="0dip"
+				android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:layout_marginRight="5dip" >
+				<TextView android:layout_width="fill_parent" android:id="@+id/labeleditquantity"
+					android:layout_height="wrap_content" android:layout_weight="1"
+					android:text="@string/quantity"  />
+				<EditText android:id="@+id/editquantity"
+					android:layout_height="wrap_content" android:layout_width="fill_parent"
+					android:singleLine="true" android:inputType="numberDecimal"
+					android:layout_below="@+id/labeleditquantity"/>
+			</RelativeLayout>
+			<RelativeLayout
+				android:layout_width="0dip"
+				android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:layout_marginRight="5dip" >
+				<TextView android:layout_width="fill_parent" android:id="@+id/labeleditunits"
+					android:layout_height="wrap_content" android:layout_weight="1"
+					android:text="@string/units"  />
+				<AutoCompleteTextView android:id="@+id/editunits"
+					android:layout_height="wrap_content" android:layout_width="fill_parent"
+					android:singleLine="true" android:inputType="text"
+					android:layout_below="@+id/labeleditunits" android:completionThreshold="1"/>
+			</RelativeLayout>
+			<RelativeLayout
+				android:layout_width="0dip"
+				android:layout_weight="1"
+				android:layout_height="wrap_content">
+				<TextView android:layout_width="fill_parent" android:id="@+id/labeleditprice"
+					android:layout_height="wrap_content" android:text="@string/price"
+					/>
+				<EditText android:id="@+id/editprice" android:layout_width="fill_parent"
+					android:layout_height="wrap_content" android:text=""
+					android:hint="0.00"
+					android:singleLine="true" android:numeric="signed|decimal"
+					android:layout_below="@id/labeleditprice" />
+				<Button android:id="@+id/pricestore"
+					android:singleLine="true"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/labeleditprice"
+					android:text="@string/menu_item_stores" />
+			</RelativeLayout>
+		</LinearLayout>
+		<TextView android:layout_width="fill_parent" android:id="@+id/labeledittag"
+			android:layout_height="wrap_content"
+			android:layout_weight="1" android:text="@string/tags"
+			android:layout_below="@+id/quantity_and_price" />
+		<MultiAutoCompleteTextView
+	 	 android:id="@+id/edittags"
+	     android:layout_width="fill_parent"
+	     android:layout_height="wrap_content"
+	     android:hint="@string/tags"
+	     android:singleLine="true"
+	     android:layout_below="@id/labeledittag"  />
+	    <LinearLayout  android:id="@+id/priority_and_note"
+			android:orientation="horizontal"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:layout_below="@id/edittags" >
+	  
+		<RelativeLayout
+				android:layout_width="0dip"
+				android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:layout_marginRight="5dip" >
+				<TextView android:layout_width="fill_parent" android:id="@+id/labeleditpriority"
+					android:layout_height="wrap_content" android:layout_weight="1"
+					android:text="@string/priority"  />
+				<EditText android:id="@+id/editpriority"
+					android:layout_height="wrap_content" android:layout_width="fill_parent"
+					android:singleLine="true" android:inputType="number"
+					android:layout_below="@+id/labeleditpriority"/>
+		</RelativeLayout>
+		<RelativeLayout
+				android:layout_width="0dip"
+				android:layout_weight="1"
+				android:layout_height="wrap_content"
+				android:layout_marginRight="5dip" >
+		      <TextView android:layout_width="fill_parent" android:id="@+id/labeleditnote"
+					android:layout_height="wrap_content" android:layout_weight="1"
+					android:text="@string/note"  />
+			  <ImageButton android:id="@+id/note"
+			   android:src="@drawable/ic_launcher_notepad_small"
+			   android:layout_width="fill_parent"
+			   android:layout_height="wrap_content"
+			   android:layout_below="@id/labeleditnote"
+			   android:scaleType="centerInside"
+			/> 
+		</RelativeLayout>
+			</LinearLayout>
+	    <!--
+			android:capitalize="words"
+		-->
+	</RelativeLayout>
+
+</ScrollView>

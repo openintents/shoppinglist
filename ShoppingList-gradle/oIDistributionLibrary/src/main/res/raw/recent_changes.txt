@@ -1,0 +1,20 @@
+---------------------------------------------------------
+release: 1.0.1
+date: 2011-02-07
+- new InfoActivity for applications without main launcher
+
+---------------------------------------------------------
+release: 1.0.0
+date: 2011-01-22
+- central library for EULA activity
+- new activity to display recent changes
+
+---------------------------------------------------------
+For the complete list of changes and a list of frequently asked questions, please visit:
+http://www.openintents.org
+
+You can help to improve the translation into your language at Launchpad:
+https://translations.launchpad.net/openintents/trunk
+
+The source code of this free and open source application is available at:
+http://code.google.com/p/openintents

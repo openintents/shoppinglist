@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2010 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">Launchpad Contributions:
+  Joan Creus https://launchpad.net/~joan-creus-c
+  OpenIntents devs https://launchpad.net/~openintents-devs</string>
+	
+    <!-- Short explanation of the application (max. 80 characters) -->
+	<string name="about_comments">Porta un registre dels teus elements de compra amb la llista de compra d\'OI.</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
+	<string name="app_name">Llista de compra d\'OI</string>
+
+	<string name="new_item">Nou element</string>
+	<string name="new_list">Nova llista</string>
+	<string name="send">Enviar llista</string>
+	<string name="mark_all_items">Marcar tots els elements</string>
+	<string name="unmark_all_items">Unmark all items</string>
+	<string name="empty_list_not_sent">No s\'ha enviat la llista buida.</string>
+	<string name="email_not_available">No hi ha cap aplicació disponible per enviar.</string>
+	<string name="my_shopping_list">La meva llista de compra</string>
+	<string name="new_list_hint">p.e. llista de desitgos, llista de família</string>
+	<string name="clean_up_list">Netejar llista</string>
+	<string name="delete_list">Eliminar llista</string>
+	<string name="ask_new_list">Escriu el nom de la nova llista de compra</string>
+	<string name="ask_rename_list">Reanomenar llista de compra</string>
+	<string name="ask_edit_item">Edita l\'element</string>
+	<string name="ask_new_store">Escriu un nom de botiga nou</string>
+	<string name="please_enter_name">Si us plau entreu un nom</string>
+	<string name="no_items_marked">No s\'ha marcat cap element com a ratllat.</string>
+	<string name="confirm_delete_list">Esteu segurs que voleu eliminar aquesta llista de compra?</string>
+	<string name="no_shopping_provider">Error accedint a les llistes decompra.</string>
+	<string name="pick_item">Escull un element</string>
+	<string name="pick_list">Escull una llista</string>
+	<string name="theme">Tema</string>
+	<string name="theme_settings">Preferències de tema</string>
+	<string name="rename_list">Reanomena llista</string>
+	<string name="menu_mark_item">Marcar element</string>
+	<string name="menu_edit_item">Edita l\'element</string>
+	<string name="menu_auto_add">Afegeix automàticament</string>
+	<string name="menu_item_stores">Botigues...</string>
+	<string name="menu_rename_store">Reanomena botiga</string>
+	<string name="menu_delete_store">Eliminar botiga</string>
+	<string name="confirm_delete_store">Esteu segurs que voleu eliminar aquesta botiga?</string>
+	<string name="no_items_available">Cap element disponible</string>
+	<string name="no_stores_available">No stores available for this list</string>
+	<string name="no_tags_available">No tags available for this list</string>
+	    
+	<!-- Remove item from this list, but keep it internally, so that the user
+	     can choose it later for inclusion again. Information like
+	     tags or price will be kept. -->
+	<string name="menu_remove_item">Elimina l\'element de la llista</string>
+	
+	<!-- Delete this item completely. If the user wants to add it again, they
+	     have to enter all the information again. -->
+	<string name="menu_delete_item">Elimina l\'element permanentment</string>
+	<string name="menu_move_item">Mou element a l\'altra llista</string>
+    <string name="menu_copy_item">Copiar element</string>
+	    
+	<!-- Button label to add an item to the list. -->
+	<string name="add">Afegir</string>
+	
+	<string name="menu_pick_items">Escull elements</string>
+	<string name="menu_start_shopping">Compres</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="pick_items_title">%s - Escull elements</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current list. -->
+	<string name="shopping_title">%s - Compres</string>
+	
+	<!-- Title supplement. \'%s\' is the name of the current item. -->
+	<string name="item_stores_title">%s - Botigues</string>
+	<string name="item_stores_activity_label">Edita botigues d\'elements</string>
+	
+	<string name="tags">Etiquetes</string>
+	<string name="price">Preu</string>
+	<string name="item">Element</string>
+	<string name="quantity">Quantitat</string>
+	<string name="priority">Prioritat</string>
+	<string name="has_note">Té una nota</string>
+	<string name="units">Unitats</string>
+	<string name="note">Nota</string>
+	<string name="stores">Stores</string>
+	<string name="list">List</string>
+	
+	<string name="otherqty">Una altra quantitat...</string>
+	<string name="otherpri">Una altra prioritat...</string>   
+	<string name="unfiltered">(Unfiltered)</string>
+	
+	<!-- Total sum of all prices. \'%s\' is the sum -->
+	<string name="total">Total: %s</string>
+	
+	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+	<string name="total_checked">Comprovats: %s</string>
+    <string name="priority1_total">Prioritat 1: %s</string>
+    <string name="priority2_total">Prioritat 1-2: %s</string>
+	<string name="priority3_total">Prioritat 1-3: %s</string>
+	<string name="priority4_total">Prioritat 1-4: %s</string>
+	
+	<string name="delete_item_confirm">Esteu segur que voleu suprimir permanentment aquest element?</string>
+	<string name="delete">Elimina</string>
+	
+	<!-- Added to an item to indicate it was bought. -->
+	<string name="suffix_checked">... D\'acord</string>
+	<string name="empty"/>
+	
+	<!-- The shortcut is created on the home screen. -->
+	<string name="pick_list_for_shortcut">Escull una llista per la drecera</string>
+	
+	<!-- Shown if external application wants to insert new items. -->
+	<string name="pick_list_to_insert_items">Escull una llista per inserir elements</string>
+	
+	<!-- Theme related -->
+	<!-- Title for selecting a theme -->
+	<string name="theme_pick">Escull un tema</string>
+	<string name="theme_description">Escull un tema per aquesta llista</string>
+	<string name="theme_default">Per defecte</string>
+	<string name="theme_classic">Clàssic</string>
+	<string name="theme_bugdroid">Android</string>
+	<string name="theme_classic_export">Clàssic (de la llista de compra d\'OI)</string>
+	<string name="theme_bugdroid_export">Android (de la llista de compra d\'OI)</string>
+
+	<!--     Dialog box    -->
+	<!-- Button label "OK" -->
+	<string name="ok">D\'acord</string>
+	<!-- Button label "Cancel" -->
+	<string name="cancel">Cancel·la</string>
+	<string name="use_theme_for_all_lists">Utilitza aquest tema per a totes les llistes</string>
+	<string name="get_more_themes">Aconsegueix més temes</string>
+	
+	<!-- preferences -->
+	<string name="preferences">Preferències</string>
+	
+    <string name="preference_application">Preferències de l\'aplicació</string>
+    
+	<string name="preference_unchecked_on_top">No activat a dalt</string>
+	<string name="preference_unchecked_on_top_summary">Mostra sempre els elements no activats primer</string>
+	<string name="preference_fontsize">Mida de la lletra</string>
+	<string name="preference_fontsize_summary">Canvia la mida de la lletra</string>
+	<string name="preference_fontsize_dialog_title">Escull la mida de la lletra</string>
+	<string name="preference_orientation">Orientació</string>
+	<string name="preference_orientation_summary">Canvia l\'orientació</string>
+	<string name="preference_orientation_dialog_title">Escull l\'orientació</string>
+	<string name="preference_sortorder_title">Criteri d\'ordenació</string>
+	<string name="preference_sortorder_summary">Canvia el criteri d\'ordenació dels elements de la llista</string>
+	<string name="preference_sortorder_for_pick_title">Criteri d\'ordenació - Escull elements</string>
+	<string name="preference_sortorder_for_pick_summary">Canvieu el criteri d\'ordenació dels elements de la llista en el mode Escull Elements</string>
+	<string name="preference_sortorder_dialog_title">Escull el criteri d\'ordenació</string>
+	<string name="preference_sortorder_for_pick_dialog_title">Escull el criteri d\'ordenació per al mode Escull Elements</string>
+	<string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+	<string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+	<string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
+	<string name="preference_loadlastused_title">Carrega l\'última llista emprada</string>
+	<string name="preference_loadlastused_summary">Compença sempre amb la llista vista l\'últim cop.</string>
+	<string name="preference_capitalization_title">Majúscules</string>
+	<string name="preference_capitalization_summary">Afegeix majúscula inicial automàticament a les entrades</string>
+	<string name="preference_capitalization_dialog_title">Escull criteri de majúscules</string> 
+	<string name="preference_hidechecked_title">Amaga elements activats</string>
+	<string name="preference_hidechecked_summary">Amaga immediatament els elements activats.</string>
+	<string name="preference_fastscroll_title">Fast Scrolling</string>
+	<string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
+	<string name="preference_showprice_title">Mostra el preu</string>
+	<string name="preference_showprice_summary">Mostrat com a columna addicional a la llista.</string>
+	<string name="preference_perstoreprice">Preus per botiga</string>
+	<string name="preference_perstoreprice_title">Track per-store prices</string>
+	<string name="preference_perstoreprice_summary">Keep track of separate prices for each item at each store.</string>
+	<string name="preference_screenlock_title">Disable screen lock</string>
+	<string name="preference_screenlock_summary">Prevents the screen to be locked when checked.</string>
+	<string name="preference_usefilters_title">Filters</string>
+	<string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
+	<string name="preference_complete_by_list_title">Limit item name completion</string>
+	<string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
+	<string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
+	<string name="preference_reset_quantity">Reset Quantity</string>
+	<string name="preference_reset_quantity_summary">Resets the quantity when adding items again.</string>
+	<string name="preference_add_for_barcode">Barcode Scanner</string>
+	<string name="preference_add_for_barcode_summary">Long press the Add button to start Barcode OI Plugin (if installed).</string>
+	<string name="preference_showtags_title">Show tags</string>
+	<string name="preference_showtags_summary">Mostrat com a columna addicional a la llista.</string>
+	<string name="preference_showquantity_title">Show quantity</string>
+	<string name="preference_showquantity_summary">Mostrat com a columna addicional a la llista.</string>
+	<string name="preference_showpriority_title">Show priority</string>
+	<string name="preference_showpriority_summary">Mostrat com a columna addicional a la llista.</string>
+	<string name="preference_showunits_title">Show units</string>
+	<string name="preference_showunits_summary">Mostrat com a columna addicional a la llista.</string>
+	<string name="preference_prio_subtotal">Subtotal by priority</string>
+	<string name="preference_prioritytotal_title">Subtotal by priority</string>
+	<string name="preference_prioritytotal_summary">No subtotal by priority shown.</string>
+	<string name="preference_prioritytotal_dialog_title">Subtotal by priority</string>
+	<string name="preference_priosubtotalchecked_title">Include checked items</string>
+	<string name="preference_priosubtotalchecked_on_summary">Subtotal by priority includes checked items</string>
+	<string name="preference_priosubtotalchecked_off_summary">Subtotal by priority excludes checked items</string>
+	<string name="preference_pickitemsinlist_title">Pick items directly in list</string>
+	<string name="preference_pickitemsinlist_on_summary">Switch main list to edit mode to re-add existing items</string>
+	<string name="preference_pickitemsinlist_off_summary">Add items to list using a dedicated dialog</string>
+	<string name="preference_samesortforpick_title">Always same sort order</string>
+	<string name="preference_samesortforpick_on_summary">Items are sorted in Pick Items mode just as in Shopping mode.</string>
+	<string name="preference_samesortforpick_off_summary">Sort order for Pick Items mode can be chosen separately.</string>
+	
+	<!-- Preference title: Shake the phone to clean up the list. -->
+	<string name="preference_shake_title">Shake to clean up</string>
+	
+	<!-- Preference summary: Shake the phone to clean up the list. -->
+	<string name="preference_shake_summary">Shake the phone to clean up the list.</string>
+	
+    <string name="preference_advanced">Advanced settings</string>
+    <string name="preference_advanced_summary">Additional settings.</string>
+    
+    <!-- Preference category: General settings -->
+    <string name="preference_general">General</string>
+    <string name="preference_pickitems">Pick Items</string>
+    
+    <string name="preference_appearance">Appearance</string>
+    
+    <string name="preference_addons">Add-ons</string>
+    <string name="preference_get_addons">Get new add-ons</string>
+    <string name="preference_get_addons_summary">Search for extensions and themes online.</string>
+    <string name="preference_get_market_addons">Get add-ons from Market</string>
+    <string name="preference_get_developer_addons">Get add-ons from OpenIntents</string>
+    <string name="preference_extensions">Extensions</string>
+    <string name="preference_themes">Themes</string>
+    <string name="preference_market_extensions_summary">Search for extensions at Android Market.</string>
+    <string name="preference_market_themes_summary">Search for themes at Android Market.</string>
+    <string name="preference_developer_extensions_summary">Get extensions from the OpenIntents homepage.</string>
+	<string name="preference_developer_themes_summary">Get themes from the OpenIntents homepage.</string>
+	<string name="preference_quickedit">Quick Edit Mode</string>
+	<string name="preference_quickedit_on_summary">Touch Priority or Quantity values for a menu of common values.</string>
+	<string name="preference_quickedit_off_summary">Touching Priority or Quantity values summons the Edit Item dialog.</string>
+	<string name="preference_reset_all_settings">Reset all settings</string>
+	<string name="preference_reset_all_settings_alert">Do you really want to RESET ALL settings? This cannot be undone.</string>    
+	<string name="preference_reset_all_settings_done">All settings have been reset</string>
+	    
+	<!-- ***************************
+	     Permissions
+	     *************************** -->
+	
+	<!-- OI Shopping list -->
+	<!-- Permission to read shopping lists -->
+	<string name="oi_shopping_permission_read">read shopping lists</string>
+	<string name="oi_shopping_permission_read_descr">Allows an application to read shopping lists. Note that encrypted lists and items are provided in the encrypted format.</string>
+	<!-- Permission to write to shopping lists -->
+	<string name="oi_shopping_permission_write">write shopping lists</string>
+	<string name="oi_shopping_permission_write_descr">Allows an application to create new lists and items or change existing ones.</string>
+	
+	
+	<!-- ***************************
+	     Preferences
+	     *************************** -->
+	
+    <string-array name="preference_sortorder_entries">
+    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    	<item>unchecked first, alphabetical</item>
+        <!-- Preference sort order: Sort by item name -->
+    	<item>alphabetical</item>
+        <!-- Preference sort order: Newest item first -->
+    	<item>newest first</item>
+        <!-- Preference sort order: Oldest item first -->
+    	<item>oldest first</item>
+    	<!-- Preference sort order: Sort alphabetically by tags -->
+    	<item>tags alphabetical</item>
+        <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
+    	<item>priority, tags alphabetical</item>
+        <!-- Preference sort order: Sort by price, the most expensive first -->
+    	<item>most expensive first</item>
+        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    	<item>unchecked first, tags alphabetical</item>
+    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    	<item>unchecked first, priority, alphabetical</item>
+    	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
+    	<item>unchecked first, priority, tags alphabetical</item>
+    </string-array>
+    
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>newest first</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>oldest first</item>
+    </string-array>
+    
+    <string-array name="preference_prioritytotal_entries">
+    	<item>Not shown</item>
+    	<item>Priority 1</item>
+    	<item>Priority 1-2</item>
+    	<item>Priority 1-3</item>
+    	<item>Priority 1-4</item>
+    </string-array>
+    
+    <string-array name="preference_fontsize_entries">
+    	<!-- Preference fontsize: tiny font size -->
+        <item>Tiny</item>
+    	<!-- Preference fontsize: small font size -->
+        <item>Small</item>
+    	<!-- Preference fontsize: default font size -->
+    	<item>Per defecte</item>
+    	<!-- Preference fontsize: large font size -->
+        <item>Large</item>
+    </string-array>
+    
+    <string-array name="preference_orientation_entries">
+    	<!-- Preference orientation: default -->
+        <item>Per defecte</item>
+    	<!-- Preference orientation: landscape -->
+    	<item>Landscape</item>
+    	<!-- Preference orientation: portrait -->
+        <item>Portrait</item>
+    </string-array>
+    
+    <string-array name="preference_capitalization_entries">
+    	<!-- Preference capitalization: No capitalization -->
+        <item>None</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+        <item>Per sentence</item>
+    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+        <item>Per word</item>
+    </string-array>
+
+	<!-- ***************************
+	     OI Notepad
+	     *************************** -->
+	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+	<string name="notepad_not_available">Editing item notes requires OI Notepad.</string>
+	<!-- Name of application "OI Notepad". Translations should be consistent. -->
+	<string name="notepad">OI Notepad</string>
+
+	<!-- ***************************
+	     Automation
+	     *************************** -->
+	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+	<string name="label_select_action">Select action:</string>
+	
+	<!-- Label above button that opens a list of all shopping lists to choose from. -->
+	<string name="label_select_list">Select list:</string>
+	
+	<!-- Arrays -->
+	
+    <string-array name="automation_actions">
+    	<!-- Automation action to clean up a list. -->
+    	<item>Netejar llista</item>
+    </string-array>
+      
+	<string name="widget_prev_page">Previous page</string>
+	<string name="widget_next_page">Next page</string>
+	<string name="widget_choose_a_list">Choose a list</string>
+	<string name="widget_no_items">No items on page %d</string>
+</resources>
