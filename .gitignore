@@ -1,10 +1,5 @@
-bin
-gen
-build-private.properties
-local.properties
-release
-build
-.gradle
-.idea
-*.iml
-*~
+*/bin
+*/gen
+*/build-private.properties
+*/local.properties
+*/release
