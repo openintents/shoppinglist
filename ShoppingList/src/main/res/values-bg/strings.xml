@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<?xml version="1.0" encoding="utf-8"?><!--
  * Copyright (C) 2007-2010 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,11 +14,11 @@
  * limitations under the License.
  -->
 <resources>
-	<!-- ***************************
-	     About information
-	     *************************** -->
-	
-	<!-- Automatically filled in by Launchpad: -->
+  <!-- ***************************
+       About information
+       *************************** -->
+
+  <!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
   Dariel Kremov https://launchpad.net/~dkremov
   Ivaylo Malinov https://launchpad.net/~iv-malinov
@@ -28,350 +27,350 @@
   Peli https://launchpad.net/~peli0101
   Stefani Soyanova https://launchpad.net/~stefi-stoyanova95
   kosyo https://launchpad.net/~kosyokk</string>
-	
-    <!-- Short explanation of the application (max. 80 characters) -->
-	<string name="about_comments">Следете списъка си с артикули за пазаруване с OI Списък за Пазаруване.</string>
-	
-	<!-- ***************************
-	     Applicatio-specific strings
-	     *************************** -->
-	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Списък за Пазаруване</string>
 
-	<string name="new_item">Нов продукт</string>
-	<string name="new_list">Нов списък</string>
-	<string name="send">Изпрати списък</string>
-	<string name="mark_all_items">Маркирай всички елементи</string>
-	<string name="unmark_all_items">Unmark all items</string>
-	<string name="empty_list_not_sent">Празният списък не е изпратен.</string>
-	<string name="email_not_available">Не се предлага приложение за изпращане.</string>
-	<string name="my_shopping_list">Мой списък за пазаруване</string>
-	<string name="new_list_hint">н.пр. списък с желания, семеен списък</string>
-	<string name="clean_up_list">Почисти списък</string>
-	<string name="delete_list">Изтрий списък</string>
-	<string name="ask_new_list">Въведи име на новия списък за пазаруване</string>
-	<string name="ask_rename_list">Преименувай списъка за пазаруване</string>
-	<string name="ask_edit_item">Редактирай елемент</string>
-	<string name="ask_new_store">Въведи име на нов склад</string>
-	<string name="please_enter_name">Моля, въведете име</string>
-	<string name="no_items_marked">Няма елементи, които да са маркирани като зачеркнати.</string>
-	<string name="confirm_delete_list">Наистина ли искате да изтриете този списък за пазаруване?</string>
-	<string name="no_shopping_provider">Грешка при достъп до списъка за пазаруване.</string>
-	<string name="pick_item">Изберете елемент</string>
-	<string name="pick_list">Изберете списък</string>
-	<string name="theme">Палитра</string>
-	<string name="theme_settings">Настройки палитра</string>
-	<string name="rename_list">Преименувай списък</string>
-	<string name="menu_mark_item">Маркирай елемент</string>
-	<string name="menu_edit_item">Редактирай елемент</string>
-	<string name="menu_auto_add">Автоматично добавяне</string>
-	<string name="menu_item_stores">Сладове..</string>
-	<string name="menu_rename_store">Преименувай склад</string>
-	<string name="menu_delete_store">Изтрии слад</string>
-	<string name="confirm_delete_store">Наистина ли сикате да изтриете този склад</string>
-	<string name="no_items_available">Елементите не са действащи</string>
-	<string name="no_stores_available">Никакви налични магазини за този списък</string>
-	<string name="no_tags_available">Няма налични етикети за този списък</string>
-	    
-	<!-- Remove item from this list, but keep it internally, so that the user
-	     can choose it later for inclusion again. Information like
-	     tags or price will be kept. -->
-	<string name="menu_remove_item">Отстрани елемент от списъка</string>
-	
-	<!-- Delete this item completely. If the user wants to add it again, they
-	     have to enter all the information again. -->
-	<string name="menu_delete_item">Изтрий елемент перманентно</string>
-	<string name="menu_move_item">Премести елемент към друг списък</string>
-    <string name="menu_copy_item">Копирай артикул</string>
-	    
-	<!-- Button label to add an item to the list. -->
-	<string name="add">Добавяне</string>
-	
-	<string name="menu_pick_items">Избери елементи</string>
-	<string name="menu_start_shopping">Пазаруване</string>
-	
-	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_title">%s - Избери елементи</string>
-	
-	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="shopping_title">%s - Пазаруване</string>
-	
-	<!-- Title supplement. \'%s\' is the name of the current item. -->
-	<string name="item_stores_title">%s Складове</string>
-	<string name="item_stores_activity_label">Редактирай елементите на Складовете</string>
-	
-	<string name="tags">Отметки</string>
-	<string name="price">Цена</string>
-	<string name="item">Елемент</string>
-	<string name="quantity">Количество</string>
-	<string name="priority">Приоритет</string>
-	<string name="has_note">Има забележка</string>
-	<string name="units">Единици</string>
-	<string name="note">Забележка</string>
-	<string name="stores">Магазини</string>
-	<string name="list">Списък</string>
-	
-	<string name="otherqty">Друго количество...</string>
-	<string name="otherpri">Друг приоритет...</string>   
-	<string name="unfiltered">(Нефилтрирано)</string>
-	
-	<!-- Total sum of all prices. \'%s\' is the sum -->
-	<string name="total">Общо: %s</string>
-	
-	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
-	<string name="total_checked">Проверени: %s</string>
-    <string name="priority1_total">Приоритет 1:%s</string>
-    <string name="priority2_total">Приоритет 1-2:%s</string>
-	<string name="priority3_total">Приоритет 1-3:%s</string>
-	<string name="priority4_total">Приоритет 1-4:%s</string>
-	
-	<string name="delete_item_confirm">Сигурен ли сте, че желаете перманентно да изтриете този артикул?</string>
-	<string name="delete">Изтриване</string>
-	
-	<!-- Added to an item to indicate it was bought. -->
-	<string name="suffix_checked">... OK</string>
-	<string name="empty"/>
-	
-	<!-- The shortcut is created on the home screen. -->
-	<string name="pick_list_for_shortcut">Избери списък за бърза команда</string>
-	
-	<!-- Shown if external application wants to insert new items. -->
-	<string name="pick_list_to_insert_items">Избери списък за въвеждане на елементи</string>
-	
-	<!-- Theme related -->
-	<!-- Title for selecting a theme -->
-	<string name="theme_pick">Избери палитра</string>
-	<string name="theme_description">Избери палитра от този списък</string>
-	<string name="theme_default">По подразбиране</string>
-	<string name="theme_classic">Класика</string>
-	<string name="theme_bugdroid">Android</string>
-	<string name="theme_classic_export">Класика (от OI списъка за пазаруване)</string>
-	<string name="theme_bugdroid_export">Android (от OI списъка за пазаруване)</string>
+  <!-- Short explanation of the application (max. 80 characters) -->
+  <string name="about_comments">Следете списъка си с артикули за пазаруване с OI Списък за Пазаруване.</string>
 
-	<!--     Dialog box    -->
-	<!-- Button label "OK" -->
-	<string name="ok">OK</string>
-	<!-- Button label "Cancel" -->
-	<string name="cancel">Откажи</string>
-	<string name="use_theme_for_all_lists">Използване на тази палитра за всички списъци</string>
-	<string name="get_more_themes">Вземете повече палитри</string>
-	
-	<!-- preferences -->
-	<string name="preferences">Настройки</string>
-	
-    <string name="preference_application">Настройки на приложението</string>
-    
-	<string name="preference_unchecked_on_top">Немаркирани най-отгоре</string>
-	<string name="preference_unchecked_on_top_summary">Винаги показвай първо немаркирани</string>
-	<string name="preference_fontsize">Размер на шрифт</string>
-	<string name="preference_fontsize_summary">Промени размер на шрифт</string>
-	<string name="preference_fontsize_dialog_title">Избери размер на шрифт</string>
-	<string name="preference_orientation">Ориентация</string>
-	<string name="preference_orientation_summary">Смени ориентацията</string>
-	<string name="preference_orientation_dialog_title">Избери ориентация</string>
-	<string name="preference_sortorder_title">Сортиране на реда</string>
-	<string name="preference_sortorder_summary">Промени реда на подреждане на елементи от списъка</string>
-	<string name="preference_sortorder_for_pick_title">Ред за сортиране - изписване на артикули</string>
-	<string name="preference_sortorder_for_pick_summary">Промяна на реда на сортиране на елементи от списък в режим на изписване на артикули.</string>
-	<string name="preference_sortorder_dialog_title">Избери реда на подреждане</string>
-	<string name="preference_sortorder_for_pick_dialog_title">Изберете ред на сортиране за режим на изписване на артикули</string>
-	<string name="preference_sortorder_for_shopping_lists">Ред на подредба - Списък за пазаруване</string>
-	<string name="preference_sortorder_for_slists_summary">Смяна реда на подредба на списъка за пазаруване</string>
-	<string name="preference_sortorder_for_slists_dialog_title">Избор на реда на подредба на списъка за пазаруване</string>
-	<string name="preference_loadlastused_title">Зареди последно ползван списък</string>
-	<string name="preference_loadlastused_summary">Започвай винаги с последно прегледания списък.</string>
-	<string name="preference_capitalization_title">Главна буква</string>
-	<string name="preference_capitalization_summary">Автоматично изписване на записите с главна буква</string>
-	<string name="preference_capitalization_dialog_title">Избери писане с главни букви</string> 
-	<string name="preference_hidechecked_title">Скрий маркирани елементи</string>
-	<string name="preference_hidechecked_summary">Скрий веднага елементи, които са демаркирани.</string>
-	<string name="preference_fastscroll_title">Бързо превъртане</string>
-	<string name="preference_fastscroll_summary">Бутона за превъртане се появява когато превъртите 35 артикула или повече.</string>
-	<string name="preference_showprice_title">Покажи цена</string>
-	<string name="preference_showprice_summary">Показано като допълнителна колона в списъка.</string>
-	<string name="preference_perstoreprice">Скалад Цени</string>
-	<string name="preference_perstoreprice_title">Проследяване на магазин цени</string>
-	<string name="preference_perstoreprice_summary">Следене на отделни цени за всеки елемент на всеки магазин.</string>
-	<string name="preference_screenlock_title">Деактивирай заключването на екрана</string>
-	<string name="preference_screenlock_summary">Когато е маркино, не позволява на екрана да се заключи.</string>
-	<string name="preference_usefilters_title">Филтри</string>
-	<string name="preference_usefilters_summary">Списъка може да се филтрира по етикети или магазини.</string>
-	<string name="preference_complete_by_list_title">Limit item name completion</string>
-	<string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
-	<string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
-	<string name="preference_reset_quantity">Нулирай количеството</string>
-	<string name="preference_reset_quantity_summary">Нулира количеството, когато се добавят отново се добавят артикули.</string>
-	<string name="preference_add_for_barcode">Баркод Скенер</string>
-	<string name="preference_add_for_barcode_summary">Натиснете продължително бутона Добави за да стартирате Баркод OI Приставка (ако е инсталирана).</string>
-	<string name="preference_showtags_title">Покажи маркери</string>
-	<string name="preference_showtags_summary">Показано като допълнителна колона в списъка.</string>
-	<string name="preference_showquantity_title">Покажи количество</string>
-	<string name="preference_showquantity_summary">Показано като допълнителна колона в списъка.</string>
-	<string name="preference_showpriority_title">Виж приоритети</string>
-	<string name="preference_showpriority_summary">Показано като допълнителна колона в списъка.</string>
-	<string name="preference_showunits_title">Виж единици</string>
-	<string name="preference_showunits_summary">Показано като допълнителна колона в списъка.</string>
-	<string name="preference_prio_subtotal">Междинна сума по приоритет</string>
-	<string name="preference_prioritytotal_title">Междинна сума по приоритет</string>
-	<string name="preference_prioritytotal_summary">Междинната сума по приоритет не е показана.</string>
-	<string name="preference_prioritytotal_dialog_title">Междинна сума по приоритет</string>
-	<string name="preference_priosubtotalchecked_title">Включете отметнати елементи</string>
-	<string name="preference_priosubtotalchecked_on_summary">Междинната сума по приоритет включва избраните елементи</string>
-	<string name="preference_priosubtotalchecked_off_summary">Междинната сума по приоритет изключва избраните елементи</string>
-	<string name="preference_pickitemsinlist_title">Вземете елементи директно от списъка</string>
-	<string name="preference_pickitemsinlist_on_summary">Избери главния списък, за да редактираш режима на добавяне на съществуващи елементи</string>
-	<string name="preference_pickitemsinlist_off_summary">Добави елементи към списъка като използваш определения диалогов прозорец</string>
-	<string name="preference_samesortforpick_title">Винаги използвай същия ред на сортиране</string>
-	<string name="preference_samesortforpick_on_summary">Елементите са подредени в режим за избор, както в режим за пазаруване онлайн.</string>
-	<string name="preference_samesortforpick_off_summary">Реда на сортиране за елементите по избор може да бъде избран отделно.</string>
-	
-	<!-- Preference title: Shake the phone to clean up the list. -->
-	<string name="preference_shake_title">Разклати за почистване</string>
-	
-	<!-- Preference summary: Shake the phone to clean up the list. -->
-	<string name="preference_shake_summary">Разклатете телефона за изчистване на списъка.</string>
-	
-    <string name="preference_advanced">Допълнителни настройки</string>
-    <string name="preference_advanced_summary">Допълнителни настройки</string>
-    
-    <!-- Preference category: General settings -->
-    <string name="preference_general">Обща информация</string>
-    <string name="preference_pickitems">Вземете елементи</string>
-    
-    <string name="preference_appearance">Външен вид</string>
-    
-    <string name="preference_addons">Добавки</string>
-    <string name="preference_get_addons">Вземи нови добавки</string>
-    <string name="preference_get_addons_summary">Търсете за разширения и палитри онлайн.</string>
-    <string name="preference_get_market_addons">Вземи добавки от Market</string>
-    <string name="preference_get_developer_addons">Вземи добавки от OpenIntents</string>
-    <string name="preference_extensions">Разширения</string>
-    <string name="preference_themes">Палитри</string>
-    <string name="preference_market_extensions_summary">Търсете разширения в Android Market.</string>
-    <string name="preference_market_themes_summary">Търсете палитри в Android Market.</string>
-    <string name="preference_developer_extensions_summary">Вземете разширения от началната страница на OpenIntents.</string>
-	<string name="preference_developer_themes_summary">Вземете палитри от началната страница на OpenIntents.</string>
-	<string name="preference_quickedit">Режим за бърза редакция</string>
-	<string name="preference_quickedit_on_summary">Докоснете стойностите на Приоритет или Количество за меню с обичайните стойности.</string>
-	<string name="preference_quickedit_off_summary">Докосването на стойностите на Приоритет или Количество извиква диалога Редактирай Артикул.</string>
-	<string name="preference_reset_all_settings">Нулирай всички настройки</string>
-	<string name="preference_reset_all_settings_alert">Сигурен ли сте, че желаете да НУЛИРАТЕ ВСИЧКИ настройки? Това действие не може да бъде отменено.</string>    
-	<string name="preference_reset_all_settings_done">Всички настройки бяха нулирани.</string>
-	    
-	<!-- ***************************
-	     Permissions
-	     *************************** -->
-	
-	<!-- OI Shopping list -->
-	<!-- Permission to read shopping lists -->
-	<string name="oi_shopping_permission_read">прочети списъци за пазаруване</string>
-	<string name="oi_shopping_permission_read_descr">Позволява на приложение да чете списъците за пазаруване. Отбележете, че кодираните списъци и елементи се предоставят в кодиран формат.</string>
-	<!-- Permission to write to shopping lists -->
-	<string name="oi_shopping_permission_write">напиши списъци за пазаруване</string>
-	<string name="oi_shopping_permission_write_descr">Позволява на приложение да създаде нови списъци и елементи или да промени съществуващи.</string>
-	
-	
-	<!-- ***************************
-	     Preferences
-	     *************************** -->
-	
-    <string-array name="preference_sortorder_entries">
-    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
-    	<item>първо немаркирани, азбучно</item>
-        <!-- Preference sort order: Sort by item name -->
-    	<item>азбучно</item>
-        <!-- Preference sort order: Newest item first -->
-    	<item>първо най-новите</item>
-        <!-- Preference sort order: Oldest item first -->
-    	<item>първо най-старите</item>
-    	<!-- Preference sort order: Sort alphabetically by tags -->
-    	<item>маркери по азбучен ред</item>
-        <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
-    	<item>приоритет, тагове по азбучен ред</item>
-        <!-- Preference sort order: Sort by price, the most expensive first -->
-    	<item>първо най-скъпите</item>
-        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
-    	<item>немаркирани първо, тагове по азбучен ред</item>
-    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
-    	<item>немаркирани първо, по приоритет, по азбучен ред</item>
-    	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
-    	<item>немаркирани първо, по приоритет, тагове по азбучен ред</item>
-    </string-array>
-    
-    <string-array name="preference_sortorder_slists">
-        <!-- Preference sort order: Sort by list name in ascending order -->
-        <item>азбучен възходящ</item>
-        <!-- Preference sort order: Sort by list name in descending order -->
-        <item>азбучен низходящ</item>
-        <!-- Preference sort order: Newest list first -->
-        <item>първо най-новите</item>
-        <!-- Preference sort order: Oldest list first -->
-        <item>първо най-старите</item>
-    </string-array>
-    
-    <string-array name="preference_prioritytotal_entries">
-    	<item>Не е показано</item>
-    	<item>Приоритет 1</item>
-    	<item>Приоритет 1-2</item>
-    	<item>Приоритет 1-3</item>
-    	<item>Приоритет 1-4</item>
-    </string-array>
-    
-    <string-array name="preference_fontsize_entries">
-    	<!-- Preference fontsize: tiny font size -->
-        <item>Най-малки</item>
-    	<!-- Preference fontsize: small font size -->
-        <item>Малки</item>
-    	<!-- Preference fontsize: default font size -->
-    	<item>По подразбиране</item>
-    	<!-- Preference fontsize: large font size -->
-        <item>Големи</item>
-    </string-array>
-    
-    <string-array name="preference_orientation_entries">
-    	<!-- Preference orientation: default -->
-        <item>По подразбиране</item>
-    	<!-- Preference orientation: landscape -->
-    	<item>Хоризонтално</item>
-    	<!-- Preference orientation: portrait -->
-        <item>Вертикално</item>
-    </string-array>
-    
-    <string-array name="preference_capitalization_entries">
-    	<!-- Preference capitalization: No capitalization -->
-        <item>Без</item>
-    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>На всяко изречение</item>
-    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>На всяка дума</item>
-    </string-array>
+  <!-- ***************************
+       Applicatio-specific strings
+       *************************** -->
+  <!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
+  <string name="app_name">OI Списък за Пазаруване</string>
 
-	<!-- ***************************
-	     OI Notepad
-	     *************************** -->
-	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
-	<string name="notepad_not_available">Редоктирането на бележки изисква OI Бележник.</string>
-	<!-- Name of application "OI Notepad". Translations should be consistent. -->
-	<string name="notepad">OI Бележник</string>
+  <string name="new_item">Нов продукт</string>
+  <string name="new_list">Нов списък</string>
+  <string name="send">Изпрати списък</string>
+  <string name="mark_all_items">Маркирай всички елементи</string>
+  <string name="unmark_all_items">Unmark all items</string>
+  <string name="empty_list_not_sent">Празният списък не е изпратен.</string>
+  <string name="email_not_available">Не се предлага приложение за изпращане.</string>
+  <string name="my_shopping_list">Мой списък за пазаруване</string>
+  <string name="new_list_hint">н.пр. списък с желания, семеен списък</string>
+  <string name="clean_up_list">Почисти списък</string>
+  <string name="delete_list">Изтрий списък</string>
+  <string name="ask_new_list">Въведи име на новия списък за пазаруване</string>
+  <string name="ask_rename_list">Преименувай списъка за пазаруване</string>
+  <string name="ask_edit_item">Редактирай елемент</string>
+  <string name="ask_new_store">Въведи име на нов склад</string>
+  <string name="please_enter_name">Моля, въведете име</string>
+  <string name="no_items_marked">Няма елементи, които да са маркирани като зачеркнати.</string>
+  <string name="confirm_delete_list">Наистина ли искате да изтриете този списък за пазаруване?</string>
+  <string name="no_shopping_provider">Грешка при достъп до списъка за пазаруване.</string>
+  <string name="pick_item">Изберете елемент</string>
+  <string name="pick_list">Изберете списък</string>
+  <string name="theme">Палитра</string>
+  <string name="theme_settings">Настройки палитра</string>
+  <string name="rename_list">Преименувай списък</string>
+  <string name="menu_mark_item">Маркирай елемент</string>
+  <string name="menu_edit_item">Редактирай елемент</string>
+  <string name="menu_auto_add">Автоматично добавяне</string>
+  <string name="menu_item_stores">Сладове..</string>
+  <string name="menu_rename_store">Преименувай склад</string>
+  <string name="menu_delete_store">Изтрии слад</string>
+  <string name="confirm_delete_store">Наистина ли сикате да изтриете този склад</string>
+  <string name="no_items_available">Елементите не са действащи</string>
+  <string name="no_stores_available">Никакви налични магазини за този списък</string>
+  <string name="no_tags_available">Няма налични етикети за този списък</string>
 
-	<!-- ***************************
-	     Automation
-	     *************************** -->
-	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
-	<string name="label_select_action">Избери действие:</string>
-	
-	<!-- Label above button that opens a list of all shopping lists to choose from. -->
-	<string name="label_select_list">Избери списък:</string>
-	
-	<!-- Arrays -->
-	
-    <string-array name="automation_actions">
-    	<!-- Automation action to clean up a list. -->
-    	<item>Почисти списък</item>
-    </string-array>
-      
-	<string name="widget_prev_page">Предишна страница</string>
-	<string name="widget_next_page">Следваща страница</string>
-	<string name="widget_choose_a_list">Избери списък</string>
-	<string name="widget_no_items">Няма артикули на страница %d</string>
+  <!-- Remove item from this list, but keep it internally, so that the user
+       can choose it later for inclusion again. Information like
+       tags or price will be kept. -->
+  <string name="menu_remove_item">Отстрани елемент от списъка</string>
+
+  <!-- Delete this item completely. If the user wants to add it again, they
+       have to enter all the information again. -->
+  <string name="menu_delete_item">Изтрий елемент перманентно</string>
+  <string name="menu_move_item">Премести елемент към друг списък</string>
+  <string name="menu_copy_item">Копирай артикул</string>
+
+  <!-- Button label to add an item to the list. -->
+  <string name="add">Добавяне</string>
+
+  <string name="menu_pick_items">Избери елементи</string>
+  <string name="menu_start_shopping">Пазаруване</string>
+
+  <!-- Title supplement. \'%s\' is the name of the current list. -->
+  <string name="pick_items_title">%s - Избери елементи</string>
+
+  <!-- Title supplement. \'%s\' is the name of the current list. -->
+  <string name="shopping_title">%s - Пазаруване</string>
+
+  <!-- Title supplement. \'%s\' is the name of the current item. -->
+  <string name="item_stores_title">%s Складове</string>
+  <string name="item_stores_activity_label">Редактирай елементите на Складовете</string>
+
+  <string name="tags">Отметки</string>
+  <string name="price">Цена</string>
+  <string name="item">Елемент</string>
+  <string name="quantity">Количество</string>
+  <string name="priority">Приоритет</string>
+  <string name="has_note">Има забележка</string>
+  <string name="units">Единици</string>
+  <string name="note">Забележка</string>
+  <string name="stores">Магазини</string>
+  <string name="list">Списък</string>
+
+  <string name="otherqty">Друго количество...</string>
+  <string name="otherpri">Друг приоритет...</string>
+  <string name="unfiltered">(Нефилтрирано)</string>
+
+  <!-- Total sum of all prices. \'%s\' is the sum -->
+  <string name="total">Общо: %s</string>
+
+  <!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+  <string name="total_checked">Проверени: %s</string>
+  <string name="priority1_total">Приоритет 1:%s</string>
+  <string name="priority2_total">Приоритет 1-2:%s</string>
+  <string name="priority3_total">Приоритет 1-3:%s</string>
+  <string name="priority4_total">Приоритет 1-4:%s</string>
+
+  <string name="delete_item_confirm">Сигурен ли сте, че желаете перманентно да изтриете този артикул?</string>
+  <string name="delete">Изтриване</string>
+
+  <!-- Added to an item to indicate it was bought. -->
+  <string name="suffix_checked">... OK</string>
+  <string name="empty" />
+
+  <!-- The shortcut is created on the home screen. -->
+  <string name="pick_list_for_shortcut">Избери списък за бърза команда</string>
+
+  <!-- Shown if external application wants to insert new items. -->
+  <string name="pick_list_to_insert_items">Избери списък за въвеждане на елементи</string>
+
+  <!-- Theme related -->
+  <!-- Title for selecting a theme -->
+  <string name="theme_pick">Избери палитра</string>
+  <string name="theme_description">Избери палитра от този списък</string>
+  <string name="theme_default">По подразбиране</string>
+  <string name="theme_classic">Класика</string>
+  <string name="theme_bugdroid">Android</string>
+  <string name="theme_classic_export">Класика (от OI списъка за пазаруване)</string>
+  <string name="theme_bugdroid_export">Android (от OI списъка за пазаруване)</string>
+
+  <!--     Dialog box    -->
+  <!-- Button label "OK" -->
+  <string name="ok">OK</string>
+  <!-- Button label "Cancel" -->
+  <string name="cancel">Откажи</string>
+  <string name="use_theme_for_all_lists">Използване на тази палитра за всички списъци</string>
+  <string name="get_more_themes">Вземете повече палитри</string>
+
+  <!-- preferences -->
+  <string name="preferences">Настройки</string>
+
+  <string name="preference_application">Настройки на приложението</string>
+
+  <string name="preference_unchecked_on_top">Немаркирани най-отгоре</string>
+  <string name="preference_unchecked_on_top_summary">Винаги показвай първо немаркирани</string>
+  <string name="preference_fontsize">Размер на шрифт</string>
+  <string name="preference_fontsize_summary">Промени размер на шрифт</string>
+  <string name="preference_fontsize_dialog_title">Избери размер на шрифт</string>
+  <string name="preference_orientation">Ориентация</string>
+  <string name="preference_orientation_summary">Смени ориентацията</string>
+  <string name="preference_orientation_dialog_title">Избери ориентация</string>
+  <string name="preference_sortorder_title">Сортиране на реда</string>
+  <string name="preference_sortorder_summary">Промени реда на подреждане на елементи от списъка</string>
+  <string name="preference_sortorder_for_pick_title">Ред за сортиране - изписване на артикули</string>
+  <string name="preference_sortorder_for_pick_summary">Промяна на реда на сортиране на елементи от списък в режим на изписване на артикули.</string>
+  <string name="preference_sortorder_dialog_title">Избери реда на подреждане</string>
+  <string name="preference_sortorder_for_pick_dialog_title">Изберете ред на сортиране за режим на изписване на артикули</string>
+  <string name="preference_sortorder_for_shopping_lists">Ред на подредба - Списък за пазаруване</string>
+  <string name="preference_sortorder_for_slists_summary">Смяна реда на подредба на списъка за пазаруване</string>
+  <string name="preference_sortorder_for_slists_dialog_title">Избор на реда на подредба на списъка за пазаруване</string>
+  <string name="preference_loadlastused_title">Зареди последно ползван списък</string>
+  <string name="preference_loadlastused_summary">Започвай винаги с последно прегледания списък.</string>
+  <string name="preference_capitalization_title">Главна буква</string>
+  <string name="preference_capitalization_summary">Автоматично изписване на записите с главна буква</string>
+  <string name="preference_capitalization_dialog_title">Избери писане с главни букви</string>
+  <string name="preference_hidechecked_title">Скрий маркирани елементи</string>
+  <string name="preference_hidechecked_summary">Скрий веднага елементи, които са демаркирани.</string>
+  <string name="preference_fastscroll_title">Бързо превъртане</string>
+  <string name="preference_fastscroll_summary">Бутона за превъртане се появява когато превъртите 35 артикула или повече.</string>
+  <string name="preference_showprice_title">Покажи цена</string>
+  <string name="preference_showprice_summary">Показано като допълнителна колона в списъка.</string>
+  <string name="preference_perstoreprice">Скалад Цени</string>
+  <string name="preference_perstoreprice_title">Проследяване на магазин цени</string>
+  <string name="preference_perstoreprice_summary">Следене на отделни цени за всеки елемент на всеки магазин.</string>
+  <string name="preference_screenlock_title">Деактивирай заключването на екрана</string>
+  <string name="preference_screenlock_summary">Когато е маркино, не позволява на екрана да се заключи.</string>
+  <string name="preference_usefilters_title">Филтри</string>
+  <string name="preference_usefilters_summary">Списъка може да се филтрира по етикети или магазини.</string>
+  <string name="preference_complete_by_list_title">Limit item name completion</string>
+  <string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
+  <string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
+  <string name="preference_reset_quantity">Нулирай количеството</string>
+  <string name="preference_reset_quantity_summary">Нулира количеството, когато се добавят отново се добавят артикули.</string>
+  <string name="preference_add_for_barcode">Баркод Скенер</string>
+  <string name="preference_add_for_barcode_summary">Натиснете продължително бутона Добави за да стартирате Баркод OI Приставка (ако е инсталирана).</string>
+  <string name="preference_showtags_title">Покажи маркери</string>
+  <string name="preference_showtags_summary">Показано като допълнителна колона в списъка.</string>
+  <string name="preference_showquantity_title">Покажи количество</string>
+  <string name="preference_showquantity_summary">Показано като допълнителна колона в списъка.</string>
+  <string name="preference_showpriority_title">Виж приоритети</string>
+  <string name="preference_showpriority_summary">Показано като допълнителна колона в списъка.</string>
+  <string name="preference_showunits_title">Виж единици</string>
+  <string name="preference_showunits_summary">Показано като допълнителна колона в списъка.</string>
+  <string name="preference_prio_subtotal">Междинна сума по приоритет</string>
+  <string name="preference_prioritytotal_title">Междинна сума по приоритет</string>
+  <string name="preference_prioritytotal_summary">Междинната сума по приоритет не е показана.</string>
+  <string name="preference_prioritytotal_dialog_title">Междинна сума по приоритет</string>
+  <string name="preference_priosubtotalchecked_title">Включете отметнати елементи</string>
+  <string name="preference_priosubtotalchecked_on_summary">Междинната сума по приоритет включва избраните елементи</string>
+  <string name="preference_priosubtotalchecked_off_summary">Междинната сума по приоритет изключва избраните елементи</string>
+  <string name="preference_pickitemsinlist_title">Вземете елементи директно от списъка</string>
+  <string name="preference_pickitemsinlist_on_summary">Избери главния списък, за да редактираш режима на добавяне на съществуващи елементи</string>
+  <string name="preference_pickitemsinlist_off_summary">Добави елементи към списъка като използваш определения диалогов прозорец</string>
+  <string name="preference_samesortforpick_title">Винаги използвай същия ред на сортиране</string>
+  <string name="preference_samesortforpick_on_summary">Елементите са подредени в режим за избор, както в режим за пазаруване онлайн.</string>
+  <string name="preference_samesortforpick_off_summary">Реда на сортиране за елементите по избор може да бъде избран отделно.</string>
+
+  <!-- Preference title: Shake the phone to clean up the list. -->
+  <string name="preference_shake_title">Разклати за почистване</string>
+
+  <!-- Preference summary: Shake the phone to clean up the list. -->
+  <string name="preference_shake_summary">Разклатете телефона за изчистване на списъка.</string>
+
+  <string name="preference_advanced">Допълнителни настройки</string>
+  <string name="preference_advanced_summary">Допълнителни настройки</string>
+
+  <!-- Preference category: General settings -->
+  <string name="preference_general">Обща информация</string>
+  <string name="preference_pickitems">Вземете елементи</string>
+
+  <string name="preference_appearance">Външен вид</string>
+
+  <string name="preference_addons">Добавки</string>
+  <string name="preference_get_addons">Вземи нови добавки</string>
+  <string name="preference_get_addons_summary">Търсете за разширения и палитри онлайн.</string>
+  <string name="preference_get_market_addons">Вземи добавки от Market</string>
+  <string name="preference_get_developer_addons">Вземи добавки от OpenIntents</string>
+  <string name="preference_extensions">Разширения</string>
+  <string name="preference_themes">Палитри</string>
+  <string name="preference_market_extensions_summary">Търсете разширения в Android Market.</string>
+  <string name="preference_market_themes_summary">Търсете палитри в Android Market.</string>
+  <string name="preference_developer_extensions_summary">Вземете разширения от началната страница на OpenIntents.</string>
+  <string name="preference_developer_themes_summary">Вземете палитри от началната страница на OpenIntents.</string>
+  <string name="preference_quickedit">Режим за бърза редакция</string>
+  <string name="preference_quickedit_on_summary">Докоснете стойностите на Приоритет или Количество за меню с обичайните стойности.</string>
+  <string name="preference_quickedit_off_summary">Докосването на стойностите на Приоритет или Количество извиква диалога Редактирай Артикул.</string>
+  <string name="preference_reset_all_settings">Нулирай всички настройки</string>
+  <string name="preference_reset_all_settings_alert">Сигурен ли сте, че желаете да НУЛИРАТЕ ВСИЧКИ настройки? Това действие не може да бъде отменено.</string>
+  <string name="preference_reset_all_settings_done">Всички настройки бяха нулирани.</string>
+
+  <!-- ***************************
+       Permissions
+       *************************** -->
+
+  <!-- OI Shopping list -->
+  <!-- Permission to read shopping lists -->
+  <string name="oi_shopping_permission_read">прочети списъци за пазаруване</string>
+  <string name="oi_shopping_permission_read_descr">Позволява на приложение да чете списъците за пазаруване. Отбележете, че кодираните списъци и елементи се предоставят в кодиран формат.</string>
+  <!-- Permission to write to shopping lists -->
+  <string name="oi_shopping_permission_write">напиши списъци за пазаруване</string>
+  <string name="oi_shopping_permission_write_descr">Позволява на приложение да създаде нови списъци и елементи или да промени съществуващи.</string>
+
+
+  <!-- ***************************
+       Preferences
+       *************************** -->
+
+  <string-array name="preference_sortorder_entries">
+    <!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    <item>първо немаркирани, азбучно</item>
+    <!-- Preference sort order: Sort by item name -->
+    <item>азбучно</item>
+    <!-- Preference sort order: Newest item first -->
+    <item>първо най-новите</item>
+    <!-- Preference sort order: Oldest item first -->
+    <item>първо най-старите</item>
+    <!-- Preference sort order: Sort alphabetically by tags -->
+    <item>маркери по азбучен ред</item>
+    <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
+    <item>приоритет, тагове по азбучен ред</item>
+    <!-- Preference sort order: Sort by price, the most expensive first -->
+    <item>първо най-скъпите</item>
+    <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    <item>немаркирани първо, тагове по азбучен ред</item>
+    <!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    <item>немаркирани първо, по приоритет, по азбучен ред</item>
+    <!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
+    <item>немаркирани първо, по приоритет, тагове по азбучен ред</item>
+  </string-array>
+
+  <string-array name="preference_sortorder_slists">
+    <!-- Preference sort order: Sort by list name in ascending order -->
+    <item>азбучен възходящ</item>
+    <!-- Preference sort order: Sort by list name in descending order -->
+    <item>азбучен низходящ</item>
+    <!-- Preference sort order: Newest list first -->
+    <item>първо най-новите</item>
+    <!-- Preference sort order: Oldest list first -->
+    <item>първо най-старите</item>
+  </string-array>
+
+  <string-array name="preference_prioritytotal_entries">
+    <item>Не е показано</item>
+    <item>Приоритет 1</item>
+    <item>Приоритет 1-2</item>
+    <item>Приоритет 1-3</item>
+    <item>Приоритет 1-4</item>
+  </string-array>
+
+  <string-array name="preference_fontsize_entries">
+    <!-- Preference fontsize: tiny font size -->
+    <item>Най-малки</item>
+    <!-- Preference fontsize: small font size -->
+    <item>Малки</item>
+    <!-- Preference fontsize: default font size -->
+    <item>По подразбиране</item>
+    <!-- Preference fontsize: large font size -->
+    <item>Големи</item>
+  </string-array>
+
+  <string-array name="preference_orientation_entries">
+    <!-- Preference orientation: default -->
+    <item>По подразбиране</item>
+    <!-- Preference orientation: landscape -->
+    <item>Хоризонтално</item>
+    <!-- Preference orientation: portrait -->
+    <item>Вертикално</item>
+  </string-array>
+
+  <string-array name="preference_capitalization_entries">
+    <!-- Preference capitalization: No capitalization -->
+    <item>Без</item>
+    <!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+    <item>На всяко изречение</item>
+    <!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+    <item>На всяка дума</item>
+  </string-array>
+
+  <!-- ***************************
+       OI Notepad
+       *************************** -->
+  <!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+  <string name="notepad_not_available">Редоктирането на бележки изисква OI Бележник.</string>
+  <!-- Name of application "OI Notepad". Translations should be consistent. -->
+  <string name="notepad">OI Бележник</string>
+
+  <!-- ***************************
+       Automation
+       *************************** -->
+  <!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+  <string name="label_select_action">Избери действие:</string>
+
+  <!-- Label above button that opens a list of all shopping lists to choose from. -->
+  <string name="label_select_list">Избери списък:</string>
+
+  <!-- Arrays -->
+
+  <string-array name="automation_actions">
+    <!-- Automation action to clean up a list. -->
+    <item>Почисти списък</item>
+  </string-array>
+
+  <string name="widget_prev_page">Предишна страница</string>
+  <string name="widget_next_page">Следваща страница</string>
+  <string name="widget_choose_a_list">Избери списък</string>
+  <string name="widget_no_items">Няма артикули на страница %d</string>
 </resources>

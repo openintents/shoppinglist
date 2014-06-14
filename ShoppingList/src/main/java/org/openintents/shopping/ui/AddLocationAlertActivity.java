@@ -16,14 +16,6 @@
 
 package org.openintents.shopping.ui;
 
-import org.openintents.provider.Alert;
-import org.openintents.provider.Tag;
-import org.openintents.provider.Location.Locations;
-import org.openintents.shopping.R;
-import org.openintents.shopping.R.id;
-import org.openintents.shopping.R.layout;
-import org.openintents.shopping.R.string;
-
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
@@ -37,169 +29,174 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.openintents.provider.Alert;
+import org.openintents.provider.Location.Locations;
+import org.openintents.provider.Tag;
+import org.openintents.shopping.R;
+
 /**
  * Allows to edit the share settings for a shopping list.
  */
 public class AddLocationAlertActivity extends Activity implements
-		OnClickListener {
-	/**
-	 * TAG for logging.
-	 */
-	private static final String TAG = "AddLocationAlertActivity";
+        OnClickListener {
+    /**
+     * TAG for logging.
+     */
+    private static final String TAG = "AddLocationAlertActivity";
 
-	private static final int REQUEST_PICK_LOC = 1;
+    private static final int REQUEST_PICK_LOC = 1;
 
-	TextView mAlertAdded;
-	TextView mTags;
-	TextView mLocation;
+    TextView mAlertAdded;
+    TextView mTags;
+    TextView mLocation;
 
-	Uri mShoppingListUri;
+    Uri mShoppingListUri;
 
-	private Tag mTag;
+    private Tag mTag;
 
-	@Override
-	public void onCreate(Bundle icicle) {
-		super.onCreate(icicle);
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
 
-		mTag = new Tag(this);
+        mTag = new Tag(this);
 
-		setContentView(R.layout.activity_add_location_alert);
+        setContentView(R.layout.activity_add_location_alert);
 
-		// Get the uri of the list
-		mShoppingListUri = getIntent().getData();
+        // Get the uri of the list
+        mShoppingListUri = getIntent().getData();
 
-		// Set up click handlers for the text field and button
-		mAlertAdded = (TextView) this.findViewById(R.id.alert_added_text);
-		mTags = (TextView) this.findViewById(R.id.tags);
-		mLocation = (TextView) this.findViewById(R.id.location);
+        // Set up click handlers for the text field and button
+        mAlertAdded = (TextView) this.findViewById(R.id.alert_added_text);
+        mTags = (TextView) this.findViewById(R.id.tags);
+        mLocation = (TextView) this.findViewById(R.id.location);
 
-		Button picklocation = (Button) this.findViewById(R.id.picklocation);
-		picklocation.setOnClickListener(this);
+        Button picklocation = (Button) this.findViewById(R.id.picklocation);
+        picklocation.setOnClickListener(this);
 
 		/*
-		 * Button addlocationalert = (Button)
+         * Button addlocationalert = (Button)
 		 * this.findViewById(R.id.addlocationalert);
 		 * addlocationalert.setOnClickListener(this);
 		 */
 
-		Button viewalerts = (Button) this.findViewById(R.id.viewalerts);
-		viewalerts.setOnClickListener(this);
+        Button viewalerts = (Button) this.findViewById(R.id.viewalerts);
+        viewalerts.setOnClickListener(this);
 
-	}
+    }
 
-	public void onClick(final View v) {
-		switch (v.getId()) {
-		case R.id.picklocation:
-			pickLocation();
-			break;
-		// case R.id.addlocationalert:
-		// addLocationAlert();
-		// break;
-		case R.id.viewalerts:
-			viewAlerts();
-			break;
-		default:
-			// Don't know what to do - do nothing.
-			Log.e(TAG, "AddLocationAlertActivity: Unexpedted view id clicked.");
-		}
-	}
+    public void onClick(final View v) {
+        switch (v.getId()) {
+            case R.id.picklocation:
+                pickLocation();
+                break;
+            // case R.id.addlocationalert:
+            // addLocationAlert();
+            // break;
+            case R.id.viewalerts:
+                viewAlerts();
+                break;
+            default:
+                // Don't know what to do - do nothing.
+                Log.e(TAG, "AddLocationAlertActivity: Unexpedted view id clicked.");
+        }
+    }
 
-	@Override
-	protected void onResume() {
-		super.onResume();
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-	}
+    }
 
-	@Override
-	protected void onPause() {
-		super.onPause();
+    @Override
+    protected void onPause() {
+        super.onPause();
 
-		// TODO Here we should store temporary information
+        // TODO Here we should store temporary information
 
-	}
+    }
 
-	public void pickLocation() {
-		// Call the pick location activity
-		Intent intent;
+    public void pickLocation() {
+        // Call the pick location activity
+        Intent intent;
 
-		intent = new Intent(Intent.ACTION_PICK, Locations.CONTENT_URI);
-		try {
-			startActivityForResult(intent, REQUEST_PICK_LOC);
-		} catch (ActivityNotFoundException e) {
-			Toast.makeText(this, R.string.locations_not_installed,
-					Toast.LENGTH_SHORT).show();
-			Log.e(TAG, "Locations not installed", e);
-		}
-	}
+        intent = new Intent(Intent.ACTION_PICK, Locations.CONTENT_URI);
+        try {
+            startActivityForResult(intent, REQUEST_PICK_LOC);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, R.string.locations_not_installed,
+                    Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "Locations not installed", e);
+        }
+    }
 
-	public void addLocationAlert() {
-		// Add location into database
-		addAlert(mLocation.getText().toString(), null, Intent.ACTION_VIEW,
-				null, mShoppingListUri.toString());
-	}
+    public void addLocationAlert() {
+        // Add location into database
+        addAlert(mLocation.getText().toString(), null, Intent.ACTION_VIEW,
+                null, mShoppingListUri.toString());
+    }
 
-	public void viewAlerts() {
-		// View list of alerts
+    public void viewAlerts() {
+        // View list of alerts
 
-		Intent intent = new Intent(Intent.ACTION_VIEW,
-				Alert.Generic.CONTENT_URI);
-		try {
-			startActivity(intent);
-		} catch (ActivityNotFoundException e) {
-			Toast.makeText(this, R.string.alerts_not_installed,
-					Toast.LENGTH_SHORT).show();
-			Log.e(TAG, "Alerts not installed", e);
-		}
-	}
+        Intent intent = new Intent(Intent.ACTION_VIEW,
+                Alert.Generic.CONTENT_URI);
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, R.string.alerts_not_installed,
+                    Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "Alerts not installed", e);
+        }
+    }
 
-	// / TODO: Simply copied this routine from LocationsView.java.
-	// This should be a convenience function in the alerts provider!
-	private void addAlert(String locationUri, String data, String actionName,
-			String type, String uri) {
+    // / TODO: Simply copied this routine from LocationsView.java.
+    // This should be a convenience function in the alerts provider!
+    private void addAlert(String locationUri, String data, String actionName,
+                          String type, String uri) {
 
-		ContentValues values = new ContentValues();
-		values.put(Alert.Location.ACTIVE, Boolean.TRUE);
-		values.put(Alert.Location.ACTIVATE_ON_BOOT, Boolean.TRUE);
-		values.put(Alert.Location.DISTANCE, 100L);
-		values.put(Alert.Location.POSITION, locationUri);
-		values.put(Alert.Location.INTENT, actionName);
-		values.put(Alert.Location.INTENT_URI, uri);
-		// TODO convert type to uri (?) or add INTENT_MIME_TYPE column
-		// getContentResolver().insert(Alert.Location.CONTENT_URI, values);
-		// using alert.insert will register alerts automatically.
-		Uri result = Alert.insert(Alert.Location.CONTENT_URI, values);
-		int textId;
-		if (uri != null) {
-			textId = R.string.alert_added;
+        ContentValues values = new ContentValues();
+        values.put(Alert.Location.ACTIVE, Boolean.TRUE);
+        values.put(Alert.Location.ACTIVATE_ON_BOOT, Boolean.TRUE);
+        values.put(Alert.Location.DISTANCE, 100L);
+        values.put(Alert.Location.POSITION, locationUri);
+        values.put(Alert.Location.INTENT, actionName);
+        values.put(Alert.Location.INTENT_URI, uri);
+        // TODO convert type to uri (?) or add INTENT_MIME_TYPE column
+        // getContentResolver().insert(Alert.Location.CONTENT_URI, values);
+        // using alert.insert will register alerts automatically.
+        Uri result = Alert.insert(Alert.Location.CONTENT_URI, values);
+        int textId;
+        if (uri != null) {
+            textId = R.string.alert_added;
 
-			mAlertAdded.setText(getString(R.string.location_alert_added));
-		} else {
-			textId = R.string.alert_not_added;
+            mAlertAdded.setText(getString(R.string.location_alert_added));
+        } else {
+            textId = R.string.alert_not_added;
 
-			mAlertAdded.setText(getString(R.string.alert_not_added));
-		}
-		Toast.makeText(this, textId, Toast.LENGTH_SHORT).show();
+            mAlertAdded.setText(getString(R.string.alert_not_added));
+        }
+        Toast.makeText(this, textId, Toast.LENGTH_SHORT).show();
 
-	}
+    }
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == RESULT_OK) {
-			switch (requestCode) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
 
-			case REQUEST_PICK_LOC:
+                case REQUEST_PICK_LOC:
 				/*
 				 * mLocation.setText(bundle.getString(Locations.EXTRA_GEO));
 				 * mTags.setText(mTag.findTags(data, ", "));
 				 */
 
-				String geo = data.getStringExtra(Locations.EXTRA_GEO);
-				mLocation.setText(geo);
-				mTags.setText(mTag.findTags(data.getDataString(), ", "));
-				addLocationAlert();
-				break;
-			}
-		}
-	}
+                    String geo = data.getStringExtra(Locations.EXTRA_GEO);
+                    mLocation.setText(geo);
+                    mTags.setText(mTag.findTags(data.getDataString(), ", "));
+                    addLocationAlert();
+                    break;
+            }
+        }
+    }
 
 }

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<?xml version="1.0" encoding="utf-8"?><!--
  * Copyright (C) 2009-2010 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,166 +16,232 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<PreferenceCategory android:title="@string/preference_application">
-		<ListPreference android:key="fontsize"
-			android:defaultValue="2" android:title="@string/preference_fontsize"
-			android:summary="@string/preference_fontsize_summary"
-			android:entries="@array/preference_fontsize_entries"
-			android:entryValues="@array/preference_fontsize_entryvalues"
-			android:dialogTitle="@string/preference_fontsize_dialog_title" />
-		<ListPreference android:key="sortorder"
-			android:defaultValue="3" android:title="@string/preference_sortorder_title"
-			android:summary="@string/preference_sortorder_summary"
-			android:entries="@array/preference_sortorder_entries"
-			android:entryValues="@array/preference_sortorder_entryvalues"
-			android:dialogTitle="@string/preference_sortorder_dialog_title" />
-		<PreferenceScreen android:key="preference_screen_advanced"
-			android:title="@string/preference_advanced" android:summary="@string/preference_advanced_summary">
-			<PreferenceCategory android:title="@string/preference_general">
-				<ListPreference android:key="capitalization"
-					android:defaultValue="1" android:title="@string/preference_capitalization_title"
-					android:summary="@string/preference_capitalization_summary"
-					android:entries="@array/preference_capitalization_entries"
-					android:entryValues="@array/preference_capitalization_entryvalues"
-					android:dialogTitle="@string/preference_capitalization_dialog_title" />
-				<ListPreference android:key="orientation"
-					android:defaultValue="-1" android:title="@string/preference_orientation"
-					android:summary="@string/preference_orientation_summary"
-					android:entries="@array/preference_orientation_entries"
-					android:entryValues="@array/preference_orientation_entryvalues"
-					android:dialogTitle="@string/preference_orientation_dialog_title" />
-				<CheckBoxPreference android:key="hidechecked"
-					android:defaultValue="false" android:title="@string/preference_hidechecked_title"
-					android:summary="@string/preference_hidechecked_summary" />
-				<CheckBoxPreference android:key="fastscroll"
-					android:defaultValue="false" android:title="@string/preference_fastscroll_title"
-					android:summary="@string/preference_fastscroll_summary" />
-					<!-- 
-				<CheckBoxPreference android:key="loadlastused"
-					android:defaultValue="true" android:title="@string/preference_loadlastused_title"
-					android:summary="@string/preference_loadlastused_summary" />  -->
-				<CheckBoxPreference android:key="shake"
-					android:defaultValue="false" android:title="@string/preference_shake_title"
-					android:summary="@string/preference_shake_summary" />
-				<CheckBoxPreference android:key="perstoreprices"
-					android:defaultValue="false" android:title="@string/preference_perstoreprice_title"
-					android:summary="@string/preference_perstoreprice_summary" />
-				<CheckBoxPreference android:key="addforbarcode" android:title="@string/preference_add_for_barcode"
-					android:summary="@string/preference_add_for_barcode_summary" 
-					android:defaultValue="false"/>
-				<CheckBoxPreference android:key="screenlock"
-					android:defaultValue="false" android:title="@string/preference_screenlock_title"
-					android:summary="@string/preference_screenlock_summary" />
-				<CheckBoxPreference android:key="quickedit" android:summaryOn="@string/preference_quickedit_on_summary"
-					android:title="@string/preference_quickedit"
-					android:summaryOff="@string/preference_quickedit_off_summary"/>
-				<CheckBoxPreference android:key="use_filters"
-					android:defaultValue="false" android:title="@string/preference_usefilters_title"
-					android:summary="@string/preference_usefilters_summary" />
-				<CheckBoxPreference android:key="holosearch" android:title="@string/preference_holo_search_title"
-					android:summaryOn="@string/preference_holo_search_on_summary" 
-					android:summaryOff="@string/preference_holo_search_off_summary" 
-					android:defaultValue="true"/>
-				<CheckBoxPreference android:key="resetquantity" android:title="@string/preference_reset_quantity"
-					android:summary="@string/preference_reset_quantity_summary" 
-					android:defaultValue="false"/>
-				<CheckBoxPreference android:key="autocomplete_only_this_list" android:title="@string/preference_complete_by_list_title"
-					android:summaryOn="@string/preference_complete_by_list_on_summary"
-					android:summaryOff="@string/preference_complete_by_list_off_summary" 
-					android:defaultValue="false"/>
-				<Preference android:key="reset_all_settings" android:title="@string/preference_reset_all_settings" />
-			</PreferenceCategory>
-			<PreferenceCategory android:title="@string/preference_appearance">
-				<CheckBoxPreference android:key="showprice"
-					android:defaultValue="true" android:title="@string/preference_showprice_title"
-					android:summary="@string/preference_showprice_summary" />
-				<CheckBoxPreference android:key="showtags"
-					android:defaultValue="true" android:title="@string/preference_showtags_title"
-					android:summary="@string/preference_showtags_summary" />\
-			    <CheckBoxPreference android:key="showunits"
-					android:defaultValue="true" android:title="@string/preference_showunits_title"
-					android:summary="@string/preference_showunits_summary" />
-				<CheckBoxPreference android:key="showquantity"
-					android:defaultValue="true" android:title="@string/preference_showquantity_title"
-					android:summary="@string/preference_showquantity_summary" />
-				<CheckBoxPreference android:defaultValue="true" android:key="showpriority"
-					android:title="@string/preference_showpriority_title"
-					android:summary="@string/preference_showpriority_summary"></CheckBoxPreference>
-			</PreferenceCategory>
-						<PreferenceCategory android:title="@string/preference_sorting">
-				<CheckBoxPreference android:key="samesortforpick"
-					android:defaultValue="false" android:title="@string/preference_samesortforpick_title"
-					android:summaryOn="@string/preference_samesortforpick_on_summary"
-					android:summaryOff="@string/preference_samesortforpick_off_summary" />
-				<ListPreference android:key="sortorderForPickItems"
-					android:defaultValue="1" android:title="@string/preference_sortorder_for_pick_title"
-					android:summary="@string/preference_sortorder_for_pick_summary"
-					android:entries="@array/preference_sortorder_entries"
-					android:entryValues="@array/preference_sortorder_entryvalues"
-					android:dialogTitle="@string/preference_sortorder_for_pick_dialog_title" />
-				<CheckBoxPreference android:key="perListSort"
-					android:defaultValue="false" android:title="@string/preference_perListSort_title"
-					android:summaryOn="@string/preference_perListSort_on_summary"
-					android:summaryOff="@string/preference_perListSort_off_summary" />
-				<ListPreference android:key="sortorderForShoppingLists"
-				    android:defaultValue="0" android:title="@string/preference_sortorder_for_shopping_lists"
-				    android:summary="@string/preference_sortorder_for_slists_summary"
-                    android:entries="@array/preference_sortorder_slists"
-                    android:entryValues="@array/preference_sortorder_slistsvalues"
-                    android:dialogTitle="@string/preference_sortorder_for_slists_dialog_title" />
-				<!-- 
-				<CheckBoxPreference android:key="pickitemsinlist"
-					android:defaultValue="false" android:title="@string/preference_pickitemsinlist_title"
-					android:summaryOn="@string/preference_pickitemsinlist_on_summary"
-					android:summaryOff="@string/preference_pickitemsinlist_off_summary" />
-				-->
-			</PreferenceCategory>
-			<PreferenceCategory android:title="@string/preference_prio_subtotal">
-				<ListPreference android:key="priority_subtotal_threshold"
-					android:defaultValue="0" android:title="@string/preference_prioritytotal_title"
-					android:summary="@string/preference_prioritytotal_summary"
-					android:entries="@array/preference_prioritytotal_entries"
-					android:entryValues="@array/preference_prioritytotal_entryvalues"
-					android:dialogTitle="@string/preference_prioritytotal_dialog_title" />
-			    <CheckBoxPreference android:defaultValue="true" android:key="priosubtotal_includes_checked" 
-			    	android:title="@string/preference_priosubtotalchecked_title" 
-			    	android:summaryOn="@string/preference_priosubtotalchecked_on_summary" 
-			    	android:summaryOff="@string/preference_priosubtotalchecked_off_summary"/>					
-			</PreferenceCategory>
-		</PreferenceScreen>
-	</PreferenceCategory>
-	
-	<PreferenceCategory android:title="@string/preference_addons">
-		<PreferenceScreen android:key="preference_screen_addons"
-			android:title="@string/preference_get_addons" android:summary="@string/preference_get_addons_summary">
-			<PreferenceCategory android:title="@string/preference_get_market_addons">
+  <PreferenceCategory android:title="@string/preference_application">
+    <ListPreference
+      android:key="fontsize"
+      android:defaultValue="2"
+      android:title="@string/preference_fontsize"
+      android:summary="@string/preference_fontsize_summary"
+      android:entries="@array/preference_fontsize_entries"
+      android:entryValues="@array/preference_fontsize_entryvalues"
+      android:dialogTitle="@string/preference_fontsize_dialog_title" />
+    <ListPreference
+      android:key="sortorder"
+      android:defaultValue="3"
+      android:title="@string/preference_sortorder_title"
+      android:summary="@string/preference_sortorder_summary"
+      android:entries="@array/preference_sortorder_entries"
+      android:entryValues="@array/preference_sortorder_entryvalues"
+      android:dialogTitle="@string/preference_sortorder_dialog_title" />
+    <PreferenceScreen
+      android:key="preference_screen_advanced"
+      android:title="@string/preference_advanced"
+      android:summary="@string/preference_advanced_summary">
+      <PreferenceCategory android:title="@string/preference_general">
+        <ListPreference
+          android:key="capitalization"
+          android:defaultValue="1"
+          android:title="@string/preference_capitalization_title"
+          android:summary="@string/preference_capitalization_summary"
+          android:entries="@array/preference_capitalization_entries"
+          android:entryValues="@array/preference_capitalization_entryvalues"
+          android:dialogTitle="@string/preference_capitalization_dialog_title" />
+        <ListPreference
+          android:key="orientation"
+          android:defaultValue="-1"
+          android:title="@string/preference_orientation"
+          android:summary="@string/preference_orientation_summary"
+          android:entries="@array/preference_orientation_entries"
+          android:entryValues="@array/preference_orientation_entryvalues"
+          android:dialogTitle="@string/preference_orientation_dialog_title" />
+        <CheckBoxPreference
+          android:key="hidechecked"
+          android:defaultValue="false"
+          android:title="@string/preference_hidechecked_title"
+          android:summary="@string/preference_hidechecked_summary" />
+        <CheckBoxPreference
+          android:key="fastscroll"
+          android:defaultValue="false"
+          android:title="@string/preference_fastscroll_title"
+          android:summary="@string/preference_fastscroll_summary" />
+        <!--
+      <CheckBoxPreference android:key="loadlastused"
+        android:defaultValue="true" android:title="@string/preference_loadlastused_title"
+        android:summary="@string/preference_loadlastused_summary" />  -->
+        <CheckBoxPreference
+          android:key="shake"
+          android:defaultValue="false"
+          android:title="@string/preference_shake_title"
+          android:summary="@string/preference_shake_summary" />
+        <CheckBoxPreference
+          android:key="perstoreprices"
+          android:defaultValue="false"
+          android:title="@string/preference_perstoreprice_title"
+          android:summary="@string/preference_perstoreprice_summary" />
+        <CheckBoxPreference
+          android:key="addforbarcode"
+          android:title="@string/preference_add_for_barcode"
+          android:summary="@string/preference_add_for_barcode_summary"
+          android:defaultValue="false" />
+        <CheckBoxPreference
+          android:key="screenlock"
+          android:defaultValue="false"
+          android:title="@string/preference_screenlock_title"
+          android:summary="@string/preference_screenlock_summary" />
+        <CheckBoxPreference
+          android:key="quickedit"
+          android:summaryOn="@string/preference_quickedit_on_summary"
+          android:title="@string/preference_quickedit"
+          android:summaryOff="@string/preference_quickedit_off_summary" />
+        <CheckBoxPreference
+          android:key="use_filters"
+          android:defaultValue="false"
+          android:title="@string/preference_usefilters_title"
+          android:summary="@string/preference_usefilters_summary" />
+        <CheckBoxPreference
+          android:key="holosearch"
+          android:title="@string/preference_holo_search_title"
+          android:summaryOn="@string/preference_holo_search_on_summary"
+          android:summaryOff="@string/preference_holo_search_off_summary"
+          android:defaultValue="true" />
+        <CheckBoxPreference
+          android:key="resetquantity"
+          android:title="@string/preference_reset_quantity"
+          android:summary="@string/preference_reset_quantity_summary"
+          android:defaultValue="false" />
+        <CheckBoxPreference
+          android:key="autocomplete_only_this_list"
+          android:title="@string/preference_complete_by_list_title"
+          android:summaryOn="@string/preference_complete_by_list_on_summary"
+          android:summaryOff="@string/preference_complete_by_list_off_summary"
+          android:defaultValue="false" />
+        <Preference
+          android:key="reset_all_settings"
+          android:title="@string/preference_reset_all_settings" />
+      </PreferenceCategory>
+      <PreferenceCategory android:title="@string/preference_appearance">
+        <CheckBoxPreference
+          android:key="showprice"
+          android:defaultValue="true"
+          android:title="@string/preference_showprice_title"
+          android:summary="@string/preference_showprice_summary" />
+        <CheckBoxPreference
+          android:key="showtags"
+          android:defaultValue="true"
+          android:title="@string/preference_showtags_title"
+          android:summary="@string/preference_showtags_summary" />\
+        <CheckBoxPreference
+          android:key="showunits"
+          android:defaultValue="true"
+          android:title="@string/preference_showunits_title"
+          android:summary="@string/preference_showunits_summary" />
+        <CheckBoxPreference
+          android:key="showquantity"
+          android:defaultValue="true"
+          android:title="@string/preference_showquantity_title"
+          android:summary="@string/preference_showquantity_summary" />
+        <CheckBoxPreference
+          android:defaultValue="true"
+          android:key="showpriority"
+          android:title="@string/preference_showpriority_title"
+          android:summary="@string/preference_showpriority_summary"></CheckBoxPreference>
+      </PreferenceCategory>
+      <PreferenceCategory android:title="@string/preference_sorting">
+        <CheckBoxPreference
+          android:key="samesortforpick"
+          android:defaultValue="false"
+          android:title="@string/preference_samesortforpick_title"
+          android:summaryOn="@string/preference_samesortforpick_on_summary"
+          android:summaryOff="@string/preference_samesortforpick_off_summary" />
+        <ListPreference
+          android:key="sortorderForPickItems"
+          android:defaultValue="1"
+          android:title="@string/preference_sortorder_for_pick_title"
+          android:summary="@string/preference_sortorder_for_pick_summary"
+          android:entries="@array/preference_sortorder_entries"
+          android:entryValues="@array/preference_sortorder_entryvalues"
+          android:dialogTitle="@string/preference_sortorder_for_pick_dialog_title" />
+        <CheckBoxPreference
+          android:key="perListSort"
+          android:defaultValue="false"
+          android:title="@string/preference_perListSort_title"
+          android:summaryOn="@string/preference_perListSort_on_summary"
+          android:summaryOff="@string/preference_perListSort_off_summary" />
+        <ListPreference
+          android:key="sortorderForShoppingLists"
+          android:defaultValue="0"
+          android:title="@string/preference_sortorder_for_shopping_lists"
+          android:summary="@string/preference_sortorder_for_slists_summary"
+          android:entries="@array/preference_sortorder_slists"
+          android:entryValues="@array/preference_sortorder_slistsvalues"
+          android:dialogTitle="@string/preference_sortorder_for_slists_dialog_title" />
+        <!--
+        <CheckBoxPreference android:key="pickitemsinlist"
+          android:defaultValue="false" android:title="@string/preference_pickitemsinlist_title"
+          android:summaryOn="@string/preference_pickitemsinlist_on_summary"
+          android:summaryOff="@string/preference_pickitemsinlist_off_summary" />
+        -->
+      </PreferenceCategory>
+      <PreferenceCategory android:title="@string/preference_prio_subtotal">
+        <ListPreference
+          android:key="priority_subtotal_threshold"
+          android:defaultValue="0"
+          android:title="@string/preference_prioritytotal_title"
+          android:summary="@string/preference_prioritytotal_summary"
+          android:entries="@array/preference_prioritytotal_entries"
+          android:entryValues="@array/preference_prioritytotal_entryvalues"
+          android:dialogTitle="@string/preference_prioritytotal_dialog_title" />
+        <CheckBoxPreference
+          android:defaultValue="true"
+          android:key="priosubtotal_includes_checked"
+          android:title="@string/preference_priosubtotalchecked_title"
+          android:summaryOn="@string/preference_priosubtotalchecked_on_summary"
+          android:summaryOff="@string/preference_priosubtotalchecked_off_summary" />
+      </PreferenceCategory>
+    </PreferenceScreen>
+  </PreferenceCategory>
 
-				<PreferenceScreen android:key="preference_market_extensions"
-					android:title="@string/preference_extensions"
-					android:summary="@string/preference_market_extensions_summary">
-					<intent android:action="android.intent.action.VIEW"
-						android:data="@string/preference_market_extensions_link" />
-				</PreferenceScreen>
-				<PreferenceScreen android:key="preference_market_themes"
-					android:title="@string/preference_themes"
-					android:summary="@string/preference_market_themes_summary">
-					<intent android:action="android.intent.action.VIEW"
-						android:data="@string/preference_market_themes_link" />
-				</PreferenceScreen>
-			</PreferenceCategory>
-			<PreferenceCategory android:title="@string/preference_get_developer_addons">
-				<PreferenceScreen android:title="@string/preference_extensions"
-					android:summary="@string/preference_developer_extensions_summary">
-					<intent android:action="android.intent.action.VIEW"
-						android:data="@string/preference_developer_extensions_link" />
-				</PreferenceScreen>
-				<PreferenceScreen android:title="@string/preference_themes"
-					android:summary="@string/preference_developer_themes_summary">
-					<intent android:action="android.intent.action.VIEW"
-						android:data="@string/preference_developer_themes_link" />
-				</PreferenceScreen>
-			</PreferenceCategory>
-		</PreferenceScreen>
-	</PreferenceCategory>
+  <PreferenceCategory android:title="@string/preference_addons">
+    <PreferenceScreen
+      android:key="preference_screen_addons"
+      android:title="@string/preference_get_addons"
+      android:summary="@string/preference_get_addons_summary">
+      <PreferenceCategory android:title="@string/preference_get_market_addons">
+
+        <PreferenceScreen
+          android:key="preference_market_extensions"
+          android:title="@string/preference_extensions"
+          android:summary="@string/preference_market_extensions_summary">
+          <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/preference_market_extensions_link" />
+        </PreferenceScreen>
+        <PreferenceScreen
+          android:key="preference_market_themes"
+          android:title="@string/preference_themes"
+          android:summary="@string/preference_market_themes_summary">
+          <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/preference_market_themes_link" />
+        </PreferenceScreen>
+      </PreferenceCategory>
+      <PreferenceCategory android:title="@string/preference_get_developer_addons">
+        <PreferenceScreen
+          android:title="@string/preference_extensions"
+          android:summary="@string/preference_developer_extensions_summary">
+          <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/preference_developer_extensions_link" />
+        </PreferenceScreen>
+        <PreferenceScreen
+          android:title="@string/preference_themes"
+          android:summary="@string/preference_developer_themes_summary">
+          <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/preference_developer_themes_link" />
+        </PreferenceScreen>
+      </PreferenceCategory>
+    </PreferenceScreen>
+  </PreferenceCategory>
 
 </PreferenceScreen>

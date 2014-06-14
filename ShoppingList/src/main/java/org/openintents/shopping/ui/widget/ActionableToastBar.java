@@ -17,9 +17,6 @@
  */
 package org.openintents.shopping.ui.widget;
 
-import org.openintents.shopping.R;
-import org.openintents.shopping.ui.ToastBarOperation;
-
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.annotation.TargetApi;
@@ -34,6 +31,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.openintents.shopping.R;
+import org.openintents.shopping.ui.ToastBarOperation;
 
 /**
  * A custom {@link View} that exposes an action to the user.
@@ -46,18 +45,30 @@ public class ActionableToastBar extends LinearLayout {
     private final Runnable mRunnable;
     private final Handler mFadeOutHandler;
 
-    /** How long toast will last in ms */
-    private static final long TOAST_LIFETIME = 15*1000L;
+    /**
+     * How long toast will last in ms
+     */
+    private static final long TOAST_LIFETIME = 15 * 1000L;
 
-    /** Icon for the description. */
+    /**
+     * Icon for the description.
+     */
     private ImageView mActionDescriptionIcon;
-    /** The clickable view */
+    /**
+     * The clickable view
+     */
     private View mActionButton;
-    /** Icon for the action button. */
+    /**
+     * Icon for the action button.
+     */
     private View mActionIcon;
-    /** The view that contains the description. */
+    /**
+     * The view that contains the description.
+     */
     private TextView mActionDescriptionView;
-    /** The view that contains the text for the action button. */
+    /**
+     * The view that contains the text for the action button.
+     */
     private TextView mActionText;
     private ToastBarOperation mOperation;
 
@@ -75,7 +86,7 @@ public class ActionableToastBar extends LinearLayout {
         mRunnable = new Runnable() {
             @Override
             public void run() {
-                if(!mHidden) {
+                if (!mHidden) {
                     hide(true, false /* actionClicked */);
                 }
             }
@@ -97,24 +108,25 @@ public class ActionableToastBar extends LinearLayout {
     /**
      * Displays the toast bar and makes it visible. Allows the setting of
      * parameters to customize the display.
-     * @param listener Performs some action when the action button is clicked.
-     *                 If the {@link ToastBarOperation} overrides
-     *                 {@link ToastBarOperation#shouldTakeOnActionClickedPrecedence()}
-     *                 to return <code>true</code>, the
-     *                 {@link ToastBarOperation#onActionClicked(android.content.Context)}
-     *                 will override this listener and be called instead.
+     *
+     * @param listener                  Performs some action when the action button is clicked.
+     *                                  If the {@link ToastBarOperation} overrides
+     *                                  {@link ToastBarOperation#shouldTakeOnActionClickedPrecedence()}
+     *                                  to return <code>true</code>, the
+     *                                  {@link ToastBarOperation#onActionClicked(android.content.Context)}
+     *                                  will override this listener and be called instead.
      * @param descriptionIconResourceId resource ID for the description icon or
      *                                  0 if no icon should be shown
-     * @param descriptionText a description text to show in the toast bar
-     * @param showActionIcon if true, the action button icon should be shown
-     * @param actionTextResource resource ID for the text to show in the action button
-     * @param replaceVisibleToast if true, this toast should replace any currently visible toast.
-     *                            Otherwise, skip showing this toast.
-     * @param op the operation that corresponds to the specific toast being shown
+     * @param descriptionText           a description text to show in the toast bar
+     * @param showActionIcon            if true, the action button icon should be shown
+     * @param actionTextResource        resource ID for the text to show in the action button
+     * @param replaceVisibleToast       if true, this toast should replace any currently visible toast.
+     *                                  Otherwise, skip showing this toast.
+     * @param op                        the operation that corresponds to the specific toast being shown
      */
     public void show(final ActionClickedListener listener, int descriptionIconResourceId,
-            CharSequence descriptionText, boolean showActionIcon, int actionTextResource,
-            boolean replaceVisibleToast, final ToastBarOperation op) {
+                     CharSequence descriptionText, boolean showActionIcon, int actionTextResource,
+                     boolean replaceVisibleToast, final ToastBarOperation op) {
 
         if (!mHidden && !replaceVisibleToast) {
             return;
@@ -191,12 +203,15 @@ public class ActionableToastBar extends LinearLayout {
                 public void onAnimationStart(Animator animation) {
                     setVisibility(View.VISIBLE);
                 }
+
                 @Override
                 public void onAnimationEnd(Animator animation) {
                 }
+
                 @Override
                 public void onAnimationCancel(Animator animation) {
                 }
+
                 @Override
                 public void onAnimationRepeat(Animator animation) {
                 }
@@ -214,13 +229,16 @@ public class ActionableToastBar extends LinearLayout {
                 @Override
                 public void onAnimationStart(Animator animation) {
                 }
+
                 @Override
                 public void onAnimationRepeat(Animator animation) {
                 }
+
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     setVisibility(View.GONE);
                 }
+
                 @Override
                 public void onAnimationCancel(Animator animation) {
                 }

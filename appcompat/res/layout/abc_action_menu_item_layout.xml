@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2010 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2010 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,17 +13,8 @@
      limitations under the License.
 -->
 
-<android.support.v7.internal.view.menu.ActionMenuItemView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:focusable="true"
-        android:paddingTop="4dip"
-        android:paddingBottom="4dip"
-        android:paddingLeft="8dip"
-        android:paddingRight="8dip"
-        android:textAppearance="?attr/actionMenuTextAppearance"
-        android:textColor="?attr/actionMenuTextColor"
-        style="?attr/actionButtonStyle"/>
+<android.support.v7.internal.view.menu.ActionMenuItemView xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center"
+  android:gravity="center" android:focusable="true" android:paddingTop="4dip" android:paddingBottom="4dip"
+  android:paddingLeft="8dip" android:paddingRight="8dip" android:textAppearance="?attr/actionMenuTextAppearance"
+  android:textColor="?attr/actionMenuTextColor" style="?attr/actionButtonStyle" />

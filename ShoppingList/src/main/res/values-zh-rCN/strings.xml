@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<?xml version="1.0" encoding="utf-8"?><!--
  * Copyright (C) 2007-2010 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,361 +14,361 @@
  * limitations under the License.
  -->
 <resources>
-	<!-- ***************************
-	     About information
-	     *************************** -->
-	
-	<!-- Automatically filled in by Launchpad: -->
+  <!-- ***************************
+       About information
+       *************************** -->
+
+  <!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
   OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101
   friedger https://launchpad.net/~friedger
   gaoyunpeng https://launchpad.net/~gaoyunpeng1982
   zhangchun https://launchpad.net/~zhangchun</string>
-	
-    <!-- Short explanation of the application (max. 80 characters) -->
-	<string name="about_comments">使用 OI 购物清单跟踪您购买的物品。</string>
-	
-	<!-- ***************************
-	     Applicatio-specific strings
-	     *************************** -->
-	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI购物清单</string>
 
-	<string name="new_item">新物品</string>
-	<string name="new_list">新列表</string>
-	<string name="send">发送列表</string>
-	<string name="mark_all_items">标记所有物品</string>
-	<string name="unmark_all_items">Unmark all items</string>
-	<string name="empty_list_not_sent">不能发送空列表.</string>
-	<string name="email_not_available">无法找到用于传送的应用程序</string>
-	<string name="my_shopping_list">我的购物列表</string>
-	<string name="new_list_hint">例如 愿望清单，家庭成员</string>
-	<string name="clean_up_list">清除列表</string>
-	<string name="delete_list">删除列表</string>
-	<string name="ask_new_list">输入新购物列表的名称</string>
-	<string name="ask_rename_list">购物列表重命名</string>
-	<string name="ask_edit_item">编辑物品</string>
-	<string name="ask_new_store">输入新的商店名称</string>
-	<string name="please_enter_name">请输入名称</string>
-	<string name="no_items_marked">没有物品被标记为取消。</string>
-	<string name="confirm_delete_list">确定删除此购物列表吗？</string>
-	<string name="no_shopping_provider">读取购物列表失败。</string>
-	<string name="pick_item">挑选一个物品</string>
-	<string name="pick_list">挑选一张列表</string>
-	<string name="theme">主题</string>
-	<string name="theme_settings">主题设置</string>
-	<string name="rename_list">重命名列表</string>
-	<string name="menu_mark_item">标记物品</string>
-	<string name="menu_edit_item">编辑物品</string>
-	<string name="menu_auto_add">自动添加</string>
-	<string name="menu_item_stores">商店</string>
-	<string name="menu_rename_store">重命名商店</string>
-	<string name="menu_delete_store">删除商店</string>
-	<string name="confirm_delete_store">删除商店？</string>
-	<string name="no_items_available">无可用项目</string>
-	<string name="no_stores_available">没有可以用于这个清单的商店</string>
-	<string name="no_tags_available">没有可以用于这个清单的标签</string>
-	    
-	<!-- Remove item from this list, but keep it internally, so that the user
-	     can choose it later for inclusion again. Information like
-	     tags or price will be kept. -->
-	<string name="menu_remove_item">从列表中删除此物品</string>
-	
-	<!-- Delete this item completely. If the user wants to add it again, they
-	     have to enter all the information again. -->
-	<string name="menu_delete_item">永久删除此物品</string>
-	<string name="menu_move_item">移到其他列表</string>
-    <string name="menu_copy_item">复制商品</string>
-	    
-	<!-- Button label to add an item to the list. -->
-	<string name="add">添加</string>
-	
-	<string name="menu_pick_items">选择物品</string>
-	<string name="menu_start_shopping">购物</string>
-	
-	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_title">%s - 选择物品</string>
-	
-	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="shopping_title">%s - 购物</string>
-	
-	<!-- Title supplement. \'%s\' is the name of the current item. -->
-	<string name="item_stores_title">商店</string>
-	<string name="item_stores_activity_label">编辑商店物品</string>
-	
-	<string name="tags">标签</string>
-	<string name="price">价格</string>
-	<string name="item">物品</string>
-	<string name="quantity">数量</string>
-	<string name="priority">优先</string>
-	<string name="has_note">已注</string>
-	<string name="units">单位</string>
-	<string name="note">注释</string>
-	<string name="stores">商店</string>
-	<string name="list">清单</string>
-	
-	<string name="otherqty">其他数量...</string>
-	<string name="otherpri">其他优先级...</string>   
-	<string name="unfiltered">(未过滤)</string>
-	
-	<!-- Total sum of all prices. \'%s\' is the sum -->
-	<string name="total">总共: %s</string>
-	
-	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
-	<string name="total_checked">已核对: %s</string>
-    <string name="priority1_total">优先1: %s</string>
-    <string name="priority2_total">优先1-2: %s</string>
-	<string name="priority3_total">优先1-3: %s</string>
-	<string name="priority4_total">优先1-4: %s</string>
-	
-	<string name="delete_item_confirm">您确定要永久删除该商品吗？</string>
-	<string name="delete">删除</string>
-	
-	<!-- Added to an item to indicate it was bought. -->
-	<string name="suffix_checked">... 确定</string>
-	<string name="empty"/>
-	
-	<!-- The shortcut is created on the home screen. -->
-	<string name="pick_list_for_shortcut">从快捷方式中选择列表</string>
-	
-	<!-- Shown if external application wants to insert new items. -->
-	<string name="pick_list_to_insert_items">选择列表插入物品</string>
-	
-	<!-- Theme related -->
-	<!-- Title for selecting a theme -->
-	<string name="theme_pick">选择主题</string>
-	<string name="theme_description">给此列表挑选主题</string>
-	<string name="theme_default">默认</string>
-	<string name="theme_classic">经典的</string>
-	<string name="theme_bugdroid">Android</string>
-	<string name="theme_classic_export">经典的 (来自 OI 购物列表)</string>
-	<string name="theme_bugdroid_export">Android (来自 OI 购物列表)</string>
+  <!-- Short explanation of the application (max. 80 characters) -->
+  <string name="about_comments">使用 OI 购物清单跟踪您购买的物品。</string>
 
-	<!--     Dialog box    -->
-	<!-- Button label "OK" -->
-	<string name="ok">确认</string>
-	<!-- Button label "Cancel" -->
-	<string name="cancel">取消</string>
-	<string name="use_theme_for_all_lists">对所有列表使用此主题</string>
-	<string name="get_more_themes">获得更多主题</string>
-	
-	<!-- preferences -->
-	<string name="preferences">设置</string>
-	
-    <string name="preference_application">应用程序设置</string>
-    
-	<string name="preference_unchecked_on_top">未检查的置顶</string>
-	<string name="preference_unchecked_on_top_summary">总是优先显示未检查的物品</string>
-	<string name="preference_fontsize">字体大小</string>
-	<string name="preference_fontsize_summary">改变字体大小</string>
-	<string name="preference_fontsize_dialog_title">选择字体大小</string>
-	<string name="preference_orientation">位置</string>
-	<string name="preference_orientation_summary">改变位置</string>
-	<string name="preference_orientation_dialog_title">选择位置</string>
-	<string name="preference_sortorder_title">排列顺序</string>
-	<string name="preference_sortorder_summary">更改列表中物品的顺序</string>
-	<string name="preference_sortorder_for_pick_title">排列顺序-选择物品</string>
-	<string name="preference_sortorder_for_pick_summary">在选择物品模式，更改物品清单的排列顺序</string>
-	<string name="preference_sortorder_dialog_title">选择排列顺序</string>
-	<string name="preference_sortorder_for_pick_dialog_title">为选择物品模式，挑选排列顺序</string>
-	<string name="preference_sortorder_for_shopping_lists">排序次序 - 购物清单</string>
-	<string name="preference_sortorder_for_slists_summary">改变购物清单的排序次序。</string>
-	<string name="preference_sortorder_for_slists_dialog_title">为购物清单选择排序测序</string>
-	<string name="preference_loadlastused_title">加载上次使用的列表</string>
-	<string name="preference_loadlastused_summary">总是默认打开上次浏览的列表。</string>
-	<string name="preference_capitalization_title">大写</string>
-	<string name="preference_capitalization_summary">条目自动大写</string>
-	<string name="preference_capitalization_dialog_title">选择大写</string> 
-	<string name="preference_hidechecked_title">隐藏已检查物品</string>
-	<string name="preference_hidechecked_summary">立即隐藏已检查物品。</string>
-	<string name="preference_fastscroll_title">快速滚动条</string>
-	<string name="preference_fastscroll_summary">滚动超过35个商品时出现滚动滑块。</string>
-	<string name="preference_showprice_title">显示价格</string>
-	<string name="preference_showprice_summary">被显示为列表的额外列</string>
-	<string name="preference_perstoreprice">每个商店的价格</string>
-	<string name="preference_perstoreprice_title">对比每个商店的价格</string>
-	<string name="preference_perstoreprice_summary">单独对比每个商店的价格</string>
-	<string name="preference_screenlock_title">禁止锁屏</string>
-	<string name="preference_screenlock_summary">选中后阻止屏幕被锁定。</string>
-	<string name="preference_usefilters_title">筛选</string>
-	<string name="preference_usefilters_summary">清单可以用标签或者商店筛选。</string>
-	<string name="preference_complete_by_list_title">Limit item name completion</string>
-	<string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
-	<string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
-	<string name="preference_reset_quantity">重置数量</string>
-	<string name="preference_reset_quantity_summary">当再次添加商品时重置数量。</string>
-	<string name="preference_add_for_barcode">条码扫描器</string>
-	<string name="preference_add_for_barcode_summary">长时间按住添加按钮以启动OI的条码插件(如果已安装)。</string>
-	<string name="preference_showtags_title">显示标签</string>
-	<string name="preference_showtags_summary">被显示为列表的额外列</string>
-	<string name="preference_showquantity_title">显示数量</string>
-	<string name="preference_showquantity_summary">被显示为列表的额外列</string>
-	<string name="preference_showpriority_title">显示优先</string>
-	<string name="preference_showpriority_summary">被显示为列表的额外列</string>
-	<string name="preference_showunits_title">显示单位</string>
-	<string name="preference_showunits_summary">被显示为列表的额外列</string>
-	<string name="preference_prio_subtotal">按优先级总计</string>
-	<string name="preference_prioritytotal_title">按优先级总计</string>
-	<string name="preference_prioritytotal_summary">没有按优先级总计显示。</string>
-	<string name="preference_prioritytotal_dialog_title">按优先级总计</string>
-	<string name="preference_priosubtotalchecked_title">包括查看物品</string>
-	<string name="preference_priosubtotalchecked_on_summary">按查看物品的优先级总计</string>
-	<string name="preference_priosubtotalchecked_off_summary">排除物品的优先级总计</string>
-	<string name="preference_pickitemsinlist_title">直接在列表中挑选物品</string>
-	<string name="preference_pickitemsinlist_on_summary">切换主列表到编辑模式，重新添加现有物品</string>
-	<string name="preference_pickitemsinlist_off_summary">使用专业对话框，添加物品到列表中</string>
-	<string name="preference_samesortforpick_title">按相同的排序</string>
-	<string name="preference_samesortforpick_on_summary">在挑选物品模式排序，和购物模式操作一样。</string>
-	<string name="preference_samesortforpick_off_summary">选择物品模式的排序顺序，可以分开操作。</string>
-	
-	<!-- Preference title: Shake the phone to clean up the list. -->
-	<string name="preference_shake_title">摇动手机以清空列表</string>
-	
-	<!-- Preference summary: Shake the phone to clean up the list. -->
-	<string name="preference_shake_summary">摇动手机以清空列表</string>
-	
-    <string name="preference_advanced">高级设置</string>
-    <string name="preference_advanced_summary">附加设定</string>
-    
-    <!-- Preference category: General settings -->
-    <string name="preference_general">常规</string>
-    <string name="preference_pickitems">挑选物品</string>
-    
-    <string name="preference_appearance">外观</string>
-    
-    <string name="preference_addons">插件</string>
-    <string name="preference_get_addons">获得新的插件</string>
-    <string name="preference_get_addons_summary">在线搜索插件和主题.</string>
-    <string name="preference_get_market_addons">从Market上获得插件</string>
-    <string name="preference_get_developer_addons">从 OpenIntents上获得插件</string>
-    <string name="preference_extensions">插件</string>
-    <string name="preference_themes">主题</string>
-    <string name="preference_market_extensions_summary">从Android Market上获得插件 .</string>
-    <string name="preference_market_themes_summary">从Android Market上获得主题.</string>
-    <string name="preference_developer_extensions_summary">从OpenIntents 主页上获得插件.</string>
-	<string name="preference_developer_themes_summary">从OpenIntents 主页上获得主题.</string>
-	<string name="preference_quickedit">快速编辑模式</string>
-	<string name="preference_quickedit_on_summary">触摸 优先级 或者 数量 的数值以打开常用数值菜单。</string>
-	<string name="preference_quickedit_off_summary">点触 优先级 或者 数量 的数值以呼出商品编辑对话框。</string>
-	<string name="preference_reset_all_settings">重置所有设定</string>
-	<string name="preference_reset_all_settings_alert">您确定要重置所有的设定吗？此操作不可撤销。</string>    
-	<string name="preference_reset_all_settings_done">所有的设定已经重置</string>
-	    
-	<!-- ***************************
-	     Permissions
-	     *************************** -->
-	
-	<!-- OI Shopping list -->
-	<!-- Permission to read shopping lists -->
-	<string name="oi_shopping_permission_read">读购物列表</string>
-	<string name="oi_shopping_permission_read_descr">允许应用软件读取购物列表。注意加密列表和物品以加密格式来提供。</string>
-	<!-- Permission to write to shopping lists -->
-	<string name="oi_shopping_permission_write">写购物列表</string>
-	<string name="oi_shopping_permission_write_descr">允许应用软件创建新的列表和物品或者改变当前的。</string>
-	
-	
-	<!-- ***************************
-	     Preferences
-	     *************************** -->
-	
-    <string-array name="preference_sortorder_entries">
-    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
-    	<item>优先列出未检查物品，按其字母顺序排序</item>
-        <!-- Preference sort order: Sort by item name -->
-    	<item>按字母排序</item>
-        <!-- Preference sort order: Newest item first -->
-    	<item>优先最新的</item>
-        <!-- Preference sort order: Oldest item first -->
-    	<item>优先最旧的</item>
-    	<!-- Preference sort order: Sort alphabetically by tags -->
-    	<item>按标签的字母顺序排序</item>
-        <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
-    	<item>按字母顺序排列优先</item>
-        <!-- Preference sort order: Sort by price, the most expensive first -->
-    	<item>优先最贵的</item>
-        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
-    	<item>优先列出未检查物品， 按标签的字母顺序排序</item>
-    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
-    	<item>未经检查的优先，按字母顺序排列</item>
-    	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
-    	<item>未经检查的优先，按字母顺序排列优先</item>
-    </string-array>
-    
-    <string-array name="preference_sortorder_slists">
-        <!-- Preference sort order: Sort by list name in ascending order -->
-        <item>按字母表升序</item>
-        <!-- Preference sort order: Sort by list name in descending order -->
-        <item>按字母表降序</item>
-        <!-- Preference sort order: Newest list first -->
-        <item>优先最新的</item>
-        <!-- Preference sort order: Oldest list first -->
-        <item>优先最旧的</item>
-    </string-array>
-    
-    <string-array name="preference_prioritytotal_entries">
-    	<item>不显示</item>
-    	<item>优先1</item>
-    	<item>优先1-2</item>
-    	<item>优先1-3</item>
-    	<item>优先1-4</item>
-    </string-array>
-    
-    <string-array name="preference_fontsize_entries">
-    	<!-- Preference fontsize: tiny font size -->
-        <item>微小</item>
-    	<!-- Preference fontsize: small font size -->
-        <item>小</item>
-    	<!-- Preference fontsize: default font size -->
-    	<item>默认</item>
-    	<!-- Preference fontsize: large font size -->
-        <item>大</item>
-    </string-array>
-    
-    <string-array name="preference_orientation_entries">
-    	<!-- Preference orientation: default -->
-        <item>默认</item>
-    	<!-- Preference orientation: landscape -->
-    	<item>背景</item>
-    	<!-- Preference orientation: portrait -->
-        <item>头像</item>
-    </string-array>
-    
-    <string-array name="preference_capitalization_entries">
-    	<!-- Preference capitalization: No capitalization -->
-        <item>无</item>
-    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>逐句</item>
-    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>逐字</item>
-    </string-array>
+  <!-- ***************************
+       Applicatio-specific strings
+       *************************** -->
+  <!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
+  <string name="app_name">OI购物清单</string>
 
-	<!-- ***************************
-	     OI Notepad
-	     *************************** -->
-	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
-	<string name="notepad_not_available">编辑物品注释，需要OI记事本。</string>
-	<!-- Name of application "OI Notepad". Translations should be consistent. -->
-	<string name="notepad">OI记事本</string>
+  <string name="new_item">新物品</string>
+  <string name="new_list">新列表</string>
+  <string name="send">发送列表</string>
+  <string name="mark_all_items">标记所有物品</string>
+  <string name="unmark_all_items">Unmark all items</string>
+  <string name="empty_list_not_sent">不能发送空列表.</string>
+  <string name="email_not_available">无法找到用于传送的应用程序</string>
+  <string name="my_shopping_list">我的购物列表</string>
+  <string name="new_list_hint">例如 愿望清单，家庭成员</string>
+  <string name="clean_up_list">清除列表</string>
+  <string name="delete_list">删除列表</string>
+  <string name="ask_new_list">输入新购物列表的名称</string>
+  <string name="ask_rename_list">购物列表重命名</string>
+  <string name="ask_edit_item">编辑物品</string>
+  <string name="ask_new_store">输入新的商店名称</string>
+  <string name="please_enter_name">请输入名称</string>
+  <string name="no_items_marked">没有物品被标记为取消。</string>
+  <string name="confirm_delete_list">确定删除此购物列表吗？</string>
+  <string name="no_shopping_provider">读取购物列表失败。</string>
+  <string name="pick_item">挑选一个物品</string>
+  <string name="pick_list">挑选一张列表</string>
+  <string name="theme">主题</string>
+  <string name="theme_settings">主题设置</string>
+  <string name="rename_list">重命名列表</string>
+  <string name="menu_mark_item">标记物品</string>
+  <string name="menu_edit_item">编辑物品</string>
+  <string name="menu_auto_add">自动添加</string>
+  <string name="menu_item_stores">商店</string>
+  <string name="menu_rename_store">重命名商店</string>
+  <string name="menu_delete_store">删除商店</string>
+  <string name="confirm_delete_store">删除商店？</string>
+  <string name="no_items_available">无可用项目</string>
+  <string name="no_stores_available">没有可以用于这个清单的商店</string>
+  <string name="no_tags_available">没有可以用于这个清单的标签</string>
 
-	<!-- ***************************
-	     Automation
-	     *************************** -->
-	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
-	<string name="label_select_action">选择操作</string>
-	
-	<!-- Label above button that opens a list of all shopping lists to choose from. -->
-	<string name="label_select_list">选择列表:</string>
-	
-	<!-- Arrays -->
-	
-    <string-array name="automation_actions">
-    	<!-- Automation action to clean up a list. -->
-    	<item>清除列表</item>
-    </string-array>
-      
-	<string name="widget_prev_page">上一页</string>
-	<string name="widget_next_page">下一页</string>
-	<string name="widget_choose_a_list">选择一个清单</string>
-	<string name="widget_no_items">第 %d 页没有商品</string>
+  <!-- Remove item from this list, but keep it internally, so that the user
+       can choose it later for inclusion again. Information like
+       tags or price will be kept. -->
+  <string name="menu_remove_item">从列表中删除此物品</string>
+
+  <!-- Delete this item completely. If the user wants to add it again, they
+       have to enter all the information again. -->
+  <string name="menu_delete_item">永久删除此物品</string>
+  <string name="menu_move_item">移到其他列表</string>
+  <string name="menu_copy_item">复制商品</string>
+
+  <!-- Button label to add an item to the list. -->
+  <string name="add">添加</string>
+
+  <string name="menu_pick_items">选择物品</string>
+  <string name="menu_start_shopping">购物</string>
+
+  <!-- Title supplement. \'%s\' is the name of the current list. -->
+  <string name="pick_items_title">%s - 选择物品</string>
+
+  <!-- Title supplement. \'%s\' is the name of the current list. -->
+  <string name="shopping_title">%s - 购物</string>
+
+  <!-- Title supplement. \'%s\' is the name of the current item. -->
+  <string name="item_stores_title">商店</string>
+  <string name="item_stores_activity_label">编辑商店物品</string>
+
+  <string name="tags">标签</string>
+  <string name="price">价格</string>
+  <string name="item">物品</string>
+  <string name="quantity">数量</string>
+  <string name="priority">优先</string>
+  <string name="has_note">已注</string>
+  <string name="units">单位</string>
+  <string name="note">注释</string>
+  <string name="stores">商店</string>
+  <string name="list">清单</string>
+
+  <string name="otherqty">其他数量...</string>
+  <string name="otherpri">其他优先级...</string>
+  <string name="unfiltered">(未过滤)</string>
+
+  <!-- Total sum of all prices. \'%s\' is the sum -->
+  <string name="total">总共: %s</string>
+
+  <!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+  <string name="total_checked">已核对: %s</string>
+  <string name="priority1_total">优先1: %s</string>
+  <string name="priority2_total">优先1-2: %s</string>
+  <string name="priority3_total">优先1-3: %s</string>
+  <string name="priority4_total">优先1-4: %s</string>
+
+  <string name="delete_item_confirm">您确定要永久删除该商品吗？</string>
+  <string name="delete">删除</string>
+
+  <!-- Added to an item to indicate it was bought. -->
+  <string name="suffix_checked">... 确定</string>
+  <string name="empty" />
+
+  <!-- The shortcut is created on the home screen. -->
+  <string name="pick_list_for_shortcut">从快捷方式中选择列表</string>
+
+  <!-- Shown if external application wants to insert new items. -->
+  <string name="pick_list_to_insert_items">选择列表插入物品</string>
+
+  <!-- Theme related -->
+  <!-- Title for selecting a theme -->
+  <string name="theme_pick">选择主题</string>
+  <string name="theme_description">给此列表挑选主题</string>
+  <string name="theme_default">默认</string>
+  <string name="theme_classic">经典的</string>
+  <string name="theme_bugdroid">Android</string>
+  <string name="theme_classic_export">经典的 (来自 OI 购物列表)</string>
+  <string name="theme_bugdroid_export">Android (来自 OI 购物列表)</string>
+
+  <!--     Dialog box    -->
+  <!-- Button label "OK" -->
+  <string name="ok">确认</string>
+  <!-- Button label "Cancel" -->
+  <string name="cancel">取消</string>
+  <string name="use_theme_for_all_lists">对所有列表使用此主题</string>
+  <string name="get_more_themes">获得更多主题</string>
+
+  <!-- preferences -->
+  <string name="preferences">设置</string>
+
+  <string name="preference_application">应用程序设置</string>
+
+  <string name="preference_unchecked_on_top">未检查的置顶</string>
+  <string name="preference_unchecked_on_top_summary">总是优先显示未检查的物品</string>
+  <string name="preference_fontsize">字体大小</string>
+  <string name="preference_fontsize_summary">改变字体大小</string>
+  <string name="preference_fontsize_dialog_title">选择字体大小</string>
+  <string name="preference_orientation">位置</string>
+  <string name="preference_orientation_summary">改变位置</string>
+  <string name="preference_orientation_dialog_title">选择位置</string>
+  <string name="preference_sortorder_title">排列顺序</string>
+  <string name="preference_sortorder_summary">更改列表中物品的顺序</string>
+  <string name="preference_sortorder_for_pick_title">排列顺序-选择物品</string>
+  <string name="preference_sortorder_for_pick_summary">在选择物品模式，更改物品清单的排列顺序</string>
+  <string name="preference_sortorder_dialog_title">选择排列顺序</string>
+  <string name="preference_sortorder_for_pick_dialog_title">为选择物品模式，挑选排列顺序</string>
+  <string name="preference_sortorder_for_shopping_lists">排序次序 - 购物清单</string>
+  <string name="preference_sortorder_for_slists_summary">改变购物清单的排序次序。</string>
+  <string name="preference_sortorder_for_slists_dialog_title">为购物清单选择排序测序</string>
+  <string name="preference_loadlastused_title">加载上次使用的列表</string>
+  <string name="preference_loadlastused_summary">总是默认打开上次浏览的列表。</string>
+  <string name="preference_capitalization_title">大写</string>
+  <string name="preference_capitalization_summary">条目自动大写</string>
+  <string name="preference_capitalization_dialog_title">选择大写</string>
+  <string name="preference_hidechecked_title">隐藏已检查物品</string>
+  <string name="preference_hidechecked_summary">立即隐藏已检查物品。</string>
+  <string name="preference_fastscroll_title">快速滚动条</string>
+  <string name="preference_fastscroll_summary">滚动超过35个商品时出现滚动滑块。</string>
+  <string name="preference_showprice_title">显示价格</string>
+  <string name="preference_showprice_summary">被显示为列表的额外列</string>
+  <string name="preference_perstoreprice">每个商店的价格</string>
+  <string name="preference_perstoreprice_title">对比每个商店的价格</string>
+  <string name="preference_perstoreprice_summary">单独对比每个商店的价格</string>
+  <string name="preference_screenlock_title">禁止锁屏</string>
+  <string name="preference_screenlock_summary">选中后阻止屏幕被锁定。</string>
+  <string name="preference_usefilters_title">筛选</string>
+  <string name="preference_usefilters_summary">清单可以用标签或者商店筛选。</string>
+  <string name="preference_complete_by_list_title">Limit item name completion</string>
+  <string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
+  <string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
+  <string name="preference_reset_quantity">重置数量</string>
+  <string name="preference_reset_quantity_summary">当再次添加商品时重置数量。</string>
+  <string name="preference_add_for_barcode">条码扫描器</string>
+  <string name="preference_add_for_barcode_summary">长时间按住添加按钮以启动OI的条码插件(如果已安装)。</string>
+  <string name="preference_showtags_title">显示标签</string>
+  <string name="preference_showtags_summary">被显示为列表的额外列</string>
+  <string name="preference_showquantity_title">显示数量</string>
+  <string name="preference_showquantity_summary">被显示为列表的额外列</string>
+  <string name="preference_showpriority_title">显示优先</string>
+  <string name="preference_showpriority_summary">被显示为列表的额外列</string>
+  <string name="preference_showunits_title">显示单位</string>
+  <string name="preference_showunits_summary">被显示为列表的额外列</string>
+  <string name="preference_prio_subtotal">按优先级总计</string>
+  <string name="preference_prioritytotal_title">按优先级总计</string>
+  <string name="preference_prioritytotal_summary">没有按优先级总计显示。</string>
+  <string name="preference_prioritytotal_dialog_title">按优先级总计</string>
+  <string name="preference_priosubtotalchecked_title">包括查看物品</string>
+  <string name="preference_priosubtotalchecked_on_summary">按查看物品的优先级总计</string>
+  <string name="preference_priosubtotalchecked_off_summary">排除物品的优先级总计</string>
+  <string name="preference_pickitemsinlist_title">直接在列表中挑选物品</string>
+  <string name="preference_pickitemsinlist_on_summary">切换主列表到编辑模式，重新添加现有物品</string>
+  <string name="preference_pickitemsinlist_off_summary">使用专业对话框，添加物品到列表中</string>
+  <string name="preference_samesortforpick_title">按相同的排序</string>
+  <string name="preference_samesortforpick_on_summary">在挑选物品模式排序，和购物模式操作一样。</string>
+  <string name="preference_samesortforpick_off_summary">选择物品模式的排序顺序，可以分开操作。</string>
+
+  <!-- Preference title: Shake the phone to clean up the list. -->
+  <string name="preference_shake_title">摇动手机以清空列表</string>
+
+  <!-- Preference summary: Shake the phone to clean up the list. -->
+  <string name="preference_shake_summary">摇动手机以清空列表</string>
+
+  <string name="preference_advanced">高级设置</string>
+  <string name="preference_advanced_summary">附加设定</string>
+
+  <!-- Preference category: General settings -->
+  <string name="preference_general">常规</string>
+  <string name="preference_pickitems">挑选物品</string>
+
+  <string name="preference_appearance">外观</string>
+
+  <string name="preference_addons">插件</string>
+  <string name="preference_get_addons">获得新的插件</string>
+  <string name="preference_get_addons_summary">在线搜索插件和主题.</string>
+  <string name="preference_get_market_addons">从Market上获得插件</string>
+  <string name="preference_get_developer_addons">从 OpenIntents上获得插件</string>
+  <string name="preference_extensions">插件</string>
+  <string name="preference_themes">主题</string>
+  <string name="preference_market_extensions_summary">从Android Market上获得插件 .</string>
+  <string name="preference_market_themes_summary">从Android Market上获得主题.</string>
+  <string name="preference_developer_extensions_summary">从OpenIntents 主页上获得插件.</string>
+  <string name="preference_developer_themes_summary">从OpenIntents 主页上获得主题.</string>
+  <string name="preference_quickedit">快速编辑模式</string>
+  <string name="preference_quickedit_on_summary">触摸 优先级 或者 数量 的数值以打开常用数值菜单。</string>
+  <string name="preference_quickedit_off_summary">点触 优先级 或者 数量 的数值以呼出商品编辑对话框。</string>
+  <string name="preference_reset_all_settings">重置所有设定</string>
+  <string name="preference_reset_all_settings_alert">您确定要重置所有的设定吗？此操作不可撤销。</string>
+  <string name="preference_reset_all_settings_done">所有的设定已经重置</string>
+
+  <!-- ***************************
+       Permissions
+       *************************** -->
+
+  <!-- OI Shopping list -->
+  <!-- Permission to read shopping lists -->
+  <string name="oi_shopping_permission_read">读购物列表</string>
+  <string name="oi_shopping_permission_read_descr">允许应用软件读取购物列表。注意加密列表和物品以加密格式来提供。</string>
+  <!-- Permission to write to shopping lists -->
+  <string name="oi_shopping_permission_write">写购物列表</string>
+  <string name="oi_shopping_permission_write_descr">允许应用软件创建新的列表和物品或者改变当前的。</string>
+
+
+  <!-- ***************************
+       Preferences
+       *************************** -->
+
+  <string-array name="preference_sortorder_entries">
+    <!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    <item>优先列出未检查物品，按其字母顺序排序</item>
+    <!-- Preference sort order: Sort by item name -->
+    <item>按字母排序</item>
+    <!-- Preference sort order: Newest item first -->
+    <item>优先最新的</item>
+    <!-- Preference sort order: Oldest item first -->
+    <item>优先最旧的</item>
+    <!-- Preference sort order: Sort alphabetically by tags -->
+    <item>按标签的字母顺序排序</item>
+    <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
+    <item>按字母顺序排列优先</item>
+    <!-- Preference sort order: Sort by price, the most expensive first -->
+    <item>优先最贵的</item>
+    <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    <item>优先列出未检查物品， 按标签的字母顺序排序</item>
+    <!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    <item>未经检查的优先，按字母顺序排列</item>
+    <!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
+    <item>未经检查的优先，按字母顺序排列优先</item>
+  </string-array>
+
+  <string-array name="preference_sortorder_slists">
+    <!-- Preference sort order: Sort by list name in ascending order -->
+    <item>按字母表升序</item>
+    <!-- Preference sort order: Sort by list name in descending order -->
+    <item>按字母表降序</item>
+    <!-- Preference sort order: Newest list first -->
+    <item>优先最新的</item>
+    <!-- Preference sort order: Oldest list first -->
+    <item>优先最旧的</item>
+  </string-array>
+
+  <string-array name="preference_prioritytotal_entries">
+    <item>不显示</item>
+    <item>优先1</item>
+    <item>优先1-2</item>
+    <item>优先1-3</item>
+    <item>优先1-4</item>
+  </string-array>
+
+  <string-array name="preference_fontsize_entries">
+    <!-- Preference fontsize: tiny font size -->
+    <item>微小</item>
+    <!-- Preference fontsize: small font size -->
+    <item>小</item>
+    <!-- Preference fontsize: default font size -->
+    <item>默认</item>
+    <!-- Preference fontsize: large font size -->
+    <item>大</item>
+  </string-array>
+
+  <string-array name="preference_orientation_entries">
+    <!-- Preference orientation: default -->
+    <item>默认</item>
+    <!-- Preference orientation: landscape -->
+    <item>背景</item>
+    <!-- Preference orientation: portrait -->
+    <item>头像</item>
+  </string-array>
+
+  <string-array name="preference_capitalization_entries">
+    <!-- Preference capitalization: No capitalization -->
+    <item>无</item>
+    <!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+    <item>逐句</item>
+    <!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+    <item>逐字</item>
+  </string-array>
+
+  <!-- ***************************
+       OI Notepad
+       *************************** -->
+  <!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+  <string name="notepad_not_available">编辑物品注释，需要OI记事本。</string>
+  <!-- Name of application "OI Notepad". Translations should be consistent. -->
+  <string name="notepad">OI记事本</string>
+
+  <!-- ***************************
+       Automation
+       *************************** -->
+  <!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+  <string name="label_select_action">选择操作</string>
+
+  <!-- Label above button that opens a list of all shopping lists to choose from. -->
+  <string name="label_select_list">选择列表:</string>
+
+  <!-- Arrays -->
+
+  <string-array name="automation_actions">
+    <!-- Automation action to clean up a list. -->
+    <item>清除列表</item>
+  </string-array>
+
+  <string name="widget_prev_page">上一页</string>
+  <string name="widget_next_page">下一页</string>
+  <string name="widget_choose_a_list">选择一个清单</string>
+  <string name="widget_no_items">第 %d 页没有商品</string>
 </resources>

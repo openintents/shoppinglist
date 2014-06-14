@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<?xml version="1.0" encoding="utf-8"?><!--
  * Copyright (C) 2010-2011 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,75 +15,76 @@
  -->
 
 <resources>
-	<style name="Theme">
-	</style>
-	<style name="Theme.ShoppingList" parent="Theme">
-		<item name="background">?android:background</item>
-		<item name="backgroundPadding">0dip</item>
-		<item name="shopping_divider">0</item>
-		<item name="textTypeface"></item>
-		<item name="textUpperCaseFont">false</item>
-		<item name="textSizeSmall">18sp</item>
-		<item name="textSizeMedium">23sp</item>
-		<item name="textSizeLarge">28sp</item>
-		<item name="textColor">#FFFFFFFF</item>
-		<item name="textColorPrice">#FFCCCCCC</item>
-		<item name="textColorPriority">#FFCCCCCC</item>
-		<item name="textColorChecked">#FFCCCCCC</item>
-		<item name="textStrikethroughChecked">false</item>
-		<item name="textSuffixUnchecked">@string/empty</item>
-		<item name="textSuffixChecked">@string/empty</item>
-		<item name="showCheckBox">true</item>
-	</style>
 
-	<style name="Theme.ShoppingList.Classic" parent="Theme.ShoppingList">
-		<item name="background">@drawable/shoppinglist01d</item>
-		<item name="backgroundPadding">-1px</item>
-		<item name="shopping_divider">-1</item>
-		<item name="textTypeface">fonts/AnkeHand.ttf</item>
-		<item name="textUpperCaseFont">false</item>
-		<item name="textSizeSmall">15sp</item>
-		<item name="textSizeMedium">20sp</item>
-		<item name="textSizeLarge">25sp</item>
-		<item name="textColor">#FF000000</item>
-		<item name="textColorPrice">#FF444444</item>
-		<item name="textColorPriority">#FFAA8844</item>
-		<item name="textColorChecked">#FF008800</item>
-		<item name="textStrikethroughChecked">true</item>
-		<item name="showCheckBox">false</item>
-	</style>
+  <style name="Theme"></style>
 
-	<style name="Theme.ShoppingList.Android" parent="Theme.ShoppingList">
-		<!-- item name="background">@drawable/theme_android</item -->
-		<item name="backgroundPadding">0dip</item>
-		<item name="shopping_divider">0</item>
-		<item name="textTypeface">fonts/Crysta.ttf</item>
-		<item name="textUpperCaseFont">true</item>
-		<item name="textSizeSmall">21sp</item>
-		<item name="textSizeMedium">26sp</item>
-		<item name="textSizeLarge">31sp</item>
-		<item name="textColor">#FFFFFF66</item>
-		<item name="textColorPrice">#FFCCCCCC</item>
-		<item name="textColorPriority">#FFEECC88</item>
-		<item name="textColorChecked">#FF66FF66</item>
-		<item name="textStrikethroughChecked">false</item>
-		<item name="textSuffixChecked">@string/suffix_checked</item>
-		<item name="showCheckBox">false</item>
-	</style>
+  <style name="Theme.ShoppingList" parent="Theme">
+    <item name="background">?android:background</item>
+    <item name="backgroundPadding">0dip</item>
+    <item name="shopping_divider">0</item>
+    <item name="textTypeface"></item>
+    <item name="textUpperCaseFont">false</item>
+    <item name="textSizeSmall">18sp</item>
+    <item name="textSizeMedium">23sp</item>
+    <item name="textSizeLarge">28sp</item>
+    <item name="textColor">#FFFFFFFF</item>
+    <item name="textColorPrice">#FFCCCCCC</item>
+    <item name="textColorPriority">#FFCCCCCC</item>
+    <item name="textColorChecked">#FFCCCCCC</item>
+    <item name="textStrikethroughChecked">false</item>
+    <item name="textSuffixUnchecked">@string/empty</item>
+    <item name="textSuffixChecked">@string/empty</item>
+    <item name="showCheckBox">true</item>
+  </style>
 
-	<!--
-		We use OI Shopping List themes also for OI Notepad, because the
-		Notepad attributes are a subset of the OI Shopping List attributes. If
-		additional attributes were required, they could be added here.
-	-->
-	<style name="Theme.Notepad.Classic" parent="Theme.ShoppingList.Classic">
-		<item name="lineMode">0</item>
-	</style>
+  <style name="Theme.ShoppingList.Classic" parent="Theme.ShoppingList">
+    <item name="background">@drawable/shoppinglist01d</item>
+    <item name="backgroundPadding">-1px</item>
+    <item name="shopping_divider">-1</item>
+    <item name="textTypeface">fonts/AnkeHand.ttf</item>
+    <item name="textUpperCaseFont">false</item>
+    <item name="textSizeSmall">15sp</item>
+    <item name="textSizeMedium">20sp</item>
+    <item name="textSizeLarge">25sp</item>
+    <item name="textColor">#FF000000</item>
+    <item name="textColorPrice">#FF444444</item>
+    <item name="textColorPriority">#FFAA8844</item>
+    <item name="textColorChecked">#FF008800</item>
+    <item name="textStrikethroughChecked">true</item>
+    <item name="showCheckBox">false</item>
+  </style>
 
-	<style name="Theme.Notepad.Android" parent="Theme.ShoppingList.Android">
-		<item name="backgroundPadding">5dip</item>
-		<item name="textColor">#FF00FF00</item>
-		<item name="lineMode">3</item>
-		<item name="lineColor">#FF606060</item>
-	</style>
+  <style name="Theme.ShoppingList.Android" parent="Theme.ShoppingList">
+    <!-- item name="background">@drawable/theme_android</item -->
+    <item name="backgroundPadding">0dip</item>
+    <item name="shopping_divider">0</item>
+    <item name="textTypeface">fonts/Crysta.ttf</item>
+    <item name="textUpperCaseFont">true</item>
+    <item name="textSizeSmall">21sp</item>
+    <item name="textSizeMedium">26sp</item>
+    <item name="textSizeLarge">31sp</item>
+    <item name="textColor">#FFFFFF66</item>
+    <item name="textColorPrice">#FFCCCCCC</item>
+    <item name="textColorPriority">#FFEECC88</item>
+    <item name="textColorChecked">#FF66FF66</item>
+    <item name="textStrikethroughChecked">false</item>
+    <item name="textSuffixChecked">@string/suffix_checked</item>
+    <item name="showCheckBox">false</item>
+  </style>
+
+  <!--
+    We use OI Shopping List themes also for OI Notepad, because the
+    Notepad attributes are a subset of the OI Shopping List attributes. If
+    additional attributes were required, they could be added here.
+  -->
+  <style name="Theme.Notepad.Classic" parent="Theme.ShoppingList.Classic">
+    <item name="lineMode">0</item>
+  </style>
+
+  <style name="Theme.Notepad.Android" parent="Theme.ShoppingList.Android">
+    <item name="backgroundPadding">5dip</item>
+    <item name="textColor">#FF00FF00</item>
+    <item name="lineMode">3</item>
+    <item name="lineColor">#FF606060</item>
+  </style>
 </resources>

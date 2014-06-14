@@ -1,15 +1,5 @@
 package org.openintents.shopping.ui;
 
-import java.util.List;
-
-import org.openintents.shopping.R;
-import org.openintents.shopping.library.provider.ShoppingContract.ItemStores;
-import org.openintents.shopping.library.provider.ShoppingContract.Stores;
-import org.openintents.shopping.library.util.ShoppingUtils;
-import org.openintents.shopping.ui.dialog.DialogActionListener;
-import org.openintents.shopping.ui.dialog.RenameListDialog;
-import org.openintents.shopping.ui.widget.StoreListView;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -30,256 +20,268 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.List;
+
+import org.openintents.shopping.R;
+import org.openintents.shopping.library.provider.ShoppingContract.Stores;
+import org.openintents.shopping.library.util.ShoppingUtils;
+import org.openintents.shopping.ui.dialog.DialogActionListener;
+import org.openintents.shopping.ui.dialog.RenameListDialog;
+import org.openintents.shopping.ui.widget.StoreListView;
+
 /**
  * UI for showing and editing stores for a specific item
- * 
- * @author OpenIntents
  *
+ * @author OpenIntents
  */
 public class ItemStoresActivity extends Activity {
 
-	private static final int DIALOG_NEW_STORE = 1;
-	private static final int DIALOG_RENAME_STORE = 2;
+    private static final int DIALOG_NEW_STORE = 1;
+    private static final int DIALOG_RENAME_STORE = 2;
 
-	public static final int MENU_RENAME_STORE = Menu.FIRST;
-	public static final int MENU_DELETE_STORE = Menu.FIRST + 1;
+    public static final int MENU_RENAME_STORE = Menu.FIRST;
+    public static final int MENU_DELETE_STORE = Menu.FIRST + 1;
 
-	long mListId = 0;
-	long mItemId = 0;
-	StoreListView mItemStores = null;
+    long mListId = 0;
+    long mItemId = 0;
+    StoreListView mItemStores = null;
 
-	int mSelectedStorePosition = 0;
+    int mSelectedStorePosition = 0;
 
-	public class NewStoreDialog extends RenameListDialog {
+    public class NewStoreDialog extends RenameListDialog {
 
-		public NewStoreDialog(Context context) {
-			super(context);
+        public NewStoreDialog(Context context) {
+            super(context);
 
-			setTitle(R.string.ask_new_store);
-			mEditText.setHint("");
-		}
+            setTitle(R.string.ask_new_store);
+            mEditText.setHint("");
+        }
 
-		public NewStoreDialog(Context context, DialogActionListener listener) {
-			super(context);
+        public NewStoreDialog(Context context, DialogActionListener listener) {
+            super(context);
 
-			setTitle(R.string.ask_new_store);
-			mEditText.setHint("");
-			setDialogActionListener(listener);
-		}
+            setTitle(R.string.ask_new_store);
+            mEditText.setHint("");
+            setDialogActionListener(listener);
+        }
 
-		public NewStoreDialog(Context context, String name,
-				DialogActionListener listener) {
-			super(context);
+        public NewStoreDialog(Context context, String name,
+                              DialogActionListener listener) {
+            super(context);
 
-			setTitle(R.string.ask_new_store);
-			mEditText.setHint("");
-			setName(name);
-			setDialogActionListener(listener);
-		}
-	}
+            setTitle(R.string.ask_new_store);
+            mEditText.setHint("");
+            setName(name);
+            setDialogActionListener(listener);
+        }
+    }
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
 
-		super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_itemstores);
+        setContentView(R.layout.activity_itemstores);
 
-		mItemStores = (StoreListView) findViewById(R.id.list_stores);
+        mItemStores = (StoreListView) findViewById(R.id.list_stores);
 
-		mItemStores
-				.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+        mItemStores
+                .setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
 
-					public void onCreateContextMenu(ContextMenu contextmenu,
-							View view, ContextMenuInfo info) {
-						contextmenu.add(0, MENU_RENAME_STORE, 0,
-								R.string.menu_rename_store).setShortcut('1',
-								'r');
-						contextmenu.add(0, MENU_DELETE_STORE, 0,
-								R.string.menu_delete_store).setShortcut('2',
-								'd');
-					}
+                    public void onCreateContextMenu(ContextMenu contextmenu,
+                                                    View view, ContextMenuInfo info) {
+                        contextmenu.add(0, MENU_RENAME_STORE, 0,
+                                R.string.menu_rename_store).setShortcut('1',
+                                'r');
+                        contextmenu.add(0, MENU_DELETE_STORE, 0,
+                                R.string.menu_delete_store).setShortcut('2',
+                                'd');
+                    }
 
-				});
+                });
 
-		String listId;
-		String itemId;
+        String listId;
+        String itemId;
 
-		List<String> pathSegs = getIntent().getData().getPathSegments();
-		int num = pathSegs.size();
-		listId = pathSegs.get(num - 2);
-		itemId = pathSegs.get(num - 1);
+        List<String> pathSegs = getIntent().getData().getPathSegments();
+        int num = pathSegs.size();
+        listId = pathSegs.get(num - 2);
+        itemId = pathSegs.get(num - 1);
 
-		mListId = Long.parseLong(listId);
-		mItemId = Long.parseLong(itemId);
+        mListId = Long.parseLong(listId);
+        mItemId = Long.parseLong(itemId);
 
-		mItemStores.fillItems(this, Long.parseLong(listId),
-				Long.parseLong(itemId));
+        mItemStores.fillItems(this, Long.parseLong(listId),
+                Long.parseLong(itemId));
 
-		String itemname = ShoppingUtils.getItemName(this,
-				Long.parseLong(itemId));
-		setTitle(itemname + " @ ...");
+        String itemname = ShoppingUtils.getItemName(this,
+                Long.parseLong(itemId));
+        setTitle(itemname + " @ ...");
 
-		Button b = (Button) findViewById(R.id.button_ok);
-		b.setOnClickListener(new OnClickListener() {
+        Button b = (Button) findViewById(R.id.button_ok);
+        b.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				mItemStores.applyUpdate();
-				finish();
-			}
-		});
-		b = (Button) findViewById(R.id.button_cancel);
-		b.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mItemStores.applyUpdate();
+                finish();
+            }
+        });
+        b = (Button) findViewById(R.id.button_cancel);
+        b.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				mItemStores.undoChanges();
-				finish();
-			}
-		});
-		b = (Button) findViewById(R.id.button_add_store);
-		b.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mItemStores.undoChanges();
+                finish();
+            }
+        });
+        b = (Button) findViewById(R.id.button_add_store);
+        b.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				showDialog(DIALOG_NEW_STORE);
-			}
-		});
+            @Override
+            public void onClick(View v) {
+                showDialog(DIALOG_NEW_STORE);
+            }
+        });
 
-	}
+    }
 
-	@Override
-	protected Dialog onCreateDialog(int id) {
+    @Override
+    protected Dialog onCreateDialog(int id) {
 
-		switch (id) {
+        switch (id) {
 
-		case DIALOG_NEW_STORE:
-			return new NewStoreDialog(this, new DialogActionListener() {
+            case DIALOG_NEW_STORE:
+                return new NewStoreDialog(this, new DialogActionListener() {
 
-				public void onAction(String name) {
-					createStore(name);
-				}
+                    public void onAction(String name) {
+                        createStore(name);
+                    }
 
-			});
+                });
 
-		case DIALOG_RENAME_STORE:
-			return new NewStoreDialog(this, getSelectedStoreName(),
-					new DialogActionListener() {
+            case DIALOG_RENAME_STORE:
+                return new NewStoreDialog(this, getSelectedStoreName(),
+                        new DialogActionListener() {
 
-						public void onAction(String name) {
-							renameStore(name);
-						}
-					});
-		}
-		return super.onCreateDialog(id);
-	}
+                            public void onAction(String name) {
+                                renameStore(name);
+                            }
+                        }
+                );
+        }
+        return super.onCreateDialog(id);
+    }
 
-	@Override
-	protected void onPrepareDialog(int id, Dialog dialog) {
-		super.onPrepareDialog(id, dialog);
+    @Override
+    protected void onPrepareDialog(int id, Dialog dialog) {
+        super.onPrepareDialog(id, dialog);
 
-		switch (id) {
-		case DIALOG_NEW_STORE:
-			((NewStoreDialog) dialog).setName("");
-			break;
+        switch (id) {
+            case DIALOG_NEW_STORE:
+                ((NewStoreDialog) dialog).setName("");
+                break;
 
-		case DIALOG_RENAME_STORE:
-			((NewStoreDialog) dialog).setName(getSelectedStoreName());
-			break;
-		}
-	}
+            case DIALOG_RENAME_STORE:
+                ((NewStoreDialog) dialog).setName(getSelectedStoreName());
+                break;
+        }
+    }
 
-	public boolean onContextItemSelected(MenuItem item) {
-		AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item
-				.getMenuInfo();
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item
+                .getMenuInfo();
 
-		mSelectedStorePosition = menuInfo.position;
+        mSelectedStorePosition = menuInfo.position;
 
-		switch (item.getItemId()) {
-		case MENU_RENAME_STORE:
-			showDialog(DIALOG_RENAME_STORE);
-			break;
+        switch (item.getItemId()) {
+            case MENU_RENAME_STORE:
+                showDialog(DIALOG_RENAME_STORE);
+                break;
 
-		case MENU_DELETE_STORE:
-			deleteStoreConfirm();
-			break;
-		}
+            case MENU_DELETE_STORE:
+                deleteStoreConfirm();
+                break;
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	private String getSelectedStoreName() {
-		return mItemStores.getStoreName(mSelectedStorePosition);
-	}
+    private String getSelectedStoreName() {
+        return mItemStores.getStoreName(mSelectedStorePosition);
+    }
 
-	private void createStore(String name) {
-		if (TextUtils.isEmpty(name)) {
-			// User has not provided any name
-			Toast.makeText(this, getString(R.string.please_enter_name),
-					Toast.LENGTH_SHORT).show();
-			return;
-		}
+    private void createStore(String name) {
+        if (TextUtils.isEmpty(name)) {
+            // User has not provided any name
+            Toast.makeText(this, getString(R.string.please_enter_name),
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-		ShoppingUtils.getStore(getApplicationContext(), name, mListId);
-		mItemStores.requery();
-	}
+        ShoppingUtils.getStore(getApplicationContext(), name, mListId);
+        mItemStores.requery();
+    }
 
-	private void renameStore(String newName) {
+    private void renameStore(String newName) {
 
-		if (TextUtils.isEmpty(newName)) {
-			// User has not provided any name
-			Toast.makeText(this, getString(R.string.please_enter_name),
-					Toast.LENGTH_SHORT).show();
-			return;
-		}
+        if (TextUtils.isEmpty(newName)) {
+            // User has not provided any name
+            Toast.makeText(this, getString(R.string.please_enter_name),
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-		String storeId = mItemStores.getStoreId(mSelectedStorePosition);
-		ContentValues values = new ContentValues();
-		values.put(Stores.NAME, newName);
-		getContentResolver().update(
-				Uri.withAppendedPath(Stores.CONTENT_URI, storeId), values,
-				null, null);
+        String storeId = mItemStores.getStoreId(mSelectedStorePosition);
+        ContentValues values = new ContentValues();
+        values.put(Stores.NAME, newName);
+        getContentResolver().update(
+                Uri.withAppendedPath(Stores.CONTENT_URI, storeId), values,
+                null, null);
 
-		mItemStores.requery();
-	}
+        mItemStores.requery();
+    }
 
-	// TODO: Convert into proper dialog that remains across screen orientation
-	// changes.
-	/**
-	 * Confirm 'delete list' command by AlertDialog.
-	 */
-	private void deleteStoreConfirm() {
-		new AlertDialog.Builder(this)
-				// .setIcon(R.drawable.alert_dialog_icon)
-				.setTitle(R.string.confirm_delete_store)
-				.setPositiveButton(R.string.ok,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {
-								// click Ok
-								deleteStore();
-							}
-						})
-				.setNegativeButton(R.string.cancel,
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int whichButton) {
-								// click Cancel
-							}
-						})
-				// .create()
-				.show();
-	}
+    // TODO: Convert into proper dialog that remains across screen orientation
+    // changes.
 
-	/**
-	 * Deletes currently selected store.
-	 */
-	private void deleteStore() {
-		String storeId = mItemStores.getStoreId(mSelectedStorePosition);
-		ShoppingUtils.deleteStore(this, storeId);
+    /**
+     * Confirm 'delete list' command by AlertDialog.
+     */
+    private void deleteStoreConfirm() {
+        new AlertDialog.Builder(this)
+                // .setIcon(R.drawable.alert_dialog_icon)
+                .setTitle(R.string.confirm_delete_store)
+                .setPositiveButton(R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int whichButton) {
+                                // click Ok
+                                deleteStore();
+                            }
+                        }
+                )
+                .setNegativeButton(R.string.cancel,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int whichButton) {
+                                // click Cancel
+                            }
+                        }
+                )
+                        // .create()
+                .show();
+    }
 
-		mItemStores.requery();
-	}
+    /**
+     * Deletes currently selected store.
+     */
+    private void deleteStore() {
+        String storeId = mItemStores.getStoreId(mSelectedStorePosition);
+        ShoppingUtils.deleteStore(this, storeId);
+
+        mItemStores.requery();
+    }
 
 }

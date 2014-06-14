@@ -23,67 +23,66 @@ import android.content.res.TypedArray;
  * There were trouble retrieving several attributes at once in
  * obtainStyledAttributes - that's why this class tries to retrieve
  * one attribute at a time.
- * 
- * @author Peli
  *
+ * @author Peli
  */
 public class ThemeAttributes {
-	Context mContext;
-	String mPackageName;
-	int mThemeId;
-	
-	public ThemeAttributes(Context context, String packageName, int themeId) {
-		mContext = context;
-		mPackageName = packageName;
-		mThemeId = themeId;
-	}
+    Context mContext;
+    String mPackageName;
+    int mThemeId;
 
-	public boolean getBoolean(String attrName, boolean defaultValue) {
-		int[] attr = ThemeUtils.getAttributeIds(mContext, new String[] {attrName}, mPackageName);
-		TypedArray a = mContext.obtainStyledAttributes(mThemeId, attr);
-		boolean b = a.getBoolean(0, defaultValue);
-		a.recycle();
-		return b;
-	}
-	
-	public int getColor(String attrName, int defaultValue) {
-		int[] attr = ThemeUtils.getAttributeIds(mContext, new String[] {attrName}, mPackageName);
-		TypedArray a = mContext.obtainStyledAttributes(mThemeId, attr);
-		int c = a.getColor(0, defaultValue);
-		a.recycle();
-		return c;
-	}
+    public ThemeAttributes(Context context, String packageName, int themeId) {
+        mContext = context;
+        mPackageName = packageName;
+        mThemeId = themeId;
+    }
 
-	public int getDimensionPixelOffset(String attrName, int defaultValue) {
-		int[] attr = ThemeUtils.getAttributeIds(mContext, new String[] {attrName}, mPackageName);
-		TypedArray a = mContext.obtainStyledAttributes(mThemeId, attr);
-		int i = a.getDimensionPixelOffset(0, defaultValue);
-		a.recycle();
-		return i;
-	}
+    public boolean getBoolean(String attrName, boolean defaultValue) {
+        int[] attr = ThemeUtils.getAttributeIds(mContext, new String[]{attrName}, mPackageName);
+        TypedArray a = mContext.obtainStyledAttributes(mThemeId, attr);
+        boolean b = a.getBoolean(0, defaultValue);
+        a.recycle();
+        return b;
+    }
 
-	public int getInteger(String attrName, int defaultValue) {
-		int[] attr = ThemeUtils.getAttributeIds(mContext, new String[] {attrName}, mPackageName);
-		TypedArray a = mContext.obtainStyledAttributes(mThemeId, attr);
-		int i = a.getInteger(0, defaultValue);
-		a.recycle();
-		return i;
-	}
-	
-	public int getResourceId(String attrName, int defaultValue) {
-		int[] attr = ThemeUtils.getAttributeIds(mContext, new String[] {attrName}, mPackageName);
-		TypedArray a = mContext.obtainStyledAttributes(mThemeId, attr);
-		int i = a.getResourceId(0, defaultValue);
-		a.recycle();
-		return i;
-	}
-	
-	public String getString(String attrName) {
-		int[] attr = ThemeUtils.getAttributeIds(mContext, new String[] {attrName}, mPackageName);
-		TypedArray a = mContext.obtainStyledAttributes(mThemeId, attr);
-		String s = a.getString(0);
-		a.recycle();
-		return s;
-	}
-	
+    public int getColor(String attrName, int defaultValue) {
+        int[] attr = ThemeUtils.getAttributeIds(mContext, new String[]{attrName}, mPackageName);
+        TypedArray a = mContext.obtainStyledAttributes(mThemeId, attr);
+        int c = a.getColor(0, defaultValue);
+        a.recycle();
+        return c;
+    }
+
+    public int getDimensionPixelOffset(String attrName, int defaultValue) {
+        int[] attr = ThemeUtils.getAttributeIds(mContext, new String[]{attrName}, mPackageName);
+        TypedArray a = mContext.obtainStyledAttributes(mThemeId, attr);
+        int i = a.getDimensionPixelOffset(0, defaultValue);
+        a.recycle();
+        return i;
+    }
+
+    public int getInteger(String attrName, int defaultValue) {
+        int[] attr = ThemeUtils.getAttributeIds(mContext, new String[]{attrName}, mPackageName);
+        TypedArray a = mContext.obtainStyledAttributes(mThemeId, attr);
+        int i = a.getInteger(0, defaultValue);
+        a.recycle();
+        return i;
+    }
+
+    public int getResourceId(String attrName, int defaultValue) {
+        int[] attr = ThemeUtils.getAttributeIds(mContext, new String[]{attrName}, mPackageName);
+        TypedArray a = mContext.obtainStyledAttributes(mThemeId, attr);
+        int i = a.getResourceId(0, defaultValue);
+        a.recycle();
+        return i;
+    }
+
+    public String getString(String attrName) {
+        int[] attr = ThemeUtils.getAttributeIds(mContext, new String[]{attrName}, mPackageName);
+        TypedArray a = mContext.obtainStyledAttributes(mThemeId, attr);
+        String s = a.getString(0);
+        a.recycle();
+        return s;
+    }
+
 }

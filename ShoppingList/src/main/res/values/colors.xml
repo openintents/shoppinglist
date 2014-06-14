@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<?xml version="1.0" encoding="utf-8"?><!--
  * Copyright (C) 2007-2010 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,12 +15,12 @@
  -->
 
 <resources>
-	<color name="darkgreen">#FF006600</color>
-    <color name="black">#000</color>
-    <color name="strikethrough">#33336600</color>
-    <drawable name="yellow_green">#9acd32</drawable>
-    <drawable name="gold">#ffd700</drawable>
-    <color name="priceTextColor">#FFCCCCCC</color>
-    <color name="markTextColor">#FFCCCCCC</color>
-    <color name="widgetBackground">#ebf5fa</color>
+  <color name="darkgreen">#FF006600</color>
+  <color name="black">#000</color>
+  <color name="strikethrough">#33336600</color>
+  <drawable name="yellow_green">#9acd32</drawable>
+  <drawable name="gold">#ffd700</drawable>
+  <color name="priceTextColor">#FFCCCCCC</color>
+  <color name="markTextColor">#FFCCCCCC</color>
+  <color name="widgetBackground">#ebf5fa</color>
 </resources>

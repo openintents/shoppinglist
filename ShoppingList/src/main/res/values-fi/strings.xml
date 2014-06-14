@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<?xml version="1.0" encoding="utf-8"?><!--
  * Copyright (C) 2007-2010 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,357 +14,357 @@
  * limitations under the License.
  -->
 <resources>
-	<!-- ***************************
-	     About information
-	     *************************** -->
-	
-	<!-- Automatically filled in by Launchpad: -->
+  <!-- ***************************
+       About information
+       *************************** -->
+
+  <!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
   emp https://launchpad.net/~emp500</string>
-	
-    <!-- Short explanation of the application (max. 80 characters) -->
-	<string name="about_comments">Pidä kirjaa sinun ostoksistasi OI Ostoslistan avulla.</string>
-	
-	<!-- ***************************
-	     Applicatio-specific strings
-	     *************************** -->
-	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI Ostoslista</string>
 
-	<string name="new_item">Uusi esine</string>
-	<string name="new_list">Uusi lista</string>
-	<string name="send">Lähetä lista</string>
-	<string name="mark_all_items">Merkitse kaikki esineet</string>
-	<string name="unmark_all_items">Unmark all items</string>
-	<string name="empty_list_not_sent">Tyhjää listaa ei lähetetty.</string>
-	<string name="email_not_available">Ei löytynyt ohjelmaa, jolla voisi lähettää</string>
-	<string name="my_shopping_list">Minun ostoslistani</string>
-	<string name="new_list_hint">esim. toivelista, perhelista</string>
-	<string name="clean_up_list">Tyhjennä lista</string>
-	<string name="delete_list">Poista lista</string>
-	<string name="ask_new_list">Syötä uuden ostoslistan nimi</string>
-	<string name="ask_rename_list">Uudelleennimeä ostoslista</string>
-	<string name="ask_edit_item">Muokkaa kohdetta</string>
-	<string name="ask_new_store">Syötä uusi kaupan nimi</string>
-	<string name="please_enter_name">Ole hyvä, ja syötä nimi</string>
-	<string name="no_items_marked">Ei kohteita jotka ovat merkittyjä</string>
-	<string name="confirm_delete_list">Oletko aivan varma, että haluat poistaa tämän ostoslistan?</string>
-	<string name="no_shopping_provider">Virhe noudettaessa ostoslistaa.</string>
-	<string name="pick_item">Valitse esine</string>
-	<string name="pick_list">Valitse lista</string>
-	<string name="theme">Teema</string>
-	<string name="theme_settings">Teema-asetukset</string>
-	<string name="rename_list">Uudelleennimeä lista</string>
-	<string name="menu_mark_item">Merkitse kohta</string>
-	<string name="menu_edit_item">Muokkaa kohdetta</string>
-	<string name="menu_auto_add">Automaattinen lisääminen</string>
-	<string name="menu_item_stores">Kaupat...</string>
-	<string name="menu_rename_store">Uudelleennimeä kauppa</string>
-	<string name="menu_delete_store">Poista kauppa</string>
-	<string name="confirm_delete_store">Oletko aivan varma, että haluat poistaa tämän kaupan?</string>
-	<string name="no_items_available">Ei kohteita saatavilla</string>
-	<string name="no_stores_available">Ei kauppoja saatavilla tähän listaan</string>
-	<string name="no_tags_available">Ei tageja saatavilla tälle listalle</string>
-	    
-	<!-- Remove item from this list, but keep it internally, so that the user
-	     can choose it later for inclusion again. Information like
-	     tags or price will be kept. -->
-	<string name="menu_remove_item">Poista kohde listalta (tagit ja hinta pysyvät)</string>
-	
-	<!-- Delete this item completely. If the user wants to add it again, they
-	     have to enter all the information again. -->
-	<string name="menu_delete_item">Poista kohde listalta pysyvästi</string>
-	<string name="menu_move_item">Siirrä kohde toiselle listalle</string>
-    <string name="menu_copy_item">Kopioi kohde</string>
-	    
-	<!-- Button label to add an item to the list. -->
-	<string name="add">Lisää</string>
-	
-	<string name="menu_pick_items">Valitse kohteita</string>
-	<string name="menu_start_shopping">Ostoksilla</string>
-	
-	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_title">%s - Valitse kohteita</string>
-	
-	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="shopping_title">%s - Ostokset</string>
-	
-	<!-- Title supplement. \'%s\' is the name of the current item. -->
-	<string name="item_stores_title">%s - Kaupat</string>
-	<string name="item_stores_activity_label">Muokkaa kohteen kauppoja</string>
-	
-	<string name="tags">Tagit</string>
-	<string name="price">Hinta</string>
-	<string name="item">Kohde</string>
-	<string name="quantity">Määrä</string>
-	<string name="priority">Tärkeysjärjestys</string>
-	<string name="has_note">on huomautus</string>
-	<string name="units">Yksikköä</string>
-	<string name="note">Huomautus</string>
-	<string name="stores">Kaupat</string>
-	<string name="list">Lista</string>
-	
-	<string name="otherqty">Muu määrä...</string>
-	<string name="otherpri">Muu tärkeysjärjestys...</string>   
-	<string name="unfiltered">(ei suodatettu)</string>
-	
-	<!-- Total sum of all prices. \'%s\' is the sum -->
-	<string name="total">Yhteensä: %s</string>
-	
-	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
-	<string name="total_checked">Valittujen tuotteiden summa: %s</string>
-    <string name="priority1_total">Tärkeysjärjestys 1: %s</string>
-    <string name="priority2_total">Tärkeysjärjestys 1-2: %s</string>
-	<string name="priority3_total">Tärkeysjärjestys 1-3: %s</string>
-	<string name="priority4_total">Tärkeysjärjestys 1-4: %s</string>
-	
-	<string name="delete_item_confirm">Oletko aivan varma, että haluat poistaa tämän kohteen pysyvästi?</string>
-	<string name="delete">Poista</string>
-	
-	<!-- Added to an item to indicate it was bought. -->
-	<string name="suffix_checked">... ostettu!</string>
-	<string name="empty"/>
-	
-	<!-- The shortcut is created on the home screen. -->
-	<string name="pick_list_for_shortcut">Valitse lista, jota käytetään pikakuvakkeessa</string>
-	
-	<!-- Shown if external application wants to insert new items. -->
-	<string name="pick_list_to_insert_items">Valitse lista, johon haluat lisätä kohteita</string>
-	
-	<!-- Theme related -->
-	<!-- Title for selecting a theme -->
-	<string name="theme_pick">Valitse teema</string>
-	<string name="theme_description">Valitse teema tälle listalle</string>
-	<string name="theme_default">Oletus</string>
-	<string name="theme_classic">Perinteinen</string>
-	<string name="theme_bugdroid">Android</string>
-	<string name="theme_classic_export">Klassinen (OI Ostoslistasta)</string>
-	<string name="theme_bugdroid_export">Android (OI Ostoslistasta)</string>
+  <!-- Short explanation of the application (max. 80 characters) -->
+  <string name="about_comments">Pidä kirjaa sinun ostoksistasi OI Ostoslistan avulla.</string>
 
-	<!--     Dialog box    -->
-	<!-- Button label "OK" -->
-	<string name="ok">OK</string>
-	<!-- Button label "Cancel" -->
-	<string name="cancel">Peruuta</string>
-	<string name="use_theme_for_all_lists">Käytä tätä teemaa kaikille listoille</string>
-	<string name="get_more_themes">Hanki lisää teemoja</string>
-	
-	<!-- preferences -->
-	<string name="preferences">Asetukset</string>
-	
-    <string name="preference_application">Sovellusasetukset</string>
-    
-	<string name="preference_unchecked_on_top">Valitsematon päälimmäisenä</string>
-	<string name="preference_unchecked_on_top_summary">Näytä valitsemattomat kohteet aina ensimmäisenä</string>
-	<string name="preference_fontsize">Fonttikoko</string>
-	<string name="preference_fontsize_summary">Vaihda fonttikokoa</string>
-	<string name="preference_fontsize_dialog_title">Valitse fonttikoko</string>
-	<string name="preference_orientation">Suuntaus</string>
-	<string name="preference_orientation_summary">Vaihda suuntaus</string>
-	<string name="preference_orientation_dialog_title">Valitse suuntaus</string>
-	<string name="preference_sortorder_title">Järjestelytapa</string>
-	<string name="preference_sortorder_summary">Valitse järjestelytapa listatuotteille</string>
-	<string name="preference_sortorder_for_pick_title">Järjestelytapa - Valitse kohteet</string>
-	<string name="preference_sortorder_for_pick_summary">Vaihda järjestystapaa listatuotteille kohteen valinta -tilassa.</string>
-	<string name="preference_sortorder_dialog_title">Valitse järjestelytapa</string>
-	<string name="preference_sortorder_for_pick_dialog_title">Valitse järjestelytapa kohteen valinta -moodille</string>
-	<string name="preference_sortorder_for_shopping_lists">Järjestystapa - Ostoslistat</string>
-	<string name="preference_sortorder_for_slists_summary">Vaihda järjestystapa ostoslistoille</string>
-	<string name="preference_sortorder_for_slists_dialog_title">Valitse järjestystapa ostoslistoille</string>
-	<string name="preference_loadlastused_title">Lataa viimeisin käytetty lista</string>
-	<string name="preference_loadlastused_summary">Käynnistä aina viimeisen katsotun listan kanssa</string>
-	<string name="preference_capitalization_title">Isot/pienet alkukirjaimet</string>
-	<string name="preference_capitalization_summary">Käytä isoja/pieniä alkukirjaimia automaattisesti merkinnöissä</string>
-	<string name="preference_capitalization_dialog_title">Valitse iso-/pienialkukirjain</string> 
-	<string name="preference_hidechecked_title">Piilota valitut kohteet</string>
-	<string name="preference_hidechecked_summary">Piilota valitsemattomat kohteet välittömästi.</string>
-	<string name="preference_fastscroll_title">Nopea vieritys</string>
-	<string name="preference_fastscroll_summary">Vierityskahva ilmestyy näytölle, kun vieritetään 35 kohdetta tai enemmän.</string>
-	<string name="preference_showprice_title">Näytä hinta</string>
-	<string name="preference_showprice_summary">Näytetään ylimääräisenä sarakkeena listassa.</string>
-	<string name="preference_perstoreprice">Kaupoittain määräytyvät hinnat</string>
-	<string name="preference_perstoreprice_title">Pidä kirjaa kaupoittain määräytyvistä hinnoista</string>
-	<string name="preference_perstoreprice_summary">Pidä kirjaa erilaisista hinnoista jokaisen tuotteen kohdalla eri kaupoittain.</string>
-	<string name="preference_screenlock_title">Poista käytöstä näyttölukitus</string>
-	<string name="preference_screenlock_summary">Estää näytönlukkiutumisen, jos tämä optio on valittuna.</string>
-	<string name="preference_usefilters_title">Suodattimet</string>
-	<string name="preference_usefilters_summary">Listat voidaan suodattaa tagien tai kauppojen mukaan.</string>
-	<string name="preference_complete_by_list_title">Limit item name completion</string>
-	<string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
-	<string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
-	<string name="preference_reset_quantity">Palauta oletusarvoinen kappalemäärä</string>
-	<string name="preference_reset_quantity_summary">Palauttaa oletusarvoisen kappalemäärän, kun tuotteita lisätään uudestaan.</string>
-	<string name="preference_add_for_barcode">Viivakoodinlukija</string>
-	<string name="preference_add_for_barcode_summary">Paina Lisää -painiketta pitkään käynnistääksesi Viivakoodi OI -lisäosan (jos asennettuna).</string>
-	<string name="preference_showtags_title">Näytä tagit</string>
-	<string name="preference_showtags_summary">Näytetään ylimääräisenä sarakkeena listassa.</string>
-	<string name="preference_showquantity_title">Näytä määrät</string>
-	<string name="preference_showquantity_summary">Näytetään ylimääräisenä sarakkeena listassa.</string>
-	<string name="preference_showpriority_title">Näytä tärkeysjärjestys</string>
-	<string name="preference_showpriority_summary">Näytetään ylimääräisenä sarakkeena listassa.</string>
-	<string name="preference_showunits_title">Näytä yksiköt</string>
-	<string name="preference_showunits_summary">Näytetään ylimääräisenä sarakkeena listassa.</string>
-	<string name="preference_prio_subtotal">Hintojen esittäminen tärkeysjärjestyksen mukaan</string>
-	<string name="preference_prioritytotal_title">Hintojen esittäminen tärkeysjärjestyksen mukaan</string>
-	<string name="preference_prioritytotal_summary">Tärkeysjärjestyksen mukaista hintaa ei näytetä.</string>
-	<string name="preference_prioritytotal_dialog_title">Hintojen esittäminen tärkeysjärjestyksen mukaan</string>
-	<string name="preference_priosubtotalchecked_title">Sisällytä ostetut tuotteet</string>
-	<string name="preference_priosubtotalchecked_on_summary">Hintojen esittäminen tärkeysjärjestyksen mukaan sisältää jo ostetut tuotteet</string>
-	<string name="preference_priosubtotalchecked_off_summary">Hintojen esittäminen tärkeysjärjestyksen mukaan EI sisällä jo ostettuja tuotteita</string>
-	<string name="preference_pickitemsinlist_title">Valitse kohteet suoraan listasta</string>
-	<string name="preference_pickitemsinlist_on_summary">Vaihda päälista muokkaustilaan lisätäksesi nykyisiä tuotteita uudelleen</string>
-	<string name="preference_pickitemsinlist_off_summary">Lisää tuotteita listaan käyttäen dedikoitua näkymää</string>
-	<string name="preference_samesortforpick_title">Aina sama järjestystapa</string>
-	<string name="preference_samesortforpick_on_summary">Tuotteet järjestetään valitse kohteita -moodissa samalla tavalla kuin Ostosmoodissa.</string>
-	<string name="preference_samesortforpick_off_summary">Järjestystapa valitse kohteita -moodissa voidaan valita erikseen.</string>
-	
-	<!-- Preference title: Shake the phone to clean up the list. -->
-	<string name="preference_shake_title">Ravista puhelinta siivotaksesi!</string>
-	
-	<!-- Preference summary: Shake the phone to clean up the list. -->
-	<string name="preference_shake_summary">Ravista puhelinta siivotaksesi lista.</string>
-	
-    <string name="preference_advanced">Edistyneet asetukset</string>
-    <string name="preference_advanced_summary">Lisäasetukset.</string>
-    
-    <!-- Preference category: General settings -->
-    <string name="preference_general">Yleinen</string>
-    <string name="preference_pickitems">Valitse kohteita</string>
-    
-    <string name="preference_appearance">Ulkoasu</string>
-    
-    <string name="preference_addons">Lisäosat</string>
-    <string name="preference_get_addons">Hanki lisää lisäosia</string>
-    <string name="preference_get_addons_summary">Etsi lisäosia ja teemoja netistä.</string>
-    <string name="preference_get_market_addons">Lataa lisäosia Marketista</string>
-    <string name="preference_get_developer_addons">Lataa lisäosia OpenIntents:ltä</string>
-    <string name="preference_extensions">Laajennokset</string>
-    <string name="preference_themes">Teemat</string>
-    <string name="preference_market_extensions_summary">Hae laajennoksia Android Marketista.</string>
-    <string name="preference_market_themes_summary">Hae teemoja Android Marketista.</string>
-    <string name="preference_developer_extensions_summary">Lataa laajennoksia OpenIntents kotisivuilta.</string>
-	<string name="preference_developer_themes_summary">Lataa teemoja OpenIntents kotisivuilta.</string>
-	<string name="preference_quickedit">Nopea muokkausmoodi</string>
-	<string name="preference_quickedit_on_summary">Kosketa tärkeysjärjestys tai yksikkö -lukuja saadaksesi valikon, jossa on yleisimmät arvot.</string>
-	<string name="preference_quickedit_off_summary">Muokkaa kohdetta -lista saadaan esille koskettamalla Tärkeysjärjestys tai yksikkö -arvoja.</string>
-	<string name="preference_reset_all_settings">Palauta kaikki asetukset oletusarvoihin</string>
-	<string name="preference_reset_all_settings_alert">Haluatko aivan varmasti palauttaa KAIKKI ASETUKSET oletusarvoille? Tätä toimintoa ei voi kumota.</string>    
-	<string name="preference_reset_all_settings_done">Kaikki asetukset ovat oletusarvoisia.</string>
-	    
-	<!-- ***************************
-	     Permissions
-	     *************************** -->
-	
-	<!-- OI Shopping list -->
-	<!-- Permission to read shopping lists -->
-	<string name="oi_shopping_permission_read">lue ostoslistoja</string>
-	<string name="oi_shopping_permission_read_descr">Sallii ohjelman lukea ostoslistoja. Ota huomioon, että salatut ostoslistat ja tavarat näytetään salatussa muodossa.</string>
-	<!-- Permission to write to shopping lists -->
-	<string name="oi_shopping_permission_write">kirjoita ostoslistoja</string>
-	<string name="oi_shopping_permission_write_descr">Sallii ohjelman tehdä uusia listoja ja kohteita tai muuttaa nykyisiä.</string>
-	
-	
-	<!-- ***************************
-	     Preferences
-	     *************************** -->
-	
-    <string-array name="preference_sortorder_entries">
-    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
-    	<item>valitsemattomat ensin, aakkosjärjestys</item>
-        <!-- Preference sort order: Sort by item name -->
-    	<item>aakkosjärjestys</item>
-        <!-- Preference sort order: Newest item first -->
-    	<item>uusin ensin</item>
-        <!-- Preference sort order: Oldest item first -->
-    	<item>vanhin ensin</item>
-    	<!-- Preference sort order: Sort alphabetically by tags -->
-    	<item>tagit aakkosjärjestyksessä</item>
-        <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
-    	<item>tärkeysjärjestys, tagit aakkosjärjestyksessä</item>
-        <!-- Preference sort order: Sort by price, the most expensive first -->
-    	<item>kallein ensin</item>
-        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
-    	<item>valitsemattomat ensin, tagit aakkosjärjestyksessä</item>
-    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
-    	<item>valitsemattomat ensin, tärkeysjärjestys, aakkosjärjestys</item>
-    	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
-    	<item>valitsemattomat ensin, tärkeysjärjestys, tagit aakkosjärjestyksessä</item>
-    </string-array>
-    
-    <string-array name="preference_sortorder_slists">
-        <!-- Preference sort order: Sort by list name in ascending order -->
-        <item>nouseva aakkosjärjestys</item>
-        <!-- Preference sort order: Sort by list name in descending order -->
-        <item>laskeva aakkosjärjestys</item>
-        <!-- Preference sort order: Newest list first -->
-        <item>uusin ensin</item>
-        <!-- Preference sort order: Oldest list first -->
-        <item>vanhin ensin</item>
-    </string-array>
-    
-    <string-array name="preference_prioritytotal_entries">
-    	<item>ei näytetä</item>
-    	<item>Tärkeysjärjestys 1</item>
-    	<item>Tärkeysjärjestys 1-2</item>
-    	<item>Tärkeysjärjestys 1-3</item>
-    	<item>Tärkeysjärjestys 1-4</item>
-    </string-array>
-    
-    <string-array name="preference_fontsize_entries">
-    	<!-- Preference fontsize: tiny font size -->
-        <item>Erittäin pieni</item>
-    	<!-- Preference fontsize: small font size -->
-        <item>Pieni</item>
-    	<!-- Preference fontsize: default font size -->
-    	<item>Oletus</item>
-    	<!-- Preference fontsize: large font size -->
-        <item>Suuri</item>
-    </string-array>
-    
-    <string-array name="preference_orientation_entries">
-    	<!-- Preference orientation: default -->
-        <item>Oletus</item>
-    	<!-- Preference orientation: landscape -->
-    	<item>Vaakasuunta</item>
-    	<!-- Preference orientation: portrait -->
-        <item>Pystysuunta</item>
-    </string-array>
-    
-    <string-array name="preference_capitalization_entries">
-    	<!-- Preference capitalization: No capitalization -->
-        <item>Ei mitään</item>
-    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>Lauseittain</item>
-    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>Sanoittain</item>
-    </string-array>
+  <!-- ***************************
+       Applicatio-specific strings
+       *************************** -->
+  <!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
+  <string name="app_name">OI Ostoslista</string>
 
-	<!-- ***************************
-	     OI Notepad
-	     *************************** -->
-	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
-	<string name="notepad_not_available">Kohteen muistiinpanojen muokkaaminen vaatii OI Muistion.</string>
-	<!-- Name of application "OI Notepad". Translations should be consistent. -->
-	<string name="notepad">OI Muistio</string>
+  <string name="new_item">Uusi esine</string>
+  <string name="new_list">Uusi lista</string>
+  <string name="send">Lähetä lista</string>
+  <string name="mark_all_items">Merkitse kaikki esineet</string>
+  <string name="unmark_all_items">Unmark all items</string>
+  <string name="empty_list_not_sent">Tyhjää listaa ei lähetetty.</string>
+  <string name="email_not_available">Ei löytynyt ohjelmaa, jolla voisi lähettää</string>
+  <string name="my_shopping_list">Minun ostoslistani</string>
+  <string name="new_list_hint">esim. toivelista, perhelista</string>
+  <string name="clean_up_list">Tyhjennä lista</string>
+  <string name="delete_list">Poista lista</string>
+  <string name="ask_new_list">Syötä uuden ostoslistan nimi</string>
+  <string name="ask_rename_list">Uudelleennimeä ostoslista</string>
+  <string name="ask_edit_item">Muokkaa kohdetta</string>
+  <string name="ask_new_store">Syötä uusi kaupan nimi</string>
+  <string name="please_enter_name">Ole hyvä, ja syötä nimi</string>
+  <string name="no_items_marked">Ei kohteita jotka ovat merkittyjä</string>
+  <string name="confirm_delete_list">Oletko aivan varma, että haluat poistaa tämän ostoslistan?</string>
+  <string name="no_shopping_provider">Virhe noudettaessa ostoslistaa.</string>
+  <string name="pick_item">Valitse esine</string>
+  <string name="pick_list">Valitse lista</string>
+  <string name="theme">Teema</string>
+  <string name="theme_settings">Teema-asetukset</string>
+  <string name="rename_list">Uudelleennimeä lista</string>
+  <string name="menu_mark_item">Merkitse kohta</string>
+  <string name="menu_edit_item">Muokkaa kohdetta</string>
+  <string name="menu_auto_add">Automaattinen lisääminen</string>
+  <string name="menu_item_stores">Kaupat...</string>
+  <string name="menu_rename_store">Uudelleennimeä kauppa</string>
+  <string name="menu_delete_store">Poista kauppa</string>
+  <string name="confirm_delete_store">Oletko aivan varma, että haluat poistaa tämän kaupan?</string>
+  <string name="no_items_available">Ei kohteita saatavilla</string>
+  <string name="no_stores_available">Ei kauppoja saatavilla tähän listaan</string>
+  <string name="no_tags_available">Ei tageja saatavilla tälle listalle</string>
 
-	<!-- ***************************
-	     Automation
-	     *************************** -->
-	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
-	<string name="label_select_action">Valitse toiminto-</string>
-	
-	<!-- Label above button that opens a list of all shopping lists to choose from. -->
-	<string name="label_select_list">Valitse lista:</string>
-	
-	<!-- Arrays -->
-	
-    <string-array name="automation_actions">
-    	<!-- Automation action to clean up a list. -->
-    	<item>Tyhjennä lista</item>
-    </string-array>
-      
-	<string name="widget_prev_page">Edellinen sivu</string>
-	<string name="widget_next_page">Seuraava sivu</string>
-	<string name="widget_choose_a_list">Valitse lista</string>
-	<string name="widget_no_items">Ei kohteita sivuilla %d</string>
+  <!-- Remove item from this list, but keep it internally, so that the user
+       can choose it later for inclusion again. Information like
+       tags or price will be kept. -->
+  <string name="menu_remove_item">Poista kohde listalta (tagit ja hinta pysyvät)</string>
+
+  <!-- Delete this item completely. If the user wants to add it again, they
+       have to enter all the information again. -->
+  <string name="menu_delete_item">Poista kohde listalta pysyvästi</string>
+  <string name="menu_move_item">Siirrä kohde toiselle listalle</string>
+  <string name="menu_copy_item">Kopioi kohde</string>
+
+  <!-- Button label to add an item to the list. -->
+  <string name="add">Lisää</string>
+
+  <string name="menu_pick_items">Valitse kohteita</string>
+  <string name="menu_start_shopping">Ostoksilla</string>
+
+  <!-- Title supplement. \'%s\' is the name of the current list. -->
+  <string name="pick_items_title">%s - Valitse kohteita</string>
+
+  <!-- Title supplement. \'%s\' is the name of the current list. -->
+  <string name="shopping_title">%s - Ostokset</string>
+
+  <!-- Title supplement. \'%s\' is the name of the current item. -->
+  <string name="item_stores_title">%s - Kaupat</string>
+  <string name="item_stores_activity_label">Muokkaa kohteen kauppoja</string>
+
+  <string name="tags">Tagit</string>
+  <string name="price">Hinta</string>
+  <string name="item">Kohde</string>
+  <string name="quantity">Määrä</string>
+  <string name="priority">Tärkeysjärjestys</string>
+  <string name="has_note">on huomautus</string>
+  <string name="units">Yksikköä</string>
+  <string name="note">Huomautus</string>
+  <string name="stores">Kaupat</string>
+  <string name="list">Lista</string>
+
+  <string name="otherqty">Muu määrä...</string>
+  <string name="otherpri">Muu tärkeysjärjestys...</string>
+  <string name="unfiltered">(ei suodatettu)</string>
+
+  <!-- Total sum of all prices. \'%s\' is the sum -->
+  <string name="total">Yhteensä: %s</string>
+
+  <!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+  <string name="total_checked">Valittujen tuotteiden summa: %s</string>
+  <string name="priority1_total">Tärkeysjärjestys 1: %s</string>
+  <string name="priority2_total">Tärkeysjärjestys 1-2: %s</string>
+  <string name="priority3_total">Tärkeysjärjestys 1-3: %s</string>
+  <string name="priority4_total">Tärkeysjärjestys 1-4: %s</string>
+
+  <string name="delete_item_confirm">Oletko aivan varma, että haluat poistaa tämän kohteen pysyvästi?</string>
+  <string name="delete">Poista</string>
+
+  <!-- Added to an item to indicate it was bought. -->
+  <string name="suffix_checked">... ostettu!</string>
+  <string name="empty" />
+
+  <!-- The shortcut is created on the home screen. -->
+  <string name="pick_list_for_shortcut">Valitse lista, jota käytetään pikakuvakkeessa</string>
+
+  <!-- Shown if external application wants to insert new items. -->
+  <string name="pick_list_to_insert_items">Valitse lista, johon haluat lisätä kohteita</string>
+
+  <!-- Theme related -->
+  <!-- Title for selecting a theme -->
+  <string name="theme_pick">Valitse teema</string>
+  <string name="theme_description">Valitse teema tälle listalle</string>
+  <string name="theme_default">Oletus</string>
+  <string name="theme_classic">Perinteinen</string>
+  <string name="theme_bugdroid">Android</string>
+  <string name="theme_classic_export">Klassinen (OI Ostoslistasta)</string>
+  <string name="theme_bugdroid_export">Android (OI Ostoslistasta)</string>
+
+  <!--     Dialog box    -->
+  <!-- Button label "OK" -->
+  <string name="ok">OK</string>
+  <!-- Button label "Cancel" -->
+  <string name="cancel">Peruuta</string>
+  <string name="use_theme_for_all_lists">Käytä tätä teemaa kaikille listoille</string>
+  <string name="get_more_themes">Hanki lisää teemoja</string>
+
+  <!-- preferences -->
+  <string name="preferences">Asetukset</string>
+
+  <string name="preference_application">Sovellusasetukset</string>
+
+  <string name="preference_unchecked_on_top">Valitsematon päälimmäisenä</string>
+  <string name="preference_unchecked_on_top_summary">Näytä valitsemattomat kohteet aina ensimmäisenä</string>
+  <string name="preference_fontsize">Fonttikoko</string>
+  <string name="preference_fontsize_summary">Vaihda fonttikokoa</string>
+  <string name="preference_fontsize_dialog_title">Valitse fonttikoko</string>
+  <string name="preference_orientation">Suuntaus</string>
+  <string name="preference_orientation_summary">Vaihda suuntaus</string>
+  <string name="preference_orientation_dialog_title">Valitse suuntaus</string>
+  <string name="preference_sortorder_title">Järjestelytapa</string>
+  <string name="preference_sortorder_summary">Valitse järjestelytapa listatuotteille</string>
+  <string name="preference_sortorder_for_pick_title">Järjestelytapa - Valitse kohteet</string>
+  <string name="preference_sortorder_for_pick_summary">Vaihda järjestystapaa listatuotteille kohteen valinta -tilassa.</string>
+  <string name="preference_sortorder_dialog_title">Valitse järjestelytapa</string>
+  <string name="preference_sortorder_for_pick_dialog_title">Valitse järjestelytapa kohteen valinta -moodille</string>
+  <string name="preference_sortorder_for_shopping_lists">Järjestystapa - Ostoslistat</string>
+  <string name="preference_sortorder_for_slists_summary">Vaihda järjestystapa ostoslistoille</string>
+  <string name="preference_sortorder_for_slists_dialog_title">Valitse järjestystapa ostoslistoille</string>
+  <string name="preference_loadlastused_title">Lataa viimeisin käytetty lista</string>
+  <string name="preference_loadlastused_summary">Käynnistä aina viimeisen katsotun listan kanssa</string>
+  <string name="preference_capitalization_title">Isot/pienet alkukirjaimet</string>
+  <string name="preference_capitalization_summary">Käytä isoja/pieniä alkukirjaimia automaattisesti merkinnöissä</string>
+  <string name="preference_capitalization_dialog_title">Valitse iso-/pienialkukirjain</string>
+  <string name="preference_hidechecked_title">Piilota valitut kohteet</string>
+  <string name="preference_hidechecked_summary">Piilota valitsemattomat kohteet välittömästi.</string>
+  <string name="preference_fastscroll_title">Nopea vieritys</string>
+  <string name="preference_fastscroll_summary">Vierityskahva ilmestyy näytölle, kun vieritetään 35 kohdetta tai enemmän.</string>
+  <string name="preference_showprice_title">Näytä hinta</string>
+  <string name="preference_showprice_summary">Näytetään ylimääräisenä sarakkeena listassa.</string>
+  <string name="preference_perstoreprice">Kaupoittain määräytyvät hinnat</string>
+  <string name="preference_perstoreprice_title">Pidä kirjaa kaupoittain määräytyvistä hinnoista</string>
+  <string name="preference_perstoreprice_summary">Pidä kirjaa erilaisista hinnoista jokaisen tuotteen kohdalla eri kaupoittain.</string>
+  <string name="preference_screenlock_title">Poista käytöstä näyttölukitus</string>
+  <string name="preference_screenlock_summary">Estää näytönlukkiutumisen, jos tämä optio on valittuna.</string>
+  <string name="preference_usefilters_title">Suodattimet</string>
+  <string name="preference_usefilters_summary">Listat voidaan suodattaa tagien tai kauppojen mukaan.</string>
+  <string name="preference_complete_by_list_title">Limit item name completion</string>
+  <string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
+  <string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
+  <string name="preference_reset_quantity">Palauta oletusarvoinen kappalemäärä</string>
+  <string name="preference_reset_quantity_summary">Palauttaa oletusarvoisen kappalemäärän, kun tuotteita lisätään uudestaan.</string>
+  <string name="preference_add_for_barcode">Viivakoodinlukija</string>
+  <string name="preference_add_for_barcode_summary">Paina Lisää -painiketta pitkään käynnistääksesi Viivakoodi OI -lisäosan (jos asennettuna).</string>
+  <string name="preference_showtags_title">Näytä tagit</string>
+  <string name="preference_showtags_summary">Näytetään ylimääräisenä sarakkeena listassa.</string>
+  <string name="preference_showquantity_title">Näytä määrät</string>
+  <string name="preference_showquantity_summary">Näytetään ylimääräisenä sarakkeena listassa.</string>
+  <string name="preference_showpriority_title">Näytä tärkeysjärjestys</string>
+  <string name="preference_showpriority_summary">Näytetään ylimääräisenä sarakkeena listassa.</string>
+  <string name="preference_showunits_title">Näytä yksiköt</string>
+  <string name="preference_showunits_summary">Näytetään ylimääräisenä sarakkeena listassa.</string>
+  <string name="preference_prio_subtotal">Hintojen esittäminen tärkeysjärjestyksen mukaan</string>
+  <string name="preference_prioritytotal_title">Hintojen esittäminen tärkeysjärjestyksen mukaan</string>
+  <string name="preference_prioritytotal_summary">Tärkeysjärjestyksen mukaista hintaa ei näytetä.</string>
+  <string name="preference_prioritytotal_dialog_title">Hintojen esittäminen tärkeysjärjestyksen mukaan</string>
+  <string name="preference_priosubtotalchecked_title">Sisällytä ostetut tuotteet</string>
+  <string name="preference_priosubtotalchecked_on_summary">Hintojen esittäminen tärkeysjärjestyksen mukaan sisältää jo ostetut tuotteet</string>
+  <string name="preference_priosubtotalchecked_off_summary">Hintojen esittäminen tärkeysjärjestyksen mukaan EI sisällä jo ostettuja tuotteita</string>
+  <string name="preference_pickitemsinlist_title">Valitse kohteet suoraan listasta</string>
+  <string name="preference_pickitemsinlist_on_summary">Vaihda päälista muokkaustilaan lisätäksesi nykyisiä tuotteita uudelleen</string>
+  <string name="preference_pickitemsinlist_off_summary">Lisää tuotteita listaan käyttäen dedikoitua näkymää</string>
+  <string name="preference_samesortforpick_title">Aina sama järjestystapa</string>
+  <string name="preference_samesortforpick_on_summary">Tuotteet järjestetään valitse kohteita -moodissa samalla tavalla kuin Ostosmoodissa.</string>
+  <string name="preference_samesortforpick_off_summary">Järjestystapa valitse kohteita -moodissa voidaan valita erikseen.</string>
+
+  <!-- Preference title: Shake the phone to clean up the list. -->
+  <string name="preference_shake_title">Ravista puhelinta siivotaksesi!</string>
+
+  <!-- Preference summary: Shake the phone to clean up the list. -->
+  <string name="preference_shake_summary">Ravista puhelinta siivotaksesi lista.</string>
+
+  <string name="preference_advanced">Edistyneet asetukset</string>
+  <string name="preference_advanced_summary">Lisäasetukset.</string>
+
+  <!-- Preference category: General settings -->
+  <string name="preference_general">Yleinen</string>
+  <string name="preference_pickitems">Valitse kohteita</string>
+
+  <string name="preference_appearance">Ulkoasu</string>
+
+  <string name="preference_addons">Lisäosat</string>
+  <string name="preference_get_addons">Hanki lisää lisäosia</string>
+  <string name="preference_get_addons_summary">Etsi lisäosia ja teemoja netistä.</string>
+  <string name="preference_get_market_addons">Lataa lisäosia Marketista</string>
+  <string name="preference_get_developer_addons">Lataa lisäosia OpenIntents:ltä</string>
+  <string name="preference_extensions">Laajennokset</string>
+  <string name="preference_themes">Teemat</string>
+  <string name="preference_market_extensions_summary">Hae laajennoksia Android Marketista.</string>
+  <string name="preference_market_themes_summary">Hae teemoja Android Marketista.</string>
+  <string name="preference_developer_extensions_summary">Lataa laajennoksia OpenIntents kotisivuilta.</string>
+  <string name="preference_developer_themes_summary">Lataa teemoja OpenIntents kotisivuilta.</string>
+  <string name="preference_quickedit">Nopea muokkausmoodi</string>
+  <string name="preference_quickedit_on_summary">Kosketa tärkeysjärjestys tai yksikkö -lukuja saadaksesi valikon, jossa on yleisimmät arvot.</string>
+  <string name="preference_quickedit_off_summary">Muokkaa kohdetta -lista saadaan esille koskettamalla Tärkeysjärjestys tai yksikkö -arvoja.</string>
+  <string name="preference_reset_all_settings">Palauta kaikki asetukset oletusarvoihin</string>
+  <string name="preference_reset_all_settings_alert">Haluatko aivan varmasti palauttaa KAIKKI ASETUKSET oletusarvoille? Tätä toimintoa ei voi kumota.</string>
+  <string name="preference_reset_all_settings_done">Kaikki asetukset ovat oletusarvoisia.</string>
+
+  <!-- ***************************
+       Permissions
+       *************************** -->
+
+  <!-- OI Shopping list -->
+  <!-- Permission to read shopping lists -->
+  <string name="oi_shopping_permission_read">lue ostoslistoja</string>
+  <string name="oi_shopping_permission_read_descr">Sallii ohjelman lukea ostoslistoja. Ota huomioon, että salatut ostoslistat ja tavarat näytetään salatussa muodossa.</string>
+  <!-- Permission to write to shopping lists -->
+  <string name="oi_shopping_permission_write">kirjoita ostoslistoja</string>
+  <string name="oi_shopping_permission_write_descr">Sallii ohjelman tehdä uusia listoja ja kohteita tai muuttaa nykyisiä.</string>
+
+
+  <!-- ***************************
+       Preferences
+       *************************** -->
+
+  <string-array name="preference_sortorder_entries">
+    <!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    <item>valitsemattomat ensin, aakkosjärjestys</item>
+    <!-- Preference sort order: Sort by item name -->
+    <item>aakkosjärjestys</item>
+    <!-- Preference sort order: Newest item first -->
+    <item>uusin ensin</item>
+    <!-- Preference sort order: Oldest item first -->
+    <item>vanhin ensin</item>
+    <!-- Preference sort order: Sort alphabetically by tags -->
+    <item>tagit aakkosjärjestyksessä</item>
+    <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
+    <item>tärkeysjärjestys, tagit aakkosjärjestyksessä</item>
+    <!-- Preference sort order: Sort by price, the most expensive first -->
+    <item>kallein ensin</item>
+    <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    <item>valitsemattomat ensin, tagit aakkosjärjestyksessä</item>
+    <!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    <item>valitsemattomat ensin, tärkeysjärjestys, aakkosjärjestys</item>
+    <!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
+    <item>valitsemattomat ensin, tärkeysjärjestys, tagit aakkosjärjestyksessä</item>
+  </string-array>
+
+  <string-array name="preference_sortorder_slists">
+    <!-- Preference sort order: Sort by list name in ascending order -->
+    <item>nouseva aakkosjärjestys</item>
+    <!-- Preference sort order: Sort by list name in descending order -->
+    <item>laskeva aakkosjärjestys</item>
+    <!-- Preference sort order: Newest list first -->
+    <item>uusin ensin</item>
+    <!-- Preference sort order: Oldest list first -->
+    <item>vanhin ensin</item>
+  </string-array>
+
+  <string-array name="preference_prioritytotal_entries">
+    <item>ei näytetä</item>
+    <item>Tärkeysjärjestys 1</item>
+    <item>Tärkeysjärjestys 1-2</item>
+    <item>Tärkeysjärjestys 1-3</item>
+    <item>Tärkeysjärjestys 1-4</item>
+  </string-array>
+
+  <string-array name="preference_fontsize_entries">
+    <!-- Preference fontsize: tiny font size -->
+    <item>Erittäin pieni</item>
+    <!-- Preference fontsize: small font size -->
+    <item>Pieni</item>
+    <!-- Preference fontsize: default font size -->
+    <item>Oletus</item>
+    <!-- Preference fontsize: large font size -->
+    <item>Suuri</item>
+  </string-array>
+
+  <string-array name="preference_orientation_entries">
+    <!-- Preference orientation: default -->
+    <item>Oletus</item>
+    <!-- Preference orientation: landscape -->
+    <item>Vaakasuunta</item>
+    <!-- Preference orientation: portrait -->
+    <item>Pystysuunta</item>
+  </string-array>
+
+  <string-array name="preference_capitalization_entries">
+    <!-- Preference capitalization: No capitalization -->
+    <item>Ei mitään</item>
+    <!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+    <item>Lauseittain</item>
+    <!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+    <item>Sanoittain</item>
+  </string-array>
+
+  <!-- ***************************
+       OI Notepad
+       *************************** -->
+  <!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+  <string name="notepad_not_available">Kohteen muistiinpanojen muokkaaminen vaatii OI Muistion.</string>
+  <!-- Name of application "OI Notepad". Translations should be consistent. -->
+  <string name="notepad">OI Muistio</string>
+
+  <!-- ***************************
+       Automation
+       *************************** -->
+  <!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+  <string name="label_select_action">Valitse toiminto-</string>
+
+  <!-- Label above button that opens a list of all shopping lists to choose from. -->
+  <string name="label_select_list">Valitse lista:</string>
+
+  <!-- Arrays -->
+
+  <string-array name="automation_actions">
+    <!-- Automation action to clean up a list. -->
+    <item>Tyhjennä lista</item>
+  </string-array>
+
+  <string name="widget_prev_page">Edellinen sivu</string>
+  <string name="widget_next_page">Seuraava sivu</string>
+  <string name="widget_choose_a_list">Valitse lista</string>
+  <string name="widget_no_items">Ei kohteita sivuilla %d</string>
 </resources>

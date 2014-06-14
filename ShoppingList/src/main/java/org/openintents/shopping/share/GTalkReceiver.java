@@ -20,55 +20,57 @@
 
 package org.openintents.shopping.share;
 
-import org.openintents.shopping.library.provider.ShoppingContract;
-import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
-
 import android.content.ContentResolver;
 import android.content.Context;
+
+import org.openintents.shopping.library.provider.ShoppingContract;
+import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
 
 /**
  * Handles receiving information about changes in shared shopping lists.
  */
-public class GTalkReceiver /* extends IntentReceiver */{
-	/**
-	 * Tag for log.
-	 */
-	private static final String TAG = "GTalkReceiver";
+public class GTalkReceiver /* extends IntentReceiver */ {
+    /**
+     * Tag for log.
+     */
+    private static final String TAG = "GTalkReceiver";
 
-	/**
-	 * Array of items for editing. This defines the projection for the table
-	 * Lists.
-	 */
-	private static final String[] mProjectionLists = new String[] {
-			ShoppingContract.Lists._ID, ShoppingContract.Lists.NAME,
-			ShoppingContract.Lists.SHARE_NAME,
-			ShoppingContract.Lists.SHARE_CONTACTS };
+    /**
+     * Array of items for editing. This defines the projection for the table
+     * Lists.
+     */
+    private static final String[] mProjectionLists = new String[]{
+            ShoppingContract.Lists._ID, ShoppingContract.Lists.NAME,
+            ShoppingContract.Lists.SHARE_NAME,
+            ShoppingContract.Lists.SHARE_CONTACTS};
 
-	/** Index of ID in the Projection for Lists */
-	private static final int mProjectionListsID = 0;
-	private static final int mProjectionListsNAME = 1;
-	private static final int mProjectionListsSHARENAME = 2;
-	private static final int mProjectionListsSHARECONTACTS = 3;
+    /**
+     * Index of ID in the Projection for Lists
+     */
+    private static final int mProjectionListsID = 0;
+    private static final int mProjectionListsNAME = 1;
+    private static final int mProjectionListsSHARENAME = 2;
+    private static final int mProjectionListsSHARECONTACTS = 3;
 
-	/**
-	 * Array of items for editing. This defines the projection for the table
-	 * ContainsFull.
-	 */
-	private static final String[] mProjectionContainsFull = new String[] {
-			ContainsFull._ID, ContainsFull.ITEM_NAME, ContainsFull.ITEM_IMAGE,
-			ContainsFull.STATUS, ContainsFull.ITEM_ID,
-			ContainsFull.SHARE_CREATED_BY, ContainsFull.SHARE_MODIFIED_BY };
-	private static final int mProjectionContainsFullCONTAINSID = 0;
-	private static final int mProjectionContainsFullITEMNAME = 1;
-	private static final int mProjectionContainsFullITEMIMAGE = 2;
-	private static final int mProjectionContainsFullSTATUS = 3;
-	private static final int mProjectionContainsFullITEMID = 4;
-	private static final int mProjectionContainsFullSHARECREATEDBY = 5;
-	private static final int mProjectionContainsFullSHAREMODIFIEDBY = 6;
+    /**
+     * Array of items for editing. This defines the projection for the table
+     * ContainsFull.
+     */
+    private static final String[] mProjectionContainsFull = new String[]{
+            ContainsFull._ID, ContainsFull.ITEM_NAME, ContainsFull.ITEM_IMAGE,
+            ContainsFull.STATUS, ContainsFull.ITEM_ID,
+            ContainsFull.SHARE_CREATED_BY, ContainsFull.SHARE_MODIFIED_BY};
+    private static final int mProjectionContainsFullCONTAINSID = 0;
+    private static final int mProjectionContainsFullITEMNAME = 1;
+    private static final int mProjectionContainsFullITEMIMAGE = 2;
+    private static final int mProjectionContainsFullSTATUS = 3;
+    private static final int mProjectionContainsFullITEMID = 4;
+    private static final int mProjectionContainsFullSHARECREATEDBY = 5;
+    private static final int mProjectionContainsFullSHAREMODIFIEDBY = 6;
 
-	private Context mContext;
-	private ContentResolver mContentResolver;
-	/*
+    private Context mContext;
+    private ContentResolver mContentResolver;
+    /*
 	 * public void onReceiveIntent(Context context, Intent intent) { mContext =
 	 * context; mContentResolver = mContext.getContentResolver(); String action
 	 * = intent.getAction(); Uri data = intent.getData(); Bundle bundle =
@@ -93,13 +95,13 @@ public class GTalkReceiver /* extends IntentReceiver */{
 	 * 
 	 * }
 	 */
-	/**
-	 * Updates shared list information or creates a new list.
-	 * 
-	 * If the shared list does not exist yet, a new list is created.
-	 * 
-	 * @param bundle
-	 */
+    /**
+     * Updates shared list information or creates a new list.
+     *
+     * If the shared list does not exist yet, a new list is created.
+     *
+     * @param bundle
+     */
 	/*
 	 * void updateList(Bundle bundle) { // Update information about list: if
 	 * (bundle != null) { String shareListName =
@@ -148,11 +150,11 @@ public class GTalkReceiver /* extends IntentReceiver */{
 	 * } else { Log.e(TAG, "Bundle received is null"); } }
 	 */
 
-	/**
-	 * Inserts an item into a list.
-	 * 
-	 * @param bundle
-	 */
+    /**
+     * Inserts an item into a list.
+     *
+     * @param bundle
+     */
 	/*
 	 * void insertItem(Bundle bundle) { // Update information about list: if
 	 * (bundle != null) { String shareListName =
@@ -189,14 +191,14 @@ public class GTalkReceiver /* extends IntentReceiver */{
 	 * } else { Log.e(TAG, "Bundle received is null"); } }
 	 */
 
-	/**
-	 * Updates information about an item in a list.
-	 * 
-	 * If the item does not exist yet, it is created. Update could include to
-	 * strike an item through.
-	 * 
-	 * @param bundle
-	 */
+    /**
+     * Updates information about an item in a list.
+     *
+     * If the item does not exist yet, it is created. Update could include to
+     * strike an item through.
+     *
+     * @param bundle
+     */
 	/*
 	 * void updateItem(Bundle bundle) { // Update information about list: if
 	 * (bundle != null) { String shareListName =

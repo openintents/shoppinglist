@@ -28,52 +28,52 @@ import android.widget.Toast;
  * Handles sending out information about changes in shared shopping lists.
  */
 public class GTalkSender {
-	private static final String TAG = "GTalkSender";
+    private static final String TAG = "GTalkSender";
 
-	Context mContext;
+    Context mContext;
 
-	// ??? IGTalkSession mGTalkSession = null;
+    // ??? IGTalkSession mGTalkSession = null;
 
-	boolean mBound;
+    boolean mBound;
 
-	/**
-	 * Suffix for bundle items to mark them old.
-	 * 
-	 * For the update version, both, the old and the new value are sent. Old
-	 * values are marked with this suffix.
-	 */
-	public static final String OLD = "_old";
+    /**
+     * Suffix for bundle items to mark them old.
+     * <p/>
+     * For the update version, both, the old and the new value are sent. Old
+     * values are marked with this suffix.
+     */
+    public static final String OLD = "_old";
 
-	/**
-	 * Bundle marker for sender.
-	 */
-	public static final String SENDER = "sender";
+    /**
+     * Bundle marker for sender.
+     */
+    public static final String SENDER = "sender";
 
-	/**
-	 * Bundle marker for data (content URI).
-	 * 
-	 * This is only necessary for the Anroid m5 issue that data is not sent
-	 * along with a GTalk message.
-	 */
-	public static final String DATA = "data";
+    /**
+     * Bundle marker for data (content URI).
+     * <p/>
+     * This is only necessary for the Anroid m5 issue that data is not sent
+     * along with a GTalk message.
+     */
+    public static final String DATA = "data";
 
-	/**
-	 * Constructs a new sender GTalk. You have to manually bind before using
-	 * GTalk.
-	 * 
-	 * @param mContext
-	 */
-	public GTalkSender(Context context) {
-		mContext = context;
-		mBound = false;
+    /**
+     * Constructs a new sender GTalk. You have to manually bind before using
+     * GTalk.
+     *
+     * @param mContext
+     */
+    public GTalkSender(Context context) {
+        mContext = context;
+        mBound = false;
 
-		// bindGTalkService();
-	}
+        // bindGTalkService();
+    }
 
-	/**
-	 * Bind to GTalk service.
-	 */
-	/*
+    /**
+     * Bind to GTalk service.
+     */
+    /*
 	 * public void bindGTalkService() { if (!mBound) { Intent intent = new
 	 * Intent(); intent.setComponent(
 	 * com.google.android.gtalkservice.GTalkServiceConstants
@@ -108,30 +108,30 @@ public class GTalkSender {
 	 * called when the connection with the service has been // unexpectedly
 	 * disconnected -- that is, its process crashed. mGTalkSession = null; } };
 	 */
-	private boolean isValidUsername(String username) {
-		if (TextUtils.isEmpty(username)) {
-			return false;
-		}
+    private boolean isValidUsername(String username) {
+        if (TextUtils.isEmpty(username)) {
+            return false;
+        }
 
-		if (username.indexOf('@') == -1) {
-			return false;
-		}
+        if (username.indexOf('@') == -1) {
+            return false;
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	private void showMessage(CharSequence msg) {
-		Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show();
-	}
+    private void showMessage(CharSequence msg) {
+        Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show();
+    }
 
-	// ////////////////////////////////////////////////////
-	// Shopping related methods follow
+    // ////////////////////////////////////////////////////
+    // Shopping related methods follow
 
-	/**
-	 * Sends updated list and email information to all recipients.
-	 * 
-	 * "local/[id]" refers to a local shopping list.
-	 */
+    /**
+     * Sends updated list and email information to all recipients.
+     *
+     * "local/[id]" refers to a local shopping list.
+     */
 	/*
 	 * public void sendList (String recipients, String shareListName) {
 	 * Log.i(TAG, "sendList(" + recipients + ", " + shareListName + ")");
@@ -200,9 +200,9 @@ public class GTalkSender {
 	 * 
 	 * }
 	 */
-	/**
-	 * Sends information about a new item to all recipients.
-	 */
+    /**
+     * Sends information about a new item to all recipients.
+     */
 	/*
 	 * public void sendItem(String recipients, String shareListName, String
 	 * itemName) { Log.i(TAG, "sendItem(" + recipients + ", " + shareListName +
@@ -259,9 +259,9 @@ public class GTalkSender {
 	 * 
 	 * }
 	 */
-	/**
-	 * Sends information about a new item to all recipients.
-	 */
+    /**
+     * Sends information about a new item to all recipients.
+     */
 	/*
 	 * public void sendItemUpdate(String recipients, String shareListName,
 	 * String itemNameOld, String itemName, Long itemStatusOld, Long itemStatus)

@@ -5,6 +5,15 @@ import android.os.Handler;
 
 import com.google.api.client.util.IOUtils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.HttpGet;
@@ -15,15 +24,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class MirrorApiClient {
     private static final String BASE_URL = "https://www.googleapis.com/mirror/v1/";
@@ -36,7 +36,7 @@ public class MirrorApiClient {
     private DefaultHttpClient mClient;
 
     private MirrorApiClient(Context context) {
-        mHandler =  new Handler(context.getMainLooper());
+        mHandler = new Handler(context.getMainLooper());
         mThreadPool = Executors.newCachedThreadPool();
         mClient = new DefaultHttpClient();
         HttpConnectionParams.setConnectionTimeout(
@@ -57,7 +57,7 @@ public class MirrorApiClient {
     }
 
     public void createTimelineItem(String token, JSONObject json,
-            final Callback callback) {
+                                   final Callback callback) {
         try {
             final HttpPost request = new HttpPost();
             request.setURI(new URI(BASE_URL + "timeline"));
@@ -190,7 +190,7 @@ public class MirrorApiClient {
                             mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    callback.onSuccess(response,null);
+                                    callback.onSuccess(response, null);
                                 }
                             });
                         } else {
@@ -218,6 +218,7 @@ public class MirrorApiClient {
 
     public static interface Callback {
         public void onSuccess(HttpResponse response, JSONObject jsonObject);
+
         public void onFailure(HttpResponse response, Throwable e);
     }
 }

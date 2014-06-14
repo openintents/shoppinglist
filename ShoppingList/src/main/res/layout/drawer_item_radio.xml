@@ -14,31 +14,30 @@
   limitations under the License.
   -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_height="wrap_content"
+  android:layout_width="match_parent"
+  android:minHeight="@dimen/mode_item_minimum_height">
+  <!--  android:background="@drawable/mode_item"  -->
+  <ImageView
+    android:id="@+id/mode_radio_button"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:minHeight="@dimen/mode_item_minimum_height"
-   >
-	<!--  android:background="@drawable/mode_item"  -->
-    <ImageView
-        android:id="@+id/mode_radio_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/mode_item_left_margin"
-        android:src="@drawable/mode_radio_button"
-        android:layout_centerVertical="true"/>
+    android:layout_marginLeft="@dimen/mode_item_left_margin"
+    android:src="@drawable/mode_radio_button"
+    android:layout_centerVertical="true" />
 
-    <TextView
-        android:id="@+id/text1"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_toRightOf="@id/mode_radio_button"
-        android:layout_alignWithParentIfMissing="true"
-        android:layout_marginLeft="@dimen/mode_item_left_margin"
-        android:layout_marginRight="@dimen/mode_item_right_margin"
-        android:layout_centerVertical="true"
-        android:includeFontPadding="false"
-        android:singleLine="true"
-        android:ellipsize="end"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    <!--   android:textColor="@color/mode_item_text_color" -->
+  <TextView
+    android:id="@+id/text1"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_toRightOf="@id/mode_radio_button"
+    android:layout_alignWithParentIfMissing="true"
+    android:layout_marginLeft="@dimen/mode_item_left_margin"
+    android:layout_marginRight="@dimen/mode_item_right_margin"
+    android:layout_centerVertical="true"
+    android:includeFontPadding="false"
+    android:singleLine="true"
+    android:ellipsize="end"
+    android:textAppearance="?android:attr/textAppearanceMedium" />
+  <!--   android:textColor="@color/mode_item_text_color" -->
 </RelativeLayout>

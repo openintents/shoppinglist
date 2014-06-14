@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright (C) 2010 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,61 +13,61 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <ImageView
+    android:id="@+id/description_icon"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:paddingLeft="16dip"
+    android:src="@drawable/ic_menu_revert_holo_dark" />
+
+  <TextView
+    android:id="@+id/description_text"
+    android:layout_width="0dip"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:ellipsize="end"
+    android:gravity="center_vertical"
+    android:paddingLeft="16dip"
+    android:singleLine="false"
+    android:text="@string/stores"
+    android:textColor="@android:color/white"
+    android:textSize="16sp" />
+
+  <LinearLayout
+    android:id="@+id/action_button"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true">
+
+    <View
+      android:id="@+id/separator"
+      android:layout_width="1dip"
+      android:layout_height="match_parent"
+      android:layout_marginBottom="10dip"
+      android:layout_marginRight="12dip"
+      android:layout_marginTop="10dip"
+      android:background="#aaaaaa" />
 
     <ImageView
-        android:id="@+id/description_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:paddingLeft="16dip"
-        android:src="@drawable/ic_menu_revert_holo_dark" />
+      android:id="@+id/action_icon"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_gravity="center_vertical"
+      android:layout_marginRight="4dip"
+      android:src="@drawable/ic_menu_revert_holo_dark" />
 
     <TextView
-        android:id="@+id/description_text"
-        android:layout_width="0dip"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:ellipsize="end"
-        android:gravity="center_vertical"
-        android:paddingLeft="16dip"
-        android:singleLine="false"
-        android:text="@string/stores"
-        android:textColor="@android:color/white"
-        android:textSize="16sp" />
-
-    <LinearLayout
-        android:id="@+id/action_button"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true" >
-
-        <View
-            android:id="@+id/separator"
-            android:layout_width="1dip"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dip"
-            android:layout_marginRight="12dip"
-            android:layout_marginTop="10dip"
-            android:background="#aaaaaa" />
-
-        <ImageView
-            android:id="@+id/action_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="4dip"
-            android:src="@drawable/ic_menu_revert_holo_dark" />
-
-        <TextView
-            android:id="@+id/action_text"
-            style="@style/UndoTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="4dip"
-            android:gravity="center_vertical"
-            android:textAllCaps="true" />
-    </LinearLayout>
+      android:id="@+id/action_text"
+      style="@style/UndoTextStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_marginLeft="4dip"
+      android:gravity="center_vertical"
+      android:textAllCaps="true" />
+  </LinearLayout>
 
 </merge>

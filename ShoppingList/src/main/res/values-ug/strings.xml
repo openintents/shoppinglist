@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<?xml version="1.0" encoding="utf-8"?><!--
  * Copyright (C) 2007-2010 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,358 +14,358 @@
  * limitations under the License.
  -->
 <resources>
-	<!-- ***************************
-	     About information
-	     *************************** -->
-	
-	<!-- Automatically filled in by Launchpad: -->
+  <!-- ***************************
+       About information
+       *************************** -->
+
+  <!-- Automatically filled in by Launchpad: -->
 	<string name="about_translators">Launchpad Contributions:
   OpenIntents devs https://launchpad.net/~openintents-devs
   Sahran https://launchpad.net/~sahran</string>
-	
-    <!-- Short explanation of the application (max. 80 characters) -->
-	<string name="about_comments">مال تىزىمىڭىزدىكى تۈرلەرنى OI مال تىزىمىدا ئىز قوغلاشنى ساقلاپ قالىدۇ.</string>
-	
-	<!-- ***************************
-	     Applicatio-specific strings
-	     *************************** -->
-	<!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-	<string name="app_name">OI سېتىۋېلىش تىزىمى</string>
 
-	<string name="new_item">يېڭى تۈر</string>
-	<string name="new_list">يېڭى تىزىم</string>
-	<string name="send">تىزىم يوللا</string>
-	<string name="mark_all_items">ھەممە تۈرگە بەلگە سال</string>
-	<string name="unmark_all_items">Unmark all items</string>
-	<string name="empty_list_not_sent">تىزىم بوش يوللىمىدى.</string>
-	<string name="email_not_available">يوللاشقا ئىشلىتىدىغان قوللىنىشچان پىروگرامما يوق.</string>
-	<string name="my_shopping_list">سېتىۋېلىش تىزىمىم</string>
-	<string name="new_list_hint">مەسىلەن، لازىمەتلىك تىزىمى، ئائىلە تىزىمى</string>
-	<string name="clean_up_list">تىزىمنى تازىلا</string>
-	<string name="delete_list">تىزىمنى ئۆچۈر</string>
-	<string name="ask_new_list">يېڭى سېتىۋېلىش تىزىمىغا ئات كىرگۈزۈڭ</string>
-	<string name="ask_rename_list">سېتىۋېلىش تىزىمىنىڭ ئاتىنى ئۆزگەرت</string>
-	<string name="ask_edit_item">تۈر كىرگۈزۈڭ</string>
-	<string name="ask_new_store">يېڭى دۇكان ئاتىنى كىرگۈزۈڭ</string>
-	<string name="please_enter_name">بىر ئات كىرگۈزۈڭ</string>
-	<string name="no_items_marked">ھېچقانداق تۈرگە سىزىۋېتىش بەلگىسى سېلىنمىدى.</string>
-	<string name="confirm_delete_list">راستلا بۇ سېتىۋېلىش تىزىمىنى ئۆچۈرەمسىز؟</string>
-	<string name="no_shopping_provider">سېتىۋېلىش تىزىمىنى زىيارەت قىلىۋاتقاندا خاتالىق كۆرۈلدى.</string>
-	<string name="pick_item">بىر تۈر تاللاڭ</string>
-	<string name="pick_list">بىر تىزىم تاللاڭ</string>
-	<string name="theme">ئۆرنەك</string>
-	<string name="theme_settings">ئۆرنەك تەڭشىكى</string>
-	<string name="rename_list">تىزىم ئاتىنى ئۆزگەرت</string>
-	<string name="menu_mark_item">تۈرگە بەلگە سال</string>
-	<string name="menu_edit_item">تۈر كىرگۈزۈڭ</string>
-	<string name="menu_auto_add">ئۆزلۈكىدىن قوش</string>
-	<string name="menu_item_stores">دۇكانلار…</string>
-	<string name="menu_rename_store">دۇكان ئاتىنى ئۆزگەرت</string>
-	<string name="menu_delete_store">دۇكان ئۆچۈر</string>
-	<string name="confirm_delete_store">بۇ دۇكاننى راستلا ئۆچۈرەمسىز؟</string>
-	<string name="no_items_available">ئىشلىتىلىشچان تۈر يوق</string>
-	<string name="no_stores_available">بۇ تىزىمدا دۇكان يوق</string>
-	<string name="no_tags_available">بۇ تىزىمنىڭ بەلگىسى يوق</string>
-	    
-	<!-- Remove item from this list, but keep it internally, so that the user
-	     can choose it later for inclusion again. Information like
-	     tags or price will be kept. -->
-	<string name="menu_remove_item">تۈرنى تىزىمدىن چىقىرىۋەت</string>
-	
-	<!-- Delete this item completely. If the user wants to add it again, they
-	     have to enter all the information again. -->
-	<string name="menu_delete_item">تۈرنى مەڭگۈلۈك ئۆچۈر</string>
-	<string name="menu_move_item">تۈرنى باشقا تىزىمغا يۆتكە</string>
-    <string name="menu_copy_item">تۈر كۆچۈر</string>
-	    
-	<!-- Button label to add an item to the list. -->
-	<string name="add">قوش</string>
-	
-	<string name="menu_pick_items">تۈرلەرنى تاللاڭ</string>
-	<string name="menu_start_shopping">تاۋارلار</string>
-	
-	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="pick_items_title">%s - تاللانغان تۈرلەر</string>
-	
-	<!-- Title supplement. \'%s\' is the name of the current list. -->
-	<string name="shopping_title">%s - تاۋارلار</string>
-	
-	<!-- Title supplement. \'%s\' is the name of the current item. -->
-	<string name="item_stores_title">%s - دۇكانلار</string>
-	<string name="item_stores_activity_label">دۇكان تۈرلىرىنى تەھرىر</string>
-	
-	<string name="tags">خەتكۈشلەر</string>
-	<string name="price">باھاسى</string>
-	<string name="item">تۈر</string>
-	<string name="quantity">سانى</string>
-	<string name="priority">ئالدىنلىق</string>
-	<string name="has_note">ئىزاھاتى بار</string>
-	<string name="units">بىرلىكى</string>
-	<string name="note">ئىزاھات</string>
-	<string name="stores">دۇكانلار</string>
-	<string name="list">تىزىم</string>
-	
-	<string name="otherqty">باشقا سانى…</string>
-	<string name="otherpri">باشقا ئالدىنلىقى…</string>   
-	<string name="unfiltered">(سۈزۈلمىگەن)</string>
-	
-	<!-- Total sum of all prices. \'%s\' is the sum -->
-	<string name="total">جەمئى: %s</string>
-	
-	<!-- Sum of all prices of the checked items. \'%s\' is the sum -->
-	<string name="total_checked">تەكشۈرۈلگەن: %s</string>
-    <string name="priority1_total">ئالدىنلىق 1: %s</string>
-    <string name="priority2_total">ئالدىنلىق 1-2: %s</string>
-	<string name="priority3_total">ئالدىنلىق 1-3: %s</string>
-	<string name="priority4_total">ئالدىنلىق 1-4: %s</string>
-	
-	<string name="delete_item_confirm">بۇ تۈرنى مەڭگۈلۈككە ئۆچۈرەمسىز؟</string>
-	<string name="delete">ئۆچۈر</string>
-	
-	<!-- Added to an item to indicate it was bought. -->
-	<string name="suffix_checked">…جەزملە</string>
-	<string name="empty"/>
-	
-	<!-- The shortcut is created on the home screen. -->
-	<string name="pick_list_for_shortcut">قىسقا يولنىڭ تاللاش تىزىمى</string>
-	
-	<!-- Shown if external application wants to insert new items. -->
-	<string name="pick_list_to_insert_items">قىستۇرىدىغان تۈرلەرنىڭ تاللاش تىزىمى</string>
-	
-	<!-- Theme related -->
-	<!-- Title for selecting a theme -->
-	<string name="theme_pick">بىر ئۆرنەك تاللاڭ</string>
-	<string name="theme_description">بۇ تىزىمنىڭ ئۆرنىكىنى تاللاڭ</string>
-	<string name="theme_default">كۆڭۈلدىكى</string>
-	<string name="theme_classic">كلاسسىك</string>
-	<string name="theme_bugdroid">Android</string>
-	<string name="theme_classic_export">كىلاسسىك (OI سېتىۋېلىش تىزىمىدىن)</string>
-	<string name="theme_bugdroid_export">Android (OI سېتىۋېلىش تىزىمىدىن)</string>
+  <!-- Short explanation of the application (max. 80 characters) -->
+  <string name="about_comments">مال تىزىمىڭىزدىكى تۈرلەرنى OI مال تىزىمىدا ئىز قوغلاشنى ساقلاپ قالىدۇ.</string>
 
-	<!--     Dialog box    -->
-	<!-- Button label "OK" -->
-	<string name="ok">جەزملە</string>
-	<!-- Button label "Cancel" -->
-	<string name="cancel">ۋاز كەچ</string>
-	<string name="use_theme_for_all_lists">بۇ ئۆرنەكنى ھەممە تىزىمغا ئىشلەت</string>
-	<string name="get_more_themes">تېخىمۇ كۆپ ئۆرنەككە ئېرىش</string>
-	
-	<!-- preferences -->
-	<string name="preferences">تەڭشەكلەر</string>
-	
-    <string name="preference_application">پىروگرامما تەڭشىكى</string>
-    
-	<string name="preference_unchecked_on_top">ئەڭ ئۈستىدىكى تاللانمىغان</string>
-	<string name="preference_unchecked_on_top_summary">تاللانمىغان تۈرلەرنى ھەمىشە ئالدىدا كۆرسەت</string>
-	<string name="preference_fontsize">خەت چوڭلۇقى</string>
-	<string name="preference_fontsize_summary">خەت چوڭلۇقىنى ئۆزگەرت</string>
-	<string name="preference_fontsize_dialog_title">خەت چوڭلۇقىنى تاللاڭ</string>
-	<string name="preference_orientation">يۆنىلىش</string>
-	<string name="preference_orientation_summary">يۆنىلىش ئۆزگەرت</string>
-	<string name="preference_orientation_dialog_title">يۆنىلىش تاللاڭ.</string>
-	<string name="preference_sortorder_title">تەرتىپلەش تەرتىپى</string>
-	<string name="preference_sortorder_summary">تىزىم تۈرلىرىنىڭ تەرتىپلەپ تەرتىپىنى ئۆزگەرتىدۇ</string>
-	<string name="preference_sortorder_for_pick_title">تەرتىپلەش تەرتىپى - تۈر تاللاڭ</string>
-	<string name="preference_sortorder_for_pick_summary">تۈر تاللاش ھالىتىدىكى تۈر تىزىمىنىڭ تەرتىپلەش تەرتىپىنى ئۆزگەرتىدۇ.</string>
-	<string name="preference_sortorder_dialog_title">تەرتىپلەش تەرتىپىنى تاللاڭ</string>
-	<string name="preference_sortorder_for_pick_dialog_title">تۈر تاللاش ھالىتىنىڭ تەرتىپلەش تەرتىپىنى تاللاڭ</string>
-	<string name="preference_sortorder_for_shopping_lists">تەرتىپلەش تەرتىپى - مال تىزىمى</string>
-	<string name="preference_sortorder_for_slists_summary">مال تىزىمى ۋە تەرتىپلەش تەرتىپىنى ئۆزگەرتىدۇ.</string>
-	<string name="preference_sortorder_for_slists_dialog_title">مال تىزىمىنىڭ تەرتىپلەش تەرتىپىنى تاللاڭ</string>
-	<string name="preference_loadlastused_title">ئاخىرقى قېتىم ئىشلەتكەننى يۈكلە</string>
-	<string name="preference_loadlastused_summary">ھەمىشە ئاخىرقى قېتىم كۆرسەتكەن تىزىمنى باشلا</string>
-	<string name="preference_capitalization_title">چوڭ كىچىك يېزىلىش</string>
-	<string name="preference_capitalization_summary">كىرگۈزگەندە ھەرپنى ئۆزلۈكىدىن چوڭ يېزىلىشقا ئۆزگەرتىدۇ</string>
-	<string name="preference_capitalization_dialog_title">چوڭ يېزىلىش تاللاڭ</string> 
-	<string name="preference_hidechecked_title">تاللانغان تۈرلەرنى يوشۇر</string>
-	<string name="preference_hidechecked_summary">تاللانغان تۈرلەرنى تېزلىكتە يوشۇرىدۇ.</string>
-	<string name="preference_fastscroll_title">تېز دومىلىتىش</string>
-	<string name="preference_fastscroll_summary">تۈر سانى 35 ياكى ئۇنىڭدىن ئېشىپ كەتكەندە سۈرگۈچنى كۆرسىتىدۇ.</string>
-	<string name="preference_showprice_title">باھانى كۆرسەت</string>
-	<string name="preference_showprice_summary">قوشۇمچە ئىستون سۈپىتىدە تىزىمدا كۆرسىتىدۇ.</string>
-	<string name="preference_perstoreprice">ھەر بىر دۇكاننىڭ باھاسى</string>
-	<string name="preference_perstoreprice_title">ھەر بىر دۇكاننىڭ باھاسىنى ئىزلا</string>
-	<string name="preference_perstoreprice_summary">ھەر بىر تۈرنىڭ ھەر بىر دۇكاندىكى باھاسىنى ئىزلاشنى داۋاملاشتۇرىدۇ.</string>
-	<string name="preference_screenlock_title">ئېكران قۇلۇپنى چەكلە</string>
-	<string name="preference_screenlock_summary">تەكشۈرۈلۈۋاتقاندا ئېكران قۇلۇپلاشنىڭ ئالدىنى ئالىدۇ.</string>
-	<string name="preference_usefilters_title">سۈزگۈچلەر</string>
-	<string name="preference_usefilters_summary">تىزىملارنى بەلگە ياكى دۇكانلار بويىچە سۈزگىلى بولىدۇ.</string>
-	<string name="preference_complete_by_list_title">Limit item name completion</string>
-	<string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
-	<string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
-	<string name="preference_reset_quantity">سانىنى ئەسلىگە قايتۇر</string>
-	<string name="preference_reset_quantity_summary">تۈرلەرنى قايتا قوشقاندا سانىنى ئەسلىگە قايتۇرىدۇ.</string>
-	<string name="preference_add_for_barcode">تاياقچە كود تاراغۇچ</string>
-	<string name="preference_add_for_barcode_summary">قوش توپچىسى ئۇزۇن بېسىلسا تاياقچە كود OI قىستۇرمىسىنى قوزغىتىدۇ (ئورنىتىلغان بولسا)</string>
-	<string name="preference_showtags_title">بەلگىنى كۆرسەت</string>
-	<string name="preference_showtags_summary">قوشۇمچە ئىستون سۈپىتىدە تىزىمدا كۆرسىتىدۇ.</string>
-	<string name="preference_showquantity_title">سانىنى كۆرسەت</string>
-	<string name="preference_showquantity_summary">قوشۇمچە ئىستون سۈپىتىدە تىزىمدا كۆرسىتىدۇ.</string>
-	<string name="preference_showpriority_title">ئالدىنلىقنى كۆرسەت</string>
-	<string name="preference_showpriority_summary">قوشۇمچە ئىستون سۈپىتىدە تىزىمدا كۆرسىتىدۇ.</string>
-	<string name="preference_showunits_title">بىرلىكىنى كۆرسەت</string>
-	<string name="preference_showunits_summary">قوشۇمچە ئىستون سۈپىتىدە تىزىمدا كۆرسىتىدۇ.</string>
-	<string name="preference_prio_subtotal">ئالدىنلىق بويىچە كىچىك جەمئى</string>
-	<string name="preference_prioritytotal_title">ئالدىنلىق بويىچە كىچىك جەمئى</string>
-	<string name="preference_prioritytotal_summary">ئالدىنلىق بويىچە كىچىك جەمئى يوق.</string>
-	<string name="preference_prioritytotal_dialog_title">ئالدىنلىق بويىچە كىچىك جەمئى</string>
-	<string name="preference_priosubtotalchecked_title">تاللانغان تۈرلەرنى ئۆز ئىچىگە ئالىدۇ</string>
-	<string name="preference_priosubtotalchecked_on_summary">تاللانغان تۈرلەرنى ئۆز ئىچىگە ئالغان ئالدىنلىق بويىچە كىچىك جەمئى</string>
-	<string name="preference_priosubtotalchecked_off_summary">تاللانغان تۈرلەرنى ئۆز ئىچىگە ئالمىغان ئالدىنلىق بويىچە كىچىك جەمئى</string>
-	<string name="preference_pickitemsinlist_title">تۈرلەرنى تىزىمدىن بىۋاستە تاللاڭ</string>
-	<string name="preference_pickitemsinlist_on_summary">ئاساسىي تىزىمنى تەھرىر ھالىتىگە ئالماشتۇرۇپ نۆۋەتتىكى تۈرلەرنى قايتا قوشىدۇ</string>
-	<string name="preference_pickitemsinlist_off_summary">مەخسۇس سۆزلەشكۈدىن بىرنى ئىشلىتىپ تۈرلەرنى تىزىمغا قوشىدۇ</string>
-	<string name="preference_samesortforpick_title">ھەمىشە ئوخشاش تەرتىپلەش تەرتىپى</string>
-	<string name="preference_samesortforpick_on_summary">سېتىۋېلىش ھالىتىگە ئوخشاش تۈرلەر تۈر تاللاش ھالىتىدە تەرتىپلەندى.</string>
-	<string name="preference_samesortforpick_off_summary">تۈر تاللاش ھالىتىنىڭ تەرتىپلەش تەرتىپىنى ئايرىم تاللاشقا بولىدۇ.</string>
-	
-	<!-- Preference title: Shake the phone to clean up the list. -->
-	<string name="preference_shake_title">تازىلىغاندا تىترەت</string>
-	
-	<!-- Preference summary: Shake the phone to clean up the list. -->
-	<string name="preference_shake_summary">تىزىمنى تازىلىغاندا تېلېفوننى تىترەت.</string>
-	
-    <string name="preference_advanced">ئالىي تەڭشەك</string>
-    <string name="preference_advanced_summary">باشقا تەڭشەكلەر.</string>
-    
-    <!-- Preference category: General settings -->
-    <string name="preference_general">ئادەتتىكى</string>
-    <string name="preference_pickitems">تۈرلەرنى تاللاڭ</string>
-    
-    <string name="preference_appearance">قىياپەت</string>
-    
-    <string name="preference_addons">قىستۇرمىلار</string>
-    <string name="preference_get_addons">يېڭى قىستۇرمىغا ئېرىش</string>
-    <string name="preference_get_addons_summary">توردىن كېڭەيتىلمە ۋە ئۆرنەك ئىزدەيدۇ.</string>
-    <string name="preference_get_market_addons">بازاردىن قىستۇرمىغا ئېرىش</string>
-    <string name="preference_get_developer_addons">OpenIntents دىن قىستۇرمىغا ئېرىش</string>
-    <string name="preference_extensions">كېڭەيتىلمە</string>
-    <string name="preference_themes">ئۇسلۇبلار</string>
-    <string name="preference_market_extensions_summary">كېڭەيتىلمىلەرنى ئاندىرويىد بازاردىن ئىزدەيدۇ.</string>
-    <string name="preference_market_themes_summary">ئاندرويىد بازاردىن ئۆرنەك ئىزدەيدۇ.</string>
-    <string name="preference_developer_extensions_summary">كېڭەيتىلمىلەرگە OpenIntents باش بەتتىن ئېرىشىدۇ.</string>
-	<string name="preference_developer_themes_summary">OpenIntents تورتۇرادىن ئۆرنەككە ئېرىشىدۇ.</string>
-	<string name="preference_quickedit">تېز تەھرىرلەش ھالىتى</string>
-	<string name="preference_quickedit_on_summary">ئادەتتىكى قىممەتبەۇ بىر تىزىملىكنىڭ چېكىش ئالدىنلىقى ياكى مىقدار قىممىتى.</string>
-	<string name="preference_quickedit_off_summary">سەزگۈچ ئالدىنلىقى ياكى سانلىق قىممەتنى تۈر تەھرىرلەش سۆزلەشكۈدە توپلايدۇ.</string>
-	<string name="preference_reset_all_settings">ھەممە تەڭشەكلەرنى ئەسلىگە قايتۇر</string>
-	<string name="preference_reset_all_settings_alert">ھەممە تەڭشەكلەرنى راستىنلا ئەسلىگە قايتۇرامسىز؟ بۇ مەشغۇلاتنى كەينىگە ياندۇرغىلى بولمايدۇ.</string>    
-	<string name="preference_reset_all_settings_done">ھەممە تەڭشەكلەر ئەسلىگە قايتۇرۇلىدۇ</string>
-	    
-	<!-- ***************************
-	     Permissions
-	     *************************** -->
-	
-	<!-- OI Shopping list -->
-	<!-- Permission to read shopping lists -->
-	<string name="oi_shopping_permission_read">سېتىۋېلىش تىزىمىنى ئوقۇ</string>
-	<string name="oi_shopping_permission_read_descr">پىروگراممىنىڭ سېتىۋېلىش تىزىمىنى ئوقۇشىغا يول قويىدۇ. دىققەت شىفىرلانغان ئىزاھات شىفىرلانغان پىچىمدا تەمىنلىنىدۇ.</string>
-	<!-- Permission to write to shopping lists -->
-	<string name="oi_shopping_permission_write">سېتىۋېلىش تىزىمىغا ياز</string>
-	<string name="oi_shopping_permission_write_descr">پىروگراممىنىڭ يېڭى تىزىم ۋە تۈر قۇرۇشى ياكى مەۋجۇت ئىزاھاتنى ئۆزگەرتىشىگە يول قويىدۇ.</string>
-	
-	
-	<!-- ***************************
-	     Preferences
-	     *************************** -->
-	
-    <string-array name="preference_sortorder_entries">
-    	<!-- Preference sort order: List unchecked items first, sort items alphabetically -->
-    	<item>تاللانمىغىنى ئالدىدا، ئېلىپبە تەرتىپىدە</item>
-        <!-- Preference sort order: Sort by item name -->
-    	<item>ئېلىپبە تەرتىپى</item>
-        <!-- Preference sort order: Newest item first -->
-    	<item>يېڭىسى ئالدىدا</item>
-        <!-- Preference sort order: Oldest item first -->
-    	<item>كونىسى ئالدىدا</item>
-    	<!-- Preference sort order: Sort alphabetically by tags -->
-    	<item>بەلگە ئېلىپبە تەرتىپىدە</item>
-        <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
-    	<item>ئالدىنلىق، بەلگە ئېلىپبە تەرتىپىدە</item>
-        <!-- Preference sort order: Sort by price, the most expensive first -->
-    	<item>ئەڭ قىممەتلىرى ئالدىدا</item>
-        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
-    	<item>تاللانمىغىنى ئالدىدا، بەلگە ئېلىپبە تەرتىپىدە</item>
-    	<!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
-    	<item>تاللانمىغىنى ئالدىدا، ئالدىنلىق، ئېلىپبە تەرتىپىدە</item>
-    	<!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
-    	<item>تاللانمىغىنى ئالدىدا، ئالدىنلىق، بەلگە ئېلىپبە تەرتىپىدە</item>
-    </string-array>
-    
-    <string-array name="preference_sortorder_slists">
-        <!-- Preference sort order: Sort by list name in ascending order -->
-        <item>ئېلىپبەلىك ئۆسكۈچى تەرتىپ</item>
-        <!-- Preference sort order: Sort by list name in descending order -->
-        <item>ئېلىپبەلىك كېمەيگۈچى تەرتىپ</item>
-        <!-- Preference sort order: Newest list first -->
-        <item>يېڭىسى ئالدىدا</item>
-        <!-- Preference sort order: Oldest list first -->
-        <item>كونىسى ئالدىدا</item>
-    </string-array>
-    
-    <string-array name="preference_prioritytotal_entries">
-    	<item>كۆرسىتىلمىگەن</item>
-    	<item>ئالدىنلىق 1</item>
-    	<item>ئالدىنلىق 1-2</item>
-    	<item>ئالدىنلىق 1-2</item>
-    	<item>ئالدىنلىق 1-4</item>
-    </string-array>
-    
-    <string-array name="preference_fontsize_entries">
-    	<!-- Preference fontsize: tiny font size -->
-        <item>كىچىكرەك</item>
-    	<!-- Preference fontsize: small font size -->
-        <item>كىچىك</item>
-    	<!-- Preference fontsize: default font size -->
-    	<item>كۆڭۈلدىكى</item>
-    	<!-- Preference fontsize: large font size -->
-        <item>چوڭ</item>
-    </string-array>
-    
-    <string-array name="preference_orientation_entries">
-    	<!-- Preference orientation: default -->
-        <item>كۆڭۈلدىكى</item>
-    	<!-- Preference orientation: landscape -->
-    	<item>توغرا يۆنىلىش</item>
-    	<!-- Preference orientation: portrait -->
-        <item>بوي يۆنىلىش</item>
-    </string-array>
-    
-    <string-array name="preference_capitalization_entries">
-    	<!-- Preference capitalization: No capitalization -->
-        <item>يوق</item>
-    	<!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-        <item>ھەر بىر جۈملە</item>
-    	<!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-        <item>ھەر بىر سۆز</item>
-    </string-array>
+  <!-- ***************************
+       Applicatio-specific strings
+       *************************** -->
+  <!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
+  <string name="app_name">OI سېتىۋېلىش تىزىمى</string>
 
-	<!-- ***************************
-	     OI Notepad
-	     *************************** -->
-	<!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
-	<string name="notepad_not_available">تۈر ئىزاھاتىنى تەھرىرلەشكە OI خاتىرە دەپتەر زۆرۈر.</string>
-	<!-- Name of application "OI Notepad". Translations should be consistent. -->
-	<string name="notepad">OI خاتىرە دەپتەر</string>
+  <string name="new_item">يېڭى تۈر</string>
+  <string name="new_list">يېڭى تىزىم</string>
+  <string name="send">تىزىم يوللا</string>
+  <string name="mark_all_items">ھەممە تۈرگە بەلگە سال</string>
+  <string name="unmark_all_items">Unmark all items</string>
+  <string name="empty_list_not_sent">تىزىم بوش يوللىمىدى.</string>
+  <string name="email_not_available">يوللاشقا ئىشلىتىدىغان قوللىنىشچان پىروگرامما يوق.</string>
+  <string name="my_shopping_list">سېتىۋېلىش تىزىمىم</string>
+  <string name="new_list_hint">مەسىلەن، لازىمەتلىك تىزىمى، ئائىلە تىزىمى</string>
+  <string name="clean_up_list">تىزىمنى تازىلا</string>
+  <string name="delete_list">تىزىمنى ئۆچۈر</string>
+  <string name="ask_new_list">يېڭى سېتىۋېلىش تىزىمىغا ئات كىرگۈزۈڭ</string>
+  <string name="ask_rename_list">سېتىۋېلىش تىزىمىنىڭ ئاتىنى ئۆزگەرت</string>
+  <string name="ask_edit_item">تۈر كىرگۈزۈڭ</string>
+  <string name="ask_new_store">يېڭى دۇكان ئاتىنى كىرگۈزۈڭ</string>
+  <string name="please_enter_name">بىر ئات كىرگۈزۈڭ</string>
+  <string name="no_items_marked">ھېچقانداق تۈرگە سىزىۋېتىش بەلگىسى سېلىنمىدى.</string>
+  <string name="confirm_delete_list">راستلا بۇ سېتىۋېلىش تىزىمىنى ئۆچۈرەمسىز؟</string>
+  <string name="no_shopping_provider">سېتىۋېلىش تىزىمىنى زىيارەت قىلىۋاتقاندا خاتالىق كۆرۈلدى.</string>
+  <string name="pick_item">بىر تۈر تاللاڭ</string>
+  <string name="pick_list">بىر تىزىم تاللاڭ</string>
+  <string name="theme">ئۆرنەك</string>
+  <string name="theme_settings">ئۆرنەك تەڭشىكى</string>
+  <string name="rename_list">تىزىم ئاتىنى ئۆزگەرت</string>
+  <string name="menu_mark_item">تۈرگە بەلگە سال</string>
+  <string name="menu_edit_item">تۈر كىرگۈزۈڭ</string>
+  <string name="menu_auto_add">ئۆزلۈكىدىن قوش</string>
+  <string name="menu_item_stores">دۇكانلار…</string>
+  <string name="menu_rename_store">دۇكان ئاتىنى ئۆزگەرت</string>
+  <string name="menu_delete_store">دۇكان ئۆچۈر</string>
+  <string name="confirm_delete_store">بۇ دۇكاننى راستلا ئۆچۈرەمسىز؟</string>
+  <string name="no_items_available">ئىشلىتىلىشچان تۈر يوق</string>
+  <string name="no_stores_available">بۇ تىزىمدا دۇكان يوق</string>
+  <string name="no_tags_available">بۇ تىزىمنىڭ بەلگىسى يوق</string>
 
-	<!-- ***************************
-	     Automation
-	     *************************** -->
-	<!-- Label above spinner for all actions (automation tasks) that can be performed. -->
-	<string name="label_select_action">مەشغۇلات تاللاڭ:</string>
-	
-	<!-- Label above button that opens a list of all shopping lists to choose from. -->
-	<string name="label_select_list">تىزىم تاللاڭ:</string>
-	
-	<!-- Arrays -->
-	
-    <string-array name="automation_actions">
-    	<!-- Automation action to clean up a list. -->
-    	<item>تىزىمنى تازىلا</item>
-    </string-array>
-      
-	<string name="widget_prev_page">ئالدىنقى بەت</string>
-	<string name="widget_next_page">كېيىنكى بەت</string>
-	<string name="widget_choose_a_list">بىر تىزىم تاللاڭ</string>
-	<string name="widget_no_items">%d بەتتە تۈر يوق</string>
+  <!-- Remove item from this list, but keep it internally, so that the user
+       can choose it later for inclusion again. Information like
+       tags or price will be kept. -->
+  <string name="menu_remove_item">تۈرنى تىزىمدىن چىقىرىۋەت</string>
+
+  <!-- Delete this item completely. If the user wants to add it again, they
+       have to enter all the information again. -->
+  <string name="menu_delete_item">تۈرنى مەڭگۈلۈك ئۆچۈر</string>
+  <string name="menu_move_item">تۈرنى باشقا تىزىمغا يۆتكە</string>
+  <string name="menu_copy_item">تۈر كۆچۈر</string>
+
+  <!-- Button label to add an item to the list. -->
+  <string name="add">قوش</string>
+
+  <string name="menu_pick_items">تۈرلەرنى تاللاڭ</string>
+  <string name="menu_start_shopping">تاۋارلار</string>
+
+  <!-- Title supplement. \'%s\' is the name of the current list. -->
+  <string name="pick_items_title">%s - تاللانغان تۈرلەر</string>
+
+  <!-- Title supplement. \'%s\' is the name of the current list. -->
+  <string name="shopping_title">%s - تاۋارلار</string>
+
+  <!-- Title supplement. \'%s\' is the name of the current item. -->
+  <string name="item_stores_title">%s - دۇكانلار</string>
+  <string name="item_stores_activity_label">دۇكان تۈرلىرىنى تەھرىر</string>
+
+  <string name="tags">خەتكۈشلەر</string>
+  <string name="price">باھاسى</string>
+  <string name="item">تۈر</string>
+  <string name="quantity">سانى</string>
+  <string name="priority">ئالدىنلىق</string>
+  <string name="has_note">ئىزاھاتى بار</string>
+  <string name="units">بىرلىكى</string>
+  <string name="note">ئىزاھات</string>
+  <string name="stores">دۇكانلار</string>
+  <string name="list">تىزىم</string>
+
+  <string name="otherqty">باشقا سانى…</string>
+  <string name="otherpri">باشقا ئالدىنلىقى…</string>
+  <string name="unfiltered">(سۈزۈلمىگەن)</string>
+
+  <!-- Total sum of all prices. \'%s\' is the sum -->
+  <string name="total">جەمئى: %s</string>
+
+  <!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+  <string name="total_checked">تەكشۈرۈلگەن: %s</string>
+  <string name="priority1_total">ئالدىنلىق 1: %s</string>
+  <string name="priority2_total">ئالدىنلىق 1-2: %s</string>
+  <string name="priority3_total">ئالدىنلىق 1-3: %s</string>
+  <string name="priority4_total">ئالدىنلىق 1-4: %s</string>
+
+  <string name="delete_item_confirm">بۇ تۈرنى مەڭگۈلۈككە ئۆچۈرەمسىز؟</string>
+  <string name="delete">ئۆچۈر</string>
+
+  <!-- Added to an item to indicate it was bought. -->
+  <string name="suffix_checked">…جەزملە</string>
+  <string name="empty" />
+
+  <!-- The shortcut is created on the home screen. -->
+  <string name="pick_list_for_shortcut">قىسقا يولنىڭ تاللاش تىزىمى</string>
+
+  <!-- Shown if external application wants to insert new items. -->
+  <string name="pick_list_to_insert_items">قىستۇرىدىغان تۈرلەرنىڭ تاللاش تىزىمى</string>
+
+  <!-- Theme related -->
+  <!-- Title for selecting a theme -->
+  <string name="theme_pick">بىر ئۆرنەك تاللاڭ</string>
+  <string name="theme_description">بۇ تىزىمنىڭ ئۆرنىكىنى تاللاڭ</string>
+  <string name="theme_default">كۆڭۈلدىكى</string>
+  <string name="theme_classic">كلاسسىك</string>
+  <string name="theme_bugdroid">Android</string>
+  <string name="theme_classic_export">كىلاسسىك (OI سېتىۋېلىش تىزىمىدىن)</string>
+  <string name="theme_bugdroid_export">Android (OI سېتىۋېلىش تىزىمىدىن)</string>
+
+  <!--     Dialog box    -->
+  <!-- Button label "OK" -->
+  <string name="ok">جەزملە</string>
+  <!-- Button label "Cancel" -->
+  <string name="cancel">ۋاز كەچ</string>
+  <string name="use_theme_for_all_lists">بۇ ئۆرنەكنى ھەممە تىزىمغا ئىشلەت</string>
+  <string name="get_more_themes">تېخىمۇ كۆپ ئۆرنەككە ئېرىش</string>
+
+  <!-- preferences -->
+  <string name="preferences">تەڭشەكلەر</string>
+
+  <string name="preference_application">پىروگرامما تەڭشىكى</string>
+
+  <string name="preference_unchecked_on_top">ئەڭ ئۈستىدىكى تاللانمىغان</string>
+  <string name="preference_unchecked_on_top_summary">تاللانمىغان تۈرلەرنى ھەمىشە ئالدىدا كۆرسەت</string>
+  <string name="preference_fontsize">خەت چوڭلۇقى</string>
+  <string name="preference_fontsize_summary">خەت چوڭلۇقىنى ئۆزگەرت</string>
+  <string name="preference_fontsize_dialog_title">خەت چوڭلۇقىنى تاللاڭ</string>
+  <string name="preference_orientation">يۆنىلىش</string>
+  <string name="preference_orientation_summary">يۆنىلىش ئۆزگەرت</string>
+  <string name="preference_orientation_dialog_title">يۆنىلىش تاللاڭ.</string>
+  <string name="preference_sortorder_title">تەرتىپلەش تەرتىپى</string>
+  <string name="preference_sortorder_summary">تىزىم تۈرلىرىنىڭ تەرتىپلەپ تەرتىپىنى ئۆزگەرتىدۇ</string>
+  <string name="preference_sortorder_for_pick_title">تەرتىپلەش تەرتىپى - تۈر تاللاڭ</string>
+  <string name="preference_sortorder_for_pick_summary">تۈر تاللاش ھالىتىدىكى تۈر تىزىمىنىڭ تەرتىپلەش تەرتىپىنى ئۆزگەرتىدۇ.</string>
+  <string name="preference_sortorder_dialog_title">تەرتىپلەش تەرتىپىنى تاللاڭ</string>
+  <string name="preference_sortorder_for_pick_dialog_title">تۈر تاللاش ھالىتىنىڭ تەرتىپلەش تەرتىپىنى تاللاڭ</string>
+  <string name="preference_sortorder_for_shopping_lists">تەرتىپلەش تەرتىپى - مال تىزىمى</string>
+  <string name="preference_sortorder_for_slists_summary">مال تىزىمى ۋە تەرتىپلەش تەرتىپىنى ئۆزگەرتىدۇ.</string>
+  <string name="preference_sortorder_for_slists_dialog_title">مال تىزىمىنىڭ تەرتىپلەش تەرتىپىنى تاللاڭ</string>
+  <string name="preference_loadlastused_title">ئاخىرقى قېتىم ئىشلەتكەننى يۈكلە</string>
+  <string name="preference_loadlastused_summary">ھەمىشە ئاخىرقى قېتىم كۆرسەتكەن تىزىمنى باشلا</string>
+  <string name="preference_capitalization_title">چوڭ كىچىك يېزىلىش</string>
+  <string name="preference_capitalization_summary">كىرگۈزگەندە ھەرپنى ئۆزلۈكىدىن چوڭ يېزىلىشقا ئۆزگەرتىدۇ</string>
+  <string name="preference_capitalization_dialog_title">چوڭ يېزىلىش تاللاڭ</string>
+  <string name="preference_hidechecked_title">تاللانغان تۈرلەرنى يوشۇر</string>
+  <string name="preference_hidechecked_summary">تاللانغان تۈرلەرنى تېزلىكتە يوشۇرىدۇ.</string>
+  <string name="preference_fastscroll_title">تېز دومىلىتىش</string>
+  <string name="preference_fastscroll_summary">تۈر سانى 35 ياكى ئۇنىڭدىن ئېشىپ كەتكەندە سۈرگۈچنى كۆرسىتىدۇ.</string>
+  <string name="preference_showprice_title">باھانى كۆرسەت</string>
+  <string name="preference_showprice_summary">قوشۇمچە ئىستون سۈپىتىدە تىزىمدا كۆرسىتىدۇ.</string>
+  <string name="preference_perstoreprice">ھەر بىر دۇكاننىڭ باھاسى</string>
+  <string name="preference_perstoreprice_title">ھەر بىر دۇكاننىڭ باھاسىنى ئىزلا</string>
+  <string name="preference_perstoreprice_summary">ھەر بىر تۈرنىڭ ھەر بىر دۇكاندىكى باھاسىنى ئىزلاشنى داۋاملاشتۇرىدۇ.</string>
+  <string name="preference_screenlock_title">ئېكران قۇلۇپنى چەكلە</string>
+  <string name="preference_screenlock_summary">تەكشۈرۈلۈۋاتقاندا ئېكران قۇلۇپلاشنىڭ ئالدىنى ئالىدۇ.</string>
+  <string name="preference_usefilters_title">سۈزگۈچلەر</string>
+  <string name="preference_usefilters_summary">تىزىملارنى بەلگە ياكى دۇكانلار بويىچە سۈزگىلى بولىدۇ.</string>
+  <string name="preference_complete_by_list_title">Limit item name completion</string>
+  <string name="preference_complete_by_list_on_summary">Show item name completion options only from current list.</string>
+  <string name="preference_complete_by_list_off_summary">Show item name completion options from any list.</string>
+  <string name="preference_reset_quantity">سانىنى ئەسلىگە قايتۇر</string>
+  <string name="preference_reset_quantity_summary">تۈرلەرنى قايتا قوشقاندا سانىنى ئەسلىگە قايتۇرىدۇ.</string>
+  <string name="preference_add_for_barcode">تاياقچە كود تاراغۇچ</string>
+  <string name="preference_add_for_barcode_summary">قوش توپچىسى ئۇزۇن بېسىلسا تاياقچە كود OI قىستۇرمىسىنى قوزغىتىدۇ (ئورنىتىلغان بولسا)</string>
+  <string name="preference_showtags_title">بەلگىنى كۆرسەت</string>
+  <string name="preference_showtags_summary">قوشۇمچە ئىستون سۈپىتىدە تىزىمدا كۆرسىتىدۇ.</string>
+  <string name="preference_showquantity_title">سانىنى كۆرسەت</string>
+  <string name="preference_showquantity_summary">قوشۇمچە ئىستون سۈپىتىدە تىزىمدا كۆرسىتىدۇ.</string>
+  <string name="preference_showpriority_title">ئالدىنلىقنى كۆرسەت</string>
+  <string name="preference_showpriority_summary">قوشۇمچە ئىستون سۈپىتىدە تىزىمدا كۆرسىتىدۇ.</string>
+  <string name="preference_showunits_title">بىرلىكىنى كۆرسەت</string>
+  <string name="preference_showunits_summary">قوشۇمچە ئىستون سۈپىتىدە تىزىمدا كۆرسىتىدۇ.</string>
+  <string name="preference_prio_subtotal">ئالدىنلىق بويىچە كىچىك جەمئى</string>
+  <string name="preference_prioritytotal_title">ئالدىنلىق بويىچە كىچىك جەمئى</string>
+  <string name="preference_prioritytotal_summary">ئالدىنلىق بويىچە كىچىك جەمئى يوق.</string>
+  <string name="preference_prioritytotal_dialog_title">ئالدىنلىق بويىچە كىچىك جەمئى</string>
+  <string name="preference_priosubtotalchecked_title">تاللانغان تۈرلەرنى ئۆز ئىچىگە ئالىدۇ</string>
+  <string name="preference_priosubtotalchecked_on_summary">تاللانغان تۈرلەرنى ئۆز ئىچىگە ئالغان ئالدىنلىق بويىچە كىچىك جەمئى</string>
+  <string name="preference_priosubtotalchecked_off_summary">تاللانغان تۈرلەرنى ئۆز ئىچىگە ئالمىغان ئالدىنلىق بويىچە كىچىك جەمئى</string>
+  <string name="preference_pickitemsinlist_title">تۈرلەرنى تىزىمدىن بىۋاستە تاللاڭ</string>
+  <string name="preference_pickitemsinlist_on_summary">ئاساسىي تىزىمنى تەھرىر ھالىتىگە ئالماشتۇرۇپ نۆۋەتتىكى تۈرلەرنى قايتا قوشىدۇ</string>
+  <string name="preference_pickitemsinlist_off_summary">مەخسۇس سۆزلەشكۈدىن بىرنى ئىشلىتىپ تۈرلەرنى تىزىمغا قوشىدۇ</string>
+  <string name="preference_samesortforpick_title">ھەمىشە ئوخشاش تەرتىپلەش تەرتىپى</string>
+  <string name="preference_samesortforpick_on_summary">سېتىۋېلىش ھالىتىگە ئوخشاش تۈرلەر تۈر تاللاش ھالىتىدە تەرتىپلەندى.</string>
+  <string name="preference_samesortforpick_off_summary">تۈر تاللاش ھالىتىنىڭ تەرتىپلەش تەرتىپىنى ئايرىم تاللاشقا بولىدۇ.</string>
+
+  <!-- Preference title: Shake the phone to clean up the list. -->
+  <string name="preference_shake_title">تازىلىغاندا تىترەت</string>
+
+  <!-- Preference summary: Shake the phone to clean up the list. -->
+  <string name="preference_shake_summary">تىزىمنى تازىلىغاندا تېلېفوننى تىترەت.</string>
+
+  <string name="preference_advanced">ئالىي تەڭشەك</string>
+  <string name="preference_advanced_summary">باشقا تەڭشەكلەر.</string>
+
+  <!-- Preference category: General settings -->
+  <string name="preference_general">ئادەتتىكى</string>
+  <string name="preference_pickitems">تۈرلەرنى تاللاڭ</string>
+
+  <string name="preference_appearance">قىياپەت</string>
+
+  <string name="preference_addons">قىستۇرمىلار</string>
+  <string name="preference_get_addons">يېڭى قىستۇرمىغا ئېرىش</string>
+  <string name="preference_get_addons_summary">توردىن كېڭەيتىلمە ۋە ئۆرنەك ئىزدەيدۇ.</string>
+  <string name="preference_get_market_addons">بازاردىن قىستۇرمىغا ئېرىش</string>
+  <string name="preference_get_developer_addons">OpenIntents دىن قىستۇرمىغا ئېرىش</string>
+  <string name="preference_extensions">كېڭەيتىلمە</string>
+  <string name="preference_themes">ئۇسلۇبلار</string>
+  <string name="preference_market_extensions_summary">كېڭەيتىلمىلەرنى ئاندىرويىد بازاردىن ئىزدەيدۇ.</string>
+  <string name="preference_market_themes_summary">ئاندرويىد بازاردىن ئۆرنەك ئىزدەيدۇ.</string>
+  <string name="preference_developer_extensions_summary">كېڭەيتىلمىلەرگە OpenIntents باش بەتتىن ئېرىشىدۇ.</string>
+  <string name="preference_developer_themes_summary">OpenIntents تورتۇرادىن ئۆرنەككە ئېرىشىدۇ.</string>
+  <string name="preference_quickedit">تېز تەھرىرلەش ھالىتى</string>
+  <string name="preference_quickedit_on_summary">ئادەتتىكى قىممەتبەۇ بىر تىزىملىكنىڭ چېكىش ئالدىنلىقى ياكى مىقدار قىممىتى.</string>
+  <string name="preference_quickedit_off_summary">سەزگۈچ ئالدىنلىقى ياكى سانلىق قىممەتنى تۈر تەھرىرلەش سۆزلەشكۈدە توپلايدۇ.</string>
+  <string name="preference_reset_all_settings">ھەممە تەڭشەكلەرنى ئەسلىگە قايتۇر</string>
+  <string name="preference_reset_all_settings_alert">ھەممە تەڭشەكلەرنى راستىنلا ئەسلىگە قايتۇرامسىز؟ بۇ مەشغۇلاتنى كەينىگە ياندۇرغىلى بولمايدۇ.</string>
+  <string name="preference_reset_all_settings_done">ھەممە تەڭشەكلەر ئەسلىگە قايتۇرۇلىدۇ</string>
+
+  <!-- ***************************
+       Permissions
+       *************************** -->
+
+  <!-- OI Shopping list -->
+  <!-- Permission to read shopping lists -->
+  <string name="oi_shopping_permission_read">سېتىۋېلىش تىزىمىنى ئوقۇ</string>
+  <string name="oi_shopping_permission_read_descr">پىروگراممىنىڭ سېتىۋېلىش تىزىمىنى ئوقۇشىغا يول قويىدۇ. دىققەت شىفىرلانغان ئىزاھات شىفىرلانغان پىچىمدا تەمىنلىنىدۇ.</string>
+  <!-- Permission to write to shopping lists -->
+  <string name="oi_shopping_permission_write">سېتىۋېلىش تىزىمىغا ياز</string>
+  <string name="oi_shopping_permission_write_descr">پىروگراممىنىڭ يېڭى تىزىم ۋە تۈر قۇرۇشى ياكى مەۋجۇت ئىزاھاتنى ئۆزگەرتىشىگە يول قويىدۇ.</string>
+
+
+  <!-- ***************************
+       Preferences
+       *************************** -->
+
+  <string-array name="preference_sortorder_entries">
+    <!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+    <item>تاللانمىغىنى ئالدىدا، ئېلىپبە تەرتىپىدە</item>
+    <!-- Preference sort order: Sort by item name -->
+    <item>ئېلىپبە تەرتىپى</item>
+    <!-- Preference sort order: Newest item first -->
+    <item>يېڭىسى ئالدىدا</item>
+    <!-- Preference sort order: Oldest item first -->
+    <item>كونىسى ئالدىدا</item>
+    <!-- Preference sort order: Sort alphabetically by tags -->
+    <item>بەلگە ئېلىپبە تەرتىپىدە</item>
+    <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
+    <item>ئالدىنلىق، بەلگە ئېلىپبە تەرتىپىدە</item>
+    <!-- Preference sort order: Sort by price, the most expensive first -->
+    <item>ئەڭ قىممەتلىرى ئالدىدا</item>
+    <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+    <item>تاللانمىغىنى ئالدىدا، بەلگە ئېلىپبە تەرتىپىدە</item>
+    <!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+    <item>تاللانمىغىنى ئالدىدا، ئالدىنلىق، ئېلىپبە تەرتىپىدە</item>
+    <!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
+    <item>تاللانمىغىنى ئالدىدا، ئالدىنلىق، بەلگە ئېلىپبە تەرتىپىدە</item>
+  </string-array>
+
+  <string-array name="preference_sortorder_slists">
+    <!-- Preference sort order: Sort by list name in ascending order -->
+    <item>ئېلىپبەلىك ئۆسكۈچى تەرتىپ</item>
+    <!-- Preference sort order: Sort by list name in descending order -->
+    <item>ئېلىپبەلىك كېمەيگۈچى تەرتىپ</item>
+    <!-- Preference sort order: Newest list first -->
+    <item>يېڭىسى ئالدىدا</item>
+    <!-- Preference sort order: Oldest list first -->
+    <item>كونىسى ئالدىدا</item>
+  </string-array>
+
+  <string-array name="preference_prioritytotal_entries">
+    <item>كۆرسىتىلمىگەن</item>
+    <item>ئالدىنلىق 1</item>
+    <item>ئالدىنلىق 1-2</item>
+    <item>ئالدىنلىق 1-2</item>
+    <item>ئالدىنلىق 1-4</item>
+  </string-array>
+
+  <string-array name="preference_fontsize_entries">
+    <!-- Preference fontsize: tiny font size -->
+    <item>كىچىكرەك</item>
+    <!-- Preference fontsize: small font size -->
+    <item>كىچىك</item>
+    <!-- Preference fontsize: default font size -->
+    <item>كۆڭۈلدىكى</item>
+    <!-- Preference fontsize: large font size -->
+    <item>چوڭ</item>
+  </string-array>
+
+  <string-array name="preference_orientation_entries">
+    <!-- Preference orientation: default -->
+    <item>كۆڭۈلدىكى</item>
+    <!-- Preference orientation: landscape -->
+    <item>توغرا يۆنىلىش</item>
+    <!-- Preference orientation: portrait -->
+    <item>بوي يۆنىلىش</item>
+  </string-array>
+
+  <string-array name="preference_capitalization_entries">
+    <!-- Preference capitalization: No capitalization -->
+    <item>يوق</item>
+    <!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+    <item>ھەر بىر جۈملە</item>
+    <!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+    <item>ھەر بىر سۆز</item>
+  </string-array>
+
+  <!-- ***************************
+       OI Notepad
+       *************************** -->
+  <!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+  <string name="notepad_not_available">تۈر ئىزاھاتىنى تەھرىرلەشكە OI خاتىرە دەپتەر زۆرۈر.</string>
+  <!-- Name of application "OI Notepad". Translations should be consistent. -->
+  <string name="notepad">OI خاتىرە دەپتەر</string>
+
+  <!-- ***************************
+       Automation
+       *************************** -->
+  <!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+  <string name="label_select_action">مەشغۇلات تاللاڭ:</string>
+
+  <!-- Label above button that opens a list of all shopping lists to choose from. -->
+  <string name="label_select_list">تىزىم تاللاڭ:</string>
+
+  <!-- Arrays -->
+
+  <string-array name="automation_actions">
+    <!-- Automation action to clean up a list. -->
+    <item>تىزىمنى تازىلا</item>
+  </string-array>
+
+  <string name="widget_prev_page">ئالدىنقى بەت</string>
+  <string name="widget_next_page">كېيىنكى بەت</string>
+  <string name="widget_choose_a_list">بىر تىزىم تاللاڭ</string>
+  <string name="widget_no_items">%d بەتتە تۈر يوق</string>
 </resources>

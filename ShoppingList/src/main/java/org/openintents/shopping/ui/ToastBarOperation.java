@@ -19,11 +19,8 @@
 package org.openintents.shopping.ui;
 
 import android.content.Context;
-import android.os.Parcel;
-import android.os.Parcelable;
-import org.openintents.shopping.ui.widget.ActionableToastBar;
 
-import org.openintents.shopping.R;
+import org.openintents.shopping.ui.widget.ActionableToastBar;
 
 /**
  * A simple holder class that stores the information to undo the application of a folder.
@@ -38,9 +35,9 @@ public class ToastBarOperation implements ActionableToastBar.ActionClickedListen
     /**
      * Create a ToastBarOperation
      *
-     * @param count Number of conversations this action would be applied to.
+     * @param count  Number of conversations this action would be applied to.
      * @param menuId res id identifying the menu item tapped; used to determine what action was
-     *        performed
+     *               performed
      */
     public ToastBarOperation(int count, int type, boolean batch) {
         mCount = count;
@@ -62,14 +59,14 @@ public class ToastBarOperation implements ActionableToastBar.ActionClickedListen
      */
     public String getDescription(Context context) {
         final int resId = -1;
-        
+
         final String desc = (resId == -1) ? "" :
                 String.format(context.getResources().getQuantityString(resId, mCount), mCount);
         return desc;
     }
 
     public String getSingularDescription(Context context) {
-    	final int resId = -1;
+        final int resId = -1;
         return (resId == -1) ? "" : context.getString(resId);
     }
 

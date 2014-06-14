@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2013 Google Inc. All Rights Reserved. -->
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright 2013 Google Inc. All Rights Reserved. -->
 <resources>
   <declare-styleable name="AdsAttrs">
     <!--
@@ -7,9 +6,9 @@
     MEDIUM_RECTANGLE, SMART_BANNER, WIDE_SKYSCRAPER, or
     &lt;width&gt;x&lt;height&gt;.
     -->
-    <attr name="adSize" format="string"/>
+    <attr name="adSize" format="string" />
 
     <!-- The ad unit ID. -->
-    <attr name="adUnitId" format="string"/>
+    <attr name="adUnitId" format="string" />
   </declare-styleable>
 </resources>

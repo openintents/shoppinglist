@@ -12,22 +12,13 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.*;
 
 import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.auth.UserRecoverableAuthException;
 import com.google.android.gms.common.AccountPicker;
 import com.google.api.client.util.IOUtils;
-
-import org.apache.http.HttpResponse;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -36,6 +27,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import org.apache.http.HttpResponse;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends Activity {
     private static final String TAG = "MainActivity";
@@ -82,8 +77,9 @@ public class MainActivity extends Activity {
         } catch (PackageManager.NameNotFoundException e) {
             mInvalideShoppingVersion = true;
         }
-        if (debug) { Log.d(TAG, "mInvalideShoppingVersion="+mInvalideShoppingVersion); }
-
+        if (debug) {
+            Log.d(TAG, "mInvalideShoppingVersion=" + mInvalideShoppingVersion);
+        }
 
         // Define our layout
         setContentView(R.layout.activity_main);
@@ -103,23 +99,27 @@ public class MainActivity extends Activity {
 
         SharedPreferences prefs = getPreferences(MODE_PRIVATE);
         String oauthToken = prefs.getString(PREF_OAUTH_TOKEN, null);
-        if (oauthToken != null)
-        {
-            if (debug) Log.d(TAG, "got OAUTH_TOKEN="+oauthToken);
+        if (oauthToken != null) {
+            if (debug) {
+                Log.d(TAG, "got OAUTH_TOKEN=" + oauthToken);
+            }
             mAuthToken = oauthToken;
             mExpireTokenButton.setEnabled(true);
             mStartAuthButton.setEnabled(false);
         } else {
-            if (debug) Log.d(TAG, "no save OAUTH_TOKEN");
+            if (debug) {
+                Log.d(TAG, "no save OAUTH_TOKEN");
+            }
         }
 
         String lastMirrorId = prefs.getString(PREF_LAST_MIRROR_ID, null);
-        if (lastMirrorId != null)
-        {
-            if (debug) Log.d(TAG, "got LAST_MIRROR_ID="+lastMirrorId);
-            mLastMirrorId=lastMirrorId;
+        if (lastMirrorId != null) {
+            if (debug) {
+                Log.d(TAG, "got LAST_MIRROR_ID=" + lastMirrorId);
+            }
+            mLastMirrorId = lastMirrorId;
         } else {
-            mLastMirrorId=null;
+            mLastMirrorId = null;
         }
 
         mStartAuthButton.setOnClickListener(new View.OnClickListener() {
@@ -148,17 +148,21 @@ public class MainActivity extends Activity {
         mNewCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (debug) { Log.d(TAG, "mInvalideShoppingVersion="+mInvalideShoppingVersion); }
+                if (debug) {
+                    Log.d(TAG, "mInvalideShoppingVersion=" + mInvalideShoppingVersion);
+                }
                 createNewTimelineItem();
             }
         });
-        sender=new OIShoppingListSender();
+        sender = new OIShoppingListSender();
         sender.initSender(getApplicationContext());
         OIShoppingListSender.ContentCallback callback;
         callback = new OIShoppingListSender.ContentCallback() {
             @Override
             public void onChange() {
-                if (debug) Log.d(TAG, "onChange()");
+                if (debug) {
+                    Log.d(TAG, "onChange()");
+                }
                 createNewTimelineItem();
             }
         };
@@ -171,7 +175,7 @@ public class MainActivity extends Activity {
 
         prefs = getPreferences(MODE_PRIVATE);
         String account = prefs.getString(PREF_OAUTH_ACCOUNT, null);
-        if (account!=null) {
+        if (account != null) {
             fetchTokenForAccount(account);
         }
 
@@ -191,12 +195,14 @@ public class MainActivity extends Activity {
 
     protected void onDestroy() {
         super.onDestroy();
-        if (sender!=null) sender.unregisterObserver();
+        if (sender != null) {
+            sender.unregisterObserver();
+        }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
-            Intent data) {
+                                    Intent data) {
         switch (requestCode) {
             case REQUEST_ACCOUNT_PICKER:
                 if (RESULT_OK == resultCode) {
@@ -208,7 +214,9 @@ public class MainActivity extends Activity {
                     SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
                     editor.putString(PREF_OAUTH_ACCOUNT, account);
                     editor.commit();
-                    if (debug) Log.d(TAG, "saved OAUTH_ACCOUNT="+account);
+                    if (debug) {
+                        Log.d(TAG, "saved OAUTH_ACCOUNT=" + account);
+                    }
 
                     Log.i(TAG, String.format("User selected account %s of type %s",
                             account, type));
@@ -230,11 +238,11 @@ public class MainActivity extends Activity {
 
     public void updateListsSpinner() {
 
-        String[] lists=sender.getLists();
+        String[] lists = sender.getLists();
 
         List<String> list = new ArrayList<String>();
-        if (lists.length>0) {
-            for(int i=0; i<lists.length; i++) {
+        if (lists.length > 0) {
+            for (int i = 0; i < lists.length; i++) {
                 list.add(lists[i]);
             }
         } else {
@@ -242,16 +250,18 @@ public class MainActivity extends Activity {
             listsSpinner.setEnabled(false);
         }
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-            android.R.layout.simple_spinner_item, list);
+                android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         listsSpinner.setAdapter(dataAdapter);
     }
 
     public class CustomOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
 
-        public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
-            if (debug) Log.d(TAG, "OnItemSelectedListener : " +
-                    parent.getItemAtPosition(pos).toString() + " " + pos);
+        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+            if (debug) {
+                Log.d(TAG, "OnItemSelectedListener : " +
+                        parent.getItemAtPosition(pos).toString() + " " + pos);
+            }
             selectedListId = pos;
             sender.setActiveListId(selectedListId);
         }
@@ -265,31 +275,35 @@ public class MainActivity extends Activity {
 
     private JSONObject buildShoppingCard() throws JSONException {
 
-        JSONObject card=new JSONObject();
-        String html="<article><section>";
-        html+="<table class=\"text-auto-size\">";
-        String text="";
+        JSONObject card = new JSONObject();
+        String html = "<article><section>";
+        html += "<table class=\"text-auto-size\">";
+        String text = "";
         sender.refreshCursor();
-        String[] items=sender.getItems();
-        int count=items.length;
-        int rightSideStart=count/2;
-        if ( count>0 && (count % 2 == 1)) {
+        String[] items = sender.getItems();
+        int count = items.length;
+        int rightSideStart = count / 2;
+        if (count > 0 && (count % 2 == 1)) {
             rightSideStart++;
         }
-        if (debug) Log.d(TAG,"rightSideStart="+rightSideStart);
-        for (int i=0; i<rightSideStart; i++) {
-            String item1=items[i];
-            String item2="";
-            int rightSide=i+rightSideStart;
-            text+=item1+" ";
-            if ((count>1) && (rightSide<count)) {
-                item2=items[rightSide];
-                text+=item2+" ";
-            }
-            if (debug) Log.d(TAG, "i="+i+" count="+count+" item1="+item1+" item2="+item2);
-            html+="<tr><td>"+item1+"</td><td>"+item2+"</td></tr>";
+        if (debug) {
+            Log.d(TAG, "rightSideStart=" + rightSideStart);
         }
-        html+="</table></section><footer>\n<p>OI Shopping List</p>\n</footer></article>";
+        for (int i = 0; i < rightSideStart; i++) {
+            String item1 = items[i];
+            String item2 = "";
+            int rightSide = i + rightSideStart;
+            text += item1 + " ";
+            if ((count > 1) && (rightSide < count)) {
+                item2 = items[rightSide];
+                text += item2 + " ";
+            }
+            if (debug) {
+                Log.d(TAG, "i=" + i + " count=" + count + " item1=" + item1 + " item2=" + item2);
+            }
+            html += "<tr><td>" + item1 + "</td><td>" + item2 + "</td></tr>";
+        }
+        html += "</table></section><footer>\n<p>OI Shopping List</p>\n</footer></article>";
         card.put("html", html);
         card.put("text", text);
         return card;
@@ -297,9 +311,11 @@ public class MainActivity extends Activity {
 
     private void checkToken() {
         if (!TextUtils.isEmpty(mAuthToken)) {
-            if (debug) Log.d(TAG, "checking token: "+mAuthToken);
+            if (debug) {
+                Log.d(TAG, "checking token: " + mAuthToken);
+            }
             MirrorApiClient client = MirrorApiClient.getInstance(this);
-            MirrorApiClient.Callback callback=new MirrorApiClient.Callback() {
+            MirrorApiClient.Callback callback = new MirrorApiClient.Callback() {
                 @Override
                 public void onSuccess(HttpResponse response, JSONObject jsonObject) {
                 }
@@ -312,8 +328,10 @@ public class MainActivity extends Activity {
                         IOUtils.copy(inputStream, baos);
                         JSONObject jsonObject = new JSONObject(baos.toString());
                         JSONObject error = jsonObject.getJSONObject("error");
-                        String message=error.getString("message");
-                        if (debug) Log.d(TAG,"jsonObject="+jsonObject);
+                        String message = error.getString("message");
+                        if (debug) {
+                            Log.d(TAG, "jsonObject=" + jsonObject);
+                        }
                     } catch (IOException e1) {
                         // Pass
                     } catch (JSONException e1) {
@@ -328,79 +346,89 @@ public class MainActivity extends Activity {
 
     public void createNewTimelineItem() {
         if (!TextUtils.isEmpty(mAuthToken)) {
-                try {
-                    JSONObject notification = new JSONObject();
-                    notification.put("level", "DEFAULT"); // Play a chime
+            try {
+                JSONObject notification = new JSONObject();
+                notification.put("level", "DEFAULT"); // Play a chime
 
-                    JSONObject json = buildShoppingCard();
-                    json.put("notification", notification);
+                JSONObject json = buildShoppingCard();
+                json.put("notification", notification);
 
-                    MirrorApiClient client = MirrorApiClient.getInstance(this);
-                    MirrorApiClient.Callback callback=new MirrorApiClient.Callback() {
-                        @Override
-                        public void onSuccess(HttpResponse response, JSONObject jsonObject) {
-                            String timelineAction="Updated";
-                            try {
-                                String id=jsonObject.getString("id");
-                                if (debug) Log.d(TAG, "id="+id);
-
-                                if (id!=null && (id.length()>0)) {
-                                    if (!TextUtils.equals(mLastMirrorId,id)) {
-                                        SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
-                                        editor.putString(PREF_LAST_MIRROR_ID, id);
-                                        editor.commit();
-                                        if (debug) Log.d(TAG, "saved LAST_MIRROR_ID="+id);
-                                        mLastMirrorId=id;
-                                        timelineAction="Created new";
-                                    }
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                MirrorApiClient client = MirrorApiClient.getInstance(this);
+                MirrorApiClient.Callback callback = new MirrorApiClient.Callback() {
+                    @Override
+                    public void onSuccess(HttpResponse response, JSONObject jsonObject) {
+                        String timelineAction = "Updated";
+                        try {
+                            String id = jsonObject.getString("id");
+                            if (debug) {
+                                Log.d(TAG, "id=" + id);
                             }
-                            Toast.makeText(MainActivity.this, timelineAction+" timeline item",
-                                    Toast.LENGTH_SHORT).show();
-                        }
 
-                        @Override
-                        public void onFailure(HttpResponse response, Throwable e) {
-                            String message="";
-                            try {
-                                InputStream inputStream = response.getEntity().getContent();
-                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                IOUtils.copy(inputStream, baos);
-                                JSONObject jsonObject = new JSONObject(baos.toString());
-                                JSONObject error = jsonObject.getJSONObject("error");
-                                message=error.getString("message");
-                                if (debug) Log.d(TAG,"jsonObject="+jsonObject);
-//                                if (debug) Log.d(TAG, "onFailure: " + EntityUtils.toString(response.getEntity()));
-                                if (message!=null) {
-                                    if (message.contentEquals("Not Found")) {
-                                        if (debug) Log.d(TAG,"last id was not found");
-                                        mLastMirrorId=null;
-                                    } else if (message.contentEquals("Invalid Credentials")) {
-                                        saveCredentials(null);
+                            if (id != null && (id.length() > 0)) {
+                                if (!TextUtils.equals(mLastMirrorId, id)) {
+                                    SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+                                    editor.putString(PREF_LAST_MIRROR_ID, id);
+                                    editor.commit();
+                                    if (debug) {
+                                        Log.d(TAG, "saved LAST_MIRROR_ID=" + id);
                                     }
+                                    mLastMirrorId = id;
+                                    timelineAction = "Created new";
                                 }
-                            } catch (IOException e1) {
-                                // Pass
-                            } catch (JSONException e1) {
-                                e1.printStackTrace();
                             }
-                            Toast.makeText(MainActivity.this, "Failed to create new timeline item: "+message,
-                                    Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    };
-
-                    if (mLastMirrorId!=null) {
-                        if (debug) Log.d(TAG,"update using "+mLastMirrorId);
-                        client.updateTimelineItem(mAuthToken, json, callback, mLastMirrorId);
-                    } else {
-                        client.createTimelineItem(mAuthToken, json, callback);
+                        Toast.makeText(MainActivity.this, timelineAction + " timeline item",
+                                Toast.LENGTH_SHORT).show();
                     }
-                } catch (JSONException e) {
-                    Toast.makeText(this, "Sorry, can't serialize that to JSON",
-                            Toast.LENGTH_SHORT).show();
+
+                    @Override
+                    public void onFailure(HttpResponse response, Throwable e) {
+                        String message = "";
+                        try {
+                            InputStream inputStream = response.getEntity().getContent();
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            IOUtils.copy(inputStream, baos);
+                            JSONObject jsonObject = new JSONObject(baos.toString());
+                            JSONObject error = jsonObject.getJSONObject("error");
+                            message = error.getString("message");
+                            if (debug) {
+                                Log.d(TAG, "jsonObject=" + jsonObject);
+                            }
+//                                if (debug) Log.d(TAG, "onFailure: " + EntityUtils.toString(response.getEntity()));
+                            if (message != null) {
+                                if (message.contentEquals("Not Found")) {
+                                    if (debug) {
+                                        Log.d(TAG, "last id was not found");
+                                    }
+                                    mLastMirrorId = null;
+                                } else if (message.contentEquals("Invalid Credentials")) {
+                                    saveCredentials(null);
+                                }
+                            }
+                        } catch (IOException e1) {
+                            // Pass
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                        Toast.makeText(MainActivity.this, "Failed to create new timeline item: " + message,
+                                Toast.LENGTH_SHORT).show();
+                    }
+                };
+
+                if (mLastMirrorId != null) {
+                    if (debug) {
+                        Log.d(TAG, "update using " + mLastMirrorId);
+                    }
+                    client.updateTimelineItem(mAuthToken, json, callback, mLastMirrorId);
+                } else {
+                    client.createTimelineItem(mAuthToken, json, callback);
                 }
+            } catch (JSONException e) {
+                Toast.makeText(this, "Sorry, can't serialize that to JSON",
+                        Toast.LENGTH_SHORT).show();
+            }
         } else {
             Toast.makeText(this, "Sorry, can't create a new timeline card without a token",
                     Toast.LENGTH_LONG).show();
@@ -430,7 +458,9 @@ public class MainActivity extends Activity {
         SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
         editor.putString(PREF_OAUTH_TOKEN, token);
         editor.commit();
-        if (debug) Log.d(TAG, "saved OAUTH_TOKEN="+token);
+        if (debug) {
+            Log.d(TAG, "saved OAUTH_TOKEN=" + token);
+        }
     }
 
     private void fetchTokenForAccount(final String account) {

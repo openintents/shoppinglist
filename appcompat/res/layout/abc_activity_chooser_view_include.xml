@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 **
 ** Copyright 2013, The Android Open Source Project
 **
@@ -16,53 +15,26 @@
 ** limitations under the License.
 */
 -->
-<merge
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <FrameLayout
-        android:id="@+id/expand_activities_button"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:focusable="true"
-        android:addStatesFromChildren="true"
-        android:background="?attr/actionBarItemBackground">
+  <FrameLayout android:id="@+id/expand_activities_button" android:layout_width="wrap_content"
+    android:layout_height="match_parent" android:layout_gravity="center" android:focusable="true"
+    android:addStatesFromChildren="true" android:background="?attr/actionBarItemBackground">
 
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="56dip"
-            android:layout_height="36dip"
-            android:layout_gravity="center"
-            android:paddingTop="2dip"
-            android:paddingBottom="2dip"
-            android:paddingLeft="12dip"
-            android:paddingRight="12dip"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true" />
+    <ImageView android:id="@+id/image" android:layout_width="56dip" android:layout_height="36dip"
+      android:layout_gravity="center" android:paddingTop="2dip" android:paddingBottom="2dip" android:paddingLeft="12dip"
+      android:paddingRight="12dip" android:scaleType="fitCenter" android:adjustViewBounds="true" />
 
-    </FrameLayout>
+  </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/default_activity_button"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:focusable="true"
-        android:addStatesFromChildren="true"
-        android:background="?attr/actionBarItemBackground">
+  <FrameLayout android:id="@+id/default_activity_button" android:layout_width="wrap_content"
+    android:layout_height="match_parent" android:layout_gravity="center" android:focusable="true"
+    android:addStatesFromChildren="true" android:background="?attr/actionBarItemBackground">
 
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="56dip"
-            android:layout_height="36dip"
-            android:layout_gravity="center"
-            android:paddingTop="2dip"
-            android:paddingBottom="2dip"
-            android:paddingLeft="12dip"
-            android:paddingRight="12dip"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true" />
+    <ImageView android:id="@+id/image" android:layout_width="56dip" android:layout_height="36dip"
+      android:layout_gravity="center" android:paddingTop="2dip" android:paddingBottom="2dip" android:paddingLeft="12dip"
+      android:paddingRight="12dip" android:scaleType="fitCenter" android:adjustViewBounds="true" />
 
-    </FrameLayout>
+  </FrameLayout>
 
 </merge>

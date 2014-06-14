@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright (C) 2011 Google Inc.
      Licensed to The Android Open Source Project.
 
@@ -16,21 +15,21 @@
      limitations under the License.
 -->
 <resources>
-    <integer name="fadein_cc_bcc_dur">150</integer>
-    <integer name="fade_duration">250</integer>
-    <integer name="dialog_animationDefaultDur">220</integer>
-    <integer name="dialog_animationShortDur">150</integer>
-    <integer name="shrink_animation_duration">200</integer>
-    <integer name="slide_animation_duration">320</integer>
-    <integer name="fade_in_animation_duration">300</integer>
+  <integer name="fadein_cc_bcc_dur">150</integer>
+  <integer name="fade_duration">250</integer>
+  <integer name="dialog_animationDefaultDur">220</integer>
+  <integer name="dialog_animationShortDur">150</integer>
+  <integer name="shrink_animation_duration">200</integer>
+  <integer name="slide_animation_duration">320</integer>
+  <integer name="fade_in_animation_duration">300</integer>
 
-    <!-- Swipe constants -->
-    <integer name="swipe_escape_velocity">100</integer>
-    <integer name="escape_animation_duration">200</integer>
-    <integer name="max_escape_animation_duration">400</integer>
-    <integer name="max_dismiss_velocity">2000</integer>
-    <integer name="snap_animation_duration">350</integer>
-    <dimen name="min_swipe">10dip</dimen>
-    <integer name="dismiss_all_leavebehinds_short_delay">175</integer>
-    <integer name="dismiss_all_leavebehinds_long_delay">350</integer>
+  <!-- Swipe constants -->
+  <integer name="swipe_escape_velocity">100</integer>
+  <integer name="escape_animation_duration">200</integer>
+  <integer name="max_escape_animation_duration">400</integer>
+  <integer name="max_dismiss_velocity">2000</integer>
+  <integer name="snap_animation_duration">350</integer>
+  <dimen name="min_swipe">10dip</dimen>
+  <integer name="dismiss_all_leavebehinds_short_delay">175</integer>
+  <integer name="dismiss_all_leavebehinds_long_delay">350</integer>
 </resources>

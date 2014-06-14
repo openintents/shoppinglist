@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application-description-file version="1" host="https://github.com/openintents/shoppinglist/tree/master/promotion/appdf">
+<application-description-file version="1"
+  host="https://github.com/openintents/shoppinglist/tree/master/promotion/appdf">
   <application package="org.openintents.shopping">
     <categorization>
       <type>application</type>
@@ -11,18 +12,24 @@
         <title>OI Shopping List</title>
         <keywords>Shopping, List, Shopping List, Checklist, OI, OpenIntents, Open Intents</keywords>
         <short-description>OI Shopping List lets you keep track of your shopping items</short-description>
-        <full-description>OI Shopping List is a powerful application which makes it easy to create and manage checklists. OI Shopping List makes it easy to add items to a list, check the item off, and remove it from the list. The application can track separate prices for each store that you use, and features a high level of customization. Font size, sort order, list columns, and list cleanup behavior are all settings controlled by the user. All of these features are brought together in a crisp layout that is customizable through a variety of themes.
+        <full-description>OI Shopping List is a powerful application which makes it easy to create and manage
+          checklists. OI Shopping List makes it easy to add items to a list, check the item off, and remove it from the
+          list. The application can track separate prices for each store that you use, and features a high level of
+          customization. Font size, sort order, list columns, and list cleanup behavior are all settings controlled by
+          the user. All of these features are brought together in a crisp layout that is customizable through a variety
+          of themes.
 
-The source code of this free and open source application is available at: 
-http://code.google.com/p/openintents
+          The source code of this free and open source application is available at:
+          http://code.google.com/p/openintents
 
-This application is ad free and does not require the internet permission.
+          This application is ad free and does not require the internet permission.
 
-For the complete list of changes and a list of frequently asked questions, please visit: 
-http://www.openintents.org
+          For the complete list of changes and a list of frequently asked questions, please visit:
+          http://www.openintents.org
 
-You can help to improve the translation into your language at Launchpad: 
-https://translations.launchpad.net/openintents/trunk</full-description>
+          You can help to improve the translation into your language at Launchpad:
+          https://translations.launchpad.net/openintents/trunk
+        </full-description>
         <features>
           <feature>Add, edit and delete lists</feature>
           <feature>Create, delete, and check items quickly and easily</feature>
@@ -31,30 +38,31 @@ https://translations.launchpad.net/openintents/trunk</full-description>
           <feature>Customizable list columns</feature>
         </features>
         <recent-changes>- Sort list of lists (patch by Stanley F. for Google Summer of Code 2012)
-- Set cursor to end in &quot;rename list&quot; dialog (patch by Alex Yaremenko)
-- Fix list shortcut when filters are active.
-- Fix Stores button in Edit Items dialog (issue 510)
-- Filter and QuickEdit menus make better use of screen space on pre-ICS devices.</recent-changes>
+          - Set cursor to end in &quot;rename list&quot; dialog (patch by Alex Yaremenko)
+          - Fix list shortcut when filters are active.
+          - Fix Stores button in Edit Items dialog (issue 510)
+          - Filter and QuickEdit menus make better use of screen space on pre-ICS devices.
+        </recent-changes>
       </texts>
-	  <videos>
+      <videos>
         <youtube-video>x5vZfaHF_qg</youtube-video>
-		<youtube-video>FXTfUHXJFMY</youtube-video>
+        <youtube-video>FXTfUHXJFMY</youtube-video>
       </videos>
-	  <images>
-	    <app-icon size="512">../icons/ic_launcher_shoppinglist_512.png</app-icon>
-	    <screenshots>
-		  <screenshot>../screenshots/android-4-0/OIShoppingList01.png</screenshot>
-		  <screenshot>../screenshots/android-4-0/OIShoppingList02.png</screenshot>
-		  <screenshot>../screenshots/android-4-0/OIShoppingList03.png</screenshot>
-		  <screenshot>../screenshots/android-4-0/OIShoppingList04.png</screenshot>
-		  <screenshot>../screenshots/android-4-0/OIShoppingList05.png</screenshot>
-		  <screenshot>../screenshots/android-4-0/OIShoppingList06.png</screenshot>
-		  <screenshot>../screenshots/android-4-0/OIShoppingList07.png</screenshot>
-		  <screenshot>../screenshots/android-4-0/OIShoppingList08.png</screenshot>
-  		  <screenshot>../screenshots/android-4-0/OIShoppingList09.png</screenshot>
-		</screenshots>
+      <images>
+      <app-icon size="512">../icons/ic_launcher_shoppinglist_512.png</app-icon>
+      <screenshots>
+        <screenshot>../screenshots/android-4-0/OIShoppingList01.png</screenshot>
+        <screenshot>../screenshots/android-4-0/OIShoppingList02.png</screenshot>
+        <screenshot>../screenshots/android-4-0/OIShoppingList03.png</screenshot>
+        <screenshot>../screenshots/android-4-0/OIShoppingList04.png</screenshot>
+        <screenshot>../screenshots/android-4-0/OIShoppingList05.png</screenshot>
+        <screenshot>../screenshots/android-4-0/OIShoppingList06.png</screenshot>
+        <screenshot>../screenshots/android-4-0/OIShoppingList07.png</screenshot>
+        <screenshot>../screenshots/android-4-0/OIShoppingList08.png</screenshot>
+        <screenshot>../screenshots/android-4-0/OIShoppingList09.png</screenshot>
+      </screenshots>
     </description>
-	<price free="yes"/>
+    <price free="yes" />
     <apk-files>
       <apk-file>http://openintents.googlecode.com/files/ShoppingList-1.7.0.5.apk</apk-file>
     </apk-files>

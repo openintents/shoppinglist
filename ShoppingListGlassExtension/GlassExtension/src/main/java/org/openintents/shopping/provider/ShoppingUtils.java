@@ -1,6 +1,5 @@
 package org.openintents.shopping.provider;
 
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -18,6 +17,7 @@ public class ShoppingUtils {
 
     /**
      * Obtain item id by name.
+     *
      * @param context
      * @param name
      * @return Item ID or -1 if item does not exist.
@@ -39,10 +39,10 @@ public class ShoppingUtils {
     /**
      * Gets or creates a new item and returns its id. If the item exists
      * already, the existing id is returned. Otherwise a new item is created.
+     *
      * @param name    New name of the item.
      * @param price
      * @param barcode
-	 *
      * @return id of the new or existing item.
      */
     public static long updateOrCreateItem(Context context, String name, String tags, String price, String barcode) {
@@ -146,10 +146,11 @@ public class ShoppingUtils {
         long status = Status.WANT_TO_BUY;
         Cursor existingItems = context.getContentResolver()
                 .query(Shopping.Contains.CONTENT_URI, new String[]{
-                        Shopping.Contains._ID, Shopping.Contains.STATUS},
+                                Shopping.Contains._ID, Shopping.Contains.STATUS},
                         "list_id = ? AND item_id = ?",
                         new String[]{String.valueOf(listId),
-                                String.valueOf(itemId)}, null);
+                                String.valueOf(itemId)}, null
+                );
         if (existingItems.getCount() > 0) {
             existingItems.moveToFirst();
             id = existingItems.getLong(0);
@@ -196,21 +197,21 @@ public class ShoppingUtils {
     }
 
     /**
-	 * Returns the id of the default shopping list. Currently this is always 1.
-	 * 
-	 * @return The id of the default shopping list.
-	 */
-	public static long getDefaultList(Context context) {
-		long id = 1;
-		Cursor c = context.getContentResolver().query(org.openintents.shopping.Shopping.ActiveList.CONTENT_URI,
-				org.openintents.shopping.Shopping.ActiveList.PROJECTION, null, null, null);
-		if (c.getCount() > 0) {
-			c.moveToFirst();
-			id = c.getLong(0);
-			c.close();
-		}
-		return id;
-	}	
+     * Returns the id of the default shopping list. Currently this is always 1.
+     *
+     * @return The id of the default shopping list.
+     */
+    public static long getDefaultList(Context context) {
+        long id = 1;
+        Cursor c = context.getContentResolver().query(org.openintents.shopping.Shopping.ActiveList.CONTENT_URI,
+                org.openintents.shopping.Shopping.ActiveList.PROJECTION, null, null, null);
+        if (c.getCount() > 0) {
+            c.moveToFirst();
+            id = c.getLong(0);
+            c.close();
+        }
+        return id;
+    }
 
     public static Uri getListForItem(Context context, String itemId) {
         Cursor cursor = context.getContentResolver().query(Shopping.Contains.CONTENT_URI,
@@ -290,7 +291,7 @@ E/AndroidRuntime( 2469): 	... 10 more
             }
 
         } else {
-        	ids = new long[0];
+            ids = new long[0];
         }
         return existingLists;
     }

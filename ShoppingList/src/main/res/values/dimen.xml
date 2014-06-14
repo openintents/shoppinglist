@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 -->
 <resources>
-    <dimen name="mode_item_left_margin">14dp</dimen>
-    <dimen name="mode_item_right_margin">8dp</dimen>
-    <dimen name="mode_item_minimum_height">48dip</dimen>
-    <dimen name="list_list_item_minimum_height">48dip</dimen>
-    <dimen name="list_list_item_left_offset">9dp</dimen>
-    <dimen name="list_list_item_start_margin">7dp</dimen>
-    <dimen name="list_list_item_end_margin">8dp</dimen>
-    <dimen name="undo_text_padding">16dip</dimen>
+  <dimen name="mode_item_left_margin">14dp</dimen>
+  <dimen name="mode_item_right_margin">8dp</dimen>
+  <dimen name="mode_item_minimum_height">48dip</dimen>
+  <dimen name="list_list_item_minimum_height">48dip</dimen>
+  <dimen name="list_list_item_left_offset">9dp</dimen>
+  <dimen name="list_list_item_start_margin">7dp</dimen>
+  <dimen name="list_list_item_end_margin">8dp</dimen>
+  <dimen name="undo_text_padding">16dip</dimen>
 </resources>

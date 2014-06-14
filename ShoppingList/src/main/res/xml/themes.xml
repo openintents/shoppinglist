@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<?xml version="1.0" encoding="utf-8"?><!--
  * Copyright (C) 2009-2010 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,20 +14,25 @@
  * limitations under the License.
  -->
 
-<themes xmlns:oi="http://schemas.openintents.org/android/themes" >
-	<attributeset oi:name="org.openintents.shoppinglist" >
-		<theme oi:title="@string/theme_default"
-			oi:style="@style/Theme.ShoppingList" />
-		<theme oi:title="@string/theme_classic"
-			oi:style="@style/Theme.ShoppingList.Classic" />
-		<theme oi:title="@string/theme_bugdroid"
-			oi:style="@style/Theme.ShoppingList.Android" />
-	</attributeset>
-	<!-- As an extra, export some themes for OI Notepad. -->
-	<attributeset oi:name="org.openintents.notepad" >
-		<theme oi:title="@string/theme_classic_export"
-			oi:style="@style/Theme.Notepad.Classic" />
-		<theme oi:title="@string/theme_bugdroid_export"
-			oi:style="@style/Theme.Notepad.Android" />
-	</attributeset>
+<themes xmlns:oi="http://schemas.openintents.org/android/themes">
+  <attributeset oi:name="org.openintents.shoppinglist">
+    <theme
+      oi:title="@string/theme_default"
+      oi:style="@style/Theme.ShoppingList" />
+    <theme
+      oi:title="@string/theme_classic"
+      oi:style="@style/Theme.ShoppingList.Classic" />
+    <theme
+      oi:title="@string/theme_bugdroid"
+      oi:style="@style/Theme.ShoppingList.Android" />
+  </attributeset>
+  <!-- As an extra, export some themes for OI Notepad. -->
+  <attributeset oi:name="org.openintents.notepad">
+    <theme
+      oi:title="@string/theme_classic_export"
+      oi:style="@style/Theme.Notepad.Classic" />
+    <theme
+      oi:title="@string/theme_bugdroid_export"
+      oi:style="@style/Theme.Notepad.Android" />
+  </attributeset>
 </themes>

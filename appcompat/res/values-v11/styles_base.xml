@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2012 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -16,29 +15,23 @@
 
 <resources>
 
-    <!-- Like in themes_base.xml, the namespace "*.AppCompat.Base" is used to
-     define base styles for the platform version. The "*.AppCompat"
-     variants are for direct use or use as parent styles by the app. -->
-    <eat-comment/>
+  <!-- Like in themes_base.xml, the namespace "*.AppCompat.Base" is used to
+   define base styles for the platform version. The "*.AppCompat"
+   variants are for direct use or use as parent styles by the app. -->
+  <eat-comment />
 
-    <!-- Progress Bar -->
+  <!-- Progress Bar -->
 
-    <style name="Widget.AppCompat.Base.ProgressBar.Horizontal"
-           parent="android:Widget.Holo.ProgressBar.Horizontal">
-    </style>
+  <style name="Widget.AppCompat.Base.ProgressBar.Horizontal"
+    parent="android:Widget.Holo.ProgressBar.Horizontal"></style>
 
-    <style name="Widget.AppCompat.Base.ProgressBar"
-           parent="android:Widget.Holo.ProgressBar">
-    </style>
+  <style name="Widget.AppCompat.Base.ProgressBar" parent="android:Widget.Holo.ProgressBar"></style>
 
-    <!-- AutoCompleteTextView styles (for SearchView) -->
+  <!-- AutoCompleteTextView styles (for SearchView) -->
 
-    <style name="Widget.AppCompat.Base.AutoCompleteTextView"
-           parent="android:Widget.Holo.AutoCompleteTextView">
-    </style>
+  <style name="Widget.AppCompat.Base.AutoCompleteTextView" parent="android:Widget.Holo.AutoCompleteTextView"></style>
 
-    <style name="Widget.AppCompat.Light.Base.AutoCompleteTextView"
-           parent="android:Widget.Holo.Light.AutoCompleteTextView">
-    </style>
+  <style name="Widget.AppCompat.Light.Base.AutoCompleteTextView"
+    parent="android:Widget.Holo.Light.AutoCompleteTextView"></style>
 
 </resources>

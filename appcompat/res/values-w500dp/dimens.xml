@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2012 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,8 +14,8 @@
 -->
 
 <resources>
-    <!-- The maximum number of action buttons that should be permitted within
-         an action bar/action mode. This will be used to determine how many
-         showAsAction="ifRoom" items can fit. "always" items can override this. -->
-    <integer name="abc_max_action_buttons">4</integer>
+  <!-- The maximum number of action buttons that should be permitted within
+       an action bar/action mode. This will be used to determine how many
+       showAsAction="ifRoom" items can fit. "always" items can override this. -->
+  <integer name="abc_max_action_buttons">4</integer>
 </resources>
