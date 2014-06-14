@@ -14,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SearchViewCompat;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -600,6 +601,18 @@ public class ShoppingItemsView extends ListView {
                 mModeBeforeSearch = mMode;
                 mMode = ShoppingActivity.MODE_ADD_ITEMS;
             }
+
+            int searchAutocompleteResource = getResources().getIdentifier("android:id/search_src_text", null, null);
+            if (searchAutocompleteResource == 0) {
+                searchAutocompleteResource = android.support.v7.appcompat.R.id.search_src_text;
+            }
+
+            View search = mSearchView.findViewById(searchAutocompleteResource);
+            if (search instanceof AutoCompleteTextView && mCursorActivity instanceof ShoppingActivity) {
+                ((ShoppingActivity) mCursorActivity).fillAutoCompleteTextViewAdapter((AutoCompleteTextView) search);
+            }
+
+
             if (query.length() == 0) {
                 mFilter = null;
             } else {

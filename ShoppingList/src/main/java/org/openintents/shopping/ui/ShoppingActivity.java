@@ -770,7 +770,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         }
 
         if (PreferenceActivity.getCompletionSettingChanged(this)) {
-            fillAutoCompleteTextViewAdapter();
+            fillAutoCompleteTextViewAdapter(mEditText);
         }
     }
 
@@ -1030,7 +1030,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         mAddPanel = findViewById(R.id.add_panel);
         mEditText = (AutoCompleteTextView) findViewById(R.id.autocomplete_add_item);
 
-        fillAutoCompleteTextViewAdapter();
+        fillAutoCompleteTextViewAdapter(mEditText);
         mEditText.setThreshold(1);
         mEditText.setOnKeyListener(new OnKeyListener() {
 
@@ -1643,7 +1643,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             }
             mItemsView.insertNewItem(this, newItem, null, null, null, null);
             mEditText.setText("");
-            fillAutoCompleteTextViewAdapter();
+            fillAutoCompleteTextViewAdapter(mEditText);
         } else {
             // Open list to select item from
             pickItems();
@@ -2439,7 +2439,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         // c.requery();
         mItemsView.requery();
-        fillAutoCompleteTextViewAdapter();
+        fillAutoCompleteTextViewAdapter(mEditText);
     }
 
     /**
@@ -3061,7 +3061,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         mItemsView.fillItems(this, listId);
 
         // Also refresh AutoCompleteTextView:
-        fillAutoCompleteTextViewAdapter();
+        fillAutoCompleteTextViewAdapter(mEditText);
     }
 
     /**
@@ -3069,7 +3069,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
      * names from all lists are collected. The adapter is filled in the
      * background.
      */
-    private void fillAutoCompleteTextViewAdapter() {
+    public void fillAutoCompleteTextViewAdapter(final AutoCompleteTextView textView) {
         boolean limit_selections = PreferenceActivity.getCompleteFromCurrentListOnlyFromPrefs(this);
         String listId = null;
         if (limit_selections) {
@@ -3092,9 +3092,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
             @Override
             protected void onPostExecute(ArrayAdapter<String> adapter) {
-                if (mEditText != null) {
+                if (textView != null) {
                     // use result from doInBackground()
-                    mEditText.setAdapter(adapter);
+                    textView.setAdapter(adapter);
                 }
             }
 
@@ -3629,7 +3629,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     @Override
     public void onItemChanged() {
         mItemsView.mCursorItems.requery();
-        fillAutoCompleteTextViewAdapter();
+        fillAutoCompleteTextViewAdapter(mEditText);
     }
 
     private class ListSortActionProvider extends ActionProvider implements OnMenuItemClickListener {
