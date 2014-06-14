@@ -117,24 +117,11 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
+import android.widget.*;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.CursorAdapter;
-import android.widget.HeaderViewListAdapter;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView.FixedViewInfo;
-import android.widget.WrapperListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * 
@@ -154,7 +141,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	private static final String TAG = "ShoppingActivity";
 	private static final boolean debug = false || LogConstants.debug;
 
-	public class MyGestureDetector extends SimpleOnGestureListener {
+    public class MyGestureDetector extends SimpleOnGestureListener {
 		private static final float DISTANCE_DIP = 16.0f;
 		private static final float PATH_DIP = 40.0f;
 		// convert dip measurements to pixels
@@ -455,8 +442,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 	private static final String BUNDLE_ITEM_URI = "item uri";
 	private static final String BUNDLE_RELATION_URI = "relation_uri";
 	private static final String BUNDLE_MODE = "mode";
+    private static final String BUNDLE_MODE_BEFORE_SEARCH = "mode_before_search";
 
-	private String mSortOrder;
+    private String mSortOrder;
 	
 	private ListSortActionProvider mListSortActionProvider;
 
@@ -673,6 +661,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 				mRelationUri = Uri.parse(icicle.getString(BUNDLE_RELATION_URI));
 			}
 			mItemsView.mMode = icicle.getInt(BUNDLE_MODE);
+            mItemsView.mModeBeforeSearch = icicle.getInt(BUNDLE_MODE_BEFORE_SEARCH);
 		}
 
 		// set focus to the edit line:
@@ -1042,8 +1031,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 			outState.putString(BUNDLE_RELATION_URI, mRelationUri.toString());
 		}
 		outState.putInt(BUNDLE_MODE, mItemsView.mMode);
-
-		mUpdating = false;
+        outState.putInt(BUNDLE_MODE_BEFORE_SEARCH, mItemsView.mMode);
+        mUpdating = false;
 
 		// after items have been added through an "insert from extras" the
 		// action name should be different to avoid duplicate inserts e.g. on
@@ -3487,9 +3476,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 				v = mAdapter.getView(list_pos, convertView, parent);
 			} else {
 				post_pos = list_pos - list_count;
-				v = mInflater.inflate(R.layout.drawer_item_list, parent, false);
+				v = mInflater.inflate(R.layout.drawer_item_radio, parent, false);
 				v2 = v.findViewById(R.id.text1);
 				((TextView)v2).setText(R.string.new_list);
+                v2 = v.findViewById(R.id.mode_radio_button);
+                ((ImageView) v2).setImageResource(android.R.drawable.ic_menu_add);
 			}
 			return v;
 		}

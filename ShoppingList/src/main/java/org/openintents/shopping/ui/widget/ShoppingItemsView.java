@@ -116,7 +116,7 @@ public class ShoppingItemsView extends ListView {
 	public int mMode = ShoppingActivity.MODE_IN_SHOP;
 	private String mFilter = null;
 	private boolean mInSearch = false;
-	private int mModeBeforeSearch; 
+	public int mModeBeforeSearch;
 	public Cursor mCursorItems = null;
 	
 	private Activity mCursorActivity = null;
