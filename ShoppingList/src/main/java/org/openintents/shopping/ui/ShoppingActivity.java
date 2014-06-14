@@ -1064,7 +1064,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                     mLastKeyAction = key.getAction();
                     return true;
                 }
-                ;
                 return false;
             }
         });
@@ -1269,7 +1268,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         if (!usingListSpinner()) {
 
             mShoppingListsView = (ListView) findViewById(android.R.id.list);
-            ((ListView) mShoppingListsView)
+            mShoppingListsView
                     .setOnItemSelectedListener(new OnItemSelectedListener() {
                         public void onItemSelected(AdapterView parent, View v,
                                                    int position, long id) {
@@ -1309,7 +1308,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         } else {
             mShoppingListsView = (Spinner) findViewById(R.id.spinner_listfilter);
-            ((Spinner) mShoppingListsView)
+            mShoppingListsView
                     .setOnItemSelectedListener(new OnItemSelectedListener() {
                         public void onItemSelected(AdapterView parent, View v,
                                                    int position, long id) {
@@ -1791,7 +1790,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         item = menu.add(0, MENU_SORT_LIST, 0, R.string.menu_sort_list)
                 .setIcon(android.R.drawable.ic_menu_sort_alphabetically);
-        MenuItemCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_ALWAYS
+        MenuItemCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_IF_ROOM
                 | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
         if (mListSortActionProvider == null) {
             mListSortActionProvider = new ListSortActionProvider(this);
@@ -2177,7 +2176,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 mShoppingListsFilterButton.setTextColor(mItemsView.mTextColor);
             }
             if (mShoppingListsView instanceof Spinner) {
-                View view = ((Spinner) mShoppingListsView).getChildAt(0);
+                View view = mShoppingListsView.getChildAt(0);
                 setSpinnerTextColorInHoloTheme(view);
             }
         }
@@ -2792,8 +2791,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         return listId;
     }
 
-    ;
-
     /**
      * sets the selected list to a specific list Id
      */
@@ -2855,7 +2852,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         if (mCursorShoppingLists == null) {
             Log.e(TAG, "missing shopping provider");
-            ArrayAdapter adapter = new ArrayAdapter(this,
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                     R.layout.list_item_shopping_list,
                     new String[]{getString(R.string.no_shopping_provider)});
             setSpinnerListAdapter(adapter);
@@ -2922,7 +2919,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             }
 
         }
-        ;
+
         mListContentObserver observer = new mListContentObserver(new Handler());
         mCursorShoppingLists.registerContentObserver(observer);
 
@@ -3197,7 +3194,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         // 2. Sort the String list
         Collections.sort(list);
         // 3. Convert it to String array
-        return list.toArray(new String[0]);
+        return list.toArray(new String[list.size()]);
     }
 
     /**

@@ -61,7 +61,7 @@
   <string name="menu_mark_item">Bifează articolul</string>
   <string name="menu_edit_item">Editează element</string>
   <string name="menu_auto_add">Adaugă automat</string>
-  <string name="menu_item_stores">Magazine...</string>
+  <string name="menu_item_stores">Magazine…</string>
   <string name="menu_rename_store">Redenumește magazinul</string>
   <string name="menu_delete_store">Șterge magazinul</string>
   <string name="confirm_delete_store">Sigur doriți să ștergeți acest magazin?</string>
@@ -107,8 +107,8 @@
   <string name="stores">Magazine</string>
   <string name="list">Listă</string>
 
-  <string name="otherqty">Altă cantitate...</string>
-  <string name="otherpri">Altă prioritate...</string>
+  <string name="otherqty">Altă cantitate…</string>
+  <string name="otherpri">Altă prioritate…</string>
   <string name="unfiltered">(Nefiltrat)</string>
 
   <!-- Total sum of all prices. \'%s\' is the sum -->
@@ -125,7 +125,7 @@
   <string name="delete">Șterge</string>
 
   <!-- Added to an item to indicate it was bought. -->
-  <string name="suffix_checked">... OK</string>
+  <string name="suffix_checked">… OK</string>
   <string name="empty" />
 
   <!-- The shortcut is created on the home screen. -->

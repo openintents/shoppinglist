@@ -64,7 +64,7 @@ Launchpad Contributions:
   <string name="menu_mark_item">Marcar item</string>
   <string name="menu_edit_item">Editar item</string>
   <string name="menu_auto_add">Adição automática</string>
-  <string name="menu_item_stores">Lojas...</string>
+  <string name="menu_item_stores">Lojas…</string>
   <string name="menu_rename_store">Mudar nome da loja</string>
   <string name="menu_delete_store">Eliminar loja</string>
   <string name="confirm_delete_store">Pretende eliminar esta loja?</string>
@@ -110,8 +110,8 @@ Launchpad Contributions:
   <string name="stores">Lojas</string>
   <string name="list">Lista</string>
 
-  <string name="otherqty">Outras quantidades...</string>
-  <string name="otherpri">Outra prioridade...</string>
+  <string name="otherqty">Outras quantidades…</string>
+  <string name="otherpri">Outra prioridade…</string>
   <string name="unfiltered">(Sem filtro)</string>
 
   <!-- Total sum of all prices. \'%s\' is the sum -->
@@ -128,7 +128,7 @@ Launchpad Contributions:
   <string name="delete">Eliminar</string>
 
   <!-- Added to an item to indicate it was bought. -->
-  <string name="suffix_checked">... Aceitar</string>
+  <string name="suffix_checked">… Aceitar</string>
   <string name="empty" />
 
   <!-- The shortcut is created on the home screen. -->

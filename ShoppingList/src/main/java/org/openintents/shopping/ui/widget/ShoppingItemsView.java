@@ -590,7 +590,7 @@ public class ShoppingItemsView extends ListView {
 
     }
 
-    private class searchQueryListener extends SearchViewCompat.OnQueryTextListenerCompat {
+    private class SearchQueryListener extends SearchViewCompat.OnQueryTextListenerCompat {
         public boolean onQueryTextChange(String query) {
             if (SearchViewCompat.isIconified(mSearchView)) {
                 return false;
@@ -626,7 +626,7 @@ public class ShoppingItemsView extends ListView {
         }
     }
 
-    private class searchDismissedListener extends SearchViewCompat.OnCloseListenerCompat {
+    private class SearchDismissedListener extends SearchViewCompat.OnCloseListenerCompat {
         public boolean onClose() {
             mInSearch = false;
             mFilter = null;
@@ -649,8 +649,8 @@ public class ShoppingItemsView extends ListView {
             if (mSearchView != null) {
                 SearchViewCompat.setSubmitButtonEnabled(mSearchView, true);
                 SearchViewCompat.setInputType(mSearchView, PreferenceActivity.getSearchInputTypeFromPrefs(context));
-                SearchViewCompat.setOnQueryTextListener(mSearchView, new searchQueryListener());
-                SearchViewCompat.setOnCloseListener(mSearchView, new searchDismissedListener());
+                SearchViewCompat.setOnQueryTextListener(mSearchView, new SearchQueryListener());
+                SearchViewCompat.setOnCloseListener(mSearchView, new SearchDismissedListener());
             }
         }
         return mSearchView;

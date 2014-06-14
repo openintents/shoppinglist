@@ -61,7 +61,7 @@
   <string name="menu_mark_item">アイテムをマーク</string>
   <string name="menu_edit_item">アイテムの編集</string>
   <string name="menu_auto_add">自動追加</string>
-  <string name="menu_item_stores">店...</string>
+  <string name="menu_item_stores">店…</string>
   <string name="menu_rename_store">店の名前を変更する</string>
   <string name="menu_delete_store">店を削除する</string>
   <string name="confirm_delete_store">本当にこの店を削除したいですか？</string>
@@ -107,8 +107,8 @@
   <string name="stores">Stores</string>
   <string name="list">List</string>
 
-  <string name="otherqty">他の個数...</string>
-  <string name="otherpri">他の優先度...</string>
+  <string name="otherqty">他の個数…</string>
+  <string name="otherpri">他の優先度…</string>
   <string name="unfiltered">(Unfiltered)</string>
 
   <!-- Total sum of all prices. \'%s\' is the sum -->
@@ -125,7 +125,7 @@
   <string name="delete">削除</string>
 
   <!-- Added to an item to indicate it was bought. -->
-  <string name="suffix_checked">... OK</string>
+  <string name="suffix_checked">… OK</string>
   <string name="empty" />
 
   <!-- The shortcut is created on the home screen. -->

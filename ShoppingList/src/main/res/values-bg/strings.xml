@@ -110,8 +110,8 @@
   <string name="stores">Магазини</string>
   <string name="list">Списък</string>
 
-  <string name="otherqty">Друго количество...</string>
-  <string name="otherpri">Друг приоритет...</string>
+  <string name="otherqty">Друго количество…</string>
+  <string name="otherpri">Друг приоритет…</string>
   <string name="unfiltered">(Нефилтрирано)</string>
 
   <!-- Total sum of all prices. \'%s\' is the sum -->
@@ -128,7 +128,7 @@
   <string name="delete">Изтриване</string>
 
   <!-- Added to an item to indicate it was bought. -->
-  <string name="suffix_checked">... OK</string>
+  <string name="suffix_checked">… OK</string>
   <string name="empty" />
 
   <!-- The shortcut is created on the home screen. -->

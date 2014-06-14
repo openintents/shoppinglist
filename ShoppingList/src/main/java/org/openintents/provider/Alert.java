@@ -108,8 +108,6 @@ public class Alert {
 
     }
 
-    ;
-
     /**
      * location based alerts. you must at least specify a position
      */
@@ -159,8 +157,6 @@ public class Alert {
 
     }
 
-    ;
-
     public static final class DateTime implements BaseColumns {
 
         public static final Uri CONTENT_URI = Uri
@@ -205,8 +201,6 @@ public class Alert {
 
     }
 
-    ;
-
     public static final class ManagedService implements BaseColumns {
 
         public static final Uri CONTENT_URI = Uri
@@ -222,8 +216,6 @@ public class Alert {
         public static final String[] PROJECTION = {_ID, _COUNT, SERVICE_CLASS,
                 TIME_INTERVALL, DO_ROAMING, LAST_TIME};
     }
-
-    ;
 
     public static void registerManagedService(String serviceClassName,
                                               long timeIntervall, boolean useWhileRoaming) {

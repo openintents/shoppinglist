@@ -57,8 +57,6 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
         ITEMNAME, QUANTITY, PRICE, PRIORITY, UNITS, TAGS
     }
 
-    ;
-
     public EditItemDialog(final Context context, final Uri itemUri,
                           final Uri relationUri, final Uri listItemUri) {
         super(context);

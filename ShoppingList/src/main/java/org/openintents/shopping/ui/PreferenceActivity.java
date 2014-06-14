@@ -121,7 +121,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
             TextKeyListener.Capitalize.SENTENCES,
             TextKeyListener.Capitalize.WORDS};
     private static final int smCapitalizationInputTypes[] = {
-            InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL,
+            InputType.TYPE_CLASS_TEXT,
             InputType.TYPE_TEXT_FLAG_CAP_SENTENCES,
             InputType.TYPE_TEXT_FLAG_CAP_WORDS};
 
@@ -193,7 +193,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
     }
 
     private void resetAllSettings(final SharedPreferences prefs) {
-        Preference resetAllSettings = (Preference) findPreference(PREFS_RESET_ALL_SETTINGS);
+        Preference resetAllSettings = findPreference(PREFS_RESET_ALL_SETTINGS);
         resetAllSettings
                 .setOnPreferenceClickListener(new OnPreferenceClickListener() {
                     @Override

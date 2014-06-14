@@ -109,8 +109,8 @@ Launchpad Contributions:
   <string name="stores">Stores</string>
   <string name="list">List</string>
 
-  <string name="otherqty">Diğer Miktar...</string>
-  <string name="otherpri">Diğer Öncelik...</string>
+  <string name="otherqty">Diğer Miktar…</string>
+  <string name="otherpri">Diğer Öncelik…</string>
   <string name="unfiltered">(Unfiltered)</string>
 
   <!-- Total sum of all prices. \'%s\' is the sum -->
@@ -127,7 +127,7 @@ Launchpad Contributions:
   <string name="delete">Sil</string>
 
   <!-- Added to an item to indicate it was bought. -->
-  <string name="suffix_checked">...TAMAM</string>
+  <string name="suffix_checked">…TAMAM</string>
   <string name="empty" />
 
   <!-- The shortcut is created on the home screen. -->

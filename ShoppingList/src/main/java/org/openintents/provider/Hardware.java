@@ -149,7 +149,7 @@ public abstract class Hardware {
                 return;
             }
 
-            if (c == null || c.getCount() < 1) {
+            if (c.getCount() < 1) {
                 Log.i(TAG, "Insert");
 
                 // This value does not exist yet. Let's insert it:
@@ -174,9 +174,8 @@ public abstract class Hardware {
             } else {
                 Log.e(TAG, "table 'preferences' corrupt. Multiple NAME!");
             }
-            if (c != null) {
-                c.close();
-            }
+            c.close();
+
         } catch (Exception e) {
             Log.i(TAG, "setPreference() failed", e);
 

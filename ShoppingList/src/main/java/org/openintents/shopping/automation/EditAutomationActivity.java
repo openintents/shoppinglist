@@ -205,7 +205,7 @@ public class EditAutomationActivity extends Activity {
                             ShoppingContract.Lists.NAME}, null, null, null
             );
 
-            if (c != null & c.moveToFirst()) {
+            if (c != null && c.moveToFirst()) {
                 mDescriptionShoppingList = c.getString(1);
             }
 

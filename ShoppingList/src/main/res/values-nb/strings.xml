@@ -58,7 +58,7 @@
   <string name="menu_mark_item">Marker punkt</string>
   <string name="menu_edit_item">Rediger punkt</string>
   <string name="menu_auto_add">Legg til automatisk</string>
-  <string name="menu_item_stores">Butikker...</string>
+  <string name="menu_item_stores">Butikker…</string>
   <string name="menu_rename_store">Gi butikk nytt navn</string>
   <string name="menu_delete_store">Slett butikk</string>
   <string name="confirm_delete_store">Vil du virkelig slette denne butikken?</string>
@@ -104,8 +104,8 @@
   <string name="stores">Stores</string>
   <string name="list">List</string>
 
-  <string name="otherqty">Annet antall...</string>
-  <string name="otherpri">Annen prioritet...</string>
+  <string name="otherqty">Annet antall…</string>
+  <string name="otherpri">Annen prioritet…</string>
   <string name="unfiltered">(Unfiltered)</string>
 
   <!-- Total sum of all prices. \'%s\' is the sum -->
@@ -122,7 +122,7 @@
   <string name="delete">Slett</string>
 
   <!-- Added to an item to indicate it was bought. -->
-  <string name="suffix_checked">... OK</string>
+  <string name="suffix_checked">… OK</string>
   <string name="empty" />
 
   <!-- The shortcut is created on the home screen. -->

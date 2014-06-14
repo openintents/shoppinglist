@@ -34,8 +34,8 @@ public class CheckItemsWidget extends AppWidgetProvider {
             int widgetId = extras.getInt("widgetId",
                     AppWidgetManager.INVALID_APPWIDGET_ID);
 
-            Integer id = new Integer(0);
-            Integer page = new Integer(0);
+            Integer id = Integer.valueOf(0);
+            Integer page = Integer.valueOf(0);
             if (intent.getAction().equals(ACTION_CHECK)) {
                 id = extras.getInt("id", 0);
             } else if (intent.getAction().equals(ACTION_NEXT_PAGE)) {

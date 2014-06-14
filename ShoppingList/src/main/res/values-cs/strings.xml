@@ -62,7 +62,7 @@
   <string name="menu_mark_item">Označit položku</string>
   <string name="menu_edit_item">Upravit položku</string>
   <string name="menu_auto_add">Automaticky přidat</string>
-  <string name="menu_item_stores">Obchody...</string>
+  <string name="menu_item_stores">Obchody…</string>
   <string name="menu_rename_store">Přejmenovat obchod</string>
   <string name="menu_delete_store">Odstranit obchod</string>
   <string name="confirm_delete_store">Opravdu chcete odstranit tento obchod?</string>
@@ -108,8 +108,8 @@
   <string name="stores">Obchody</string>
   <string name="list">Seznam</string>
 
-  <string name="otherqty">Jiné množství...</string>
-  <string name="otherpri">Jiná priorita...</string>
+  <string name="otherqty">Jiné množství…</string>
+  <string name="otherpri">Jiná priorita…</string>
   <string name="unfiltered">(Nefiltorváno)</string>
 
   <!-- Total sum of all prices. \'%s\' is the sum -->
@@ -126,7 +126,7 @@
   <string name="delete">Odstranit</string>
 
   <!-- Added to an item to indicate it was bought. -->
-  <string name="suffix_checked">... OK</string>
+  <string name="suffix_checked">… OK</string>
   <string name="empty" />
 
   <!-- The shortcut is created on the home screen. -->

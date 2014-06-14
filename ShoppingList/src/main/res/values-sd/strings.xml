@@ -59,7 +59,7 @@
   <string name="menu_mark_item">आईटम ते निशान लगायो</string>
   <string name="menu_edit_item">आइटम सम्पादित कयो</string>
   <string name="menu_auto_add">स्वत: जोड़</string>
-  <string name="menu_item_stores">स्टोर्स...</string>
+  <string name="menu_item_stores">स्टोर्स…</string>
   <string name="menu_rename_store">स्टोर जो नाम बदल्यो</string>
   <string name="menu_delete_store">स्टोर खे मिटायो</string>
   <string name="confirm_delete_store">शा तहां सहियमें इन्ह स्टोर खे मितायण ता चाह्यो</string>

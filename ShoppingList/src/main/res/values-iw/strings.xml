@@ -60,7 +60,7 @@
   <string name="menu_mark_item">סמן פריט</string>
   <string name="menu_edit_item">ערוך פריט</string>
   <string name="menu_auto_add">הוספה אוטומטית</string>
-  <string name="menu_item_stores">חנויות...</string>
+  <string name="menu_item_stores">חנויות…</string>
   <string name="menu_rename_store">שנה שם חנות</string>
   <string name="menu_delete_store">מחק חנות</string>
   <string name="confirm_delete_store">האם אתה בטוח כי ברצונך למחוק חנות זו?</string>
@@ -106,8 +106,8 @@
   <string name="stores">Stores</string>
   <string name="list">List</string>
 
-  <string name="otherqty">כמות אחרת...</string>
-  <string name="otherpri">עדיפות אחרת...</string>
+  <string name="otherqty">כמות אחרת…</string>
+  <string name="otherpri">עדיפות אחרת…</string>
   <string name="unfiltered">(Unfiltered)</string>
 
   <!-- Total sum of all prices. \'%s\' is the sum -->
@@ -124,7 +124,7 @@
   <string name="delete">מחק</string>
 
   <!-- Added to an item to indicate it was bought. -->
-  <string name="suffix_checked">... אוקיי</string>
+  <string name="suffix_checked">… אוקיי</string>
   <string name="empty" />
 
   <!-- The shortcut is created on the home screen. -->

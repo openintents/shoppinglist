@@ -63,7 +63,7 @@
   <string name="menu_mark_item">علامتگذاری مورد</string>
   <string name="menu_edit_item">ویرایش مورد</string>
   <string name="menu_auto_add">افزودن خودکار</string>
-  <string name="menu_item_stores">فروشگاه...</string>
+  <string name="menu_item_stores">فروشگاه…</string>
   <string name="menu_rename_store">تغییر نام فروشگاه</string>
   <string name="menu_delete_store">حذف فروشگاه</string>
   <string name="confirm_delete_store">آیا شما واقعا می خواهید به حذف این فروشگاه؟</string>
@@ -109,8 +109,8 @@
   <string name="stores">فروشگاه ها</string>
   <string name="list">لیست</string>
 
-  <string name="otherqty">مقدار دیگر...</string>
-  <string name="otherpri">اولویت دیگر...</string>
+  <string name="otherqty">مقدار دیگر…</string>
+  <string name="otherpri">اولویت دیگر…</string>
   <string name="unfiltered">غربال نشده</string>
 
   <!-- Total sum of all prices. \'%s\' is the sum -->
@@ -127,7 +127,7 @@
   <string name="delete">حذف</string>
 
   <!-- Added to an item to indicate it was bought. -->
-  <string name="suffix_checked">... تأیید</string>
+  <string name="suffix_checked">… تأیید</string>
   <string name="empty" />
 
   <!-- The shortcut is created on the home screen. -->

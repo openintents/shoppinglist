@@ -22,24 +22,14 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-      android:orientation="horizontal"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content">
-
-      <ImageView
-        android:src="@drawable/ic_launcher_shoppinglist"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center_vertical" />
-
-      <TextView
-        android:id="@+id/command"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-    </LinearLayout>
+    <TextView
+      android:id="@+id/command"
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content"
+      android:layout_gravity="center_vertical"
+      android:drawableLeft="@drawable/ic_launcher_shoppinglist"
+      android:drawableStart="@drawable/ic_launcher_shoppinglist"
+      android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
       android:id="@+id/select_action"

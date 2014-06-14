@@ -113,11 +113,8 @@ public class GTalkSender {
             return false;
         }
 
-        if (username.indexOf('@') == -1) {
-            return false;
-        }
+        return username.indexOf('@') != -1;
 
-        return true;
     }
 
     private void showMessage(CharSequence msg) {

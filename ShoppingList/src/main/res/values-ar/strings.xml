@@ -62,7 +62,7 @@ Launchpad Contributions:
   <string name="menu_mark_item">حدد عنصر</string>
   <string name="menu_edit_item">تعديل العنصر</string>
   <string name="menu_auto_add">أضافة اوتوماتيكيا</string>
-  <string name="menu_item_stores">المتاجر...</string>
+  <string name="menu_item_stores">المتاجر…</string>
   <string name="menu_rename_store">أعد تسمية المتجر</string>
   <string name="menu_delete_store">أحذف المتجر</string>
   <string name="confirm_delete_store">هل أنت متأكد من رغبتك في حذف هذا المتجر  ؟</string>
@@ -108,8 +108,8 @@ Launchpad Contributions:
   <string name="stores">المخازن</string>
   <string name="list">قائمة</string>
 
-  <string name="otherqty">كمية أخرى...</string>
-  <string name="otherpri">أولوية أخرى...</string>
+  <string name="otherqty">كمية أخرى…</string>
+  <string name="otherpri">أولوية أخرى…</string>
   <string name="unfiltered">(دون ترشيح)</string>
 
   <!-- Total sum of all prices. \'%s\' is the sum -->
@@ -126,7 +126,7 @@ Launchpad Contributions:
   <string name="delete">احذف</string>
 
   <!-- Added to an item to indicate it was bought. -->
-  <string name="suffix_checked">موافق...</string>
+  <string name="suffix_checked">موافق…</string>
   <string name="empty" />
 
   <!-- The shortcut is created on the home screen. -->

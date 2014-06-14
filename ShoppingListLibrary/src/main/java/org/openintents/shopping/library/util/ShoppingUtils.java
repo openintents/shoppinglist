@@ -53,7 +53,7 @@ public class ShoppingUtils {
             existingItems.moveToFirst();
             id = existingItems.getLong(0);
         }
-        ;
+
         existingItems.close();
         return id;
     }
@@ -68,7 +68,6 @@ public class ShoppingUtils {
             existingItems.moveToFirst();
             id = existingItems.getLong(0);
         }
-        ;
         existingItems.close();
         return id;
     }
@@ -83,7 +82,6 @@ public class ShoppingUtils {
             existingItems.moveToFirst();
             name = existingItems.getString(0);
         }
-        ;
         existingItems.close();
         return name;
     }

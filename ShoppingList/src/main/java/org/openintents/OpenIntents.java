@@ -129,7 +129,7 @@ public abstract class OpenIntents {
      *
      * @param activity
      */
-    public static final void requiresOpenIntents(final Activity activity) {
+    public static void requiresOpenIntents(final Activity activity) {
         try {
             activity.getPackageManager().getPackageInfo("org.openintents", 0);
         } catch (NameNotFoundException e) {
@@ -151,7 +151,7 @@ public abstract class OpenIntents {
     /**
      * calls the InitDefaultValues activity (unless unchecked).
      */
-    public static final void suggestInitDefaultValues(final Activity activity) {
+    public static void suggestInitDefaultValues(final Activity activity) {
         SharedPreferences prefs = activity.getSharedPreferences(
                 PREFERENCES_INIT_DEFAULT_VALUES, 0);
         boolean b = prefs.getBoolean(PREFERENCES_DONT_SHOW_INIT_DEFAULT_VALUES,

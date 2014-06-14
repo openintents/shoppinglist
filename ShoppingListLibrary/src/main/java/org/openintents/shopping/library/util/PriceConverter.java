@@ -45,7 +45,7 @@ public class PriceConverter {
             priceLong = 0L;
         } else {
             try {
-                priceLong = (long) Math
+                priceLong = Math
                         .round(100 * PriceConverter.mPriceFormatter
                                 .parse(price).doubleValue());
             } catch (ParseException e) {

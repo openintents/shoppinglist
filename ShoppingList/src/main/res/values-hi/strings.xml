@@ -60,7 +60,7 @@
   <string name="menu_mark_item">आइटम चिन्हित करें</string>
   <string name="menu_edit_item">आइटम सम्पादित करें</string>
   <string name="menu_auto_add">स्वत: जोड़</string>
-  <string name="menu_item_stores">स्टोर्स...</string>
+  <string name="menu_item_stores">स्टोर्स…</string>
   <string name="menu_rename_store">स्टोर का नाम बदलें</string>
   <string name="menu_delete_store">स्टोर हटाएँ</string>
   <string name="confirm_delete_store">क्या आप सचमुच इस स्टोर को हटाना चाहते हैं</string>
@@ -124,7 +124,7 @@
   <string name="delete">हटाएँ</string>
 
   <!-- Added to an item to indicate it was bought. -->
-  <string name="suffix_checked">... ठीक है</string>
+  <string name="suffix_checked">… ठीक है</string>
   <string name="empty" />
 
   <!-- The shortcut is created on the home screen. -->

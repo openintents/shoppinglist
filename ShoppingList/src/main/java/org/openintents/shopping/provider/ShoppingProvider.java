@@ -304,7 +304,7 @@ public class ShoppingProvider extends ContentProvider {
                         Context.MODE_PRIVATE);
                 list_id = sp.getInt("lastused", 1);
                 m.addRow(new Object[]{Long.toString(list_id)});
-                return (Cursor) m;
+                return m;
             case PREFS:
                 m = new MatrixCursor(projection);
                 // assumes only one projection will ever be used,
@@ -312,7 +312,7 @@ public class ShoppingProvider extends ContentProvider {
                 String sortOrder = PreferenceActivity.getSortOrderFromPrefs(
                         getContext(), ShoppingActivity.MODE_IN_SHOP);
                 m.addRow(new Object[]{sortOrder});
-                return (Cursor) m;
+                return m;
 
             case SUBTOTALS_LISTID:
                 list_id = Long.parseLong(url.getPathSegments().get(1));
@@ -482,7 +482,7 @@ public class ShoppingProvider extends ContentProvider {
         MatrixCursor m = new MatrixCursor(projection);
         m.addRow(new Object[]{Long.toString(itemCopyId),
                 Long.toString(containsCopyId)});
-        return (Cursor) m;
+        return m;
     }
 
     @Override

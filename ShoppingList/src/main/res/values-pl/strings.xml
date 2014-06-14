@@ -68,7 +68,7 @@
   <string name="menu_mark_item">Zaznacz element</string>
   <string name="menu_edit_item">Edytuj element</string>
   <string name="menu_auto_add">Edytuj element</string>
-  <string name="menu_item_stores">Sklepy...</string>
+  <string name="menu_item_stores">Sklepy…</string>
   <string name="menu_rename_store">Zmień nazwę sklepu</string>
   <string name="menu_delete_store">Usuń sklep</string>
   <string name="confirm_delete_store">Czy na pewno chcesz usunąć ten sklep?</string>
@@ -114,8 +114,8 @@
   <string name="stores">Sklepy</string>
   <string name="list">Lista</string>
 
-  <string name="otherqty">Inna Ilość...</string>
-  <string name="otherpri">Inny Priorytet...</string>
+  <string name="otherqty">Inna Ilość…</string>
+  <string name="otherpri">Inny Priorytet…</string>
   <string name="unfiltered">(niefiltrowane)</string>
 
   <!-- Total sum of all prices. \'%s\' is the sum -->
@@ -132,7 +132,7 @@
   <string name="delete">Usuń</string>
 
   <!-- Added to an item to indicate it was bought. -->
-  <string name="suffix_checked">... OK</string>
+  <string name="suffix_checked">… OK</string>
   <string name="empty" />
 
   <!-- The shortcut is created on the home screen. -->

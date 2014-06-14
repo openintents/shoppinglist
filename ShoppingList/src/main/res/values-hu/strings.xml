@@ -57,7 +57,7 @@
   <string name="menu_mark_item">Elem megjelölése</string>
   <string name="menu_edit_item">Elem szerkesztése</string>
   <string name="menu_auto_add">Automatikus hozzáadás</string>
-  <string name="menu_item_stores">Stores...</string>
+  <string name="menu_item_stores">Stores…</string>
   <string name="menu_rename_store">Rename store</string>
   <string name="menu_delete_store">Delete store</string>
   <string name="confirm_delete_store">Do you really want to delete this store?</string>
@@ -103,8 +103,8 @@
   <string name="stores">Stores</string>
   <string name="list">List</string>
 
-  <string name="otherqty">Other Quantity...</string>
-  <string name="otherpri">Other Priority...</string>
+  <string name="otherqty">Other Quantity…</string>
+  <string name="otherpri">Other Priority…</string>
   <string name="unfiltered">(Unfiltered)</string>
 
   <!-- Total sum of all prices. \'%s\' is the sum -->
@@ -121,7 +121,7 @@
   <string name="delete">Törlés</string>
 
   <!-- Added to an item to indicate it was bought. -->
-  <string name="suffix_checked">... OK</string>
+  <string name="suffix_checked">… OK</string>
   <string name="empty" />
 
   <!-- The shortcut is created on the home screen. -->

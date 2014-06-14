@@ -58,7 +58,7 @@
   <string name="menu_mark_item">Marcar element</string>
   <string name="menu_edit_item">Edita l\'element</string>
   <string name="menu_auto_add">Afegeix automàticament</string>
-  <string name="menu_item_stores">Botigues...</string>
+  <string name="menu_item_stores">Botigues…</string>
   <string name="menu_rename_store">Reanomena botiga</string>
   <string name="menu_delete_store">Eliminar botiga</string>
   <string name="confirm_delete_store">Esteu segurs que voleu eliminar aquesta botiga?</string>
@@ -104,8 +104,8 @@
   <string name="stores">Stores</string>
   <string name="list">List</string>
 
-  <string name="otherqty">Una altra quantitat...</string>
-  <string name="otherpri">Una altra prioritat...</string>
+  <string name="otherqty">Una altra quantitat…</string>
+  <string name="otherpri">Una altra prioritat…</string>
   <string name="unfiltered">(Unfiltered)</string>
 
   <!-- Total sum of all prices. \'%s\' is the sum -->
@@ -122,7 +122,7 @@
   <string name="delete">Elimina</string>
 
   <!-- Added to an item to indicate it was bought. -->
-  <string name="suffix_checked">... D\'acord</string>
+  <string name="suffix_checked">… D\'acord</string>
   <string name="empty" />
 
   <!-- The shortcut is created on the home screen. -->

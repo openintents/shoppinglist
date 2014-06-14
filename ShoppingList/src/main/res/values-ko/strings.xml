@@ -59,7 +59,7 @@
   <string name="menu_mark_item">항목 체크하기</string>
   <string name="menu_edit_item">항목 수정</string>
   <string name="menu_auto_add">자동으로 추가하기</string>
-  <string name="menu_item_stores">가게들...</string>
+  <string name="menu_item_stores">가게들…</string>
   <string name="menu_rename_store">가게 이름 바꾸기</string>
   <string name="menu_delete_store">가게 삭제하기</string>
   <string name="confirm_delete_store">이 가게를 삭제하시겠습니까?</string>
@@ -105,8 +105,8 @@
   <string name="stores">Stores</string>
   <string name="list">List</string>
 
-  <string name="otherqty">다른 수량...</string>
-  <string name="otherpri">다른 우선순위...</string>
+  <string name="otherqty">다른 수량…</string>
+  <string name="otherpri">다른 우선순위…</string>
   <string name="unfiltered">(Unfiltered)</string>
 
   <!-- Total sum of all prices. \'%s\' is the sum -->
@@ -123,7 +123,7 @@
   <string name="delete">삭제</string>
 
   <!-- Added to an item to indicate it was bought. -->
-  <string name="suffix_checked">... OK</string>
+  <string name="suffix_checked">… OK</string>
   <string name="empty" />
 
   <!-- The shortcut is created on the home screen. -->

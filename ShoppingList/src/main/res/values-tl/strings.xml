@@ -58,7 +58,7 @@
   <string name="menu_mark_item">Markahan ang bagay</string>
   <string name="menu_edit_item">Baguhin ang bagay</string>
   <string name="menu_auto_add">Awtomatikong magdagdag</string>
-  <string name="menu_item_stores">Mga tindahan...</string>
+  <string name="menu_item_stores">Mga tindahan…</string>
   <string name="menu_rename_store">Palitan ang pangalan ng tindahan</string>
   <string name="menu_delete_store">Alisin ang tindahan</string>
   <string name="confirm_delete_store">Gusto mo ba talagang alisin ang tindahan na ito?</string>
@@ -104,7 +104,7 @@
   <string name="stores">Stores</string>
   <string name="list">List</string>
 
-  <string name="otherqty">Ibang Bilang...</string>
+  <string name="otherqty">Ibang Bilang…</string>
   <string name="otherpri">Ibang Prioridad</string>
   <string name="unfiltered">(Unfiltered)</string>
 
@@ -122,7 +122,7 @@
   <string name="delete">Alisin</string>
 
   <!-- Added to an item to indicate it was bought. -->
-  <string name="suffix_checked">... OK</string>
+  <string name="suffix_checked">… OK</string>
   <string name="empty" />
 
   <!-- The shortcut is created on the home screen. -->

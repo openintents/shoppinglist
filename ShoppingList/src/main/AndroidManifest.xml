@@ -46,9 +46,6 @@
   1.1.0 [10006]: 2009-05-16
   1.0.3 [10004]: 2009-02-04  -->
 
-  <uses-sdk
-    android:minSdkVersion="7"
-    android:targetSdkVersion="19" />
   <uses-feature
     android:name="android.hardware.touchscreen"
     android:required="false" />
@@ -57,6 +54,7 @@
     tools:replace="label"
     android:icon="@drawable/ic_launcher_shoppinglist"
     android:label="@string/app_name"
+    android:allowBackup="true"
     android:backupAgent="ShoppingBackupAgent">
 
     <!-- aTrackDog metadata -->

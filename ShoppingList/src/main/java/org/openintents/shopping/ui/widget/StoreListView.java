@@ -214,7 +214,7 @@ public class StoreListView extends ListView {
             }
 
             // set style for check box
-            c.setTag(new Integer(cursor.getPosition()));
+            c.setTag(cursor.getPosition());
 
             c.setVisibility(CheckBox.VISIBLE);
             c.setChecked(status);
@@ -249,9 +249,9 @@ public class StoreListView extends ListView {
             });
 
             v = (EditText) view.findViewById(R.id.price);
-            v.setTag(new Integer(cursor.getPosition()));
+            v.setTag(cursor.getPosition());
             v = (EditText) view.findViewById(R.id.aisle);
-            v.setTag(new Integer(cursor.getPosition()));
+            v.setTag(cursor.getPosition());
 
         }
 

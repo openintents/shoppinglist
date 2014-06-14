@@ -1,6 +1,8 @@
 package org.openintents.shopping;
 
+import android.annotation.TargetApi;
 import android.app.backup.*;
+import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 
@@ -8,6 +10,7 @@ import java.io.IOException;
 
 import org.openintents.shopping.provider.ShoppingDatabase;
 
+@TargetApi(Build.VERSION_CODES.FROYO)
 public class ShoppingBackupAgent extends BackupAgentHelper {
     private static final String TAG = "ShoppingBackupAgent";
     private static final boolean debug = false || LogConstants.debug;

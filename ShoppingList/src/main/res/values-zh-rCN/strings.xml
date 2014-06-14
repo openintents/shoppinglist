@@ -108,8 +108,8 @@
   <string name="stores">商店</string>
   <string name="list">清单</string>
 
-  <string name="otherqty">其他数量...</string>
-  <string name="otherpri">其他优先级...</string>
+  <string name="otherqty">其他数量…</string>
+  <string name="otherpri">其他优先级…</string>
   <string name="unfiltered">(未过滤)</string>
 
   <!-- Total sum of all prices. \'%s\' is the sum -->
@@ -126,7 +126,7 @@
   <string name="delete">删除</string>
 
   <!-- Added to an item to indicate it was bought. -->
-  <string name="suffix_checked">... 确定</string>
+  <string name="suffix_checked">… 确定</string>
   <string name="empty" />
 
   <!-- The shortcut is created on the home screen. -->

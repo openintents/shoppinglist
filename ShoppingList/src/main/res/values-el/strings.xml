@@ -59,7 +59,7 @@
   <string name="menu_mark_item">Επισήμανση στοιχείου</string>
   <string name="menu_edit_item">Επεξεργασία στοιχείου</string>
   <string name="menu_auto_add">Αυτόματη προσθήκη</string>
-  <string name="menu_item_stores">Καταστήματα...</string>
+  <string name="menu_item_stores">Καταστήματα…</string>
   <string name="menu_rename_store">Μετονομασία καταστήματος</string>
   <string name="menu_delete_store">Διαγραφή καταστήματος</string>
   <string name="confirm_delete_store">Θέλετε σίγουρα να διαγράψετε αυτό το κατάστημα;</string>
@@ -105,8 +105,8 @@
   <string name="stores">Stores</string>
   <string name="list">List</string>
 
-  <string name="otherqty">Άλλη Ποσότητα...</string>
-  <string name="otherpri">Άλλη Προτεραιότητα...</string>
+  <string name="otherqty">Άλλη Ποσότητα…</string>
+  <string name="otherpri">Άλλη Προτεραιότητα…</string>
   <string name="unfiltered">(Unfiltered)</string>
 
   <!-- Total sum of all prices. \'%s\' is the sum -->
@@ -123,7 +123,7 @@
   <string name="delete">Διαγραφή</string>
 
   <!-- Added to an item to indicate it was bought. -->
-  <string name="suffix_checked">... OK</string>
+  <string name="suffix_checked">… OK</string>
   <string name="empty" />
 
   <!-- The shortcut is created on the home screen. -->
