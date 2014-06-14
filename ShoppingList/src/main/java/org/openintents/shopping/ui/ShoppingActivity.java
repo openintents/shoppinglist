@@ -3519,6 +3519,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 }
             } else if ((list_pos = position - mNumAboveList) < list_count) {
                 int curListPos = mShoppingListsView.getSelectedItemPosition();
+                if (list_pos == curListPos) {
+                    mDrawerListsView.setItemChecked(position, true);
+                }
                 v = mAdapter.getView(list_pos, convertView, parent);
             } else {
                 post_pos = list_pos - list_count;
