@@ -628,9 +628,11 @@ public class ShoppingItemsView extends ListView {
 
     private class SearchDismissedListener extends SearchViewCompat.OnCloseListenerCompat {
         public boolean onClose() {
+            if (mInSearch){
+                mMode = mModeBeforeSearch;
+            }
             mInSearch = false;
             mFilter = null;
-            mMode = mModeBeforeSearch;
             if (mToastBar != null) {
                 mToastBar.hide(true /* animated */, false /* actionClicked */);
             }
