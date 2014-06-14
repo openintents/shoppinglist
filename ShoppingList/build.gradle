@@ -6,6 +6,7 @@ android {
 
     defaultConfig {
         applicationId "org.openintents.shopping"
+        versionName "2.0-rc1"
         minSdkVersion 7
         targetSdkVersion 19
 
@@ -13,10 +14,44 @@ android {
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
+
+    signingConfigs {
+        release {
+            Properties props = new Properties()
+            props.load(new FileInputStream("$buildDir/../build-private.properties"))
+
+            storeFile file(props.getProperty("key.store"))
+            storePassword props.getProperty("key.store.password")
+            keyAlias props.getProperty("key.alias")
+            keyPassword props.getProperty("key.alias.password")
+        }
+    }
+
+    productFlavors {
+        play {
+
+        }
+
+        tstore {
+
+        }
+
+    }
+
     buildTypes {
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
+
+            applicationVariants.all { variant ->
+                def file = variant.outputFile
+                variant.outputFile = new File(file.parent, file.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
+            }
         }
     }
 }

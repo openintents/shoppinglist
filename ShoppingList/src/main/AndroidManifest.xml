@@ -78,10 +78,6 @@
       android:name="org.openintents.themes"
       android:resource="@xml/themes" />
 
-    <meta-data
-      android:name="hideMarketLink"
-      android:value="false" />
-
     <provider
       android:name="org.openintents.shopping.provider.ShoppingProvider"
       android:authorities="org.openintents.shopping"
@@ -284,9 +280,6 @@
         <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
       </intent-filter>
     </activity>
-    <meta-data
-      android:value="false"
-      android:name="hideMarketLink" />
   </application>
 
   <!-- required for MyBackupPro: -->
