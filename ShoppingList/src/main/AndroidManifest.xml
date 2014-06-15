@@ -19,7 +19,7 @@
   package="org.openintents.shopping"
   android:installLocation="auto"
   android:versionName="1.8"
-  android:versionCode="10045">
+  android:versionCode="100201">
   <!-- History:
    * * * UPDATE ATRACKDOG METADATA BELOW FOR RELEASE CANDIDATES * * *
         1.8 [10044]: 2013-12-??
