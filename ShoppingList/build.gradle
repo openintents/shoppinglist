@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "org.openintents.shopping"
-        versionName "2.0-rc1"
+        versionName "2.0-rc2"
         minSdkVersion 7
         targetSdkVersion 19
 
@@ -16,19 +16,6 @@ android {
 
     lintOptions {
         abortOnError false
-    }
-
-
-    signingConfigs {
-        release {
-            Properties props = new Properties()
-            props.load(new FileInputStream("$buildDir/../build-private.properties"))
-
-            storeFile file(props.getProperty("key.store"))
-            storePassword props.getProperty("key.store.password")
-            keyAlias props.getProperty("key.alias")
-            keyPassword props.getProperty("key.alias.password")
-        }
     }
 
     productFlavors {
@@ -46,7 +33,6 @@ android {
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-            signingConfig signingConfigs.release
 
             applicationVariants.all { variant ->
                 def file = variant.outputFile
@@ -54,7 +40,28 @@ android {
             }
         }
     }
+
+    propertyFile = new File(projectDir, "build-private.properties")
+    if (propertyFile.exists()) {
+        signingConfigs {
+            release {
+                Properties props = new Properties()
+                props.load(new FileInputStream(propertyFile))
+
+                storeFile file(props.getProperty("key.store"))
+                storePassword props.getProperty("key.store.password")
+                keyAlias props.getProperty("key.alias")
+                keyPassword props.getProperty("key.alias.password")
+            }
+        }
+        buildTypes.release.signingConfig signingConfigs.release
+        println "Release apks will be signed!"
+    } else {
+        println "For signed release apks you need to create a build-private.properties file"
+    }
+
 }
+
 
 dependencies {
     compile project(':ShoppingListLibrary')
