@@ -1,4 +1,19 @@
 ----------------
+release 2.0-rc2
+date: ??
+
+- Search/add filters the list in-place instead of using the auto-complete popup.
+
+----------------
+release 2.0-rc1
+date: 2014-06-14
+
+- Holo UI using action bar and navigation drawer.
+- Undo support for marking items and Clean List.
+- Search / add items via action bar.
+- Optionally remember a different sort order for each list.
+
+----------------
 release 1.8
 date: 2014-02-11
 
