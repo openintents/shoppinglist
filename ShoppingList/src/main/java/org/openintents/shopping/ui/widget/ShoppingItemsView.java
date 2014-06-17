@@ -602,6 +602,7 @@ public class ShoppingItemsView extends ListView {
                 mMode = ShoppingActivity.MODE_ADD_ITEMS;
             }
 
+            /*
             int searchAutocompleteResource = getResources().getIdentifier("android:id/search_src_text", null, null);
             if (searchAutocompleteResource == 0) {
                 searchAutocompleteResource = android.support.v7.appcompat.R.id.search_src_text;
@@ -611,6 +612,7 @@ public class ShoppingItemsView extends ListView {
             if (search instanceof AutoCompleteTextView && mCursorActivity instanceof ShoppingActivity) {
                 ((ShoppingActivity) mCursorActivity).fillAutoCompleteTextViewAdapter((AutoCompleteTextView) search);
             }
+            */
 
 
             if (query.length() == 0) {
