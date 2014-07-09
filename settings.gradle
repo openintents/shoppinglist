@@ -1,2 +1,3 @@
 include ':ShoppingListLibrary'
 include ':ShoppingList'
+include ':ShoppingListWear'
