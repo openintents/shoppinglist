@@ -1,14 +1,14 @@
 apply plugin: 'android'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.1.0"
+    compileSdkVersion 20
+    buildToolsVersion "20"
 
     defaultConfig {
         applicationId "org.openintents.shopping"
         versionName "2.0-rc2"
-        minSdkVersion 7
-        targetSdkVersion 19
+        minSdkVersion 14
+        targetSdkVersion 20
 
         testApplicationId "org.openintents.shopping.test"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
@@ -20,7 +20,10 @@ android {
 
     productFlavors {
         play {
-
+            dependencies {
+                compile 'com.google.android.gms:play-services-wearable:+'
+                wearApp project(':ShoppingListWear')
+            }
         }
 
         tstore {
@@ -66,7 +69,7 @@ android {
 dependencies {
     compile project(':ShoppingListLibrary')
     compile 'org.openintents:distribution-lib:1.0.+'
-    compile 'com.android.support:appcompat-v7:+'
+    compile 'com.android.support:appcompat-v7:20.+'
     compile files('libs/sensorsimulator-lib.jar')
     compile files('libs/OIShoppingListMyBackupPro.jar')
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:4.3.1'
