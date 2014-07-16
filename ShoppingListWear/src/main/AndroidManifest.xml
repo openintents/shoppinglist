@@ -20,6 +20,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="com.google.android.voicesearch.SELF_NOTE"/>
+            </intent-filter>
         </activity>
 
         <service

@@ -14,7 +14,9 @@
  * limitations under the License.
  -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:locale="en"
+    tools:ignore="MissingTranslation">
   <!-- Share shopping list -->
   <string name="shopping_name_description">Enter a unique identifier for this list.</string>
   <string name="please_enter_description">Please enter a unique identifier</string>
@@ -42,6 +44,7 @@
   <string name="alert_not_added">Alert could not be added (see log for information).</string>
   <string name="alerts_not_installed">No application installed for alerts.</string>
 
+    <string name="preference_pickitems"></string>
   <!-- GTalk related -->
   <!--
   <string name="gtalk_invalid_username">Invalid username. Please enter your Gmail or Google apps. username.</string>
