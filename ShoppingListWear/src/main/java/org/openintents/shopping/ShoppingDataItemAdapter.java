@@ -1,9 +1,7 @@
 package org.openintents.shopping;
 
-import android.support.wearable.view.WatchViewStub;
+import android.content.Context;
 import android.support.wearable.view.WearableListView;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -19,27 +17,41 @@ import java.util.List;
 
 public class ShoppingDataItemAdapter extends WearableListView.Adapter {
 
+    private static final String EMPTY_STRING = "";
     private List<DataItem> mItems = new ArrayList<DataItem>();
+    private Context mContext;
 
-    public ShoppingDataItemAdapter(){
-
+    public ShoppingDataItemAdapter(Context context){
+        mContext = context;
     }
 
     @Override
     public WearableListView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        final View view =  LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.rect_activity_shopping, viewGroup, false);
-
-        return new WearableListView.ViewHolder(view);
+        return new WearableListView.ViewHolder(new ShoppingItemView(mContext, 14, 20));
     }
 
     @Override
     public void onBindViewHolder(WearableListView.ViewHolder viewHolder, int i) {
         String name = DataMapItem.fromDataItem(mItems.get(i)).getDataMap().getString(ShoppingContract.ContainsFull.ITEM_NAME);
-        ((TextView)viewHolder.itemView.findViewById(R.id.name)).setText(name);
         String quantity =DataMapItem.fromDataItem(mItems.get(i)).getDataMap().getString(ShoppingContract.ContainsFull.QUANTITY);
         String units = DataMapItem.fromDataItem(mItems.get(i)).getDataMap().getString(ShoppingContract.ContainsFull.ITEM_UNITS);
-        String quantityDisplay = quantity + " " + units;
-        ((TextView)viewHolder.itemView.findViewById(R.id.quantity)).setText(quantityDisplay);
+        String titleDisplay;
+        if (quantity == null){
+            titleDisplay = name;
+        } else {
+            if (units == null){
+                titleDisplay = quantity + " " + name;
+            } else {
+                titleDisplay = quantity+ units + " " + name;
+            }
+        }
+        ((TextView)viewHolder.itemView.findViewById(R.id.title)).setText(titleDisplay);
+
+        String tags = DataMapItem.fromDataItem(mItems.get(i)).getDataMap().getString(ShoppingContract.ContainsFull.ITEM_TAGS);
+        if (tags == null){
+            tags = EMPTY_STRING;
+        }
+        ((TextView)viewHolder.itemView.findViewById(R.id.tags)).setText(tags);
     }
 
     public void setItems(DataItemBuffer items) {

@@ -11,6 +11,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.wearable.DataApi;
 import com.google.android.gms.wearable.MessageApi;
+import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.PutDataRequest;
@@ -70,8 +71,13 @@ public class GooglePlayWearSupport implements WearSupport {
         pendingResult.await();
 
         NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes(mGoogleApiClient).await();
-        MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(mGoogleApiClient, nodes.getNodes().get(0).getId(), "items", null).await();
-        Log.d(TAG, "" + result.getStatus().getStatusMessage());
+        Node node = nodes.getNodes().get(0);
+        if (node != null) {
+            MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(mGoogleApiClient, node.getId(), "items", null).await();
+            Log.d(TAG, "" + result.getStatus().getStatusMessage());
+        } else {
+            Log.d(TAG, "no android wear");
+        }
     }
 
     private void putString(PutDataMapRequest request, Cursor cursor, String columnName) {

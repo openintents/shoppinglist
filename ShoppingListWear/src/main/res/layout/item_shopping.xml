@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.wearable.view.WatchViewStub
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/shopping_item_view_stub"
+    android:layout_height="75dip"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:rectLayout="@layout/rect_activity_shopping"
-    app:roundLayout="@layout/round_activity_shopping"
-    tools:context=".MyActivity"
-    tools:deviceIds="wear">
-</android.support.wearable.view.WatchViewStub>
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center">
+    <TextView
+        android:id="@+id/title"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        tools:text="Butter"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tags"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        tools:text="100g" />
+</LinearLayout>

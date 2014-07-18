@@ -33,7 +33,7 @@ public class ShoppingListActivity extends Activity implements ServiceConnection,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping);
         final WearableListView listView = (WearableListView) findViewById(R.id.shopping_list);
-        adapter = new ShoppingDataItemAdapter();
+        adapter = new ShoppingDataItemAdapter(this);
         listView.setAdapter(adapter);
 
         listView.setClickListener(new WearableListView.ClickListener() {
