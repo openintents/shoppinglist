@@ -14,7 +14,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SearchViewCompat;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -36,6 +35,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 import org.openintents.distribution.DownloadAppDialog;
+import org.openintents.shopping.WearSupport;
 import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
@@ -48,6 +48,7 @@ import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;
 import org.openintents.shopping.ui.*;
 import org.openintents.shopping.ui.dialog.EditItemDialog;
+import org.openintents.shopping.wear.WearSupportFactory;
 
 /**
  * View to show a shopping list with its items
@@ -133,6 +134,7 @@ public class ShoppingItemsView extends ListView {
     private ActionBarListener mActionBarListener = null;
     private UndoListener mUndoListener = null;
     private ActionableToastBar mToastBar;
+    private WearSupport mWearSupport;
 
     /**
      * Extend the SimpleCursorAdapter to strike through items. if STATUS ==
@@ -731,6 +733,7 @@ public class ShoppingItemsView extends ListView {
 
         // Remember standard divider
         mDefaultDivider = getDivider();
+        mWearSupport = WearSupportFactory.getDefault(getContext());
     }
 
     public void setActionBarListener(ActionBarListener listener) {
@@ -852,6 +855,7 @@ public class ShoppingItemsView extends ListView {
 
         // called in requery():
         updateTotal();
+        pushToWear();
 
         return mCursorItems;
     }
@@ -876,7 +880,7 @@ public class ShoppingItemsView extends ListView {
     /**
      * Set theme according to Id.
      *
-     * @param themeId
+     * @param themeName
      */
     public void setListTheme(String themeName) {
         int size = PreferenceActivity.getFontSizeFromPrefs(getContext());
@@ -1252,10 +1256,19 @@ public class ShoppingItemsView extends ListView {
             Log.d(TAG, "update row " + mCursorItems.getString(0) + ", newstatus "
                     + newstatus);
         }
+
+        new Thread(){
+            @Override
+            public void run() {
+                mWearSupport.pushToWear(mCursorItems);
+            }
+        }.start();
+
         getContext().getContentResolver().update(
                 Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI,
                         item_id), values, null, null
         );
+
         boolean affectsSort = PreferenceActivity.prefsStatusAffectsSort(getContext(), mMode);
         boolean hidesItem = true /* TODO */;
         if (mUndoListener != null && (affectsSort || hidesItem)) {
@@ -1355,6 +1368,25 @@ public class ShoppingItemsView extends ListView {
 
     }
 
+    public void pushToWear(){
+        if (mWearSupport.isAvailable()){
+            new Thread(){
+                @Override
+                public void run() {
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    mCursorItems.moveToPosition(-1);
+                    while (mCursorItems.moveToNext()) {
+                        mWearSupport.pushToWear(mCursorItems);
+                    }
+                }
+            }.start();
+
+        }
+    }
     /**
      * Post setSelection delayed, because onItemSelected() may be called more
      * than once, leading to fillItems() being called more than once as well.

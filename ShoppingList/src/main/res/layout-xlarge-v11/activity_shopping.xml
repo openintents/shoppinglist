@@ -19,12 +19,17 @@
   android:layout_width="fill_parent"
   android:layout_height="fill_parent">
 
-  <fragment
-    android:id="@+id/sidelist"
-    android:layout_width="fill_parent"
+  <ListView
+    android:id="@+id/left_drawer"
+    android:layout_width="0dp"
     android:layout_height="fill_parent"
-    class="org.openintents.shopping.ui.tablet.ShoppingListFilterFragment"
-    android:layout_weight="3" />
+    android:layout_gravity="start"
+    android:choiceMode="singleChoice"
+    android:divider="@android:color/transparent"
+    android:dividerHeight="0dp"
+    android:background="#111"
+    android:layout_weight="3"/>
+
 
   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/background"

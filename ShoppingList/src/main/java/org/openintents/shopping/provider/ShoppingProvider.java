@@ -759,7 +759,6 @@ public class ShoppingProvider extends ContentProvider {
     private Uri insertItemStore(Uri url, ContentValues values) {
         SQLiteDatabase db = mOpenHelper.getWritableDatabase();
         Long now = Long.valueOf(System.currentTimeMillis());
-        Resources r = Resources.getSystem();
 
         // Make sure that the fields are all set
         if (!(values.containsKey(ItemStores.ITEM_ID) && values
