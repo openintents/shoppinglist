@@ -22,6 +22,7 @@ import android.app.Dialog;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.*;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
@@ -73,7 +74,6 @@ import org.openintents.shopping.ui.dialog.*;
 import org.openintents.shopping.ui.dialog.EditItemDialog.FieldType;
 import org.openintents.shopping.ui.dialog.EditItemDialog.OnItemChangedListener;
 import org.openintents.shopping.ui.dialog.ThemeDialog.ThemeDialogListener;
-import org.openintents.shopping.ui.tablet.ShoppingListFilterFragment;
 import org.openintents.shopping.ui.widget.ActionableToastBar;
 import org.openintents.shopping.ui.widget.QuickSelectMenu;
 import org.openintents.shopping.ui.widget.ShoppingItemsView;
@@ -1239,29 +1239,36 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     private void createList() {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerListsView = (ListView) findViewById(R.id.left_drawer);
 
         mTitle = mDrawerTitle = getTitle();
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
+        if (mDrawerLayout != null) {
+            mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                    R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
 
-            /** Called when a drawer has settled in a completely closed state. */
-            public void onDrawerClosed(View view) {
-                getSupportActionBar().setTitle(mTitle);
-                getSupportActionBar().setSubtitle(mSubTitle);
-                compat_invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
+                /**
+                 * Called when a drawer has settled in a completely closed state.
+                 */
+                public void onDrawerClosed(View view) {
+                    getSupportActionBar().setTitle(mTitle);
+                    getSupportActionBar().setSubtitle(mSubTitle);
+                    compat_invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                }
 
-            /** Called when a drawer has settled in a completely open state. */
-            public void onDrawerOpened(View drawerView) {
-                getSupportActionBar().setTitle(mDrawerTitle);
-                getSupportActionBar().setSubtitle(null);
-                compat_invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-        };
+                /**
+                 * Called when a drawer has settled in a completely open state.
+                 */
+                public void onDrawerOpened(View drawerView) {
+                    getSupportActionBar().setTitle(mDrawerTitle);
+                    getSupportActionBar().setSubtitle(null);
+                    compat_invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                }
+            };
 
-        // Set the drawer toggle as the DrawerListener
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+            // Set the drawer toggle as the DrawerListener
+            mDrawerLayout.setDrawerListener(mDrawerToggle);
+        }
+
+        mDrawerListsView = (ListView) findViewById(R.id.left_drawer);
 
         // TODO probably can obsolete the below; tablet mode should also use
         // the drawer rather than a separate fragment
@@ -3139,7 +3146,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
      * Tags for notes can be comma-separated. Here we create a list of the
      * unique tags.
      *
-     * @param c
      * @return
      */
     String[] getTaglist() {
@@ -3152,7 +3158,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
      * Tags for notes can be comma-separated. Here we create a list of the
      * unique tags.
      *
-     * @param c
+     * @param listId
      * @return
      */
     String[] getTaglist(String listId) {
@@ -3268,9 +3274,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
      * @param requestCode The original request code as given to startActivity().
      * @param resultCode  From sending activity as per setResult().
      * @param data        From sending activity as per setResult().
-     * @param extras      From sending activity as per setResult().
-     * @see android.app.Activity#onActivityResult(int, int, java.lang.String,
-     * android.os.Bundle)
+     * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -3620,9 +3624,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         if (usingListSpinner()) {// Temp - restricted for OS3
             mShoppingListsView.setAdapter(adapter);
         } else {
-            ShoppingListFilterFragment os3 = (ShoppingListFilterFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.sidelist);
-            os3.setAdapter(adapter);
+            // TODO
         }
     }
 
