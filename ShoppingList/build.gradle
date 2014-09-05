@@ -1,4 +1,4 @@
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 20
@@ -72,8 +72,10 @@ android {
 
 dependencies {
 
-    maven {
-        url '../myorepository'
+    repositories {
+        maven {
+            url '../myorepository'
+        }
     }
 
     compile project(':ShoppingListLibrary')

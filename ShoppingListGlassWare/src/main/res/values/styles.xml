@@ -1,0 +1,6 @@
+<resources>
+
+  <style name="ShoppingListTheme" parent="@android:style/Theme.DeviceDefault">
+    <!-- Theme customization goes here. -->
+  </style>
+</resources>
