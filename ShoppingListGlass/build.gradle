@@ -1,0 +1,53 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.12.+'
+    }
+}
+apply plugin: 'android'
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    compile.exclude module: 'xpp3'
+    compile.exclude module: 'httpclient'
+    compile.exclude module: 'junit'
+    compile.exclude module: 'android'
+    compile.exclude module: 'google-play-services'
+}
+
+dependencies {
+
+    // Require the Google APIs Client Library
+    compile 'com.google.api-client:google-api-client:1.17.0-rc'
+    compile 'com.google.api-client:google-api-client-android:1.17.0-rc'
+    compile 'com.google.apis:google-api-services-mirror:v1-rev26-1.17.0-rc'
+    compile (group: 'com.google.http-client', name: 'google-http-client-jackson2', version: '1.17.0-rc')
+    compile (group: 'com.google.guava', name: 'guava', version: '15.0')
+}
+
+
+android {
+    compileSdkVersion 20
+    buildToolsVersion "20"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 19
+    }
+    buildTypes {
+        release {
+            runProguard true
+            proguardFile getDefaultProguardFile('proguard-android-optimize.txt')
+        }
+    }
+    productFlavors {
+        defaultFlavor {
+            proguardFile 'proguard-rules.txt'
+        }
+    }
+}

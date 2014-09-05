@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="GooglePlayServices-libs-google-play-services.jar-google-play-services">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/Libraries/GooglePlayServices/libs/google-play-services.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
