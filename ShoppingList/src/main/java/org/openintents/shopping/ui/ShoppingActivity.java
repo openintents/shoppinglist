@@ -63,6 +63,7 @@ import org.openintents.intents.GeneralIntents;
 import org.openintents.intents.ShoppingListIntents;
 import org.openintents.provider.Alert;
 import org.openintents.provider.Location.Locations;
+import org.openintents.shopping.BuildConfig;
 import org.openintents.shopping.LogConstants;
 import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract;
@@ -641,7 +642,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         mItemsView.setActionBarListener(this);
         mItemsView.setUndoListener(this);
 
-        toggleBoughtInputMethod = new MyoToggleBoughtInputMethod(this, mItemsView);
+        if ("myo".equals(BuildConfig.FLAVOR)) {
+            toggleBoughtInputMethod = new MyoToggleBoughtInputMethod(this, mItemsView);
+        }
     }
 
     @Override
