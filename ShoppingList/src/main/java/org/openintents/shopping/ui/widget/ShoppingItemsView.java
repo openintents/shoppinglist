@@ -136,6 +136,7 @@ public class ShoppingItemsView extends ListView {
     private ActionableToastBar mToastBar;
     private WearSupport mWearSupport;
 
+
     /**
      * Extend the SimpleCursorAdapter to strike through items. if STATUS ==
      * Shopping.Status.BOUGHT

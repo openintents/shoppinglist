@@ -28,16 +28,6 @@ android {
 
         myo {
             minSdkVersion 16
-
-            dependencies {
-                repositories {
-                    maven {
-                        url '../myorepository'
-                    }
-                }
-
-                compile('com.thalmic:myosdk:0.6.+@aar')
-            }
         }
 
         tstore {
@@ -81,6 +71,11 @@ android {
 
 
 dependencies {
+
+    maven {
+        url '../myorepository'
+    }
+
     compile project(':ShoppingListLibrary')
     compile 'org.openintents:distribution-lib:1.0.+'
     compile 'com.android.support:appcompat-v7:20.+'
@@ -89,4 +84,6 @@ dependencies {
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:4.3.1'
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:3.1'
     androidTestCompile files('libs/polidea_test_runner_1.2.jar')
+
+    myoCompile('com.thalmic:myosdk:0.6.+@aar')
 }

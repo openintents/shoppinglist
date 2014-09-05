@@ -22,7 +22,6 @@ import android.app.Dialog;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.*;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
@@ -100,6 +99,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
      */
     private static final String TAG = "ShoppingActivity";
     private static final boolean debug = false || LogConstants.debug;
+    private ToggleBoughtInputMethod toggleBoughtInputMethod;
 
     public class MyGestureDetector extends SimpleOnGestureListener {
         private static final float DISTANCE_DIP = 16.0f;
@@ -640,6 +640,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         mItemsView.setActionBarListener(this);
         mItemsView.setUndoListener(this);
+
+        toggleBoughtInputMethod = new MyoToggleBoughtInputMethod(this, mItemsView);
     }
 
     @Override
@@ -988,6 +990,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		 */
 
         mItemsView.onPause();
+    }
+
+    public void onDestroy(){
+        if (toggleBoughtInputMethod != null){
+            toggleBoughtInputMethod.release();
+        }
     }
 
     @Override
