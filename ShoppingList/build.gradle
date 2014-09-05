@@ -26,6 +26,20 @@ android {
             }
         }
 
+        myo {
+            minSdkVersion 16
+
+            dependencies {
+                repositories {
+                    maven {
+                        url '../myorepository'
+                    }
+                }
+
+                compile('com.thalmic:myosdk:0.6.+@aar')
+            }
+        }
+
         tstore {
 
         }
