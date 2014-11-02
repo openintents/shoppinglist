@@ -1,4 +1,4 @@
-package org.openintents.shopping;
+package org.openintents.shopping.wear;
 
 import android.content.Context;
 import android.util.AttributeSet;

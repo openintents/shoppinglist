@@ -1,15 +1,13 @@
-package org.openintents.shopping;
+package org.openintents.shopping.wear;
 
-import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.support.v4.content.LocalBroadcastManager;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.data.FreezableUtils;
 import com.google.android.gms.wearable.DataApi;
 import com.google.android.gms.wearable.DataEvent;
 import com.google.android.gms.wearable.DataEventBuffer;
@@ -23,9 +21,8 @@ import com.google.android.gms.wearable.PutDataRequest;
 import com.google.android.gms.wearable.Wearable;
 import com.google.android.gms.wearable.WearableListenerService;
 
-import org.openintents.shopping.library.provider.ShoppingContract;
-
-public class ShoppingWearableListenerService extends WearableListenerService implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class ShoppingWearableListenerService extends WearableListenerService implements GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
     private GoogleApiClient mGoogleApiClient;
 
     @Override
@@ -46,6 +43,7 @@ public class ShoppingWearableListenerService extends WearableListenerService imp
 
     @Override
     public void onDataChanged(DataEventBuffer dataEvents) {
+        FreezableUtils.freezeIterable(dataEvents);
         for (DataEvent dataEvent : dataEvents) {
             if (dataEvent.getType() == DataEvent.TYPE_CHANGED) {
                 DataMap dataMap = DataMapItem.fromDataItem(dataEvent.getDataItem()).getDataMap();
@@ -59,6 +57,8 @@ public class ShoppingWearableListenerService extends WearableListenerService imp
         if (messageEvent.getPath() != null){
             Intent i = new Intent(this, ShoppingListActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            String listId = new String(messageEvent.getData());
+            i.putExtra(ShoppingListActivity.EXTRA_LIST_ID, listId);
             startActivity(i);
         }
     }

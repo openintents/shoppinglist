@@ -1,7 +1,9 @@
 package org.openintents.shopping.wear;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -58,25 +60,54 @@ public class GooglePlayWearSupport implements WearSupport {
     }
 
     @Override
-    public void pushToWear(Cursor cursor) {
-        String id = cursor.getString(cursor.getColumnIndex(ShoppingContract.Items._ID));
-        PutDataMapRequest dataMap = PutDataMapRequest.create("/items/" + id);
+    public void pushListItem(long listId, Cursor cursor) {
+        String id = cursor.getString(cursor.getColumnIndex(ShoppingContract.ContainsFull._ID));
+        String listIdString = String.valueOf(listId);
+        PutDataMapRequest dataMap = PutDataMapRequest.create("/" + listIdString + "/items/" + id);
         putString(dataMap, cursor, ShoppingContract.ContainsFull.ITEM_NAME);
         putString(dataMap, cursor, ShoppingContract.ContainsFull.QUANTITY);
         putString(dataMap, cursor, ShoppingContract.ContainsFull.ITEM_UNITS);
         putString(dataMap, cursor, ShoppingContract.ContainsFull.STATUS);
+        putString(dataMap, cursor, ShoppingContract.ContainsFull.ITEM_TAGS);
+        sendRequest(dataMap, listIdString);
+    }
+
+    public void pushList(Cursor cursor){
+        String id = cursor.getString(cursor.getColumnIndex(ShoppingContract.Lists._ID));
+        PutDataMapRequest dataMap = PutDataMapRequest.create("/lists/" + id);
+        putString(dataMap, cursor, ShoppingContract.Lists.NAME);
+        putString(dataMap, cursor, ShoppingContract.Lists.ITEMS_SORT);
+        putString(dataMap, cursor, ShoppingContract.Lists.STORE_FILTER);
+        sendRequest(dataMap, null);
+    }
+
+    @Override
+    public void updateListItem(long listId, Uri itemUri, ContentValues values) {
+        String id = itemUri.getLastPathSegment();
+        PutDataMapRequest request = PutDataMapRequest.create("/" + listId + "/items/" + id);
+        for (String key : values.keySet()){
+            String value = values.getAsString(key);
+            request.getDataMap().putString(key, value);
+        }
+        sendRequest(request, String.valueOf(listId));
+    }
+
+
+    private void sendRequest(PutDataMapRequest dataMap, String listIdToShow) {
         PutDataRequest request = dataMap.asPutDataRequest();
         PendingResult<DataApi.DataItemResult> pendingResult = Wearable.DataApi
                 .putDataItem(mGoogleApiClient, request);
         pendingResult.await();
 
-        NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes(mGoogleApiClient).await();
-        Node node = nodes.getNodes().get(0);
-        if (node != null) {
-            MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(mGoogleApiClient, node.getId(), "items", null).await();
-            Log.d(TAG, "" + result.getStatus().getStatusMessage());
-        } else {
-            Log.d(TAG, "no android wear");
+        if (listIdToShow != null) {
+            NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes(mGoogleApiClient).await();
+            Node node = nodes.getNodes().get(0);
+            if (node != null) {
+                MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(mGoogleApiClient, node.getId(), "items", listIdToShow.getBytes()).await();
+                Log.d(TAG, "" + result.getStatus());
+            } else {
+                Log.d(TAG, "no android wear");
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-package org.openintents.shopping;
+package org.openintents.shopping.wear;
 
 import android.content.Context;
 import android.support.wearable.view.CircledImageView;
@@ -6,6 +6,8 @@ import android.support.wearable.view.WearableListView;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import org.openintents.shopping.R;
 
 public class ShoppingItemView extends FrameLayout implements WearableListView.Item {
 

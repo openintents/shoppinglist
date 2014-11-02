@@ -21,7 +21,14 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
-import android.content.*;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
+import android.content.ContentUris;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
@@ -31,7 +38,11 @@ import android.database.DataSetObserver;
 import android.hardware.SensorListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
-import android.os.*;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.ActionProvider;
 import android.support.v4.view.MenuItemCompat;
@@ -41,20 +52,41 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.*;
+import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.MotionEvent;
+import android.view.SubMenu;
+import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.*;
+import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
-
-import java.util.*;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.CursorAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.WrapperListAdapter;
 
 import org.openintents.OpenIntents;
 import org.openintents.distribution.DistributionLibraryFragmentActivity;
@@ -67,12 +99,21 @@ import org.openintents.shopping.BuildConfig;
 import org.openintents.shopping.LogConstants;
 import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract;
-import org.openintents.shopping.library.provider.ShoppingContract.*;
+import org.openintents.shopping.library.provider.ShoppingContract.Contains;
+import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
+import org.openintents.shopping.library.provider.ShoppingContract.Items;
+import org.openintents.shopping.library.provider.ShoppingContract.Lists;
+import org.openintents.shopping.library.provider.ShoppingContract.Status;
+import org.openintents.shopping.library.provider.ShoppingContract.Stores;
 import org.openintents.shopping.library.util.PriceConverter;
 import org.openintents.shopping.library.util.ShoppingUtils;
-import org.openintents.shopping.ui.dialog.*;
+import org.openintents.shopping.ui.dialog.DialogActionListener;
+import org.openintents.shopping.ui.dialog.EditItemDialog;
 import org.openintents.shopping.ui.dialog.EditItemDialog.FieldType;
 import org.openintents.shopping.ui.dialog.EditItemDialog.OnItemChangedListener;
+import org.openintents.shopping.ui.dialog.NewListDialog;
+import org.openintents.shopping.ui.dialog.RenameListDialog;
+import org.openintents.shopping.ui.dialog.ThemeDialog;
 import org.openintents.shopping.ui.dialog.ThemeDialog.ThemeDialogListener;
 import org.openintents.shopping.ui.widget.ActionableToastBar;
 import org.openintents.shopping.ui.widget.QuickSelectMenu;
@@ -84,6 +125,12 @@ import org.openintents.shopping.ui.widget.ShoppingItemsView.OnCustomClickListene
 import org.openintents.shopping.widgets.CheckItemsWidget;
 import org.openintents.util.MenuIntentOptionsWithIcons;
 import org.openintents.util.ShakeSensorListener;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Displays a shopping list.
@@ -100,6 +147,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
      */
     private static final String TAG = "ShoppingActivity";
     private static final boolean debug = false || LogConstants.debug;
+
     private ToggleBoughtInputMethod toggleBoughtInputMethod;
 
     public class MyGestureDetector extends SimpleOnGestureListener {
@@ -175,21 +223,13 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     private static final int MENU_EDIT_ITEM = Menu.FIRST + 8; // includes rename
     private static final int MENU_DELETE_ITEM = Menu.FIRST + 9;
 
-    private static final int MENU_INSERT_FROM_EXTRAS = Menu.FIRST + 10; // insert
-    // from
-    // string
-    // array
-    // in
-    // intent
-    // extras
+    private static final int MENU_INSERT_FROM_EXTRAS = Menu.FIRST + 10;
     private static final int MENU_COPY_ITEM = Menu.FIRST + 11;
     private static final int MENU_SORT_LIST = Menu.FIRST + 12;
     private static final int MENU_SEARCH_ADD = Menu.FIRST + 13;
 
     // TODO: obsolete pick items button, now in drawer
-    private static final int MENU_PICK_ITEMS = Menu.FIRST + 14; // pick from
-    // previously
-    // used items
+    private static final int MENU_PICK_ITEMS = Menu.FIRST + 14;
 
     // TODO: Implement "select list" action
     // that can be called by other programs.
@@ -202,6 +242,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     private static final int MENU_MARK_ALL_ITEMS = Menu.FIRST + 21;
     private static final int MENU_ITEM_STORES = Menu.FIRST + 22;
     private static final int MENU_UNMARK_ALL_ITEMS = Menu.FIRST + 23;
+    private static final int MENU_CALL_HOME = Menu.FIRST + 24;
 
     private static final int MENU_DISTRIBUTION_START = Menu.FIRST + 100; // MUST
     // BE
@@ -362,7 +403,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
     // private Cursor mCursorItems;
 
-    public static final String[] mStringItems = new String[]{
+    public static final String[] PROJECTION_ITEMS = new String[]{
             ContainsFull._ID, ContainsFull.ITEM_NAME, ContainsFull.ITEM_IMAGE,
             ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,
             ContainsFull.QUANTITY, ContainsFull.STATUS, ContainsFull.ITEM_ID,
@@ -529,24 +570,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         } else if (Intent.ACTION_VIEW.equals(action)) {
             mState = STATE_VIEW_LIST;
 
-            if (ShoppingContract.ITEM_TYPE.equals(type)) {
-                mListUri = ShoppingUtils.getListForItem(this, intent.getData()
-                        .getLastPathSegment());
-            } else if (intent.getData() != null) {
-                mListUri = intent.getData();
-            }
+            setListUriFromIntent(intent.getData(), type);
         } else if (Intent.ACTION_INSERT.equals(action)) {
-            // TODO: insert items from extras ????
+
             mState = STATE_VIEW_LIST;
 
-            if (ShoppingContract.ITEM_TYPE.equals(type)) {
-                mListUri = ShoppingUtils.getListForItem(
-                        getApplicationContext(), intent.getData()
-                                .getLastPathSegment()
-                );
-            } else if (intent.getData() != null) {
-                mListUri = intent.getData();
-            }
+            setListUriFromIntent(intent.getData(), type);
 
         } else if (Intent.ACTION_PICK.equals(action)) {
             mState = STATE_PICK_ITEM;
@@ -561,7 +590,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         } else if (GeneralIntents.ACTION_INSERT_FROM_EXTRAS.equals(action)) {
             if (ShoppingListIntents.TYPE_STRING_ARRAYLIST_SHOPPING.equals(type)) {
                 /*
-				 * Need to insert new items from a string array in the intent
+                 * Need to insert new items from a string array in the intent
 				 * extras Use main action but add an item to the options menu
 				 * for adding extra items
 				 */
@@ -642,8 +671,17 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         mItemsView.setActionBarListener(this);
         mItemsView.setUndoListener(this);
 
-        if ("myo".equals(BuildConfig.FLAVOR)) {
-            toggleBoughtInputMethod = new MyoToggleBoughtInputMethod(this, mItemsView);
+        if (BuildConfig.FLAVOR.equals("myo")) {
+            //toggleBoughtInputMethod = new MyToggleBoughtInputMethod(this, mItemsView);
+        }
+    }
+
+    private void setListUriFromIntent(Uri data, String type) {
+        if (ShoppingContract.ITEM_TYPE.equals(type)) {
+            mListUri = ShoppingUtils.getListForItem(this, data
+                    .getLastPathSegment());
+        } else if (data != null) {
+            mListUri = data;
         }
     }
 
@@ -995,8 +1033,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         mItemsView.onPause();
     }
 
-    public void onDestroy(){
-        if (toggleBoughtInputMethod != null){
+    public void onDestroy() {
+        super.onDestroy();
+        if (toggleBoughtInputMethod != null) {
             toggleBoughtInputMethod.release();
         }
     }
@@ -1866,6 +1905,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         menu.add(0, MENU_UNMARK_ALL_ITEMS, 0, R.string.unmark_all_items);
 
+        menu.add(0, MENU_CALL_HOME, 0, R.string.call_home);
+
         // Add distribution menu items last.
         mDistribution.onCreateOptionsMenu(menu);
 
@@ -2050,6 +2091,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 return true;
             case MENU_UNMARK_ALL_ITEMS:
                 mItemsView.toggleAllItems(false);
+                return true;
+            case MENU_CALL_HOME:
+                intent = new Intent(Intent.ACTION_CALL);
+                startActivity(intent);
         }
         if (debug) {
             Log.d(TAG, "Start intent group id : " + item.getGroupId());

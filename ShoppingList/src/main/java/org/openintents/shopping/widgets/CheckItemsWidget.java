@@ -260,7 +260,7 @@ public class CheckItemsWidget extends AppWidgetProvider {
                 + ShoppingContract.Status.WANT_TO_BUY;
 
         Cursor cursor = context.getContentResolver().query(
-                ContainsFull.CONTENT_URI, ShoppingActivity.mStringItems,
+                ContainsFull.CONTENT_URI, ShoppingActivity.PROJECTION_ITEMS,
                 selection, new String[]{String.valueOf(listId)}, sortOrder);
 
         return cursor;

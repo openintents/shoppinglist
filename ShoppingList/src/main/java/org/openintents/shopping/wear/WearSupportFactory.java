@@ -1,7 +1,9 @@
 package org.openintents.shopping.wear;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 
 import org.openintents.shopping.BuildConfig;
 import org.openintents.shopping.WearSupport;
@@ -24,8 +26,19 @@ public class WearSupportFactory {
         }
 
         @Override
-        public void pushToWear(Cursor cursor) {
+        public void pushListItem(long listId, Cursor cursor) {
 
         }
+
+        @Override
+        public void pushList(Cursor cursor) {
+
+        }
+
+        @Override
+        public void updateListItem(long listId, Uri itemUri, ContentValues values) {
+
+        }
+
     }
 }

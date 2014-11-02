@@ -766,37 +766,17 @@ public class ShoppingItemsView extends ListView {
      */
     public Cursor fillItems(Activity activity, long listId) {
 
-        mListId = listId;
-        String sortOrder = PreferenceActivity.getSortOrderFromPrefs(this
-                .getContext(), mMode, listId);
-        boolean hideBought = PreferenceActivity
-                .getHideCheckedItemsFromPrefs(this.getContext());
-        String selection;
-        String[] selection_args = new String[]{String.valueOf(listId)};
-        if (mFilter != null) {
-            selection = "list_id = ? AND " + ShoppingContract.ContainsFull.ITEM_NAME +
-                    " like '%" + mFilter + "%'";
-        } else if (mMode == ShoppingActivity.MODE_IN_SHOP) {
-            if (hideBought) {
-                selection = "list_id = ? AND " + ShoppingContract.Contains.STATUS
-                        + " == " + ShoppingContract.Status.WANT_TO_BUY;
-            } else {
-                selection = "list_id = ? AND " + ShoppingContract.Contains.STATUS
-                        + " <> " + ShoppingContract.Status.REMOVED_FROM_LIST;
-            }
-        } else {
-            selection = "list_id = ? ";
-        }
 
+        Cursor items = createItemsCursor(listId);
+
+        mListId = listId;
         if (mCursorItems != null) {
             disposeItemsCursor();
         }
 
         // Get a cursor for all items that are contained
         // in currently selected shopping list.
-        mCursorItems = getContext().getContentResolver().query(
-                ContainsFull.CONTENT_URI, ShoppingActivity.mStringItems,
-                selection, selection_args, sortOrder);
+        mCursorItems = items;
 
         // Activate the following for a striped list.
         // setupListStripes(mListItems, this);
@@ -856,9 +836,36 @@ public class ShoppingItemsView extends ListView {
 
         // called in requery():
         updateTotal();
-        pushToWear();
+        pushItemsToWear();
 
         return mCursorItems;
+    }
+
+    private Cursor createItemsCursor(long listId) {
+        String sortOrder = PreferenceActivity.getSortOrderFromPrefs(this
+                .getContext(), mMode, listId);
+        boolean hideBought = PreferenceActivity
+                .getHideCheckedItemsFromPrefs(this.getContext());
+        String selection;
+        String[] selection_args = new String[]{String.valueOf(listId)};
+        if (mFilter != null) {
+            selection = "list_id = ? AND " + ContainsFull.ITEM_NAME +
+                    " like '%" + mFilter + "%'";
+        } else if (mMode == ShoppingActivity.MODE_IN_SHOP) {
+            if (hideBought) {
+                selection = "list_id = ? AND " + Contains.STATUS
+                        + " == " + Status.WANT_TO_BUY;
+            } else {
+                selection = "list_id = ? AND " + Contains.STATUS
+                        + " <> " + Status.REMOVED_FROM_LIST;
+            }
+        } else {
+            selection = "list_id = ? ";
+        }
+
+        return getContext().getContentResolver().query(
+                ContainsFull.CONTENT_URI, ShoppingActivity.PROJECTION_ITEMS,
+                selection, selection_args, sortOrder);
     }
 
     /**
@@ -1199,16 +1206,18 @@ public class ShoppingItemsView extends ListView {
             }
 
             if (doUpdate) {
-                ContentValues values = new ContentValues();
+                final ContentValues values = new ContentValues();
                 values.put(ShoppingContract.Contains.STATUS, newstatus);
                 if (debug) {
                     Log.d(TAG, "update row " + mCursorItems.getString(0) + ", newstatus "
                             + newstatus);
                 }
+                final Uri itemUri = Uri.withAppendedPath(Contains.CONTENT_URI,
+                        mCursorItems.getString(0));
                 getContext().getContentResolver().update(
-                        Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI,
-                                mCursorItems.getString(0)), values, null, null
+                        itemUri, values, null, null
                 );
+                pushUpdatedItemToWear(values, itemUri);
 
             }
         }
@@ -1251,24 +1260,21 @@ public class ShoppingItemsView extends ListView {
         }
 
         String item_id = mCursorItems.getString(0);
-        ContentValues values = new ContentValues();
+        final ContentValues values = new ContentValues();
         values.put(ShoppingContract.Contains.STATUS, newstatus);
         if (debug) {
             Log.d(TAG, "update row " + mCursorItems.getString(0) + ", newstatus "
                     + newstatus);
         }
 
-        new Thread(){
-            @Override
-            public void run() {
-                mWearSupport.pushToWear(mCursorItems);
-            }
-        }.start();
 
+        final Uri itemUri = Uri.withAppendedPath(Contains.CONTENT_URI,
+                item_id);
         getContext().getContentResolver().update(
-                Uri.withAppendedPath(ShoppingContract.Contains.CONTENT_URI,
-                        item_id), values, null, null
+                itemUri, values, null, null
         );
+
+        pushUpdatedItemToWear(values, itemUri);
 
         boolean affectsSort = PreferenceActivity.prefsStatusAffectsSort(getContext(), mMode);
         boolean hidesItem = true /* TODO */;
@@ -1284,6 +1290,15 @@ public class ShoppingItemsView extends ListView {
         if (affectsSort) {
             invalidate();
         }
+    }
+
+    private void pushUpdatedItemToWear(final ContentValues values, final Uri itemUri) {
+        new Thread(){
+            @Override
+            public void run() {
+                mWearSupport.updateListItem(mListId, itemUri, values);
+            }
+        }.start();
     }
 
     public boolean cleanupList() {
@@ -1369,23 +1384,19 @@ public class ShoppingItemsView extends ListView {
 
     }
 
-    public void pushToWear(){
+    public void pushItemsToWear(){
         if (mWearSupport.isAvailable()){
             new Thread(){
                 @Override
                 public void run() {
-                    try {
-                        sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    mCursorItems.moveToPosition(-1);
-                    while (mCursorItems.moveToNext()) {
-                        mWearSupport.pushToWear(mCursorItems);
+                    Cursor cursor = createItemsCursor(mListId);
+                    Log.d(TAG, "pushing " + cursor.getCount() + " items");
+                    cursor.moveToFirst();
+                    while (cursor.moveToNext()) {
+                        mWearSupport.pushListItem(mListId, cursor);
                     }
                 }
             }.start();
-
         }
     }
     /**
