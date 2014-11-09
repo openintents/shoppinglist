@@ -26,6 +26,7 @@ public class GooglePlayWearSupport implements WearSupport {
 
     private static final String TAG = GooglePlayWearSupport.class.getSimpleName();
     GoogleApiClient mGoogleApiClient;
+    private boolean syncEnabled = true;
 
     public GooglePlayWearSupport(Context context) {
         int availability = GooglePlayServicesUtil.isGooglePlayServicesAvailable(context);
@@ -57,6 +58,16 @@ public class GooglePlayWearSupport implements WearSupport {
     @Override
     public boolean isAvailable() {
         return mGoogleApiClient != null && mGoogleApiClient.isConnected();
+    }
+
+    @Override
+    public void setSyncEnabled(boolean enableSync) {
+        syncEnabled = enableSync;
+    }
+
+    @Override
+    public boolean isSyncEnabled() {
+        return syncEnabled;
     }
 
     @Override

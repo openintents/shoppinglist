@@ -9,4 +9,7 @@ public interface WearSupport {
     public void pushListItem(long listId, Cursor cursor);
     void updateListItem(long listId, Uri itemUri, ContentValues values);
     void pushList(Cursor cursor);
+
+    boolean isSyncEnabled();
+    void setSyncEnabled(boolean enableSync);
 }

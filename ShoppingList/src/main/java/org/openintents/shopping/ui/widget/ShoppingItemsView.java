@@ -836,7 +836,6 @@ public class ShoppingItemsView extends ListView {
 
         // called in requery():
         updateTotal();
-        pushItemsToWear();
 
         return mCursorItems;
     }
@@ -1292,15 +1291,6 @@ public class ShoppingItemsView extends ListView {
         }
     }
 
-    private void pushUpdatedItemToWear(final ContentValues values, final Uri itemUri) {
-        new Thread(){
-            @Override
-            public void run() {
-                mWearSupport.updateListItem(mListId, itemUri, values);
-            }
-        }.start();
-    }
-
     public boolean cleanupList() {
 
         boolean nothingdeleted = true;
@@ -1399,6 +1389,18 @@ public class ShoppingItemsView extends ListView {
             }.start();
         }
     }
+
+
+    private void pushUpdatedItemToWear(final ContentValues values, final Uri itemUri) {
+        if (mWearSupport.isAvailable() && mWearSupport.isSyncEnabled())
+            new Thread(){
+                @Override
+                public void run() {
+                    mWearSupport.updateListItem(mListId, itemUri, values);
+                }
+            }.start();
+    }
+
     /**
      * Post setSelection delayed, because onItemSelected() may be called more
      * than once, leading to fillItems() being called more than once as well.

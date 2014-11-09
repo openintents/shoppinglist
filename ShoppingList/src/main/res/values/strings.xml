@@ -401,4 +401,6 @@
   <string name="widget_next_page">Next page</string>
   <string name="widget_choose_a_list">Choose a list</string>
   <string name="widget_no_items">No items on page %d</string>
+    <string name="sync_wear">Sync with Watch</string>
+    <string name="call_home">Call home</string>
 </resources> 

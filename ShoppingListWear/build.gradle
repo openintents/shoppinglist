@@ -19,7 +19,7 @@ android {
         }
     }
 
-    propertyFile = new File(projectDir, "build-private.properties")
+    def propertyFile = new File(projectDir, "build-private.properties")
     if (propertyFile.exists()) {
         signingConfigs {
             release {

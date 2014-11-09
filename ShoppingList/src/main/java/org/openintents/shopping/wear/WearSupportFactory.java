@@ -36,6 +36,16 @@ public class WearSupportFactory {
         }
 
         @Override
+        public boolean isSyncEnabled() {
+            return false;
+        }
+
+        @Override
+        public void setSyncEnabled(boolean enableSync) {
+
+        }
+
+        @Override
         public void updateListItem(long listId, Uri itemUri, ContentValues values) {
 
         }

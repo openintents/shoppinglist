@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.wearable.view.WearableListView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -19,14 +20,17 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.wearable.DataItem;
 import com.google.android.gms.wearable.DataItemBuffer;
+import com.google.android.gms.wearable.DataMap;
+import com.google.android.gms.wearable.DataMapItem;
 import com.google.android.gms.wearable.Wearable;
 
 import org.openintents.shopping.R;
+import org.openintents.shopping.library.provider.ShoppingContract;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingListActivity extends Activity implements ServiceConnection, GoogleApiClient.ConnectionCallbacks,
+public class ShoppingActivity extends Activity implements ServiceConnection, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, ResultCallback<DataItemBuffer> {
 
     public static final String EXTRA_LIST_ID = "EXTRA_LIST_ID";
@@ -79,6 +83,14 @@ public class ShoppingListActivity extends Activity implements ServiceConnection,
     @Override
     protected void onResume() {
         super.onResume();
+        if (mGoogleApiClient.isConnected()){
+            loadItems();
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
     }
 
     @Override
@@ -93,6 +105,10 @@ public class ShoppingListActivity extends Activity implements ServiceConnection,
 
     @Override
     public void onConnected(Bundle bundle) {
+        loadItems();
+    }
+
+    private void loadItems() {
         Wearable.DataApi.getDataItems(mGoogleApiClient).setResultCallback(this);
     }
 
@@ -114,7 +130,11 @@ public class ShoppingListActivity extends Activity implements ServiceConnection,
         for (int i=0; i< dataItemBuffer.getCount(); i++){
             DataItem item = dataItemBuffer.get(i);
             if (item.getUri().getPath().startsWith(listPrefix)){
-                items.add(item);
+                DataMap mapItem = DataMapItem.fromDataItem(item).getDataMap();
+                String name = mapItem.getString(ShoppingContract.ContainsFull.ITEM_NAME);
+                if (!TextUtils.isEmpty(name)) {
+                    items.add(item);
+                }
             }
         }
 

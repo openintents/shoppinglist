@@ -243,10 +243,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     private static final int MENU_ITEM_STORES = Menu.FIRST + 22;
     private static final int MENU_UNMARK_ALL_ITEMS = Menu.FIRST + 23;
     private static final int MENU_CALL_HOME = Menu.FIRST + 24;
+    private static final int MENU_SYNC_WEAR = Menu.FIRST + 25;
 
-    private static final int MENU_DISTRIBUTION_START = Menu.FIRST + 100; // MUST
-    // BE
-    // LAST
+    private static final int MENU_DISTRIBUTION_START = Menu.FIRST + 100; // MUST BE LAST
 
     private static final int DIALOG_ABOUT = 1;
     // private static final int DIALOG_TEXT_ENTRY = 2;
@@ -1906,6 +1905,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         menu.add(0, MENU_UNMARK_ALL_ITEMS, 0, R.string.unmark_all_items);
 
         menu.add(0, MENU_CALL_HOME, 0, R.string.call_home);
+        menu.add(0, MENU_SYNC_WEAR, 0, R.string.sync_wear);
 
         // Add distribution menu items last.
         mDistribution.onCreateOptionsMenu(menu);
@@ -1927,7 +1927,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         // Test whether intent exists for picking a location:
         PackageManager pm = getPackageManager();
-        Intent intent = new Intent(Intent.ACTION_PICK, Locations.CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_PICK, Uri.parse("geo:"));
         List<ResolveInfo> resolve_pick_location = pm.queryIntentActivities(
                 intent, PackageManager.MATCH_DEFAULT_ONLY);
 		/*
@@ -2095,6 +2095,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             case MENU_CALL_HOME:
                 intent = new Intent(Intent.ACTION_CALL);
                 startActivity(intent);
+                return true;
+            case MENU_SYNC_WEAR:
+                mItemsView.pushItemsToWear();
+                return true;
         }
         if (debug) {
             Log.d(TAG, "Start intent group id : " + item.getGroupId());
