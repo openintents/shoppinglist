@@ -14,12 +14,12 @@ android {
     }
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
-    propertyFile = new File(projectDir, "build-private.properties")
+    def propertyFile = new File(projectDir, "build-private.properties")
     if (propertyFile.exists()) {
         signingConfigs {
             release {
