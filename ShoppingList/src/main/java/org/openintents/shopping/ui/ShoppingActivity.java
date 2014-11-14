@@ -54,7 +54,11 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
+import java.lang.Class;
 
 import org.openintents.OpenIntents;
 import org.openintents.distribution.DistributionLibraryFragmentActivity;
@@ -643,7 +647,16 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         mItemsView.setUndoListener(this);
 
         if ("myo".equals(BuildConfig.FLAVOR)) {
-            toggleBoughtInputMethod = new MyoToggleBoughtInputMethod(this, mItemsView);
+            try {
+                Class myoToggleBoughtInputMethod = Class.forName("org.openintents.shopping.ui.MyoToggleBoughtInputMethod");
+                Constructor constructor = myoToggleBoughtInputMethod.getConstructor(new Class[]{ShoppingActivity.class, mItemsView.getClass()});
+                toggleBoughtInputMethod = (ToggleBoughtInputMethod) constructor.newInstance(new Object[] {this, mItemsView});
+            } catch (ClassNotFoundException e) {
+            } catch (NoSuchMethodException e) {
+            } catch (InvocationTargetException e) {
+            } catch (InstantiationException e) {
+            } catch (IllegalAccessException e) {
+            }
         }
     }
 
