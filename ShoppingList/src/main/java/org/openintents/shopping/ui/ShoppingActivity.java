@@ -94,7 +94,6 @@ import org.openintents.distribution.DownloadOIAppDialog;
 import org.openintents.intents.GeneralIntents;
 import org.openintents.intents.ShoppingListIntents;
 import org.openintents.provider.Alert;
-import org.openintents.provider.Location.Locations;
 import org.openintents.shopping.BuildConfig;
 import org.openintents.shopping.LogConstants;
 import org.openintents.shopping.R;
@@ -126,6 +125,8 @@ import org.openintents.shopping.widgets.CheckItemsWidget;
 import org.openintents.util.MenuIntentOptionsWithIcons;
 import org.openintents.util.ShakeSensorListener;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -147,7 +148,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
      */
     private static final String TAG = "ShoppingActivity";
     private static final boolean debug = false || LogConstants.debug;
-
     private ToggleBoughtInputMethod toggleBoughtInputMethod;
 
     public class MyGestureDetector extends SimpleOnGestureListener {
@@ -242,7 +242,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     private static final int MENU_MARK_ALL_ITEMS = Menu.FIRST + 21;
     private static final int MENU_ITEM_STORES = Menu.FIRST + 22;
     private static final int MENU_UNMARK_ALL_ITEMS = Menu.FIRST + 23;
-    private static final int MENU_CALL_HOME = Menu.FIRST + 24;
     private static final int MENU_SYNC_WEAR = Menu.FIRST + 25;
 
     private static final int MENU_DISTRIBUTION_START = Menu.FIRST + 100; // MUST BE LAST
@@ -670,8 +669,17 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         mItemsView.setActionBarListener(this);
         mItemsView.setUndoListener(this);
 
-        if (BuildConfig.FLAVOR.equals("myo")) {
-            //toggleBoughtInputMethod = new MyToggleBoughtInputMethod(this, mItemsView);
+        if ("myo".equals(BuildConfig.FLAVOR)) {
+            try {
+                Class myoToggleBoughtInputMethod = Class.forName("org.openintents.shopping.ui.MyoToggleBoughtInputMethod");
+                Constructor constructor = myoToggleBoughtInputMethod.getConstructor(new Class[]{ShoppingActivity.class, mItemsView.getClass()});
+                toggleBoughtInputMethod = (ToggleBoughtInputMethod) constructor.newInstance(new Object[]{this, mItemsView});
+            } catch (ClassNotFoundException e) {
+            } catch (NoSuchMethodException e) {
+            } catch (InvocationTargetException e) {
+            } catch (InstantiationException e) {
+            } catch (IllegalAccessException e) {
+            }
         }
     }
 
@@ -687,14 +695,18 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
+        if (mDrawerToggle != null) {
+            // Sync the toggle state after onRestoreInstanceState has occurred.
+            mDrawerToggle.syncState();
+        }
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
+        if (mDrawerToggle != null) {
+            mDrawerToggle.onConfigurationChanged(newConfig);
+        }
     }
 
     @Override
@@ -909,8 +921,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         }
 
         // TODO ???
-		/*
-		 * // Register intent receiver for refresh intents: IntentFilter
+        /*
+         * // Register intent receiver for refresh intents: IntentFilter
 		 * intentfilter = new IntentFilter(OpenIntents.REFRESH_ACTION);
 		 * registerReceiver(mIntentReceiver, intentfilter);
 		 */
@@ -1024,7 +1036,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         saveActiveList(true);
         // TODO ???
-		/*
+        /*
 		 * // Unregister refresh intent receiver
 		 * unregisterReceiver(mIntentReceiver);
 		 */
@@ -1904,7 +1916,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         menu.add(0, MENU_UNMARK_ALL_ITEMS, 0, R.string.unmark_all_items);
 
-        menu.add(0, MENU_CALL_HOME, 0, R.string.call_home);
         menu.add(0, MENU_SYNC_WEAR, 0, R.string.sync_wear);
 
         // Add distribution menu items last.
@@ -1960,7 +1971,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
-        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerListsView);
+        boolean drawerOpen = mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mDrawerListsView);
         boolean holoSearch = PreferenceActivity.getUsingHoloSearchFromPrefs(this);
         // TODO: supposed to hide content-related actions when the drawer is open.
 
@@ -1993,6 +2004,14 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             if (!holoSearch) {
                 mAddPanel.setVisibility(View.VISIBLE);
             }
+
+            View searchView = menuItem.getActionView();
+            int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
+            View imageView = searchView.findViewById(searchImgId);
+            if (imageView instanceof ImageView) {
+                ((ImageView) imageView).setImageResource(R.drawable.ic_menu_add);
+            }
+
         }
 
         menuItem = menu.findItem(MENU_MARK_ALL_ITEMS).setVisible(mItemsView.mNumUnchecked > 0);
@@ -2000,6 +2019,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         menuItem = menu.findItem(MENU_CLEAN_UP_LIST).setEnabled(
                 mItemsView.mNumChecked > 0).setVisible(!drawerOpen);
+
 
         // Delete list is possible, if we have more than one list:
         // AND
@@ -2092,10 +2112,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             case MENU_UNMARK_ALL_ITEMS:
                 mItemsView.toggleAllItems(false);
                 return true;
-            case MENU_CALL_HOME:
-                intent = new Intent(Intent.ACTION_CALL);
-                startActivity(intent);
-                return true;
             case MENU_SYNC_WEAR:
                 mItemsView.pushItemsToWear();
                 return true;
@@ -2114,7 +2130,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                     REQUEST_CODE_CATEGORY_ALTERNATIVE);
             return true;
         }
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
+        if (mDrawerToggle != null && mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -3639,7 +3655,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             int list_count = mAdapter.getCount();
             if (position < mNumAboveList) {
                 // Pick Items or Shopping selected
-                mDrawerLayout.closeDrawer(mDrawerListsView);
+                closeDrawer();
                 mItemsView.mMode = (position == 1) ? MODE_ADD_ITEMS : MODE_IN_SHOP;
                 mDrawerListsView.setItemChecked(position, true);
                 mDrawerListsView.setItemChecked(1 - position, false);
@@ -3663,11 +3679,17 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 updateTitle();
 
                 mDrawerListsView.setItemChecked(position, true);
-                mDrawerLayout.closeDrawer(mDrawerListsView);
+                closeDrawer();
             } else {
-                mDrawerLayout.closeDrawer(mDrawerListsView);
+                closeDrawer();
                 showDialog(DIALOG_NEW_LIST);
             }
+        }
+    }
+
+    private void closeDrawer() {
+        if (mDrawerLayout != null) {
+            mDrawerLayout.closeDrawer(mDrawerListsView);
         }
     }
 
@@ -3745,7 +3767,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             } else if (PreferenceActivity.getUsingPerListSortFromPrefs(mContext) == false) {
                 vis = false;
             }
-            if (mDrawerLayout.isDrawerOpen(mDrawerListsView)) {
+            if (mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mDrawerListsView)) {
                 vis = false;
             }
             return vis;

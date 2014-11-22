@@ -39,6 +39,37 @@
     android:layout_weight="1">
     <!-- android:background="@drawable/shoppinglist01d" -->
 
+        <Spinner
+          android:id="@+id/spinner_listfilter"
+          android:layout_weight="1"
+          android:layout_width="wrap_content"
+          android:layout_height="fill_parent"
+          android:drawSelectorOnTop="true"
+          android:visibility="gone"/>
+
+        <Button
+          android:id="@+id/listfilter"
+          android:layout_width="wrap_content"
+          android:layout_weight="1"
+          android:layout_height="fill_parent"
+          android:visibility="gone"
+          android:text="@string/list"/>
+
+        <Button
+          android:id="@+id/tagfilter"
+          android:layout_width="wrap_content"
+          android:layout_weight="1"
+          android:layout_height="fill_parent"
+          android:text="@string/tags"
+          android:visibility="gone"/>
+
+        <Button
+          android:id="@+id/storefilter"
+          android:layout_width="wrap_content"
+          android:layout_weight="1"
+          android:layout_height="fill_parent"
+          android:text="@string/stores"
+          android:visibility="gone"/>
 
     <org.openintents.shopping.ui.widget.ShoppingItemsView
       android:id="@+id/list_items"
@@ -108,5 +139,8 @@
         android:text="@string/add" />
     </LinearLayout>
 
+    <org.openintents.shopping.ui.widget.ActionableToastBar
+          android:id="@+id/toast_bar"
+          style="@style/ToastBarStyle" />
   </LinearLayout>
 </LinearLayout>
