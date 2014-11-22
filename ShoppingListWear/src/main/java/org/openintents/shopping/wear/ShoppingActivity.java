@@ -22,6 +22,7 @@ import com.google.android.gms.wearable.DataItem;
 import com.google.android.gms.wearable.DataItemBuffer;
 import com.google.android.gms.wearable.DataMap;
 import com.google.android.gms.wearable.DataMapItem;
+import com.google.android.gms.wearable.PutDataRequest;
 import com.google.android.gms.wearable.Wearable;
 
 import org.openintents.shopping.R;
@@ -51,7 +52,14 @@ public class ShoppingActivity extends Activity implements ServiceConnection, Goo
         listView.setClickListener(new WearableListView.ClickListener() {
             @Override
             public void onClick(WearableListView.ViewHolder viewHolder) {
+                long itemId = viewHolder.getItemId();
                 Log.d(TAG, "id: " + viewHolder.getItemId());
+
+                int position = viewHolder.getPosition();
+                DataItem item = adapter.getItem(position);
+                Log.d(TAG, "id: " + DataMapItem.fromDataItem(item).getDataMap().getString(ShoppingContract.ContainsFull.ITEM_NAME));
+                Log.d(TAG, "url:" + item.getUri().toString());
+                toggleShoppingItem(position, itemId);
             }
 
             @Override
@@ -68,6 +76,13 @@ public class ShoppingActivity extends Activity implements ServiceConnection, Goo
                 .addOnConnectionFailedListener(this)
                 .build();
         mGoogleApiClient.connect();
+    }
+
+    private void toggleShoppingItem(int position, long itemId) {
+        PutDataRequest request = null;
+        //Wearable.DataApi.putDataItem(mGoogleApiClient, request);
+
+        adapter.remove(position);
     }
 
     private void registerLocalNewDataReceiver() {

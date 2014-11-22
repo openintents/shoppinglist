@@ -83,6 +83,14 @@ public class ShoppingDataItemAdapter extends WearableListView.Adapter {
         notifyDataSetChanged();
     }
 
+    public DataItem getItem(int position){
+        if (mItems != null){
+            return mItems.get(position);
+        } else {
+            return null;
+        }
+    }
+
     @Override
     public int getItemCount() {
         if (mItems == null){
