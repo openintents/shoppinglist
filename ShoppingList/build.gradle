@@ -83,6 +83,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:20.+'
     compile files('libs/sensorsimulator-lib.jar')
     compile files('libs/OIShoppingListMyBackupPro.jar')
+    compile files('libs/pollfish.jar')
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:4.3.1'
     androidTestCompile files('libs/polidea_test_runner_1.2.jar')
 
