@@ -160,7 +160,8 @@ android:layout_centerVertical="true"
       android:layout_alignParentBottom="true"
       android:layout_alignWithParentIfMissing="true"
       android:gravity="top"
-      android:visibility="gone" />
+      android:visibility="gone"
+        android:layout_alignParentLeft="true" />
 
     <TextView
       android:id="@+id/price"
