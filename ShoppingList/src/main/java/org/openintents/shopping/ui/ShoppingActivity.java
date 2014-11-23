@@ -1852,8 +1852,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         View searchView = mItemsView.getSearchView();
         if (searchView != null) {
-            item = menu.add(0, MENU_SEARCH_ADD, 0, R.string.menu_search_add)
-                    .setIcon(android.R.drawable.ic_menu_search);
+            item = menu.add(0, MENU_SEARCH_ADD, 0, R.string.menu_search_add);
             MenuItemCompat.setActionView(item, searchView);
             MenuItemCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_ALWAYS);
         }
@@ -2012,7 +2011,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
             View imageView = searchView.findViewById(searchImgId);
             if (imageView instanceof ImageView) {
-                ((ImageView) imageView).setImageResource(R.drawable.ic_menu_add);
+                ((ImageView) imageView).setImageResource(android.R.drawable.ic_menu_add);
             }
 
         }
@@ -3616,7 +3615,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 v2 = v.findViewById(R.id.text1);
                 ((TextView) v2).setText(R.string.new_list);
                 v2 = v.findViewById(R.id.mode_radio_button);
-                ((ImageView) v2).setImageResource(android.R.drawable.ic_menu_add);
+                ((ImageView) v2).setImageResource(R.drawable.ic_menu_add_list);
             }
             return v;
         }
