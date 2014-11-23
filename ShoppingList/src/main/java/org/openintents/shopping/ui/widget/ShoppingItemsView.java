@@ -309,7 +309,9 @@ public class ShoppingItemsView extends ListView {
                 TextView t = styled_as_name[i];
 
                 // Set font
-                t.setTypeface(mCurrentTypeface);
+                if (mCurrentTypeface != null) {
+                    t.setTypeface(mCurrentTypeface);
+                }
 
                 // Set size
                 t.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
@@ -967,36 +969,7 @@ public class ShoppingItemsView extends ListView {
             mThemeAttributes = new ThemeAttributes(c, mPackageName, themeid);
 
             mTextTypeface = mThemeAttributes.getString(ThemeShoppingList.textTypeface);
-            mCurrentTypeface = null;
-
-            // Look for special cases:
-            if ("monospace".equals(mTextTypeface)) {
-                mCurrentTypeface = Typeface.create(Typeface.MONOSPACE,
-                        Typeface.NORMAL);
-            } else if ("sans".equals(mTextTypeface)) {
-                mCurrentTypeface = Typeface.create(Typeface.SANS_SERIF,
-                        Typeface.NORMAL);
-            } else if ("serif".equals(mTextTypeface)) {
-                mCurrentTypeface = Typeface.create(Typeface.SERIF,
-                        Typeface.NORMAL);
-            } else if (!TextUtils.isEmpty(mTextTypeface)) {
-
-                try {
-                    if (debug) {
-                        Log.d(TAG, "Reading typeface: package: " + mPackageName
-                                + ", typeface: " + mTextTypeface);
-                    }
-                    Resources remoteRes = mPackageManager
-                            .getResourcesForApplication(mPackageName);
-                    mCurrentTypeface = Typeface.createFromAsset(remoteRes
-                            .getAssets(), mTextTypeface);
-                    if (debug) {
-                        Log.d(TAG, "Result: " + mCurrentTypeface);
-                    }
-                } catch (NameNotFoundException e) {
-                    Log.e(TAG, "Package not found for Typeface", e);
-                }
-            }
+            mCurrentTypeface = createTypeface(mTextTypeface);
 
             mTextUpperCaseFont = mThemeAttributes.getBoolean(
                     ThemeShoppingList.textUpperCaseFont, false);
@@ -1066,6 +1039,43 @@ public class ShoppingItemsView extends ListView {
             Log.e(TAG, "NumberFormatException", e);
             return false;
         }
+    }
+
+    private Typeface createTypeface(String typeface) {
+        Typeface newTypeface = null;
+        try {
+            // Look for special cases:
+            if ("monospace".equals(typeface)) {
+                newTypeface = Typeface.create(Typeface.MONOSPACE,
+                        Typeface.NORMAL);
+            } else if ("sans".equals(typeface)) {
+                newTypeface = Typeface.create(Typeface.SANS_SERIF,
+                        Typeface.NORMAL);
+            } else if ("serif".equals(typeface)) {
+                newTypeface = Typeface.create(Typeface.SERIF,
+                        Typeface.NORMAL);
+            } else if (!TextUtils.isEmpty(typeface)) {
+
+                try {
+                    if (debug) {
+                        Log.d(TAG, "Reading typeface: package: " + mPackageName
+                                + ", typeface: " + typeface);
+                    }
+                    Resources remoteRes = mPackageManager
+                            .getResourcesForApplication(mPackageName);
+                    newTypeface = Typeface.createFromAsset(remoteRes
+                            .getAssets(), typeface);
+                    if (debug) {
+                        Log.d(TAG, "Result: " + newTypeface);
+                    }
+                } catch (NameNotFoundException e) {
+                    Log.e(TAG, "Package not found for Typeface", e);
+                }
+            }
+        } catch (RuntimeException e){
+            Log.e(TAG, "type face can't be made " + typeface);
+        }
+        return newTypeface;
     }
 
     /**

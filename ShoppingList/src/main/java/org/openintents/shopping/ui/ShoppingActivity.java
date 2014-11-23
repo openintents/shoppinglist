@@ -88,6 +88,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.WrapperListAdapter;
 
+import com.pollfish.constants.Position;
+import com.pollfish.main.PollFish;
+
 import org.openintents.OpenIntents;
 import org.openintents.distribution.DistributionLibraryFragmentActivity;
 import org.openintents.distribution.DownloadOIAppDialog;
@@ -2248,7 +2251,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             // input box and the button, because the background is
             // semi-transparent.
             mEditText.setTextColor(mItemsView.mTextColor);
-            mButton.setTextColor(mItemsView.mTextColor);
             if (mStoresFilterButton != null) {
                 mStoresFilterButton.setTextColor(mItemsView.mTextColor);
             }
