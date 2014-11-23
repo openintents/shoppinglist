@@ -598,33 +598,42 @@ public class ShoppingItemsView extends ListView {
 
     private class SearchQueryListener extends SearchViewCompat.OnQueryTextListenerCompat {
         public boolean onQueryTextChange(String query) {
-            if (SearchViewCompat.isIconified(mSearchView)) {
-                return false;
+            boolean isIconified = SearchViewCompat.isIconified(mSearchView);
+            String prevFilter = mFilter;
+
+            if (isIconified) {
+                // Something tries to restore the query text after the drawer is dismissed, but
+                // it doesn't re-expand the search view. Force the query string empty when it is
+                // not shown, and switch back to non-search mode.
+                if (query != null && query.length() > 0) {
+                    SearchViewCompat.setQuery(mSearchView, "", false);
+                }
+                query = null;
+                if (mInSearch) {
+                    mMode = mModeBeforeSearch;
+                    mInSearch = false;
+                }
             }
-            if (mInSearch == false) {
+
+            if (mInSearch == false && !isIconified) {
                 mInSearch = true;
                 mModeBeforeSearch = mMode;
                 mMode = ShoppingActivity.MODE_ADD_ITEMS;
             }
 
-            /*
-            int searchAutocompleteResource = getResources().getIdentifier("android:id/search_src_text", null, null);
-            if (searchAutocompleteResource == 0) {
-                searchAutocompleteResource = android.support.v7.appcompat.R.id.search_src_text;
-            }
-
-            View search = mSearchView.findViewById(searchAutocompleteResource);
-            if (search instanceof AutoCompleteTextView && mCursorActivity instanceof ShoppingActivity) {
-                ((ShoppingActivity) mCursorActivity).fillAutoCompleteTextViewAdapter((AutoCompleteTextView) search);
-            }
-            */
-
-
-            if (query.length() == 0) {
+            if (query == null || query.length() == 0) {
                 mFilter = null;
             } else {
                 mFilter = query;
             }
+
+            if (prevFilter == null && mFilter == null) {
+                return true;
+            }
+            if (prevFilter != null && prevFilter.equals(mFilter)) {
+                return true;
+            }
+
             if (mToastBar != null) {
                 mToastBar.hide(true /* animated */, false /* actionClicked */);
             }
