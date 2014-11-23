@@ -1384,6 +1384,10 @@ public class ShoppingItemsView extends ListView {
 
     }
 
+    public boolean isWearSupportAvailable() {
+        return mWearSupport != null && mWearSupport.isAvailable();
+    }
+
     public void pushItemsToWear(){
         if (mWearSupport.isAvailable()){
             new Thread(){

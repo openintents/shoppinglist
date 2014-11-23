@@ -2017,6 +2017,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         }
 
+        menuItem = menu.findItem(MENU_SYNC_WEAR);
+        if (menuItem != null) {
+            menuItem.setVisible(mItemsView.isWearSupportAvailable());
+        }
+
         menuItem = menu.findItem(MENU_MARK_ALL_ITEMS).setVisible(mItemsView.mNumUnchecked > 0);
         menuItem = menu.findItem(MENU_UNMARK_ALL_ITEMS).setVisible(mItemsView.mNumChecked > 0);
 
