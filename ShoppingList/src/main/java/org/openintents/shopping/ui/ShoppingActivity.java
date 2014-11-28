@@ -750,7 +750,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             // UGLY WORKAROUND:
             // On screen orientation changes, fillItems() is called twice.
             // That is why we have to set the list position twice.
-            mItemsView.mUpdateLastListPosition = 2;
+            // Nov14: Seems to not be required anymore, so change to 1 to
+            // avoid unwanted scrolling when marking items.
+            mItemsView.mUpdateLastListPosition = 1;
 
             mItemsView.mLastListPosition = sp.getInt(
                     PreferenceActivity.PREFS_LASTLIST_POSITION, 0);
