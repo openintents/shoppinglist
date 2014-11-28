@@ -824,26 +824,32 @@ public class ShoppingItemsView extends ListView {
             }
         }
 
-        mSimpleCursorAdapter adapter = new mSimpleCursorAdapter(
-                context,
-                // Use a template that displays a text view
-                layout_row,
-                // Give the cursor to the list adapter
-                mCursorItems,
-                // Map the IMAGE and NAME to...
-                new String[]{ContainsFull.ITEM_NAME, /*
+        mSimpleCursorAdapter adapter = (mSimpleCursorAdapter) getAdapter();
+
+        if (adapter != null) {
+            adapter.changeCursor(mCursorItems);
+        } else {
+            adapter = new mSimpleCursorAdapter(
+                    context,
+                    // Use a template that displays a text view
+                    layout_row,
+                    // Give the cursor to the list adapter
+                    mCursorItems,
+                    // Map the IMAGE and NAME to...
+                    new String[]{ContainsFull.ITEM_NAME, /*
                                                          * ContainsFull.ITEM_IMAGE
 														 * ,
 														 */
-                        ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,
-                        ContainsFull.QUANTITY, ContainsFull.PRIORITY,
-                        ContainsFull.ITEM_UNITS
-                },
-                // the view defined in the XML template
-                new int[]{R.id.name, /* R.id.image_URI, */R.id.tags,
-                        R.id.price, R.id.quantity, R.id.priority, R.id.units}
-        );
-        setAdapter(adapter);
+                            ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,
+                            ContainsFull.QUANTITY, ContainsFull.PRIORITY,
+                            ContainsFull.ITEM_UNITS
+                    },
+                    // the view defined in the XML template
+                    new int[]{R.id.name, /* R.id.image_URI, */R.id.tags,
+                            R.id.price, R.id.quantity, R.id.priority, R.id.units}
+            );
+            setAdapter(adapter);
+        }
 
         // called in requery():
         updateTotal();
