@@ -5,7 +5,6 @@ android {
     buildToolsVersion "20"
 
     defaultConfig {
-        applicationId "org.openintents.shopping.library"
         minSdkVersion 2
         targetSdkVersion 20
     }
