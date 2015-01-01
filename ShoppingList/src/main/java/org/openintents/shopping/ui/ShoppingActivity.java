@@ -263,6 +263,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     private static final int REQUEST_CODE_CATEGORY_ALTERNATIVE = 1;
     private static final int REQUEST_PICK_LIST = 2;
 
+    public static final int LOADER_TOTALS = 0;
+    public static final int LOADER_ITEMS = 1;
+
     /**
      * The main activity.
      * <p/>
@@ -1229,6 +1232,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         mItemsView.setThemedBackground(findViewById(R.id.background));
         mItemsView.setCustomClickListener(this);
         mItemsView.setToastBar(mToastBar);
+        mItemsView.initTotals();
 
         mItemsView.setItemsCanFocus(true);
         mItemsView.setDragListener(new DragListener() {
@@ -1251,18 +1255,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
             }
         });
-
-        TextView tv = (TextView) findViewById(R.id.total_1);
-        mItemsView.setTotalCheckedTextView(tv);
-
-        tv = (TextView) findViewById(R.id.total_2);
-        mItemsView.setTotalTextView(tv);
-
-        tv = (TextView) findViewById(R.id.total_3);
-        mItemsView.setPrioritySubtotalTextView(tv);
-
-        tv = (TextView) findViewById(R.id.count);
-        mItemsView.setCountTextView(tv);
 
         mItemsView.setOnItemClickListener(new OnItemClickListener() {
 

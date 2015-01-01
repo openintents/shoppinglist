@@ -100,9 +100,6 @@ public class ShoppingItemsView extends ListView {
     private View mThemedBackground;
     private long mListId;
 
-    private TextView mTotalTextView;
-    private TextView mPriTotalTextView;
-    private TextView mTotalCheckedTextView;
 
     private Drawable mDefaultDivider;
 
@@ -134,6 +131,7 @@ public class ShoppingItemsView extends ListView {
     private ActionBarListener mActionBarListener = null;
     private UndoListener mUndoListener = null;
     private ActionableToastBar mToastBar;
+    private ShoppingTotalsHandler mTotalsHandler;
     private WearSupport mWearSupport;
 
 
@@ -245,21 +243,12 @@ public class ShoppingItemsView extends ListView {
                 r.setOnClickListener(new mItemClickListener("Click on description: ",
                         EditItemDialog.FieldType.ITEMNAME));
 
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.CUPCAKE) {
-                    mPriceView.setVisibility(mPriceVisibility);
-                    mTagsView.setVisibility(mTagsVisibility);
-                    mQuantityView.setVisibility(mQuantityVisibility);
-                    mUnitsView.setVisibility(mUnitsVisibility);
-                    mPriorityView.setVisibility(mPriorityVisibility);
-                } else {
-                    // avoid problems on Cupcake with views positioned relative to
-                    // invisible views
-                    mPriceView.setVisibility(View.VISIBLE);
-                    mTagsView.setVisibility(View.VISIBLE);
-                    mQuantityView.setVisibility(View.VISIBLE);
-                    mUnitsView.setVisibility(View.VISIBLE);
-                    mPriorityView.setVisibility(View.VISIBLE);
-                }
+                mPriceView.setVisibility(mPriceVisibility);
+                mTagsView.setVisibility(mTagsVisibility);
+                mQuantityView.setVisibility(mQuantityVisibility);
+                mUnitsView.setVisibility(mUnitsVisibility);
+                mPriorityView.setVisibility(mPriorityVisibility);
+
             }
         }
 
@@ -721,8 +710,6 @@ public class ShoppingItemsView extends ListView {
 
     };
 
-    private TextView mCountTextView;
-
     public ShoppingItemsView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
@@ -746,6 +733,13 @@ public class ShoppingItemsView extends ListView {
         // Remember standard divider
         mDefaultDivider = getDivider();
         mWearSupport = WearSupportFactory.getDefault(getContext());
+    }
+
+    public void initTotals() {
+        // Can't be called during init because that happens while
+        // still inflating the parent activity, so findViewById
+        // doesn't work yet.
+        mTotalsHandler = new ShoppingTotalsHandler(this);
     }
 
     public void setActionBarListener(ActionBarListener listener) {
@@ -1475,23 +1469,6 @@ public class ShoppingItemsView extends ListView {
         }
     }
 
-    public void setTotalTextView(TextView tv) {
-        mTotalTextView = tv;
-    }
-
-    public void setPrioritySubtotalTextView(TextView tv) {
-        mPriTotalTextView = tv;
-    }
-
-    public void setTotalCheckedTextView(TextView tv) {
-        mTotalCheckedTextView = tv;
-    }
-
-    public void setCountTextView(TextView tv) {
-        mCountTextView = tv;
-
-    }
-
     /**
      * Update the text fields for "Total:" and "Checked:" with corresponding
      * price information.
@@ -1500,116 +1477,19 @@ public class ShoppingItemsView extends ListView {
         if (debug) {
             Log.d(TAG, "updateTotal()");
         }
+        mTotalsHandler.update(mCursorActivity.getLoaderManager(), mListId);
+    }
 
-        mNumChecked = mNumUnchecked = 0;
-        long total = 0;
-        long totalchecked = 0;
-        long priority_total = 0;
-        int priority_threshold = PreferenceActivity.getSubtotalByPriorityThreshold(this
-                .getContext());
-        boolean prioIncludesChecked =
-                PreferenceActivity.prioritySubtotalIncludesChecked(this.getContext());
+    public void updateNumChecked (long numChecked, long numUnchecked) {
 
-        Cursor total_cursor = getContext().getContentResolver().query(
-                Subtotals.CONTENT_URI.buildUpon().appendPath("" + mListId).build(),
-                Subtotals.PROJECTION, null, null, null);
-        total_cursor.moveToPosition(-1);
-        while (total_cursor.moveToNext()) {
-            long item_status = total_cursor.getLong(Subtotals.STATUS_INDEX);
-            boolean isChecked = (item_status == ShoppingContract.Status.BOUGHT);
-
-            if (item_status == ShoppingContract.Status.REMOVED_FROM_LIST) {
-                continue;
-            }
-
-            long price = total_cursor.getLong(Subtotals.SUBTOTAL_INDEX);
-            total += price;
-
-            if (isChecked) {
-                totalchecked += price;
-                mNumChecked += total_cursor.getLong(Subtotals.COUNT_INDEX);
-            } else if (item_status == ShoppingContract.Status.WANT_TO_BUY) {
-                mNumUnchecked += total_cursor.getLong(Subtotals.COUNT_INDEX);
-            }
-
-            if (priority_threshold != 0 && (prioIncludesChecked || !isChecked)) {
-                String priority_str = total_cursor.getString(Subtotals.PRIORITY_INDEX);
-                if (priority_str != null) {
-                    int priority = 0;
-                    try {
-                        priority = Integer.parseInt(priority_str);
-                    } catch (NumberFormatException e) {
-                        // pretend it's a 0 then...
-                    }
-                    if (priority != 0 && priority <= priority_threshold) {
-                        priority_total += price;
-                    }
-                }
-            }
-        }
-        total_cursor.deactivate();
-        total_cursor.close();
-
-        if (debug) {
-            Log.d(TAG, "Total: " + total + ", Checked: " + totalchecked + "(#" + mNumChecked + ")");
-        }
+        mNumChecked = numChecked;
+        mNumUnchecked = numUnchecked;
 
         // Update ActionBar in ShoppingActivity
         // for the "Clean up list" command
         if (mActionBarListener != null && !mInSearch) {
             mActionBarListener.updateActionBar();
         }
-
-        if (mTotalTextView == null || mTotalCheckedTextView == null) {
-            // Most probably in "Add item" mode where no total is displayed
-            return;
-        }
-
-        if (mPriceVisibility != View.VISIBLE) {
-            // If price is not displayed, do not display total
-            mTotalTextView.setVisibility(View.GONE);
-            mPriTotalTextView.setVisibility(View.GONE);
-            mTotalCheckedTextView.setVisibility(View.GONE);
-            return;
-        }
-
-        mTotalTextView.setTextColor(mTextColorPrice);
-        mPriTotalTextView.setTextColor(mTextColorPrice);
-        mTotalCheckedTextView.setTextColor(mTextColorPrice);
-        mCountTextView.setTextColor(mTextColorPrice);
-
-        if (total != 0) {
-            String s = mPriceFormatter.format(total * 0.01d);
-            s = getContext().getString(R.string.total, s);
-            mTotalTextView.setText(s);
-            mTotalTextView.setVisibility(View.VISIBLE);
-        } else {
-            mTotalTextView.setVisibility(View.GONE);
-        }
-
-        if (priority_total != 0) {
-            final int captions[] = {0, R.string.priority1_total, R.string.priority2_total,
-                    R.string.priority3_total, R.string.priority4_total};
-            String s = mPriceFormatter.format(priority_total * 0.01d);
-            s = getContext().getString(captions[priority_threshold], s);
-            mPriTotalTextView.setText(s);
-            mPriTotalTextView.setVisibility(View.VISIBLE);
-        } else {
-            mPriTotalTextView.setVisibility(View.GONE);
-        }
-
-        if (totalchecked != 0) {
-            String s = mPriceFormatter.format(totalchecked * 0.01d);
-            s = getContext().getString(R.string.total_checked, s);
-            mTotalCheckedTextView.setText(s);
-            mTotalCheckedTextView.setVisibility(View.VISIBLE);
-            mCountTextView.setVisibility(View.VISIBLE);
-        } else {
-            mTotalCheckedTextView.setVisibility(View.GONE);
-            mCountTextView.setVisibility(View.GONE);
-        }
-
-        mCountTextView.setText("#" + mNumChecked);
     }
 
     private long getQuantityPrice(Cursor cursor) {
