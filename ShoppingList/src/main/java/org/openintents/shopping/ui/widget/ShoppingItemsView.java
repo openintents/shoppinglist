@@ -7,7 +7,6 @@ import android.content.*;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
-import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.*;
 import android.graphics.drawable.ColorDrawable;
@@ -15,7 +14,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.widget.SearchViewCompat;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -43,7 +41,6 @@ import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
 import org.openintents.shopping.library.provider.ShoppingContract.Status;
-import org.openintents.shopping.library.provider.ShoppingContract.Subtotals;
 import org.openintents.shopping.library.util.ShoppingUtils;
 import org.openintents.shopping.theme.ThemeAttributes;
 import org.openintents.shopping.theme.ThemeShoppingList;
@@ -102,7 +99,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
     private View mThemedBackground;
     private long mListId;
 
-    private long mAddedItemId = -1;
+    private long mFocusItemId = -1;
 
     private Drawable mDefaultDivider;
 
@@ -811,19 +808,21 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
             setAdapter(adapter);
         }
 
-        if (mAddedItemId != -1) {
+        if (mFocusItemId != -1) {
             // Set the item that we have just selected:
             // Get position of ID:
             mCursorItems.moveToPosition(-1);
             while (mCursorItems.moveToNext()) {
-                if (mCursorItems.getLong(ShoppingActivity.mStringItemsITEMID) == mAddedItemId) {
+                if (mCursorItems.getLong(ShoppingActivity.mStringItemsITEMID) == mFocusItemId) {
                     int pos = mCursorItems.getPosition();
+                    // scroll item near top, but not all the way to top, to provide context.
+                    pos = Math.max(pos - 3, 0);
                     postDelayedSetSelection(pos);
+                    break;
                 }
-                break;
             }
             if (! mInSearch) {
-                mAddedItemId = -1;
+                mFocusItemId = -1;
             }
         }
     }
@@ -1241,6 +1240,8 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
     }
 
     public void toggleItemBought(int position) {
+        boolean shouldFocusItem = false;
+
         if (mCursorItems.getCount() <= position) {
             Log.e(TAG, "toggle inexistent item. Probably clicked too quickly?");
             return;
@@ -1266,7 +1267,11 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
             // removed_from_list -> want_to_buy
             if (oldstatus == ShoppingContract.Status.WANT_TO_BUY) {
                 newstatus = ShoppingContract.Status.REMOVED_FROM_LIST;
-            } // else old is REMOVE_FROM_LIST or BOUGHT, new is WANT_TO_BUY, which is the default.
+                shouldFocusItem = mInSearch && mFilter.length() > 0;
+            }  else { // old is REMOVE_FROM_LIST or BOUGHT, new is WANT_TO_BUY, which is the default.
+                if (mInSearch)
+                    shouldFocusItem = true;
+            }
         }
 
         String item_id = mCursorItems.getString(0);
@@ -1277,6 +1282,9 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
                     + newstatus);
         }
 
+        if (shouldFocusItem) {
+            mFocusItemId = mCursorItems.getLong(ShoppingActivity.mStringItemsITEMID);
+        }
 
         final Uri itemUri = Uri.withAppendedPath(Contains.CONTENT_URI,
                 item_id);
@@ -1364,7 +1372,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         ShoppingUtils.addItemToList(getContext(), itemId, mListId, Status.WANT_TO_BUY,
                 priority, quantity, true, false, resetQuantity);
 
-        mAddedItemId = itemId;
+        mFocusItemId = itemId;
         fillItems(activity, mListId);
     }
 
