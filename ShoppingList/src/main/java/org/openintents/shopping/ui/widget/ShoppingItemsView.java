@@ -844,10 +844,21 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
 
         mListId = listId;
 
+        setSearchModePref();
         activity.getLoaderManager().restartLoader(ShoppingActivity.LOADER_ITEMS, null, this);
 
         updateTotal();
 
+    }
+
+    private void setSearchModePref() {
+        // this is not a real user preference, just used to communicate
+        // current app state to the content provider.
+        SharedPreferences sp = mCursorActivity.getSharedPreferences(
+                "org.openintents.shopping_preferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putBoolean("_searching", mInSearch);
+        editor.commit();
     }
 
     private Cursor createItemsCursor(long listId, CursorLoader loader) {

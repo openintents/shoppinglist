@@ -158,11 +158,14 @@ public class ShoppingProvider extends ContentProvider {
 
             case CONTAINS_FULL:
 
+                boolean inSearchMode = appIsInSearchMode();
+
                 // all callers pass list id as selection_args[0]. perhaps not so
                 // nice to depend on that, but... need to choose the projection map
                 // based on the list's store filter.
-                if (PreferenceActivity.getUsingFiltersFromPrefs(getContext())
-                        && listUsesStoreFilter(selectionArgs[0])) {
+                if (!inSearchMode
+                    && PreferenceActivity.getUsingFiltersFromPrefs(getContext())
+                    && listUsesStoreFilter(selectionArgs[0])) {
                     // actually there are two ways we could do the query when
                     // filtering by stores. perhaps
                     // we should offer both. for now choose the first one...
@@ -204,8 +207,8 @@ public class ShoppingProvider extends ContentProvider {
                 }
                 defaultOrderBy = ContainsFull.DEFAULT_SORT_ORDER;
                 String tagFilter = getListTagsFilter(selectionArgs[0]);
-                if (!TextUtils.isEmpty(tagFilter)) {
-                    qb.appendWhere(" AND item_tags like '%" + tagFilter + "%'");
+                if (!inSearchMode && !TextUtils.isEmpty(tagFilter)) {
+                    qb.appendWhere(" AND items.tags like '%" + tagFilter + "%'");
                 }
                 break;
 
@@ -416,6 +419,13 @@ public class ShoppingProvider extends ContentProvider {
         c.close();
 
         return (tag);
+    }
+
+    private boolean appIsInSearchMode() {
+        SharedPreferences sp = getContext().getSharedPreferences(
+                "org.openintents.shopping_preferences",
+                Context.MODE_PRIVATE);
+        return sp.getBoolean("_searching", false);
     }
 
     // caller wants us to copy the item and the contains record.
