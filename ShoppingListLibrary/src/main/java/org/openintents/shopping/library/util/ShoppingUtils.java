@@ -62,7 +62,7 @@ public class ShoppingUtils {
         long id = -1;
 
         Cursor existingItems = context.getContentResolver().query(
-                Uri.parse("content://org.openintents.shopping/containsfull"), new String[]{Contains.ITEM_ID},
+                ContainsFull.CONTENT_URI, new String[]{Contains.ITEM_ID},
                 "list_id = ? and upper(items.name) = upper(?)", new String[]{list_id, name}, null);
         if (existingItems.getCount() > 0) {
             existingItems.moveToFirst();
@@ -122,7 +122,7 @@ public class ShoppingUtils {
         }
 
         if (id == -1) {
-            // Add new item to list:
+            // Add new item to list.
             ContentValues values = getContentValues(name, tags, price, barcode);
             try {
                 Uri uri = context.getContentResolver().insert(
@@ -352,7 +352,9 @@ public class ShoppingUtils {
      *
      * @param itemId       The id of the new item.
      * @param listId       The id of the shopping list the item is added.
-     * @param itemType     The type of the new item
+     * @param status       The status of the new item
+     * @param priority     The priority of the new item
+     * @param quantity     The quantity of the new item
      * @param togglestatus If true, then status is toggled between WANT_TO_BUY and BOUGHT
      * @return id of the "contains" table entry, or -1 if insert failed.
      */
@@ -503,8 +505,10 @@ public class ShoppingUtils {
 
             // update aisle and price:
             ContentValues values = new ContentValues(3);
-            values.put(ItemStores.PRICE, price);
-            values.put(ItemStores.AISLE, aisle);
+            if (!TextUtils.isEmpty(price))
+                values.put(ItemStores.PRICE, price);
+            if (!TextUtils.isEmpty(aisle))
+                values.put(ItemStores.AISLE, aisle);
             values.put(ItemStores.STOCKS_ITEM, stocksItem);
             try {
                 Uri uri = Uri.withAppendedPath(ItemStores.CONTENT_URI,
@@ -548,8 +552,12 @@ public class ShoppingUtils {
      * already, the existing id is returned.
      *
      * @param itemId   The id of the new item.
-     * @param listId   The id of the shopping list the item is added.
-     * @param itemType The type of the new item
+     * @param storeId  The id of the store to which the item is added.
+     * @param aisle    The aisle in which the item can be found at this store.
+     *                 Can be null.
+     * @param price    The price of the item at this store.
+     *                 Can be null.
+     * @param known_new true if the caller knows the item is not yet in the table for this store.
      * @return id of the "contains" table entry, or -1 if insert failed.
      */
     public static long addItemToStore(Context context, final long itemId,
@@ -605,7 +613,7 @@ public class ShoppingUtils {
         }
     }
 
-    public static void addTagToItem(Context context, long itemId, String store) {
+    public static void addTagToItem(Context context, long itemId, String newTag) {
         String allTags = "";
         Cursor existingTags = context.getContentResolver().query(
                 Items.CONTENT_URI, new String[]{Items.TAGS}, "_id = ?",
@@ -617,9 +625,15 @@ public class ShoppingUtils {
         }
 
         if (!TextUtils.isEmpty(allTags)) {
-            allTags = allTags + ", " + store;
+            if (allTags.equals(newTag))
+                return;
+            if (allTags.startsWith(newTag + ","))
+                return;
+            if (allTags.contains(", " + newTag))
+                return;
+            allTags = allTags + ", " + newTag;
         } else {
-            allTags = store;
+            allTags = newTag;
         }
 
         ContentValues values = new ContentValues(1);
@@ -804,9 +818,8 @@ public class ShoppingUtils {
         return items;
     }
 
-    public static String getListFilterStoreName(Context context, Uri list_uri) {
-        String filter = null;
-        String store_id;
+    private static String getListFilterStoreId(Context context, Uri list_uri) {
+        String store_id = null;
         Cursor c = context.getContentResolver().query(list_uri,
                 new String[]{Lists.STORE_FILTER}, null, null, null);
         if (c.getCount() > 0) {
@@ -814,20 +827,27 @@ public class ShoppingUtils {
             store_id = c.getString(0);
             c.deactivate();
             c.close();
+        }
+        return store_id;
+    }
 
-            if (store_id.length() > 0) {
-                c = context.getContentResolver().query(Stores.CONTENT_URI,
-                        new String[]{Stores.NAME}, "_id = ?", new String[]{store_id}, null);
-                if (c != null) {
-                    if (c.getCount() > 0) {
-                        c.moveToFirst();
-                        filter = c.getString(0);
-                    }
-                    c.deactivate();
-                    c.close();
+    public static String getListFilterStoreName(Context context, Uri list_uri) {
+        String filter = null;
+        String store_id = getListFilterStoreId(context, list_uri);
+
+        if (store_id != null && store_id.length() > 0) {
+            Cursor c = context.getContentResolver().query(Stores.CONTENT_URI,
+                    new String[]{Stores.NAME}, "_id = ?", new String[]{store_id}, null);
+            if (c != null) {
+                if (c.getCount() > 0) {
+                    c.moveToFirst();
+                    filter = c.getString(0);
                 }
+                c.deactivate();
+                c.close();
             }
         }
+
         return filter;
     }
 
@@ -846,6 +866,23 @@ public class ShoppingUtils {
             }
         }
         return filter;
+    }
+
+    public static void addDefaultsToAddedItem(Context context, long list_id, long item_id) {
+        Uri list_uri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI,
+                Long.toString(list_id));
+        String tagsFilter = getListTagsFilter(context, list_uri);
+        String storeId = getListFilterStoreId(context, list_uri);
+        boolean hasTagsFilter = !TextUtils.isEmpty(tagsFilter);
+        boolean hasStoreIdFilter = !TextUtils.isEmpty(storeId);
+
+        if (hasStoreIdFilter) {
+            addItemToStore(context, item_id, Long.parseLong(storeId), true, null, null, false);
+        }
+
+        if (hasTagsFilter) {
+            addTagToItem(context, item_id, tagsFilter);
+        }
     }
 
     public static String getListSortOrder(Context context, long list_id) {

@@ -1285,7 +1285,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
             }
         }
 
-        String item_id = mCursorItems.getString(0);
+        String contains_id = mCursorItems.getString(0);
         final ContentValues values = new ContentValues();
         values.put(ShoppingContract.Contains.STATUS, newstatus);
         if (debug) {
@@ -1293,12 +1293,16 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
                     + newstatus);
         }
 
+        if (mInSearch && newstatus == ShoppingContract.Status.WANT_TO_BUY) {
+            long item_id = mCursorItems.getLong(ShoppingActivity.mStringItemsITEMID);
+            ShoppingUtils.addDefaultsToAddedItem(getContext(), mListId, item_id);
+        }
+
         if (shouldFocusItem) {
             mFocusItemId = mCursorItems.getLong(ShoppingActivity.mStringItemsITEMID);
         }
 
-        final Uri itemUri = Uri.withAppendedPath(Contains.CONTENT_URI,
-                item_id);
+        final Uri itemUri = Uri.withAppendedPath(Contains.CONTENT_URI, contains_id);
         getContext().getContentResolver().update(
                 itemUri, values, null, null
         );
@@ -1310,7 +1314,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         if (mUndoListener != null && (affectsSort || hidesItem)) {
             String item_name = mCursorItems.getString(ShoppingActivity.mStringItemsITEMNAME);
             ToastBarSingleItemStatusOperation op = new ToastBarSingleItemStatusOperation(this, getContext(),
-                    item_id, item_name, oldstatus, newstatus, 0, false);
+                    contains_id, item_name, oldstatus, newstatus, 0, false);
             mUndoListener.onUndoAvailable(op);
         }
 
@@ -1381,8 +1385,8 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         }
         boolean resetQuantity = PreferenceActivity.getResetQuantity(getContext());
         ShoppingUtils.addItemToList(getContext(), itemId, mListId, Status.WANT_TO_BUY,
-                priority, quantity, true, false, resetQuantity);
-
+                priority, quantity, false, false, resetQuantity);
+        ShoppingUtils.addDefaultsToAddedItem(getContext(), mListId, itemId);
         mFocusItemId = itemId;
         fillItems(activity, mListId);
     }
