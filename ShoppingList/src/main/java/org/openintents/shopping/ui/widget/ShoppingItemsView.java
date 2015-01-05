@@ -635,6 +635,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
             if (query.length() > 0) {
                 insertNewItem(mCursorActivity, query, null, null, null, null);
                 SearchViewCompat.setQuery(mSearchView, "", false);
+                fillItems(mCursorActivity, mListId);
             }
             if (mToastBar != null) {
                 mToastBar.hide(true /* animated */, false /* actionClicked */);
