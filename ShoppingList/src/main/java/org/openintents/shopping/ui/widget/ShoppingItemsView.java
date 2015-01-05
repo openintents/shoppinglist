@@ -1279,7 +1279,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
             // removed_from_list -> want_to_buy
             if (oldstatus == ShoppingContract.Status.WANT_TO_BUY) {
                 newstatus = ShoppingContract.Status.REMOVED_FROM_LIST;
-                shouldFocusItem = mInSearch && mFilter.length() > 0;
+                shouldFocusItem = mInSearch && mFilter != null && mFilter.length() > 0;
             }  else { // old is REMOVE_FROM_LIST or BOUGHT, new is WANT_TO_BUY, which is the default.
                 if (mInSearch)
                     shouldFocusItem = true;
