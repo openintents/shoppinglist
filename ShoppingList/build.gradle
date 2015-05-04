@@ -47,6 +47,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def file = output.outputFile
+                    output.outputFile = new File(file.parent, file.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
+                }
+            }
         }
     }
 
@@ -81,7 +87,7 @@ dependencies {
     }
 
     compile project(':ShoppingListLibrary')
-    //compile 'org.openintents:distribution-lib:1.0.+'
+    compile 'org.openintents:distribution-lib:1.0.2'
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile files('libs/sensorsimulator-lib.jar')
     compile files('libs/OIShoppingListMyBackupPro.jar')

@@ -2,18 +2,18 @@ package org.openintents.shopping.ui.widget;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.LoaderManager;
 import android.content.*;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
-import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.*;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Handler;
+import android.os.Bundle;
 import android.support.v4.widget.SearchViewCompat;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -42,19 +42,17 @@ import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
 import org.openintents.shopping.library.provider.ShoppingContract.Status;
-import org.openintents.shopping.library.provider.ShoppingContract.Subtotals;
 import org.openintents.shopping.library.util.ShoppingUtils;
 import org.openintents.shopping.theme.ThemeAttributes;
 import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;
 import org.openintents.shopping.ui.*;
 import org.openintents.shopping.ui.dialog.EditItemDialog;
-import org.openintents.shopping.sync.WearSupportFactory;
 
 /**
  * View to show a shopping list with its items
  */
-public class ShoppingItemsView extends ListView {
+public class ShoppingItemsView extends ListView implements LoaderManager.LoaderCallbacks<Cursor>{
     private final static String TAG = "ShoppingListView";
     private final static boolean debug = false;
 
@@ -101,9 +99,7 @@ public class ShoppingItemsView extends ListView {
     private View mThemedBackground;
     private long mListId;
 
-    private TextView mTotalTextView;
-    private TextView mPriTotalTextView;
-    private TextView mTotalCheckedTextView;
+    private long mFocusItemId = -1;
 
     private Drawable mDefaultDivider;
 
@@ -136,6 +132,7 @@ public class ShoppingItemsView extends ListView {
     private UndoListener mUndoListener = null;
     private ActionableToastBar mToastBar;
     private SyncSupport mSyncSupport;
+    private ShoppingTotalsHandler mTotalsHandler;
 
 
     /**
@@ -246,21 +243,12 @@ public class ShoppingItemsView extends ListView {
                 r.setOnClickListener(new mItemClickListener("Click on description: ",
                         EditItemDialog.FieldType.ITEMNAME));
 
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.CUPCAKE) {
-                    mPriceView.setVisibility(mPriceVisibility);
-                    mTagsView.setVisibility(mTagsVisibility);
-                    mQuantityView.setVisibility(mQuantityVisibility);
-                    mUnitsView.setVisibility(mUnitsVisibility);
-                    mPriorityView.setVisibility(mPriorityVisibility);
-                } else {
-                    // avoid problems on Cupcake with views positioned relative to
-                    // invisible views
-                    mPriceView.setVisibility(View.VISIBLE);
-                    mTagsView.setVisibility(View.VISIBLE);
-                    mQuantityView.setVisibility(View.VISIBLE);
-                    mUnitsView.setVisibility(View.VISIBLE);
-                    mPriorityView.setVisibility(View.VISIBLE);
-                }
+                mPriceView.setVisibility(mPriceVisibility);
+                mTagsView.setVisibility(mTagsVisibility);
+                mQuantityView.setVisibility(mQuantityVisibility);
+                mUnitsView.setVisibility(mUnitsVisibility);
+                mPriorityView.setVisibility(mPriorityVisibility);
+
             }
         }
 
@@ -648,6 +636,7 @@ public class ShoppingItemsView extends ListView {
             if (query.length() > 0) {
                 insertNewItem(mCursorActivity, query, null, null, null, null);
                 SearchViewCompat.setQuery(mSearchView, "", false);
+                fillItems(mCursorActivity, mListId);
             }
             if (mToastBar != null) {
                 mToastBar.hide(true /* animated */, false /* actionClicked */);
@@ -700,30 +689,6 @@ public class ShoppingItemsView extends ListView {
         mCursorItems = null;
     }
 
-    private boolean mContentObserverRegistered = false;
-    ContentObserver mContentObserver = new ContentObserver(new Handler()) {
-
-        @Override
-        public void onChange(boolean selfChange) {
-            super.onChange(selfChange);
-
-            if (mCursorItems != null) {
-                try {
-                    requery();
-                } catch (IllegalStateException e) {
-                    Log.e(TAG, "IllegalStateException ", e);
-                    // Somehow the logic is not completely right yet...
-                    disposeItemsCursor();
-
-                }
-            }
-
-        }
-
-    };
-
-    private TextView mCountTextView;
-
     public ShoppingItemsView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
@@ -749,6 +714,13 @@ public class ShoppingItemsView extends ListView {
         mSyncSupport = ((ShoppingApplication)getContext().getApplicationContext()).dependencies().getSyncSupport(getContext());
     }
 
+    public void initTotals() {
+        // Can't be called during init because that happens while
+        // still inflating the parent activity, so findViewById
+        // doesn't work yet.
+        mTotalsHandler = new ShoppingTotalsHandler(this);
+    }
+
     public void setActionBarListener(ActionBarListener listener) {
         mActionBarListener = listener;
     }
@@ -758,33 +730,26 @@ public class ShoppingItemsView extends ListView {
     }
 
     public void onResume() {
-        // Content observer registered at fillItems()
-        // registerContentObserver();
         setFastScrollEnabled(PreferenceActivity.getFastScrollEnabledFromPrefs(getContext()));
     }
 
     public void onPause() {
-        unregisterContentObserver();
+
     }
 
     public long getListId() {
         return mListId;
     }
 
-    /**
-     * @param activity Activity to manage the cursor.
-     * @param listId
-     * @return
-     */
-    public Cursor fillItems(Activity activity, long listId) {
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        CursorLoader loader =  new CursorLoader(mCursorActivity);
+        createItemsCursor(mListId, loader);
+        return loader;
+    }
 
-
-        Cursor items = createItemsCursor(listId);
-
-        mListId = listId;
-        if (mCursorItems != null) {
-            disposeItemsCursor();
-        }
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor items) {
 
         // Get a cursor for all items that are contained
         // in currently selected shopping list.
@@ -793,20 +758,15 @@ public class ShoppingItemsView extends ListView {
         // Activate the following for a striped list.
         // setupListStripes(mListItems, this);
 
-        registerContentObserver();
-
         if (mCursorItems == null) {
             Log.e(TAG, "missing shopping provider");
             setAdapter(new ArrayAdapter<String>(this.getContext(),
                     android.R.layout.simple_list_item_1,
                     new String[]{"no shopping provider"}));
-            return mCursorItems;
+            return;
         }
-        mCursorActivity = activity;
-        mCursorActivity.startManagingCursor(mCursorItems);
 
         int layout_row = R.layout.list_item_shopping_item;
-
         int size = PreferenceActivity.getFontSizeFromPrefs(getContext());
         if (size < 3) {
             layout_row = R.layout.list_item_shopping_item_small;
@@ -814,45 +774,96 @@ public class ShoppingItemsView extends ListView {
 
         Context context = getContext();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            // If background is light, we apply the light holo theme to widgets.
+        // If background is light, we apply the light holo theme to widgets.
 
-            // determine color from text color:
-            int gray = (Color.red(mTextColor) + Color.green(mTextColor) + Color.blue(mTextColor));
-            if (gray < 3 * 128) {
-                // dark text color <-> light background color => use light holo theme.
-                context = new ContextThemeWrapper(context, android.R.style.Theme_Holo_Light);
-            }
+        // determine color from text color:
+        int gray = (Color.red(mTextColor) + Color.green(mTextColor) + Color.blue(mTextColor));
+        if (gray < 3 * 128) {
+            // dark text color <-> light background color => use light holo theme.
+            context = new ContextThemeWrapper(context, android.R.style.Theme_Holo_Light);
         }
 
-        mSimpleCursorAdapter adapter = new mSimpleCursorAdapter(
-                context,
-                // Use a template that displays a text view
-                layout_row,
-                // Give the cursor to the list adapter
-                mCursorItems,
-                // Map the IMAGE and NAME to...
-                new String[]{ContainsFull.ITEM_NAME, /*
+        mSimpleCursorAdapter adapter = (mSimpleCursorAdapter) getAdapter();
+
+        if (adapter != null) {
+            adapter.swapCursor(mCursorItems);
+        } else {
+            adapter = new mSimpleCursorAdapter(
+                    context,
+                    // Use a template that displays a text view
+                    layout_row,
+                    // Give the cursor to the list adapter
+                    mCursorItems,
+                    // Map the IMAGE and NAME to...
+                    new String[]{ContainsFull.ITEM_NAME, /*
                                                          * ContainsFull.ITEM_IMAGE
 														 * ,
 														 */
-                        ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,
-                        ContainsFull.QUANTITY, ContainsFull.PRIORITY,
-                        ContainsFull.ITEM_UNITS
-                },
-                // the view defined in the XML template
-                new int[]{R.id.name, /* R.id.image_URI, */R.id.tags,
-                        R.id.price, R.id.quantity, R.id.priority, R.id.units}
-        );
-        setAdapter(adapter);
+                            ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,
+                            ContainsFull.QUANTITY, ContainsFull.PRIORITY,
+                            ContainsFull.ITEM_UNITS
+                    },
+                    // the view defined in the XML template
+                    new int[]{R.id.name, /* R.id.image_URI, */R.id.tags,
+                            R.id.price, R.id.quantity, R.id.priority, R.id.units}
+            );
+            setAdapter(adapter);
+        }
 
-        // called in requery():
-        updateTotal();
-
-        return mCursorItems;
+        if (mFocusItemId != -1) {
+            // Set the item that we have just selected:
+            // Get position of ID:
+            mCursorItems.moveToPosition(-1);
+            while (mCursorItems.moveToNext()) {
+                if (mCursorItems.getLong(ShoppingActivity.mStringItemsITEMID) == mFocusItemId) {
+                    int pos = mCursorItems.getPosition();
+                    // scroll item near top, but not all the way to top, to provide context.
+                    pos = Math.max(pos - 3, 0);
+                    postDelayedSetSelection(pos);
+                    break;
+                }
+            }
+            if (! mInSearch) {
+                mFocusItemId = -1;
+            }
+        }
     }
 
-    private Cursor createItemsCursor(long listId) {
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        mCursorItems = null;
+    }
+
+    /**
+     * @param activity Activity to manage the cursor.
+     * @param listId
+     * @return
+     */
+    public void fillItems(Activity activity, long listId) {
+
+        mCursorItems = null;
+        mCursorActivity = activity;
+
+        mListId = listId;
+
+        setSearchModePref();
+        activity.getLoaderManager().restartLoader(ShoppingActivity.LOADER_ITEMS, null, this);
+
+        updateTotal();
+
+    }
+
+    private void setSearchModePref() {
+        // this is not a real user preference, just used to communicate
+        // current app state to the content provider.
+        SharedPreferences sp = mCursorActivity.getSharedPreferences(
+                "org.openintents.shopping_preferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putBoolean("_searching", mInSearch);
+        editor.commit();
+    }
+
+    private Cursor createItemsCursor(long listId, CursorLoader loader) {
         String sortOrder = PreferenceActivity.getSortOrderFromPrefs(this
                 .getContext(), mMode, listId);
         boolean hideBought = PreferenceActivity
@@ -874,26 +885,18 @@ public class ShoppingItemsView extends ListView {
             selection = "list_id = ? ";
         }
 
+        if (loader != null) {
+            loader.setUri(ContainsFull.CONTENT_URI);
+            loader.setProjection(ShoppingActivity.PROJECTION_ITEMS);
+            loader.setSelection(selection);
+            loader.setSelectionArgs(selection_args);
+            loader.setSortOrder(sortOrder);
+            return null;
+        }
+
         return getContext().getContentResolver().query(
                 ContainsFull.CONTENT_URI, ShoppingActivity.PROJECTION_ITEMS,
                 selection, selection_args, sortOrder);
-    }
-
-    /**
-     *
-     */
-    private void registerContentObserver() {
-        if (mContentObserverRegistered == false) {
-            mContentObserverRegistered = true;
-            getContext().getContentResolver().registerContentObserver(
-                    ShoppingContract.Items.CONTENT_URI, true, mContentObserver);
-        }
-    }
-
-    private void unregisterContentObserver() {
-        mContentObserverRegistered = false;
-        getContext().getContentResolver().unregisterContentObserver(
-                mContentObserver);
     }
 
     /**
@@ -1250,6 +1253,8 @@ public class ShoppingItemsView extends ListView {
     }
 
     public void toggleItemBought(int position) {
+        boolean shouldFocusItem = false;
+
         if (mCursorItems.getCount() <= position) {
             Log.e(TAG, "toggle inexistent item. Probably clicked too quickly?");
             return;
@@ -1275,10 +1280,14 @@ public class ShoppingItemsView extends ListView {
             // removed_from_list -> want_to_buy
             if (oldstatus == ShoppingContract.Status.WANT_TO_BUY) {
                 newstatus = ShoppingContract.Status.REMOVED_FROM_LIST;
-            } // else old is REMOVE_FROM_LIST or BOUGHT, new is WANT_TO_BUY, which is the default.
+                shouldFocusItem = mInSearch && mFilter != null && mFilter.length() > 0;
+            }  else { // old is REMOVE_FROM_LIST or BOUGHT, new is WANT_TO_BUY, which is the default.
+                if (mInSearch)
+                    shouldFocusItem = true;
+            }
         }
 
-        String item_id = mCursorItems.getString(0);
+        String contains_id = mCursorItems.getString(0);
         final ContentValues values = new ContentValues();
         values.put(ShoppingContract.Contains.STATUS, newstatus);
         if (debug) {
@@ -1286,9 +1295,16 @@ public class ShoppingItemsView extends ListView {
                     + newstatus);
         }
 
+        if (mInSearch && newstatus == ShoppingContract.Status.WANT_TO_BUY) {
+            long item_id = mCursorItems.getLong(ShoppingActivity.mStringItemsITEMID);
+            ShoppingUtils.addDefaultsToAddedItem(getContext(), mListId, item_id);
+        }
 
-        final Uri itemUri = Uri.withAppendedPath(Contains.CONTENT_URI,
-                item_id);
+        if (shouldFocusItem) {
+            mFocusItemId = mCursorItems.getLong(ShoppingActivity.mStringItemsITEMID);
+        }
+
+        final Uri itemUri = Uri.withAppendedPath(Contains.CONTENT_URI, contains_id);
         getContext().getContentResolver().update(
                 itemUri, values, null, null
         );
@@ -1300,7 +1316,7 @@ public class ShoppingItemsView extends ListView {
         if (mUndoListener != null && (affectsSort || hidesItem)) {
             String item_name = mCursorItems.getString(ShoppingActivity.mStringItemsITEMNAME);
             ToastBarSingleItemStatusOperation op = new ToastBarSingleItemStatusOperation(this, getContext(),
-                    item_id, item_name, oldstatus, newstatus, 0, false);
+                    contains_id, item_name, oldstatus, newstatus, 0, false);
             mUndoListener.onUndoAvailable(op);
         }
 
@@ -1371,27 +1387,10 @@ public class ShoppingItemsView extends ListView {
         }
         boolean resetQuantity = PreferenceActivity.getResetQuantity(getContext());
         ShoppingUtils.addItemToList(getContext(), itemId, mListId, Status.WANT_TO_BUY,
-                priority, quantity, true, false, resetQuantity);
-
+                priority, quantity, false, false, resetQuantity);
+        ShoppingUtils.addDefaultsToAddedItem(getContext(), mListId, itemId);
+        mFocusItemId = itemId;
         fillItems(activity, mListId);
-
-        // Set the item that we have just selected:
-        // Get position of ID:
-        mCursorItems.moveToPosition(-1);
-        while (mCursorItems.moveToNext()) {
-            if (mCursorItems.getLong(ShoppingActivity.mStringItemsITEMID) == itemId) {
-                int pos = mCursorItems.getPosition();
-                // if (pos > 0) {
-                // Set selection one before, so that the item is fully
-                // visible.
-                // setSelection(pos - 1);
-                // } else {
-                postDelayedSetSelection(pos);
-                // }
-                break;
-            }
-        }
-
     }
 
     public boolean isWearSupportAvailable() {
@@ -1403,7 +1402,7 @@ public class ShoppingItemsView extends ListView {
             new Thread(){
                 @Override
                 public void run() {
-                    Cursor cursor = createItemsCursor(mListId);
+                    Cursor cursor = createItemsCursor(mListId, null);
                     Log.d(TAG, "pushing " + cursor.getCount() + " items");
                     cursor.moveToFirst();
                     while (cursor.moveToNext()) {
@@ -1470,23 +1469,6 @@ public class ShoppingItemsView extends ListView {
         }
     }
 
-    public void setTotalTextView(TextView tv) {
-        mTotalTextView = tv;
-    }
-
-    public void setPrioritySubtotalTextView(TextView tv) {
-        mPriTotalTextView = tv;
-    }
-
-    public void setTotalCheckedTextView(TextView tv) {
-        mTotalCheckedTextView = tv;
-    }
-
-    public void setCountTextView(TextView tv) {
-        mCountTextView = tv;
-
-    }
-
     /**
      * Update the text fields for "Total:" and "Checked:" with corresponding
      * price information.
@@ -1495,116 +1477,19 @@ public class ShoppingItemsView extends ListView {
         if (debug) {
             Log.d(TAG, "updateTotal()");
         }
+        mTotalsHandler.update(mCursorActivity.getLoaderManager(), mListId);
+    }
 
-        mNumChecked = mNumUnchecked = 0;
-        long total = 0;
-        long totalchecked = 0;
-        long priority_total = 0;
-        int priority_threshold = PreferenceActivity.getSubtotalByPriorityThreshold(this
-                .getContext());
-        boolean prioIncludesChecked =
-                PreferenceActivity.prioritySubtotalIncludesChecked(this.getContext());
+    public void updateNumChecked (long numChecked, long numUnchecked) {
 
-        Cursor total_cursor = getContext().getContentResolver().query(
-                Subtotals.CONTENT_URI.buildUpon().appendPath("" + mListId).build(),
-                Subtotals.PROJECTION, null, null, null);
-        total_cursor.moveToPosition(-1);
-        while (total_cursor.moveToNext()) {
-            long item_status = total_cursor.getLong(Subtotals.STATUS_INDEX);
-            boolean isChecked = (item_status == ShoppingContract.Status.BOUGHT);
-
-            if (item_status == ShoppingContract.Status.REMOVED_FROM_LIST) {
-                continue;
-            }
-
-            long price = total_cursor.getLong(Subtotals.SUBTOTAL_INDEX);
-            total += price;
-
-            if (isChecked) {
-                totalchecked += price;
-                mNumChecked += total_cursor.getLong(Subtotals.COUNT_INDEX);
-            } else if (item_status == ShoppingContract.Status.WANT_TO_BUY) {
-                mNumUnchecked += total_cursor.getLong(Subtotals.COUNT_INDEX);
-            }
-
-            if (priority_threshold != 0 && (prioIncludesChecked || !isChecked)) {
-                String priority_str = total_cursor.getString(Subtotals.PRIORITY_INDEX);
-                if (priority_str != null) {
-                    int priority = 0;
-                    try {
-                        priority = Integer.parseInt(priority_str);
-                    } catch (NumberFormatException e) {
-                        // pretend it's a 0 then...
-                    }
-                    if (priority != 0 && priority <= priority_threshold) {
-                        priority_total += price;
-                    }
-                }
-            }
-        }
-        total_cursor.deactivate();
-        total_cursor.close();
-
-        if (debug) {
-            Log.d(TAG, "Total: " + total + ", Checked: " + totalchecked + "(#" + mNumChecked + ")");
-        }
+        mNumChecked = numChecked;
+        mNumUnchecked = numUnchecked;
 
         // Update ActionBar in ShoppingActivity
         // for the "Clean up list" command
         if (mActionBarListener != null && !mInSearch) {
             mActionBarListener.updateActionBar();
         }
-
-        if (mTotalTextView == null || mTotalCheckedTextView == null) {
-            // Most probably in "Add item" mode where no total is displayed
-            return;
-        }
-
-        if (mPriceVisibility != View.VISIBLE) {
-            // If price is not displayed, do not display total
-            mTotalTextView.setVisibility(View.GONE);
-            mPriTotalTextView.setVisibility(View.GONE);
-            mTotalCheckedTextView.setVisibility(View.GONE);
-            return;
-        }
-
-        mTotalTextView.setTextColor(mTextColorPrice);
-        mPriTotalTextView.setTextColor(mTextColorPrice);
-        mTotalCheckedTextView.setTextColor(mTextColorPrice);
-        mCountTextView.setTextColor(mTextColorPrice);
-
-        if (total != 0) {
-            String s = mPriceFormatter.format(total * 0.01d);
-            s = getContext().getString(R.string.total, s);
-            mTotalTextView.setText(s);
-            mTotalTextView.setVisibility(View.VISIBLE);
-        } else {
-            mTotalTextView.setVisibility(View.GONE);
-        }
-
-        if (priority_total != 0) {
-            final int captions[] = {0, R.string.priority1_total, R.string.priority2_total,
-                    R.string.priority3_total, R.string.priority4_total};
-            String s = mPriceFormatter.format(priority_total * 0.01d);
-            s = getContext().getString(captions[priority_threshold], s);
-            mPriTotalTextView.setText(s);
-            mPriTotalTextView.setVisibility(View.VISIBLE);
-        } else {
-            mPriTotalTextView.setVisibility(View.GONE);
-        }
-
-        if (totalchecked != 0) {
-            String s = mPriceFormatter.format(totalchecked * 0.01d);
-            s = getContext().getString(R.string.total_checked, s);
-            mTotalCheckedTextView.setText(s);
-            mTotalCheckedTextView.setVisibility(View.VISIBLE);
-            mCountTextView.setVisibility(View.VISIBLE);
-        } else {
-            mTotalCheckedTextView.setVisibility(View.GONE);
-            mCountTextView.setVisibility(View.GONE);
-        }
-
-        mCountTextView.setText("#" + mNumChecked);
     }
 
     private long getQuantityPrice(Cursor cursor) {
