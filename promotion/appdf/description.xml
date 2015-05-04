@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application-description-file version="1"
-  host="https://github.com/openintents/shoppinglist/tree/master/promotion/appdf">
+<application-description-file version="2"
+  host="https://github.com/openintents/shoppinglist/tree/master/promotion">
   <application package="org.openintents.shopping">
     <categorization>
       <type>application</type>
@@ -61,6 +61,7 @@
         <screenshot>../screenshots/android-4-0/OIShoppingList08.png</screenshot>
         <screenshot>../screenshots/android-4-0/OIShoppingList09.png</screenshot>
       </screenshots>
+      </images>
     </description>
     <price free="yes" />
     <apk-files>

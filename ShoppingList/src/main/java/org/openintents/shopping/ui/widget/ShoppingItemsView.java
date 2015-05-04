@@ -35,7 +35,8 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 import org.openintents.distribution.DownloadAppDialog;
-import org.openintents.shopping.WearSupport;
+import org.openintents.shopping.ShoppingApplication;
+import org.openintents.shopping.SyncSupport;
 import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
@@ -48,7 +49,7 @@ import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;
 import org.openintents.shopping.ui.*;
 import org.openintents.shopping.ui.dialog.EditItemDialog;
-import org.openintents.shopping.wear.WearSupportFactory;
+import org.openintents.shopping.sync.WearSupportFactory;
 
 /**
  * View to show a shopping list with its items
@@ -134,7 +135,7 @@ public class ShoppingItemsView extends ListView {
     private ActionBarListener mActionBarListener = null;
     private UndoListener mUndoListener = null;
     private ActionableToastBar mToastBar;
-    private WearSupport mWearSupport;
+    private SyncSupport mSyncSupport;
 
 
     /**
@@ -745,7 +746,7 @@ public class ShoppingItemsView extends ListView {
 
         // Remember standard divider
         mDefaultDivider = getDivider();
-        mWearSupport = WearSupportFactory.getDefault(getContext());
+        mSyncSupport = ((ShoppingApplication)getContext().getApplicationContext()).dependencies().getSyncSupport(getContext());
     }
 
     public void setActionBarListener(ActionBarListener listener) {
@@ -1394,11 +1395,11 @@ public class ShoppingItemsView extends ListView {
     }
 
     public boolean isWearSupportAvailable() {
-        return mWearSupport != null && mWearSupport.isAvailable();
+        return mSyncSupport != null && mSyncSupport.isAvailable();
     }
 
     public void pushItemsToWear(){
-        if (mWearSupport.isAvailable()){
+        if (mSyncSupport.isAvailable()){
             new Thread(){
                 @Override
                 public void run() {
@@ -1406,7 +1407,7 @@ public class ShoppingItemsView extends ListView {
                     Log.d(TAG, "pushing " + cursor.getCount() + " items");
                     cursor.moveToFirst();
                     while (cursor.moveToNext()) {
-                        mWearSupport.pushListItem(mListId, cursor);
+                        mSyncSupport.pushListItem(mListId, cursor);
                     }
                 }
             }.start();
@@ -1415,11 +1416,11 @@ public class ShoppingItemsView extends ListView {
 
 
     private void pushUpdatedItemToWear(final ContentValues values, final Uri itemUri) {
-        if (mWearSupport.isAvailable() && mWearSupport.isSyncEnabled())
+        if (mSyncSupport.isAvailable() && mSyncSupport.isSyncEnabled())
             new Thread(){
                 @Override
                 public void run() {
-                    mWearSupport.updateListItem(mListId, itemUri, values);
+                    mSyncSupport.updateListItem(mListId, itemUri, values);
                 }
             }.start();
     }

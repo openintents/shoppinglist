@@ -35,7 +35,7 @@ import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.DataSetObserver;
-import android.hardware.SensorListener;
+import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -88,18 +88,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.WrapperListAdapter;
 
-import com.pollfish.constants.Position;
-import com.pollfish.main.PollFish;
-
 import org.openintents.OpenIntents;
 import org.openintents.distribution.DistributionLibraryFragmentActivity;
 import org.openintents.distribution.DownloadOIAppDialog;
 import org.openintents.intents.GeneralIntents;
 import org.openintents.intents.ShoppingListIntents;
 import org.openintents.provider.Alert;
-import org.openintents.shopping.BuildConfig;
 import org.openintents.shopping.LogConstants;
 import org.openintents.shopping.R;
+import org.openintents.shopping.ShoppingApplication;
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
@@ -128,8 +125,6 @@ import org.openintents.shopping.widgets.CheckItemsWidget;
 import org.openintents.util.MenuIntentOptionsWithIcons;
 import org.openintents.util.ShakeSensorListener;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -435,8 +430,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     private Button mTagsFilterButton = null;
     private Button mShoppingListsFilterButton = null;
 
-    protected Context mDialogContext;
-
     // TODO: Set up state information for onFreeze(), ...
     // State data to be stored when freezing:
     private final String ORIGINAL_ITEM = "original item";
@@ -480,7 +473,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     // public int mPriceVisibility;
     // private int mTagsVisibility;
     private SensorManager mSensorManager;
-    private SensorListener mMySensorListener = new ShakeSensorListener() {
+    private SensorEventListener mMySensorListener = new ShakeSensorListener() {
 
         @Override
         public void onShake() {
@@ -533,6 +526,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         setContentView(R.layout.activity_shopping);
 
+        ((ShoppingApplication) getApplication()).dependencies().onCreateShoppingListActivity(this);
+
         // mEditItemPosition = -1;
 
         // Automatic requeries (once a second)
@@ -554,40 +549,31 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         if (action == null) {
             // Main action
             mState = STATE_MAIN;
-
-            mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI,
-                    "" + defaultShoppingList);
-
+            mListUri = buildDefaultShoppingListUri(defaultShoppingList);
             intent.setData(mListUri);
+
         } else if (Intent.ACTION_MAIN.equals(action)) {
             // Main action
             mState = STATE_MAIN;
-
-            mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI,
-                    "" + defaultShoppingList);
-
+            mListUri = buildDefaultShoppingListUri(defaultShoppingList);
             intent.setData(mListUri);
 
         } else if (Intent.ACTION_VIEW.equals(action)) {
             mState = STATE_VIEW_LIST;
+            mListUri = setListUriFromIntent(intent.getData(), type);
 
-            setListUriFromIntent(intent.getData(), type);
         } else if (Intent.ACTION_INSERT.equals(action)) {
-
             mState = STATE_VIEW_LIST;
-
-            setListUriFromIntent(intent.getData(), type);
+            mListUri = setListUriFromIntent(intent.getData(), type);
 
         } else if (Intent.ACTION_PICK.equals(action)) {
             mState = STATE_PICK_ITEM;
+            mListUri = buildDefaultShoppingListUri(defaultShoppingList);
 
-            mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI,
-                    "" + defaultShoppingList);
         } else if (Intent.ACTION_GET_CONTENT.equals(action)) {
             mState = STATE_GET_CONTENT_ITEM;
+            mListUri = buildDefaultShoppingListUri(defaultShoppingList);
 
-            mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI,
-                    "" + defaultShoppingList);
         } else if (GeneralIntents.ACTION_INSERT_FROM_EXTRAS.equals(action)) {
             if (ShoppingListIntents.TYPE_STRING_ARRAYLIST_SHOPPING.equals(type)) {
                 /*
@@ -597,10 +583,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 				 */
                 getShoppingExtras(intent);
                 mState = STATE_MAIN;
-                mListUri = Uri.withAppendedPath(
-                        ShoppingContract.Lists.CONTENT_URI, ""
-                                + defaultShoppingList
-                );
+                mListUri = buildDefaultShoppingListUri(defaultShoppingList);
                 intent.setData(mListUri);
             } else if (intent.getDataString().startsWith(
                     ShoppingContract.Lists.CONTENT_URI.toString())) {
@@ -617,6 +600,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         } else {
             // Unknown action.
             Log.e(TAG, "Shopping: Unknown action, exiting");
+            Toast.makeText(this, "Don't know how to handle " + action, Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -672,26 +656,20 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         mItemsView.setActionBarListener(this);
         mItemsView.setUndoListener(this);
 
-        if ("myo".equals(BuildConfig.FLAVOR)) {
-            try {
-                Class myoToggleBoughtInputMethod = Class.forName("org.openintents.shopping.ui.MyoToggleBoughtInputMethod");
-                Constructor constructor = myoToggleBoughtInputMethod.getConstructor(new Class[]{ShoppingActivity.class, mItemsView.getClass()});
-                toggleBoughtInputMethod = (ToggleBoughtInputMethod) constructor.newInstance(new Object[]{this, mItemsView});
-            } catch (ClassNotFoundException e) {
-            } catch (NoSuchMethodException e) {
-            } catch (InvocationTargetException e) {
-            } catch (InstantiationException e) {
-            } catch (IllegalAccessException e) {
-            }
-        }
+        toggleBoughtInputMethod = ((ShoppingApplication) getApplication()).dependencies().getToggleBoughtInputMethod(this, mItemsView);
     }
 
-    private void setListUriFromIntent(Uri data, String type) {
+    private Uri buildDefaultShoppingListUri(final int defaultShoppingList) {
+        return Uri.withAppendedPath(Lists.CONTENT_URI,
+                String.valueOf(defaultShoppingList));
+    }
+
+    private Uri setListUriFromIntent(Uri data, String type) {
         if (ShoppingContract.ITEM_TYPE.equals(type)) {
-            mListUri = ShoppingUtils.getListForItem(this, data
+            return ShoppingUtils.getListForItem(this, data
                     .getLastPathSegment());
         } else if (data != null) {
-            mListUri = data;
+            return data;
         }
     }
 
@@ -1040,7 +1018,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         saveActiveList(true);
         // TODO ???
         /*
-		 * // Unregister refresh intent receiver
+         * // Unregister refresh intent receiver
 		 * unregisterReceiver(mIntentReceiver);
 		 */
 
@@ -1824,7 +1802,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         super.onCreateOptionsMenu(menu);
 
 		/*
-		 * int MENU_ACTION_WITH_TEXT=0;
+         * int MENU_ACTION_WITH_TEXT=0;
 		 * 
 		 * //Temp- for backward compatibility with OS 3 features
 		 * 
