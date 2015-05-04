@@ -7,7 +7,7 @@ import com.pollfish.main.PollFish;
 
 public class OptionalDependencies extends BaseOptionalDependencies {
     @Override
-    public void onCreateShoppingListActivity(final Activity context) {
-        PollFish.init(context, "something", Position.TOP_RIGHT, 0);
+    public void onResumeShoppingActivity(final Activity context) {
+        PollFish.init(context, BuildConfig.KEY_POLLFISH, Position.MIDDLE_RIGHT, 0);
     }
 }

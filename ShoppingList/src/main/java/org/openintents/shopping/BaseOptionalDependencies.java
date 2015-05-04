@@ -15,7 +15,7 @@ import org.openintents.shopping.ui.widget.ShoppingItemsView;
  */
 public class BaseOptionalDependencies {
 
-    public void onCreateShoppingListActivity(Activity context) {
+    public void onResumeShoppingActivity(Activity context) {
         // do nothing;
     }
 

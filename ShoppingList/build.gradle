@@ -1,5 +1,11 @@
 apply plugin: 'com.android.application'
 
+Properties local_properties = new Properties()
+File localPropertiesFile = project.rootProject.file('private.properties')
+if (localPropertiesFile.exists()) {
+    local_properties.load(localPropertiesFile.newDataInputStream())
+}
+
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
@@ -28,6 +34,7 @@ android {
         }
 
         playInternet {
+            buildConfigField "String", "KEY_POLLFISH", "\"" + (local_properties.key_pollfish ?: "") + "\""
             dependencies {
                 compile 'com.google.android.gms:play-services-wearable:7.3.0'
                 wearApp project(':ShoppingListWear')
