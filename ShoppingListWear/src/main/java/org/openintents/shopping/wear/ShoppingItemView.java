@@ -1,7 +1,6 @@
 package org.openintents.shopping.wear;
 
 import android.content.Context;
-import android.support.wearable.view.CircledImageView;
 import android.support.wearable.view.WearableListView;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -9,7 +8,7 @@ import android.widget.TextView;
 
 import org.openintents.shopping.R;
 
-public class ShoppingItemView extends FrameLayout implements WearableListView.Item {
+public class ShoppingItemView extends FrameLayout implements WearableListView.OnCenterProximityListener {
 
 
     final TextView title;
@@ -27,34 +26,14 @@ public class ShoppingItemView extends FrameLayout implements WearableListView.It
     }
 
     @Override
-    public float getProximityMinValue() {
-        return 0.5f;
+    public void onCenterPosition(boolean b) {
+        title.animate().scaleX(1f).scaleY(1f).alpha(1);
+        tags.animate().scaleX(1f).scaleY(1f).alpha(1);
     }
 
     @Override
-    public float getProximityMaxValue() {
-        return 1f;
-    }
-
-    @Override
-    public float getCurrentProximityValue() {
-        return title.getAlpha();
-    }
-
-    @Override
-    public void setScalingAnimatorValue(float value) {
-        title.setAlpha(value);
-    }
-
-    @Override
-    public void onScaleUpStart() {
-        title.setTextSize(20);
-        tags.setTextSize(20);
-    }
-
-    @Override
-    public void onScaleDownStart() {
-        title.setTextSize(14);
-        tags.setTextSize(14);
+    public void onNonCenterPosition(boolean b) {
+        title.animate().scaleX(0.8f).scaleY(0.8f).alpha(0.6f);
+        tags.animate().scaleX(0.8f).scaleY(0.8f).alpha(0.6f);
     }
 }

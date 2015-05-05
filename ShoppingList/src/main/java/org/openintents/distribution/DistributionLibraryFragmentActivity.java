@@ -2,12 +2,12 @@ package org.openintents.distribution;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 //public class DistributionLibraryActivity extends Activity {//Temp - FragmentActivity for 3.x compatibility
-public class DistributionLibraryFragmentActivity extends ActionBarActivity {
+public class DistributionLibraryFragmentActivity extends AppCompatActivity {
 
     static final int MENU_DISTRIBUTION_START = Menu.FIRST;
 

@@ -1,4 +1,4 @@
-package org.openintents.shopping.wear;
+package org.openintents.shopping.sync;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -19,16 +19,16 @@ import com.google.android.gms.wearable.PutDataMapRequest;
 import com.google.android.gms.wearable.PutDataRequest;
 import com.google.android.gms.wearable.Wearable;
 
-import org.openintents.shopping.WearSupport;
+import org.openintents.shopping.SyncSupport;
 import org.openintents.shopping.library.provider.ShoppingContract;
 
-public class GooglePlayWearSupport implements WearSupport {
+public class GooglePlaySyncSupport implements SyncSupport {
 
-    private static final String TAG = GooglePlayWearSupport.class.getSimpleName();
+    private static final String TAG = GooglePlaySyncSupport.class.getSimpleName();
     GoogleApiClient mGoogleApiClient;
     private boolean syncEnabled = true;
 
-    public GooglePlayWearSupport(Context context) {
+    public GooglePlaySyncSupport(Context context) {
         int availability = GooglePlayServicesUtil.isGooglePlayServicesAvailable(context);
         if (availability == ConnectionResult.SUCCESS) {
             mGoogleApiClient = new GoogleApiClient.Builder(context)

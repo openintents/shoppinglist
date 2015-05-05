@@ -17,9 +17,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="org.openintents.shopping"
-    android:installLocation="auto"
-    android:versionCode="100201"
-    android:versionName="1.8">
+    android:installLocation="auto">
+
     <!-- History:
      * * * UPDATE ATRACKDOG METADATA BELOW FOR RELEASE CANDIDATES * * *
           1.8 [10044]: 2013-12-??
@@ -46,15 +45,35 @@
     1.1.0 [10006]: 2009-05-16
     1.0.3 [10004]: 2009-02-04  -->
 
+    <permission
+      android:name="org.openintents.shopping.READ_PERMISSION"
+      android:description="@string/oi_shopping_permission_read_descr"
+      android:label="@string/oi_shopping_permission_read"
+      android:permissionGroup="android.permission-group.PERSONAL_INFO"
+      android:protectionLevel="normal" />
+    <permission
+      android:name="org.openintents.shopping.WRITE_PERMISSION"
+      android:description="@string/oi_shopping_permission_write_descr"
+      android:label="@string/oi_shopping_permission_write"
+      android:permissionGroup="android.permission-group.PERSONAL_INFO"
+      android:protectionLevel="normal" />
+
+
     <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="false" />
+    <!-- required for MyBackupPro: -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="org.openintents.shopping.READ_PERMISSION" />
+    <uses-permission android:name="org.openintents.shopping.WRITE_PERMISSION" />
 
     <application
         android:allowBackup="true"
         android:backupAgent="ShoppingBackupAgent"
         android:icon="@drawable/ic_launcher_shoppinglist"
         android:label="@string/app_name"
+        android:name=".ShoppingApplication"
         tools:replace="label">
 
         <!-- aTrackDog metadata -->
@@ -81,16 +100,13 @@
         <provider
             android:name="org.openintents.shopping.provider.ShoppingProvider"
             android:authorities="org.openintents.shopping"
+            android:readPermission="org.openintents.shopping.READ_PERMISSION"
+            android:writePermission="org.openintents.shopping.WRITE_PERMISSION"
             android:exported="true" />
         <provider
             android:name="org.openintents.shopping.backup.MyBackupPro"
             android:authorities="org.openintents.shopping.backup.MyBackupPro"
             android:exported="true" />
-        <!-- Permissions not yet active! Activate permissions in one of the following releases.
-          (Give time to extensions to implement permissions.)
-          android:readPermission="org.openintents.shopping.READ_PERMISSION"
-      android:writePermission="org.openintents.shopping.WRITE_PERMISSION"
-         -->
 
         <!-- Shopping activity -->
         <activity
@@ -247,15 +263,15 @@
 
         <activity
             android:name=".ui.PreferenceActivity"
-            android:label="@string/preferences"></activity>
+            android:label="@string/preferences"/>
         <activity
             android:name=".ui.PickItemsActivity"
             android:label="@string/menu_pick_items"
-            android:theme="@android:style/Theme.Dialog"></activity>
+            android:theme="@android:style/Theme.Dialog"/>
         <activity
             android:name=".ui.ItemStoresActivity"
             android:label="@string/item_stores_activity_label"
-            android:theme="@android:style/Theme.Dialog"></activity>
+            android:theme="@android:style/Theme.Dialog"/>
 
         <!-- Activities from OI Distribution Library -->
         <activity android:name="org.openintents.distribution.EulaActivity" />
@@ -281,27 +297,4 @@
             </intent-filter>
         </activity>
     </application>
-
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- required for MyBackupPro: -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-
-    <uses-permission android:name="org.openintents.shopping.READ_PERMISSION" />
-    <uses-permission android:name="org.openintents.shopping.WRITE_PERMISSION" />
-
-    <permission
-        android:name="org.openintents.shopping.READ_PERMISSION"
-        android:description="@string/oi_shopping_permission_read_descr"
-        android:label="@string/oi_shopping_permission_read"
-        android:permissionGroup="android.permission-group.PERSONAL_INFO"
-        android:protectionLevel="normal" />
-    <permission
-        android:name="org.openintents.shopping.WRITE_PERMISSION"
-        android:description="@string/oi_shopping_permission_write_descr"
-        android:label="@string/oi_shopping_permission_write"
-        android:permissionGroup="android.permission-group.PERSONAL_INFO"
-        android:protectionLevel="normal" />
-
 </manifest>

@@ -1,15 +1,21 @@
 apply plugin: 'com.android.application'
 
+Properties local_properties = new Properties()
+File localPropertiesFile = project.rootProject.file('private.properties')
+if (localPropertiesFile.exists()) {
+    local_properties.load(localPropertiesFile.newDataInputStream())
+}
+
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.1"
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
 
     defaultConfig {
         applicationId "org.openintents.shopping"
         versionName "2.0.2"
         versionCode 100202
         minSdkVersion 14
-        targetSdkVersion 21
+        targetSdkVersion 22
 
         testApplicationId "org.openintents.shopping.test"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
@@ -22,7 +28,15 @@ android {
     productFlavors {
         play {
             dependencies {
-                compile 'com.google.android.gms:play-services-wearable:+'
+                compile 'com.google.android.gms:play-services-wearable:7.3.0'
+                wearApp project(':ShoppingListWear')
+            }
+        }
+
+        playInternet {
+            buildConfigField "String", "KEY_POLLFISH", "\"" + (local_properties.key_pollfish ?: "") + "\""
+            dependencies {
+                compile 'com.google.android.gms:play-services-wearable:7.3.0'
                 wearApp project(':ShoppingListWear')
             }
         }
@@ -34,14 +48,12 @@ android {
         tstore {
 
         }
-
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-
             applicationVariants.all { variant ->
                 variant.outputs.each { output ->
                     def file = output.outputFile
@@ -82,13 +94,13 @@ dependencies {
     }
 
     compile project(':ShoppingListLibrary')
-    compile 'org.openintents:distribution-lib:1.0.+'
-    compile 'com.android.support:appcompat-v7:20.+'
+    compile 'org.openintents:distribution-lib:1.0.2'
+    compile 'com.android.support:appcompat-v7:22.1.1'
     compile files('libs/sensorsimulator-lib.jar')
     compile files('libs/OIShoppingListMyBackupPro.jar')
-    compile files('libs/pollfish.jar')
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:4.3.1'
     androidTestCompile files('libs/polidea_test_runner_1.2.jar')
 
+    playInternetCompile files('libs/pollfish.jar')
     myoCompile('com.thalmic:myosdk:0.6.+@aar')
 }
