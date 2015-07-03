@@ -21,5 +21,5 @@ package org.openintents.shopping.ui;
  * Classes that can undo an operation should implement this interface.
  */
 public interface UndoListener {
-    public void onUndoAvailable(ToastBarOperation undoOp);
+    public void onUndoAvailable(SnackbarUndoOperation undoOp);
 }

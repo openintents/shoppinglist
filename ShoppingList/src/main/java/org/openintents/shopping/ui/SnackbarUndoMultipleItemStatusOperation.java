@@ -6,6 +6,7 @@ import android.content.OperationApplicationException;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.RemoteException;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -14,7 +15,7 @@ import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.shopping.ui.widget.ShoppingItemsView;
 
-public class ToastBarMultipleItemStatusOperation extends ToastBarOperation {
+public class SnackbarUndoMultipleItemStatusOperation extends SnackbarUndoOperation {
 
     /**
      *
@@ -32,8 +33,8 @@ public class ToastBarMultipleItemStatusOperation extends ToastBarOperation {
     private Context mContext;
     private ArrayList<String> mItemList;
 
-    public ToastBarMultipleItemStatusOperation(ShoppingItemsView shoppingItemsView, Context context,
-                                               int type, long listId, boolean batch) {
+    public SnackbarUndoMultipleItemStatusOperation(ShoppingItemsView shoppingItemsView, Context context,
+                                                   int type, long listId, boolean batch) {
         super(1, type, batch);
         mShoppingItemsView = shoppingItemsView;
         mContext = context;
@@ -63,7 +64,7 @@ public class ToastBarMultipleItemStatusOperation extends ToastBarOperation {
     }
 
     @Override
-    public void onActionClicked(Context context) {
+    public void onClick(View view) {
         // here is where we get to try batch provider operation
         ArrayList<ContentProviderOperation> ops =
                 new ArrayList<ContentProviderOperation>();

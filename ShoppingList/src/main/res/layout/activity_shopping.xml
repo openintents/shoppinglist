@@ -138,9 +138,6 @@
 
     </LinearLayout>
 
-    <org.openintents.shopping.ui.widget.ActionableToastBar
-      android:id="@+id/toast_bar"
-      style="@style/ToastBarStyle" />
   </FrameLayout>
   <!-- android:layout_gravity="start" tells DrawerLayout to treat
        this as a sliding drawer on the left side for left-to-right

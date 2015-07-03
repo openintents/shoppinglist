@@ -14,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SearchViewCompat;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -130,7 +131,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
 
     private ActionBarListener mActionBarListener = null;
     private UndoListener mUndoListener = null;
-    private ActionableToastBar mToastBar;
+    private Snackbar mSnackbar;
     private SyncSupport mSyncSupport;
     private ShoppingTotalsHandler mTotalsHandler;
 
@@ -623,9 +624,6 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
                 return true;
             }
 
-            if (mToastBar != null) {
-                mToastBar.hide(true /* animated */, false /* actionClicked */);
-            }
             fillItems(mCursorActivity, mListId);
 
             // invalidate();
@@ -638,9 +636,6 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
                 SearchViewCompat.setQuery(mSearchView, "", false);
                 fillItems(mCursorActivity, mListId);
             }
-            if (mToastBar != null) {
-                mToastBar.hide(true /* animated */, false /* actionClicked */);
-            }
             return true;
         }
     }
@@ -652,9 +647,6 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
             }
             mInSearch = false;
             mFilter = null;
-            if (mToastBar != null) {
-                mToastBar.hide(true /* animated */, false /* actionClicked */);
-            }
             fillItems(mCursorActivity, mListId);
             // invalidate();
             return false;
@@ -1193,11 +1185,11 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
      * @param on if true all want_to_buy items are set to bought, if false all bought items are set to want_to_buy
      */
     public void toggleAllItems(boolean on) {
-        int op_type = on ? ToastBarMultipleItemStatusOperation.MARK_ALL : ToastBarMultipleItemStatusOperation.UNMARK_ALL;
-        ToastBarMultipleItemStatusOperation op = null;
+        int op_type = on ? SnackbarUndoMultipleItemStatusOperation.MARK_ALL : SnackbarUndoMultipleItemStatusOperation.UNMARK_ALL;
+        SnackbarUndoMultipleItemStatusOperation op = null;
 
         if (mUndoListener != null) {
-            op = new ToastBarMultipleItemStatusOperation(this, mCursorActivity,
+            op = new SnackbarUndoMultipleItemStatusOperation(this, mCursorActivity,
                     op_type, mListId, false);
         }
 
@@ -1315,7 +1307,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         boolean hidesItem = true /* TODO */;
         if (mUndoListener != null && (affectsSort || hidesItem)) {
             String item_name = mCursorItems.getString(ShoppingActivity.mStringItemsITEMNAME);
-            ToastBarSingleItemStatusOperation op = new ToastBarSingleItemStatusOperation(this, getContext(),
+            SnackbarUndoSingleItemStatusOperation op = new SnackbarUndoSingleItemStatusOperation(this, getContext(),
                     contains_id, item_name, oldstatus, newstatus, 0, false);
             mUndoListener.onUndoAvailable(op);
         }
@@ -1331,10 +1323,10 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
 
         boolean nothingdeleted = true;
 
-        ToastBarMultipleItemStatusOperation op = null;
+        SnackbarUndoMultipleItemStatusOperation op = null;
         if (mUndoListener != null) {
-            op = new ToastBarMultipleItemStatusOperation(this, mCursorActivity,
-                    ToastBarMultipleItemStatusOperation.CLEAN_LIST, mListId, false);
+            op = new SnackbarUndoMultipleItemStatusOperation(this, mCursorActivity,
+                    SnackbarUndoMultipleItemStatusOperation.CLEAN_LIST, mListId, false);
         }
 
         // by changing state
@@ -1522,12 +1514,6 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-
-        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
-            if (mToastBar != null && !mToastBar.isEventInToastBar(ev)) {
-                mToastBar.hide(true /* animated */, false /* actionClicked */);
-            }
-        }
 
         if (mDragAndDropEnabled) {
             if (mDragListener != null || mDropListener != null) {
@@ -1793,10 +1779,6 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
 
     public interface ActionBarListener {
         void updateActionBar();
-    }
-
-    public void setToastBar(ActionableToastBar toastBar) {
-        mToastBar = toastBar;
     }
 
 }
