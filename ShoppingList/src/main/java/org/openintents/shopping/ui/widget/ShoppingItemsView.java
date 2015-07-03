@@ -44,6 +44,7 @@ import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
 import org.openintents.shopping.library.provider.ShoppingContract.Status;
 import org.openintents.shopping.library.util.ShoppingUtils;
+import org.openintents.shopping.provider.ShoppingProvider;
 import org.openintents.shopping.theme.ThemeAttributes;
 import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;
@@ -864,7 +865,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         String[] selection_args = new String[]{String.valueOf(listId)};
         if (mFilter != null) {
             selection = "list_id = ? AND " + ContainsFull.ITEM_NAME +
-                    " like '%" + mFilter + "%'";
+                    " like '%" + ShoppingProvider.EscapeSQLChars(mFilter) + "%' ESCAPE '`'";
         } else if (mMode == ShoppingActivity.MODE_IN_SHOP) {
             if (hideBought) {
                 selection = "list_id = ? AND " + Contains.STATUS
