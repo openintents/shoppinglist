@@ -15,6 +15,7 @@
  -->
 
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
   android:id="@+id/drawer_layout"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
@@ -145,7 +146,7 @@
        The drawer is given a fixed width in dp and extends the full height of
        the container. A solid background is used for contrast
        with the content view. -->
-  <ListView
+  <!-- ListView
     android:id="@+id/left_drawer"
     android:layout_width="240dp"
     android:layout_height="match_parent"
@@ -153,5 +154,12 @@
     android:choiceMode="singleChoice"
     android:divider="@android:color/transparent"
     android:dividerHeight="0dp"
-    android:background="#111" />
+    android:background="#111" /> -->
+  <android.support.design.widget.NavigationView
+      android:id="@+id/left_drawer"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_gravity="start" />
+      <!-- app:headerLayout="@layout/drawer_header"
+      app:menu="@menu/drawer" -->
 </android.support.v4.widget.DrawerLayout>

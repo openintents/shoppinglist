@@ -82,13 +82,13 @@
   <!-- Button label to add an item to the list. -->
   <string name="add">Add</string>
 
-  <string name="menu_pick_items">Pick items</string>
+  <string name="menu_pick_items">Pick Items</string>
   <string name="menu_start_shopping">Shopping</string>
   <string name="menu_sort_list">Sort</string>
   <string name="menu_search_add">Search / Add items</string>
 
   <!-- Title supplement. '%s' is the name of the current list. -->
-  <string name="pick_items_title">%s - Pick items</string>
+  <string name="pick_items_title">%s - Pick Items</string>
 
   <!-- Title supplement. '%s' is the name of the current list. -->
   <string name="shopping_title">%s - Shopping</string>

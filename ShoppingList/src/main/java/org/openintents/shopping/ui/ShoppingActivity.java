@@ -33,7 +33,6 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.database.DataSetObserver;
 import android.hardware.Sensor;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
@@ -43,6 +42,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.view.ActionProvider;
 import android.support.v4.view.MenuItemCompat;
@@ -84,7 +84,6 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.WrapperListAdapter;
 
 import org.openintents.OpenIntents;
 import org.openintents.distribution.DistributionLibraryFragmentActivity;
@@ -307,7 +306,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
     private ShoppingItemsView mItemsView;
     private DrawerLayout mDrawerLayout;
-    private ListView mDrawerListsView;
+    private NavigationView mNavigationView;
+    private NavigationMenuManager mNavigationManager;
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mTitle, mDrawerTitle, mSubTitle;
 
@@ -1155,6 +1155,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 public void onDrawerOpened(View drawerView) {
                     getSupportActionBar().setTitle(mDrawerTitle);
                     getSupportActionBar().setSubtitle(null);
+                    mNavigationManager.updateMenu();
                     invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
                 }
             };
@@ -1163,8 +1164,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             mDrawerLayout.setDrawerListener(mDrawerToggle);
         }
 
-        mDrawerListsView = (ListView) findViewById(R.id.left_drawer);
-
+        mNavigationView = (NavigationView) findViewById(R.id.left_drawer);
+        mNavigationManager = new NavigationMenuManager(this, mNavigationView);
 
         mShoppingListsView = (Spinner) findViewById(R.id.spinner_listfilter);
         mShoppingListsView
@@ -1676,7 +1677,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
-        boolean drawerOpen = mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mDrawerListsView);
+        boolean drawerOpen = mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mNavigationView);
         boolean holoSearch = PreferenceActivity.getUsingHoloSearchFromPrefs(this);
         // TODO: supposed to hide content-related actions when the drawer is open.
 
@@ -2632,12 +2633,14 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 mStringListFilter, null, null, mSortOrder);
         startManagingCursor(mCursorShoppingLists);
 
+        mNavigationManager.setCursor(mCursorShoppingLists);
+
         if (mCursorShoppingLists == null) {
             Log.e(TAG, "missing shopping provider");
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                     R.layout.list_item_shopping_list,
                     new String[]{getString(R.string.no_shopping_provider)});
-            setSpinnerAndDrawerListAdapter(adapter);
+            setListOfListsAdapter(adapter);
 
             return;
         }
@@ -2727,7 +2730,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                     // Give the cursor to the list adapter
                     mCursorShoppingLists, new String[]{Lists.NAME},
                     new int[]{R.id.text1});
-        setSpinnerAndDrawerListAdapter(adapter);
+        setListOfListsAdapter(adapter);
 
     }
 
@@ -3066,218 +3069,126 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         setSelectedListPos(newPos);
     }
 
-    private class DrawerListAdapter implements WrapperListAdapter, OnItemClickListener {
+    private class NavigationMenuManager {
 
-        private ListAdapter mAdapter = null;
+        private Cursor mCursor = null;
         private int mNumAboveList = 3;
         private int mNumBelowList = 1;
         private int mViewTypeNum;
         LayoutInflater mInflater;
+        private NavigationView mNav;
+        private MenuItem.OnMenuItemClickListener mPickItemsListener;
+        private MenuItem.OnMenuItemClickListener mShoppingListener;
+        private MenuItem.OnMenuItemClickListener mListListener;
 
-        public DrawerListAdapter(Context context, ListAdapter adapter) {
-            mAdapter = adapter;
-            mViewTypeNum = mAdapter.getViewTypeCount();
+        private final static int ModeGroup = 1;
+        private final static int ListsGroup = 2;
+
+        public NavigationMenuManager(Context context, NavigationView nav) {
+            mCursor = null;
+            mNav = nav;
             mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
 
-        @Override
-        public boolean areAllItemsEnabled() {
-            return false;
-        }
-
-        @Override
-        public boolean isEnabled(int position) {
-            int list_pos, post_pos;
-            int list_count = mAdapter.getCount();
-            if (position < mNumAboveList) {
-                return (position != 2); // not the "Lists" header
-            } else if ((list_pos = position - mNumAboveList) < list_count) {
-                // actual list entries can be selected
-            } else {
-                post_pos = list_pos - list_count;
-                // New List button can be selected
-            }
-            return true;
-        }
-
-        @Override
-        public int getCount() {
-            // TODO Auto-generated method stub
-            return mAdapter.getCount() + mNumAboveList + mNumBelowList;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            int list_pos, post_pos;
-            int list_count = mAdapter.getCount();
-            if (position < mNumAboveList) {
-            } else if ((list_pos = position - mNumAboveList) < list_count) {
-                return mAdapter.getItem(list_pos);
-            } else {
-                post_pos = list_pos - list_count;
-            }
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            int list_pos, post_pos;
-            int list_count = mAdapter.getCount();
-            if (position < mNumAboveList) {
-
-            } else if ((list_pos = position - mNumAboveList) < list_count) {
-                return mAdapter.getItemId(list_pos);
-            } else {
-                post_pos = list_pos - list_count;
-            }
-            return -1;
-        }
-
-        @Override
-        public int getItemViewType(int position) {
-            int list_pos, post_pos;
-            int list_count = mAdapter.getCount();
-            if (position < mNumAboveList) {
-            } else if ((list_pos = position - mNumAboveList) < list_count) {
-                return mAdapter.getItemViewType(list_pos);
-            }
-            return IGNORE_ITEM_VIEW_TYPE;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            int list_pos, post_pos;
-            int list_count = mAdapter.getCount();
-            View v = null;
-            View v2 = null;
-
-            if (position < mNumAboveList) {
-                switch (position) {
-                    case 1:
-                        v = mInflater.inflate(R.layout.drawer_item_radio, parent, false);
-                        v2 = v.findViewById(R.id.text1);
-                        ((TextView) v2).setText(R.string.menu_pick_items);
-                        v2 = v.findViewById(R.id.mode_radio_button);
-                        v2.setSelected(mItemsView.mMode == MODE_ADD_ITEMS);
-                        break;
-                    case 0:
-                        v = mInflater.inflate(R.layout.drawer_item_radio, parent, false);
-                        v2 = v.findViewById(R.id.text1);
-                        ((TextView) v2).setText(R.string.menu_start_shopping);
-                        v2 = v.findViewById(R.id.mode_radio_button);
-                        v2.setSelected(mItemsView.mMode == MODE_IN_SHOP);
-                        break;
-                    case 2:
-                        v = mInflater.inflate(R.layout.drawer_item_header, parent, false);
-                        ((TextView) v).setText(R.string.list); // fix me
-                        break;
+            mPickItemsListener = new OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    switchToMode(MODE_ADD_ITEMS);
+                    return true;
                 }
-            } else if ((list_pos = position - mNumAboveList) < list_count) {
-                int curListPos = mShoppingListsView.getSelectedItemPosition();
-                if (list_pos == curListPos) {
-                    mDrawerListsView.setItemChecked(position, true);
+            };
+            mShoppingListener = new OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    switchToMode(MODE_IN_SHOP);
+                    return true;
                 }
-                v = mAdapter.getView(list_pos, convertView, parent);
-            } else {
-                post_pos = list_pos - list_count;
-                v = mInflater.inflate(R.layout.drawer_item_radio, parent, false);
-                v2 = v.findViewById(R.id.text1);
-                ((TextView) v2).setText(R.string.new_list);
-                v2 = v.findViewById(R.id.mode_radio_button);
-                ((ImageView) v2).setImageResource(R.drawable.ic_menu_add_list);
-            }
-            return v;
+            };
+            mListListener = new OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    switchToList(menuItem.getItemId());
+                    return true;
+                }
+            };
+
         }
 
-        @Override
-        public int getViewTypeCount() {
-            return mViewTypeNum;
-        }
-
-        @Override
-        public boolean hasStableIds() {
-            // TODO Auto-generated method stub
-            return false;
-        }
-
-        @Override
-        public boolean isEmpty() {
-            return false;
-        }
-
-        @Override
-        public void registerDataSetObserver(DataSetObserver observer) {
-            mAdapter.registerDataSetObserver(observer);
-        }
-
-        @Override
-        public void unregisterDataSetObserver(DataSetObserver observer) {
-            mAdapter.unregisterDataSetObserver(observer);
-        }
-
-        @Override
-        public ListAdapter getWrappedAdapter() {
-            return mAdapter;
-        }
-
-        public void onItemClick(AdapterView parent, View v,
-                                int position, long id) {
-            if (debug) {
-                Log.d(TAG, "DrawerListAdapter: onItemClick");
-            }
-
-            int list_pos;
-            int list_count = mAdapter.getCount();
-            if (position < mNumAboveList) {
-                // Pick Items or Shopping selected
-                closeDrawer();
-                mItemsView.mMode = (position == 1) ? MODE_ADD_ITEMS : MODE_IN_SHOP;
-                mDrawerListsView.setItemChecked(position, true);
-                mDrawerListsView.setItemChecked(1 - position, false);
+        private void switchToMode(int mode) {
+            closeDrawer();
+            if (mItemsView.mMode != mode) {
+                mItemsView.mMode = mode;
+                // mNavigationView.setItemChecked(position, true);
+                // mNavigationView.setItemChecked(1 - position, false);
                 onModeChanged();
-                // need to toggle the radio buttons too
-            } else if ((list_pos = position - mNumAboveList) < list_count) {
-                // Update list cursor:
-                mShoppingListsView.setSelection(list_pos);
-                getSelectedListId();
-
-                // Set the theme based on the selected list:
-                setListTheme(loadListTheme());
-
-                // If it's the same list we had before, requery only
-                // if a preference has changed since then.
-                fillItems(id == mItemsView.getListId());
-
-                // Apply the theme after the list has been filled:
-                applyListTheme();
-
-                updateTitle();
-
-                mDrawerListsView.setItemChecked(position, true);
-                closeDrawer();
-            } else {
-                closeDrawer();
-                showDialog(DIALOG_NEW_LIST);
             }
         }
+
+        private void switchToList(int listPos) {
+            closeDrawer();
+            setSelectedListPos(listPos);
+        }
+
+        public void setCursor(Cursor cursor) {
+            mCursor = cursor;
+        }
+
+        public void updateMenu() {
+
+            Menu m = mNav.getMenu();
+            m.clear();
+
+            m.setGroupCheckable(ModeGroup, true, true);
+            m.setGroupCheckable(ListsGroup, true, true);
+
+            // for now, replicate existing structure... but would be nice
+            // to switch modes between commands and lists, similar to gmail's
+            // switch between commands/folders and accounts.
+
+            // add shopping and pick items
+            m.add(ModeGroup, Menu.NONE, Menu.NONE, R.string.menu_start_shopping)
+                    .setIcon(android.R.drawable.btn_radio)
+                    .setChecked(mItemsView.mMode == MODE_IN_SHOP)
+                    .setOnMenuItemClickListener(mShoppingListener);
+            m.add(ModeGroup, Menu.NONE, Menu.NONE, R.string.menu_pick_items)
+                    .setIcon(android.R.drawable.btn_radio)
+                    .setChecked(mItemsView.mMode == MODE_ADD_ITEMS)
+                    .setOnMenuItemClickListener(mPickItemsListener);
+
+            // add lists group
+            int i_list, count = mCursor.getCount();
+            int curListPos = mShoppingListsView.getSelectedItemPosition();
+            mCursor.moveToFirst();
+            for (i_list = 0; i_list < count; i_list++) {
+                String name = mCursor.getString(mStringListFilterNAME);
+                m.add(ListsGroup, i_list, Menu.NONE, name)
+                        .setChecked(i_list == curListPos)
+                        .setOnMenuItemClickListener(mListListener);
+                mCursor.moveToNext();
+            }
+
+            // add new list command
+            m.add(Menu.NONE, Menu.NONE, Menu.NONE, R.string.new_list)
+                    .setIcon(R.drawable.ic_menu_add_list)
+            .setOnMenuItemClickListener(new OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    closeDrawer();
+                    showDialog(DIALOG_NEW_LIST);
+                    return true;
+                }
+            });
+            
+        }
+
     }
 
     private void closeDrawer() {
         if (mDrawerLayout != null) {
-            mDrawerLayout.closeDrawer(mDrawerListsView);
+            mDrawerLayout.closeDrawer(mNavigationView);
         }
     }
 
-    /**
-     * With the requirement of OS3, making an intermediary decision depending
-     * upon the widget
-     *
-     * @param adapter
-     */
-    private void setSpinnerAndDrawerListAdapter(ListAdapter adapter) {
-        DrawerListAdapter adapterWrapper = (new DrawerListAdapter(this, adapter));
-        mDrawerListsView.setAdapter(adapterWrapper);
-        mDrawerListsView.setOnItemClickListener(adapterWrapper);
+    private void setListOfListsAdapter(ListAdapter adapter) {
         mShoppingListsView.setAdapter(adapter);
     }
 
@@ -3338,7 +3249,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             } else if (PreferenceActivity.getUsingPerListSortFromPrefs(mContext) == false) {
                 vis = false;
             }
-            if (mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mDrawerListsView)) {
+            if (mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mNavigationView)) {
                 vis = false;
             }
             return vis;
