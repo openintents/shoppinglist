@@ -2004,14 +2004,16 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         }
 
         // Rename currently selected list:
+        long listId = getSelectedListId();
+
         ContentValues values = new ContentValues();
         values.put(Lists.NAME, "" + newName);
-        getContentResolver().update(
-                Uri.withAppendedPath(Lists.CONTENT_URI,
-                        mCursorShoppingLists.getString(0)), values, null, null
+        getContentResolver().update(mListUri, values, null, null
         );
 
+        //
         mCursorShoppingLists.requery();
+        setSelectedListId((int)listId);
         updateTitle();
         return true;
     }
