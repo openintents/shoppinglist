@@ -865,7 +865,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         String[] selection_args = new String[]{String.valueOf(listId)};
         if (mFilter != null) {
             selection = "list_id = ? AND " + ContainsFull.ITEM_NAME +
-                    " like '%" + ShoppingProvider.EscapeSQLChars(mFilter) + "%' ESCAPE '`'";
+                    " like '%" + ShoppingProvider.escapeSQLChars(mFilter) + "%' ESCAPE '`'";
         } else if (mMode == ShoppingActivity.MODE_IN_SHOP) {
             if (hideBought) {
                 selection = "list_id = ? AND " + Contains.STATUS

@@ -107,7 +107,7 @@ public class ShoppingProvider extends ContentProvider {
         return true;
     }
 
-    public static String EscapeSQLChars(String trapped) {
+    public static String escapeSQLChars(String trapped) {
         /*
         In order for this method to work properly, the query using the result must use '`' as its
         Escape character.
@@ -216,7 +216,7 @@ public class ShoppingProvider extends ContentProvider {
                 defaultOrderBy = ContainsFull.DEFAULT_SORT_ORDER;
                 String tagFilter = getListTagsFilter(selectionArgs[0]);
                 if (!inSearchMode && !TextUtils.isEmpty(tagFilter)) {
-                    qb.appendWhere(" AND items.tags like '%" + EscapeSQLChars(tagFilter) + "%' ESCAPE '`'");
+                    qb.appendWhere(" AND items.tags like '%" + escapeSQLChars(tagFilter) + "%' ESCAPE '`'");
                 }
                 break;
 
