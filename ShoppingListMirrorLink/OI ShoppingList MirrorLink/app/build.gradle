@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+
+def generateSelfSignedCertificate(version){
+    def buildType = version == "release" ? "assembleRelease": "assembleDebug"
+    def rerunAssemble = true
+    def projectLocation = projectDir.toString()
+    def certGeneratorLocation = "certificategenerator-android-studio.jar"
+    def certXmlLocation = projectLocation + "/certificate.xml"
+    def certificateDestination = projectLocation + "/src/main/assets/self-signed.ccc.crt"
+    def certificateFolder = projectLocation + "/src/main/assets/"
+    def certificateIssuer = "CN=Name"
+    def developerId = ""
+    def apkLocation = ""
+    android.applicationVariants.all { variant ->
+        if ((variant.name).equals(version)) {
+            variant.outputs.each { output ->
+                apkLocation = output.outputFile
+            }
+        }
+    }
+
+    if (project.hasProperty("isLast")) {
+        rerunAssemble = !isLast
+    }
+
+
+    if (rerunAssemble) {
+        def subdir = new File(certificateFolder)
+        if( !subdir.exists() ) {
+            subdir.mkdirs()
+        }
+        exec {
+            executable 'java'
+            args "-jar", certGeneratorLocation, "generate-certificate", apkLocation,
+                    android.defaultConfig.applicationId, android.defaultConfig.versionCode,
+                    certXmlLocation, certificateDestination, certificateIssuer, developerId
+        }
+        if (System.properties['os.name'].toLowerCase().contains("windows")) {
+            exec {
+                executable "cmd"
+                workingDir projectLocation
+                args  "/c", "..\\gradlew.bat", buildType, "-PisLast=true"
+            }
+        } else {
+            exec {
+                executable "bash"
+                workingDir projectLocation
+                args "../gradlew", buildType, "-PisLast=true"
+            }
+        }
+    }
+}
+
+
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
+
+    defaultConfig {
+        applicationId "com.example.mymirrorlinkapplication"
+        minSdkVersion 15
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+    }
+
+    assembleDebug.doLast {
+        generateSelfSignedCertificate("debug")
+    }
+    assembleRelease.doLast{
+        generateSelfSignedCertificate("release")
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
+}
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:21.0.0'
+    compile(name:'mirrorlink-library', ext:'aar')
+}
