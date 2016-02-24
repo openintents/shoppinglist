@@ -16,15 +16,10 @@
     android:targetPackage="org.openintents.shopping"
     android:name="pl.polidea.instrumentation.PolideaInstrumentationTestRunner" />
 
-  <application
-    android:icon="@drawable/icon"
-    android:label="@string/app_name">
-
-    <uses-library android:name="android.org.openintents.shopping.test.test.runner" />
+  <application>
 
     <activity
       android:name=".test.BarcodeScannerTest"
-      android:label="@string/app_name"
       android:theme="@android:style/Theme.Translucent.NoTitleBar">
       <intent-filter android:label="Scan barcode test">
         <action android:name="android.intent.action.GET_CONTENT" />

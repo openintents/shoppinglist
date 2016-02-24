@@ -7,15 +7,15 @@ if (localPropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "org.openintents.shopping"
         versionName "2.0.2"
         versionCode 100202
         minSdkVersion 14
-        targetSdkVersion 22
+        targetSdkVersion 23
 
         testApplicationId "org.openintents.shopping.test"
         testInstrumentationRunner "android.test.InstrumentationTestRunner"
@@ -28,7 +28,7 @@ android {
     productFlavors {
         play {
             dependencies {
-                compile 'com.google.android.gms:play-services-wearable:7.3.0'
+                compile "com.google.android.gms:play-services-wearable:$rootProject.ext.playServicesVersion"
                 wearApp project(':ShoppingListWear')
             }
         }
@@ -36,7 +36,7 @@ android {
         playInternet {
             buildConfigField "String", "KEY_POLLFISH", "\"" + (local_properties.key_pollfish ?: "") + "\""
             dependencies {
-                compile 'com.google.android.gms:play-services-wearable:7.3.0'
+                compile "com.google.android.gms:play-services-wearable:$rootProject.ext.playServicesVersion"
                 wearApp project(':ShoppingListWear')
             }
         }
@@ -95,7 +95,7 @@ dependencies {
 
     compile project(':ShoppingListLibrary')
     compile 'org.openintents:distribution-lib:1.0.2'
-    compile 'com.android.support:appcompat-v7:22.1.1'
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
     compile files('libs/sensorsimulator-lib.jar')
     compile files('libs/OIShoppingListMyBackupPro.jar')
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:4.3.1'

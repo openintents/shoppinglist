@@ -18,9 +18,6 @@ public class BarcodeScannerTest extends Activity {
     String resultModeData = null;
     private Random random = new Random();
 
-    /**
-     * Called when the activity is first created.
-     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,5 +1,3 @@
 include ':ShoppingListLibrary'
 include ':ShoppingList'
 include ':ShoppingListWear'
-include ':ShoppingListGlass'
-include ':ShoppingListExtGlass'

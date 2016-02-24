@@ -2,9 +2,12 @@ bin
 gen
 build-private.properties
 local.properties
+private.properties
 release
 build
 .gradle
 .idea
 *.iml
 *~
+.DS_Store
+*.p12
