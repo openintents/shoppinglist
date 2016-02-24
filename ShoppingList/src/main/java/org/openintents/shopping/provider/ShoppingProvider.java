@@ -107,6 +107,14 @@ public class ShoppingProvider extends ContentProvider {
         return true;
     }
 
+    public static String escapeSQLChars(String trapped) {
+        /*
+        In order for this method to work properly, the query using the result must use '`' as its
+        Escape character.
+        */
+        return trapped.replaceAll("'", "''").replaceAll("`", "``").replaceAll("%", "`%").replaceAll("_","`_");
+    }
+
     @Override
     public Cursor query(Uri url, String[] projection, String selection,
                         String[] selectionArgs, String sort) {
@@ -208,7 +216,7 @@ public class ShoppingProvider extends ContentProvider {
                 defaultOrderBy = ContainsFull.DEFAULT_SORT_ORDER;
                 String tagFilter = getListTagsFilter(selectionArgs[0]);
                 if (!inSearchMode && !TextUtils.isEmpty(tagFilter)) {
-                    qb.appendWhere(" AND items.tags like '%" + tagFilter + "%'");
+                    qb.appendWhere(" AND items.tags like '%" + escapeSQLChars(tagFilter) + "%' ESCAPE '`'");
                 }
                 break;
 

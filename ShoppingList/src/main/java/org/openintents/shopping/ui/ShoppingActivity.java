@@ -47,6 +47,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.view.ActionProvider;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -111,7 +112,6 @@ import org.openintents.shopping.ui.dialog.NewListDialog;
 import org.openintents.shopping.ui.dialog.RenameListDialog;
 import org.openintents.shopping.ui.dialog.ThemeDialog;
 import org.openintents.shopping.ui.dialog.ThemeDialog.ThemeDialogListener;
-import org.openintents.shopping.ui.widget.ActionableToastBar;
 import org.openintents.shopping.ui.widget.QuickSelectMenu;
 import org.openintents.shopping.ui.widget.ShoppingItemsView;
 import org.openintents.shopping.ui.widget.ShoppingItemsView.ActionBarListener;
@@ -310,7 +310,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     private ListView mDrawerListsView;
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mTitle, mDrawerTitle, mSubTitle;
-    protected ActionableToastBar mToastBar;
 
     // private Cursor mCursorItems;
 
@@ -1068,13 +1067,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         mLayoutParamsItems = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.FILL_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
-
-        mToastBar = (ActionableToastBar) findViewById(R.id.toast_bar);
-
         mItemsView = (ShoppingItemsView) findViewById(R.id.list_items);
         mItemsView.setThemedBackground(findViewById(R.id.background));
         mItemsView.setCustomClickListener(this);
-        mItemsView.setToastBar(mToastBar);
         mItemsView.initTotals();
 
         mItemsView.setItemsCanFocus(true);
@@ -2009,14 +2004,16 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         }
 
         // Rename currently selected list:
+        long listId = getSelectedListId();
+
         ContentValues values = new ContentValues();
         values.put(Lists.NAME, "" + newName);
-        getContentResolver().update(
-                Uri.withAppendedPath(Lists.CONTENT_URI,
-                        mCursorShoppingLists.getString(0)), values, null, null
+        getContentResolver().update(mListUri, values, null, null
         );
 
+        //
         mCursorShoppingLists.requery();
+        setSelectedListId((int)listId);
         updateTitle();
         return true;
     }
@@ -3361,8 +3358,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     }
 
     @Override
-    public void onUndoAvailable(ToastBarOperation undoOp) {
-        mToastBar.show(null, 0, undoOp.getDescription(this),
-                true, R.string.undo, true, undoOp);
+    public void onUndoAvailable(SnackbarUndoOperation undoOp) {
+        Snackbar snackbar = Snackbar.make(mItemsView, undoOp.getDescription(this),
+                   Snackbar.LENGTH_LONG);
+        snackbar.setAction(R.string.undo, undoOp);
+        snackbar.show();
     }
 }

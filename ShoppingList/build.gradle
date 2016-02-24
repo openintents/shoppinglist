@@ -96,6 +96,7 @@ dependencies {
     compile project(':ShoppingListLibrary')
     compile 'org.openintents:distribution-lib:1.0.2'
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
+    compile "com.android.support:design:$rootProject.ext.supportVersion"
     compile files('libs/sensorsimulator-lib.jar')
     compile files('libs/OIShoppingListMyBackupPro.jar')
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:4.3.1'

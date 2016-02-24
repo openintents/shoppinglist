@@ -3,12 +3,13 @@ package org.openintents.shopping.ui;
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
+import android.view.View;
 
 import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.ui.widget.ShoppingItemsView;
 
-public class ToastBarSingleItemStatusOperation extends ToastBarOperation {
+public class SnackbarUndoSingleItemStatusOperation extends SnackbarUndoOperation {
 
     /**
      *
@@ -20,10 +21,10 @@ public class ToastBarSingleItemStatusOperation extends ToastBarOperation {
     private String mItemName;
     private String mContainsId;
 
-    public ToastBarSingleItemStatusOperation(ShoppingItemsView shoppingItemsView, Context context,
-                                             String containsId, String name,
-                                             long old_status, long new_status,
-                                             int type, boolean batch) {
+    public SnackbarUndoSingleItemStatusOperation(ShoppingItemsView shoppingItemsView, Context context,
+                                                 String containsId, String name,
+                                                 long old_status, long new_status,
+                                                 int type, boolean batch) {
         super(1, type, batch);
         mShoppingItemsView = shoppingItemsView;
         mContext = context;
@@ -59,7 +60,7 @@ public class ToastBarSingleItemStatusOperation extends ToastBarOperation {
     }
 
     @Override
-    public void onActionClicked(Context context) {
+    public void onClick(View view) {
         ContentValues values = new ContentValues();
         values.put(ShoppingContract.Contains.STATUS, mOldStatus);
         mContext.getContentResolver().update(

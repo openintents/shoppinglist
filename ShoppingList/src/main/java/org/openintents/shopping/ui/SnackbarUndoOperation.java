@@ -19,13 +19,12 @@
 package org.openintents.shopping.ui;
 
 import android.content.Context;
-
-import org.openintents.shopping.ui.widget.ActionableToastBar;
+import android.view.View;
 
 /**
  * A simple holder class that stores the information to undo the application of a folder.
  */
-public class ToastBarOperation implements ActionableToastBar.ActionClickedListener {
+public class SnackbarUndoOperation implements View.OnClickListener {
     public static final int UNDO = 0;
     public static final int ERROR = 1;
     protected final int mCount;
@@ -33,13 +32,13 @@ public class ToastBarOperation implements ActionableToastBar.ActionClickedListen
     protected final int mType;
 
     /**
-     * Create a ToastBarOperation
+     * Create a SnackbarUndoOperation
      *
      * @param count  Number of conversations this action would be applied to.
-     * @param menuId res id identifying the menu item tapped; used to determine what action was
-     *               performed
+     * @param type   type of action
+     * @param batch  whether it is a batch operation
      */
-    public ToastBarOperation(int count, int type, boolean batch) {
+    public SnackbarUndoOperation(int count, int type, boolean batch) {
         mCount = count;
         mBatch = batch;
         mType = type;
@@ -70,28 +69,8 @@ public class ToastBarOperation implements ActionableToastBar.ActionClickedListen
         return (resId == -1) ? "" : context.getString(resId);
     }
 
-//    @Override
-//    public int describeContents() {
-//        return 0;
-//    }
-
-    /**
-     * Returns true if this object should take precedence
-     * when the {@link ActionableToastBar}'s action button is clicked.
-     * If <code>true</code>, the listener passed in {@link ActionableToastBar#show}
-     * will not be used. The default implementation returns false. Derived
-     * classes should override if this behavior is desired.
-     */
-    public boolean shouldTakeOnActionClickedPrecedence() {
-        return false;
-    }
-
     @Override
-    public void onActionClicked(Context context) {
-        // DO NOTHING
-    }
+    public void onClick(View view) {
 
-    public void onToastBarTimeout(Context context) {
-        // DO NOTHING
     }
 }
