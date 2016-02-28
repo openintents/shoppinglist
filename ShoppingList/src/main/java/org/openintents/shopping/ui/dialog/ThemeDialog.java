@@ -128,7 +128,7 @@ public class ThemeDialog extends AlertDialog implements OnClickListener,
         prepareDialog();
     }
 
-    public void fillThemes() {
+    private void fillThemes() {
         mListInfo = ThemeUtils.getThemeInfos(mContext,
                 ThemeShoppingList.SHOPPING_LIST_THEME);
 
@@ -139,18 +139,8 @@ public class ThemeDialog extends AlertDialog implements OnClickListener,
             i++;
         }
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            // Enforce light theme
-            mListView.setAdapter(new ArrayAdapter<String>(
-                    new ContextThemeWrapper(mContext,
-                            android.R.style.Theme_Light),
-                    android.R.layout.simple_list_item_single_choice, s
-            ));
-        } else {
-            // Use default (Holo) theme
-            mListView.setAdapter(new ArrayAdapter<String>(mContext,
-                    android.R.layout.simple_list_item_single_choice, s));
-        }
+        mListView.setAdapter(new ArrayAdapter<>(mContext,
+                android.R.layout.simple_list_item_single_choice, s));
 
         mListView.setOnItemClickListener(this);
     }
