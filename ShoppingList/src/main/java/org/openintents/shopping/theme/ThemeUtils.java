@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.openintents.shopping.ShoppingApplication;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -61,21 +62,26 @@ public class ThemeUtils {
      */
     private static List<ApplicationInfo> getThemePackages(PackageManager pm,
                                                           String firstPackage) {
-        List<ApplicationInfo> appinfolist = new LinkedList<ApplicationInfo>();
+        List<ApplicationInfo> appinfolist = new LinkedList<>();
 
-        List<ApplicationInfo> allapps = pm
-                .getInstalledApplications(PackageManager.GET_META_DATA);
-        for (ApplicationInfo ai : allapps) {
-            if (ai.metaData != null) {
-                if (ai.metaData.containsKey(METADATA_THEMES)) {
-                    if (ai.packageName.equals(firstPackage)) {
-                        // Add this package at the beginning of the list
-                        appinfolist.add(0, ai);
-                    } else {
-                        appinfolist.add(ai);
+        try {
+            List<ApplicationInfo> allapps = pm
+                    .getInstalledApplications(PackageManager.GET_META_DATA);
+            for (ApplicationInfo ai : allapps) {
+                if (ai.metaData != null) {
+                    if (ai.metaData.containsKey(METADATA_THEMES)) {
+                        if (ai.packageName.equals(firstPackage)) {
+                            // Add this package at the beginning of the list
+                            appinfolist.add(0, ai);
+                        } else {
+                            appinfolist.add(ai);
+                        }
                     }
                 }
             }
+            return appinfolist;
+        } catch (Exception e) {
+            // getInstalledApplications can throw android.os.TransactionTooLargeException (data > 1mb)
         }
 
         return appinfolist;
@@ -156,7 +162,7 @@ public class ThemeUtils {
 
         List<ApplicationInfo> appinfolist = getThemePackages(pm,
                 thisPackageName);
-        List<ThemeInfo> themeinfolist = new LinkedList<ThemeInfo>();
+        List<ThemeInfo> themeinfolist = new LinkedList<>();
 
         for (ApplicationInfo ai : appinfolist) {
             addThemeInfos(pm, attributeset, ai, themeinfolist);
