@@ -15,6 +15,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Before;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract;
@@ -62,6 +63,7 @@ public class ShoppingActivityTest {
         ed.commit();
     }
 
+    @Test
     public void test000Eula() {
         onView(withText(org.openintents.distribution.R.string.oi_distribution_eula_refuse)).check(matches(isDisplayed()));
         onView(withText(org.openintents.distribution.R.string.oi_distribution_eula_accept)).check(matches(isDisplayed()));
@@ -69,6 +71,7 @@ public class ShoppingActivityTest {
         onView(withText(org.openintents.distribution.R.string.oi_distribution_eula_accept)).perform(click());
     }
 
+    @Test
     public void test001RecentChanges() {
         onView(withText(org.openintents.distribution.R.string.oi_distribution_newversion_recent_changes)).check(matches(isDisplayed()));
         onView(withText(org.openintents.distribution.R.string.oi_distribution_newversion_continue)).check(matches(isDisplayed()));
@@ -76,6 +79,7 @@ public class ShoppingActivityTest {
         onView(withText(org.openintents.distribution.R.string.oi_distribution_newversion_continue)).perform(click());
     }
 
+    @Test
     public void testUiAddItem() {
         String itemName = "testitem_add_" + random.nextInt(10000);
 
@@ -84,6 +88,7 @@ public class ShoppingActivityTest {
         onData(hasEntry(equalTo(ShoppingContract.Items.NAME), itemName)).check(matches(isDisplayed()));
     }
 
+    @Test
     public void testUiDeleteItemPermanently() {
         String itemName = "testitem_delete_" + random.nextInt(10000);
         addItem(itemName);
@@ -104,6 +109,7 @@ public class ShoppingActivityTest {
     /**
      * Test the add for barcode scanner setting
      */
+    @Test
     public void testSettingAddForBarcode() {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(rule.getActivity());
@@ -125,6 +131,7 @@ public class ShoppingActivityTest {
     /**
      * Test adding items from menu > Barcode scanner test.
      */
+    @Test
     public void testIntentBarcodeScanner() {
         Log.d(TAG, "Name 1: " + BARCODE_SCANNER_ITEM);
 
@@ -144,7 +151,7 @@ public class ShoppingActivityTest {
         checkHasItem(BARCODE_SCANNER_ITEM);
     }
 
-
+    @Test
     public void testMoveToAnotherList() {
 
         String newListName = "New Test List";
@@ -171,6 +178,7 @@ public class ShoppingActivityTest {
         checkHasItem(movedItemName);
     }
 
+    @Test
     public void testRenameItem() {
         int rndInt = random.nextInt(10000);
         String itemName = "not_rename" + rndInt;

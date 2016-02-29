@@ -6,6 +6,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openintents.intents.GeneralIntents;
 import org.openintents.intents.ShoppingListIntents;
@@ -50,9 +51,7 @@ public class ShoppingActivityInsertByIntentTest {
     };
 
 
-    /**
-     * Test adding items through intent.
-     */
+    @Test
     public void testIntentAddItemsFromArrayList() {
 
         onData(hasEntry(equalTo(ShoppingContract.Items.NAME), is(lastItemName))).check(matches(isDisplayed()));
