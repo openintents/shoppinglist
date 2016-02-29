@@ -1678,10 +1678,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         boolean drawerOpen = mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mDrawerListsView);
         boolean holoSearch = PreferenceActivity.getUsingHoloSearchFromPrefs(this);
-        // TODO: supposed to hide content-related actions when the drawer is open.
-
-        // TODO: Add item-specific menu items (see NotesList.java example)
-        // like edit, strike-through, delete.
 
         // Add menu option for auto adding items from string array in intent
         // extra if they exist

@@ -132,7 +132,7 @@ public class ShoppingListsActivity extends ListActivity {
             c.close();
         }
 
-        // If there was a problem retrieving the note title
+        // If there was a problem retrieving the list title
         // simply use the application name
         return getString(R.string.app_name);
     }

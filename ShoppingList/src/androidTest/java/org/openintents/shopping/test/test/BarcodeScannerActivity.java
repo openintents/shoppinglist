@@ -11,9 +11,9 @@ import java.util.Random;
 
 import org.openintents.intents.ShoppingListIntents;
 
-public class BarcodeScannerTest extends Activity {
+public class BarcodeScannerActivity extends Activity {
 
-    private static final String TAG = "BarcodeScannerTest";
+    private static final String TAG = "BarcodeScannerActivity";
 
     String resultModeData = null;
     private Random random = new Random();
@@ -36,10 +36,9 @@ public class BarcodeScannerTest extends Activity {
         resultIntent.setData(Uri.parse(resultModeData));
         Log.d(TAG, "Result intent data: " + resultIntent.getDataString());
 
-        String barcodeName = TestShoppingActivity.barcodescanneritem;
+        String barcodeName = ShoppingActivityTest.BARCODE_SCANNER_ITEM;
         String barcode = "barcode_" + random.nextInt(1000000);
 
-        Log.d(TAG, "Name: " + TestShoppingActivity.barcodescanneritem);
         Log.d(TAG, "Return: " + barcodeName + ", " + barcode);
 
         ArrayList<String> newEntry = new ArrayList<String>();
