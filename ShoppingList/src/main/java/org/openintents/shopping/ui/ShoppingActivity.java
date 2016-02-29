@@ -801,6 +801,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 // 2 different modes
                 if (mItemsView.mMode == MODE_IN_SHOP) {
                     registerSensor();
+                    mSubTitle = getString(R.string.shopping_title);
                 } else {
                     mSubTitle = getString(R.string.menu_pick_items);
                     unregisterSensor();
