@@ -165,7 +165,7 @@ public class CheckItemsWidget extends AppWidgetProvider {
             Intent intentGoToApp = new Intent(context, ShoppingActivity.class);
             intentGoToApp.setAction(Intent.ACTION_VIEW);
             intentGoToApp.setData(Uri.withAppendedPath(
-                    ShoppingContract.Lists.CONTENT_URI, "" + listId));
+                    ShoppingContract.Lists.CONTENT_URI, Long.toString(listId)));
             PendingIntent pendingIntentGoToApp = PendingIntent.getActivity(
                     context, 0, intentGoToApp,
                     PendingIntent.FLAG_UPDATE_CURRENT);
@@ -175,8 +175,8 @@ public class CheckItemsWidget extends AppWidgetProvider {
 			 */
             String title = getTitle(
                     context,
-                    Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, ""
-                            + listId)
+                    Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, 
+                            Long.toString(listId))
             );
             views.setTextViewText(R.id.list_name, title);
             views.setOnClickPendingIntent(R.id.list_name, pendingIntentGoToApp);
