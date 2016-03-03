@@ -43,11 +43,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.ActionProvider;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -800,8 +800,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                     .getPickItemsInListFromPrefs(getApplicationContext())) {
                 // 2 different modes
                 if (mItemsView.mMode == MODE_IN_SHOP) {
+                    mSubTitle = getString(R.string.menu_start_shopping);
                     registerSensor();
-                    mSubTitle = getString(R.string.shopping_title);
                 } else {
                     mSubTitle = getString(R.string.menu_pick_items);
                     unregisterSensor();
@@ -1066,7 +1066,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         });
 
         mLayoutParamsItems = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.FILL_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         mItemsView = (ShoppingItemsView) findViewById(R.id.list_items);
         mItemsView.setThemedBackground(findViewById(R.id.background));
@@ -1552,7 +1552,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                     .setIcon(android.R.drawable.ic_menu_upload);
         }
 
-        MenuItem item = null;
+        MenuItem item;
 
         View searchView = mItemsView.getSearchView();
         if (searchView != null) {
@@ -1589,7 +1589,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                         setVisible(false);
 
 		/*
-		 * menu.add(0, MENU_SHARE, 0, R.string.share)
+         * menu.add(0, MENU_SHARE, 0, R.string.share)
 		 * .setIcon(R.drawable.contact_share001a) .setShortcut('4', 's');
 		 */
 
@@ -1721,10 +1721,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             menuItem.setVisible(mItemsView.isWearSupportAvailable());
         }
 
-        menuItem = menu.findItem(MENU_MARK_ALL_ITEMS).setVisible(mItemsView.mNumUnchecked > 0);
-        menuItem = menu.findItem(MENU_UNMARK_ALL_ITEMS).setVisible(mItemsView.mNumChecked > 0);
+        menu.findItem(MENU_MARK_ALL_ITEMS).setVisible(mItemsView.mNumUnchecked > 0);
+        menu.findItem(MENU_UNMARK_ALL_ITEMS).setVisible(mItemsView.mNumChecked > 0);
 
-        menuItem = menu.findItem(MENU_CLEAN_UP_LIST).setEnabled(
+        menu.findItem(MENU_CLEAN_UP_LIST).setEnabled(
                 mItemsView.mNumChecked > 0).setVisible(!drawerOpen);
 
 
@@ -2010,14 +2010,14 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         //
         mCursorShoppingLists.requery();
-        setSelectedListId((int)listId);
+        setSelectedListId((int) listId);
         updateTitle();
         return true;
     }
 
     private void sendList() {
         if (mItemsView.getAdapter() instanceof CursorAdapter) {
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < mItemsView.getAdapter().getCount(); i++) {
                 Cursor item = (Cursor) mItemsView.getAdapter().getItem(i);
                 if (item.getLong(mStringItemsSTATUS) == ShoppingContract.Status.BOUGHT) {
@@ -2073,7 +2073,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             }
         } else {
             Toast.makeText(this, R.string.empty_list_not_sent,
-                    Toast.LENGTH_SHORT);
+                    Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -2120,7 +2120,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                             }
                         }
                 )
-                        // .create()
+                // .create()
                 .show();
     }
 
@@ -2247,7 +2247,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             // and no item is selected.
             return;
         }
-        listId = Integer.parseInt(mListUri.getLastPathSegment());
 
         // Attach item to new list, preserving all other fields
         String containsId = c.getString(mStringItemsCONTAINSID);
@@ -2633,7 +2632,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         if (mCursorShoppingLists == null) {
             Log.e(TAG, "missing shopping provider");
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                     R.layout.list_item_shopping_list,
                     new String[]{getString(R.string.no_shopping_provider)});
             setSpinnerAndDrawerListAdapter(adapter);
@@ -2721,11 +2720,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 		 */
 
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
-                    // Use a template that displays a text view
-                    R.layout.list_item_shopping_list,
-                    // Give the cursor to the list adapter
-                    mCursorShoppingLists, new String[]{Lists.NAME},
-                    new int[]{R.id.text1});
+                // Use a template that displays a text view
+                R.layout.list_item_shopping_list,
+                // Give the cursor to the list adapter
+                mCursorShoppingLists, new String[]{Lists.NAME},
+                new int[]{R.id.text1});
         setSpinnerAndDrawerListAdapter(adapter);
 
     }
@@ -2841,7 +2840,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                             appendPath(listId).build();
                     retCol = "items.name";
                 }
-                List<String> autocompleteItems = new LinkedList<String>();
+                List<String> autocompleteItems = new LinkedList<>();
                 Cursor c = getContentResolver().query(uri, new String[]{retCol}, null, null, retCol + " asc");
                 if (c != null) {
                     String lastitem = "";
@@ -2856,7 +2855,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                     }
                     c.close();
                 }
-                return new ArrayAdapter<String>(ShoppingActivity.this,
+                return new ArrayAdapter<>(ShoppingActivity.this,
                         android.R.layout.simple_dropdown_item_1line,
                         autocompleteItems);
             }
@@ -2901,7 +2900,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         }
 
         // Create a set of all tags (every tag should only appear once).
-        HashSet<String> tagset = new HashSet<String>();
+        HashSet<String> tagset = new HashSet<>();
         c.moveToPosition(-1);
         while (c.moveToNext()) {
             String tags = c.getString(0);
@@ -2919,7 +2918,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         // Sort the list
         // 1. Convert HashSet to String list.
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
         list.addAll(tagset);
         // 2. Sort the String list
         Collections.sort(list);
@@ -3145,10 +3144,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            int list_pos, post_pos;
+            int list_pos;
             int list_count = mAdapter.getCount();
             View v = null;
-            View v2 = null;
+            View v2;
 
             if (position < mNumAboveList) {
                 switch (position) {
@@ -3178,7 +3177,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 }
                 v = mAdapter.getView(list_pos, convertView, parent);
             } else {
-                post_pos = list_pos - list_count;
                 v = mInflater.inflate(R.layout.drawer_item_radio, parent, false);
                 v2 = v.findViewById(R.id.text1);
                 ((TextView) v2).setText(R.string.new_list);
@@ -3334,7 +3332,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             boolean vis = true;
             if (mItemsView.mMode != MODE_IN_SHOP) {
                 vis = false;
-            } else if (PreferenceActivity.getUsingPerListSortFromPrefs(mContext) == false) {
+            } else if (!PreferenceActivity.getUsingPerListSortFromPrefs(mContext)) {
                 vis = false;
             }
             if (mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mDrawerListsView)) {
@@ -3357,7 +3355,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     @Override
     public void onUndoAvailable(SnackbarUndoOperation undoOp) {
         Snackbar snackbar = Snackbar.make(mItemsView, undoOp.getDescription(this),
-                   Snackbar.LENGTH_LONG);
+                Snackbar.LENGTH_LONG);
         snackbar.setAction(R.string.undo, undoOp);
         snackbar.show();
     }
