@@ -2157,11 +2157,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
      * @param field
      */
     void editItem(long itemId, long containsId, EditItemDialog.FieldType field) {
-        mItemUri = Uri.withAppendedPath(ShoppingContract.Items.CONTENT_URI, ""
-                + itemId);
-        mListItemUri = Uri.withAppendedPath(mListUri, "" + itemId);
+        mItemUri = Uri.withAppendedPath(ShoppingContract.Items.CONTENT_URI, Long.toString(itemId));
+        mListItemUri = Uri.withAppendedPath(mListUri, Long.toString(itemId));
         mRelationUri = Uri.withAppendedPath(
-                ShoppingContract.Contains.CONTENT_URI, "" + containsId);
+                ShoppingContract.Contains.CONTENT_URI, Long.toString(containsId));
         mEditItemFocusField = field;
 
         showDialog(DIALOG_EDIT_ITEM);
@@ -2563,8 +2562,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         long listId = mCursorShoppingLists.getLong(mStringListFilterID);
 
-        mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, ""
-                + listId);
+        mListUri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI,
+                Long.toString(listId));
 
         getIntent().setData(mListUri);
 

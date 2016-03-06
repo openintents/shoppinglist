@@ -56,7 +56,7 @@ public class ShoppingTotalsHandler implements LoaderManager.LoaderCallbacks<Curs
         } else {
             if (mListId != listId) {
                 mListId = listId;
-                mCursorLoader.setUri(ShoppingContract.Subtotals.CONTENT_URI.buildUpon().appendPath("" + mListId).build());
+                mCursorLoader.setUri(ShoppingContract.Subtotals.CONTENT_URI.buildUpon().appendPath(Long.toString(mListId)).build());
             }
             manager.restartLoader(ShoppingActivity.LOADER_TOTALS , null, this);
         }
@@ -66,7 +66,7 @@ public class ShoppingTotalsHandler implements LoaderManager.LoaderCallbacks<Curs
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         CursorLoader loader =  new CursorLoader(mActivity);
         loader.setProjection(ShoppingContract.Subtotals.PROJECTION);
-        loader.setUri(ShoppingContract.Subtotals.CONTENT_URI.buildUpon().appendPath("" + mListId).build());
+        loader.setUri(ShoppingContract.Subtotals.CONTENT_URI.buildUpon().appendPath(Long.toString(mListId)).build());
         return loader;
     }
 
