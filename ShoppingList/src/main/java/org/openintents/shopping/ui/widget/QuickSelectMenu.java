@@ -27,8 +27,7 @@ public class QuickSelectMenu {
 
     // not sure if we want to expose this or just an add() method.
     public Menu getMenu() {
-        Menu menu = mImplPlatform.getMenu();
-        return menu;
+        return mImplPlatform.getMenu();
     }
 
     /**

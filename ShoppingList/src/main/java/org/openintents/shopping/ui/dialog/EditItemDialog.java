@@ -102,12 +102,10 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
                             + constraint.toString() + "%' ";
                 }
 
-                Cursor cursor = mContext.getContentResolver().query(
+                return mContext.getContentResolver().query(
                         Units.CONTENT_URI,
                         new String[]{Units._ID, Units.NAME}, query, args,
                         Units.NAME);
-
-                return cursor;
             }
         });
         mUnits.setAdapter(mUnitsAdapter);

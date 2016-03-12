@@ -211,11 +211,10 @@ public class Tag {
      * API desired.
      */
     public Cursor findTaggedContent(String tag, String contentUri) {
-        Cursor c = mContext.getContentResolver().query(Tags.CONTENT_URI,
+        return mContext.getContentResolver().query(Tags.CONTENT_URI,
                 new String[]{Tags._ID, Tags.URI_2},
                 "content1.uri like ? and content2.uri like ?",
                 new String[]{tag, contentUri + "%"}, "content2.uri");
-        return c;
     }
 
     /**
@@ -228,10 +227,9 @@ public class Tag {
      * API desired.
      */
     public Cursor findTags(String contentUri) {
-        Cursor c = mContext.getContentResolver().query(Tags.CONTENT_URI,
+        return mContext.getContentResolver().query(Tags.CONTENT_URI,
                 new String[]{Tags._ID, Tags.URI_1}, "content2.uri = ?",
                 new String[]{contentUri}, "content1.uri");
-        return c;
     }
 
     public String findTags(String uri, String separator) {
@@ -260,13 +258,12 @@ public class Tag {
     public Cursor findTagsForContentType(String contentUriPrefix) {
         Uri uri = Contents.CONTENT_URI.buildUpon()
                 .appendQueryParameter(Tags.DISTINCT, "true").build();
-        Cursor c = mContext
+        return mContext
                 .getContentResolver()
                 .query(uri,
                         new String[]{Contents._ID, Contents.URI},
                         "exists(select * from content content2, tag tag where content2.uri like ? and content2._id = tag.content_id and content._id = tag.tag_id)",
                         new String[]{contentUriPrefix + "%"}, "content.uri");
-        return c;
     }
 
     /**
@@ -277,10 +274,9 @@ public class Tag {
      * API desired.
      */
     public Cursor findAllTags() {
-        Cursor c = mContext.getContentResolver().query(Contents.CONTENT_URI,
+        return mContext.getContentResolver().query(Contents.CONTENT_URI,
                 new String[]{Contents._ID, Contents.URI, Contents.TYPE},
                 "type like 'TAG%'", null, Contents.DEFAULT_SORT_ORDER);
-        return c;
     }
 
     /**
@@ -292,7 +288,7 @@ public class Tag {
      * API desired.
      */
     public Cursor findAllUsedTags() {
-        Cursor c = mContext
+        return mContext
                 .getContentResolver()
                 .query(Contents.CONTENT_URI,
                         new String[]{Contents._ID, Contents.URI,
@@ -300,7 +296,6 @@ public class Tag {
                         "type like 'TAG%' and (select count(*) from tag where tag.tag_id = content._id) > 0",
                         null, Contents.DEFAULT_SORT_ORDER
                 );
-        return c;
     }
 
     /**

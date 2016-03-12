@@ -1160,9 +1160,8 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
 
     private float getTextSizeMedium(ThemeAttributes ta) {
         final float scale = getResources().getDisplayMetrics().scaledDensity;
-        float size = ta.getDimensionPixelOffset(
+        return ta.getDimensionPixelOffset(
                 ThemeShoppingList.textSizeMedium, (int) (23 * scale + 0.5f));
-        return size;
     }
 
     private float getTextSizeLarge(ThemeAttributes ta) {

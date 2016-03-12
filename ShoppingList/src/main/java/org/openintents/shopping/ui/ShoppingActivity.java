@@ -2409,10 +2409,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         // mCursorListFilter has been set to correct position
         // by calling getSelectedListId(),
         // so we can read out further elements:
-        String skinBackground = mCursorShoppingLists
+        return mCursorShoppingLists
                 .getString(mStringListFilterSKINBACKGROUND);
-
-        return skinBackground;
     }
 
     public void saveListTheme(String theme) {

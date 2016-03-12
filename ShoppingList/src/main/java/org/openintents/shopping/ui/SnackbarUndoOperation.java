@@ -59,9 +59,8 @@ public class SnackbarUndoOperation implements View.OnClickListener {
     public String getDescription(Context context) {
         final int resId = -1;
 
-        final String desc = (resId == -1) ? "" :
+        return (resId == -1) ? "" :
                 String.format(context.getResources().getQuantityString(resId, mCount), mCount);
-        return desc;
     }
 
     public String getSingularDescription(Context context) {
