@@ -328,24 +328,21 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
     }
 
     public static int getFontSizeFromPrefs(Context context) {
-        int size = Integer.parseInt(PreferenceManager
+        return Integer.parseInt(PreferenceManager
                 .getDefaultSharedPreferences(context).getString(PREFS_FONTSIZE,
                         PREFS_FONTSIZE_DEFAULT));
-        return size;
     }
 
     public static int getOrientationFromPrefs(Context context) {
-        int orientation = Integer.parseInt(PreferenceManager
+        return Integer.parseInt(PreferenceManager
                 .getDefaultSharedPreferences(context).getString(
                         PREFS_ORIENTATION, PREFS_ORIENTATION_DEFAULT));
-        return orientation;
     }
 
     public static boolean getCompleteFromCurrentListOnlyFromPrefs(Context context) {
-        boolean filter = PreferenceManager
+        return PreferenceManager
                 .getDefaultSharedPreferences(context).getBoolean(PREFS_CURRENT_LIST_COMPLETE,
                         PREFS_CURRENT_LIST_COMPLETE_DEFAULT);
-        return filter;
     }
 
     public static boolean getCompletionSettingChanged(Context context) {
@@ -353,27 +350,23 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
     }
 
     public static boolean getUsingPerStorePricesFromPrefs(Context context) {
-        boolean using = PreferenceManager.getDefaultSharedPreferences(context)
+        return PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(PREFS_PERSTOREPRICES, PREFS_PERSTOREPRICES_DEFAULT);
-        return using;
     }
 
     public static boolean getQuickEditModeFromPrefs(Context context) {
-        boolean using = PreferenceManager.getDefaultSharedPreferences(context)
+        return PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(PREFS_QUICKEDITMODE, PREFS_QUICKEDITMODE_DEFAULT);
-        return using;
     }
 
     public static boolean getUsingFiltersFromPrefs(Context context) {
-        boolean using = PreferenceManager.getDefaultSharedPreferences(context)
+        return PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(PREFS_USE_FILTERS, PREFS_USE_FILTERS_DEFAULT);
-        return using;
     }
 
     public static boolean getUsingHoloSearchFromPrefs(Context context) {
-        boolean using = PreferenceManager.getDefaultSharedPreferences(context)
+        return PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(PREFS_HOLO_SEARCH, PREFS_HOLO_SEARCH_DEFAULT);
-        return using;
     }
 
     public static boolean getPickItemsInListFromPrefs(Context context) {
@@ -385,10 +378,9 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
     }
 
     public static boolean getUsingPerListSortFromPrefs(Context context) {
-        boolean perListSort = PreferenceManager.getDefaultSharedPreferences(context)
+        return PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(PREFS_SORT_PER_LIST,
                         PREFS_SORT_PER_LIST_DEFAULT);
-        return perListSort;
     }
 
     /**

@@ -665,10 +665,9 @@ public class ShoppingUtils {
         }
 
         // Delete item from currentList by deleting contains row
-        int itemsDeleted = context.getContentResolver().delete(
+        return context.getContentResolver().delete(
                 Contains.CONTENT_URI, "item_id = ? and list_id = ?",
                 new String[]{itemId, listId});
-        return itemsDeleted;
     }
 
     /**
@@ -744,9 +743,8 @@ public class ShoppingUtils {
                 "store_id = " + storeId, null);
 
         // Then delete currently selected store
-        int storesDeleted = context.getContentResolver().delete(
+        return context.getContentResolver().delete(
                 Stores.CONTENT_URI, "_id = " + storeId, null);
-        return storesDeleted;
     }
 
     /**
@@ -771,10 +769,8 @@ public class ShoppingUtils {
         }
 
         // Then delete currently selected list
-        int rowsDeleted = context.getContentResolver().delete(
+        return context.getContentResolver().delete(
                 Lists.CONTENT_URI, "_id = " + listId, null);
-
-        return rowsDeleted;
     }
 
     private static List<String> getItemStoreIdsForList(Context context,
@@ -785,16 +781,14 @@ public class ShoppingUtils {
                         .appendPath(itemId).appendPath(listId).build(),
                 new String[]{"itemstores._id"}, null, null, null
         );
-        List<String> itemStoreIds = getStringListAndCloseCursor(c, 0);
-        return itemStoreIds;
+        return getStringListAndCloseCursor(c, 0);
     }
 
     private static List<String> getItemIdsForList(Context context, String listId) {
         Cursor c = context.getContentResolver().query(Contains.CONTENT_URI,
                 new String[]{Contains.ITEM_ID}, Contains.LIST_ID + " = ?",
                 new String[]{listId}, null);
-        List<String> itemIds = getStringListAndCloseCursor(c, 0);
-        return itemIds;
+        return getStringListAndCloseCursor(c, 0);
     }
 
     private static List<String> getStoreIdsForList(Context context,
@@ -802,8 +796,7 @@ public class ShoppingUtils {
         Cursor c = context.getContentResolver().query(Stores.CONTENT_URI,
                 new String[]{Stores._ID}, Stores.LIST_ID + " = ?",
                 new String[]{listId}, null);
-        List<String> storeIds = getStringListAndCloseCursor(c, 0);
-        return storeIds;
+        return getStringListAndCloseCursor(c, 0);
     }
 
     private static List<String> getStringListAndCloseCursor(Cursor c, int index) {

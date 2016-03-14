@@ -259,11 +259,9 @@ public class CheckItemsWidget extends AppWidgetProvider {
                 + ShoppingContract.Contains.STATUS + " == "
                 + ShoppingContract.Status.WANT_TO_BUY;
 
-        Cursor cursor = context.getContentResolver().query(
+        return context.getContentResolver().query(
                 ContainsFull.CONTENT_URI, ShoppingActivity.PROJECTION_ITEMS,
                 selection, new String[]{String.valueOf(listId)}, sortOrder);
-
-        return cursor;
     }
 
 }
