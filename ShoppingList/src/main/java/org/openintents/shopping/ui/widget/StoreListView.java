@@ -36,7 +36,7 @@ public class StoreListView extends ListView {
     private final static String TAG = "StoreListView";
     private final static boolean debug = false;
 
-    Typeface mCurrentTypeface = null;
+    Typeface mCurrentTypeface;
 
     public int mPriceVisibility;
     public String mTextTypeface;
@@ -48,10 +48,10 @@ public class StoreListView extends ListView {
     public boolean mShowCheckBox;
     public boolean mInTextInput;
 
-    public boolean mBinding = false;
+    public boolean mBinding;
 
-    private boolean mTextChanged = false;
-
+    private boolean mTextChanged;
+    
     final String[] mStringItems = new String[]{
             "itemstores." + ItemStores._ID, Stores.NAME,
             ItemStores.STOCKS_ITEM, ItemStores.PRICE, ItemStores.AISLE,
@@ -66,11 +66,11 @@ public class StoreListView extends ListView {
     private Cursor mCursorItemstores;
     private long mItemId;
     private long mListId;
-    private ContentValues[] mBackup = null;
-    private boolean mDirty = false;
+    private ContentValues[] mBackup;
+    private boolean mDirty;
 
-    EditText m_lastView = null;
-    int m_lastCol = 0;
+    EditText m_lastView;
+    int m_lastCol;
 
     public void applyUpdate() {
         if (m_lastView == null) {
@@ -458,7 +458,7 @@ public class StoreListView extends ListView {
         long oldstatus = 0;
 
         // should first check if the itemstore record exists...
-        String itemstore_id = null;
+        String itemstore_id;
 
         if (mCursorItemstores.isNull(0)) {
             long storeId = mCursorItemstores.getLong(cursorColumnSTORE_ID);

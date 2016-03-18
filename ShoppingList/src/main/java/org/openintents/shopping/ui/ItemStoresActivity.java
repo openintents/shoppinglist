@@ -42,11 +42,11 @@ public class ItemStoresActivity extends Activity {
     public static final int MENU_RENAME_STORE = Menu.FIRST;
     public static final int MENU_DELETE_STORE = Menu.FIRST + 1;
 
-    long mListId = 0;
-    long mItemId = 0;
-    StoreListView mItemStores = null;
+    long mListId;
+    long mItemId;
+    StoreListView mItemStores;
 
-    int mSelectedStorePosition = 0;
+    int mSelectedStorePosition;
 
     public class NewStoreDialog extends RenameListDialog {
 

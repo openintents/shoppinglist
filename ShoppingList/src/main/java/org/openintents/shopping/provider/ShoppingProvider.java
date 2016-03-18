@@ -663,7 +663,6 @@ public class ShoppingProvider extends ContentProvider {
 
     private Uri insertContains(Uri url, ContentValues values) {
         SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-        Resources r = Resources.getSystem();
 
         // Make sure that the fields are all set
         if (!(values.containsKey(Contains.ITEM_ID) && values
@@ -737,7 +736,6 @@ public class ShoppingProvider extends ContentProvider {
         long rowID;
 
         Long now = Long.valueOf(System.currentTimeMillis());
-        Resources r = Resources.getSystem();
 
         // Make sure that the fields are all set
         if (!values.containsKey(Stores.NAME)) {

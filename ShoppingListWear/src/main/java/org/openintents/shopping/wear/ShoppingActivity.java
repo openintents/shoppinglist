@@ -79,7 +79,7 @@ public class ShoppingActivity extends Activity implements ServiceConnection, Goo
     }
 
     private void toggleShoppingItem(int position, long itemId) {
-        PutDataRequest request = null;
+        PutDataRequest request;
         //Wearable.DataApi.putDataItem(mGoogleApiClient, request);
 
         adapter.remove(position);

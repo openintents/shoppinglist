@@ -219,8 +219,8 @@ public class Alert {
 
     public static void registerManagedService(String serviceClassName,
                                               long timeIntervall, boolean useWhileRoaming) {
-        long minTime = 0;
-        ContentValues cv = null;
+        long minTime;
+        ContentValues cv;
 
         Cursor c = mContentResolver.query(ManagedService.CONTENT_URI,
                 ManagedService.PROJECTION, ManagedService.SERVICE_CLASS
@@ -308,7 +308,7 @@ public class Alert {
 
     public static void unregisterManagedService(String serviceClassName) {
         ContentValues cv = new ContentValues();
-        long minTime = 0;
+        long minTime;
 
         delete(ManagedService.CONTENT_URI, ManagedService.SERVICE_CLASS
                 + " like '" + serviceClassName + "'", null);
@@ -363,7 +363,7 @@ public class Alert {
      * @param cv  the ContentValues that will be inserted to
      */
     public static Uri insert(Uri uri, ContentValues cv) {
-        Uri res = null;
+        Uri res;
         int type = URL_MATCHER.match(uri);
 
         res = mContentResolver.insert(uri, cv);
@@ -418,12 +418,9 @@ public class Alert {
             gUri = Uri.parse(cv.getAsString(Location.POSITION));
             // do this for easier debugging.
             distStr = cv.getAsString(Location.DISTANCE);
-            float dist = Float.parseFloat(distStr);
             // float dist=cv.getAsFloat(Location.DISTANCE);
             geo = gUri.getSchemeSpecificPart();
             loc = geo.split(",");
-            double latitude = Double.parseDouble(loc[0]);
-            double longitude = Double.parseDouble(loc[1]);
 
             // TODO: find out how to handle this now
             /*

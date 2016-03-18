@@ -27,7 +27,7 @@ import org.openintents.util.IntentUtils;
 public class PreferenceActivity extends android.preference.PreferenceActivity
         implements OnSharedPreferenceChangeListener {
     private static boolean mBackupManagerAvailable;
-    public static int updateCount = 0;
+    public static int updateCount;
 
     static {
         try {
@@ -129,7 +129,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
     private CheckBoxPreference mIncludesChecked;
     private ListPreference mPickItemsSort;
 
-    private static boolean mFilterCompletionChanged = false;
+    private static boolean mFilterCompletionChanged;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

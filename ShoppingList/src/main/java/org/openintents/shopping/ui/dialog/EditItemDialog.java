@@ -33,8 +33,8 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
     Context mContext;
     Uri mItemUri;
     Uri mListItemUri;
-    long mItemId = 0;
-    String mNoteText = null;
+    long mItemId;
+    String mNoteText;
 
     EditText mEditText;
     MultiAutoCompleteTextView mTags;
@@ -372,7 +372,6 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
             values.put(Items.PRICE, priceLong);
         }
         if (units != null) {
-            long units_id = ShoppingUtils.getUnits(mContext, units);
             values.put(Items.UNITS, units);
         }
         mContext.getContentResolver().update(mItemUri, values, null, null);

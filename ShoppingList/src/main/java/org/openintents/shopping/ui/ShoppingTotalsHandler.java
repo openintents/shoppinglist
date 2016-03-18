@@ -23,9 +23,9 @@ public class ShoppingTotalsHandler implements LoaderManager.LoaderCallbacks<Curs
     private final static String TAG = "ShoppingTotalsHandler";
     private final static boolean debug = false;
 
-    private Activity mActivity = null;
+    private Activity mActivity;
     private ShoppingItemsView mItemsView;
-    private CursorLoader mCursorLoader = null;
+    private CursorLoader mCursorLoader;
 
     private long mListId;
 
