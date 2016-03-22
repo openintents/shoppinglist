@@ -253,7 +253,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
      */
     public static final int MODE_IN_SHOP = 1;
 
-    private boolean mEditingFilter = false;
+    private boolean mEditingFilter;
 
     /**
      * URI of current list
@@ -339,10 +339,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
     private AutoCompleteTextView mEditText;
     private Button mButton;
-    private View mAddPanel = null;
-    private Button mStoresFilterButton = null;
-    private Button mTagsFilterButton = null;
-    private Button mShoppingListsFilterButton = null;
+    private View mAddPanel;
+    private Button mStoresFilterButton;
+    private Button mTagsFilterButton;
+    private Button mShoppingListsFilterButton;
 
     // TODO: Set up state information for onFreeze(), ...
     // State data to be stored when freezing:
@@ -387,12 +387,12 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     /**
      * isActive is true only after onResume() and before onPause().
      */
-    private boolean mIsActive = false;
+    private boolean mIsActive;
 
     /**
      * Whether to use the sensor for shake.
      */
-    private boolean mUseSensor = false;
+    private boolean mUseSensor;
     private Uri mRelationUri;
     private int mMoveItemPosition;
 
@@ -594,7 +594,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
     private void updateWidgets() {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
-        int[] a = appWidgetManager.getAppWidgetIds(new ComponentName(this
+        appWidgetManager.getAppWidgetIds(new ComponentName(this
                 .getPackageName(), CheckItemsWidget.class.getName()));
         List<AppWidgetProviderInfo> b = appWidgetManager
                 .getInstalledProviders();
@@ -1362,8 +1362,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         mStoresFilterButton.setVisibility(mEditingFilter ? View.VISIBLE : View.GONE);
         mTagsFilterButton.setVisibility(mEditingFilter ? View.VISIBLE : View.GONE);
-
-        boolean showListFilter = mEditingFilter;
 
         if (mShoppingListsFilterButton != null) {
             mShoppingListsFilterButton
@@ -3063,7 +3061,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
     private class DrawerListAdapter implements WrapperListAdapter, OnItemClickListener {
 
-        private ListAdapter mAdapter = null;
+        private ListAdapter mAdapter;
         private int mNumAboveList = 3;
         private int mNumBelowList = 1;
         private int mViewTypeNum;

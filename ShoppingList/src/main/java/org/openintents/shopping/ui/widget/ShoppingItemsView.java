@@ -58,7 +58,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
     private final static String TAG = "ShoppingListView";
     private final static boolean debug = false;
 
-    Typeface mCurrentTypeface = null;
+    Typeface mCurrentTypeface;
 
     public int mPriceVisibility;
     public int mTagsVisibility;
@@ -77,11 +77,11 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
     public String mTextSuffixUnchecked;
     public String mTextSuffixChecked;
     public int mBackgroundPadding;
-    public int mUpdateLastListPosition = 0;
+    public int mUpdateLastListPosition;
     public int mLastListPosition;
     public int mLastListTop;
-    public long mNumChecked = 0;
-    public long mNumUnchecked = 0;
+    public long mNumChecked;
+    public long mNumUnchecked;
 
     private ThemeAttributes mThemeAttributes;
     private PackageManager mPackageManager;
@@ -91,12 +91,12 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
             .getNumberInstance(Locale.ENGLISH);
 
     public int mMode = ShoppingActivity.MODE_IN_SHOP;
-    private String mFilter = null;
-    private boolean mInSearch = false;
+    private String mFilter;
+    private boolean mInSearch;
     public int mModeBeforeSearch;
-    public Cursor mCursorItems = null;
-
-    private Activity mCursorActivity = null;
+    public Cursor mCursorItems;
+    
+    private Activity mCursorActivity;
 
     private View mThemedBackground;
     private long mListId;
@@ -130,8 +130,8 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
     private DragListener mDragListener;
     private DropListener mDropListener;
 
-    private ActionBarListener mActionBarListener = null;
-    private UndoListener mUndoListener = null;
+    private ActionBarListener mActionBarListener;
+    private UndoListener mUndoListener;
     private Snackbar mSnackbar;
     private SyncSupport mSyncSupport;
     private ShoppingTotalsHandler mTotalsHandler;
@@ -654,7 +654,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         }
     }
 
-    private View mSearchView = null;
+    private View mSearchView;
 
     public View getSearchView() {
         Context context = getContext();
@@ -1021,7 +1021,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
                 divider = mThemeAttributes.getInteger(ThemeShoppingList.divider, 0);
             }
 
-            Drawable div = null;
+            Drawable div;
             if (divider > 0) {
                 div = getResources().getDrawable(divider);
             } else if (divider < 0) {
@@ -1321,7 +1321,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
 
     public boolean cleanupList() {
 
-        boolean nothingdeleted = true;
+        boolean nothingdeleted;
 
         SnackbarUndoMultipleItemStatusOperation op = null;
         if (mUndoListener != null) {
@@ -1501,8 +1501,8 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         return price;
     }
 
-    OnCustomClickListener mListener = null;
-    private boolean mDragAndDropEnabled = false;
+    OnCustomClickListener mListener;
+    private boolean mDragAndDropEnabled;
 
     public void setCustomClickListener(OnCustomClickListener listener) {
         mListener = listener;

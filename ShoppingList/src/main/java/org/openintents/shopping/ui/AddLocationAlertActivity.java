@@ -164,7 +164,7 @@ public class AddLocationAlertActivity extends Activity implements
         // TODO convert type to uri (?) or add INTENT_MIME_TYPE column
         // getContentResolver().insert(Alert.Location.CONTENT_URI, values);
         // using alert.insert will register alerts automatically.
-        Uri result = Alert.insert(Alert.Location.CONTENT_URI, values);
+        Alert.insert(Alert.Location.CONTENT_URI, values);
         int textId;
         if (uri != null) {
             textId = R.string.alert_added;

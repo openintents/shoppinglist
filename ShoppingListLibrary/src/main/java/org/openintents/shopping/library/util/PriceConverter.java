@@ -28,7 +28,7 @@ public class PriceConverter {
     public static NumberFormat mPriceFormatter = DecimalFormat
             .getNumberInstance(Locale.ENGLISH);
 
-    private static boolean initialized = false;
+    private static boolean initialized;
 
     public static void init() {
         PriceConverter.mPriceFormatter.setMaximumFractionDigits(2);
