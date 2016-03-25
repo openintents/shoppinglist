@@ -1464,6 +1464,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                         case QUANTITY:
                             values.put(Contains.QUANTITY, number);
                             break;
+                        default:
+                            break;
                     }
                     mItemsView.mCursorItems.moveToPosition(pos);
                     String containsId = mItemsView.mCursorItems
@@ -1820,6 +1822,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             case MENU_SYNC_WEAR:
                 mItemsView.pushItemsToWear();
                 return true;
+            default:
+                break;
         }
         if (debug) {
             Log.d(TAG, "Start intent group id : " + item.getGroupId());
@@ -1900,6 +1904,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 break;
             case MENU_ITEM_STORES:
                 editItemStores(menuInfo.position);
+                break;
+            default:
                 break;
         }
 
@@ -2496,6 +2502,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             case DIALOG_GET_FROM_MARKET:
                 return new DownloadOIAppDialog(this,
                         DownloadOIAppDialog.OI_BARCODESCANNER);
+            default:
+                break;
         }
         return super.onCreateDialog(id);
 
@@ -2528,6 +2536,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 break;
             case DIALOG_GET_FROM_MARKET:
                 DownloadOIAppDialog.onPrepareDialog(this, dialog);
+                break;
+            default:
                 break;
         }
     }
@@ -3164,6 +3174,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                         v = mInflater.inflate(R.layout.drawer_item_header, parent, false);
                         ((TextView) v).setText(R.string.list); // fix me
                         break;
+                    default:
+                        break;
+                    
                 }
             } else if ((list_pos = position - mNumAboveList) < list_count) {
                 int curListPos = mShoppingListsView.getSelectedItemPosition();

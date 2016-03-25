@@ -49,7 +49,8 @@ public class MyoToggleBoughtInputMethod implements ToggleBoughtInputMethod {
                     position--;
                     itemsView.setSelection(position);
                     break;
-
+                default:
+                    break;
             }
         }
     }

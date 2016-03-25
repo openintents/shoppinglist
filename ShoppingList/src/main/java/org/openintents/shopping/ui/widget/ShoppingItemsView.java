@@ -1539,6 +1539,8 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
                         mUpperBound = Math.min(y - touchSlop, mHeight / 3);
                         mLowerBound = Math.max(y + touchSlop, mHeight * 2 / 3);
                         return false;
+                    default:
+                        break;
                 }
             }
         }
@@ -1699,6 +1701,8 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
                             }
                         }
                     }
+                    break;
+                default:
                     break;
             }
             return true;
