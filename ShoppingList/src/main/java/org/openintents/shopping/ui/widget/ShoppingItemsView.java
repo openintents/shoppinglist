@@ -294,7 +294,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
             state.mCursor = cursor;
 
             // set style for name view and friends
-            TextView styled_as_name[] = {state.mNameView, state.mUnitsView, state.mQuantityView};
+            TextView[] styled_as_name = {state.mNameView, state.mUnitsView, state.mQuantityView};
             int i;
             for (i = 0; i < styled_as_name.length; i++) {
                 TextView t = styled_as_name[i];

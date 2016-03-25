@@ -412,7 +412,7 @@ public class Alert {
         String distStr = "";
 
         String geo = "";
-        String loc[] = null;
+        String[] loc = null;
 
         try {
             gUri = Uri.parse(cv.getAsString(Location.POSITION));
@@ -463,7 +463,7 @@ public class Alert {
     public static void registerDateTimeAlert(ContentValues cv) {
 
         String myDate = cv.getAsString(DateTime.TIME);
-        String s[] = myDate.split(",");
+        String[] s = myDate.split(",");
         Log.d(_TAG, "registerDateTimeAlert: s[0]>>" + s[0] + "<< s[1]>>+"
                 + s[1] + "<<");
         long time = 0;

@@ -24,9 +24,9 @@ public class SnackbarUndoMultipleItemStatusOperation extends SnackbarUndoOperati
     public static final int MARK_ALL = 1;
     public static final int CLEAN_LIST = 2;
 
-    private long old_status[] = {ShoppingContract.Status.BOUGHT,
+    private long[] old_status = {ShoppingContract.Status.BOUGHT,
             ShoppingContract.Status.WANT_TO_BUY, ShoppingContract.Status.BOUGHT};
-    private int resIds[] = {R.plurals.undoable_unmark_all, R.plurals.undoable_mark_all,
+    private int[] resIds = {R.plurals.undoable_unmark_all, R.plurals.undoable_mark_all,
             R.plurals.undoable_clean_list};
 
     private final ShoppingItemsView mShoppingItemsView;

@@ -116,11 +116,11 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 
     public static final String EXTRA_SHOW_GET_ADD_ONS = "show_get_add_ons";
 
-    private static final TextKeyListener.Capitalize smCapitalizationSettings[] = {
+    private static final TextKeyListener.Capitalize[] smCapitalizationSettings = {
             TextKeyListener.Capitalize.NONE,
             TextKeyListener.Capitalize.SENTENCES,
             TextKeyListener.Capitalize.WORDS};
-    private static final int smCapitalizationInputTypes[] = {
+    private static final int[] smCapitalizationInputTypes = {
             InputType.TYPE_CLASS_TEXT,
             InputType.TYPE_TEXT_FLAG_CAP_SENTENCES,
             InputType.TYPE_TEXT_FLAG_CAP_WORDS};
@@ -301,7 +301,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 
     private void updatePrioSubtotalSummary(SharedPreferences prefs) {
         int threshold = getSubtotalByPriorityThreshold(prefs);
-        CharSequence labels[] = mPrioSubtotal.getEntries();
+        CharSequence[] labels = mPrioSubtotal.getEntries();
         mPrioSubtotal.setSummary(labels[threshold]);
         mIncludesChecked.setEnabled(threshold != 0);
     }
