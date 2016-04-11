@@ -3282,9 +3282,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     private class ListSortActionProvider extends ActionProvider implements OnMenuItemClickListener {
 
         private Context mContext;
-        private String mSortLabels[];
-        private String mSortVals[];
-        private Integer mSortValInts[];
+        private String[] mSortLabels;
+        private String[] mSortVals;
+        private Integer[] mSortValInts;
 
         public ListSortActionProvider(Context context) {
             super(context);

@@ -147,7 +147,7 @@ public class ShoppingTotalsHandler implements LoaderManager.LoaderCallbacks<Curs
         }
 
         if (priority_total != 0) {
-            final int captions[] = {0, R.string.priority1_total, R.string.priority2_total,
+            final int[] captions = {0, R.string.priority1_total, R.string.priority2_total,
                     R.string.priority3_total, R.string.priority4_total};
             String s = mPriceFormatter.format(priority_total * 0.01d);
             s = mActivity.getString(captions[priority_threshold], s);
