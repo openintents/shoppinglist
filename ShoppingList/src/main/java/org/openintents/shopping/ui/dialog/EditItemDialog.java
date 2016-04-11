@@ -425,6 +425,8 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
             case ITEMNAME:
                 focus_field(mEditText, false);
                 break;
+            default:
+                break;
 
         }
     }

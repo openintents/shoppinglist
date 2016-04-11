@@ -170,6 +170,8 @@ public class ItemStoresActivity extends Activity {
                             }
                         }
                 );
+            default:
+                break;
         }
         return super.onCreateDialog(id);
     }
@@ -185,6 +187,8 @@ public class ItemStoresActivity extends Activity {
 
             case DIALOG_RENAME_STORE:
                 ((NewStoreDialog) dialog).setName(getSelectedStoreName());
+                break;
+            default:
                 break;
         }
     }
@@ -202,6 +206,8 @@ public class ItemStoresActivity extends Activity {
 
             case MENU_DELETE_STORE:
                 deleteStoreConfirm();
+                break;
+            default:
                 break;
         }
 

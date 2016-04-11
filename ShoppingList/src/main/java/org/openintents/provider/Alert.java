@@ -377,7 +377,8 @@ public class Alert {
                 case ALERT_DATE_TIME:
                     registerDateTimeAlert(cv);
                     break;
-
+                default:
+                    break;
             }
 
         }

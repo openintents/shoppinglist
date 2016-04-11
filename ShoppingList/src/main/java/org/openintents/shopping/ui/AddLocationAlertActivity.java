@@ -195,6 +195,8 @@ public class AddLocationAlertActivity extends Activity implements
                     mTags.setText(mTag.findTags(data.getDataString(), ", "));
                     addLocationAlert();
                     break;
+                default:
+                    break;
             }
         }
     }
