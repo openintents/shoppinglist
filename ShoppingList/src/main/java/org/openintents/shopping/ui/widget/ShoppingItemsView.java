@@ -58,7 +58,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
     private final static String TAG = "ShoppingListView";
     private final static boolean debug = false;
 
-    Typeface mCurrentTypeface;
+    private Typeface mCurrentTypeface;
 
     public int mPriceVisibility;
     public int mTagsVisibility;
@@ -87,7 +87,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
     private PackageManager mPackageManager;
     private String mPackageName;
 
-    NumberFormat mPriceFormatter = DecimalFormat
+    private NumberFormat mPriceFormatter = DecimalFormat
             .getNumberInstance(Locale.ENGLISH);
 
     public int mMode = ShoppingActivity.MODE_IN_SHOP;
@@ -1501,7 +1501,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         return price;
     }
 
-    OnCustomClickListener mListener;
+    private OnCustomClickListener mListener;
     private boolean mDragAndDropEnabled;
 
     public void setCustomClickListener(OnCustomClickListener listener) {

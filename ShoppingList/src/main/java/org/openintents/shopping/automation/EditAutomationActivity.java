@@ -27,15 +27,15 @@ public class EditAutomationActivity extends Activity {
     private static final String BUNDLE_ACTION = "action";
     private static final String BUNDLE_LIST_URI = "list";
 
-    TextView mTextCommand;
+    private TextView mTextCommand;
     // TextView mTextSelectAction;
     // TextView mTextSelectCountdown;
-    Spinner mSpinnerAction;
-    Button mButtonOk;
-    Button mButtonCountdown;
+    private Spinner mSpinnerAction;
+    private Button mButtonOk;
+    private Button mButtonCountdown;
 
-    String mDescriptionAction;
-    String mDescriptionShoppingList;
+    private String mDescriptionAction;
+    private String mDescriptionShoppingList;
 
     private Uri mUri;
 

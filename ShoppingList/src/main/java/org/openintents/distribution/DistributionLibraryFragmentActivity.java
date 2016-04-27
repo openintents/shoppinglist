@@ -9,9 +9,9 @@ import android.view.MenuItem;
 //public class DistributionLibraryActivity extends Activity {//Temp - FragmentActivity for 3.x compatibility
 public class DistributionLibraryFragmentActivity extends AppCompatActivity {
 
-    static final int MENU_DISTRIBUTION_START = Menu.FIRST;
+    private static final int MENU_DISTRIBUTION_START = Menu.FIRST;
 
-    static final int DIALOG_DISTRIBUTION_START = 1;
+    private static final int DIALOG_DISTRIBUTION_START = 1;
 
     protected DistributionLibrary mDistribution;
 
