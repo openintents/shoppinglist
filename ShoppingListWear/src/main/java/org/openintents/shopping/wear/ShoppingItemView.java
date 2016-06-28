@@ -11,8 +11,8 @@ import org.openintents.shopping.R;
 public class ShoppingItemView extends FrameLayout implements WearableListView.OnCenterProximityListener {
 
 
-    final TextView title;
-    final TextView tags;
+    private final TextView title;
+    private final TextView tags;
     private final float mDefaultTextSize;
     private final float mSelectedTextSize;
 

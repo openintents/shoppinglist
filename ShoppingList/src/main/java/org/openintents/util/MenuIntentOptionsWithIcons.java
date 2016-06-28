@@ -19,8 +19,8 @@ import java.util.List;
  */
 public class MenuIntentOptionsWithIcons {
 
-    Context mContext;
-    Menu mMenu;
+    private Context mContext;
+    private Menu mMenu;
 
     public MenuIntentOptionsWithIcons(Context context, Menu menu) {
         mContext = context;

@@ -30,28 +30,28 @@ import org.openintents.shopping.ui.PreferenceActivity;
 
 public class EditItemDialog extends AlertDialog implements OnClickListener {
 
-    Context mContext;
-    Uri mItemUri;
-    Uri mListItemUri;
-    long mItemId;
-    String mNoteText;
+    private Context mContext;
+    private Uri mItemUri;
+    private Uri mListItemUri;
+    private long mItemId;
+    private String mNoteText;
 
-    EditText mEditText;
-    MultiAutoCompleteTextView mTags;
-    EditText mPrice;
-    Button mPriceStore;
-    EditText mQuantity;
-    EditText mPriority;
-    AutoCompleteTextView mUnits;
+    private EditText mEditText;
+    private MultiAutoCompleteTextView mTags;
+    private EditText mPrice;
+    private Button mPriceStore;
+    private EditText mQuantity;
+    private EditText mPriority;
+    private AutoCompleteTextView mUnits;
 
-    TextView mPriceLabel;
-    ImageButton mNote;
+    private TextView mPriceLabel;
+    private ImageButton mNote;
 
-    String[] mTagList;
+    private String[] mTagList;
 
-    OnItemChangedListener mOnItemChangedListener;
+    private OnItemChangedListener mOnItemChangedListener;
 
-    SimpleCursorAdapter mUnitsAdapter;
+    private SimpleCursorAdapter mUnitsAdapter;
 
     public enum FieldType {
         ITEMNAME, QUANTITY, PRICE, PRIORITY, UNITS, TAGS

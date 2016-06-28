@@ -46,11 +46,11 @@ public class AddLocationAlertActivity extends Activity implements
 
     private static final int REQUEST_PICK_LOC = 1;
 
-    TextView mAlertAdded;
-    TextView mTags;
-    TextView mLocation;
+    private TextView mAlertAdded;
+    private TextView mTags;
+    private TextView mLocation;
 
-    Uri mShoppingListUri;
+    private Uri mShoppingListUri;
 
     private Tag mTag;
 

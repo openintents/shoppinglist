@@ -30,11 +30,11 @@ import android.widget.Toast;
 public class GTalkSender {
     private static final String TAG = "GTalkSender";
 
-    Context mContext;
+    private Context mContext;
 
     // ??? IGTalkSession mGTalkSession = null;
 
-    boolean mBound;
+    private boolean mBound;
 
     /**
      * Suffix for bundle items to mark them old.

@@ -36,7 +36,7 @@ public class StoreListView extends ListView {
     private final static String TAG = "StoreListView";
     private final static boolean debug = false;
 
-    Typeface mCurrentTypeface;
+    private Typeface mCurrentTypeface;
 
     public int mPriceVisibility;
     public String mTextTypeface;
@@ -52,16 +52,16 @@ public class StoreListView extends ListView {
 
     private boolean mTextChanged;
     
-    final String[] mStringItems = new String[]{
+    private final String[] mStringItems = new String[]{
             "itemstores." + ItemStores._ID, Stores.NAME,
             ItemStores.STOCKS_ITEM, ItemStores.PRICE, ItemStores.AISLE,
             "stores._id as store_id"};
-    final static int cursorColumnID = 0;
-    final static int cursorColumnNAME = 1;
-    final static int cursorColumnSTOCKS_ITEM = 2;
-    final static int cursorColumnPRICE = 3;
-    final static int cursorColumnAISLE = 4;
-    final static int cursorColumnSTORE_ID = 5;
+    private final static int cursorColumnID = 0;
+    private final static int cursorColumnNAME = 1;
+    private final static int cursorColumnSTOCKS_ITEM = 2;
+    private final static int cursorColumnPRICE = 3;
+    private final static int cursorColumnAISLE = 4;
+    private final static int cursorColumnSTORE_ID = 5;
 
     private Cursor mCursorItemstores;
     private long mItemId;
@@ -69,8 +69,8 @@ public class StoreListView extends ListView {
     private ContentValues[] mBackup;
     private boolean mDirty;
 
-    EditText m_lastView;
-    int m_lastCol;
+    private EditText m_lastView;
+    private int m_lastCol;
 
     public void applyUpdate() {
         if (m_lastView == null) {
@@ -100,8 +100,8 @@ public class StoreListView extends ListView {
         private class EditTextWatcher implements TextWatcher,
                 OnFocusChangeListener {
 
-            int mCol;
-            EditText mView;
+            private int mCol;
+            private EditText mView;
 
             public EditTextWatcher(EditText v, int col) {
                 if (debug) {
@@ -276,7 +276,7 @@ public class StoreListView extends ListView {
 
     }
 
-    ContentObserver mContentObserver = new ContentObserver(new Handler()) {
+    private ContentObserver mContentObserver = new ContentObserver(new Handler()) {
 
         @Override
         public void onChange(boolean selfChange) {

@@ -27,9 +27,9 @@ import android.content.res.TypedArray;
  * @author Peli
  */
 public class ThemeAttributes {
-    Context mContext;
-    String mPackageName;
-    int mThemeId;
+    private Context mContext;
+    private String mPackageName;
+    private int mThemeId;
 
     public ThemeAttributes(Context context, String packageName, int themeId) {
         mContext = context;

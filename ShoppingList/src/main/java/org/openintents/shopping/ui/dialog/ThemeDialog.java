@@ -50,11 +50,11 @@ public class ThemeDialog extends AlertDialog implements OnClickListener,
 
     private static final String BUNDLE_THEME = "theme";
 
-    Context mContext;
-    ThemeDialogListener mListener;
-    ListView mListView;
-    CheckBox mCheckBox;
-    List<ThemeInfo> mListInfo;
+    private Context mContext;
+    private ThemeDialogListener mListener;
+    private ListView mListView;
+    private CheckBox mCheckBox;
+    private List<ThemeInfo> mListInfo;
 
     public ThemeDialog(Context context) {
         super(context);

@@ -51,7 +51,7 @@ public class ShoppingProvider extends ContentProvider {
 
     private ShoppingDatabase mOpenHelper;
 
-    static final String TAG = "ShoppingProvider";
+    protected static final String TAG = "ShoppingProvider";
     private static final boolean debug = false || LogConstants.debug;
 
     private static HashMap<String, String> ITEMS_PROJECTION_MAP;
