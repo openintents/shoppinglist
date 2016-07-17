@@ -600,7 +600,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 .getInstalledProviders();
         for (AppWidgetProviderInfo i : b) {
             if (i.provider.getPackageName().equals(this.getPackageName())) {
-                a = appWidgetManager.getAppWidgetIds(i.provider);
+                int a[] = appWidgetManager.getAppWidgetIds(i.provider);
                 new CheckItemsWidget().onUpdate(this, appWidgetManager, a);
             }
         }
