@@ -61,19 +61,19 @@ public class ListShareSettingsActivity extends Activity {
     /**
      * Cursor for access to the list.
      */
-    Cursor mCursor;
+    private Cursor mCursor;
 
     /**
      * The EditText containing the unique shared list name.
      */
-    EditText mShareName;
+    private EditText mShareName;
 
     /**
      * The EditText containing the contacts.
      */
-    EditText mContacts;
+    private EditText mContacts;
 
-    Uri mUri;
+    private Uri mUri;
 
     @Override
     public void onCreate(Bundle icicle) {

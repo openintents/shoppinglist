@@ -16,12 +16,12 @@ public class ShoppingBackupAgent extends BackupAgentHelper {
     private static final boolean debug = false || LogConstants.debug;
 
     // The name of the SharedPreferences file
-    static final String PREFS = "org.openintents.shopping_preferences";
+    private static final String PREFS = "org.openintents.shopping_preferences";
 
     // A key to uniquely identify the set of backup data
-    static final String PREFS_BACKUP_KEY = "prefs";
+    private static final String PREFS_BACKUP_KEY = "prefs";
 
-    static final String DB_BACKUP_KEY = "db";
+    private static final String DB_BACKUP_KEY = "db";
 
     // Allocate a helper and add it to the backup agent
     public void onCreate() {

@@ -10,7 +10,7 @@ import android.view.View;
  */
 public class QuickSelectMenu {
 
-    android.support.v7.widget.PopupMenu mImplPlatform;
+    private android.support.v7.widget.PopupMenu mImplPlatform;
 
     private OnItemSelectedListener mItemSelectedListener;
 

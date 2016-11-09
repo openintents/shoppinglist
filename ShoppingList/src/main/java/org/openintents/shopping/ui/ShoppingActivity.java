@@ -320,9 +320,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             ContainsFull.SHARE_CREATED_BY, ContainsFull.SHARE_MODIFIED_BY,
             ContainsFull.PRIORITY, ContainsFull.ITEM_HAS_NOTE,
             ContainsFull.ITEM_UNITS};
-    static final int mStringItemsCONTAINSID = 0;
+    private static final int mStringItemsCONTAINSID = 0;
     public static final int mStringItemsITEMNAME = 1;
-    static final int mStringItemsITEMIMAGE = 2;
+    private static final int mStringItemsITEMIMAGE = 2;
     public static final int mStringItemsITEMTAGS = 3;
     public static final int mStringItemsITEMPRICE = 4;
     public static final int mStringItemsQUANTITY = 5;
@@ -600,7 +600,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         List<AppWidgetProviderInfo> b = appWidgetManager.getInstalledProviders();
         for (AppWidgetProviderInfo i : b) {
             if (i.provider.getPackageName().equals(this.getPackageName())) {
-                a = appWidgetManager.getAppWidgetIds(i.provider);
+                int a[] = appWidgetManager.getAppWidgetIds(i.provider);
                 new CheckItemsWidget().onUpdate(this, appWidgetManager, a);
             }
         }
@@ -2205,7 +2205,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         startActivity(intent);
     }
 
-    int mDeleteItemPosition;
+    private int mDeleteItemPosition;
 
     /**
      * delete item
@@ -2818,7 +2818,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         new AsyncTask<String, Integer, ArrayAdapter<String>>() {
 
-            ArrayAdapter<String> adapter;
+            private ArrayAdapter<String> adapter;
 
             @Override
             protected ArrayAdapter<String> doInBackground(String... params) {
@@ -3075,7 +3075,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         private int mNumAboveList = 3;
         private int mNumBelowList = 1;
         private int mViewTypeNum;
-        LayoutInflater mInflater;
+        private LayoutInflater mInflater;
 
         public DrawerListAdapter(Context context, ListAdapter adapter) {
             mAdapter = adapter;

@@ -40,7 +40,7 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
      * 1.2.7-beta 8: Release 1.2.7-beta 9: Release 1.3.0 10: Release 1.3.1-beta
      * 11: Release 1.4.0-beta
      */
-    static final int DATABASE_VERSION = 13;
+    private static final int DATABASE_VERSION = 13;
 
     public static final String DATABASE_NAME = "shopping.db";
 
