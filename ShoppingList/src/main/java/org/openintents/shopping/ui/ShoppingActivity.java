@@ -596,8 +596,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         appWidgetManager.getAppWidgetIds(new ComponentName(this
                 .getPackageName(), CheckItemsWidget.class.getName()));
-        List<AppWidgetProviderInfo> b = appWidgetManager
-                .getInstalledProviders();
+        int[] a;
+        List<AppWidgetProviderInfo> b = appWidgetManager.getInstalledProviders();
         for (AppWidgetProviderInfo i : b) {
             if (i.provider.getPackageName().equals(this.getPackageName())) {
                 a = appWidgetManager.getAppWidgetIds(i.provider);

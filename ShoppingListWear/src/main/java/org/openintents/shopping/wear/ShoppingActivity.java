@@ -35,7 +35,7 @@ public class ShoppingActivity extends Activity implements ServiceConnection, Goo
         GoogleApiClient.OnConnectionFailedListener, ResultCallback<DataItemBuffer> {
 
     public static final String EXTRA_LIST_ID = "EXTRA_LIST_ID";
-    private static final String TAG = "SHoppintListActivity";
+    private static final String TAG = "ShoppintListActivity";
     private TextView mTextView;
     private ShoppingWearableListenerService mService;
     private com.google.android.gms.common.api.GoogleApiClient mGoogleApiClient;
