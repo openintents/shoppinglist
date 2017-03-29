@@ -6,10 +6,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
+import org.openintents.intents.ShoppingListIntents;
+
 import java.util.ArrayList;
 import java.util.Random;
-
-import org.openintents.intents.ShoppingListIntents;
 
 public class BarcodeScannerActivity extends Activity {
 

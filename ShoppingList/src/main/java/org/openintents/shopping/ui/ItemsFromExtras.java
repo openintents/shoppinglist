@@ -103,7 +103,7 @@ public class ItemsFromExtras {
         }
     }
 
-    public void getShoppingExtras(final Intent intent) {
+    void getShoppingExtras(final Intent intent) {
         mExtraItems = intent.getExtras().getStringArrayList(
                 ShoppingListIntents.EXTRA_STRING_ARRAYLIST_SHOPPING);
         mExtraQuantities = intent.getExtras().getStringArrayList(

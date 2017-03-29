@@ -9,7 +9,7 @@
     android:minSdkVersion="3" />
   <instrumentation
     android:targetPackage="org.openintents.shopping"
-    android:name="android.test.InstrumentationTestRunner" />
+    android:name="android.support.test.runner.AndroidJUnitRunner" />
 
   <!-- Instrumentation for Jenkins server -->
   <instrumentation
@@ -19,7 +19,7 @@
   <application>
 
     <activity
-      android:name=".test.BarcodeScannerTest"
+      android:name=".test.BarcodeScannerActivity"
       android:theme="@android:style/Theme.Translucent.NoTitleBar">
       <intent-filter android:label="Scan barcode test">
         <action android:name="android.intent.action.GET_CONTENT" />

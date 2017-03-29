@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "org.openintents.shopping"
         minSdkVersion 20
-        targetSdkVersion 23
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
