@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <style name="OITheme" parent="@style/Theme.AppCompat">
+    <item name="actionBarStyle">@style/OIActionBar</item>
+  </style>
+
+  <style name="OIActionBar" parent="@style/Widget.AppCompat.ActionBar">
+    <item name="background">@android:color/background_dark</item>
+  </style>
+
   <!-- Undo bar styles -->
   <style name="AbstractUndoTextStyle">
     <item name="android:textSize">12sp</item>

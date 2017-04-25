@@ -115,7 +115,7 @@
         <activity
             android:name=".ShoppingActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat"
+            android:theme="@style/OITheme"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -210,14 +210,6 @@
             </intent-filter>
         </activity>
 
-        <!--
-    <activity android:name=".shopping.share.ThemeSettingsActivity"
-        android:label="@string/theme_settings"
-        android:theme="@android:style/Theme.Dialog"
-        android:icon="@drawable/shoppinglisttheme001a">
-        TODO commented out for new sdk, if needed recover from svn
-        -->
-
         <activity
             android:name=".ui.AddLocationAlertActivity"
             android:label="@string/add_location_alert"
@@ -239,15 +231,6 @@
                 <data android:mimeType="vnd.android.cursor.item/vnd.openintents.shopping.list" />
             </intent-filter>
         </activity>
-
-        <!-- GTalk support for shopping list -->
-        <!-- SHARE actions can only supply cursor.dir data, because the
-             item IDs will be different on the sender and on the receiver side.
-             All information about items and lists is carried in the bundle. -->
-        <!--
-        TODO commented out for new sdk, if needed recover from svn
-    <receiver android:name=".shopping.share.GTalkReceiver">
-    -->
 
         <activity
             android:name=".automation.EditAutomationActivity"
