@@ -43,5 +43,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':ShoppingListLibrary')
     compile "com.google.android.support:wearable:$rootProject.ext.supportWearableVersion"
+    provided "com.google.android.wearable:wearable:$rootProject.ext.supportWearableVersion"
     compile "com.google.android.gms:play-services-wearable:$rootProject.ext.playServicesVersion"
 }
