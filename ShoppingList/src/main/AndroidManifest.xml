@@ -62,8 +62,6 @@
     <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="false" />
-    <!-- required for MyBackupPro: -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-permission android:name="org.openintents.shopping.READ_PERMISSION" />
     <uses-permission android:name="org.openintents.shopping.WRITE_PERMISSION" />
@@ -103,13 +101,6 @@
             android:readPermission="org.openintents.shopping.READ_PERMISSION"
             android:writePermission="org.openintents.shopping.WRITE_PERMISSION"
             android:exported="true" />
-
-        <!-- non-FOSS -->
-        <provider
-            android:name="org.openintents.shopping.backup.MyBackupPro"
-            android:authorities="org.openintents.shopping.backup.MyBackupPro"
-            android:exported="true" />
-        <!-- non-FOSS-end -->
 
         <!-- Shopping activity -->
         <activity

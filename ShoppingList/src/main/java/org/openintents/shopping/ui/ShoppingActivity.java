@@ -769,13 +769,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             mItemsFromExtras.insertInto(this, mItemsView);
         }
 
-        // TODO ???
-        /*
-         * // Register intent receiver for refresh intents: IntentFilter
-		 * intentfilter = new IntentFilter(OpenIntents.REFRESH_ACTION);
-		 * registerReceiver(mIntentReceiver, intentfilter);
-		 */
-
         // Items received through intents are added in
         // fillItems().
 

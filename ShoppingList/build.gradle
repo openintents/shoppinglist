@@ -12,8 +12,8 @@ android {
 
     defaultConfig {
         applicationId "org.openintents.shopping"
-        versionName "2.0.3"
-        versionCode 100203
+        versionName "2.1.0"
+        versionCode 100210
         minSdkVersion 14
         targetSdkVersion rootProject.ext.targetSdkVersion
 
@@ -27,23 +27,9 @@ android {
 
     productFlavors {
         play {
-            dependencies {
-                compile "com.google.android.gms:play-services-wearable:$rootProject.ext.playServicesVersion"
-                wearApp project(':ShoppingListWear')
-            }
+
         }
 
-        playInternet {
-            buildConfigField "String", "KEY_POLLFISH", "\"" + (local_properties.key_pollfish ?: "") + "\""
-            dependencies {
-                compile "com.google.android.gms:play-services-wearable:$rootProject.ext.playServicesVersion"
-                wearApp project(':ShoppingListWear')
-            }
-        }
-
-        myo {
-            minSdkVersion 16
-        }
 
         tstore {
 
@@ -52,8 +38,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
             applicationVariants.all { variant ->
                 variant.outputs.each { output ->
                     def file = output.outputFile
@@ -87,17 +73,10 @@ android {
 
 dependencies {
 
-    repositories {
-        maven {
-            url '../myorepository'
-        }
-    }
-
     compile project(':ShoppingListLibrary')
     compile 'com.github.openintents:distribution:1.2'
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
     compile "com.android.support:design:$rootProject.ext.supportVersion"
-    compile files('libs/OIShoppingListMyBackupPro.jar')
     androidTestCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'
@@ -109,6 +88,4 @@ dependencies {
     androidTestCompile "com.android.support:support-v4:$rootProject.ext.supportVersion"
     androidTestCompile "com.android.support:design:$rootProject.ext.supportVersion"
 
-    playInternetCompile files('libs/pollfish.jar')
-    myoCompile('com.thalmic:myosdk:0.6.+@aar')
 }

@@ -11,10 +11,11 @@
     android:targetPackage="org.openintents.shopping"
     android:name="android.support.test.runner.AndroidJUnitRunner" />
 
-  <!-- Instrumentation for Jenkins server -->
+  <!-- Instrumentation for Jenkins server
   <instrumentation
     android:targetPackage="org.openintents.shopping"
     android:name="pl.polidea.instrumentation.PolideaInstrumentationTestRunner" />
+-->
 
   <application>
 
