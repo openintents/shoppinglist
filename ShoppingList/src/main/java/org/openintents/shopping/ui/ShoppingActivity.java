@@ -1275,11 +1275,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 );
         int i_store, count = c.getCount();
         if (count == 0) {
-            c.deactivate();
-            c.close();
             Toast.makeText(this, R.string.no_stores_available,
                     Toast.LENGTH_SHORT).show();
-            return;
         }
 
         // prepend the "no filter" option
@@ -1328,7 +1325,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         if (count == 0) {
             Toast.makeText(this, R.string.no_tags_available, Toast.LENGTH_SHORT)
                     .show();
-            return;
         }
 
         // prepend the "no filter" option
