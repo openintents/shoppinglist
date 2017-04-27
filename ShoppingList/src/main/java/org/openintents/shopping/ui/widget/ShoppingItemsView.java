@@ -3,16 +3,26 @@ package org.openintents.shopping.ui.widget;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.LoaderManager;
-import android.content.*;
+import android.content.ActivityNotFoundException;
+import android.content.ContentUris;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.CursorLoader;
+import android.content.Intent;
+import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.PixelFormat;
+import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SearchViewCompat;
@@ -24,21 +34,31 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ImageSpan;
 import android.text.style.StrikethroughSpan;
+import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.*;
-import android.widget.*;
+import android.view.ContextThemeWrapper;
+import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
-
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Locale;
+import android.widget.TextView;
 
 import org.openintents.distribution.DownloadAppDialog;
+import org.openintents.shopping.R;
 import org.openintents.shopping.ShoppingApplication;
 import org.openintents.shopping.SyncSupport;
-import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
@@ -48,13 +68,22 @@ import org.openintents.shopping.provider.ShoppingProvider;
 import org.openintents.shopping.theme.ThemeAttributes;
 import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;
-import org.openintents.shopping.ui.*;
+import org.openintents.shopping.ui.PreferenceActivity;
+import org.openintents.shopping.ui.ShoppingActivity;
+import org.openintents.shopping.ui.ShoppingTotalsHandler;
+import org.openintents.shopping.ui.SnackbarUndoMultipleItemStatusOperation;
+import org.openintents.shopping.ui.SnackbarUndoSingleItemStatusOperation;
+import org.openintents.shopping.ui.UndoListener;
 import org.openintents.shopping.ui.dialog.EditItemDialog;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * View to show a shopping list with its items
  */
-public class ShoppingItemsView extends ListView implements LoaderManager.LoaderCallbacks<Cursor>{
+public class ShoppingItemsView extends ListView implements LoaderManager.LoaderCallbacks<Cursor> {
     private final static String TAG = "ShoppingListView";
     private final static boolean debug = false;
 
@@ -95,7 +124,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
     private boolean mInSearch;
     public int mModeBeforeSearch;
     public Cursor mCursorItems;
-    
+
     private Activity mCursorActivity;
 
     private View mThemedBackground;
@@ -293,6 +322,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
             state.mCursorPos = cursor.getPosition();
             state.mCursor = cursor;
 
+
             // set style for name view and friends
             TextView[] styled_as_name = {state.mNameView, state.mUnitsView, state.mQuantityView};
             int i;
@@ -386,12 +416,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         }
 
         private void hideTextView(TextView view) {
-            // Cupcake doesn't compute position for invisible
-            // members of RelativeLayout, so we can't make
-            // views invisible when running Cupcake.
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.CUPCAKE) {
-                view.setVisibility(View.GONE);
-            }
+            view.setVisibility(View.GONE);
             view.setText("");
         }
 
@@ -484,7 +509,9 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
                 TextView tv = (TextView) view;
                 SpannedStringBuilder name_etc = new SpannedStringBuilder();
                 name_etc.appendSpannedString(new ClickableItemSpan(), name);
-
+                if (name.equalsIgnoreCase(mFilter)) {
+                    name_etc.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), 0, name_etc.length(), 0);
+                }
                 if (hasNote) {
                     Drawable d = getResources().getDrawable(R.drawable.ic_launcher_notepad_small);
                     float ratio = d.getIntrinsicWidth() / d.getIntrinsicHeight();
@@ -618,16 +645,13 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
                 mFilter = query;
             }
 
-            if (prevFilter == null && mFilter == null) {
-                return true;
-            }
-            if (prevFilter != null && prevFilter.equals(mFilter)) {
+            if ((prevFilter == null && mFilter == null) ||
+                    (prevFilter != null && prevFilter.equals(mFilter))) {
                 return true;
             }
 
             fillItems(mCursorActivity, mListId);
 
-            // invalidate();
             return true;
         }
 
@@ -643,7 +667,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
 
     private class SearchDismissedListener extends SearchViewCompat.OnCloseListenerCompat {
         public boolean onClose() {
-            if (mInSearch){
+            if (mInSearch) {
                 mMode = mModeBeforeSearch;
             }
             mInSearch = false;
@@ -665,6 +689,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
                 SearchViewCompat.setInputType(mSearchView, PreferenceActivity.getSearchInputTypeFromPrefs(context));
                 SearchViewCompat.setOnQueryTextListener(mSearchView, new SearchQueryListener());
                 SearchViewCompat.setOnCloseListener(mSearchView, new SearchDismissedListener());
+                SearchViewCompat.setImeOptions(mSearchView, EditorInfo.IME_ACTION_UNSPECIFIED);
             }
         }
         return mSearchView;
@@ -704,7 +729,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
 
         // Remember standard divider
         mDefaultDivider = getDivider();
-        mSyncSupport = ((ShoppingApplication)getContext().getApplicationContext()).dependencies().getSyncSupport(getContext());
+        mSyncSupport = ((ShoppingApplication) getContext().getApplicationContext()).dependencies().getSyncSupport(getContext());
     }
 
     public void initTotals() {
@@ -736,7 +761,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        CursorLoader loader =  new CursorLoader(mCursorActivity);
+        CursorLoader loader = new CursorLoader(mCursorActivity);
         createItemsCursor(mListId, loader);
         return loader;
     }
@@ -753,7 +778,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
 
         if (mCursorItems == null) {
             Log.e(TAG, "missing shopping provider");
-            setAdapter(new ArrayAdapter<String>(this.getContext(),
+            setAdapter(new ArrayAdapter<>(this.getContext(),
                     android.R.layout.simple_list_item_1,
                     new String[]{"no shopping provider"}));
             return;
@@ -816,7 +841,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
                     break;
                 }
             }
-            if (! mInSearch) {
+            if (!mInSearch) {
                 mFocusItemId = -1;
             }
         }
@@ -853,7 +878,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
                 "org.openintents.shopping_preferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putBoolean("_searching", mInSearch);
-        editor.commit();
+        editor.apply();
     }
 
     private Cursor createItemsCursor(long listId, CursorLoader loader) {
@@ -1078,7 +1103,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
                     Log.e(TAG, "Package not found for Typeface", e);
                 }
             }
-        } catch (RuntimeException e){
+        } catch (RuntimeException e) {
             Log.e(TAG, "type face can't be made " + typeface);
         }
         return newTypeface;
@@ -1273,9 +1298,10 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
             if (oldstatus == ShoppingContract.Status.WANT_TO_BUY) {
                 newstatus = ShoppingContract.Status.REMOVED_FROM_LIST;
                 shouldFocusItem = mInSearch && mFilter != null && mFilter.length() > 0;
-            }  else { // old is REMOVE_FROM_LIST or BOUGHT, new is WANT_TO_BUY, which is the default.
-                if (mInSearch)
+            } else { // old is REMOVE_FROM_LIST or BOUGHT, new is WANT_TO_BUY, which is the default.
+                if (mInSearch) {
                     shouldFocusItem = true;
+                }
             }
         }
 
@@ -1389,9 +1415,9 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         return mSyncSupport != null && mSyncSupport.isAvailable();
     }
 
-    public void pushItemsToWear(){
-        if (mSyncSupport.isAvailable()){
-            new Thread(){
+    public void pushItemsToWear() {
+        if (mSyncSupport.isAvailable()) {
+            new Thread() {
                 @Override
                 public void run() {
                     Cursor cursor = createItemsCursor(mListId, null);
@@ -1408,7 +1434,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
 
     private void pushUpdatedItemToWear(final ContentValues values, final Uri itemUri) {
         if (mSyncSupport.isAvailable() && mSyncSupport.isSyncEnabled())
-            new Thread(){
+            new Thread() {
                 @Override
                 public void run() {
                     mSyncSupport.updateListItem(mListId, itemUri, values);
@@ -1472,7 +1498,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         mTotalsHandler.update(mCursorActivity.getLoaderManager(), mListId);
     }
 
-    public void updateNumChecked (long numChecked, long numUnchecked) {
+    public void updateNumChecked(long numChecked, long numUnchecked) {
 
         mNumChecked = numChecked;
         mNumUnchecked = numUnchecked;

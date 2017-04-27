@@ -108,7 +108,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
     public static final String PREFS_SORT_PER_LIST = "perListSort";
     public static final boolean PREFS_SORT_PER_LIST_DEFAULT = false;
     public static final String PREFS_HOLO_SEARCH = "holosearch";
-    public static final boolean PREFS_HOLO_SEARCH_DEFAULT = false;
+    public static final boolean PREFS_HOLO_SEARCH_DEFAULT = true;
 
     public static final String PREFS_RESET_ALL_SETTINGS = "reset_all_settings";
 

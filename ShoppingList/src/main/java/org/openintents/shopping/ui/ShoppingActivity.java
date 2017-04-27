@@ -1476,10 +1476,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
      * Inserts new item from edit box into currently selected shopping list.
      */
     private void insertNewItem() {
-        String newItem = mEditText.getText().toString();
+        String newItem = mEditText.getText().toString().trim();
 
         // Only add if there is something to add:
-        if (newItem.compareTo("") != 0) {
+        if (newItem.length() > 0) {
             long listId = getSelectedListId();
             if (listId < 0) {
                 // No valid list - probably view is not active
