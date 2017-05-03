@@ -129,45 +129,45 @@ public class ShoppingTotalsHandler implements LoaderManager.LoaderCallbacks<Curs
             mTotalTextView.setVisibility(View.GONE);
             mPriTotalTextView.setVisibility(View.GONE);
             mTotalCheckedTextView.setVisibility(View.GONE);
-            return;
-        }
 
-        mTotalTextView.setTextColor(mItemsView.mTextColorPrice);
-        mPriTotalTextView.setTextColor(mItemsView.mTextColorPrice);
-        mTotalCheckedTextView.setTextColor(mItemsView.mTextColorPrice);
-        mCountTextView.setTextColor(mItemsView.mTextColorPrice);
-
-        if (total != 0) {
-            String s = mPriceFormatter.format(total * 0.01d);
-            s = mActivity.getString(R.string.total, s);
-            mTotalTextView.setText(s);
-            mTotalTextView.setVisibility(View.VISIBLE);
         } else {
-            mTotalTextView.setVisibility(View.GONE);
-        }
 
-        if (priority_total != 0) {
-            final int[] captions = {0, R.string.priority1_total, R.string.priority2_total,
-                    R.string.priority3_total, R.string.priority4_total};
-            String s = mPriceFormatter.format(priority_total * 0.01d);
-            s = mActivity.getString(captions[priority_threshold], s);
-            mPriTotalTextView.setText(s);
-            mPriTotalTextView.setVisibility(View.VISIBLE);
-        } else {
-            mPriTotalTextView.setVisibility(View.GONE);
-        }
+            mTotalTextView.setTextColor(mItemsView.mTextColorPrice);
+            mPriTotalTextView.setTextColor(mItemsView.mTextColorPrice);
+            mTotalCheckedTextView.setTextColor(mItemsView.mTextColorPrice);
+            mCountTextView.setTextColor(mItemsView.mTextColorPrice);
 
-        if (totalchecked != 0) {
-            String s = mPriceFormatter.format(totalchecked * 0.01d);
-            s = mActivity.getString(R.string.total_checked, s);
-            mTotalCheckedTextView.setText(s);
-            mTotalCheckedTextView.setVisibility(View.VISIBLE);
-            mCountTextView.setVisibility(View.VISIBLE);
-        } else {
-            mTotalCheckedTextView.setVisibility(View.GONE);
-            mCountTextView.setVisibility(View.GONE);
-        }
+            if (total != 0) {
+                String s = mPriceFormatter.format(total * 0.01d);
+                s = mActivity.getString(R.string.total, s);
+                mTotalTextView.setText(s);
+                mTotalTextView.setVisibility(View.VISIBLE);
+            } else {
+                mTotalTextView.setVisibility(View.GONE);
+            }
 
+            if (priority_total != 0) {
+                final int[] captions = {0, R.string.priority1_total, R.string.priority2_total,
+                        R.string.priority3_total, R.string.priority4_total};
+                String s = mPriceFormatter.format(priority_total * 0.01d);
+                s = mActivity.getString(captions[priority_threshold], s);
+                mPriTotalTextView.setText(s);
+                mPriTotalTextView.setVisibility(View.VISIBLE);
+            } else {
+                mPriTotalTextView.setVisibility(View.GONE);
+            }
+
+            if (totalchecked != 0) {
+                String s = mPriceFormatter.format(totalchecked * 0.01d);
+                s = mActivity.getString(R.string.total_checked, s);
+                mTotalCheckedTextView.setText(s);
+                mTotalCheckedTextView.setVisibility(View.VISIBLE);
+                mCountTextView.setVisibility(View.VISIBLE);
+            } else {
+                mTotalCheckedTextView.setVisibility(View.GONE);
+                mCountTextView.setVisibility(View.GONE);
+            }
+        }
         mCountTextView.setText("#" + numChecked);
         mItemsView.updateNumChecked(numChecked, numUnchecked);
     }
