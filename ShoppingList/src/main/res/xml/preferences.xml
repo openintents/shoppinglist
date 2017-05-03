@@ -33,6 +33,9 @@
       android:entries="@array/preference_sortorder_entries"
       android:entryValues="@array/preference_sortorder_entryvalues"
       android:dialogTitle="@string/preference_sortorder_dialog_title" />
+    <Preference
+        android:key="layout_choice"
+        android:title="@string/layout_choice_title"/>
     <PreferenceScreen
       android:key="preference_screen_advanced"
       android:title="@string/preference_advanced"

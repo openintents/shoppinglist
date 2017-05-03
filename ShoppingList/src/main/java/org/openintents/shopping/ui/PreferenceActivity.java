@@ -1,5 +1,6 @@
 package org.openintents.shopping.ui;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -109,6 +110,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
     public static final boolean PREFS_SORT_PER_LIST_DEFAULT = false;
     public static final String PREFS_HOLO_SEARCH = "holosearch";
     public static final boolean PREFS_HOLO_SEARCH_DEFAULT = true;
+    public static final String PREFS_SHOW_LAYOUT_CHOICE = "show_layout_choice";
 
     public static final String PREFS_RESET_ALL_SETTINGS = "reset_all_settings";
 
@@ -148,6 +150,14 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
 
         mIncludesChecked = (CheckBoxPreference) findPreference(PREFS_PRIOSUBINCLCHECKED);
 
+        Preference layoutChoicePreference = findPreference("layout_choice");
+        layoutChoicePreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                startActivity(new Intent(PreferenceActivity.this, LayoutChoiceActivity.class));
+                return true;
+            }
+        });
         SharedPreferences shared = getPreferenceScreen().getSharedPreferences();
         updatePrioSubtotalSummary(shared);
         updatePickItemsSortPref(shared);
@@ -615,5 +625,27 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
         ed.putBoolean(PREFS_THEME_SET_FOR_ALL, setForAll);
         ed.commit();
     }
+    
+    public static void setUsingHoloSearch(Context context, boolean useHoloSearch) {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        Editor ed = prefs.edit();
+        ed.putBoolean(PREFS_HOLO_SEARCH, useHoloSearch);
+        ed.apply();
+    }
 
+    public static boolean getShowLayoutChoice(Context context) {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        return prefs.getBoolean(PREFS_SHOW_LAYOUT_CHOICE, true);
+    }
+
+    public static void setShowLayoutChoice(Context context, boolean showLayoutChoice) {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        prefs.edit()
+                .putBoolean(PREFS_SHOW_LAYOUT_CHOICE, showLayoutChoice)
+                .apply();
+    }
 }
