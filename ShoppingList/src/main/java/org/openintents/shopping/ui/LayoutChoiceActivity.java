@@ -7,6 +7,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.RadioGroup;
 
 import org.openintents.shopping.R;
@@ -19,7 +20,7 @@ public class LayoutChoiceActivity extends AppCompatActivity implements RadioGrou
         setContentView(R.layout.dialog_layout_choice);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.layout_choice);
+        final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.layout_choice);
 
         if (PreferenceActivity.getUsingHoloSearchFromPrefs(this)) {
             radioGroup.check(R.id.layout_choice_actionbar);
@@ -27,6 +28,19 @@ public class LayoutChoiceActivity extends AppCompatActivity implements RadioGrou
             radioGroup.check(R.id.layout_choice_bottom);
         }
         radioGroup.setOnCheckedChangeListener(this);
+
+        findViewById(R.id.image_actionbar).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                radioGroup.check(R.id.layout_choice_actionbar);
+            }
+        });
+        findViewById(R.id.image_bottom).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                radioGroup.check(R.id.layout_choice_bottom);
+            }
+        });
     }
 
     @Override
@@ -43,7 +57,7 @@ public class LayoutChoiceActivity extends AppCompatActivity implements RadioGrou
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
         PreferenceActivity.setUsingHoloSearch(this, checkedId == R.id.layout_choice_actionbar);
         PreferenceActivity.setShowLayoutChoice(this, false);
-        startActivity(new Intent(this, ShoppingActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        startActivity(new Intent(this, org.openintents.shopping.ShoppingActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
     }
 
