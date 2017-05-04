@@ -403,4 +403,8 @@
   <string name="widget_no_items">No items on page %d</string>
     <string name="sync_wear">Sync with Watch</string>
     <string name="call_home">Call home</string>
+  <string name="layout_choice_actionbar_hint">Layout with search and add items in the action bar.\nUse this if you usually add several items at once.</string>
+  <string name="layout_choice_bottom_hint">Layout with add item at the bottom.\nUse this if you usually add one item at a time.</string>
+  <string name="layout_choice_title">Choose your preferred layout</string>
+  <string name="layout_choice_description">You can change the layout in the settings again.\n\nPlease restart app after changing the layout!</string>
 </resources> 
