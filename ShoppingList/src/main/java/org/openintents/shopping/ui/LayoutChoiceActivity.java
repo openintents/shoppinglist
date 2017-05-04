@@ -48,7 +48,7 @@ public class LayoutChoiceActivity extends AppCompatActivity implements RadioGrou
     }
 
     public static boolean show(Activity context) {
-        if (PreferenceActivity.getShowLayoutChoice(context)) {
+        if (PreferenceActivity.getShowLayoutChoice(context) && PreferenceActivity.getUsingHoloSearchFromPrefs(context)) {
             context.startActivity(new Intent(context, LayoutChoiceActivity.class));
             return true;
         } else {
