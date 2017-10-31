@@ -14,7 +14,7 @@ env:
 before_install:
   - android list sdk --extended --no-ui --all
   - echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-24
-  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - echo no | android create avd --force -n test -t android-24 --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
 before_script:
   - chmod a+x ./ci/wait_for_emulator
