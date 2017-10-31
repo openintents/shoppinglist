@@ -25,6 +25,8 @@ android {
         abortOnError false
     }
 
+    flavorDimensions "market"
+
     productFlavors {
         play {
 
@@ -43,7 +45,7 @@ android {
             applicationVariants.all { variant ->
                 variant.outputs.each { output ->
                     def file = output.outputFile
-                    output.outputFile = new File(file.parent, file.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
+                    output.outputFileName = new File(file.parent, file.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
                 }
             }
         }
