@@ -7,9 +7,9 @@ android:
     - '.*intel.+'
 env:
   matrix:
-    - ANDROID_SDKS=android-25,sysimg-25  ANDROID_TARGET=android-25  ANDROID_ABI=armeabi-v7a
+    - ANDROID_SDKS=android-25,sysimg-25  ANDROID_TARGET=android-25
 before_install:
-  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET
   - emulator -avd test -no-skin -no-audio -no-window &
 before_script:
   - chmod a+x ./ci/wait_for_emulator
