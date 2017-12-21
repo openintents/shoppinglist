@@ -88,6 +88,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
     private final static boolean debug = false;
 
     private Typeface mCurrentTypeface;
+    private ShoppingActivity mShoppingActivity;
 
     public int mPriceVisibility;
     public int mTagsVisibility;
@@ -674,6 +675,9 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
             mFilter = null;
             fillItems(mCursorActivity, mListId);
             // invalidate();
+            if (mShoppingActivity != null) {
+                mShoppingActivity.onModeChanged();
+            }
             return false;
         }
     }
@@ -709,24 +713,27 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
 
     public ShoppingItemsView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init();
+        init(context);
     }
 
     public ShoppingItemsView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(context);
     }
 
     public ShoppingItemsView(Context context) {
         super(context);
-        init();
+        init(context);
     }
 
-    private void init() {
+    private void init(Context context) {
         mItemHeightNormal = 45;
         mItemHeightHalf = mItemHeightNormal / 2;
         mItemHeightExpanded = 90;
 
+        if (context instanceof ShoppingActivity) {
+            mShoppingActivity = (ShoppingActivity)context;
+        }
         // Remember standard divider
         mDefaultDivider = getDivider();
         mSyncSupport = ((ShoppingApplication) getContext().getApplicationContext()).dependencies().getSyncSupport(getContext());

@@ -2725,7 +2725,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
     }
 
-    private void onModeChanged() {
+    public void onModeChanged() {
 
         if (debug) {
             Log.d(TAG, "onModeChanged()");
