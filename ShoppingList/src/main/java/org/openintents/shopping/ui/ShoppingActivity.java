@@ -2528,6 +2528,21 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             case DIALOG_GET_FROM_MARKET:
                 DownloadOIAppDialog.onPrepareDialog(this, dialog);
                 break;
+            case DIALOG_DELETE_ITEM:
+                if (mItemsView != null && dialog instanceof AlertDialog) {
+                    ListAdapter adapter = mItemsView.getAdapter();
+                    if (adapter != null && adapter instanceof CursorAdapter) {
+                        Cursor c = (Cursor) adapter.getItem(mDeleteItemPosition);
+                        if (c != null) {
+                            String itemName = c.getString(mStringItemsITEMNAME);
+                            if (itemName != null) {
+                                ((AlertDialog) dialog).setMessage(
+                                        getResources().getString(R.string.delete_item_confirm, itemName));
+                            }
+                        }
+                    }
+                }
+                break;
             default:
                 break;
         }
