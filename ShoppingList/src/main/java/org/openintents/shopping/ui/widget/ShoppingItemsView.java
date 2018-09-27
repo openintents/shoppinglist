@@ -759,6 +759,10 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         return mListId;
     }
 
+    public boolean getInSearch() {
+        return mInSearch;
+    }
+
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         CursorLoader loader = new CursorLoader(mCursorActivity);
