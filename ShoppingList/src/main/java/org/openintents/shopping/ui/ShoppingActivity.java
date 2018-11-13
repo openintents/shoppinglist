@@ -3230,8 +3230,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 mItemsView.mMode = (position == 1) ? MODE_ADD_ITEMS : MODE_IN_SHOP;
                 mDrawerListsView.setItemChecked(position, true);
                 mDrawerListsView.setItemChecked(1 - position, false);
+                mDrawerListsView.invalidateViews();
                 onModeChanged();
-                // need to toggle the radio buttons too
             } else if ((list_pos = position - mNumAboveList) < list_count) {
                 // Update list cursor:
                 mShoppingListsView.setSelection(list_pos);
