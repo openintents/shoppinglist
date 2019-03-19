@@ -5,7 +5,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'com.android.tools.build:gradle:3.3.2'
     }
 }
 
@@ -15,15 +15,16 @@ allprojects {
         maven {
             url "https://jitpack.io"
         }
+        google()
 
     }
 }
 
 ext {
-    compileSdkVersion = 25
-    targetSdkVersion = 25
-    buildToolsVersion = "26.0.2"
-    supportVersion = "25.3.1"
+    compileSdkVersion = 28
+    targetSdkVersion = 28
+    buildToolsVersion = "28.0.3"
+    supportVersion = "28.+"
     playServicesVersion = "10.2.1"
     supportWearableVersion = "2.0.0"
 }

@@ -25,7 +25,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.widget.SearchViewCompat;
+import android.support.v7.widget.SearchView;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
@@ -614,9 +614,9 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
 
     }
 
-    private class SearchQueryListener extends SearchViewCompat.OnQueryTextListenerCompat {
+    private class SearchQueryListener implements SearchView.OnQueryTextListener {
         public boolean onQueryTextChange(String query) {
-            boolean isIconified = SearchViewCompat.isIconified(mSearchView);
+            boolean isIconified = mSearchView.isIconified();
             String prevFilter = mFilter;
 
             if (isIconified) {
@@ -624,7 +624,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
                 // it doesn't re-expand the search view. Force the query string empty when it is
                 // not shown, and switch back to non-search mode.
                 if (query != null && query.length() > 0) {
-                    SearchViewCompat.setQuery(mSearchView, "", false);
+                    mSearchView.setQuery("", false);
                 }
                 query = null;
                 if (mInSearch) {
@@ -658,14 +658,14 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         public boolean onQueryTextSubmit(String query) {
             if (query.length() > 0) {
                 insertNewItem(mCursorActivity, query, null, null, null, null);
-                SearchViewCompat.setQuery(mSearchView, "", false);
+                mSearchView.setQuery("", false);
                 fillItems(mCursorActivity, mListId);
             }
             return true;
         }
     }
 
-    private class SearchDismissedListener extends SearchViewCompat.OnCloseListenerCompat {
+    private class SearchDismissedListener implements SearchView.OnCloseListener {
         public boolean onClose() {
             if (mInSearch) {
                 mMode = mModeBeforeSearch;
@@ -678,18 +678,18 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         }
     }
 
-    private View mSearchView;
+    private SearchView mSearchView;
 
     public View getSearchView() {
         Context context = getContext();
         if (PreferenceActivity.getUsingHoloSearchFromPrefs(context)) {
-            mSearchView = SearchViewCompat.newSearchView(mCursorActivity);
+            mSearchView = new SearchView(mCursorActivity);
             if (mSearchView != null) {
-                SearchViewCompat.setSubmitButtonEnabled(mSearchView, true);
-                SearchViewCompat.setInputType(mSearchView, PreferenceActivity.getSearchInputTypeFromPrefs(context));
-                SearchViewCompat.setOnQueryTextListener(mSearchView, new SearchQueryListener());
-                SearchViewCompat.setOnCloseListener(mSearchView, new SearchDismissedListener());
-                SearchViewCompat.setImeOptions(mSearchView, EditorInfo.IME_ACTION_UNSPECIFIED);
+                mSearchView.setSubmitButtonEnabled(true);
+                mSearchView.setInputType(PreferenceActivity.getSearchInputTypeFromPrefs(context));
+                mSearchView.setOnQueryTextListener(new SearchQueryListener());
+                mSearchView.setOnCloseListener(new SearchDismissedListener());
+                mSearchView.setImeOptions(EditorInfo.IME_ACTION_UNSPECIFIED);
             }
         }
         return mSearchView;

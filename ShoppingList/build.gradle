@@ -19,6 +19,7 @@ android {
 
         testApplicationId "org.openintents.shopping.test"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        setProperty("archivesBaseName", "$applicationId-$versionName")
     }
 
     lintOptions {
@@ -42,12 +43,7 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
-            applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-                    def file = output.outputFile
-                    output.outputFileName = new File(file.parent, file.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
-                }
-            }
+
         }
     }
 
@@ -75,19 +71,19 @@ android {
 
 dependencies {
 
-    compile project(':ShoppingListLibrary')
-    compile 'com.github.openintents:distribution:1.2'
-    compile "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
-    compile "com.android.support:design:$rootProject.ext.supportVersion"
-    androidTestCompile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'com.android.support.test:rules:0.5'
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
-    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2.2'
-    androidTestCompile "com.android.support:support-annotations:$rootProject.ext.supportVersion"
-    androidTestCompile "com.android.support:recyclerview-v7:$rootProject.ext.supportVersion"
-    androidTestCompile "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
-    androidTestCompile "com.android.support:support-v4:$rootProject.ext.supportVersion"
-    androidTestCompile "com.android.support:design:$rootProject.ext.supportVersion"
+    implementation project(':ShoppingListLibrary')
+    implementation 'com.github.openintents:distribution:1.2'
+    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
+    implementation "com.android.support:design:$rootProject.ext.supportVersion"
+    androidTestImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:0.5'
+    androidTestImplementation 'com.android.support.test:rules:0.5'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:2.2.2'
+    androidTestImplementation "com.android.support:support-annotations:$rootProject.ext.supportVersion"
+    androidTestImplementation "com.android.support:recyclerview-v7:$rootProject.ext.supportVersion"
+    androidTestImplementation "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
+    androidTestImplementation "com.android.support:support-v4:$rootProject.ext.supportVersion"
+    androidTestImplementation "com.android.support:design:$rootProject.ext.supportVersion"
 
 }
