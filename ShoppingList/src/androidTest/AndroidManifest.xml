@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="org.openintents.shopping.test"
-  android:versionCode="1"
-  android:versionName="1.0">
+    package="org.openintents.shopping.test"
+    android:versionCode="1"
+    android:versionName="1.0">
 
-  <uses-sdk
-    android:targetSdkVersion="15"
-    android:minSdkVersion="3" />
-  <instrumentation
-    android:targetPackage="org.openintents.shopping"
-    android:name="android.support.test.runner.AndroidJUnitRunner" />
+    <uses-sdk
+        android:minSdkVersion="3"
+        android:targetSdkVersion="15" />
+    <instrumentation
+        android:name="android.support.test.runner.AndroidJUnitRunner"
+        android:targetPackage="org.openintents.shopping" />
 
-  <!-- Instrumentation for Jenkins server
-  <instrumentation
-    android:targetPackage="org.openintents.shopping"
-    android:name="pl.polidea.instrumentation.PolideaInstrumentationTestRunner" />
--->
+    <!-- Instrumentation for Jenkins server
+    <instrumentation
+      android:targetPackage="org.openintents.shopping"
+      android:name="pl.polidea.instrumentation.PolideaInstrumentationTestRunner" />
+  -->
 
-  <application>
+    <application>
 
-    <activity
-      android:name=".test.BarcodeScannerActivity"
-      android:theme="@android:style/Theme.Translucent.NoTitleBar">
-      <intent-filter android:label="Scan barcode test">
-        <action android:name="android.intent.action.GET_CONTENT" />
-        <category android:name="android.intent.category.ALTERNATIVE" />
-        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
-        <data android:mimeType="vnd.android.cursor.dir/vnd.openintents.shopping.list" />
-        <data android:mimeType="vnd.android.cursor.item/vnd.openintents.shopping.list" />
-      </intent-filter>
-    </activity>
+        <activity
+            android:name=".test.BarcodeScannerActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter android:label="Scan barcode test">
+                <action android:name="android.intent.action.GET_CONTENT" />
+                <category android:name="android.intent.category.ALTERNATIVE" />
+                <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+                <data android:mimeType="vnd.android.cursor.dir/vnd.openintents.shopping.list" />
+                <data android:mimeType="vnd.android.cursor.item/vnd.openintents.shopping.list" />
+            </intent-filter>
+        </activity>
 
-  </application>
+    </application>
 </manifest>

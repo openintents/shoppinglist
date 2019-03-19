@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2007-2010 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,10 +31,13 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.*;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-
-import java.util.List;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import org.openintents.shopping.LogConstants;
 import org.openintents.shopping.R;
@@ -42,6 +45,8 @@ import org.openintents.shopping.theme.ThemeShoppingList;
 import org.openintents.shopping.theme.ThemeUtils;
 import org.openintents.shopping.theme.ThemeUtils.ThemeInfo;
 import org.openintents.shopping.ui.PreferenceActivity;
+
+import java.util.List;
 
 public class ThemeDialog extends AlertDialog implements OnClickListener,
         OnCancelListener, OnItemClickListener {
@@ -238,7 +243,7 @@ public class ThemeDialog extends AlertDialog implements OnClickListener,
 
     public void pressOk() {
 
-		/* User clicked Yes so do some stuff */
+        /* User clicked Yes so do some stuff */
         String theme = getSelectedTheme();
         mListener.onSaveTheme(theme);
         mListener.onSetTheme(theme);

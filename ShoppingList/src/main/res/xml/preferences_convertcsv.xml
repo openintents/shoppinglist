@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <PreferenceCategory android:title="@string/preference_shoppinglist">
+        <EditTextPreference
+            android:defaultValue="@string/default_shoppinglist_filename"
+            android:key="shoppinglist_filename"
+            android:summary="@string/preference_filename_summary"
+            android:title="@string/preference_filename" />
+
+        <ListPreference
+            android:defaultValue="outlook tasks"
+            android:dialogTitle="@string/select_csv_file_format"
+            android:entries="@array/shoppinglist_format"
+            android:entryValues="@array/shoppinglist_format_value"
+            android:key="shoppinglist_format"
+            android:summary="@string/preferences_select_csv_file_format"
+            android:title="@string/csv_file_format" />
+        <ListPreference
+            android:defaultValue="1"
+            android:dialogTitle="@string/select_import_policy"
+            android:entries="@array/shoppinglist_import_policy"
+            android:entryValues="@array/shoppinglist_import_policy_value"
+            android:key="shoppinglist_import_policy"
+            android:summary="@string/preferences_select_import_policy"
+            android:title="@string/import_policy" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="shoppinglist_import_stores"
+            android:summaryOff="@string/preference_stores_off_summary"
+            android:summaryOn="@string/preference_stores_on_summary"
+            android:title="@string/preference_stores" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="ask_if_file_exists"
+            android:summary="@string/preference_ask_if_file_exists_summary"
+            android:title="@string/preference_ask_if_file_exists" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

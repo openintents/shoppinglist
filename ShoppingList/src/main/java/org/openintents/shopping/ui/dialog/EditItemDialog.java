@@ -2,8 +2,13 @@ package org.openintents.shopping.ui.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.*;
+import android.content.ActivityNotFoundException;
+import android.content.ContentUris;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.text.Editable;
@@ -14,8 +19,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FilterQueryProvider;
+import android.widget.ImageButton;
+import android.widget.MultiAutoCompleteTextView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.CursorToStringConverter;
+import android.widget.TextView;
 
 import org.openintents.distribution.DownloadAppDialog;
 import org.openintents.shopping.R;
@@ -24,18 +37,23 @@ import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.shopping.library.provider.ShoppingContract.Items;
 import org.openintents.shopping.library.provider.ShoppingContract.Units;
 import org.openintents.shopping.library.util.PriceConverter;
-import org.openintents.shopping.library.util.ShoppingUtils;
 import org.openintents.shopping.ui.ItemStoresActivity;
 import org.openintents.shopping.ui.PreferenceActivity;
 
 public class EditItemDialog extends AlertDialog implements OnClickListener {
 
+    private final String[] mProjection = {ShoppingContract.Items.NAME,
+            ShoppingContract.Items.TAGS, ShoppingContract.Items.PRICE,
+            ShoppingContract.Items.NOTE, ShoppingContract.Items._ID,
+            ShoppingContract.Items.UNITS};
+    private final String[] mRelationProjection = {
+            ShoppingContract.Contains.QUANTITY,
+            ShoppingContract.Contains.PRIORITY};
     private Context mContext;
     private Uri mItemUri;
     private Uri mListItemUri;
     private long mItemId;
     private String mNoteText;
-
     private EditText mEditText;
     private MultiAutoCompleteTextView mTags;
     private EditText mPrice;
@@ -43,19 +61,30 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
     private EditText mQuantity;
     private EditText mPriority;
     private AutoCompleteTextView mUnits;
-
     private TextView mPriceLabel;
     private ImageButton mNote;
-
     private String[] mTagList;
-
     private OnItemChangedListener mOnItemChangedListener;
-
     private SimpleCursorAdapter mUnitsAdapter;
+    private TextWatcher mTextWatcher = new TextWatcher() {
 
-    public enum FieldType {
-        ITEMNAME, QUANTITY, PRICE, PRIORITY, UNITS, TAGS
-    }
+        @Override
+        public void afterTextChanged(Editable arg0) {
+            updateQuantityPrice();
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count,
+                                      int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before,
+                                  int count) {
+        }
+
+    };
+    private Uri mRelationUri;
 
     public EditItemDialog(final Context context, final Uri itemUri,
                           final Uri relationUri, final Uri listItemUri) {
@@ -194,19 +223,19 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
         setButton(context.getText(R.string.ok), this);
         setButton2(context.getText(R.string.cancel), this);
 
-		/*
+        /*
          * setButton(R.string.ok, new DialogInterface.OnClickListener() { public
-		 * void onClick(DialogInterface dialog, int whichButton) {
-		 * 
-		 * dialog.dismiss(); doTextEntryDialogAction(mTextEntryMenu, (Dialog)
-		 * dialog);
-		 * 
-		 * } }).setNegativeButton(R.string.cancel, new
-		 * DialogInterface.OnClickListener() { public void
-		 * onClick(DialogInterface dialog, int whichButton) {
-		 * 
-		 * dialog.cancel(); } }).create();
-		 */
+         * void onClick(DialogInterface dialog, int whichButton) {
+         *
+         * dialog.dismiss(); doTextEntryDialogAction(mTextEntryMenu, (Dialog)
+         * dialog);
+         *
+         * } }).setNegativeButton(R.string.cancel, new
+         * DialogInterface.OnClickListener() { public void
+         * onClick(DialogInterface dialog, int whichButton) {
+         *
+         * dialog.cancel(); } }).create();
+         */
 
         mQuantity.addTextChangedListener(mTextWatcher);
         mPrice.addTextChangedListener(mTextWatcher);
@@ -239,25 +268,6 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
         }
     }
 
-    private TextWatcher mTextWatcher = new TextWatcher() {
-
-        @Override
-        public void afterTextChanged(Editable arg0) {
-            updateQuantityPrice();
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count,
-                                      int after) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before,
-                                  int count) {
-        }
-
-    };
-
     void updateQuantityPrice() {
         try {
             double price = Double.parseDouble(mPrice.getText().toString());
@@ -277,16 +287,6 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
         // Otherwise show default label:
         mPriceLabel.setText(mContext.getText(R.string.price));
     }
-
-    private final String[] mProjection = {ShoppingContract.Items.NAME,
-            ShoppingContract.Items.TAGS, ShoppingContract.Items.PRICE,
-            ShoppingContract.Items.NOTE, ShoppingContract.Items._ID,
-            ShoppingContract.Items.UNITS};
-    private final String[] mRelationProjection = {
-            ShoppingContract.Contains.QUANTITY,
-            ShoppingContract.Contains.PRIORITY};
-
-    private Uri mRelationUri;
 
     public void setItemUri(Uri itemUri, Uri listItemUri) {
         mItemUri = itemUri;
@@ -429,6 +429,10 @@ public class EditItemDialog extends AlertDialog implements OnClickListener {
                 break;
 
         }
+    }
+
+    public enum FieldType {
+        ITEMNAME, QUANTITY, PRICE, PRIORITY, UNITS, TAGS
     }
 
     public interface OnItemChangedListener {

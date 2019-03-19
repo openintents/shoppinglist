@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">OI Boodschappenlijst</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">OI Notitieblok</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">Start %s en selecteer menu &gt; Converteer CSV.</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">Converteer CSV</string>
+    <string name="convert_csv_notepad">Converteer CSV naar Notitieblok</string>
+    <string name="convert_csv_shoppinglist">Converteer CSV naar Boodschappenlijst</string>
+    <string name="convert_all_notes">Converteer alle notes</string>
+    <string name="convert_all_shoppinglists">Converteer alle boodschappenlijsten</string>
+    <string name="convert_list">Converteer lijst \'%s\'</string>
+    <string name="file_path">Bestandspad</string>
+    <string name="file_import">Importeer</string>
+    <string name="file_export">Exporteer</string>
+    <string name="error_writing_file">Fout bij schrijven naar bestand</string>
+    <string name="error_reading_file">Fout bij het lezen van het bestand</string>
+    <string name="wrong_csv_format">Verkeerd CSV formaat</string>
+    <string name="error_file_not_found">Bestand niet gevonden</string>
+    <string name="error_not_yet_implemented">Nog niet geïmplementeerd, kies een andere optie.</string>
+    <string name="import_finished">Importen is voltooid</string>
+    <string name="export_finished">Exporteren is voltooid</string>
+    <string name="filemanager_title_notepad">Selecteer notitieblok CSV bestand</string>
+    <string name="filemanager_title_shoppinglist">Selecteer het CSV bestand van de boodschappenlijst</string>
+	<string name="current_import_policy">Huidig importeer beleid:</string>
+	<string name="import_policy">Importeer beleid</string>
+	<string name="select_import_policy">Selecteer het te gebruiken importeer beleid</string>
+    
+    <string name="file_exists">Het bestand bestaat al. Wilt u het overschrijven?</string>
+    <string name="dont_ask_again">Niet opnieuw vragen. Altijd overschrijven!</string>
+    
+    <string name="warn_restore_policy_title">Importeer beleid is ingesteld op HERSTELLEN</string>
+    <string name="warn_restore_policy">Uw huidige importeer beleid is ingesteld op VERWIJDER ALLE HUIDIGE GEGEVENS en VERVANG ze met de gegevens van het CSV bestand. Weet u het zeker?</string>
+    
+    <string name="menu_settings">Instellingen</string>
+    <string name="csv_file_format">CSV bestandsformaat</string>
+    <string name="select_csv_file_format">Selecteer CSV bestandsformaat</string>
+    <string name="select_encoding">Kies een codering</string>
+    <string name="default_encoding">Standaard</string>
+    <string name="use_custom_encoding">Gebruik aangepaste codering (geavanceerde gebruikers)</string>
+    <string name="preferences_select_csv_file_format">Selecteer een CSV bestandsformaat</string>
+    <string name="preferences_select_import_policy">Selecteer het te gebruiken importeer beleid</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">Algemene instellingen</string>
+    <string name="preference_common_summary">Import/export instellingen welke van toepassing zijn op Notitieblok en Boodschappenlijst.</string>
+    <string name="preference_ask_if_file_exists">Vraag of het bestand bestaat</string>
+    <string name="preference_ask_if_file_exists_summary">Als dit is aangevinkt verschijnt er een dialoog om te bevestigen het te overschrijven als het exporteer bestand al bestaat.</string>
+    
+    <string name="preference_application_specific">Programmaspecifieke instellingen</string>
+    <string name="preference_filename">Bestandsnaam</string>
+    <string name="preference_filename_summary">Volledige pad voor bestand.</string>
+    
+    <string name="preference_notepad">OI Notitieblok</string>
+    <string name="preference_notepad_summary">Import/export instellingen voor OI Notitieblok</string>
+    
+    <string name="preference_shoppinglist">OI Boodschappenlijst</string>
+    <string name="preference_shoppinglist_summary">Import/export instellingen voor OI Boodschappenlijst.</string>
+    
+	<string name="converting">Bezig met converteren...</string>
+	<string name="dialog_ok">Oké</string>
+	<string name="preference_stores">Importeer winkels</string>
+	<string name="preference_stores_off_summary">HandyShopper-namen alleen importeren als tag</string>
+	<string name="preference_stores_on_summary">HandyShopper-winkels, prijzen per winkel en padinformatie importeren</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>MS Outlook Notities</item>
+        <item>Palm CSV</item>
+        <item>JPilot Memo</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>MS Outlook Taken</item>
+        <item>HandyShopper</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>DUPLICEREN - sta duplicaties van gegevens toe.</item>
+        <item>BEWAREN - Bestaande gegevens niet overschrijven</item>
+        <item>Overschrijf - Overschrijf bestaande gegevens.</item>
+        <item>Herstellen - VERWIJDER ALLES, dan importeren.</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>DUPLICEREN - Voeg een tweede kopie toe van een document als het al bestaat.</item>
+        <item>BEWAREN - Bestaande gegevens niet overschrijven, negeer de waarden in het CSV-bestand</item>
+        <item>Overschrijven - Een gegeven in het CSV bestand zal een bestaand gegeven OVERSCHRIJVEN.</item>
+        <item>Herstel reservekopie - VERWIJDER AL UW BESTAANDE GEGEVENS, importeer dan het CSV bestand.</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>DUPLICEREN - sta duplicaties van gegevens toe.</item>
+        <item>BEWAREN - Bestaande gegevens niet overschrijven</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>DUPLICEREN - Voeg een tweede kopie toe van een document als het al bestaat.</item>
+        <item>BEWAREN - Bestaande gegevens niet overschrijven, negeer de waarden in het CSV-bestand</item>
+    </string-array>
+    
+</resources>

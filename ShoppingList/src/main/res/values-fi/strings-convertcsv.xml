@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">OI Ostoslista</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">OI Muistio</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">Käynnistä %s ja valitse valikko &gt; Muunna CSV.</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">Muunna CSV</string>
+    <string name="convert_csv_notepad">Muunna CSV Muistioon</string>
+    <string name="convert_csv_shoppinglist">Muunna CSV Ostoslistaan</string>
+    <string name="convert_all_notes">Muunna kaikki muistiinpanot</string>
+    <string name="convert_all_shoppinglists">Muunna kaikki ostoslistat</string>
+    <string name="convert_list">Muunna lista \'%s\'</string>
+    <string name="file_path">Tiedostopolku</string>
+    <string name="file_import">Tuonti</string>
+    <string name="file_export">Vienti</string>
+    <string name="error_writing_file">Virhe kirjoitettaessa tiedostoon</string>
+    <string name="error_reading_file">Virhe luettaessa tiedostoa</string>
+    <string name="wrong_csv_format">Väärä CSV formaatissa</string>
+    <string name="error_file_not_found">Tiedostoa ei löydy</string>
+    <string name="error_not_yet_implemented">Ei vielä toteutetaan, valitkaa eri vaihtoehtoa.</string>
+    <string name="import_finished">Tuonti valmis</string>
+    <string name="export_finished">Vienti päättynyt</string>
+    <string name="filemanager_title_notepad">Valitse notepad CSV tiedosto</string>
+    <string name="filemanager_title_shoppinglist">Valitse ostoslista CSV tiedosto</string>
+	<string name="current_import_policy">Nykyinen Tuonti Politiikka:</string>
+	<string name="import_policy">Tuonti Politiikka</string>
+	<string name="select_import_policy">Valitse Tuo politiikka käyttää</string>
+    
+    <string name="file_exists">Tiedosto on olemassa. Haluatko ylikirjoittaa?</string>
+    <string name="dont_ask_again">Älä kysy uudestaan​​. Ylikirjoittaa aina!</string>
+    
+    <string name="warn_restore_policy_title">Tuonti politiikka asetus on RESTORE</string>
+    <string name="warn_restore_policy">Sinun nykyinen tuonti politiikka on asetettu   POISTA KAIKKI NYKYINEN ASIAKIRJAT 
+ja VAIHDA kanssa sisällön CSV-tiedoston. Oletko varma?</string>
+    
+    <string name="menu_settings">Asetuksia</string>
+    <string name="csv_file_format">CSV-tiedostomuoto</string>
+    <string name="select_csv_file_format">Valitse CSV-tiedostomuoto</string>
+    <string name="select_encoding">Valitse koodaus</string>
+    <string name="default_encoding">Oletusarvo</string>
+    <string name="use_custom_encoding">Käytä mukautettuja koodaus (kokeneet käyttäjät)</string>
+    <string name="preferences_select_csv_file_format">Valitse CSV-tiedostomuoto</string>
+    <string name="preferences_select_import_policy">Valitse Tuo politiikka käyttää</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">Yleiset asetukset</string>
+    <string name="preference_common_summary">Tuonti/Vienti asetuksia että sovelletaan Muistilehtiö ja Ostoslista.</string>
+    <string name="preference_ask_if_file_exists">Kysy jos tiedosto on olemassa</string>
+    <string name="preference_ask_if_file_exists_summary">Jos tarkastetaan dialogi näyttäisi vahvistavan korvaamasta jos vienti tiedosto on jo olemassa.</string>
+    
+    <string name="preference_application_specific">Sovelluksen tiettyjä asetuksia</string>
+    <string name="preference_filename">Tiedostonimi</string>
+    <string name="preference_filename_summary">Koko polku varten tiedostoon.</string>
+    
+    <string name="preference_notepad">OI Muistio</string>
+    <string name="preference_notepad_summary">Tuonti/vienti asetusten varten OI Notepad.</string>
+    
+    <string name="preference_shoppinglist">OI Ostoslista</string>
+    <string name="preference_shoppinglist_summary">Tuonti/vienti asetusten varten OI Ostoslista</string>
+    
+	<string name="converting">Konvertoivan ...</string>
+	<string name="dialog_ok">OK</string>
+	<string name="preference_stores">Tuonti myymälöissä</string>
+	<string name="preference_stores_off_summary">Tuonti HandyShopper tallentaa nimiä vain kuten tuote tageja.</string>
+	<string name="preference_stores_on_summary">Tuonti HandyShopper tallentaa ja per-myymälä hinta ja aisle tiedot.</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>MS Outlook Toteaa</item>
+        <item>Palm CSV</item>
+        <item>JPilot Memo</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>MS Outlook Tehtävät</item>
+        <item>HandyShopper</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>KAKSOISKAPPALE- Mahdollistaa kaksoiskappaleet kirjaa.</item>
+        <item>PITÄÄ - Älä korvaa olemassa olevia tallenteita.</item>
+        <item>Korvaa - Korvataanko aiemmat ennätykset.</item>
+        <item>Palautus - POISTA KAIKKI, sitten tuoda.</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>KAKSOISKAPPALE - Lisää toinen kopio ennätys, jos se on jo olemassa.</item>
+        <item>PITÄÄ - Älä korvaa olemassa olevan ennätyksen, sivuuttaa jokin CSV-tiedoston</item>
+        <item>Päällekirjoitus - Ennätys vuonna CSV tulevat KORVATAANKO nykyinen ennätys.</item>
+        <item>Palauta Kopiosta - POISTA KAIKKI SINUN OLEMASSA LEVYT, sitten tuoda CSV-tiedoston.</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>KAKSOISKAPPALE- Mahdollistaa kaksoiskappaleet kirjaa.</item>
+        <item>PITÄÄ - Älä korvaa olemassa olevia tallenteita.</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>KAKSOISKAPPALE - Lisää toinen kopio ennätys, jos se on jo olemassa.</item>
+        <item>PITÄÄ - Älä korvaa olemassa olevan ennätyksen, sivuuttaa jokin CSV-tiedoston</item>
+    </string-array>
+    
+</resources>

@@ -9,7 +9,7 @@ import org.openintents.shopping.ui.widget.ShoppingItemsView;
 
 /**
  * This is the default implementation for all product flavors for any implementation
- *
+ * <p>
  * If the signature is changed make sure that the corresponding implementations are changed
  * because Android Studio does only show usage for the current build flavor.
  */

@@ -20,14 +20,14 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.util.List;
-
 import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract.Stores;
 import org.openintents.shopping.library.util.ShoppingUtils;
 import org.openintents.shopping.ui.dialog.DialogActionListener;
 import org.openintents.shopping.ui.dialog.RenameListDialog;
 import org.openintents.shopping.ui.widget.StoreListView;
+
+import java.util.List;
 
 /**
  * UI for showing and editing stores for a specific item
@@ -36,45 +36,15 @@ import org.openintents.shopping.ui.widget.StoreListView;
  */
 public class ItemStoresActivity extends Activity {
 
-    private static final int DIALOG_NEW_STORE = 1;
-    private static final int DIALOG_RENAME_STORE = 2;
-
     public static final int MENU_RENAME_STORE = Menu.FIRST;
     public static final int MENU_DELETE_STORE = Menu.FIRST + 1;
-
+    private static final int DIALOG_NEW_STORE = 1;
+    private static final int DIALOG_RENAME_STORE = 2;
     private long mListId;
     private long mItemId;
     private StoreListView mItemStores;
 
     private int mSelectedStorePosition;
-
-    public class NewStoreDialog extends RenameListDialog {
-
-        public NewStoreDialog(Context context) {
-            super(context);
-
-            setTitle(R.string.ask_new_store);
-            mEditText.setHint("");
-        }
-
-        public NewStoreDialog(Context context, DialogActionListener listener) {
-            super(context);
-
-            setTitle(R.string.ask_new_store);
-            mEditText.setHint("");
-            setDialogActionListener(listener);
-        }
-
-        public NewStoreDialog(Context context, String name,
-                              DialogActionListener listener) {
-            super(context);
-
-            setTitle(R.string.ask_new_store);
-            mEditText.setHint("");
-            setName(name);
-            setDialogActionListener(listener);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -249,9 +219,6 @@ public class ItemStoresActivity extends Activity {
         mItemStores.requery();
     }
 
-    // TODO: Convert into proper dialog that remains across screen orientation
-    // changes.
-
     /**
      * Confirm 'delete list' command by AlertDialog.
      */
@@ -276,9 +243,12 @@ public class ItemStoresActivity extends Activity {
                             }
                         }
                 )
-                        // .create()
+                // .create()
                 .show();
     }
+
+    // TODO: Convert into proper dialog that remains across screen orientation
+    // changes.
 
     /**
      * Deletes currently selected store.
@@ -288,6 +258,34 @@ public class ItemStoresActivity extends Activity {
         ShoppingUtils.deleteStore(this, storeId);
 
         mItemStores.requery();
+    }
+
+    public class NewStoreDialog extends RenameListDialog {
+
+        public NewStoreDialog(Context context) {
+            super(context);
+
+            setTitle(R.string.ask_new_store);
+            mEditText.setHint("");
+        }
+
+        public NewStoreDialog(Context context, DialogActionListener listener) {
+            super(context);
+
+            setTitle(R.string.ask_new_store);
+            mEditText.setHint("");
+            setDialogActionListener(listener);
+        }
+
+        public NewStoreDialog(Context context, String name,
+                              DialogActionListener listener) {
+            super(context);
+
+            setTitle(R.string.ask_new_store);
+            mEditText.setHint("");
+            setName(name);
+            setDialogActionListener(listener);
+        }
     }
 
 }

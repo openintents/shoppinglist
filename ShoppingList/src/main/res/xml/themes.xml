@@ -15,24 +15,24 @@
  -->
 
 <themes xmlns:oi="http://schemas.openintents.org/android/themes">
-  <attributeset oi:name="org.openintents.shoppinglist">
-    <theme
-      oi:title="@string/theme_default"
-      oi:style="@style/Theme.ShoppingList" />
-    <theme
-      oi:title="@string/theme_classic"
-      oi:style="@style/Theme.ShoppingList.Classic" />
-    <theme
-      oi:title="@string/theme_bugdroid"
-      oi:style="@style/Theme.ShoppingList.Android" />
-  </attributeset>
-  <!-- As an extra, export some themes for OI Notepad. -->
-  <attributeset oi:name="org.openintents.notepad">
-    <theme
-      oi:title="@string/theme_classic_export"
-      oi:style="@style/Theme.Notepad.Classic" />
-    <theme
-      oi:title="@string/theme_bugdroid_export"
-      oi:style="@style/Theme.Notepad.Android" />
-  </attributeset>
+    <attributeset oi:name="org.openintents.shoppinglist">
+        <theme
+            oi:style="@style/Theme.ShoppingList"
+            oi:title="@string/theme_default" />
+        <theme
+            oi:style="@style/Theme.ShoppingList.Classic"
+            oi:title="@string/theme_classic" />
+        <theme
+            oi:style="@style/Theme.ShoppingList.Android"
+            oi:title="@string/theme_bugdroid" />
+    </attributeset>
+    <!-- As an extra, export some themes for OI Notepad. -->
+    <attributeset oi:name="org.openintents.notepad">
+        <theme
+            oi:style="@style/Theme.Notepad.Classic"
+            oi:title="@string/theme_classic_export" />
+        <theme
+            oi:style="@style/Theme.Notepad.Android"
+            oi:title="@string/theme_bugdroid_export" />
+    </attributeset>
 </themes>

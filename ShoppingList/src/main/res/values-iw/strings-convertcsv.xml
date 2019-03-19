@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">רשימת קנייה OI</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">פנקס OI</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">פתח %s ובחר תפריט &gt; המר CSV.</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">המר CSV</string>
+    <string name="convert_csv_notepad">המר CSV לפנקס רשימות</string>
+    <string name="convert_csv_shoppinglist">המר CSV לרשימת קניות</string>
+    <string name="convert_all_notes">המר את כל הפתקים</string>
+    <string name="convert_all_shoppinglists">המר את כל רשימות הקניות</string>
+    <string name="convert_list">המר רשימת \'%s\'</string>
+    <string name="file_path">נתיב קובץ</string>
+    <string name="file_import">ייבוא</string>
+    <string name="file_export">ייצוא</string>
+    <string name="error_writing_file">אירעה שגיאה בכתיבה לקובץ</string>
+    <string name="error_reading_file">שגיאה בקריאה מן הקובץ</string>
+    <string name="wrong_csv_format">פרומט CSV שגוי</string>
+    <string name="error_file_not_found">קובץ לא נמצא</string>
+    <string name="error_not_yet_implemented">לא יושם עדיין, אנא בחר אפשרות אחרת.</string>
+    <string name="import_finished">ייבוא הושלם</string>
+    <string name="export_finished">ייצואהושלם</string>
+    <string name="filemanager_title_notepad">בחר פנקס רשימות מסוג קובץ CSV</string>
+    <string name="filemanager_title_shoppinglist">בחר רשימת קניות מסוג קובץ CSV</string>
+	<string name="current_import_policy">מדיניות ייבוא נוכחית:</string>
+	<string name="import_policy">מדיניות ייבוא</string>
+	<string name="select_import_policy">בחר את מדיניות הייבוא לשימוש</string>
+    
+    <string name="file_exists">הקובץ קיים. האם אתה רוצה להחליפו?</string>
+    <string name="dont_ask_again">אל תשאל שוב. תמיד החלף!</string>
+    
+    <string name="warn_restore_policy_title">מדיניות ייבוא נקבעה לשחזור</string>
+    <string name="warn_restore_policy">מדיניות הייבוא הנוכחית שלך נקבעה למחיקת כל הרשומות הנוכחיות ולהחליף אותם עם התוכן של קובץ ה-CSV. האם אתה בטוח?</string>
+    
+    <string name="menu_settings">הגדרות</string>
+    <string name="csv_file_format">פורמט קובץ CSV</string>
+    <string name="select_csv_file_format">בחר פרומט קובץ CSV</string>
+    <string name="select_encoding">בחירת קידוד</string>
+    <string name="default_encoding">בררת מחדל</string>
+    <string name="use_custom_encoding">השתמש בקידוד מותאם אישית ( משתמשים מתקדמים)</string>
+    <string name="preferences_select_csv_file_format">בחר פורמט קובץ CSV</string>
+    <string name="preferences_select_import_policy">בחר את מדיניות הייבוא לשימוש</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">הגדרות נפוצות</string>
+    <string name="preference_common_summary">ייבא/ יצא הגדרות שמתאימות לפנקס רשימות ולרשימת קניות.</string>
+    <string name="preference_ask_if_file_exists">שאל אם הקובץ קיים</string>
+    <string name="preference_ask_if_file_exists_summary">אם סומן, דיאלוג מופיע כדי לאשר כתיבה מחדש אם קובץ הייצוא כבר קיים.</string>
+    
+    <string name="preference_application_specific">הגדרות יישום מיוחדות</string>
+    <string name="preference_filename">שם הקובץ</string>
+    <string name="preference_filename_summary">נתיב מלא לקובץ.</string>
+    
+    <string name="preference_notepad">פנקס OI</string>
+    <string name="preference_notepad_summary">הגדרות ייבוא/ייצוא לפנקס רשימות OI.</string>
+    
+    <string name="preference_shoppinglist">רשימת קניות OI</string>
+    <string name="preference_shoppinglist_summary">הגדרות ייבוא/ייצוא לרשימת קניות OI</string>
+    
+	<string name="converting">ממיר...</string>
+	<string name="dialog_ok">OK</string>
+	<string name="preference_stores">ייבא חנויות</string>
+	<string name="preference_stores_off_summary">יבא שמות חנות HandyShopper רק כתגיות פריט</string>
+	<string name="preference_stores_on_summary">ייבוא חנויות HandyShopper  ומחיר לפני חנות ומידע מעבר.</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>פתקי השקפה של MS</item>
+        <item>כף היד CSV</item>
+        <item>תזכיר JPilot</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>משימות השקפה של MS</item>
+        <item>קונה שימושי</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>כפול - הרשה כפילויות לרשומות.</item>
+        <item>KEEP - Don\'t overwrite existing records.</item>
+        <item>כתיבה מחדש - כתוב מחדש רשומות קיימות.</item>
+        <item>שחזר - מחק הכל, ואז ייבא.</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>כפולות - הוסף עותק נוסף של רשומה אם הוא כבר קיים.</item>
+        <item>KEEP - Don\'t overwrite an existing record, ignore the one in the CSV file.</item>
+        <item>כתיבה מחדש - רשומה בתוך CSV תכתוב מחדש רשומה קיימת</item>
+        <item>שחזור גיבוי - מחק את כל הרשומות הקיימות שלך, ואז ייבא את קובץ ה-CSV</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>כפול - הרשה כפילויות לרשומות.</item>
+        <item>KEEP - Don\'t overwrite existing records.</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>כפולות - הוסף עותק נוסף של רשומה אם הוא כבר קיים.</item>
+        <item>KEEP - Don\'t overwrite an existing record, ignore the one in the CSV file.</item>
+    </string-array>
+    
+</resources>

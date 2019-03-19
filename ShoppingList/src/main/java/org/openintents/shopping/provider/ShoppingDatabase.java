@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2007-2011 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,6 +30,7 @@ import org.openintents.shopping.library.provider.ShoppingContract.Lists;
 
 public class ShoppingDatabase extends SQLiteOpenHelper {
 
+    public static final String DATABASE_NAME = "shopping.db";
     /**
      * Version of database.
      * <p/>
@@ -41,8 +42,6 @@ public class ShoppingDatabase extends SQLiteOpenHelper {
      * 11: Release 1.4.0-beta
      */
     private static final int DATABASE_VERSION = 13;
-
-    public static final String DATABASE_NAME = "shopping.db";
 
     ShoppingDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

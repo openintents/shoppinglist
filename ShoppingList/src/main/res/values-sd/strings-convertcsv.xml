@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">OI खरीदारी सूची</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">OI नोटपैड</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">%s लॉन्च कयो अऊँ  </string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">CSV परिवर्तित कयो</string>
+    <string name="convert_csv_notepad">CSV खे नोटपैड में परिवर्तित कयो</string>
+    <string name="convert_csv_shoppinglist">CSV खे खरीदारी सूचीमें परिवर्तित कयो</string>
+    <string name="convert_all_notes">सद्यूं नोट्स परिवर्तित कयो</string>
+    <string name="convert_all_shoppinglists">सभी खरीदारी सूचियन खे परिवर्तित कयो</string>
+    <string name="convert_list">s\' सूची खे  परिवर्तित कयो%\'</string>
+    <string name="file_path">फ़ाइल जो  पथ</string>
+    <string name="file_import">आयात</string>
+    <string name="file_export">निर्यात</string>
+    <string name="error_writing_file">फाइल लिखण में त्रुटि</string>
+    <string name="error_reading_file">फ़ाइल पढ़न में त्रुटि</string>
+    <string name="wrong_csv_format">गलत CSV स्वरूप</string>
+    <string name="error_file_not_found">फाईल न मिली</string>
+    <string name="error_not_yet_implemented">हिम्म्ल ताणी लागू न कयो आ , कृपया कोई ब्यो विकल्प चुन्द्यो  |</string>
+    <string name="import_finished">आयात समाप्त</string>
+    <string name="export_finished">निर्यात समाप्त</string>
+    <string name="filemanager_title_notepad">नोटपैड CSV फ़ाइल चुन्द्यो</string>
+    <string name="filemanager_title_shoppinglist">खरीदारी सूची CSV फ़ाइल चुन्द्यो</string>
+	<string name="current_import_policy">वर्तमान आयात नीति:</string>
+	<string name="import_policy">आयात नीति</string>
+	<string name="select_import_policy">आयात नीति जो उपयोग करण लाये उनखे चुन्द्यो</string>
+    
+    <string name="file_exists">\?फ़ाइल मौजूद आहे|शा तहां अधिलेखित करण चाह्यो ता</string>
+    <string name="dont_ask_again">!पुन न पूछ्यो. हमेशा अधिलेखित कयो</string>
+    
+    <string name="warn_restore_policy_title">आयत निति पुनर्स्थापित करण लाये निधारित थी वई आ</string>
+    <string name="warn_restore_policy">तहंजी वर्तमान आयत निति निर्धारित तव,\" सभी मौजूदा रिकॉर्ड मिटायो अऊँ उनंखे CSV फ़ाइल जी  सामग्री सां गड्ड बदले षड्योस \" पर| शा तहान्खे यकीन अथव?</string>
+    
+    <string name="menu_settings">सेटिंग्स</string>
+    <string name="csv_file_format">CSV फ़ाइल स्वरूप</string>
+    <string name="select_csv_file_format">CSV फ़ाइल स्वरूप चुन्द्यो</string>
+    <string name="select_encoding">एन्कोडिंग चुन्द्यो</string>
+    <string name="default_encoding">डिफ़ॉल्ट</string>
+    <string name="use_custom_encoding">कस्टम एन्कोडिंग जो प्रयोग कयो  (उन्नत उपयोगकर्ताओं)</string>
+    <string name="preferences_select_csv_file_format">हिक्क CSV फ़ाइल स्वरूप चुन्द्यो</string>
+    <string name="preferences_select_import_policy">आयात नीति जो उपयोग करण लाये उनखे चुन्द्यो</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">सामान्य सेटिंग्स</string>
+    <string name="preference_common_summary">उन सेटिंग्स खे आयात / निर्यात कयो जो नोटपैड अऊँ खरीदारी सूची जे लाये लागू आ</string>
+    <string name="preference_ask_if_file_exists">पूछ्यो अगर फाईल मौजूद आहे त</string>
+    <string name="preference_ask_if_file_exists_summary">अगर जाँच कयऊँ त हिक्क संवाद प्रकट थीन्दो आ अधिलेखन जी पुष्टि करण लाये अगर निर्यात फ़ाइल पहरों सन ही मौजूद आहे त</string>
+    
+    <string name="preference_application_specific">अनुप्रयोग विशिष्ट सेटिंग्स</string>
+    <string name="preference_filename">फ़ाइलनाम</string>
+    <string name="preference_filename_summary">फ़ाइल जे लाये  पूर्ण पथ</string>
+    
+    <string name="preference_notepad">OI नोटपैड</string>
+    <string name="preference_notepad_summary">OI नोटपैड जे लाये सेटिंग्स आयात/निर्यात कयो</string>
+    
+    <string name="preference_shoppinglist">OI खरीदारी सूची</string>
+    <string name="preference_shoppinglist_summary">OI खरीदारी सूची  जे लाये सेटिंग्स आयात/निर्यात कयो</string>
+    
+	<string name="converting">परिवर्तन थे तो...</string>
+	<string name="dialog_ok">OK</string>
+	<string name="preference_stores">स्टोर आयात कयो</string>
+	<string name="preference_stores_off_summary">आइटम टैग जे रूप में ही HandyShopper जो स्टोर नाम आयात कयो</string>
+	<string name="preference_stores_on_summary">HandyShopper स्टोर अऊँ प्रति स्टोर जे मूल्य अऊँ गलियारे जी जानकारी आयत कयो</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>MS Outlook नोट्स</item>
+        <item>CSV हथेली</item>
+        <item>JPilot मेमो</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>MS Outlook कार्य</item>
+        <item>HandyShopper</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>डुप्लीकेट - रिकॉर्ड खे डुप्लिकेट करण जी अनुमति दीन्दो आ</item>
+        <item>राख्यो - मौजूदा रेकोर्दन खे अधिलेखित न कयो</item>
+        <item>अधिलेखित - मौजूदा रिकॉर्ड अधिलेखित कंदों आ</item>
+        <item>रेस्टोर - सब मिटायो, पो  आयात कयो</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>डुप्लीकेट - हिक्क रिकॉर्ड जी  खे कॉपी कंदों आ अगर ऊओ पहरों  खान ही मौजूद हून्दो आ |</item>
+        <item>राख्यो - मौजूदा रेकोर्दन खे अधिलेखित न कयो,CSV फाईल खे अन्देखो कयोस</item>
+        <item>अधिलेखित - CSV में हिक्क मौजूदा रिकॉर्ड खे अधिलेखित करे शादंड़ो</item>
+        <item>बैकअप रेस्टोर कयो - पेंजे मौजूदा सादे रिकॉर्डन खे मिटायो, पो CSV फ़ाइल आयात कयो</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>डुप्लीकेट - रिकॉर्ड खे डुप्लिकेट करण जी अनुमति दीन्दो आ</item>
+        <item>राख्यो - मौजूदा रेकोर्दन खे अधिलेखित न कयो</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>डुप्लीकेट - हिक्क रिकॉर्ड जी  खे कॉपी कंदों आ अगर ऊओ पहरों  खान ही मौजूद हून्दो आ |</item>
+        <item>राख्यो - मौजूदा रेकोर्दन खे अधिलेखित न कयो,CSV फाईल खे अन्देखो कयोस</item>
+    </string-array>
+    
+</resources>

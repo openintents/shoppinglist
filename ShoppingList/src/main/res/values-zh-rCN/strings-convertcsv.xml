@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">OI购物清单</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">OI记事本</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">启动 %s，并选择菜单-&gt;转换 CSV.</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">转换 CSV</string>
+    <string name="convert_csv_notepad">I转换 CSV到记事本</string>
+    <string name="convert_csv_shoppinglist">I转换 CSV到购物列表</string>
+    <string name="convert_all_notes">I转换所有的便签</string>
+    <string name="convert_all_shoppinglists">I转换所有的购物清单</string>
+    <string name="convert_list">转换列表 \'%s\'</string>
+    <string name="file_path">文件路径</string>
+    <string name="file_import">导入</string>
+    <string name="file_export">导出</string>
+    <string name="error_writing_file">写入文件出错</string>
+    <string name="error_reading_file">读文件时出错</string>
+    <string name="wrong_csv_format">错误的CSV格式</string>
+    <string name="error_file_not_found">未找到文件</string>
+    <string name="error_not_yet_implemented">不可用，请选择不同的选项。</string>
+    <string name="import_finished">导入已完成</string>
+    <string name="export_finished">导出已完成</string>
+    <string name="filemanager_title_notepad">选择记事本CSV文件</string>
+    <string name="filemanager_title_shoppinglist">选择购物清单CSV文件</string>
+	<string name="current_import_policy">当前导入政策</string>
+	<string name="import_policy">导入政策</string>
+	<string name="select_import_policy">选择导入政策</string>
+    
+    <string name="file_exists">文件存在，要覆盖？</string>
+    <string name="dont_ask_again">不再询问，全部覆盖！</string>
+    
+    <string name="warn_restore_policy_title">重置导入政策</string>
+    <string name="warn_restore_policy">当前导入政策已删除，用CSV文件替换内容，确定？</string>
+    
+    <string name="menu_settings">设置</string>
+    <string name="csv_file_format">CSV文件格式</string>
+    <string name="select_csv_file_format">选择CSV文件格式</string>
+    <string name="select_encoding">选择编码</string>
+    <string name="default_encoding">默认</string>
+    <string name="use_custom_encoding">使用自定义编码（高级用户）</string>
+    <string name="preferences_select_csv_file_format">选择CSV文件格式</string>
+    <string name="preferences_select_import_policy">选择导入政策</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">通用设置</string>
+    <string name="preference_common_summary">导入/导出适用于记事本和购物清单的设置。</string>
+    <string name="preference_ask_if_file_exists">如果文件已存在，请提示</string>
+    <string name="preference_ask_if_file_exists_summary">如果文件已存在，对话框提示确认覆盖。</string>
+    
+    <string name="preference_application_specific">应用程序描述设置</string>
+    <string name="preference_filename">文件名</string>
+    <string name="preference_filename_summary">文件的完整路径。</string>
+    
+    <string name="preference_notepad">OI记事本</string>
+    <string name="preference_notepad_summary">OI记事本导入/导出设置。</string>
+    
+    <string name="preference_shoppinglist">OI 购物清单</string>
+    <string name="preference_shoppinglist_summary">OI购物清单导入/导出设置。</string>
+    
+	<string name="converting">正在转换...</string>
+	<string name="dialog_ok">確定</string>
+	<string name="preference_stores">导入商店</string>
+	<string name="preference_stores_off_summary">导入HandyShopper名字存为标签。</string>
+	<string name="preference_stores_on_summary">导入HandyShopper，每一家店的价格，和渠道信息。</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>MS Outlook便签</item>
+        <item>掌上CSV</item>
+        <item>J-Pilot 备忘录</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>MS Outlook任务</item>
+        <item>HandyShopper</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>复制 - 允许重复记录。</item>
+        <item>保持 - 不要覆盖现有记录。</item>
+        <item>覆盖 - 覆盖现有记录。</item>
+        <item>还原 - 全部删除，然后导入。</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>副本 - 如果一条记录已经存在，则添加一条它的副本。</item>
+        <item>保持 - 不要覆盖现有记录，忽略CSV文件中的记录。</item>
+        <item>覆盖 - 用CSV的记录将覆盖现有的记录。</item>
+        <item>恢复备份 - 删除所有现有的记录，然后导入CSV文件。</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>复制 - 允许重复记录。</item>
+        <item>保持 - 不要覆盖现有记录。</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>副本 - 如果一条记录已经存在，则添加一条它的副本。</item>
+        <item>保持 - 不要覆盖现有记录，忽略CSV文件中的记录。</item>
+    </string-array>
+    
+</resources>

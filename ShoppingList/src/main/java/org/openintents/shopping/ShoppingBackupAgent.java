@@ -1,14 +1,18 @@
 package org.openintents.shopping;
 
 import android.annotation.TargetApi;
-import android.app.backup.*;
+import android.app.backup.BackupAgentHelper;
+import android.app.backup.BackupDataInput;
+import android.app.backup.BackupDataOutput;
+import android.app.backup.FileBackupHelper;
+import android.app.backup.SharedPreferencesBackupHelper;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 
-import java.io.IOException;
-
 import org.openintents.shopping.provider.ShoppingDatabase;
+
+import java.io.IOException;
 
 @TargetApi(Build.VERSION_CODES.FROYO)
 public class ShoppingBackupAgent extends BackupAgentHelper {

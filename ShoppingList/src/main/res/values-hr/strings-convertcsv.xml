@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">OI Lista za kupovinu</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">OI Blokčić</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">Pokrjeni %s i odaberi meni &gt; CSV Konverter.</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">Konvertuj CSV</string>
+    <string name="convert_csv_notepad">Konvertuj CSV u Blokče</string>
+    <string name="convert_csv_shoppinglist">Konvertuj CSV u Listu za kupovinu</string>
+    <string name="convert_all_notes">Konvertiraj sve bilješke</string>
+    <string name="convert_all_shoppinglists">Konvertuj sve liste za kupovinu</string>
+    <string name="convert_list">Konvertuj listu \'%s\'</string>
+    <string name="file_path">Putanja datoteke</string>
+    <string name="file_import">Uvedi</string>
+    <string name="file_export">Izvoz</string>
+    <string name="error_writing_file">Greška pri pisanju datoteke</string>
+    <string name="error_reading_file">Greška pri čitanju datoteke</string>
+    <string name="wrong_csv_format">Pogrješan CSV format</string>
+    <string name="error_file_not_found">Datoteka nije pronađena</string>
+    <string name="error_not_yet_implemented">Nije još podržana, molimo odaberite drugu opciju.</string>
+    <string name="import_finished">Uvoz završen</string>
+    <string name="export_finished">Izvoz završen</string>
+    <string name="filemanager_title_notepad">Odaberi blokče CSV datoteku</string>
+    <string name="filemanager_title_shoppinglist">Odaberi listu za kupovinu CSV datoteku</string>
+	<string name="current_import_policy">Trenutna Polisa Uvoza:</string>
+	<string name="import_policy">Polisa Uvoza</string>
+	<string name="select_import_policy">Odaberi polisu uvoza za korišćenje</string>
+    
+    <string name="file_exists">Datoteka postoji. Želite li pisati preko nje?</string>
+    <string name="dont_ask_again">Ne pitaj ponovo. Uvek piši preko nje!</string>
+    
+    <string name="warn_restore_policy_title">Polisa za uvoz je postavljena za VRAĆANJE</string>
+    <string name="warn_restore_policy">Tvoja trenutna uvozna polisa je OBRIŠI SVE TRENUTNE ZAPISE i ZAMENI IH sa sadržajem  CSV fajla. Da li si siguran?</string>
+    
+    <string name="menu_settings">Podešavanja</string>
+    <string name="csv_file_format">CSV datoteke</string>
+    <string name="select_csv_file_format">Odaberi CSV datoteku</string>
+    <string name="select_encoding">Odaberi šifrovanje</string>
+    <string name="default_encoding">Uobičajeni</string>
+    <string name="use_custom_encoding">Koristi svoj encoding (za napredne korisnike)</string>
+    <string name="preferences_select_csv_file_format">Odaberi CSV datoteke</string>
+    <string name="preferences_select_import_policy">Odaberi polisu uvoza za korišćenje</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">Uobičajna podešavanja</string>
+    <string name="preference_common_summary">Uvedi/izvedi podešavanja koja važe za Blokče i Listu za kupovinu.</string>
+    <string name="preference_ask_if_file_exists">Pitaj da li datoteka postoji</string>
+    <string name="preference_ask_if_file_exists_summary">Ako odabrani dijalog pokazuje potvrdjeno ispisivanje preko fajlova ako izvoz već postoji.</string>
+    
+    <string name="preference_application_specific">Specificna podešavanja za aplikacije</string>
+    <string name="preference_filename">Naziv datoteke</string>
+    <string name="preference_filename_summary">Pun put datoteke.</string>
+    
+    <string name="preference_notepad">OI Blokčić</string>
+    <string name="preference_notepad_summary">Uvoz/izvoz podešavanja za OI Blokče.</string>
+    
+    <string name="preference_shoppinglist">OI Lista za kupovinu</string>
+    <string name="preference_shoppinglist_summary">Uvoz/izvoz podešavanja za OI Listu za kupovinu</string>
+    
+	<string name="converting">Konvertiranje....</string>
+	<string name="dialog_ok">OK</string>
+	<string name="preference_stores">Uvezi prodavnice</string>
+	<string name="preference_stores_off_summary">Izvezi HandyShopper imena prodavnica samo kao tagovi predmjeta.</string>
+	<string name="preference_stores_on_summary">Uvezi HandyShopper prodavnice i cene i informacije po prodavnici.</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>MSOutlook bilješke</item>
+        <item>Šaka CSV</item>
+        <item>JPilot Pamtač</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>MS Outlook Zadaće</item>
+        <item>HandyShopper</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>DUPLIKAT - Dozvoljava dupliranje unosa.</item>
+        <item>SAČUVAJ \' Nemoj pisati preko postojećih unosa.</item>
+        <item>Piši preko - Piši preko postojećih unosa.</item>
+        <item>Povrati - OBRIŠI SVE, onda uvezi.</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>DUPLIKAT - Dodaj drugu kopiju upisa ako već postoji.</item>
+        <item>ZADRŽI - Nemoj pisati preko postojećeg upisa, ignoriši upis u CSV datoteci.</item>
+        <item>Piši preko - Upis u CSV će PISATI PREKO postojećeg upisa.</item>
+        <item>Povrati Backup - OBRIŠI SVE TVOJE POSTOJEĆE UPISE, onda uvezi CSV datoteku.</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>DUPLIKAT - Dozvoljava dupliranje unosa.</item>
+        <item>SAČUVAJ \' Nemoj pisati preko postojećih unosa.</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>DUPLIKAT - Dodaj drugu kopiju upisa ako već postoji.</item>
+        <item>ZADRŽI - Nemoj pisati preko postojećeg upisa, ignoriši upis u CSV datoteci.</item>
+    </string-array>
+    
+</resources>

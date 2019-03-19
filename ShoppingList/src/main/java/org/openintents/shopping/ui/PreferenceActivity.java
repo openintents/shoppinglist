@@ -1,6 +1,5 @@
 package org.openintents.shopping.ui;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,8 +10,12 @@ import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.*;
+import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 import android.text.InputType;
 import android.text.method.KeyListener;
 import android.text.method.TextKeyListener;
@@ -27,35 +30,16 @@ import org.openintents.util.IntentUtils;
 
 public class PreferenceActivity extends android.preference.PreferenceActivity
         implements OnSharedPreferenceChangeListener {
-    private static boolean mBackupManagerAvailable;
-    public static int updateCount;
-
-    static {
-        try {
-            BackupManagerWrapper.checkAvailable();
-            mBackupManagerAvailable = true;
-        } catch (Throwable e) {
-            mBackupManagerAvailable = false;
-        }
-    }
-
-    private static final String TAG = "PreferenceActivity";
-
     public static final String PREFS_SAMESORTFORPICK = "samesortforpick";
     public static final boolean PREFS_SAMESORTFORPICK_DEFAULT = false;
-
     public static final String PREFS_SORTORDER = "sortorder";
     public static final String PREFS_PICKITEMS_SORTORDER = "sortorderForPickItems";
-
     public static final String PREFS_SORTORDER_DEFAULT = "3";
     public static final String PREFS_PICKITEMS_SORTORDER_DEFAULT = "1";
-
     public static final String PREFS_SORTORDER_SHOPPINGLISTS = "sortorderForShoppingLists";
     public static final String PREFS_SORTORDER_SHOPPINGLISTS_DEFAULT = "0";
-
     public static final String PREFS_FONTSIZE = "fontsize";
     public static final String PREFS_FONTSIZE_DEFAULT = "2";
-
     public static final String PREFS_ORIENTATION = "orientation";
     public static final String PREFS_ORIENTATION_DEFAULT = "-1";
     @Deprecated
@@ -111,13 +95,10 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
     public static final String PREFS_HOLO_SEARCH = "holosearch";
     public static final boolean PREFS_HOLO_SEARCH_DEFAULT = true;
     public static final String PREFS_SHOW_LAYOUT_CHOICE = "show_layout_choice";
-
     public static final String PREFS_RESET_ALL_SETTINGS = "reset_all_settings";
-
     public static final int PREFS_CAPITALIZATION_DEFAULT = 1;
-
     public static final String EXTRA_SHOW_GET_ADD_ONS = "show_get_add_ons";
-
+    private static final String TAG = "PreferenceActivity";
     private static final TextKeyListener.Capitalize[] smCapitalizationSettings = {
             TextKeyListener.Capitalize.NONE,
             TextKeyListener.Capitalize.SENTENCES,
@@ -126,216 +107,22 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
             InputType.TYPE_CLASS_TEXT,
             InputType.TYPE_TEXT_FLAG_CAP_SENTENCES,
             InputType.TYPE_TEXT_FLAG_CAP_WORDS};
+    public static int updateCount;
+    private static boolean mBackupManagerAvailable;
+    private static boolean mFilterCompletionChanged;
+
+    static {
+        try {
+            BackupManagerWrapper.checkAvailable();
+            mBackupManagerAvailable = true;
+        } catch (Throwable e) {
+            mBackupManagerAvailable = false;
+        }
+    }
 
     private ListPreference mPrioSubtotal;
     private CheckBoxPreference mIncludesChecked;
     private ListPreference mPickItemsSort;
-
-    private static boolean mFilterCompletionChanged;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // Load the preferences from an XML resource
-        addPreferencesFromResource(R.xml.preferences);
-
-        // Set enabled state of Market preference
-        PreferenceScreen sp = (PreferenceScreen) findPreference(PREFS_MARKET_EXTENSIONS);
-        sp.setEnabled(isMarketAvailable());
-        sp = (PreferenceScreen) findPreference(PREFS_MARKET_THEMES);
-        sp.setEnabled(isMarketAvailable());
-
-        mPrioSubtotal = (ListPreference) findPreference(PREFS_PRIOSUBTOTAL);
-        mPickItemsSort = (ListPreference) findPreference(PREFS_PICKITEMS_SORTORDER);
-
-        mIncludesChecked = (CheckBoxPreference) findPreference(PREFS_PRIOSUBINCLCHECKED);
-
-        Preference layoutChoicePreference = findPreference("layout_choice");
-        layoutChoicePreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                startActivity(new Intent(PreferenceActivity.this, LayoutChoiceActivity.class));
-                return true;
-            }
-        });
-        SharedPreferences shared = getPreferenceScreen().getSharedPreferences();
-        updatePrioSubtotalSummary(shared);
-        updatePickItemsSortPref(shared);
-        resetAllSettings(shared);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (getIntent() != null && getIntent().hasExtra(EXTRA_SHOW_GET_ADD_ONS)) {
-            // Open License section directly:
-            PreferenceScreen licensePrefScreen = (PreferenceScreen) getPreferenceScreen()
-                    .findPreference(PREFS_SCREEN_ADDONS);
-            setPreferenceScreen(licensePrefScreen);
-        }
-        getPreferenceScreen().getSharedPreferences()
-                .registerOnSharedPreferenceChangeListener(this);
-        mFilterCompletionChanged = false;
-    }
-
-    @Override
-    protected void onPause() {
-        if (mBackupManagerAvailable) {
-            new BackupManagerWrapper(this).dataChanged();
-        }
-        getPreferenceScreen().getSharedPreferences()
-                .unregisterOnSharedPreferenceChangeListener(this);
-        super.onPause();
-    }
-
-    public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-        updateCount++;
-        if (key.equals(PREFS_PRIOSUBTOTAL)) {
-            updatePrioSubtotalSummary(prefs);
-        }
-        if (key.equals(PREFS_SAMESORTFORPICK)) {
-            updatePickItemsSortPref(prefs);
-        }
-        if (key.equals(PREFS_CURRENT_LIST_COMPLETE)) {
-            mFilterCompletionChanged = true;
-        }
-    }
-
-    private void resetAllSettings(final SharedPreferences prefs) {
-        Preference resetAllSettings = findPreference(PREFS_RESET_ALL_SETTINGS);
-        resetAllSettings
-                .setOnPreferenceClickListener(new OnPreferenceClickListener() {
-                    @Override
-                    public boolean onPreferenceClick(Preference preference) {
-                        AlertDialog alert = new AlertDialog.Builder(
-                                PreferenceActivity.this).create();
-                        alert.setTitle(R.string.preference_reset_all_settings);
-                        alert.setMessage(getString(R.string.preference_reset_all_settings_alert));
-                        alert.setButton(getString(android.R.string.yes),
-                                new OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog,
-                                                        int which) {
-                                        SharedPreferences.Editor editor = prefs
-                                                .edit();
-                                        // Main
-                                        editor.putString(PREFS_FONTSIZE,
-                                                PREFS_FONTSIZE_DEFAULT);
-                                        editor.putString(PREFS_SORTORDER,
-                                                PREFS_SORTORDER_DEFAULT);
-                                        // Main advanced
-                                        editor.putString(
-                                                PREFS_CAPITALIZATION,
-                                                String.valueOf(PREFS_CAPITALIZATION_DEFAULT));
-                                        editor.putString(PREFS_ORIENTATION,
-                                                PREFS_ORIENTATION_DEFAULT);
-                                        editor.putBoolean(PREFS_HIDECHECKED,
-                                                PREFS_HIDECHECKED_DEFAULT);
-                                        editor.putBoolean(PREFS_FASTSCROLL,
-                                                PREFS_FASTSCROLL_DEFAULT);
-                                        editor.putBoolean(PREFS_SHAKE,
-                                                PREFS_SHAKE_DEFAULT);
-                                        editor.putBoolean(PREFS_PERSTOREPRICES,
-                                                PREFS_PERSTOREPRICES_DEFAULT);
-                                        editor.putBoolean(PREFS_ADDFORBARCODE,
-                                                PREFS_ADDFORBARCODE_DEFAULT);
-                                        editor.putBoolean(PREFS_SCREENLOCK,
-                                                PREFS_SCREENLOCK_DEFAULT);
-                                        editor.putBoolean(PREFS_QUICKEDITMODE,
-                                                PREFS_QUICKEDITMODE_DEFAULT);
-                                        editor.putBoolean(PREFS_USE_FILTERS,
-                                                PREFS_USE_FILTERS_DEFAULT);
-                                        editor.putBoolean(PREFS_RESETQUANTITY,
-                                                PREFS_RESETQUANTITY_DEFAULT);
-                                        editor.putBoolean(PREFS_HOLO_SEARCH,
-                                                PREFS_HOLO_SEARCH_DEFAULT);
-                                        // Appearance
-                                        editor.putBoolean(PREFS_SHOW_PRICE,
-                                                PREFS_SHOW_PRICE_DEFAULT);
-                                        editor.putBoolean(PREFS_SHOW_TAGS,
-                                                PREFS_SHOW_TAGS_DEFAULT);
-                                        editor.putBoolean(PREFS_SHOW_UNITS,
-                                                PREFS_SHOW_UNITS_DEFAULT);
-                                        editor.putBoolean(PREFS_SHOW_QUANTITY,
-                                                PREFS_SHOW_QUANTITY_DEFAULT);
-                                        editor.putBoolean(PREFS_SHOW_PRIORITY,
-                                                PREFS_SHOW_PRIORITY_DEFAULT);
-                                        // Pick items
-                                        editor.putBoolean(
-                                                PREFS_SAMESORTFORPICK,
-                                                PREFS_SAMESORTFORPICK_DEFAULT);
-                                        editor.putString(
-                                                PREFS_PICKITEMS_SORTORDER,
-                                                PREFS_PICKITEMS_SORTORDER_DEFAULT);
-                                        editor.putBoolean(
-                                                PREFS_PICKITEMSINLIST,
-                                                PREFS_PICKITEMSINLIST_DEFAULT);
-                                        editor.putString(
-                                                PREFS_SORTORDER_SHOPPINGLISTS,
-                                                PREFS_SORTORDER_SHOPPINGLISTS_DEFAULT);
-                                        // Subtotal
-                                        editor.putString(PREFS_PRIOSUBTOTAL,
-                                                PREFS_PRIOSUBTOTAL_DEFAULT);
-                                        editor.putBoolean(
-                                                PREFS_PRIOSUBINCLCHECKED,
-                                                PREFS_PRIOSUBINCLCHECKED_DEFAULT);
-
-                                        editor.putBoolean(PREFS_CURRENT_LIST_COMPLETE, PREFS_CURRENT_LIST_COMPLETE_DEFAULT);
-                                        editor.putBoolean(PREFS_SORT_PER_LIST, PREFS_SORT_PER_LIST_DEFAULT);
-
-                                        editor.commit();
-
-                                        Toast.makeText(
-                                                PreferenceActivity.this,
-                                                R.string.preference_reset_all_settings_done,
-                                                Toast.LENGTH_LONG).show();
-                                        finish();
-                                    }
-                                }
-                        );
-                        alert.setButton2(getString(android.R.string.cancel),
-                                new OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog,
-                                                        int which) {
-                                        dialog.dismiss();
-                                    }
-                                }
-                        );
-                        alert.show();
-                        return false;
-                    }
-                });
-    }
-
-    private void updatePrioSubtotalSummary(SharedPreferences prefs) {
-        int threshold = getSubtotalByPriorityThreshold(prefs);
-        CharSequence[] labels = mPrioSubtotal.getEntries();
-        mPrioSubtotal.setSummary(labels[threshold]);
-        mIncludesChecked.setEnabled(threshold != 0);
-    }
-
-    private void updatePickItemsSortPref(SharedPreferences prefs) {
-        boolean sameSort = prefs.getBoolean(PREFS_SAMESORTFORPICK,
-                PREFS_SAMESORTFORPICK_DEFAULT);
-        mPickItemsSort.setEnabled(!sameSort);
-        // maybe we should set the label to say the active sort order.
-        // but not tonight.
-        // CharSequence labels[] = mPickItemsSort.getEntries();
-    }
-
-    /**
-     * Check whether Market is available.
-     *
-     * @return true if Market is available
-     */
-    private boolean isMarketAvailable() {
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri
-                .parse(getString(R.string.preference_market_extensions_link)));
-        return IntentUtils.isIntentAvailable(this, i);
-    }
 
     public static int getFontSizeFromPrefs(Context context) {
         return Integer.parseInt(PreferenceManager
@@ -625,7 +412,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
         ed.putBoolean(PREFS_THEME_SET_FOR_ALL, setForAll);
         ed.commit();
     }
-    
+
     public static void setUsingHoloSearch(Context context, boolean useHoloSearch) {
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
@@ -647,5 +434,209 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
         prefs.edit()
                 .putBoolean(PREFS_SHOW_LAYOUT_CHOICE, showLayoutChoice)
                 .apply();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Load the preferences from an XML resource
+        addPreferencesFromResource(R.xml.preferences);
+
+        // Set enabled state of Market preference
+        PreferenceScreen sp = (PreferenceScreen) findPreference(PREFS_MARKET_EXTENSIONS);
+        sp.setEnabled(isMarketAvailable());
+        sp = (PreferenceScreen) findPreference(PREFS_MARKET_THEMES);
+        sp.setEnabled(isMarketAvailable());
+
+        mPrioSubtotal = (ListPreference) findPreference(PREFS_PRIOSUBTOTAL);
+        mPickItemsSort = (ListPreference) findPreference(PREFS_PICKITEMS_SORTORDER);
+
+        mIncludesChecked = (CheckBoxPreference) findPreference(PREFS_PRIOSUBINCLCHECKED);
+
+        Preference layoutChoicePreference = findPreference("layout_choice");
+        layoutChoicePreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                startActivity(new Intent(PreferenceActivity.this, LayoutChoiceActivity.class));
+                return true;
+            }
+        });
+        SharedPreferences shared = getPreferenceScreen().getSharedPreferences();
+        updatePrioSubtotalSummary(shared);
+        updatePickItemsSortPref(shared);
+        resetAllSettings(shared);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (getIntent() != null && getIntent().hasExtra(EXTRA_SHOW_GET_ADD_ONS)) {
+            // Open License section directly:
+            PreferenceScreen licensePrefScreen = (PreferenceScreen) getPreferenceScreen()
+                    .findPreference(PREFS_SCREEN_ADDONS);
+            setPreferenceScreen(licensePrefScreen);
+        }
+        getPreferenceScreen().getSharedPreferences()
+                .registerOnSharedPreferenceChangeListener(this);
+        mFilterCompletionChanged = false;
+    }
+
+    @Override
+    protected void onPause() {
+        if (mBackupManagerAvailable) {
+            new BackupManagerWrapper(this).dataChanged();
+        }
+        getPreferenceScreen().getSharedPreferences()
+                .unregisterOnSharedPreferenceChangeListener(this);
+        super.onPause();
+    }
+
+    public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+        updateCount++;
+        if (key.equals(PREFS_PRIOSUBTOTAL)) {
+            updatePrioSubtotalSummary(prefs);
+        }
+        if (key.equals(PREFS_SAMESORTFORPICK)) {
+            updatePickItemsSortPref(prefs);
+        }
+        if (key.equals(PREFS_CURRENT_LIST_COMPLETE)) {
+            mFilterCompletionChanged = true;
+        }
+    }
+
+    private void resetAllSettings(final SharedPreferences prefs) {
+        Preference resetAllSettings = findPreference(PREFS_RESET_ALL_SETTINGS);
+        resetAllSettings
+                .setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                    @Override
+                    public boolean onPreferenceClick(Preference preference) {
+                        AlertDialog alert = new AlertDialog.Builder(
+                                PreferenceActivity.this).create();
+                        alert.setTitle(R.string.preference_reset_all_settings);
+                        alert.setMessage(getString(R.string.preference_reset_all_settings_alert));
+                        alert.setButton(getString(android.R.string.yes),
+                                new OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog,
+                                                        int which) {
+                                        SharedPreferences.Editor editor = prefs
+                                                .edit();
+                                        // Main
+                                        editor.putString(PREFS_FONTSIZE,
+                                                PREFS_FONTSIZE_DEFAULT);
+                                        editor.putString(PREFS_SORTORDER,
+                                                PREFS_SORTORDER_DEFAULT);
+                                        // Main advanced
+                                        editor.putString(
+                                                PREFS_CAPITALIZATION,
+                                                String.valueOf(PREFS_CAPITALIZATION_DEFAULT));
+                                        editor.putString(PREFS_ORIENTATION,
+                                                PREFS_ORIENTATION_DEFAULT);
+                                        editor.putBoolean(PREFS_HIDECHECKED,
+                                                PREFS_HIDECHECKED_DEFAULT);
+                                        editor.putBoolean(PREFS_FASTSCROLL,
+                                                PREFS_FASTSCROLL_DEFAULT);
+                                        editor.putBoolean(PREFS_SHAKE,
+                                                PREFS_SHAKE_DEFAULT);
+                                        editor.putBoolean(PREFS_PERSTOREPRICES,
+                                                PREFS_PERSTOREPRICES_DEFAULT);
+                                        editor.putBoolean(PREFS_ADDFORBARCODE,
+                                                PREFS_ADDFORBARCODE_DEFAULT);
+                                        editor.putBoolean(PREFS_SCREENLOCK,
+                                                PREFS_SCREENLOCK_DEFAULT);
+                                        editor.putBoolean(PREFS_QUICKEDITMODE,
+                                                PREFS_QUICKEDITMODE_DEFAULT);
+                                        editor.putBoolean(PREFS_USE_FILTERS,
+                                                PREFS_USE_FILTERS_DEFAULT);
+                                        editor.putBoolean(PREFS_RESETQUANTITY,
+                                                PREFS_RESETQUANTITY_DEFAULT);
+                                        editor.putBoolean(PREFS_HOLO_SEARCH,
+                                                PREFS_HOLO_SEARCH_DEFAULT);
+                                        // Appearance
+                                        editor.putBoolean(PREFS_SHOW_PRICE,
+                                                PREFS_SHOW_PRICE_DEFAULT);
+                                        editor.putBoolean(PREFS_SHOW_TAGS,
+                                                PREFS_SHOW_TAGS_DEFAULT);
+                                        editor.putBoolean(PREFS_SHOW_UNITS,
+                                                PREFS_SHOW_UNITS_DEFAULT);
+                                        editor.putBoolean(PREFS_SHOW_QUANTITY,
+                                                PREFS_SHOW_QUANTITY_DEFAULT);
+                                        editor.putBoolean(PREFS_SHOW_PRIORITY,
+                                                PREFS_SHOW_PRIORITY_DEFAULT);
+                                        // Pick items
+                                        editor.putBoolean(
+                                                PREFS_SAMESORTFORPICK,
+                                                PREFS_SAMESORTFORPICK_DEFAULT);
+                                        editor.putString(
+                                                PREFS_PICKITEMS_SORTORDER,
+                                                PREFS_PICKITEMS_SORTORDER_DEFAULT);
+                                        editor.putBoolean(
+                                                PREFS_PICKITEMSINLIST,
+                                                PREFS_PICKITEMSINLIST_DEFAULT);
+                                        editor.putString(
+                                                PREFS_SORTORDER_SHOPPINGLISTS,
+                                                PREFS_SORTORDER_SHOPPINGLISTS_DEFAULT);
+                                        // Subtotal
+                                        editor.putString(PREFS_PRIOSUBTOTAL,
+                                                PREFS_PRIOSUBTOTAL_DEFAULT);
+                                        editor.putBoolean(
+                                                PREFS_PRIOSUBINCLCHECKED,
+                                                PREFS_PRIOSUBINCLCHECKED_DEFAULT);
+
+                                        editor.putBoolean(PREFS_CURRENT_LIST_COMPLETE, PREFS_CURRENT_LIST_COMPLETE_DEFAULT);
+                                        editor.putBoolean(PREFS_SORT_PER_LIST, PREFS_SORT_PER_LIST_DEFAULT);
+
+                                        editor.commit();
+
+                                        Toast.makeText(
+                                                PreferenceActivity.this,
+                                                R.string.preference_reset_all_settings_done,
+                                                Toast.LENGTH_LONG).show();
+                                        finish();
+                                    }
+                                }
+                        );
+                        alert.setButton2(getString(android.R.string.cancel),
+                                new OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog,
+                                                        int which) {
+                                        dialog.dismiss();
+                                    }
+                                }
+                        );
+                        alert.show();
+                        return false;
+                    }
+                });
+    }
+
+    private void updatePrioSubtotalSummary(SharedPreferences prefs) {
+        int threshold = getSubtotalByPriorityThreshold(prefs);
+        CharSequence[] labels = mPrioSubtotal.getEntries();
+        mPrioSubtotal.setSummary(labels[threshold]);
+        mIncludesChecked.setEnabled(threshold != 0);
+    }
+
+    private void updatePickItemsSortPref(SharedPreferences prefs) {
+        boolean sameSort = prefs.getBoolean(PREFS_SAMESORTFORPICK,
+                PREFS_SAMESORTFORPICK_DEFAULT);
+        mPickItemsSort.setEnabled(!sameSort);
+        // maybe we should set the label to say the active sort order.
+        // but not tonight.
+        // CharSequence labels[] = mPickItemsSort.getEntries();
+    }
+
+    /**
+     * Check whether Market is available.
+     *
+     * @return true if Market is available
+     */
+    private boolean isMarketAvailable() {
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri
+                .parse(getString(R.string.preference_market_extensions_link)));
+        return IntentUtils.isIntentAvailable(this, i);
     }
 }

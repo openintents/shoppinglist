@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">Llista de compra d\'OI</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">Bloc de notes d\'OI</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">Llança %s i selecciona el menú &gt; Converteix a CSV</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">Converteix CSV</string>
+    <string name="convert_csv_notepad">Converteix CSV a bloc de notes</string>
+    <string name="convert_csv_shoppinglist">Converteix CSV a llista de compra</string>
+    <string name="convert_all_notes">Converteix totes les notes</string>
+    <string name="convert_all_shoppinglists">Converteix totes les llistes de compra</string>
+    <string name="convert_list">Converteix la llista \'%s\'</string>
+    <string name="file_path">Camí del fitxer</string>
+    <string name="file_import">Importa</string>
+    <string name="file_export">Exporta</string>
+    <string name="error_writing_file">Error escrivint al fitxer</string>
+    <string name="error_reading_file">Error llegint del fitxer</string>
+    <string name="wrong_csv_format">Format CSV incorrecte</string>
+    <string name="error_file_not_found">No s\'ha trobat el fitxer</string>
+    <string name="error_not_yet_implemented">Encara no està implementat, si us plau escolliu una altra opció.</string>
+    <string name="import_finished">Importació finalitzada</string>
+    <string name="export_finished">Exportació finalitzada</string>
+    <string name="filemanager_title_notepad">Selecciona fitxer CSV del bloc de notes</string>
+    <string name="filemanager_title_shoppinglist">Selecciona fitxer CSV de la llista de compra</string>
+	<string name="current_import_policy">Política d\'importació actual:</string>
+	<string name="import_policy">Política d\'importació</string>
+	<string name="select_import_policy">Seleccioneu la política d\'importació a utilitzar</string>
+    
+    <string name="file_exists">El fitxer ja existeix. Voleu sobreescriure\'l?</string>
+    <string name="dont_ask_again">No ho tornis a preguntar. Sobreescriu sempre!</string>
+    
+    <string name="warn_restore_policy_title">S\'ha canviat la política d\'importació a RESTAURA</string>
+    <string name="warn_restore_policy">La teva política d\'importació actual és ELIMINAR TOTS ELS REGISTRES ACTUALS i SUBSTITUIR-LOS amb els continguts del fitxer CSV. N\'esteu segurs?</string>
+    
+    <string name="menu_settings">Preferències</string>
+    <string name="csv_file_format">Format de fitxer CSV</string>
+    <string name="select_csv_file_format">Seleccioneu el format de fitxer CSV</string>
+    <string name="select_encoding">Seleccioneu la codificació</string>
+    <string name="default_encoding">Per defecte</string>
+    <string name="use_custom_encoding">Utilitzeu una codificació personalitzada (usuaris avançats)</string>
+    <string name="preferences_select_csv_file_format">Seleccioneu un format de fitxer CSV</string>
+    <string name="preferences_select_import_policy">Seleccioneu la política d\'importació a utilitzar</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">Preferències comunes</string>
+    <string name="preference_common_summary">Preferències d\'importació/exportació que són aplicables al bloc de notes i a la llista de compres.</string>
+    <string name="preference_ask_if_file_exists">Preguntar si el fitxer existeix</string>
+    <string name="preference_ask_if_file_exists_summary">Si està seleccionat, apareixerà un diàleg per confirmar la sobreescriptura si el fitxer d\'exportació ja existeix.</string>
+    
+    <string name="preference_application_specific">Preferències específiques de l\'aplicació</string>
+    <string name="preference_filename">Nom del fitxer</string>
+    <string name="preference_filename_summary">Camí sencer del fitxer.</string>
+    
+    <string name="preference_notepad">Bloc de notes d\'OI</string>
+    <string name="preference_notepad_summary">Preferències d\'importació/exportació pel bloc de notes d\'OI</string>
+    
+    <string name="preference_shoppinglist">Llista de compra d\'OI</string>
+    <string name="preference_shoppinglist_summary">Preferències d\'importació/exportació per la llista de compra d\'OI.</string>
+    
+	<string name="converting">S\'està convertint...</string>
+	<string name="dialog_ok">OK</string>
+	<string name="preference_stores">Importar botigues</string>
+	<string name="preference_stores_off_summary">Importar els noms de botigues HandyShopper només com a etiquetes d\'element</string>
+	<string name="preference_stores_on_summary">Importar botigues HandyShopper i informació per botiga i passadís.</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>Notes de MS Outlook</item>
+        <item>CSV de Palm</item>
+        <item>JPilot Memo</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>Tasques de MS Outlook</item>
+        <item>HandyShopper</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>DUPLICAT - Permet registres duplicats</item>
+        <item>KEEP - Don\'t overwrite existing records.</item>
+        <item>Sobreescriu - Sobreescriu registres ja existents.</item>
+        <item>Restaura - ESBORRA\'LS TOTS, després importa</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>DUPLICAT - Afegeix una segona còpia d\'un registre si ja existeix.</item>
+        <item>KEEP - Don\'t overwrite an existing record, ignore the one in the CSV file.</item>
+        <item>Sobreescriu - Un registre al CSV SOBREESCRIURÀ un registre ja existent.</item>
+        <item>Restaura còpia de seguretat - ESBORRA TOTS ELS TEUS REGISTRES JA EXISTENTS, després importa el fitxer CSV.</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>DUPLICAT - Permet registres duplicats</item>
+        <item>KEEP - Don\'t overwrite existing records.</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>DUPLICAT - Afegeix una segona còpia d\'un registre si ja existeix.</item>
+        <item>KEEP - Don\'t overwrite an existing record, ignore the one in the CSV file.</item>
+    </string-array>
+    
+</resources>

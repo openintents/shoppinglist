@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+
+
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">Списък за пазаруване на OI</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">OI Бележник</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">Стартирайте %s и изберете меню &gt; Превърни CSV</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">Превърни CSV</string>
+    <string name="convert_csv_notepad">Превърни CSV в Бележник</string>
+    <string name="convert_csv_shoppinglist">Превърни CSV в списък за пазаруване</string>
+    <string name="convert_all_notes">Превърни всички бележки</string>
+    <string name="convert_all_shoppinglists">Превърни всички списъци за пазаруване</string>
+    <string name="convert_list">Превърни списък %s</string>
+    <string name="file_path">Път до файла</string>
+    <string name="file_import">Вмъкване</string>
+    <string name="file_export">Извличане</string>
+    <string name="error_writing_file">Грешка при записа на файл</string>
+    <string name="error_reading_file">Грешка при четене от файл</string>
+    <string name="wrong_csv_format">Грешен формат CSV</string>
+    <string name="error_file_not_found">Файлът не е намерен</string>
+    <string name="error_not_yet_implemented">Все още не е приложена, моля изберете друга опция.</string>
+    <string name="import_finished">Вмъкването завърши</string>
+    <string name="export_finished">Извличането завърши</string>
+    <string name="filemanager_title_notepad">Изберете бележник в CSV формат</string>
+    <string name="filemanager_title_shoppinglist">Изберете списък за пазаруване в CSV формат</string>
+	<string name="current_import_policy">Настояща вмъкната полица</string>
+	<string name="import_policy">Вмъкване на полица</string>
+	<string name="select_import_policy">Изберете вмъкнатата полица за използване</string>
+    
+    <string name="file_exists">Вече има такъв файл. Искате ли да го презапишете?</string>
+    <string name="dont_ask_again">Не питай отново. Винаги презаписвай!</string>
+    
+    <string name="warn_restore_policy_title">Изберете вмъкнатата полица за възстановяване</string>
+    <string name="warn_restore_policy">Вашата текуща е настроена на ИЗТРИЙ ВСИЯКИ ЗАПИСИ и ГИ ЗАМЕНИ със съдържанието на CSV файла.Сигурен ли сте?</string>
+    
+    <string name="menu_settings">Настройки</string>
+    <string name="csv_file_format">CSV файлов формат</string>
+    <string name="select_csv_file_format">Избери CSV файлов формат</string>
+    <string name="select_encoding">Избор на кодираща таблица</string>
+    <string name="default_encoding">По подразбиране</string>
+    <string name="use_custom_encoding">Използвай кодиране по поръчка(за напреднали потребители)</string>
+    <string name="preferences_select_csv_file_format">Изберете файлов формат CSV</string>
+    <string name="preferences_select_import_policy">Изберете вмъкнатата полица за използване</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">Общи настройки</string>
+    <string name="preference_common_summary">Вмъкнете/извлечете настройки, които се отнасят за Бележник и Списък за пазаруване.</string>
+    <string name="preference_ask_if_file_exists">Попитай дали файлът съществува</string>
+    <string name="preference_ask_if_file_exists_summary">Ако има отметка се появява диалогов прозорец, за да потвърдите презаписването, ако извелченият файл вече съществува.</string>
+    
+    <string name="preference_application_specific">Специфични настройки на приложението</string>
+    <string name="preference_filename">Име на файла</string>
+    <string name="preference_filename_summary">Пълният път до файла.</string>
+    
+    <string name="preference_notepad">OI Бележник</string>
+    <string name="preference_notepad_summary">Вмъкни/извлечи настройки за OI Бележник.</string>
+    
+    <string name="preference_shoppinglist">OI списък за пазаруване</string>
+    <string name="preference_shoppinglist_summary">Вмъкни/извлечи настройки за OI списък за пазаруване.</string>
+    
+	<string name="converting">Конвертиране...</string>
+	<string name="dialog_ok">Да</string>
+	<string name="preference_stores">Вмъкни магазини</string>
+	<string name="preference_stores_off_summary">Импортиране на имена от етикети на магазин HandyShopper.</string>
+	<string name="preference_stores_on_summary">Вмъкнете HandyShopper магазини и магазина цена и информационна пътека.</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>MS Изглед на бележки</item>
+        <item>Длан CSV</item>
+        <item>JPilot Memo</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>MS Изглед на задачи</item>
+        <item>HandyShopper</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>ДУБЛИКАТ- Позволение за копиране на записи.</item>
+        <item>ЗАПАЗИ - Не препокривай съществуващите документи.</item>
+        <item>Презаписване- Презапиши съществуващи записи.</item>
+        <item>Възстанови- ИЗТРИЙ ВСИЧКИ, след това вмъкни.</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>ДУБЛИКАТ- Добави второ копие на записа ако той вече съществува.</item>
+        <item>ЗАПАЗИ - Не препокривай съществуващия документ, игнорирай този в CSV файла.</item>
+        <item>Презаписване- запис в CSV ще ПРЕЗАПИШЕ съществуващ запис.</item>
+        <item>Възстановяване на резервното копие- ИЗТРИЙ ВСИЧКИ ТВОЙ СЪЩЕСТВУВАЩИ ЗАПИСИ, след това вмъкни CSV файла.</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>ДУБЛИКАТ- Позволение за копиране на записи.</item>
+        <item>ЗАПАЗИ - Не препокривай съществуващите документи.</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>ДУБЛИКАТ- Добави второ копие на записа ако той вече съществува.</item>
+        <item>ЗАПАЗИ - Не препокривай съществуващия документ, игнорирай този в CSV файла.</item>
+    </string-array>
+    
+</resources>

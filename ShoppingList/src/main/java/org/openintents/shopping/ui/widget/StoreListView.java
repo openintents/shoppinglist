@@ -18,8 +18,13 @@ import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
+import android.widget.TextView;
 
 import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract;
@@ -35,9 +40,16 @@ import org.openintents.shopping.ui.PreferenceActivity;
 public class StoreListView extends ListView {
     private final static String TAG = "StoreListView";
     private final static boolean debug = false;
-
-    private Typeface mCurrentTypeface;
-
+    private final static int cursorColumnID = 0;
+    private final static int cursorColumnNAME = 1;
+    private final static int cursorColumnSTOCKS_ITEM = 2;
+    private final static int cursorColumnPRICE = 3;
+    private final static int cursorColumnAISLE = 4;
+    private final static int cursorColumnSTORE_ID = 5;
+    private final String[] mStringItems = new String[]{
+            "itemstores." + ItemStores._ID, Stores.NAME,
+            ItemStores.STOCKS_ITEM, ItemStores.PRICE, ItemStores.AISLE,
+            "stores._id as store_id"};
     public int mPriceVisibility;
     public String mTextTypeface;
     public float mTextSize;
@@ -47,22 +59,9 @@ public class StoreListView extends ListView {
     public int mTextColorChecked;
     public boolean mShowCheckBox;
     public boolean mInTextInput;
-
     public boolean mBinding;
-
+    private Typeface mCurrentTypeface;
     private boolean mTextChanged;
-    
-    private final String[] mStringItems = new String[]{
-            "itemstores." + ItemStores._ID, Stores.NAME,
-            ItemStores.STOCKS_ITEM, ItemStores.PRICE, ItemStores.AISLE,
-            "stores._id as store_id"};
-    private final static int cursorColumnID = 0;
-    private final static int cursorColumnNAME = 1;
-    private final static int cursorColumnSTOCKS_ITEM = 2;
-    private final static int cursorColumnPRICE = 3;
-    private final static int cursorColumnAISLE = 4;
-    private final static int cursorColumnSTORE_ID = 5;
-
     private Cursor mCursorItemstores;
     private long mItemId;
     private long mListId;
@@ -71,211 +70,6 @@ public class StoreListView extends ListView {
 
     private EditText m_lastView;
     private int m_lastCol;
-
-    public void applyUpdate() {
-        if (m_lastView == null) {
-            return;
-        }
-        String val = m_lastView.getText().toString();
-        if (m_lastCol == cursorColumnPRICE) {
-            val = Long.toString(PriceConverter.getCentPriceFromString(val));
-        }
-        Integer row = (Integer) m_lastView.getTag();
-        if (row != null) {
-            if (debug) {
-                Log.d(TAG, "Text changed to " + val + " @ pos " + row
-                        + ", col " + m_lastCol);
-            }
-            maybeUpdate(row, m_lastCol, val);
-        }
-        m_lastView = null;
-    }
-
-    /**
-     * Extend the SimpleCursorAdapter to handle updates to the data
-     */
-    public class mSimpleCursorAdapter extends SimpleCursorAdapter implements
-            ViewBinder {
-
-        private class EditTextWatcher implements TextWatcher,
-                OnFocusChangeListener {
-
-            private int mCol;
-            private EditText mView;
-
-            public EditTextWatcher(EditText v, int col) {
-                if (debug) {
-                    Log.d(TAG, "New EditTextWatcher for " + v.toString()
-                            + " col " + col);
-                }
-                mView = v;
-                mCol = col;
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-                if (mBinding) {
-                    return; // for update purposes, doesn't count as change
-                }
-
-                if (mView != m_lastView) {
-                    mView.setOnFocusChangeListener(this);
-                    // applyUpdate();
-                }
-
-                m_lastView = mView;
-                m_lastCol = mCol;
-
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before,
-                                      int count) {
-
-            }
-
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (v == m_lastView && hasFocus == false) {
-                    mInTextInput = true;
-                    applyUpdate();
-                    mInTextInput = false;
-                }
-            }
-
-        }
-
-        /**
-         * Constructor simply calls super class.
-         *
-         * @param context Context.
-         * @param layout  Layout.
-         * @param c       Cursor.
-         * @param from    Projection from.
-         * @param to      Projection to.
-         */
-        mSimpleCursorAdapter(final Context context, final int layout,
-                             final Cursor c, final String[] from, final int[] to) {
-            super(context, layout, c, from, to);
-            super.setViewBinder(this);
-
-        }
-
-        @Override
-        public View newView(Context context, Cursor cursor, ViewGroup parent) {
-            View view = super.newView(context, cursor, parent);
-
-            EditText v;
-            v = (EditText) view.findViewById(R.id.price);
-            v.addTextChangedListener(new EditTextWatcher(v, cursorColumnPRICE));
-            v.setVisibility(mPriceVisibility);
-
-            v = (EditText) view.findViewById(R.id.aisle);
-            v.addTextChangedListener(new EditTextWatcher(v, cursorColumnAISLE));
-            v.setVisibility(mPriceVisibility);
-
-            return view;
-        }
-
-        /**
-         * Additionally to the standard bindView, we also check for STATUS, and
-         * strike the item through if BOUGHT.
-         */
-        @Override
-        public void bindView(final View view, final Context context,
-                             final Cursor cursor) {
-
-            // set tags to null during binding, to help avoid extra db updates
-            // while binding
-            EditText v;
-            v = (EditText) view.findViewById(R.id.price);
-            v.setTag(null);
-            v = (EditText) view.findViewById(R.id.aisle);
-            v.setTag(null);
-
-            mBinding = true;
-            super.bindView(view, context, cursor);
-            mBinding = false;
-
-            boolean status = cursor.getInt(cursorColumnSTOCKS_ITEM) != 0;
-            final int cursorpos = cursor.getPosition();
-
-            CheckBox c = (CheckBox) view.findViewById(R.id.check);
-
-            if (debug) {
-                Log.i(TAG, "bindview: pos = " + cursor.getPosition());
-            }
-
-            // set style for check box
-            c.setTag(cursor.getPosition());
-
-            c.setVisibility(CheckBox.VISIBLE);
-            c.setChecked(status);
-
-            // The parent view knows how to deal with clicks.
-            // We just pass the click through.
-            // c.setClickable(false);
-
-            c.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    if (debug) {
-                        Log.d(TAG, "Click: ");
-                    }
-                    toggleItemstore(cursorpos);
-                }
-
-            });
-
-            TextView t;
-
-            t = (TextView) view.findViewById(R.id.name);
-            t.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
-
-                public void onCreateContextMenu(ContextMenu contextmenu,
-                                                View view, ContextMenuInfo info) {
-                    // Context menus are created in the main activity
-                    // ItemStoresActivity
-                }
-
-            });
-
-            v = (EditText) view.findViewById(R.id.price);
-            v.setTag(cursor.getPosition());
-            v = (EditText) view.findViewById(R.id.aisle);
-            v.setTag(cursor.getPosition());
-
-        }
-
-        public boolean setViewValue(View view, Cursor cursor, int i) {
-            int id = view.getId();
-            if (id == R.id.price) {
-                long price = cursor.getLong(cursorColumnPRICE);
-                if (price != 0) {
-                    String text = PriceConverter.getStringFromCentPrice(price);
-                    ((TextView) view).setText(text);
-                    return true;
-                }
-            }
-            // let SimpleCursorAdapter handle the binding.
-            return false;
-        }
-
-        @Override
-        public void setViewBinder(ViewBinder viewBinder) {
-            throw new RuntimeException("this adapter implements setViewValue");
-        }
-
-    }
-
     private ContentObserver mContentObserver = new ContentObserver(new Handler()) {
 
         @Override
@@ -309,6 +103,25 @@ public class StoreListView extends ListView {
     public StoreListView(Context context) {
         super(context);
         init();
+    }
+
+    public void applyUpdate() {
+        if (m_lastView == null) {
+            return;
+        }
+        String val = m_lastView.getText().toString();
+        if (m_lastCol == cursorColumnPRICE) {
+            val = Long.toString(PriceConverter.getCentPriceFromString(val));
+        }
+        Integer row = (Integer) m_lastView.getTag();
+        if (row != null) {
+            if (debug) {
+                Log.d(TAG, "Text changed to " + val + " @ pos " + row
+                        + ", col " + m_lastCol);
+            }
+            maybeUpdate(row, m_lastCol, val);
+        }
+        m_lastView = null;
     }
 
     private void init() {
@@ -514,14 +327,14 @@ public class StoreListView extends ListView {
             ShoppingUtils.addItemToStore(getContext(), mItemId, storeId, aisle,
                     price, false);
 
-			/*
+            /*
              * At the corresponding points in the item view, we would requery
-			 * and invalidate. However that is mainly because the editing
-			 * happens in widgets outside the list view itself, where here it
-			 * happens in EditTexts directly in the list. So we probably don't
-			 * need to invalidate() here. Do we really need to requery()?
-			 * Probably somewhere, perhaps not here.
-			 */
+             * and invalidate. However that is mainly because the editing
+             * happens in widgets outside the list view itself, where here it
+             * happens in EditTexts directly in the list. So we probably don't
+             * need to invalidate() here. Do we really need to requery()?
+             * Probably somewhere, perhaps not here.
+             */
             // requery();
             // invalidate();
             // need to do those somewhere else.
@@ -570,5 +383,190 @@ public class StoreListView extends ListView {
             }
         }
         return id;
+    }
+
+    /**
+     * Extend the SimpleCursorAdapter to handle updates to the data
+     */
+    public class mSimpleCursorAdapter extends SimpleCursorAdapter implements
+            ViewBinder {
+
+        /**
+         * Constructor simply calls super class.
+         *
+         * @param context Context.
+         * @param layout  Layout.
+         * @param c       Cursor.
+         * @param from    Projection from.
+         * @param to      Projection to.
+         */
+        mSimpleCursorAdapter(final Context context, final int layout,
+                             final Cursor c, final String[] from, final int[] to) {
+            super(context, layout, c, from, to);
+            super.setViewBinder(this);
+
+        }
+
+        @Override
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
+            View view = super.newView(context, cursor, parent);
+
+            EditText v;
+            v = (EditText) view.findViewById(R.id.price);
+            v.addTextChangedListener(new EditTextWatcher(v, cursorColumnPRICE));
+            v.setVisibility(mPriceVisibility);
+
+            v = (EditText) view.findViewById(R.id.aisle);
+            v.addTextChangedListener(new EditTextWatcher(v, cursorColumnAISLE));
+            v.setVisibility(mPriceVisibility);
+
+            return view;
+        }
+
+        /**
+         * Additionally to the standard bindView, we also check for STATUS, and
+         * strike the item through if BOUGHT.
+         */
+        @Override
+        public void bindView(final View view, final Context context,
+                             final Cursor cursor) {
+
+            // set tags to null during binding, to help avoid extra db updates
+            // while binding
+            EditText v;
+            v = (EditText) view.findViewById(R.id.price);
+            v.setTag(null);
+            v = (EditText) view.findViewById(R.id.aisle);
+            v.setTag(null);
+
+            mBinding = true;
+            super.bindView(view, context, cursor);
+            mBinding = false;
+
+            boolean status = cursor.getInt(cursorColumnSTOCKS_ITEM) != 0;
+            final int cursorpos = cursor.getPosition();
+
+            CheckBox c = (CheckBox) view.findViewById(R.id.check);
+
+            if (debug) {
+                Log.i(TAG, "bindview: pos = " + cursor.getPosition());
+            }
+
+            // set style for check box
+            c.setTag(cursor.getPosition());
+
+            c.setVisibility(CheckBox.VISIBLE);
+            c.setChecked(status);
+
+            // The parent view knows how to deal with clicks.
+            // We just pass the click through.
+            // c.setClickable(false);
+
+            c.setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    if (debug) {
+                        Log.d(TAG, "Click: ");
+                    }
+                    toggleItemstore(cursorpos);
+                }
+
+            });
+
+            TextView t;
+
+            t = (TextView) view.findViewById(R.id.name);
+            t.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+
+                public void onCreateContextMenu(ContextMenu contextmenu,
+                                                View view, ContextMenuInfo info) {
+                    // Context menus are created in the main activity
+                    // ItemStoresActivity
+                }
+
+            });
+
+            v = (EditText) view.findViewById(R.id.price);
+            v.setTag(cursor.getPosition());
+            v = (EditText) view.findViewById(R.id.aisle);
+            v.setTag(cursor.getPosition());
+
+        }
+
+        public boolean setViewValue(View view, Cursor cursor, int i) {
+            int id = view.getId();
+            if (id == R.id.price) {
+                long price = cursor.getLong(cursorColumnPRICE);
+                if (price != 0) {
+                    String text = PriceConverter.getStringFromCentPrice(price);
+                    ((TextView) view).setText(text);
+                    return true;
+                }
+            }
+            // let SimpleCursorAdapter handle the binding.
+            return false;
+        }
+
+        @Override
+        public void setViewBinder(ViewBinder viewBinder) {
+            throw new RuntimeException("this adapter implements setViewValue");
+        }
+
+        private class EditTextWatcher implements TextWatcher,
+                OnFocusChangeListener {
+
+            private int mCol;
+            private EditText mView;
+
+            public EditTextWatcher(EditText v, int col) {
+                if (debug) {
+                    Log.d(TAG, "New EditTextWatcher for " + v.toString()
+                            + " col " + col);
+                }
+                mView = v;
+                mCol = col;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (mBinding) {
+                    return; // for update purposes, doesn't count as change
+                }
+
+                if (mView != m_lastView) {
+                    mView.setOnFocusChangeListener(this);
+                    // applyUpdate();
+                }
+
+                m_lastView = mView;
+                m_lastCol = mCol;
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+
+            }
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (v == m_lastView && hasFocus == false) {
+                    mInTextInput = true;
+                    applyUpdate();
+                    mInTextInput = false;
+                }
+            }
+
+        }
+
     }
 }

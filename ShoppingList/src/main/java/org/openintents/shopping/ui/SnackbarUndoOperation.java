@@ -34,9 +34,9 @@ public class SnackbarUndoOperation implements View.OnClickListener {
     /**
      * Create a SnackbarUndoOperation
      *
-     * @param count  Number of conversations this action would be applied to.
-     * @param type   type of action
-     * @param batch  whether it is a batch operation
+     * @param count Number of conversations this action would be applied to.
+     * @param type  type of action
+     * @param batch whether it is a batch operation
      */
     public SnackbarUndoOperation(int count, int type, boolean batch) {
         mCount = count;

@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2007-2008 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,130 +29,10 @@ import android.util.Log;
  */
 public class Tag {
 
-    public static final class Tags implements BaseColumns {
-        /**
-         * The content:// style URL for this table
-         */
-        public static final Uri CONTENT_URI = Uri
-                .parse("content://org.openintents.tags/tags");
-
-        /**
-         * The default sort order for this table.
-         */
-        public static final String DEFAULT_SORT_ORDER = "modified DESC";
-
-        /**
-         * The id of the tag.
-         * <p/>
-         * Type: STRING
-         * </P>
-         */
-        public static final String TAG_ID = "tag_id";
-
-        /**
-         * The id of the content.
-         * <p/>
-         * Type: STRING
-         * </P>
-         */
-        public static final String CONTENT_ID = "content_id";
-
-        /**
-         * The timestamp for when the tag was created.
-         * <p/>
-         * Type: INTEGER (long)
-         * </P>
-         */
-        public static final String CREATED_DATE = "created";
-
-        /**
-         * The timestamp for when the tag was last modified.
-         * <p/>
-         * Type: INTEGER (long)
-         * </P>
-         */
-        public static final String MODIFIED_DATE = "modified";
-
-        /**
-         * The timestamp for when the tag was last modified.
-         * <p/>
-         * Type: INTEGER (long)
-         * </P>
-         */
-        public static final String ACCESS_DATE = "accessed";
-
-        /**
-         * First URI of the relationship (usually the tag).
-         */
-        public static final String URI_1 = "uri_1";
-
-        /**
-         * Second URI of the relationship (usually the content).
-         */
-        public static final String URI_2 = "uri_2";
-
-        /**
-         * The Uri to be tagged that the query is about.
-         */
-        public static final String QUERY_URI = "uri";
-
-        /**
-         * The tag that the query is about.
-         */
-        public static final String QUERY_TAG = "tag";
-
-        public static final String DISTINCT = "distinct";
-        public static final String QUERY_UNIQUE_TAG = "unique";
-    }
-
-    public static final class Contents implements BaseColumns {
-        /**
-         * The content:// style URL for this table
-         */
-        public static final Uri CONTENT_URI = Uri
-                .parse("content://org.openintents.tags/contents");
-
-        /**
-         * The default sort order for this table.
-         */
-        public static final String DEFAULT_SORT_ORDER = "type DESC, uri";
-
-        /**
-         * The uri of the content, or the tag text if the uri starts with "TAG".
-         * This can be tested in SQL using "WHERE type like 'TAG%'".
-         * <p/>
-         * Type: TEXT
-         * </P>
-         */
-        public static final String URI = "uri";
-
-        /**
-         * The type of the content, e.g TAG null means CONTENT.
-         * <p/>
-         * Type: TEXT
-         * </P>
-         */
-        public static final String TYPE = "type";
-
-        /**
-         * The timestamp for when the note was created.
-         * <p/>
-         * Type: INTEGER (long)
-         * </P>
-         */
-        public static final String CREATED_DATE = "created";
-
-        public static final String QUERY_BY_TYPE = "byType";
-
-    }
-
     private static final String TAG = "Tag.java";
-
     private static final String DELETE_URI = "tag.content_id = (select content2._id FROM content content2 WHERE content2.uri = ?)";
-
     private static final String DELETE_TAG_URI = "tag.tag_id = (select content1._id FROM content content1 WHERE content1.uri = ?) "
             + "AND tag.content_id = (select content2._id FROM content content2 WHERE content2.uri = ?)";
-
     private Context mContext;
 
     public Tag(Context context) {
@@ -310,6 +190,123 @@ public class Tag {
                 Tags.CONTENT_URI).putExtra(Tags.QUERY_TAG, tag).putExtra(
                 Tags.QUERY_URI, uri);
         mContext.startActivity(intent);
+
+    }
+
+    public static final class Tags implements BaseColumns {
+        /**
+         * The content:// style URL for this table
+         */
+        public static final Uri CONTENT_URI = Uri
+                .parse("content://org.openintents.tags/tags");
+
+        /**
+         * The default sort order for this table.
+         */
+        public static final String DEFAULT_SORT_ORDER = "modified DESC";
+
+        /**
+         * The id of the tag.
+         * <p/>
+         * Type: STRING
+         * </P>
+         */
+        public static final String TAG_ID = "tag_id";
+
+        /**
+         * The id of the content.
+         * <p/>
+         * Type: STRING
+         * </P>
+         */
+        public static final String CONTENT_ID = "content_id";
+
+        /**
+         * The timestamp for when the tag was created.
+         * <p/>
+         * Type: INTEGER (long)
+         * </P>
+         */
+        public static final String CREATED_DATE = "created";
+
+        /**
+         * The timestamp for when the tag was last modified.
+         * <p/>
+         * Type: INTEGER (long)
+         * </P>
+         */
+        public static final String MODIFIED_DATE = "modified";
+
+        /**
+         * The timestamp for when the tag was last modified.
+         * <p/>
+         * Type: INTEGER (long)
+         * </P>
+         */
+        public static final String ACCESS_DATE = "accessed";
+
+        /**
+         * First URI of the relationship (usually the tag).
+         */
+        public static final String URI_1 = "uri_1";
+
+        /**
+         * Second URI of the relationship (usually the content).
+         */
+        public static final String URI_2 = "uri_2";
+
+        /**
+         * The Uri to be tagged that the query is about.
+         */
+        public static final String QUERY_URI = "uri";
+
+        /**
+         * The tag that the query is about.
+         */
+        public static final String QUERY_TAG = "tag";
+
+        public static final String DISTINCT = "distinct";
+        public static final String QUERY_UNIQUE_TAG = "unique";
+    }
+
+    public static final class Contents implements BaseColumns {
+        /**
+         * The content:// style URL for this table
+         */
+        public static final Uri CONTENT_URI = Uri
+                .parse("content://org.openintents.tags/contents");
+
+        /**
+         * The default sort order for this table.
+         */
+        public static final String DEFAULT_SORT_ORDER = "type DESC, uri";
+
+        /**
+         * The uri of the content, or the tag text if the uri starts with "TAG".
+         * This can be tested in SQL using "WHERE type like 'TAG%'".
+         * <p/>
+         * Type: TEXT
+         * </P>
+         */
+        public static final String URI = "uri";
+
+        /**
+         * The type of the content, e.g TAG null means CONTENT.
+         * <p/>
+         * Type: TEXT
+         * </P>
+         */
+        public static final String TYPE = "type";
+
+        /**
+         * The timestamp for when the note was created.
+         * <p/>
+         * Type: INTEGER (long)
+         * </P>
+         */
+        public static final String CREATED_DATE = "created";
+
+        public static final String QUERY_BY_TYPE = "byType";
 
     }
 

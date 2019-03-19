@@ -10,13 +10,12 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.openintents.shopping.ShoppingApplication;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /**
  * Helper functions for retrieving remote themes, that are themes in external
@@ -25,21 +24,17 @@ import org.xmlpull.v1.XmlPullParserException;
  * @author Peli
  */
 public class ThemeUtils {
-    private static final String TAG = "ThemeUtils";
-
     public static final String METADATA_THEMES = "org.openintents.themes";
+    public static final String ELEM_THEMES = "themes";
 
     // For XML:
-
-    public static String SCHEMA = "http://schemas.openintents.org/android/themes";
-
-    public static final String ELEM_THEMES = "themes";
     public static final String ELEM_ATTRIBUTESET = "attributeset";
     public static final String ELEM_THEME = "theme";
-
     public static final String ATTR_NAME = "name";
     public static final String ATTR_TITLE = "title";
     public static final String ATTR_STYLE = "style";
+    private static final String TAG = "ThemeUtils";
+    public static String SCHEMA = "http://schemas.openintents.org/android/themes";
 
     public static int[] getAttributeIds(Context context, String[] attrNames,
                                         String packageName) {
@@ -171,12 +166,6 @@ public class ThemeUtils {
         return themeinfolist;
     }
 
-    public static class ThemeInfo {
-        public String packageName;
-        public String title;
-        public String styleName;
-    }
-
     public static String getPackageNameFromStyle(String style) {
         int pos = style.indexOf(':');
         if (pos >= 0) {
@@ -184,5 +173,11 @@ public class ThemeUtils {
         } else {
             return null;
         }
+    }
+
+    public static class ThemeInfo {
+        public String packageName;
+        public String title;
+        public String styleName;
     }
 }

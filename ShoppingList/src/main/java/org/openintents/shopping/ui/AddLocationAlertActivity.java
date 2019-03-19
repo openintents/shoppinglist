@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2007-2008 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -73,11 +73,11 @@ public class AddLocationAlertActivity extends Activity implements
         Button picklocation = (Button) this.findViewById(R.id.picklocation);
         picklocation.setOnClickListener(this);
 
-		/*
+        /*
          * Button addlocationalert = (Button)
-		 * this.findViewById(R.id.addlocationalert);
-		 * addlocationalert.setOnClickListener(this);
-		 */
+         * this.findViewById(R.id.addlocationalert);
+         * addlocationalert.setOnClickListener(this);
+         */
 
         Button viewalerts = (Button) this.findViewById(R.id.viewalerts);
         viewalerts.setOnClickListener(this);
@@ -185,10 +185,10 @@ public class AddLocationAlertActivity extends Activity implements
             switch (requestCode) {
 
                 case REQUEST_PICK_LOC:
-				/*
-				 * mLocation.setText(bundle.getString(Locations.EXTRA_GEO));
-				 * mTags.setText(mTag.findTags(data, ", "));
-				 */
+                    /*
+                     * mLocation.setText(bundle.getString(Locations.EXTRA_GEO));
+                     * mTags.setText(mTag.findTags(data, ", "));
+                     */
 
                     String geo = data.getStringExtra(Locations.EXTRA_GEO);
                     mLocation.setText(geo);

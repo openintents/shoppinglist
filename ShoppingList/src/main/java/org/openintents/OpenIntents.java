@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2007-2008 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -122,6 +122,8 @@ public abstract class OpenIntents {
      * @deprecated will be removed by 0.2.1 latest
      */
     public static final String EDIT_GENERIC_ALERT = "org.openintents.action.EDIT_GENERIC_ALERT";
+    public static final String PREFERENCES_INIT_DEFAULT_VALUES = "InitView";
+    public static final String PREFERENCES_DONT_SHOW_INIT_DEFAULT_VALUES = "dontShowInitDefaultValues";
 
     /**
      * shows an English message if open intents is not installed, finishes the
@@ -166,7 +168,4 @@ public abstract class OpenIntents {
         }
 
     }
-
-    public static final String PREFERENCES_INIT_DEFAULT_VALUES = "InitView";
-    public static final String PREFERENCES_DONT_SHOW_INIT_DEFAULT_VALUES = "dontShowInitDefaultValues";
 }

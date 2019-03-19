@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">OI Nákupný Zoznam</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">OI Poznámkový Blok</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">Spustiť %s a vybrať menu &gt; Konvertovať CSV</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">Konvertovať CSV</string>
+    <string name="convert_csv_notepad">Konvertovať CSV do Poznámkového bloku</string>
+    <string name="convert_csv_shoppinglist">Konvertovať CSV do Nákupného zoznamu</string>
+    <string name="convert_all_notes">Kovertovať všetky poznámky</string>
+    <string name="convert_all_shoppinglists">Konvertovať všetky nákupné zoznamy</string>
+    <string name="convert_list">Konvertovať zoznam \'%s\'</string>
+    <string name="file_path">Cesta k súboru</string>
+    <string name="file_import">Importovať</string>
+    <string name="file_export">Exportovať</string>
+    <string name="error_writing_file">Chyba zápisu do súboru</string>
+    <string name="error_reading_file">Chyba čítania zo súboru</string>
+    <string name="wrong_csv_format">Nesprávny CSV formát</string>
+    <string name="error_file_not_found">Súbor sa nenašiel</string>
+    <string name="error_not_yet_implemented">Ešte neimplementované, prosím vyberte inú možnosť.</string>
+    <string name="import_finished">Importovanie ukončené.</string>
+    <string name="export_finished">Exportovanie ukončené</string>
+    <string name="filemanager_title_notepad">Vyberte CSV súbor Poznámkového Bloku</string>
+    <string name="filemanager_title_shoppinglist">Vyberte CSV súbor Nákupného Zoznamu</string>
+	<string name="current_import_policy">Súčasný importovací postup:</string>
+	<string name="import_policy">Importovací postup</string>
+	<string name="select_import_policy">Vyberte importovací postup ktorý chcete použiť</string>
+    
+    <string name="file_exists">Súbor existuje. Chcete ho prepísať?</string>
+    <string name="dont_ask_again">Nepýtaj sa znova. Vždy prepíš!</string>
+    
+    <string name="warn_restore_policy_title">Imporovací postup nastavený na OBNOVA</string>
+    <string name="warn_restore_policy">Váš súčasný importovací postup je nastavený na VYMAŽ VŠETKY SÚČASNÉ ZÁZNAMY a NAHRAĎ ich obsahom s CSV súboru. Ste si istý?</string>
+    
+    <string name="menu_settings">Nastavenia</string>
+    <string name="csv_file_format">CSV súborový formát</string>
+    <string name="select_csv_file_format">Vyberte CSV súborový formát</string>
+    <string name="select_encoding">Vyberte kódovanie</string>
+    <string name="default_encoding">Predvolené</string>
+    <string name="use_custom_encoding">Použiť vlastné kódovanie (pokročilý užívatelia)</string>
+    <string name="preferences_select_csv_file_format">Vyberte CSV súborový formát</string>
+    <string name="preferences_select_import_policy">Vyberte importovací postup ktorý chcete použiť</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">Bežné nastavenia</string>
+    <string name="preference_common_summary">Importovať/exportovať nastavenia ktoré sa vzťahujú na Poznámkový Blok a Nákupný Zoznam.</string>
+    <string name="preference_ask_if_file_exists">Spýtaj sa či súbor existuje</string>
+    <string name="preference_ask_if_file_exists_summary">Ak je zaškrnuté, tak sa zobrazí dialógové okno na potvrdenie prepísania ak exportný súbor už existuje.</string>
+    
+    <string name="preference_application_specific">špecifické nastavenia aplikácie</string>
+    <string name="preference_filename">Názov súboru</string>
+    <string name="preference_filename_summary">Celá cesta pre súbor</string>
+    
+    <string name="preference_notepad">OI Poznámkový Blok</string>
+    <string name="preference_notepad_summary">Importovať/exportovať nastavenia pre OI Poznámkový Blok</string>
+    
+    <string name="preference_shoppinglist">OI Nákupný Zoznam</string>
+    <string name="preference_shoppinglist_summary">Importovať/exportovať nastavenia pre OI Nákupný Zoznam.</string>
+    
+	<string name="converting">Konvertuje sa...</string>
+	<string name="dialog_ok">Ok</string>
+	<string name="preference_stores">Importovať obchody</string>
+	<string name="preference_stores_off_summary">Importovať iba HandyShopper názvy obchodov ako štítky položiek</string>
+	<string name="preference_stores_on_summary">Importovať HandyShopper obchody, ceny pre každý obchod a informácie o uličkách.</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>Poznámky MS Outlook</item>
+        <item>Palm CSV</item>
+        <item>JPilot Memo</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>Úlohy MS Outlook</item>
+        <item>HandyShopper</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>DUPLIKOVAŤ - umožňuje duplikáty záznamov.</item>
+        <item>PONECHAŤ - Neprepisovať existujúce záznamy.</item>
+        <item>PREPÍSAŤ - Prepísať existujúce záznamy.</item>
+        <item>OBNOVIŤ - Vymazať všetky a potom importovať.</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>DUPLIKOVAŤ - Pridať druhú kópiu záznamu, ak už existuje.</item>
+        <item>PONECHAŤ - Neprepisovať existujúce záznamy, ignorovať ten, nachádzajúci sa v CSV súbore.</item>
+        <item>PREPÍSAŤ - Záznam v CSV prepíše existujúci záznam.</item>
+        <item>OBNOVIŤ ZÁLOHU - Vymazať všetky Vaše existujúce záznamy a následne importovať CSV súbor.</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>DUPLIKOVAŤ - umožňuje duplikáty záznamov.</item>
+        <item>PONECHAŤ - Neprepisovať existujúce záznamy.</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>DUPLIKOVAŤ - Pridať druhú kópiu záznamu, ak už existuje.</item>
+        <item>PONECHAŤ - Neprepisovať existujúce záznamy, ignorovať ten, nachádzajúci sa v CSV súbore.</item>
+    </string-array>
+    
+</resources>

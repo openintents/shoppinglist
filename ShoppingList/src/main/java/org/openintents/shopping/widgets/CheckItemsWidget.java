@@ -4,13 +4,15 @@ import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.appwidget.AppWidgetProviderInfo;
-import android.content.*;
+import android.content.ComponentName;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.RemoteViews;
-
-import java.util.List;
 
 import org.openintents.shopping.R;
 import org.openintents.shopping.ShoppingActivity;
@@ -18,12 +20,26 @@ import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
 import org.openintents.shopping.ui.PreferenceActivity;
 
+import java.util.List;
+
 public class CheckItemsWidget extends AppWidgetProvider {
     private final static int LIMIT_ITEMS = 5;
     private final static String PREFS = "check_items_widget";
     private final static String ACTION_CHECK = "ActionCheck";
     private final static String ACTION_NEXT_PAGE = "ActionNextPage";
     private final static String ACTION_PREV_PAGE = "ActionPrevPage";
+
+    public static Cursor fillItems(Context context, long listId) {
+        String sortOrder = PreferenceActivity.getSortOrderFromPrefs(context,
+                ShoppingActivity.MODE_IN_SHOP);
+        String selection = "list_id = ? AND "
+                + ShoppingContract.Contains.STATUS + " == "
+                + ShoppingContract.Status.WANT_TO_BUY;
+
+        return context.getContentResolver().query(
+                ContainsFull.CONTENT_URI, ShoppingActivity.PROJECTION_ITEMS,
+                selection, new String[]{String.valueOf(listId)}, sortOrder);
+    }
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -160,8 +176,8 @@ public class CheckItemsWidget extends AppWidgetProvider {
                 i++;
             }
             /*
-			 * Icon
-			 */
+             * Icon
+             */
             Intent intentGoToApp = new Intent(context, ShoppingActivity.class);
             intentGoToApp.setAction(Intent.ACTION_VIEW);
             intentGoToApp.setData(Uri.withAppendedPath(
@@ -170,12 +186,12 @@ public class CheckItemsWidget extends AppWidgetProvider {
                     context, 0, intentGoToApp,
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
-			/*
-			 * List title
-			 */
+            /*
+             * List title
+             */
             String title = getTitle(
                     context,
-                    Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, 
+                    Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI,
                             Long.toString(listId))
             );
             views.setTextViewText(R.id.list_name, title);
@@ -183,9 +199,9 @@ public class CheckItemsWidget extends AppWidgetProvider {
             views.setOnClickPendingIntent(R.id.button_go_to_app,
                     pendingIntentGoToApp);
 
-			/*
-			 * Preference button
-			 */
+            /*
+             * Preference button
+             */
             Intent intentPreferences = new Intent(context,
                     CheckItemsWidgetConfig.class);
             intentPreferences.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
@@ -197,9 +213,9 @@ public class CheckItemsWidget extends AppWidgetProvider {
             views.setOnClickPendingIntent(R.id.button_go_to_preferences,
                     pendingIntentPreferences);
 
-			/*
-			 * Prev page
-			 */
+            /*
+             * Prev page
+             */
             Intent intentPrevPage = new Intent(context, CheckItemsWidget.class);
             intentPrevPage.setAction(ACTION_PREV_PAGE);
             intentPrevPage.putExtra("widgetId", widgetId);
@@ -209,9 +225,9 @@ public class CheckItemsWidget extends AppWidgetProvider {
             views.setOnClickPendingIntent(R.id.button_prev,
                     pendingIntentPrevPage);
 
-			/*
-			 * Next page
-			 */
+            /*
+             * Next page
+             */
             Intent intentNextPage = new Intent(context, CheckItemsWidget.class);
             intentNextPage.setAction(ACTION_NEXT_PAGE);
             intentNextPage.putExtra("widgetId", widgetId);
@@ -250,18 +266,6 @@ public class CheckItemsWidget extends AppWidgetProvider {
         // If there was a problem retrieving the note title
         // simply use the application name
         return context.getString(R.string.app_name);
-    }
-
-    public static Cursor fillItems(Context context, long listId) {
-        String sortOrder = PreferenceActivity.getSortOrderFromPrefs(context,
-                ShoppingActivity.MODE_IN_SHOP);
-        String selection = "list_id = ? AND "
-                + ShoppingContract.Contains.STATUS + " == "
-                + ShoppingContract.Status.WANT_TO_BUY;
-
-        return context.getContentResolver().query(
-                ContainsFull.CONTENT_URI, ShoppingActivity.PROJECTION_ITEMS,
-                selection, new String[]{String.valueOf(listId)}, sortOrder);
     }
 
 }

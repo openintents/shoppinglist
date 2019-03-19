@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">OI Alışveriş Listesi</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">OI Not defteri</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">%s i başlat ve menüsüyü seç &gt; CSV\'ye Çevir.</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">Çevir CSV</string>
+    <string name="convert_csv_notepad">CSV\'den Not defterine dönüştür</string>
+    <string name="convert_csv_shoppinglist">CSV\'den Alışveriş listesine dönüştür</string>
+    <string name="convert_all_notes">Tüm notları çevir</string>
+    <string name="convert_all_shoppinglists">Tüm alışveriş listesini çevir</string>
+    <string name="convert_list">\'%s\' listesini dnüştür</string>
+    <string name="file_path">Dosya yolu</string>
+    <string name="file_import">İçe aktar</string>
+    <string name="file_export">Dışa aktar</string>
+    <string name="error_writing_file">Dosyaya yazılırken hata</string>
+    <string name="error_reading_file">Dosya okunurken hata</string>
+    <string name="wrong_csv_format">Hatalı CSV formatı</string>
+    <string name="error_file_not_found">Dosya bulunamadı</string>
+    <string name="error_not_yet_implemented">Uygulanamadı, lütfen farklı bir seçenek seçin.</string>
+    <string name="import_finished">İçe aktarma tamamlandı</string>
+    <string name="export_finished">Dışa aktarma tamamlandı</string>
+    <string name="filemanager_title_notepad">Not defteri CSV dosyası seçin</string>
+    <string name="filemanager_title_shoppinglist">Alışveriş Listesi CSV dosyası seçin</string>
+	<string name="current_import_policy">İçe aktarma</string>
+	<string name="import_policy">İçe Aktarma İlkeleri</string>
+	<string name="select_import_policy">Kullanmak istediğiniz içe aktarma ilkelerini seçin</string>
+    
+    <string name="file_exists">Dosya zaten var. Var olan dosya ile değiştirisin mi?</string>
+    <string name="dont_ask_again">Tekrar sorma. Her zaman var olan dosyayla değiştir!</string>
+    
+    <string name="warn_restore_policy_title">İçe Aktarma İlkelerini GERİ AL olarak ayarla</string>
+    <string name="warn_restore_policy">Senin mevcut içe aktarma politikan MEVCUT BÜTÜN KAYITLARI SİL ve CSV dosyasının tüm içeriğini bunla DEĞİŞTİR olarak ayarlandı. Devam etmek istediğinize emin misiniz?</string>
+    
+    <string name="menu_settings">Ayarlar</string>
+    <string name="csv_file_format">CSV dosya biçimi</string>
+    <string name="select_csv_file_format">CSV dosya biçimi seçin</string>
+    <string name="select_encoding">Kodlama türü seçin</string>
+    <string name="default_encoding">Varsayılan</string>
+    <string name="use_custom_encoding">Kodlama türünü kendiniz ayarlayın (sadece üst düzey kullanıcılar)</string>
+    <string name="preferences_select_csv_file_format">Bir CVS dosya biçimi seçin</string>
+    <string name="preferences_select_import_policy">Kullanmak istediğiniz içe aktarma ilkelerini seçin</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">Genel ayarlar</string>
+    <string name="preference_common_summary">Kaydedilecek Not defteri ve Alıveriş listesi ayarlarını içe/dışa aktar.</string>
+    <string name="preference_ask_if_file_exists">Dosyanın olup olmadığını kontrol et</string>
+    <string name="preference_ask_if_file_exists_summary">Eğer işaretlerseniz dışa aktarılan dosyanın zaten bulunduğu durumlarda dosyanın üstüne yazılacak.</string>
+    
+    <string name="preference_application_specific">Özel uygulama ayarları</string>
+    <string name="preference_filename">Dosya adı</string>
+    <string name="preference_filename_summary">Dosya için tam yol.</string>
+    
+    <string name="preference_notepad">OI Not defteri</string>
+    <string name="preference_notepad_summary">OI Not defteri için içe/dışa aktarma ayarları.</string>
+    
+    <string name="preference_shoppinglist">OI Alışveriş listesi</string>
+    <string name="preference_shoppinglist_summary">OI Alışveriş listesi için içe/dışa aktarma ayarları.</string>
+    
+	<string name="converting">Çevriliyor...</string>
+	<string name="dialog_ok">OK</string>
+	<string name="preference_stores">Mağazaları içe aktar</string>
+	<string name="preference_stores_off_summary">BecerikliMüşteri mağaza isimlerini sadece öğe etiketi olarak içe aktar.</string>
+	<string name="preference_stores_on_summary">BecerikliMüşteri mağazalarını, mağaza başına fiyatları ve reyon bilgilerini içe aktar.</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>MS Outlook Notları</item>
+        <item>Palm CSV</item>
+        <item>JPilot Notu</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>MS Outlook Görevleri</item>
+        <item>BecerikliMüşteri</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>KOPYALA - Kayıtları kopyalamanıza izin verir</item>
+        <item>KEEP - Don\'t overwrite existing records.</item>
+        <item>Üstüne yaz - Var olan kayıtların üstüne yazar.</item>
+        <item>Geri Al - HEPSİNİ SİLi daha sonra içe aktar.</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>KOPYALA - Eğer kayıt mevcutsa ikinci bir koptasını oluştur.</item>
+        <item>KEEP - Don\'t overwrite an existing record, ignore the one in the CSV file.</item>
+        <item>Üstüne yaz - CSV deki bir kayıt var olan bir dosyanın ÜSTÜNE YAZACAK.</item>
+        <item>Yedeklemeyi Geri Al - VAR OLAN BÜTÜN KAYITLARI SİLER, ve CSV dosyasını içe aktarır.</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>KOPYALA - Kayıtları kopyalamanıza izin verir</item>
+        <item>KEEP - Don\'t overwrite existing records.</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>KOPYALA - Eğer kayıt mevcutsa ikinci bir koptasını oluştur.</item>
+        <item>KEEP - Don\'t overwrite an existing record, ignore the one in the CSV file.</item>
+    </string-array>
+    
+</resources>

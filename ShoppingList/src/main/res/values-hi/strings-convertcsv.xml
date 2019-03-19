@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">OI खरीदारी सूची</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">OI नोटपैड</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">%s लॉन्च करें और  </string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">CSV परिवर्तित करें</string>
+    <string name="convert_csv_notepad">CSV को नोटपैड में परिवर्तित करें</string>
+    <string name="convert_csv_shoppinglist">CSV को खरीदारी सूची में परिवर्तित करें</string>
+    <string name="convert_all_notes">सभी नोट्स को परिवर्तित करें</string>
+    <string name="convert_all_shoppinglists">सभी खरीदारी सूचियों को परिवर्तित करें</string>
+    <string name="convert_list">\'%s\' सूची को परिवर्तित करें</string>
+    <string name="file_path">फ़ाइल का पथ</string>
+    <string name="file_import">आयात</string>
+    <string name="file_export">निर्यात</string>
+    <string name="error_writing_file">फाइल में लिखने में त्रुटि</string>
+    <string name="error_reading_file">फ़ाइल से पढ़ने में त्रुटि</string>
+    <string name="wrong_csv_format">गलत CSV स्वरूप</string>
+    <string name="error_file_not_found">फ़ाइल नहीं मिली</string>
+    <string name="error_not_yet_implemented">अभी तक  लागू नहीं किया गया , कृपया कोई दूसरा विकल्प को चुने |</string>
+    <string name="import_finished">आयात समाप्त</string>
+    <string name="export_finished">निर्यात समाप्त</string>
+    <string name="filemanager_title_notepad">नोटपैड CSV फ़ाइल चुनें</string>
+    <string name="filemanager_title_shoppinglist">खरीदारी सूची CSV फ़ाइल चुने</string>
+	<string name="current_import_policy">वर्तमान आयात नीति:</string>
+	<string name="import_policy">आयात नीति</string>
+	<string name="select_import_policy">आयात नीति का उपयोग करने के लिए उसे चुनें</string>
+    
+    <string name="file_exists">फ़ाइल मौजूद है|क्या आप अधिलेखित करना चाहते हैं?</string>
+    <string name="dont_ask_again">पुन न पूछें. हमेशा अधिलेखित करें!</string>
+    
+    <string name="warn_restore_policy_title">आयत निति पुनर्स्थापित करने के लिए निधारित कर दी गयी है</string>
+    <string name="warn_restore_policy">आपकी वर्तमान आयत निति निर्धारित है," सभी मौजूदा रिकॉर्ड मिटायें और उन्हें CSV फ़ाइल की सामग्री के साथ बदल दें" पर| क्या आपको यकीन है?</string>
+    
+    <string name="menu_settings">सेटिंग्स</string>
+    <string name="csv_file_format">CSV फ़ाइल स्वरूप</string>
+    <string name="select_csv_file_format">CSV फ़ाइल स्वरूप का चयन करें</string>
+    <string name="select_encoding">एन्कोडिंग का चयन करें</string>
+    <string name="default_encoding">डिफ़ॉल्ट</string>
+    <string name="use_custom_encoding">कस्टम एन्कोडिंग का प्रयोग करें (उन्नत उपयोगकर्ताओं)</string>
+    <string name="preferences_select_csv_file_format">एक CSV फ़ाइल स्वरूप का चयन करें</string>
+    <string name="preferences_select_import_policy">आयात नीति का उपयोग करने के लिए उसे चुनें</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">सामान्य सेटिंग्स</string>
+    <string name="preference_common_summary">उन सेटिंग्स का आयात / निर्यात करें जो नोटपैड और खरीदारी सूची के लिए लागू है|</string>
+    <string name="preference_ask_if_file_exists">पूछें यदी फाईल मौजूद है</string>
+    <string name="preference_ask_if_file_exists_summary">यदि  जाँच की जाये तो  एक संवाद प्रकट होता है अधिलेखन की पुष्टि करने  के लिए अगर निर्यात फ़ाइल पहले से मौजूद हो तो</string>
+    
+    <string name="preference_application_specific">अनुप्रयोग विशिष्ट सेटिंग्स</string>
+    <string name="preference_filename">फाईल का नाम</string>
+    <string name="preference_filename_summary">फ़ाइल के लिए पूर्ण पथ|</string>
+    
+    <string name="preference_notepad">OI नोटपैड</string>
+    <string name="preference_notepad_summary">OI नोटपैड के लिए सेटिंग्स आयात/निर्यात करें|</string>
+    
+    <string name="preference_shoppinglist">OI खरीदारी सूची</string>
+    <string name="preference_shoppinglist_summary">OI खरीदारी सूची के लिए सेटिंग्स आयात/निर्यात करें|</string>
+    
+	<string name="converting">परिवर्तन हो रहा है...</string>
+	<string name="dialog_ok">OK</string>
+	<string name="preference_stores">स्टोर आयात करें</string>
+	<string name="preference_stores_off_summary">आइटम टैग के रूप में ही HandyShopper के स्टोर नाम आयात करें</string>
+	<string name="preference_stores_on_summary">HandyShopper स्टोर और प्रति स्टोर के मूल्य और गलियारे की जानकारी आयत करें|</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>MS Outlook नोट्स</item>
+        <item>CSV हथेली</item>
+        <item>JPilot मेमो</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>MS Outlook कार्य</item>
+        <item>HandyShopper</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>डुप्लीकेट - रिकॉर्ड को डुप्लिकेट करने की अनुमति देता है|</item>
+        <item>रखें - जारी रेकॉर्ड के ऊपर न डालें.</item>
+        <item>अधिलेखित - मौजूदा रिकॉर्ड अधिलेखित करता है|</item>
+        <item>पुनर्स्थापित करना - सभीमिटाएँ, फिर आयात करें|</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>डुप्लीकेट - एक रिकॉर्ड की एक दूसरे नकल जोड़ता है अगर यह पहले से ही मौजूद है|</item>
+        <item>रखें - जारी रेकॉर्ड के ऊपर न डालें, CSV फ़ाइल वाले को नज़रअंदाज़ करें.</item>
+        <item>अधिलेखित - CSV में एक रिकॉर्ड एक मौजूदा रिकॉर्ड को अधिलेखित कर देगा|</item>
+        <item>बैकअप पुनर्स्थापित करना - अपने मौजूदा सभी रिकॉर्ड मिटायें, फिर CSV फ़ाइल आयात करते हैं|</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>डुप्लीकेट - रिकॉर्ड को डुप्लिकेट करने की अनुमति देता है|</item>
+        <item>रखें - जारी रेकॉर्ड के ऊपर न डालें.</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>डुप्लीकेट - एक रिकॉर्ड की एक दूसरे नकल जोड़ता है अगर यह पहले से ही मौजूद है|</item>
+        <item>रखें - जारी रेकॉर्ड के ऊपर न डालें, CSV फ़ाइल वाले को नज़रअंदाज़ करें.</item>
+    </string-array>
+    
+</resources>

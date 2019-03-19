@@ -15,20 +15,20 @@
  -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/background"
-  android:orientation="vertical"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent">
-
-  <ListView
-    android:id="@+id/list1"
+    android:id="@+id/background"
     android:layout_width="fill_parent"
-    android:layout_height="0dip"
-    android:layout_weight="1" />
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
 
-  <CheckBox
-    android:id="@+id/check1"
-    android:text="@string/use_theme_for_all_lists"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content" />
+    <ListView
+        android:id="@+id/list1"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" />
+
+    <CheckBox
+        android:id="@+id/check1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/use_theme_for_all_lists" />
 </LinearLayout>

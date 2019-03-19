@@ -17,14 +17,14 @@
 
 <!-- This is a separator between different sections in the drawer.  -->
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"
-  android:minHeight="44dp"
-  android:gravity="bottom"
-  android:ellipsize="end"
-  android:singleLine="true"
-  android:textAllCaps="true"
-  style="?android:attr/listSeparatorTextViewStyle" /><!--
+    style="?android:attr/listSeparatorTextViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ellipsize="end"
+    android:gravity="bottom"
+    android:minHeight="44dp"
+    android:singleLine="true"
+    android:textAllCaps="true" /><!--
     android:textColor="@color/folder_list_heading_text_color"
     android:paddingLeft="@dimen/folder_list_heading_padding_side"
     android:paddingRight="@dimen/folder_list_heading_padding_side"

@@ -15,10 +15,10 @@
  -->
 
 <resources>
-  <color name="darkgreen">#FF006600</color>
-  <color name="black">#000</color>
-  <color name="strikethrough">#33336600</color>
-  <color name="priceTextColor">#FFCCCCCC</color>
-  <color name="markTextColor">#FFCCCCCC</color>
-  <color name="widgetBackground">#ebf5fa</color>
+    <color name="darkgreen">#FF006600</color>
+    <color name="black">#000</color>
+    <color name="strikethrough">#33336600</color>
+    <color name="priceTextColor">#FFCCCCCC</color>
+    <color name="markTextColor">#FFCCCCCC</color>
+    <color name="widgetBackground">#ebf5fa</color>
 </resources>

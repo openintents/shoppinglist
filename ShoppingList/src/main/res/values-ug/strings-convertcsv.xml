@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">OI سېتىۋېلىش تىزىمى</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">OI خاتىرە دەپتەر</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">%s نى قوزغىتىپ، تىزىملىك &gt; CSV كە ئايلاندۇرنى تاللاڭ.</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">CSV كە ئايلاندۇر</string>
+    <string name="convert_csv_notepad">CSV  نى خاتىرە دەپتەرگە ئايلاندۇر</string>
+    <string name="convert_csv_shoppinglist">CSV نى سېتىۋېلىش تىزىمىغا ئايلاندۇر</string>
+    <string name="convert_all_notes">ھەممە ئىزاھاتنى ئايلاندۇر</string>
+    <string name="convert_all_shoppinglists">ھەممە سېتىۋېلىش تىزىمىنى ئايلاندۇر</string>
+    <string name="convert_list">ئايلاندۇرۇش تىزىمى \'%s\'</string>
+    <string name="file_path">ھۆججەت يولى</string>
+    <string name="file_import">ئەكىر</string>
+    <string name="file_export">چىقار</string>
+    <string name="error_writing_file">ھۆججەتكە يېزىۋاتقاندا خاتالىق كۆرۈلدى</string>
+    <string name="error_reading_file">ھۆججەت ئوقۇۋاتقاندا خاتالىق كۆرۈلدى</string>
+    <string name="wrong_csv_format">خاتا CSV پىچىمى</string>
+    <string name="error_file_not_found">ھۆججەت تېپىلمىدى</string>
+    <string name="error_not_yet_implemented">ئىشلەتكىلى بولمايدۇ، باشقا تاللانما تاللاڭ.</string>
+    <string name="import_finished">ئەكىرىش تامام.</string>
+    <string name="export_finished">چىقىرىش تامام</string>
+    <string name="filemanager_title_notepad">خاتىرە دەپتەر CSV ھۆججەت تاللاڭ</string>
+    <string name="filemanager_title_shoppinglist">سېتىۋېلىش تىزىمى CSV ھۆججەت تاللاڭ</string>
+	<string name="current_import_policy">نۆۋەتتىكى ئەكىرىش تەدبىرى:</string>
+	<string name="import_policy">ئەكىرىش تەدبىرى</string>
+	<string name="select_import_policy">ئەكىرىدىغان تەدبىرنى تاللاڭ</string>
+    
+    <string name="file_exists">ھۆججەت مەۋجۇت، قاپلىۋېتەمسىز؟</string>
+    <string name="dont_ask_again">قايتا سورىما، ھەمىشە قاپلا!</string>
+    
+    <string name="warn_restore_policy_title">ئەكىرىش تەدبىرىنى ئەسلىگە كەلتۈر</string>
+    <string name="warn_restore_policy">نۆۋەتتىكى ئەكىرىش تەدبىرى ئۆچۈرۈلدى. CSV ھۆججەتتە مەزمۇننى ئالماشتۇرىدۇ، راستمۇ؟</string>
+    
+    <string name="menu_settings">تەڭشەكلەر</string>
+    <string name="csv_file_format">CSV ھۆججەت پىچىمى</string>
+    <string name="select_csv_file_format">CSV ھۆججەت پىچىمىنى تاللاڭ</string>
+    <string name="select_encoding">كودلاشنى تاللاڭ</string>
+    <string name="default_encoding">كۆڭۈلدىكى</string>
+    <string name="use_custom_encoding">ئۆزگىچە كودلاشنى ئىشلەت (ئالىي ئىشلەتكۈچى)</string>
+    <string name="preferences_select_csv_file_format">CSV ھۆججەت پىچىمىنى تاللاڭ</string>
+    <string name="preferences_select_import_policy">ئەكىرىدىغان تەدبىرنى تاللاڭ</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">ئورتاق تەڭشەكلەر</string>
+    <string name="preference_common_summary">ئەكىر/چىقار تەڭشەكلەر خاتىرە دەپتەر ۋە سېتىۋېلىش تىزىم تەڭشىكىگە قوللىنىلىدۇ.</string>
+    <string name="preference_ask_if_file_exists">ھۆججەت مەۋجۇت بولسا سورا</string>
+    <string name="preference_ask_if_file_exists_summary">ئەگەر ھۆججەت مەۋجۇت بولسا سۆزلەشكۈدە قاپلاشنى ئەسكەرتىدۇ.</string>
+    
+    <string name="preference_application_specific">ئەپ چۈشەندۈرۈش تەڭشەكلىرى</string>
+    <string name="preference_filename">ھۆججەت ئاتى</string>
+    <string name="preference_filename_summary">ھۆججەتنىڭ تولۇق يولى.</string>
+    
+    <string name="preference_notepad">OI خاتىرە دەپتەر</string>
+    <string name="preference_notepad_summary">OI خاتىرە دەپتەر ئەكىر/چىقار تەڭشەكلىرى</string>
+    
+    <string name="preference_shoppinglist">OI سېتىۋېلىش تىزىمى</string>
+    <string name="preference_shoppinglist_summary">OI سېتىۋېلىش تىزىمى ئەكىر/چىقار تەڭشەكلىرى</string>
+    
+	<string name="converting">ئايلاندۇرۇۋاتىدۇ……</string>
+	<string name="dialog_ok">جەزملە</string>
+	<string name="preference_stores">دۇكاننى ئەكىر</string>
+	<string name="preference_stores_off_summary">HandyShopper  ئاتىنى بەلگە سۈپىتىدە ئەكىر</string>
+	<string name="preference_stores_on_summary">HandyShopper دۇكىنى ۋە ھەر بىر دۇكاننىڭ باھا ۋە مال مەنبە ئۇچۇرىنى ئەكىرىدۇ.</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>MS Outlook ئىزاھات</item>
+        <item>Palm CSV</item>
+        <item>JPilot خاتىرە</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>MS Outlook ۋەزىپە</item>
+        <item>HandyShopper</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>كۆچۈر - تەكرار خاتىرىگە يول قوي.</item>
+        <item>ساقلاپ قال - مەۋجۇت خاتىرىلەرنى قاپلىۋەتمە.</item>
+        <item>قاپلا - نۆۋەتتە مەۋجۇت خاتىرىلەرنى قاپلىۋەت.</item>
+        <item>ئەسلىگە كەلتۈر - ھەممىنى ئۆچۈرۈپ ئاندىن ئەكىر.</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>كۆچۈر - ئەگەر مەۋجۇت بولسا بىر خاتىرىنى قوشۇپ ئىككى نۇسخا خاتىرىلەيدۇ.</item>
+        <item>ساقلاپ قال - مەۋجۇت خاتىرىنى قاپلىۋەتمە، CSV ھۆججەتتىكى بىرسىگە پەرۋا قىلما.</item>
+        <item>قاپلا - CSV  خاتىرىسى ئارقىلىق مەۋجۇت خاتىرىنى قاپلىۋېتىدۇ.</item>
+        <item>زاپاسنى ئەسلىگە كەلتۈر - نۆۋەتتە مەۋجۇت ھەممە خاتىرىنى ئۆچۈرۈپ ئاندىن CSV ھۆججەت ئەكىرىدۇ.</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>كۆچۈر - تەكرار خاتىرىگە يول قوي.</item>
+        <item>ساقلاپ قال - مەۋجۇت خاتىرىلەرنى قاپلىۋەتمە.</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>كۆچۈر - ئەگەر مەۋجۇت بولسا بىر خاتىرىنى قوشۇپ ئىككى نۇسخا خاتىرىلەيدۇ.</item>
+        <item>ساقلاپ قال - مەۋجۇت خاتىرىنى قاپلىۋەتمە، CSV ھۆججەتتىكى بىرسىگە پەرۋا قىلما.</item>
+    </string-array>
+    
+</resources>

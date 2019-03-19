@@ -12,12 +12,12 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-import java.util.List;
-
 import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.Lists;
 import org.openintents.shopping.ui.PreferenceActivity;
+
+import java.util.List;
 
 public class CheckItemsWidgetConfig extends ListActivity {
     private final static String PREFS = "check_items_widget";

@@ -11,11 +11,11 @@ buildscript {
 
 allprojects {
     repositories {
+        google()
         jcenter()
         maven {
             url "https://jitpack.io"
         }
-        google()
 
     }
 }
@@ -25,6 +25,6 @@ ext {
     targetSdkVersion = 28
     buildToolsVersion = "28.0.3"
     supportVersion = "28.+"
-    playServicesVersion = "10.2.1"
-    supportWearableVersion = "2.0.0"
+    playServicesVersion = "16.0.1"
+    supportWearableVersion = "2.4.0"
 }

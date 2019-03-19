@@ -15,70 +15,70 @@
  -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/background"
-  android:orientation="vertical"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent">
-
-  <LinearLayout
-    android:orientation="horizontal"
+    android:id="@+id/background"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
 
-    <View
-      android:layout_width="48dip"
-      android:layout_height="48dip"
-      android:background="@android:drawable/ic_menu_share" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="48dip"
+            android:layout_height="48dip"
+            android:background="@android:drawable/ic_menu_share" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:text="@string/shopping_name_description" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/share_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:capitalize="sentences" />
 
     <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="@string/shopping_name_description"
-      android:layout_marginTop="10dip" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:text="@string/shopping_share_description" />
 
-  </LinearLayout>
+    <EditText
+        android:id="@+id/contacts"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:capitalize="sentences" />
 
-  <EditText
-    android:id="@+id/share_name"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:capitalize="sentences" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dip"
+        android:orientation="horizontal">
 
-  <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/shopping_share_description"
-    android:layout_marginTop="10dip" />
+        <Button
+            android:id="@+id/ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ok" />
 
-  <EditText
-    android:id="@+id/contacts"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:capitalize="sentences" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=""
+            android:visible="false" />
 
-  <LinearLayout
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="3dip">
-
-    <Button
-      android:id="@+id/ok"
-      android:text="@string/ok"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" />
-
-    <TextView
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:text=""
-      android:layout_weight="1"
-      android:visible="false" />
-
-    <Button
-      android:id="@+id/cancel"
-      android:text="@string/cancel"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" />
-  </LinearLayout>
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel" />
+    </LinearLayout>
 </LinearLayout>

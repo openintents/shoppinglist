@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2007-2008 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,69 +29,6 @@ import android.provider.BaseColumns;
  * Definition for content provider related to location.
  */
 public class Location {
-
-    public static final class Locations implements BaseColumns {
-        /**
-         * The content:// style URL for this table
-         */
-        public static final Uri CONTENT_URI = Uri
-                .parse("content://org.openintents.locations/locations");
-
-        /**
-         * The default sort order for this table
-         */
-        public static final String DEFAULT_SORT_ORDER = "modified DESC";
-
-        /**
-         * The latitude of the location
-         * <p/>
-         * Type: TEXT
-         * </P>
-         */
-        public static final String LATITUDE = "latitude";
-
-        /**
-         * The longitude of the location
-         * <p/>
-         * Type: TEXT
-         * </P>
-         */
-        public static final String LONGITUDE = "longitude";
-
-        /**
-         * The timestamp for when the note was created
-         * <p/>
-         * Type: INTEGER (long)
-         * </P>
-         */
-        public static final String CREATED_DATE = "created";
-
-        /**
-         * The timestamp for when the note was last modified
-         * <p/>
-         * Type: INTEGER (long)
-         * </P>
-         */
-        public static final String MODIFIED_DATE = "modified";
-
-        /**
-         * bundle/extra key for pick action, containing location uri with scheme
-         * geo:
-         */
-        public static final String EXTRA_GEO = "geo";
-    }
-
-    public static final class Extras implements BaseColumns {
-
-        public static final String LOCATION_ID = "locationId";
-        public static final String KEY = "key";
-        public static final String VALUE = "value";
-
-        public static final String URI_PATH_EXTRAS = "extras";
-        public static final Uri CONTENT_URI = Uri
-                .parse("content://org.openintents.locations/extras");
-
-    }
 
     private ContentResolver mResolver;
 
@@ -164,6 +101,69 @@ public class Location {
                 .appendPath(String.valueOf(locationId))
                 .appendPath(Extras.URI_PATH_EXTRAS);
         return mResolver.insert(uri.build(), null);
+
+    }
+
+    public static final class Locations implements BaseColumns {
+        /**
+         * The content:// style URL for this table
+         */
+        public static final Uri CONTENT_URI = Uri
+                .parse("content://org.openintents.locations/locations");
+
+        /**
+         * The default sort order for this table
+         */
+        public static final String DEFAULT_SORT_ORDER = "modified DESC";
+
+        /**
+         * The latitude of the location
+         * <p/>
+         * Type: TEXT
+         * </P>
+         */
+        public static final String LATITUDE = "latitude";
+
+        /**
+         * The longitude of the location
+         * <p/>
+         * Type: TEXT
+         * </P>
+         */
+        public static final String LONGITUDE = "longitude";
+
+        /**
+         * The timestamp for when the note was created
+         * <p/>
+         * Type: INTEGER (long)
+         * </P>
+         */
+        public static final String CREATED_DATE = "created";
+
+        /**
+         * The timestamp for when the note was last modified
+         * <p/>
+         * Type: INTEGER (long)
+         * </P>
+         */
+        public static final String MODIFIED_DATE = "modified";
+
+        /**
+         * bundle/extra key for pick action, containing location uri with scheme
+         * geo:
+         */
+        public static final String EXTRA_GEO = "geo";
+    }
+
+    public static final class Extras implements BaseColumns {
+
+        public static final String LOCATION_ID = "locationId";
+        public static final String KEY = "key";
+        public static final String VALUE = "value";
+
+        public static final String URI_PATH_EXTRAS = "extras";
+        public static final Uri CONTENT_URI = Uri
+                .parse("content://org.openintents.locations/extras");
 
     }
 }
