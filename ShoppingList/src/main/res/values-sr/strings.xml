@@ -118,7 +118,7 @@
     <string name="priority3_total">1-3 Приоритет: %s</string>
     <string name="priority4_total">1-4 Приоритет: %s</string>
 
-    <string name="delete_item_confirm">Потврдите трајно брисање ове ставке…</string>
+    <string name="delete_item_confirm">Потврдите трајно брисање ове ставке (\"%s\")?</string>
     <string name="delete">Обриши</string>
 
     <!-- Added to an item to indicate it was bought. -->

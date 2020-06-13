@@ -125,7 +125,7 @@
     <string name="priority3_total">Prioriteit 1-3: %s</string>
     <string name="priority4_total">Prioriteit 1-4: %s</string>
 
-    <string name="delete_item_confirm">Weet u zeker dat u dit item voorgoed wilt verwijderen?</string>
+    <string name="delete_item_confirm">Weet u zeker dat u dit item voorgoed wilt verwijderen (\"%s\")?</string>
     <string name="delete">Verwijderen</string>
 
     <!-- Added to an item to indicate it was bought. -->
