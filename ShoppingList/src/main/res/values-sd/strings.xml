@@ -119,7 +119,7 @@
     <string name="priority3_total">प्रधानता १-३: %s</string>
     <string name="priority4_total">प्रधानता १-४: %s</string>
 
-    <string name="delete_item_confirm">\?शा तहन्जो पक्को तावकी तहां ईयो आईटम मितायण ता चाह्यो</string>
+    <string name="delete_item_confirm">\?(\"%s\") शा तहन्जो पक्को तावकी तहां ईयो आईटम मितायण ता चाह्यो</string>
     <string name="delete">मिटायो</string>
 
     <!-- Added to an item to indicate it was bought. -->

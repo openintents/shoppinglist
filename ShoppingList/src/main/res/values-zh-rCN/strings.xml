@@ -122,7 +122,7 @@
     <string name="priority3_total">优先1-3: %s</string>
     <string name="priority4_total">优先1-4: %s</string>
 
-    <string name="delete_item_confirm">您确定要永久删除该商品吗？</string>
+    <string name="delete_item_confirm">您确定要永久删除该商品吗 (\"%s\")？</string>
     <string name="delete">删除</string>
 
     <!-- Added to an item to indicate it was bought. -->

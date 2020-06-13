@@ -118,7 +118,7 @@
     <string name="priority3_total">Tärkeysjärjestys 1-3: %s</string>
     <string name="priority4_total">Tärkeysjärjestys 1-4: %s</string>
 
-    <string name="delete_item_confirm">Oletko aivan varma, että haluat poistaa tämän kohteen pysyvästi?</string>
+    <string name="delete_item_confirm">Oletko aivan varma, että haluat poistaa tämän kohteen pysyvästi (\"%s\")?</string>
     <string name="delete">Poista</string>
 
     <!-- Added to an item to indicate it was bought. -->

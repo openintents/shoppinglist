@@ -120,7 +120,7 @@
     <string name="priority3_total">प्रधानता १-३: %s</string>
     <string name="priority4_total">प्रधानता १-४: %s</string>
 
-    <string name="delete_item_confirm">क्या आप पक्का से इस चीज़ को हमेशा के लिए हटाना चाहते हैं?</string>
+    <string name="delete_item_confirm">क्या आप पक्का से इस चीज़ को हमेशा के लिए हटाना चाहते हैं (\"%s\")?</string>
     <string name="delete">हटाएँ</string>
 
     <!-- Added to an item to indicate it was bought. -->

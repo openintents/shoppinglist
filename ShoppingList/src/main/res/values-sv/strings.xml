@@ -120,7 +120,7 @@
     <string name="priority3_total">Prioritet 1-3: %s</string>
     <string name="priority4_total">Prioritet 1-4: %s</string>
 
-    <string name="delete_item_confirm">Är du säker på att du permanent vill ta bort den här varan?</string>
+    <string name="delete_item_confirm">Är du säker på att du permanent vill ta bort den här varan (\"%s\")?</string>
     <string name="delete">Ta bort</string>
 
     <!-- Added to an item to indicate it was bought. -->

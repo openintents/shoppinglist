@@ -128,7 +128,7 @@
     <string name="priority3_total">Priorytet 1-3: %s</string>
     <string name="priority4_total">Priorytet 1-4: %s</string>
 
-    <string name="delete_item_confirm">Czy na pewno chcesz trwale usunąć ten element?</string>
+    <string name="delete_item_confirm">Czy na pewno chcesz trwale usunąć ten element (\"%s\")?</string>
     <string name="delete">Usuń</string>
 
     <!-- Added to an item to indicate it was bought. -->
