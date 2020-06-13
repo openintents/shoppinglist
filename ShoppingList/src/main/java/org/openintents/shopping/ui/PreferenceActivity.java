@@ -25,6 +25,7 @@ import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract.Contains;
 import org.openintents.shopping.library.provider.ShoppingContract.Lists;
 import org.openintents.shopping.library.util.ShoppingUtils;
+import org.openintents.shopping.ui.widget.ShoppingItemsView;
 import org.openintents.util.BackupManagerWrapper;
 import org.openintents.util.IntentUtils;
 
@@ -189,17 +190,17 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
     static public int getSortOrderIndexFromPrefs(Context context, int mode, long listId) {
         int sortOrder = 0;
 
-        if (mode != ShoppingActivity.MODE_IN_SHOP) {
+        if (mode != ShoppingItemsView.MODE_IN_SHOP) {
             boolean followShopping = PreferenceManager
                     .getDefaultSharedPreferences(context).getBoolean(
                             PREFS_SAMESORTFORPICK,
                             PREFS_SAMESORTFORPICK_DEFAULT);
             if (followShopping) {
-                mode = ShoppingActivity.MODE_IN_SHOP;
+                mode = ShoppingItemsView.MODE_IN_SHOP;
             }
         }
 
-        if (mode != ShoppingActivity.MODE_IN_SHOP) {
+        if (mode != ShoppingItemsView.MODE_IN_SHOP) {
             // use the pick-items-specific value, if there is one
             try {
                 sortOrder = Integer.parseInt(PreferenceManager
@@ -210,11 +211,11 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
                 // Guess somebody messed with the preferences and put a string
                 // into
                 // this field. We'll follow shopping mode then.
-                mode = ShoppingActivity.MODE_IN_SHOP;
+                mode = ShoppingItemsView.MODE_IN_SHOP;
             }
         }
 
-        if (mode == ShoppingActivity.MODE_IN_SHOP) {
+        if (mode == ShoppingItemsView.MODE_IN_SHOP) {
 
             boolean set = false;
             if (PreferenceActivity.getUsingPerListSortFromPrefs(context)) {
@@ -271,7 +272,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity
     static public boolean prefsStatusAffectsSort(Context context, int mode) {
         int index = getSortOrderIndexFromPrefs(context, mode);
         boolean affects = Contains.StatusAffectsSortOrder[index];
-        if (mode == ShoppingActivity.MODE_IN_SHOP && !affects) {
+        if (mode == ShoppingItemsView.MODE_IN_SHOP && !affects) {
             // in shopping mode we should also invalidate display when
             // marking items if we are hiding checked items.
             affects = getHideCheckedItemsFromPrefs(context);

@@ -19,7 +19,7 @@ public class PickItemsActivity extends Activity {
         setContentView(R.layout.activity_pick_items);
 
         final ShoppingItemsView listItems = (ShoppingItemsView) findViewById(R.id.list_items);
-        listItems.mMode = ShoppingActivity.MODE_PICK_ITEMS_DLG;
+        listItems.setPickItemsDlgMode();
 
         String listId = getIntent().getData().getLastPathSegment();
         listItems.fillItems(this, Long.parseLong(listId));

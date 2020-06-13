@@ -84,6 +84,20 @@ import java.util.Locale;
  * View to show a shopping list with its items
  */
 public class ShoppingItemsView extends ListView implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    /**
+     * mode: separate dialog to add items from existing list
+     */
+    private static final int MODE_PICK_ITEMS_DLG = 3;
+    /**
+     * mode: add items from existing list
+     */
+    private static final int MODE_ADD_ITEMS = 2;
+    /**
+     * mode: I am in the shop
+     */
+    public static final int MODE_IN_SHOP = 1;
+
     private final static String TAG = "ShoppingListView";
     private final static boolean debug = false;
     public int mPriceVisibility;
@@ -108,7 +122,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
     public int mLastListTop;
     public long mNumChecked;
     public long mNumUnchecked;
-    public int mMode = ShoppingActivity.MODE_IN_SHOP;
+    private int mMode = MODE_IN_SHOP;
     public int mModeBeforeSearch;
     public Cursor mCursorItems;
     private Typeface mCurrentTypeface;
@@ -160,6 +174,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
     private ShoppingTotalsHandler mTotalsHandler;
     private SearchView mSearchView;
     private OnCustomClickListener mListener;
+    private OnModeChangeListener mModeChangeListener;
     private boolean mDragAndDropEnabled;
 
     public ShoppingItemsView(Context context, AttributeSet attrs, int defStyle) {
@@ -181,13 +196,11 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         Context context = getContext();
         if (PreferenceActivity.getUsingHoloSearchFromPrefs(context)) {
             mSearchView = new SearchView(mCursorActivity);
-            if (mSearchView != null) {
-                mSearchView.setSubmitButtonEnabled(true);
-                mSearchView.setInputType(PreferenceActivity.getSearchInputTypeFromPrefs(context));
-                mSearchView.setOnQueryTextListener(new SearchQueryListener());
-                mSearchView.setOnCloseListener(new SearchDismissedListener());
-                mSearchView.setImeOptions(EditorInfo.IME_ACTION_UNSPECIFIED);
-            }
+            mSearchView.setSubmitButtonEnabled(true);
+            mSearchView.setInputType(PreferenceActivity.getSearchInputTypeFromPrefs(context));
+            mSearchView.setOnQueryTextListener(new SearchQueryListener());
+            mSearchView.setOnCloseListener(new SearchDismissedListener());
+            mSearchView.setImeOptions(EditorInfo.IME_ACTION_UNSPECIFIED);
         }
         return mSearchView;
     }
@@ -377,7 +390,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         if (mFilter != null) {
             selection = "list_id = ? AND " + ContainsFull.ITEM_NAME +
                     " like '%" + ShoppingProvider.escapeSQLChars(mFilter) + "%' ESCAPE '`'";
-        } else if (mMode == ShoppingActivity.MODE_IN_SHOP) {
+        } else if (inShopMode()) {
             if (hideBought) {
                 selection = "list_id = ? AND " + Contains.STATUS
                         + " == " + Status.WANT_TO_BUY;
@@ -771,7 +784,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         // Toggle status depending on mode:
         long newstatus = ShoppingContract.Status.WANT_TO_BUY;
 
-        if (mMode == ShoppingActivity.MODE_IN_SHOP) {
+        if (inShopMode()) {
             if (oldstatus == ShoppingContract.Status.WANT_TO_BUY) {
                 newstatus = ShoppingContract.Status.BOUGHT;
             } // else old was BOUGHT, new should be WANT_TO_BUY, which is the default.
@@ -1273,8 +1286,33 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         mDropListener = l;
     }
 
+    public void setOnModeChangeListener(OnModeChangeListener listener) {
+        mModeChangeListener = listener;
+    }
+
+    public void setModes(int mode, int modeBeforeSearch) {
+        mMode = mode;
+        mModeBeforeSearch = modeBeforeSearch;
+    }
+
+    public void setPickItemsDlgMode() {
+        mMode = MODE_PICK_ITEMS_DLG;
+    }
+
+    public void setAddItemsMode() {
+        mMode = MODE_ADD_ITEMS;
+    }
+
+    public void setInShopMode() {
+        mMode = MODE_IN_SHOP;
+    }
+
+    public int getMode() {
+        return mMode;
+    }
+
     public interface OnCustomClickListener {
-        public void onCustomClick(Cursor c, int pos, EditItemDialog.FieldType field, View v);
+        void onCustomClick(Cursor c, int pos, EditItemDialog.FieldType field, View v);
     }
 
     public interface DragListener {
@@ -1291,6 +1329,10 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
 
     public interface ActionBarListener {
         void updateActionBar();
+    }
+
+    public interface OnModeChangeListener {
+        void onModeChanged();
     }
 
     /**
@@ -1417,7 +1459,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
                 state.mCheckView.setVisibility(CheckBox.GONE);
             }
 
-            if (mMode == ShoppingActivity.MODE_IN_SHOP) {
+            if (inShopMode()) {
                 state.mNoCheckView.setVisibility(ImageView.GONE);
             } else {  // mMode == ShoppingActivity.MODE_ADD_ITEMS
                 if (status == ShoppingContract.Status.REMOVED_FROM_LIST) {
@@ -1741,6 +1783,18 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
 
     }
 
+    public boolean inShopMode() {
+        return mMode == MODE_IN_SHOP;
+    }
+
+    public boolean inAddItemsMode() {
+        return mMode == MODE_ADD_ITEMS;
+    }
+
+    public boolean inPickItemsDialogMode() {
+        return mMode == MODE_PICK_ITEMS_DLG;
+    }
+
     private class SearchQueryListener implements SearchView.OnQueryTextListener {
         public boolean onQueryTextChange(String query) {
             boolean isIconified = mSearchView.isIconified();
@@ -1763,7 +1817,7 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
             if (mInSearch == false && !isIconified) {
                 mInSearch = true;
                 mModeBeforeSearch = mMode;
-                mMode = ShoppingActivity.MODE_ADD_ITEMS;
+                mMode = MODE_ADD_ITEMS;
             }
 
             if (query == null || query.length() == 0) {
@@ -1796,6 +1850,9 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         public boolean onClose() {
             if (mInSearch) {
                 mMode = mModeBeforeSearch;
+                if (mModeChangeListener != null) {
+                    mModeChangeListener.onModeChanged();
+                }
             }
             mInSearch = false;
             mFilter = null;

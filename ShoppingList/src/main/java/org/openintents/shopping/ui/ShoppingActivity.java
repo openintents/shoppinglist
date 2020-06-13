@@ -129,31 +129,22 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
+import static org.openintents.shopping.ui.widget.ShoppingItemsView.MODE_IN_SHOP;
+
 /**
  * Displays a shopping list.
  */
 public class ShoppingActivity extends DistributionLibraryFragmentActivity
         implements ThemeDialogListener, OnCustomClickListener,
         ActionBarListener, OnItemChangedListener,
-        UndoListener { // implements
+        UndoListener, ShoppingItemsView.OnModeChangeListener { // implements
     // AdapterView.OnItemClickListener
     // {
 
     public static final int DIALOG_GET_FROM_MARKET = 7;
     public static final int LOADER_TOTALS = 0;
     public static final int LOADER_ITEMS = 1;
-    /**
-     * mode: separate dialog to add items from existing list
-     */
-    public static final int MODE_PICK_ITEMS_DLG = 3;
-    /**
-     * mode: add items from existing list
-     */
-    public static final int MODE_ADD_ITEMS = 2;
-    /**
-     * mode: I am in the shop
-     */
-    public static final int MODE_IN_SHOP = 1;
+
     public static final String[] PROJECTION_ITEMS = new String[]{
             ContainsFull._ID, ContainsFull.ITEM_NAME, ContainsFull.ITEM_IMAGE,
             ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,
@@ -529,8 +520,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             if (icicle.containsKey(BUNDLE_RELATION_URI)) {
                 mRelationUri = Uri.parse(icicle.getString(BUNDLE_RELATION_URI));
             }
-            mItemsView.mMode = icicle.getInt(BUNDLE_MODE);
-            mItemsView.mModeBeforeSearch = icicle.getInt(BUNDLE_MODE_BEFORE_SEARCH);
+            mItemsView.setModes(icicle.getInt(BUNDLE_MODE), icicle.getInt(BUNDLE_MODE_BEFORE_SEARCH));
         }
 
         // set focus to the edit line:
@@ -706,7 +696,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             return;
         }
 
-        if (mItemsView.mMode == MODE_IN_SHOP) {
+        if (mItemsView.inShopMode()) {
             registerAcceleratorSensor();
         }
 
@@ -785,7 +775,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             if (PreferenceActivity
                     .getPickItemsInListFromPrefs(getApplicationContext())) {
                 // 2 different modes
-                if (mItemsView.mMode == MODE_IN_SHOP) {
+                if (mItemsView.inShopMode()) {
                     mSubTitle = getString(R.string.menu_start_shopping);
                     registerSensor();
                 } else {
@@ -807,7 +797,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     }
 
     private void updateButton() {
-        if (mItemsView.mMode == MODE_ADD_ITEMS) {
+        if (mItemsView.inAddItemsMode()) {
             String newItem = mEditText.getText().toString();
             if (TextUtils.isEmpty(newItem)) {
                 // If in "add items" mode and the text field is empty,
@@ -905,7 +895,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         }
         // When app is stopped, it will be thrown out of search mode; thus if we are in search mode,
         // we need to ensure the app resumes in the original mode it was in before entering search.
-        final int saveMode = mItemsView.getInSearch() ? mItemsView.mModeBeforeSearch : mItemsView.mMode;
+        final int saveMode = mItemsView.getInSearch() ? mItemsView.mModeBeforeSearch : mItemsView.getMode();
         outState.putInt(BUNDLE_MODE, saveMode);
         outState.putInt(BUNDLE_MODE_BEFORE_SEARCH, saveMode);
         mUpdating = false;
@@ -972,7 +962,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (mItemsView.mMode == MODE_ADD_ITEMS) {
+                if (mItemsView.inAddItemsMode()) {
                     // small optimization: Only care about updating
                     // the button label on each key pressed if we
                     // are in "add items" mode.
@@ -1060,6 +1050,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         mItemsView = (ShoppingItemsView) findViewById(R.id.list_items);
         mItemsView.setThemedBackground(findViewById(R.id.background));
         mItemsView.setCustomClickListener(this);
+        mItemsView.setOnModeChangeListener(this);
         mItemsView.initTotals();
 
         mItemsView.setItemsCanFocus(true);
@@ -1679,7 +1670,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         // set menu title for change mode
         MenuItem menuItem = menu.findItem(MENU_PICK_ITEMS);
 
-        if (mItemsView.mMode == MODE_ADD_ITEMS) {
+        if (mItemsView.inAddItemsMode()) {
             menuItem.setTitle(R.string.menu_start_shopping);
             menuItem.setIcon(android.R.drawable.ic_menu_myplaces);
         } else {
@@ -1847,15 +1838,15 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     private void pickItems() {
         if (PreferenceActivity
                 .getPickItemsInListFromPrefs(getApplicationContext())) {
-            if (mItemsView.mMode == MODE_IN_SHOP) {
-                mItemsView.mMode = MODE_ADD_ITEMS;
+            if (mItemsView.inShopMode()) {
+                mItemsView.setAddItemsMode();
             } else {
-                mItemsView.mMode = MODE_IN_SHOP;
+                mItemsView.setInShopMode();
             }
             onModeChanged();
         } else {
-            if (mItemsView.mMode != MODE_IN_SHOP) {
-                mItemsView.mMode = MODE_IN_SHOP;
+            if (!mItemsView.inShopMode()) {
+                mItemsView.setInShopMode();
                 onModeChanged();
             }
             pickItemsUsingDialog();
@@ -2724,7 +2715,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
     }
 
-    private void onModeChanged() {
+    public void onModeChanged() {
 
         if (debug) {
             Log.d(TAG, "onModeChanged()");
@@ -3167,14 +3158,14 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                         v2 = v.findViewById(R.id.text1);
                         ((TextView) v2).setText(R.string.menu_pick_items);
                         v2 = v.findViewById(R.id.mode_radio_button);
-                        v2.setSelected(mItemsView.mMode == MODE_ADD_ITEMS);
+                        v2.setSelected(mItemsView.inAddItemsMode());
                         break;
                     case 0:
                         v = mInflater.inflate(R.layout.drawer_item_radio, parent, false);
                         v2 = v.findViewById(R.id.text1);
                         ((TextView) v2).setText(R.string.menu_start_shopping);
                         v2 = v.findViewById(R.id.mode_radio_button);
-                        v2.setSelected(mItemsView.mMode == MODE_IN_SHOP);
+                        v2.setSelected(mItemsView.inShopMode());
                         break;
                     case 2:
                         v = mInflater.inflate(R.layout.drawer_item_header, parent, false);
@@ -3242,7 +3233,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             if (position < mNumAboveList) {
                 // Pick Items or Shopping selected
                 closeDrawer();
-                mItemsView.mMode = (position == 1) ? MODE_ADD_ITEMS : MODE_IN_SHOP;
+                if (position == 1) mItemsView.setAddItemsMode(); else mItemsView.setInShopMode();
                 mDrawerListsView.setItemChecked(position, true);
                 mDrawerListsView.setItemChecked(1 - position, false);
                 mDrawerListsView.invalidateViews();
@@ -3319,7 +3310,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         public boolean isVisible() {
             boolean vis = true;
-            if (mItemsView.mMode != MODE_IN_SHOP) {
+            if (!mItemsView.inShopMode()) {
                 vis = false;
             } else if (!PreferenceActivity.getUsingPerListSortFromPrefs(mContext)) {
                 vis = false;
