@@ -2,7 +2,7 @@
 
 ![logo](ShoppingList/src/main/res/drawable-hdpi-v5/ic_launcher_shoppinglist.png)
 
-Free, open source Android application in 40 languages since 2011.
+Free, ad-free, open source Android application in 40 languages since 2009.
 
 OI Shopping List is a powerful application which makes it easy to create and manage checklists for your daily shopping.
 
