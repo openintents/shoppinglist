@@ -43,7 +43,7 @@ public class SnackbarUndoSingleItemStatusOperation extends SnackbarUndoOperation
     public String getSingularDescription(Context context) {
         int resId;
 
-        if (mShoppingItemsView.mMode == ShoppingActivity.MODE_ADD_ITEMS) {
+        if (mShoppingItemsView.inAddItemsMode()) {
             if (mNewStatus == ShoppingContract.Status.WANT_TO_BUY) {
                 resId = R.string.undoable_added_item;
             } else {

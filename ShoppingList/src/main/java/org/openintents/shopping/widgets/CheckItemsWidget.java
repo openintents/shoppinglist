@@ -19,6 +19,7 @@ import org.openintents.shopping.ShoppingActivity;
 import org.openintents.shopping.library.provider.ShoppingContract;
 import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
 import org.openintents.shopping.ui.PreferenceActivity;
+import org.openintents.shopping.ui.widget.ShoppingItemsView;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class CheckItemsWidget extends AppWidgetProvider {
 
     public static Cursor fillItems(Context context, long listId) {
         String sortOrder = PreferenceActivity.getSortOrderFromPrefs(context,
-                ShoppingActivity.MODE_IN_SHOP);
+                ShoppingItemsView.MODE_IN_SHOP);
         String selection = "list_id = ? AND "
                 + ShoppingContract.Contains.STATUS + " == "
                 + ShoppingContract.Status.WANT_TO_BUY;

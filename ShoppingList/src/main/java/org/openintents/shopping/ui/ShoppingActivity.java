@@ -547,10 +547,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         if (ShoppingContract.ITEM_TYPE.equals(type)) {
             return ShoppingUtils.getListForItem(this, data
                     .getLastPathSegment());
-        } else if (data != null) {
-            return data;
-        }
-        return null;
+        } else return data;
     }
 
     @Override
@@ -583,7 +580,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         List<AppWidgetProviderInfo> b = appWidgetManager.getInstalledProviders();
         for (AppWidgetProviderInfo i : b) {
             if (i.provider.getPackageName().equals(this.getPackageName())) {
-                int a[] = appWidgetManager.getAppWidgetIds(i.provider);
+                int[] a = appWidgetManager.getAppWidgetIds(i.provider);
                 new CheckItemsWidget().onUpdate(this, appWidgetManager, a);
             }
         }
@@ -1644,11 +1641,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         if (debug) {
             Log.d(TAG, "View alerts possible: " + view_alerts_possible);
         }
-        if (pick_location_possible && view_alerts_possible) {
-            return true;
-        }
-
-        return false;
+        return pick_location_possible && view_alerts_possible;
     }
 
     @Override
@@ -1935,24 +1928,22 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     private void applyListTheme() {
         mItemsView.applyListTheme();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            // In Holo themes, apply the theme text color also to the
-            // input box and the button, because the background is
-            // semi-transparent.
-            mEditText.setTextColor(mItemsView.mTextColor);
-            if (mStoresFilterButton != null) {
-                mStoresFilterButton.setTextColor(mItemsView.mTextColor);
-            }
-            if (mTagsFilterButton != null) {
-                mTagsFilterButton.setTextColor(mItemsView.mTextColor);
-            }
-            if (mShoppingListsFilterButton != null) {
-                mShoppingListsFilterButton.setTextColor(mItemsView.mTextColor);
-            }
-            if (mShoppingListsView instanceof Spinner) {
-                View view = mShoppingListsView.getChildAt(0);
-                setSpinnerTextColorInHoloTheme(view);
-            }
+        // In Holo themes, apply the theme text color also to the
+        // input box and the button, because the background is
+        // semi-transparent.
+        mEditText.setTextColor(mItemsView.mTextColor);
+        if (mStoresFilterButton != null) {
+            mStoresFilterButton.setTextColor(mItemsView.mTextColor);
+        }
+        if (mTagsFilterButton != null) {
+            mTagsFilterButton.setTextColor(mItemsView.mTextColor);
+        }
+        if (mShoppingListsFilterButton != null) {
+            mShoppingListsFilterButton.setTextColor(mItemsView.mTextColor);
+        }
+        if (mShoppingListsView instanceof Spinner) {
+            View view = mShoppingListsView.getChildAt(0);
+            setSpinnerTextColorInHoloTheme(view);
         }
     }
 
@@ -1963,10 +1954,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
      * @param view
      */
     private void setSpinnerTextColorInHoloTheme(View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            if (view instanceof TextView) {
-                ((TextView) view).setTextColor(mItemsView.mTextColor);
-            }
+        if (view instanceof TextView) {
+            ((TextView) view).setTextColor(mItemsView.mTextColor);
         }
     }
 
@@ -3233,7 +3222,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             if (position < mNumAboveList) {
                 // Pick Items or Shopping selected
                 closeDrawer();
-                if (position == 1) mItemsView.setAddItemsMode(); else mItemsView.setInShopMode();
+                if (position == 1) mItemsView.setAddItemsMode();
+                else mItemsView.setInShopMode();
                 mDrawerListsView.setItemChecked(position, true);
                 mDrawerListsView.setItemChecked(1 - position, false);
                 mDrawerListsView.invalidateViews();

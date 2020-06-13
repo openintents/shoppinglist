@@ -23,10 +23,8 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,15 +79,7 @@ public class ThemeDialog extends AlertDialog implements OnClickListener,
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view;
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            // Enforce light theme
-            inflate = inflate.cloneInContext(new ContextThemeWrapper(mContext,
-                    android.R.style.Theme_Light));
-            view = inflate.inflate(R.layout.dialog_theme_settings, null);
-        } else {
-            // Use default (Holo) theme
-            view = inflate.inflate(R.layout.dialog_theme_settings, null);
-        }
+        view = inflate.inflate(R.layout.dialog_theme_settings, null);
 
         setView(view);
 

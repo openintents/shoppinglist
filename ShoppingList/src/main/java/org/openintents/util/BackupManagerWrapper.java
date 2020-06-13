@@ -1,9 +1,7 @@
 package org.openintents.util;
 
-import android.annotation.TargetApi;
 import android.app.backup.BackupManager;
 import android.content.Context;
-import android.os.Build;
 
 public class BackupManagerWrapper {
     /* class initialization fails when this throws an exception */
@@ -17,7 +15,6 @@ public class BackupManagerWrapper {
 
     private BackupManager mInstance;
 
-    @TargetApi(Build.VERSION_CODES.FROYO)
     public BackupManagerWrapper(Context ctx) {
         mInstance = new BackupManager(ctx);
 
@@ -27,7 +24,6 @@ public class BackupManagerWrapper {
     public static void checkAvailable() {
     }
 
-    @TargetApi(Build.VERSION_CODES.FROYO)
     public void dataChanged() {
         mInstance.dataChanged();
     }

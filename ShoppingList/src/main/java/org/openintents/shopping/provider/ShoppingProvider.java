@@ -49,6 +49,7 @@ import org.openintents.shopping.library.provider.ShoppingContract.Stores;
 import org.openintents.shopping.library.provider.ShoppingContract.Units;
 import org.openintents.shopping.ui.PreferenceActivity;
 import org.openintents.shopping.ui.ShoppingActivity;
+import org.openintents.shopping.ui.widget.ShoppingItemsView;
 
 import java.util.HashMap;
 
@@ -518,7 +519,7 @@ public class ShoppingProvider extends ContentProvider {
                 // assumes only one projection will ever be used,
                 // asking only for the id of the active list.
                 String sortOrder = PreferenceActivity.getSortOrderFromPrefs(
-                        getContext(), ShoppingActivity.MODE_IN_SHOP);
+                        getContext(), ShoppingItemsView.MODE_IN_SHOP);
                 m.addRow(new Object[]{sortOrder});
                 return m;
 

@@ -42,7 +42,7 @@
         android:id="@+id/share_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:capitalize="sentences" />
+        android:inputType="textCapSentences" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
         android:id="@+id/contacts"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:capitalize="sentences" />
+        android:inputType="textCapSentences" />
 
     <LinearLayout
         android:layout_width="fill_parent"

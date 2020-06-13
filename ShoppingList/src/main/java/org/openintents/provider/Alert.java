@@ -39,7 +39,7 @@ import android.util.Log;
  */
 public class Alert {
 
-    public static final String _TAG = "org.openintents.provider.Alert";
+    public static final String _TAG = "Alert";
 
     public static final String TYPE_LOCATION = "location";
     public static final String TYPE_SENSOR = "sensor";

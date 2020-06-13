@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/labeleditprice"
                     android:hint="0.00"
-                    android:numeric="signed|decimal"
+                    android:inputType="numberSigned|numberDecimal"
                     android:singleLine="true"
                     android:text="" />
 

@@ -195,7 +195,7 @@
     <string name="preference_showprice_summary">Wird als separate Spalte in der Liste angezeigt</string>
     <string name="preference_perstoreprice">Preise je Geschäft</string>
     <string name="preference_perstoreprice_title">Preise je Geschäft speichern</string>
-    <string name="preference_perstoreprice_summary">Seperate Preise für jedes Item in jedem Shop verfolgen.</string>
+    <string name="preference_perstoreprice_summary">Separate Preise für jedes Item in jedem Shop verfolgen.</string>
     <string name="preference_screenlock_title">Bildschirmsperre deaktivieren</string>
     <string name="preference_screenlock_summary">Wenn aktiviert, wird der Bildschirm nicht mehr gesperrt.</string>
     <string name="preference_usefilters_title">Filter</string>

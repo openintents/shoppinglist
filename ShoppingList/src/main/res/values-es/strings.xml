@@ -243,7 +243,7 @@
 
     <string name="preference_addons">Componentes adicionales</string>
     <string name="preference_get_addons">Obtener nuevos componentes</string>
-    <string name="preference_get_addons_summary">Buscar extensiones y temas en linea.</string>
+    <string name="preference_get_addons_summary">Buscar extensiones y temas en línea.</string>
     <string name="preference_get_market_addons">Obtener complementos del Market</string>
     <string name="preference_get_developer_addons">Obtener complementos de OpenIntents</string>
     <string name="preference_extensions">Extensiones</string>

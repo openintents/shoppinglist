@@ -1,4 +1,9 @@
 ----------------
+release 2.2.1
+date: 2020-06-13
+
+- Improve switching between screens
+----------------
 release 2.0-rc2
 date: ??
 

@@ -8,12 +8,11 @@ if (localPropertiesFile.exists()) {
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "org.openintents.shopping"
-        versionName "2.2.0"
-        versionCode 100220
+        versionName "2.2.1"
+        versionCode 100221
         minSdkVersion 16
         targetSdkVersion rootProject.ext.targetSdkVersion
 
@@ -79,11 +78,11 @@ dependencies {
     implementation 'com.github.openintents:distribution:3.0.2'
     implementation "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
     implementation "com.android.support:design:$rootProject.ext.supportVersion"
-    androidTestImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:0.5'
-    androidTestImplementation 'com.android.support.test:rules:0.5'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:2.2.2'
+    androidTestImplementation 'junit:junit:4.13'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2'
     androidTestImplementation "com.android.support:support-annotations:$rootProject.ext.supportVersion"
     androidTestImplementation "com.android.support:recyclerview-v7:$rootProject.ext.supportVersion"
     androidTestImplementation "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"

@@ -39,7 +39,7 @@ public class ListShareSettingsActivity extends Activity {
     /**
      * TAG for logging.
      */
-    private static final String TAG = "ListShareSettingsActivity";
+    private static final String TAG = "ListShareSettings";
 
     /**
      * Array of items we need to edit. This defines the projection for the table

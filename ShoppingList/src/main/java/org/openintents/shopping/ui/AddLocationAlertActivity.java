@@ -42,7 +42,7 @@ public class AddLocationAlertActivity extends Activity implements
     /**
      * TAG for logging.
      */
-    private static final String TAG = "AddLocationAlertActivity";
+    private static final String TAG = "AddLocationAlert";
 
     private static final int REQUEST_PICK_LOC = 1;
 
