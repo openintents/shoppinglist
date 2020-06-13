@@ -903,8 +903,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         if (mRelationUri != null) {
             outState.putString(BUNDLE_RELATION_URI, mRelationUri.toString());
         }
-        outState.putInt(BUNDLE_MODE, mItemsView.mMode);
-        outState.putInt(BUNDLE_MODE_BEFORE_SEARCH, mItemsView.mMode);
+        // When app is stopped, it will be thrown out of search mode; thus if we are in search mode,
+        // we need to ensure the app resumes in the original mode it was in before entering search.
+        final int saveMode = mItemsView.getInSearch() ? mItemsView.mModeBeforeSearch : mItemsView.mMode;
+        outState.putInt(BUNDLE_MODE, saveMode);
+        outState.putInt(BUNDLE_MODE_BEFORE_SEARCH, saveMode);
         mUpdating = false;
 
         // after items have been added through an "insert from extras" the
