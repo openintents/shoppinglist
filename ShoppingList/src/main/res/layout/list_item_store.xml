@@ -15,62 +15,62 @@
  -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="horizontal"
-  android:layout_width="fill_parent"
-  android:layout_height="wrap_content">
-
-  <CheckBox
-    android:id="@+id/check"
-    android:layout_width="wrap_content"
-    android:layout_weight="0"
-    android:layout_height="fill_parent"
-    android:layout_marginLeft="3dip"
-    android:layout_marginRight="3dip"
-    android:layout_marginTop="0dip"
-    android:textStyle="normal"
-    android:bufferType="spannable"
-    android:focusable="true" />
-
-  <TextView
-    android:id="@+id/name"
-    android:textAppearance="?android:attr/textAppearanceLarge"
-    android:layout_width="0dip"
-    android:layout_weight="4"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:layout_alignWithParentIfMissing="true"
-    android:layout_marginBottom="2dip"
-    android:layout_marginTop="2dip"
-    android:gravity="center_vertical"
-    android:textStyle="normal"
-    android:bufferType="spannable" />
+    android:orientation="horizontal">
 
-  <EditText
-    android:id="@+id/aisle"
-    android:layout_width="0dip"
-    android:layout_weight="2"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentRight="true"
-    android:layout_marginTop="1dip"
-    android:layout_marginLeft="2dip"
-    android:gravity="right"
-    android:inputType="text"
-    android:visibility="visible" />
+    <CheckBox
+        android:id="@+id/check"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="3dip"
+        android:layout_marginTop="0dip"
+        android:layout_marginRight="3dip"
+        android:layout_weight="0"
+        android:bufferType="spannable"
+        android:focusable="true"
+        android:textStyle="normal" />
 
-  <EditText
-    android:id="@+id/price"
-    android:layout_width="0dip"
-    android:layout_weight="2"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentRight="true"
-    android:layout_marginTop="1dip"
-    android:layout_marginLeft="2dip"
-    android:layout_marginRight="4dip"
-    android:gravity="right"
-    android:visibility="visible"
-    android:inputType="numberDecimal" />
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="2dip"
+        android:layout_marginBottom="2dip"
+        android:layout_weight="4"
+        android:bufferType="spannable"
+        android:gravity="center_vertical"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="normal" />
+
+    <EditText
+        android:id="@+id/aisle"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="2dip"
+        android:layout_marginTop="1dip"
+        android:layout_weight="2"
+        android:gravity="right"
+        android:inputType="text"
+        android:visibility="visible" />
+
+    <EditText
+        android:id="@+id/price"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="2dip"
+        android:layout_marginTop="1dip"
+        android:layout_marginRight="4dip"
+        android:layout_weight="2"
+        android:gravity="right"
+        android:inputType="numberDecimal"
+        android:visibility="visible" />
 </LinearLayout>

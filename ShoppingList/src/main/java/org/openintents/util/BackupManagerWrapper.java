@@ -6,8 +6,6 @@ import android.content.Context;
 import android.os.Build;
 
 public class BackupManagerWrapper {
-    private BackupManager mInstance;
-
     /* class initialization fails when this throws an exception */
     static {
         try {
@@ -17,14 +15,16 @@ public class BackupManagerWrapper {
         }
     }
 
-    /* calling here forces class initialization */
-    public static void checkAvailable() {
-    }
+    private BackupManager mInstance;
 
     @TargetApi(Build.VERSION_CODES.FROYO)
     public BackupManagerWrapper(Context ctx) {
         mInstance = new BackupManager(ctx);
 
+    }
+
+    /* calling here forces class initialization */
+    public static void checkAvailable() {
     }
 
     @TargetApi(Build.VERSION_CODES.FROYO)

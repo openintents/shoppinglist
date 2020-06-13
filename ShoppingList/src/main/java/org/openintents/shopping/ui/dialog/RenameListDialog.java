@@ -14,10 +14,8 @@ import org.openintents.shopping.ui.PreferenceActivity;
 
 public class RenameListDialog extends AlertDialog implements OnClickListener {
 
-    private Context mContext;
-
     protected EditText mEditText;
-
+    private Context mContext;
     private DialogActionListener mDialogActionListener;
 
     public RenameListDialog(Context context) {

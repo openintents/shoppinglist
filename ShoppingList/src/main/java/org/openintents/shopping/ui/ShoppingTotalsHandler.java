@@ -2,7 +2,6 @@ package org.openintents.shopping.ui;
 
 import android.app.Activity;
 import android.app.LoaderManager;
-import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
@@ -19,7 +18,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class ShoppingTotalsHandler implements LoaderManager.LoaderCallbacks<Cursor>{
+public class ShoppingTotalsHandler implements LoaderManager.LoaderCallbacks<Cursor> {
     private final static String TAG = "ShoppingTotalsHandler";
     private final static boolean debug = false;
 
@@ -52,19 +51,19 @@ public class ShoppingTotalsHandler implements LoaderManager.LoaderCallbacks<Curs
     public void update(LoaderManager manager, long listId) {
         if (mCursorLoader == null) {
             mListId = listId;
-            mCursorLoader = (CursorLoader) manager.initLoader(ShoppingActivity.LOADER_TOTALS, null, this );
+            mCursorLoader = (CursorLoader) manager.initLoader(ShoppingActivity.LOADER_TOTALS, null, this);
         } else {
             if (mListId != listId) {
                 mListId = listId;
                 mCursorLoader.setUri(ShoppingContract.Subtotals.CONTENT_URI.buildUpon().appendPath(Long.toString(mListId)).build());
             }
-            manager.restartLoader(ShoppingActivity.LOADER_TOTALS , null, this);
+            manager.restartLoader(ShoppingActivity.LOADER_TOTALS, null, this);
         }
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        CursorLoader loader =  new CursorLoader(mActivity);
+        CursorLoader loader = new CursorLoader(mActivity);
         loader.setProjection(ShoppingContract.Subtotals.PROJECTION);
         loader.setUri(ShoppingContract.Subtotals.CONTENT_URI.buildUpon().appendPath(Long.toString(mListId)).build());
         return loader;

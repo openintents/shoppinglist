@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2007-2011 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +16,13 @@
 
 package org.openintents.shopping.provider;
 
-import android.content.*;
+import android.content.ContentProvider;
+import android.content.ContentUris;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.UriMatcher;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
@@ -28,16 +34,23 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
-import java.util.HashMap;
-
 import org.openintents.intents.ProviderIntents;
 import org.openintents.intents.ProviderUtils;
 import org.openintents.shopping.LogConstants;
 import org.openintents.shopping.R;
 import org.openintents.shopping.library.provider.ShoppingContract;
-import org.openintents.shopping.library.provider.ShoppingContract.*;
+import org.openintents.shopping.library.provider.ShoppingContract.Contains;
+import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
+import org.openintents.shopping.library.provider.ShoppingContract.ItemStores;
+import org.openintents.shopping.library.provider.ShoppingContract.Items;
+import org.openintents.shopping.library.provider.ShoppingContract.Lists;
+import org.openintents.shopping.library.provider.ShoppingContract.Status;
+import org.openintents.shopping.library.provider.ShoppingContract.Stores;
+import org.openintents.shopping.library.provider.ShoppingContract.Units;
 import org.openintents.shopping.ui.PreferenceActivity;
 import org.openintents.shopping.ui.ShoppingActivity;
+
+import java.util.HashMap;
 
 /**
  * Provides access to a database of shopping items and shopping lists.
@@ -49,24 +62,8 @@ import org.openintents.shopping.ui.ShoppingActivity;
  */
 public class ShoppingProvider extends ContentProvider {
 
-    private ShoppingDatabase mOpenHelper;
-
     protected static final String TAG = "ShoppingProvider";
     private static final boolean debug = false || LogConstants.debug;
-
-    private static HashMap<String, String> ITEMS_PROJECTION_MAP;
-    private static HashMap<String, String> LISTS_PROJECTION_MAP;
-    private static HashMap<String, String> CONTAINS_PROJECTION_MAP;
-    private static HashMap<String, String> CONTAINS_FULL_PROJECTION_MAP;
-    private static HashMap<String, String> CONTAINS_FULL_CHEAPEST_PROJECTION_MAP;
-    private static HashMap<String, String> CONTAINS_FULL_STORE_PROJECTION_MAP;
-
-    private static HashMap<String, String> STORES_PROJECTION_MAP;
-    private static HashMap<String, String> ITEMSTORES_PROJECTION_MAP;
-    private static HashMap<String, String> NOTES_PROJECTION_MAP;
-    private static HashMap<String, String> UNITS_PROJECTION_MAP;
-    private static HashMap<String, String> SUBTOTALS_PROJECTION_MAP;
-
     // Basic tables
     private static final int ITEMS = 1;
     private static final int ITEM_ID = 2;
@@ -88,7 +85,6 @@ public class ShoppingProvider extends ContentProvider {
     private static final int SUBTOTALS = 18;
     private static final int SUBTOTALS_LISTID = 19;
     private static final int CONTAINS_FULL_LISTID = 20;
-
     // Derived tables
     private static final int CONTAINS_FULL = 101; // combined with items and
     // lists
@@ -96,23 +92,224 @@ public class ShoppingProvider extends ContentProvider {
     private static final int ACTIVELIST = 103;
     // duplicate specified contains record and its item, return ids
     private static final int CONTAINS_COPYOFID = 104;
-
     private static final int TAGS_LISTID = 105;
-
     private static final UriMatcher URL_MATCHER;
+    private static HashMap<String, String> ITEMS_PROJECTION_MAP;
+    private static HashMap<String, String> LISTS_PROJECTION_MAP;
+    private static HashMap<String, String> CONTAINS_PROJECTION_MAP;
+    private static HashMap<String, String> CONTAINS_FULL_PROJECTION_MAP;
+    private static HashMap<String, String> CONTAINS_FULL_CHEAPEST_PROJECTION_MAP;
+    private static HashMap<String, String> CONTAINS_FULL_STORE_PROJECTION_MAP;
+    private static HashMap<String, String> STORES_PROJECTION_MAP;
+    private static HashMap<String, String> ITEMSTORES_PROJECTION_MAP;
+    private static HashMap<String, String> NOTES_PROJECTION_MAP;
+    private static HashMap<String, String> UNITS_PROJECTION_MAP;
+    private static HashMap<String, String> SUBTOTALS_PROJECTION_MAP;
 
-    @Override
-    public boolean onCreate() {
-        mOpenHelper = new ShoppingDatabase(getContext());
-        return true;
+    static {
+        URL_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
+        URL_MATCHER.addURI("org.openintents.shopping", "items", ITEMS);
+        URL_MATCHER.addURI("org.openintents.shopping", "items/#", ITEM_ID);
+        URL_MATCHER.addURI("org.openintents.shopping", "lists", LISTS);
+        URL_MATCHER.addURI("org.openintents.shopping", "lists/active",
+                ACTIVELIST);
+        URL_MATCHER.addURI("org.openintents.shopping", "lists/#", LIST_ID);
+        URL_MATCHER.addURI("org.openintents.shopping", "contains", CONTAINS);
+        URL_MATCHER.addURI("org.openintents.shopping", "contains/#",
+                CONTAINS_ID);
+        URL_MATCHER.addURI("org.openintents.shopping", "contains/copyof/#",
+                CONTAINS_COPYOFID);
+        URL_MATCHER.addURI("org.openintents.shopping", "containsfull",
+                CONTAINS_FULL);
+        URL_MATCHER.addURI("org.openintents.shopping", "containsfull/#",
+                CONTAINS_FULL_ID);
+        URL_MATCHER.addURI("org.openintents.shopping", "containsfull/list/#",
+                CONTAINS_FULL_LISTID);
+        URL_MATCHER.addURI("org.openintents.shopping", "stores", STORES);
+        URL_MATCHER.addURI("org.openintents.shopping", "stores/#", STORES_ID);
+        URL_MATCHER
+                .addURI("org.openintents.shopping", "itemstores", ITEMSTORES);
+        URL_MATCHER.addURI("org.openintents.shopping", "itemstores/#",
+                ITEMSTORES_ID);
+        URL_MATCHER.addURI("org.openintents.shopping", "itemstores/item/#/#",
+                ITEMSTORES_ITEMID);
+        URL_MATCHER.addURI("org.openintents.shopping", "liststores/#",
+                STORES_LISTID);
+        URL_MATCHER.addURI("org.openintents.shopping", "listtags/#",
+                TAGS_LISTID);
+        URL_MATCHER.addURI("org.openintents.shopping", "notes", NOTES);
+        URL_MATCHER.addURI("org.openintents.shopping", "notes/#", NOTE_ID);
+        URL_MATCHER.addURI("org.openintents.shopping", "units", UNITS);
+        URL_MATCHER.addURI("org.openintents.shopping", "units/#", UNITS_ID);
+
+        URL_MATCHER.addURI("org.openintents.shopping", "prefs", PREFS);
+        // subtotals for the specified list id, or active list if not specified
+        URL_MATCHER.addURI("org.openintents.shopping", "subtotals/#",
+                SUBTOTALS_LISTID);
+        URL_MATCHER.addURI("org.openintents.shopping", "subtotals", SUBTOTALS);
+
+        ITEMS_PROJECTION_MAP = new HashMap<String, String>();
+        ITEMS_PROJECTION_MAP.put(Items._ID, "items._id");
+        ITEMS_PROJECTION_MAP.put(Items.NAME, "items.name");
+        ITEMS_PROJECTION_MAP.put(Items.IMAGE, "items.image");
+        ITEMS_PROJECTION_MAP.put(Items.PRICE, "items.price");
+        ITEMS_PROJECTION_MAP.put(Items.UNITS, "items.units");
+        ITEMS_PROJECTION_MAP.put(Items.TAGS, "items.tags");
+        ITEMS_PROJECTION_MAP.put(Items.BARCODE, "items.barcode");
+        ITEMS_PROJECTION_MAP.put(Items.LOCATION, "items.location");
+        ITEMS_PROJECTION_MAP.put(Items.DUE_DATE, "items.due");
+        ITEMS_PROJECTION_MAP.put(Items.CREATED_DATE, "items.created");
+        ITEMS_PROJECTION_MAP.put(Items.MODIFIED_DATE, "items.modified");
+        ITEMS_PROJECTION_MAP.put(Items.ACCESSED_DATE, "items.accessed");
+
+        LISTS_PROJECTION_MAP = new HashMap<String, String>();
+        LISTS_PROJECTION_MAP.put(Lists._ID, "lists._id");
+        LISTS_PROJECTION_MAP.put(Lists.NAME, "lists.name");
+        LISTS_PROJECTION_MAP.put(Lists.IMAGE, "lists.image");
+        LISTS_PROJECTION_MAP.put(Lists.CREATED_DATE, "lists.created");
+        LISTS_PROJECTION_MAP.put(Lists.MODIFIED_DATE, "lists.modified");
+        LISTS_PROJECTION_MAP.put(Lists.ACCESSED_DATE, "lists.accessed");
+        LISTS_PROJECTION_MAP.put(Lists.SHARE_NAME, "lists.share_name");
+        LISTS_PROJECTION_MAP.put(Lists.SHARE_CONTACTS, "lists.share_contacts");
+        LISTS_PROJECTION_MAP
+                .put(Lists.SKIN_BACKGROUND, "lists.skin_background");
+        LISTS_PROJECTION_MAP.put(Lists.SKIN_FONT, "lists.skin_font");
+        LISTS_PROJECTION_MAP.put(Lists.SKIN_COLOR, "lists.skin_color");
+        LISTS_PROJECTION_MAP.put(Lists.SKIN_COLOR_STRIKETHROUGH,
+                "lists.skin_color_strikethrough");
+        LISTS_PROJECTION_MAP.put(Lists.ITEMS_SORT, "lists.items_sort");
+
+        CONTAINS_PROJECTION_MAP = new HashMap<String, String>();
+        CONTAINS_PROJECTION_MAP.put(Contains._ID, "contains._id");
+        CONTAINS_PROJECTION_MAP.put(Contains.ITEM_ID, "contains.item_id");
+        CONTAINS_PROJECTION_MAP.put(Contains.LIST_ID, "contains.list_id");
+        CONTAINS_PROJECTION_MAP.put(Contains.QUANTITY, "contains.quantity");
+        CONTAINS_PROJECTION_MAP.put(Contains.PRIORITY, "contains.priority");
+
+        CONTAINS_PROJECTION_MAP.put(Contains.STATUS, "contains.status");
+        CONTAINS_PROJECTION_MAP.put(Contains.CREATED_DATE, "contains.created");
+        CONTAINS_PROJECTION_MAP
+                .put(Contains.MODIFIED_DATE, "contains.modified");
+        CONTAINS_PROJECTION_MAP
+                .put(Contains.ACCESSED_DATE, "contains.accessed");
+        CONTAINS_PROJECTION_MAP.put(Contains.SHARE_CREATED_BY,
+                "contains.share_created_by");
+        CONTAINS_PROJECTION_MAP.put(Contains.SHARE_MODIFIED_BY,
+                "contains.share_modified_by");
+
+        CONTAINS_FULL_PROJECTION_MAP = new HashMap<String, String>();
+        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull._ID,
+                "contains._id as _id");
+        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_ID,
+                "contains.item_id");
+        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.LIST_ID,
+                "contains.list_id");
+        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.QUANTITY,
+                "contains.quantity as quantity");
+        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.PRIORITY,
+                "contains.priority as priority");
+        CONTAINS_FULL_PROJECTION_MAP
+                .put(ContainsFull.STATUS, "contains.status");
+        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.CREATED_DATE,
+                "contains.created");
+        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.MODIFIED_DATE,
+                "contains.modified");
+        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ACCESSED_DATE,
+                "contains.accessed");
+        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.SHARE_CREATED_BY,
+                "contains.share_created_by");
+        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.SHARE_MODIFIED_BY,
+                "contains.share_modified_by");
+        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_NAME,
+                "items.name as item_name");
+        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_IMAGE,
+                "items.image as item_image");
+        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_PRICE,
+                "items.price as item_price");
+        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_UNITS,
+                "items.units as item_units");
+        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_TAGS,
+                "items.tags as item_tags");
+        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.LIST_NAME,
+                "lists.name as list_name");
+        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.LIST_IMAGE,
+                "lists.image as list_image");
+        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_HAS_NOTE,
+                "items.note is not NULL and items.note <> '' as item_has_note");
+
+        CONTAINS_FULL_CHEAPEST_PROJECTION_MAP = new HashMap<String, String>(
+                CONTAINS_FULL_PROJECTION_MAP);
+        CONTAINS_FULL_CHEAPEST_PROJECTION_MAP.put(ContainsFull.ITEM_PRICE,
+                "min(itemstores.price) as item_price");
+
+        CONTAINS_FULL_STORE_PROJECTION_MAP = new HashMap<String, String>(
+                CONTAINS_FULL_PROJECTION_MAP);
+        CONTAINS_FULL_STORE_PROJECTION_MAP.put(ContainsFull.ITEM_PRICE,
+                "itemstores.price as item_price");
+
+        UNITS_PROJECTION_MAP = new HashMap<String, String>();
+        UNITS_PROJECTION_MAP.put(Units._ID, "units._id");
+        UNITS_PROJECTION_MAP.put(Units.CREATED_DATE, "units.created");
+        UNITS_PROJECTION_MAP.put(Units.MODIFIED_DATE, "units.modified");
+        UNITS_PROJECTION_MAP.put(Units.NAME, "units.name");
+        UNITS_PROJECTION_MAP.put(Units.SINGULAR, "units.singular");
+
+        STORES_PROJECTION_MAP = new HashMap<String, String>();
+        STORES_PROJECTION_MAP.put(Stores._ID, "stores._id");
+        STORES_PROJECTION_MAP.put(Stores.CREATED_DATE, "stores.created");
+        STORES_PROJECTION_MAP.put(Stores.MODIFIED_DATE, "stores.modified");
+        STORES_PROJECTION_MAP.put(Stores.NAME, "stores.name");
+        STORES_PROJECTION_MAP.put(Stores.LIST_ID, "stores.list_id");
+
+        ITEMSTORES_PROJECTION_MAP = new HashMap<String, String>();
+        ITEMSTORES_PROJECTION_MAP.put(ItemStores._ID, "itemstores._id");
+        ITEMSTORES_PROJECTION_MAP.put(ItemStores.CREATED_DATE,
+                "itemstores.created");
+        ITEMSTORES_PROJECTION_MAP.put(ItemStores.MODIFIED_DATE,
+                "itemstores.modified");
+        ITEMSTORES_PROJECTION_MAP.put(ItemStores.ITEM_ID, "itemstores.item_id");
+        ITEMSTORES_PROJECTION_MAP.put(ItemStores.STORE_ID,
+                "itemstores.store_id");
+        ITEMSTORES_PROJECTION_MAP.put(Stores.NAME, "stores.name");
+        ITEMSTORES_PROJECTION_MAP.put(ItemStores.AISLE, "itemstores.aisle");
+        ITEMSTORES_PROJECTION_MAP.put(ItemStores.PRICE, "itemstores.price");
+        ITEMSTORES_PROJECTION_MAP.put(ItemStores.STOCKS_ITEM,
+                "itemstores.stocks_item");
+
+        NOTES_PROJECTION_MAP = new HashMap<String, String>();
+        NOTES_PROJECTION_MAP.put(ShoppingContract.Notes._ID, "items._id");
+        NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.NOTE, "items.note");
+        NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.TITLE, "null as title");
+        NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.TAGS, "null as tags");
+        NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.ENCRYPTED,
+                "null as encrypted");
+        NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.THEME, "null as theme");
+
+        SUBTOTALS_PROJECTION_MAP = new HashMap<String, String>();
+        SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.COUNT,
+                "count() as count");
+        SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.PRIORITY,
+                "priority");
+        SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.SUBTOTAL,
+                "sum(qty_price) as subtotal");
+        SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.STATUS,
+                "status");
     }
+
+    private ShoppingDatabase mOpenHelper;
 
     public static String escapeSQLChars(String trapped) {
         /*
         In order for this method to work properly, the query using the result must use '`' as its
         Escape character.
         */
-        return trapped.replaceAll("'", "''").replaceAll("`", "``").replaceAll("%", "`%").replaceAll("_","`_");
+        return trapped.replaceAll("'", "''").replaceAll("`", "``").replaceAll("%", "`%").replaceAll("_", "`_");
+    }
+
+    @Override
+    public boolean onCreate() {
+        mOpenHelper = new ShoppingDatabase(getContext());
+        return true;
     }
 
     @Override
@@ -172,8 +369,8 @@ public class ShoppingProvider extends ContentProvider {
                 // nice to depend on that, but... need to choose the projection map
                 // based on the list's store filter.
                 if (!inSearchMode
-                    && PreferenceActivity.getUsingFiltersFromPrefs(getContext())
-                    && listUsesStoreFilter(selectionArgs[0])) {
+                        && PreferenceActivity.getUsingFiltersFromPrefs(getContext())
+                        && listUsesStoreFilter(selectionArgs[0])) {
                     // actually there are two ways we could do the query when
                     // filtering by stores. perhaps
                     // we should offer both. for now choose the first one...
@@ -1181,195 +1378,5 @@ public class ShoppingProvider extends ContentProvider {
             default:
                 throw new IllegalArgumentException("Unknown URL " + url);
         }
-    }
-
-    static {
-        URL_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
-        URL_MATCHER.addURI("org.openintents.shopping", "items", ITEMS);
-        URL_MATCHER.addURI("org.openintents.shopping", "items/#", ITEM_ID);
-        URL_MATCHER.addURI("org.openintents.shopping", "lists", LISTS);
-        URL_MATCHER.addURI("org.openintents.shopping", "lists/active",
-                ACTIVELIST);
-        URL_MATCHER.addURI("org.openintents.shopping", "lists/#", LIST_ID);
-        URL_MATCHER.addURI("org.openintents.shopping", "contains", CONTAINS);
-        URL_MATCHER.addURI("org.openintents.shopping", "contains/#",
-                CONTAINS_ID);
-        URL_MATCHER.addURI("org.openintents.shopping", "contains/copyof/#",
-                CONTAINS_COPYOFID);
-        URL_MATCHER.addURI("org.openintents.shopping", "containsfull",
-                CONTAINS_FULL);
-        URL_MATCHER.addURI("org.openintents.shopping", "containsfull/#",
-                CONTAINS_FULL_ID);
-        URL_MATCHER.addURI("org.openintents.shopping", "containsfull/list/#",
-                CONTAINS_FULL_LISTID);
-        URL_MATCHER.addURI("org.openintents.shopping", "stores", STORES);
-        URL_MATCHER.addURI("org.openintents.shopping", "stores/#", STORES_ID);
-        URL_MATCHER
-                .addURI("org.openintents.shopping", "itemstores", ITEMSTORES);
-        URL_MATCHER.addURI("org.openintents.shopping", "itemstores/#",
-                ITEMSTORES_ID);
-        URL_MATCHER.addURI("org.openintents.shopping", "itemstores/item/#/#",
-                ITEMSTORES_ITEMID);
-        URL_MATCHER.addURI("org.openintents.shopping", "liststores/#",
-                STORES_LISTID);
-        URL_MATCHER.addURI("org.openintents.shopping", "listtags/#",
-                TAGS_LISTID);
-        URL_MATCHER.addURI("org.openintents.shopping", "notes", NOTES);
-        URL_MATCHER.addURI("org.openintents.shopping", "notes/#", NOTE_ID);
-        URL_MATCHER.addURI("org.openintents.shopping", "units", UNITS);
-        URL_MATCHER.addURI("org.openintents.shopping", "units/#", UNITS_ID);
-
-        URL_MATCHER.addURI("org.openintents.shopping", "prefs", PREFS);
-        // subtotals for the specified list id, or active list if not specified
-        URL_MATCHER.addURI("org.openintents.shopping", "subtotals/#",
-                SUBTOTALS_LISTID);
-        URL_MATCHER.addURI("org.openintents.shopping", "subtotals", SUBTOTALS);
-
-        ITEMS_PROJECTION_MAP = new HashMap<String, String>();
-        ITEMS_PROJECTION_MAP.put(Items._ID, "items._id");
-        ITEMS_PROJECTION_MAP.put(Items.NAME, "items.name");
-        ITEMS_PROJECTION_MAP.put(Items.IMAGE, "items.image");
-        ITEMS_PROJECTION_MAP.put(Items.PRICE, "items.price");
-        ITEMS_PROJECTION_MAP.put(Items.UNITS, "items.units");
-        ITEMS_PROJECTION_MAP.put(Items.TAGS, "items.tags");
-        ITEMS_PROJECTION_MAP.put(Items.BARCODE, "items.barcode");
-        ITEMS_PROJECTION_MAP.put(Items.LOCATION, "items.location");
-        ITEMS_PROJECTION_MAP.put(Items.DUE_DATE, "items.due");
-        ITEMS_PROJECTION_MAP.put(Items.CREATED_DATE, "items.created");
-        ITEMS_PROJECTION_MAP.put(Items.MODIFIED_DATE, "items.modified");
-        ITEMS_PROJECTION_MAP.put(Items.ACCESSED_DATE, "items.accessed");
-
-        LISTS_PROJECTION_MAP = new HashMap<String, String>();
-        LISTS_PROJECTION_MAP.put(Lists._ID, "lists._id");
-        LISTS_PROJECTION_MAP.put(Lists.NAME, "lists.name");
-        LISTS_PROJECTION_MAP.put(Lists.IMAGE, "lists.image");
-        LISTS_PROJECTION_MAP.put(Lists.CREATED_DATE, "lists.created");
-        LISTS_PROJECTION_MAP.put(Lists.MODIFIED_DATE, "lists.modified");
-        LISTS_PROJECTION_MAP.put(Lists.ACCESSED_DATE, "lists.accessed");
-        LISTS_PROJECTION_MAP.put(Lists.SHARE_NAME, "lists.share_name");
-        LISTS_PROJECTION_MAP.put(Lists.SHARE_CONTACTS, "lists.share_contacts");
-        LISTS_PROJECTION_MAP
-                .put(Lists.SKIN_BACKGROUND, "lists.skin_background");
-        LISTS_PROJECTION_MAP.put(Lists.SKIN_FONT, "lists.skin_font");
-        LISTS_PROJECTION_MAP.put(Lists.SKIN_COLOR, "lists.skin_color");
-        LISTS_PROJECTION_MAP.put(Lists.SKIN_COLOR_STRIKETHROUGH,
-                "lists.skin_color_strikethrough");
-        LISTS_PROJECTION_MAP.put(Lists.ITEMS_SORT, "lists.items_sort");
-
-        CONTAINS_PROJECTION_MAP = new HashMap<String, String>();
-        CONTAINS_PROJECTION_MAP.put(Contains._ID, "contains._id");
-        CONTAINS_PROJECTION_MAP.put(Contains.ITEM_ID, "contains.item_id");
-        CONTAINS_PROJECTION_MAP.put(Contains.LIST_ID, "contains.list_id");
-        CONTAINS_PROJECTION_MAP.put(Contains.QUANTITY, "contains.quantity");
-        CONTAINS_PROJECTION_MAP.put(Contains.PRIORITY, "contains.priority");
-
-        CONTAINS_PROJECTION_MAP.put(Contains.STATUS, "contains.status");
-        CONTAINS_PROJECTION_MAP.put(Contains.CREATED_DATE, "contains.created");
-        CONTAINS_PROJECTION_MAP
-                .put(Contains.MODIFIED_DATE, "contains.modified");
-        CONTAINS_PROJECTION_MAP
-                .put(Contains.ACCESSED_DATE, "contains.accessed");
-        CONTAINS_PROJECTION_MAP.put(Contains.SHARE_CREATED_BY,
-                "contains.share_created_by");
-        CONTAINS_PROJECTION_MAP.put(Contains.SHARE_MODIFIED_BY,
-                "contains.share_modified_by");
-
-        CONTAINS_FULL_PROJECTION_MAP = new HashMap<String, String>();
-        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull._ID,
-                "contains._id as _id");
-        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_ID,
-                "contains.item_id");
-        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.LIST_ID,
-                "contains.list_id");
-        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.QUANTITY,
-                "contains.quantity as quantity");
-        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.PRIORITY,
-                "contains.priority as priority");
-        CONTAINS_FULL_PROJECTION_MAP
-                .put(ContainsFull.STATUS, "contains.status");
-        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.CREATED_DATE,
-                "contains.created");
-        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.MODIFIED_DATE,
-                "contains.modified");
-        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ACCESSED_DATE,
-                "contains.accessed");
-        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.SHARE_CREATED_BY,
-                "contains.share_created_by");
-        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.SHARE_MODIFIED_BY,
-                "contains.share_modified_by");
-        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_NAME,
-                "items.name as item_name");
-        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_IMAGE,
-                "items.image as item_image");
-        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_PRICE,
-                "items.price as item_price");
-        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_UNITS,
-                "items.units as item_units");
-        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_TAGS,
-                "items.tags as item_tags");
-        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.LIST_NAME,
-                "lists.name as list_name");
-        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.LIST_IMAGE,
-                "lists.image as list_image");
-        CONTAINS_FULL_PROJECTION_MAP.put(ContainsFull.ITEM_HAS_NOTE,
-                "items.note is not NULL and items.note <> '' as item_has_note");
-
-        CONTAINS_FULL_CHEAPEST_PROJECTION_MAP = new HashMap<String, String>(
-                CONTAINS_FULL_PROJECTION_MAP);
-        CONTAINS_FULL_CHEAPEST_PROJECTION_MAP.put(ContainsFull.ITEM_PRICE,
-                "min(itemstores.price) as item_price");
-
-        CONTAINS_FULL_STORE_PROJECTION_MAP = new HashMap<String, String>(
-                CONTAINS_FULL_PROJECTION_MAP);
-        CONTAINS_FULL_STORE_PROJECTION_MAP.put(ContainsFull.ITEM_PRICE,
-                "itemstores.price as item_price");
-
-        UNITS_PROJECTION_MAP = new HashMap<String, String>();
-        UNITS_PROJECTION_MAP.put(Units._ID, "units._id");
-        UNITS_PROJECTION_MAP.put(Units.CREATED_DATE, "units.created");
-        UNITS_PROJECTION_MAP.put(Units.MODIFIED_DATE, "units.modified");
-        UNITS_PROJECTION_MAP.put(Units.NAME, "units.name");
-        UNITS_PROJECTION_MAP.put(Units.SINGULAR, "units.singular");
-
-        STORES_PROJECTION_MAP = new HashMap<String, String>();
-        STORES_PROJECTION_MAP.put(Stores._ID, "stores._id");
-        STORES_PROJECTION_MAP.put(Stores.CREATED_DATE, "stores.created");
-        STORES_PROJECTION_MAP.put(Stores.MODIFIED_DATE, "stores.modified");
-        STORES_PROJECTION_MAP.put(Stores.NAME, "stores.name");
-        STORES_PROJECTION_MAP.put(Stores.LIST_ID, "stores.list_id");
-
-        ITEMSTORES_PROJECTION_MAP = new HashMap<String, String>();
-        ITEMSTORES_PROJECTION_MAP.put(ItemStores._ID, "itemstores._id");
-        ITEMSTORES_PROJECTION_MAP.put(ItemStores.CREATED_DATE,
-                "itemstores.created");
-        ITEMSTORES_PROJECTION_MAP.put(ItemStores.MODIFIED_DATE,
-                "itemstores.modified");
-        ITEMSTORES_PROJECTION_MAP.put(ItemStores.ITEM_ID, "itemstores.item_id");
-        ITEMSTORES_PROJECTION_MAP.put(ItemStores.STORE_ID,
-                "itemstores.store_id");
-        ITEMSTORES_PROJECTION_MAP.put(Stores.NAME, "stores.name");
-        ITEMSTORES_PROJECTION_MAP.put(ItemStores.AISLE, "itemstores.aisle");
-        ITEMSTORES_PROJECTION_MAP.put(ItemStores.PRICE, "itemstores.price");
-        ITEMSTORES_PROJECTION_MAP.put(ItemStores.STOCKS_ITEM,
-                "itemstores.stocks_item");
-
-        NOTES_PROJECTION_MAP = new HashMap<String, String>();
-        NOTES_PROJECTION_MAP.put(ShoppingContract.Notes._ID, "items._id");
-        NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.NOTE, "items.note");
-        NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.TITLE, "null as title");
-        NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.TAGS, "null as tags");
-        NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.ENCRYPTED,
-                "null as encrypted");
-        NOTES_PROJECTION_MAP.put(ShoppingContract.Notes.THEME, "null as theme");
-
-        SUBTOTALS_PROJECTION_MAP = new HashMap<String, String>();
-        SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.COUNT,
-                "count() as count");
-        SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.PRIORITY,
-                "priority");
-        SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.SUBTOTAL,
-                "sum(qty_price) as subtotal");
-        SUBTOTALS_PROJECTION_MAP.put(ShoppingContract.Subtotals.STATUS,
-                "status");
     }
 }

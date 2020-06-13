@@ -14,355 +14,355 @@
  * limitations under the License.
  -->
 <resources>
-  <!-- ***************************
-       About information
-       *************************** -->
+    <!-- ***************************
+         About information
+         *************************** -->
 
-  <!-- Automatically filled in by Launchpad: -->
-	<string name="about_translators">Launchpad Contributions:
+    <!-- Automatically filled in by Launchpad: -->
+    <string name="about_translators">Launchpad Contributions:
   Giannis Konstantinidis https://launchpad.net/~giankonstantinidis
   OpenIntents devs https://launchpad.net/~openintents-devs
   Peli https://launchpad.net/~peli0101</string>
 
-  <!-- Short explanation of the application (max. 80 characters) -->
-  <string name="about_comments">Παρακολουθήστε τα αντικείμενα αγορών σας με την OI Λίστα Αγορών.</string>
+    <!-- Short explanation of the application (max. 80 characters) -->
+    <string name="about_comments">Παρακολουθήστε τα αντικείμενα αγορών σας με την OI Λίστα Αγορών.</string>
 
-  <!-- ***************************
-       Applicatio-specific strings
-       *************************** -->
-  <!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-  <string name="app_name">OI Λίστα Αγορών</string>
+    <!-- ***************************
+         Applicatio-specific strings
+         *************************** -->
+    <!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
+    <string name="app_name">OI Λίστα Αγορών</string>
 
-  <string name="new_item">Νέο στοιχείο</string>
-  <string name="new_list">Νέα λίστα</string>
-  <string name="send">Αποστολή λίστας</string>
-  <string name="mark_all_items">Σημείωση όλων των αντικειμένων</string>
-  <string name="empty_list_not_sent">Κενή λίστα. Δεν εστάλη.</string>
-  <string name="email_not_available">Δεν υπάρχει εφαρμογή για αποστολή.</string>
-  <string name="my_shopping_list">Η λίστα αγορών μου</string>
-  <string name="new_list_hint">π.χ. λίστα επιθυμιών, οικογενειακή λίστα</string>
-  <string name="clean_up_list">Εκκαθάριση λίστας</string>
-  <string name="delete_list">Διαγραφή λίστας</string>
-  <string name="ask_new_list">Εισαγάγετε το όνομα της νέας λίστας αγορών</string>
-  <string name="ask_rename_list">Μετονομασία λίστας αγορών</string>
-  <string name="ask_edit_item">Επεξεργασία στοιχείου</string>
-  <string name="ask_new_store">Εισάγετε ένα νέο όνομα καταστήματος</string>
-  <string name="please_enter_name">Εισαγάγετε ένα όνομα</string>
-  <string name="no_items_marked">Δεν έχουν επισημανθεί στοιχεία ως ολοκληρωμένα.</string>
-  <string name="confirm_delete_list">Είστε σίγουρος οτι θέλετε να διαγράψετε τη λίστα αγορών;</string>
-  <string name="no_shopping_provider">Σφάλμα κατά την πρόσβαση στις λίστες αγορών.</string>
-  <string name="pick_item">Επιλέξτε στοιχείο</string>
-  <string name="pick_list">Επιλέξτε λίστα</string>
-  <string name="theme">Θέμα</string>
-  <string name="theme_settings">Ρυθμίσεις θέματος</string>
-  <string name="rename_list">Μετονομασία λίστας</string>
-  <string name="menu_mark_item">Επισήμανση στοιχείου</string>
-  <string name="menu_edit_item">Επεξεργασία στοιχείου</string>
-  <string name="menu_auto_add">Αυτόματη προσθήκη</string>
-  <string name="menu_item_stores">Καταστήματα…</string>
-  <string name="menu_rename_store">Μετονομασία καταστήματος</string>
-  <string name="menu_delete_store">Διαγραφή καταστήματος</string>
-  <string name="confirm_delete_store">Θέλετε σίγουρα να διαγράψετε αυτό το κατάστημα;</string>
-  <string name="no_items_available">Δεν υπάρχουν διαθέσιμα αντικείμενα</string>
-  <string name="no_stores_available">No stores available for this list</string>
-  <string name="no_tags_available">No tags available for this list</string>
+    <string name="new_item">Νέο στοιχείο</string>
+    <string name="new_list">Νέα λίστα</string>
+    <string name="send">Αποστολή λίστας</string>
+    <string name="mark_all_items">Σημείωση όλων των αντικειμένων</string>
+    <string name="empty_list_not_sent">Κενή λίστα. Δεν εστάλη.</string>
+    <string name="email_not_available">Δεν υπάρχει εφαρμογή για αποστολή.</string>
+    <string name="my_shopping_list">Η λίστα αγορών μου</string>
+    <string name="new_list_hint">π.χ. λίστα επιθυμιών, οικογενειακή λίστα</string>
+    <string name="clean_up_list">Εκκαθάριση λίστας</string>
+    <string name="delete_list">Διαγραφή λίστας</string>
+    <string name="ask_new_list">Εισαγάγετε το όνομα της νέας λίστας αγορών</string>
+    <string name="ask_rename_list">Μετονομασία λίστας αγορών</string>
+    <string name="ask_edit_item">Επεξεργασία στοιχείου</string>
+    <string name="ask_new_store">Εισάγετε ένα νέο όνομα καταστήματος</string>
+    <string name="please_enter_name">Εισαγάγετε ένα όνομα</string>
+    <string name="no_items_marked">Δεν έχουν επισημανθεί στοιχεία ως ολοκληρωμένα.</string>
+    <string name="confirm_delete_list">Είστε σίγουρος οτι θέλετε να διαγράψετε τη λίστα αγορών;</string>
+    <string name="no_shopping_provider">Σφάλμα κατά την πρόσβαση στις λίστες αγορών.</string>
+    <string name="pick_item">Επιλέξτε στοιχείο</string>
+    <string name="pick_list">Επιλέξτε λίστα</string>
+    <string name="theme">Θέμα</string>
+    <string name="theme_settings">Ρυθμίσεις θέματος</string>
+    <string name="rename_list">Μετονομασία λίστας</string>
+    <string name="menu_mark_item">Επισήμανση στοιχείου</string>
+    <string name="menu_edit_item">Επεξεργασία στοιχείου</string>
+    <string name="menu_auto_add">Αυτόματη προσθήκη</string>
+    <string name="menu_item_stores">Καταστήματα…</string>
+    <string name="menu_rename_store">Μετονομασία καταστήματος</string>
+    <string name="menu_delete_store">Διαγραφή καταστήματος</string>
+    <string name="confirm_delete_store">Θέλετε σίγουρα να διαγράψετε αυτό το κατάστημα;</string>
+    <string name="no_items_available">Δεν υπάρχουν διαθέσιμα αντικείμενα</string>
+    <string name="no_stores_available">No stores available for this list</string>
+    <string name="no_tags_available">No tags available for this list</string>
 
-  <!-- Remove item from this list, but keep it internally, so that the user
-       can choose it later for inclusion again. Information like
-       tags or price will be kept. -->
-  <string name="menu_remove_item">Κατάργηση στοιχείου από λίστα</string>
+    <!-- Remove item from this list, but keep it internally, so that the user
+         can choose it later for inclusion again. Information like
+         tags or price will be kept. -->
+    <string name="menu_remove_item">Κατάργηση στοιχείου από λίστα</string>
 
-  <!-- Delete this item completely. If the user wants to add it again, they
-       have to enter all the information again. -->
-  <string name="menu_delete_item">Μόνιμη διαγραφή στοιχείου</string>
-  <string name="menu_move_item">Μετακίνηση αντικειμένου σε άλλη λίστα</string>
-  <string name="menu_copy_item">Αντιγραφή αντικειμένου</string>
+    <!-- Delete this item completely. If the user wants to add it again, they
+         have to enter all the information again. -->
+    <string name="menu_delete_item">Μόνιμη διαγραφή στοιχείου</string>
+    <string name="menu_move_item">Μετακίνηση αντικειμένου σε άλλη λίστα</string>
+    <string name="menu_copy_item">Αντιγραφή αντικειμένου</string>
 
-  <!-- Button label to add an item to the list. -->
-  <string name="add">Προσθήκη</string>
+    <!-- Button label to add an item to the list. -->
+    <string name="add">Προσθήκη</string>
 
-  <string name="menu_pick_items">Επιλογή στοιχείων</string>
-  <string name="menu_start_shopping">Αγορές</string>
+    <string name="menu_pick_items">Επιλογή στοιχείων</string>
+    <string name="menu_start_shopping">Αγορές</string>
 
-  <!-- Title supplement. \'%s\' is the name of the current list. -->
-  <string name="pick_items_title">%s - Επιλογή στοιχείων</string>
+    <!-- Title supplement. \'%s\' is the name of the current list. -->
+    <string name="pick_items_title">%s - Επιλογή στοιχείων</string>
 
-  <!-- Title supplement. \'%s\' is the name of the current list. -->
-  <string name="shopping_title">%s - Αγορές</string>
+    <!-- Title supplement. \'%s\' is the name of the current list. -->
+    <string name="shopping_title">%s - Αγορές</string>
 
-  <!-- Title supplement. \'%s\' is the name of the current item. -->
-  <string name="item_stores_title">%s - Καταστήματα</string>
-  <string name="item_stores_activity_label">Επεξεργασία Καταστημάτων Αντικειμένων</string>
+    <!-- Title supplement. \'%s\' is the name of the current item. -->
+    <string name="item_stores_title">%s - Καταστήματα</string>
+    <string name="item_stores_activity_label">Επεξεργασία Καταστημάτων Αντικειμένων</string>
 
-  <string name="tags">Ετικέτες</string>
-  <string name="price">Τιμή</string>
-  <string name="item">Στοιχείο</string>
-  <string name="quantity">Ποσότητα</string>
-  <string name="priority">Προτεραιότητα</string>
-  <string name="has_note">Έχει Σημείωση</string>
-  <string name="units">Μονάδες</string>
-  <string name="note">Σημείωση</string>
-  <string name="stores">Stores</string>
-  <string name="list">List</string>
+    <string name="tags">Ετικέτες</string>
+    <string name="price">Τιμή</string>
+    <string name="item">Στοιχείο</string>
+    <string name="quantity">Ποσότητα</string>
+    <string name="priority">Προτεραιότητα</string>
+    <string name="has_note">Έχει Σημείωση</string>
+    <string name="units">Μονάδες</string>
+    <string name="note">Σημείωση</string>
+    <string name="stores">Stores</string>
+    <string name="list">List</string>
 
-  <string name="otherqty">Άλλη Ποσότητα…</string>
-  <string name="otherpri">Άλλη Προτεραιότητα…</string>
-  <string name="unfiltered">(Unfiltered)</string>
+    <string name="otherqty">Άλλη Ποσότητα…</string>
+    <string name="otherpri">Άλλη Προτεραιότητα…</string>
+    <string name="unfiltered">(Unfiltered)</string>
 
-  <!-- Total sum of all prices. \'%s\' is the sum -->
-  <string name="total">Σύνολο: %s</string>
+    <!-- Total sum of all prices. \'%s\' is the sum -->
+    <string name="total">Σύνολο: %s</string>
 
-  <!-- Sum of all prices of the checked items. \'%s\' is the sum -->
-  <string name="total_checked">Επιλεγμένα: %s</string>
-  <string name="priority1_total">Προτεραιότητα 1: %s</string>
-  <string name="priority2_total">Προτεραιότητα 1-2: %s</string>
-  <string name="priority3_total">Προτεραιότητα 1-3: %s</string>
-  <string name="priority4_total">Προτεραιότητα 1-4: %s</string>
+    <!-- Sum of all prices of the checked items. \'%s\' is the sum -->
+    <string name="total_checked">Επιλεγμένα: %s</string>
+    <string name="priority1_total">Προτεραιότητα 1: %s</string>
+    <string name="priority2_total">Προτεραιότητα 1-2: %s</string>
+    <string name="priority3_total">Προτεραιότητα 1-3: %s</string>
+    <string name="priority4_total">Προτεραιότητα 1-4: %s</string>
 
-  <string name="delete_item_confirm">Θέλετε σίγουρα να διαγράψετε μόνιμα αυτό το αντικείμενο;</string>
-  <string name="delete">Διαγραφή</string>
+    <string name="delete_item_confirm">Θέλετε σίγουρα να διαγράψετε μόνιμα αυτό το αντικείμενο;</string>
+    <string name="delete">Διαγραφή</string>
 
-  <!-- Added to an item to indicate it was bought. -->
-  <string name="suffix_checked">… OK</string>
-  <string name="empty" />
+    <!-- Added to an item to indicate it was bought. -->
+    <string name="suffix_checked">… OK</string>
+    <string name="empty" />
 
-  <!-- The shortcut is created on the home screen. -->
-  <string name="pick_list_for_shortcut">Επιλογή λίστας για συντόμευση</string>
+    <!-- The shortcut is created on the home screen. -->
+    <string name="pick_list_for_shortcut">Επιλογή λίστας για συντόμευση</string>
 
-  <!-- Shown if external application wants to insert new items. -->
-  <string name="pick_list_to_insert_items">Επιλογή λίστας για εισαγωγή στοιχείων</string>
+    <!-- Shown if external application wants to insert new items. -->
+    <string name="pick_list_to_insert_items">Επιλογή λίστας για εισαγωγή στοιχείων</string>
 
-  <!-- Theme related -->
-  <!-- Title for selecting a theme -->
-  <string name="theme_pick">Επιλογή θέματος</string>
-  <string name="theme_description">Επιλογή θέματος για τη λίστα</string>
-  <string name="theme_default">Προεπιλογή</string>
-  <string name="theme_classic">Κλασσικό</string>
-  <string name="theme_bugdroid">Android</string>
-  <string name="theme_classic_export">Κλασσικό (από OI Shopping List)</string>
-  <string name="theme_bugdroid_export">Android (από OI Shopping List)</string>
+    <!-- Theme related -->
+    <!-- Title for selecting a theme -->
+    <string name="theme_pick">Επιλογή θέματος</string>
+    <string name="theme_description">Επιλογή θέματος για τη λίστα</string>
+    <string name="theme_default">Προεπιλογή</string>
+    <string name="theme_classic">Κλασσικό</string>
+    <string name="theme_bugdroid">Android</string>
+    <string name="theme_classic_export">Κλασσικό (από OI Shopping List)</string>
+    <string name="theme_bugdroid_export">Android (από OI Shopping List)</string>
 
-  <!--     Dialog box    -->
-  <!-- Button label "OK" -->
-  <string name="ok">OK</string>
-  <!-- Button label "Cancel" -->
-  <string name="cancel">Άκυρο</string>
-  <string name="use_theme_for_all_lists">Χρήση αυτού του θέματος σε όλες τις λίστες</string>
-  <string name="get_more_themes">Λήψη περισσότερων θεμάτων</string>
+    <!--     Dialog box    -->
+    <!-- Button label "OK" -->
+    <string name="ok">OK</string>
+    <!-- Button label "Cancel" -->
+    <string name="cancel">Άκυρο</string>
+    <string name="use_theme_for_all_lists">Χρήση αυτού του θέματος σε όλες τις λίστες</string>
+    <string name="get_more_themes">Λήψη περισσότερων θεμάτων</string>
 
-  <!-- preferences -->
-  <string name="preferences">Ρυθμίσεις</string>
+    <!-- preferences -->
+    <string name="preferences">Ρυθμίσεις</string>
 
-  <string name="preference_application">Ρυθμίσεις εφαρμογής</string>
+    <string name="preference_application">Ρυθμίσεις εφαρμογής</string>
 
-  <string name="preference_unchecked_on_top">Τα μη επιλεγμένα στην κορυφή</string>
-  <string name="preference_unchecked_on_top_summary">Να εμφανίζονται πάντα πρώτα τα μη επιλεγμένα στοιχεία</string>
-  <string name="preference_fontsize">Μέγεθος γραμματοσειράς</string>
-  <string name="preference_fontsize_summary">Αλλαγή μεγέθους γραμματοσειράς</string>
-  <string name="preference_fontsize_dialog_title">Επιλογή μεγέθους γραμματοσειράς</string>
-  <string name="preference_orientation">Προσανατολισμός</string>
-  <string name="preference_orientation_summary">Αλλαγή προσανατολισμού</string>
-  <string name="preference_orientation_dialog_title">Επιλογή προσανατολισμού</string>
-  <string name="preference_sortorder_title">Σειρά ταξινόμησης</string>
-  <string name="preference_sortorder_summary">Αλλαγή σειράς ταξινόμησης στοιχείων λίστας</string>
-  <string name="preference_sortorder_for_pick_title">Σειρά ταξινόμησης - Επιλογή Αντικειμένων</string>
-  <string name="preference_sortorder_for_pick_summary">Αλλαγή της σειράς ταξινόμησης των αντικειμένων λίστας στη λειτουργία Επιλογής Αντικειμένων.</string>
-  <string name="preference_sortorder_dialog_title">Επιλογή σειράς ταξινόμησης</string>
-  <string name="preference_sortorder_for_pick_dialog_title">Επιλογή σειράς ταξινόμησης για τη λειτουργία Επιλογής Αντικειμένων.</string>
-  <string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
-  <string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
-  <string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
-  <string name="preference_loadlastused_title">Φόρτωση της πιο πρόσφατης λίστας</string>
-  <string name="preference_loadlastused_summary">Έναρξη πάντα με τη λίστα που προβλήθηκε τελευταία.</string>
-  <string name="preference_capitalization_title">Κεφαλαιοποίηση</string>
-  <string name="preference_capitalization_summary">Αυτόματη κεφαλαιοποίηση των καταχωρήσεων</string>
-  <string name="preference_capitalization_dialog_title">Επιλογή κεφαλαιοποίησης</string>
-  <string name="preference_hidechecked_title">Απόκρυψη επιλεγμένων στοιχείων</string>
-  <string name="preference_hidechecked_summary">Άμεση απόκρυψη των στοιχείων που έχουν επιλεγεί ως ολοκληρωμένα.</string>
-  <string name="preference_fastscroll_title">Fast Scrolling</string>
-  <string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
-  <string name="preference_showprice_title">Εμφάνιση τιμής</string>
-  <string name="preference_showprice_summary">Εμφάνιση ως επιπλέον στήλης στη λίστα.</string>
-  <string name="preference_perstoreprice">Τιμές ανα κατάστημα</string>
-  <string name="preference_perstoreprice_title">Ανίχνευση τιμών ανα κατάστημα</string>
-  <string name="preference_perstoreprice_summary">Παρακολουθήστε τις διαφορετικές τιμές για κάθε αντικείμενο σε κάθε κατάστημα.</string>
-  <string name="preference_screenlock_title">Απενεργοποίηση του κλειδώματος οθόνης</string>
-  <string name="preference_screenlock_summary">Αποτρέπει το κλείδωμα της οθόνης όταν είναι επιλεγμένο.</string>
-  <string name="preference_usefilters_title">Filters</string>
-  <string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
-  <string name="preference_reset_quantity">Επαναφορά Ποσότητας</string>
-  <string name="preference_reset_quantity_summary">Επαναφέρει την ποσότητα κατά την προσθήκη αντικειμένων ξανά.</string>
-  <string name="preference_add_for_barcode">Σαρωτής Γραμμωτού Κώδικα</string>
-  <string name="preference_add_for_barcode_summary">Κρατήστε πατημένο το κουμπί Προσθήκη για την εκκίνηση της ΟΙ Επέκτασης Γραμμωτού Κώδικα (εάν είναι εγκατεστημένη)</string>
-  <string name="preference_showtags_title">Εμφάνιση ετικετών</string>
-  <string name="preference_showtags_summary">Εμφάνιση ως επιπλέον στήλης στη λίστα.</string>
-  <string name="preference_showquantity_title">Εμφάνιση ποσότητας</string>
-  <string name="preference_showquantity_summary">Εμφάνιση ως επιπλέον στήλης στη λίστα.</string>
-  <string name="preference_showpriority_title">Εμφάνιση προτεραιότητας</string>
-  <string name="preference_showpriority_summary">Εμφάνιση ως επιπλέον στήλης στη λίστα.</string>
-  <string name="preference_showunits_title">Εμφάνιση μονάδων</string>
-  <string name="preference_showunits_summary">Εμφάνιση ως επιπλέον στήλης στη λίστα.</string>
-  <string name="preference_prio_subtotal">Υποσύνολο κατά προτεραιότητα</string>
-  <string name="preference_prioritytotal_title">Υποσύνολο κατά προτεραιότητα</string>
-  <string name="preference_prioritytotal_summary">Δεν εμφανίζεται κανένα υποσύνολο κατα προτεραιότητα.</string>
-  <string name="preference_prioritytotal_dialog_title">Υποσύνολο κατά προτεραιότητα</string>
-  <string name="preference_priosubtotalchecked_title">Συμπερίληψη σημειωμένων αντικειμένων</string>
-  <string name="preference_priosubtotalchecked_on_summary">Το υποσύνολο κατά προτεραιότητα περιέχει  τα επιλεγμένα αντικείμενα</string>
-  <string name="preference_priosubtotalchecked_off_summary">Το υποσύνολο κατά προτεραιότητα εξαιρεί  τα επιλεγμένα αντικείμενα</string>
-  <string name="preference_pickitemsinlist_title">Επιλογή αντικειμένων απευθείας στη λίστα.</string>
-  <string name="preference_pickitemsinlist_on_summary">Εναλλαγή της κύριας λίστας στη λειτουργία επεξεργασίας για την επαναπροσθήκη των υπάρχοντων αντικειμένων</string>
-  <string name="preference_pickitemsinlist_off_summary">Προσθήκη αντικειμένων στη λίστα χρησιμοποιώντας έναν αφιερωμένο δι\'αλογο</string>
-  <string name="preference_samesortforpick_title">Πάντα η ίδια σειρά ταξινόμησης</string>
-  <string name="preference_samesortforpick_on_summary">Τα αντικέιμενα ταξινομούνται στη λειτουργία Επιλογής Αντικειμένων έτσι όπως και στη λειτουργία Αγορών.</string>
-  <string name="preference_samesortforpick_off_summary">Η σειρά ταξινόμησης για τη λειτουργία Επιλογής Αντικειμένων μπορεί να επιλεγεί χωριστά.</string>
+    <string name="preference_unchecked_on_top">Τα μη επιλεγμένα στην κορυφή</string>
+    <string name="preference_unchecked_on_top_summary">Να εμφανίζονται πάντα πρώτα τα μη επιλεγμένα στοιχεία</string>
+    <string name="preference_fontsize">Μέγεθος γραμματοσειράς</string>
+    <string name="preference_fontsize_summary">Αλλαγή μεγέθους γραμματοσειράς</string>
+    <string name="preference_fontsize_dialog_title">Επιλογή μεγέθους γραμματοσειράς</string>
+    <string name="preference_orientation">Προσανατολισμός</string>
+    <string name="preference_orientation_summary">Αλλαγή προσανατολισμού</string>
+    <string name="preference_orientation_dialog_title">Επιλογή προσανατολισμού</string>
+    <string name="preference_sortorder_title">Σειρά ταξινόμησης</string>
+    <string name="preference_sortorder_summary">Αλλαγή σειράς ταξινόμησης στοιχείων λίστας</string>
+    <string name="preference_sortorder_for_pick_title">Σειρά ταξινόμησης - Επιλογή Αντικειμένων</string>
+    <string name="preference_sortorder_for_pick_summary">Αλλαγή της σειράς ταξινόμησης των αντικειμένων λίστας στη λειτουργία Επιλογής Αντικειμένων.</string>
+    <string name="preference_sortorder_dialog_title">Επιλογή σειράς ταξινόμησης</string>
+    <string name="preference_sortorder_for_pick_dialog_title">Επιλογή σειράς ταξινόμησης για τη λειτουργία Επιλογής Αντικειμένων.</string>
+    <string name="preference_sortorder_for_shopping_lists">Sort order - Shopping Lists</string>
+    <string name="preference_sortorder_for_slists_summary">Change sort order of shopping lists.</string>
+    <string name="preference_sortorder_for_slists_dialog_title">Choose sort order for shopping lists</string>
+    <string name="preference_loadlastused_title">Φόρτωση της πιο πρόσφατης λίστας</string>
+    <string name="preference_loadlastused_summary">Έναρξη πάντα με τη λίστα που προβλήθηκε τελευταία.</string>
+    <string name="preference_capitalization_title">Κεφαλαιοποίηση</string>
+    <string name="preference_capitalization_summary">Αυτόματη κεφαλαιοποίηση των καταχωρήσεων</string>
+    <string name="preference_capitalization_dialog_title">Επιλογή κεφαλαιοποίησης</string>
+    <string name="preference_hidechecked_title">Απόκρυψη επιλεγμένων στοιχείων</string>
+    <string name="preference_hidechecked_summary">Άμεση απόκρυψη των στοιχείων που έχουν επιλεγεί ως ολοκληρωμένα.</string>
+    <string name="preference_fastscroll_title">Fast Scrolling</string>
+    <string name="preference_fastscroll_summary">Scroll handle appears when scrolling 35 items or more.</string>
+    <string name="preference_showprice_title">Εμφάνιση τιμής</string>
+    <string name="preference_showprice_summary">Εμφάνιση ως επιπλέον στήλης στη λίστα.</string>
+    <string name="preference_perstoreprice">Τιμές ανα κατάστημα</string>
+    <string name="preference_perstoreprice_title">Ανίχνευση τιμών ανα κατάστημα</string>
+    <string name="preference_perstoreprice_summary">Παρακολουθήστε τις διαφορετικές τιμές για κάθε αντικείμενο σε κάθε κατάστημα.</string>
+    <string name="preference_screenlock_title">Απενεργοποίηση του κλειδώματος οθόνης</string>
+    <string name="preference_screenlock_summary">Αποτρέπει το κλείδωμα της οθόνης όταν είναι επιλεγμένο.</string>
+    <string name="preference_usefilters_title">Filters</string>
+    <string name="preference_usefilters_summary">Lists can be filtered by tags or stores.</string>
+    <string name="preference_reset_quantity">Επαναφορά Ποσότητας</string>
+    <string name="preference_reset_quantity_summary">Επαναφέρει την ποσότητα κατά την προσθήκη αντικειμένων ξανά.</string>
+    <string name="preference_add_for_barcode">Σαρωτής Γραμμωτού Κώδικα</string>
+    <string name="preference_add_for_barcode_summary">Κρατήστε πατημένο το κουμπί Προσθήκη για την εκκίνηση της ΟΙ Επέκτασης Γραμμωτού Κώδικα (εάν είναι εγκατεστημένη)</string>
+    <string name="preference_showtags_title">Εμφάνιση ετικετών</string>
+    <string name="preference_showtags_summary">Εμφάνιση ως επιπλέον στήλης στη λίστα.</string>
+    <string name="preference_showquantity_title">Εμφάνιση ποσότητας</string>
+    <string name="preference_showquantity_summary">Εμφάνιση ως επιπλέον στήλης στη λίστα.</string>
+    <string name="preference_showpriority_title">Εμφάνιση προτεραιότητας</string>
+    <string name="preference_showpriority_summary">Εμφάνιση ως επιπλέον στήλης στη λίστα.</string>
+    <string name="preference_showunits_title">Εμφάνιση μονάδων</string>
+    <string name="preference_showunits_summary">Εμφάνιση ως επιπλέον στήλης στη λίστα.</string>
+    <string name="preference_prio_subtotal">Υποσύνολο κατά προτεραιότητα</string>
+    <string name="preference_prioritytotal_title">Υποσύνολο κατά προτεραιότητα</string>
+    <string name="preference_prioritytotal_summary">Δεν εμφανίζεται κανένα υποσύνολο κατα προτεραιότητα.</string>
+    <string name="preference_prioritytotal_dialog_title">Υποσύνολο κατά προτεραιότητα</string>
+    <string name="preference_priosubtotalchecked_title">Συμπερίληψη σημειωμένων αντικειμένων</string>
+    <string name="preference_priosubtotalchecked_on_summary">Το υποσύνολο κατά προτεραιότητα περιέχει  τα επιλεγμένα αντικείμενα</string>
+    <string name="preference_priosubtotalchecked_off_summary">Το υποσύνολο κατά προτεραιότητα εξαιρεί  τα επιλεγμένα αντικείμενα</string>
+    <string name="preference_pickitemsinlist_title">Επιλογή αντικειμένων απευθείας στη λίστα.</string>
+    <string name="preference_pickitemsinlist_on_summary">Εναλλαγή της κύριας λίστας στη λειτουργία επεξεργασίας για την επαναπροσθήκη των υπάρχοντων αντικειμένων</string>
+    <string name="preference_pickitemsinlist_off_summary">Προσθήκη αντικειμένων στη λίστα χρησιμοποιώντας έναν αφιερωμένο δι\'αλογο</string>
+    <string name="preference_samesortforpick_title">Πάντα η ίδια σειρά ταξινόμησης</string>
+    <string name="preference_samesortforpick_on_summary">Τα αντικέιμενα ταξινομούνται στη λειτουργία Επιλογής Αντικειμένων έτσι όπως και στη λειτουργία Αγορών.</string>
+    <string name="preference_samesortforpick_off_summary">Η σειρά ταξινόμησης για τη λειτουργία Επιλογής Αντικειμένων μπορεί να επιλεγεί χωριστά.</string>
 
-  <!-- Preference title: Shake the phone to clean up the list. -->
-  <string name="preference_shake_title">Κίνηση για εκκαθάριση</string>
+    <!-- Preference title: Shake the phone to clean up the list. -->
+    <string name="preference_shake_title">Κίνηση για εκκαθάριση</string>
 
-  <!-- Preference summary: Shake the phone to clean up the list. -->
-  <string name="preference_shake_summary">Κινήστε το τηλέφωνο για την εκκαθάριση της λίστας.</string>
+    <!-- Preference summary: Shake the phone to clean up the list. -->
+    <string name="preference_shake_summary">Κινήστε το τηλέφωνο για την εκκαθάριση της λίστας.</string>
 
-  <string name="preference_advanced">Σύνθετες ρυθμίσεις</string>
-  <string name="preference_advanced_summary">Επιπλέον ρυθμίσεις.</string>
+    <string name="preference_advanced">Σύνθετες ρυθμίσεις</string>
+    <string name="preference_advanced_summary">Επιπλέον ρυθμίσεις.</string>
 
-  <!-- Preference category: General settings -->
-  <string name="preference_general">Γενικά</string>
-  <string name="preference_pickitems">Επιλογή Αντικειμένων</string>
+    <!-- Preference category: General settings -->
+    <string name="preference_general">Γενικά</string>
+    <string name="preference_pickitems">Επιλογή Αντικειμένων</string>
 
-  <string name="preference_appearance">Εμφάνιση</string>
+    <string name="preference_appearance">Εμφάνιση</string>
 
-  <string name="preference_addons">Προσθήκες</string>
-  <string name="preference_get_addons">Λήψη νέων προσθηκών</string>
-  <string name="preference_get_addons_summary">Αναζήτηση για επεκτάσεις και θέματα στο Internet.</string>
-  <string name="preference_get_market_addons">Λήψη προσθηκών από το Market</string>
-  <string name="preference_get_developer_addons">Λήψη προσθηκών από το OpenIntents</string>
-  <string name="preference_extensions">Επεκτάσεις</string>
-  <string name="preference_themes">Θέματα</string>
-  <string name="preference_market_extensions_summary">Αναζήτηση για επεκτάσεις στο Android Market.</string>
-  <string name="preference_market_themes_summary">Αναζήτηση για θέματα στο Android Market.</string>
-  <string name="preference_developer_extensions_summary">Λήψη επεκτάσεων από την αρχική σελίδα του OpenIntents.</string>
-  <string name="preference_developer_themes_summary">Λήψη θεμάτων από την αρχική σελίδα του OpenIntents.</string>
-  <string name="preference_quickedit">Λειτουργία Γρήγορης Επεξεργασίας</string>
-  <string name="preference_quickedit_on_summary">Αγγίξτε τις τιμές Προτεραιότητας ή Ποσότητας για ένα μενού κοινών τιμών.</string>
-  <string name="preference_quickedit_off_summary">Αγγίζοντας τις τιμές Προτεραιότητας ή Ποσότητας καλεί το διάλογο Επεξεργασίας Αντικειμένου.</string>
-  <string name="preference_reset_all_settings">Επαναφορά όλων των ρυθμίσεων</string>
-  <string name="preference_reset_all_settings_alert">Θέλετε σίγουρα να ΕΠΑΝΑΦΕΡΕΤΕ ΟΛΕΣ τις ρυθμίσεις; Η ενέργεια δε μπορεί να αναιρεθεί.</string>
-  <string name="preference_reset_all_settings_done">Όλες οι ρυθμίσεις έχουν επαναφερθεί.</string>
+    <string name="preference_addons">Προσθήκες</string>
+    <string name="preference_get_addons">Λήψη νέων προσθηκών</string>
+    <string name="preference_get_addons_summary">Αναζήτηση για επεκτάσεις και θέματα στο Internet.</string>
+    <string name="preference_get_market_addons">Λήψη προσθηκών από το Market</string>
+    <string name="preference_get_developer_addons">Λήψη προσθηκών από το OpenIntents</string>
+    <string name="preference_extensions">Επεκτάσεις</string>
+    <string name="preference_themes">Θέματα</string>
+    <string name="preference_market_extensions_summary">Αναζήτηση για επεκτάσεις στο Android Market.</string>
+    <string name="preference_market_themes_summary">Αναζήτηση για θέματα στο Android Market.</string>
+    <string name="preference_developer_extensions_summary">Λήψη επεκτάσεων από την αρχική σελίδα του OpenIntents.</string>
+    <string name="preference_developer_themes_summary">Λήψη θεμάτων από την αρχική σελίδα του OpenIntents.</string>
+    <string name="preference_quickedit">Λειτουργία Γρήγορης Επεξεργασίας</string>
+    <string name="preference_quickedit_on_summary">Αγγίξτε τις τιμές Προτεραιότητας ή Ποσότητας για ένα μενού κοινών τιμών.</string>
+    <string name="preference_quickedit_off_summary">Αγγίζοντας τις τιμές Προτεραιότητας ή Ποσότητας καλεί το διάλογο Επεξεργασίας Αντικειμένου.</string>
+    <string name="preference_reset_all_settings">Επαναφορά όλων των ρυθμίσεων</string>
+    <string name="preference_reset_all_settings_alert">Θέλετε σίγουρα να ΕΠΑΝΑΦΕΡΕΤΕ ΟΛΕΣ τις ρυθμίσεις; Η ενέργεια δε μπορεί να αναιρεθεί.</string>
+    <string name="preference_reset_all_settings_done">Όλες οι ρυθμίσεις έχουν επαναφερθεί.</string>
 
-  <!-- ***************************
-       Permissions
-       *************************** -->
+    <!-- ***************************
+         Permissions
+         *************************** -->
 
-  <!-- OI Shopping list -->
-  <!-- Permission to read shopping lists -->
-  <string name="oi_shopping_permission_read">ανάγνωση λιστών αγορών</string>
-  <string name="oi_shopping_permission_read_descr">Επιτρέπει σε μια εφαρμογή την ανάγνωση λιστών αγορών. Λάβετε υπόψη σας ότι οι κρυπτογραφημένες λίστες και στοιχεία παρέχονται στην κρυπτογραφημένη μορφή.</string>
-  <!-- Permission to write to shopping lists -->
-  <string name="oi_shopping_permission_write">εγγραφή λιστών αγορών</string>
-  <string name="oi_shopping_permission_write_descr">Επιτρέπει στην εφαρμογή τη δημιουργία νέων λιστών και στοιχείων ή την αλλαγή των όσων ήδη υπάρχουν.</string>
+    <!-- OI Shopping list -->
+    <!-- Permission to read shopping lists -->
+    <string name="oi_shopping_permission_read">ανάγνωση λιστών αγορών</string>
+    <string name="oi_shopping_permission_read_descr">Επιτρέπει σε μια εφαρμογή την ανάγνωση λιστών αγορών. Λάβετε υπόψη σας ότι οι κρυπτογραφημένες λίστες και στοιχεία παρέχονται στην κρυπτογραφημένη μορφή.</string>
+    <!-- Permission to write to shopping lists -->
+    <string name="oi_shopping_permission_write">εγγραφή λιστών αγορών</string>
+    <string name="oi_shopping_permission_write_descr">Επιτρέπει στην εφαρμογή τη δημιουργία νέων λιστών και στοιχείων ή την αλλαγή των όσων ήδη υπάρχουν.</string>
 
 
-  <!-- ***************************
-       Preferences
-       *************************** -->
+    <!-- ***************************
+         Preferences
+         *************************** -->
 
-  <string-array name="preference_sortorder_entries">
-    <!-- Preference sort order: List unchecked items first, sort items alphabetically -->
-    <item>μη επιλεγμένα, με αλφαβητική σειρά</item>
-    <!-- Preference sort order: Sort by item name -->
-    <item>με αλφαβητική σειρά</item>
-    <!-- Preference sort order: Newest item first -->
-    <item>πιο πρόσφατα</item>
-    <!-- Preference sort order: Oldest item first -->
-    <item>παλαιότερα</item>
-    <!-- Preference sort order: Sort alphabetically by tags -->
-    <item>ετικέτες με αλφαβητική σειρά</item>
-    <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
-    <item>προτεραιότητα, αλφαβητικά κατά ετικέτα</item>
-    <!-- Preference sort order: Sort by price, the most expensive first -->
-    <item>πιο ακριβά</item>
-    <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
-    <item>μη σημειωμένα αρχικά, αλφαβητικά κατά ετικέτα</item>
-    <!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
-    <item>μη σημειωμένα αρχικά, προτεραιότητα, αλφαβητικά</item>
-    <!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
-    <item>μη σημειωμένα αρχικά, προτεραιότητα, αλφαβητικά κατά ετικέτα</item>
-  </string-array>
+    <string-array name="preference_sortorder_entries">
+        <!-- Preference sort order: List unchecked items first, sort items alphabetically -->
+        <item>μη επιλεγμένα, με αλφαβητική σειρά</item>
+        <!-- Preference sort order: Sort by item name -->
+        <item>με αλφαβητική σειρά</item>
+        <!-- Preference sort order: Newest item first -->
+        <item>πιο πρόσφατα</item>
+        <!-- Preference sort order: Oldest item first -->
+        <item>παλαιότερα</item>
+        <!-- Preference sort order: Sort alphabetically by tags -->
+        <item>ετικέτες με αλφαβητική σειρά</item>
+        <!-- Preference sort order: Sort by priority, then alphabetically by tags -->
+        <item>προτεραιότητα, αλφαβητικά κατά ετικέτα</item>
+        <!-- Preference sort order: Sort by price, the most expensive first -->
+        <item>πιο ακριβά</item>
+        <!-- Preference sort order: List unchecked items first, sort alphabetically by tags -->
+        <item>μη σημειωμένα αρχικά, αλφαβητικά κατά ετικέτα</item>
+        <!-- Preference sort order: List unchecked items first, priority, sort items alphabetically -->
+        <item>μη σημειωμένα αρχικά, προτεραιότητα, αλφαβητικά</item>
+        <!-- Preference sort order: List unchecked items first, priority, tags, sort items alphabetically -->
+        <item>μη σημειωμένα αρχικά, προτεραιότητα, αλφαβητικά κατά ετικέτα</item>
+    </string-array>
 
-  <string-array name="preference_sortorder_slists">
-    <!-- Preference sort order: Sort by list name in ascending order -->
-    <item>alphabetical ascending</item>
-    <!-- Preference sort order: Sort by list name in descending order -->
-    <item>alphabetical descending</item>
-    <!-- Preference sort order: Newest list first -->
-    <item>πιο πρόσφατα</item>
-    <!-- Preference sort order: Oldest list first -->
-    <item>παλαιότερα</item>
-  </string-array>
+    <string-array name="preference_sortorder_slists">
+        <!-- Preference sort order: Sort by list name in ascending order -->
+        <item>alphabetical ascending</item>
+        <!-- Preference sort order: Sort by list name in descending order -->
+        <item>alphabetical descending</item>
+        <!-- Preference sort order: Newest list first -->
+        <item>πιο πρόσφατα</item>
+        <!-- Preference sort order: Oldest list first -->
+        <item>παλαιότερα</item>
+    </string-array>
 
-  <string-array name="preference_prioritytotal_entries">
-    <item>Δεν εμφανίζεται</item>
-    <item>Προτεραιότητα 1</item>
-    <item>Προτεραιότητα 1-2</item>
-    <item>Προτεραιότητα 1-3</item>
-    <item>Προτεραιότητα 1-4</item>
-  </string-array>
+    <string-array name="preference_prioritytotal_entries">
+        <item>Δεν εμφανίζεται</item>
+        <item>Προτεραιότητα 1</item>
+        <item>Προτεραιότητα 1-2</item>
+        <item>Προτεραιότητα 1-3</item>
+        <item>Προτεραιότητα 1-4</item>
+    </string-array>
 
-  <string-array name="preference_fontsize_entries">
-    <!-- Preference fontsize: tiny font size -->
-    <item>Ελάχιστο</item>
-    <!-- Preference fontsize: small font size -->
-    <item>Μικρό</item>
-    <!-- Preference fontsize: default font size -->
-    <item>Προεπιλογή</item>
-    <!-- Preference fontsize: large font size -->
-    <item>Μεγάλο</item>
-  </string-array>
+    <string-array name="preference_fontsize_entries">
+        <!-- Preference fontsize: tiny font size -->
+        <item>Ελάχιστο</item>
+        <!-- Preference fontsize: small font size -->
+        <item>Μικρό</item>
+        <!-- Preference fontsize: default font size -->
+        <item>Προεπιλογή</item>
+        <!-- Preference fontsize: large font size -->
+        <item>Μεγάλο</item>
+    </string-array>
 
-  <string-array name="preference_orientation_entries">
-    <!-- Preference orientation: default -->
-    <item>Προεπιλογή</item>
-    <!-- Preference orientation: landscape -->
-    <item>Οριζόντια</item>
-    <!-- Preference orientation: portrait -->
-    <item>Κατακόρυφα</item>
-  </string-array>
+    <string-array name="preference_orientation_entries">
+        <!-- Preference orientation: default -->
+        <item>Προεπιλογή</item>
+        <!-- Preference orientation: landscape -->
+        <item>Οριζόντια</item>
+        <!-- Preference orientation: portrait -->
+        <item>Κατακόρυφα</item>
+    </string-array>
 
-  <string-array name="preference_capitalization_entries">
-    <!-- Preference capitalization: No capitalization -->
-    <item>Καμία</item>
-    <!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
-    <item>Ανά πρόταση</item>
-    <!-- Preference capitalization: Automatically capitalize first letter of each word. -->
-    <item>Ανά λέξη</item>
-  </string-array>
+    <string-array name="preference_capitalization_entries">
+        <!-- Preference capitalization: No capitalization -->
+        <item>Καμία</item>
+        <!-- Preference capitalization: Automatically capitalize first letter of a sentence. -->
+        <item>Ανά πρόταση</item>
+        <!-- Preference capitalization: Automatically capitalize first letter of each word. -->
+        <item>Ανά λέξη</item>
+    </string-array>
 
-  <!-- ***************************
-       OI Notepad
-       *************************** -->
-  <!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
-  <string name="notepad_not_available">Η επεξεργασία των σημειώσεων αντικειμένου απαιτεί το OI Σημειωματάριο.</string>
-  <!-- Name of application "OI Notepad". Translations should be consistent. -->
-  <string name="notepad">OI Σημειωματάριο</string>
+    <!-- ***************************
+         OI Notepad
+         *************************** -->
+    <!-- Message box warning if user wants to edit a note, but OI Notepad is not installed. -->
+    <string name="notepad_not_available">Η επεξεργασία των σημειώσεων αντικειμένου απαιτεί το OI Σημειωματάριο.</string>
+    <!-- Name of application "OI Notepad". Translations should be consistent. -->
+    <string name="notepad">OI Σημειωματάριο</string>
 
-  <!-- ***************************
-       Automation
-       *************************** -->
-  <!-- Label above spinner for all actions (automation tasks) that can be performed. -->
-  <string name="label_select_action">Επιλογή ενέργειας:</string>
+    <!-- ***************************
+         Automation
+         *************************** -->
+    <!-- Label above spinner for all actions (automation tasks) that can be performed. -->
+    <string name="label_select_action">Επιλογή ενέργειας:</string>
 
-  <!-- Label above button that opens a list of all shopping lists to choose from. -->
-  <string name="label_select_list">Επιλογή λίστας:</string>
+    <!-- Label above button that opens a list of all shopping lists to choose from. -->
+    <string name="label_select_list">Επιλογή λίστας:</string>
 
-  <!-- Arrays -->
+    <!-- Arrays -->
 
-  <string-array name="automation_actions">
-    <!-- Automation action to clean up a list. -->
-    <item>Εκκαθάριση λίστας</item>
-  </string-array>
+    <string-array name="automation_actions">
+        <!-- Automation action to clean up a list. -->
+        <item>Εκκαθάριση λίστας</item>
+    </string-array>
 
-  <string name="widget_prev_page">Προηγούμενη σελίδα</string>
-  <string name="widget_next_page">Επόμενη σελίδα</string>
-  <string name="widget_choose_a_list">Επιλέξτε μια λίστα</string>
-  <string name="widget_no_items">Κανένα αντικείμενο στη σελίδα %d</string>
+    <string name="widget_prev_page">Προηγούμενη σελίδα</string>
+    <string name="widget_next_page">Επόμενη σελίδα</string>
+    <string name="widget_choose_a_list">Επιλέξτε μια λίστα</string>
+    <string name="widget_no_items">Κανένα αντικείμενο στη σελίδα %d</string>
 </resources>

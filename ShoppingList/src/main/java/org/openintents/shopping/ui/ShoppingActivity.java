@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2007-2010 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -87,6 +87,7 @@ import android.widget.Toast;
 import android.widget.WrapperListAdapter;
 
 import org.openintents.OpenIntents;
+import org.openintents.convertcsv.shoppinglist.ConvertCsvActivity;
 import org.openintents.distribution.DistributionLibraryFragmentActivity;
 import org.openintents.distribution.DownloadOIAppDialog;
 import org.openintents.intents.GeneralIntents;
@@ -138,42 +139,61 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     // AdapterView.OnItemClickListener
     // {
 
+    public static final int DIALOG_GET_FROM_MARKET = 7;
+    public static final int LOADER_TOTALS = 0;
+    public static final int LOADER_ITEMS = 1;
+    /**
+     * mode: separate dialog to add items from existing list
+     */
+    public static final int MODE_PICK_ITEMS_DLG = 3;
+    /**
+     * mode: add items from existing list
+     */
+    public static final int MODE_ADD_ITEMS = 2;
+    /**
+     * mode: I am in the shop
+     */
+    public static final int MODE_IN_SHOP = 1;
+    public static final String[] PROJECTION_ITEMS = new String[]{
+            ContainsFull._ID, ContainsFull.ITEM_NAME, ContainsFull.ITEM_IMAGE,
+            ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,
+            ContainsFull.QUANTITY, ContainsFull.STATUS, ContainsFull.ITEM_ID,
+            ContainsFull.SHARE_CREATED_BY, ContainsFull.SHARE_MODIFIED_BY,
+            ContainsFull.PRIORITY, ContainsFull.ITEM_HAS_NOTE,
+            ContainsFull.ITEM_UNITS};
+    public static final int mStringItemsITEMNAME = 1;
+    public static final int mStringItemsITEMTAGS = 3;
+    public static final int mStringItemsITEMPRICE = 4;
+    public static final int mStringItemsQUANTITY = 5;
+    public static final int mStringItemsSTATUS = 6;
+    public static final int mStringItemsITEMID = 7;
+    public static final int mStringItemsPRIORITY = 10;
+    public static final int mStringItemsITEMHASNOTE = 11;
+    public static final int mStringItemsITEMUNITS = 12;
     /**
      * TAG for logging.
      */
     private static final String TAG = "ShoppingActivity";
     private static final boolean debug = LogConstants.debug;
-
-    private ItemsFromExtras mItemsFromExtras = new ItemsFromExtras();
-    private ToggleBoughtInputMethod toggleBoughtInputMethod;
-
     private static final int SWIPE_MIN_DISTANCE = 120;
     private static final int SWIPE_MAX_OFF_PATH = 250;
     private static final int SWIPE_THRESHOLD_VELOCITY = 200;
-
     private static final int MENU_NEW_LIST = Menu.FIRST;
     private static final int MENU_CLEAN_UP_LIST = Menu.FIRST + 1;
     private static final int MENU_DELETE_LIST = Menu.FIRST + 2;
-
     private static final int MENU_SHARE = Menu.FIRST + 3;
     private static final int MENU_THEME = Menu.FIRST + 4;
-
     private static final int MENU_ADD_LOCATION_ALERT = Menu.FIRST + 5;
-
     private static final int MENU_RENAME_LIST = Menu.FIRST + 6;
-
     private static final int MENU_MARK_ITEM = Menu.FIRST + 7;
     private static final int MENU_EDIT_ITEM = Menu.FIRST + 8; // includes rename
     private static final int MENU_DELETE_ITEM = Menu.FIRST + 9;
-
     private static final int MENU_INSERT_FROM_EXTRAS = Menu.FIRST + 10;
     private static final int MENU_COPY_ITEM = Menu.FIRST + 11;
     private static final int MENU_SORT_LIST = Menu.FIRST + 12;
     private static final int MENU_SEARCH_ADD = Menu.FIRST + 13;
-
     // TODO: obsolete pick items button, now in drawer
     private static final int MENU_PICK_ITEMS = Menu.FIRST + 14;
-
     // TODO: Implement "select list" action
     // that can be called by other programs.
     // private static final int MENU_SELECT_LIST = Menu.FIRST + 15; // select a
@@ -186,9 +206,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     private static final int MENU_ITEM_STORES = Menu.FIRST + 22;
     private static final int MENU_UNMARK_ALL_ITEMS = Menu.FIRST + 23;
     private static final int MENU_SYNC_WEAR = Menu.FIRST + 25;
-
+    private static final int MENU_CONVERT_CSV = Menu.FIRST + 26;
     private static final int MENU_DISTRIBUTION_START = Menu.FIRST + 100; // MUST BE LAST
-
     private static final int DIALOG_ABOUT = 1;
     // private static final int DIALOG_TEXT_ENTRY = 2;
     private static final int DIALOG_NEW_LIST = 2;
@@ -196,105 +215,35 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     private static final int DIALOG_EDIT_ITEM = 4;
     private static final int DIALOG_DELETE_ITEM = 5;
     private static final int DIALOG_THEME = 6;
-    public static final int DIALOG_GET_FROM_MARKET = 7;
-
     private static final int DIALOG_DISTRIBUTION_START = 100; // MUST BE LAST
-
     private static final int REQUEST_CODE_CATEGORY_ALTERNATIVE = 1;
     private static final int REQUEST_PICK_LIST = 2;
-
-    public static final int LOADER_TOTALS = 0;
-    public static final int LOADER_ITEMS = 1;
-
     /**
      * The main activity.
      * <p/>
      * Displays the shopping list that was used last time.
      */
     private static final int STATE_MAIN = 0;
-
     /**
      * VIEW action on a item/list URI.
      */
     private static final int STATE_VIEW_LIST = 1;
-
     /**
      * PICK action on an dir/item URI.
      */
     private static final int STATE_PICK_ITEM = 2;
-
     /**
      * GET_CONTENT action on an item/item URI.
      */
     private static final int STATE_GET_CONTENT_ITEM = 3;
-
-    /**
-     * Current state
-     */
-    private int mState;
-
-    /*
-     * Value of PreferenceActivity.updateCount last time we called fillItems().
-     */
-    private int lastAppliedPrefChange = -1;
-
-    /**
-     * mode: separate dialog to add items from existing list
-     */
-    public static final int MODE_PICK_ITEMS_DLG = 3;
-
-    /**
-     * mode: add items from existing list
-     */
-    public static final int MODE_ADD_ITEMS = 2;
-
-    /**
-     * mode: I am in the shop
-     */
-    public static final int MODE_IN_SHOP = 1;
-
-    private boolean mEditingFilter;
-
-    /**
-     * URI of current list
-     */
-    private Uri mListUri;
-
-    /**
-     * URI of selected item
-     */
-    private Uri mItemUri;
-
-    /**
-     * URI of current list and item
-     */
-    private Uri mListItemUri;
-
     /**
      * Definition of the requestCode for the subactivity.
      */
     static final private int SUBACTIVITY_LIST_SHARE_SETTINGS = 0;
-
     /**
      * Definition for message handler:
      */
     static final private int MESSAGE_UPDATE_CURSORS = 1;
-
-    /**
-     * Update interval for automatic requires.
-     * <p/>
-     * (Workaround since ContentObserver does not work.)
-     */
-    private int mUpdateInterval;
-
-    private boolean mUpdating;
-
-    /**
-     * Private members connected to list of shopping lists
-     */
-    // Temp - making it generic for tablet compatibility
-    private AdapterView mShoppingListsView;
-    private Cursor mCursorShoppingLists;
     private static final String[] mStringListFilter = new String[]{Lists._ID,
             Lists.NAME, Lists.IMAGE, Lists.SHARE_NAME, Lists.SHARE_CONTACTS,
             Lists.SKIN_BACKGROUND};
@@ -304,58 +253,71 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     private static final int mStringListFilterSHARENAME = 3;
     private static final int mStringListFilterSHARECONTACTS = 4;
     private static final int mStringListFilterSKINBACKGROUND = 5;
-
-    private ShoppingItemsView mItemsView;
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerListsView;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private CharSequence mTitle, mDrawerTitle, mSubTitle;
-
-    // private Cursor mCursorItems;
-
-    public static final String[] PROJECTION_ITEMS = new String[]{
-            ContainsFull._ID, ContainsFull.ITEM_NAME, ContainsFull.ITEM_IMAGE,
-            ContainsFull.ITEM_TAGS, ContainsFull.ITEM_PRICE,
-            ContainsFull.QUANTITY, ContainsFull.STATUS, ContainsFull.ITEM_ID,
-            ContainsFull.SHARE_CREATED_BY, ContainsFull.SHARE_MODIFIED_BY,
-            ContainsFull.PRIORITY, ContainsFull.ITEM_HAS_NOTE,
-            ContainsFull.ITEM_UNITS};
     private static final int mStringItemsCONTAINSID = 0;
-    public static final int mStringItemsITEMNAME = 1;
     private static final int mStringItemsITEMIMAGE = 2;
-    public static final int mStringItemsITEMTAGS = 3;
-    public static final int mStringItemsITEMPRICE = 4;
-    public static final int mStringItemsQUANTITY = 5;
-    public static final int mStringItemsSTATUS = 6;
-    public static final int mStringItemsITEMID = 7;
     private static final int mStringItemsSHARECREATEDBY = 8;
     private static final int mStringItemsSHAREMODIFIEDBY = 9;
-    public static final int mStringItemsPRIORITY = 10;
-    public static final int mStringItemsITEMHASNOTE = 11;
-    public static final int mStringItemsITEMUNITS = 12;
-
-    private LinearLayout.LayoutParams mLayoutParamsItems;
-    private int mAllowedListHeight; // Height for the list allowed in this view.
-
-    private AutoCompleteTextView mEditText;
-    private Button mButton;
-    private View mAddPanel;
-    private Button mStoresFilterButton;
-    private Button mTagsFilterButton;
-    private Button mShoppingListsFilterButton;
-
-    // TODO: Set up state information for onFreeze(), ...
-    // State data to be stored when freezing:
-    private final String ORIGINAL_ITEM = "original item";
-
     // private static final String BUNDLE_TEXT_ENTRY_MENU = "text entry menu";
     // private static final String BUNDLE_CURSOR_ITEMS_POSITION =
     // "cursor items position";
     private static final String BUNDLE_ITEM_URI = "item uri";
     private static final String BUNDLE_RELATION_URI = "relation_uri";
     private static final String BUNDLE_MODE = "mode";
-    private static final String BUNDLE_MODE_BEFORE_SEARCH = "mode_before_search";
 
+    // private Cursor mCursorItems;
+    private static final String BUNDLE_MODE_BEFORE_SEARCH = "mode_before_search";
+    // TODO: Set up state information for onFreeze(), ...
+    // State data to be stored when freezing:
+    private final String ORIGINAL_ITEM = "original item";
+    private ItemsFromExtras mItemsFromExtras = new ItemsFromExtras();
+    private ToggleBoughtInputMethod toggleBoughtInputMethod;
+    /**
+     * Current state
+     */
+    private int mState;
+    /*
+     * Value of PreferenceActivity.updateCount last time we called fillItems().
+     */
+    private int lastAppliedPrefChange = -1;
+    private boolean mEditingFilter;
+    /**
+     * URI of current list
+     */
+    private Uri mListUri;
+    /**
+     * URI of selected item
+     */
+    private Uri mItemUri;
+    /**
+     * URI of current list and item
+     */
+    private Uri mListItemUri;
+    /**
+     * Update interval for automatic requires.
+     * <p/>
+     * (Workaround since ContentObserver does not work.)
+     */
+    private int mUpdateInterval;
+    private boolean mUpdating;
+    /**
+     * Private members connected to list of shopping lists
+     */
+    // Temp - making it generic for tablet compatibility
+    private AdapterView mShoppingListsView;
+    private Cursor mCursorShoppingLists;
+    private ShoppingItemsView mItemsView;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerListsView;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private CharSequence mTitle, mDrawerTitle, mSubTitle;
+    private LinearLayout.LayoutParams mLayoutParamsItems;
+    private int mAllowedListHeight; // Height for the list allowed in this view.
+    private AutoCompleteTextView mEditText;
+    private Button mButton;
+    private View mAddPanel;
+    private Button mStoresFilterButton;
+    private Button mTagsFilterButton;
+    private Button mShoppingListsFilterButton;
     private String mSortOrder;
 
     private ListSortActionProvider mListSortActionProvider;
@@ -399,6 +361,35 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     private EditItemDialog.FieldType mEditItemFocusField = EditItemDialog.FieldType.ITEMNAME;
     private GestureDetector mGestureDetector;
     private View.OnTouchListener mGestureListener;
+    private int mDeleteItemPosition;
+    // Handle the process of automatically updating enabled sensors:
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == MESSAGE_UPDATE_CURSORS) {
+                mCursorShoppingLists.requery();
+
+                if (mUpdating) {
+                    sendMessageDelayed(obtainMessage(MESSAGE_UPDATE_CURSORS),
+                            mUpdateInterval);
+                }
+
+            }
+        }
+    };
+
+    /**
+     * Set theme for all lists.
+     *
+     * @param context
+     * @param theme
+     */
+    public static void setThemeForAll(Context context, String theme) {
+        ContentValues values = new ContentValues();
+        values.put(Lists.SKIN_BACKGROUND, theme);
+        context.getContentResolver().update(Lists.CONTENT_URI, values, null,
+                null);
+    }
 
     /**
      * Called when the activity is first created.
@@ -476,9 +467,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             if (ShoppingListIntents.TYPE_STRING_ARRAYLIST_SHOPPING.equals(type)) {
                 /*
                  * Need to insert new items from a string array in the intent
-				 * extras Use main action but add an item to the options menu
-				 * for adding extra items
-				 */
+                 * extras Use main action but add an item to the options menu
+                 * for adding extra items
+                 */
                 mItemsFromExtras.getShoppingExtras(intent);
                 mState = STATE_MAIN;
                 mListUri = buildDefaultShoppingListUri(defaultShoppingList);
@@ -884,8 +875,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         // TODO ???
         /*
          * // Unregister refresh intent receiver
-		 * unregisterReceiver(mIntentReceiver);
-		 */
+         * unregisterReceiver(mIntentReceiver);
+         */
 
         mItemsView.onPause();
     }
@@ -1420,6 +1411,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         }
     }
 
+    // Menu
+
     private boolean QuickEditFieldPopupMenu(final Cursor c, final int pos,
                                             final FieldType field, View v) {
         QuickSelectMenu popup = new QuickSelectMenu(this, v);
@@ -1515,29 +1508,27 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         finish();
     }
 
-    // Menu
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
 
-		/*
+        /*
          * int MENU_ACTION_WITH_TEXT=0;
-		 * 
-		 * //Temp- for backward compatibility with OS 3 features
-		 * 
-		 * if(!usingListSpinner()){ try{ //setting the value equivalent to
-		 * desired expression
-		 * //MenuItem.SHOW_AS_ACTION_IF_ROOM|MenuItem.SHOW_AS_ACTION_WITH_TEXT
-		 * java.lang.reflect.Field
-		 * field=MenuItem.class.getDeclaredField("SHOW_AS_ACTION_IF_ROOM");
-		 * MENU_ACTION_WITH_TEXT=field.getInt(MenuItem.class);
-		 * field=MenuItem.class.getDeclaredField("SHOW_AS_ACTION_WITH_TEXT");
-		 * MENU_ACTION_WITH_TEXT|=field.getInt(MenuItem.class); }catch(Exception
-		 * e){ //reset value irrespective of cause MENU_ACTION_WITH_TEXT=0; }
-		 * 
-		 * }
-		 */
+         *
+         * //Temp- for backward compatibility with OS 3 features
+         *
+         * if(!usingListSpinner()){ try{ //setting the value equivalent to
+         * desired expression
+         * //MenuItem.SHOW_AS_ACTION_IF_ROOM|MenuItem.SHOW_AS_ACTION_WITH_TEXT
+         * java.lang.reflect.Field
+         * field=MenuItem.class.getDeclaredField("SHOW_AS_ACTION_IF_ROOM");
+         * MENU_ACTION_WITH_TEXT=field.getInt(MenuItem.class);
+         * field=MenuItem.class.getDeclaredField("SHOW_AS_ACTION_WITH_TEXT");
+         * MENU_ACTION_WITH_TEXT|=field.getInt(MenuItem.class); }catch(Exception
+         * e){ //reset value irrespective of cause MENU_ACTION_WITH_TEXT=0; }
+         *
+         * }
+         */
 
         // Add menu option for auto adding items from string array in intent
         // extra if they exist
@@ -1582,10 +1573,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 // tentatively replaced by buttons in drawer.
                         setVisible(false);
 
-		/*
+        /*
          * menu.add(0, MENU_SHARE, 0, R.string.share)
-		 * .setIcon(R.drawable.contact_share001a) .setShortcut('4', 's');
-		 */
+         * .setIcon(R.drawable.contact_share001a) .setShortcut('4', 's');
+         */
 
         menu.add(0, MENU_THEME, 0, R.string.theme)
                 .setIcon(android.R.drawable.ic_menu_manage)
@@ -1618,6 +1609,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         menu.add(0, MENU_SYNC_WEAR, 0, R.string.sync_wear);
 
+        menu.add(0, MENU_CONVERT_CSV, 0, R.string.convert_csv);
+
         // Add distribution menu items last.
         mDistribution.onCreateOptionsMenu(menu);
 
@@ -1641,11 +1634,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         Intent intent = new Intent(Intent.ACTION_PICK, Uri.parse("geo:"));
         List<ResolveInfo> resolve_pick_location = pm.queryIntentActivities(
                 intent, PackageManager.MATCH_DEFAULT_ONLY);
-		/*
-		 * for (int i = 0; i < resolve_pick_location.size(); i++) { Log.d(TAG,
-		 * "Activity name: " + resolve_pick_location.get(i).activityInfo.name);
-		 * }
-		 */
+        /*
+         * for (int i = 0; i < resolve_pick_location.size(); i++) { Log.d(TAG,
+         * "Activity name: " + resolve_pick_location.get(i).activityInfo.name);
+         * }
+         */
 
         // Check whether adding alerts is possible.
         intent = new Intent(Intent.ACTION_VIEW, Alert.Generic.CONTENT_URI);
@@ -1729,10 +1722,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         // and not deletable.
 
         // TODO ???
-		/*
-		 * menu.setItemShown(MENU_DELETE_LIST, mCursorListFilter.count() > 1 &&
-		 * listId != 1); // 1 is hardcoded number of default first list.
-		 */
+        /*
+         * menu.setItemShown(MENU_DELETE_LIST, mCursorListFilter.count() > 1 &&
+         * listId != 1); // 1 is hardcoded number of default first list.
+         */
 
         // The following code is put from onCreateOptionsMenu to
         // onPrepareOptionsMenu,
@@ -1816,6 +1809,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             case MENU_SYNC_WEAR:
                 mItemsView.pushItemsToWear();
                 return true;
+            case MENU_CONVERT_CSV:
+                startActivity(new Intent(this, ConvertCsvActivity.class).setData(mListUri));
+                return true;
             default:
                 break;
         }
@@ -1839,6 +1835,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         return super.onOptionsItemSelected(item);
 
     }
+
+    // /////////////////////////////////////////////////////
+    //
+    // Menu functions
+    //
 
     /**
      *
@@ -1905,11 +1906,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         return true;
     }
-
-    // /////////////////////////////////////////////////////
-    //
-    // Menu functions
-    //
 
     /**
      * Creates a new list from dialog.
@@ -1982,6 +1978,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             }
         }
     }
+
+    // TODO: Convert into proper dialog that remains across screen orientation
+    // changes.
 
     /**
      * Rename list from dialog.
@@ -2091,9 +2090,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         }
     }
 
-    // TODO: Convert into proper dialog that remains across screen orientation
-    // changes.
-
     /**
      * Confirm 'delete list' command by AlertDialog.
      */
@@ -2198,8 +2194,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 .build());
         startActivity(intent);
     }
-
-    private int mDeleteItemPosition;
 
     /**
      * delete item
@@ -2314,18 +2308,18 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         // If we share items, mark item on other lists:
         // TODO ???
-		/*
-		 * String recipients =
-		 * mCursorListFilter.getString(mStringListFilterSHARECONTACTS); if (!
-		 * recipients.equals("")) { String shareName =
-		 * mCursorListFilter.getString(mStringListFilterSHARENAME); long
-		 * newstatus = Shopping.Status.BOUGHT;
-		 * 
-		 * Log.i(TAG, "Update shared item. " + " recipients: " + recipients +
-		 * ", shareName: " + shareName + ", status: " + newstatus);
-		 * mGTalkSender.sendItemUpdate(recipients, shareName, itemName,
-		 * itemName, oldstatus, newstatus); }
-		 */
+        /*
+         * String recipients =
+         * mCursorListFilter.getString(mStringListFilterSHARECONTACTS); if (!
+         * recipients.equals("")) { String shareName =
+         * mCursorListFilter.getString(mStringListFilterSHARENAME); long
+         * newstatus = Shopping.Status.BOUGHT;
+         *
+         * Log.i(TAG, "Update shared item. " + " recipients: " + recipients +
+         * ", shareName: " + shareName + ", status: " + newstatus);
+         * mGTalkSender.sendItemUpdate(recipients, shareName, itemName,
+         * itemName, oldstatus, newstatus); }
+         */
     }
 
     /**
@@ -2367,19 +2361,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     }
 
     /**
-     * Set theme for all lists.
-     *
-     * @param context
-     * @param theme
-     */
-    public static void setThemeForAll(Context context, String theme) {
-        ContentValues values = new ContentValues();
-        values.put(Lists.SKIN_BACKGROUND, theme);
-        context.getContentResolver().update(Lists.CONTENT_URI, values, null,
-                null);
-    }
-
-    /**
      * Loads the theme settings for the currently selected theme.
      * <p/>
      * Up to version 1.2.1, only one of 3 hardcoded themes are available. These
@@ -2390,11 +2371,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
      * @return
      */
     public String loadListTheme() {
-		/*
-		 * long listId = getSelectedListId(); if (listId < 0) { // No valid list
-		 * - probably view is not active // and no item is selected. return 1;
-		 * // return default theme }
-		 */
+        /*
+         * long listId = getSelectedListId(); if (listId < 0) { // No valid list
+         * - probably view is not active // and no item is selected. return 1;
+         * // return default theme }
+         */
 
         // Return default theme if something unexpected happens:
         if (mCursorShoppingLists == null) {
@@ -2503,6 +2484,11 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
     }
 
+    // /////////////////////////////////////////////////////
+    //
+    // Helper functions
+    //
+
     @Override
     protected void onPrepareDialog(int id, Dialog dialog) {
         super.onPrepareDialog(id, dialog);
@@ -2535,11 +2521,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 break;
         }
     }
-
-    // /////////////////////////////////////////////////////
-    //
-    // Helper functions
-    //
 
     /**
      * Returns the ID of the selected shopping list.
@@ -2706,17 +2687,17 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         // automatically detected.
         // mCursor
 
-		/*
-		 * ArrayList<String> list = new ArrayList<String>(); // TODO Create
-		 * summary of all lists // list.add(ALL); while
-		 * (mCursorListFilter.next()) {
-		 * list.add(mCursorListFilter.getString(mStringListFilterNAME)); }
-		 * ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-		 * android.R.layout.simple_spinner_item, list);
-		 * adapter.setDropDownViewResource(
-		 * android.R.layout.simple_spinner_dropdown_item);
-		 * mSpinnerListFilter.setAdapter(adapter);
-		 */
+        /*
+         * ArrayList<String> list = new ArrayList<String>(); // TODO Create
+         * summary of all lists // list.add(ALL); while
+         * (mCursorListFilter.next()) {
+         * list.add(mCursorListFilter.getString(mStringListFilterNAME)); }
+         * ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+         * android.R.layout.simple_spinner_item, list);
+         * adapter.setDropDownViewResource(
+         * android.R.layout.simple_spinner_dropdown_item);
+         * mSpinnerListFilter.setAdapter(adapter);
+         */
 
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
                 // Use a template that displays a text view
@@ -2739,7 +2720,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         updateTitle();
     }
-
 
     @Override
     public void updateActionBar() {
@@ -2950,22 +2930,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         return recipients.contains("@");
     }
 
-    // Handle the process of automatically updating enabled sensors:
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == MESSAGE_UPDATE_CURSORS) {
-                mCursorShoppingLists.requery();
-
-                if (mUpdating) {
-                    sendMessageDelayed(obtainMessage(MESSAGE_UPDATE_CURSORS),
-                            mUpdateInterval);
-                }
-
-            }
-        }
-    };
-
     /**
      * This method is called when the sending activity has finished, with the
      * result it supplied.
@@ -3061,6 +3025,39 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             newPos = pos + value;
         }
         setSelectedListPos(newPos);
+    }
+
+    private void closeDrawer() {
+        if (mDrawerLayout != null) {
+            mDrawerLayout.closeDrawer(mDrawerListsView);
+        }
+    }
+
+    /**
+     * With the requirement of OS3, making an intermediary decision depending
+     * upon the widget
+     *
+     * @param adapter
+     */
+    private void setSpinnerAndDrawerListAdapter(ListAdapter adapter) {
+        DrawerListAdapter adapterWrapper = (new DrawerListAdapter(this, adapter));
+        mDrawerListsView.setAdapter(adapterWrapper);
+        mDrawerListsView.setOnItemClickListener(adapterWrapper);
+        mShoppingListsView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onItemChanged() {
+        mItemsView.mCursorItems.requery();
+        fillAutoCompleteTextViewAdapter(mEditText);
+    }
+
+    @Override
+    public void onUndoAvailable(SnackbarUndoOperation undoOp) {
+        Snackbar snackbar = Snackbar.make(mItemsView, undoOp.getDescription(this),
+                Snackbar.LENGTH_LONG);
+        snackbar.setAction(R.string.undo, undoOp);
+        snackbar.show();
     }
 
     private class DrawerListAdapter implements WrapperListAdapter, OnItemClickListener {
@@ -3170,7 +3167,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                         break;
                     default:
                         break;
-                    
+
                 }
             } else if ((list_pos = position - mNumAboveList) < list_count) {
                 int curListPos = mShoppingListsView.getSelectedItemPosition();
@@ -3233,8 +3230,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 mItemsView.mMode = (position == 1) ? MODE_ADD_ITEMS : MODE_IN_SHOP;
                 mDrawerListsView.setItemChecked(position, true);
                 mDrawerListsView.setItemChecked(1 - position, false);
+                mDrawerListsView.invalidateViews();
                 onModeChanged();
-                // need to toggle the radio buttons too
             } else if ((list_pos = position - mNumAboveList) < list_count) {
                 // Update list cursor:
                 mShoppingListsView.setSelection(list_pos);
@@ -3259,31 +3256,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 showDialog(DIALOG_NEW_LIST);
             }
         }
-    }
-
-    private void closeDrawer() {
-        if (mDrawerLayout != null) {
-            mDrawerLayout.closeDrawer(mDrawerListsView);
-        }
-    }
-
-    /**
-     * With the requirement of OS3, making an intermediary decision depending
-     * upon the widget
-     *
-     * @param adapter
-     */
-    private void setSpinnerAndDrawerListAdapter(ListAdapter adapter) {
-        DrawerListAdapter adapterWrapper = (new DrawerListAdapter(this, adapter));
-        mDrawerListsView.setAdapter(adapterWrapper);
-        mDrawerListsView.setOnItemClickListener(adapterWrapper);
-        mShoppingListsView.setAdapter(adapter);
-    }
-
-    @Override
-    public void onItemChanged() {
-        mItemsView.mCursorItems.requery();
-        fillAutoCompleteTextViewAdapter(mEditText);
     }
 
     private class ListSortActionProvider extends ActionProvider implements OnMenuItemClickListener {
@@ -3352,13 +3324,5 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             fillItems(false);
             return true;
         }
-    }
-
-    @Override
-    public void onUndoAvailable(SnackbarUndoOperation undoOp) {
-        Snackbar snackbar = Snackbar.make(mItemsView, undoOp.getDescription(this),
-                Snackbar.LENGTH_LONG);
-        snackbar.setAction(R.string.undo, undoOp);
-        snackbar.show();
     }
 }

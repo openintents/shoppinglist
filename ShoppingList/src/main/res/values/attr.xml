@@ -21,56 +21,56 @@
 
 <resources>
 
-  <declare-styleable name="ShoppingList">
-    <!-- Resource ID of background image. defined in appcompat -->
-    <attr name="background" />
+    <declare-styleable name="ShoppingList">
+        <!-- Resource ID of background image. defined in appcompat -->
+        <attr name="background" />
 
-    <!-- Padding for background image.
-      If all backgroundPadding is set to '-1px'
-      then padding is obtained from background 9-patch drawable. -->
-    <attr name="backgroundPadding" format="dimension" />
-    <attr name="backgroundPaddingLeft" format="dimension" />
-    <attr name="backgroundPaddingTop" format="dimension" />
-    <attr name="backgroundPaddingRight" format="dimension" />
-    <attr name="backgroundPaddingBottom" format="dimension" />
+        <!-- Padding for background image.
+          If all backgroundPadding is set to '-1px'
+          then padding is obtained from background 9-patch drawable. -->
+        <attr name="backgroundPadding" format="dimension" />
+        <attr name="backgroundPaddingLeft" format="dimension" />
+        <attr name="backgroundPaddingTop" format="dimension" />
+        <attr name="backgroundPaddingRight" format="dimension" />
+        <attr name="backgroundPaddingBottom" format="dimension" />
 
-    <attr name="shopping_divider" format="integer" />
+        <attr name="shopping_divider" format="integer" />
 
-    <!-- Type face can be one of "monospace", "serif", "sans"
-      or it can be the path to a font in the assets folder,
-      like "myfont.ttf". -->
-    <attr name="textTypeface" format="string" />
+        <!-- Type face can be one of "monospace", "serif", "sans"
+          or it can be the path to a font in the assets folder,
+          like "myfont.ttf". -->
+        <attr name="textTypeface" format="string" />
 
-    <!-- Set true if the font only contains upper case characters. -->
-    <attr name="textUpperCaseFont" format="boolean" />
+        <!-- Set true if the font only contains upper case characters. -->
+        <attr name="textUpperCaseFont" format="boolean" />
 
-    <attr name="textSizeTiny" format="dimension" />
-    <attr name="textSizeSmall" format="dimension" />
-    <attr name="textSizeMedium" format="dimension" />
-    <attr name="textSizeLarge" format="dimension" />
-    <attr name="textColor" format="color" />
-    <attr name="textColorPrice" format="color" />
-    <attr name="textColorPriority" format="color" />
-    <attr name="textColorChecked" format="color" />
-    <attr name="textStrikethroughChecked" format="boolean" />
+        <attr name="textSizeTiny" format="dimension" />
+        <attr name="textSizeSmall" format="dimension" />
+        <attr name="textSizeMedium" format="dimension" />
+        <attr name="textSizeLarge" format="dimension" />
+        <attr name="textColor" format="color" />
+        <attr name="textColorPrice" format="color" />
+        <attr name="textColorPriority" format="color" />
+        <attr name="textColorChecked" format="color" />
+        <attr name="textStrikethroughChecked" format="boolean" />
 
-    <!-- Suffix to add to unchecked elements. -->
-    <attr name="textSuffixUnchecked" format="string" />
+        <!-- Suffix to add to unchecked elements. -->
+        <attr name="textSuffixUnchecked" format="string" />
 
-    <!-- Suffix to add to checked elements. -->
-    <attr name="textSuffixChecked" format="string" />
+        <!-- Suffix to add to checked elements. -->
+        <attr name="textSuffixChecked" format="string" />
 
-    <attr name="showCheckBox" format="boolean" />
+        <attr name="showCheckBox" format="boolean" />
 
-    <!-- Additional styles used for Notepad themes: -->
-    <!-- Lines mode:
-       * 0..no line.
-       * 2..show lines only where there is text (padding width).
-       * 3..show lines only where there is text (full width).
-       * 4..show lines for whole page (padding width).
-       * 5..show lines for whole page (full width). -->
-    <attr name="lineMode" format="integer" />
-    <attr name="lineColor" format="color" />
-  </declare-styleable>
+        <!-- Additional styles used for Notepad themes: -->
+        <!-- Lines mode:
+           * 0..no line.
+           * 2..show lines only where there is text (padding width).
+           * 3..show lines only where there is text (full width).
+           * 4..show lines for whole page (padding width).
+           * 5..show lines for whole page (full width). -->
+        <attr name="lineMode" format="integer" />
+        <attr name="lineColor" format="color" />
+    </declare-styleable>
 
 </resources>

@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2008 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,63 +29,27 @@ import android.util.Log;
  */
 public abstract class Hardware {
 
+    public static final String[] mProjectionPreferencesFilter = new String[]{
+            Preferences._ID, Preferences.NAME, Preferences.VALUE};
+    public static final int mProjectionPreferencesID = 0;
+
+    // //////////////////////////////////////////////////////
+    // Convenience functions:
+    public static final int mProjectionPreferencesNAME = 1;
+    public static final int mProjectionPreferencesVALUE = 2;
+    // Some default preference values
+    public static final String IPADDRESS = "IP address";
+    public static final String SOCKET = "Socket";
+    public static final String DEFAULT_SOCKET = "8010";
     /**
      * TAG for logging.
      */
     private static final String TAG = "Hardware";
-
-    /**
-     * Hardware preferences. Simple table to store name-value pairs.
-     */
-    public static final class Preferences implements BaseColumns {
-        /**
-         * The content:// style URL for this table.
-         */
-        public static final Uri CONTENT_URI = Uri
-                .parse("content://org.openintents.hardware/preferences");
-
-        /**
-         * The default sort order for this table.
-         */
-        public static final String DEFAULT_SORT_ORDER = "_id ASC";
-
-        /**
-         * The name of the item.
-         * <p/>
-         * Type: TEXT
-         * </P>
-         */
-        public static final String NAME = "name";
-
-        /**
-         * An image of the item (uri).
-         * <p/>
-         * Type: TEXT
-         * </P>
-         */
-        public static final String VALUE = "value";
-
-    }
-
-    // //////////////////////////////////////////////////////
-    // Convenience functions:
-
     /**
      * The content resolver has to be set before accessing any of these
      * functions.
      */
     public static ContentResolver mContentResolver;
-
-    public static final String[] mProjectionPreferencesFilter = new String[]{
-            Preferences._ID, Preferences.NAME, Preferences.VALUE};
-    public static final int mProjectionPreferencesID = 0;
-    public static final int mProjectionPreferencesNAME = 1;
-    public static final int mProjectionPreferencesVALUE = 2;
-
-    // Some default preference values
-    public static final String IPADDRESS = "IP address";
-    public static final String SOCKET = "Socket";
-    public static final String DEFAULT_SOCKET = "8010";
 
     /**
      * Obtains the 'value' for preferenceID, or returns "" if not existent.
@@ -125,11 +89,11 @@ public abstract class Hardware {
      */
     public static void setPreference(final String name, final String value) {
         /*
-		 * // This value does not exist yet. Let's insert it: ContentValues
-		 * values2 = new ContentValues(2); values2.put(Preferences.NAME, name);
-		 * values2.put(Preferences.VALUE, value);
-		 * mContentResolver.insert(Preferences.CONTENT_URI, values2);
-		 */
+         * // This value does not exist yet. Let's insert it: ContentValues
+         * values2 = new ContentValues(2); values2.put(Preferences.NAME, name);
+         * values2.put(Preferences.VALUE, value);
+         * mContentResolver.insert(Preferences.CONTENT_URI, values2);
+         */
 
         Log.i(TAG, "setPreference");
         try {
@@ -180,5 +144,38 @@ public abstract class Hardware {
             Log.i(TAG, "setPreference() failed", e);
 
         }
+    }
+
+    /**
+     * Hardware preferences. Simple table to store name-value pairs.
+     */
+    public static final class Preferences implements BaseColumns {
+        /**
+         * The content:// style URL for this table.
+         */
+        public static final Uri CONTENT_URI = Uri
+                .parse("content://org.openintents.hardware/preferences");
+
+        /**
+         * The default sort order for this table.
+         */
+        public static final String DEFAULT_SORT_ORDER = "_id ASC";
+
+        /**
+         * The name of the item.
+         * <p/>
+         * Type: TEXT
+         * </P>
+         */
+        public static final String NAME = "name";
+
+        /**
+         * An image of the item (uri).
+         * <p/>
+         * Type: TEXT
+         * </P>
+         */
+        public static final String VALUE = "value";
+
     }
 }

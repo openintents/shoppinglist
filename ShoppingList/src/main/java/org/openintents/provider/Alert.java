@@ -1,6 +1,6 @@
 package org.openintents.provider;
 
-/* 
+/*
  * Copyright (C) 2007-2008 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,11 @@ package org.openintents.provider;
  */
 
 import android.app.AlarmManager;
-import android.content.*;
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.content.UriMatcher;
 import android.database.Cursor;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -45,11 +49,11 @@ public class Alert {
 
     public static final String NATURE_USER = "user";
     public static final String NATURE_SYSTEM = "system";
-
-    public static ContentResolver mContentResolver;
-
+    // ugly hack to make the mock provider work,
+    // see [..]
+    public static final long LOCATION_EXPIRES = 1000000;
+    public static final String EXTRA_URI = "URI";
     private static final UriMatcher URL_MATCHER;
-
     private static final int ALERT_GENERIC = 100;
     private static final int ALERT_GENERIC_ID = 101;
     private static final int ALERT_LOCATION = 102;
@@ -60,161 +64,32 @@ public class Alert {
     private static final int ALERT_SENSOR_ID = 106;
     private static final int ALERT_DATE_TIME = 107;
     private static final int ALERT_DATE_TIME_ID = 108;
-
-    // ugly hack to make the mock provider work,
-    // see [..]
-    public static final long LOCATION_EXPIRES = 1000000;
-
-    public static final String EXTRA_URI = "URI";
-
+    public static ContentResolver mContentResolver;
     protected static LocationManager locationManager;
 
     protected static AlarmManager alarmManager;
 
     protected static Context context;
 
-    public static final class Generic implements BaseColumns {
+    static {
 
-        public static final Uri CONTENT_URI = Uri
-                .parse("content://org.openintents.alert/generic");
+        URL_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
 
-        public static final String CONDITION1 = "condition1";
-
-        public static final String CONDITION2 = "condition2";
-
-        public static final String TYPE = "alert_type";
-
-        public static final String RULE = "rule";
-
-        public static final String NATURE = "nature";
-
-        public static final String ACTIVE = "active";
-
-        public static final String ACTIVATE_ON_BOOT = "activate_on_boot";
-
-        public static final String INTENT = "intent";
-
-        public static final String INTENT_CATEGORY = "intent_category";
-
-        public static final String INTENT_URI = "intent_uri";
-
-        public static final String INTENT_MIME_TYPE = "intent_mime_type";
-
-        public static final String DEFAULT_SORT_ORDER = "";
-
-        public static final String[] PROJECTION = {_ID, _COUNT, CONDITION1,
-                CONDITION2, TYPE, RULE, NATURE, ACTIVE, ACTIVATE_ON_BOOT,
-                INTENT, INTENT_CATEGORY, INTENT_URI, INTENT_MIME_TYPE};
-
-    }
-
-    /**
-     * location based alerts. you must at least specify a position
-     */
-    public static final class Location implements BaseColumns {
-
-        public static final Uri CONTENT_URI = Uri
-                .parse("content://org.openintents.alert/location");
-
-        /**
-         * Location.Position is an Uri of the format geo:long,lat example:
-         * geo:3.1472,567890
-         */
-        public static final String POSITION = Generic.CONDITION1;
-
-        /**
-         * Location.Distance is distance in meters as long.
-         */
-        public static final String DISTANCE = Generic.CONDITION2;
-
-        /**
-         * Type must always be of Alert.TYPE_LOCATION any other values will
-         * result in your alert not being processed.
-         */
-        public static final String TYPE = Generic.TYPE;
-
-        public static final String RULE = Generic.RULE;
-
-        public static final String NATURE = Generic.NATURE;
-
-        public static final String ACTIVE = Generic.ACTIVE;
-
-        public static final String ACTIVATE_ON_BOOT = Generic.ACTIVATE_ON_BOOT;
-
-        public static final String INTENT = Generic.INTENT;
-
-        public static final String INTENT_CATEGORY = Generic.INTENT_CATEGORY;
-
-        public static final String INTENT_URI = Generic.INTENT_URI;
-
-        public static final String INTENT_MIME_TYPE = Generic.INTENT_MIME_TYPE;
-
-        public static final String DEFAULT_SORT_ORDER = "";
-
-        public static final String[] PROJECTION = {_ID, _COUNT, POSITION,
-                DISTANCE, TYPE, RULE, NATURE, ACTIVE, ACTIVATE_ON_BOOT, INTENT,
-                INTENT_CATEGORY, INTENT_URI, INTENT_MIME_TYPE};
-
-    }
-
-    public static final class DateTime implements BaseColumns {
-
-        public static final Uri CONTENT_URI = Uri
-                .parse("content://org.openintents.alert/datetime");
-
-        /**
-         * The point in time for the alarm, in format time:epoch1234456 number
-         * is time in millisecond sice 1970, like you get from
-         * System.getCurrentMillis
-         */
-        public static final String TIME = Generic.CONDITION1;
-
-        /**
-         * the alert reocurs every n milliseconds, or not at all if set to 0.
-         * reouccreny should be at least 1 minute.
-         */
-        public static final String REOCCURENCE = Generic.CONDITION2;
-
-        public static final String TYPE = Generic.TYPE;
-
-        public static final String RULE = Generic.RULE;
-
-        public static final String NATURE = Generic.NATURE;
-
-        public static final String ACTIVE = Generic.ACTIVE;
-
-        public static final String ACTIVATE_ON_BOOT = Generic.ACTIVATE_ON_BOOT;
-
-        public static final String INTENT = Generic.INTENT;
-
-        public static final String INTENT_CATEGORY = Generic.INTENT_CATEGORY;
-
-        public static final String INTENT_URI = Generic.INTENT_URI;
-
-        public static final String INTENT_MIME_TYPE = Generic.INTENT_MIME_TYPE;
-
-        public static final String DEFAULT_SORT_ORDER = "";
-
-        public static final String[] PROJECTION = {_ID, _COUNT, TIME,
-                REOCCURENCE, TYPE, RULE, NATURE, ACTIVE, ACTIVATE_ON_BOOT,
-                INTENT, INTENT_CATEGORY, INTENT_URI, INTENT_MIME_TYPE};
-
-    }
-
-    public static final class ManagedService implements BaseColumns {
-
-        public static final Uri CONTENT_URI = Uri
-                .parse("content://org.openintents.alert/managedservice");
-        public static final String SERVICE_CLASS = "service_class";
-
-        public static final String TIME_INTERVALL = "time_intervall";
-
-        public static final String DO_ROAMING = "do_roaming";
-
-        public static final String LAST_TIME = "last_time";
-
-        public static final String[] PROJECTION = {_ID, _COUNT, SERVICE_CLASS,
-                TIME_INTERVALL, DO_ROAMING, LAST_TIME};
+        URL_MATCHER.addURI("org.openintents.alert", "generic/", ALERT_GENERIC);
+        URL_MATCHER.addURI("org.openintents.alert", "generic/#",
+                ALERT_GENERIC_ID);
+        URL_MATCHER.addURI("org.openintents.alert", "location", ALERT_LOCATION);
+        URL_MATCHER.addURI("org.openintents.alert", "location/#",
+                ALERT_LOCATION_ID);
+        URL_MATCHER.addURI("org.openintents.alert", "combined", ALERT_COMBINED);
+        URL_MATCHER.addURI("org.openintents.alert", "combined/#",
+                ALERT_COMBINED_ID);
+        URL_MATCHER
+                .addURI("org.openintents.alert", "datetime", ALERT_DATE_TIME);
+        URL_MATCHER.addURI("org.openintents.alert", "datetime/#",
+                ALERT_DATE_TIME_ID);
+        URL_MATCHER.addURI("org.openintents.alert", "", 6000);
+        URL_MATCHER.addURI("org.openintents.alert", "/", 6001);
     }
 
     public static void registerManagedService(String serviceClassName,
@@ -425,18 +300,18 @@ public class Alert {
 
             // TODO: find out how to handle this now
             /*
-			 * PendingIntent i= new PendingIntent();
-			 * //i.setClassName("org.openintents.alert"
-			 * ,"LocationAlertDispatcher");
-			 * i.setAction("org.openintents.action.LOCATION_ALERT_DISPATCH");
-			 * //i.setData(gUri); i.putExtra(Location.POSITION,
-			 * cv.getAsString(Location.POSITION));
-			 * 
-			 * locationManager.addProximityAlert( latitude, longitude, dist,
-			 * LOCATION_EXPIRES, i );
-			 * Log.d(_TAG,"Registerd alert geo:"+geo+" dist:"+dist);
-			 * Log.d(_TAG,"Registered alert intent:" + i);
-			 */
+             * PendingIntent i= new PendingIntent();
+             * //i.setClassName("org.openintents.alert"
+             * ,"LocationAlertDispatcher");
+             * i.setAction("org.openintents.action.LOCATION_ALERT_DISPATCH");
+             * //i.setData(gUri); i.putExtra(Location.POSITION,
+             * cv.getAsString(Location.POSITION));
+             *
+             * locationManager.addProximityAlert( latitude, longitude, dist,
+             * LOCATION_EXPIRES, i );
+             * Log.d(_TAG,"Registerd alert geo:"+geo+" dist:"+dist);
+             * Log.d(_TAG,"Registered alert intent:" + i);
+             */
         } catch (ArrayIndexOutOfBoundsException aioe) {
             Log.e(_TAG, "Error parsing geo uri. not in format geo:lat,long");
         } catch (NumberFormatException nfe) {
@@ -500,47 +375,170 @@ public class Alert {
     }
 
     public static void unregisterDateTimeAlert(ContentValues cv) {
-		/*
-		 * String myDate=cv.getAsString(DateTime.TIME); String
-		 * s[]=myDate.split(",");
-		 * Log.d(_TAG,"registerDateTimeAlert: s[0]>>"+s[0]
-		 * +"<< s[1]>>+"+s[1]+"<<"); long time=0; long
-		 * myReoccurence=cv.getAsLong(DateTime.REOCCURENCE);
-		 * 
-		 * Cursor c=mContentResolver.query( DateTime.CONTENT_URI,
-		 * DateTime.PROJECTION_MAP, DateTime.TIME+" like '"+myDate+"'", null
-		 * null );
-		 * 
-		 * if (c==null||c.count()==0) {//alert has been deleted
-		 * 
-		 * }else if (c!=null&&c.count()==1) {//exactly out alert alarmManager. }
-		 * //TODO: check if there are now other alerts at this time.
-		 */
+        /*
+         * String myDate=cv.getAsString(DateTime.TIME); String
+         * s[]=myDate.split(",");
+         * Log.d(_TAG,"registerDateTimeAlert: s[0]>>"+s[0]
+         * +"<< s[1]>>+"+s[1]+"<<"); long time=0; long
+         * myReoccurence=cv.getAsLong(DateTime.REOCCURENCE);
+         *
+         * Cursor c=mContentResolver.query( DateTime.CONTENT_URI,
+         * DateTime.PROJECTION_MAP, DateTime.TIME+" like '"+myDate+"'", null
+         * null );
+         *
+         * if (c==null||c.count()==0) {//alert has been deleted
+         *
+         * }else if (c!=null&&c.count()==1) {//exactly out alert alarmManager. }
+         * //TODO: check if there are now other alerts at this time.
+         */
 
         // atm it would oly be possible to delete all dateTimeDispatch alerts
         // and register the need a new. so we just leave them be, means some
         // emtpy lookups, but hey! :/
     }
 
-    static {
+    public static final class Generic implements BaseColumns {
 
-        URL_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
+        public static final Uri CONTENT_URI = Uri
+                .parse("content://org.openintents.alert/generic");
 
-        URL_MATCHER.addURI("org.openintents.alert", "generic/", ALERT_GENERIC);
-        URL_MATCHER.addURI("org.openintents.alert", "generic/#",
-                ALERT_GENERIC_ID);
-        URL_MATCHER.addURI("org.openintents.alert", "location", ALERT_LOCATION);
-        URL_MATCHER.addURI("org.openintents.alert", "location/#",
-                ALERT_LOCATION_ID);
-        URL_MATCHER.addURI("org.openintents.alert", "combined", ALERT_COMBINED);
-        URL_MATCHER.addURI("org.openintents.alert", "combined/#",
-                ALERT_COMBINED_ID);
-        URL_MATCHER
-                .addURI("org.openintents.alert", "datetime", ALERT_DATE_TIME);
-        URL_MATCHER.addURI("org.openintents.alert", "datetime/#",
-                ALERT_DATE_TIME_ID);
-        URL_MATCHER.addURI("org.openintents.alert", "", 6000);
-        URL_MATCHER.addURI("org.openintents.alert", "/", 6001);
+        public static final String CONDITION1 = "condition1";
+
+        public static final String CONDITION2 = "condition2";
+
+        public static final String TYPE = "alert_type";
+
+        public static final String RULE = "rule";
+
+        public static final String NATURE = "nature";
+
+        public static final String ACTIVE = "active";
+
+        public static final String ACTIVATE_ON_BOOT = "activate_on_boot";
+
+        public static final String INTENT = "intent";
+
+        public static final String INTENT_CATEGORY = "intent_category";
+
+        public static final String INTENT_URI = "intent_uri";
+
+        public static final String INTENT_MIME_TYPE = "intent_mime_type";
+
+        public static final String DEFAULT_SORT_ORDER = "";
+
+        public static final String[] PROJECTION = {_ID, _COUNT, CONDITION1,
+                CONDITION2, TYPE, RULE, NATURE, ACTIVE, ACTIVATE_ON_BOOT,
+                INTENT, INTENT_CATEGORY, INTENT_URI, INTENT_MIME_TYPE};
+
+    }
+
+    /**
+     * location based alerts. you must at least specify a position
+     */
+    public static final class Location implements BaseColumns {
+
+        public static final Uri CONTENT_URI = Uri
+                .parse("content://org.openintents.alert/location");
+
+        /**
+         * Location.Position is an Uri of the format geo:long,lat example:
+         * geo:3.1472,567890
+         */
+        public static final String POSITION = Generic.CONDITION1;
+
+        /**
+         * Location.Distance is distance in meters as long.
+         */
+        public static final String DISTANCE = Generic.CONDITION2;
+
+        /**
+         * Type must always be of Alert.TYPE_LOCATION any other values will
+         * result in your alert not being processed.
+         */
+        public static final String TYPE = Generic.TYPE;
+
+        public static final String RULE = Generic.RULE;
+
+        public static final String NATURE = Generic.NATURE;
+
+        public static final String ACTIVE = Generic.ACTIVE;
+
+        public static final String ACTIVATE_ON_BOOT = Generic.ACTIVATE_ON_BOOT;
+
+        public static final String INTENT = Generic.INTENT;
+
+        public static final String INTENT_CATEGORY = Generic.INTENT_CATEGORY;
+
+        public static final String INTENT_URI = Generic.INTENT_URI;
+
+        public static final String INTENT_MIME_TYPE = Generic.INTENT_MIME_TYPE;
+
+        public static final String DEFAULT_SORT_ORDER = "";
+
+        public static final String[] PROJECTION = {_ID, _COUNT, POSITION,
+                DISTANCE, TYPE, RULE, NATURE, ACTIVE, ACTIVATE_ON_BOOT, INTENT,
+                INTENT_CATEGORY, INTENT_URI, INTENT_MIME_TYPE};
+
+    }
+
+    public static final class DateTime implements BaseColumns {
+
+        public static final Uri CONTENT_URI = Uri
+                .parse("content://org.openintents.alert/datetime");
+
+        /**
+         * The point in time for the alarm, in format time:epoch1234456 number
+         * is time in millisecond sice 1970, like you get from
+         * System.getCurrentMillis
+         */
+        public static final String TIME = Generic.CONDITION1;
+
+        /**
+         * the alert reocurs every n milliseconds, or not at all if set to 0.
+         * reouccreny should be at least 1 minute.
+         */
+        public static final String REOCCURENCE = Generic.CONDITION2;
+
+        public static final String TYPE = Generic.TYPE;
+
+        public static final String RULE = Generic.RULE;
+
+        public static final String NATURE = Generic.NATURE;
+
+        public static final String ACTIVE = Generic.ACTIVE;
+
+        public static final String ACTIVATE_ON_BOOT = Generic.ACTIVATE_ON_BOOT;
+
+        public static final String INTENT = Generic.INTENT;
+
+        public static final String INTENT_CATEGORY = Generic.INTENT_CATEGORY;
+
+        public static final String INTENT_URI = Generic.INTENT_URI;
+
+        public static final String INTENT_MIME_TYPE = Generic.INTENT_MIME_TYPE;
+
+        public static final String DEFAULT_SORT_ORDER = "";
+
+        public static final String[] PROJECTION = {_ID, _COUNT, TIME,
+                REOCCURENCE, TYPE, RULE, NATURE, ACTIVE, ACTIVATE_ON_BOOT,
+                INTENT, INTENT_CATEGORY, INTENT_URI, INTENT_MIME_TYPE};
+
+    }
+
+    public static final class ManagedService implements BaseColumns {
+
+        public static final Uri CONTENT_URI = Uri
+                .parse("content://org.openintents.alert/managedservice");
+        public static final String SERVICE_CLASS = "service_class";
+
+        public static final String TIME_INTERVALL = "time_intervall";
+
+        public static final String DO_ROAMING = "do_roaming";
+
+        public static final String LAST_TIME = "last_time";
+
+        public static final String[] PROJECTION = {_ID, _COUNT, SERVICE_CLASS,
+                TIME_INTERVALL, DO_ROAMING, LAST_TIME};
     }
 
 }/* eoc */

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">OIخرید فهرست</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">OI سخن ازعضويت</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">راه اندازی %s با و انتخاب CSV کنید  منو &gt; تبدیل</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">برگرداندن‌ csv</string>
+    <string name="convert_csv_notepad">برگرداندن‌ csv  به سخن ازعضويت</string>
+    <string name="convert_csv_shoppinglist">برگرداندن‌ csv به فهرست خرید میکردم</string>
+    <string name="convert_all_notes">يادداشتهاي پيروي</string>
+    <string name="convert_all_shoppinglists">فهرست پيروي خريد</string>
+    <string name="convert_list">برگرداندن‌ فهرست \'%s\'</string>
+    <string name="file_path">مسير پرونده‌</string>
+    <string name="file_import">واردات</string>
+    <string name="file_export">صادرات</string>
+    <string name="error_writing_file">غلط نامه نوشتن به پرونده</string>
+    <string name="error_reading_file">اشتباه از خواندن پرونده‌</string>
+    <string name="wrong_csv_format">قالب‌ csv غلط</string>
+    <string name="error_file_not_found">پيدا پرونده‌</string>
+    <string name="error_not_yet_implemented">اجرا نشده و گزینه های مختلف انتخاب خواهش كرد.</string>
+    <string name="import_finished">واردات تمام</string>
+    <string name="export_finished">تمام صادرات</string>
+    <string name="filemanager_title_notepad">انتخاب سخن ازعضويت csv پرونده‌</string>
+    <string name="filemanager_title_shoppinglist">پرونده‌ csv خريد انتخاب فهرست</string>
+	<string name="current_import_policy">واردات کنوني سياست:</string>
+	<string name="import_policy">سياست واردات</string>
+	<string name="select_import_policy">انتخاب واردات به استفاده از سیاست</string>
+    
+    <string name="file_exists">اين پرونده وجود دارد. آیا شما می خواهم به جاى نوشت‌?</string>
+    <string name="dont_ask_again">سوال نكنيد.  هميشه باپرداخت‌ موافقت‌ كردن‌ !</string>
+    
+    <string name="warn_restore_policy_title">سياست واردات را به عراق بازگرداند.</string>
+    <string name="warn_restore_policy">سياست فعلی شما واردات حذف شده است تا همه سوابق و جاي آنها را با مضمون csv پرونده كردند. مطمئن هستيد?</string>
+    
+    <string name="menu_settings">مک کليلن</string>
+    <string name="csv_file_format">قالب‌ csv پرونده‌</string>
+    <string name="select_csv_file_format">قالب‌ csv انتخاب پرونده‌</string>
+    <string name="select_encoding">انتخاب است.</string>
+    <string name="default_encoding">نكول‌ كردن‌</string>
+    <string name="use_custom_encoding">استفاده از رسوم)) (كاربران پيش رفت.</string>
+    <string name="preferences_select_csv_file_format">قالب‌ csv برگزيده پرونده‌</string>
+    <string name="preferences_select_import_policy">انتخاب واردات به استفاده از سیاست</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">آقای مک کليلن مشترک</string>
+    <string name="preference_common_summary">ورود/صادرات ايران به درخواست این سخن ازعضويت خريد و فهرست است.</string>
+    <string name="preference_ask_if_file_exists">آيا وجود دارد عضو هيئت تحريريه فايل</string>
+    <string name="preference_ask_if_file_exists_summary">اگر جلو يك گفتگو به نظر می رسد اگر صادرات جای نوشتن تاييد پرونده هم اکنون وجود دارد.</string>
+    
+    <string name="preference_application_specific">درخواست آژانس بين المللی خاصی</string>
+    <string name="preference_filename">نام فایل</string>
+    <string name="preference_filename_summary">مسير كامل به پرونده كردند.</string>
+    
+    <string name="preference_notepad">OI سخن ازعضويت</string>
+    <string name="preference_notepad_summary">ورود/صادرات به ايران سخن ازعضويتOI ميخواندند.</string>
+    
+    <string name="preference_shoppinglist">OI فهرست خريد</string>
+    <string name="preference_shoppinglist_summary">ورود/صادرات به ايران برای خريد فهرستOI ميخواندند.</string>
+    
+	<string name="converting">فونت فارسی...</string>
+	<string name="dialog_ok">OK</string>
+	<string name="preference_stores">انبارهاي غلة وارداتي</string>
+	<string name="preference_stores_off_summary">انبار غلة وارداتي دستیکاسب خرده فروش نام تنها به عنوان کلان ميآويخت.</string>
+	<string name="preference_stores_on_summary">دستیکاسب خرده فروش واردات و مغازه ها در مغازه راهه قيمت و اطلاعات است.</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>MS انم يادداشتهاي چشم انداز</item>
+        <item>روغن‌ نخل‌ CSV</item>
+        <item>jpilot ياداشت‌</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>MS چشم انداز وظايف</item>
+        <item>استاددرکارخودكاسب‌ خرده‌ فروش‌</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>المثني‌-پسکا--رت هاى اجازه ثبت كرده است.</item>
+        <item>KEEP - Don\'t overwrite existing records.</item>
+        <item>باپردا--خت‌------------- ----موافقت‌------------------ كردن‌-جاى نوشت‌ اسناد موجود است.</item>
+        <item>احيا--حذف كنند, آنگاه واردات است.</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>المثني‌-دوم-- اضافه يك نسخه از آن صورت اگر هم وجود داشته باشد.</item>
+        <item>KEEP - Don\'t overwrite an existing record, ignore the one in the CSV file.</item>
+        <item>باپردا--خت‌------ موافقت‌--- كردن‌-يك ركورد خواهد باپرداخت‌csv موافقت‌ كردن‌ در موجود است.</item>
+        <item>پشتيبان‌ بازگرداند-- (برداشتن تمام مدارك موجود شما, csv سپس واردات پرونده كردند.</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>المثني‌-پسکا--رت هاى اجازه ثبت كرده است.</item>
+        <item>KEEP - Don\'t overwrite existing records.</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>المثني‌-دوم-- اضافه يك نسخه از آن صورت اگر هم وجود داشته باشد.</item>
+        <item>KEEP - Don\'t overwrite an existing record, ignore the one in the CSV file.</item>
+    </string-array>
+    
+</resources>

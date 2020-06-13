@@ -25,7 +25,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.widget.SearchViewCompat;
+import android.support.v7.widget.SearchView;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
@@ -86,9 +86,6 @@ import java.util.Locale;
 public class ShoppingItemsView extends ListView implements LoaderManager.LoaderCallbacks<Cursor> {
     private final static String TAG = "ShoppingListView";
     private final static boolean debug = false;
-
-    private Typeface mCurrentTypeface;
-
     public int mPriceVisibility;
     public int mTagsVisibility;
     public int mQuantityVisibility;
@@ -111,20 +108,17 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
     public int mLastListTop;
     public long mNumChecked;
     public long mNumUnchecked;
-
+    public int mMode = ShoppingActivity.MODE_IN_SHOP;
+    public int mModeBeforeSearch;
+    public Cursor mCursorItems;
+    private Typeface mCurrentTypeface;
     private ThemeAttributes mThemeAttributes;
     private PackageManager mPackageManager;
     private String mPackageName;
-
     private NumberFormat mPriceFormatter = DecimalFormat
             .getNumberInstance(Locale.ENGLISH);
-
-    public int mMode = ShoppingActivity.MODE_IN_SHOP;
     private String mFilter;
     private boolean mInSearch;
-    public int mModeBeforeSearch;
-    public Cursor mCursorItems;
-
     private Activity mCursorActivity;
 
     private View mThemedBackground;
@@ -164,532 +158,35 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
     private Snackbar mSnackbar;
     private SyncSupport mSyncSupport;
     private ShoppingTotalsHandler mTotalsHandler;
+    private SearchView mSearchView;
+    private OnCustomClickListener mListener;
+    private boolean mDragAndDropEnabled;
 
-
-    /**
-     * Extend the SimpleCursorAdapter to strike through items. if STATUS ==
-     * Shopping.Status.BOUGHT
-     */
-    public class mSimpleCursorAdapter extends SimpleCursorAdapter implements
-            ViewBinder {
-
-        private class mItemRowState {
-            public View mParentView;
-            public TextView mNameView;
-            public TextView mQuantityView;
-            public TextView mUnitsView;
-            public TextView mPriceView;
-            public TextView mPriorityView;
-            public TextView mTagsView;
-            public CheckBox mCheckView;
-            public ImageView mNoCheckView;
-
-            public Cursor mCursor;
-            public int mCursorPos;
-
-            private class mItemClickListener implements OnClickListener {
-                private String mLogMessage;
-                private EditItemDialog.FieldType mFieldType;
-
-                public void onClick(View v) {
-                    if (debug) {
-                        Log.d(TAG, mLogMessage);
-                    }
-                    if (mListener != null) {
-                        mItemRowState state = (mItemRowState) v.getTag();
-                        mListener.onCustomClick(state.mCursor, state.mCursorPos,
-                                mFieldType, v);
-                    }
-                }
-
-                public mItemClickListener(String logMessage, EditItemDialog.FieldType fieldType) {
-                    mLogMessage = logMessage;
-                    mFieldType = fieldType;
-                }
-            }
-
-            private class mItemToggleListener implements OnClickListener {
-                private String mLogMessage;
-
-                public void onClick(View v) {
-                    if (debug) {
-                        Log.d(TAG, mLogMessage);
-                    }
-                    mItemRowState state = (mItemRowState) v.getTag();
-                    toggleItemBought(state.mCursorPos);
-                }
-
-                public mItemToggleListener(String logMessage) {
-                    mLogMessage = logMessage;
-                }
-            }
-
-            public mItemRowState(View view) {
-                // This class is here to initialize state information related
-                // to a single reusable item row, to reduce the amount of
-                // setup that needs to be done each time the row is reused.
-                //
-                // Callbacks can be bound up-front here if they depend on cursor position.
-
-                mParentView = view;
-                mNameView = (TextView) view.findViewById(R.id.name);
-                mPriceView = (TextView) view.findViewById(R.id.price);
-                mTagsView = (TextView) view.findViewById(R.id.tags);
-                mQuantityView = (TextView) view.findViewById(R.id.quantity);
-                mUnitsView = (TextView) view.findViewById(R.id.units);
-                mPriorityView = (TextView) view.findViewById(R.id.priority);
-                mCheckView = (CheckBox) view.findViewById(R.id.check);
-                mNoCheckView = (ImageView) view.findViewById(R.id.nocheck);
-
-                mParentView.setTag(this);
-                mNameView.setTag(this);
-                mPriceView.setTag(this);
-                mTagsView.setTag(this);
-                mQuantityView.setTag(this);
-                mUnitsView.setTag(this);
-                mPriorityView.setTag(this);
-                mCheckView.setTag(this);
-                mNoCheckView.setTag(this);
-
-                mQuantityView.setOnClickListener(new mItemClickListener("Quantity Click ",
-                        EditItemDialog.FieldType.QUANTITY));
-                mPriceView.setOnClickListener(new mItemClickListener("Click on price: ",
-                        EditItemDialog.FieldType.PRICE));
-                mUnitsView.setOnClickListener(new mItemClickListener("Click on units: ",
-                        EditItemDialog.FieldType.UNITS));
-                mPriorityView.setOnClickListener(new mItemClickListener("Click on priority: ",
-                        EditItemDialog.FieldType.PRIORITY));
-                mTagsView.setOnClickListener(new mItemClickListener("Click on tags: ",
-                        EditItemDialog.FieldType.TAGS));
-
-                mCheckView.setOnClickListener(new mItemToggleListener("Click: "));
-                // also check around check box
-                RelativeLayout l = (RelativeLayout) view.findViewById(R.id.check_surround);
-                l.setTag(this);
-                l.setOnClickListener(new mItemToggleListener("Click around: "));
-
-                // Check for clicks on and around item text
-                RelativeLayout r = (RelativeLayout) view.findViewById(R.id.description);
-                r.setTag(this);
-                r.setOnClickListener(new mItemClickListener("Click on description: ",
-                        EditItemDialog.FieldType.ITEMNAME));
-
-                mPriceView.setVisibility(mPriceVisibility);
-                mTagsView.setVisibility(mTagsVisibility);
-                mQuantityView.setVisibility(mQuantityVisibility);
-                mUnitsView.setVisibility(mUnitsVisibility);
-                mPriorityView.setVisibility(mPriorityVisibility);
-
-            }
-        }
-
-        /**
-         * Constructor simply calls super class.
-         *
-         * @param context Context.
-         * @param layout  Layout.
-         * @param c       Cursor.
-         * @param from    Projection from.
-         * @param to      Projection to.
-         */
-        mSimpleCursorAdapter(final Context context, final int layout,
-                             final Cursor c, final String[] from, final int[] to) {
-            super(context, layout, c, from, to);
-            super.setViewBinder(this);
-
-            mPriceFormatter.setMaximumFractionDigits(2);
-            mPriceFormatter.setMinimumFractionDigits(2);
-        }
-
-        @Override
-        public View newView(Context context, Cursor cursor, ViewGroup parent) {
-            View view = super.newView(context, cursor, parent);
-            mItemRowState rowState = new mItemRowState(view); // sets view tags
-            return view;
-        }
-
-        /**
-         * Additionally to the standard bindView, we also check for STATUS, and
-         * strike the item through if BOUGHT.
-         */
-        @Override
-        public void bindView(final View view, final Context context,
-                             final Cursor cursor) {
-            super.bindView(view, context, cursor);
-
-            long status = cursor.getLong(ShoppingActivity.mStringItemsSTATUS);
-            mItemRowState state = (mItemRowState) view.getTag();
-            state.mCursorPos = cursor.getPosition();
-            state.mCursor = cursor;
-
-
-            // set style for name view and friends
-            TextView[] styled_as_name = {state.mNameView, state.mUnitsView, state.mQuantityView};
-            int i;
-            for (i = 0; i < styled_as_name.length; i++) {
-                TextView t = styled_as_name[i];
-
-                // Set font
-                if (mCurrentTypeface != null) {
-                    t.setTypeface(mCurrentTypeface);
-                }
-
-                // Set size
-                t.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
-
-                // Check for upper case:
-                if (mTextUpperCaseFont) {
-                    // Only upper case should be displayed
-                    CharSequence cs = t.getText();
-                    t.setText(cs.toString().toUpperCase());
-                }
-
-                t.setTextColor(mTextColor);
-
-                if (status == ShoppingContract.Status.BOUGHT) {
-                    t.setTextColor(mTextColorChecked);
-
-                    if (mShowStrikethrough) {
-                        // We have bought the item,
-                        // so we strike it through:
-
-                        // First convert text to 'spannable'
-                        t.setText(t.getText(), TextView.BufferType.SPANNABLE);
-                        Spannable str = (Spannable) t.getText();
-
-                        // Strikethrough
-                        str.setSpan(new StrikethroughSpan(), 0, str.length(),
-                                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-                        // apply color
-                        // TODO: How to get color from resource?
-                        // Drawable colorStrikethrough = context
-                        // .getResources().getDrawable(R.drawable.strikethrough);
-                        // str.setSpan(new ForegroundColorSpan(0xFF006600), 0,
-                        // str.setSpan(new ForegroundColorSpan
-                        // (getResources().getColor(R.color.darkgreen)), 0,
-                        // str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                        // color: 0x33336600
-                    }
-
-                    if (i == 0 && mTextSuffixChecked != null) {
-                        // very simple
-                        t.append(mTextSuffixChecked);
-                    }
-
-                } else {
-                    // item not bought:
-                    if (i == 0 && mTextSuffixUnchecked != null) {
-                        t.append(mTextSuffixUnchecked);
-                    }
-                }
-            }
-
-            // we have a check box now.. more visual and gets the point across
-
-            if (debug) {
-                Log.i(TAG, "bindview: pos = " + cursor.getPosition());
-            }
-
-            // set style for check box
-
-            if (mShowCheckBox) {
-                state.mCheckView.setVisibility(CheckBox.VISIBLE);
-                state.mCheckView.setChecked(status == ShoppingContract.Status.BOUGHT);
-            } else {
-                state.mCheckView.setVisibility(CheckBox.GONE);
-            }
-
-            if (mMode == ShoppingActivity.MODE_IN_SHOP) {
-                state.mNoCheckView.setVisibility(ImageView.GONE);
-            } else {  // mMode == ShoppingActivity.MODE_ADD_ITEMS
-                if (status == ShoppingContract.Status.REMOVED_FROM_LIST) {
-                    state.mNoCheckView.setVisibility(ImageView.VISIBLE);
-                    if (mShowCheckBox) {
-                        // replace check box
-                        state.mCheckView.setVisibility(CheckBox.INVISIBLE);
-                    }
-                } else {
-                    state.mNoCheckView.setVisibility(ImageView.INVISIBLE);
-                }
-            }
-        }
-
-        private void hideTextView(TextView view) {
-            view.setVisibility(View.GONE);
-            view.setText("");
-        }
-
-        private class ClickableNoteSpan extends ClickableSpan {
-            public void onClick(View view) {
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                mItemRowState state = (mItemRowState) view.getTag();
-                int cursorpos = state.mCursorPos;
-                if (debug) {
-                    Log.d(TAG, "Click on has_note: " + cursorpos);
-                }
-                mCursorItems.moveToPosition(cursorpos);
-                long note_id = mCursorItems.getLong(ShoppingActivity.mStringItemsITEMID);
-                Uri uri = ContentUris.withAppendedId(ShoppingContract.Notes.CONTENT_URI, note_id);
-                i.setData(uri);
-                Context context = getContext();
-                try {
-                    context.startActivity(i);
-                } catch (ActivityNotFoundException e) {
-                    // we could add a simple edit note dialog, but for now...
-                    Dialog g = new DownloadAppDialog(context,
-                            R.string.notepad_not_available,
-                            R.string.notepad,
-                            R.string.notepad_package,
-                            R.string.notepad_website);
-                    g.show();
-                }
-            }
-        }
-
-        private class ClickableItemSpan extends ClickableSpan {
-            public void onClick(View view) {
-                if (debug) {
-                    Log.d(TAG, "Click on description: ");
-                }
-                if (mListener != null) {
-                    mItemRowState state = (mItemRowState) view.getTag();
-                    int cursorpos = state.mCursorPos;
-                    mListener.onCustomClick(mCursorItems, cursorpos,
-                            EditItemDialog.FieldType.ITEMNAME, view);
-                }
-
-            }
-
-            public void updateDrawState(TextPaint ds) {
-                // Override the parent's method to avoid having the text
-                // in this span look like a link.
-            }
-        }
-
-        private class SpannedStringBuilder extends SpannableStringBuilder {
-            public SpannedStringBuilder appendSpannedString(Object o, CharSequence text) {
-                int spanStart = length();
-                super.append(text);
-                setSpan(o, spanStart, spanStart + text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-                return this;
-            }
-
-            public SpannedStringBuilder appendSpannedString(Object o, Object p, CharSequence text) {
-                int spanStart = length();
-                super.append(text);
-                setSpan(o, spanStart, spanStart + text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-                setSpan(p, spanStart, spanStart + text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-                return this;
-            }
-        }
-
-        public boolean setViewValue(View view, Cursor cursor, int i) {
-            int id = view.getId();
-            long price = 0;
-            boolean hasPrice = false;
-            String tags = null;
-            String priceString = null;
-            boolean hasTags = false;
-            mItemRowState state = (mItemRowState) view.getTag();
-            if (mPriceVisibility == View.VISIBLE) {
-                price = getQuantityPrice(cursor);
-                hasPrice = (price != 0);
-            }
-            if (mTagsVisibility == View.VISIBLE) {
-                tags = cursor.getString(ShoppingActivity.mStringItemsITEMTAGS);
-                hasTags = !TextUtils.isEmpty(tags);
-            }
-
-            if (id == R.id.name) {
-                boolean hasNote = cursor
-                        .getInt(ShoppingActivity.mStringItemsITEMHASNOTE) != 0;
-                String name = cursor
-                        .getString(ShoppingActivity.mStringItemsITEMNAME);
-                TextView tv = (TextView) view;
-                SpannedStringBuilder name_etc = new SpannedStringBuilder();
-                name_etc.appendSpannedString(new ClickableItemSpan(), name);
-                if (name.equalsIgnoreCase(mFilter)) {
-                    name_etc.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), 0, name_etc.length(), 0);
-                }
-                if (hasNote) {
-                    Drawable d = getResources().getDrawable(R.drawable.ic_launcher_notepad_small);
-                    float ratio = d.getIntrinsicWidth() / d.getIntrinsicHeight();
-                    d.setBounds(0, 0, (int) (ratio * mTextSize), (int) mTextSize);
-                    ImageSpan noteimgspan = new ImageSpan(d, ImageSpan.ALIGN_BASELINE);
-                    name_etc.appendSpannedString(noteimgspan, new ClickableNoteSpan(), "\u00A0");
-                }
-
-                if (hasPrice) {
-                    // set price text while setting name, so that correct size is known below
-                    priceString = mPriceFormatter.format(price * 0.01d);
-                    state.mPriceView.setText(priceString);
-                }
-                if (hasPrice && !hasTags) {
-                    TextPaint paint = state.mPriceView.getPaint();
-                    Rect bounds = new Rect();
-                    ColorDrawable price_overlay = new ColorDrawable();
-                    price_overlay.setAlpha(0);
-                    paint.getTextBounds(priceString, 0, priceString.length(), bounds);
-                    price_overlay.setBounds(0, 0, bounds.width(), bounds.height());
-                    ImageSpan priceimgspan = new ImageSpan(price_overlay, ImageSpan.ALIGN_BASELINE);
-                    name_etc.appendSpannedString(priceimgspan, " ");
-                }
-                tv.setText(name_etc);
-                tv.setMovementMethod(LinkMovementMethod.getInstance());
-                return true;
-            } else if (id == R.id.price) {
-                TextView tv = (TextView) view;
-                if (hasPrice) {
-                    tv.setVisibility(View.VISIBLE);
-                    tv.setTextColor(mTextColorPrice);
-                } else {
-                    hideTextView(tv);
-                }
-                return true;
-            } else if (id == R.id.tags) {
-
-                TextView tv = (TextView) view;
-                if (hasTags) {
-                    tv.setVisibility(View.VISIBLE);
-                    tv.setTextColor(mTextColorPrice);
-                    tv.setText(tags);
-                    if (hasPrice) {
-                        // don't overlap the price
-                        RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) tv.getLayoutParams();
-                        rlp.addRule(RelativeLayout.LEFT_OF, R.id.price);
-                    }
-                } else {
-                    hideTextView(tv);
-                }
-                return true;
-            } else if (id == R.id.quantity) {
-                String quantity = cursor.getString(ShoppingActivity.mStringItemsQUANTITY);
-                TextView tv = (TextView) view;
-                if (mQuantityVisibility == View.VISIBLE &&
-                        !TextUtils.isEmpty(quantity)) {
-                    tv.setVisibility(View.VISIBLE);
-                    // tv.setTextColor(mPriceTextColor);
-                    tv.setText(quantity + " ");
-                } else {
-                    hideTextView(tv);
-                }
-                return true;
-            } else if (id == R.id.units) {
-                String units = cursor.getString(ShoppingActivity.mStringItemsITEMUNITS);
-                String quantity = cursor.getString(ShoppingActivity.mStringItemsQUANTITY);
-                TextView tv = (TextView) view;
-                // looks more natural if you only show units when showing qty.
-                if (mUnitsVisibility == View.VISIBLE &&
-                        mQuantityVisibility == View.VISIBLE &&
-                        !TextUtils.isEmpty(units) && !TextUtils.isEmpty(quantity)) {
-                    tv.setVisibility(View.VISIBLE);
-                    // tv.setTextColor(mPriceTextColor);
-                    tv.setText(units + " ");
-                } else {
-                    hideTextView(tv);
-                }
-                return true;
-            } else if (id == R.id.priority) {
-                String priority = cursor.getString(ShoppingActivity.mStringItemsPRIORITY);
-                TextView tv = (TextView) view;
-                if (mPriorityVisibility == View.VISIBLE &&
-                        !TextUtils.isEmpty(priority)) {
-                    tv.setVisibility(View.VISIBLE);
-                    tv.setTextColor(mTextColorPriority);
-                    tv.setText("-" + priority + "- ");
-                } else {
-                    hideTextView(tv);
-                }
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        @Override
-        public void setViewBinder(ViewBinder viewBinder) {
-            throw new RuntimeException("this adapter implements setViewValue");
-        }
-
+    public ShoppingItemsView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        init();
     }
 
-    private class SearchQueryListener extends SearchViewCompat.OnQueryTextListenerCompat {
-        public boolean onQueryTextChange(String query) {
-            boolean isIconified = SearchViewCompat.isIconified(mSearchView);
-            String prevFilter = mFilter;
-
-            if (isIconified) {
-                // Something tries to restore the query text after the drawer is dismissed, but
-                // it doesn't re-expand the search view. Force the query string empty when it is
-                // not shown, and switch back to non-search mode.
-                if (query != null && query.length() > 0) {
-                    SearchViewCompat.setQuery(mSearchView, "", false);
-                }
-                query = null;
-                if (mInSearch) {
-                    mMode = mModeBeforeSearch;
-                    mInSearch = false;
-                }
-            }
-
-            if (mInSearch == false && !isIconified) {
-                mInSearch = true;
-                mModeBeforeSearch = mMode;
-                mMode = ShoppingActivity.MODE_ADD_ITEMS;
-            }
-
-            if (query == null || query.length() == 0) {
-                mFilter = null;
-            } else {
-                mFilter = query;
-            }
-
-            if ((prevFilter == null && mFilter == null) ||
-                    (prevFilter != null && prevFilter.equals(mFilter))) {
-                return true;
-            }
-
-            fillItems(mCursorActivity, mListId);
-
-            return true;
-        }
-
-        public boolean onQueryTextSubmit(String query) {
-            if (query.length() > 0) {
-                insertNewItem(mCursorActivity, query, null, null, null, null);
-                SearchViewCompat.setQuery(mSearchView, "", false);
-                fillItems(mCursorActivity, mListId);
-            }
-            return true;
-        }
+    public ShoppingItemsView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init();
     }
 
-    private class SearchDismissedListener extends SearchViewCompat.OnCloseListenerCompat {
-        public boolean onClose() {
-            if (mInSearch) {
-                mMode = mModeBeforeSearch;
-            }
-            mInSearch = false;
-            mFilter = null;
-            fillItems(mCursorActivity, mListId);
-            // invalidate();
-            return false;
-        }
+    public ShoppingItemsView(Context context) {
+        super(context);
+        init();
     }
-
-    private View mSearchView;
 
     public View getSearchView() {
         Context context = getContext();
         if (PreferenceActivity.getUsingHoloSearchFromPrefs(context)) {
-            mSearchView = SearchViewCompat.newSearchView(mCursorActivity);
+            mSearchView = new SearchView(mCursorActivity);
             if (mSearchView != null) {
-                SearchViewCompat.setSubmitButtonEnabled(mSearchView, true);
-                SearchViewCompat.setInputType(mSearchView, PreferenceActivity.getSearchInputTypeFromPrefs(context));
-                SearchViewCompat.setOnQueryTextListener(mSearchView, new SearchQueryListener());
-                SearchViewCompat.setOnCloseListener(mSearchView, new SearchDismissedListener());
-                SearchViewCompat.setImeOptions(mSearchView, EditorInfo.IME_ACTION_UNSPECIFIED);
+                mSearchView.setSubmitButtonEnabled(true);
+                mSearchView.setInputType(PreferenceActivity.getSearchInputTypeFromPrefs(context));
+                mSearchView.setOnQueryTextListener(new SearchQueryListener());
+                mSearchView.setOnCloseListener(new SearchDismissedListener());
+                mSearchView.setImeOptions(EditorInfo.IME_ACTION_UNSPECIFIED);
             }
         }
         return mSearchView;
@@ -705,21 +202,6 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
             mCursorItems.close();
         }
         mCursorItems = null;
-    }
-
-    public ShoppingItemsView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        init();
-    }
-
-    public ShoppingItemsView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
-    }
-
-    public ShoppingItemsView(Context context) {
-        super(context);
-        init();
     }
 
     private void init() {
@@ -1435,7 +917,6 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         }
     }
 
-
     private void pushUpdatedItemToWear(final ContentValues values, final Uri itemUri) {
         if (mSyncSupport.isAvailable() && mSyncSupport.isSyncEnabled())
             new Thread() {
@@ -1531,15 +1012,8 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         return price;
     }
 
-    private OnCustomClickListener mListener;
-    private boolean mDragAndDropEnabled;
-
     public void setCustomClickListener(OnCustomClickListener listener) {
         mListener = listener;
-    }
-
-    public interface OnCustomClickListener {
-        public void onCustomClick(Cursor c, int pos, EditItemDialog.FieldType field, View v);
     }
 
     @Override
@@ -1799,6 +1273,10 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
         mDropListener = l;
     }
 
+    public interface OnCustomClickListener {
+        public void onCustomClick(Cursor c, int pos, EditItemDialog.FieldType field, View v);
+    }
+
     public interface DragListener {
         void drag(int from, int to);
     }
@@ -1813,6 +1291,518 @@ public class ShoppingItemsView extends ListView implements LoaderManager.LoaderC
 
     public interface ActionBarListener {
         void updateActionBar();
+    }
+
+    /**
+     * Extend the SimpleCursorAdapter to strike through items. if STATUS ==
+     * Shopping.Status.BOUGHT
+     */
+    public class mSimpleCursorAdapter extends SimpleCursorAdapter implements
+            ViewBinder {
+
+        /**
+         * Constructor simply calls super class.
+         *
+         * @param context Context.
+         * @param layout  Layout.
+         * @param c       Cursor.
+         * @param from    Projection from.
+         * @param to      Projection to.
+         */
+        mSimpleCursorAdapter(final Context context, final int layout,
+                             final Cursor c, final String[] from, final int[] to) {
+            super(context, layout, c, from, to);
+            super.setViewBinder(this);
+
+            mPriceFormatter.setMaximumFractionDigits(2);
+            mPriceFormatter.setMinimumFractionDigits(2);
+        }
+
+        @Override
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
+            View view = super.newView(context, cursor, parent);
+            mItemRowState rowState = new mItemRowState(view); // sets view tags
+            return view;
+        }
+
+        /**
+         * Additionally to the standard bindView, we also check for STATUS, and
+         * strike the item through if BOUGHT.
+         */
+        @Override
+        public void bindView(final View view, final Context context,
+                             final Cursor cursor) {
+            super.bindView(view, context, cursor);
+
+            long status = cursor.getLong(ShoppingActivity.mStringItemsSTATUS);
+            mItemRowState state = (mItemRowState) view.getTag();
+            state.mCursorPos = cursor.getPosition();
+            state.mCursor = cursor;
+
+
+            // set style for name view and friends
+            TextView[] styled_as_name = {state.mNameView, state.mUnitsView, state.mQuantityView};
+            int i;
+            for (i = 0; i < styled_as_name.length; i++) {
+                TextView t = styled_as_name[i];
+
+                // Set font
+                if (mCurrentTypeface != null) {
+                    t.setTypeface(mCurrentTypeface);
+                }
+
+                // Set size
+                t.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
+
+                // Check for upper case:
+                if (mTextUpperCaseFont) {
+                    // Only upper case should be displayed
+                    CharSequence cs = t.getText();
+                    t.setText(cs.toString().toUpperCase());
+                }
+
+                t.setTextColor(mTextColor);
+
+                if (status == ShoppingContract.Status.BOUGHT) {
+                    t.setTextColor(mTextColorChecked);
+
+                    if (mShowStrikethrough) {
+                        // We have bought the item,
+                        // so we strike it through:
+
+                        // First convert text to 'spannable'
+                        t.setText(t.getText(), TextView.BufferType.SPANNABLE);
+                        Spannable str = (Spannable) t.getText();
+
+                        // Strikethrough
+                        str.setSpan(new StrikethroughSpan(), 0, str.length(),
+                                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                        // apply color
+                        // TODO: How to get color from resource?
+                        // Drawable colorStrikethrough = context
+                        // .getResources().getDrawable(R.drawable.strikethrough);
+                        // str.setSpan(new ForegroundColorSpan(0xFF006600), 0,
+                        // str.setSpan(new ForegroundColorSpan
+                        // (getResources().getColor(R.color.darkgreen)), 0,
+                        // str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        // color: 0x33336600
+                    }
+
+                    if (i == 0 && mTextSuffixChecked != null) {
+                        // very simple
+                        t.append(mTextSuffixChecked);
+                    }
+
+                } else {
+                    // item not bought:
+                    if (i == 0 && mTextSuffixUnchecked != null) {
+                        t.append(mTextSuffixUnchecked);
+                    }
+                }
+            }
+
+            // we have a check box now.. more visual and gets the point across
+
+            if (debug) {
+                Log.i(TAG, "bindview: pos = " + cursor.getPosition());
+            }
+
+            // set style for check box
+
+            if (mShowCheckBox) {
+                state.mCheckView.setVisibility(CheckBox.VISIBLE);
+                state.mCheckView.setChecked(status == ShoppingContract.Status.BOUGHT);
+            } else {
+                state.mCheckView.setVisibility(CheckBox.GONE);
+            }
+
+            if (mMode == ShoppingActivity.MODE_IN_SHOP) {
+                state.mNoCheckView.setVisibility(ImageView.GONE);
+            } else {  // mMode == ShoppingActivity.MODE_ADD_ITEMS
+                if (status == ShoppingContract.Status.REMOVED_FROM_LIST) {
+                    state.mNoCheckView.setVisibility(ImageView.VISIBLE);
+                    if (mShowCheckBox) {
+                        // replace check box
+                        state.mCheckView.setVisibility(CheckBox.INVISIBLE);
+                    }
+                } else {
+                    state.mNoCheckView.setVisibility(ImageView.INVISIBLE);
+                }
+            }
+        }
+
+        private void hideTextView(TextView view) {
+            view.setVisibility(View.GONE);
+            view.setText("");
+        }
+
+        public boolean setViewValue(View view, Cursor cursor, int i) {
+            int id = view.getId();
+            long price = 0;
+            boolean hasPrice = false;
+            String tags = null;
+            String priceString = null;
+            boolean hasTags = false;
+            mItemRowState state = (mItemRowState) view.getTag();
+            if (mPriceVisibility == View.VISIBLE) {
+                price = getQuantityPrice(cursor);
+                hasPrice = (price != 0);
+            }
+            if (mTagsVisibility == View.VISIBLE) {
+                tags = cursor.getString(ShoppingActivity.mStringItemsITEMTAGS);
+                hasTags = !TextUtils.isEmpty(tags);
+            }
+
+            if (id == R.id.name) {
+                boolean hasNote = cursor
+                        .getInt(ShoppingActivity.mStringItemsITEMHASNOTE) != 0;
+                String name = cursor
+                        .getString(ShoppingActivity.mStringItemsITEMNAME);
+                TextView tv = (TextView) view;
+                SpannedStringBuilder name_etc = new SpannedStringBuilder();
+                name_etc.appendSpannedString(new ClickableItemSpan(), name);
+                if (name.equalsIgnoreCase(mFilter)) {
+                    name_etc.setSpan(new StyleSpan(Typeface.BOLD_ITALIC), 0, name_etc.length(), 0);
+                }
+                if (hasNote) {
+                    Drawable d = getResources().getDrawable(R.drawable.ic_launcher_notepad_small);
+                    float ratio = d.getIntrinsicWidth() / d.getIntrinsicHeight();
+                    d.setBounds(0, 0, (int) (ratio * mTextSize), (int) mTextSize);
+                    ImageSpan noteimgspan = new ImageSpan(d, ImageSpan.ALIGN_BASELINE);
+                    name_etc.appendSpannedString(noteimgspan, new ClickableNoteSpan(), "\u00A0");
+                }
+
+                if (hasPrice) {
+                    // set price text while setting name, so that correct size is known below
+                    priceString = mPriceFormatter.format(price * 0.01d);
+                    state.mPriceView.setText(priceString);
+                }
+                if (hasPrice && !hasTags) {
+                    TextPaint paint = state.mPriceView.getPaint();
+                    Rect bounds = new Rect();
+                    ColorDrawable price_overlay = new ColorDrawable();
+                    price_overlay.setAlpha(0);
+                    paint.getTextBounds(priceString, 0, priceString.length(), bounds);
+                    price_overlay.setBounds(0, 0, bounds.width(), bounds.height());
+                    ImageSpan priceimgspan = new ImageSpan(price_overlay, ImageSpan.ALIGN_BASELINE);
+                    name_etc.appendSpannedString(priceimgspan, " ");
+                }
+                tv.setText(name_etc);
+                tv.setMovementMethod(LinkMovementMethod.getInstance());
+                return true;
+            } else if (id == R.id.price) {
+                TextView tv = (TextView) view;
+                if (hasPrice) {
+                    tv.setVisibility(View.VISIBLE);
+                    tv.setTextColor(mTextColorPrice);
+                } else {
+                    hideTextView(tv);
+                }
+                return true;
+            } else if (id == R.id.tags) {
+
+                TextView tv = (TextView) view;
+                if (hasTags) {
+                    tv.setVisibility(View.VISIBLE);
+                    tv.setTextColor(mTextColorPrice);
+                    tv.setText(tags);
+                    if (hasPrice) {
+                        // don't overlap the price
+                        RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) tv.getLayoutParams();
+                        rlp.addRule(RelativeLayout.LEFT_OF, R.id.price);
+                    }
+                } else {
+                    hideTextView(tv);
+                }
+                return true;
+            } else if (id == R.id.quantity) {
+                String quantity = cursor.getString(ShoppingActivity.mStringItemsQUANTITY);
+                TextView tv = (TextView) view;
+                if (mQuantityVisibility == View.VISIBLE &&
+                        !TextUtils.isEmpty(quantity)) {
+                    tv.setVisibility(View.VISIBLE);
+                    // tv.setTextColor(mPriceTextColor);
+                    tv.setText(quantity + " ");
+                } else {
+                    hideTextView(tv);
+                }
+                return true;
+            } else if (id == R.id.units) {
+                String units = cursor.getString(ShoppingActivity.mStringItemsITEMUNITS);
+                String quantity = cursor.getString(ShoppingActivity.mStringItemsQUANTITY);
+                TextView tv = (TextView) view;
+                // looks more natural if you only show units when showing qty.
+                if (mUnitsVisibility == View.VISIBLE &&
+                        mQuantityVisibility == View.VISIBLE &&
+                        !TextUtils.isEmpty(units) && !TextUtils.isEmpty(quantity)) {
+                    tv.setVisibility(View.VISIBLE);
+                    // tv.setTextColor(mPriceTextColor);
+                    tv.setText(units + " ");
+                } else {
+                    hideTextView(tv);
+                }
+                return true;
+            } else if (id == R.id.priority) {
+                String priority = cursor.getString(ShoppingActivity.mStringItemsPRIORITY);
+                TextView tv = (TextView) view;
+                if (mPriorityVisibility == View.VISIBLE &&
+                        !TextUtils.isEmpty(priority)) {
+                    tv.setVisibility(View.VISIBLE);
+                    tv.setTextColor(mTextColorPriority);
+                    tv.setText("-" + priority + "- ");
+                } else {
+                    hideTextView(tv);
+                }
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public void setViewBinder(ViewBinder viewBinder) {
+            throw new RuntimeException("this adapter implements setViewValue");
+        }
+
+        private class mItemRowState {
+            public View mParentView;
+            public TextView mNameView;
+            public TextView mQuantityView;
+            public TextView mUnitsView;
+            public TextView mPriceView;
+            public TextView mPriorityView;
+            public TextView mTagsView;
+            public CheckBox mCheckView;
+            public ImageView mNoCheckView;
+
+            public Cursor mCursor;
+            public int mCursorPos;
+
+            public mItemRowState(View view) {
+                // This class is here to initialize state information related
+                // to a single reusable item row, to reduce the amount of
+                // setup that needs to be done each time the row is reused.
+                //
+                // Callbacks can be bound up-front here if they depend on cursor position.
+
+                mParentView = view;
+                mNameView = (TextView) view.findViewById(R.id.name);
+                mPriceView = (TextView) view.findViewById(R.id.price);
+                mTagsView = (TextView) view.findViewById(R.id.tags);
+                mQuantityView = (TextView) view.findViewById(R.id.quantity);
+                mUnitsView = (TextView) view.findViewById(R.id.units);
+                mPriorityView = (TextView) view.findViewById(R.id.priority);
+                mCheckView = (CheckBox) view.findViewById(R.id.check);
+                mNoCheckView = (ImageView) view.findViewById(R.id.nocheck);
+
+                mParentView.setTag(this);
+                mNameView.setTag(this);
+                mPriceView.setTag(this);
+                mTagsView.setTag(this);
+                mQuantityView.setTag(this);
+                mUnitsView.setTag(this);
+                mPriorityView.setTag(this);
+                mCheckView.setTag(this);
+                mNoCheckView.setTag(this);
+
+                mQuantityView.setOnClickListener(new mItemClickListener("Quantity Click ",
+                        EditItemDialog.FieldType.QUANTITY));
+                mPriceView.setOnClickListener(new mItemClickListener("Click on price: ",
+                        EditItemDialog.FieldType.PRICE));
+                mUnitsView.setOnClickListener(new mItemClickListener("Click on units: ",
+                        EditItemDialog.FieldType.UNITS));
+                mPriorityView.setOnClickListener(new mItemClickListener("Click on priority: ",
+                        EditItemDialog.FieldType.PRIORITY));
+                mTagsView.setOnClickListener(new mItemClickListener("Click on tags: ",
+                        EditItemDialog.FieldType.TAGS));
+
+                mCheckView.setOnClickListener(new mItemToggleListener("Click: "));
+                // also check around check box
+                RelativeLayout l = (RelativeLayout) view.findViewById(R.id.check_surround);
+                l.setTag(this);
+                l.setOnClickListener(new mItemToggleListener("Click around: "));
+
+                // Check for clicks on and around item text
+                RelativeLayout r = (RelativeLayout) view.findViewById(R.id.description);
+                r.setTag(this);
+                r.setOnClickListener(new mItemClickListener("Click on description: ",
+                        EditItemDialog.FieldType.ITEMNAME));
+
+                mPriceView.setVisibility(mPriceVisibility);
+                mTagsView.setVisibility(mTagsVisibility);
+                mQuantityView.setVisibility(mQuantityVisibility);
+                mUnitsView.setVisibility(mUnitsVisibility);
+                mPriorityView.setVisibility(mPriorityVisibility);
+
+            }
+
+            private class mItemClickListener implements OnClickListener {
+                private String mLogMessage;
+                private EditItemDialog.FieldType mFieldType;
+
+                public mItemClickListener(String logMessage, EditItemDialog.FieldType fieldType) {
+                    mLogMessage = logMessage;
+                    mFieldType = fieldType;
+                }
+
+                public void onClick(View v) {
+                    if (debug) {
+                        Log.d(TAG, mLogMessage);
+                    }
+                    if (mListener != null) {
+                        mItemRowState state = (mItemRowState) v.getTag();
+                        mListener.onCustomClick(state.mCursor, state.mCursorPos,
+                                mFieldType, v);
+                    }
+                }
+            }
+
+            private class mItemToggleListener implements OnClickListener {
+                private String mLogMessage;
+
+                public mItemToggleListener(String logMessage) {
+                    mLogMessage = logMessage;
+                }
+
+                public void onClick(View v) {
+                    if (debug) {
+                        Log.d(TAG, mLogMessage);
+                    }
+                    mItemRowState state = (mItemRowState) v.getTag();
+                    toggleItemBought(state.mCursorPos);
+                }
+            }
+        }
+
+        private class ClickableNoteSpan extends ClickableSpan {
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                mItemRowState state = (mItemRowState) view.getTag();
+                int cursorpos = state.mCursorPos;
+                if (debug) {
+                    Log.d(TAG, "Click on has_note: " + cursorpos);
+                }
+                mCursorItems.moveToPosition(cursorpos);
+                long note_id = mCursorItems.getLong(ShoppingActivity.mStringItemsITEMID);
+                Uri uri = ContentUris.withAppendedId(ShoppingContract.Notes.CONTENT_URI, note_id);
+                i.setData(uri);
+                Context context = getContext();
+                try {
+                    context.startActivity(i);
+                } catch (ActivityNotFoundException e) {
+                    // we could add a simple edit note dialog, but for now...
+                    Dialog g = new DownloadAppDialog(context,
+                            R.string.notepad_not_available,
+                            R.string.notepad,
+                            R.string.notepad_package,
+                            R.string.notepad_website);
+                    g.show();
+                }
+            }
+        }
+
+        private class ClickableItemSpan extends ClickableSpan {
+            public void onClick(View view) {
+                if (debug) {
+                    Log.d(TAG, "Click on description: ");
+                }
+                if (mListener != null) {
+                    mItemRowState state = (mItemRowState) view.getTag();
+                    int cursorpos = state.mCursorPos;
+                    mListener.onCustomClick(mCursorItems, cursorpos,
+                            EditItemDialog.FieldType.ITEMNAME, view);
+                }
+
+            }
+
+            public void updateDrawState(TextPaint ds) {
+                // Override the parent's method to avoid having the text
+                // in this span look like a link.
+            }
+        }
+
+        private class SpannedStringBuilder extends SpannableStringBuilder {
+            public SpannedStringBuilder appendSpannedString(Object o, CharSequence text) {
+                int spanStart = length();
+                super.append(text);
+                setSpan(o, spanStart, spanStart + text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+                return this;
+            }
+
+            public SpannedStringBuilder appendSpannedString(Object o, Object p, CharSequence text) {
+                int spanStart = length();
+                super.append(text);
+                setSpan(o, spanStart, spanStart + text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+                setSpan(p, spanStart, spanStart + text.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+                return this;
+            }
+        }
+
+    }
+
+    private class SearchQueryListener implements SearchView.OnQueryTextListener {
+        public boolean onQueryTextChange(String query) {
+            boolean isIconified = mSearchView.isIconified();
+            String prevFilter = mFilter;
+
+            if (isIconified) {
+                // Something tries to restore the query text after the drawer is dismissed, but
+                // it doesn't re-expand the search view. Force the query string empty when it is
+                // not shown, and switch back to non-search mode.
+                if (query != null && query.length() > 0) {
+                    mSearchView.setQuery("", false);
+                }
+                query = null;
+                if (mInSearch) {
+                    mMode = mModeBeforeSearch;
+                    mInSearch = false;
+                }
+            }
+
+            if (mInSearch == false && !isIconified) {
+                mInSearch = true;
+                mModeBeforeSearch = mMode;
+                mMode = ShoppingActivity.MODE_ADD_ITEMS;
+            }
+
+            if (query == null || query.length() == 0) {
+                mFilter = null;
+            } else {
+                mFilter = query;
+            }
+
+            if ((prevFilter == null && mFilter == null) ||
+                    (prevFilter != null && prevFilter.equals(mFilter))) {
+                return true;
+            }
+
+            fillItems(mCursorActivity, mListId);
+
+            return true;
+        }
+
+        public boolean onQueryTextSubmit(String query) {
+            if (query.length() > 0) {
+                insertNewItem(mCursorActivity, query, null, null, null, null);
+                mSearchView.setQuery("", false);
+                fillItems(mCursorActivity, mListId);
+            }
+            return true;
+        }
+    }
+
+    private class SearchDismissedListener implements SearchView.OnCloseListener {
+        public boolean onClose() {
+            if (mInSearch) {
+                mMode = mModeBeforeSearch;
+            }
+            mInSearch = false;
+            mFilter = null;
+            fillItems(mCursorActivity, mListId);
+            // invalidate();
+            return false;
+        }
     }
 
 }

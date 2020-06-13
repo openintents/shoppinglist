@@ -14,108 +14,152 @@
  * limitations under the License.
  -->
 
-<resources xmlns:tools="http://schemas.android.com/tools"
-    tools:locale="en"
-    tools:ignore="MissingTranslation">
-  <!-- ***************************
-       About information
-       *************************** -->
-  <string name="about_copyright">Copyright © 2008-2012 OpenIntents</string>
-  <string name="about_website_url">http://www.openintents.org/en/shoppinglist</string>
-  <string name="about_email">support@openintents.org</string>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation" tools:locale="en">
+    <!-- ***************************
+         About information
+         *************************** -->
+    <string name="about_copyright">Copyright © 2008–2019 OpenIntents</string>
+    <string name="about_website_url">http://www.openintents.org/en/shoppinglist</string>
+    <string name="about_email">support@openintents.org</string>
 
-  <string-array name="about_authors"><!-- Add your name here if you helped out -->
-    <item>Peli</item>
-    <item>Friedger</item>
-    <item>"Ronan 'Zero' Schwarz"</item>
-    <item>Michael A. Krehan</item>
-    <item>Ben Caldwell</item>
-    <item>Aaron Peromsik</item>
-  </string-array>
+    <string-array name="about_authors"><!-- Add your name here if you helped out -->
+        <item>Peli</item>
+        <item>Friedger</item>
+        <item>"Ronan 'Zero' Schwarz"</item>
+        <item>Michael A. Krehan</item>
+        <item>Ben Caldwell</item>
+        <item>Aaron Peromsik</item>
+    </string-array>
 
-  <string-array name="about_documenters"><!-- Add your name here if you helped out -->
-    <!-- <item></item> -->
-  </string-array>
+    <string-array name="about_documenters"><!-- Add your name here if you helped out -->
+        <!-- <item></item> -->
+    </string-array>
 
-  <string-array name="about_artists"><!-- Add your name here if you helped out -->
-    <item>Peli</item>
-    <item>Anke-Art http://www.anke-art.de</item>
-    <!-- For the hand-writing font -->
-    <item></item>
-  </string-array>
+    <string-array name="about_artists"><!-- Add your name here if you helped out -->
+        <item>Peli</item>
+        <item>Anke-Art http://www.anke-art.de</item>
+        <!-- For the hand-writing font -->
+        <item></item>
+    </string-array>
 
-  <!-- ***************************
-       Distribution
-       *************************** -->
+    <!-- ***************************
+         Distribution
+         *************************** -->
 
-  <!-- Notepad -->
-  <string name="notepad_package">org.openintents.notepad</string>
-  <string name="notepad_website">http://www.openintents.org/en/notepad</string>
+    <!-- Notepad -->
+    <string name="notepad_package">org.openintents.notepad</string>
+    <string name="notepad_website">http://www.openintents.org/en/notepad</string>
 
-  <!-- ***************************
+    <!-- ***************************
+         Preferences
+         *************************** -->
+
+    <string-array name="preference_sortorder_entryvalues">
+        <!-- These are out of order because an added order fit better in the middle
+         of the list but I didn't want to renumber the older sort orders and have to
+         convert stored preferences. -->
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>9</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <string-array name="preference_sortorder_slistsvalues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="preference_fontsize_entryvalues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="preference_orientation_entryvalues">
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="preference_capitalization_entryvalues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="preference_prioritytotal_entryvalues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <!-- URL to OI Shopping list extensions on Market -->
+    <string name="preference_market_extensions_link">market://search?q=extension oi shopping list</string>
+
+    <!-- URL to OI Shopping list themes on Market -->
+    <string name="preference_market_themes_link">market://search?q=theme oi shopping list</string>
+
+    <!-- URL to OI Shopping list extensions-->
+    <string name="preference_developer_extensions_link">http://www.openintents.org/en/shoppinglist#extensions</string>
+
+    <!-- URL to OI Shopping list themes-->
+    <string name="preference_developer_themes_link">http://www.openintents.org/en/shoppinglist#themes</string>
+
+    <!-- ***************************
        Preferences
        *************************** -->
 
-  <string-array name="preference_sortorder_entryvalues">
-    <!-- These are out of order because an added order fit better in the middle
-     of the list but I didn't want to renumber the older sort orders and have to
-     convert stored preferences. -->
-    <item>0</item>
-    <item>1</item>
-    <item>2</item>
-    <item>3</item>
-    <item>4</item>
-    <item>9</item>
-    <item>5</item>
-    <item>6</item>
-    <item>7</item>
-    <item>8</item>
-  </string-array>
 
-  <string-array name="preference_sortorder_slistsvalues">
-    <item>0</item>
-    <item>1</item>
-    <item>2</item>
-    <item>3</item>
-  </string-array>
+    <string-array name="notepad_format_value" translatable="false">
+        <item>outlook notes</item>
+        <item>palm</item>
+        <item>jpilot memo</item>
+    </string-array>
 
-  <string-array name="preference_fontsize_entryvalues">
-    <item>0</item>
-    <item>1</item>
-    <item>2</item>
-    <item>3</item>
-  </string-array>
+    <string-array name="shoppinglist_format_value" translatable="false">
+        <item>outlook tasks</item>
+        <item>handyshopper</item>
+    </string-array>
 
-  <string-array name="preference_orientation_entryvalues">
-    <item>-1</item>
-    <item>0</item>
-    <item>1</item>
-  </string-array>
+    <string-array name="import_policy_value" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 
-  <string-array name="preference_capitalization_entryvalues">
-    <item>0</item>
-    <item>1</item>
-    <item>2</item>
-  </string-array>
+    <string-array name="shoppinglist_import_policy_value" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
 
-  <string-array name="preference_prioritytotal_entryvalues">
-    <item>0</item>
-    <item>1</item>
-    <item>2</item>
-    <item>3</item>
-    <item>4</item>
-  </string-array>
 
-  <!-- URL to OI Shopping list extensions on Market -->
-  <string name="preference_market_extensions_link">market://search?q=extension oi shopping list</string>
+    <!-- ***************************
+         CSV Files
+         *************************** -->
+    <!-- Header -->
+    <string name="header_subject" translatable="false">Subject</string>
+    <string name="header_percent_complete" translatable="false">% Complete</string>
+    <string name="header_categories" translatable="false">Categories</string>
+    <string name="header_tags" translatable="false">Tags</string>
 
-  <!-- URL to OI Shopping list themes on Market -->
-  <string name="preference_market_themes_link">market://search?q=theme oi shopping list</string>
+    <!-- Header HandyShopper -->
+    <string name="header_need" translatable="false">Need</string>
 
-  <!-- URL to OI Shopping list extensions-->
-  <string name="preference_developer_extensions_link">http://www.openintents.org/en/shoppinglist#extensions</string>
-
-  <!-- URL to OI Shopping list themes-->
-  <string name="preference_developer_themes_link">http://www.openintents.org/en/shoppinglist#themes</string>
+    <!-- File path -->
+    <string name="default_notepad_filename" translatable="false">notepad.csv</string>
+    <string name="default_shoppinglist_filename" translatable="false">shoppinglist.csv</string>
+    <string name="default_filename" translatable="false">output.csv</string>
 
 </resources> 

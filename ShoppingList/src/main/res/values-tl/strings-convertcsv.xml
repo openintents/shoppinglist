@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">OI Listahan ng Bilihin</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">OI Talaan</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">Ilunsad ang %s at piliin ang menu &gt; Palitan CSV.</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">Palitan ang CSV</string>
+    <string name="convert_csv_notepad">Palitan ang CSV ng Talaan</string>
+    <string name="convert_csv_shoppinglist">Palitan ang CSV ng Listahan ng bilihin</string>
+    <string name="convert_all_notes">Palitan ang lahat ng mga tala</string>
+    <string name="convert_all_shoppinglists">Palitan ang lahat ng mga listahan ng bilihin</string>
+    <string name="convert_list">Palitan ang listahan \'%s\'</string>
+    <string name="file_path">File path</string>
+    <string name="file_import">Import</string>
+    <string name="file_export">Export</string>
+    <string name="error_writing_file">Mali sa pagsulat sa file</string>
+    <string name="error_reading_file">Mali sa pagbasa ng file</string>
+    <string name="wrong_csv_format">Maling CSV na ayos</string>
+    <string name="error_file_not_found">Hindi mahanap ang file</string>
+    <string name="error_not_yet_implemented">Hindi pa ipinapatupad, paki-pili ng iba.</string>
+    <string name="import_finished">Natapos na ang pag-import</string>
+    <string name="export_finished">Natapos na ang pag-export</string>
+    <string name="filemanager_title_notepad">Piliin ang talaan CSV file</string>
+    <string name="filemanager_title_shoppinglist">Piliin ang listahan ng bilihin CSV file</string>
+	<string name="current_import_policy">Kasalukuyang Patakaran ng pag-import:</string>
+	<string name="import_policy">Patakaran ng pag-import:</string>
+	<string name="select_import_policy">Piliin ang gagamitin na patakaran ng pag-import:</string>
+    
+    <string name="file_exists">Mayroon ng ganitong file. Nais mo bang patungan?</string>
+    <string name="dont_ask_again">Huwag ng tanungin. Laging patungan!</string>
+    
+    <string name="warn_restore_policy_title">Import patakaran i-takda sa IBALIK</string>
+    <string name="warn_restore_policy">Ang iyong kasalukuyang patakaran ng pag-import ay ALISIN ANG LAHAT NG KASALUKUYANG RECORDS at PALITAN ang mga ito ng mga nilalaman ng CSV file. Sigurado ka ba?</string>
+    
+    <string name="menu_settings">Mga Setting</string>
+    <string name="csv_file_format">Ang ayos ng file ay CSV</string>
+    <string name="select_csv_file_format">Piliin na CSV ang ayos ng file</string>
+    <string name="select_encoding">Piliin ang encoding</string>
+    <string name="default_encoding">Default</string>
+    <string name="use_custom_encoding">Gamitin ang pasadyang encoding (mga advanced na mga gumagamit)</string>
+    <string name="preferences_select_csv_file_format">Piliin na CSV ang ayos ng file</string>
+    <string name="preferences_select_import_policy">Piliin ang gagamitin na patakaran ng pag-import:</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">Pang-karaniwang mga setting</string>
+    <string name="preference_common_summary">Import/export setting na nalalapat sa Talaan at Listahan ng bilihin.</string>
+    <string name="preference_ask_if_file_exists">Tanungin kung may ganito na file</string>
+    <string name="preference_ask_if_file_exists_summary">Kung may-tsek, may diyalogo na lilitaw para kumpirmahin kung papatungan kapag may ganito ng export file.</string>
+    
+    <string name="preference_application_specific">Espesipiko na settings ng applikasyon</string>
+    <string name="preference_filename">Filename</string>
+    <string name="preference_filename_summary">Buong path ng file.</string>
+    
+    <string name="preference_notepad">OI Talaan</string>
+    <string name="preference_notepad_summary">Mga import/export setting para sa OI Talaan</string>
+    
+    <string name="preference_shoppinglist">OI Listahan ng Bilihin</string>
+    <string name="preference_shoppinglist_summary">Mga Import/export setting para sa OI Listahan ng bilihin.</string>
+    
+	<string name="converting">Pinapalitan...</string>
+	<string name="dialog_ok">OK</string>
+	<string name="preference_stores">Import ang mga tindahan</string>
+	<string name="preference_stores_off_summary">I-import lamang ang pangalan ng HandyShopper tindahan  na item tags.</string>
+	<string name="preference_stores_on_summary">I-import ang HandyShopper tindahan at presyo at impormasyon ng pasilyo bawat tindahan.</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>Mga MS Outlook Tala</item>
+        <item>Palm CSV</item>
+        <item>JPilot Memo</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>Mga MS Outlook Gawain</item>
+        <item>HandyShopper</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>NAULIT - Payagan ang mga naulit na mga record.</item>
+        <item>KEEP - Don\'t overwrite existing records.</item>
+        <item>PATUNGAN - Patungan ang dati ng mga record.</item>
+        <item>IBALIK - ALISIN LAHAT, tapos i-import.</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>NAULIT - Dagdagan ng pangalawang kopya ng record kung ito ay nandito na.</item>
+        <item>KEEP - Don\'t overwrite an existing record, ignore the one in the CSV file.</item>
+        <item>Patungan - Ang record sa CSV ay PAPATUNGAN ng record na nandito na.</item>
+        <item>Ibalik Backup - ALISIN ANG LAHAT NG IYONG MGA RECORD NA NANDITO NA, tapos i-import sa CSV file.</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>NAULIT - Payagan ang mga naulit na mga record.</item>
+        <item>KEEP - Don\'t overwrite existing records.</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>NAULIT - Dagdagan ng pangalawang kopya ng record kung ito ay nandito na.</item>
+        <item>KEEP - Don\'t overwrite an existing record, ignore the one in the CSV file.</item>
+    </string-array>
+    
+</resources>

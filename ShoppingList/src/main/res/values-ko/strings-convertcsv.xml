@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">OI 쇼핑 목록</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">OI 메모장</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">%s 을(를) 실행하고 메뉴 &gt; CSV 변환 을 선택하세요.</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">CSV 변환하기</string>
+    <string name="convert_csv_notepad">메모장으로 CSV 변환하기</string>
+    <string name="convert_csv_shoppinglist">쇼핑 목록으로 CSV 변환하기</string>
+    <string name="convert_all_notes">모든 메모 변환하기</string>
+    <string name="convert_all_shoppinglists">모든 쇼핑 목록 변환하기</string>
+    <string name="convert_list">목록 \'%s\' 변환하기</string>
+    <string name="file_path">파일 경로</string>
+    <string name="file_import">불러오기</string>
+    <string name="file_export">내보내기</string>
+    <string name="error_writing_file">파일에 쓰는 데 오류가 발생했습니다</string>
+    <string name="error_reading_file">파일을 읽는 데 오류가 발생하였습니다</string>
+    <string name="wrong_csv_format">CSV 형식이 잘못되었습니다</string>
+    <string name="error_file_not_found">파일을 찾을 수 없습니다</string>
+    <string name="error_not_yet_implemented">아직 구현되지 않은 기능입니다. 다른 옵션을 선택해 주세요.</string>
+    <string name="import_finished">가져오기 완료</string>
+    <string name="export_finished">내보내기 완료</string>
+    <string name="filemanager_title_notepad">메모장 CSV 파일을 선택하세요</string>
+    <string name="filemanager_title_shoppinglist">쇼핑 목록 CSV 파일을 선택하세요</string>
+	<string name="current_import_policy">현재 불러오기 설정:</string>
+	<string name="import_policy">불러오기 설정</string>
+	<string name="select_import_policy">사용할 불러오기 설정을 선택하세요</string>
+    
+    <string name="file_exists">파일이 이미 존재합니다. 덮어쓰겠습니까?</string>
+    <string name="dont_ask_again">다음부터 묻지 않고 항상 덮어 쓰기.</string>
+    
+    <string name="warn_restore_policy_title">불러오기 설정이 복원 으로 설정되었습니다.</string>
+    <string name="warn_restore_policy">불러오기 설정이 지금 있는 모든 항목을 삭제한 후 CSV 파일을 불러오게 되 있습니다. 확실합니까?</string>
+    
+    <string name="menu_settings">설정</string>
+    <string name="csv_file_format">CSV 파일 형식</string>
+    <string name="select_csv_file_format">CSV 파일 형식을 선택하세요</string>
+    <string name="select_encoding">인코딩 설정</string>
+    <string name="default_encoding">기본값</string>
+    <string name="use_custom_encoding">사용자 설정 인코딩 사용 (고급 사용자용)</string>
+    <string name="preferences_select_csv_file_format">CSV 파일 형식을 선택하세요</string>
+    <string name="preferences_select_import_policy">사용할 불러오기 설정을 선택하세요</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">일반 설정</string>
+    <string name="preference_common_summary">메모장, 쇼핑 목록에 해당되는 불러오기/내보내기 설정.</string>
+    <string name="preference_ask_if_file_exists">파일이 존재하는지 묻기</string>
+    <string name="preference_ask_if_file_exists_summary">체크된 경우 내보내기 파일이 이미 존재하면 덮어씌울지 묻습니다.</string>
+    
+    <string name="preference_application_specific">앱 개별 설정</string>
+    <string name="preference_filename">파일 이름</string>
+    <string name="preference_filename_summary">파일 전체 경로</string>
+    
+    <string name="preference_notepad">OI 메모장</string>
+    <string name="preference_notepad_summary">OI 메모장 불러오기/내보내기 설정</string>
+    
+    <string name="preference_shoppinglist">OI 쇼핑 목록</string>
+    <string name="preference_shoppinglist_summary">OI 쇼핑 목록 불러오기/내보내기 설정</string>
+    
+	<string name="converting">변환 중...</string>
+	<string name="dialog_ok">OK</string>
+	<string name="preference_stores">가게 불러오기</string>
+	<string name="preference_stores_off_summary">항목 태그로만 HandyShopper 가게 이름 불러오기.</string>
+	<string name="preference_stores_on_summary">HandyShopper 가게 이름, 가게별 가격, 코너 정보 불러오기.</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>MS 아웃룩 메모</item>
+        <item>Palm CSV</item>
+        <item>JPilot 메모</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>MS 아웃룩 할 일</item>
+        <item>HandyShopper</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>사본 - 중복 항목 허용하기.</item>
+        <item>KEEP - Don\'t overwrite existing records.</item>
+        <item>덮어쓰기 - 지금 있는 항목에 덮어씁니다.</item>
+        <item>복원 - 모두 삭제한 후 불러옵니다.</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>사본 - 이미 항목이 존재할 경우에도 사본을 만듭니다.</item>
+        <item>KEEP - Don\'t overwrite an existing record, ignore the one in the CSV file.</item>
+        <item>덮어쓰기 - CSV 파일에 있는 내용을 지금 존재하는 항목에 덮어씌웁니다.</item>
+        <item>백업 복원 - 지금 있는 모든 항목을 삭제한 후, CSV 파일을 불러옵니다.</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>사본 - 중복 항목 허용하기.</item>
+        <item>KEEP - Don\'t overwrite existing records.</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>사본 - 이미 항목이 존재할 경우에도 사본을 만듭니다.</item>
+        <item>KEEP - Don\'t overwrite an existing record, ignore the one in the CSV file.</item>
+    </string-array>
+    
+</resources>

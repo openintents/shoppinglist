@@ -61,13 +61,13 @@ public class GooglePlaySyncSupport implements SyncSupport {
     }
 
     @Override
-    public void setSyncEnabled(boolean enableSync) {
-        syncEnabled = enableSync;
+    public boolean isSyncEnabled() {
+        return syncEnabled;
     }
 
     @Override
-    public boolean isSyncEnabled() {
-        return syncEnabled;
+    public void setSyncEnabled(boolean enableSync) {
+        syncEnabled = enableSync;
     }
 
     @Override
@@ -83,7 +83,7 @@ public class GooglePlaySyncSupport implements SyncSupport {
         sendRequest(dataMap, listIdString);
     }
 
-    public void pushList(Cursor cursor){
+    public void pushList(Cursor cursor) {
         String id = cursor.getString(cursor.getColumnIndex(ShoppingContract.Lists._ID));
         PutDataMapRequest dataMap = PutDataMapRequest.create("/lists/" + id);
         putString(dataMap, cursor, ShoppingContract.Lists.NAME);
@@ -96,7 +96,7 @@ public class GooglePlaySyncSupport implements SyncSupport {
     public void updateListItem(long listId, Uri itemUri, ContentValues values) {
         String id = itemUri.getLastPathSegment();
         PutDataMapRequest request = PutDataMapRequest.create("/" + listId + "/items/" + id);
-        for (String key : values.keySet()){
+        for (String key : values.keySet()) {
             String value = values.getAsString(key);
             request.getDataMap().putString(key, value);
         }

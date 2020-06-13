@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">Список покупок OI</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">Блокнот OI</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">Запустіть %s та виберіть меню &gt; Конвертувати CSV.</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">Конвертувати CSV</string>
+    <string name="convert_csv_notepad">Конвертувати CSV  у Блокнот</string>
+    <string name="convert_csv_shoppinglist">Конвертувати CSV у Список покупок</string>
+    <string name="convert_all_notes">Конвертувати усі нотатки</string>
+    <string name="convert_all_shoppinglists">Конвертувати усі списки покупок</string>
+    <string name="convert_list">конвертувати список \'%s\'</string>
+    <string name="file_path">Шлях до файлу</string>
+    <string name="file_import">Імпорт</string>
+    <string name="file_export">Експорт</string>
+    <string name="error_writing_file">Помилка запису до файлу</string>
+    <string name="error_reading_file">Помилка читання з файлу</string>
+    <string name="wrong_csv_format">Невірний формат CSV</string>
+    <string name="error_file_not_found">Файл не знайдено</string>
+    <string name="error_not_yet_implemented">Ще не вбудовано, будь ласка, виберіть інший параметр.</string>
+    <string name="import_finished">Імпортування завершено</string>
+    <string name="export_finished">Експортування завершено</string>
+    <string name="filemanager_title_notepad">Вибрати CSV файл блокноту</string>
+    <string name="filemanager_title_shoppinglist">Вибрати CSV файл списку покупок</string>
+	<string name="current_import_policy">Поточна політика імпорту:</string>
+	<string name="import_policy">Політика імпорту</string>
+	<string name="select_import_policy">Вибрати політику імпорту для використання</string>
+    
+    <string name="file_exists">Файл існує. Ви хочете перезаписати?</string>
+    <string name="dont_ask_again">Не питатися знову. Завжди переписувати!</string>
+    
+    <string name="warn_restore_policy_title">Політика імпорту задана як Відновлення</string>
+    <string name="warn_restore_policy">Ваша поточна політика імпорту встановлена, щоб видалити всі поточні записи і замінити їх вмістом файлу CSV. Ви впевнені?</string>
+    
+    <string name="menu_settings">Параметри</string>
+    <string name="csv_file_format">Формат файлу CSV</string>
+    <string name="select_csv_file_format">Вибрати формат файлу CSV</string>
+    <string name="select_encoding">Вибрати кодування</string>
+    <string name="default_encoding">Типово</string>
+    <string name="use_custom_encoding">Використовувати власне кодування (досвідчені користувачі)</string>
+    <string name="preferences_select_csv_file_format">Вибрати формат файлу CSV</string>
+    <string name="preferences_select_import_policy">Вибрати політику імпорту для використання</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">Спільні налаштування</string>
+    <string name="preference_common_summary">Імпорт/експорт налаштувань, які застосовуються в блокноті та списку покупок.</string>
+    <string name="preference_ask_if_file_exists">Питатися якщо файл існує</string>
+    <string name="preference_ask_if_file_exists_summary">Якщо вибрано, то з\'явиться діалогове вікно для підтвердження перезапису, якщо файл експорту вже існує.</string>
+    
+    <string name="preference_application_specific">Специфічні налаштування додатку</string>
+    <string name="preference_filename">Ім\'я файлу</string>
+    <string name="preference_filename_summary">Повний шлях до файлу.</string>
+    
+    <string name="preference_notepad">Блокнот OI</string>
+    <string name="preference_notepad_summary">Імпорт/експорт налаштувань для OI Блокнот.</string>
+    
+    <string name="preference_shoppinglist">OI список покупок</string>
+    <string name="preference_shoppinglist_summary">Імпорт/експорт налаштувань для OI Список покупок.</string>
+    
+	<string name="converting">Перетворення...</string>
+	<string name="dialog_ok">Гаразд</string>
+	<string name="preference_stores">Імпорт магазинів</string>
+	<string name="preference_stores_off_summary">Імпортувати  імена магазинів HandyShopper тільки як елементи тегів.</string>
+	<string name="preference_stores_on_summary">Імпортувати магазини HandyShopper і ціни в магазинах і допоміжну інформацію.</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>MS Outlook Notes</item>
+        <item>Palm CSV</item>
+        <item>JPilot Memo</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>MS Outlook Tasks</item>
+        <item>HandyShopper</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>Дублікати - дозволити дублікати записів.</item>
+        <item>Зберігати - не переписувати існуючі записи.</item>
+        <item>Переписувати - переписувати існуючі записи.</item>
+        <item>Відновлювати - вилучати усе, тоді імпортувати.</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>Дублікати - додавати другу копію запису, якщо він вже існує.</item>
+        <item>Зберігати - не переписувати існуючий запис, ігнорувати його у CSV файлі.</item>
+        <item>Переписувати - запис у CSV буде переписувати існуючий запис.</item>
+        <item>Відновлювати резервне - вилучає все існуючі записи, тоді імпортує CSV файл.</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>Дублікати - дозволити дублікати записів.</item>
+        <item>Зберігати - не переписувати існуючі записи.</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>Дублікати - додавати другу копію запису, якщо він вже існує.</item>
+        <item>Зберігати - не переписувати існуючий запис, ігнорувати його у CSV файлі.</item>
+    </string-array>
+    
+</resources>

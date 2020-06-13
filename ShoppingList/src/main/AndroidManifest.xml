@@ -46,17 +46,17 @@
     1.0.3 [10004]: 2009-02-04  -->
 
     <permission
-      android:name="org.openintents.shopping.READ_PERMISSION"
-      android:description="@string/oi_shopping_permission_read_descr"
-      android:label="@string/oi_shopping_permission_read"
-      android:permissionGroup="android.permission-group.PERSONAL_INFO"
-      android:protectionLevel="normal" />
+        android:name="org.openintents.shopping.READ_PERMISSION"
+        android:description="@string/oi_shopping_permission_read_descr"
+        android:label="@string/oi_shopping_permission_read"
+        android:permissionGroup="android.permission-group.PERSONAL_INFO"
+        android:protectionLevel="normal" />
     <permission
-      android:name="org.openintents.shopping.WRITE_PERMISSION"
-      android:description="@string/oi_shopping_permission_write_descr"
-      android:label="@string/oi_shopping_permission_write"
-      android:permissionGroup="android.permission-group.PERSONAL_INFO"
-      android:protectionLevel="normal" />
+        android:name="org.openintents.shopping.WRITE_PERMISSION"
+        android:description="@string/oi_shopping_permission_write_descr"
+        android:label="@string/oi_shopping_permission_write"
+        android:permissionGroup="android.permission-group.PERSONAL_INFO"
+        android:protectionLevel="normal" />
 
 
     <uses-feature
@@ -67,11 +67,11 @@
     <uses-permission android:name="org.openintents.shopping.WRITE_PERMISSION" />
 
     <application
+        android:name=".ShoppingApplication"
         android:allowBackup="true"
         android:backupAgent="ShoppingBackupAgent"
         android:icon="@drawable/ic_launcher_shoppinglist"
         android:label="@string/app_name"
-        android:name=".ShoppingApplication"
         tools:replace="label">
 
         <!-- aTrackDog metadata -->
@@ -98,9 +98,9 @@
         <provider
             android:name="org.openintents.shopping.provider.ShoppingProvider"
             android:authorities="org.openintents.shopping"
+            android:exported="true"
             android:readPermission="org.openintents.shopping.READ_PERMISSION"
-            android:writePermission="org.openintents.shopping.WRITE_PERMISSION"
-            android:exported="true" />
+            android:writePermission="org.openintents.shopping.WRITE_PERMISSION" />
 
         <!-- Shopping activity -->
         <activity
@@ -116,7 +116,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkUrlError">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.PICK" />
                 <action android:name="android.intent.action.INSERT" />
@@ -124,7 +124,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="vnd.android.cursor.dir/vnd.openintents.shopping.item" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkUrlError">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.EDIT" />
                 <action android:name="android.intent.action.GET_CONTENT" />
@@ -132,7 +132,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="vnd.android.cursor.item/vnd.openintents.shopping.item" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkUrlError">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.EDIT" />
 
@@ -149,7 +149,7 @@
         </activity>
 
         <activity android:name=".ui.ShoppingListsActivity">
-            <intent-filter>
+            <intent-filter tools:ignore="AppLinkUrlError">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.PICK" />
                 <action android:name="android.intent.action.INSERT" />
@@ -240,19 +240,42 @@
 
         <activity
             android:name=".ui.PreferenceActivity"
-            android:label="@string/preferences"/>
+            android:label="@string/preferences" />
         <activity
             android:name=".ui.PickItemsActivity"
             android:label="@string/menu_pick_items"
-            android:theme="@android:style/Theme.Dialog"/>
+            android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".ui.ItemStoresActivity"
             android:label="@string/item_stores_activity_label"
-            android:theme="@android:style/Theme.Dialog"/>
+            android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".ui.LayoutChoiceActivity"
             android:label="@string/layout_choice_title"
-            android:theme="@style/Theme.AppCompat"/>
+            android:theme="@style/Theme.AppCompat" />
+
+        <activity android:name="org.openintents.convertcsv.shoppinglist.ConvertCsvActivity"
+            android:exported="true"
+            android:label="@string/convert_csv"
+            android:theme="@style/Theme.AppCompat"
+            >
+            <intent-filter android:label="@string/convert_csv">
+                <action android:name="org.openintents.convertcsv.CONVERT"/>
+                <category android:name="android.intent.category.ALTERNATIVE" />
+                <data android:mimeType="vnd.android.cursor.item/vnd.openintents.shopping.list" />
+            </intent-filter>
+            <!-- The following intent makes it viewable in a file browser. -->
+            <intent-filter android:label="@string/convert_csv_shoppinglist"
+                tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/csv" />
+                <data android:mimeType="text/comma-separated-values" />
+            </intent-filter>
+        </activity>
+        <activity android:name="org.openintents.convertcsv.PreferenceActivity"
+            android:label="@string/menu_settings">
+        </activity>
         <!-- Activities from OI Distribution Library -->
         <activity android:name="org.openintents.distribution.EulaActivity" />
         <activity android:name="org.openintents.distribution.NewVersionActivity" />

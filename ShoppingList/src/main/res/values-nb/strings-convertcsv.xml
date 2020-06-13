@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">OI Handleliste</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">OI Notatblokk</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">Start %s og velg meny &gt; Konverter CSV.</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">Konverter CSV</string>
+    <string name="convert_csv_notepad">Konverter CSV til Notatblokk</string>
+    <string name="convert_csv_shoppinglist">Konverter CSV til Handleliste</string>
+    <string name="convert_all_notes">Konverter alle notater</string>
+    <string name="convert_all_shoppinglists">Konverter alle handlelister</string>
+    <string name="convert_list">Konverter liste \'%s\'</string>
+    <string name="file_path">Filsti</string>
+    <string name="file_import">Importer</string>
+    <string name="file_export">Eksporter</string>
+    <string name="error_writing_file">Feil ved skriving til fil</string>
+    <string name="error_reading_file">Feil ved lesing av fil</string>
+    <string name="wrong_csv_format">Feil CSV-format</string>
+    <string name="error_file_not_found">Fil ikke funnet</string>
+    <string name="error_not_yet_implemented">Ikke implementert ennå, vennligst velg et annet alternativ.</string>
+    <string name="import_finished">Importering ferdig</string>
+    <string name="export_finished">Eksportering ferdig</string>
+    <string name="filemanager_title_notepad">Velg notatblokk CSV-fil</string>
+    <string name="filemanager_title_shoppinglist">Velg handleliste CSV-fil</string>
+	<string name="current_import_policy">Nåværende importpolitikk:</string>
+	<string name="import_policy">Importpolitikk</string>
+	<string name="select_import_policy">Velg importpolitikken å bruke</string>
+    
+    <string name="file_exists">Filen eksisterer. Vil du overskrive?</string>
+    <string name="dont_ask_again">Ikke spør igjen. Overskriv alltid!</string>
+    
+    <string name="warn_restore_policy_title">Importpolitikk sett til GJENOPPRETT</string>
+    <string name="warn_restore_policy">Din nåværende importpolitikk er sett til SLETT ALLE NÅVÆRENDE POSTER og ERSTATT dem med inneholdene av CSV-filen. Er du sikker?</string>
+    
+    <string name="menu_settings">Innstillinger</string>
+    <string name="csv_file_format">CSV filformat</string>
+    <string name="select_csv_file_format">Velg CSV filformat</string>
+    <string name="select_encoding">Velg koding</string>
+    <string name="default_encoding">Standard</string>
+    <string name="use_custom_encoding">Bruk tilpasset koding (avanserte brukere)</string>
+    <string name="preferences_select_csv_file_format">Velg et CSV-filformat</string>
+    <string name="preferences_select_import_policy">Velg importpolitikken å bruke</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">Vanlige innstillinger</string>
+    <string name="preference_common_summary">Importer/eksporter innstillinger som gjelder for Notatblokk og Handleliste.</string>
+    <string name="preference_ask_if_file_exists">Spør om fil eksisterer</string>
+    <string name="preference_ask_if_file_exists_summary">En dialog dukker opp hvis krysset for å bekrefte overskriving hvis eksportfilen allerede eksisterer.</string>
+    
+    <string name="preference_application_specific">Innstillinger spesifikke til applikasjon</string>
+    <string name="preference_filename">Filnavn</string>
+    <string name="preference_filename_summary">Full sti for fil.</string>
+    
+    <string name="preference_notepad">OI Notatblokk</string>
+    <string name="preference_notepad_summary">Importer/eksporter innstillinger fra OI Notatblokk.</string>
+    
+    <string name="preference_shoppinglist">OI Handleliste</string>
+    <string name="preference_shoppinglist_summary">Importer/eksporter innstillinger fra OI Handleliste.</string>
+    
+	<string name="converting">Konverterer...</string>
+	<string name="dialog_ok">OK</string>
+	<string name="preference_stores">Importer butikker</string>
+	<string name="preference_stores_off_summary">Importer HandyShopper butikknavn bare som elementmerker.</string>
+	<string name="preference_stores_on_summary">Importer HandyShopper-butikker, priser per butikk og hylleradinformasjon.</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>MS Outlook Notater</item>
+        <item>Palm CSV</item>
+        <item>JPilot Memo</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>MS Outlook Oppgaver</item>
+        <item>HandyShopper</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>DUPLISER - Tillatt duplisering av poster.</item>
+        <item>BEHOLD - Ikke overskriv eksisterende poster.</item>
+        <item>Overskriv - Overskriv eksisterende poster.</item>
+        <item>Gjenopprett - SLETT ALT, så importer.</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>DUPLISER - Legg til en ny kopi av en post hvis den allerede eksisterer.</item>
+        <item>BEHOLD - Ikke overskriv en eksisterende post, ignorer den i CSV-filen.</item>
+        <item>Overskriv - En post i CSV\'en vil OVERSKRIVE en eksisterende post.</item>
+        <item>Gjenopprett sikkerhetskopi - SLETT ALLE DINE EKSISTERENDE POSTER, så importer CSV-filen.</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>DUPLISER - Tillatt duplisering av poster.</item>
+        <item>BEHOLD - Ikke overskriv eksisterende poster.</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>DUPLISER - Legg til en ny kopi av en post hvis den allerede eksisterer.</item>
+        <item>BEHOLD - Ikke overskriv en eksisterende post, ignorer den i CSV-filen.</item>
+    </string-array>
+    
+</resources>

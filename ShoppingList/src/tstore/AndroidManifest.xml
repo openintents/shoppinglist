@@ -15,14 +15,15 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  package="org.openintents.shopping">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="org.openintents.shopping">
 
-  <application tools:replace="label"
-    android:label="@string/app_name">
+    <application
+        android:label="@string/app_name"
+        tools:replace="label">
 
-    <meta-data
-      android:name="hideMarketLink"
-      android:value="true" />
-  </application>
+        <meta-data
+            android:name="hideMarketLink"
+            android:value="true" />
+    </application>
 </manifest>

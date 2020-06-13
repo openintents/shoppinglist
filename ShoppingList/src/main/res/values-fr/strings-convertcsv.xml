@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">AchatsListe</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">OI Bloc-notes</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">Lancement %s et sélectionnez Menu &gt; Convertir CSV.</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">Convertir CSV</string>
+    <string name="convert_csv_notepad">Convertir CSV pour le Bloc-notes</string>
+    <string name="convert_csv_shoppinglist">Convertir CSV liste d\'achats</string>
+    <string name="convert_all_notes">Convertir toutes les notes</string>
+    <string name="convert_all_shoppinglists">Convertissez tous les listes de achats</string>
+    <string name="convert_list">Convertir la liste \'%s\'</string>
+    <string name="file_path">Chemin du fichier</string>
+    <string name="file_import">Importer</string>
+    <string name="file_export">Export</string>
+    <string name="error_writing_file">Erreur à l\'écriture du fichier</string>
+    <string name="error_reading_file">Erreur de lecture du fichier</string>
+    <string name="wrong_csv_format">Mauvaise format CSV</string>
+    <string name="error_file_not_found">Fichier non trouvé</string>
+    <string name="error_not_yet_implemented">Pas encore mis en œuvre, s\'il vous plaît choisir l\'option différente.</string>
+    <string name="import_finished">Importation terminée</string>
+    <string name="export_finished">Exporter terminée</string>
+    <string name="filemanager_title_notepad">Sélectionnez le bloc-notes un fichier CSV</string>
+    <string name="filemanager_title_shoppinglist">Sélectionnez le fichier CSV liste d\'achats</string>
+	<string name="current_import_policy">Politique d\'importation actuelle:</string>
+	<string name="import_policy">Politique d\'importation</string>
+	<string name="select_import_policy">Sélectionnez la politique d\'importation à utiliser</string>
+    
+    <string name="file_exists">Le fichier existe. Voulez-vous remplacer?</string>
+    <string name="dont_ask_again">Ne demandez pas à nouveau. Toujours écraser!</string>
+    
+    <string name="warn_restore_policy_title">La politique d\'importation fixé à RESTAURER</string>
+    <string name="warn_restore_policy">Votre politique d\'importation actuelle est configuré pour supprimer TOUTES dossiers actuels et les remplacer par le contenu du fichier CSV. Etes-vous sûr?</string>
+    
+    <string name="menu_settings">Réglages des Tâches:</string>
+    <string name="csv_file_format">Format de fichier CSV</string>
+    <string name="select_csv_file_format">Sélectionner un format de fichier CSV</string>
+    <string name="select_encoding">Choisir l\'encodage</string>
+    <string name="default_encoding">Par défaut</string>
+    <string name="use_custom_encoding">Utilisez le codage personnalisé (utilisateurs avancés)</string>
+    <string name="preferences_select_csv_file_format">Sélectionnez un format de fichier CSV</string>
+    <string name="preferences_select_import_policy">Sélectionnez la politique d\'importation à utiliser</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">Les paramètres communs</string>
+    <string name="preference_common_summary">Importation / exportation des paramètres qui s\'appliquent à Notepad et liste de achats.</string>
+    <string name="preference_ask_if_file_exists">Demandez si le fichier existe</string>
+    <string name="preference_ask_if_file_exists_summary">Si coché une boîte de dialogue apparaît pour confirmer l\'écrasement si le fichier d\'exportation existe déjà.</string>
+    
+    <string name="preference_application_specific">Paramètres des applications spécifiques</string>
+    <string name="preference_filename">Nom du fichier</string>
+    <string name="preference_filename_summary">Le chemin complet du fichier.</string>
+    
+    <string name="preference_notepad">OI Bloc-notes</string>
+    <string name="preference_notepad_summary">Importation / exportation des paramètres pour OI Notepad.</string>
+    
+    <string name="preference_shoppinglist">OI Achats liste</string>
+    <string name="preference_shoppinglist_summary">Importation / exportation des paramètres pour Achats liste OI.</string>
+    
+	<string name="converting">Conversion...</string>
+	<string name="dialog_ok">OK</string>
+	<string name="preference_stores">Importer magasins</string>
+	<string name="preference_stores_off_summary">Importer noms magasin HandyShopper seulement comme balises item.</string>
+	<string name="preference_stores_on_summary">Magasins HandyShopper importation et par magasin de prix et d\'information allée.</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>MS notes Outlook</item>
+        <item>Palm CSV</item>
+        <item>Mémo jpilot</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>MS tâches Outlook</item>
+        <item>pratiqueacheteur</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>DUPLICATE - Autoriser les doublons d\'enregistrements.</item>
+        <item>GARDER - ne pas supprimer les enregistrements existants.</item>
+        <item>Ecraser - Ecraser les enregistrements existants.</item>
+        <item>Restaurer - Supprimer tout, puis les importer.</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>DUPLICATE - Ajouter une deuxième copie d\'un enregistrement si elle existe déjà.</item>
+        <item>GARDER - ne pas supprimer un enregistrement existant, ignorer celui dans le fichiers CSV.</item>
+        <item>Ecraser - Un record dans le CSV va écraser un enregistrement existant.</item>
+        <item>Restaurer la sauvegarde - supprimer tous vos enregistrements existants, puis importer le fichier CSV.</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>DUPLICATE - Autoriser les doublons d\'enregistrements.</item>
+        <item>GARDER - ne pas supprimer les enregistrements existants.</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>DUPLICATE - Ajouter une deuxième copie d\'un enregistrement si elle existe déjà.</item>
+        <item>GARDER - ne pas supprimer un enregistrement existant, ignorer celui dans le fichiers CSV.</item>
+    </string-array>
+    
+</resources>

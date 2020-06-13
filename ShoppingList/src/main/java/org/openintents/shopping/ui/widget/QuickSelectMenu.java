@@ -5,7 +5,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-/* This class exposes a subset of PopupMenu functionality, and chooses whether 
+/* This class exposes a subset of PopupMenu functionality, and chooses whether
  * to use the platform PopupMenu (on Honeycomb or above) or a backported version.
  */
 public class QuickSelectMenu {
@@ -30,6 +30,24 @@ public class QuickSelectMenu {
         return mImplPlatform.getMenu();
     }
 
+    public void setOnItemSelectedListener(OnItemSelectedListener listener) {
+        mItemSelectedListener = listener;
+    }
+
+    public void show() {
+        mImplPlatform.show();
+    }
+
+    public boolean onMenuItemClickImpl(MenuItem item) {
+        CharSequence name = item.getTitle();
+        int id = item.getItemId();
+        this.mItemSelectedListener.onItemSelected(name, id);
+        return true;
+    }
+
+    // popup.setOnMenuItemClickListener(new
+    // android.widget.PopupMenu.OnMenuItemClickListener() {
+
     /**
      * Interface responsible for receiving menu item click events if the items
      * themselves do not have individual item click listeners.
@@ -42,23 +60,5 @@ public class QuickSelectMenu {
          * @param id
          */
         public void onItemSelected(CharSequence item, int id);
-    }
-
-    public void setOnItemSelectedListener(OnItemSelectedListener listener) {
-        mItemSelectedListener = listener;
-    }
-
-    public void show() {
-        mImplPlatform.show();
-    }
-
-    // popup.setOnMenuItemClickListener(new
-    // android.widget.PopupMenu.OnMenuItemClickListener() {
-
-    public boolean onMenuItemClickImpl(MenuItem item) {
-        CharSequence name = item.getTitle();
-        int id = item.getItemId();
-        this.mItemSelectedListener.onItemSelected(name, id);
-        return true;
     }
 }

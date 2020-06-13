@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">OI Λίστα Αγορών</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">OI Σημειωματάριο</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">Εκκινήστε το %s το επιλέξτε μενού &gt;  Μεταροπέας CSV.</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">Μετατροπή CSV</string>
+    <string name="convert_csv_notepad">Μετατροπή CSV στο Σημειωματάριο</string>
+    <string name="convert_csv_shoppinglist">Μετατροπή CSV στη Λίστα Αγορών</string>
+    <string name="convert_all_notes">Μετατροπή όλων των σημειώσεων</string>
+    <string name="convert_all_shoppinglists">Μετατρέψτε όλες τις λίστες αγορών</string>
+    <string name="convert_list">Μετατρέψτε τη λίστα \'%s\'</string>
+    <string name="file_path">Διαδρομή αρχείου</string>
+    <string name="file_import">Εισαγωγή</string>
+    <string name="file_export">Εξαγωγή</string>
+    <string name="error_writing_file">Σφάλμα κατά την εγγραφή στο αρχείο</string>
+    <string name="error_reading_file">Σφάλμα κατά την ανάγνωση από το αρχείο</string>
+    <string name="wrong_csv_format">Λανθασμένη μορφή CSV</string>
+    <string name="error_file_not_found">Το αρχείο δε βρέθηκε</string>
+    <string name="error_not_yet_implemented">Δεν έχει ακόμα εφαρμοστεί, παρακαλώ διαλέξτε μια διαφορετική επιλογή</string>
+    <string name="import_finished">Η εισαγωγή ολοκληρώθηκε</string>
+    <string name="export_finished">Η εξαγωγή ολοκληρώθηκε</string>
+    <string name="filemanager_title_notepad">Επιλογή αρχείου CSV σημειωματαρίου</string>
+    <string name="filemanager_title_shoppinglist">Επιλογή αρχείου CSV λίστας αγορών</string>
+	<string name="current_import_policy">Τρέχουσα Πολιτική Εισαγωγής:</string>
+	<string name="import_policy">Πολιτική Εισαγωγής</string>
+	<string name="select_import_policy">Επιλέξτε την πολιτική εισαγωγής προς χρήση</string>
+    
+    <string name="file_exists">Το αρχείο υπάρχει ήδη. Θέλετε να το αντικαταστήσετε;</string>
+    <string name="dont_ask_again">Να μην ερωτηθώ ξανά. Πάντα να γίνεται αντικατάσταση!</string>
+    
+    <string name="warn_restore_policy_title">Η πολιτική εισαγωγής ορίστηκε στο ΕΠΑΝΑΦΟΡΑ</string>
+    <string name="warn_restore_policy">Η τρέχουσα πολιτική εισαγωγής σας είναι να ΔΙΑΓΡΑΦΟΥΝ ΟΛΕΣ ΟΙ ΤΡΕΧΟΥΣΕΣ ΚΑΤΑΧΩΡΗΣΕΙΣ και να ΑΝΤΙΚΑΤΑΣΤΑΘΟΥΝ με τα περιεχόμενα του αρχείου CSV. Είστε σίγουρος;</string>
+    
+    <string name="menu_settings">Ρυθμίσεις</string>
+    <string name="csv_file_format">Μορφή αρχείου CSV</string>
+    <string name="select_csv_file_format">Επιλέξτε τη μορφή αρχείου CSV</string>
+    <string name="select_encoding">Επιλογή κωδικοποίησης</string>
+    <string name="default_encoding">Προεπιλογή</string>
+    <string name="use_custom_encoding">Χρήση προσαρμοσμένης κωδικοποίησης (προχωρημένοι χρήστες)</string>
+    <string name="preferences_select_csv_file_format">Επιλέξτε μια μορφή αρχείου CSV</string>
+    <string name="preferences_select_import_policy">Επιλέξτε την πολιτική εισαγωγής προς χρήση</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">Κοινές ρυθμίσεις</string>
+    <string name="preference_common_summary">εισαγωγή/εξαγωγή ρυθμίσεων που αφαρμόζονται στο Σημειωματάριο και τη Λίστα Αγορών.</string>
+    <string name="preference_ask_if_file_exists">Ερώτηση εάν το αρχείο υπάρχει</string>
+    <string name="preference_ask_if_file_exists_summary">Εάν επιλεγεί εμφανίζεται ένας διάλογος για την επιβεβαίωση αντικατάστασης εάν το εξαγώμενο αρχείο υπάρχει ήδη.</string>
+    
+    <string name="preference_application_specific">Ειδικές ρυθμίσεις εφαρμογής</string>
+    <string name="preference_filename">Όνομα αρχείου</string>
+    <string name="preference_filename_summary">Πλήρης διαδρομή για το αρχείο.</string>
+    
+    <string name="preference_notepad">OI Σημειωματάριο</string>
+    <string name="preference_notepad_summary">Ρυθμίσεις εισαγωγής/εξαγωγής για το OI Σημειωματάριο.</string>
+    
+    <string name="preference_shoppinglist">OI Λίστα Αγορών</string>
+    <string name="preference_shoppinglist_summary">Ρυθμίσεις εισαγωγής/εξαγωγής για την OI Λίστα Αγορών</string>
+    
+	<string name="converting">Γίνεται μετατροπή...</string>
+	<string name="dialog_ok">OK</string>
+	<string name="preference_stores">Εισαγωγή καταστημάτων</string>
+	<string name="preference_stores_off_summary">Η εισαγωγή HandyShopper αποθηκεύει ονόματα μόνο ως ετικέτες αντικειμένων.</string>
+	<string name="preference_stores_on_summary">Η εισαγωγή HandyShopper αποθηκεύει και τις τιμές ανα κατάστημα και της πληροφορίες των διαδρόμων.</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>Σημειώσεις MS Outlook</item>
+        <item>Palm CSV</item>
+        <item>JPilot Memo</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>Εργασίες MS Outlook</item>
+        <item>HandyShopper</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>ΑΝΤΙΓΡΑΦΟ - Να επιτρέπονται αντίγραφα των καταχωρήσεων.</item>
+        <item>ΔΙΑΤΗΡΗΣΗ - Να μη γίνεται αντικατάσταση των υπάρχοντων καταχωρήσεων.</item>
+        <item>ΑΝΤΙΚΑΤΑΣΤΑΣΗ - Αντικατάσταση των υπάρχοντων καταχωρήσεων.</item>
+        <item>Επαναφορά - ΔΙΑΓΡΑΦΗ ΟΛΩΝ, έπειτα εισαγωγή.</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>ΑΝΤΙΓΡΑΦΟ - Προσθήκη ενός δεύτερου αντιγράφου μιας καταχώρησης εάν ήδη υπάρχει.</item>
+        <item>ΔΙΑΤΗΡΗΣΗ - Να μη γίνει αντικατάσταση μιας υπάρχοντος καταχώρησης, να αγνοείται αυτή στο αρχείο CSV.</item>
+        <item>Αντικατάσταση - Μια καταχώρηση στο CSV θα ΑΝΤΙΚΑΤΑΣΤΗΣΕΙ μια υπάρχουσα καταχώρηση.</item>
+        <item>Επαναφορά Αντιγράφου Ασφαλείας - ΔΙΑΓΡΑΦΗ ΟΛΩΝ ΤΩΝ ΥΠΑΡΧΟΝΤΩΝ ΚΑΤΑΧΩΡΗΣΕΩΝ, έπειτα εισαγωγή του αρχείου CSV.</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>ΑΝΤΙΓΡΑΦΟ - Να επιτρέπονται αντίγραφα των καταχωρήσεων.</item>
+        <item>ΔΙΑΤΗΡΗΣΗ - Να μη γίνεται αντικατάσταση των υπάρχοντων καταχωρήσεων.</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>ΑΝΤΙΓΡΑΦΟ - Προσθήκη ενός δεύτερου αντιγράφου μιας καταχώρησης εάν ήδη υπάρχει.</item>
+        <item>ΔΙΑΤΗΡΗΣΗ - Να μη γίνει αντικατάσταση μιας υπάρχοντος καταχώρησης, να αγνοείται αυτή στο αρχείο CSV.</item>
+    </string-array>
+    
+</resources>

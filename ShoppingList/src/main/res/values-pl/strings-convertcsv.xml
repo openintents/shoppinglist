@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">OI Lista zakupów</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">OI Notatnik</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">Włącz %s i zaznacz opcję menu &gt; Konwertuj CSV.</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">Konwertuj CSV</string>
+    <string name="convert_csv_notepad">Konwertuj CSV do Notatnika</string>
+    <string name="convert_csv_shoppinglist">Konwertuj CSV do Listy zakupów</string>
+    <string name="convert_all_notes">Konwertuj wszystkie notatki</string>
+    <string name="convert_all_shoppinglists">Konwertuj wszystkie listy zakupów</string>
+    <string name="convert_list">Konwertuj listę \'%s\'</string>
+    <string name="file_path">Ścieżka dostępu do pliku</string>
+    <string name="file_import">Import</string>
+    <string name="file_export">Eksport</string>
+    <string name="error_writing_file">Błąd zapisu do pliku</string>
+    <string name="error_reading_file">Błąd odczytu z pliku</string>
+    <string name="wrong_csv_format">Błędny format CSV</string>
+    <string name="error_file_not_found">Nie odnaleziono pliku</string>
+    <string name="error_not_yet_implemented">Jeszcze nie zaimplementowano, proszę wybrać inną opcję.</string>
+    <string name="import_finished">Import zakończony</string>
+    <string name="export_finished">Eksport zakończony</string>
+    <string name="filemanager_title_notepad">Zaznacz plik CSV notatnika</string>
+    <string name="filemanager_title_shoppinglist">Zaznacz plik CSV listy zakupów</string>
+	<string name="current_import_policy">Obecny Sposób importu:</string>
+	<string name="import_policy">Sposób importu</string>
+	<string name="select_import_policy">Zaznacz sposób importu, który ma być używany</string>
+    
+    <string name="file_exists">Plik już istnieje. Czy chcesz nadpisać?</string>
+    <string name="dont_ask_again">Nie pytaj więcej. Zawsze nadpisuj!</string>
+    
+    <string name="warn_restore_policy_title">Sposób importu ustawiony na ODŚWIEŻANIE</string>
+    <string name="warn_restore_policy">Twój obecny sposób importu jest ustawiony na USUŃ WSZYSTKIE OBECNE ZAPISY i ZASTĄP je zawartością pliku CSV. Jesteś pewny?</string>
+    
+    <string name="menu_settings">Ustawienia</string>
+    <string name="csv_file_format">Format pliku CSV</string>
+    <string name="select_csv_file_format">Wybierz format pliku CSV</string>
+    <string name="select_encoding">Wybierz kodowanie</string>
+    <string name="default_encoding">Domyślne</string>
+    <string name="use_custom_encoding">Używaj niestandardowego kodowania (zaawansowani użytkownicy)</string>
+    <string name="preferences_select_csv_file_format">Wybierz format pliku CSV</string>
+    <string name="preferences_select_import_policy">Zaznacz sposób importu, który ma być używany</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">Ustawienia ogólne</string>
+    <string name="preference_common_summary">Import/eksport ustawień, które odnoszą się do Notatnika i Listy zakupów.</string>
+    <string name="preference_ask_if_file_exists">Zapytaj czy plik istnieje</string>
+    <string name="preference_ask_if_file_exists_summary">Jeśli jest zaznaczone, pojawi się okienko, aby potwierdzić nadpisanie jeśli plik już istnieje.</string>
+    
+    <string name="preference_application_specific">Charakterystyczne ustawienia aplikacji</string>
+    <string name="preference_filename">Nazwa pliku</string>
+    <string name="preference_filename_summary">Pełna ścieżka dostępu do pliku</string>
+    
+    <string name="preference_notepad">OI Notatnik</string>
+    <string name="preference_notepad_summary">Import/eksport ustawień dla OI Notatnika</string>
+    
+    <string name="preference_shoppinglist">OI Lista zakupów</string>
+    <string name="preference_shoppinglist_summary">Import/eksport ustawień dla OI Listy zakupów</string>
+    
+	<string name="converting">Konwertowanie...</string>
+	<string name="dialog_ok">OK</string>
+	<string name="preference_stores">Import schowków</string>
+	<string name="preference_stores_off_summary">Import nazw schowków HandyShopper tylko jako znaczników pozycji.</string>
+	<string name="preference_stores_on_summary">Import schowków HandyShopper i ceny oraz informacji przejściowych powstałych przed przechowaniem.</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>Notatki MS Outlook</item>
+        <item>Palm CSV</item>
+        <item>JPilot Memo</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>Zadania MS Outlook</item>
+        <item>HandyShopper</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>POWIELAJ - pozwala powielać zapisy.</item>
+        <item>POZOSTAW - Nie nadpisuj istniejących rekordów.</item>
+        <item>Nadpisz - nadpisz istniejące zapisy.</item>
+        <item>Przywróć - USUŃ WSZYSTKIE, potem importuj.</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>POWIEL - dodaj drugą kopię zapisu jeśli już istnieje.</item>
+        <item>POZOSTAW - Nie nadpisuj istniejących rekordów, ignoruj ten z pliku CSV.</item>
+        <item>Nadpisz - zapis z pliku CSV NADPISZE istniejący zapis.</item>
+        <item>Przywróć kopię zapasową - USUŃ WSZYSTKIE ISTNIEJĄCE ZAPISY, potem importuj plik CSV.</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>POWIELAJ - pozwala powielać zapisy.</item>
+        <item>POZOSTAW - Nie nadpisuj istniejących rekordów.</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>POWIEL - dodaj drugą kopię zapisu jeśli już istnieje.</item>
+        <item>POZOSTAW - Nie nadpisuj istniejących rekordów, ignoruj ten z pliku CSV.</item>
+    </string-array>
+    
+</resources>

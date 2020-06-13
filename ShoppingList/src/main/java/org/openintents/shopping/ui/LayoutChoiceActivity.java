@@ -14,6 +14,15 @@ import org.openintents.shopping.R;
 
 public class LayoutChoiceActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
 
+    public static boolean show(Activity context) {
+        if (PreferenceActivity.getShowLayoutChoice(context) && PreferenceActivity.getUsingHoloSearchFromPrefs(context)) {
+            context.startActivity(new Intent(context, LayoutChoiceActivity.class));
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,14 +68,5 @@ public class LayoutChoiceActivity extends AppCompatActivity implements RadioGrou
         PreferenceActivity.setShowLayoutChoice(this, false);
         startActivity(new Intent(this, org.openintents.shopping.ShoppingActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
-    }
-
-    public static boolean show(Activity context) {
-        if (PreferenceActivity.getShowLayoutChoice(context) && PreferenceActivity.getUsingHoloSearchFromPrefs(context)) {
-            context.startActivity(new Intent(context, LayoutChoiceActivity.class));
-            return true;
-        } else {
-            return false;
-        }
     }
 }

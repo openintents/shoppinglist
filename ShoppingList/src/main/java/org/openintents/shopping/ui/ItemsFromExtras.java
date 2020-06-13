@@ -14,40 +14,36 @@ import org.openintents.shopping.ui.widget.ShoppingItemsView;
 import java.util.List;
 
 public class ItemsFromExtras {
+    private static final boolean debug = LogConstants.debug;
+    private static final String TAG = "ItemsFromExtras";
     /**
      * The items to add to the shopping list.
      * <p/>
      * Received as a string array list in the intent extras.
      */
     private List<String> mExtraItems;
-
     /**
      * The quantities for items to add to the shopping list.
      * <p/>
      * Received as a string array list in the intent extras.
      */
     private List<String> mExtraQuantities;
-
     /**
      * The prices for items to add to the shopping list.
      * <p/>
      * Received as a string array list in the intent extras.
      */
     private List<String> mExtraPrices;
-
     /**
      * The barcodes for items to add to the shopping list.
      * <p/>
      * Received as a string array list in the intent extras.
      */
     private List<String> mExtraBarcodes;
-
     /**
      * The list URI received together with intent extras.
      */
     private Uri mExtraListUri;
-    private static final boolean debug = LogConstants.debug;
-    private static final String TAG = "ItemsFromExtras";
 
     /**
      * Inserts new item from string array received in intent extras.

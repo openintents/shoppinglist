@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">"قائمة التسوق OI</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">المفكرة OI</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">s% إطلاق  وحدد القائمة ;gt </string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">تحويل CSV</string>
+    <string name="convert_csv_notepad">تحويل CSV إلى المفكرة</string>
+    <string name="convert_csv_shoppinglist">تحويل CSV إلى قائمة التسوق</string>
+    <string name="convert_all_notes">تحويل كافة الملاحظات</string>
+    <string name="convert_all_shoppinglists">تحويل جميع قوائم التسوق</string>
+    <string name="convert_list">تحويل قائمة \'s%\'</string>
+    <string name="file_path">مسار ملف</string>
+    <string name="file_import">استيراد</string>
+    <string name="file_export">التصدير</string>
+    <string name="error_writing_file">خطأ في الكتابة إلى ملف</string>
+    <string name="error_reading_file">خطأ في القراءة من ملف</string>
+    <string name="wrong_csv_format">تنسيق CSV خاطئ</string>
+    <string name="error_file_not_found">لم يتم العثور على الملف</string>
+    <string name="error_not_yet_implemented">لم تنفذ بعد، الرجاء اختيار خيار مختلف.</string>
+    <string name="import_finished">الانتهاء من الاستيراد</string>
+    <string name="export_finished">تصدير الانتهاء</string>
+    <string name="filemanager_title_notepad">حدد ملف CSV المفكرة</string>
+    <string name="filemanager_title_shoppinglist">حدد ملف CSV قائمة التسوق</string>
+	<string name="current_import_policy">سياسة الاستيراد الحالية:</string>
+	<string name="import_policy">سياسة الاستيراد</string>
+	<string name="select_import_policy">حدد استيراد نهج لاستخدام</string>
+    
+    <string name="file_exists">الملف موجود. هل تريد الكتابة فوق؟</string>
+    <string name="dont_ask_again">عدم السؤال مرة أخرى. الكتابة فوق دائماً!</string>
+    
+    <string name="warn_restore_policy_title">سياسة الاستيراد تعيين إلى استعادة</string>
+    <string name="warn_restore_policy">سياسة الاستيراد الحالية الخاصة بك يتم تعيين إلى "حذف كافة السجلات الحالية" واستبدالها بمحتويات الملف CSV. هل أنت متأكد؟</string>
+    
+    <string name="menu_settings">إعدادات</string>
+    <string name="csv_file_format">تنسيق ملف CSV</string>
+    <string name="select_csv_file_format">حدد تنسيق الملف CSV</string>
+    <string name="select_encoding">حدد ترميز</string>
+    <string name="default_encoding">الافتراضي</string>
+    <string name="use_custom_encoding">استخدام الترميز مخصصة (المستخدمين المتقدمين)</string>
+    <string name="preferences_select_csv_file_format">حدد تنسيق ملف CSV</string>
+    <string name="preferences_select_import_policy">حدد استيراد نهج لاستخدام</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">إعدادات عامة</string>
+    <string name="preference_common_summary">استيراد وتصدير الإعدادات التي تنطبق على قائمة المفكرة وتسوق.</string>
+    <string name="preference_ask_if_file_exists">اسأل ما إذا كان الملف موجوداً</string>
+    <string name="preference_ask_if_file_exists_summary">إذا دققت يظهر مربع حوار تأكيد الكتابة إذا كان يوجد بالفعل ملف التصدير.</string>
+    
+    <string name="preference_application_specific">تطبيق إعدادات محددة</string>
+    <string name="preference_filename">اسم الملف</string>
+    <string name="preference_filename_summary">المسار الكامل للملف.</string>
+    
+    <string name="preference_notepad">المفكرة OI</string>
+    <string name="preference_notepad_summary">استيراد/تصدير إعدادات ل OI برنامج "المفكرة.</string>
+    
+    <string name="preference_shoppinglist">قائمة تسوق OI</string>
+    <string name="preference_shoppinglist_summary">استيراد/تصدير إعدادات ل OI قائمة التسوق.</string>
+    
+	<string name="converting">تحويل...</string>
+	<string name="dialog_ok">OK</string>
+	<string name="preference_stores">مخازن الاستيراد</string>
+	<string name="preference_stores_off_summary">استيراد أسماء مخزن HandyShopper فقط كالعلامات البند.</string>
+	<string name="preference_stores_on_summary">استيراد مخازن HandyShopper وفي مخزن معلومات الأسعار والممر.</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>MS outlook  مذكرات</item>
+        <item>Palm CSV</item>
+        <item>JPilot Memo</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>مهام MS Outlook</item>
+        <item>HandyShopper</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>تكرار - يسمح بتكرارات سجلات</item>
+        <item>احتفظ -لا تكتب فوق التسجيلات الموجودة</item>
+        <item>الكتابة فوق - الكتابة فوق السجلات الموجودة.</item>
+        <item>استعادة-"حذف الكل"، ثم استيراد.</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>تكرار - إضافة نسخة ثانية من سجل إذا كان موجوداً بالفعل.</item>
+        <item>احتفظ -لا تكتب فوق التسجيلات الموجودة، تجاهل الموجودة في ملفات CSV.</item>
+        <item>الكتابة فوق - رقماً قياسياً في CSV سيتم الكتابة فوق سجل موجود.</item>
+        <item>استعادة النسخ الاحتياطي - حذف كافة الخاص بك السجلات الموجودة، ثم قم باستيراد ملف CSV.</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>تكرار - يسمح بتكرارات سجلات</item>
+        <item>احتفظ -لا تكتب فوق التسجيلات الموجودة</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>تكرار - إضافة نسخة ثانية من سجل إذا كان موجوداً بالفعل.</item>
+        <item>احتفظ -لا تكتب فوق التسجيلات الموجودة، تجاهل الموجودة في ملفات CSV.</item>
+    </string-array>
+    
+</resources>

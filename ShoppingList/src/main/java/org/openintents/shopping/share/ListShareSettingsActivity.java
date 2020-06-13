@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2007-2008 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -161,9 +161,9 @@ public class ListShareSettingsActivity extends Activity {
         bundle.putString(ShoppingContract.Lists.SHARE_NAME, sharename);
         bundle.putString(ShoppingContract.Lists.SHARE_CONTACTS, contacts);
 
-		/*
+        /*
          * setResult(RESULT_OK, mUri.toString(), bundle);
-		 */
+         */
         // TODO ??? OK???
         setResult(RESULT_OK);
 
@@ -179,9 +179,9 @@ public class ListShareSettingsActivity extends Activity {
 
     }
 
-	/*
-	 * public void onClick(View v) { // When the user clicks, just finish this
-	 * activity. // onPause will be called, and we save our data there.
-	 * finish(); }
-	 */
+    /*
+     * public void onClick(View v) { // When the user clicks, just finish this
+     * activity. // onPause will be called, and we save our data there.
+     * finish(); }
+     */
 }

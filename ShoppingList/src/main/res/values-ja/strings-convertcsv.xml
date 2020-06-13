@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_shopping">OI ショッピングリスト</string>
+	<!-- Name of an application. Please make sure that translations are consistent. -->
+	<string name="info_app_notepad">OI メモ帳</string>
+	
+	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+	<string name="info_instructions">%s を起動して メニュー &gt; CSV を変換 を選択</string>
+	
+	<!-- ***************************
+	     Applicatio-specific strings
+	     *************************** -->
+	<!-- Application name. Can be localized.
+	  "CSV" is a common file extension meaning "comma separated values".
+	  "OI" and "CSV" should not be changed.  -->
+
+    <string name="convert_csv">CSV を変換</string>
+    <string name="convert_csv_notepad">CSV をメモ帳に変換</string>
+    <string name="convert_csv_shoppinglist">CSV をショッピングリストに変換</string>
+    <string name="convert_all_notes">すべてのノートを変換</string>
+    <string name="convert_all_shoppinglists">すべてのショッピングリストを変換</string>
+    <string name="convert_list">リスト \'%s\' を変換</string>
+    <string name="file_path">ファイルの場所</string>
+    <string name="file_import">インポート</string>
+    <string name="file_export">エクスポート</string>
+    <string name="error_writing_file">ファイルへ書き込む際にエラーが発生しました</string>
+    <string name="error_reading_file">ファイルを読み込む際にエラーが発生しました</string>
+    <string name="wrong_csv_format">CSV フォーマットが間違っています</string>
+    <string name="error_file_not_found">ファイルが見つかりません</string>
+    <string name="error_not_yet_implemented">まだ実装されていません、別のオプションを選択してください。</string>
+    <string name="import_finished">インポートが完了しました</string>
+    <string name="export_finished">エクスポートが完了しました</string>
+    <string name="filemanager_title_notepad">メモ帳 CSV ファイルを選択</string>
+    <string name="filemanager_title_shoppinglist">ショッピングリスト CSV ファイルを選択</string>
+	<string name="current_import_policy">現在のインポートポリシー:</string>
+	<string name="import_policy">インポートポリシー</string>
+	<string name="select_import_policy">使用するインポートポリシーを選択してください</string>
+    
+    <string name="file_exists">ファイルはすでに存在します。上書きしますか？</string>
+    <string name="dont_ask_again">二度と聞かない。いつも上書きする！</string>
+    
+    <string name="warn_restore_policy_title">インポートポリシーが RESTORE に設定されました</string>
+    <string name="warn_restore_policy">あなたの現在のインポートポリシーはすべての記録を削除し、 CSV ファイル内のコンテンツで置き換えることになっています。よろしいですか？</string>
+    
+    <string name="menu_settings">設定</string>
+    <string name="csv_file_format">CSV ファイルフォーマット</string>
+    <string name="select_csv_file_format">CSV ファイルフォーマットを選択</string>
+    <string name="select_encoding">エンコードを選択</string>
+    <string name="default_encoding">デフォルト</string>
+    <string name="use_custom_encoding">カスタムエンコードを使用する (上級ユーザー)</string>
+    <string name="preferences_select_csv_file_format">CSV ファイルフォーマットを一つ選択</string>
+    <string name="preferences_select_import_policy">使用するインポートポリシーを選択してください</string>
+    
+    <!-- Preferences -->
+    <!-- Preference category title -->
+    <string name="preference_common">一般設定</string>
+    <string name="preference_common_summary">メモ帳とショッピングリストに適応される設定をインポート/エクスポート</string>
+    <string name="preference_ask_if_file_exists">ファイルがすでに存在する場合に聞く</string>
+    <string name="preference_ask_if_file_exists_summary">チェックされていると既に存在するファイルを上書きするときに確認ダイアログが表示されます。</string>
+    
+    <string name="preference_application_specific">アプリケーションの詳しい設定</string>
+    <string name="preference_filename">ファイル名</string>
+    <string name="preference_filename_summary">ファイルのフルパス</string>
+    
+    <string name="preference_notepad">OI メモ帳</string>
+    <string name="preference_notepad_summary">OI メモ帳の設定をインポート/エクスポート</string>
+    
+    <string name="preference_shoppinglist">OI ショッピングリスト</string>
+    <string name="preference_shoppinglist_summary">OI ショッピングリストの設定をインポート/エクスポートする</string>
+    
+	<string name="converting">変換中...</string>
+	<string name="dialog_ok">OK</string>
+	<string name="preference_stores">店をインポートする</string>
+	<string name="preference_stores_off_summary">HandyShopper 店名をアイテムタグとしてインポート</string>
+	<string name="preference_stores_on_summary">HandyShopper 店、各店の価格と通路情報をインポート</string>
+
+	<!-- OI Notepad -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    
+	<!-- OI Shopping list -->
+	<!-- Permission -->
+
+
+	<!-- Permission -->
+
+
+    	
+    <string-array name="notepad_format">
+        <item>MS Outlook ノート</item>
+        <item>Palm CSV</item>
+        <item>JPilot メモ</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_format">
+        <item>MS Outlook タスク</item>
+        <item>HandyShopper</item>
+    </string-array>
+    
+    <string-array name="import_policy">
+        <item>重複- 記録の重複を許可する</item>
+        <item>キープ- 既に存在する記録を上書きしない。</item>
+        <item>上書き- 存在する記録に上書き</item>
+        <item>復元- すべてを削除し、インポートする。</item>
+    </string-array>
+
+    <string-array name="import_policy_detail">
+        <item>重複- 存在する記録がある場合、二つ目のコピーを追加する。</item>
+        <item>キープ- 既に存在する記録を上書きせず、CSVファイル内の記録は無視する。</item>
+        <item>上書き- CSV 内の記録は存在する記録を上書きします。</item>
+        <item>バックアップを復元- すべての記録を削除し、CSV ファイルをインポートします。</item>
+    </string-array>
+    
+    <string-array name="shoppinglist_import_policy">
+        <item>重複- 記録の重複を許可する</item>
+        <item>キープ- 既に存在する記録を上書きしない。</item>
+    </string-array>
+
+    <string-array name="shoppinglist_import_policy_detail">
+        <item>重複- 存在する記録がある場合、二つ目のコピーを追加する。</item>
+        <item>キープ- 既に存在する記録を上書きせず、CSVファイル内の記録は無視する。</item>
+    </string-array>
+    
+</resources>
