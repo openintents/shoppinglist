@@ -2,9 +2,10 @@ package org.openintents.distribution;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 //public class DistributionLibraryActivity extends Activity {//Temp - FragmentActivity for 3.x compatibility
 public class DistributionLibraryFragmentActivity extends AppCompatActivity {

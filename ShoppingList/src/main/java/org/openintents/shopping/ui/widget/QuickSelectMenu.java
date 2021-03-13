@@ -5,19 +5,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.widget.PopupMenu;
+
 /* This class exposes a subset of PopupMenu functionality, and chooses whether
  * to use the platform PopupMenu (on Honeycomb or above) or a backported version.
  */
 public class QuickSelectMenu {
 
-    private android.support.v7.widget.PopupMenu mImplPlatform;
+    private PopupMenu mImplPlatform;
 
     private OnItemSelectedListener mItemSelectedListener;
 
     public QuickSelectMenu(Context context, View anchor) {
-        mImplPlatform = new android.support.v7.widget.PopupMenu(context, anchor);
+        mImplPlatform = new PopupMenu(context, anchor);
         mImplPlatform
-                .setOnMenuItemClickListener(new android.support.v7.widget.PopupMenu.OnMenuItemClickListener() {
+                .setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         return onMenuItemClickImpl(item);

@@ -23,7 +23,6 @@ allprojects {
 ext {
     compileSdkVersion = 28
     targetSdkVersion = 28
-    supportVersion = "28.+"
     playServicesVersion = "16.0.1"
     supportWearableVersion = "2.4.0"
 }
