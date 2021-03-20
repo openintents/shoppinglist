@@ -39,15 +39,9 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.ActionProvider;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -85,6 +79,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.WrapperListAdapter;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.core.view.ActionProvider;
+import androidx.core.view.MenuItemCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.openintents.OpenIntents;
 import org.openintents.convertcsv.shoppinglist.ConvertCsvActivity;
@@ -129,6 +130,8 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
+import static org.openintents.shopping.ui.PreferenceActivity.PREFS_HIDECHECKED;
+import static org.openintents.shopping.ui.PreferenceActivity.PREFS_HIDECHECKED_DEFAULT;
 import static org.openintents.shopping.ui.widget.ShoppingItemsView.MODE_IN_SHOP;
 
 /**
@@ -1530,14 +1533,14 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         View searchView = mItemsView.getSearchView();
         if (searchView != null) {
             item = menu.add(0, MENU_SEARCH_ADD, 0, R.string.menu_search_add);
-            MenuItemCompat.setActionView(item, searchView);
-            MenuItemCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_ALWAYS);
+            item.setActionView(searchView);
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         }
         mAddPanel.setVisibility(searchView == null ? View.VISIBLE : View.GONE);
 
         item = menu.add(0, MENU_SORT_LIST, 0, R.string.menu_sort_list)
                 .setIcon(android.R.drawable.ic_menu_sort_alphabetically);
-        MenuItemCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_IF_ROOM
+        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
                 | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
         if (mListSortActionProvider == null) {
             mListSortActionProvider = new ListSortActionProvider(this);
@@ -1553,8 +1556,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         item = menu.add(0, MENU_CLEAN_UP_LIST, 0, R.string.clean_up_list)
                 .setIcon(R.drawable.ic_menu_cleanup).setShortcut('1', 'c');
-        MenuItemCompat.setShowAsAction(item, MenuItem.SHOW_AS_ACTION_IF_ROOM
-                | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
         menu.add(0, MENU_PICK_ITEMS, 0, R.string.menu_pick_items)
                 .setIcon(android.R.drawable.ic_menu_add).setShortcut('2', 'p').
@@ -1695,9 +1697,14 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         menu.findItem(MENU_MARK_ALL_ITEMS).setVisible(mItemsView.mNumUnchecked > 0);
         menu.findItem(MENU_UNMARK_ALL_ITEMS).setVisible(mItemsView.mNumChecked > 0);
 
-        menu.findItem(MENU_CLEAN_UP_LIST).setEnabled(
-                mItemsView.mNumChecked > 0).setVisible(!drawerOpen);
-
+        // Show clean_up_list menu action only if setting "Hide checked items" is set to false
+        // as clean_up_list menu item would unexpected work on already hidden items
+        SharedPreferences sp = getSharedPreferences("org.openintents.shopping_preferences", MODE_PRIVATE);
+        if (sp.getBoolean(PREFS_HIDECHECKED, PREFS_HIDECHECKED_DEFAULT)) {
+            menu.findItem(MENU_CLEAN_UP_LIST).setVisible(false);
+        } else {
+            menu.findItem(MENU_CLEAN_UP_LIST).setEnabled(mItemsView.mNumChecked > 0).setVisible(!drawerOpen);
+        }
 
         // Delete list is possible, if we have more than one list:
         // AND

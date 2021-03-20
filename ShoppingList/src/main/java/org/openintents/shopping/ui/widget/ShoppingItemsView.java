@@ -24,8 +24,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.SearchView;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
@@ -54,6 +52,10 @@ import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.SearchView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.openintents.distribution.DownloadAppDialog;
 import org.openintents.shopping.R;
