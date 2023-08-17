@@ -1597,8 +1597,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         menu.add(0, MENU_SYNC_WEAR, 0, R.string.sync_wear);
 
-        menu.add(0, MENU_CONVERT_CSV, 0, R.string.convert_csv);
-
         // Add distribution menu items last.
         mDistribution.onCreateOptionsMenu(menu);
 

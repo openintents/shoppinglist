@@ -40,7 +40,7 @@
     <string name="convert_csv_shoppinglist">Convert CSV to Shopping list</string>
     <string name="convert_all_notes">Convert all notes</string>
     <string name="convert_all_shoppinglists">Convert all shopping lists</string>
-    <string name="convert_list">Convert list \'%s\'</string>
+    <string name="convert_list">Convert list %s</string>
     <string name="file_path">File path</string>
     <string name="new_file">New file</string>
     <string name="choose_file">Choose file</string>

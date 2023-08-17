@@ -7,7 +7,7 @@ if (localPropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdk targetSdkVersion
 
     defaultConfig {
         applicationId "org.openintents.shopping"
@@ -48,8 +48,8 @@ android {
 
     def propertyFile = new File(projectDir, "build-private.properties")
     compileOptions {
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
+        sourceCompatibility = "1.8"
+        targetCompatibility = "1.8"
     }
     if (propertyFile.exists()) {
         signingConfigs {
