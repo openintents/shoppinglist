@@ -24,7 +24,6 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,9 +32,7 @@ import android.os.Message;
 import android.os.ParcelFileDescriptor;
 import android.preference.PreferenceManager;
 import android.provider.OpenableColumns;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.Xml.Encoding;
 import android.view.LayoutInflater;
@@ -47,7 +44,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -85,6 +81,7 @@ public class ConvertCsvBaseActivity extends AppCompatActivity {
     protected static final int DIALOG_ID_PERMISSIONS = 4;
     protected static final int DIALOG_DISTRIBUTION_START = 100; // MUST BE LAST
     protected static final int REQUEST_CODE_PICK_FILE = 1;
+    protected static final int REQUEST_CODE_NEW_FILE = 2;
     private final static String TAG = "ConvertCsvBaseActivity";
     // This is the activity's message handler that the worker thread can use to communicate
     // with the main thread. This may be null if the activity is paused and could change, so
@@ -94,8 +91,8 @@ public class ConvertCsvBaseActivity extends AppCompatActivity {
     static boolean smHasWorkerThread;
     // Max value for the progress bar.
     static int smProgressMax;
-    protected TextView mFilePathView;
-    protected TextView mFileNameView;
+    protected String mFilePath;
+    protected String mFileName;
     protected TextView mConvertInfo;
     protected Spinner mSpinner;
     protected String PREFERENCE_FILENAME;
@@ -205,24 +202,7 @@ public class ConvertCsvBaseActivity extends AppCompatActivity {
 
         setPreferencesUsed();
 
-        mFilePathView = findViewById(R.id.file_path);
-        mFileNameView = findViewById(R.id.file_name);
-
         SharedPreferences pm = PreferenceManager.getDefaultSharedPreferences(this);
-        String filepath = pm.getString(PREFERENCE_FILENAME, "");
-
-        if (TextUtils.isEmpty(filepath)) {
-            setFileUriUnknown();
-        } else {
-            setFileUri(Uri.parse(filepath));
-        }
-
-
-        ImageButton buttonFileManager = findViewById(R.id.new_document);
-        buttonFileManager.setOnClickListener(arg0 -> openFileManagerForNewDocument());
-
-        buttonFileManager = findViewById(R.id.open_document);
-        buttonFileManager.setOnClickListener(arg0 -> openFileManagerForChoosingDocument());
 
         mConvertInfo = findViewById(R.id.convert_info);
 
@@ -373,7 +353,7 @@ public class ConvertCsvBaseActivity extends AppCompatActivity {
         if (importPolicy == IMPORT_POLICY_RESTORE) {
             showDialog(DIALOG_ID_WARN_RESTORE_POLICY);
         } else {
-            startImportPostCheck();
+            openFileManagerForChoosingDocument();
         }
     }
 
@@ -382,7 +362,6 @@ public class ConvertCsvBaseActivity extends AppCompatActivity {
         //getContentResolver().delete(Shopping.Contains.CONTENT_URI, null, null);
         //getContentResolver().delete(Shopping.Items.CONTENT_URI, null, null);
         //getContentResolver().delete(Shopping.Lists.CONTENT_URI, null, null);
-
 
         String fileName = getFilenameAndSavePreferences();
 
@@ -422,7 +401,6 @@ public class ConvertCsvBaseActivity extends AppCompatActivity {
 
                     reader.close();
                     dispatchSuccess(R.string.import_finished);
-                    onImportFinished();
 
                 } catch (FileNotFoundException e) {
                     dispatchError(R.string.error_file_not_found);
@@ -467,19 +445,23 @@ public class ConvertCsvBaseActivity extends AppCompatActivity {
     }
 
     public String getDocumentName(Uri uri) {
-        Cursor cursor = getContentResolver()
-                .query(uri, null, null, null, null, null);
-
-        String displayName = uri.getLastPathSegment();
+        String displayName = "";
         try {
-            if (cursor != null && cursor.moveToFirst()) {
-                displayName = cursor.getString(
-                        cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+            Cursor cursor = getContentResolver()
+                    .query(uri, null, null, null, null, null);
+
+            displayName = uri.getLastPathSegment();
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    displayName = cursor.getString(
+                            cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
             }
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
+        } catch (Exception e) {
         }
         return displayName;
     }
@@ -531,7 +513,7 @@ public class ConvertCsvBaseActivity extends AppCompatActivity {
 
     public void startExport() {
         Log.i(TAG, "Exporting...");
-        doExport();
+        openFileManagerForNewDocument();
     }
 
     public void doExport() {
@@ -584,7 +566,7 @@ public class ConvertCsvBaseActivity extends AppCompatActivity {
      */
     public String getFilenameAndSavePreferences() {
 
-        String fileName = mFilePathView.getText().toString();
+        String fileName = mFilePath;
 
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(this);
@@ -721,18 +703,16 @@ public class ConvertCsvBaseActivity extends AppCompatActivity {
 
     private void openFileManagerForNewDocument() {
 
-        String fileName = mFileNameView.getText().toString();
-        String filePath = mFilePathView.getText().toString();
-        if (TextUtils.isEmpty(filePath)) {
-            fileName = DEFAULT_FILENAME;
-        }
+        String fileName = "";
+        String filePath = DEFAULT_FILENAME;
+
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("text/*");
         intent.putExtra(Intent.EXTRA_TITLE, fileName);
 
         try {
-            startActivityForResult(intent, REQUEST_CODE_PICK_FILE);
+            startActivityForResult(intent, REQUEST_CODE_NEW_FILE);
         } catch (ActivityNotFoundException e) {
             showDialog(DIALOG_ID_NO_FILE_MANAGER_AVAILABLE);
         }
@@ -740,7 +720,7 @@ public class ConvertCsvBaseActivity extends AppCompatActivity {
 
     private void openFileManagerForChoosingDocument() {
 
-        String fileName = mFilePathView.getText().toString();
+        String fileName = "";
 
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 
@@ -781,6 +761,17 @@ public class ConvertCsvBaseActivity extends AppCompatActivity {
         Log.i(TAG, "onActivityResult");
 
         switch (requestCode) {
+            case REQUEST_CODE_NEW_FILE:
+                if (resultCode == RESULT_OK && data != null) {
+                    Uri documentUri = data.getData();
+                    if (documentUri != null) {
+                        setFileUri(documentUri);
+                    } else {
+                        setFileUriUnknown();
+                    }
+                    doExport();
+                }
+                break;
             case REQUEST_CODE_PICK_FILE:
                 if (resultCode == RESULT_OK && data != null) {
                     Uri documentUri = data.getData();
@@ -789,19 +780,19 @@ public class ConvertCsvBaseActivity extends AppCompatActivity {
                     } else {
                         setFileUriUnknown();
                     }
-
+                    startImportPostCheck();
                 }
                 break;
         }
     }
 
     private void setFileUriUnknown() {
-        mFileNameView.setText(getString(R.string.unknown_document));
-        mFilePathView.setText("");
+        mFileName = getString(R.string.unknown_document);
+        mFilePath = "";
     }
 
     private void setFileUri(Uri documentUri) {
-        mFileNameView.setText(getDocumentName(documentUri));
-        mFilePathView.setText(documentUri.toString());
+        mFileName = getDocumentName(documentUri);
+        mFilePath = documentUri.toString();
     }
 }

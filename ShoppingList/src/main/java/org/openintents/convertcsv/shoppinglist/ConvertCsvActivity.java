@@ -120,10 +120,6 @@ public class ConvertCsvActivity extends ConvertCsvBaseActivity {
 
     @Override
     public void onImportFinished() {
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        Uri uri = ShoppingContract.Lists.CONTENT_URI.buildUpon().appendPath(String.valueOf(getCurrentListId())).build();
-        i.setData(uri);
-        startActivity(i);
     }
 
     @Override
