@@ -8,6 +8,47 @@ Written 2026-06-09 against commit `81bc3c2` (versionName 2.2.1, versionCode 1002
 
 ---
 
+## 0b. ARCHITECTURE DIRECTION (updated 2026-06-09)
+
+After the Google-Play upgrade + Kotlin migration, the project pivoted to:
+**Jetpack Compose UI + extracted, tested business logic. Target: Android only**
+(Compose Multiplatform was considered and declined — the app's core is Android-
+specific: ContentProvider as public API, widget, backup agent, Tasker automation).
+
+DONE (green, tested):
+- Kotlin migration: 62/63 main+lib Java files + both built flavors are now Kotlin.
+  ONLY `ui/ShoppingActivity.java` (3324 lines) remains Java — automated agent
+  conversion is blocked by a content-filter false-positive on that one large file.
+  It interops fine with the Kotlin code. Convert it later via Android Studio's
+  Code > Convert Java File to Kotlin (the right tool at that size), OR replace it
+  screen-by-screen with Compose (preferred — see below).
+- Compose + test toolchain: Kotlin compose-compiler plugin, Compose BOM 2024.09.03,
+  material3, activity-compose, lifecycle-viewmodel/runtime-compose; Robolectric +
+  androidx.test + coroutines-test for JVM unit tests.
+- Architecture slice (the pattern to follow for each screen):
+  * `data/ShoppingRepository` (+ `data/Models.kt`) — business-logic boundary over
+    the ContentProvider; returns ShoppingListInfo/ShoppingItem, no Cursors in UI.
+  * `ui/compose/ShoppingListViewModel` — StateFlow state + actions, IO off-main.
+  * `ui/compose/ShoppingListScreen` + `ComposeShoppingActivity` — first Compose
+    screen (add/check/strikethrough), hosted SEPARATELY (exported=false, not the
+    launcher) so the legacy app keeps working during migration.
+- Tests: 11 passing. `ShoppingRepositoryTest` runs the real ShoppingProvider+SQLite
+  under Robolectric; `PriceConverterTest` pins the money logic.
+  Run: `./gradlew :ShoppingList:testPlayDebugUnitTest`
+
+NEXT (migration roadmap):
+- Grow the repository to cover the rest of ShoppingActivity's logic (lists CRUD,
+  stores, per-store prices, sort/filter, totals/subtotals, themes) — each piece
+  extracted with a Robolectric test.
+- Build Compose screens for: list switcher/drawer, stores, item edit, preferences.
+  As each screen reaches parity, route the launcher to it and delete the matching
+  legacy code; retire `ShoppingActivity.java` last.
+- Add a ViewModel test (fake the repository — make ShoppingRepository's methods
+  `open`/interface-backed; they're already `open`).
+- Compose UI tests (androidx.compose.ui:ui-test-junit4 is wired up) once a screen stabilises.
+- Dependency note: Compose adds deps (counter to the original "smallest app" goal),
+  an accepted trade for the architecture. R8 strips unused parts in release.
+
 ## 0. PROGRESS (updated 2026-06-09)
 
 Branch: `upgrade/google-play-androidx`. **The app now builds against SDK 35 with
