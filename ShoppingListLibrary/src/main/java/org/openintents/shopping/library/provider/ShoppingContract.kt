@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2007-2011 OpenIntents.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,38 +14,41 @@
  * limitations under the License.
  */
 
-package org.openintents.shopping.library.provider;
+package org.openintents.shopping.library.provider
 
-import android.net.Uri;
-import android.provider.BaseColumns;
+import android.net.Uri
+import android.provider.BaseColumns
 
 /**
  * Definition for content provider related to shopping.
  */
-public abstract class ShoppingContract {
+object ShoppingContract {
 
     /**
      * TAG for logging.
      */
-    private static final String TAG = "Shopping";
-    public static final String ITEM_TYPE = "vnd.android.cursor.item/vnd.openintents.shopping.item";
-    public static final String QUERY_ITEMS_WITH_STATE = "itemsWithState";
-    public static final String AUTHORITY = "org.openintents.shopping";
+    private const val TAG = "Shopping"
+
+    const val ITEM_TYPE = "vnd.android.cursor.item/vnd.openintents.shopping.item"
+    const val QUERY_ITEMS_WITH_STATE = "itemsWithState"
+    const val AUTHORITY = "org.openintents.shopping"
 
     /**
      * Items that can be put into shopping lists.
      */
-    public static final class Items implements BaseColumns {
+    object Items : BaseColumns {
+        const val _ID = "_id"
         /**
          * The content:// style URL for this table.
          */
-        public static final Uri CONTENT_URI = Uri
-                .parse("content://org.openintents.shopping/items");
+        @JvmField
+        val CONTENT_URI: Uri = Uri
+            .parse("content://org.openintents.shopping/items")
 
         /**
          * The default sort order for this table.
          */
-        public static final String DEFAULT_SORT_ORDER = "modified ASC";
+        const val DEFAULT_SORT_ORDER = "modified ASC"
 
         /**
          * The name of the item.
@@ -53,7 +56,7 @@ public abstract class ShoppingContract {
          * Type: TEXT
          * </P>
          */
-        public static final String NAME = "name";
+        const val NAME = "name"
 
         /**
          * An image of the item (uri).
@@ -61,7 +64,7 @@ public abstract class ShoppingContract {
          * Type: TEXT
          * </P>
          */
-        public static final String IMAGE = "image";
+        const val IMAGE = "image"
 
         /**
          * A price for the item (in cent)
@@ -69,7 +72,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String PRICE = "price";
+        const val PRICE = "price"
 
         /**
          * Units for the item
@@ -77,7 +80,7 @@ public abstract class ShoppingContract {
          * Type: VARCHAR
          * </P>
          */
-        public static final String UNITS = "units";
+        const val UNITS = "units"
 
         /**
          * Tags for the item
@@ -85,7 +88,7 @@ public abstract class ShoppingContract {
          * Type: VARCHAR
          * </P>
          */
-        public static final String TAGS = "tags";
+        const val TAGS = "tags"
 
         /**
          * A barcode (EAN or QR)
@@ -93,7 +96,7 @@ public abstract class ShoppingContract {
          * Type: VARCHAR
          * </P>
          */
-        public static final String BARCODE = "barcode";
+        const val BARCODE = "barcode"
 
         /**
          * a location where to find it, as geo:lat,long uri
@@ -101,7 +104,7 @@ public abstract class ShoppingContract {
          * Type: VARCHAR
          * </P>
          */
-        public static final String LOCATION = "location";
+        const val LOCATION = "location"
 
         /**
          * text of a note about the item
@@ -109,7 +112,7 @@ public abstract class ShoppingContract {
          * Type: VARCHAR
          * </P>
          */
-        public static final String NOTE = "note";
+        const val NOTE = "note"
 
         /**
          * The timestamp for when the item was created.
@@ -117,7 +120,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String CREATED_DATE = "created";
+        const val CREATED_DATE = "created"
 
         /**
          * The timestamp for when the item was last modified.
@@ -125,7 +128,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String MODIFIED_DATE = "modified";
+        const val MODIFIED_DATE = "modified"
 
         /**
          * The timestamp for when the item was last accessed.
@@ -133,7 +136,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String ACCESSED_DATE = "accessed";
+        const val ACCESSED_DATE = "accessed"
 
         /**
          * The timestamp for when the item is due.
@@ -141,47 +144,53 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String DUE_DATE = "due";
+        const val DUE_DATE = "due"
 
         /**
          * Generic projection map.
          */
-        public static final String[] PROJECTION = {_ID, NAME, IMAGE, PRICE,
-                CREATED_DATE, MODIFIED_DATE, ACCESSED_DATE, UNITS};
+        @JvmField
+        val PROJECTION = arrayOf(
+            BaseColumns._ID, NAME, IMAGE, PRICE,
+            CREATED_DATE, MODIFIED_DATE, ACCESSED_DATE, UNITS
+        )
 
-        public static final String[] PROJECTION_TO_COPY = {
-                NAME, IMAGE, PRICE, UNITS, TAGS, BARCODE, LOCATION, NOTE
-        };
+        @JvmField
+        val PROJECTION_TO_COPY = arrayOf(
+            NAME, IMAGE, PRICE, UNITS, TAGS, BARCODE, LOCATION, NOTE
+        )
 
         /**
          * Offset in PROJECTION array.
          */
-        public static final int PROJECTION_ID = 0;
-        public static final int PROJECTION_NAME = 1;
-        public static final int PROJECTION_IMAGE = 2;
-        public static final int PROJECTION_PRICE = 3;
-        public static final int PROJECTION_CREATED_DATE = 4;
-        public static final int PROJECTION_MODIFIED_DATE = 5;
-        public static final int PROJECTION_ACCESSED_DATE = 6;
-        public static final int PROJECTION_UNITS = 7;
+        const val PROJECTION_ID = 0
+        const val PROJECTION_NAME = 1
+        const val PROJECTION_IMAGE = 2
+        const val PROJECTION_PRICE = 3
+        const val PROJECTION_CREATED_DATE = 4
+        const val PROJECTION_MODIFIED_DATE = 5
+        const val PROJECTION_ACCESSED_DATE = 6
+        const val PROJECTION_UNITS = 7
     }
 
     /**
      * Shopping lists that can contain items.
      */
-    public static final class Lists implements BaseColumns {
+    object Lists : BaseColumns {
+        const val _ID = "_id"
         /**
          * The content:// style URL for this table.
          */
-        public static final Uri CONTENT_URI = Uri
-                .parse("content://org.openintents.shopping/lists");
+        @JvmField
+        val CONTENT_URI: Uri = Uri
+            .parse("content://org.openintents.shopping/lists")
 
         /**
          * The default sort order for this table.
          */
-        public static final String DEFAULT_SORT_ORDER
-                // = "modified DESC";
-                = "modified ASC";
+        const val DEFAULT_SORT_ORDER =
+            // = "modified DESC";
+            "modified ASC"
 
         /**
          * The name of the list.
@@ -189,7 +198,7 @@ public abstract class ShoppingContract {
          * Type: TEXT
          * </P>
          */
-        public static final String NAME = "name";
+        const val NAME = "name"
 
         /**
          * An image of the list (uri).
@@ -197,7 +206,7 @@ public abstract class ShoppingContract {
          * Type: TEXT
          * </P>
          */
-        public static final String IMAGE = "image";
+        const val IMAGE = "image"
 
         /**
          * The timestamp for when the item was created.
@@ -205,7 +214,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String CREATED_DATE = "created";
+        const val CREATED_DATE = "created"
 
         /**
          * The timestamp for when the item was last modified.
@@ -213,7 +222,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String MODIFIED_DATE = "modified";
+        const val MODIFIED_DATE = "modified"
 
         /**
          * The timestamp for when the item was last accessed.
@@ -221,7 +230,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String ACCESSED_DATE = "accessed";
+        const val ACCESSED_DATE = "accessed"
 
         /**
          * The name of the shared shopping list that should be worldwide unique.
@@ -233,7 +242,7 @@ public abstract class ShoppingContract {
          * </P>
          * Available since release 0.1.6.
          */
-        public static final String SHARE_NAME = "share_name";
+        const val SHARE_NAME = "share_name"
 
         /**
          * The comma separated list of contacts with whom this list is shared.
@@ -243,7 +252,7 @@ public abstract class ShoppingContract {
          * </P>
          * Available since release 0.1.6.
          */
-        public static final String SHARE_CONTACTS = "share_contacts";
+        const val SHARE_CONTACTS = "share_contacts"
 
         /**
          * Name of background image.
@@ -253,7 +262,7 @@ public abstract class ShoppingContract {
          * </P>
          * Available since release 0.1.6.
          */
-        public static final String SKIN_BACKGROUND = "skin_background";
+        const val SKIN_BACKGROUND = "skin_background"
 
         /**
          * Name of font in list.
@@ -263,7 +272,7 @@ public abstract class ShoppingContract {
          * </P>
          * Available since release 0.1.6.
          */
-        public static final String SKIN_FONT = "skin_font";
+        const val SKIN_FONT = "skin_font"
 
         /**
          * Color of text in list.
@@ -273,7 +282,7 @@ public abstract class ShoppingContract {
          * </P>
          * Available since release 0.1.6.
          */
-        public static final String SKIN_COLOR = "skin_color";
+        const val SKIN_COLOR = "skin_color"
 
         /**
          * Color of strikethrough text in list.
@@ -283,7 +292,7 @@ public abstract class ShoppingContract {
          * </P>
          * Available since release 0.1.6.
          */
-        public static final String SKIN_COLOR_STRIKETHROUGH = "skin_color_strikethrough";
+        const val SKIN_COLOR_STRIKETHROUGH = "skin_color_strikethrough"
 
         /**
          * ID of store to filter in list, -1 to show all stores.
@@ -293,7 +302,7 @@ public abstract class ShoppingContract {
          * </P>
          * Available since release 1.6.
          */
-        public static final String STORE_FILTER = "store_filter";
+        const val STORE_FILTER = "store_filter"
 
         /**
          * Tag text to filter in list.
@@ -303,14 +312,15 @@ public abstract class ShoppingContract {
          * </P>
          * Available since release 1.6.
          */
-        public static final String TAGS_FILTER = "tags_filter";
+        const val TAGS_FILTER = "tags_filter"
 
-        public static final String[] SORT_ORDERS = new String[]{
-                "UPPER(" + NAME + ") ASC",
-                "UPPER(" + NAME + ") DESC",
-                CREATED_DATE + " DESC",
-                CREATED_DATE + " ASC"
-        };
+        @JvmField
+        val SORT_ORDERS = arrayOf(
+            "UPPER(" + NAME + ") ASC",
+            "UPPER(" + NAME + ") DESC",
+            CREATED_DATE + " DESC",
+            CREATED_DATE + " ASC"
+        )
 
         /**
          * ID of sort order to use for this list, null to follow prefs.
@@ -320,24 +330,25 @@ public abstract class ShoppingContract {
          * </P>
          * Available since release 2.0.
          */
-        public static final String ITEMS_SORT = "items_sort";
-
+        const val ITEMS_SORT = "items_sort"
     }
 
     /**
      * Information which list contains which items/lists/(recipes)
      */
-    public static final class Contains implements BaseColumns {
+    object Contains : BaseColumns {
+        const val _ID = "_id"
         /**
          * The content:// style URL for this table.
          */
-        public static final Uri CONTENT_URI = Uri
-                .parse("content://org.openintents.shopping/contains");
+        @JvmField
+        val CONTENT_URI: Uri = Uri
+            .parse("content://org.openintents.shopping/contains")
 
         /**
          * The default sort order for this table.
          */
-        public static final String DEFAULT_SORT_ORDER = "modified DESC";
+        const val DEFAULT_SORT_ORDER = "modified DESC"
 
         /**
          * The id of the item.
@@ -345,7 +356,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String ITEM_ID = "item_id";
+        const val ITEM_ID = "item_id"
 
         /**
          * The id of the list that contains item_id.
@@ -353,7 +364,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String LIST_ID = "list_id";
+        const val LIST_ID = "list_id"
 
         /**
          * Quantity specifier.
@@ -361,7 +372,7 @@ public abstract class ShoppingContract {
          * Type: TEXT
          * </P>
          */
-        public static final String QUANTITY = "quantity";
+        const val QUANTITY = "quantity"
 
         /**
          * Priority specifier.
@@ -369,7 +380,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long) 1-5
          * </P>
          */
-        public static final String PRIORITY = "priority";
+        const val PRIORITY = "priority"
 
         /**
          * Status: WANT_TO_BUY or BOUGHT.
@@ -377,7 +388,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String STATUS = "status";
+        const val STATUS = "status"
 
         /**
          * The timestamp for when the item was created.
@@ -385,7 +396,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String CREATED_DATE = "created";
+        const val CREATED_DATE = "created"
 
         /**
          * The timestamp for when the item was last modified.
@@ -393,7 +404,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String MODIFIED_DATE = "modified";
+        const val MODIFIED_DATE = "modified"
 
         /**
          * The timestamp for when the item was last accessed.
@@ -401,7 +412,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String ACCESSED_DATE = "accessed";
+        const val ACCESSED_DATE = "accessed"
 
         /**
          * Name of person who inserted the item.
@@ -411,7 +422,7 @@ public abstract class ShoppingContract {
          * </P>
          * Available since release 0.1.6.
          */
-        public static final String SHARE_CREATED_BY = "share_created_by";
+        const val SHARE_CREATED_BY = "share_created_by"
 
         /**
          * Name of person who changed status of the item, for example mark it as
@@ -422,7 +433,7 @@ public abstract class ShoppingContract {
          * </P>
          * Available since release 0.1.6.
          */
-        public static final String SHARE_MODIFIED_BY = "share_modified_by";
+        const val SHARE_MODIFIED_BY = "share_modified_by"
 
         /**
          * sort key with in the list
@@ -430,69 +441,75 @@ public abstract class ShoppingContract {
          * Type: INTEGER
          * </P>
          */
-        public static final String SORT_KEY = "sort_key";
+        const val SORT_KEY = "sort_key"
+
         /**
          * Support sort orders. The "sort order" in the preferences is an index
          * into this array.
          */
-        public static final String[] SORT_ORDERS = {
-                // unchecked first, alphabetical
-                "contains.status ASC, items.name COLLATE NOCASE ASC",
+        @JvmField
+        val SORT_ORDERS = arrayOf(
+            // unchecked first, alphabetical
+            "contains.status ASC, items.name COLLATE NOCASE ASC",
 
-                "items.name COLLATE NOCASE ASC",
+            "items.name COLLATE NOCASE ASC",
 
-                "contains.modified DESC",
+            "contains.modified DESC",
 
-                "contains.modified ASC",
+            "contains.modified ASC",
 
-                // sort by tags, but put empty tags last.
-                "(items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC",
+            // sort by tags, but put empty tags last.
+            "(items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC",
 
-                "items.price DESC, items.name COLLATE NOCASE ASC",
+            "items.price DESC, items.name COLLATE NOCASE ASC",
 
-                // unchecked first, tags alphabetical, but put empty tags last.
-                "contains.status ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC",
+            // unchecked first, tags alphabetical, but put empty tags last.
+            "contains.status ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC",
 
-                // unchecked first, priority, alphabetical
-                "contains.status ASC, contains.priority ASC, items.name COLLATE NOCASE ASC",
+            // unchecked first, priority, alphabetical
+            "contains.status ASC, contains.priority ASC, items.name COLLATE NOCASE ASC",
 
-                // unchecked first, priority, tags alphabetical, but put empty
-                // tags last.
-                "contains.status ASC, contains.priority ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC",
+            // unchecked first, priority, tags alphabetical, but put empty
+            // tags last.
+            "contains.status ASC, contains.priority ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC",
 
-                // priority, tags alphabetical, but put empty tags last.
-                "contains.priority ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC",
-        };
+            // priority, tags alphabetical, but put empty tags last.
+            "contains.priority ASC, (items.tags IS NULL or items.tags = '') ASC, items.tags COLLATE NOCASE ASC, items.name COLLATE NOCASE ASC"
+        )
 
         /**
          * For each of the above sort orders, does it depend on status?
          */
-        public static final boolean[] StatusAffectsSortOrder = {
-                true, false, false, false, false, false, true, true, true, false
-        };
+        @JvmField
+        val StatusAffectsSortOrder = booleanArrayOf(
+            true, false, false, false, false, false, true, true, true, false
+        )
 
-        public static final String[] PROJECTION_TO_COPY = {
-                LIST_ID, QUANTITY, PRIORITY, STATUS
-        };
+        @JvmField
+        val PROJECTION_TO_COPY = arrayOf(
+            LIST_ID, QUANTITY, PRIORITY, STATUS
+        )
     }
 
     /**
      * Combined table of contents, items, and lists.
      */
-    public static final class ContainsFull implements BaseColumns {
+    object ContainsFull : BaseColumns {
+        const val _ID = "_id"
 
         /**
          * The content:// style URL for this table.
          */
-        public static final Uri CONTENT_URI = Uri
-                .parse("content://org.openintents.shopping/containsfull");
+        @JvmField
+        val CONTENT_URI: Uri = Uri
+            .parse("content://org.openintents.shopping/containsfull")
 
         /**
          * The default sort order for this table.
          */
-        public static final String DEFAULT_SORT_ORDER
-                // = "contains.modified DESC";
-                = "contains.modified ASC";
+        const val DEFAULT_SORT_ORDER =
+            // = "contains.modified DESC";
+            "contains.modified ASC"
 
         // Elements from Contains
 
@@ -502,7 +519,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String ITEM_ID = "item_id";
+        const val ITEM_ID = "item_id"
 
         /**
          * The id of the list that contains item_id.
@@ -510,7 +527,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String LIST_ID = "list_id";
+        const val LIST_ID = "list_id"
 
         /**
          * Quantity specifier.
@@ -518,7 +535,7 @@ public abstract class ShoppingContract {
          * Type: TEXT
          * </P>
          */
-        public static final String QUANTITY = "quantity";
+        const val QUANTITY = "quantity"
 
         /**
          * Priority specifier.
@@ -526,7 +543,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long) 1-5
          * </P>
          */
-        public static final String PRIORITY = "priority";
+        const val PRIORITY = "priority"
 
         /**
          * Status: WANT_TO_BUY or BOUGHT.
@@ -534,7 +551,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String STATUS = "status";
+        const val STATUS = "status"
 
         /**
          * The timestamp for when the item was created.
@@ -542,7 +559,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String CREATED_DATE = "created";
+        const val CREATED_DATE = "created"
 
         /**
          * The timestamp for when the item was last modified.
@@ -550,7 +567,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String MODIFIED_DATE = "modified";
+        const val MODIFIED_DATE = "modified"
 
         /**
          * The timestamp for when the item was last accessed.
@@ -558,7 +575,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String ACCESSED_DATE = "accessed";
+        const val ACCESSED_DATE = "accessed"
 
         /**
          * Name of person who inserted the item.
@@ -568,7 +585,7 @@ public abstract class ShoppingContract {
          * </P>
          * Available since release 0.1.6.
          */
-        public static final String SHARE_CREATED_BY = "share_created_by";
+        const val SHARE_CREATED_BY = "share_created_by"
 
         /**
          * Name of person who crossed out the item.
@@ -578,7 +595,7 @@ public abstract class ShoppingContract {
          * </P>
          * Available since release 0.1.6.
          */
-        public static final String SHARE_MODIFIED_BY = "share_modified_by";
+        const val SHARE_MODIFIED_BY = "share_modified_by"
 
         // Elements from Items
 
@@ -588,7 +605,7 @@ public abstract class ShoppingContract {
          * Type: TEXT
          * </P>
          */
-        public static final String ITEM_NAME = "item_name";
+        const val ITEM_NAME = "item_name"
 
         /**
          * An image of the item (uri).
@@ -596,7 +613,7 @@ public abstract class ShoppingContract {
          * Type: TEXT
          * </P>
          */
-        public static final String ITEM_IMAGE = "item_image";
+        const val ITEM_IMAGE = "item_image"
 
         /**
          * A price of the item (in cent).
@@ -604,7 +621,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER
          * </P>
          */
-        public static final String ITEM_PRICE = "item_price";
+        const val ITEM_PRICE = "item_price"
 
         /**
          * Units of the item.
@@ -612,7 +629,7 @@ public abstract class ShoppingContract {
          * Type: VARCHAR
          * </P>
          */
-        public static final String ITEM_UNITS = "item_units";
+        const val ITEM_UNITS = "item_units"
 
         /**
          * tags of the item.
@@ -620,7 +637,7 @@ public abstract class ShoppingContract {
          * Type: VARCHAR
          * </P>
          */
-        public static final String ITEM_TAGS = "item_tags";
+        const val ITEM_TAGS = "item_tags"
 
         // Elements from Lists
 
@@ -630,7 +647,7 @@ public abstract class ShoppingContract {
          * Type: TEXT
          * </P>
          */
-        public static final String LIST_NAME = "list_name";
+        const val LIST_NAME = "list_name"
 
         /**
          * An image of the list (uri).
@@ -638,7 +655,7 @@ public abstract class ShoppingContract {
          * Type: TEXT
          * </P>
          */
-        public static final String LIST_IMAGE = "list_image";
+        const val LIST_IMAGE = "list_image"
 
         /**
          * A barcode (EAN or QR)
@@ -646,7 +663,7 @@ public abstract class ShoppingContract {
          * Type: VARCHAR
          * </P>
          */
-        public static final String BARCODE = "barcode";
+        const val BARCODE = "barcode"
 
         /**
          * a location where to find it, as geo:lat,long uri
@@ -654,7 +671,7 @@ public abstract class ShoppingContract {
          * Type: VARCHAR
          * </P>
          */
-        public static final String LOCATION = "location";
+        const val LOCATION = "location"
 
         /**
          * The timestamp for when the item is due.
@@ -662,7 +679,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String DUE_DATE = "due";
+        const val DUE_DATE = "due"
 
         /**
          * Whether the item has a note.
@@ -670,29 +687,29 @@ public abstract class ShoppingContract {
          * Type: INTEGER
          * </P>
          */
-        public static final String ITEM_HAS_NOTE = "item_has_note";
+        const val ITEM_HAS_NOTE = "item_has_note"
     }
 
     /**
      * Status of "contains" element.
      */
-    public static final class Status {
+    object Status {
 
         /**
          * Want to buy this item.
          */
-        public static final long WANT_TO_BUY = 1;
+        const val WANT_TO_BUY = 1L
 
         /**
          * Have bought this item.
          */
-        public static final long BOUGHT = 2;
+        const val BOUGHT = 2L
 
         /**
          * Have removed it from the list. Won't be deleted, in oder to keep
          * reference for later suggestions.
          */
-        public static final long REMOVED_FROM_LIST = 3;
+        const val REMOVED_FROM_LIST = 3L
 
         /**
          * Checks whether a status is a valid possibility.
@@ -700,25 +717,28 @@ public abstract class ShoppingContract {
          * @param s status to be checked.
          * @return true if status is a valid possibility.
          */
-        public static boolean isValid(final long s) {
-            return s == WANT_TO_BUY || s == BOUGHT || s == REMOVED_FROM_LIST;
+        @JvmStatic
+        fun isValid(s: Long): Boolean {
+            return s == WANT_TO_BUY || s == BOUGHT || s == REMOVED_FROM_LIST
         }
     }
 
     /**
      * Stores which might be able to sell items.
      */
-    public static final class Stores implements BaseColumns {
+    object Stores : BaseColumns {
+        const val _ID = "_id"
         /**
          * The content:// style URL for this table.
          */
-        public static final Uri CONTENT_URI = Uri
-                .parse("content://org.openintents.shopping/stores");
+        @JvmField
+        val CONTENT_URI: Uri = Uri
+            .parse("content://org.openintents.shopping/stores")
 
         /**
          * The default sort order for this table.
          */
-        public static final String DEFAULT_SORT_ORDER = "name ASC";
+        const val DEFAULT_SORT_ORDER = "name ASC"
 
         /**
          * The name of the item.
@@ -726,7 +746,7 @@ public abstract class ShoppingContract {
          * Type: TEXT
          * </P>
          */
-        public static final String NAME = "name";
+        const val NAME = "name"
 
         /**
          * The id of the list associated with this store.
@@ -734,7 +754,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String LIST_ID = "list_id";
+        const val LIST_ID = "list_id"
 
         /**
          * The timestamp for when the store was created.
@@ -742,7 +762,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String CREATED_DATE = "created";
+        const val CREATED_DATE = "created"
 
         /**
          * The timestamp for when the store was last modified.
@@ -750,27 +770,29 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String MODIFIED_DATE = "modified";
+        const val MODIFIED_DATE = "modified"
 
-        public static final Uri QUERY_BY_LIST_URI = Uri
-                .parse("content://org.openintents.shopping/liststores");
-
+        @JvmField
+        val QUERY_BY_LIST_URI: Uri = Uri
+            .parse("content://org.openintents.shopping/liststores")
     }
 
     /**
      * Items that can be put into shopping lists.
      */
-    public static final class ItemStores implements BaseColumns {
+    object ItemStores : BaseColumns {
+        const val _ID = "_id"
         /**
          * The content:// style URL for this table.
          */
-        public static final Uri CONTENT_URI = Uri
-                .parse("content://org.openintents.shopping/itemstores");
+        @JvmField
+        val CONTENT_URI: Uri = Uri
+            .parse("content://org.openintents.shopping/itemstores")
 
         /**
          * The default sort order for this table.
          */
-        public static final String DEFAULT_SORT_ORDER = "item_id ASC";
+        const val DEFAULT_SORT_ORDER = "item_id ASC"
 
         /**
          * The timestamp for when the itemstore record was created.
@@ -778,7 +800,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String CREATED_DATE = "created";
+        const val CREATED_DATE = "created"
 
         /**
          * The timestamp for when the itemstore record was last modified.
@@ -786,7 +808,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String MODIFIED_DATE = "modified";
+        const val MODIFIED_DATE = "modified"
 
         /**
          * The id of the item.
@@ -794,7 +816,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String ITEM_ID = "item_id";
+        const val ITEM_ID = "item_id"
 
         /**
          * The id of one store that contains item.
@@ -802,7 +824,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String STORE_ID = "store_id";
+        const val STORE_ID = "store_id"
 
         /**
          * The aisle which contains item item_id at store store_id.
@@ -810,7 +832,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String AISLE = "aisle";
+        const val AISLE = "aisle"
 
         /**
          * The price of item item_id at store store_id.
@@ -818,7 +840,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String PRICE = "price";
+        const val PRICE = "price"
 
         /**
          * Whether we expect to find item item_id at store store_id.
@@ -826,23 +848,25 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String STOCKS_ITEM = "stocks_item";
+        const val STOCKS_ITEM = "stocks_item"
     }
 
     /**
      * Completion table for the Units field of Items.
      */
-    public static final class Units implements BaseColumns {
+    object Units : BaseColumns {
+        const val _ID = "_id"
         /**
          * The content:// style URL for this table.
          */
-        public static final Uri CONTENT_URI = Uri
-                .parse("content://org.openintents.shopping/units");
+        @JvmField
+        val CONTENT_URI: Uri = Uri
+            .parse("content://org.openintents.shopping/units")
 
         /**
          * The default sort order for this table.
          */
-        public static final String DEFAULT_SORT_ORDER = "name ASC";
+        const val DEFAULT_SORT_ORDER = "name ASC"
 
         /**
          * The name of the units.
@@ -850,7 +874,7 @@ public abstract class ShoppingContract {
          * Type: TEXT
          * </P>
          */
-        public static final String NAME = "name";
+        const val NAME = "name"
 
         /**
          * The name of the units when quantity == 1, if different from
@@ -859,7 +883,7 @@ public abstract class ShoppingContract {
          * Type: TEXT
          * </P>
          */
-        public static final String SINGULAR = "singular";
+        const val SINGULAR = "singular"
 
         /**
          * The timestamp for when the unit was created.
@@ -867,7 +891,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String CREATED_DATE = "created";
+        const val CREATED_DATE = "created"
 
         /**
          * The timestamp for when the unit was last modified.
@@ -875,35 +899,33 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String MODIFIED_DATE = "modified";
+        const val MODIFIED_DATE = "modified"
     }
 
-    public static final class Notes implements BaseColumns {
+    object Notes : BaseColumns {
+        const val _ID = "_id"
 
         // unlike other tables, this one does not correspond
         // to its own sql table... it just defines a projection of the items
         // table.
 
-        // This class cannot be instantiated
-        private Notes() {
-        }
-
         /**
          * The content:// style URL for this table
          */
-        public static final Uri CONTENT_URI = Uri
-                .parse("content://org.openintents.shopping/notes");
+        @JvmField
+        val CONTENT_URI: Uri = Uri
+            .parse("content://org.openintents.shopping/notes")
 
         /**
          * The MIME type of {@link #CONTENT_URI} providing a directory of notes.
          */
-        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/vnd.openintents.notepad.note";
+        const val CONTENT_TYPE = "vnd.android.cursor.dir/vnd.openintents.notepad.note"
 
         /**
          * The MIME type of a {@link #CONTENT_URI} sub-directory of a single
          * note.
          */
-        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.openintents.notepad.note";
+        const val CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.openintents.notepad.note"
 
         /**
          * The title of the note
@@ -911,7 +933,7 @@ public abstract class ShoppingContract {
          * Type: TEXT
          * </P>
          */
-        public static final String TITLE = "title";
+        const val TITLE = "title"
 
         /**
          * The note itself
@@ -919,7 +941,7 @@ public abstract class ShoppingContract {
          * Type: TEXT
          * </P>
          */
-        public static final String NOTE = "note";
+        const val NOTE = "note"
 
         /**
          * The timestamp for when the note was created
@@ -927,7 +949,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long from System.curentTimeMillis())
          * </P>
          */
-        public static final String CREATED_DATE = "created";
+        const val CREATED_DATE = "created"
 
         /**
          * The timestamp for when the note was last modified
@@ -935,7 +957,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long from System.curentTimeMillis())
          * </P>
          */
-        public static final String MODIFIED_DATE = "modified";
+        const val MODIFIED_DATE = "modified"
 
         /**
          * Tags associated with a note. Multiple tags are separated by commas.
@@ -945,7 +967,7 @@ public abstract class ShoppingContract {
          *
          * @since 1.1.0
          */
-        public static final String TAGS = "tags";
+        const val TAGS = "tags"
 
         /**
          * Whether the note is encrypted. 0 = not encrypted. 1 = encrypted.
@@ -955,7 +977,7 @@ public abstract class ShoppingContract {
          *
          * @since 1.1.0
          */
-        public static final String ENCRYPTED = "encrypted";
+        const val ENCRYPTED = "encrypted"
 
         /**
          * A theme URI.
@@ -965,34 +987,38 @@ public abstract class ShoppingContract {
          *
          * @since 1.1.0
          */
-        public static final String THEME = "theme";
+        const val THEME = "theme"
     }
 
     /**
      * Virtual table containing the id of the active list.
      */
-    public static final class ActiveList implements BaseColumns {
+    object ActiveList : BaseColumns {
+        const val _ID = "_id"
         /**
          * The content:// style URL for this table.
          */
-        public static final Uri CONTENT_URI = Uri
-                .parse("content://org.openintents.shopping/lists/active");
+        @JvmField
+        val CONTENT_URI: Uri = Uri
+            .parse("content://org.openintents.shopping/lists/active")
 
         /**
          * Generic projection map.
          */
-        public static final String[] PROJECTION = {_ID};
+        @JvmField
+        val PROJECTION = arrayOf(BaseColumns._ID)
     }
 
     /**
      * Virtual table containing subtotals of items by status and priority.
      */
-    public static final class Subtotals {
+    object Subtotals {
         /**
          * The content:// style URL for this table.
          */
-        public static final Uri CONTENT_URI = Uri
-                .parse("content://org.openintents.shopping/subtotals");
+        @JvmField
+        val CONTENT_URI: Uri = Uri
+            .parse("content://org.openintents.shopping/subtotals")
 
         /**
          * Priority
@@ -1000,7 +1026,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String PRIORITY = "priority";
+        const val PRIORITY = "priority"
 
         /**
          * Status
@@ -1008,7 +1034,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String STATUS = "status";
+        const val STATUS = "status"
 
         /**
          * Number of items subtotaled in this cell.
@@ -1016,7 +1042,7 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String COUNT = "count";
+        const val COUNT = "count"
 
         /**
          * Subtotal.
@@ -1024,17 +1050,21 @@ public abstract class ShoppingContract {
          * Type: INTEGER (long)
          * </P>
          */
-        public static final String SUBTOTAL = "subtotal";
+        const val SUBTOTAL = "subtotal"
 
         /**
          * Generic projection map.
          */
-        public static final String[] PROJECTION = {PRIORITY, STATUS, COUNT,
-                SUBTOTAL};
+        @JvmField
+        val PROJECTION = arrayOf(
+            PRIORITY, STATUS, COUNT,
+            SUBTOTAL
+        )
+
         // index values for use with cursors using the default projection
-        public static final int PRIORITY_INDEX = 0;
-        public static final int STATUS_INDEX = 1;
-        public static final int COUNT_INDEX = 2;
-        public static final int SUBTOTAL_INDEX = 3;
+        const val PRIORITY_INDEX = 0
+        const val STATUS_INDEX = 1
+        const val COUNT_INDEX = 2
+        const val SUBTOTAL_INDEX = 3
     }
 }
