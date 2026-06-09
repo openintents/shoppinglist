@@ -35,18 +35,26 @@ DONE (green, tested):
   * `ui/compose/ShoppingListScreen` (stateless, hoisted) + `ShoppingListRoute` +
     `ComposeShoppingActivity` — hosted SEPARATELY (exported=false, NOT the launcher)
     so the legacy app keeps working during migration.
-- Compose screens DONE so far (all tested, green): view items, add item, check off
-  (strikethrough), switch/create lists (ModalNavigationDrawer), edit item
-  (name/quantity/price/units/priority/tags via ItemEdit) + remove, list totals
-  (to-buy/bought bar), list-options overflow menu (sort: unchecked-first/
-  alphabetical, hide checked, clean up), store management (add/remove), and
-  per-store prices (price field per store in the edit dialog).
-- Tests: **39 passing**. Pure-JVM: PriceConverter, ShoppingTotals, ItemArrangement,
-  ShoppingListViewModel via FakeShoppingRepository. Robolectric (real provider+
-  SQLite): ShoppingRepository. Run: `./gradlew :ShoppingList:testPlayDebugUnitTest`
-- The main shopping screen is at strong feature parity. Remaining gaps are the
-  store-filter-on-main-screen (show the selected store's price per item), and the
-  auxiliary screens below.
+- Compose UI DONE (all tested, green): view items · add · check off (strikethrough) ·
+  switch/create lists (drawer) · edit item (name/quantity/price/units/priority/tags
+  via ItemEdit) · remove · list totals (to-buy/bought) · sort/hide-checked/cleanup ·
+  store management (add/remove) · per-store prices · store filter on the main screen
+  (FilterChips; selected store's prices flow into list + totals) · **Settings screen**
+  (all 17 prefs, writing the same SharedPreferences keys the legacy getters read) ·
+  **CSV import/export via the Storage Access Framework** (closes the scoped-storage gap).
+- Tests: **48 passing**. Pure-JVM: PriceConverter, ShoppingTotals, ItemArrangement,
+  ShoppingListViewModel + SettingsViewModel (via fakes). Robolectric (real provider+
+  SQLite + real prefs): ShoppingRepository, SettingsRepository (incl. a faithfulness
+  test that legacy getters see Compose writes). Run: `./gradlew :ShoppingList:testPlayDebugUnitTest`
+- The Compose UI is now a SECOND launcher entry ("OI Shopping (new UI)", exported)
+  for on-device testing. The production swap is a one-line manifest change (move the
+  MAIN/LAUNCHER filter off the legacy .ShoppingActivity) — do it AFTER a device pass.
+
+NOT ported (intentionally — auxiliary / Android-glue, reached via their own intents
+and still working): home-screen widget + config, Tasker automation, GTalk sharing
+(largely dead), and list "themes" (loads fonts/colors from other installed apps —
+Android-specific, low value). The legacy ShoppingActivity remains for these + as the
+current launcher until the Compose UI is device-verified and promoted.
 - Dependencies kept minimal as requested: drawer/menus/dialogs are all material3;
   DI + testability use the lifecycle + coroutines libs already present. NO Hilt,
   Navigation-Compose, or Accompanist. (Compose itself is the one accepted size

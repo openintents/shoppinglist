@@ -249,11 +249,22 @@
             android:name=".ui.PreferenceActivity"
             android:label="@string/preferences" />
         <!-- New Compose UI host (work in progress; legacy ShoppingActivity is still the launcher) -->
+        <!--
+          The new Compose UI. Exposed as a SECOND launcher entry for on-device
+          testing while the rewrite is finished. To make it the production UI,
+          move the MAIN/LAUNCHER intent-filter here from the legacy .ShoppingActivity
+          (and drop this distinct label).
+        -->
         <activity
             android:name=".ui.compose.ComposeShoppingActivity"
-            android:exported="false"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="true"
+            android:label="OI Shopping (new UI)"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.compose.settings.SettingsActivity"
             android:exported="false"
