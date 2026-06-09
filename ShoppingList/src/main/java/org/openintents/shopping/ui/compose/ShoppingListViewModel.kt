@@ -20,6 +20,7 @@ import org.openintents.shopping.data.ShoppingItem
 import org.openintents.shopping.data.ShoppingListInfo
 import org.openintents.shopping.data.ShoppingRepository
 import org.openintents.shopping.data.SortMode
+import org.openintents.shopping.data.StoreInfo
 import org.openintents.shopping.data.arrangeItems
 import org.openintents.shopping.data.computeTotals
 
@@ -28,6 +29,7 @@ data class ShoppingUiState(
     val lists: List<ShoppingListInfo> = emptyList(),
     val currentListId: Long = -1L,
     val items: List<ShoppingItem> = emptyList(),
+    val stores: List<StoreInfo> = emptyList(),
     val sortMode: SortMode = SortMode.UNCHECKED_FIRST,
     val hideChecked: Boolean = false,
     val loading: Boolean = true,
@@ -70,8 +72,10 @@ class ShoppingListViewModel(
 
     fun refresh() = viewModelScope.launch {
         val listId = _state.value.currentListId
-        val items = withContext(ioDispatcher) { repository.getItems(listId) }
-        _state.update { it.copy(items = items, loading = false) }
+        val (items, stores) = withContext(ioDispatcher) {
+            repository.getItems(listId) to repository.getStores(listId)
+        }
+        _state.update { it.copy(items = items, stores = stores, loading = false) }
     }
 
     fun selectList(listId: Long) {
@@ -121,6 +125,17 @@ class ShoppingListViewModel(
     fun cleanup() = viewModelScope.launch {
         val listId = _state.value.currentListId
         withContext(ioDispatcher) { repository.cleanupList(listId) }
+        refresh()
+    }
+
+    fun addStore(name: String) = viewModelScope.launch {
+        val listId = _state.value.currentListId
+        withContext(ioDispatcher) { repository.addStore(listId, name) }
+        refresh()
+    }
+
+    fun removeStore(store: StoreInfo) = viewModelScope.launch {
+        withContext(ioDispatcher) { repository.removeStore(store.id) }
         refresh()
     }
 

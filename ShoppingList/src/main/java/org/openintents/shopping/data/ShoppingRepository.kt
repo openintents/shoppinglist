@@ -50,4 +50,13 @@ interface ShoppingRepository {
 
     /** Creates a list by name, or returns the id of the existing list with that name. */
     fun createList(name: String): Long
+
+    /** The stores defined for [listId]. */
+    fun getStores(listId: Long): List<StoreInfo>
+
+    /** Creates (or reuses) a store by name on [listId]. Returns store id, or -1 for blank. */
+    fun addStore(listId: Long, name: String): Long
+
+    /** Deletes a store (and its per-item entries). */
+    fun removeStore(storeId: Long)
 }

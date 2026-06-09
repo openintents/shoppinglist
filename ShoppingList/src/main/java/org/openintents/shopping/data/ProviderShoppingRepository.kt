@@ -8,6 +8,7 @@ import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull
 import org.openintents.shopping.library.provider.ShoppingContract.Items
 import org.openintents.shopping.library.provider.ShoppingContract.Lists
 import org.openintents.shopping.library.provider.ShoppingContract.Status
+import org.openintents.shopping.library.provider.ShoppingContract.Stores
 import org.openintents.shopping.library.util.ShoppingUtils
 
 /**
@@ -110,4 +111,28 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
     }
 
     override fun createList(name: String): Long = ShoppingUtils.getList(context, name)
+
+    override fun getStores(listId: Long): List<StoreInfo> {
+        val out = ArrayList<StoreInfo>()
+        resolver.query(
+            Stores.CONTENT_URI, arrayOf(Stores._ID, Stores.NAME),
+            "${Stores.LIST_ID} = ?", arrayOf(listId.toString()),
+            Stores.DEFAULT_SORT_ORDER
+        )?.use { c ->
+            while (c.moveToNext()) {
+                out.add(StoreInfo(c.getLong(0), c.getString(1) ?: ""))
+            }
+        }
+        return out
+    }
+
+    override fun addStore(listId: Long, name: String): Long {
+        val trimmed = name.trim()
+        if (trimmed.isEmpty()) return -1L
+        return ShoppingUtils.getStore(context, trimmed, listId)
+    }
+
+    override fun removeStore(storeId: Long) {
+        ShoppingUtils.deleteStore(context, storeId.toString())
+    }
 }

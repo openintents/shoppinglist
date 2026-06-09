@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.AlertDialog
@@ -49,6 +50,7 @@ import org.openintents.shopping.data.ListTotals
 import org.openintents.shopping.data.ShoppingItem
 import org.openintents.shopping.data.ShoppingListInfo
 import org.openintents.shopping.data.SortMode
+import org.openintents.shopping.data.StoreInfo
 import org.openintents.shopping.library.util.PriceConverter
 
 /**
@@ -69,6 +71,8 @@ fun ShoppingListRoute(viewModel: ShoppingListViewModel) {
         onSetSortMode = viewModel::setSortMode,
         onToggleHideChecked = viewModel::toggleHideChecked,
         onCleanup = viewModel::cleanup,
+        onAddStore = viewModel::addStore,
+        onRemoveStore = viewModel::removeStore,
     )
 }
 
@@ -85,10 +89,13 @@ fun ShoppingListScreen(
     onSetSortMode: (SortMode) -> Unit,
     onToggleHideChecked: () -> Unit,
     onCleanup: () -> Unit,
+    onAddStore: (String) -> Unit,
+    onRemoveStore: (StoreInfo) -> Unit,
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     var showNewListDialog by remember { mutableStateOf(false) }
+    var showStoresDialog by remember { mutableStateOf(false) }
     var editingItem by remember { mutableStateOf<ShoppingItem?>(null) }
 
     ModalNavigationDrawer(
@@ -121,6 +128,7 @@ fun ShoppingListScreen(
                             onSetSortMode = onSetSortMode,
                             onToggleHideChecked = onToggleHideChecked,
                             onCleanup = onCleanup,
+                            onManageStores = { showStoresDialog = true },
                         )
                     }
                 )
@@ -154,6 +162,15 @@ fun ShoppingListScreen(
                 showNewListDialog = false
                 scope.launch { drawerState.close() }
             }
+        )
+    }
+
+    if (showStoresDialog) {
+        ManageStoresDialog(
+            stores = state.stores,
+            onDismiss = { showStoresDialog = false },
+            onAddStore = onAddStore,
+            onRemoveStore = onRemoveStore,
         )
     }
 
@@ -211,6 +228,7 @@ private fun ListOptionsMenu(
     onSetSortMode: (SortMode) -> Unit,
     onToggleHideChecked: () -> Unit,
     onCleanup: () -> Unit,
+    onManageStores: () -> Unit,
 ) {
     var expanded by remember { mutableStateOf(false) }
     IconButton(onClick = { expanded = true }) {
@@ -236,7 +254,67 @@ private fun ListOptionsMenu(
             text = { Text("Clean up (remove checked)") },
             onClick = { onCleanup(); expanded = false },
         )
+        HorizontalDivider()
+        DropdownMenuItem(
+            text = { Text("Stores…") },
+            onClick = { onManageStores(); expanded = false },
+        )
     }
+}
+
+@Composable
+private fun ManageStoresDialog(
+    stores: List<StoreInfo>,
+    onDismiss: () -> Unit,
+    onAddStore: (String) -> Unit,
+    onRemoveStore: (StoreInfo) -> Unit,
+) {
+    var newStore by remember { mutableStateOf("") }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Stores") },
+        text = {
+            Column {
+                if (stores.isEmpty()) {
+                    Text("No stores yet.")
+                }
+                stores.forEach { store ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(store.name, modifier = Modifier.weight(1f))
+                        IconButton(onClick = { onRemoveStore(store) }) {
+                            Icon(Icons.Filled.Delete, contentDescription = "Remove ${store.name}")
+                        }
+                    }
+                }
+                Spacer(Modifier.height(8.dp))
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    OutlinedTextField(
+                        value = newStore,
+                        onValueChange = { newStore = it },
+                        label = { Text("Add store") },
+                        singleLine = true,
+                        modifier = Modifier.weight(1f),
+                    )
+                    IconButton(
+                        onClick = {
+                            if (newStore.isNotBlank()) {
+                                onAddStore(newStore)
+                                newStore = ""
+                            }
+                        }
+                    ) {
+                        Icon(Icons.Filled.Add, contentDescription = "Add store")
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onDismiss) { Text("Done") }
+        }
+    )
 }
 
 @Composable

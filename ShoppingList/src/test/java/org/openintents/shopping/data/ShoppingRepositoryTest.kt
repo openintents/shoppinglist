@@ -111,6 +111,20 @@ class ShoppingRepositoryTest {
     }
 
     @Test
+    fun stores_addRemoveAndScopedToList() {
+        val listA = repo.createList("StoreListA")
+        val listB = repo.createList("StoreListB")
+
+        val storeId = repo.addStore(listA, "Aldi")
+        assertTrue(storeId >= 0)
+        assertTrue(repo.getStores(listA).any { it.name == "Aldi" })
+        assertFalse(repo.getStores(listB).any { it.name == "Aldi" })
+
+        repo.removeStore(storeId)
+        assertFalse(repo.getStores(listA).any { it.name == "Aldi" })
+    }
+
+    @Test
     fun items_areScopedToTheirList() {
         val listA = repo.createList("ListA")
         val listB = repo.createList("ListB")

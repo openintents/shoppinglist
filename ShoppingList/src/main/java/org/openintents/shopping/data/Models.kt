@@ -8,6 +8,12 @@ data class ShoppingListInfo(
     val name: String,
 )
 
+/** A store belonging to a list (the "stores" table). */
+data class StoreInfo(
+    val id: Long,
+    val name: String,
+)
+
 /**
  * One row of a list: an item together with its per-list state (the "contains"
  * relation, joined with the item). [containsId] is the relation row id used to

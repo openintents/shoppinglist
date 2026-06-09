@@ -168,6 +168,21 @@ class ShoppingListViewModelTest {
     }
 
     @Test
+    fun stores_addAndRemoveReflectedInState() = runTest(dispatcher) {
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
+        advanceUntilIdle()
+
+        vm.addStore("Lidl")
+        advanceUntilIdle()
+        assertTrue(vm.state.value.stores.any { it.name == "Lidl" })
+
+        val store = vm.state.value.stores.single { it.name == "Lidl" }
+        vm.removeStore(store)
+        advanceUntilIdle()
+        assertFalse(vm.state.value.stores.any { it.name == "Lidl" })
+    }
+
+    @Test
     fun selectList_switchesItems() = runTest(dispatcher) {
         val repo = FakeShoppingRepository()
         val a = repo.createList("A")

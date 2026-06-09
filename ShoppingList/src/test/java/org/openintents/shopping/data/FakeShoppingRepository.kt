@@ -10,6 +10,7 @@ class FakeShoppingRepository : ShoppingRepository {
 
     private val lists = mutableListOf<ShoppingListInfo>()
     private val itemsByList = mutableMapOf<Long, MutableList<ShoppingItem>>()
+    private val storesByList = mutableMapOf<Long, MutableList<StoreInfo>>()
     private var nextId = 1L
 
     override fun getDefaultListId(): Long {
@@ -59,5 +60,22 @@ class FakeShoppingRepository : ShoppingRepository {
             val idx = items.indexOfFirst { it.containsId == containsId }
             if (idx >= 0) items[idx] = items[idx].copy(status = status)
         }
+    }
+
+    override fun getStores(listId: Long): List<StoreInfo> =
+        storesByList[listId].orEmpty().sortedBy { it.name.lowercase() }
+
+    override fun addStore(listId: Long, name: String): Long {
+        val trimmed = name.trim()
+        if (trimmed.isEmpty()) return -1L
+        val existing = storesByList[listId]?.firstOrNull { it.name == trimmed }
+        if (existing != null) return existing.id
+        val id = nextId++
+        storesByList.getOrPut(listId) { mutableListOf() }.add(StoreInfo(id, trimmed))
+        return id
+    }
+
+    override fun removeStore(storeId: Long) {
+        storesByList.values.forEach { stores -> stores.removeAll { it.id == storeId } }
     }
 }
