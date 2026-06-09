@@ -3,6 +3,7 @@ package org.openintents.shopping.ui.compose
 import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
@@ -36,6 +37,7 @@ import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -51,12 +53,16 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
 import org.openintents.shopping.data.ItemEdit
+import org.openintents.shopping.data.ListTheme
 import org.openintents.shopping.data.ListTotals
 import org.openintents.shopping.data.ShoppingItem
 import org.openintents.shopping.data.ShoppingListInfo
@@ -94,6 +100,7 @@ fun ShoppingListRoute(viewModel: ShoppingListViewModel) {
         onMarkAll = viewModel::markAll,
         onRenameList = viewModel::renameCurrentList,
         onDeleteList = viewModel::deleteCurrentList,
+        onSetTheme = viewModel::setTheme,
     )
 }
 
@@ -121,6 +128,7 @@ fun ShoppingListScreen(
     onMarkAll: (Boolean) -> Unit,
     onRenameList: (String) -> Unit,
     onDeleteList: () -> Unit,
+    onSetTheme: (ListTheme) -> Unit,
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -129,7 +137,13 @@ fun ShoppingListScreen(
     var showStoresDialog by remember { mutableStateOf(false) }
     var showRenameDialog by remember { mutableStateOf(false) }
     var showDeleteConfirm by remember { mutableStateOf(false) }
+    var showThemeDialog by remember { mutableStateOf(false) }
     var editingItem by remember { mutableStateOf<ShoppingItem?>(null) }
+
+    val theme = state.theme
+    val fontFamily: FontFamily? = remember(theme) {
+        theme.fontAsset?.let { FontFamily(Font(it, context.assets)) }
+    }
 
     val exportLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.CreateDocument("text/csv")
@@ -179,6 +193,7 @@ fun ShoppingListScreen(
                             onRenameList = { showRenameDialog = true },
                             onDeleteList = { showDeleteConfirm = true },
                             onSendList = { shareList(context, state.currentListName, state.items) },
+                            onTheme = { showThemeDialog = true },
                             onManageStores = { showStoresDialog = true },
                             onImportCsv = {
                                 importLauncher.launch(
@@ -191,7 +206,12 @@ fun ShoppingListScreen(
                 )
             }
         ) { padding ->
-            Column(modifier = Modifier.fillMaxSize().padding(padding)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding)
+                    .background(Color(theme.backgroundArgb))
+            ) {
                 if (state.stores.isNotEmpty()) {
                     StoreFilterRow(
                         stores = state.stores,
@@ -204,6 +224,8 @@ fun ShoppingListScreen(
                     items(state.visibleItems, key = { it.containsId }) { item ->
                         ShoppingItemRow(
                             item = item,
+                            theme = theme,
+                            fontFamily = fontFamily,
                             onToggle = { onToggleItem(item) },
                             onClick = { editingItem = item },
                         )
@@ -252,6 +274,14 @@ fun ShoppingListScreen(
             dismissButton = {
                 TextButton(onClick = { showDeleteConfirm = false }) { Text("Cancel") }
             }
+        )
+    }
+
+    if (showThemeDialog) {
+        ThemeDialog(
+            current = state.theme,
+            onDismiss = { showThemeDialog = false },
+            onSelect = { onSetTheme(it); showThemeDialog = false },
         )
     }
 
@@ -357,6 +387,7 @@ private fun ListOptionsMenu(
     onRenameList: () -> Unit,
     onDeleteList: () -> Unit,
     onSendList: () -> Unit,
+    onTheme: () -> Unit,
     onManageStores: () -> Unit,
     onImportCsv: () -> Unit,
     onExportCsv: () -> Unit,
@@ -405,6 +436,10 @@ private fun ListOptionsMenu(
         DropdownMenuItem(
             text = { Text("Send list") },
             onClick = { onSendList(); expanded = false },
+        )
+        DropdownMenuItem(
+            text = { Text("Theme") },
+            onClick = { onTheme(); expanded = false },
         )
         HorizontalDivider()
         DropdownMenuItem(
@@ -487,8 +522,16 @@ private fun ManageStoresDialog(
 }
 
 @Composable
-private fun ShoppingItemRow(item: ShoppingItem, onToggle: () -> Unit, onClick: () -> Unit) {
-    val decoration = if (item.isBought) TextDecoration.LineThrough else TextDecoration.None
+private fun ShoppingItemRow(
+    item: ShoppingItem,
+    theme: ListTheme,
+    fontFamily: FontFamily?,
+    onToggle: () -> Unit,
+    onClick: () -> Unit,
+) {
+    val struck = item.isBought && theme.strikethroughChecked
+    val decoration = if (struck) TextDecoration.LineThrough else TextDecoration.None
+    val color = Color(if (item.isBought) theme.checkedTextArgb else theme.textArgb)
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -503,17 +546,43 @@ private fun ShoppingItemRow(item: ShoppingItem, onToggle: () -> Unit, onClick: (
         }
         Text(
             text = label,
+            color = color,
+            fontFamily = fontFamily,
             textDecoration = decoration,
             modifier = Modifier.weight(1f).padding(start = 8.dp)
         )
         item.priceCents?.let { cents ->
             Text(
                 text = PriceConverter.getStringFromCentPrice(cents),
+                color = color,
+                fontFamily = fontFamily,
                 textDecoration = decoration,
                 modifier = Modifier.padding(start = 8.dp)
             )
         }
     }
+}
+
+@Composable
+private fun ThemeDialog(current: ListTheme, onDismiss: () -> Unit, onSelect: (ListTheme) -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Theme") },
+        text = {
+            Column {
+                ListTheme.entries.forEach { t ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth().clickable { onSelect(t) }.padding(vertical = 10.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(selected = t == current, onClick = { onSelect(t) })
+                        Text(t.displayName, modifier = Modifier.padding(start = 8.dp))
+                    }
+                }
+            }
+        },
+        confirmButton = { TextButton(onClick = onDismiss) { Text("Done") } }
+    )
 }
 
 @Composable

@@ -72,6 +72,12 @@ class FakeShoppingRepository : ShoppingRepository {
         }
     }
 
+    private val themeByList = mutableMapOf<Long, ListTheme>()
+
+    override fun getListTheme(listId: Long): ListTheme = themeByList[listId] ?: ListTheme.DEFAULT
+
+    override fun setListTheme(listId: Long, theme: ListTheme) { themeByList[listId] = theme }
+
     override fun renameList(listId: Long, newName: String) {
         val idx = lists.indexOfFirst { it.id == listId }
         if (idx >= 0) lists[idx] = lists[idx].copy(name = newName.trim())

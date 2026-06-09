@@ -218,6 +218,15 @@ class ShoppingRepositoryTest {
     }
 
     @Test
+    fun listTheme_defaultsThenSetAndReadBack() {
+        val id = repo.createList("ThemeList")
+        assertEquals(ListTheme.DEFAULT, repo.getListTheme(id))
+
+        repo.setListTheme(id, ListTheme.CLASSIC)
+        assertEquals(ListTheme.CLASSIC, repo.getListTheme(id))
+    }
+
+    @Test
     fun items_areScopedToTheirList() {
         val listA = repo.createList("ListA")
         val listB = repo.createList("ListB")

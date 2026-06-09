@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.openintents.shopping.data.ItemEdit
+import org.openintents.shopping.data.ListTheme
 import org.openintents.shopping.data.ListTotals
 import org.openintents.shopping.data.ProviderShoppingRepository
 import org.openintents.shopping.data.ShoppingItem
@@ -37,6 +38,7 @@ data class ShoppingUiState(
     val editingNote: String? = null,
     val sortMode: SortMode = SortMode.UNCHECKED_FIRST,
     val hideChecked: Boolean = false,
+    val theme: ListTheme = ListTheme.DEFAULT,
     val loading: Boolean = true,
     val userMessage: String? = null,
 ) {
@@ -97,9 +99,19 @@ class ShoppingListViewModel(
         val storePrices = if (storeId != null) {
             withContext(ioDispatcher) { repository.getStorePricesForList(storeId) }
         } else emptyMap()
+        val theme = withContext(ioDispatcher) { repository.getListTheme(listId) }
         _state.update {
-            it.copy(items = items, stores = stores, storePricesForList = storePrices, loading = false)
+            it.copy(
+                items = items, stores = stores, storePricesForList = storePrices,
+                theme = theme, loading = false
+            )
         }
+    }
+
+    fun setTheme(theme: ListTheme) = viewModelScope.launch {
+        val listId = _state.value.currentListId
+        withContext(ioDispatcher) { repository.setListTheme(listId, theme) }
+        _state.update { it.copy(theme = theme) }
     }
 
     fun selectList(listId: Long) {

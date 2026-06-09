@@ -15,6 +15,7 @@ import org.junit.Before
 import org.junit.Test
 import org.openintents.shopping.data.FakeShoppingRepository
 import org.openintents.shopping.data.ItemEdit
+import org.openintents.shopping.data.ListTheme
 
 /**
  * Pure-JVM ViewModel tests (no Robolectric): a fake repository + a test
@@ -290,6 +291,15 @@ class ShoppingListViewModelTest {
         advanceUntilIdle()
 
         assertEquals("two layers", vm.state.value.editingNote)
+    }
+
+    @Test
+    fun setTheme_updatesState() = runTest(dispatcher) {
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
+        advanceUntilIdle()
+        vm.setTheme(ListTheme.ANDROID)
+        advanceUntilIdle()
+        assertEquals(ListTheme.ANDROID, vm.state.value.theme)
     }
 
     @Test

@@ -129,6 +129,19 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
 
     override fun createList(name: String): Long = ShoppingUtils.getList(context, name)
 
+    override fun getListTheme(listId: Long): ListTheme {
+        val name = resolver.query(
+            Uri.withAppendedPath(Lists.CONTENT_URI, listId.toString()),
+            arrayOf(Lists.SKIN_BACKGROUND), null, null, null
+        )?.use { c -> if (c.moveToFirst()) c.getString(0) else null }
+        return ListTheme.fromName(name)
+    }
+
+    override fun setListTheme(listId: Long, theme: ListTheme) {
+        val values = ContentValues().apply { put(Lists.SKIN_BACKGROUND, theme.name) }
+        resolver.update(Uri.withAppendedPath(Lists.CONTENT_URI, listId.toString()), values, null, null)
+    }
+
     override fun renameList(listId: Long, newName: String) {
         val values = ContentValues().apply { put(Lists.NAME, newName.trim()) }
         resolver.update(Uri.withAppendedPath(Lists.CONTENT_URI, listId.toString()), values, null, null)

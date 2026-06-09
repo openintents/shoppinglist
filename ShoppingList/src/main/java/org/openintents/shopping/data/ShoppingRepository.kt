@@ -51,6 +51,12 @@ interface ShoppingRepository {
     /** Creates a list by name, or returns the id of the existing list with that name. */
     fun createList(name: String): Long
 
+    /** The theme selected for a list (stored in Lists.SKIN_BACKGROUND). */
+    fun getListTheme(listId: Long): ListTheme
+
+    /** Sets the theme for a list. */
+    fun setListTheme(listId: Long, theme: ListTheme)
+
     /** Renames a list. */
     fun renameList(listId: Long, newName: String)
 
