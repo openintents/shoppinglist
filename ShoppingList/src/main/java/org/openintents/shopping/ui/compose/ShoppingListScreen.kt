@@ -1,5 +1,6 @@
 package org.openintents.shopping.ui.compose
 
+import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
@@ -48,6 +49,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -59,6 +61,7 @@ import org.openintents.shopping.data.ShoppingListInfo
 import org.openintents.shopping.data.SortMode
 import org.openintents.shopping.data.StoreInfo
 import org.openintents.shopping.library.util.PriceConverter
+import org.openintents.shopping.ui.compose.settings.SettingsActivity
 
 /**
  * Stateful entry point: reads [ShoppingListViewModel] state and forwards events.
@@ -313,6 +316,14 @@ private fun ListOptionsMenu(
         DropdownMenuItem(
             text = { Text("Stores…") },
             onClick = { onManageStores(); expanded = false },
+        )
+        val context = LocalContext.current
+        DropdownMenuItem(
+            text = { Text("Settings") },
+            onClick = {
+                context.startActivity(Intent(context, SettingsActivity::class.java))
+                expanded = false
+            },
         )
     }
 }
