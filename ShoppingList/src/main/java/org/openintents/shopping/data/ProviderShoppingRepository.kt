@@ -122,7 +122,9 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
     }
 
     override fun removeItem(listId: Long, item: ShoppingItem) {
-        ShoppingUtils.deleteItemFromList(context, item.itemId.toString(), listId.toString())
+        // Soft-remove: keep the relation row (status REMOVED_FROM_LIST) so the item
+        // stays in the catalogue and can be re-added via Pick-items mode.
+        setItemStatus(item.containsId, Status.REMOVED_FROM_LIST)
     }
 
     override fun setItemStatus(containsId: Long, status: Long) {

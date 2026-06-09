@@ -227,6 +227,19 @@ class ShoppingRepositoryTest {
     }
 
     @Test
+    fun removeItem_softRemovesSoItRemainsForPickMode() {
+        val listId = repo.createList("SoftRemove")
+        repo.addItem(listId, "Temp2")
+        val item = repo.getItems(listId).single()
+
+        repo.removeItem(listId, item)
+
+        assertTrue(repo.getItems(listId).isEmpty()) // gone from the shopping view
+        val all = repo.getAllListItems(listId)
+        assertTrue(all.any { it.name == "Temp2" && !it.isOnList }) // still re-pickable
+    }
+
+    @Test
     fun items_areScopedToTheirList() {
         val listA = repo.createList("ListA")
         val listB = repo.createList("ListB")

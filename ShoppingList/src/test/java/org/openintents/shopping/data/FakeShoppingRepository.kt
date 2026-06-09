@@ -65,7 +65,8 @@ class FakeShoppingRepository : ShoppingRepository {
     override fun getItemNote(itemId: Long): String? = noteByItem[itemId]
 
     override fun removeItem(listId: Long, item: ShoppingItem) {
-        itemsByList[listId]?.removeAll { it.containsId == item.containsId }
+        // Soft-remove (status REMOVED_FROM_LIST), keeping the row for Pick-items mode.
+        setItemStatus(item.containsId, Status.REMOVED_FROM_LIST)
     }
 
     override fun setItemStatus(containsId: Long, status: Long) {
