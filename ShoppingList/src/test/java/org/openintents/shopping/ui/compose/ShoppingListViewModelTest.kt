@@ -32,6 +32,16 @@ class ShoppingListViewModelTest {
     fun tearDown() = Dispatchers.resetMain()
 
     @Test
+    fun init_onFreshRepo_showsDefaultListInDrawer() = runTest(dispatcher) {
+        // Nothing pre-created: init must create the default list AND list it.
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
+        advanceUntilIdle()
+
+        assertTrue(vm.state.value.currentListId >= 0)
+        assertTrue(vm.state.value.lists.isNotEmpty())
+    }
+
+    @Test
     fun init_loadsDefaultListAndItems() = runTest(dispatcher) {
         val repo = FakeShoppingRepository()
         val listId = repo.getDefaultListId()

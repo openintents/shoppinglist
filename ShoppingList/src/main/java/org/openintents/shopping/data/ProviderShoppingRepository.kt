@@ -3,6 +3,7 @@ package org.openintents.shopping.data
 import android.content.ContentValues
 import android.content.Context
 import android.net.Uri
+import org.openintents.shopping.R
 import org.openintents.shopping.library.provider.ShoppingContract.Contains
 import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull
 import org.openintents.shopping.library.provider.ShoppingContract.ItemStores
@@ -34,7 +35,15 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
         return out
     }
 
-    override fun getDefaultListId(): Long = ShoppingUtils.getDefaultList(context)
+    override fun getDefaultListId(): Long {
+        // A fresh install has an empty lists table; create the default list
+        // ("My shopping list"), mirroring the legacy ShoppingActivity. Without
+        // this, items get added to a non-existent list and never display.
+        if (getLists().isEmpty()) {
+            return ShoppingUtils.getList(context, context.getString(R.string.my_shopping_list))
+        }
+        return ShoppingUtils.getDefaultList(context)
+    }
 
     override fun getItems(listId: Long): List<ShoppingItem> {
         val out = ArrayList<ShoppingItem>()

@@ -76,8 +76,11 @@ class ShoppingListViewModel(
 
     init {
         viewModelScope.launch {
-            val (lists, defaultId) = withContext(ioDispatcher) {
-                repository.getLists() to repository.getDefaultListId()
+            // getDefaultListId() must run FIRST: on a fresh install it creates the
+            // default list, which getLists() then needs to return for the drawer.
+            val (defaultId, lists) = withContext(ioDispatcher) {
+                val id = repository.getDefaultListId()
+                id to repository.getLists()
             }
             _state.update { it.copy(lists = lists, currentListId = defaultId) }
             refresh()

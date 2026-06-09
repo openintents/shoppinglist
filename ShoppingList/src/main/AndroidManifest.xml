@@ -48,13 +48,11 @@
         android:name="org.openintents.shopping.READ_PERMISSION"
         android:description="@string/oi_shopping_permission_read_descr"
         android:label="@string/oi_shopping_permission_read"
-        android:permissionGroup="android.permission-group.PERSONAL_INFO"
         android:protectionLevel="normal" />
     <permission
         android:name="org.openintents.shopping.WRITE_PERMISSION"
         android:description="@string/oi_shopping_permission_write_descr"
         android:label="@string/oi_shopping_permission_write"
-        android:permissionGroup="android.permission-group.PERSONAL_INFO"
         android:protectionLevel="normal" />
 
 

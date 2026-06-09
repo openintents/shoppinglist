@@ -30,6 +30,21 @@ class ShoppingRepositoryTest {
     }
 
     @Test
+    fun getDefaultListId_createsDefaultListOnFreshDb() {
+        // Fresh DB: no lists. getDefaultListId must create the default list, else
+        // items get added to a non-existent list and never display (device bug).
+        assertTrue(repo.getLists().isEmpty())
+
+        val id = repo.getDefaultListId()
+
+        assertTrue(id >= 0)
+        assertTrue(repo.getLists().isNotEmpty())
+        // And items added to it are then visible.
+        repo.addItem(id, "Milk")
+        assertTrue(repo.getItems(id).any { it.name == "Milk" })
+    }
+
+    @Test
     fun createList_thenItAppears() {
         val id = repo.createList("Groceries")
         assertTrue(id >= 0)
