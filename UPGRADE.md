@@ -37,12 +37,16 @@ DONE (green, tested):
     so the legacy app keeps working during migration.
 - Compose screens DONE so far (all tested, green): view items, add item, check off
   (strikethrough), switch/create lists (ModalNavigationDrawer), edit item
-  (name/quantity/price) + remove, list totals (to-buy/bought bar), and a list-
-  options overflow menu (sort: unchecked-first/alphabetical, hide checked, clean up).
-- Tests: **35 passing**. Pure-JVM: PriceConverter (6), ShoppingTotals (7),
-  ItemArrangement (4), ShoppingListViewModel via FakeShoppingRepository (10).
-  Robolectric (real provider+SQLite): ShoppingRepository (8).
-  Run: `./gradlew :ShoppingList:testPlayDebugUnitTest`
+  (name/quantity/price/units/priority/tags via ItemEdit) + remove, list totals
+  (to-buy/bought bar), list-options overflow menu (sort: unchecked-first/
+  alphabetical, hide checked, clean up), store management (add/remove), and
+  per-store prices (price field per store in the edit dialog).
+- Tests: **39 passing**. Pure-JVM: PriceConverter, ShoppingTotals, ItemArrangement,
+  ShoppingListViewModel via FakeShoppingRepository. Robolectric (real provider+
+  SQLite): ShoppingRepository. Run: `./gradlew :ShoppingList:testPlayDebugUnitTest`
+- The main shopping screen is at strong feature parity. Remaining gaps are the
+  store-filter-on-main-screen (show the selected store's price per item), and the
+  auxiliary screens below.
 - Dependencies kept minimal as requested: drawer/menus/dialogs are all material3;
   DI + testability use the lifecycle + coroutines libs already present. NO Hilt,
   Navigation-Compose, or Accompanist. (Compose itself is the one accepted size
