@@ -26,7 +26,7 @@ class ShoppingRepositoryTest {
     @Before
     fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
-        repo = ShoppingRepository(context)
+        repo = ProviderShoppingRepository(context)
     }
 
     @Test

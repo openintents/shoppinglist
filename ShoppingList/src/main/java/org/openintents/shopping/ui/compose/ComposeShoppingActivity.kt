@@ -15,8 +15,8 @@ class ComposeShoppingActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MaterialTheme {
-                val vm: ShoppingListViewModel = viewModel()
-                ShoppingListScreen(vm)
+                val vm: ShoppingListViewModel = viewModel(factory = ShoppingListViewModel.Factory)
+                ShoppingListRoute(vm)
             }
         }
     }

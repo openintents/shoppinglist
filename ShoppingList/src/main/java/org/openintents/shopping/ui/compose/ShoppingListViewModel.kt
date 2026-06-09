@@ -1,58 +1,100 @@
 package org.openintents.shopping.ui.compose
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.openintents.shopping.data.ProviderShoppingRepository
 import org.openintents.shopping.data.ShoppingItem
+import org.openintents.shopping.data.ShoppingListInfo
 import org.openintents.shopping.data.ShoppingRepository
 
-/** Immutable UI state for the shopping-list screen. */
+/** Immutable UI state for the shopping screen. */
 data class ShoppingUiState(
-    val listId: Long = -1L,
+    val lists: List<ShoppingListInfo> = emptyList(),
+    val currentListId: Long = -1L,
     val items: List<ShoppingItem> = emptyList(),
     val loading: Boolean = true,
-)
+) {
+    val currentListName: String
+        get() = lists.firstOrNull { it.id == currentListId }?.name ?: ""
+}
 
 /**
- * Holds the screen state and the actions the UI can take, delegating all data
- * work to [ShoppingRepository] off the main thread. The Compose layer only ever
- * reads [state] and calls these methods — it never touches the provider.
+ * Owns the screen state and the actions the UI can take. Depends on the
+ * [ShoppingRepository] interface (constructor-injected) and a [CoroutineDispatcher]
+ * for off-main work, so it can be unit-tested with a fake repository and a test
+ * dispatcher — no Android framework needed (see ShoppingListViewModelTest).
  */
-class ShoppingListViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val repository = ShoppingRepository(application)
+class ShoppingListViewModel(
+    private val repository: ShoppingRepository,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
+) : ViewModel() {
 
     private val _state = MutableStateFlow(ShoppingUiState())
     val state: StateFlow<ShoppingUiState> = _state.asStateFlow()
 
     init {
         viewModelScope.launch {
-            val listId = withContext(Dispatchers.IO) { repository.getDefaultListId() }
-            _state.value = _state.value.copy(listId = listId)
+            val (lists, defaultId) = withContext(ioDispatcher) {
+                repository.getLists() to repository.getDefaultListId()
+            }
+            _state.update { it.copy(lists = lists, currentListId = defaultId) }
             refresh()
         }
     }
 
     fun refresh() = viewModelScope.launch {
-        val listId = _state.value.listId
-        val items = withContext(Dispatchers.IO) { repository.getItems(listId) }
-        _state.value = _state.value.copy(items = items, loading = false)
+        val listId = _state.value.currentListId
+        val items = withContext(ioDispatcher) { repository.getItems(listId) }
+        _state.update { it.copy(items = items, loading = false) }
+    }
+
+    fun selectList(listId: Long) {
+        if (listId == _state.value.currentListId) return
+        _state.update { it.copy(currentListId = listId, loading = true) }
+        refresh()
+    }
+
+    fun createList(name: String) = viewModelScope.launch {
+        if (name.isBlank()) return@launch
+        val newId = withContext(ioDispatcher) {
+            val id = repository.createList(name.trim())
+            id
+        }
+        val lists = withContext(ioDispatcher) { repository.getLists() }
+        _state.update { it.copy(lists = lists, currentListId = newId, loading = true) }
+        refresh()
     }
 
     fun addItem(name: String) = viewModelScope.launch {
-        val listId = _state.value.listId
-        withContext(Dispatchers.IO) { repository.addItem(listId, name) }
+        val listId = _state.value.currentListId
+        withContext(ioDispatcher) { repository.addItem(listId, name) }
         refresh()
     }
 
     fun toggle(item: ShoppingItem) = viewModelScope.launch {
-        withContext(Dispatchers.IO) { repository.toggleItemBought(item) }
+        withContext(ioDispatcher) { repository.toggleItemBought(item) }
         refresh()
+    }
+
+    companion object {
+        /** Factory that wires the provider-backed repository from the Application context. */
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val app = this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as Application
+                ShoppingListViewModel(ProviderShoppingRepository(app))
+            }
+        }
     }
 }
