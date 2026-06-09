@@ -23,6 +23,9 @@ class FakeShoppingRepository : ShoppingRepository {
     override fun getItems(listId: Long): List<ShoppingItem> =
         itemsByList[listId].orEmpty().filter { it.status != Status.REMOVED_FROM_LIST }
 
+    override fun getAllListItems(listId: Long): List<ShoppingItem> =
+        itemsByList[listId].orEmpty().toList()
+
     override fun createList(name: String): Long {
         lists.firstOrNull { it.name == name }?.let { return it.id }
         val id = nextId++

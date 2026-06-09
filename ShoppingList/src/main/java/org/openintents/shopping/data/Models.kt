@@ -31,6 +31,7 @@ data class ShoppingItem(
     val units: String? = null,
 ) {
     val isBought: Boolean get() = status == Status.BOUGHT
+    val isOnList: Boolean get() = status != Status.REMOVED_FROM_LIST
 }
 
 /** The editable fields of an item, as entered in the edit dialog. */

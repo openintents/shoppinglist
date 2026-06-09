@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.openintents.shopping.data.ItemEdit
+import org.openintents.shopping.data.ListMode
 import org.openintents.shopping.data.ListTheme
 import org.openintents.shopping.data.ListTotals
 import org.openintents.shopping.data.ProviderShoppingRepository
@@ -31,6 +32,8 @@ data class ShoppingUiState(
     val lists: List<ShoppingListInfo> = emptyList(),
     val currentListId: Long = -1L,
     val items: List<ShoppingItem> = emptyList(),
+    val mode: ListMode = ListMode.SHOPPING,
+    val pickItems: List<ShoppingItem> = emptyList(),
     val stores: List<StoreInfo> = emptyList(),
     val selectedStoreId: Long? = null,
     val storePricesForList: Map<Long, Long?> = emptyMap(),
@@ -100,12 +103,27 @@ class ShoppingListViewModel(
             withContext(ioDispatcher) { repository.getStorePricesForList(storeId) }
         } else emptyMap()
         val theme = withContext(ioDispatcher) { repository.getListTheme(listId) }
+        val pickItems = if (_state.value.mode == ListMode.PICK_ITEMS) {
+            withContext(ioDispatcher) { repository.getAllListItems(listId) }
+        } else emptyList()
         _state.update {
             it.copy(
-                items = items, stores = stores, storePricesForList = storePrices,
-                theme = theme, loading = false
+                items = items, pickItems = pickItems, stores = stores,
+                storePricesForList = storePrices, theme = theme, loading = false
             )
         }
+    }
+
+    fun setMode(mode: ListMode) {
+        if (mode == _state.value.mode) return
+        _state.update { it.copy(mode = mode) }
+        refresh()
+    }
+
+    /** In pick mode: toggle an item on/off the current list. */
+    fun pickToggle(item: ShoppingItem) = viewModelScope.launch {
+        withContext(ioDispatcher) { repository.setItemOnList(item, !item.isOnList) }
+        refresh()
     }
 
     fun setTheme(theme: ListTheme) = viewModelScope.launch {

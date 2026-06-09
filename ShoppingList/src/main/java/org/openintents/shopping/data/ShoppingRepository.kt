@@ -20,6 +20,12 @@ interface ShoppingRepository {
     /** The items currently on [listId] (excludes items removed from the list). */
     fun getItems(listId: Long): List<ShoppingItem>
 
+    /**
+     * Every item ever on [listId], INCLUDING ones removed from the list (status
+     * REMOVED_FROM_LIST). Used by "Pick items" mode to re-add past items.
+     */
+    fun getAllListItems(listId: Long): List<ShoppingItem>
+
     /** Adds (or reuses) an item by name on [listId] as "want to buy". Returns item id, or -1 for blank. */
     fun addItem(listId: Long, name: String): Long
 
@@ -34,6 +40,11 @@ interface ShoppingRepository {
 
     /** Sets the per-list status of a relation row to one of [Status]. */
     fun setItemStatus(containsId: Long, status: Long)
+
+    /** Puts an item on the list (WANT_TO_BUY) or removes it (REMOVED_FROM_LIST). */
+    fun setItemOnList(item: ShoppingItem, onList: Boolean) {
+        setItemStatus(item.containsId, if (onList) Status.WANT_TO_BUY else Status.REMOVED_FROM_LIST)
+    }
 
     /** Flips an item between WANT_TO_BUY and BOUGHT. */
     fun toggleItemBought(item: ShoppingItem) {

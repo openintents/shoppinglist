@@ -66,6 +66,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
 import org.openintents.shopping.data.ItemEdit
+import org.openintents.shopping.data.ListMode
 import org.openintents.shopping.data.ListTheme
 import org.openintents.shopping.data.ListTotals
 import org.openintents.shopping.data.ShoppingItem
@@ -84,6 +85,8 @@ fun ShoppingListRoute(viewModel: ShoppingListViewModel) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     ShoppingListScreen(
         state = state,
+        onSetMode = viewModel::setMode,
+        onPickToggle = viewModel::pickToggle,
         onSelectList = viewModel::selectList,
         onCreateList = viewModel::createList,
         onAddItem = viewModel::addItem,
@@ -113,6 +116,8 @@ fun ShoppingListRoute(viewModel: ShoppingListViewModel) {
 @Composable
 fun ShoppingListScreen(
     state: ShoppingUiState,
+    onSetMode: (ListMode) -> Unit,
+    onPickToggle: (ShoppingItem) -> Unit,
     onSelectList: (Long) -> Unit,
     onCreateList: (String) -> Unit,
     onAddItem: (String) -> Unit,
@@ -172,6 +177,8 @@ fun ShoppingListScreen(
             ListDrawerContent(
                 lists = state.lists,
                 currentListId = state.currentListId,
+                mode = state.mode,
+                onSetMode = onSetMode,
                 onSelectList = { id ->
                     onSelectList(id)
                     scope.launch { drawerState.close() }
@@ -229,6 +236,21 @@ fun ShoppingListScreen(
                     HorizontalDivider()
                 }
                 LazyColumn(modifier = Modifier.weight(1f).fillMaxWidth()) {
+                    if (state.mode == ListMode.PICK_ITEMS) {
+                        items(
+                            state.pickItems.sortedBy { it.name.lowercase() },
+                            key = { it.containsId }
+                        ) { item ->
+                            PickItemRow(
+                                item = item,
+                                theme = theme,
+                                fontFamily = fontFamily,
+                                onToggle = { onPickToggle(item) },
+                            )
+                            HorizontalDivider()
+                        }
+                        return@LazyColumn
+                    }
                     items(state.visibleItems, key = { it.containsId }) { item ->
                         ShoppingItemRow(
                             item = item,
@@ -341,10 +363,25 @@ fun ShoppingListScreen(
 private fun ListDrawerContent(
     lists: List<ShoppingListInfo>,
     currentListId: Long,
+    mode: ListMode,
+    onSetMode: (ListMode) -> Unit,
     onSelectList: (Long) -> Unit,
     onNewList: () -> Unit,
 ) {
     ModalDrawerSheet {
+        NavigationDrawerItem(
+            label = { Text("Shopping") },
+            selected = mode == ListMode.SHOPPING,
+            onClick = { onSetMode(ListMode.SHOPPING) },
+            modifier = Modifier.padding(horizontal = 12.dp),
+        )
+        NavigationDrawerItem(
+            label = { Text("Pick items") },
+            selected = mode == ListMode.PICK_ITEMS,
+            onClick = { onSetMode(ListMode.PICK_ITEMS) },
+            modifier = Modifier.padding(horizontal = 12.dp),
+        )
+        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
         Text(
             text = "Lists",
             modifier = Modifier.padding(16.dp),
@@ -582,6 +619,32 @@ private fun ShoppingItemRow(
                 modifier = Modifier.padding(start = 8.dp)
             )
         }
+    }
+}
+
+@Composable
+private fun PickItemRow(
+    item: ShoppingItem,
+    theme: ListTheme,
+    fontFamily: FontFamily?,
+    onToggle: () -> Unit,
+) {
+    // In pick mode the checkbox means "on this list"; off-list items are dimmed.
+    val color = Color(if (item.isOnList) theme.textArgb else theme.checkedTextArgb)
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onToggle)
+            .padding(horizontal = 8.dp, vertical = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Checkbox(checked = item.isOnList, onCheckedChange = { onToggle() })
+        Text(
+            text = item.name,
+            color = color,
+            fontFamily = fontFamily,
+            modifier = Modifier.weight(1f).padding(start = 8.dp)
+        )
     }
 }
 

@@ -15,6 +15,7 @@ import org.junit.Before
 import org.junit.Test
 import org.openintents.shopping.data.FakeShoppingRepository
 import org.openintents.shopping.data.ItemEdit
+import org.openintents.shopping.data.ListMode
 import org.openintents.shopping.data.ListTheme
 
 /**
@@ -300,6 +301,26 @@ class ShoppingListViewModelTest {
         vm.setTheme(ListTheme.ANDROID)
         advanceUntilIdle()
         assertEquals(ListTheme.ANDROID, vm.state.value.theme)
+    }
+
+    @Test
+    fun pickMode_showsRemovedItemsAndTogglesMembership() = runTest(dispatcher) {
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
+        advanceUntilIdle()
+        vm.addItem("Milk"); advanceUntilIdle()
+        val milk = vm.state.value.items.single { it.name == "Milk" }
+
+        // Remove it from the list (pick toggle off) and switch to pick mode.
+        vm.pickToggle(milk); advanceUntilIdle()
+        assertTrue(vm.state.value.items.none { it.name == "Milk" }) // gone from shopping view
+
+        vm.setMode(ListMode.PICK_ITEMS); advanceUntilIdle()
+        val pick = vm.state.value.pickItems.single { it.name == "Milk" }
+        assertFalse(pick.isOnList) // shown in pick mode, but off the list
+
+        // Re-pick it.
+        vm.pickToggle(pick); advanceUntilIdle()
+        assertTrue(vm.state.value.pickItems.single { it.name == "Milk" }.isOnList)
     }
 
     @Test

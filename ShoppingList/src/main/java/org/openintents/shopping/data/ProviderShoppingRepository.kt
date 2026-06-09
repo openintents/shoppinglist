@@ -45,7 +45,13 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
         return ShoppingUtils.getDefaultList(context)
     }
 
-    override fun getItems(listId: Long): List<ShoppingItem> {
+    override fun getItems(listId: Long): List<ShoppingItem> =
+        queryListItems(listId, includeRemoved = false)
+
+    override fun getAllListItems(listId: Long): List<ShoppingItem> =
+        queryListItems(listId, includeRemoved = true)
+
+    private fun queryListItems(listId: Long, includeRemoved: Boolean): List<ShoppingItem> {
         val out = ArrayList<ShoppingItem>()
         resolver.query(
             ContainsFull.CONTENT_URI,
@@ -58,7 +64,7 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
             ContainsFull.DEFAULT_SORT_ORDER
         )?.use { c ->
             while (c.moveToNext()) {
-                if (c.getLong(3) == Status.REMOVED_FROM_LIST) continue
+                if (!includeRemoved && c.getLong(3) == Status.REMOVED_FROM_LIST) continue
                 out.add(
                     ShoppingItem(
                         containsId = c.getLong(0),
