@@ -18,50 +18,27 @@
  * This code is based on Android's API demos.
  */
 
-package org.openintents.shopping.share;
+package org.openintents.shopping.share
 
-import android.content.Context;
-import android.text.TextUtils;
-import android.widget.Toast;
+import android.content.Context
+import android.text.TextUtils
+import android.widget.Toast
 
 /**
  * Handles sending out information about changes in shared shopping lists.
  */
-public class GTalkSender {
-    /**
-     * Suffix for bundle items to mark them old.
-     * <p/>
-     * For the update version, both, the old and the new value are sent. Old
-     * values are marked with this suffix.
-     */
-    public static final String OLD = "_old";
-    /**
-     * Bundle marker for sender.
-     */
-    public static final String SENDER = "sender";
-
+class GTalkSender(context: Context) {
     // ??? IGTalkSession mGTalkSession = null;
-    /**
-     * Bundle marker for data (content URI).
-     * <p/>
-     * This is only necessary for the Anroid m5 issue that data is not sent
-     * along with a GTalk message.
-     */
-    public static final String DATA = "data";
-    private static final String TAG = "GTalkSender";
-    private Context mContext;
-    private boolean mBound;
+    private val mContext: Context = context
+    private val mBound: Boolean = false
 
     /**
      * Constructs a new sender GTalk. You have to manually bind before using
      * GTalk.
      *
-     * @param mContext
+     * @param context
      */
-    public GTalkSender(Context context) {
-        mContext = context;
-        mBound = false;
-
+    init {
         // bindGTalkService();
     }
 
@@ -103,17 +80,16 @@ public class GTalkSender {
      * called when the connection with the service has been // unexpectedly
      * disconnected -- that is, its process crashed. mGTalkSession = null; } };
      */
-    private boolean isValidUsername(String username) {
+    private fun isValidUsername(username: String): Boolean {
         if (TextUtils.isEmpty(username)) {
-            return false;
+            return false
         }
 
-        return username.indexOf('@') != -1;
-
+        return username.indexOf('@') != -1
     }
 
-    private void showMessage(CharSequence msg) {
-        Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show();
+    private fun showMessage(msg: CharSequence) {
+        Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show()
     }
 
     // ////////////////////////////////////////////////////
@@ -327,4 +303,28 @@ public class GTalkSender {
      * }
      */
 
+    companion object {
+        /**
+         * Suffix for bundle items to mark them old.
+         *
+         * For the update version, both, the old and the new value are sent. Old
+         * values are marked with this suffix.
+         */
+        const val OLD = "_old"
+
+        /**
+         * Bundle marker for sender.
+         */
+        const val SENDER = "sender"
+
+        /**
+         * Bundle marker for data (content URI).
+         *
+         * This is only necessary for the Anroid m5 issue that data is not sent
+         * along with a GTalk message.
+         */
+        const val DATA = "data"
+
+        private const val TAG = "GTalkSender"
+    }
 }

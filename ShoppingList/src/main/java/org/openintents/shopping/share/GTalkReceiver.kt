@@ -18,58 +18,20 @@
  * This code is based on Android's API demos.
  */
 
-package org.openintents.shopping.share;
+package org.openintents.shopping.share
 
-import android.content.ContentResolver;
-import android.content.Context;
-
-import org.openintents.shopping.library.provider.ShoppingContract;
-import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull;
+import android.content.ContentResolver
+import android.content.Context
+import org.openintents.shopping.library.provider.ShoppingContract
+import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull
 
 /**
  * Handles receiving information about changes in shared shopping lists.
  */
-public class GTalkReceiver /* extends IntentReceiver */ {
-    /**
-     * Tag for log.
-     */
-    private static final String TAG = "GTalkReceiver";
+class GTalkReceiver /* extends IntentReceiver */ {
+    private var mContext: Context? = null
+    private var mContentResolver: ContentResolver? = null
 
-    /**
-     * Array of items for editing. This defines the projection for the table
-     * Lists.
-     */
-    private static final String[] mProjectionLists = new String[]{
-            ShoppingContract.Lists._ID, ShoppingContract.Lists.NAME,
-            ShoppingContract.Lists.SHARE_NAME,
-            ShoppingContract.Lists.SHARE_CONTACTS};
-
-    /**
-     * Index of ID in the Projection for Lists
-     */
-    private static final int mProjectionListsID = 0;
-    private static final int mProjectionListsNAME = 1;
-    private static final int mProjectionListsSHARENAME = 2;
-    private static final int mProjectionListsSHARECONTACTS = 3;
-
-    /**
-     * Array of items for editing. This defines the projection for the table
-     * ContainsFull.
-     */
-    private static final String[] mProjectionContainsFull = new String[]{
-            ContainsFull._ID, ContainsFull.ITEM_NAME, ContainsFull.ITEM_IMAGE,
-            ContainsFull.STATUS, ContainsFull.ITEM_ID,
-            ContainsFull.SHARE_CREATED_BY, ContainsFull.SHARE_MODIFIED_BY};
-    private static final int mProjectionContainsFullCONTAINSID = 0;
-    private static final int mProjectionContainsFullITEMNAME = 1;
-    private static final int mProjectionContainsFullITEMIMAGE = 2;
-    private static final int mProjectionContainsFullSTATUS = 3;
-    private static final int mProjectionContainsFullITEMID = 4;
-    private static final int mProjectionContainsFullSHARECREATEDBY = 5;
-    private static final int mProjectionContainsFullSHAREMODIFIEDBY = 6;
-
-    private Context mContext;
-    private ContentResolver mContentResolver;
     /*
      * public void onReceiveIntent(Context context, Intent intent) { mContext =
      * context; mContentResolver = mContext.getContentResolver(); String action
@@ -296,4 +258,45 @@ public class GTalkReceiver /* extends IntentReceiver */ {
      * } else { Log.e(TAG, "Bundle received is null"); } }
      */
 
+    companion object {
+        /**
+         * Tag for log.
+         */
+        private const val TAG = "GTalkReceiver"
+
+        /**
+         * Array of items for editing. This defines the projection for the table
+         * Lists.
+         */
+        private val mProjectionLists = arrayOf(
+            ShoppingContract.Lists._ID, ShoppingContract.Lists.NAME,
+            ShoppingContract.Lists.SHARE_NAME,
+            ShoppingContract.Lists.SHARE_CONTACTS
+        )
+
+        /**
+         * Index of ID in the Projection for Lists
+         */
+        private const val mProjectionListsID = 0
+        private const val mProjectionListsNAME = 1
+        private const val mProjectionListsSHARENAME = 2
+        private const val mProjectionListsSHARECONTACTS = 3
+
+        /**
+         * Array of items for editing. This defines the projection for the table
+         * ContainsFull.
+         */
+        private val mProjectionContainsFull = arrayOf(
+            ContainsFull._ID, ContainsFull.ITEM_NAME, ContainsFull.ITEM_IMAGE,
+            ContainsFull.STATUS, ContainsFull.ITEM_ID,
+            ContainsFull.SHARE_CREATED_BY, ContainsFull.SHARE_MODIFIED_BY
+        )
+        private const val mProjectionContainsFullCONTAINSID = 0
+        private const val mProjectionContainsFullITEMNAME = 1
+        private const val mProjectionContainsFullITEMIMAGE = 2
+        private const val mProjectionContainsFullSTATUS = 3
+        private const val mProjectionContainsFullITEMID = 4
+        private const val mProjectionContainsFullSHARECREATEDBY = 5
+        private const val mProjectionContainsFullSHAREMODIFIEDBY = 6
+    }
 }
