@@ -1,5 +1,6 @@
 package org.openintents.shopping.ui.compose
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -42,6 +43,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
 import org.openintents.shopping.data.ShoppingItem
 import org.openintents.shopping.data.ShoppingListInfo
+import org.openintents.shopping.library.util.PriceConverter
 
 /**
  * Stateful entry point: reads [ShoppingListViewModel] state and forwards events.
@@ -56,6 +58,8 @@ fun ShoppingListRoute(viewModel: ShoppingListViewModel) {
         onCreateList = viewModel::createList,
         onAddItem = viewModel::addItem,
         onToggleItem = viewModel::toggle,
+        onUpdateItem = viewModel::updateItem,
+        onRemoveItem = viewModel::removeItem,
     )
 }
 
@@ -67,10 +71,13 @@ fun ShoppingListScreen(
     onCreateList: (String) -> Unit,
     onAddItem: (String) -> Unit,
     onToggleItem: (ShoppingItem) -> Unit,
+    onUpdateItem: (ShoppingItem, String, String?, Long?) -> Unit,
+    onRemoveItem: (ShoppingItem) -> Unit,
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     var showNewListDialog by remember { mutableStateOf(false) }
+    var editingItem by remember { mutableStateOf<ShoppingItem?>(null) }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -101,7 +108,11 @@ fun ShoppingListScreen(
             Column(modifier = Modifier.fillMaxSize().padding(padding)) {
                 LazyColumn(modifier = Modifier.weight(1f).fillMaxWidth()) {
                     items(state.items, key = { it.containsId }) { item ->
-                        ShoppingItemRow(item = item, onToggle = { onToggleItem(item) })
+                        ShoppingItemRow(
+                            item = item,
+                            onToggle = { onToggleItem(item) },
+                            onClick = { editingItem = item },
+                        )
                         HorizontalDivider()
                     }
                 }
@@ -118,6 +129,21 @@ fun ShoppingListScreen(
                 showNewListDialog = false
                 scope.launch { drawerState.close() }
             }
+        )
+    }
+
+    editingItem?.let { item ->
+        EditItemDialog(
+            item = item,
+            onDismiss = { editingItem = null },
+            onSave = { name, quantity, priceCents ->
+                onUpdateItem(item, name, quantity, priceCents)
+                editingItem = null
+            },
+            onDelete = {
+                onRemoveItem(item)
+                editingItem = null
+            },
         )
     }
 }
@@ -154,18 +180,91 @@ private fun ListDrawerContent(
 }
 
 @Composable
-private fun ShoppingItemRow(item: ShoppingItem, onToggle: () -> Unit) {
+private fun ShoppingItemRow(item: ShoppingItem, onToggle: () -> Unit, onClick: () -> Unit) {
+    val decoration = if (item.isBought) TextDecoration.LineThrough else TextDecoration.None
     Row(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 4.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .padding(horizontal = 8.dp, vertical = 4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Checkbox(checked = item.isBought, onCheckedChange = { onToggle() })
+        val label = buildString {
+            if (!item.quantity.isNullOrBlank()) append(item.quantity).append("  ")
+            append(item.name)
+        }
         Text(
-            text = item.name,
-            textDecoration = if (item.isBought) TextDecoration.LineThrough else TextDecoration.None,
-            modifier = Modifier.padding(start = 8.dp)
+            text = label,
+            textDecoration = decoration,
+            modifier = Modifier.weight(1f).padding(start = 8.dp)
         )
+        item.priceCents?.let { cents ->
+            Text(
+                text = PriceConverter.getStringFromCentPrice(cents),
+                textDecoration = decoration,
+                modifier = Modifier.padding(start = 8.dp)
+            )
+        }
     }
+}
+
+@Composable
+private fun EditItemDialog(
+    item: ShoppingItem,
+    onDismiss: () -> Unit,
+    onSave: (name: String, quantity: String?, priceCents: Long?) -> Unit,
+    onDelete: () -> Unit,
+) {
+    var name by remember { mutableStateOf(item.name) }
+    var quantity by remember { mutableStateOf(item.quantity.orEmpty()) }
+    var price by remember {
+        mutableStateOf(item.priceCents?.let { PriceConverter.getStringFromCentPrice(it) } ?: "")
+    }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Edit item") },
+        text = {
+            Column {
+                OutlinedTextField(
+                    value = name,
+                    onValueChange = { name = it },
+                    label = { Text("Name") },
+                    singleLine = true,
+                )
+                Spacer(Modifier.height(8.dp))
+                OutlinedTextField(
+                    value = quantity,
+                    onValueChange = { quantity = it },
+                    label = { Text("Quantity") },
+                    singleLine = true,
+                )
+                Spacer(Modifier.height(8.dp))
+                OutlinedTextField(
+                    value = price,
+                    onValueChange = { price = it },
+                    label = { Text("Price") },
+                    singleLine = true,
+                )
+                Spacer(Modifier.height(8.dp))
+                TextButton(onClick = onDelete) { Text("Remove from list") }
+            }
+        },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    if (name.isNotBlank()) {
+                        val cents = if (price.isBlank()) null else PriceConverter.getCentPriceFromString(price)
+                        onSave(name, quantity.ifBlank { null }, cents)
+                    }
+                }
+            ) { Text("Save") }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) { Text("Cancel") }
+        }
+    )
 }
 
 @Composable

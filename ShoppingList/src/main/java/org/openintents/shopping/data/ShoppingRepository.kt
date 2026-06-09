@@ -23,6 +23,15 @@ interface ShoppingRepository {
     /** Adds (or reuses) an item by name on [listId] as "want to buy". Returns item id, or -1 for blank. */
     fun addItem(listId: Long, name: String): Long
 
+    /**
+     * Updates an item's name and price, and its per-list quantity.
+     * [priceCents] null clears the price; [quantity] null/blank clears the quantity.
+     */
+    fun updateItem(item: ShoppingItem, name: String, quantity: String?, priceCents: Long?)
+
+    /** Removes [item] from [listId] (the item stays in the catalogue / other lists). */
+    fun removeItem(listId: Long, item: ShoppingItem)
+
     /** Sets the per-list status of a relation row to one of [Status]. */
     fun setItemStatus(containsId: Long, status: Long)
 

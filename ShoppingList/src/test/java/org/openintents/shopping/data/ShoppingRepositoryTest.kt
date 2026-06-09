@@ -70,6 +70,31 @@ class ShoppingRepositoryTest {
     }
 
     @Test
+    fun updateItem_persistsNamePriceAndQuantity() {
+        val listId = repo.createList("Edit")
+        repo.addItem(listId, "Cheese")
+        val item = repo.getItems(listId).single { it.name == "Cheese" }
+
+        repo.updateItem(item, "Cheddar", "2", 150L)
+
+        val updated = repo.getItems(listId).single()
+        assertEquals("Cheddar", updated.name)
+        assertEquals("2", updated.quantity)
+        assertEquals(150L, updated.priceCents)
+    }
+
+    @Test
+    fun removeItem_takesItOffTheList() {
+        val listId = repo.createList("Remove")
+        repo.addItem(listId, "Temp")
+        val item = repo.getItems(listId).single()
+
+        repo.removeItem(listId, item)
+
+        assertTrue(repo.getItems(listId).isEmpty())
+    }
+
+    @Test
     fun items_areScopedToTheirList() {
         val listA = repo.createList("ListA")
         val listB = repo.createList("ListB")

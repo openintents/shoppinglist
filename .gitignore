@@ -10,4 +10,5 @@ build
 *.iml
 *~
 .DS_Store
-*.p12.claude/
+*.p12
+.claude/

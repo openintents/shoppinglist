@@ -71,6 +71,37 @@ class ShoppingListViewModelTest {
     }
 
     @Test
+    fun updateItem_reflectedInState() = runTest(dispatcher) {
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
+        advanceUntilIdle()
+        vm.addItem("Cheese")
+        advanceUntilIdle()
+        val item = vm.state.value.items.single { it.name == "Cheese" }
+
+        vm.updateItem(item, "Cheddar", "3", 200L)
+        advanceUntilIdle()
+
+        val updated = vm.state.value.items.single()
+        assertEquals("Cheddar", updated.name)
+        assertEquals("3", updated.quantity)
+        assertEquals(200L, updated.priceCents)
+    }
+
+    @Test
+    fun removeItem_removedFromState() = runTest(dispatcher) {
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
+        advanceUntilIdle()
+        vm.addItem("Gone")
+        advanceUntilIdle()
+        val item = vm.state.value.items.single { it.name == "Gone" }
+
+        vm.removeItem(item)
+        advanceUntilIdle()
+
+        assertTrue(vm.state.value.items.none { it.name == "Gone" })
+    }
+
+    @Test
     fun createList_switchesToNewList() = runTest(dispatcher) {
         val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
         advanceUntilIdle()

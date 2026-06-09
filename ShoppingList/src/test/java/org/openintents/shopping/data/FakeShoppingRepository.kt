@@ -39,6 +39,21 @@ class FakeShoppingRepository : ShoppingRepository {
         return id
     }
 
+    override fun updateItem(item: ShoppingItem, name: String, quantity: String?, priceCents: Long?) {
+        itemsByList.values.forEach { items ->
+            val idx = items.indexOfFirst { it.containsId == item.containsId }
+            if (idx >= 0) {
+                items[idx] = items[idx].copy(
+                    name = name.trim(), quantity = quantity, priceCents = priceCents
+                )
+            }
+        }
+    }
+
+    override fun removeItem(listId: Long, item: ShoppingItem) {
+        itemsByList[listId]?.removeAll { it.containsId == item.containsId }
+    }
+
     override fun setItemStatus(containsId: Long, status: Long) {
         itemsByList.values.forEach { items ->
             val idx = items.indexOfFirst { it.containsId == containsId }

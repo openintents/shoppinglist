@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.Uri
 import org.openintents.shopping.library.provider.ShoppingContract.Contains
 import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull
+import org.openintents.shopping.library.provider.ShoppingContract.Items
 import org.openintents.shopping.library.provider.ShoppingContract.Lists
 import org.openintents.shopping.library.provider.ShoppingContract.Status
 import org.openintents.shopping.library.util.ShoppingUtils
@@ -76,6 +77,28 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
         )
         ShoppingUtils.addDefaultsToAddedItem(context, listId, itemId)
         return itemId
+    }
+
+    override fun updateItem(item: ShoppingItem, name: String, quantity: String?, priceCents: Long?) {
+        // Name and price live on the item itself.
+        val itemValues = ContentValues().apply {
+            put(Items.NAME, name.trim())
+            if (priceCents != null) put(Items.PRICE, priceCents) else putNull(Items.PRICE)
+        }
+        resolver.update(
+            Uri.withAppendedPath(Items.CONTENT_URI, item.itemId.toString()),
+            itemValues, null, null
+        )
+        // Quantity is a property of the item's membership on this list.
+        val containsValues = ContentValues().apply { put(Contains.QUANTITY, quantity ?: "") }
+        resolver.update(
+            Uri.withAppendedPath(Contains.CONTENT_URI, item.containsId.toString()),
+            containsValues, null, null
+        )
+    }
+
+    override fun removeItem(listId: Long, item: ShoppingItem) {
+        ShoppingUtils.deleteItemFromList(context, item.itemId.toString(), listId.toString())
     }
 
     override fun setItemStatus(containsId: Long, status: Long) {

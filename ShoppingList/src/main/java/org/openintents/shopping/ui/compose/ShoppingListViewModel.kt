@@ -88,6 +88,18 @@ class ShoppingListViewModel(
         refresh()
     }
 
+    fun updateItem(item: ShoppingItem, name: String, quantity: String?, priceCents: Long?) =
+        viewModelScope.launch {
+            withContext(ioDispatcher) { repository.updateItem(item, name, quantity, priceCents) }
+            refresh()
+        }
+
+    fun removeItem(item: ShoppingItem) = viewModelScope.launch {
+        val listId = _state.value.currentListId
+        withContext(ioDispatcher) { repository.removeItem(listId, item) }
+        refresh()
+    }
+
     companion object {
         /** Factory that wires the provider-backed repository from the Application context. */
         val Factory: ViewModelProvider.Factory = viewModelFactory {
