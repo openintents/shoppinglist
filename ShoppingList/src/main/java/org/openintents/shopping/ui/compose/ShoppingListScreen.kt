@@ -35,7 +35,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -73,6 +75,8 @@ fun ShoppingListRoute(viewModel: ShoppingListViewModel) {
         onCleanup = viewModel::cleanup,
         onAddStore = viewModel::addStore,
         onRemoveStore = viewModel::removeStore,
+        onLoadStorePrices = viewModel::loadStorePrices,
+        onSetStorePrice = viewModel::setStorePrice,
     )
 }
 
@@ -91,6 +95,8 @@ fun ShoppingListScreen(
     onCleanup: () -> Unit,
     onAddStore: (String) -> Unit,
     onRemoveStore: (StoreInfo) -> Unit,
+    onLoadStorePrices: (Long) -> Unit,
+    onSetStorePrice: (itemId: Long, storeId: Long, priceCents: Long?) -> Unit,
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -175,8 +181,12 @@ fun ShoppingListScreen(
     }
 
     editingItem?.let { item ->
+        LaunchedEffect(item.itemId) { onLoadStorePrices(item.itemId) }
         EditItemDialog(
             item = item,
+            stores = state.stores,
+            storePrices = state.editingStorePrices,
+            onSetStorePrice = { storeId, cents -> onSetStorePrice(item.itemId, storeId, cents) },
             onDismiss = { editingItem = null },
             onSave = { name, quantity, priceCents ->
                 onUpdateItem(item, name, quantity, priceCents)
@@ -350,6 +360,9 @@ private fun ShoppingItemRow(item: ShoppingItem, onToggle: () -> Unit, onClick: (
 @Composable
 private fun EditItemDialog(
     item: ShoppingItem,
+    stores: List<StoreInfo>,
+    storePrices: Map<Long, Long?>,
+    onSetStorePrice: (storeId: Long, priceCents: Long?) -> Unit,
     onDismiss: () -> Unit,
     onSave: (name: String, quantity: String?, priceCents: Long?) -> Unit,
     onDelete: () -> Unit,
@@ -358,6 +371,14 @@ private fun EditItemDialog(
     var quantity by remember { mutableStateOf(item.quantity.orEmpty()) }
     var price by remember {
         mutableStateOf(item.priceCents?.let { PriceConverter.getStringFromCentPrice(it) } ?: "")
+    }
+    // Per-store price text, re-seeded when the loaded prices arrive.
+    val storePriceText = remember(stores, storePrices) {
+        mutableStateMapOf<Long, String>().apply {
+            stores.forEach { s ->
+                put(s.id, storePrices[s.id]?.let { PriceConverter.getStringFromCentPrice(it) } ?: "")
+            }
+        }
     }
 
     AlertDialog(
@@ -385,6 +406,19 @@ private fun EditItemDialog(
                     label = { Text("Price") },
                     singleLine = true,
                 )
+                if (stores.isNotEmpty()) {
+                    Spacer(Modifier.height(12.dp))
+                    Text("Per-store prices")
+                    stores.forEach { store ->
+                        Spacer(Modifier.height(4.dp))
+                        OutlinedTextField(
+                            value = storePriceText[store.id] ?: "",
+                            onValueChange = { storePriceText[store.id] = it },
+                            label = { Text(store.name) },
+                            singleLine = true,
+                        )
+                    }
+                }
                 Spacer(Modifier.height(8.dp))
                 TextButton(onClick = onDelete) { Text("Remove from list") }
             }
@@ -395,6 +429,12 @@ private fun EditItemDialog(
                     if (name.isNotBlank()) {
                         val cents = if (price.isBlank()) null else PriceConverter.getCentPriceFromString(price)
                         onSave(name, quantity.ifBlank { null }, cents)
+                        stores.forEach { store ->
+                            val txt = storePriceText[store.id].orEmpty()
+                            if (txt.isNotBlank()) {
+                                onSetStorePrice(store.id, PriceConverter.getCentPriceFromString(txt))
+                            }
+                        }
                     }
                 }
             ) { Text("Save") }

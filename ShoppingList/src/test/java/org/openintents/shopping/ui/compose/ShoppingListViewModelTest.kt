@@ -183,6 +183,26 @@ class ShoppingListViewModelTest {
     }
 
     @Test
+    fun storePrices_loadAndSetReflectedInState() = runTest(dispatcher) {
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
+        advanceUntilIdle()
+        vm.addStore("Cafe")
+        advanceUntilIdle()
+        vm.addItem("Coffee")
+        advanceUntilIdle()
+        val item = vm.state.value.items.single { it.name == "Coffee" }
+        val store = vm.state.value.stores.single()
+
+        vm.setStorePrice(item.itemId, store.id, 350L)
+        advanceUntilIdle()
+        assertEquals(350L, vm.state.value.editingStorePrices[store.id])
+
+        vm.loadStorePrices(item.itemId)
+        advanceUntilIdle()
+        assertEquals(350L, vm.state.value.editingStorePrices[store.id])
+    }
+
+    @Test
     fun selectList_switchesItems() = runTest(dispatcher) {
         val repo = FakeShoppingRepository()
         val a = repo.createList("A")

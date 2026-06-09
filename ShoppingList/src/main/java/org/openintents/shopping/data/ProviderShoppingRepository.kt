@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.Uri
 import org.openintents.shopping.library.provider.ShoppingContract.Contains
 import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull
+import org.openintents.shopping.library.provider.ShoppingContract.ItemStores
 import org.openintents.shopping.library.provider.ShoppingContract.Items
 import org.openintents.shopping.library.provider.ShoppingContract.Lists
 import org.openintents.shopping.library.provider.ShoppingContract.Status
@@ -134,5 +135,23 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
 
     override fun removeStore(storeId: Long) {
         ShoppingUtils.deleteStore(context, storeId.toString())
+    }
+
+    override fun getItemStorePrices(itemId: Long): Map<Long, Long?> {
+        val out = HashMap<Long, Long?>()
+        resolver.query(
+            ItemStores.CONTENT_URI, arrayOf(ItemStores.STORE_ID, ItemStores.PRICE),
+            "${ItemStores.ITEM_ID} = ?", arrayOf(itemId.toString()), null
+        )?.use { c ->
+            while (c.moveToNext()) {
+                out[c.getLong(0)] = if (c.isNull(1)) null else c.getLong(1)
+            }
+        }
+        return out
+    }
+
+    override fun setItemStorePrice(itemId: Long, storeId: Long, priceCents: Long?) {
+        // addItemToStore find-or-creates the itemstores row; price is stored in cents.
+        ShoppingUtils.addItemToStore(context, itemId, storeId, null, priceCents?.toString(), false)
     }
 }

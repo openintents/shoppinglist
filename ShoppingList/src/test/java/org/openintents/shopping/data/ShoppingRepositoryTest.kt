@@ -125,6 +125,18 @@ class ShoppingRepositoryTest {
     }
 
     @Test
+    fun itemStorePrice_setAndReadBack() {
+        val listId = repo.createList("PriceList")
+        repo.addItem(listId, "Coffee")
+        val item = repo.getItems(listId).single { it.name == "Coffee" }
+        val storeId = repo.addStore(listId, "Cafe")
+
+        repo.setItemStorePrice(item.itemId, storeId, 350L)
+
+        assertEquals(350L, repo.getItemStorePrices(item.itemId)[storeId])
+    }
+
+    @Test
     fun items_areScopedToTheirList() {
         val listA = repo.createList("ListA")
         val listB = repo.createList("ListB")

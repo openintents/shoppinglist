@@ -77,5 +77,16 @@ class FakeShoppingRepository : ShoppingRepository {
 
     override fun removeStore(storeId: Long) {
         storesByList.values.forEach { stores -> stores.removeAll { it.id == storeId } }
+        storePrices.keys.filter { it.second == storeId }.forEach { storePrices.remove(it) }
+    }
+
+    private val storePrices = mutableMapOf<Pair<Long, Long>, Long?>()
+
+    override fun getItemStorePrices(itemId: Long): Map<Long, Long?> =
+        storePrices.filterKeys { it.first == itemId }.mapKeys { it.key.second }
+
+    override fun setItemStorePrice(itemId: Long, storeId: Long, priceCents: Long?) {
+        if (priceCents == null) return // matches provider impl: null leaves it unchanged
+        storePrices[itemId to storeId] = priceCents
     }
 }

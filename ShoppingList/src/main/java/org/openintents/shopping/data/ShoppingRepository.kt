@@ -59,4 +59,10 @@ interface ShoppingRepository {
 
     /** Deletes a store (and its per-item entries). */
     fun removeStore(storeId: Long)
+
+    /** Per-store prices for an item: storeId -> price in cents (absent/null = unset). */
+    fun getItemStorePrices(itemId: Long): Map<Long, Long?>
+
+    /** Sets the price (in cents) of an item at a store; null leaves it unchanged. */
+    fun setItemStorePrice(itemId: Long, storeId: Long, priceCents: Long?)
 }

@@ -30,6 +30,7 @@ data class ShoppingUiState(
     val currentListId: Long = -1L,
     val items: List<ShoppingItem> = emptyList(),
     val stores: List<StoreInfo> = emptyList(),
+    val editingStorePrices: Map<Long, Long?> = emptyMap(),
     val sortMode: SortMode = SortMode.UNCHECKED_FIRST,
     val hideChecked: Boolean = false,
     val loading: Boolean = true,
@@ -137,6 +138,18 @@ class ShoppingListViewModel(
     fun removeStore(store: StoreInfo) = viewModelScope.launch {
         withContext(ioDispatcher) { repository.removeStore(store.id) }
         refresh()
+    }
+
+    /** Loads the per-store prices for [itemId] into state (call when opening item edit). */
+    fun loadStorePrices(itemId: Long) = viewModelScope.launch {
+        val prices = withContext(ioDispatcher) { repository.getItemStorePrices(itemId) }
+        _state.update { it.copy(editingStorePrices = prices) }
+    }
+
+    fun setStorePrice(itemId: Long, storeId: Long, priceCents: Long?) = viewModelScope.launch {
+        withContext(ioDispatcher) { repository.setItemStorePrice(itemId, storeId, priceCents) }
+        val prices = withContext(ioDispatcher) { repository.getItemStorePrices(itemId) }
+        _state.update { it.copy(editingStorePrices = prices) }
     }
 
     companion object {
