@@ -128,6 +128,15 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
 
     override fun createList(name: String): Long = ShoppingUtils.getList(context, name)
 
+    override fun renameList(listId: Long, newName: String) {
+        val values = ContentValues().apply { put(Lists.NAME, newName.trim()) }
+        resolver.update(Uri.withAppendedPath(Lists.CONTENT_URI, listId.toString()), values, null, null)
+    }
+
+    override fun deleteList(listId: Long) {
+        ShoppingUtils.deleteList(context, listId.toString())
+    }
+
     override fun getStores(listId: Long): List<StoreInfo> {
         val out = ArrayList<StoreInfo>()
         resolver.query(

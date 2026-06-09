@@ -172,6 +172,39 @@ class ShoppingListViewModel(
         refresh()
     }
 
+    fun markAll(bought: Boolean) = viewModelScope.launch {
+        val listId = _state.value.currentListId
+        withContext(ioDispatcher) { repository.markAllItems(listId, bought) }
+        refresh()
+    }
+
+    fun renameCurrentList(newName: String) = viewModelScope.launch {
+        if (newName.isBlank()) return@launch
+        val listId = _state.value.currentListId
+        val lists = withContext(ioDispatcher) {
+            repository.renameList(listId, newName)
+            repository.getLists()
+        }
+        _state.update { it.copy(lists = lists) }
+    }
+
+    fun deleteCurrentList() = viewModelScope.launch {
+        val listId = _state.value.currentListId
+        val (newId, lists) = withContext(ioDispatcher) {
+            repository.deleteList(listId)
+            // Switch to another list, or recreate the default if none remain.
+            val pickId = repository.getLists().firstOrNull()?.id ?: repository.getDefaultListId()
+            pickId to repository.getLists()
+        }
+        _state.update {
+            it.copy(
+                lists = lists, currentListId = newId, loading = true,
+                selectedStoreId = null, storePricesForList = emptyMap()
+            )
+        }
+        refresh()
+    }
+
     fun addStore(name: String) = viewModelScope.launch {
         val listId = _state.value.currentListId
         withContext(ioDispatcher) { repository.addStore(listId, name) }

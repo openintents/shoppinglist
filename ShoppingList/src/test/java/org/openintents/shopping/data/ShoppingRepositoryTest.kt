@@ -180,6 +180,33 @@ class ShoppingRepositoryTest {
     }
 
     @Test
+    fun renameList_changesName() {
+        val id = repo.createList("Old name")
+        repo.renameList(id, "New name")
+        assertEquals("New name", repo.getLists().single { it.id == id }.name)
+    }
+
+    @Test
+    fun deleteList_removesOnlyThatList() {
+        val a = repo.createList("ListA2")
+        val b = repo.createList("ListB2")
+        repo.deleteList(a)
+        assertFalse(repo.getLists().any { it.id == a })
+        assertTrue(repo.getLists().any { it.id == b })
+    }
+
+    @Test
+    fun markAllItems_marksThenUnmarks() {
+        val id = repo.createList("MarkAll")
+        repo.addItem(id, "x")
+        repo.addItem(id, "y")
+        repo.markAllItems(id, true)
+        assertTrue(repo.getItems(id).all { it.isBought })
+        repo.markAllItems(id, false)
+        assertTrue(repo.getItems(id).none { it.isBought })
+    }
+
+    @Test
     fun items_areScopedToTheirList() {
         val listA = repo.createList("ListA")
         val listB = repo.createList("ListB")

@@ -67,6 +67,16 @@ class FakeShoppingRepository : ShoppingRepository {
         }
     }
 
+    override fun renameList(listId: Long, newName: String) {
+        val idx = lists.indexOfFirst { it.id == listId }
+        if (idx >= 0) lists[idx] = lists[idx].copy(name = newName.trim())
+    }
+
+    override fun deleteList(listId: Long) {
+        lists.removeAll { it.id == listId }
+        itemsByList.remove(listId)
+    }
+
     override fun getStores(listId: Long): List<StoreInfo> =
         storesByList[listId].orEmpty().sortedBy { it.name.lowercase() }
 

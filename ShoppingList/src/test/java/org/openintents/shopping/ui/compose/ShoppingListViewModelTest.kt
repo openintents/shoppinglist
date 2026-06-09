@@ -241,6 +241,43 @@ class ShoppingListViewModelTest {
     }
 
     @Test
+    fun markAll_marksEveryItem() = runTest(dispatcher) {
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
+        advanceUntilIdle()
+        vm.addItem("a"); advanceUntilIdle()
+        vm.addItem("b"); advanceUntilIdle()
+
+        vm.markAll(true); advanceUntilIdle()
+        assertTrue(vm.state.value.items.all { it.isBought })
+        vm.markAll(false); advanceUntilIdle()
+        assertTrue(vm.state.value.items.none { it.isBought })
+    }
+
+    @Test
+    fun renameCurrentList_updatesName() = runTest(dispatcher) {
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
+        advanceUntilIdle()
+        vm.renameCurrentList("Renamed")
+        advanceUntilIdle()
+        assertEquals("Renamed", vm.state.value.currentListName)
+    }
+
+    @Test
+    fun deleteCurrentList_switchesToAnotherList() = runTest(dispatcher) {
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
+        advanceUntilIdle()
+        vm.createList("Second")
+        advanceUntilIdle()
+
+        vm.deleteCurrentList()
+        advanceUntilIdle()
+
+        assertFalse(vm.state.value.lists.any { it.name == "Second" })
+        assertTrue(vm.state.value.currentListId >= 0)
+        assertTrue(vm.state.value.lists.isNotEmpty())
+    }
+
+    @Test
     fun selectList_switchesItems() = runTest(dispatcher) {
         val repo = FakeShoppingRepository()
         val a = repo.createList("A")

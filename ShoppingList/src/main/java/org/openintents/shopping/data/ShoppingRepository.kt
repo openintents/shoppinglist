@@ -51,6 +51,18 @@ interface ShoppingRepository {
     /** Creates a list by name, or returns the id of the existing list with that name. */
     fun createList(name: String): Long
 
+    /** Renames a list. */
+    fun renameList(listId: Long, newName: String)
+
+    /** Deletes a list (and its items' membership). */
+    fun deleteList(listId: Long)
+
+    /** Marks every item on [listId] as bought (true) or want-to-buy (false). */
+    fun markAllItems(listId: Long, bought: Boolean) {
+        val target = if (bought) Status.BOUGHT else Status.WANT_TO_BUY
+        getItems(listId).forEach { if (it.status != target) setItemStatus(it.containsId, target) }
+    }
+
     /** The stores defined for [listId]. */
     fun getStores(listId: Long): List<StoreInfo>
 

@@ -91,6 +91,9 @@ fun ShoppingListRoute(viewModel: ShoppingListViewModel) {
         onExport = viewModel::exportTo,
         onImport = viewModel::importFrom,
         onConsumeMessage = viewModel::consumeMessage,
+        onMarkAll = viewModel::markAll,
+        onRenameList = viewModel::renameCurrentList,
+        onDeleteList = viewModel::deleteCurrentList,
     )
 }
 
@@ -115,12 +118,17 @@ fun ShoppingListScreen(
     onExport: (android.net.Uri) -> Unit,
     onImport: (android.net.Uri) -> Unit,
     onConsumeMessage: () -> Unit,
+    onMarkAll: (Boolean) -> Unit,
+    onRenameList: (String) -> Unit,
+    onDeleteList: () -> Unit,
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     var showNewListDialog by remember { mutableStateOf(false) }
     var showStoresDialog by remember { mutableStateOf(false) }
+    var showRenameDialog by remember { mutableStateOf(false) }
+    var showDeleteConfirm by remember { mutableStateOf(false) }
     var editingItem by remember { mutableStateOf<ShoppingItem?>(null) }
 
     val exportLauncher = rememberLauncherForActivityResult(
@@ -167,6 +175,10 @@ fun ShoppingListScreen(
                             onSetSortMode = onSetSortMode,
                             onToggleHideChecked = onToggleHideChecked,
                             onCleanup = onCleanup,
+                            onMarkAll = onMarkAll,
+                            onRenameList = { showRenameDialog = true },
+                            onDeleteList = { showDeleteConfirm = true },
+                            onSendList = { shareList(context, state.currentListName, state.items) },
                             onManageStores = { showStoresDialog = true },
                             onImportCsv = {
                                 importLauncher.launch(
@@ -214,6 +226,31 @@ fun ShoppingListScreen(
                 onCreateList(name)
                 showNewListDialog = false
                 scope.launch { drawerState.close() }
+            }
+        )
+    }
+
+    if (showRenameDialog) {
+        TextEntryDialog(
+            title = "Rename list",
+            label = "List name",
+            initial = state.currentListName,
+            confirmLabel = "Rename",
+            onDismiss = { showRenameDialog = false },
+            onConfirm = { onRenameList(it); showRenameDialog = false },
+        )
+    }
+
+    if (showDeleteConfirm) {
+        AlertDialog(
+            onDismissRequest = { showDeleteConfirm = false },
+            title = { Text("Delete list") },
+            text = { Text("Delete \"${state.currentListName}\" and its items?") },
+            confirmButton = {
+                TextButton(onClick = { onDeleteList(); showDeleteConfirm = false }) { Text("Delete") }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDeleteConfirm = false }) { Text("Cancel") }
             }
         )
     }
@@ -315,6 +352,10 @@ private fun ListOptionsMenu(
     onSetSortMode: (SortMode) -> Unit,
     onToggleHideChecked: () -> Unit,
     onCleanup: () -> Unit,
+    onMarkAll: (Boolean) -> Unit,
+    onRenameList: () -> Unit,
+    onDeleteList: () -> Unit,
+    onSendList: () -> Unit,
     onManageStores: () -> Unit,
     onImportCsv: () -> Unit,
     onExportCsv: () -> Unit,
@@ -342,6 +383,27 @@ private fun ListOptionsMenu(
         DropdownMenuItem(
             text = { Text("Clean up (remove checked)") },
             onClick = { onCleanup(); expanded = false },
+        )
+        DropdownMenuItem(
+            text = { Text("Mark all items") },
+            onClick = { onMarkAll(true); expanded = false },
+        )
+        DropdownMenuItem(
+            text = { Text("Unmark all items") },
+            onClick = { onMarkAll(false); expanded = false },
+        )
+        HorizontalDivider()
+        DropdownMenuItem(
+            text = { Text("Rename list") },
+            onClick = { onRenameList(); expanded = false },
+        )
+        DropdownMenuItem(
+            text = { Text("Delete list") },
+            onClick = { onDeleteList(); expanded = false },
+        )
+        DropdownMenuItem(
+            text = { Text("Send list") },
+            onClick = { onSendList(); expanded = false },
         )
         HorizontalDivider()
         DropdownMenuItem(
@@ -615,6 +677,51 @@ private fun AddItemRow(onAdd: (String) -> Unit) {
             Icon(Icons.Filled.Add, contentDescription = "Add")
         }
     }
+}
+
+@Composable
+private fun TextEntryDialog(
+    title: String,
+    label: String,
+    initial: String = "",
+    confirmLabel: String,
+    onDismiss: () -> Unit,
+    onConfirm: (String) -> Unit,
+) {
+    var text by remember { mutableStateOf(initial) }
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(title) },
+        text = {
+            OutlinedTextField(
+                value = text,
+                onValueChange = { text = it },
+                label = { Text(label) },
+                singleLine = true,
+            )
+        },
+        confirmButton = {
+            TextButton(onClick = { if (text.isNotBlank()) onConfirm(text) }) { Text(confirmLabel) }
+        },
+        dismissButton = { TextButton(onClick = onDismiss) { Text("Cancel") } }
+    )
+}
+
+private fun shareList(context: android.content.Context, listName: String, items: List<ShoppingItem>) {
+    val body = buildString {
+        append(listName).append('\n')
+        items.forEach { item ->
+            append(if (item.isBought) "[x] " else "[ ] ")
+            if (!item.quantity.isNullOrBlank()) append(item.quantity).append(' ')
+            append(item.name).append('\n')
+        }
+    }
+    val intent = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_SUBJECT, listName)
+        putExtra(Intent.EXTRA_TEXT, body)
+    }
+    context.startActivity(Intent.createChooser(intent, "Send list"))
 }
 
 @Composable
