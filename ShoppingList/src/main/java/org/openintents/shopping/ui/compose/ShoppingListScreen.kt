@@ -39,6 +39,10 @@ import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -84,6 +88,7 @@ fun ShoppingListRoute(viewModel: ShoppingListViewModel) {
         onCreateList = viewModel::createList,
         onAddItem = viewModel::addItem,
         onToggleItem = viewModel::toggle,
+        onRestoreStatus = viewModel::restoreStatus,
         onUpdateItem = viewModel::updateItem,
         onRemoveItem = viewModel::removeItem,
         onSetSortMode = viewModel::setSortMode,
@@ -112,6 +117,7 @@ fun ShoppingListScreen(
     onCreateList: (String) -> Unit,
     onAddItem: (String) -> Unit,
     onToggleItem: (ShoppingItem) -> Unit,
+    onRestoreStatus: (containsId: Long, status: Long) -> Unit,
     onUpdateItem: (ShoppingItem, ItemEdit) -> Unit,
     onRemoveItem: (ShoppingItem) -> Unit,
     onSetSortMode: (SortMode) -> Unit,
@@ -139,6 +145,7 @@ fun ShoppingListScreen(
     var showDeleteConfirm by remember { mutableStateOf(false) }
     var showThemeDialog by remember { mutableStateOf(false) }
     var editingItem by remember { mutableStateOf<ShoppingItem?>(null) }
+    val snackbarHostState = remember { SnackbarHostState() }
 
     val theme = state.theme
     val fontFamily: FontFamily? = remember(theme) {
@@ -174,6 +181,7 @@ fun ShoppingListScreen(
         }
     ) {
         Scaffold(
+            snackbarHost = { SnackbarHost(snackbarHostState) },
             topBar = {
                 TopAppBar(
                     title = { Text(state.currentListName.ifEmpty { "Shopping list" }) },
@@ -226,7 +234,21 @@ fun ShoppingListScreen(
                             item = item,
                             theme = theme,
                             fontFamily = fontFamily,
-                            onToggle = { onToggleItem(item) },
+                            onToggle = {
+                                val originalStatus = item.status
+                                val wasBought = item.isBought
+                                onToggleItem(item)
+                                scope.launch {
+                                    val result = snackbarHostState.showSnackbar(
+                                        message = if (wasBought) "Unmarked ${item.name}" else "Marked ${item.name}",
+                                        actionLabel = "Undo",
+                                        duration = SnackbarDuration.Short,
+                                    )
+                                    if (result == SnackbarResult.ActionPerformed) {
+                                        onRestoreStatus(item.containsId, originalStatus)
+                                    }
+                                }
+                            },
                             onClick = { editingItem = item },
                         )
                         HorizontalDivider()

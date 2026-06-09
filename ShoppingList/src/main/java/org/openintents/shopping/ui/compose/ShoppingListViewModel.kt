@@ -164,6 +164,12 @@ class ShoppingListViewModel(
         refresh()
     }
 
+    /** Restores an item's status (used by the undo snackbar). */
+    fun restoreStatus(containsId: Long, status: Long) = viewModelScope.launch {
+        withContext(ioDispatcher) { repository.setItemStatus(containsId, status) }
+        refresh()
+    }
+
     fun updateItem(item: ShoppingItem, edit: ItemEdit) = viewModelScope.launch {
         withContext(ioDispatcher) { repository.updateItem(item, edit) }
         refresh()
