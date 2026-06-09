@@ -95,6 +95,22 @@ class ShoppingRepositoryTest {
     }
 
     @Test
+    fun cleanupList_removesBoughtItemsOnly() {
+        val listId = repo.createList("Cleanup")
+        repo.addItem(listId, "Milk")
+        repo.addItem(listId, "Eggs")
+        val milk = repo.getItems(listId).single { it.name == "Milk" }
+        repo.toggleItemBought(milk)
+
+        val removed = repo.cleanupList(listId)
+
+        assertEquals(1, removed)
+        val names = repo.getItems(listId).map { it.name }
+        assertFalse(names.contains("Milk"))
+        assertTrue(names.contains("Eggs"))
+    }
+
+    @Test
     fun items_areScopedToTheirList() {
         val listA = repo.createList("ListA")
         val listB = repo.createList("ListB")

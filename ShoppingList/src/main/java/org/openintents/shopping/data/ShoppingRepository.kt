@@ -41,6 +41,13 @@ interface ShoppingRepository {
         setItemStatus(item.containsId, newStatus)
     }
 
+    /** Removes every bought item from [listId] (marks them removed-from-list). Returns the count. */
+    fun cleanupList(listId: Long): Int {
+        val bought = getItems(listId).filter { it.status == Status.BOUGHT }
+        bought.forEach { setItemStatus(it.containsId, Status.REMOVED_FROM_LIST) }
+        return bought.size
+    }
+
     /** Creates a list by name, or returns the id of the existing list with that name. */
     fun createList(name: String): Long
 }

@@ -116,6 +116,45 @@ class ShoppingListViewModelTest {
     }
 
     @Test
+    fun hideChecked_filtersVisibleItemsButNotTotalsSource() = runTest(dispatcher) {
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
+        advanceUntilIdle()
+        vm.addItem("Milk")
+        advanceUntilIdle()
+        val milk = vm.state.value.items.single { it.name == "Milk" }
+        vm.toggle(milk)
+        advanceUntilIdle()
+        vm.addItem("Eggs")
+        advanceUntilIdle()
+
+        assertEquals(2, vm.state.value.visibleItems.size)
+
+        vm.toggleHideChecked()
+        assertEquals(listOf("Eggs"), vm.state.value.visibleItems.map { it.name })
+        assertEquals(2, vm.state.value.items.size) // raw list unchanged
+    }
+
+    @Test
+    fun cleanup_removesCheckedItems() = runTest(dispatcher) {
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
+        advanceUntilIdle()
+        vm.addItem("Milk")
+        advanceUntilIdle()
+        val milk = vm.state.value.items.single { it.name == "Milk" }
+        vm.toggle(milk)
+        advanceUntilIdle()
+        vm.addItem("Eggs")
+        advanceUntilIdle()
+
+        vm.cleanup()
+        advanceUntilIdle()
+
+        val names = vm.state.value.items.map { it.name }
+        assertFalse(names.contains("Milk"))
+        assertTrue(names.contains("Eggs"))
+    }
+
+    @Test
     fun createList_switchesToNewList() = runTest(dispatcher) {
         val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
         advanceUntilIdle()

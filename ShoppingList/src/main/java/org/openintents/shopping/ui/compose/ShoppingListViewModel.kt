@@ -19,6 +19,8 @@ import org.openintents.shopping.data.ProviderShoppingRepository
 import org.openintents.shopping.data.ShoppingItem
 import org.openintents.shopping.data.ShoppingListInfo
 import org.openintents.shopping.data.ShoppingRepository
+import org.openintents.shopping.data.SortMode
+import org.openintents.shopping.data.arrangeItems
 import org.openintents.shopping.data.computeTotals
 
 /** Immutable UI state for the shopping screen. */
@@ -26,12 +28,18 @@ data class ShoppingUiState(
     val lists: List<ShoppingListInfo> = emptyList(),
     val currentListId: Long = -1L,
     val items: List<ShoppingItem> = emptyList(),
+    val sortMode: SortMode = SortMode.UNCHECKED_FIRST,
+    val hideChecked: Boolean = false,
     val loading: Boolean = true,
 ) {
     val currentListName: String
         get() = lists.firstOrNull { it.id == currentListId }?.name ?: ""
 
-    /** Money totals derived from [items] (pure; recomputed on read). */
+    /** The items to render, after the user's sort + filter (derived). */
+    val visibleItems: List<ShoppingItem>
+        get() = arrangeItems(items, sortMode, hideChecked)
+
+    /** Money totals derived from the full [items] (independent of the view filter). */
     val totals: ListTotals
         get() = computeTotals(items)
 }
@@ -103,6 +111,16 @@ class ShoppingListViewModel(
     fun removeItem(item: ShoppingItem) = viewModelScope.launch {
         val listId = _state.value.currentListId
         withContext(ioDispatcher) { repository.removeItem(listId, item) }
+        refresh()
+    }
+
+    fun setSortMode(mode: SortMode) = _state.update { it.copy(sortMode = mode) }
+
+    fun toggleHideChecked() = _state.update { it.copy(hideChecked = !it.hideChecked) }
+
+    fun cleanup() = viewModelScope.launch {
+        val listId = _state.value.currentListId
+        withContext(ioDispatcher) { repository.cleanupList(listId) }
         refresh()
     }
 

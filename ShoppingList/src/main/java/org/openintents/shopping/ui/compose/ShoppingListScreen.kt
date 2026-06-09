@@ -12,10 +12,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -44,6 +48,7 @@ import kotlinx.coroutines.launch
 import org.openintents.shopping.data.ListTotals
 import org.openintents.shopping.data.ShoppingItem
 import org.openintents.shopping.data.ShoppingListInfo
+import org.openintents.shopping.data.SortMode
 import org.openintents.shopping.library.util.PriceConverter
 
 /**
@@ -61,6 +66,9 @@ fun ShoppingListRoute(viewModel: ShoppingListViewModel) {
         onToggleItem = viewModel::toggle,
         onUpdateItem = viewModel::updateItem,
         onRemoveItem = viewModel::removeItem,
+        onSetSortMode = viewModel::setSortMode,
+        onToggleHideChecked = viewModel::toggleHideChecked,
+        onCleanup = viewModel::cleanup,
     )
 }
 
@@ -74,6 +82,9 @@ fun ShoppingListScreen(
     onToggleItem: (ShoppingItem) -> Unit,
     onUpdateItem: (ShoppingItem, String, String?, Long?) -> Unit,
     onRemoveItem: (ShoppingItem) -> Unit,
+    onSetSortMode: (SortMode) -> Unit,
+    onToggleHideChecked: () -> Unit,
+    onCleanup: () -> Unit,
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -102,13 +113,22 @@ fun ShoppingListScreen(
                         IconButton(onClick = { scope.launch { drawerState.open() } }) {
                             Icon(Icons.Filled.Menu, contentDescription = "Open lists")
                         }
+                    },
+                    actions = {
+                        ListOptionsMenu(
+                            sortMode = state.sortMode,
+                            hideChecked = state.hideChecked,
+                            onSetSortMode = onSetSortMode,
+                            onToggleHideChecked = onToggleHideChecked,
+                            onCleanup = onCleanup,
+                        )
                     }
                 )
             }
         ) { padding ->
             Column(modifier = Modifier.fillMaxSize().padding(padding)) {
                 LazyColumn(modifier = Modifier.weight(1f).fillMaxWidth()) {
-                    items(state.items, key = { it.containsId }) { item ->
+                    items(state.visibleItems, key = { it.containsId }) { item ->
                         ShoppingItemRow(
                             item = item,
                             onToggle = { onToggleItem(item) },
@@ -180,6 +200,41 @@ private fun ListDrawerContent(
             icon = { Icon(Icons.Filled.Add, contentDescription = null) },
             onClick = onNewList,
             modifier = Modifier.padding(horizontal = 12.dp),
+        )
+    }
+}
+
+@Composable
+private fun ListOptionsMenu(
+    sortMode: SortMode,
+    hideChecked: Boolean,
+    onSetSortMode: (SortMode) -> Unit,
+    onToggleHideChecked: () -> Unit,
+    onCleanup: () -> Unit,
+) {
+    var expanded by remember { mutableStateOf(false) }
+    IconButton(onClick = { expanded = true }) {
+        Icon(Icons.Filled.MoreVert, contentDescription = "More options")
+    }
+    DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+        DropdownMenuItem(
+            text = { Text("Sort: unchecked first") },
+            leadingIcon = { if (sortMode == SortMode.UNCHECKED_FIRST) Icon(Icons.Filled.Check, null) },
+            onClick = { onSetSortMode(SortMode.UNCHECKED_FIRST); expanded = false },
+        )
+        DropdownMenuItem(
+            text = { Text("Sort: alphabetical") },
+            leadingIcon = { if (sortMode == SortMode.ALPHABETICAL) Icon(Icons.Filled.Check, null) },
+            onClick = { onSetSortMode(SortMode.ALPHABETICAL); expanded = false },
+        )
+        HorizontalDivider()
+        DropdownMenuItem(
+            text = { Text(if (hideChecked) "Show checked items" else "Hide checked items") },
+            onClick = { onToggleHideChecked(); expanded = false },
+        )
+        DropdownMenuItem(
+            text = { Text("Clean up (remove checked)") },
+            onClick = { onCleanup(); expanded = false },
         )
     }
 }
