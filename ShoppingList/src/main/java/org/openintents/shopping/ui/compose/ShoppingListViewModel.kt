@@ -14,10 +14,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.openintents.shopping.data.ListTotals
 import org.openintents.shopping.data.ProviderShoppingRepository
 import org.openintents.shopping.data.ShoppingItem
 import org.openintents.shopping.data.ShoppingListInfo
 import org.openintents.shopping.data.ShoppingRepository
+import org.openintents.shopping.data.computeTotals
 
 /** Immutable UI state for the shopping screen. */
 data class ShoppingUiState(
@@ -28,6 +30,10 @@ data class ShoppingUiState(
 ) {
     val currentListName: String
         get() = lists.firstOrNull { it.id == currentListId }?.name ?: ""
+
+    /** Money totals derived from [items] (pure; recomputed on read). */
+    val totals: ListTotals
+        get() = computeTotals(items)
 }
 
 /**

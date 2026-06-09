@@ -102,6 +102,20 @@ class ShoppingListViewModelTest {
     }
 
     @Test
+    fun totals_reflectPricedItems() = runTest(dispatcher) {
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
+        advanceUntilIdle()
+        vm.addItem("Wine")
+        advanceUntilIdle()
+        val item = vm.state.value.items.single()
+
+        vm.updateItem(item, "Wine", "2", 500L)
+        advanceUntilIdle()
+
+        assertEquals(1000L, vm.state.value.totals.toBuyCents)
+    }
+
+    @Test
     fun createList_switchesToNewList() = runTest(dispatcher) {
         val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
         advanceUntilIdle()

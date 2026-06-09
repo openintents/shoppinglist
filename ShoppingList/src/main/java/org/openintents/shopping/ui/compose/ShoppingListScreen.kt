@@ -41,6 +41,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
+import org.openintents.shopping.data.ListTotals
 import org.openintents.shopping.data.ShoppingItem
 import org.openintents.shopping.data.ShoppingListInfo
 import org.openintents.shopping.library.util.PriceConverter
@@ -115,6 +116,10 @@ fun ShoppingListScreen(
                         )
                         HorizontalDivider()
                     }
+                }
+                if (state.totals.hasAny) {
+                    HorizontalDivider()
+                    TotalsBar(totals = state.totals)
                 }
                 AddItemRow(onAdd = onAddItem)
             }
@@ -266,6 +271,23 @@ private fun EditItemDialog(
         }
     )
 }
+
+@Composable
+private fun TotalsBar(totals: ListTotals) {
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(text = "To buy: ${formatTotal(totals.toBuyCents)}", modifier = Modifier.weight(1f))
+        if (totals.boughtCents > 0) {
+            Text(text = "Bought: ${formatTotal(totals.boughtCents)}")
+        }
+    }
+}
+
+/** Like PriceConverter but shows "0.00" for a zero total instead of an empty string. */
+private fun formatTotal(cents: Long): String =
+    if (cents == 0L) "0.00" else PriceConverter.getStringFromCentPrice(cents)
 
 @Composable
 private fun AddItemRow(onAdd: (String) -> Unit) {
