@@ -16,7 +16,6 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.openintents.shopping"
     android:installLocation="auto">
 
     <!-- History:
@@ -105,6 +104,7 @@
         <!-- Shopping activity -->
         <activity
             android:name=".ShoppingActivity"
+            android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/OITheme"
             android:windowSoftInputMode="stateHidden|adjustResize">
@@ -148,7 +148,9 @@
                    -->
         </activity>
 
-        <activity android:name=".ui.ShoppingListsActivity">
+        <activity
+            android:name=".ui.ShoppingListsActivity"
+            android:exported="true">
             <intent-filter tools:ignore="AppLinkUrlError">
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.PICK" />
@@ -177,6 +179,7 @@
 
         <activity
             android:name=".share.ListShareSettingsActivity"
+            android:exported="true"
             android:label="@string/share_settings"
             android:theme="@android:style/Theme.Dialog">
             <!-- android:icon="@android:drawable/ic_menu_share" -->
@@ -203,6 +206,7 @@
 
         <activity
             android:name=".ui.AddLocationAlertActivity"
+            android:exported="true"
             android:label="@string/add_location_alert"
             android:theme="@android:style/Theme.Dialog">
             <!-- android:icon="@android:drawable/ic_menu_mylocation" -->
@@ -225,6 +229,7 @@
 
         <activity
             android:name=".automation.EditAutomationActivity"
+            android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="org.openintents.action.EDIT_AUTOMATION" />
@@ -232,7 +237,9 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".automation.AutomationReceiver">
+        <receiver
+            android:name=".automation.AutomationReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="org.openintents.action.RUN_AUTOMATION" />
             </intent-filter>
@@ -279,10 +286,16 @@
         <!-- Activities from OI Distribution Library -->
         <activity android:name="org.openintents.distribution.EulaActivity" />
         <activity android:name="org.openintents.distribution.NewVersionActivity" />
+        <!-- Override: lib manifest lacks android:exported (required on API 31+) -->
+        <activity
+            android:name="org.openintents.distribution.about.About"
+            android:exported="true"
+            tools:node="merge" />
 
         <!-- Widget -->
         <receiver
             android:name=".widgets.CheckItemsWidget"
+            android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -294,7 +307,9 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_check_items" />
         </receiver>
-        <activity android:name=".widgets.CheckItemsWidgetConfig">
+        <activity
+            android:name=".widgets.CheckItemsWidgetConfig"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>

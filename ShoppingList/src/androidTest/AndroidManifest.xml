@@ -8,7 +8,7 @@
         android:minSdkVersion="3"
         android:targetSdkVersion="15" />
     <instrumentation
-        android:name="android.support.test.runner.AndroidJUnitRunner"
+        android:name="androidx.test.runner.AndroidJUnitRunner"
         android:targetPackage="org.openintents.shopping" />
 
     <!-- Instrumentation for Jenkins server

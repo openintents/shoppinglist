@@ -1,55 +1,47 @@
 apply plugin: 'com.android.application'
 
-Properties local_properties = new Properties()
-File localPropertiesFile = project.rootProject.file('private.properties')
-if (localPropertiesFile.exists()) {
-    local_properties.load(localPropertiesFile.newDataInputStream())
-}
-
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    namespace "org.openintents.shopping"
+    compileSdk rootProject.ext.compileSdkVersion
 
     defaultConfig {
         applicationId "org.openintents.shopping"
         versionName "2.2.1"
         versionCode 100221
-        minSdkVersion 16
+        minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
 
         testApplicationId "org.openintents.shopping.test"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", "$applicationId-$versionName")
     }
 
-    lintOptions {
+    lint {
         abortOnError false
     }
 
-    flavorDimensions "market"
+    flavorDimensions += "market"
 
     productFlavors {
         play {
-
         }
 
-
         tstore {
-
         }
     }
 
     buildTypes {
         release {
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
-
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard.cfg'
         }
     }
 
     def propertyFile = new File(projectDir, "build-private.properties")
     compileOptions {
-        sourceCompatibility = '1.8'
-        targetCompatibility = '1.8'
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     if (propertyFile.exists()) {
         signingConfigs {
@@ -68,25 +60,20 @@ android {
     } else {
         println "For signed release apks you need to create a build-private.properties file"
     }
-
 }
 
 
 dependencies {
-
     implementation project(':ShoppingListLibrary')
     implementation 'com.github.openintents:distribution:3.0.2'
-    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
-    implementation "com.android.support:design:$rootProject.ext.supportVersion"
-    androidTestImplementation 'junit:junit:4.13'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test:rules:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2'
-    androidTestImplementation "com.android.support:support-annotations:$rootProject.ext.supportVersion"
-    androidTestImplementation "com.android.support:recyclerview-v7:$rootProject.ext.supportVersion"
-    androidTestImplementation "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
-    androidTestImplementation "com.android.support:support-v4:$rootProject.ext.supportVersion"
-    androidTestImplementation "com.android.support:design:$rootProject.ext.supportVersion"
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
 
+    androidTestImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.6.2'
+    androidTestImplementation 'androidx.test:rules:1.6.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.6.1'
+    androidTestImplementation 'androidx.annotation:annotation:1.9.1'
+    androidTestImplementation 'androidx.recyclerview:recyclerview:1.3.2'
 }

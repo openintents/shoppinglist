@@ -171,7 +171,7 @@ public class CheckItemsWidget extends AppWidgetProvider {
 
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(
                         context, Integer.valueOf(cursor.getString(0)),
-                        intentCheckService, PendingIntent.FLAG_ONE_SHOT);
+                        intentCheckService, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
                 views.setOnClickPendingIntent(viewId, pendingIntent);
 
                 i++;
@@ -185,7 +185,7 @@ public class CheckItemsWidget extends AppWidgetProvider {
                     ShoppingContract.Lists.CONTENT_URI, Long.toString(listId)));
             PendingIntent pendingIntentGoToApp = PendingIntent.getActivity(
                     context, 0, intentGoToApp,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
             /*
              * List title
@@ -210,7 +210,7 @@ public class CheckItemsWidget extends AppWidgetProvider {
             intentPreferences.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
             PendingIntent pendingIntentPreferences = PendingIntent.getActivity(
                     context, 0, intentPreferences,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
             views.setOnClickPendingIntent(R.id.button_go_to_preferences,
                     pendingIntentPreferences);
 
@@ -222,7 +222,7 @@ public class CheckItemsWidget extends AppWidgetProvider {
             intentPrevPage.putExtra("widgetId", widgetId);
             PendingIntent pendingIntentPrevPage = PendingIntent.getBroadcast(
                     context, widgetId, intentPrevPage,
-                    PendingIntent.FLAG_ONE_SHOT);
+                    PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
             views.setOnClickPendingIntent(R.id.button_prev,
                     pendingIntentPrevPage);
 
@@ -234,7 +234,7 @@ public class CheckItemsWidget extends AppWidgetProvider {
             intentNextPage.putExtra("widgetId", widgetId);
             PendingIntent pendingIntentNextPage = PendingIntent.getBroadcast(
                     context, widgetId, intentNextPage,
-                    PendingIntent.FLAG_ONE_SHOT);
+                    PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
             views.setOnClickPendingIntent(R.id.button_next,
                     pendingIntentNextPage);
         }

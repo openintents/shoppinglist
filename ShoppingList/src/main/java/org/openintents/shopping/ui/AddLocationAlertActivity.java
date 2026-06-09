@@ -85,19 +85,14 @@ public class AddLocationAlertActivity extends Activity implements
     }
 
     public void onClick(final View v) {
-        switch (v.getId()) {
-            case R.id.picklocation:
-                pickLocation();
-                break;
-            // case R.id.addlocationalert:
-            // addLocationAlert();
-            // break;
-            case R.id.viewalerts:
-                viewAlerts();
-                break;
-            default:
-                // Don't know what to do - do nothing.
-                Log.e(TAG, "AddLocationAlertActivity: Unexpedted view id clicked.");
+        int id = v.getId();
+        if (id == R.id.picklocation) {
+            pickLocation();
+        } else if (id == R.id.viewalerts) {
+            viewAlerts();
+        } else {
+            // Don't know what to do - do nothing.
+            Log.e(TAG, "AddLocationAlertActivity: Unexpedted view id clicked.");
         }
     }
 
