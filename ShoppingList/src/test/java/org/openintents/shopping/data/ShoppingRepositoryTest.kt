@@ -152,6 +152,19 @@ class ShoppingRepositoryTest {
     }
 
     @Test
+    fun exportCsv_writesItemsToWriter() {
+        val listId = repo.createList("ExportList")
+        repo.addItem(listId, "Bananas")
+
+        val writer = java.io.StringWriter()
+        repo.exportCsv(writer)
+        val csv = writer.toString()
+
+        assertTrue(csv.isNotEmpty())
+        assertTrue(csv.contains("Bananas"))
+    }
+
+    @Test
     fun items_areScopedToTheirList() {
         val listA = repo.createList("ListA")
         val listB = repo.createList("ListB")

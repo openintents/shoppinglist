@@ -37,6 +37,7 @@ data class ShoppingUiState(
     val sortMode: SortMode = SortMode.UNCHECKED_FIRST,
     val hideChecked: Boolean = false,
     val loading: Boolean = true,
+    val userMessage: String? = null,
 ) {
     val currentListName: String
         get() = lists.firstOrNull { it.id == currentListId }?.name ?: ""
@@ -67,6 +68,7 @@ data class ShoppingUiState(
 class ShoppingListViewModel(
     private val repository: ShoppingRepository,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private val contentResolver: android.content.ContentResolver? = null,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ShoppingUiState())
@@ -190,12 +192,47 @@ class ShoppingListViewModel(
         _state.update { it.copy(editingStorePrices = prices) }
     }
 
+    fun exportTo(uri: android.net.Uri) = viewModelScope.launch {
+        val cr = contentResolver ?: return@launch
+        val result = withContext(ioDispatcher) {
+            runCatching {
+                cr.openOutputStream(uri)?.use { os ->
+                    java.io.OutputStreamWriter(os).use { w -> repository.exportCsv(w) }
+                } ?: throw java.io.IOException("Cannot open output stream")
+            }
+        }
+        _state.update { it.copy(userMessage = if (result.isSuccess) "Exported" else "Export failed") }
+    }
+
+    fun importFrom(uri: android.net.Uri) = viewModelScope.launch {
+        val cr = contentResolver ?: return@launch
+        val result = withContext(ioDispatcher) {
+            runCatching {
+                cr.openInputStream(uri)?.use { ins ->
+                    java.io.InputStreamReader(ins).use { r ->
+                        repository.importCsv(
+                            r,
+                            org.openintents.convertcsv.common.ConvertCsvBaseActivity.IMPORT_POLICY_OVERWRITE
+                        )
+                    }
+                } ?: throw java.io.IOException("Cannot open input stream")
+            }
+        }
+        refresh()
+        _state.update { it.copy(userMessage = if (result.isSuccess) "Imported" else "Import failed") }
+    }
+
+    fun consumeMessage() = _state.update { it.copy(userMessage = null) }
+
     companion object {
         /** Factory that wires the provider-backed repository from the Application context. */
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 val app = this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as Application
-                ShoppingListViewModel(ProviderShoppingRepository(app))
+                ShoppingListViewModel(
+                    ProviderShoppingRepository(app),
+                    contentResolver = app.contentResolver,
+                )
             }
         }
     }

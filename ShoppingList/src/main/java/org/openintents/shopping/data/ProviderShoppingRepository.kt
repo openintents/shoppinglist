@@ -143,6 +143,14 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
         ShoppingUtils.deleteStore(context, storeId.toString())
     }
 
+    override fun exportCsv(writer: java.io.Writer) {
+        org.openintents.convertcsv.shoppinglist.ExportCsv(context).exportCsv(writer)
+    }
+
+    override fun importCsv(reader: java.io.Reader, importPolicy: Int) {
+        org.openintents.convertcsv.shoppinglist.ImportCsv(context, importPolicy).importCsv(reader)
+    }
+
     override fun getItemStorePrices(itemId: Long): Map<Long, Long?> {
         val out = HashMap<Long, Long?>()
         resolver.query(

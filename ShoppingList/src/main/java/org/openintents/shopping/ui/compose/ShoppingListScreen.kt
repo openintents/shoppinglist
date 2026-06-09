@@ -1,6 +1,8 @@
 package org.openintents.shopping.ui.compose
 
 import android.content.Intent
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
@@ -86,6 +88,9 @@ fun ShoppingListRoute(viewModel: ShoppingListViewModel) {
         onLoadStorePrices = viewModel::loadStorePrices,
         onSetStorePrice = viewModel::setStorePrice,
         onSelectStore = viewModel::selectStore,
+        onExport = viewModel::exportTo,
+        onImport = viewModel::importFrom,
+        onConsumeMessage = viewModel::consumeMessage,
     )
 }
 
@@ -107,12 +112,30 @@ fun ShoppingListScreen(
     onLoadStorePrices: (Long) -> Unit,
     onSetStorePrice: (itemId: Long, storeId: Long, priceCents: Long?) -> Unit,
     onSelectStore: (Long?) -> Unit,
+    onExport: (android.net.Uri) -> Unit,
+    onImport: (android.net.Uri) -> Unit,
+    onConsumeMessage: () -> Unit,
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
     var showNewListDialog by remember { mutableStateOf(false) }
     var showStoresDialog by remember { mutableStateOf(false) }
     var editingItem by remember { mutableStateOf<ShoppingItem?>(null) }
+
+    val exportLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.CreateDocument("text/csv")
+    ) { uri -> uri?.let(onExport) }
+    val importLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.OpenDocument()
+    ) { uri -> uri?.let(onImport) }
+
+    LaunchedEffect(state.userMessage) {
+        state.userMessage?.let {
+            android.widget.Toast.makeText(context, it, android.widget.Toast.LENGTH_SHORT).show()
+            onConsumeMessage()
+        }
+    }
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -145,6 +168,12 @@ fun ShoppingListScreen(
                             onToggleHideChecked = onToggleHideChecked,
                             onCleanup = onCleanup,
                             onManageStores = { showStoresDialog = true },
+                            onImportCsv = {
+                                importLauncher.launch(
+                                    arrayOf("text/csv", "text/comma-separated-values", "text/plain")
+                                )
+                            },
+                            onExportCsv = { exportLauncher.launch("shoppinglist.csv") },
                         )
                     }
                 )
@@ -287,6 +316,8 @@ private fun ListOptionsMenu(
     onToggleHideChecked: () -> Unit,
     onCleanup: () -> Unit,
     onManageStores: () -> Unit,
+    onImportCsv: () -> Unit,
+    onExportCsv: () -> Unit,
 ) {
     var expanded by remember { mutableStateOf(false) }
     IconButton(onClick = { expanded = true }) {
@@ -316,6 +347,15 @@ private fun ListOptionsMenu(
         DropdownMenuItem(
             text = { Text("Stores…") },
             onClick = { onManageStores(); expanded = false },
+        )
+        HorizontalDivider()
+        DropdownMenuItem(
+            text = { Text("Import CSV…") },
+            onClick = { onImportCsv(); expanded = false },
+        )
+        DropdownMenuItem(
+            text = { Text("Export CSV…") },
+            onClick = { onExportCsv(); expanded = false },
         )
         val context = LocalContext.current
         DropdownMenuItem(

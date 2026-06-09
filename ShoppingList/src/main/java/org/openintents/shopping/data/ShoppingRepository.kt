@@ -60,6 +60,12 @@ interface ShoppingRepository {
     /** Deletes a store (and its per-item entries). */
     fun removeStore(storeId: Long)
 
+    /** Exports all lists as OpenIntents CSV to [writer]. */
+    fun exportCsv(writer: java.io.Writer)
+
+    /** Imports OpenIntents CSV from [reader]; [importPolicy] is a ConvertCsvBaseActivity.IMPORT_POLICY_*. */
+    fun importCsv(reader: java.io.Reader, importPolicy: Int)
+
     /** Per-store prices for an item: storeId -> price in cents (absent/null = unset). */
     fun getItemStorePrices(itemId: Long): Map<Long, Long?>
 

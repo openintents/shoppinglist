@@ -93,6 +93,9 @@ class FakeShoppingRepository : ShoppingRepository {
     override fun getStorePricesForList(storeId: Long): Map<Long, Long?> =
         storePrices.filterKeys { it.second == storeId }.mapKeys { it.key.first }
 
+    override fun exportCsv(writer: java.io.Writer) { /* not used in fake-based tests */ }
+    override fun importCsv(reader: java.io.Reader, importPolicy: Int) { /* not used in fake-based tests */ }
+
     override fun setItemStorePrice(itemId: Long, storeId: Long, priceCents: Long?) {
         if (priceCents == null) return // matches provider impl: null leaves it unchanged
         storePrices[itemId to storeId] = priceCents
