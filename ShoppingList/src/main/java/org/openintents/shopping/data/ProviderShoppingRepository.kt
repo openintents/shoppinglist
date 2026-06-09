@@ -98,6 +98,7 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
             if (edit.priceCents != null) put(Items.PRICE, edit.priceCents) else putNull(Items.PRICE)
             put(Items.UNITS, edit.units ?: "")
             put(Items.TAGS, edit.tags ?: "")
+            put(Items.NOTE, edit.note ?: "")
         }
         resolver.update(
             Uri.withAppendedPath(Items.CONTENT_URI, item.itemId.toString()),
@@ -168,6 +169,12 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
     override fun importCsv(reader: java.io.Reader, importPolicy: Int) {
         org.openintents.convertcsv.shoppinglist.ImportCsv(context, importPolicy).importCsv(reader)
     }
+
+    override fun getItemNote(itemId: Long): String? =
+        resolver.query(
+            Uri.withAppendedPath(Items.CONTENT_URI, itemId.toString()),
+            arrayOf(Items.NOTE), null, null, null
+        )?.use { c -> if (c.moveToFirst()) c.getString(0) else null }
 
     override fun getItemStorePrices(itemId: Long): Map<Long, Long?> {
         val out = HashMap<Long, Long?>()

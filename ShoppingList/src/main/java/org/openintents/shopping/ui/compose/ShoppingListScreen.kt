@@ -85,7 +85,7 @@ fun ShoppingListRoute(viewModel: ShoppingListViewModel) {
         onCleanup = viewModel::cleanup,
         onAddStore = viewModel::addStore,
         onRemoveStore = viewModel::removeStore,
-        onLoadStorePrices = viewModel::loadStorePrices,
+        onLoadItemEditData = viewModel::loadItemEditData,
         onSetStorePrice = viewModel::setStorePrice,
         onSelectStore = viewModel::selectStore,
         onExport = viewModel::exportTo,
@@ -112,7 +112,7 @@ fun ShoppingListScreen(
     onCleanup: () -> Unit,
     onAddStore: (String) -> Unit,
     onRemoveStore: (StoreInfo) -> Unit,
-    onLoadStorePrices: (Long) -> Unit,
+    onLoadItemEditData: (Long) -> Unit,
     onSetStorePrice: (itemId: Long, storeId: Long, priceCents: Long?) -> Unit,
     onSelectStore: (Long?) -> Unit,
     onExport: (android.net.Uri) -> Unit,
@@ -265,11 +265,12 @@ fun ShoppingListScreen(
     }
 
     editingItem?.let { item ->
-        LaunchedEffect(item.itemId) { onLoadStorePrices(item.itemId) }
+        LaunchedEffect(item.itemId) { onLoadItemEditData(item.itemId) }
         EditItemDialog(
             item = item,
             stores = state.stores,
             storePrices = state.editingStorePrices,
+            note = state.editingNote,
             onSetStorePrice = { storeId, cents -> onSetStorePrice(item.itemId, storeId, cents) },
             onDismiss = { editingItem = null },
             onSave = { edit ->
@@ -520,6 +521,7 @@ private fun EditItemDialog(
     item: ShoppingItem,
     stores: List<StoreInfo>,
     storePrices: Map<Long, Long?>,
+    note: String?,
     onSetStorePrice: (storeId: Long, priceCents: Long?) -> Unit,
     onDismiss: () -> Unit,
     onSave: (ItemEdit) -> Unit,
@@ -533,6 +535,8 @@ private fun EditItemDialog(
     var units by remember { mutableStateOf(item.units.orEmpty()) }
     var priority by remember { mutableStateOf(item.priority.orEmpty()) }
     var tags by remember { mutableStateOf(item.tags.orEmpty()) }
+    // Note loads asynchronously after the dialog opens; seed when it arrives.
+    var noteText by remember(note) { mutableStateOf(note.orEmpty()) }
     // Per-store price text, re-seeded when the loaded prices arrive.
     val storePriceText = remember(stores, storePrices) {
         mutableStateMapOf<Long, String>().apply {
@@ -588,6 +592,12 @@ private fun EditItemDialog(
                     label = { Text("Tags") },
                     singleLine = true,
                 )
+                Spacer(Modifier.height(8.dp))
+                OutlinedTextField(
+                    value = noteText,
+                    onValueChange = { noteText = it },
+                    label = { Text("Note") },
+                )
                 if (stores.isNotEmpty()) {
                     Spacer(Modifier.height(12.dp))
                     Text("Per-store prices")
@@ -618,6 +628,7 @@ private fun EditItemDialog(
                                 units = units.ifBlank { null },
                                 priority = priority.ifBlank { null },
                                 tags = tags.ifBlank { null },
+                                note = noteText.ifBlank { null },
                             )
                         )
                         stores.forEach { store ->

@@ -40,7 +40,10 @@ class FakeShoppingRepository : ShoppingRepository {
         return id
     }
 
+    private val noteByItem = mutableMapOf<Long, String?>()
+
     override fun updateItem(item: ShoppingItem, edit: ItemEdit) {
+        noteByItem[item.itemId] = edit.note
         itemsByList.values.forEach { items ->
             val idx = items.indexOfFirst { it.containsId == item.containsId }
             if (idx >= 0) {
@@ -55,6 +58,8 @@ class FakeShoppingRepository : ShoppingRepository {
             }
         }
     }
+
+    override fun getItemNote(itemId: Long): String? = noteByItem[itemId]
 
     override fun removeItem(listId: Long, item: ShoppingItem) {
         itemsByList[listId]?.removeAll { it.containsId == item.containsId }

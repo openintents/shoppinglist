@@ -207,6 +207,17 @@ class ShoppingRepositoryTest {
     }
 
     @Test
+    fun itemNote_setAndReadBack() {
+        val listId = repo.createList("NoteList")
+        repo.addItem(listId, "Cake")
+        val item = repo.getItems(listId).single()
+
+        repo.updateItem(item, ItemEdit("Cake", null, null, null, null, null, note = "buy the big one"))
+
+        assertEquals("buy the big one", repo.getItemNote(item.itemId))
+    }
+
+    @Test
     fun items_areScopedToTheirList() {
         val listA = repo.createList("ListA")
         val listB = repo.createList("ListB")

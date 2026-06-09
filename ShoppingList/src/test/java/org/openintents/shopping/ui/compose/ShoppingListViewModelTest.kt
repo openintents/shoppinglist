@@ -209,7 +209,7 @@ class ShoppingListViewModelTest {
         advanceUntilIdle()
         assertEquals(350L, vm.state.value.editingStorePrices[store.id])
 
-        vm.loadStorePrices(item.itemId)
+        vm.loadItemEditData(item.itemId)
         advanceUntilIdle()
         assertEquals(350L, vm.state.value.editingStorePrices[store.id])
     }
@@ -275,6 +275,21 @@ class ShoppingListViewModelTest {
         assertFalse(vm.state.value.lists.any { it.name == "Second" })
         assertTrue(vm.state.value.currentListId >= 0)
         assertTrue(vm.state.value.lists.isNotEmpty())
+    }
+
+    @Test
+    fun loadItemEditData_loadsNote() = runTest(dispatcher) {
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
+        advanceUntilIdle()
+        vm.addItem("Cake"); advanceUntilIdle()
+        val item = vm.state.value.items.single()
+        vm.updateItem(item, ItemEdit("Cake", null, null, null, null, null, note = "two layers"))
+        advanceUntilIdle()
+
+        vm.loadItemEditData(item.itemId)
+        advanceUntilIdle()
+
+        assertEquals("two layers", vm.state.value.editingNote)
     }
 
     @Test

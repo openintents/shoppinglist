@@ -34,6 +34,7 @@ data class ShoppingUiState(
     val selectedStoreId: Long? = null,
     val storePricesForList: Map<Long, Long?> = emptyMap(),
     val editingStorePrices: Map<Long, Long?> = emptyMap(),
+    val editingNote: String? = null,
     val sortMode: SortMode = SortMode.UNCHECKED_FIRST,
     val hideChecked: Boolean = false,
     val loading: Boolean = true,
@@ -216,10 +217,12 @@ class ShoppingListViewModel(
         refresh()
     }
 
-    /** Loads the per-store prices for [itemId] into state (call when opening item edit). */
-    fun loadStorePrices(itemId: Long) = viewModelScope.launch {
-        val prices = withContext(ioDispatcher) { repository.getItemStorePrices(itemId) }
-        _state.update { it.copy(editingStorePrices = prices) }
+    /** Loads the per-store prices AND note for [itemId] (call when opening item edit). */
+    fun loadItemEditData(itemId: Long) = viewModelScope.launch {
+        val (prices, note) = withContext(ioDispatcher) {
+            repository.getItemStorePrices(itemId) to repository.getItemNote(itemId)
+        }
+        _state.update { it.copy(editingStorePrices = prices, editingNote = note) }
     }
 
     fun setStorePrice(itemId: Long, storeId: Long, priceCents: Long?) = viewModelScope.launch {

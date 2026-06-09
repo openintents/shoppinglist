@@ -41,4 +41,5 @@ data class ItemEdit(
     val units: String?,
     val priority: String?,
     val tags: String?,
+    val note: String? = null,
 )

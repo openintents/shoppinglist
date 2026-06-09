@@ -78,6 +78,9 @@ interface ShoppingRepository {
     /** Imports OpenIntents CSV from [reader]; [importPolicy] is a ConvertCsvBaseActivity.IMPORT_POLICY_*. */
     fun importCsv(reader: java.io.Reader, importPolicy: Int)
 
+    /** The free-text note attached to an item (Items.NOTE), or null. */
+    fun getItemNote(itemId: Long): String?
+
     /** Per-store prices for an item: storeId -> price in cents (absent/null = unset). */
     fun getItemStorePrices(itemId: Long): Map<Long, Long?>
 
