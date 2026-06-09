@@ -21,5 +21,5 @@ package org.openintents.shopping.ui
  * Classes that can undo an operation should implement this interface.
  */
 interface UndoListener {
-    fun onUndoAvailable(undoOp: SnackbarUndoOperation)
+    fun onUndoAvailable(undoOp: SnackbarUndoOperation?)
 }
