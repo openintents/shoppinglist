@@ -43,7 +43,7 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
             arrayOf(
                 ContainsFull._ID, ContainsFull.ITEM_ID, ContainsFull.ITEM_NAME,
                 ContainsFull.STATUS, ContainsFull.QUANTITY, ContainsFull.ITEM_PRICE,
-                ContainsFull.PRIORITY, ContainsFull.ITEM_TAGS
+                ContainsFull.PRIORITY, ContainsFull.ITEM_TAGS, ContainsFull.ITEM_UNITS
             ),
             ContainsFull.LIST_ID + " = ?", arrayOf(listId.toString()),
             ContainsFull.DEFAULT_SORT_ORDER
@@ -60,6 +60,7 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
                         priceCents = if (c.isNull(5)) null else c.getLong(5),
                         priority = c.getString(6),
                         tags = c.getString(7),
+                        units = c.getString(8),
                     )
                 )
             }
@@ -81,18 +82,23 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
         return itemId
     }
 
-    override fun updateItem(item: ShoppingItem, name: String, quantity: String?, priceCents: Long?) {
-        // Name and price live on the item itself.
+    override fun updateItem(item: ShoppingItem, edit: ItemEdit) {
+        // Name, price, units and tags live on the item itself.
         val itemValues = ContentValues().apply {
-            put(Items.NAME, name.trim())
-            if (priceCents != null) put(Items.PRICE, priceCents) else putNull(Items.PRICE)
+            put(Items.NAME, edit.name.trim())
+            if (edit.priceCents != null) put(Items.PRICE, edit.priceCents) else putNull(Items.PRICE)
+            put(Items.UNITS, edit.units ?: "")
+            put(Items.TAGS, edit.tags ?: "")
         }
         resolver.update(
             Uri.withAppendedPath(Items.CONTENT_URI, item.itemId.toString()),
             itemValues, null, null
         )
-        // Quantity is a property of the item's membership on this list.
-        val containsValues = ContentValues().apply { put(Contains.QUANTITY, quantity ?: "") }
+        // Quantity and priority are properties of the item's membership on this list.
+        val containsValues = ContentValues().apply {
+            put(Contains.QUANTITY, edit.quantity ?: "")
+            put(Contains.PRIORITY, edit.priority ?: "")
+        }
         resolver.update(
             Uri.withAppendedPath(Contains.CONTENT_URI, item.containsId.toString()),
             containsValues, null, null

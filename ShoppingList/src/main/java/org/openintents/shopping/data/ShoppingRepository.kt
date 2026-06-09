@@ -24,10 +24,10 @@ interface ShoppingRepository {
     fun addItem(listId: Long, name: String): Long
 
     /**
-     * Updates an item's name and price, and its per-list quantity.
-     * [priceCents] null clears the price; [quantity] null/blank clears the quantity.
+     * Applies [edit] to [item]: name/price/units/tags on the item itself,
+     * quantity/priority on its membership of the current list.
      */
-    fun updateItem(item: ShoppingItem, name: String, quantity: String?, priceCents: Long?)
+    fun updateItem(item: ShoppingItem, edit: ItemEdit)
 
     /** Removes [item] from [listId] (the item stays in the catalogue / other lists). */
     fun removeItem(listId: Long, item: ShoppingItem)

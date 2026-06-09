@@ -70,17 +70,20 @@ class ShoppingRepositoryTest {
     }
 
     @Test
-    fun updateItem_persistsNamePriceAndQuantity() {
+    fun updateItem_persistsAllEditableFields() {
         val listId = repo.createList("Edit")
         repo.addItem(listId, "Cheese")
         val item = repo.getItems(listId).single { it.name == "Cheese" }
 
-        repo.updateItem(item, "Cheddar", "2", 150L)
+        repo.updateItem(item, ItemEdit("Cheddar", "2", 150L, "kg", "1", "dairy"))
 
         val updated = repo.getItems(listId).single()
         assertEquals("Cheddar", updated.name)
         assertEquals("2", updated.quantity)
         assertEquals(150L, updated.priceCents)
+        assertEquals("kg", updated.units)
+        assertEquals("1", updated.priority)
+        assertEquals("dairy", updated.tags)
     }
 
     @Test

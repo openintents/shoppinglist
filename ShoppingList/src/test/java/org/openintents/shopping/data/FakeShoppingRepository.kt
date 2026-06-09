@@ -40,12 +40,17 @@ class FakeShoppingRepository : ShoppingRepository {
         return id
     }
 
-    override fun updateItem(item: ShoppingItem, name: String, quantity: String?, priceCents: Long?) {
+    override fun updateItem(item: ShoppingItem, edit: ItemEdit) {
         itemsByList.values.forEach { items ->
             val idx = items.indexOfFirst { it.containsId == item.containsId }
             if (idx >= 0) {
                 items[idx] = items[idx].copy(
-                    name = name.trim(), quantity = quantity, priceCents = priceCents
+                    name = edit.name.trim(),
+                    quantity = edit.quantity,
+                    priceCents = edit.priceCents,
+                    units = edit.units,
+                    priority = edit.priority,
+                    tags = edit.tags,
                 )
             }
         }

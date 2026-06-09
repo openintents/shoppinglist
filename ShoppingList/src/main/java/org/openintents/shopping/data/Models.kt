@@ -28,6 +28,17 @@ data class ShoppingItem(
     val priceCents: Long?,
     val priority: String?,
     val tags: String?,
+    val units: String? = null,
 ) {
     val isBought: Boolean get() = status == Status.BOUGHT
 }
+
+/** The editable fields of an item, as entered in the edit dialog. */
+data class ItemEdit(
+    val name: String,
+    val quantity: String?,
+    val priceCents: Long?,
+    val units: String?,
+    val priority: String?,
+    val tags: String?,
+)

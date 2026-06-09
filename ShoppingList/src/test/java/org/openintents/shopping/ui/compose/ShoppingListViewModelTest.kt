@@ -14,6 +14,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.openintents.shopping.data.FakeShoppingRepository
+import org.openintents.shopping.data.ItemEdit
 
 /**
  * Pure-JVM ViewModel tests (no Robolectric): a fake repository + a test
@@ -78,13 +79,14 @@ class ShoppingListViewModelTest {
         advanceUntilIdle()
         val item = vm.state.value.items.single { it.name == "Cheese" }
 
-        vm.updateItem(item, "Cheddar", "3", 200L)
+        vm.updateItem(item, ItemEdit("Cheddar", "3", 200L, "kg", null, null))
         advanceUntilIdle()
 
         val updated = vm.state.value.items.single()
         assertEquals("Cheddar", updated.name)
         assertEquals("3", updated.quantity)
         assertEquals(200L, updated.priceCents)
+        assertEquals("kg", updated.units)
     }
 
     @Test
@@ -109,7 +111,7 @@ class ShoppingListViewModelTest {
         advanceUntilIdle()
         val item = vm.state.value.items.single()
 
-        vm.updateItem(item, "Wine", "2", 500L)
+        vm.updateItem(item, ItemEdit("Wine", "2", 500L, null, null, null))
         advanceUntilIdle()
 
         assertEquals(1000L, vm.state.value.totals.toBuyCents)

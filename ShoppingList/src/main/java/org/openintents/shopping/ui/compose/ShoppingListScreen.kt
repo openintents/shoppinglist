@@ -48,6 +48,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
+import org.openintents.shopping.data.ItemEdit
 import org.openintents.shopping.data.ListTotals
 import org.openintents.shopping.data.ShoppingItem
 import org.openintents.shopping.data.ShoppingListInfo
@@ -88,7 +89,7 @@ fun ShoppingListScreen(
     onCreateList: (String) -> Unit,
     onAddItem: (String) -> Unit,
     onToggleItem: (ShoppingItem) -> Unit,
-    onUpdateItem: (ShoppingItem, String, String?, Long?) -> Unit,
+    onUpdateItem: (ShoppingItem, ItemEdit) -> Unit,
     onRemoveItem: (ShoppingItem) -> Unit,
     onSetSortMode: (SortMode) -> Unit,
     onToggleHideChecked: () -> Unit,
@@ -188,8 +189,8 @@ fun ShoppingListScreen(
             storePrices = state.editingStorePrices,
             onSetStorePrice = { storeId, cents -> onSetStorePrice(item.itemId, storeId, cents) },
             onDismiss = { editingItem = null },
-            onSave = { name, quantity, priceCents ->
-                onUpdateItem(item, name, quantity, priceCents)
+            onSave = { edit ->
+                onUpdateItem(item, edit)
                 editingItem = null
             },
             onDelete = {
@@ -364,7 +365,7 @@ private fun EditItemDialog(
     storePrices: Map<Long, Long?>,
     onSetStorePrice: (storeId: Long, priceCents: Long?) -> Unit,
     onDismiss: () -> Unit,
-    onSave: (name: String, quantity: String?, priceCents: Long?) -> Unit,
+    onSave: (ItemEdit) -> Unit,
     onDelete: () -> Unit,
 ) {
     var name by remember { mutableStateOf(item.name) }
@@ -372,6 +373,9 @@ private fun EditItemDialog(
     var price by remember {
         mutableStateOf(item.priceCents?.let { PriceConverter.getStringFromCentPrice(it) } ?: "")
     }
+    var units by remember { mutableStateOf(item.units.orEmpty()) }
+    var priority by remember { mutableStateOf(item.priority.orEmpty()) }
+    var tags by remember { mutableStateOf(item.tags.orEmpty()) }
     // Per-store price text, re-seeded when the loaded prices arrive.
     val storePriceText = remember(stores, storePrices) {
         mutableStateMapOf<Long, String>().apply {
@@ -401,9 +405,30 @@ private fun EditItemDialog(
                 )
                 Spacer(Modifier.height(8.dp))
                 OutlinedTextField(
+                    value = units,
+                    onValueChange = { units = it },
+                    label = { Text("Units") },
+                    singleLine = true,
+                )
+                Spacer(Modifier.height(8.dp))
+                OutlinedTextField(
                     value = price,
                     onValueChange = { price = it },
                     label = { Text("Price") },
+                    singleLine = true,
+                )
+                Spacer(Modifier.height(8.dp))
+                OutlinedTextField(
+                    value = priority,
+                    onValueChange = { priority = it },
+                    label = { Text("Priority") },
+                    singleLine = true,
+                )
+                Spacer(Modifier.height(8.dp))
+                OutlinedTextField(
+                    value = tags,
+                    onValueChange = { tags = it },
+                    label = { Text("Tags") },
                     singleLine = true,
                 )
                 if (stores.isNotEmpty()) {
@@ -428,7 +453,16 @@ private fun EditItemDialog(
                 onClick = {
                     if (name.isNotBlank()) {
                         val cents = if (price.isBlank()) null else PriceConverter.getCentPriceFromString(price)
-                        onSave(name, quantity.ifBlank { null }, cents)
+                        onSave(
+                            ItemEdit(
+                                name = name,
+                                quantity = quantity.ifBlank { null },
+                                priceCents = cents,
+                                units = units.ifBlank { null },
+                                priority = priority.ifBlank { null },
+                                tags = tags.ifBlank { null },
+                            )
+                        )
                         stores.forEach { store ->
                             val txt = storePriceText[store.id].orEmpty()
                             if (txt.isNotBlank()) {

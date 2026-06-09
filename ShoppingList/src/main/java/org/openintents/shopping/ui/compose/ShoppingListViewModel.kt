@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.openintents.shopping.data.ItemEdit
 import org.openintents.shopping.data.ListTotals
 import org.openintents.shopping.data.ProviderShoppingRepository
 import org.openintents.shopping.data.ShoppingItem
@@ -107,11 +108,10 @@ class ShoppingListViewModel(
         refresh()
     }
 
-    fun updateItem(item: ShoppingItem, name: String, quantity: String?, priceCents: Long?) =
-        viewModelScope.launch {
-            withContext(ioDispatcher) { repository.updateItem(item, name, quantity, priceCents) }
-            refresh()
-        }
+    fun updateItem(item: ShoppingItem, edit: ItemEdit) = viewModelScope.launch {
+        withContext(ioDispatcher) { repository.updateItem(item, edit) }
+        refresh()
+    }
 
     fun removeItem(item: ShoppingItem) = viewModelScope.launch {
         val listId = _state.value.currentListId
