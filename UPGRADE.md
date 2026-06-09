@@ -25,29 +25,42 @@ DONE (green, tested):
 - Compose + test toolchain: Kotlin compose-compiler plugin, Compose BOM 2024.09.03,
   material3, activity-compose, lifecycle-viewmodel/runtime-compose; Robolectric +
   androidx.test + coroutines-test for JVM unit tests.
-- Architecture slice (the pattern to follow for each screen):
-  * `data/ShoppingRepository` (+ `data/Models.kt`) — business-logic boundary over
-    the ContentProvider; returns ShoppingListInfo/ShoppingItem, no Cursors in UI.
-  * `ui/compose/ShoppingListViewModel` — StateFlow state + actions, IO off-main.
-  * `ui/compose/ShoppingListScreen` + `ComposeShoppingActivity` — first Compose
-    screen (add/check/strikethrough), hosted SEPARATELY (exported=false, not the
-    launcher) so the legacy app keeps working during migration.
-- Tests: 11 passing. `ShoppingRepositoryTest` runs the real ShoppingProvider+SQLite
-  under Robolectric; `PriceConverterTest` pins the money logic.
+- Architecture (the pattern, repeated per slice):
+  * `data/ShoppingRepository` (interface) + `data/ProviderShoppingRepository`
+    (ContentProvider impl) + `data/Models.kt` — business-logic boundary; returns
+    ShoppingListInfo/ShoppingItem domain models, no Cursors in the UI.
+  * pure logic in `data/` (computeTotals, arrangeItems, PriceConverter) — no Android.
+  * `ui/compose/ShoppingListViewModel` — constructor-injected repo + injectable
+    dispatcher + ViewModelProvider.Factory; StateFlow state, IO off-main.
+  * `ui/compose/ShoppingListScreen` (stateless, hoisted) + `ShoppingListRoute` +
+    `ComposeShoppingActivity` — hosted SEPARATELY (exported=false, NOT the launcher)
+    so the legacy app keeps working during migration.
+- Compose screens DONE so far (all tested, green): view items, add item, check off
+  (strikethrough), switch/create lists (ModalNavigationDrawer), edit item
+  (name/quantity/price) + remove, list totals (to-buy/bought bar), and a list-
+  options overflow menu (sort: unchecked-first/alphabetical, hide checked, clean up).
+- Tests: **35 passing**. Pure-JVM: PriceConverter (6), ShoppingTotals (7),
+  ItemArrangement (4), ShoppingListViewModel via FakeShoppingRepository (10).
+  Robolectric (real provider+SQLite): ShoppingRepository (8).
   Run: `./gradlew :ShoppingList:testPlayDebugUnitTest`
+- Dependencies kept minimal as requested: drawer/menus/dialogs are all material3;
+  DI + testability use the lifecycle + coroutines libs already present. NO Hilt,
+  Navigation-Compose, or Accompanist. (Compose itself is the one accepted size
+  trade vs. the original "smallest app" goal; R8 strips unused parts in release.)
 
-NEXT (migration roadmap):
-- Grow the repository to cover the rest of ShoppingActivity's logic (lists CRUD,
-  stores, per-store prices, sort/filter, totals/subtotals, themes) — each piece
-  extracted with a Robolectric test.
-- Build Compose screens for: list switcher/drawer, stores, item edit, preferences.
-  As each screen reaches parity, route the launcher to it and delete the matching
-  legacy code; retire `ShoppingActivity.java` last.
-- Add a ViewModel test (fake the repository — make ShoppingRepository's methods
-  `open`/interface-backed; they're already `open`).
-- Compose UI tests (androidx.compose.ui:ui-test-junit4 is wired up) once a screen stabilises.
-- Dependency note: Compose adds deps (counter to the original "smallest app" goal),
-  an accepted trade for the architecture. R8 strips unused parts in release.
+NEXT (remaining migration work — needs product decisions and/or device testing):
+- Stores + per-store prices screen (touches stores/itemstores tables) — bigger slice.
+- Preferences screen in Compose (font size, per-list sort, completion behavior…).
+- Themes, sharing, automation/Tasker, CSV import/export UI, widget config — these
+  stay in the legacy/Android layer for now; decide per-feature whether to port.
+- Make the Compose UI reachable / eventually the launcher: only after the above
+  reach parity, then delete the matching legacy code and retire `ShoppingActivity.java`
+  last. Until then `ComposeShoppingActivity` is exported=false (not user-reachable).
+- Compose UI tests (androidx.compose.ui:ui-test-junit4 is wired up) once screens settle.
+- Device smoke-test the Compose flows on a real emulator/device.
+- Still pending from Phase 1: scoped-storage audit in `convertcsv`, remove
+  aTrackDog/permissionGroup/dead Wear+playInternet, androidTest manifest cleanup,
+  targetSdk 35→36, release signing config.
 
 ## 0. PROGRESS (updated 2026-06-09)
 
