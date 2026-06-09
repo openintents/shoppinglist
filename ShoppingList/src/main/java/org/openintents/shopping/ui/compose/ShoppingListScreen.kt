@@ -1,6 +1,7 @@
 package org.openintents.shopping.ui.compose
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -8,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -22,6 +25,7 @@ import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -78,6 +82,7 @@ fun ShoppingListRoute(viewModel: ShoppingListViewModel) {
         onRemoveStore = viewModel::removeStore,
         onLoadStorePrices = viewModel::loadStorePrices,
         onSetStorePrice = viewModel::setStorePrice,
+        onSelectStore = viewModel::selectStore,
     )
 }
 
@@ -98,6 +103,7 @@ fun ShoppingListScreen(
     onRemoveStore: (StoreInfo) -> Unit,
     onLoadStorePrices: (Long) -> Unit,
     onSetStorePrice: (itemId: Long, storeId: Long, priceCents: Long?) -> Unit,
+    onSelectStore: (Long?) -> Unit,
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -142,6 +148,14 @@ fun ShoppingListScreen(
             }
         ) { padding ->
             Column(modifier = Modifier.fillMaxSize().padding(padding)) {
+                if (state.stores.isNotEmpty()) {
+                    StoreFilterRow(
+                        stores = state.stores,
+                        selectedStoreId = state.selectedStoreId,
+                        onSelectStore = onSelectStore,
+                    )
+                    HorizontalDivider()
+                }
                 LazyColumn(modifier = Modifier.weight(1f).fillMaxWidth()) {
                     items(state.visibleItems, key = { it.containsId }) { item ->
                         ShoppingItemRow(
@@ -229,6 +243,36 @@ private fun ListDrawerContent(
             onClick = onNewList,
             modifier = Modifier.padding(horizontal = 12.dp),
         )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun StoreFilterRow(
+    stores: List<StoreInfo>,
+    selectedStoreId: Long?,
+    onSelectStore: (Long?) -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .horizontalScroll(rememberScrollState())
+            .padding(horizontal = 8.dp, vertical = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        FilterChip(
+            selected = selectedStoreId == null,
+            onClick = { onSelectStore(null) },
+            label = { Text("All") },
+        )
+        stores.forEach { store ->
+            Spacer(Modifier.width(8.dp))
+            FilterChip(
+                selected = selectedStoreId == store.id,
+                onClick = { onSelectStore(store.id) },
+                label = { Text(store.name) },
+            )
+        }
     }
 }
 

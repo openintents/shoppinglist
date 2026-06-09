@@ -205,6 +205,32 @@ class ShoppingListViewModelTest {
     }
 
     @Test
+    fun selectStore_appliesStorePricesToItemsAndTotals() = runTest(dispatcher) {
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
+        advanceUntilIdle()
+        vm.addStore("Shop")
+        advanceUntilIdle()
+        val store = vm.state.value.stores.single()
+        vm.addItem("Tea")
+        advanceUntilIdle()
+        val item = vm.state.value.items.single()
+        vm.setStorePrice(item.itemId, store.id, 250L)
+        advanceUntilIdle()
+
+        // No store selected: item has no default price.
+        assertEquals(null, vm.state.value.visibleItems.single().priceCents)
+
+        vm.selectStore(store.id)
+        advanceUntilIdle()
+        assertEquals(250L, vm.state.value.visibleItems.single().priceCents)
+        assertEquals(250L, vm.state.value.totals.toBuyCents)
+
+        vm.selectStore(null)
+        advanceUntilIdle()
+        assertEquals(null, vm.state.value.visibleItems.single().priceCents)
+    }
+
+    @Test
     fun selectList_switchesItems() = runTest(dispatcher) {
         val repo = FakeShoppingRepository()
         val a = repo.createList("A")

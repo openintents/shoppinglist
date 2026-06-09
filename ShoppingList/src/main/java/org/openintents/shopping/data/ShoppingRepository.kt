@@ -63,6 +63,9 @@ interface ShoppingRepository {
     /** Per-store prices for an item: storeId -> price in cents (absent/null = unset). */
     fun getItemStorePrices(itemId: Long): Map<Long, Long?>
 
+    /** Prices (cents) at [storeId], keyed by itemId — used to show a store's prices on the list. */
+    fun getStorePricesForList(storeId: Long): Map<Long, Long?>
+
     /** Sets the price (in cents) of an item at a store; null leaves it unchanged. */
     fun setItemStorePrice(itemId: Long, storeId: Long, priceCents: Long?)
 }

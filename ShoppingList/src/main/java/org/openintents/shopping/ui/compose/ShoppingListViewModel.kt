@@ -31,6 +31,8 @@ data class ShoppingUiState(
     val currentListId: Long = -1L,
     val items: List<ShoppingItem> = emptyList(),
     val stores: List<StoreInfo> = emptyList(),
+    val selectedStoreId: Long? = null,
+    val storePricesForList: Map<Long, Long?> = emptyMap(),
     val editingStorePrices: Map<Long, Long?> = emptyMap(),
     val sortMode: SortMode = SortMode.UNCHECKED_FIRST,
     val hideChecked: Boolean = false,
@@ -39,13 +41,21 @@ data class ShoppingUiState(
     val currentListName: String
         get() = lists.firstOrNull { it.id == currentListId }?.name ?: ""
 
+    /**
+     * Items with the selected store's price substituted in (when a store is
+     * selected). Both the displayed list and the totals derive from these.
+     */
+    val effectiveItems: List<ShoppingItem>
+        get() = if (selectedStoreId == null) items
+        else items.map { it.copy(priceCents = storePricesForList[it.itemId] ?: it.priceCents) }
+
     /** The items to render, after the user's sort + filter (derived). */
     val visibleItems: List<ShoppingItem>
-        get() = arrangeItems(items, sortMode, hideChecked)
+        get() = arrangeItems(effectiveItems, sortMode, hideChecked)
 
-    /** Money totals derived from the full [items] (independent of the view filter). */
+    /** Money totals (using the selected store's prices when a store is selected). */
     val totals: ListTotals
-        get() = computeTotals(items)
+        get() = computeTotals(effectiveItems)
 }
 
 /**
@@ -74,16 +84,39 @@ class ShoppingListViewModel(
 
     fun refresh() = viewModelScope.launch {
         val listId = _state.value.currentListId
+        val storeId = _state.value.selectedStoreId
         val (items, stores) = withContext(ioDispatcher) {
             repository.getItems(listId) to repository.getStores(listId)
         }
-        _state.update { it.copy(items = items, stores = stores, loading = false) }
+        val storePrices = if (storeId != null) {
+            withContext(ioDispatcher) { repository.getStorePricesForList(storeId) }
+        } else emptyMap()
+        _state.update {
+            it.copy(items = items, stores = stores, storePricesForList = storePrices, loading = false)
+        }
     }
 
     fun selectList(listId: Long) {
         if (listId == _state.value.currentListId) return
-        _state.update { it.copy(currentListId = listId, loading = true) }
+        _state.update {
+            it.copy(
+                currentListId = listId, loading = true,
+                selectedStoreId = null, storePricesForList = emptyMap()
+            )
+        }
         refresh()
+    }
+
+    fun selectStore(storeId: Long?) {
+        if (storeId == null) {
+            _state.update { it.copy(selectedStoreId = null, storePricesForList = emptyMap()) }
+            return
+        }
+        _state.update { it.copy(selectedStoreId = storeId) }
+        viewModelScope.launch {
+            val prices = withContext(ioDispatcher) { repository.getStorePricesForList(storeId) }
+            _state.update { it.copy(storePricesForList = prices) }
+        }
     }
 
     fun createList(name: String) = viewModelScope.launch {
@@ -93,7 +126,12 @@ class ShoppingListViewModel(
             id
         }
         val lists = withContext(ioDispatcher) { repository.getLists() }
-        _state.update { it.copy(lists = lists, currentListId = newId, loading = true) }
+        _state.update {
+            it.copy(
+                lists = lists, currentListId = newId, loading = true,
+                selectedStoreId = null, storePricesForList = emptyMap()
+            )
+        }
         refresh()
     }
 

@@ -156,6 +156,19 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
         return out
     }
 
+    override fun getStorePricesForList(storeId: Long): Map<Long, Long?> {
+        val out = HashMap<Long, Long?>()
+        resolver.query(
+            ItemStores.CONTENT_URI, arrayOf(ItemStores.ITEM_ID, ItemStores.PRICE),
+            "${ItemStores.STORE_ID} = ?", arrayOf(storeId.toString()), null
+        )?.use { c ->
+            while (c.moveToNext()) {
+                out[c.getLong(0)] = if (c.isNull(1)) null else c.getLong(1)
+            }
+        }
+        return out
+    }
+
     override fun setItemStorePrice(itemId: Long, storeId: Long, priceCents: Long?) {
         // addItemToStore find-or-creates the itemstores row; price is stored in cents.
         ShoppingUtils.addItemToStore(context, itemId, storeId, null, priceCents?.toString(), false)

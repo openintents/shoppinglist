@@ -90,6 +90,9 @@ class FakeShoppingRepository : ShoppingRepository {
     override fun getItemStorePrices(itemId: Long): Map<Long, Long?> =
         storePrices.filterKeys { it.first == itemId }.mapKeys { it.key.second }
 
+    override fun getStorePricesForList(storeId: Long): Map<Long, Long?> =
+        storePrices.filterKeys { it.second == storeId }.mapKeys { it.key.first }
+
     override fun setItemStorePrice(itemId: Long, storeId: Long, priceCents: Long?) {
         if (priceCents == null) return // matches provider impl: null leaves it unchanged
         storePrices[itemId to storeId] = priceCents
