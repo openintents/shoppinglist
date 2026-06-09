@@ -248,6 +248,12 @@
         <activity
             android:name=".ui.PreferenceActivity"
             android:label="@string/preferences" />
+        <!-- New Compose UI host (work in progress; legacy ShoppingActivity is still the launcher) -->
+        <activity
+            android:name=".ui.compose.ComposeShoppingActivity"
+            android:exported="false"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".ui.PickItemsActivity"
             android:label="@string/menu_pick_items"
