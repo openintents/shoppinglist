@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          android:installLocation="auto"
+          tools:targetApi="froyo">
+    <!-- History:
+      1.0.2 [3]: 2012-11-04
+      1.0.1 [2]: 2011-02-07
+      1.0.0 [1]: 2011-01-22 -->
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+    <application>
+        <activity android:name=".EulaActivity"
+              android:label="@string/oi_distribution_eula_title">
+        </activity>
+        <activity
+            android:name=".about.About"
+            android:label="@string/about"
+            android:exported="true"
+            >
+            <!-- android:launchMode="singleTop" android:screenOrientation="sensor" -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.MONKEY" />
+            </intent-filter>
+
+        </activity>
+    </application>
+</manifest> 

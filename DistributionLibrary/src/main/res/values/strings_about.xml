@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+**
+** 	 Copyright (C) 2008-2017 pjv (and others, see About dialog)
+** 
+** 	 This file is part of OI About.
+**
+**   OI About is free software: you can redistribute it and/or modify
+**   it under the terms of the GNU General Public License as published by
+**   the Free Software Foundation, either version 3 of the License, or
+**   (at your option) any later version.
+**
+**   OI About is distributed in the hope that it will be useful,
+**   but WITHOUT ANY WARRANTY; without even the implied warranty of
+**   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**   GNU General Public License for more details.
+**
+**   You should have received a copy of the GNU General Public License
+**   along with OI About.  If not, see <http://www.gnu.org/licenses/>.
+**
+*/
+-->
+<resources>
+
+    <!-- ***************************
+         About information
+         *************************** -->
+
+    <!-- Explanation what this application does. It is a menu extension for other applications. -->
+    <string name="about_comments">A standalone about dialog that is shared between apps.</string>
+
+    <!-- ***************************
+         Distribution
+         *************************** -->
+    <!-- Name of an application. Please make sure that translations are consistent. -->
+    <string name="info_app_filemanager">OI File Manager</string>
+    <!-- Name of an application. Please make sure that translations are consistent. -->
+    <string name="info_app_shopping">OI Shopping List</string>
+    <!-- Name of an application. Please make sure that translations are consistent. -->
+    <string name="info_app_notepad">OI Notepad</string>
+    <!-- Name of an application. Please make sure that translations are consistent. -->
+    <string name="info_app_safe">OI Safe</string>
+
+    <!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
+    <string name="info_instructions">Launch %s and select menu > About.</string>
+
+    <!-- ***************************
+         Applicatio-specific strings
+         *************************** -->
+    <!-- Application name. Can be localized, like "OI About", or "OI Info".
+       This is an extension that shows an about dialog or info dialog.  -->
+    <string name="about">OI About</string>
+
+    <string name="menu_about">About OI About itself</string>
+
+    <!-- About some application, where "%s" is the name of another application. -->
+    <string name="about_activity_name_extended">About %s</string>
+
+    <string name="l_authors">Written by</string>
+    <string name="l_documenters">Documented by</string>
+    <string name="l_translators">Translated by</string>
+    <string name="l_artists">Artwork by</string>
+    <string name="l_international_translators">International translations by</string>
+    <string name="l_credits">Credits</string>
+    <string name="l_license">License</string>
+    <string name="l_info">General Info</string>
+    <string name="l_recent_changes">Recent changes</string>
+
+    <string name="no_information_available">No information available.</string>
+
+    <!-- ***************************
+         International languages
+         *************************** -->
+    <!-- Language names. -->
+    <string-array name="language_names">
+        <item>Arabic</item>
+        <item>Belarusian</item>
+        <item>Bulgarian</item>
+        <item>Catalan</item>
+        <item>Czech</item>
+        <item>Danish</item>
+        <item>German</item>
+        <item>Greek</item>
+        <item>English</item>
+        <item>English (United Kingdom)</item>
+        <item>Spanish</item>
+        <item>Persian</item>
+        <item>Finnish</item>
+        <item>Faroese</item>
+        <item>French</item>
+        <item>Hindi</item>
+        <item>Croatian</item>
+        <item>Hungarian</item>
+        <item>Italian</item>
+        <item>Hebrew</item>
+        <item>Japanese</item>
+        <item>Korean</item>
+        <item>Lao</item>
+        <item>Latvian</item>
+        <item>Macedonian</item>
+        <item>Norwegian Bokmal</item>
+        <item>Dutch</item>
+        <item>Occitan (post 1500)</item>
+        <item>Punjabi</item>
+        <item>Polish</item>
+        <item>Portuguese</item>
+        <item>Brazilian Portuguese</item>
+        <item>Romanian</item>
+        <item>Russian</item>
+        <item>Sardinian</item>
+        <item>Sindhi</item>
+        <item>Slovak</item>
+        <item>Slovenian</item>
+        <item>Swedish</item>
+        <item>Tagalog</item>
+        <item>Turkish</item>
+        <item>Uyghur</item>
+        <item>Chinese (Simplified)</item>
+        <item>Chinese (Traditional)</item>
+    </string-array>
+</resources>

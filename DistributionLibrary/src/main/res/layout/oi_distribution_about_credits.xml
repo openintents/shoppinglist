@@ -1,0 +1,76 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="4dp"
+            android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <org.openintents.distribution.about.view.RobotoLightTextView
+            android:id="@+id/l_authors"
+            style="@style/all_title"
+            android:text="@string/l_authors" />
+
+        <TextView
+            android:id="@+id/et_authors"
+            style="@style/all_content">
+        </TextView>
+
+        <org.openintents.distribution.about.view.RobotoLightTextView
+            android:id="@+id/l_documenters"
+            style="@style/all_title"
+            android:text="@string/l_documenters" />
+
+        <TextView
+            android:id="@+id/et_documenters"
+            style="@style/all_content">
+        </TextView>
+
+        <org.openintents.distribution.about.view.RobotoLightTextView
+            android:id="@+id/l_translators"
+            style="@style/all_title"
+            android:text="@string/l_translators" />
+
+        <TextView
+            android:id="@+id/et_translators"
+            style="@style/all_content">
+        </TextView>
+
+        <org.openintents.distribution.about.view.RobotoLightTextView
+            android:id="@+id/l_artists"
+            style="@style/all_title"
+            android:text="@string/l_artists" />
+
+        <TextView
+            android:id="@+id/et_artists"
+            style="@style/all_content">
+        </TextView>
+
+        <org.openintents.distribution.about.view.RobotoLightTextView
+            android:id="@+id/l_international_translators"
+            style="@style/all_title"
+            android:text="@string/l_international_translators" />
+
+        <TextView
+            android:id="@+id/et_international_translators"
+            style="@style/all_content">
+        </TextView>
+
+        <TextView
+            android:id="@+id/tv_no_information"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/no_information_available"
+            android:visibility="gone">
+        </TextView>
+    </LinearLayout>
+
+</ScrollView>

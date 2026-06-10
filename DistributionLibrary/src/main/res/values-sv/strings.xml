@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="oi_distribution_app_name">OI Distributionsbibliotek</string>
+    
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">Launchpad Contributions:
+  Carl Fredrik Sima https://launchpad.net/~cf-sima
+  OpenIntents devs https://launchpad.net/~openintents-devs
+  Rikard Edgren https://launchpad.net/~rikard-edgren</string>
+	
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->	
+	<!-- EULA (End user license agreement). %s is an application name, e.g. "OI Notepad EULA". 
+		Translation should be short, since this is a title. -->
+	<string name="oi_distribution_eula_title">%s Slutanvändaravtal</string>
+	
+	<!-- EULA welcome message. %s is an application name, e.g. "... (EULA) for OI Notepad".
+		Translation can be as long as required. -->
+	<string name="oi_distribution_eula_message">Var god läs och acceptera följande Slutanvändaravtal (EULA) för %s.</string>
+	
+	<!-- Button: Accept terms of EULA. -->
+	<string name="oi_distribution_eula_accept">Acceptera</string>
+	
+	<!-- Button: Refuse terms of EULA. -->
+	<string name="oi_distribution_eula_refuse">Avbryt</string>
+	
+	<!-- New version -->
+	<!-- Application name and version. %1$s is the application name (e.g. "OI Notepad") and %2$s is the version number (e.g. "1.2.0").
+	Keep unmodified, unless your language requires that the version number is displayed first. -->
+	<string name="oi_distribution_name_and_version">%1$s %2$s</string>
+	
+	<!-- Welcome message. %s is an application name. -->
+	<string name="oi_distribution_newversion_message">Välkommen till en ny version av %s.</string>
+	
+	<string name="oi_distribution_newversion_recent_changes">Senaste ändringar:</string>
+	
+	<!-- Button: Continue to main application. -->
+	<string name="oi_distribution_newversion_continue">Fortsätt</string>
+	
+	<!-- Update -->
+	<!-- Menu command to look for updates. -->
+    <string name="oi_distribution_menu_update">Kontrollera efter updateringar</string>
+	<string name="oi_distribution_update_box_text">Kontrollera manuellt efter updateringar eller installera OI Update för automatiska meddelanden.</string>
+	<string name="oi_distribution_update_check_now">Kontrollera nu</string>
+	<string name="oi_distribution_update_get_updater">Hämta OI Updater</string>
+	<string name="oi_distribution_update_error">Nerladdningsapplikationen ej tillgänglig.</string>
+	
+    <!-- Name of the application "OI Update". Translations of the application name should be consistent. -->
+    <string name="oi_distribution_update_app">OI Update</string>
+    
+    <!-- About -->
+    <!-- Menu command to open the "about" or "info" dialog. -->
+    <string name="oi_distribution_about">Om</string>
+    <!-- %s is the version number (e.g. "1.2.1") -->
+	<string name="oi_distribution_aboutapp_not_available">Inget kompatibelt tillägg tillgängligt för visning av all info (kontakt, erkännande, licens)</string>
+    
+    <!-- Button text: Get the application "OI About". Translations of the application name should be consistent. -->
+    <string name="oi_distribution_aboutapp_get">Hämta OI About</string>
+    
+    <!-- Name of the application "OI About". Translations of the application name should be consistent. -->
+    <string name="oi_distribution_aboutapp">OI About</string>
+    
+   	<!-- Support -->
+    <string name="oi_distribution_supportapp_not_available">No compatible extension available to display full info (Help/FAQ, Contact Developers, Feature request, Donations).</string>
+    <string name="oi_distribution_supportapp_get">Get OI Support</string>
+	<string name="oi_distribution_supportapp">OI Support</string>
+    <string name="oi_distribution_support">Support</string>
+    
+    
+    <!-- Name of the application "Barcode OI Plugin". Translations of the application name should be consistent.  -->
+    <string name="oi_distribution_barcodescanner">Streckkod OI Plugin</string>
+    <!-- Dialog message. -->
+    <string name="oi_distribution_barcodescanner_not_available">Ingen kompatibel streckkodsscanner tillgänglig.</string>
+    
+    <!-- Name of the application "OI File Manager". Translations of the application name should be consistent.  -->
+    <string name="oi_distribution_filemanager">OI File Manager</string>
+    <!-- Dialog message. -->
+    <string name="oi_distribution_filemanager_not_available">Inget kompatibelt filhanteringsprogram tillgängligt.</string>
+    
+    <!-- Safe -->
+    <!-- Name of the application "OI Safe". Translations of the application name should be consistent.  -->
+    <string name="oi_distribution_safe">OI Safe</string>
+    <!-- Dialog message. -->
+    <string name="oi_distribution_safe_not_available">Inget kompatibelt krypteringsprogram tillgängligt.</string>
+    <string name="oi_distribution_safe_not_available_decrypt">Inget kompatibelt program för dekryptering tillgängligt.\n\nNotera: Du behöver återställa huvudnyckeln från en säkerhetskopia för att få åtkomst till tidigare krypterad data.</string>
+    
+    <!-- Dialog message: %s is the name of an application (e.g. "OI Notepad"). -->
+    <string name="oi_distribution_download_market_message">Ladda hem %s från Android Market eller OpenIntents webbsida.</string>
+    <!-- Dialog message: %s is the name of an application (e.g. "OI Notepad"). -->
+    <string name="oi_distribution_download_message">Ladda hem %s från OpenIntents webbsida.</string>
+    <!-- Dialog button: download the suggested application from Android Market. -->
+    <string name="oi_distribution_download_market">Ladda hem från Android Market</string>
+    <!-- Dialog button: download the suggested application from the developer web site. -->
+    <string name="oi_distribution_download_web">Webbnerladdning</string>
+	<!-- Dialog title: %s is the name of an application (e.g. "OI Notepad"). -->
+    <string name="oi_distribution_download_title">Ladda ner %s</string>
+	
+	<!-- %s is an application name (e.g. "OI About can be used with the following applications:") -->
+	<string name="oi_distribution_info_activity_text">%s kan användas tillsammans med följande applikationer:</string>
+	<!-- %s is an application name (e.g. "Launch OI Notepad") -->
+    <string name="oi_distribution_info_launch">Starta %s</string>
+    <!-- %1$s is the current application name. %2$s is another application name, and %3$s is the other application\'s version name
+    (e.g. "OI About requires OI Notepad 1.2.0 or higher.") -->
+	<string name="oi_distribution_info_not_available">%1$s behöver %2$s version %3$s eller högre.</string>
+	<!-- Title of a dialog. -->
+	<string name="oi_distribution_info_instructions">Instruktioner</string>
+	<!-- Error message -->
+	<string name="oi_distribution_launch_error">Applikationen kunde inte startas</string>
+	
+</resources>

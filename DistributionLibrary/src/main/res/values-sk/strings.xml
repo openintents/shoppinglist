@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="oi_distribution_app_name">OI Distribučná knižnica</string>
+    
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	
+	<!-- Automatically filled in by Launchpad: -->
+	<string name="about_translators">Launchpad Contributions:
+  Marek Dobransky https://launchpad.net/~marekdobr
+  OpenIntents devs https://launchpad.net/~openintents-devs</string>
+	
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	
+	<!-- EULA -->	
+	<!-- EULA (End user license agreement). %s is an application name, e.g. "OI Notepad EULA". 
+		Translation should be short, since this is a title. -->
+	<string name="oi_distribution_eula_title">%s EULA</string>
+	
+	<!-- EULA welcome message. %s is an application name, e.g. "... (EULA) for OI Notepad".
+		Translation can be as long as required. -->
+	<string name="oi_distribution_eula_message">Prosím prečítajte si nasledujúcu Licenčnú zmluvu koncového používateľa  (EULA) pre %s.</string>
+	
+	<!-- Button: Accept terms of EULA. -->
+	<string name="oi_distribution_eula_accept">Akceptovať</string>
+	
+	<!-- Button: Refuse terms of EULA. -->
+	<string name="oi_distribution_eula_refuse">Zrušiť</string>
+	
+	<!-- New version -->
+	<!-- Application name and version. %1$s is the application name (e.g. "OI Notepad") and %2$s is the version number (e.g. "1.2.0").
+	Keep unmodified, unless your language requires that the version number is displayed first. -->
+	<string name="oi_distribution_name_and_version">%1$s %2$s</string>
+	
+	<!-- Welcome message. %s is an application name. -->
+	<string name="oi_distribution_newversion_message">Vitajte v novej verzii %s</string>
+	
+	<string name="oi_distribution_newversion_recent_changes">Nedávne zmeny</string>
+	
+	<!-- Button: Continue to main application. -->
+	<string name="oi_distribution_newversion_continue">Pokračovať</string>
+	
+	<!-- Update -->
+	<!-- Menu command to look for updates. -->
+    <string name="oi_distribution_menu_update">Skontrolovať aktualizácie</string>
+	<string name="oi_distribution_update_box_text">Skontrolujte aktualizácie ručne alebo nainštalujte OI Aktualizácie pre automatické upozornenia.</string>
+	<string name="oi_distribution_update_check_now">Skontroluj teraz</string>
+	<string name="oi_distribution_update_get_updater">Získať OI Aktualizátor</string>
+	<string name="oi_distribution_update_error">Stiahnutie aplikácie nie je dostupné.</string>
+	
+    <!-- Name of the application "OI Update". Translations of the application name should be consistent. -->
+    <string name="oi_distribution_update_app">OI Aktualizácia</string>
+    
+    <!-- About -->
+    <!-- Menu command to open the "about" or "info" dialog. -->
+    <string name="oi_distribution_about">O aplikácii</string>
+    <!-- %s is the version number (e.g. "1.2.1") -->
+	<string name="oi_distribution_aboutapp_not_available">Nie je dostupné žiadne kompatibilné rozšírenie pre zobrazenie všetkých informácii (kontakty, záväzky, licencie).</string>
+    
+    <!-- Button text: Get the application "OI About". Translations of the application name should be consistent. -->
+    <string name="oi_distribution_aboutapp_get">Získať OI About</string>
+    
+    <!-- Name of the application "OI About". Translations of the application name should be consistent. -->
+    <string name="oi_distribution_aboutapp">O aplikácii OpenIntents</string>
+    
+   	<!-- Support -->
+    <string name="oi_distribution_supportapp_not_available">No compatible extension available to display full info (Help/FAQ, Contact Developers, Feature request, Donations).</string>
+    <string name="oi_distribution_supportapp_get">Get OI Support</string>
+	<string name="oi_distribution_supportapp">OI Support</string>
+    <string name="oi_distribution_support">Support</string>
+    
+    
+    <!-- Name of the application "Barcode OI Plugin". Translations of the application name should be consistent.  -->
+    <string name="oi_distribution_barcodescanner">Čiarový kód OI doplnok</string>
+    <!-- Dialog message. -->
+    <string name="oi_distribution_barcodescanner_not_available">Žiadny kompatibilný skener čiarových kódov nie je k dispozícii</string>
+    
+    <!-- Name of the application "OI File Manager". Translations of the application name should be consistent.  -->
+    <string name="oi_distribution_filemanager">OI Správca Súborov</string>
+    <!-- Dialog message. -->
+    <string name="oi_distribution_filemanager_not_available">Nie je dostupný žiadny kompatibilný správca súborov.</string>
+    
+    <!-- Safe -->
+    <!-- Name of the application "OI Safe". Translations of the application name should be consistent.  -->
+    <string name="oi_distribution_safe">OI Trezor</string>
+    <!-- Dialog message. -->
+    <string name="oi_distribution_safe_not_available">Žiadna kompatibilná šifrovacia aplikácia nie je k dispozícii</string>
+    <string name="oi_distribution_safe_not_available_decrypt">Žiadna kompatibilná aplikácia na dešifrovanie nie je dostupná.\n\nPoznámka: Musíte obnoviť univerzálny kľúč zo zálohovaného súboru pre prístup k skôr zašifrovaných údajom.</string>
+    
+    <!-- Dialog message: %s is the name of an application (e.g. "OI Notepad"). -->
+    <string name="oi_distribution_download_market_message">Prosím stiahnite si %S z Obchodu alebo webových stránok OpenIntents.</string>
+    <!-- Dialog message: %s is the name of an application (e.g. "OI Notepad"). -->
+    <string name="oi_distribution_download_message">Prosím siahnite si %s z webových stránok OpenIntents</string>
+    <!-- Dialog button: download the suggested application from Android Market. -->
+    <string name="oi_distribution_download_market">Stiahnuť z obchodu</string>
+    <!-- Dialog button: download the suggested application from the developer web site. -->
+    <string name="oi_distribution_download_web">Stiahnuť z webu</string>
+	<!-- Dialog title: %s is the name of an application (e.g. "OI Notepad"). -->
+    <string name="oi_distribution_download_title">Sťahujem %s</string>
+	
+	<!-- %s is an application name (e.g. "OI About can be used with the following applications:") -->
+	<string name="oi_distribution_info_activity_text">%s môže byť použité nasledujúcimi aplikáciami:</string>
+	<!-- %s is an application name (e.g. "Launch OI Notepad") -->
+    <string name="oi_distribution_info_launch">Spustiť %s</string>
+    <!-- %1$s is the current application name. %2$s is another application name, and %3$s is the other application\'s version name
+    (e.g. "OI About requires OI Notepad 1.2.0 or higher.") -->
+	<string name="oi_distribution_info_not_available">%1$s vyžaduje %2$s %3$s alebo vyššiu.</string>
+	<!-- Title of a dialog. -->
+	<string name="oi_distribution_info_instructions">Pokyny</string>
+	<!-- Error message -->
+	<string name="oi_distribution_launch_error">Aplikácia nemôže byť spustená</string>
+	
+</resources>

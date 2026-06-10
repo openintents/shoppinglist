@@ -1,0 +1,133 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="4dp">
+
+    <LinearLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageSwitcher
+            android:id="@+id/i_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:paddingBottom="15sp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                tools:ignore="contentDescription"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                tools:ignore="contentDescription"/>
+        </ImageSwitcher>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:layout_margin="8dp"
+            android:background="@color/oi_distribution_separator_secondary" />
+
+        <TextSwitcher
+            android:id="@+id/t_program_name_and_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <org.openintents.distribution.about.view.RobotoLightTextView style="@style/all_title" />
+
+            <org.openintents.distribution.about.view.RobotoLightTextView style="@style/all_title" />
+        </TextSwitcher>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/top_separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/top"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/oi_distribution_separator" />
+
+    <TextSwitcher
+        android:id="@+id/t_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView style="@style/info_email_copyright_website" />
+
+        <TextView style="@style/info_email_copyright_website" />
+    </TextSwitcher>
+
+    <TextSwitcher
+        android:id="@+id/t_website"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/t_email"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            style="@style/info_email_copyright_website"
+            android:autoLink="none" />
+
+        <TextView
+            style="@style/info_email_copyright_website"
+            android:autoLink="none" />
+    </TextSwitcher>
+
+    <TextSwitcher
+        android:id="@+id/t_copyright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/t_website"
+        android:layout_centerHorizontal="true">
+
+        <TextView style="@style/info_email_copyright_website" />
+
+        <TextView style="@style/info_email_copyright_website" />
+    </TextSwitcher>
+
+    <View
+        android:id="@+id/bottom_separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@id/t_copyright"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/oi_distribution_separator_secondary" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottom_separator"
+        android:layout_below="@id/top_separator">
+
+        <TextSwitcher
+            android:id="@+id/t_comments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView style="@style/info_comments" />
+
+            <TextView style="@style/info_comments" />
+        </TextSwitcher>
+    </ScrollView>
+
+</RelativeLayout>

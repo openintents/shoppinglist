@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+ * Copyright (C) 2007-2008 OpenIntents.org
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+<resources>
+	<!-- ***************************
+	     About information
+	     *************************** -->
+	<string name="about_copyright">Copyright © 2008–2013 OpenIntents</string> 
+	<string name="about_website_url">http://www.openintents.org</string>
+	<string name="about_email">support@openintents.org</string>
+	
+    <string-array name="about_authors"><!-- Add your name here if you helped out -->
+        <item>Peli</item>
+    </string-array>
+    
+    <string-array name="about_documenters"><!-- Add your name here if you helped out -->
+        <!-- <item></item> -->
+    </string-array>
+    
+    <string-array name="about_translators"><!-- Add your name here if you helped out, but only in the arrays.xml for the localization that you helped to translate into! -->
+        <!-- <item></item>  -->
+    </string-array>
+    
+    <string-array name="about_artists"><!-- Add your name here if you helped out -->
+        <item>Peli</item>
+    </string-array>
+    
+	
+	<!-- ***************************
+	     Distribution
+	     *************************** -->
+	<!-- Update -->
+	<string name="oi_distribution_update_checker_package">org.openintents.updatechecker</string>
+    <string name="oi_distribution_update_checker_website">https://github.com/openintents/openintents/tree/master/UpdateCheckerApp</string>
+	
+	<!-- About -->
+    <string name="oi_distribution_aboutapp_package">org.openintents.about</string>
+    <string name="oi_distribution_aboutapp_website">http://www.openintents.org/about/</string>
+	
+	<!-- Support -->
+    <string name="oi_distribution_support_page">http://www.openintents.org/contribute</string>
+	<!-- Privacy -->
+    <string name="oi_distribution_privacy_page">http://www.openintents.org/privacy-for-apps</string>
+
+    <!-- Barcode plugin -->
+    <string name="oi_distribution_barcodescanner_package">org.openintents.barcodescanner</string>
+    <string name="oi_distribution_barcodescanner_website">https://play.google.com/store/apps/details?id=org.openintents.barcodescanner</string>
+	
+    <!-- File Manager -->
+    <string name="oi_distribution_filemanager_package">org.openintents.filemanager</string>
+    <string name="oi_distribution_filemanager_website">http://www.openintents.org/en/filemanager</string>
+	
+	<!-- Safe -->
+    <string name="oi_distribution_safe_package">org.openintents.safe</string>
+    <string name="oi_distribution_safe_website">http://www.openintents.org/en/safe</string>
+
+    <string-array name="languages">
+        <item>ar</item>
+        <!-- Arabic -->
+        <item>be</item>
+        <!-- Belarusian -->
+        <item>bg</item>
+        <!-- Bulgarian -->
+        <item>ca</item>
+        <!-- Catalan -->
+        <item>cs</item>
+        <!-- Czech -->
+        <item>da</item>
+        <!-- Danish -->
+        <item>de</item>
+        <!-- German -->
+        <item>el</item>
+        <!-- Greek -->
+        <item>en</item>
+        <!-- English -->
+        <item>en_GB</item>
+        <!-- English (United Kingdom) -->
+        <item>es</item>
+        <!-- Spanish -->
+        <item>fa</item>
+        <!-- Persian -->
+        <item>fi</item>
+        <!-- Finnish -->
+        <item>fo</item>
+        <!-- Faroese -->
+        <item>fr</item>
+        <!-- French -->
+        <item>hi</item>
+        <!-- Hindi -->
+        <item>hr</item>
+        <!-- Croatian -->
+        <item>hu</item>
+        <!-- Hungarian -->
+        <item>it</item>
+        <!-- Italian -->
+        <item>iw</item>
+        <!-- Hebrew -->
+        <item>ja</item>
+        <!-- Japanese -->
+        <item>ko</item>
+        <!-- Korean -->
+        <item>lo</item>
+        <!-- Lao -->
+        <item>lv</item>
+        <!-- Latvian -->
+        <item>mk</item>
+        <!-- Macedonian -->
+        <item>nb</item>
+        <!-- Norwegian Bokmal -->
+        <item>nl</item>
+        <!-- Dutch -->
+        <item>oc</item>
+        <!-- Occitan (post 1500) -->
+        <item>pa</item>
+        <!-- Punjabi -->
+        <item>pl</item>
+        <!-- Polish -->
+        <item>pt</item>
+        <!-- Portuguese -->
+        <item>pt_BR</item>
+        <!-- Brazilian Portuguese -->
+        <item>ro</item>
+        <!-- Romanian -->
+        <item>ru</item>
+        <!-- Russian -->
+        <item>sc</item>
+        <!-- Sardinian -->
+        <item>sd</item>
+        <!-- Sindhi -->
+        <item>sk</item>
+        <!-- Slovak -->
+        <item>sl</item>
+        <!-- Slovenian -->
+        <item>sv</item>
+        <!-- Swedish -->
+        <item>tl</item>
+        <!-- Tagalog -->
+        <item>tr</item>
+        <!-- Turkish -->
+        <item>ug</item>
+        <!-- Uyghur -->
+        <item>zh_CN</item>
+        <!-- Chinese (Simplified) -->
+        <item>zh_TW</item>
+        <!-- Chinese (Traditional) -->
+    </string-array>
+
+</resources>

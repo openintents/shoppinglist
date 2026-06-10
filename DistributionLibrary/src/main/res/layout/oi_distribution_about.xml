@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+**
+** 	 Copyright (C) 2008-2017 pjv (and others, see About dialog)
+** 
+** 	 This file is part of OI About.
+**
+**   OI About is free software: you can redistribute it and/or modify
+**   it under the terms of the GNU General Public License as published by
+**   the Free Software Foundation, either version 3 of the License, or
+**   (at your option) any later version.
+**
+**   OI About is distributed in the hope that it will be useful,
+**   but WITHOUT ANY WARRANTY; without even the implied warranty of
+**   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**   GNU General Public License for more details.
+**
+**   You should have received a copy of the GNU General Public License
+**   along with OI About.  If not, see <http://www.gnu.org/licenses/>.
+*/
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <!-- Having the tabs at the bottom would be better but it seems this is not easily possible. pjv 2008-12-31 -->
+    <include
+        layout="@layout/oi_distribution_about_info"
+        android:id="@+id/info" />
+
+    <include
+        layout="@layout/oi_distribution_about_credits"
+        android:id="@+id/credits" />
+
+    <include
+        layout="@layout/oi_distribution_about_license"
+        android:id="@+id/license" />
+
+    <include
+        layout="@layout/oi_distribution_about_recent_changes"
+        android:id="@+id/recent_changes" />
+</FrameLayout>

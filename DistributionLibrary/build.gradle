@@ -1,0 +1,33 @@
+apply plugin: 'com.android.library'
+
+android {
+    namespace 'org.openintents.distribution'
+    compileSdk rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+    }
+
+    lint {
+        abortOnError false
+        disable 'GoogleAppIndexingWarning'
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+}
+
+dependencies {
+    // Vendored from com.github.openintents:distribution:3.0.2 (JitPack) so the app
+    // builds entirely from source (F-Droid-friendly, no JitPack/Jetifier needed).
+    api 'com.google.android.material:material:1.12.0'
+}
