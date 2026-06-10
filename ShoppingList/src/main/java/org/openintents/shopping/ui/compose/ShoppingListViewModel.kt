@@ -44,6 +44,8 @@ data class ShoppingUiState(
     val theme: ListTheme = ListTheme.DEFAULT,
     val loading: Boolean = true,
     val userMessage: String? = null,
+    /** Set after an add so the list can scroll to the new item; the UI consumes it. */
+    val scrollToContainsId: Long? = null,
 ) {
     val currentListName: String
         get() = lists.firstOrNull { it.id == currentListId }?.name ?: ""
@@ -173,9 +175,14 @@ class ShoppingListViewModel(
 
     fun addItem(name: String) = viewModelScope.launch {
         val listId = _state.value.currentListId
-        withContext(ioDispatcher) { repository.addItem(listId, name) }
-        refresh()
+        val itemId = withContext(ioDispatcher) { repository.addItem(listId, name) }
+        refresh().join()
+        // Tell the UI to scroll to where the new item landed (sort decides the position).
+        val containsId = _state.value.items.firstOrNull { it.itemId == itemId }?.containsId
+        _state.update { it.copy(scrollToContainsId = containsId) }
     }
+
+    fun consumeScrollTarget() = _state.update { it.copy(scrollToContainsId = null) }
 
     fun toggle(item: ShoppingItem) = viewModelScope.launch {
         withContext(ioDispatcher) { repository.toggleItemBought(item) }

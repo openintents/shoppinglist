@@ -18,6 +18,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
@@ -63,6 +66,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -111,6 +115,7 @@ fun ShoppingListRoute(viewModel: ShoppingListViewModel) {
         onRenameList = viewModel::renameCurrentList,
         onDeleteList = viewModel::deleteCurrentList,
         onSetTheme = viewModel::setTheme,
+        onConsumeScroll = viewModel::consumeScrollTarget,
     )
 }
 
@@ -142,8 +147,10 @@ fun ShoppingListScreen(
     onRenameList: (String) -> Unit,
     onDeleteList: () -> Unit,
     onSetTheme: (ListTheme) -> Unit,
+    onConsumeScroll: () -> Unit,
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
+    val listState = rememberLazyListState()
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     var showNewListDialog by remember { mutableStateOf(false) }
@@ -171,6 +178,14 @@ fun ShoppingListScreen(
             android.widget.Toast.makeText(context, it, android.widget.Toast.LENGTH_SHORT).show()
             onConsumeMessage()
         }
+    }
+
+    // After an add, scroll the list to where the new item landed (sort decides position).
+    LaunchedEffect(state.scrollToContainsId) {
+        val target = state.scrollToContainsId ?: return@LaunchedEffect
+        val idx = state.visibleItems.indexOfFirst { it.containsId == target }
+        if (idx >= 0) listState.animateScrollToItem(idx)
+        onConsumeScroll()
     }
 
     ModalNavigationDrawer(
@@ -250,7 +265,10 @@ fun ShoppingListScreen(
                     )
                     HorizontalDivider()
                 }
-                LazyColumn(modifier = Modifier.weight(1f).fillMaxWidth()) {
+                LazyColumn(
+                    state = listState,
+                    modifier = Modifier.weight(1f).fillMaxWidth()
+                ) {
                     if (state.mode == ListMode.PICK_ITEMS) {
                         items(
                             state.pickItems.sortedBy { it.name.lowercase() },
@@ -836,6 +854,12 @@ private fun formatTotal(cents: Long): String =
 @Composable
 private fun AddItemRow(onAdd: (String) -> Unit) {
     var newItem by remember { mutableStateOf("") }
+    val submit = {
+        if (newItem.isNotBlank()) {
+            onAdd(newItem)
+            newItem = ""
+        }
+    }
     Row(
         modifier = Modifier.fillMaxWidth().padding(8.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -844,16 +868,12 @@ private fun AddItemRow(onAdd: (String) -> Unit) {
             value = newItem,
             onValueChange = { newItem = it },
             label = { Text("Add item") },
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+            keyboardActions = KeyboardActions(onDone = { submit() }),
             modifier = Modifier.weight(1f)
         )
-        IconButton(
-            onClick = {
-                if (newItem.isNotBlank()) {
-                    onAdd(newItem)
-                    newItem = ""
-                }
-            }
-        ) {
+        IconButton(onClick = submit) {
             Icon(Icons.Filled.Add, contentDescription = "Add")
         }
     }
