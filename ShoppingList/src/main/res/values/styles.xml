@@ -3,6 +3,11 @@
 
     <style name="OITheme" parent="@style/Theme.AppCompat">
         <item name="actionBarStyle">@style/OIActionBar</item>
+        <!-- The legacy View UI does not apply window insets; opt out of the
+             SDK 35 edge-to-edge enforcement so the bottom add-bar isn't drawn
+             under the navigation bar. (Honored while targeting SDK 35; ignored
+             on API < 35.) -->
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
     </style>
 
     <style name="OIActionBar" parent="@style/Widget.AppCompat.ActionBar">
