@@ -30,6 +30,12 @@ interface ShoppingRepository {
     fun addItem(listId: Long, name: String): Long
 
     /**
+     * Distinct item names from the whole catalogue (every list), sorted, for the
+     * add-field auto-suggestions. Items on the current list are a subset of these.
+     */
+    fun getItemNameSuggestions(): List<String>
+
+    /**
      * Applies [edit] to [item]: name/price/units/tags on the item itself,
      * quantity/priority on its membership of the current list.
      */

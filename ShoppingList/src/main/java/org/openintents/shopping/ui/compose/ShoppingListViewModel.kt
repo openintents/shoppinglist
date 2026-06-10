@@ -42,6 +42,8 @@ data class ShoppingUiState(
     val sortMode: SortMode = SortMode.UNCHECKED_FIRST,
     val hideChecked: Boolean = false,
     val theme: ListTheme = ListTheme.DEFAULT,
+    /** Catalogue item names for the add-field auto-suggestions. */
+    val suggestions: List<String> = emptyList(),
     val loading: Boolean = true,
     val userMessage: String? = null,
     /** Set after an add so the list can scroll to the new item; the UI consumes it. */
@@ -105,13 +107,15 @@ class ShoppingListViewModel(
             withContext(ioDispatcher) { repository.getStorePricesForList(storeId) }
         } else emptyMap()
         val theme = withContext(ioDispatcher) { repository.getListTheme(listId) }
+        val suggestions = withContext(ioDispatcher) { repository.getItemNameSuggestions() }
         val pickItems = if (_state.value.mode == ListMode.PICK_ITEMS) {
             withContext(ioDispatcher) { repository.getAllListItems(listId) }
         } else emptyList()
         _state.update {
             it.copy(
                 items = items, pickItems = pickItems, stores = stores,
-                storePricesForList = storePrices, theme = theme, loading = false
+                storePricesForList = storePrices, theme = theme,
+                suggestions = suggestions, loading = false
             )
         }
     }

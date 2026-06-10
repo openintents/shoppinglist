@@ -97,6 +97,25 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
         return itemId
     }
 
+    override fun getItemNameSuggestions(): List<String> {
+        val out = ArrayList<String>()
+        resolver.query(
+            Items.CONTENT_URI, arrayOf(Items.NAME), null, null,
+            Items.NAME + " COLLATE NOCASE ASC"
+        )?.use { c ->
+            var last = ""
+            while (c.moveToNext()) {
+                val name = c.getString(0) ?: continue
+                // The query is sorted, so skip case-insensitive duplicates as we go.
+                if (name.isNotBlank() && !name.equals(last, ignoreCase = true)) {
+                    out.add(name)
+                    last = name
+                }
+            }
+        }
+        return out
+    }
+
     override fun updateItem(item: ShoppingItem, edit: ItemEdit) {
         // Name, price, units and tags live on the item itself.
         val itemValues = ContentValues().apply {

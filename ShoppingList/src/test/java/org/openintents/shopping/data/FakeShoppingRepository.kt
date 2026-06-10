@@ -43,6 +43,13 @@ class FakeShoppingRepository : ShoppingRepository {
         return id
     }
 
+    override fun getItemNameSuggestions(): List<String> =
+        itemsByList.values.flatten()
+            .map { it.name }
+            .filter { it.isNotBlank() }
+            .distinctBy { it.lowercase() }
+            .sortedBy { it.lowercase() }
+
     private val noteByItem = mutableMapOf<Long, String?>()
 
     override fun updateItem(item: ShoppingItem, edit: ItemEdit) {

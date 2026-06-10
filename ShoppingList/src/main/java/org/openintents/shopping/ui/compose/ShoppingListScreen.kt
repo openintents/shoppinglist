@@ -48,6 +48,7 @@ import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
+import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -313,7 +314,7 @@ fun ShoppingListScreen(
                     HorizontalDivider()
                     TotalsBar(totals = state.totals)
                 }
-                AddItemRow(onAdd = onAddItem)
+                AddItemRow(suggestions = state.suggestions, onAdd = onAddItem)
             }
         }
     }
@@ -852,7 +853,7 @@ private fun formatTotal(cents: Long): String =
     if (cents == 0L) "0.00" else PriceConverter.getStringFromCentPrice(cents)
 
 @Composable
-private fun AddItemRow(onAdd: (String) -> Unit) {
+private fun AddItemRow(suggestions: List<String>, onAdd: (String) -> Unit) {
     var newItem by remember { mutableStateOf("") }
     val submit = {
         if (newItem.isNotBlank()) {
@@ -860,21 +861,51 @@ private fun AddItemRow(onAdd: (String) -> Unit) {
             newItem = ""
         }
     }
-    Row(
-        modifier = Modifier.fillMaxWidth().padding(8.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        OutlinedTextField(
-            value = newItem,
-            onValueChange = { newItem = it },
-            label = { Text("Add item") },
-            singleLine = true,
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-            keyboardActions = KeyboardActions(onDone = { submit() }),
-            modifier = Modifier.weight(1f)
-        )
-        IconButton(onClick = submit) {
-            Icon(Icons.Filled.Add, contentDescription = "Add")
+    // Catalogue names matching what's typed (case-insensitive); prefix matches first.
+    val matches = remember(newItem, suggestions) {
+        val q = newItem.trim()
+        if (q.isBlank()) emptyList()
+        else suggestions.asSequence()
+            .filter { it.contains(q, ignoreCase = true) && !it.equals(q, ignoreCase = true) }
+            .sortedByDescending { it.startsWith(q, ignoreCase = true) }
+            .take(8)
+            .toList()
+    }
+    Column(modifier = Modifier.fillMaxWidth()) {
+        if (matches.isNotEmpty()) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .horizontalScroll(rememberScrollState())
+                    .padding(horizontal = 8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                matches.forEach { name ->
+                    // Tapping a suggestion adds it straight away (fast re-add).
+                    SuggestionChip(
+                        onClick = { onAdd(name); newItem = "" },
+                        label = { Text(name) },
+                    )
+                    Spacer(Modifier.width(8.dp))
+                }
+            }
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            OutlinedTextField(
+                value = newItem,
+                onValueChange = { newItem = it },
+                label = { Text("Add item") },
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+                keyboardActions = KeyboardActions(onDone = { submit() }),
+                modifier = Modifier.weight(1f)
+            )
+            IconButton(onClick = submit) {
+                Icon(Icons.Filled.Add, contentDescription = "Add")
+            }
         }
     }
 }
