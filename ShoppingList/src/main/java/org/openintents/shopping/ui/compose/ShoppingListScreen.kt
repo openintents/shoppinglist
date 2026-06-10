@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -33,6 +34,7 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
@@ -191,7 +193,19 @@ fun ShoppingListScreen(
             snackbarHost = { SnackbarHost(snackbarHostState) },
             topBar = {
                 TopAppBar(
-                    title = { Text(state.currentListName.ifEmpty { "Shopping list" }) },
+                    title = {
+                        Column {
+                            Text(
+                                state.currentListName.ifEmpty { "Shopping list" },
+                                style = MaterialTheme.typography.titleLarge,
+                            )
+                            Text(
+                                if (state.mode == ListMode.PICK_ITEMS) "Pick items" else "Shopping",
+                                style = MaterialTheme.typography.labelMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            )
+                        }
+                    },
                     navigationIcon = {
                         IconButton(onClick = { scope.launch { drawerState.open() } }) {
                             Icon(Icons.Filled.Menu, contentDescription = "Open lists")
@@ -226,6 +240,7 @@ fun ShoppingListScreen(
                     .fillMaxSize()
                     .padding(padding)
                     .background(Color(theme.backgroundArgb))
+                    .imePadding() // lift the bottom add-bar above the soft keyboard
             ) {
                 if (state.stores.isNotEmpty()) {
                     StoreFilterRow(
