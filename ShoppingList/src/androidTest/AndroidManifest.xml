@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.openintents.shopping.test"
+    package="org.openintents.shopping.ishy.test"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -9,7 +9,7 @@
         android:targetSdkVersion="15" />
     <instrumentation
         android:name="androidx.test.runner.AndroidJUnitRunner"
-        android:targetPackage="org.openintents.shopping" />
+        android:targetPackage="org.openintents.shopping.ishy" />
 
     <!-- Instrumentation for Jenkins server
     <instrumentation

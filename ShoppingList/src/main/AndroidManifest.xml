@@ -45,12 +45,12 @@
     1.0.3 [10004]: 2009-02-04  -->
 
     <permission
-        android:name="org.openintents.shopping.READ_PERMISSION"
+        android:name="org.openintents.shopping.ishy.READ_PERMISSION"
         android:description="@string/oi_shopping_permission_read_descr"
         android:label="@string/oi_shopping_permission_read"
         android:protectionLevel="normal" />
     <permission
-        android:name="org.openintents.shopping.WRITE_PERMISSION"
+        android:name="org.openintents.shopping.ishy.WRITE_PERMISSION"
         android:description="@string/oi_shopping_permission_write_descr"
         android:label="@string/oi_shopping_permission_write"
         android:protectionLevel="normal" />
@@ -60,8 +60,8 @@
         android:name="android.hardware.touchscreen"
         android:required="false" />
 
-    <uses-permission android:name="org.openintents.shopping.READ_PERMISSION" />
-    <uses-permission android:name="org.openintents.shopping.WRITE_PERMISSION" />
+    <uses-permission android:name="org.openintents.shopping.ishy.READ_PERMISSION" />
+    <uses-permission android:name="org.openintents.shopping.ishy.WRITE_PERMISSION" />
 
     <application
         android:name=".ShoppingApplication"
@@ -94,10 +94,10 @@
 
         <provider
             android:name="org.openintents.shopping.provider.ShoppingProvider"
-            android:authorities="org.openintents.shopping"
+            android:authorities="org.openintents.shopping.ishy"
             android:exported="true"
-            android:readPermission="org.openintents.shopping.READ_PERMISSION"
-            android:writePermission="org.openintents.shopping.WRITE_PERMISSION" />
+            android:readPermission="org.openintents.shopping.ishy.READ_PERMISSION"
+            android:writePermission="org.openintents.shopping.ishy.WRITE_PERMISSION" />
 
         <!-- Shopping activity -->
         <activity

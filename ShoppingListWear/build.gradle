@@ -6,7 +6,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "org.openintents.shopping"
+        applicationId "org.openintents.shopping.ishy"
         minSdkVersion 20
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

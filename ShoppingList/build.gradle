@@ -7,13 +7,13 @@ android {
     compileSdk rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId "org.openintents.shopping"
+        applicationId "org.openintents.shopping.ishy"
         versionName "2.2.1"
         versionCode 100221
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
 
-        testApplicationId "org.openintents.shopping.test"
+        testApplicationId "org.openintents.shopping.ishy.test"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", "$applicationId-$versionName")
     }
