@@ -33,14 +33,6 @@
             android:key="sortorder"
             android:summary="@string/preference_sortorder_summary"
             android:title="@string/preference_sortorder_title" />
-        <ListPreference
-            android:defaultValue="1"
-            android:dialogTitle="@string/preference_capitalization_dialog_title"
-            android:entries="@array/preference_capitalization_entries"
-            android:entryValues="@array/preference_capitalization_entryvalues"
-            android:key="capitalization"
-            android:summary="@string/preference_capitalization_summary"
-            android:title="@string/preference_capitalization_title" />
         <Preference
             android:key="layout_choice"
             android:title="@string/layout_choice_title" />
@@ -68,6 +60,14 @@
                     android:key="orientation"
                     android:summary="@string/preference_orientation_summary"
                     android:title="@string/preference_orientation" />
+                <ListPreference
+                    android:defaultValue="1"
+                    android:dialogTitle="@string/preference_capitalization_dialog_title"
+                    android:entries="@array/preference_capitalization_entries"
+                    android:entryValues="@array/preference_capitalization_entryvalues"
+                    android:key="capitalization"
+                    android:summary="@string/preference_capitalization_summary"
+                    android:title="@string/preference_capitalization_title" />
                 <CheckBoxPreference
                     android:defaultValue="false"
                     android:key="hidechecked"
