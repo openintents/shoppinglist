@@ -174,7 +174,6 @@ class PreferenceActivity : android.preference.PreferenceActivity(),
         }
 
         @JvmStatic
-        @JvmStatic
         fun getShowUndoSnackbarFromPrefs(context: Context): Boolean {
             return PreferenceManager.getDefaultSharedPreferences(context)
                     .getBoolean(PREFS_SHOW_UNDO_SNACKBAR, PREFS_SHOW_UNDO_SNACKBAR_DEFAULT)
