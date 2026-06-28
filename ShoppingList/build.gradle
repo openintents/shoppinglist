@@ -8,8 +8,8 @@ android {
 
     defaultConfig {
         applicationId "org.openintents.shopping.ishy"
-        versionName "2.2.2"
-        versionCode 100222
+        versionName "2.2.3"
+        versionCode 100223
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
 
