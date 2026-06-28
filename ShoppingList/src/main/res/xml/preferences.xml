@@ -33,6 +33,14 @@
             android:key="sortorder"
             android:summary="@string/preference_sortorder_summary"
             android:title="@string/preference_sortorder_title" />
+        <ListPreference
+            android:defaultValue="1"
+            android:dialogTitle="@string/preference_capitalization_dialog_title"
+            android:entries="@array/preference_capitalization_entries"
+            android:entryValues="@array/preference_capitalization_entryvalues"
+            android:key="capitalization"
+            android:summary="@string/preference_capitalization_summary"
+            android:title="@string/preference_capitalization_title" />
         <Preference
             android:key="layout_choice"
             android:title="@string/layout_choice_title" />
@@ -41,14 +49,6 @@
             android:summary="@string/preference_advanced_summary"
             android:title="@string/preference_advanced">
             <PreferenceCategory android:title="@string/preference_general">
-                <ListPreference
-                    android:defaultValue="1"
-                    android:dialogTitle="@string/preference_capitalization_dialog_title"
-                    android:entries="@array/preference_capitalization_entries"
-                    android:entryValues="@array/preference_capitalization_entryvalues"
-                    android:key="capitalization"
-                    android:summary="@string/preference_capitalization_summary"
-                    android:title="@string/preference_capitalization_title" />
                 <ListPreference
                     android:defaultValue="-1"
                     android:dialogTitle="@string/preference_orientation_dialog_title"
@@ -132,7 +132,7 @@
                     android:defaultValue="true"
                     android:key="showtags"
                     android:summary="@string/preference_showtags_summary"
-                    android:title="@string/preference_showtags_title" />\
+                    android:title="@string/preference_showtags_title" />
                 <CheckBoxPreference
                     android:defaultValue="true"
                     android:key="showunits"
@@ -147,7 +147,7 @@
                     android:defaultValue="true"
                     android:key="showpriority"
                     android:summary="@string/preference_showpriority_summary"
-                    android:title="@string/preference_showpriority_title"></CheckBoxPreference>
+                    android:title="@string/preference_showpriority_title" />
             </PreferenceCategory>
             <PreferenceCategory android:title="@string/preference_sorting">
                 <CheckBoxPreference
@@ -178,12 +178,6 @@
                     android:key="sortorderForShoppingLists"
                     android:summary="@string/preference_sortorder_for_slists_summary"
                     android:title="@string/preference_sortorder_for_shopping_lists" />
-                <!--
-                <CheckBoxPreference android:key="pickitemsinlist"
-                  android:defaultValue="false" android:title="@string/preference_pickitemsinlist_title"
-                  android:summaryOn="@string/preference_pickitemsinlist_on_summary"
-                  android:summaryOff="@string/preference_pickitemsinlist_off_summary" />
-                -->
             </PreferenceCategory>
             <PreferenceCategory android:title="@string/preference_prio_subtotal">
                 <ListPreference
