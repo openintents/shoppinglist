@@ -174,11 +174,13 @@ class PreferenceActivity : android.preference.PreferenceActivity(),
         }
 
         @JvmStatic
+        @JvmStatic
         fun getShowUndoSnackbarFromPrefs(context: Context): Boolean {
             return PreferenceManager.getDefaultSharedPreferences(context)
                     .getBoolean(PREFS_SHOW_UNDO_SNACKBAR, PREFS_SHOW_UNDO_SNACKBAR_DEFAULT)
         }
 
+        @JvmStatic
         fun getUsingHoloSearchFromPrefs(context: Context): Boolean {
             return PreferenceManager.getDefaultSharedPreferences(context)
                     .getBoolean(PREFS_HOLO_SEARCH, PREFS_HOLO_SEARCH_DEFAULT)
