@@ -405,6 +405,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         if (LayoutChoiceActivity.show(this)) {
             finish();
+            return;
         }
         setContentView(R.layout.activity_shopping);
 
@@ -2810,7 +2811,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                     uri = Items.CONTENT_URI;
                     retCol = Items.NAME;
                 } else {
-                    uri = Uri.parse("content://org.openintents.shopping/containsfull/list").buildUpon().
+                    uri = Uri.parse("content://org.openintents.shopping.ishy/containsfull/list").buildUpon().
                             appendPath(listId).build();
                     retCol = "items.name";
                 }
@@ -2866,7 +2867,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                     new String[]{ShoppingContract.Items.TAGS}, null, null,
                     ShoppingContract.Items.DEFAULT_SORT_ORDER);
         } else {
-            Uri uri = Uri.parse("content://org.openintents.shopping/listtags")
+            Uri uri = Uri.parse("content://org.openintents.shopping.ishy/listtags")
                     .buildUpon().appendPath(listId).build();
             c = getContentResolver().query(uri,
                     new String[]{ShoppingContract.ContainsFull.ITEM_TAGS},

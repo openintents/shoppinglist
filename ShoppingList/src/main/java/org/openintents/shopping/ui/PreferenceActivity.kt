@@ -462,7 +462,7 @@ class PreferenceActivity : android.preference.PreferenceActivity(),
 
             prefs.edit()
                     .putBoolean(PREFS_SHOW_LAYOUT_CHOICE, showLayoutChoice)
-                    .apply()
+                    .commit()
         }
     }
 

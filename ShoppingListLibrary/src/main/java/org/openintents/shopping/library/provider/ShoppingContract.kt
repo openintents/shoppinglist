@@ -31,7 +31,7 @@ object ShoppingContract {
 
     const val ITEM_TYPE = "vnd.android.cursor.item/vnd.openintents.shopping.item"
     const val QUERY_ITEMS_WITH_STATE = "itemsWithState"
-    const val AUTHORITY = "org.openintents.shopping"
+    const val AUTHORITY = "org.openintents.shopping.ishy"
 
     /**
      * Items that can be put into shopping lists.
@@ -43,7 +43,7 @@ object ShoppingContract {
          */
         @JvmField
         val CONTENT_URI: Uri = Uri
-            .parse("content://org.openintents.shopping/items")
+            .parse("content://org.openintents.shopping.ishy/items")
 
         /**
          * The default sort order for this table.
@@ -183,7 +183,7 @@ object ShoppingContract {
          */
         @JvmField
         val CONTENT_URI: Uri = Uri
-            .parse("content://org.openintents.shopping/lists")
+            .parse("content://org.openintents.shopping.ishy/lists")
 
         /**
          * The default sort order for this table.
@@ -343,7 +343,7 @@ object ShoppingContract {
          */
         @JvmField
         val CONTENT_URI: Uri = Uri
-            .parse("content://org.openintents.shopping/contains")
+            .parse("content://org.openintents.shopping.ishy/contains")
 
         /**
          * The default sort order for this table.
@@ -502,7 +502,7 @@ object ShoppingContract {
          */
         @JvmField
         val CONTENT_URI: Uri = Uri
-            .parse("content://org.openintents.shopping/containsfull")
+            .parse("content://org.openintents.shopping.ishy/containsfull")
 
         /**
          * The default sort order for this table.
@@ -733,7 +733,7 @@ object ShoppingContract {
          */
         @JvmField
         val CONTENT_URI: Uri = Uri
-            .parse("content://org.openintents.shopping/stores")
+            .parse("content://org.openintents.shopping.ishy/stores")
 
         /**
          * The default sort order for this table.
@@ -774,7 +774,7 @@ object ShoppingContract {
 
         @JvmField
         val QUERY_BY_LIST_URI: Uri = Uri
-            .parse("content://org.openintents.shopping/liststores")
+            .parse("content://org.openintents.shopping.ishy/liststores")
     }
 
     /**
@@ -787,7 +787,7 @@ object ShoppingContract {
          */
         @JvmField
         val CONTENT_URI: Uri = Uri
-            .parse("content://org.openintents.shopping/itemstores")
+            .parse("content://org.openintents.shopping.ishy/itemstores")
 
         /**
          * The default sort order for this table.
@@ -861,7 +861,7 @@ object ShoppingContract {
          */
         @JvmField
         val CONTENT_URI: Uri = Uri
-            .parse("content://org.openintents.shopping/units")
+            .parse("content://org.openintents.shopping.ishy/units")
 
         /**
          * The default sort order for this table.
@@ -914,7 +914,7 @@ object ShoppingContract {
          */
         @JvmField
         val CONTENT_URI: Uri = Uri
-            .parse("content://org.openintents.shopping/notes")
+            .parse("content://org.openintents.shopping.ishy/notes")
 
         /**
          * The MIME type of {@link #CONTENT_URI} providing a directory of notes.
@@ -1000,7 +1000,7 @@ object ShoppingContract {
          */
         @JvmField
         val CONTENT_URI: Uri = Uri
-            .parse("content://org.openintents.shopping/lists/active")
+            .parse("content://org.openintents.shopping.ishy/lists/active")
 
         /**
          * Generic projection map.
@@ -1018,7 +1018,7 @@ object ShoppingContract {
          */
         @JvmField
         val CONTENT_URI: Uri = Uri
-            .parse("content://org.openintents.shopping/subtotals")
+            .parse("content://org.openintents.shopping.ishy/subtotals")
 
         /**
          * Priority

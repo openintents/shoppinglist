@@ -29,7 +29,7 @@
          Applicatio-specific strings
          *************************** -->
     <!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-    <string name="app_name">OI Shopping List</string>
+    <string name="app_name">OI Shopping List Ishy</string>
 
     <string name="new_item">Element novèl</string>
     <string name="new_list">Lista novèla</string>

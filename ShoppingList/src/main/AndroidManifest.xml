@@ -255,14 +255,9 @@
         -->
         <activity
             android:name=".ui.compose.ComposeShoppingActivity"
-            android:exported="true"
+            android:exported="false"
             android:label="OI Shopping (new UI)"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".ui.compose.settings.SettingsActivity"
             android:exported="false"

@@ -1293,67 +1293,67 @@ class ShoppingProvider : ContentProvider() {
 
         init {
             URL_MATCHER = UriMatcher(UriMatcher.NO_MATCH)
-            URL_MATCHER.addURI("org.openintents.shopping", "items", ITEMS)
-            URL_MATCHER.addURI("org.openintents.shopping", "items/#", ITEM_ID)
-            URL_MATCHER.addURI("org.openintents.shopping", "lists", LISTS)
+            URL_MATCHER.addURI("org.openintents.shopping.ishy", "items", ITEMS)
+            URL_MATCHER.addURI("org.openintents.shopping.ishy", "items/#", ITEM_ID)
+            URL_MATCHER.addURI("org.openintents.shopping.ishy", "lists", LISTS)
             URL_MATCHER.addURI(
-                "org.openintents.shopping", "lists/active",
+                "org.openintents.shopping.ishy", "lists/active",
                 ACTIVELIST
             )
-            URL_MATCHER.addURI("org.openintents.shopping", "lists/#", LIST_ID)
-            URL_MATCHER.addURI("org.openintents.shopping", "contains", CONTAINS)
+            URL_MATCHER.addURI("org.openintents.shopping.ishy", "lists/#", LIST_ID)
+            URL_MATCHER.addURI("org.openintents.shopping.ishy", "contains", CONTAINS)
             URL_MATCHER.addURI(
-                "org.openintents.shopping", "contains/#",
+                "org.openintents.shopping.ishy", "contains/#",
                 CONTAINS_ID
             )
             URL_MATCHER.addURI(
-                "org.openintents.shopping", "contains/copyof/#",
+                "org.openintents.shopping.ishy", "contains/copyof/#",
                 CONTAINS_COPYOFID
             )
             URL_MATCHER.addURI(
-                "org.openintents.shopping", "containsfull",
+                "org.openintents.shopping.ishy", "containsfull",
                 CONTAINS_FULL
             )
             URL_MATCHER.addURI(
-                "org.openintents.shopping", "containsfull/#",
+                "org.openintents.shopping.ishy", "containsfull/#",
                 CONTAINS_FULL_ID
             )
             URL_MATCHER.addURI(
-                "org.openintents.shopping", "containsfull/list/#",
+                "org.openintents.shopping.ishy", "containsfull/list/#",
                 CONTAINS_FULL_LISTID
             )
-            URL_MATCHER.addURI("org.openintents.shopping", "stores", STORES)
-            URL_MATCHER.addURI("org.openintents.shopping", "stores/#", STORES_ID)
+            URL_MATCHER.addURI("org.openintents.shopping.ishy", "stores", STORES)
+            URL_MATCHER.addURI("org.openintents.shopping.ishy", "stores/#", STORES_ID)
             URL_MATCHER
-                .addURI("org.openintents.shopping", "itemstores", ITEMSTORES)
+                .addURI("org.openintents.shopping.ishy", "itemstores", ITEMSTORES)
             URL_MATCHER.addURI(
-                "org.openintents.shopping", "itemstores/#",
+                "org.openintents.shopping.ishy", "itemstores/#",
                 ITEMSTORES_ID
             )
             URL_MATCHER.addURI(
-                "org.openintents.shopping", "itemstores/item/#/#",
+                "org.openintents.shopping.ishy", "itemstores/item/#/#",
                 ITEMSTORES_ITEMID
             )
             URL_MATCHER.addURI(
-                "org.openintents.shopping", "liststores/#",
+                "org.openintents.shopping.ishy", "liststores/#",
                 STORES_LISTID
             )
             URL_MATCHER.addURI(
-                "org.openintents.shopping", "listtags/#",
+                "org.openintents.shopping.ishy", "listtags/#",
                 TAGS_LISTID
             )
-            URL_MATCHER.addURI("org.openintents.shopping", "notes", NOTES)
-            URL_MATCHER.addURI("org.openintents.shopping", "notes/#", NOTE_ID)
-            URL_MATCHER.addURI("org.openintents.shopping", "units", UNITS)
-            URL_MATCHER.addURI("org.openintents.shopping", "units/#", UNITS_ID)
+            URL_MATCHER.addURI("org.openintents.shopping.ishy", "notes", NOTES)
+            URL_MATCHER.addURI("org.openintents.shopping.ishy", "notes/#", NOTE_ID)
+            URL_MATCHER.addURI("org.openintents.shopping.ishy", "units", UNITS)
+            URL_MATCHER.addURI("org.openintents.shopping.ishy", "units/#", UNITS_ID)
 
-            URL_MATCHER.addURI("org.openintents.shopping", "prefs", PREFS)
+            URL_MATCHER.addURI("org.openintents.shopping.ishy", "prefs", PREFS)
             // subtotals for the specified list id, or active list if not specified
             URL_MATCHER.addURI(
-                "org.openintents.shopping", "subtotals/#",
+                "org.openintents.shopping.ishy", "subtotals/#",
                 SUBTOTALS_LISTID
             )
-            URL_MATCHER.addURI("org.openintents.shopping", "subtotals", SUBTOTALS)
+            URL_MATCHER.addURI("org.openintents.shopping.ishy", "subtotals", SUBTOTALS)
 
             ITEMS_PROJECTION_MAP = HashMap()
             ITEMS_PROJECTION_MAP.put(Items._ID, "items._id")
