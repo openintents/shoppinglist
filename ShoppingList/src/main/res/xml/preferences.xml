@@ -44,6 +44,11 @@
         <Preference
             android:key="layout_choice"
             android:title="@string/layout_choice_title" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="show_undo_snackbar"
+            android:summary="@string/preference_show_undo_snackbar_summary"
+            android:title="@string/preference_show_undo_snackbar_title" />
         <PreferenceScreen
             android:key="preference_screen_advanced"
             android:summary="@string/preference_advanced_summary"

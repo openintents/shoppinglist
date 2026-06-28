@@ -95,6 +95,8 @@ class PreferenceActivity : android.preference.PreferenceActivity(),
         const val PREFS_SORT_PER_LIST_DEFAULT = false
         const val PREFS_HOLO_SEARCH = "holosearch"
         const val PREFS_HOLO_SEARCH_DEFAULT = true
+        const val PREFS_SHOW_UNDO_SNACKBAR = "show_undo_snackbar"
+        const val PREFS_SHOW_UNDO_SNACKBAR_DEFAULT = true
         const val PREFS_SHOW_LAYOUT_CHOICE = "show_layout_choice"
         const val PREFS_RESET_ALL_SETTINGS = "reset_all_settings"
         const val PREFS_CAPITALIZATION_DEFAULT = 1
@@ -172,6 +174,11 @@ class PreferenceActivity : android.preference.PreferenceActivity(),
         }
 
         @JvmStatic
+        fun getShowUndoSnackbarFromPrefs(context: Context): Boolean {
+            return PreferenceManager.getDefaultSharedPreferences(context)
+                    .getBoolean(PREFS_SHOW_UNDO_SNACKBAR, PREFS_SHOW_UNDO_SNACKBAR_DEFAULT)
+        }
+
         fun getUsingHoloSearchFromPrefs(context: Context): Boolean {
             return PreferenceManager.getDefaultSharedPreferences(context)
                     .getBoolean(PREFS_HOLO_SEARCH, PREFS_HOLO_SEARCH_DEFAULT)

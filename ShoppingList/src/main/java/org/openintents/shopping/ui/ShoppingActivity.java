@@ -3050,9 +3050,17 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
     @Override
     public void onUndoAvailable(SnackbarUndoOperation undoOp) {
+        if (!PreferenceActivity.getShowUndoSnackbarFromPrefs(this)) {
+            return;
+        }
         Snackbar snackbar = Snackbar.make(mItemsView, undoOp.getDescription(this),
                 Snackbar.LENGTH_LONG);
         snackbar.setAction(R.string.undo, undoOp);
+        android.view.View snackbarView = snackbar.getView();
+        android.widget.FrameLayout.LayoutParams params =
+                (android.widget.FrameLayout.LayoutParams) snackbarView.getLayoutParams();
+        params.gravity = android.view.Gravity.CENTER;
+        snackbarView.setLayoutParams(params);
         snackbar.show();
     }
 
