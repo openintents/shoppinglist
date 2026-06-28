@@ -179,6 +179,7 @@
 
     <string name="preference_show_undo_snackbar_title">Show undo popup</string>
     <string name="preference_show_undo_snackbar_summary">Show a popup with undo option after adding or cleaning items</string>
+    <string name="preference_dummy">&#x200B;</string>
     <string name="preference_application">Application settings</string>
 
     <string name="preference_unchecked_on_top">Unchecked on top</string>

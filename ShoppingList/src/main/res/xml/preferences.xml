@@ -53,6 +53,12 @@
             android:key="preference_screen_advanced"
             android:summary="@string/preference_advanced_summary"
             android:title="@string/preference_advanced">
+            <PreferenceCategory android:title="@string/preference_dummy">
+                <Preference
+                    android:key="preference_dummy"
+                    android:selectable="false"
+                    android:title="@string/preference_dummy" />
+            </PreferenceCategory>
             <PreferenceCategory android:title="@string/preference_general">
                 <ListPreference
                     android:defaultValue="-1"
