@@ -16,3 +16,16 @@ All of these features are brought together in a crisp layout that is customizabl
 * **[F-Droid](https://f-droid.org/en/packages/org.openintents.shopping/)** [F-Droid meta data](https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/org.openintents.shopping.yml)
 
 * **[Google Play](https://play.google.com/store/apps/details?id=org.openintents.shopping)**
+
+## Ishy Fork
+
+This fork (`ishy/app-id-rename` branch) is a personal build for side-by-side installation with the original app.
+
+Changes from upstream:
+
+- App ID changed to `org.openintents.shopping.ishy`
+- Display name changed to "OI Shopping List Ishy"
+- Removed the incomplete "New UI" (Compose) launcher icon
+- Fixed a first-run loop where selecting a default layout would return to the layout selection screen instead of proceeding to the main view
+- Moved the Capitalization setting to Advanced Settings where it is visible
+- Centered the undo popup and added a preference to disable it
