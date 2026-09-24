@@ -260,10 +260,6 @@
             android:name=".ui.ItemStoresActivity"
             android:label="@string/item_stores_activity_label"
             android:theme="@android:style/Theme.Dialog" />
-        <activity
-            android:name=".ui.LayoutChoiceActivity"
-            android:label="@string/layout_choice_title"
-            android:theme="@style/OIAppCompatTheme" />
 
         <activity android:name="org.openintents.convertcsv.shoppinglist.ConvertCsvActivity"
             android:exported="true"

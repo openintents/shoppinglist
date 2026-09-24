@@ -482,11 +482,6 @@ class PreferenceActivity : android.preference.PreferenceActivity(),
 
         mIncludesChecked = findPreference(PREFS_PRIOSUBINCLCHECKED) as CheckBoxPreference
 
-        val layoutChoicePreference = findPreference("layout_choice")
-        layoutChoicePreference.onPreferenceClickListener = Preference.OnPreferenceClickListener { _ ->
-            startActivity(Intent(this@PreferenceActivity, LayoutChoiceActivity::class.java))
-            true
-        }
         val shared = preferenceScreen.sharedPreferences
         updatePrioSubtotalSummary(shared)
         updatePickItemsSortPref(shared)
