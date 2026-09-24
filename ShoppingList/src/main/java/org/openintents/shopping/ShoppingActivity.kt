@@ -1,20 +1,15 @@
 package org.openintents.shopping
 
+import org.openintents.shopping.ui.compose.ComposeShoppingActivity
+
 /**
- * The main activity prior to version 1.4 was ".ShoppingActivity". Home screens
- * may still contain a direct link to the old activity, therefore this class
+ * The app's main screen (the launcher entry).
+ *
+ * The main activity prior to version 1.4 was ".ShoppingActivity". Home screens,
+ * list shortcuts and the widget link to this component, therefore this class
  * must never be renamed or moved.
  *
- * This class is derived from .ui.ShoppingActivity which contains the actual
- * implementation.
- *
- * This solution is used instead of using an activity-alias in the Manifest,
- * because the activity-alias does not respect the
- * android:windowSoftInputMode="stateHidden|adjustResize" setting.
+ * It hosts the Compose UI (see [ComposeShoppingActivity]). The legacy View UI
+ * (.ui.ShoppingActivity) only serves the item pick/edit intents of other apps.
  */
-open class ShoppingActivity : org.openintents.shopping.ui.ShoppingActivity() {
-
-    /**
-     * For the implementation, see .ui.ShoppingActivity.
-     */
-}
+open class ShoppingActivity : ComposeShoppingActivity()

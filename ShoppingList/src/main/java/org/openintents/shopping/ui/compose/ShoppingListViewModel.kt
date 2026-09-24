@@ -53,6 +53,8 @@ data class ShoppingUiState(
     val showPrice: Boolean = true,
     /** "capitalization" setting: 0 = none, 1 = sentences, 2 = words. */
     val capitalization: Int = 1,
+    /** "fontsize" setting: 0 tiny, 1 small, 2 medium, 3 large (see ListTheme.textSizeSp). */
+    val fontSize: Int = 2,
     /** Catalogue item names for the add-field auto-suggestions. */
     val suggestions: List<String> = emptyList(),
     val loading: Boolean = true,
@@ -94,6 +96,9 @@ class ShoppingListViewModel(
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ShoppingUiState())
+
+    /** A list requested (e.g. by a shortcut) before the initial load finished. */
+    private var pendingListId: Long? = null
     val state: StateFlow<ShoppingUiState> = _state.asStateFlow()
 
     init {
@@ -104,7 +109,11 @@ class ShoppingListViewModel(
                 val id = repository.getDefaultListId()
                 id to repository.getLists()
             }
-            _state.update { it.copy(lists = lists, currentListId = defaultId) }
+            // Read on the main thread, where showList() writes it.
+            val requested = pendingListId?.takeIf { p -> lists.any { it.id == p } }
+            pendingListId = null
+            if (requested != null) rememberActiveList(requested)
+            _state.update { it.copy(lists = lists, currentListId = requested ?: defaultId) }
             loadSettings()
             refresh()
         }
@@ -113,15 +122,20 @@ class ShoppingListViewModel(
     /** Re-reads the settings the Compose UI honors (they can change in Settings). */
     private suspend fun loadSettings() {
         val s = settings ?: return
-        val (hideChecked, showPrice, capitalization) = withContext(ioDispatcher) {
-            Triple(
-                s.getBoolean(PREF_HIDE_CHECKED, false),
-                s.getBoolean(PREF_SHOW_PRICE, true),
-                s.getString(PREF_CAPITALIZATION, "1").toIntOrNull()?.takeIf { it in 0..2 } ?: 1,
+        val loaded = withContext(ioDispatcher) {
+            _state.value.copy(
+                hideChecked = s.getBoolean(PREF_HIDE_CHECKED, false),
+                showPrice = s.getBoolean(PREF_SHOW_PRICE, true),
+                capitalization = s.getString(PREF_CAPITALIZATION, "1").toIntOrNull()
+                    ?.takeIf { it in 0..2 } ?: 1,
+                fontSize = s.getString(PREF_FONT_SIZE, "2").toIntOrNull()?.takeIf { it in 0..3 } ?: 2,
             )
         }
         _state.update {
-            it.copy(hideChecked = hideChecked, showPrice = showPrice, capitalization = capitalization)
+            it.copy(
+                hideChecked = loaded.hideChecked, showPrice = loaded.showPrice,
+                capitalization = loaded.capitalization, fontSize = loaded.fontSize,
+            )
         }
     }
 
@@ -203,6 +217,15 @@ class ShoppingListViewModel(
         val listId = _state.value.currentListId
         withContext(ioDispatcher) { repository.setListTheme(listId, theme) }
         _state.update { it.copy(theme = theme) }
+    }
+
+    /** Shows [listId] (from an intent); ignored if there is no such list. */
+    fun showList(listId: Long) {
+        if (_state.value.currentListId < 0) {
+            pendingListId = listId // initial load still running; it picks this up
+        } else if (_state.value.lists.any { it.id == listId }) {
+            selectList(listId)
+        }
     }
 
     fun selectList(listId: Long) {
@@ -412,6 +435,7 @@ class ShoppingListViewModel(
         private const val PREF_HIDE_CHECKED = "hidechecked"
         private const val PREF_SHOW_PRICE = "showprice"
         private const val PREF_CAPITALIZATION = "capitalization"
+        private const val PREF_FONT_SIZE = "fontsize"
 
         /** Factory that wires the provider-backed repository from the Application context. */
         val Factory: ViewModelProvider.Factory = viewModelFactory {

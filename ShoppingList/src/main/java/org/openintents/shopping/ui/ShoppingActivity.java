@@ -407,10 +407,6 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             return;
         }
 
-        if (LayoutChoiceActivity.show(this)) {
-            finish();
-            return;
-        }
         setContentView(R.layout.activity_shopping);
 
         // mEditItemPosition = -1;

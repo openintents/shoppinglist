@@ -1,3 +1,4 @@
+- Neuer, schnellerer Hauptbildschirm: Tippen hakt ab, langes Drücken bearbeitet, Artikel über die untere Leiste mit Vorschlägen hinzufügen. Alle Listen-Themen (Standard, Klassisch, Bugdroid) bleiben erhalten.
 - Aktualisiert für Android 15: Ziel-API 35, AndroidX, Kotlin.
 - CSV-Import/-Export nutzt die Dateiauswahl des Systems und behält den Zugriff auf die gewählte Datei.
 - Abstürze bei CSV-Import/-Export, Freigabe-Einstellungen, Automatisierung und im Widget behoben.

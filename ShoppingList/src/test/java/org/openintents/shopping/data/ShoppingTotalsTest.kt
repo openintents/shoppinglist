@@ -71,4 +71,12 @@ class ShoppingTotalsTest {
         val t = computeTotals(listOf(item(100, null, Status.REMOVED_FROM_LIST)))
         assertEquals(0L, t.allCents)
     }
+
+    @Test
+    fun lineCents_multipliesPriceByQuantity() {
+        val item = ShoppingItem(1, 1, "Coffee", Status.WANT_TO_BUY, "2", 499, null, null)
+        assertEquals(998L, lineCents(item))
+        assertEquals(499L, lineCents(item.copy(quantity = null)))
+        assertEquals(null, lineCents(item.copy(priceCents = null)))
+    }
 }

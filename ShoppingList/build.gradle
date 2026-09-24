@@ -31,6 +31,10 @@ android {
         unitTests {
             includeAndroidResources = true
             returnDefaultValues = true
+            all {
+                // ScreenshotTest renders the UIs to build/screenshots only when asked to.
+                if (project.hasProperty('screenshots')) systemProperty 'screenshots', 'true'
+            }
         }
     }
 

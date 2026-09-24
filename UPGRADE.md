@@ -31,8 +31,13 @@ Done in this pass (source audit, all components):
   play AAB, lint).
 
 OPEN before publishing:
-- Decide the launcher: the manifest still exposes BOTH the legacy UI and the Compose UI
-  ("OI Shopping (new UI)", hardcoded label) as launcher entries.
+- DECIDED: the Compose UI is the app. It is hosted by org.openintents.shopping.ShoppingActivity
+  (the historic launcher component, so home-screen icons, list shortcuts and the widget
+  keep working). The legacy .ui.ShoppingActivity only serves other apps' item PICK/EDIT
+  intents; remove it together with the rest of the View UI in a follow-up.
+- Themes: ListTheme mirrors res/values/themes.xml attribute for attribute (paper
+  background, fonts, sizes per "fontsize", colors, strike-through, suffix, checkbox).
+  Themes exported by other installed apps are not supported in the Compose UI.
 - Device smoke test (widget add/check/page with the non-exported receiver, CSV
   import/export after reboot, first-run layout chooser, edge-to-edge on Android 15).
 - Fill in the release date in `recent_changes.txt`.

@@ -28,7 +28,8 @@ class MenuIntentOptionsWithIcons(
         outSpecificItems: Array<MenuItem?>?
     ): Int {
         val pm = mContext.packageManager
-        val lri = pm.queryIntentActivityOptions(caller, specifics, intent, 0)
+        val lri: List<android.content.pm.ResolveInfo>? =
+            pm.queryIntentActivityOptions(caller, specifics, intent, 0)
         val N = lri?.size ?: 0
         if ((flags and Menu.FLAG_APPEND_TO_GROUP) == 0) {
             mMenu.removeGroup(group)

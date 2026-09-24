@@ -23,9 +23,7 @@ fun computeTotals(items: List<ShoppingItem>): ListTotals {
     var toBuy = 0L
     var bought = 0L
     for (item in items) {
-        val unit = item.priceCents ?: continue
-        val qty = item.quantity?.trim()?.toDoubleOrNull() ?: 1.0
-        val line = (unit * qty).roundToLong()
+        val line = lineCents(item) ?: continue
         when (item.status) {
             Status.BOUGHT -> bought += line
             Status.WANT_TO_BUY -> toBuy += line
@@ -33,4 +31,11 @@ fun computeTotals(items: List<ShoppingItem>): ListTotals {
         }
     }
     return ListTotals(toBuy, bought)
+}
+
+/** An item's line cost in cents (unit price * quantity), or null if it has no price. */
+fun lineCents(item: ShoppingItem): Long? {
+    val unit = item.priceCents ?: return null
+    val qty = item.quantity?.trim()?.toDoubleOrNull() ?: 1.0
+    return (unit * qty).roundToLong()
 }

@@ -12,7 +12,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -66,6 +71,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -90,6 +100,8 @@ import org.openintents.shopping.data.ShoppingItem
 import org.openintents.shopping.data.ShoppingListInfo
 import org.openintents.shopping.data.SortMode
 import org.openintents.shopping.data.StoreInfo
+import org.openintents.shopping.data.lineCents
+import org.openintents.shopping.library.provider.ShoppingContract.Status
 import org.openintents.shopping.library.util.PriceConverter
 import org.openintents.shopping.ui.compose.settings.SettingsActivity
 
@@ -290,7 +302,8 @@ fun ShoppingListScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(padding)
-                    .background(Color(theme.backgroundArgb))
+                    // The Scaffold padding already covers the navigation bar; don't add it twice.
+                    .consumeWindowInsets(padding)
                     .imePadding() // lift the bottom add-bar above the soft keyboard
             ) {
                 if (state.stores.isNotEmpty()) {
@@ -303,17 +316,21 @@ fun ShoppingListScreen(
                 }
                 val shownEmpty = if (state.mode == ListMode.PICK_ITEMS) pickItemsSorted.isEmpty()
                 else state.visibleItems.isEmpty()
+                // Only the list itself wears the list theme (like the legacy UI);
+                // app bar, totals and add bar keep the app's colors.
+                ThemedListArea(theme = theme, modifier = Modifier.weight(1f).fillMaxWidth()) {
                 if (shownEmpty && !state.loading) {
                     Text(
                         text = stringResource(R.string.no_items_available),
                         color = Color(theme.checkedTextArgb),
+                        fontFamily = fontFamily,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth().padding(32.dp),
                     )
                 }
                 LazyColumn(
                     state = listState,
-                    modifier = Modifier.weight(1f).fillMaxWidth()
+                    modifier = Modifier.fillMaxSize()
                 ) {
                     if (state.mode == ListMode.PICK_ITEMS) {
                         items(pickItemsSorted, key = { it.containsId }) { item ->
@@ -321,9 +338,10 @@ fun ShoppingListScreen(
                                 item = item,
                                 theme = theme,
                                 fontFamily = fontFamily,
+                                fontSize = state.fontSize,
                                 onToggle = { onPickToggle(item) },
                             )
-                            HorizontalDivider()
+                            if (theme.showDivider) HorizontalDivider()
                         }
                         return@LazyColumn
                     }
@@ -332,6 +350,7 @@ fun ShoppingListScreen(
                             item = item,
                             theme = theme,
                             fontFamily = fontFamily,
+                            fontSize = state.fontSize,
                             showPrice = state.showPrice,
                             onToggle = {
                                 val originalStatus = item.status
@@ -352,10 +371,11 @@ fun ShoppingListScreen(
                                     }
                                 }
                             },
-                            onClick = { editingContainsId = item.containsId },
+                            onEdit = { editingContainsId = item.containsId },
                         )
-                        HorizontalDivider()
+                        if (theme.showDivider) HorizontalDivider()
                     }
+                }
                 }
                 if (state.totals.hasAny) {
                     HorizontalDivider()
@@ -411,6 +431,7 @@ fun ShoppingListScreen(
     if (showThemeDialog) {
         ThemeDialog(
             current = state.theme,
+            fontSize = state.fontSize,
             onDismiss = { showThemeDialog = false },
             onSelect = { onSetTheme(it); showThemeDialog = false },
         )
@@ -678,46 +699,112 @@ private fun ManageStoresDialog(
     )
 }
 
+/**
+ * The list area in the list theme's colors; the Classic theme draws the notepad
+ * paper (a 9-patch, whose padding keeps the text inside the paper's margins).
+ */
+@Composable
+private fun ThemedListArea(
+    theme: ListTheme,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    val context = LocalContext.current
+    val paper = remember(theme) {
+        if (theme.paperBackground) {
+            androidx.core.content.ContextCompat.getDrawable(context, R.drawable.shoppinglist01d)
+        } else null
+    }
+    val paperPadding = remember(paper) {
+        android.graphics.Rect().also { paper?.getPadding(it) }
+    }
+    val density = LocalDensity.current
+    Box(
+        modifier = modifier
+            .background(Color(theme.backgroundArgb))
+            .drawBehind {
+                paper?.let { d ->
+                    d.setBounds(0, 0, size.width.toInt(), size.height.toInt())
+                    drawIntoCanvas { d.draw(it.nativeCanvas) }
+                }
+            }
+            .padding(
+                with(density) {
+                    androidx.compose.foundation.layout.PaddingValues(
+                        start = paperPadding.left.toDp(), top = paperPadding.top.toDp(),
+                        end = paperPadding.right.toDp(), bottom = paperPadding.bottom.toDp(),
+                    )
+                }
+            )
+    ) {
+        content()
+    }
+}
+
+/** An item's name as the theme shows it (upper-case fonts, "... OK" suffix). */
+@Composable
+private fun themedName(theme: ListTheme, text: String, checked: Boolean): String {
+    val base = if (theme.upperCase) text.uppercase() else text
+    return if (checked && theme.checkedSuffix) base + stringResource(R.string.suffix_checked) else base
+}
+
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ShoppingItemRow(
     item: ShoppingItem,
     theme: ListTheme,
     fontFamily: FontFamily?,
+    fontSize: Int,
     showPrice: Boolean,
     onToggle: () -> Unit,
-    onClick: () -> Unit,
+    onEdit: () -> Unit,
 ) {
     val struck = item.isBought && theme.strikethroughChecked
     val decoration = if (struck) TextDecoration.LineThrough else TextDecoration.None
     val color = Color(if (item.isBought) theme.checkedTextArgb else theme.textArgb)
+    val textSize = theme.textSizeSp(fontSize).sp
+    val editLabel = stringResource(R.string.menu_edit_item)
+    // Like the legacy UI: tap marks the item, long-press edits it. Themes without
+    // a checkbox show the state through color / strike-through / suffix only.
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(onClick = onClick)
-            .padding(horizontal = 8.dp, vertical = 4.dp),
+            .combinedClickable(
+                onClick = onToggle,
+                onLongClick = onEdit,
+                onLongClickLabel = editLabel,
+            )
+            .padding(horizontal = 8.dp, vertical = 4.dp)
+            .heightIn(min = 40.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Checkbox(
-            checked = item.isBought,
-            onCheckedChange = { onToggle() },
-            modifier = Modifier.semantics { contentDescription = item.name },
-        )
+        if (theme.showCheckBox) {
+            Checkbox(
+                checked = item.isBought,
+                onCheckedChange = { onToggle() },
+                modifier = Modifier.semantics { contentDescription = item.name },
+            )
+        }
         val label = buildString {
-            if (!item.quantity.isNullOrBlank()) append(item.quantity).append("  ")
+            if (!item.quantity.isNullOrBlank()) append(item.quantity).append(' ')
+            if (!item.units.isNullOrBlank()) append(item.units).append(' ')
             append(item.name)
         }
         Text(
-            text = label,
+            text = themedName(theme, label, item.isBought),
             color = color,
             fontFamily = fontFamily,
+            fontSize = textSize,
             textDecoration = decoration,
             modifier = Modifier.weight(1f).padding(start = 8.dp)
         )
-        item.priceCents?.takeIf { showPrice }?.let { cents ->
+        // Line cost (price * quantity), like the legacy UI and the totals.
+        lineCents(item)?.takeIf { showPrice }?.let { cents ->
             Text(
                 text = PriceConverter.getStringFromCentPrice(cents),
-                color = color,
+                color = Color(if (item.isBought) theme.checkedTextArgb else theme.priceArgb),
                 fontFamily = fontFamily,
+                fontSize = textSize * 0.7f,
                 textDecoration = decoration,
                 modifier = Modifier.padding(start = 8.dp)
             )
@@ -730,6 +817,7 @@ private fun PickItemRow(
     item: ShoppingItem,
     theme: ListTheme,
     fontFamily: FontFamily?,
+    fontSize: Int,
     onToggle: () -> Unit,
 ) {
     // In pick mode the checkbox means "on this list"; off-list items are dimmed.
@@ -738,18 +826,22 @@ private fun PickItemRow(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onToggle)
-            .padding(horizontal = 8.dp, vertical = 4.dp),
+            .padding(horizontal = 8.dp, vertical = 4.dp)
+            .heightIn(min = 40.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Checkbox(
-            checked = item.isOnList,
-            onCheckedChange = { onToggle() },
-            modifier = Modifier.semantics { contentDescription = item.name },
-        )
+        if (theme.showCheckBox) {
+            Checkbox(
+                checked = item.isOnList,
+                onCheckedChange = { onToggle() },
+                modifier = Modifier.semantics { contentDescription = item.name },
+            )
+        }
         Text(
-            text = item.name,
+            text = themedName(theme, item.name, checked = false),
             color = color,
             fontFamily = fontFamily,
+            fontSize = theme.textSizeSp(fontSize).sp,
             modifier = Modifier.weight(1f).padding(start = 8.dp)
         )
     }
@@ -761,20 +853,45 @@ private fun ListTheme.labelRes(): Int = when (this) {
     ListTheme.ANDROID -> R.string.theme_bugdroid
 }
 
+/** Theme picker: each option is a small live preview of a list in that theme. */
 @Composable
-private fun ThemeDialog(current: ListTheme, onDismiss: () -> Unit, onSelect: (ListTheme) -> Unit) {
+private fun ThemeDialog(
+    current: ListTheme,
+    fontSize: Int,
+    onDismiss: () -> Unit,
+    onSelect: (ListTheme) -> Unit,
+) {
+    val context = LocalContext.current
+    val sample = listOf(
+        ShoppingItem(-1, -1, stringResource(R.string.theme_preview_item_1), Status.WANT_TO_BUY, null, null, null, null),
+        ShoppingItem(-2, -2, stringResource(R.string.theme_preview_item_2), Status.BOUGHT, null, null, null, null),
+    )
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.theme)) },
         text = {
-            Column {
+            Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                 ListTheme.entries.forEach { t ->
+                    val font = remember(t) { t.fontAsset?.let { FontFamily(Font(it, context.assets)) } }
                     Row(
-                        modifier = Modifier.fillMaxWidth().clickable { onSelect(t) }.padding(vertical = 10.dp),
+                        modifier = Modifier.fillMaxWidth().clickable { onSelect(t) }.padding(vertical = 6.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         RadioButton(selected = t == current, onClick = { onSelect(t) })
-                        Text(stringResource(t.labelRes()), modifier = Modifier.padding(start = 8.dp))
+                        Column(modifier = Modifier.padding(start = 8.dp)) {
+                            Text(stringResource(t.labelRes()))
+                            ThemedListArea(theme = t, modifier = Modifier.fillMaxWidth().padding(top = 4.dp)) {
+                                Column {
+                                    sample.forEach { item ->
+                                        ShoppingItemRow(
+                                            item = item, theme = t, fontFamily = font,
+                                            fontSize = fontSize.coerceAtMost(1), showPrice = false,
+                                            onToggle = { onSelect(t) }, onEdit = { onSelect(t) },
+                                        )
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
