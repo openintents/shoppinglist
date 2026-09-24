@@ -30,17 +30,30 @@ Done in this pass (source audit, all components):
   aTrackDog meta-data. CI is now `.github/workflows/build.yml` (unit tests, tstore APK,
   play AAB, lint).
 
-OPEN before publishing:
-- DECIDED: the Compose UI is the app. It is hosted by org.openintents.shopping.ShoppingActivity
-  (the historic launcher component, so home-screen icons, list shortcuts and the widget
-  keep working). The legacy .ui.ShoppingActivity only serves other apps' item PICK/EDIT
-  intents; remove it together with the rest of the View UI in a follow-up.
-- Themes: ListTheme mirrors res/values/themes.xml attribute for attribute (paper
-  background, fonts, sizes per "fontsize", colors, strike-through, suffix, checkbox).
-  Themes exported by other installed apps are not supported in the Compose UI.
-- Device smoke test (widget add/check/page with the non-exported receiver, CSV
-  import/export after reboot, first-run layout chooser, edge-to-edge on Android 15).
-- Fill in the release date in `recent_changes.txt`.
+Feature parity with the legacy UI (checked before release 2.3.0):
+
+| Legacy feature | New UI |
+|---|---|
+| Add / check / edit / remove items, undo | yes (tap = check, long-press = edit) |
+| Search / add in the action bar | yes, setting "Search/add items in action bar" |
+| 10 sort orders, per-list sort, Pick items sort, list order | yes (same settings) |
+| Store filter / tag filter ("use_filters") | yes, chips above the list |
+| Mark all / unmark all / clean up with undo, shake to clean up | yes |
+| Move / copy / delete item permanently | yes (edit dialog) |
+| Per-item stores (stocks, aisle, price) | yes (edit dialog -> Stores..., legacy screen) |
+| Priority subtotal, show price/tags/units/quantity/priority | yes |
+| Themes incl. "use for all lists", font size | yes |
+| Keep screen on, orientation, reset quantity, completion scope | yes |
+| Convert CSV (HandyShopper, encoding, policy), About | yes (menu) |
+| Items from other apps (SEND text, INSERT_FROM_EXTRAS), list shortcuts, widget | yes |
+| Other apps picking items (PICK/GET_CONTENT item) | served by the legacy screen |
+| Quick edit mode (tap quantity/priority) | replaced by long-press edit |
+| Fast scroll | not ported (Compose list) |
+| Barcode add via "OI Barcode Scanner", location alerts (OI Locations), GTalk sharing, Wear sync, theme packs from other apps, Market add-on links | dropped: the partner apps/services no longer exist |
+
+Release channels: F-Droid (tag + `.fdroid.yml`), GitHub releases for Obtainium and
+Zapstore (`.github/workflows/release.yml`, needs the signing secrets and
+`ZAPSTORE_SIGN_WITH`), Google Play (`bundlePlayRelease`, uploaded by hand).
 
 ## 0b. ARCHITECTURE DIRECTION (updated 2026-06-09)
 

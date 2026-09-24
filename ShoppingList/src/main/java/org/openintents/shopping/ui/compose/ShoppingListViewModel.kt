@@ -18,6 +18,8 @@ import kotlinx.coroutines.withContext
 import org.openintents.shopping.data.ItemEdit
 import org.openintents.shopping.data.ListMode
 import org.openintents.shopping.data.ListTheme
+import org.openintents.shopping.data.ItemSnapshot
+import org.openintents.shopping.data.ListFilters
 import org.openintents.shopping.data.ListTotals
 import org.openintents.shopping.data.NewItem
 import org.openintents.shopping.data.ProviderShoppingRepository
@@ -26,10 +28,13 @@ import org.openintents.shopping.data.ShoppingListInfo
 import org.openintents.shopping.data.SettingsRepository
 import org.openintents.shopping.data.SharedPrefsSettingsRepository
 import org.openintents.shopping.data.ShoppingRepository
-import org.openintents.shopping.data.SortMode
 import org.openintents.shopping.data.StoreInfo
 import org.openintents.shopping.data.arrangeItems
 import org.openintents.shopping.data.computeTotals
+import org.openintents.shopping.data.prioritySubtotal
+
+/** A bulk change that can be undone. */
+enum class BulkChange { MARKED_ALL, UNMARKED_ALL, CLEANED_UP }
 
 /** One-shot feedback shown to the user (the UI maps it to a translated string). */
 enum class UserMessage { EXPORTED, EXPORT_FAILED, IMPORTED, IMPORT_FAILED }
@@ -50,7 +55,8 @@ data class ShoppingUiState(
     val editingItemId: Long? = null,
     /** True once the note / store prices of [editingItemId] are loaded (Save waits for it). */
     val editingLoaded: Boolean = false,
-    val sortMode: SortMode = SortMode.UNCHECKED_FIRST,
+    /** The list's sort order (a legacy sort order value, see ShoppingRepository.getSortOrder). */
+    val sortOrder: Int = 0,
     val hideChecked: Boolean = false,
     val theme: ListTheme = ListTheme.DEFAULT,
     /** "showprice" setting. */
@@ -61,6 +67,25 @@ data class ShoppingUiState(
     val fontSize: Int = 2,
     /** "holosearch" setting: the search/add field is in the top bar instead of at the bottom. */
     val addBarOnTop: Boolean = false,
+    /** Which item details the rows show ("showquantity", "showunits", "showtags", "showpriority"). */
+    val showQuantity: Boolean = true,
+    val showUnits: Boolean = true,
+    val showTags: Boolean = true,
+    val showPriority: Boolean = true,
+    /** "priority_subtotal_threshold" (0 = off) and "priosubtotal_includes_checked". */
+    val prioritySubtotalThreshold: Int = 0,
+    val prioritySubtotalIncludesChecked: Boolean = true,
+    /** "use_filters" setting: offer the store / tag filter. */
+    val useFilters: Boolean = false,
+    /** The list's filters and the tags that can be filtered by. */
+    val filters: ListFilters = ListFilters(),
+    val tags: List<String> = emptyList(),
+    /** Set after mark all / unmark all / clean up: the UI offers an undo, then consumes it. */
+    val bulkChange: BulkChange? = null,
+    /** How many items [bulkChange] changed. */
+    val bulkChangeCount: Int = 0,
+    /** Set after a copy: the UI opens this row in the editor, then consumes it. */
+    val editRequest: Long? = null,
     /** Catalogue item names for the add-field auto-suggestions. */
     val suggestions: List<String> = emptyList(),
     val loading: Boolean = true,
@@ -81,11 +106,15 @@ data class ShoppingUiState(
 
     /** The items to render, after the user's sort + filter (derived). */
     val visibleItems: List<ShoppingItem>
-        get() = arrangeItems(effectiveItems, sortMode, hideChecked)
+        get() = arrangeItems(effectiveItems, hideChecked)
 
     /** Money totals (using the selected store's prices when a store is selected). */
     val totals: ListTotals
         get() = computeTotals(effectiveItems)
+
+    /** The priority subtotal (0 when off). */
+    val prioritySubtotal: Long
+        get() = prioritySubtotal(effectiveItems, prioritySubtotalThreshold, prioritySubtotalIncludesChecked)
 }
 
 /**
@@ -103,8 +132,8 @@ class ShoppingListViewModel(
 
     private val _state = MutableStateFlow(ShoppingUiState())
 
-    /** Lists whose legacy tag/store filters were already cleared in this session. */
-    private val filtersCleared = java.util.Collections.synchronizedSet(HashSet<Long>())
+    /** State before the last mark all / unmark all / clean up, for its undo. */
+    private var lastBulkChange: List<ItemSnapshot> = emptyList()
 
     /** A list requested (e.g. by a shortcut) before the initial load finished. */
     private var pendingListId: Long? = null
@@ -139,6 +168,14 @@ class ShoppingListViewModel(
                     ?.takeIf { it in 0..2 } ?: 1,
                 fontSize = s.getString(PREF_FONT_SIZE, "2").toIntOrNull()?.takeIf { it in 0..3 } ?: 2,
                 addBarOnTop = s.getBoolean(PREF_ADD_BAR_ON_TOP, false),
+                showQuantity = s.getBoolean("showquantity", true),
+                showUnits = s.getBoolean("showunits", true),
+                showTags = s.getBoolean("showtags", true),
+                showPriority = s.getBoolean("showpriority", true),
+                prioritySubtotalThreshold = s.getString("priority_subtotal_threshold", "0")
+                    .toIntOrNull()?.takeIf { it in 0..4 } ?: 0,
+                prioritySubtotalIncludesChecked = s.getBoolean("priosubtotal_includes_checked", true),
+                useFilters = s.getBoolean("use_filters", false),
             )
         }
         _state.update {
@@ -146,6 +183,11 @@ class ShoppingListViewModel(
                 hideChecked = loaded.hideChecked, showPrice = loaded.showPrice,
                 capitalization = loaded.capitalization, fontSize = loaded.fontSize,
                 addBarOnTop = loaded.addBarOnTop,
+                showQuantity = loaded.showQuantity, showUnits = loaded.showUnits,
+                showTags = loaded.showTags, showPriority = loaded.showPriority,
+                prioritySubtotalThreshold = loaded.prioritySubtotalThreshold,
+                prioritySubtotalIncludesChecked = loaded.prioritySubtotalIncludesChecked,
+                useFilters = loaded.useFilters,
             )
         }
     }
@@ -189,9 +231,11 @@ class ShoppingListViewModel(
             val theme: ListTheme,
             val suggestions: List<String>,
             val pickItems: List<ShoppingItem>,
+            val sortOrder: Int,
+            val filters: ListFilters,
+            val tags: List<String>,
         )
         val loaded = withContext(ioDispatcher) {
-            if (filtersCleared.add(listId)) repository.clearListFilters(listId)
             Loaded(
                 items = repository.getItems(listId),
                 stores = repository.getStores(listId),
@@ -199,6 +243,9 @@ class ShoppingListViewModel(
                 theme = repository.getListTheme(listId),
                 suggestions = repository.getItemNameSuggestions(),
                 pickItems = if (mode == ListMode.PICK_ITEMS) repository.getAllListItems(listId) else emptyList(),
+                sortOrder = repository.getSortOrder(listId),
+                filters = repository.getListFilters(listId),
+                tags = repository.getListTags(listId),
             )
         }
         _state.update {
@@ -208,7 +255,8 @@ class ShoppingListViewModel(
             else it.copy(
                 items = loaded.items, pickItems = loaded.pickItems, stores = loaded.stores,
                 storePricesForList = loaded.storePrices, theme = loaded.theme,
-                suggestions = loaded.suggestions, loading = false
+                suggestions = loaded.suggestions, sortOrder = loaded.sortOrder,
+                filters = loaded.filters, tags = loaded.tags, loading = false
             )
         }
     }
@@ -223,6 +271,12 @@ class ShoppingListViewModel(
     fun pickToggle(item: ShoppingItem) = viewModelScope.launch {
         withContext(ioDispatcher) { repository.setItemOnList(item, !item.isOnList) }
         refresh()
+    }
+
+    /** "Use this theme for all lists". */
+    fun setThemeForAllLists(theme: ListTheme) = viewModelScope.launch {
+        withContext(ioDispatcher) { repository.getLists().forEach { repository.setListTheme(it.id, theme) } }
+        _state.update { it.copy(theme = theme) }
     }
 
     fun setTheme(theme: ListTheme) = viewModelScope.launch {
@@ -337,7 +391,12 @@ class ShoppingListViewModel(
         refresh()
     }
 
-    fun setSortMode(mode: SortMode) = _state.update { it.copy(sortMode = mode) }
+    fun setSortOrder(sortOrder: Int) = viewModelScope.launch {
+        val listId = _state.value.currentListId
+        if (listId < 0) return@launch
+        withContext(ioDispatcher) { repository.setSortOrder(listId, sortOrder) }
+        refresh()
+    }
 
     fun toggleHideChecked() {
         _state.update { it.copy(hideChecked = !it.hideChecked) }
@@ -347,13 +406,69 @@ class ShoppingListViewModel(
 
     fun cleanup() = viewModelScope.launch {
         val listId = _state.value.currentListId
-        withContext(ioDispatcher) { repository.cleanupList(listId) }
+        val changed = withContext(ioDispatcher) { repository.cleanupList(listId) }
+        offerUndo(changed, BulkChange.CLEANED_UP)
         refresh()
     }
 
     fun markAll(bought: Boolean) = viewModelScope.launch {
         val listId = _state.value.currentListId
-        withContext(ioDispatcher) { repository.markAllItems(listId, bought) }
+        val changed = withContext(ioDispatcher) { repository.markAllItems(listId, bought) }
+        offerUndo(changed, if (bought) BulkChange.MARKED_ALL else BulkChange.UNMARKED_ALL)
+        refresh()
+    }
+
+    private fun offerUndo(changed: List<ItemSnapshot>, change: BulkChange) {
+        if (changed.isEmpty()) return
+        lastBulkChange = changed
+        _state.update { it.copy(bulkChange = change, bulkChangeCount = changed.size) }
+    }
+
+    /** The UI showed the undo snackbar for [ShoppingUiState.bulkChange]. */
+    fun consumeBulkChange() = _state.update { it.copy(bulkChange = null) }
+
+    /** Undoes the last mark all / unmark all / clean up. */
+    fun undoBulkChange() = viewModelScope.launch {
+        val snapshots = lastBulkChange
+        lastBulkChange = emptyList()
+        if (snapshots.isEmpty()) return@launch
+        withContext(ioDispatcher) { repository.restore(snapshots) }
+        refresh()
+    }
+
+    /** Only show items at [storeId] (null = all); needs the "use_filters" setting. */
+    fun setStoreFilter(storeId: Long?) = viewModelScope.launch {
+        val listId = _state.value.currentListId
+        withContext(ioDispatcher) { repository.setStoreFilter(listId, storeId) }
+        refresh()
+    }
+
+    /** Only show items with [tag] (null = all). */
+    fun setTagFilter(tag: String?) = viewModelScope.launch {
+        val listId = _state.value.currentListId
+        withContext(ioDispatcher) { repository.setTagFilter(listId, tag) }
+        refresh()
+    }
+
+    fun moveItem(item: ShoppingItem, targetListId: Long) = viewModelScope.launch {
+        if (targetListId == _state.value.currentListId) return@launch
+        withContext(ioDispatcher) { repository.moveItem(item, targetListId) }
+        refresh()
+    }
+
+    /** Copies an item; the UI then opens the copy in the editor ([ShoppingUiState.editRequest]). */
+    fun copyItem(item: ShoppingItem) = viewModelScope.launch {
+        val newContainsId = withContext(ioDispatcher) { repository.copyItem(item) }
+        refresh().join()
+        if (newContainsId != null) _state.update { it.copy(editRequest = newContainsId) }
+    }
+
+    fun consumeEditRequest() = _state.update { it.copy(editRequest = null) }
+
+    /** Deletes an item for good (and from the catalogue if no other list has it). */
+    fun deleteItem(item: ShoppingItem) = viewModelScope.launch {
+        val listId = _state.value.currentListId
+        withContext(ioDispatcher) { repository.deleteItem(listId, item) }
         refresh()
     }
 

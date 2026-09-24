@@ -26,8 +26,20 @@ class FakeShoppingRepository : ShoppingRepository {
 
     override fun getLists(): List<ShoppingListInfo> = lists.toList()
 
-    override fun getItems(listId: Long): List<ShoppingItem> =
-        itemsByList[listId].orEmpty().filter { it.status != Status.REMOVED_FROM_LIST }
+    private val sortByList = mutableMapOf<Long, Int>()
+
+    override fun getSortOrder(listId: Long): Int = sortByList[listId] ?: 0
+
+    override fun setSortOrder(listId: Long, sortOrder: Int) { sortByList[listId] = sortOrder }
+
+    /** Implements the two basic legacy sort orders: 0 unchecked first + name, 1 name. */
+    override fun getItems(listId: Long): List<ShoppingItem> {
+        val items = itemsByList[listId].orEmpty().filter { it.status != Status.REMOVED_FROM_LIST }
+        return when (getSortOrder(listId)) {
+            1 -> items.sortedBy { it.name.lowercase() }
+            else -> items.sortedWith(compareBy({ it.status }, { it.name.lowercase() }))
+        }
+    }
 
     override fun getAllListItems(listId: Long): List<ShoppingItem> =
         itemsByList[listId].orEmpty().toList()
@@ -93,6 +105,38 @@ class FakeShoppingRepository : ShoppingRepository {
             val idx = items.indexOfFirst { it.containsId == containsId }
             if (idx >= 0) items[idx] = items[idx].copy(status = status)
         }
+    }
+
+    private val filtersByList = mutableMapOf<Long, ListFilters>()
+
+    override fun getListFilters(listId: Long): ListFilters = filtersByList[listId] ?: ListFilters()
+
+    override fun setStoreFilter(listId: Long, storeId: Long?) {
+        filtersByList[listId] = getListFilters(listId).copy(storeId = storeId)
+    }
+
+    override fun setTagFilter(listId: Long, tag: String?) {
+        filtersByList[listId] = getListFilters(listId).copy(tag = tag)
+    }
+
+    override fun getListTags(listId: Long): List<String> =
+        itemsByList[listId].orEmpty().flatMap { it.tags.orEmpty().split(',') }
+            .map { it.trim() }.filter { it.isNotEmpty() }.distinct().sorted()
+
+    override fun moveItem(item: ShoppingItem, targetListId: Long) {
+        itemsByList.values.forEach { items -> items.removeAll { it.containsId == item.containsId } }
+        itemsByList.getOrPut(targetListId) { mutableListOf() }.add(item)
+    }
+
+    override fun copyItem(item: ShoppingItem): Long? {
+        val id = nextId++
+        itemsByList.values.firstOrNull { items -> items.any { it.containsId == item.containsId } }
+            ?.add(item.copy(containsId = id, itemId = id))
+        return id
+    }
+
+    override fun deleteItem(listId: Long, item: ShoppingItem) {
+        itemsByList[listId]?.removeAll { it.containsId == item.containsId }
     }
 
     private val themeByList = mutableMapOf<Long, ListTheme>()

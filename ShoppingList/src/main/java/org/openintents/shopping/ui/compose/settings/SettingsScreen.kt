@@ -24,6 +24,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.material3.AlertDialog
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -44,6 +46,7 @@ fun SettingsRoute(viewModel: SettingsViewModel, onBack: () -> Unit) {
         choices = state.choices,
         onSetBool = viewModel::setBool,
         onSetChoice = viewModel::setChoice,
+        onResetAll = viewModel::resetAll,
         onBack = onBack,
     )
 }
@@ -56,6 +59,7 @@ fun SettingsScreen(
     onSetBool: (String, Boolean) -> Unit,
     onSetChoice: (String, String) -> Unit,
     onBack: () -> Unit,
+    onResetAll: () -> Unit = {},
 ) {
     Scaffold(
         topBar = {
@@ -72,23 +76,54 @@ fun SettingsScreen(
         Column(
             modifier = Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState())
         ) {
-            AppSettingsCatalog.choices.forEach { setting ->
-                ChoiceRow(
-                    title = stringResource(setting.titleRes),
-                    entries = stringArrayResource(setting.entriesRes),
-                    values = stringArrayResource(setting.valuesRes),
-                    selectedValue = choices[setting.key] ?: setting.default,
-                    onSelect = { onSetChoice(setting.key, it) },
+            AppSettingsCatalog.sections.forEach { section ->
+                Text(
+                    stringResource(section.titleRes),
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 20.dp, bottom = 4.dp),
                 )
-                HorizontalDivider()
+                section.settings.forEach { setting ->
+                    when (setting) {
+                        is ChoiceSetting -> ChoiceRow(
+                            title = stringResource(setting.titleRes),
+                            entries = stringArrayResource(setting.entriesRes),
+                            values = stringArrayResource(setting.valuesRes),
+                            selectedValue = choices[setting.key] ?: setting.default,
+                            onSelect = { onSetChoice(setting.key, it) },
+                        )
+                        is BoolSetting -> SwitchRow(
+                            title = stringResource(setting.titleRes),
+                            checked = bools[setting.key] ?: setting.default,
+                            onCheckedChange = { onSetBool(setting.key, it) },
+                        )
+                    }
+                    HorizontalDivider()
+                }
             }
-            AppSettingsCatalog.toggles.forEach { setting ->
-                SwitchRow(
-                    title = stringResource(setting.titleRes),
-                    checked = bools[setting.key] ?: setting.default,
-                    onCheckedChange = { onSetBool(setting.key, it) },
+            var confirmReset by remember { mutableStateOf(false) }
+            TextButton(
+                onClick = { confirmReset = true },
+                modifier = Modifier.padding(16.dp),
+            ) { Text(stringResource(R.string.preference_reset_all_settings)) }
+            if (confirmReset) {
+                val context = LocalContext.current
+                AlertDialog(
+                    onDismissRequest = { confirmReset = false },
+                    title = { Text(stringResource(R.string.preference_reset_all_settings)) },
+                    confirmButton = {
+                        TextButton(onClick = {
+                            confirmReset = false
+                            onResetAll()
+                            android.widget.Toast.makeText(
+                                context, R.string.preference_reset_all_settings_done, android.widget.Toast.LENGTH_SHORT
+                            ).show()
+                        }) { Text(stringResource(R.string.ok)) }
+                    },
+                    dismissButton = {
+                        TextButton(onClick = { confirmReset = false }) { Text(stringResource(R.string.cancel)) }
+                    },
                 )
-                HorizontalDivider()
             }
         }
     }

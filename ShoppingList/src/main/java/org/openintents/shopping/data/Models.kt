@@ -52,3 +52,14 @@ data class NewItem(
     val price: String? = null,
     val barcode: String? = null,
 )
+
+/**
+ * The per-list filters (shared with the legacy UI): only items at [storeId]
+ * (when the "use_filters" setting is on) and/or with [tag]. Null = no filter.
+ */
+data class ListFilters(val storeId: Long? = null, val tag: String? = null) {
+    val isActive: Boolean get() = storeId != null || tag != null
+}
+
+/** A list row's previous state, to undo a bulk action (mark all, clean up). */
+data class ItemSnapshot(val containsId: Long, val status: Long, val quantity: String?)

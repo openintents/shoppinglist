@@ -14,6 +14,7 @@ import org.openintents.shopping.library.provider.ShoppingContract.Stores
 import org.openintents.shopping.library.util.PriceConverter
 import org.openintents.shopping.library.util.ShoppingUtils
 import org.openintents.shopping.ui.PreferenceActivity
+import org.openintents.shopping.ui.widget.ShoppingItemsView
 
 /**
  * [ShoppingRepository] backed by the app's ContentProvider + SQLite.
@@ -22,13 +23,18 @@ import org.openintents.shopping.ui.PreferenceActivity
  */
 class ProviderShoppingRepository(private val context: Context) : ShoppingRepository {
 
+    private companion object {
+        /** Any mode other than MODE_IN_SHOP selects the Pick items sort order. */
+        const val MODE_PICK_ITEMS = 2
+    }
+
     private val resolver get() = context.contentResolver
 
     override fun getLists(): List<ShoppingListInfo> {
         val out = ArrayList<ShoppingListInfo>()
         resolver.query(
             Lists.CONTENT_URI, arrayOf(Lists._ID, Lists.NAME),
-            null, null, Lists.DEFAULT_SORT_ORDER
+            null, null, PreferenceActivity.getShoppingListSortOrderFromPrefs(context)
         )?.use { c ->
             while (c.moveToNext()) {
                 out.add(ShoppingListInfo(c.getLong(0), c.getString(1) ?: ""))
@@ -63,7 +69,25 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
     override fun getAllListItems(listId: Long): List<ShoppingItem> =
         queryListItems(listId, includeRemoved = true)
 
+    // The stored values are indices into Contains.SORT_ORDERS.
+    override fun getSortOrder(listId: Long): Int =
+        PreferenceActivity.getSortOrderIndexFromPrefs(context, ShoppingItemsView.MODE_IN_SHOP, listId)
+
+    override fun setSortOrder(listId: Long, sortOrder: Int) {
+        if (PreferenceActivity.getUsingPerListSortFromPrefs(context)) {
+            val values = ContentValues().apply { put(Lists.ITEMS_SORT, sortOrder) }
+            resolver.update(Uri.withAppendedPath(Lists.CONTENT_URI, listId.toString()), values, null, null)
+        } else {
+            @Suppress("DEPRECATION")
+            android.preference.PreferenceManager.getDefaultSharedPreferences(context).edit()
+                .putString(PreferenceActivity.PREFS_SORTORDER, sortOrder.toString()).apply()
+        }
+    }
+
     private fun queryListItems(listId: Long, includeRemoved: Boolean): List<ShoppingItem> {
+        // Same sort orders as the legacy UI (Pick items can have its own).
+        val mode = if (includeRemoved) MODE_PICK_ITEMS else ShoppingItemsView.MODE_IN_SHOP
+        val sortOrder = PreferenceActivity.getSortOrderFromPrefs(context, mode, listId)
         val out = ArrayList<ShoppingItem>()
         resolver.query(
             ContainsFull.CONTENT_URI,
@@ -73,7 +97,7 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
                 ContainsFull.PRIORITY, ContainsFull.ITEM_TAGS, ContainsFull.ITEM_UNITS
             ),
             ContainsFull.LIST_ID + " = ?", arrayOf(listId.toString()),
-            ContainsFull.DEFAULT_SORT_ORDER
+            sortOrder
         )?.use { c ->
             while (c.moveToNext()) {
                 if (!includeRemoved && c.getLong(3) == Status.REMOVED_FROM_LIST) continue
@@ -171,7 +195,12 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
     override fun removeItem(listId: Long, item: ShoppingItem) {
         // Soft-remove: keep the relation row (status REMOVED_FROM_LIST) so the item
         // stays in the catalogue and can be re-added via Pick-items mode.
-        setItemStatus(item.containsId, Status.REMOVED_FROM_LIST)
+        val values = ContentValues().apply {
+            put(Contains.STATUS, Status.REMOVED_FROM_LIST)
+            // "Reset quantity" setting: a re-added item starts without the old quantity.
+            if (PreferenceActivity.getResetQuantity(context)) put(Contains.QUANTITY, "")
+        }
+        resolver.update(Uri.withAppendedPath(Contains.CONTENT_URI, item.containsId.toString()), values, null, null)
     }
 
     override fun getItemStatus(containsId: Long): Long? =
@@ -180,17 +209,65 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
             arrayOf(Contains.STATUS), null, null, null
         )?.use { c -> if (c.moveToFirst() && !c.isNull(0)) c.getLong(0) else null }
 
-    override fun clearListFilters(listId: Long) {
-        val values = ContentValues().apply {
-            put(Lists.TAGS_FILTER, "")
-            put(Lists.STORE_FILTER, -1L)
+    override fun getListFilters(listId: Long): ListFilters =
+        resolver.query(
+            Uri.withAppendedPath(Lists.CONTENT_URI, listId.toString()),
+            arrayOf(Lists.STORE_FILTER, Lists.TAGS_FILTER), null, null, null
+        )?.use { c ->
+            if (!c.moveToFirst()) ListFilters()
+            else ListFilters(
+                storeId = if (c.isNull(0)) null else c.getLong(0).takeIf { it >= 0 },
+                tag = c.getString(1)?.takeIf { it.isNotBlank() },
+            )
+        } ?: ListFilters()
+
+    override fun setStoreFilter(listId: Long, storeId: Long?) =
+        updateList(listId, ContentValues().apply { put(Lists.STORE_FILTER, storeId ?: -1L) })
+
+    override fun setTagFilter(listId: Long, tag: String?) =
+        updateList(listId, ContentValues().apply { put(Lists.TAGS_FILTER, tag ?: "") })
+
+    private fun updateList(listId: Long, values: ContentValues) {
+        resolver.update(Uri.withAppendedPath(Lists.CONTENT_URI, listId.toString()), values, null, null)
+    }
+
+    override fun getListTags(listId: Long): List<String> {
+        val tags = sortedSetOf(String.CASE_INSENSITIVE_ORDER)
+        resolver.query(
+            Uri.parse("content://org.openintents.shopping/listtags/$listId"),
+            arrayOf(ContainsFull.ITEM_TAGS), null, null, null
+        )?.use { c ->
+            while (c.moveToNext()) {
+                // Tags are comma separated.
+                c.getString(0)?.split(',')?.map { it.trim() }?.filter { it.isNotEmpty() }?.let(tags::addAll)
+            }
         }
-        resolver.update(
-            Uri.withAppendedPath(Lists.CONTENT_URI, listId.toString()), values,
-            "(${Lists.TAGS_FILTER} IS NOT NULL AND ${Lists.TAGS_FILTER} <> '') OR " +
-                "(${Lists.STORE_FILTER} IS NOT NULL AND ${Lists.STORE_FILTER} <> -1)",
-            null
-        )
+        return tags.toList()
+    }
+
+    override fun moveItem(item: ShoppingItem, targetListId: Long) {
+        val values = ContentValues().apply { put(Contains.LIST_ID, targetListId) }
+        resolver.update(Uri.withAppendedPath(Contains.CONTENT_URI, item.containsId.toString()), values, null, null)
+    }
+
+    override fun copyItem(item: ShoppingItem): Long? =
+        resolver.query(
+            Uri.withAppendedPath(Uri.withAppendedPath(Contains.CONTENT_URI, "copyof"), item.containsId.toString()),
+            arrayOf("item_id", "contains_id"), null, null, null
+        )?.use { c -> if (c.moveToFirst()) c.getLong(1) else null }
+
+    override fun deleteItem(listId: Long, item: ShoppingItem) {
+        ShoppingUtils.deleteItem(context, item.itemId.toString(), listId.toString())
+    }
+
+    override fun restore(snapshots: List<ItemSnapshot>) {
+        snapshots.forEach { snap ->
+            val values = ContentValues().apply {
+                put(Contains.STATUS, snap.status)
+                put(Contains.QUANTITY, snap.quantity ?: "")
+            }
+            resolver.update(Uri.withAppendedPath(Contains.CONTENT_URI, snap.containsId.toString()), values, null, null)
+        }
     }
 
     override fun setItemStatus(containsId: Long, status: Long) {

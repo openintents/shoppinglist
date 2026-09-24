@@ -4,8 +4,6 @@
     <string name="compose_open_lists">Open lists</string>
     <string name="compose_more_options">More options</string>
     <string name="compose_lists">Lists</string>
-    <string name="compose_sort_unchecked_first">Sort: unchecked first</string>
-    <string name="compose_sort_alphabetical">Sort: alphabetical</string>
     <string name="compose_show_checked_items">Show checked items</string>
     <string name="compose_import_csv">Import CSV…</string>
     <string name="compose_export_csv">Export CSV…</string>

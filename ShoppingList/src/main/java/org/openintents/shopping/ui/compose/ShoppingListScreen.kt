@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
@@ -81,6 +83,7 @@ import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -97,12 +100,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
 import org.openintents.shopping.R
 import org.openintents.shopping.data.ItemEdit
+import org.openintents.shopping.data.ListFilters
 import org.openintents.shopping.data.ListMode
 import org.openintents.shopping.data.ListTheme
 import org.openintents.shopping.data.ListTotals
 import org.openintents.shopping.data.ShoppingItem
 import org.openintents.shopping.data.ShoppingListInfo
-import org.openintents.shopping.data.SortMode
 import org.openintents.shopping.data.StoreInfo
 import org.openintents.shopping.data.lineCents
 import org.openintents.shopping.library.provider.ShoppingContract.Status
@@ -130,7 +133,7 @@ fun ShoppingListRoute(viewModel: ShoppingListViewModel) {
         onRestoreStatus = viewModel::restoreStatus,
         onUpdateItem = viewModel::updateItem,
         onRemoveItem = viewModel::removeItem,
-        onSetSortMode = viewModel::setSortMode,
+        onSetSortOrder = viewModel::setSortOrder,
         onToggleHideChecked = viewModel::toggleHideChecked,
         onCleanup = viewModel::cleanup,
         onAddStore = viewModel::addStore,
@@ -147,6 +150,15 @@ fun ShoppingListRoute(viewModel: ShoppingListViewModel) {
         onDeleteList = viewModel::deleteCurrentList,
         onSetTheme = viewModel::setTheme,
         onConsumeScroll = viewModel::consumeScrollTarget,
+        onSetStoreFilter = viewModel::setStoreFilter,
+        onSetTagFilter = viewModel::setTagFilter,
+        onUndoBulkChange = viewModel::undoBulkChange,
+        onConsumeBulkChange = viewModel::consumeBulkChange,
+        onMoveItem = viewModel::moveItem,
+        onCopyItem = viewModel::copyItem,
+        onDeleteItem = viewModel::deleteItem,
+        onConsumeEditRequest = viewModel::consumeEditRequest,
+        onSetThemeForAllLists = viewModel::setThemeForAllLists,
     )
 }
 
@@ -163,7 +175,7 @@ fun ShoppingListScreen(
     onRestoreStatus: (containsId: Long, status: Long) -> Unit,
     onUpdateItem: (ShoppingItem, ItemEdit) -> Unit,
     onRemoveItem: (ShoppingItem) -> Unit,
-    onSetSortMode: (SortMode) -> Unit,
+    onSetSortOrder: (Int) -> Unit,
     onToggleHideChecked: () -> Unit,
     onCleanup: () -> Unit,
     onAddStore: (String) -> Unit,
@@ -180,6 +192,15 @@ fun ShoppingListScreen(
     onDeleteList: () -> Unit,
     onSetTheme: (ListTheme) -> Unit,
     onConsumeScroll: () -> Unit,
+    onSetStoreFilter: (Long?) -> Unit = {},
+    onSetTagFilter: (String?) -> Unit = {},
+    onUndoBulkChange: () -> Unit = {},
+    onConsumeBulkChange: () -> Unit = {},
+    onMoveItem: (ShoppingItem, Long) -> Unit = { _, _ -> },
+    onCopyItem: (ShoppingItem) -> Unit = {},
+    onDeleteItem: (ShoppingItem) -> Unit = {},
+    onConsumeEditRequest: () -> Unit = {},
+    onSetThemeForAllLists: (ListTheme) -> Unit = {},
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val listState = rememberLazyListState()
@@ -191,6 +212,7 @@ fun ShoppingListScreen(
     var showRenameDialog by rememberSaveable { mutableStateOf(false) }
     var showDeleteConfirm by rememberSaveable { mutableStateOf(false) }
     var showThemeDialog by rememberSaveable { mutableStateOf(false) }
+    var showSortDialog by rememberSaveable { mutableStateOf(false) }
     // The item being edited, by relation-row id (saveable, unlike the item itself).
     var editingContainsId by rememberSaveable { mutableStateOf<Long?>(null) }
     val editingItem = editingContainsId?.let { id -> state.items.firstOrNull { it.containsId == id } }
@@ -199,7 +221,7 @@ fun ShoppingListScreen(
     var addText by rememberSaveable { mutableStateOf("") }
     val searchQuery = if (state.addBarOnTop) addText.trim() else ""
     val pickItemsSorted = remember(state.pickItems, searchQuery) {
-        state.pickItems.sortedBy { it.name.lowercase() }.filter { it.matches(searchQuery) }
+        state.pickItems.filter { it.matches(searchQuery) } // sorted by the repository
     }
     val shownItems = remember(state.visibleItems, searchQuery) {
         state.visibleItems.filter { it.matches(searchQuery) }
@@ -212,6 +234,7 @@ fun ShoppingListScreen(
     }
 
     val theme = state.theme
+    val rowDetails = RowDetails(state.showQuantity, state.showUnits, state.showTags, state.showPriority)
     val sendTitle = stringResource(R.string.send)
     val markedFormat = stringResource(R.string.undoable_marked_item)
     val unmarkedFormat = stringResource(R.string.undoable_unmarked_item)
@@ -226,6 +249,34 @@ fun ShoppingListScreen(
     val importLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.OpenDocument()
     ) { uri -> uri?.let(onImport) }
+
+    // Undo for mark all / unmark all / clean up.
+    val resources = context.resources
+    LaunchedEffect(state.bulkChange) {
+        val change = state.bulkChange ?: return@LaunchedEffect
+        onConsumeBulkChange()
+        val count = when (change) {
+            BulkChange.CLEANED_UP -> R.plurals.undoable_clean_list
+            BulkChange.MARKED_ALL -> R.plurals.undoable_mark_all
+            BulkChange.UNMARKED_ALL -> R.plurals.undoable_unmark_all
+        }
+        snackbarHostState.currentSnackbarData?.dismiss()
+        val result = snackbarHostState.showSnackbar(
+            message = resources.getQuantityString(count, state.bulkChangeCount, state.bulkChangeCount),
+            actionLabel = undoLabel,
+            duration = SnackbarDuration.Long,
+        )
+        if (result == SnackbarResult.ActionPerformed) onUndoBulkChange()
+    }
+
+    // A copied item opens in the editor.
+    LaunchedEffect(state.editRequest, state.items) {
+        val request = state.editRequest ?: return@LaunchedEffect
+        if (state.items.any { it.containsId == request }) {
+            editingContainsId = request
+            onConsumeEditRequest()
+        }
+    }
 
     LaunchedEffect(state.userMessage) {
         state.userMessage?.let {
@@ -300,9 +351,8 @@ fun ShoppingListScreen(
                     },
                     actions = {
                         ListOptionsMenu(
-                            sortMode = state.sortMode,
                             hideChecked = state.hideChecked,
-                            onSetSortMode = onSetSortMode,
+                            onSort = { showSortDialog = true },
                             onToggleHideChecked = onToggleHideChecked,
                             onCleanup = onCleanup,
                             onMarkAll = onMarkAll,
@@ -319,6 +369,22 @@ fun ShoppingListScreen(
                                 )
                             },
                             onExportCsv = { exportLauncher.launch("shoppinglist.csv") },
+                            onConvertCsv = {
+                                context.startActivity(
+                                    Intent(context, org.openintents.convertcsv.shoppinglist.ConvertCsvActivity::class.java)
+                                        .setData(
+                                            android.net.Uri.withAppendedPath(
+                                                org.openintents.shopping.library.provider.ShoppingContract.Lists.CONTENT_URI,
+                                                state.currentListId.toString()
+                                            )
+                                        )
+                                )
+                            },
+                            onAbout = {
+                                context.startActivity(
+                                    Intent(context, org.openintents.distribution.about.About::class.java)
+                                )
+                            },
                         )
                     }
                 )
@@ -332,6 +398,17 @@ fun ShoppingListScreen(
                     .consumeWindowInsets(padding)
                     .imePadding() // lift the bottom add-bar above the soft keyboard
             ) {
+                if (state.filters.isActive || (state.useFilters && (state.stores.isNotEmpty() || state.tags.isNotEmpty()))) {
+                    ListFilterRow(
+                        filters = state.filters,
+                        stores = state.stores,
+                        tags = state.tags,
+                        useFilters = state.useFilters,
+                        onSetStoreFilter = onSetStoreFilter,
+                        onSetTagFilter = onSetTagFilter,
+                    )
+                    HorizontalDivider()
+                }
                 if (state.stores.isNotEmpty()) {
                     StoreFilterRow(
                         stores = state.stores,
@@ -378,6 +455,7 @@ fun ShoppingListScreen(
                             fontFamily = fontFamily,
                             fontSize = state.fontSize,
                             showPrice = state.showPrice,
+                            details = rowDetails,
                             onToggle = {
                                 val originalStatus = item.status
                                 val wasBought = item.isBought
@@ -405,7 +483,11 @@ fun ShoppingListScreen(
                 }
                 if (state.totals.hasAny) {
                     HorizontalDivider()
-                    TotalsBar(totals = state.totals)
+                    TotalsBar(
+                        totals = state.totals,
+                        prioritySubtotal = state.prioritySubtotal,
+                        priorityThreshold = state.prioritySubtotalThreshold,
+                    )
                 }
                 if (state.addBarOnTop) {
                     // Suggestions for the add/search field in the top bar.
@@ -466,10 +548,22 @@ fun ShoppingListScreen(
         )
     }
 
+    if (showSortDialog) {
+        ChoiceDialog(
+            title = stringResource(R.string.menu_sort_list),
+            labels = stringArrayResource(R.array.preference_sortorder_entries).toList(),
+            values = stringArrayResource(R.array.preference_sortorder_entryvalues).toList(),
+            selected = state.sortOrder.toString(),
+            onDismiss = { showSortDialog = false },
+            onSelect = { onSetSortOrder(it.toInt()); showSortDialog = false },
+        )
+    }
+
     if (showThemeDialog) {
         ThemeDialog(
             current = state.theme,
             fontSize = state.fontSize,
+            onApplyToAllLists = { onSetThemeForAllLists(it); showThemeDialog = false },
             onDismiss = { showThemeDialog = false },
             onSelect = { onSetTheme(it); showThemeDialog = false },
         )
@@ -513,6 +607,20 @@ fun ShoppingListScreen(
                 onRemoveItem(item)
                 close()
             },
+            otherLists = state.lists.filter { it.id != state.currentListId },
+            onMove = { listId -> onMoveItem(item, listId); close() },
+            onCopy = { onCopyItem(item); close() },
+            onItemStores = {
+                // Which stores carry the item, aisle and price per store.
+                context.startActivity(
+                    Intent(context, org.openintents.shopping.ui.ItemStoresActivity::class.java).setData(
+                        org.openintents.shopping.library.provider.ShoppingContract.Lists.CONTENT_URI.buildUpon()
+                            .appendPath(state.currentListId.toString())
+                            .appendPath(item.itemId.toString()).build()
+                    )
+                )
+            },
+            onDeletePermanently = { onDeleteItem(item); close() },
         )
     }
 }
@@ -593,11 +701,70 @@ private fun StoreFilterRow(
     }
 }
 
+/**
+ * The store / tag filters of the list (the "use_filters" setting). Active
+ * filters are always shown, so items are never hidden without a visible reason.
+ */
+@Composable
+private fun ListFilterRow(
+    filters: ListFilters,
+    stores: List<StoreInfo>,
+    tags: List<String>,
+    useFilters: Boolean,
+    onSetStoreFilter: (Long?) -> Unit,
+    onSetTagFilter: (String?) -> Unit,
+) {
+    var storeMenu by remember { mutableStateOf(false) }
+    var tagMenu by remember { mutableStateOf(false) }
+    val unfiltered = stringResource(R.string.unfiltered)
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .horizontalScroll(rememberScrollState())
+            .padding(horizontal = 8.dp, vertical = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        if (useFilters || filters.storeId != null) {
+            Box {
+                FilterChip(
+                    selected = filters.storeId != null,
+                    onClick = { storeMenu = true },
+                    label = {
+                        Text(stores.firstOrNull { it.id == filters.storeId }?.name ?: stringResource(R.string.stores))
+                    },
+                )
+                DropdownMenu(expanded = storeMenu, onDismissRequest = { storeMenu = false }) {
+                    DropdownMenuItem(text = { Text(unfiltered) }, onClick = { storeMenu = false; onSetStoreFilter(null) })
+                    stores.forEach { store ->
+                        DropdownMenuItem(
+                            text = { Text(store.name) },
+                            onClick = { storeMenu = false; onSetStoreFilter(store.id) },
+                        )
+                    }
+                }
+            }
+            Spacer(Modifier.width(8.dp))
+        }
+        Box {
+            FilterChip(
+                selected = filters.tag != null,
+                onClick = { tagMenu = true },
+                label = { Text(filters.tag ?: stringResource(R.string.tags)) },
+            )
+            DropdownMenu(expanded = tagMenu, onDismissRequest = { tagMenu = false }) {
+                DropdownMenuItem(text = { Text(unfiltered) }, onClick = { tagMenu = false; onSetTagFilter(null) })
+                tags.forEach { tag ->
+                    DropdownMenuItem(text = { Text(tag) }, onClick = { tagMenu = false; onSetTagFilter(tag) })
+                }
+            }
+        }
+    }
+}
+
 @Composable
 private fun ListOptionsMenu(
-    sortMode: SortMode,
     hideChecked: Boolean,
-    onSetSortMode: (SortMode) -> Unit,
+    onSort: () -> Unit,
     onToggleHideChecked: () -> Unit,
     onCleanup: () -> Unit,
     onMarkAll: (Boolean) -> Unit,
@@ -608,6 +775,8 @@ private fun ListOptionsMenu(
     onManageStores: () -> Unit,
     onImportCsv: () -> Unit,
     onExportCsv: () -> Unit,
+    onConvertCsv: () -> Unit = {},
+    onAbout: () -> Unit = {},
 ) {
     var expanded by remember { mutableStateOf(false) }
     IconButton(onClick = { expanded = true }) {
@@ -615,16 +784,9 @@ private fun ListOptionsMenu(
     }
     DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
         DropdownMenuItem(
-            text = { Text(stringResource(R.string.compose_sort_unchecked_first)) },
-            leadingIcon = { if (sortMode == SortMode.UNCHECKED_FIRST) Icon(Icons.Filled.Check, null) },
-            onClick = { onSetSortMode(SortMode.UNCHECKED_FIRST); expanded = false },
+            text = { Text(stringResource(R.string.menu_sort_list)) },
+            onClick = { onSort(); expanded = false },
         )
-        DropdownMenuItem(
-            text = { Text(stringResource(R.string.compose_sort_alphabetical)) },
-            leadingIcon = { if (sortMode == SortMode.ALPHABETICAL) Icon(Icons.Filled.Check, null) },
-            onClick = { onSetSortMode(SortMode.ALPHABETICAL); expanded = false },
-        )
-        HorizontalDivider()
         DropdownMenuItem(
             text = { Text(stringResource(if (hideChecked) R.string.compose_show_checked_items else R.string.preference_hidechecked_title)) },
             onClick = { onToggleHideChecked(); expanded = false },
@@ -672,6 +834,11 @@ private fun ListOptionsMenu(
             text = { Text(stringResource(R.string.compose_export_csv)) },
             onClick = { onExportCsv(); expanded = false },
         )
+        // The full CSV screen: HandyShopper format, encoding, import policy.
+        DropdownMenuItem(
+            text = { Text(stringResource(R.string.convert_csv)) },
+            onClick = { onConvertCsv(); expanded = false },
+        )
         val context = LocalContext.current
         DropdownMenuItem(
             text = { Text(stringResource(R.string.preferences)) },
@@ -679,6 +846,10 @@ private fun ListOptionsMenu(
                 context.startActivity(Intent(context, SettingsActivity::class.java))
                 expanded = false
             },
+        )
+        DropdownMenuItem(
+            text = { Text(stringResource(org.openintents.distribution.R.string.oi_distribution_about)) },
+            onClick = { onAbout(); expanded = false },
         )
     }
 }
@@ -787,6 +958,14 @@ private fun themedName(theme: ListTheme, text: String, checked: Boolean): String
     return if (checked && theme.checkedSuffix) base + stringResource(R.string.suffix_checked) else base
 }
 
+/** Which item details a row shows (the "show..." settings). */
+private data class RowDetails(
+    val quantity: Boolean = true,
+    val units: Boolean = true,
+    val tags: Boolean = true,
+    val priority: Boolean = true,
+)
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ShoppingItemRow(
@@ -797,6 +976,7 @@ private fun ShoppingItemRow(
     showPrice: Boolean,
     onToggle: () -> Unit,
     onEdit: () -> Unit,
+    details: RowDetails = RowDetails(),
 ) {
     val struck = item.isBought && theme.strikethroughChecked
     val decoration = if (struck) TextDecoration.LineThrough else TextDecoration.None
@@ -825,18 +1005,40 @@ private fun ShoppingItemRow(
             )
         }
         val label = buildString {
-            if (!item.quantity.isNullOrBlank()) append(item.quantity).append(' ')
-            if (!item.units.isNullOrBlank()) append(item.units).append(' ')
+            if (details.quantity && !item.quantity.isNullOrBlank()) append(item.quantity).append(' ')
+            if (details.units && !item.units.isNullOrBlank()) append(item.units).append(' ')
             append(item.name)
         }
-        Text(
-            text = themedName(theme, label, item.isBought),
-            color = color,
-            fontFamily = fontFamily,
-            fontSize = textSize,
-            textDecoration = decoration,
-            modifier = Modifier.weight(1f).padding(start = 8.dp)
-        )
+        Column(modifier = Modifier.weight(1f).padding(start = 8.dp)) {
+            Text(
+                text = themedName(theme, label, item.isBought),
+                color = color,
+                fontFamily = fontFamily,
+                fontSize = textSize,
+                textDecoration = decoration,
+            )
+            if (details.tags && !item.tags.isNullOrBlank()) {
+                Text(
+                    text = if (theme.upperCase) item.tags.uppercase() else item.tags,
+                    color = Color(theme.priceArgb),
+                    fontFamily = fontFamily,
+                    fontSize = textSize * 0.6f,
+                )
+            }
+        }
+        if (details.priority && !item.priority.isNullOrBlank()) {
+            // A small badge, so it is not mistaken for part of the price.
+            Text(
+                text = item.priority,
+                color = Color(theme.priorityArgb),
+                fontFamily = fontFamily,
+                fontSize = textSize * 0.6f,
+                modifier = Modifier
+                    .padding(start = 8.dp)
+                    .border(1.dp, Color(theme.priorityArgb), RoundedCornerShape(4.dp))
+                    .padding(horizontal = 5.dp)
+            )
+        }
         // Line cost (price * quantity), like the legacy UI and the totals.
         lineCents(item)?.takeIf { showPrice }?.let { cents ->
             Text(
@@ -886,6 +1088,36 @@ private fun PickItemRow(
     }
 }
 
+/** A single-choice dialog (radio buttons), e.g. the sort order. */
+@Composable
+private fun ChoiceDialog(
+    title: String,
+    labels: List<String>,
+    values: List<String>,
+    selected: String,
+    onDismiss: () -> Unit,
+    onSelect: (String) -> Unit,
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(title) },
+        text = {
+            Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+                labels.zip(values).forEach { (label, value) ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth().clickable { onSelect(value) }.padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(selected = value == selected, onClick = { onSelect(value) })
+                        Text(label, modifier = Modifier.padding(start = 8.dp))
+                    }
+                }
+            }
+        },
+        confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } }
+    )
+}
+
 private fun ListTheme.labelRes(): Int = when (this) {
     ListTheme.DEFAULT -> R.string.theme_default
     ListTheme.CLASSIC -> R.string.theme_classic
@@ -897,6 +1129,7 @@ private fun ListTheme.labelRes(): Int = when (this) {
 private fun ThemeDialog(
     current: ListTheme,
     fontSize: Int,
+    onApplyToAllLists: (ListTheme) -> Unit,
     onDismiss: () -> Unit,
     onSelect: (ListTheme) -> Unit,
 ) {
@@ -935,7 +1168,12 @@ private fun ThemeDialog(
                 }
             }
         },
-        confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.compose_done)) } }
+        confirmButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.compose_done)) } },
+        dismissButton = {
+            TextButton(onClick = { onApplyToAllLists(current) }) {
+                Text(stringResource(R.string.use_theme_for_all_lists))
+            }
+        },
     )
 }
 
@@ -951,7 +1189,14 @@ private fun EditItemDialog(
     onDismiss: () -> Unit,
     onSave: (ItemEdit) -> Unit,
     onDelete: () -> Unit,
+    otherLists: List<ShoppingListInfo> = emptyList(),
+    onMove: (Long) -> Unit = {},
+    onCopy: () -> Unit = {},
+    onDeletePermanently: () -> Unit = {},
+    onItemStores: () -> Unit = {},
 ) {
+    var showMove by rememberSaveable { mutableStateOf(false) }
+    var confirmDelete by rememberSaveable { mutableStateOf(false) }
     var name by rememberSaveable { mutableStateOf(item.name) }
     var quantity by rememberSaveable { mutableStateOf(item.quantity.orEmpty()) }
     var price by rememberSaveable {
@@ -1042,6 +1287,14 @@ private fun EditItemDialog(
                 }
                 Spacer(Modifier.height(8.dp))
                 TextButton(onClick = onDelete) { Text(stringResource(R.string.menu_remove_item)) }
+                if (otherLists.isNotEmpty()) {
+                    TextButton(onClick = { showMove = true }) { Text(stringResource(R.string.menu_move_item)) }
+                }
+                TextButton(onClick = onCopy) { Text(stringResource(R.string.menu_copy_item)) }
+                if (stores.isNotEmpty()) {
+                    TextButton(onClick = onItemStores) { Text(stringResource(R.string.menu_item_stores)) }
+                }
+                TextButton(onClick = { confirmDelete = true }) { Text(stringResource(R.string.menu_delete_item)) }
             }
         },
         confirmButton = {
@@ -1078,13 +1331,52 @@ private fun EditItemDialog(
             TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) }
         }
     )
+
+    if (showMove) {
+        AlertDialog(
+            onDismissRequest = { showMove = false },
+            title = { Text(stringResource(R.string.menu_move_item)) },
+            text = {
+                Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+                    otherLists.forEach { list ->
+                        Text(
+                            list.name,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { showMove = false; onMove(list.id) }
+                                .padding(vertical = 12.dp)
+                        )
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showMove = false }) { Text(stringResource(R.string.cancel)) }
+            }
+        )
+    }
+
+    if (confirmDelete) {
+        AlertDialog(
+            onDismissRequest = { confirmDelete = false },
+            title = { Text(stringResource(R.string.menu_delete_item)) },
+            text = { Text(stringResource(R.string.delete_item_confirm, item.name)) },
+            confirmButton = {
+                TextButton(onClick = { confirmDelete = false; onDeletePermanently() }) {
+                    Text(stringResource(R.string.delete))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { confirmDelete = false }) { Text(stringResource(R.string.cancel)) }
+            }
+        )
+    }
 }
 
 private fun isValidPrice(text: String): Boolean =
     text.isBlank() || PriceConverter.getCentPriceFromString(text) != null
 
 @Composable
-private fun TotalsBar(totals: ListTotals) {
+private fun TotalsBar(totals: ListTotals, prioritySubtotal: Long, priorityThreshold: Int) {
     Row(
         modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -1093,6 +1385,18 @@ private fun TotalsBar(totals: ListTotals) {
             text = stringResource(R.string.total, formatTotal(totals.toBuyCents)),
             modifier = Modifier.weight(1f)
         )
+        if (prioritySubtotal != 0L && priorityThreshold in 1..4) {
+            val caption = when (priorityThreshold) {
+                1 -> R.string.priority1_total
+                2 -> R.string.priority2_total
+                3 -> R.string.priority3_total
+                else -> R.string.priority4_total
+            }
+            Text(
+                text = stringResource(caption, formatTotal(prioritySubtotal)),
+                modifier = Modifier.padding(end = 12.dp)
+            )
+        }
         if (totals.boughtCents > 0) {
             Text(text = stringResource(R.string.total_checked, formatTotal(totals.boughtCents)))
         }

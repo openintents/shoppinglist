@@ -41,7 +41,9 @@ class ScreenshotTest {
     @Before
     fun setUp() {
         assumeTrue(System.getProperty("screenshots") != null)
-        PreferenceActivity.setShowLayoutChoice(context, false)
+        @Suppress("DEPRECATION")
+        android.preference.PreferenceManager.getDefaultSharedPreferences(context)
+            .edit().putString("sortorder", "0").commit() // unchecked first
         listId = repo.createList("Groceries")
         repo.createList("Hardware store")
         listOf("Milk", "Bread", "Eggs", "Apples", "Coffee", "Butter").forEach { repo.addItem(listId, it) }

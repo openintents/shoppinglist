@@ -39,3 +39,16 @@ fun lineCents(item: ShoppingItem): Long? {
     val qty = item.quantity?.trim()?.toDoubleOrNull() ?: 1.0
     return (unit * qty).roundToLong()
 }
+
+/**
+ * The legacy "subtotal by priority": the cost of the items with a priority from
+ * 1 to [threshold] (0 = not shown). Bought items count when [includesChecked].
+ */
+fun prioritySubtotal(items: List<ShoppingItem>, threshold: Int, includesChecked: Boolean): Long {
+    if (threshold <= 0) return 0L
+    return items.sumOf { item ->
+        val prio = item.priority?.trim()?.toIntOrNull() ?: 0
+        val counts = item.status == Status.WANT_TO_BUY || (includesChecked && item.status == Status.BOUGHT)
+        if (counts && prio in 1..threshold) lineCents(item) ?: 0L else 0L
+    }
+}

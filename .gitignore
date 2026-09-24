@@ -12,3 +12,6 @@ build
 .DS_Store
 *.p12
 .claude/
+*.jks
+*.keystore
+.kotlin/

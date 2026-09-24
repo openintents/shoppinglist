@@ -147,7 +147,7 @@ class ShoppingRepositoryTest {
 
         val removed = repo.cleanupList(listId)
 
-        assertEquals(1, removed)
+        assertEquals(1, removed.size)
         val names = repo.getItems(listId).map { it.name }
         assertFalse(names.contains("Milk"))
         assertTrue(names.contains("Eggs"))
@@ -301,22 +301,55 @@ class ShoppingRepositoryTest {
     }
 
     @Test
-    fun clearListFilters_showsItemsHiddenByALegacyTagFilter() {
-        val context = ApplicationProvider.getApplicationContext<Context>()
+    fun tagFilter_hidesOtherItemsUntilCleared() {
         val listId = repo.createList("Filtered")
         repo.addItem(listId, "Pepper")
-        context.contentResolver.update(
-            android.net.Uri.withAppendedPath(
-                org.openintents.shopping.library.provider.ShoppingContract.Lists.CONTENT_URI, listId.toString()
-            ),
-            android.content.ContentValues().apply {
-                put(org.openintents.shopping.library.provider.ShoppingContract.Lists.TAGS_FILTER, "nomatch")
-            },
-            null, null
-        )
+        repo.addItem(listId, "Soap")
+        val soap = repo.getItems(listId).single { it.name == "Soap" }
+        repo.updateItem(soap, ItemEdit("Soap", null, null, null, null, "drugstore, bath"))
+        assertEquals(listOf("bath", "drugstore"), repo.getListTags(listId))
+
+        repo.setTagFilter(listId, "drugstore")
+        assertEquals(ListFilters(tag = "drugstore"), repo.getListFilters(listId))
+        assertEquals(listOf("Soap"), repo.getItems(listId).map { it.name })
+
+        repo.setTagFilter(listId, null)
+        assertEquals(2, repo.getItems(listId).size)
+    }
+
+    @Test
+    fun moveCopyAndDeleteItems() {
+        val a = repo.createList("MoveA")
+        val b = repo.createList("MoveB")
+        repo.addItem(a, "Rice")
+        repo.addItem(a, "Beans")
+        val rice = repo.getItems(a).single { it.name == "Rice" }
+        repo.moveItem(rice, b)
+        assertEquals(listOf("Rice"), repo.getItems(b).map { it.name })
+        assertFalse(repo.getItems(a).any { it.name == "Rice" })
+
+        val beans = repo.getItems(a).single()
+        val copy = repo.copyItem(beans)
+        assertTrue(copy != null && repo.getItems(a).any { it.containsId == copy })
+        assertEquals(2, repo.getItems(a).size)
+
+        repo.deleteItem(a, beans)
+        assertFalse(repo.getAllListItems(a).any { it.containsId == beans.containsId })
+    }
+
+    @Test
+    fun markAllAndCleanup_canBeUndone() {
+        val listId = repo.createList("Undo")
+        repo.addItem(listId, "x")
+        repo.addItem(listId, "y")
+        val marked = repo.markAllItems(listId, true)
+        assertEquals(2, marked.size)
+        val cleaned = repo.cleanupList(listId)
         assertTrue(repo.getItems(listId).isEmpty())
-        repo.clearListFilters(listId)
-        assertEquals("Pepper", repo.getItems(listId).single().name)
+        repo.restore(cleaned)
+        assertTrue(repo.getItems(listId).all { it.isBought })
+        repo.restore(marked)
+        assertTrue(repo.getItems(listId).none { it.isBought })
     }
 
     @Test

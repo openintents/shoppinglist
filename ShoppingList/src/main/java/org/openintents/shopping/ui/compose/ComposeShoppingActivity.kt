@@ -3,6 +3,10 @@ package org.openintents.shopping.ui.compose
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Intent
+import android.content.pm.ActivityInfo
+import android.hardware.Sensor
+import android.hardware.SensorManager
+import android.view.WindowManager
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -12,7 +16,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import org.openintents.intents.ShoppingListIntents
+import org.openintents.shopping.data.ListMode
 import org.openintents.shopping.data.NewItem
+import org.openintents.util.ShakeSensorListener
 import org.openintents.shopping.library.provider.ShoppingContract
 import org.openintents.shopping.widgets.CheckItemsWidget
 import org.openintents.shopping.ui.compose.theme.OiShoppingTheme
@@ -49,6 +55,38 @@ open class ComposeShoppingActivity : ComponentActivity() {
         super.onNewIntent(intent)
         setIntent(intent)
         showListFrom(intent)
+    }
+
+    private val shakeListener = object : ShakeSensorListener() {
+        override fun onShake() {
+            // "Shake to clean up" (only while shopping, like the legacy UI).
+            if (viewModel.state.value.mode == ListMode.SHOPPING) viewModel.cleanup()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Settings that act on the window (they can change in Settings).
+        @Suppress("DEPRECATION")
+        val prefs = android.preference.PreferenceManager.getDefaultSharedPreferences(this)
+        requestedOrientation = prefs.getString("orientation", "-1")?.toIntOrNull()
+            ?: ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        if (prefs.getBoolean("screenlock", false)) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        } else {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+        if (prefs.getBoolean("shake", false)) {
+            val sensors = getSystemService(SENSOR_SERVICE) as SensorManager
+            sensors.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)?.let {
+                sensors.registerListener(shakeListener, it, SensorManager.SENSOR_DELAY_UI)
+            }
+        }
+    }
+
+    override fun onPause() {
+        (getSystemService(SENSOR_SERVICE) as SensorManager).unregisterListener(shakeListener)
+        super.onPause()
     }
 
     override fun onStop() {

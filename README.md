@@ -16,3 +16,17 @@ All of these features are brought together in a crisp layout that is customizabl
 * **[F-Droid](https://f-droid.org/en/packages/org.openintents.shopping/)** [F-Droid meta data](https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/org.openintents.shopping.yml)
 
 * **[Google Play](https://play.google.com/store/apps/details?id=org.openintents.shopping)**
+
+* **[Obtainium](https://github.com/ImranR98/Obtainium)**: add the app with the URL
+  `https://github.com/openintents/shoppinglist` (APKs from the GitHub releases)
+
+* **[Zapstore](https://zapstore.dev)**: search for "OI Shopping List"
+
+## Releasing
+
+1. Bump `versionName`/`versionCode` in `ShoppingList/build.gradle`, add
+   `fastlane/metadata/android/*/changelogs/<versionCode>.txt` (max. 500 characters)
+   and point `release_notes` in `zapstore.yaml` at it.
+2. Push a tag `v<versionName>`. The *Release* workflow builds and signs the APK,
+   creates the GitHub release (Obtainium) and publishes to Zapstore.
+   F-Droid picks up the tag by itself (see `.fdroid.yml`).
