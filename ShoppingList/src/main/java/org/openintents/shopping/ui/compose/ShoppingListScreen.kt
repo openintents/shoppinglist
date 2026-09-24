@@ -30,6 +30,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
@@ -57,6 +59,8 @@ import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
@@ -191,7 +195,21 @@ fun ShoppingListScreen(
     var editingContainsId by rememberSaveable { mutableStateOf<Long?>(null) }
     val editingItem = editingContainsId?.let { id -> state.items.firstOrNull { it.containsId == id } }
     val snackbarHostState = remember { SnackbarHostState() }
-    val pickItemsSorted = remember(state.pickItems) { state.pickItems.sortedBy { it.name.lowercase() } }
+    // Text of the add field. With the field in the top bar it also searches the list.
+    var addText by rememberSaveable { mutableStateOf("") }
+    val searchQuery = if (state.addBarOnTop) addText.trim() else ""
+    val pickItemsSorted = remember(state.pickItems, searchQuery) {
+        state.pickItems.sortedBy { it.name.lowercase() }.filter { it.matches(searchQuery) }
+    }
+    val shownItems = remember(state.visibleItems, searchQuery) {
+        state.visibleItems.filter { it.matches(searchQuery) }
+    }
+    val submitAdd = {
+        if (addText.isNotBlank()) {
+            onAddItem(addText)
+            addText = ""
+        }
+    }
 
     val theme = state.theme
     val sendTitle = stringResource(R.string.send)
@@ -225,7 +243,7 @@ fun ShoppingListScreen(
     // After an add, scroll the list to where the new item landed (sort decides position).
     LaunchedEffect(state.scrollToContainsId) {
         val target = state.scrollToContainsId ?: return@LaunchedEffect
-        val shown = if (state.mode == ListMode.PICK_ITEMS) pickItemsSorted else state.visibleItems
+        val shown = if (state.mode == ListMode.PICK_ITEMS) pickItemsSorted else shownItems
         val idx = shown.indexOfFirst { it.containsId == target }
         if (idx >= 0) listState.animateScrollToItem(idx)
         onConsumeScroll()
@@ -252,7 +270,15 @@ fun ShoppingListScreen(
             topBar = {
                 TopAppBar(
                     title = {
-                        Column {
+                        if (state.addBarOnTop) {
+                            TopBarAddField(
+                                text = addText,
+                                onTextChange = { addText = it },
+                                placeholder = state.currentListName.ifEmpty { stringResource(R.string.app_name) },
+                                capitalization = state.capitalization,
+                                onSubmit = submitAdd,
+                            )
+                        } else Column {
                             Text(
                                 state.currentListName.ifEmpty { stringResource(R.string.app_name) },
                                 style = MaterialTheme.typography.titleLarge,
@@ -315,7 +341,7 @@ fun ShoppingListScreen(
                     HorizontalDivider()
                 }
                 val shownEmpty = if (state.mode == ListMode.PICK_ITEMS) pickItemsSorted.isEmpty()
-                else state.visibleItems.isEmpty()
+                else shownItems.isEmpty()
                 // Only the list itself wears the list theme (like the legacy UI);
                 // app bar, totals and add bar keep the app's colors.
                 ThemedListArea(theme = theme, modifier = Modifier.weight(1f).fillMaxWidth()) {
@@ -345,7 +371,7 @@ fun ShoppingListScreen(
                         }
                         return@LazyColumn
                     }
-                    items(state.visibleItems, key = { it.containsId }) { item ->
+                    items(shownItems, key = { it.containsId }) { item ->
                         ShoppingItemRow(
                             item = item,
                             theme = theme,
@@ -381,11 +407,23 @@ fun ShoppingListScreen(
                     HorizontalDivider()
                     TotalsBar(totals = state.totals)
                 }
-                AddItemRow(
-                    suggestions = state.suggestions,
-                    capitalization = state.capitalization,
-                    onAdd = onAddItem,
-                )
+                if (state.addBarOnTop) {
+                    // Suggestions for the add/search field in the top bar.
+                    SuggestionRow(
+                        query = addText,
+                        suggestions = state.suggestions,
+                        onPick = { onAddItem(it); addText = "" },
+                    )
+                } else {
+                    AddItemRow(
+                        text = addText,
+                        onTextChange = { addText = it },
+                        suggestions = state.suggestions,
+                        capitalization = state.capitalization,
+                        onAdd = { onAddItem(it); addText = "" },
+                        onSubmit = submitAdd,
+                    )
+                }
             }
         }
     }
@@ -1061,18 +1099,21 @@ private fun TotalsBar(totals: ListTotals) {
 private fun formatTotal(cents: Long): String =
     if (cents == 0L) "0.00" else PriceConverter.getStringFromCentPrice(cents)
 
+/** Case-insensitive search of the list (empty query matches everything). */
+private fun ShoppingItem.matches(query: String): Boolean =
+    query.isEmpty() || name.contains(query, ignoreCase = true)
+
+private fun keyboardCapitalization(capitalization: Int) = when (capitalization) {
+    0 -> KeyboardCapitalization.None
+    2 -> KeyboardCapitalization.Words
+    else -> KeyboardCapitalization.Sentences
+}
+
+/** Catalogue names matching what's typed (case-insensitive); prefix matches first. */
 @Composable
-private fun AddItemRow(suggestions: List<String>, capitalization: Int, onAdd: (String) -> Unit) {
-    var newItem by rememberSaveable { mutableStateOf("") }
-    val submit = {
-        if (newItem.isNotBlank()) {
-            onAdd(newItem)
-            newItem = ""
-        }
-    }
-    // Catalogue names matching what's typed (case-insensitive); prefix matches first.
-    val matches = remember(newItem, suggestions) {
-        val q = newItem.trim()
+private fun SuggestionRow(query: String, suggestions: List<String>, onPick: (String) -> Unit) {
+    val matches = remember(query, suggestions) {
+        val q = query.trim()
         if (q.isBlank()) emptyList()
         else suggestions.asSequence()
             .filter { it.contains(q, ignoreCase = true) && !it.equals(q, ignoreCase = true) }
@@ -1080,50 +1121,100 @@ private fun AddItemRow(suggestions: List<String>, capitalization: Int, onAdd: (S
             .take(8)
             .toList()
     }
-    Column(modifier = Modifier.fillMaxWidth()) {
-        if (matches.isNotEmpty()) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState())
-                    .padding(horizontal = 8.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                matches.forEach { name ->
-                    // Tapping a suggestion adds it straight away (fast re-add).
-                    SuggestionChip(
-                        onClick = { onAdd(name); newItem = "" },
-                        label = { Text(name) },
-                    )
-                    Spacer(Modifier.width(8.dp))
-                }
-            }
+    if (matches.isEmpty()) return
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .horizontalScroll(rememberScrollState())
+            .padding(horizontal = 8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        matches.forEach { name ->
+            // Tapping a suggestion adds it straight away (fast re-add).
+            SuggestionChip(onClick = { onPick(name) }, label = { Text(name) })
+            Spacer(Modifier.width(8.dp))
         }
+    }
+}
+
+/** The add field at the bottom of the screen. */
+@Composable
+private fun AddItemRow(
+    text: String,
+    onTextChange: (String) -> Unit,
+    suggestions: List<String>,
+    capitalization: Int,
+    onAdd: (String) -> Unit,
+    onSubmit: () -> Unit,
+) {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        SuggestionRow(query = text, suggestions = suggestions, onPick = onAdd)
         Row(
             modifier = Modifier.fillMaxWidth().padding(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             OutlinedTextField(
-                value = newItem,
-                onValueChange = { newItem = it },
+                value = text,
+                onValueChange = onTextChange,
                 label = { Text(stringResource(R.string.new_item)) },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(
-                    capitalization = when (capitalization) {
-                        0 -> KeyboardCapitalization.None
-                        2 -> KeyboardCapitalization.Words
-                        else -> KeyboardCapitalization.Sentences
-                    },
+                    capitalization = keyboardCapitalization(capitalization),
                     imeAction = ImeAction.Done,
                 ),
-                keyboardActions = KeyboardActions(onDone = { submit() }),
+                keyboardActions = KeyboardActions(onDone = { onSubmit() }),
                 modifier = Modifier.weight(1f)
             )
-            IconButton(onClick = submit) {
+            IconButton(onClick = onSubmit) {
                 Icon(Icons.Filled.Add, contentDescription = stringResource(R.string.add))
             }
         }
     }
+}
+
+/**
+ * The search/add field in the top bar ("holosearch" setting): typing filters
+ * the list, Enter or + adds the text as a new item.
+ */
+@Composable
+private fun TopBarAddField(
+    text: String,
+    onTextChange: (String) -> Unit,
+    placeholder: String,
+    capitalization: Int,
+    onSubmit: () -> Unit,
+) {
+    TextField(
+        value = text,
+        onValueChange = onTextChange,
+        placeholder = { Text(placeholder, maxLines = 1) },
+        leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
+        trailingIcon = {
+            if (text.isNotEmpty()) {
+                Row {
+                    IconButton(onClick = { onTextChange("") }) {
+                        Icon(Icons.Filled.Clear, contentDescription = stringResource(R.string.compose_clear))
+                    }
+                    IconButton(onClick = onSubmit) {
+                        Icon(Icons.Filled.Add, contentDescription = stringResource(R.string.add))
+                    }
+                }
+            }
+        },
+        singleLine = true,
+        keyboardOptions = KeyboardOptions(
+            capitalization = keyboardCapitalization(capitalization),
+            imeAction = ImeAction.Done,
+        ),
+        keyboardActions = KeyboardActions(onDone = { onSubmit() }),
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = Color.Transparent,
+            unfocusedContainerColor = Color.Transparent,
+        ),
+        modifier = Modifier.fillMaxWidth().semantics {
+            contentDescription = placeholder
+        },
+    )
 }
 
 @Composable

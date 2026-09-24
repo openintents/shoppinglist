@@ -395,4 +395,17 @@ class ShoppingListViewModelTest {
         advanceUntilIdle()
         assertTrue(vm.state.value.items.any { it.name == "OnlyOnA" })
     }
+
+    @Test
+    fun addBarOnTop_isReadFromTheHolosearchSetting() = runTest(dispatcher) {
+        val settings = FakeSettingsRepository()
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher, settings = settings)
+        advanceUntilIdle()
+        assertFalse(vm.state.value.addBarOnTop)
+
+        settings.setBoolean("holosearch", true)
+        vm.onResume()
+        advanceUntilIdle()
+        assertTrue(vm.state.value.addBarOnTop)
+    }
 }

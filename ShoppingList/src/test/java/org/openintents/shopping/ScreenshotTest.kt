@@ -64,6 +64,14 @@ class ScreenshotTest {
     fun composeUi() = capture(ShoppingActivity::class.java, "compose-ui.png")
 
     @Test
+    fun composeUiTopBar() {
+        @Suppress("DEPRECATION")
+        android.preference.PreferenceManager.getDefaultSharedPreferences(context)
+            .edit().putBoolean("holosearch", true).commit()
+        capture(ShoppingActivity::class.java, "compose-ui-topbar.png")
+    }
+
+    @Test
     fun composeUiClassic() {
         repo.setListTheme(listId, ListTheme.CLASSIC)
         capture(ShoppingActivity::class.java, "compose-ui-classic.png")

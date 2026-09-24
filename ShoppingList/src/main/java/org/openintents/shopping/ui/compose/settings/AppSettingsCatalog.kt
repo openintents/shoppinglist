@@ -49,7 +49,7 @@ object AppSettingsCatalog {
         BoolSetting("screenlock", R.string.preference_screenlock_title, false),
         BoolSetting("quickedit", R.string.preference_quickedit, false),
         BoolSetting("use_filters", R.string.preference_usefilters_title, false),
-        BoolSetting("holosearch", R.string.preference_holo_search_title, true),
+        BoolSetting("holosearch", R.string.preference_holo_search_title, false),
         BoolSetting("resetquantity", R.string.preference_reset_quantity, false),
         BoolSetting("autocomplete_only_this_list", R.string.preference_complete_by_list_title, false),
         BoolSetting("showprice", R.string.preference_showprice_title, true),

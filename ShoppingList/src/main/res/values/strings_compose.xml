@@ -21,6 +21,7 @@
     <string name="compose_invalid_price">Invalid price</string>
     <string name="compose_back">Back</string>
     <string name="compose_change">Change</string>
+    <string name="compose_clear">Clear</string>
     <!-- Sample items in the theme picker preview -->
     <string name="theme_preview_item_1">Milk</string>
     <string name="theme_preview_item_2">Bread</string>

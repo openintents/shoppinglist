@@ -55,6 +55,8 @@ data class ShoppingUiState(
     val capitalization: Int = 1,
     /** "fontsize" setting: 0 tiny, 1 small, 2 medium, 3 large (see ListTheme.textSizeSp). */
     val fontSize: Int = 2,
+    /** "holosearch" setting: the search/add field is in the top bar instead of at the bottom. */
+    val addBarOnTop: Boolean = false,
     /** Catalogue item names for the add-field auto-suggestions. */
     val suggestions: List<String> = emptyList(),
     val loading: Boolean = true,
@@ -129,12 +131,14 @@ class ShoppingListViewModel(
                 capitalization = s.getString(PREF_CAPITALIZATION, "1").toIntOrNull()
                     ?.takeIf { it in 0..2 } ?: 1,
                 fontSize = s.getString(PREF_FONT_SIZE, "2").toIntOrNull()?.takeIf { it in 0..3 } ?: 2,
+                addBarOnTop = s.getBoolean(PREF_ADD_BAR_ON_TOP, false),
             )
         }
         _state.update {
             it.copy(
                 hideChecked = loaded.hideChecked, showPrice = loaded.showPrice,
                 capitalization = loaded.capitalization, fontSize = loaded.fontSize,
+                addBarOnTop = loaded.addBarOnTop,
             )
         }
     }
@@ -436,6 +440,8 @@ class ShoppingListViewModel(
         private const val PREF_SHOW_PRICE = "showprice"
         private const val PREF_CAPITALIZATION = "capitalization"
         private const val PREF_FONT_SIZE = "fontsize"
+        /** Same key as the legacy "search/add items in action bar" layout choice. */
+        private const val PREF_ADD_BAR_ON_TOP = "holosearch"
 
         /** Factory that wires the provider-backed repository from the Application context. */
         val Factory: ViewModelProvider.Factory = viewModelFactory {
