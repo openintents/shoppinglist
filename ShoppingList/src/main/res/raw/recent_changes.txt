@@ -1,6 +1,6 @@
 ----------------
 release 2.3.0
-date: 2026-??-??
+date: 2026-09-24
 
 - New, faster main screen: tap to check off, long-press to edit, add items from the bottom bar with suggestions. All list themes (Default, Classic, Bugdroid) are kept.
 - Updated for Android 15: targets API 35, AndroidX, Kotlin.
