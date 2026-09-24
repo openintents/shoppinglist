@@ -16,6 +16,7 @@
 
 package org.openintents.convertcsv.common
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.ActivityNotFoundException
@@ -425,9 +426,8 @@ open class ConvertCsvBaseActivity : AppCompatActivity() {
         var size = -1
         try {
             if (cursor != null && cursor.moveToFirst()) {
-                val displayName = cursor.getString(
-                    cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                )
+                val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                val displayName = if (nameIndex >= 0) cursor.getString(nameIndex) else null
                 Log.i(TAG, "Display Name: $displayName")
 
                 val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
@@ -730,6 +730,7 @@ open class ConvertCsvBaseActivity : AppCompatActivity() {
     }
 
     @Suppress("DEPRECATION")
+    @SuppressLint("WrongConstant") // the grant flags are masked to READ/WRITE
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data)

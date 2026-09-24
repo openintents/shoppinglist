@@ -144,9 +144,9 @@ open class Alert {
             )!!
 
             c.moveToFirst()
-            minTime = c.getLong(c.getColumnIndex(ManagedService.TIME_INTERVALL))
+            minTime = c.getLong(c.getColumnIndexOrThrow(ManagedService.TIME_INTERVALL))
             while (!c.isAfterLast) {
-                val l = c.getLong(c.getColumnIndex(ManagedService.TIME_INTERVALL))
+                val l = c.getLong(c.getColumnIndexOrThrow(ManagedService.TIME_INTERVALL))
                 if (l < minTime) {
                     minTime = l
                 }
@@ -213,9 +213,9 @@ open class Alert {
             )!!
 
             c.moveToFirst()
-            minTime = c.getLong(c.getColumnIndex(ManagedService.TIME_INTERVALL))
+            minTime = c.getLong(c.getColumnIndexOrThrow(ManagedService.TIME_INTERVALL))
             while (!c.isAfterLast) {
-                val l = c.getLong(c.getColumnIndex(ManagedService.TIME_INTERVALL))
+                val l = c.getLong(c.getColumnIndexOrThrow(ManagedService.TIME_INTERVALL))
                 if (l < minTime) {
                     minTime = l
                 }

@@ -169,15 +169,15 @@ class ExportCsv(private val mContext: Context) {
                 val itemname = ci.getString(ci.getColumnIndexOrThrow(ContainsFull.ITEM_NAME))
                 val status = ci.getLong(ci.getColumnIndexOrThrow(ContainsFull.STATUS))
                 val tags = ci.getString(ci.getColumnIndexOrThrow(ContainsFull.ITEM_TAGS))
-                val priority = ci.getString(ci.getColumnIndex(ContainsFull.PRIORITY))
-                val quantity = ci.getString(ci.getColumnIndex(ContainsFull.QUANTITY))
-                val price = ci.getLong(ci.getColumnIndex(ContainsFull.ITEM_PRICE))
+                val priority = ci.getString(ci.getColumnIndexOrThrow(ContainsFull.PRIORITY))
+                val quantity = ci.getString(ci.getColumnIndexOrThrow(ContainsFull.QUANTITY))
+                val price = ci.getLong(ci.getColumnIndexOrThrow(ContainsFull.ITEM_PRICE))
                 var pricestring = ""
                 if (price != 0L) {
                     pricestring += price.toDouble() / 100.0
                 }
-                val unit = ci.getString(ci.getColumnIndex(ContainsFull.ITEM_UNITS))
-                val itemId = ci.getInt(ci.getColumnIndex(ContainsFull.ITEM_ID)).toLong()
+                val unit = ci.getString(ci.getColumnIndexOrThrow(ContainsFull.ITEM_UNITS))
+                val itemId = ci.getInt(ci.getColumnIndexOrThrow(ContainsFull.ITEM_ID)).toLong()
 
                 val statusText = getHandyShopperStatusText(status)
 

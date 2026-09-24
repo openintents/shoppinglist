@@ -132,7 +132,7 @@ open class CheckItemsWidget : AppWidgetProvider() {
                 )
                 views.setTextViewText(
                     viewId,
-                    cursor.getString(cursor.getColumnIndex(ContainsFull.ITEM_NAME))
+                    cursor.getString(cursor.getColumnIndexOrThrow(ContainsFull.ITEM_NAME))
                 )
 
                 val intentCheckService = Intent(context, CheckItemsWidget::class.java)
