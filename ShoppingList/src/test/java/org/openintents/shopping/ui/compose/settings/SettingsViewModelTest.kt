@@ -12,7 +12,7 @@ class SettingsViewModelTest {
         val vm = SettingsViewModel(FakeSettingsRepository())
         // From the catalog defaults (mirroring preferences.xml).
         assertEquals(false, vm.state.value.bools["hidechecked"])
-        assertEquals(true, vm.state.value.bools["loadlastused"])
+        assertEquals(true, vm.state.value.bools["showprice"])
         assertEquals("2", vm.state.value.choices["fontsize"])
     }
 

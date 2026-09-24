@@ -11,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -18,6 +19,7 @@ import org.openintents.shopping.data.ItemEdit
 import org.openintents.shopping.data.ListMode
 import org.openintents.shopping.data.ListTheme
 import org.openintents.shopping.data.ListTotals
+import org.openintents.shopping.data.NewItem
 import org.openintents.shopping.data.ProviderShoppingRepository
 import org.openintents.shopping.data.ShoppingItem
 import org.openintents.shopping.data.ShoppingListInfo
@@ -46,6 +48,8 @@ data class ShoppingUiState(
     val editingNote: String? = null,
     /** The item whose note/store prices are loaded into [editingNote]/[editingStorePrices]. */
     val editingItemId: Long? = null,
+    /** True once the note / store prices of [editingItemId] are loaded (Save waits for it). */
+    val editingLoaded: Boolean = false,
     val sortMode: SortMode = SortMode.UNCHECKED_FIRST,
     val hideChecked: Boolean = false,
     val theme: ListTheme = ListTheme.DEFAULT,
@@ -98,6 +102,9 @@ class ShoppingListViewModel(
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ShoppingUiState())
+
+    /** Lists whose legacy tag/store filters were already cleared in this session. */
+    private val filtersCleared = java.util.Collections.synchronizedSet(HashSet<Long>())
 
     /** A list requested (e.g. by a shortcut) before the initial load finished. */
     private var pendingListId: Long? = null
@@ -184,6 +191,7 @@ class ShoppingListViewModel(
             val pickItems: List<ShoppingItem>,
         )
         val loaded = withContext(ioDispatcher) {
+            if (filtersCleared.add(listId)) repository.clearListFilters(listId)
             Loaded(
                 items = repository.getItems(listId),
                 stores = repository.getStores(listId),
@@ -227,8 +235,30 @@ class ShoppingListViewModel(
     fun showList(listId: Long) {
         if (_state.value.currentListId < 0) {
             pendingListId = listId // initial load still running; it picks this up
-        } else if (_state.value.lists.any { it.id == listId }) {
-            selectList(listId)
+            return
+        }
+        viewModelScope.launch {
+            // Re-read: the list may have been created while we were in the background.
+            val lists = withContext(ioDispatcher) { repository.getLists() }
+            _state.update { it.copy(lists = lists) }
+            if (lists.any { it.id == listId }) selectList(listId)
+        }
+    }
+
+    /**
+     * Adds items sent by another app (shared text, INSERT_FROM_EXTRAS) to
+     * [listId], or to the current list when null.
+     */
+    fun addItemsFromIntent(listId: Long?, items: List<NewItem>) {
+        if (items.none { it.name.isNotBlank() }) return
+        viewModelScope.launch {
+            // Wait for the initial load, which decides the current list.
+            _state.first { it.currentListId >= 0 }
+            val lists = withContext(ioDispatcher) { repository.getLists() }
+            val target = listId?.takeIf { id -> lists.any { it.id == id } } ?: _state.value.currentListId
+            withContext(ioDispatcher) { repository.addItems(target, items) }
+            _state.update { it.copy(lists = lists) }
+            if (target != _state.value.currentListId) selectList(target) else refresh()
         }
     }
 
@@ -245,15 +275,10 @@ class ShoppingListViewModel(
     }
 
     fun selectStore(storeId: Long?) {
-        if (storeId == null) {
-            _state.update { it.copy(selectedStoreId = null, storePricesForList = emptyMap()) }
-            return
-        }
-        _state.update { it.copy(selectedStoreId = storeId) }
-        viewModelScope.launch {
-            val prices = withContext(ioDispatcher) { repository.getStorePricesForList(storeId) }
-            _state.update { it.copy(storePricesForList = prices) }
-        }
+        if (storeId == _state.value.selectedStoreId) return
+        _state.update { it.copy(selectedStoreId = storeId, storePricesForList = emptyMap()) }
+        // refresh() loads the selected store's prices together with the items.
+        if (storeId != null) refresh()
     }
 
     fun createList(name: String) = viewModelScope.launch {
@@ -290,6 +315,7 @@ class ShoppingListViewModel(
     fun consumeScrollTarget() = _state.update { it.copy(scrollToContainsId = null) }
 
     fun toggle(item: ShoppingItem) = viewModelScope.launch {
+        // The repository flips the stored status, so quick double taps work.
         withContext(ioDispatcher) { repository.toggleItemBought(item) }
         refresh()
     }
@@ -367,6 +393,9 @@ class ShoppingListViewModel(
 
     fun removeStore(store: StoreInfo) = viewModelScope.launch {
         withContext(ioDispatcher) { repository.removeStore(store.id) }
+        if (_state.value.selectedStoreId == store.id) {
+            _state.update { it.copy(selectedStoreId = null, storePricesForList = emptyMap()) }
+        }
         refresh()
     }
 
@@ -375,21 +404,26 @@ class ShoppingListViewModel(
         // Already loaded (e.g. the dialog was recomposed after a rotation): keep it.
         if (_state.value.editingItemId == itemId) return
         // Clear the previous item's values so they never show (or get saved) for this one.
-        _state.update { it.copy(editingItemId = itemId, editingStorePrices = emptyMap(), editingNote = null) }
+        _state.update {
+            it.copy(
+                editingItemId = itemId, editingLoaded = false,
+                editingStorePrices = emptyMap(), editingNote = null,
+            )
+        }
         viewModelScope.launch {
             val (prices, note) = withContext(ioDispatcher) {
                 repository.getItemStorePrices(itemId) to repository.getItemNote(itemId)
             }
             _state.update {
                 if (it.editingItemId != itemId) it
-                else it.copy(editingStorePrices = prices, editingNote = note)
+                else it.copy(editingStorePrices = prices, editingNote = note, editingLoaded = true)
             }
         }
     }
 
     /** The item editor was closed. */
     fun endItemEdit() = _state.update {
-        it.copy(editingItemId = null, editingStorePrices = emptyMap(), editingNote = null)
+        it.copy(editingItemId = null, editingLoaded = false, editingStorePrices = emptyMap(), editingNote = null)
     }
 
     fun setStorePrice(itemId: Long, storeId: Long, priceCents: Long?) = viewModelScope.launch {
@@ -425,8 +459,15 @@ class ShoppingListViewModel(
                 } ?: throw java.io.IOException("Cannot open input stream")
             }
         }
+        // An import can create lists: reload them for the drawer.
+        val lists = withContext(ioDispatcher) { repository.getLists() }
+        _state.update {
+            it.copy(
+                lists = lists,
+                userMessage = if (result.isSuccess) UserMessage.IMPORTED else UserMessage.IMPORT_FAILED,
+            )
+        }
         refresh()
-        _state.update { it.copy(userMessage = if (result.isSuccess) UserMessage.IMPORTED else UserMessage.IMPORT_FAILED) }
     }
 
     fun consumeMessage() = _state.update { it.copy(userMessage = null) }

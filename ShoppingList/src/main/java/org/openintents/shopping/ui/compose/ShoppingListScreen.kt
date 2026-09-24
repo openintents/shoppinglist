@@ -502,6 +502,7 @@ fun ShoppingListScreen(
             stores = state.stores,
             storePrices = state.editingStorePrices,
             note = state.editingNote,
+            loaded = state.editingLoaded,
             onSetStorePrice = { storeId, cents -> onSetStorePrice(item.itemId, storeId, cents) },
             onDismiss = close,
             onSave = { edit ->
@@ -944,6 +945,8 @@ private fun EditItemDialog(
     stores: List<StoreInfo>,
     storePrices: Map<Long, Long?>,
     note: String?,
+    /** Note and store prices are loaded; saving earlier would erase them. */
+    loaded: Boolean,
     onSetStorePrice: (storeId: Long, priceCents: Long?) -> Unit,
     onDismiss: () -> Unit,
     onSave: (ItemEdit) -> Unit,
@@ -1043,6 +1046,7 @@ private fun EditItemDialog(
         },
         confirmButton = {
             TextButton(
+                enabled = loaded,
                 onClick = {
                     // Never save a typo'd price: that would silently erase the stored one.
                     val pricesValid = isValidPrice(price) &&

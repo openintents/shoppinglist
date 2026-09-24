@@ -44,3 +44,11 @@ data class ItemEdit(
     val tags: String?,
     val note: String? = null,
 )
+
+/** An item sent by another app; [quantity] and [price] (text, e.g. "1.50") are optional. */
+data class NewItem(
+    val name: String,
+    val quantity: String? = null,
+    val price: String? = null,
+    val barcode: String? = null,
+)

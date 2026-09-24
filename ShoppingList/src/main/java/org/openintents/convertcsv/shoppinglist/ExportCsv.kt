@@ -119,7 +119,13 @@ class ExportCsv(private val mContext: Context) {
                         ConvertCsvBaseActivity.dispatchConversionProgress(progress++)
                         val itemname = ci.getString(ci.getColumnIndexOrThrow(ContainsFull.ITEM_NAME))
                         val status = ci.getLong(ci.getColumnIndexOrThrow(ContainsFull.STATUS))
-                        val percentage = if (status == Status.BOUGHT) 1 else 0
+                        // 1 = bought, 0 = to buy; removed items as -1 so that an
+                        // import (which maps anything else to REMOVED) keeps them off the list.
+                        val percentage = when (status) {
+                            Status.BOUGHT -> 1
+                            Status.WANT_TO_BUY -> 0
+                            else -> -1
+                        }
                         val tags = ci.getString(ci.getColumnIndexOrThrow(ContainsFull.ITEM_TAGS))
                         csvwriter.write(itemname)
                         csvwriter.write(percentage)

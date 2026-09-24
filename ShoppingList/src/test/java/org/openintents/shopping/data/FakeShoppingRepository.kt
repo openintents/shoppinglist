@@ -49,6 +49,12 @@ class FakeShoppingRepository : ShoppingRepository {
         return id
     }
 
+    override fun addItems(listId: Long, items: List<NewItem>): Int =
+        items.count { addItem(listId, it.name) >= 0 }
+
+    override fun getItemStatus(containsId: Long): Long? =
+        itemsByList.values.flatten().firstOrNull { it.containsId == containsId }?.status
+
     override fun getItemNameSuggestions(): List<String> =
         itemsByList.values.flatten()
             .map { it.name }

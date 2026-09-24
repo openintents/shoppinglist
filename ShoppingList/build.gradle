@@ -13,6 +13,14 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
 
+        // Only the languages the app is translated into: drops the unused
+        // translations of the libraries (about 80 more locales) from the APK.
+        resourceConfigurations += ["en", "ar", "be", "bg", "ca", "cs", "da", "de", "el",
+                                   "en-rGB", "es", "fa", "fi", "fr", "hi", "hr", "hu", "it",
+                                   "iw", "ja", "ko", "mk", "nb", "nl", "oc", "pa", "pl", "pt",
+                                   "pt-rBR", "ro", "ru", "sd", "sk", "sr", "sv", "tl", "tr",
+                                   "ug", "uk", "zh-rCN", "zh-rTW"]
+
         testApplicationId "org.openintents.shopping.test"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         setProperty("archivesBaseName", "$applicationId-$versionName")

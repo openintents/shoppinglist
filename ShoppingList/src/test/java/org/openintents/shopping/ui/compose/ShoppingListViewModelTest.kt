@@ -18,6 +18,7 @@ import org.openintents.shopping.data.FakeShoppingRepository
 import org.openintents.shopping.data.ItemEdit
 import org.openintents.shopping.data.ListMode
 import org.openintents.shopping.data.ListTheme
+import org.openintents.shopping.data.NewItem
 
 /**
  * Pure-JVM ViewModel tests (no Robolectric): a fake repository + a test
@@ -407,5 +408,29 @@ class ShoppingListViewModelTest {
         vm.onResume()
         advanceUntilIdle()
         assertTrue(vm.state.value.addBarOnTop)
+    }
+
+    @Test
+    fun addItemsFromIntent_addsToTheRequestedList() = runTest(dispatcher) {
+        val repo = FakeShoppingRepository()
+        val vm = ShoppingListViewModel(repo, dispatcher)
+        val other = repo.createList("Other")
+        vm.addItemsFromIntent(other, listOf(NewItem("Tea"), NewItem("Honey")))
+        advanceUntilIdle()
+        assertEquals(other, vm.state.value.currentListId)
+        assertEquals(setOf("Tea", "Honey"), vm.state.value.items.map { it.name }.toSet())
+    }
+
+    @Test
+    fun selectStore_whileReloading_keepsTheReload() = runTest(dispatcher) {
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
+        advanceUntilIdle()
+        vm.addStore("Shop"); advanceUntilIdle()
+        vm.addItem("Tea"); advanceUntilIdle()
+        val item = vm.state.value.items.single()
+        vm.toggle(item)
+        vm.selectStore(vm.state.value.stores.single().id) // before the toggle's reload finished
+        advanceUntilIdle()
+        assertTrue(vm.state.value.items.single().isBought)
     }
 }

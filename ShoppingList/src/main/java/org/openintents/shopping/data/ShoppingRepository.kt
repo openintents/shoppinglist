@@ -33,6 +33,19 @@ interface ShoppingRepository {
     fun addItem(listId: Long, name: String): Long
 
     /**
+     * Adds items sent by another app (shared text, INSERT_FROM_EXTRAS). Quantity
+     * and price are optional and may be null. Returns the number of items added.
+     */
+    fun addItems(listId: Long, items: List<NewItem>): Int
+
+    /**
+     * Clears the tag/store filters the legacy UI could set on a list; the
+     * provider applies them to every query, and the new UI cannot show or
+     * change them, so they would hide items for good.
+     */
+    fun clearListFilters(listId: Long) {}
+
+    /**
      * Distinct item names from the whole catalogue (every list), sorted, for the
      * add-field auto-suggestions. Items on the current list are a subset of these.
      */
@@ -55,11 +68,19 @@ interface ShoppingRepository {
         setItemStatus(item.containsId, if (onList) Status.WANT_TO_BUY else Status.REMOVED_FROM_LIST)
     }
 
-    /** Flips an item between WANT_TO_BUY and BOUGHT. */
-    fun toggleItemBought(item: ShoppingItem) {
-        val newStatus = if (item.status == Status.BOUGHT) Status.WANT_TO_BUY else Status.BOUGHT
+    /**
+     * Flips an item between WANT_TO_BUY and BOUGHT, based on its current stored
+     * status (so two quick taps flip it twice). Returns the new status.
+     */
+    fun toggleItemBought(item: ShoppingItem): Long {
+        val current = getItemStatus(item.containsId) ?: item.status
+        val newStatus = if (current == Status.BOUGHT) Status.WANT_TO_BUY else Status.BOUGHT
         setItemStatus(item.containsId, newStatus)
+        return newStatus
     }
+
+    /** The stored status of a relation row, or null if it does not exist. */
+    fun getItemStatus(containsId: Long): Long?
 
     /** Removes every bought item from [listId] (marks them removed-from-list). Returns the count. */
     fun cleanupList(listId: Long): Int {

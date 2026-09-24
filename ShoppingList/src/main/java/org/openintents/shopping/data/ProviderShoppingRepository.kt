@@ -11,6 +11,7 @@ import org.openintents.shopping.library.provider.ShoppingContract.Items
 import org.openintents.shopping.library.provider.ShoppingContract.Lists
 import org.openintents.shopping.library.provider.ShoppingContract.Status
 import org.openintents.shopping.library.provider.ShoppingContract.Stores
+import org.openintents.shopping.library.util.PriceConverter
 import org.openintents.shopping.library.util.ShoppingUtils
 import org.openintents.shopping.ui.PreferenceActivity
 
@@ -94,19 +95,27 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
         return out
     }
 
-    override fun addItem(listId: Long, name: String): Long {
-        val trimmed = name.trim()
+    override fun addItem(listId: Long, name: String): Long = addItem(listId, NewItem(name))
+
+    override fun addItems(listId: Long, items: List<NewItem>): Int =
+        items.count { addItem(listId, it) >= 0 }
+
+    private fun addItem(listId: Long, item: NewItem): Long {
+        val trimmed = item.name.trim()
         if (trimmed.isEmpty()) return -1L
         // Like the legacy UI: reuse a catalogue item of the same name (keeping its
         // price, tags and store prices) unless the user limited that to this list.
         val scope = if (PreferenceActivity.getCompleteFromCurrentListOnlyFromPrefs(context)) {
             listId.toString()
         } else null
-        val itemId = ShoppingUtils.updateOrCreateItem(context, trimmed, null, null, null, scope)
+        val price = item.price?.trim()?.takeIf { PriceConverter.getCentPriceFromString(it) != null }
+        val itemId = ShoppingUtils.updateOrCreateItem(
+            context, trimmed, null, price, item.barcode?.trim()?.ifEmpty { null }, scope
+        )
         if (itemId < 0) return -1L
         ShoppingUtils.addItemToList(
             context, itemId, listId, Status.WANT_TO_BUY,
-            null, null, false, false, false
+            null, item.quantity?.trim()?.ifEmpty { null }, false, false, false
         )
         ShoppingUtils.addDefaultsToAddedItem(context, listId, itemId)
         return itemId
@@ -135,7 +144,11 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
         // Name, price, units and tags live on the item itself.
         val itemValues = ContentValues().apply {
             put(Items.NAME, edit.name.trim())
-            if (edit.priceCents != null) put(Items.PRICE, edit.priceCents) else putNull(Items.PRICE)
+            // Only write the price when it was changed: with "per-store prices" the
+            // shown price is the cheapest store price, not the item's own price.
+            if (edit.priceCents != item.priceCents) {
+                if (edit.priceCents != null) put(Items.PRICE, edit.priceCents) else putNull(Items.PRICE)
+            }
             put(Items.UNITS, edit.units ?: "")
             put(Items.TAGS, edit.tags ?: "")
             put(Items.NOTE, edit.note ?: "")
@@ -159,6 +172,25 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
         // Soft-remove: keep the relation row (status REMOVED_FROM_LIST) so the item
         // stays in the catalogue and can be re-added via Pick-items mode.
         setItemStatus(item.containsId, Status.REMOVED_FROM_LIST)
+    }
+
+    override fun getItemStatus(containsId: Long): Long? =
+        resolver.query(
+            Uri.withAppendedPath(Contains.CONTENT_URI, containsId.toString()),
+            arrayOf(Contains.STATUS), null, null, null
+        )?.use { c -> if (c.moveToFirst() && !c.isNull(0)) c.getLong(0) else null }
+
+    override fun clearListFilters(listId: Long) {
+        val values = ContentValues().apply {
+            put(Lists.TAGS_FILTER, "")
+            put(Lists.STORE_FILTER, -1L)
+        }
+        resolver.update(
+            Uri.withAppendedPath(Lists.CONTENT_URI, listId.toString()), values,
+            "(${Lists.TAGS_FILTER} IS NOT NULL AND ${Lists.TAGS_FILTER} <> '') OR " +
+                "(${Lists.STORE_FILTER} IS NOT NULL AND ${Lists.STORE_FILTER} <> -1)",
+            null
+        )
     }
 
     override fun setItemStatus(containsId: Long, status: Long) {

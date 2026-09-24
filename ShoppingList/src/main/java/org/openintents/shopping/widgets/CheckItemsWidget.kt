@@ -154,6 +154,8 @@ open class CheckItemsWidget : AppWidgetProvider() {
              */
             val intentGoToApp = Intent(context, ShoppingActivity::class.java)
             intentGoToApp.action = Intent.ACTION_VIEW
+            // Reuse the open app screen (it switches to this list) instead of stacking another.
+            intentGoToApp.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             intentGoToApp.data = Uri.withAppendedPath(
                 ShoppingContract.Lists.CONTENT_URI, listId.toString()
             )

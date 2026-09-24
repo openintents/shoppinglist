@@ -273,4 +273,62 @@ class ShoppingRepositoryTest {
         assertTrue(repo.getItems(listA).any { it.name == "OnlyA" })
         assertFalse(repo.getItems(listB).any { it.name == "OnlyA" })
     }
+
+    @Test
+    fun addItems_fromAnotherApp_keepsQuantityAndPrice() {
+        val listId = repo.createList("Shared")
+        val added = repo.addItems(
+            listId,
+            listOf(NewItem("Tea", "2", "1.50"), NewItem("  "), NewItem("Honey", null, "abc"))
+        )
+        assertEquals(2, added)
+        val tea = repo.getItems(listId).single { it.name == "Tea" }
+        assertEquals("2", tea.quantity)
+        assertEquals(150L, tea.priceCents)
+        // An unparsable price is ignored instead of failing the item.
+        assertEquals(null, repo.getItems(listId).single { it.name == "Honey" }.priceCents)
+    }
+
+    @Test
+    fun toggleItemBought_usesTheStoredStatus() {
+        val listId = repo.createList("DoubleTap")
+        repo.addItem(listId, "Salt")
+        val stale = repo.getItems(listId).single()
+        repo.toggleItemBought(stale)
+        // A second tap on the same (stale) row flips it back.
+        repo.toggleItemBought(stale)
+        assertEquals(Status.WANT_TO_BUY, repo.getItems(listId).single().status)
+    }
+
+    @Test
+    fun clearListFilters_showsItemsHiddenByALegacyTagFilter() {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val listId = repo.createList("Filtered")
+        repo.addItem(listId, "Pepper")
+        context.contentResolver.update(
+            android.net.Uri.withAppendedPath(
+                org.openintents.shopping.library.provider.ShoppingContract.Lists.CONTENT_URI, listId.toString()
+            ),
+            android.content.ContentValues().apply {
+                put(org.openintents.shopping.library.provider.ShoppingContract.Lists.TAGS_FILTER, "nomatch")
+            },
+            null, null
+        )
+        assertTrue(repo.getItems(listId).isEmpty())
+        repo.clearListFilters(listId)
+        assertEquals("Pepper", repo.getItems(listId).single().name)
+    }
+
+    @Test
+    fun exportCsv_marksRemovedItems() {
+        val listId = repo.createList("ExportRemoved")
+        repo.addItem(listId, "Kept")
+        repo.addItem(listId, "Gone")
+        repo.removeItem(listId, repo.getItems(listId).single { it.name == "Gone" })
+        val out = java.io.StringWriter()
+        repo.exportCsv(out)
+        val csv = out.toString()
+        assertTrue(csv, csv.lines().any { it.contains("Gone") && it.contains("-1") })
+        assertTrue(csv, csv.lines().any { it.contains("Kept") && it.contains(",0,") })
+    }
 }

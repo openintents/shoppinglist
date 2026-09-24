@@ -1,5 +1,7 @@
 package org.openintents.shopping.ui.compose
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -9,7 +11,10 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import org.openintents.intents.ShoppingListIntents
+import org.openintents.shopping.data.NewItem
 import org.openintents.shopping.library.provider.ShoppingContract
+import org.openintents.shopping.widgets.CheckItemsWidget
 import org.openintents.shopping.ui.compose.theme.OiShoppingTheme
 
 /**
@@ -46,11 +51,49 @@ open class ComposeShoppingActivity : ComponentActivity() {
         showListFrom(intent)
     }
 
+    override fun onStop() {
+        super.onStop()
+        updateWidgets()
+    }
+
     private fun showListFrom(intent: Intent?) {
-        listIdFrom(intent?.data)?.let(viewModel::showList)
+        val listId = listIdFrom(intent?.data)
+        val items = itemsFrom(intent)
+        if (items.isNotEmpty()) {
+            // Shared text / INSERT_FROM_EXTRAS (forwarded by ShoppingListsActivity).
+            viewModel.addItemsFromIntent(listId, items)
+            // Don't add them again if the same intent is delivered once more.
+            intent?.removeExtra(ShoppingListIntents.EXTRA_STRING_ARRAYLIST_SHOPPING)
+        } else {
+            listId?.let(viewModel::showList)
+        }
+    }
+
+    /** Home-screen widgets show list items; refresh them when leaving the app. */
+    private fun updateWidgets() {
+        val context = applicationContext
+        Thread {
+            val manager = AppWidgetManager.getInstance(context)
+            val ids = manager.getAppWidgetIds(ComponentName(context, CheckItemsWidget::class.java))
+            if (ids.isNotEmpty()) CheckItemsWidget().onUpdate(context, manager, ids)
+        }.start()
     }
 
     companion object {
+        /** Items sent as string array lists in the extras (see ShoppingListIntents). */
+        fun itemsFrom(intent: Intent?): List<NewItem> {
+            val extras = intent?.extras ?: return emptyList()
+            val names = extras.getStringArrayList(ShoppingListIntents.EXTRA_STRING_ARRAYLIST_SHOPPING)
+                ?: return emptyList()
+            val quantities = extras.getStringArrayList(ShoppingListIntents.EXTRA_STRING_ARRAYLIST_QUANTITY)
+            val prices = extras.getStringArrayList(ShoppingListIntents.EXTRA_STRING_ARRAYLIST_PRICE)
+            val barcodes = extras.getStringArrayList(ShoppingListIntents.EXTRA_STRING_ARRAYLIST_BARCODE)
+            return names.mapIndexedNotNull { i, name ->
+                if (name.isNullOrBlank()) null
+                else NewItem(name, quantities?.getOrNull(i), prices?.getOrNull(i), barcodes?.getOrNull(i))
+            }
+        }
+
         /** The list id of a content://org.openintents.shopping/lists/N URI, else null. */
         fun listIdFrom(uri: Uri?): Long? {
             if (uri == null || uri.authority != ShoppingContract.AUTHORITY) return null
