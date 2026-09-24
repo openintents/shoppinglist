@@ -8,6 +8,35 @@ Written 2026-06-09 against commit `81bc3c2` (versionName 2.2.1, versionCode 1002
 
 ---
 
+## 0a. RELEASE 2.3.0 PREP (2026-09-24)
+
+versionName 2.3.0 / versionCode 100230. Release notes: `res/raw/recent_changes.txt`,
+`src/play/play/en-US/whatsnew`, `fastlane/.../changelogs/100230.txt` (F-Droid).
+
+Done in this pass (source audit, all components):
+- Compose UI: stale-refresh race, last-used list persisted/validated, catalogue item
+  reuse on add (no duplicates), refresh on resume, CSV import policy KEEP, price
+  validation, rotation-safe dialogs/input, settings honored (hidechecked, showprice,
+  capitalization), all strings translatable (`values/strings_compose.xml`), a11y labels,
+  list themes shared with the legacy UI (stored as "1"/"2"/"3").
+- CSV: persistable SAF grants, crash fixes (HandyShopper import/export, non-list URIs),
+  export truncates ("wt").
+- Provider/DB: SQL fixes for `containsfull/#` and `itemstores/#`, no selection-arg SQL
+  concatenation, cursor leaks, WAL off so the backup agent captures all data.
+- Legacy UI: move/delete by id (rotation-safe), cursor-reload crashes, first-run layout
+  chooser, edge-to-edge opt-out for all full-screen legacy activities (values-v35).
+- Widget receiver no longer exported; per-widget settings PendingIntents.
+- Removed dead ShoppingListWear/, src/playInternet/, Ant build.xml, Travis CI,
+  aTrackDog meta-data. CI is now `.github/workflows/build.yml` (unit tests, tstore APK,
+  play AAB, lint).
+
+OPEN before publishing:
+- Decide the launcher: the manifest still exposes BOTH the legacy UI and the Compose UI
+  ("OI Shopping (new UI)", hardcoded label) as launcher entries.
+- Device smoke test (widget add/check/page with the non-exported receiver, CSV
+  import/export after reboot, first-run layout chooser, edge-to-edge on Android 15).
+- Fill in the release date in `recent_changes.txt`.
+
 ## 0b. ARCHITECTURE DIRECTION (updated 2026-06-09)
 
 After the Google-Play upgrade + Kotlin migration, the project pivoted to:

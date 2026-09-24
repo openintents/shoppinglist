@@ -35,6 +35,10 @@ class MenuIntentOptionsWithIcons(
         }
         for (i in 0 until N) {
             val ri = lri!![i]
+            // Own activities (e.g. Convert CSV) are already in the menu explicitly.
+            if (caller != null && ri.activityInfo.packageName == caller.packageName) {
+                continue
+            }
             val rintent = Intent(
                 if (ri.specificIndex < 0) intent else specifics!![ri.specificIndex]
             )

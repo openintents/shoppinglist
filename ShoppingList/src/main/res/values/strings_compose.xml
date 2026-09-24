@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Strings used only by the Compose UI (ui/compose). -->
+<resources>
+    <string name="compose_open_lists">Open lists</string>
+    <string name="compose_more_options">More options</string>
+    <string name="compose_lists">Lists</string>
+    <string name="compose_sort_unchecked_first">Sort: unchecked first</string>
+    <string name="compose_sort_alphabetical">Sort: alphabetical</string>
+    <string name="compose_show_checked_items">Show checked items</string>
+    <string name="compose_import_csv">Import CSV…</string>
+    <string name="compose_export_csv">Export CSV…</string>
+    <string name="compose_list_name">List name</string>
+    <string name="compose_create">Create</string>
+    <string name="compose_rename">Rename</string>
+    <string name="compose_save">Save</string>
+    <string name="compose_done">Done</string>
+    <string name="compose_add_store">Add store</string>
+    <string name="compose_remove_store">Remove %1$s</string>
+    <string name="compose_per_store_prices">Per-store prices</string>
+    <string name="compose_all_stores">All</string>
+    <string name="compose_invalid_price">Invalid price</string>
+    <string name="compose_back">Back</string>
+    <string name="compose_change">Change</string>
+</resources>

@@ -127,8 +127,10 @@ class ExportCsv(private val mContext: Context) {
                         csvwriter.write(tags)
                         csvwriter.writeNewline()
                     }
+                    ci.close()
                 }
             }
+            c.close()
         }
 
         csvwriter.close()
@@ -243,10 +245,10 @@ class ExportCsv(private val mContext: Context) {
         }
     }
 
-    private fun getHandyShopperNote(itemId: Long): String {
+    private fun getHandyShopperNote(itemId: Long): String? {
         val uri: Uri = ContentUris.withAppendedId(ShoppingContract.Items.CONTENT_URI, itemId)
 
-        var note = ""
+        var note: String? = null
         val c1 = mContext.contentResolver.query(
             uri,
             arrayOf(ShoppingContract.Items.NOTE), null, null, null
@@ -331,7 +333,7 @@ class ExportCsv(private val mContext: Context) {
                         val storeName = c2.getString(c2.getColumnIndexOrThrow(ShoppingContract.Stores.NAME))
 
                         if (price != 0L) {
-                            val info = "$storeName=$aisle/$pricestring"
+                            val info = "$storeName=${aisle ?: ""}/$pricestring"
                             perStoreInfo = if (perStoreInfo == "") {
                                 info
                             } else {

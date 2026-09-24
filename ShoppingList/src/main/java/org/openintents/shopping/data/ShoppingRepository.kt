@@ -17,6 +17,9 @@ interface ShoppingRepository {
     /** The id of the list to show by default (creates the initial list if needed). */
     fun getDefaultListId(): Long
 
+    /** Remembers [listId] as the list to open next time. */
+    fun setActiveList(listId: Long)
+
     /** The items currently on [listId] (excludes items removed from the list). */
     fun getItems(listId: Long): List<ShoppingItem>
 

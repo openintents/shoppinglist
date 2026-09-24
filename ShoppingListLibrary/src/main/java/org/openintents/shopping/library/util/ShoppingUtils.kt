@@ -90,7 +90,7 @@ object ShoppingUtils {
                 arrayOf(itemId.toString()), null)
         if (existingItems!!.count > 0) {
             existingItems.moveToFirst()
-            name = existingItems.getString(0)
+            name = existingItems.getString(0) ?: ""
         }
         existingItems.close()
         return name

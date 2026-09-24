@@ -45,6 +45,31 @@ class ShoppingRepositoryTest {
     }
 
     @Test
+    fun addItem_reusesTheCatalogueItemFromAnotherList() {
+        // Like the legacy UI: "Milk" on a second list is the same item (same
+        // price/tags/store prices), not a duplicate catalogue entry.
+        val a = repo.createList("ReuseA")
+        val b = repo.createList("ReuseB")
+        val first = repo.addItem(a, "Milk")
+        val second = repo.addItem(b, "milk")
+        assertEquals(first, second)
+        assertTrue(repo.getItems(b).any { it.itemId == first })
+    }
+
+    @Test
+    fun getDefaultListId_fallsBackWhenLastUsedListWasDeleted() {
+        val a = repo.createList("LastUsedA")
+        val b = repo.createList("LastUsedB")
+        repo.setActiveList(b)
+        assertEquals(b, repo.getDefaultListId())
+
+        repo.deleteList(b)
+        val id = repo.getDefaultListId()
+        assertTrue(repo.getLists().any { it.id == id })
+        assertEquals(a, id)
+    }
+
+    @Test
     fun createList_thenItAppears() {
         val id = repo.createList("Groceries")
         assertTrue(id >= 0)

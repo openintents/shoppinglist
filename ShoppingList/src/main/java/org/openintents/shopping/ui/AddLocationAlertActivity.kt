@@ -53,6 +53,7 @@ open class AddLocationAlertActivity : Activity(), OnClickListener {
         super.onCreate(icicle)
 
         mTag = Tag(this)
+        Alert.init(applicationContext)
 
         setContentView(R.layout.activity_add_location_alert)
 

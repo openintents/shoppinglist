@@ -180,7 +180,7 @@ open class CheckItemsWidget : AppWidgetProvider() {
             intentPreferences.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId)
             intentPreferences.flags = Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT
             val pendingIntentPreferences = PendingIntent.getActivity(
-                context, 0, intentPreferences,
+                context, widgetId, intentPreferences,
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
             views.setOnClickPendingIntent(R.id.button_go_to_preferences, pendingIntentPreferences)

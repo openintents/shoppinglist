@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="OITheme" parent="@style/Theme.AppCompat">
+    <!-- The legacy View UI does not apply window insets. The themes below are
+         redefined in values-v35/styles.xml to opt out of the SDK 35 edge-to-edge
+         enforcement (android:windowOptOutEdgeToEdgeEnforcement, API 35 only;
+         ignored once targeting SDK 36). -->
+    <style name="Base.OITheme" parent="@style/Theme.AppCompat">
         <item name="actionBarStyle">@style/OIActionBar</item>
-        <!-- The legacy View UI does not apply window insets; opt out of the
-             SDK 35 edge-to-edge enforcement so the bottom add-bar isn't drawn
-             under the navigation bar. (Honored while targeting SDK 35; ignored
-             on API < 35.) -->
-        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
     </style>
+
+    <style name="OITheme" parent="Base.OITheme" />
+
+    <!-- Full-screen legacy AppCompat activities (was @style/Theme.AppCompat) -->
+    <style name="OIAppCompatTheme" parent="@style/Theme.AppCompat" />
+
+    <!-- Full-screen legacy framework activities (PreferenceActivity, ListActivity,
+         TabActivity, ...). Same as the platform default theme for targetSdk >= 24. -->
+    <style name="OIFrameworkTheme" parent="@android:style/Theme.DeviceDefault.Light.DarkActionBar" />
 
     <style name="OIActionBar" parent="@style/Widget.AppCompat.ActionBar">
         <item name="background">@android:color/background_dark</item>

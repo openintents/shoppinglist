@@ -21,11 +21,16 @@ import org.openintents.shopping.data.ListTotals
 import org.openintents.shopping.data.ProviderShoppingRepository
 import org.openintents.shopping.data.ShoppingItem
 import org.openintents.shopping.data.ShoppingListInfo
+import org.openintents.shopping.data.SettingsRepository
+import org.openintents.shopping.data.SharedPrefsSettingsRepository
 import org.openintents.shopping.data.ShoppingRepository
 import org.openintents.shopping.data.SortMode
 import org.openintents.shopping.data.StoreInfo
 import org.openintents.shopping.data.arrangeItems
 import org.openintents.shopping.data.computeTotals
+
+/** One-shot feedback shown to the user (the UI maps it to a translated string). */
+enum class UserMessage { EXPORTED, EXPORT_FAILED, IMPORTED, IMPORT_FAILED }
 
 /** Immutable UI state for the shopping screen. */
 data class ShoppingUiState(
@@ -39,13 +44,19 @@ data class ShoppingUiState(
     val storePricesForList: Map<Long, Long?> = emptyMap(),
     val editingStorePrices: Map<Long, Long?> = emptyMap(),
     val editingNote: String? = null,
+    /** The item whose note/store prices are loaded into [editingNote]/[editingStorePrices]. */
+    val editingItemId: Long? = null,
     val sortMode: SortMode = SortMode.UNCHECKED_FIRST,
     val hideChecked: Boolean = false,
     val theme: ListTheme = ListTheme.DEFAULT,
+    /** "showprice" setting. */
+    val showPrice: Boolean = true,
+    /** "capitalization" setting: 0 = none, 1 = sentences, 2 = words. */
+    val capitalization: Int = 1,
     /** Catalogue item names for the add-field auto-suggestions. */
     val suggestions: List<String> = emptyList(),
     val loading: Boolean = true,
-    val userMessage: String? = null,
+    val userMessage: UserMessage? = null,
     /** Set after an add so the list can scroll to the new item; the UI consumes it. */
     val scrollToContainsId: Long? = null,
 ) {
@@ -79,6 +90,7 @@ class ShoppingListViewModel(
     private val repository: ShoppingRepository,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val contentResolver: android.content.ContentResolver? = null,
+    private val settings: SettingsRepository? = null,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ShoppingUiState())
@@ -93,29 +105,84 @@ class ShoppingListViewModel(
                 id to repository.getLists()
             }
             _state.update { it.copy(lists = lists, currentListId = defaultId) }
+            loadSettings()
+            refresh()
+        }
+    }
+
+    /** Re-reads the settings the Compose UI honors (they can change in Settings). */
+    private suspend fun loadSettings() {
+        val s = settings ?: return
+        val (hideChecked, showPrice, capitalization) = withContext(ioDispatcher) {
+            Triple(
+                s.getBoolean(PREF_HIDE_CHECKED, false),
+                s.getBoolean(PREF_SHOW_PRICE, true),
+                s.getString(PREF_CAPITALIZATION, "1").toIntOrNull()?.takeIf { it in 0..2 } ?: 1,
+            )
+        }
+        _state.update {
+            it.copy(hideChecked = hideChecked, showPrice = showPrice, capitalization = capitalization)
+        }
+    }
+
+    /**
+     * Reloads everything when the screen comes back to the foreground: the data
+     * may have been changed by the widget, the legacy UI, automation or Settings.
+     */
+    fun onResume() {
+        if (_state.value.currentListId < 0) return // initial load still running
+        viewModelScope.launch {
+            loadSettings()
+            val lists = withContext(ioDispatcher) { repository.getLists() }
+            val current = _state.value.currentListId
+            if (lists.none { it.id == current }) {
+                // The current list was deleted elsewhere.
+                val newId = withContext(ioDispatcher) { repository.getDefaultListId() }
+                val newLists = withContext(ioDispatcher) { repository.getLists() }
+                _state.update {
+                    it.copy(
+                        lists = newLists, currentListId = newId, loading = true,
+                        selectedStoreId = null, storePricesForList = emptyMap()
+                    )
+                }
+            } else {
+                _state.update { it.copy(lists = lists) }
+            }
             refresh()
         }
     }
 
     fun refresh() = viewModelScope.launch {
         val listId = _state.value.currentListId
+        if (listId < 0) return@launch
+        val mode = _state.value.mode
         val storeId = _state.value.selectedStoreId
-        val (items, stores) = withContext(ioDispatcher) {
-            repository.getItems(listId) to repository.getStores(listId)
+        data class Loaded(
+            val items: List<ShoppingItem>,
+            val stores: List<StoreInfo>,
+            val storePrices: Map<Long, Long?>,
+            val theme: ListTheme,
+            val suggestions: List<String>,
+            val pickItems: List<ShoppingItem>,
+        )
+        val loaded = withContext(ioDispatcher) {
+            Loaded(
+                items = repository.getItems(listId),
+                stores = repository.getStores(listId),
+                storePrices = if (storeId != null) repository.getStorePricesForList(storeId) else emptyMap(),
+                theme = repository.getListTheme(listId),
+                suggestions = repository.getItemNameSuggestions(),
+                pickItems = if (mode == ListMode.PICK_ITEMS) repository.getAllListItems(listId) else emptyList(),
+            )
         }
-        val storePrices = if (storeId != null) {
-            withContext(ioDispatcher) { repository.getStorePricesForList(storeId) }
-        } else emptyMap()
-        val theme = withContext(ioDispatcher) { repository.getListTheme(listId) }
-        val suggestions = withContext(ioDispatcher) { repository.getItemNameSuggestions() }
-        val pickItems = if (_state.value.mode == ListMode.PICK_ITEMS) {
-            withContext(ioDispatcher) { repository.getAllListItems(listId) }
-        } else emptyList()
         _state.update {
-            it.copy(
-                items = items, pickItems = pickItems, stores = stores,
-                storePricesForList = storePrices, theme = theme,
-                suggestions = suggestions, loading = false
+            // Drop the result if the user switched list/mode/store while loading:
+            // a newer refresh() is on its way and must not be overwritten.
+            if (it.currentListId != listId || it.mode != mode || it.selectedStoreId != storeId) it
+            else it.copy(
+                items = loaded.items, pickItems = loaded.pickItems, stores = loaded.stores,
+                storePricesForList = loaded.storePrices, theme = loaded.theme,
+                suggestions = loaded.suggestions, loading = false
             )
         }
     }
@@ -140,6 +207,7 @@ class ShoppingListViewModel(
 
     fun selectList(listId: Long) {
         if (listId == _state.value.currentListId) return
+        rememberActiveList(listId)
         _state.update {
             it.copy(
                 currentListId = listId, loading = true,
@@ -167,7 +235,11 @@ class ShoppingListViewModel(
             val id = repository.createList(name.trim())
             id
         }
-        val lists = withContext(ioDispatcher) { repository.getLists() }
+        if (newId < 0) return@launch
+        val lists = withContext(ioDispatcher) {
+            repository.setActiveList(newId)
+            repository.getLists()
+        }
         _state.update {
             it.copy(
                 lists = lists, currentListId = newId, loading = true,
@@ -179,8 +251,10 @@ class ShoppingListViewModel(
 
     fun addItem(name: String) = viewModelScope.launch {
         val listId = _state.value.currentListId
+        if (listId < 0) return@launch
         val itemId = withContext(ioDispatcher) { repository.addItem(listId, name) }
         refresh().join()
+        if (itemId < 0 || _state.value.currentListId != listId) return@launch
         // Tell the UI to scroll to where the new item landed (sort decides the position).
         val containsId = _state.value.items.firstOrNull { it.itemId == itemId }?.containsId
         _state.update { it.copy(scrollToContainsId = containsId) }
@@ -212,7 +286,11 @@ class ShoppingListViewModel(
 
     fun setSortMode(mode: SortMode) = _state.update { it.copy(sortMode = mode) }
 
-    fun toggleHideChecked() = _state.update { it.copy(hideChecked = !it.hideChecked) }
+    fun toggleHideChecked() {
+        _state.update { it.copy(hideChecked = !it.hideChecked) }
+        val hide = _state.value.hideChecked
+        settings?.let { s -> viewModelScope.launch(ioDispatcher) { s.setBoolean(PREF_HIDE_CHECKED, hide) } }
+    }
 
     fun cleanup() = viewModelScope.launch {
         val listId = _state.value.currentListId
@@ -242,6 +320,7 @@ class ShoppingListViewModel(
             repository.deleteList(listId)
             // Switch to another list, or recreate the default if none remain.
             val pickId = repository.getLists().firstOrNull()?.id ?: repository.getDefaultListId()
+            repository.setActiveList(pickId)
             pickId to repository.getLists()
         }
         _state.update {
@@ -265,17 +344,31 @@ class ShoppingListViewModel(
     }
 
     /** Loads the per-store prices AND note for [itemId] (call when opening item edit). */
-    fun loadItemEditData(itemId: Long) = viewModelScope.launch {
-        val (prices, note) = withContext(ioDispatcher) {
-            repository.getItemStorePrices(itemId) to repository.getItemNote(itemId)
+    fun loadItemEditData(itemId: Long) {
+        // Already loaded (e.g. the dialog was recomposed after a rotation): keep it.
+        if (_state.value.editingItemId == itemId) return
+        // Clear the previous item's values so they never show (or get saved) for this one.
+        _state.update { it.copy(editingItemId = itemId, editingStorePrices = emptyMap(), editingNote = null) }
+        viewModelScope.launch {
+            val (prices, note) = withContext(ioDispatcher) {
+                repository.getItemStorePrices(itemId) to repository.getItemNote(itemId)
+            }
+            _state.update {
+                if (it.editingItemId != itemId) it
+                else it.copy(editingStorePrices = prices, editingNote = note)
+            }
         }
-        _state.update { it.copy(editingStorePrices = prices, editingNote = note) }
+    }
+
+    /** The item editor was closed. */
+    fun endItemEdit() = _state.update {
+        it.copy(editingItemId = null, editingStorePrices = emptyMap(), editingNote = null)
     }
 
     fun setStorePrice(itemId: Long, storeId: Long, priceCents: Long?) = viewModelScope.launch {
         withContext(ioDispatcher) { repository.setItemStorePrice(itemId, storeId, priceCents) }
         val prices = withContext(ioDispatcher) { repository.getItemStorePrices(itemId) }
-        _state.update { it.copy(editingStorePrices = prices) }
+        _state.update { if (it.editingItemId != itemId) it else it.copy(editingStorePrices = prices) }
     }
 
     fun exportTo(uri: android.net.Uri) = viewModelScope.launch {
@@ -287,7 +380,7 @@ class ShoppingListViewModel(
                 } ?: throw java.io.IOException("Cannot open output stream")
             }
         }
-        _state.update { it.copy(userMessage = if (result.isSuccess) "Exported" else "Export failed") }
+        _state.update { it.copy(userMessage = if (result.isSuccess) UserMessage.EXPORTED else UserMessage.EXPORT_FAILED) }
     }
 
     fun importFrom(uri: android.net.Uri) = viewModelScope.launch {
@@ -296,21 +389,30 @@ class ShoppingListViewModel(
             runCatching {
                 cr.openInputStream(uri)?.use { ins ->
                     java.io.InputStreamReader(ins).use { r ->
+                        // KEEP (the legacy default): existing items keep their tags/prices.
                         repository.importCsv(
                             r,
-                            org.openintents.convertcsv.common.ConvertCsvBaseActivity.IMPORT_POLICY_OVERWRITE
+                            org.openintents.convertcsv.common.ConvertCsvBaseActivity.IMPORT_POLICY_KEEP
                         )
                     }
                 } ?: throw java.io.IOException("Cannot open input stream")
             }
         }
         refresh()
-        _state.update { it.copy(userMessage = if (result.isSuccess) "Imported" else "Import failed") }
+        _state.update { it.copy(userMessage = if (result.isSuccess) UserMessage.IMPORTED else UserMessage.IMPORT_FAILED) }
     }
 
     fun consumeMessage() = _state.update { it.copy(userMessage = null) }
 
+    private fun rememberActiveList(listId: Long) {
+        viewModelScope.launch(ioDispatcher) { repository.setActiveList(listId) }
+    }
+
     companion object {
+        private const val PREF_HIDE_CHECKED = "hidechecked"
+        private const val PREF_SHOW_PRICE = "showprice"
+        private const val PREF_CAPITALIZATION = "capitalization"
+
         /** Factory that wires the provider-backed repository from the Application context. */
         val Factory: ViewModelProvider.Factory = viewModelFactory {
             initializer {
@@ -318,6 +420,7 @@ class ShoppingListViewModel(
                 ShoppingListViewModel(
                     ProviderShoppingRepository(app),
                     contentResolver = app.contentResolver,
+                    settings = SharedPrefsSettingsRepository(app),
                 )
             }
         }

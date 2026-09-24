@@ -13,6 +13,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import org.openintents.shopping.data.FakeSettingsRepository
 import org.openintents.shopping.data.FakeShoppingRepository
 import org.openintents.shopping.data.ItemEdit
 import org.openintents.shopping.data.ListMode
@@ -207,13 +208,67 @@ class ShoppingListViewModelTest {
         val item = vm.state.value.items.single { it.name == "Coffee" }
         val store = vm.state.value.stores.single()
 
+        // The edit dialog loads the item's data first, then edits it.
+        vm.loadItemEditData(item.itemId)
+        advanceUntilIdle()
         vm.setStorePrice(item.itemId, store.id, 350L)
         advanceUntilIdle()
         assertEquals(350L, vm.state.value.editingStorePrices[store.id])
 
+        // Reopening the editor reloads the stored value.
+        vm.endItemEdit()
+        assertTrue(vm.state.value.editingStorePrices.isEmpty())
         vm.loadItemEditData(item.itemId)
         advanceUntilIdle()
         assertEquals(350L, vm.state.value.editingStorePrices[store.id])
+    }
+
+    @Test
+    fun selectList_isRememberedForNextStart() = runTest(dispatcher) {
+        val repo = FakeShoppingRepository()
+        val vm = ShoppingListViewModel(repo, dispatcher)
+        advanceUntilIdle()
+        vm.createList("Second")
+        advanceUntilIdle()
+        val second = vm.state.value.currentListId
+        val first = vm.state.value.lists.first { it.id != second }.id
+
+        vm.selectList(first)
+        advanceUntilIdle()
+        assertEquals(first, repo.getDefaultListId())
+
+        vm.selectList(second)
+        advanceUntilIdle()
+        val restarted = ShoppingListViewModel(repo, dispatcher)
+        advanceUntilIdle()
+        assertEquals(second, restarted.state.value.currentListId)
+    }
+
+    @Test
+    fun hideChecked_isReadFromAndSavedToSettings() = runTest(dispatcher) {
+        val settings = FakeSettingsRepository()
+        settings.setBoolean("hidechecked", true)
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher, settings = settings)
+        advanceUntilIdle()
+        assertTrue(vm.state.value.hideChecked)
+
+        vm.toggleHideChecked()
+        advanceUntilIdle()
+        assertFalse(vm.state.value.hideChecked)
+        assertFalse(settings.getBoolean("hidechecked", true))
+    }
+
+    @Test
+    fun onResume_picksUpChangesMadeElsewhere() = runTest(dispatcher) {
+        val repo = FakeShoppingRepository()
+        val vm = ShoppingListViewModel(repo, dispatcher)
+        advanceUntilIdle()
+        // e.g. the widget or the legacy UI adds an item while we are paused.
+        repo.addItem(vm.state.value.currentListId, "Bread")
+
+        vm.onResume()
+        advanceUntilIdle()
+        assertTrue(vm.state.value.items.any { it.name == "Bread" })
     }
 
     @Test

@@ -403,6 +403,9 @@ open class ConvertCsvBaseActivity : AppCompatActivity() {
             } catch (e: WrongFormatException) {
                 dispatchError(R.string.wrong_csv_format)
                 Log.i(TAG, "array index out of bounds", e)
+            } catch (e: RuntimeException) {
+                dispatchError(R.string.error_reading_file)
+                Log.e(TAG, "Import failed", e)
             }
 
             smHasWorkerThread = false
@@ -411,7 +414,13 @@ open class ConvertCsvBaseActivity : AppCompatActivity() {
     }
 
     open fun getDocumentSize(uri: Uri): Int {
-        val cursor = contentResolver.query(uri, null, null, null, null, null)
+        val cursor = try {
+            contentResolver.query(uri, null, null, null, null, null)
+        } catch (e: RuntimeException) {
+            // e.g. SecurityException if the URI permission is no longer granted
+            Log.w(TAG, "Cannot query document size", e)
+            null
+        }
 
         var size = -1
         try {
@@ -422,7 +431,7 @@ open class ConvertCsvBaseActivity : AppCompatActivity() {
                 Log.i(TAG, "Display Name: $displayName")
 
                 val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
-                if (!cursor.isNull(sizeIndex)) {
+                if (sizeIndex >= 0 && !cursor.isNull(sizeIndex)) {
                     size = cursor.getInt(sizeIndex)
                 }
             }
@@ -433,14 +442,21 @@ open class ConvertCsvBaseActivity : AppCompatActivity() {
     }
 
     open fun getDocumentName(uri: Uri): String {
-        val cursor = contentResolver.query(uri, null, null, null, null, null)
+        val cursor = try {
+            contentResolver.query(uri, null, null, null, null, null)
+        } catch (e: RuntimeException) {
+            // e.g. SecurityException if the URI permission is no longer granted
+            Log.w(TAG, "Cannot query document name", e)
+            null
+        }
 
         var displayName: String? = uri.lastPathSegment
         try {
             if (cursor != null && cursor.moveToFirst()) {
-                displayName = cursor.getString(
-                    cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                )
+                val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                if (nameIndex >= 0) {
+                    displayName = cursor.getString(nameIndex)
+                }
             }
         } finally {
             cursor?.close()
@@ -503,7 +519,7 @@ open class ConvertCsvBaseActivity : AppCompatActivity() {
             try {
                 val writer: Writer
                 val enc = getCurrentEncoding()
-                val pfd: ParcelFileDescriptor = contentResolver.openFileDescriptor(file, "w")!!
+                val pfd: ParcelFileDescriptor = contentResolver.openFileDescriptor(file, "wt")!!
                 writer = if (enc == null) {
                     OutputStreamWriter(FileOutputStream(pfd.fileDescriptor))
                 } else {
@@ -519,6 +535,9 @@ open class ConvertCsvBaseActivity : AppCompatActivity() {
             } catch (e: IOException) {
                 dispatchError(R.string.error_writing_file)
                 Log.i(TAG, "IO exception", e)
+            } catch (e: RuntimeException) {
+                dispatchError(R.string.error_writing_file)
+                Log.e(TAG, "Export failed", e)
             }
 
             smHasWorkerThread = false
@@ -721,6 +740,16 @@ open class ConvertCsvBaseActivity : AppCompatActivity() {
                 if (resultCode == RESULT_OK && data != null) {
                     val documentUri = data.data
                     if (documentUri != null) {
+                        // Keep access to the document across reboots.
+                        try {
+                            contentResolver.takePersistableUriPermission(
+                                documentUri,
+                                data.flags and (Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                            )
+                        } catch (e: RuntimeException) {
+                            // No persistable grant offered (e.g. ACTION_GET_CONTENT providers).
+                            Log.w(TAG, "Could not persist URI permission", e)
+                        }
                         setFileUri(documentUri)
                     } else {
                         setFileUriUnknown()

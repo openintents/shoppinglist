@@ -31,6 +31,12 @@ import org.openintents.shopping.library.provider.ShoppingContract.Lists
 internal class ShoppingDatabase(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
+    init {
+        // ShoppingBackupAgent backs up only the main database file, so keep
+        // all data in it (no -wal file; WAL is on by default since API 28).
+        setWriteAheadLoggingEnabled(false)
+    }
+
     /**
      * Creates tables "items", "lists", and "contains".
      */

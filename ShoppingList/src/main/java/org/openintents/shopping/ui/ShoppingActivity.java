@@ -254,6 +254,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     private static final String BUNDLE_ITEM_URI = "item uri";
     private static final String BUNDLE_RELATION_URI = "relation_uri";
     private static final String BUNDLE_MODE = "mode";
+    private static final String BUNDLE_MOVE_CONTAINS_ID = "move_contains_id";
+    private static final String BUNDLE_DELETE_ITEM_ID = "delete_item_id";
+    private static final String BUNDLE_DELETE_ITEM_NAME = "delete_item_name";
 
     // private Cursor mCursorItems;
     private static final String BUNDLE_MODE_BEFORE_SEARCH = "mode_before_search";
@@ -347,12 +350,13 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
      */
     private boolean mUseSensor;
     private Uri mRelationUri;
-    private int mMoveItemPosition;
+    private String mMoveContainsId;
 
     private EditItemDialog.FieldType mEditItemFocusField = EditItemDialog.FieldType.ITEMNAME;
     private GestureDetector mGestureDetector;
     private View.OnTouchListener mGestureListener;
-    private int mDeleteItemPosition;
+    private String mDeleteItemId;
+    private String mDeleteItemName;
     // Handle the process of automatically updating enabled sensors:
     private Handler mHandler = new Handler() {
         @Override
@@ -405,6 +409,7 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
         if (LayoutChoiceActivity.show(this)) {
             finish();
+            return;
         }
         setContentView(R.layout.activity_shopping);
 
@@ -521,6 +526,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 mRelationUri = Uri.parse(icicle.getString(BUNDLE_RELATION_URI));
             }
             mItemsView.setModes(icicle.getInt(BUNDLE_MODE), icicle.getInt(BUNDLE_MODE_BEFORE_SEARCH));
+            mMoveContainsId = icicle.getString(BUNDLE_MOVE_CONTAINS_ID);
+            mDeleteItemId = icicle.getString(BUNDLE_DELETE_ITEM_ID);
+            mDeleteItemName = icicle.getString(BUNDLE_DELETE_ITEM_NAME);
         }
 
         // set focus to the edit line:
@@ -895,6 +903,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         final int saveMode = mItemsView.getInSearch() ? mItemsView.mModeBeforeSearch : mItemsView.getMode();
         outState.putInt(BUNDLE_MODE, saveMode);
         outState.putInt(BUNDLE_MODE_BEFORE_SEARCH, saveMode);
+        outState.putString(BUNDLE_MOVE_CONTAINS_ID, mMoveContainsId);
+        outState.putString(BUNDLE_DELETE_ITEM_ID, mDeleteItemId);
+        outState.putString(BUNDLE_DELETE_ITEM_NAME, mDeleteItemName);
         mUpdating = false;
 
         // after items have been added through an "insert from extras" the
@@ -1442,7 +1453,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                         default:
                             break;
                     }
-                    mItemsView.mCursorItems.moveToPosition(pos);
+                    if (!moveItemsCursorTo(pos)) {
+                        return;
+                    }
                     String containsId = mItemsView.mCursorItems
                             .getString(mStringItemsCONTAINSID);
                     Uri uri = Uri.withAppendedPath(
@@ -1872,11 +1885,16 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 deleteItemDialog(menuInfo.position);
                 break;
             case MENU_MOVE_ITEM:
+                Cursor moveCursor = mItemsView.mCursorItems;
+                if (moveCursor == null || moveCursor.isClosed()
+                        || !moveCursor.moveToPosition(menuInfo.position)) {
+                    break;
+                }
+                mMoveContainsId = moveCursor.getString(mStringItemsCONTAINSID);
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_PICK);
                 intent.setData(ShoppingContract.Lists.CONTENT_URI);
                 startActivityForResult(intent, REQUEST_PICK_LIST);
-                mMoveItemPosition = menuInfo.position;
                 break;
             case MENU_COPY_ITEM:
                 copyItem(menuInfo.position);
@@ -2149,7 +2167,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         if (debug) {
             Log.d(TAG, "EditItems: Position: " + position);
         }
-        mItemsView.mCursorItems.moveToPosition(position);
+        if (!moveItemsCursorTo(position)) {
+            return;
+        }
         // mEditItemPosition = position;
 
         long itemId = mItemsView.mCursorItems.getLong(mStringItemsITEMID);
@@ -2164,7 +2184,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
             Log.d(TAG, "EditItemStores: Position: " + position);
         }
 
-        mItemsView.mCursorItems.moveToPosition(position);
+        if (!moveItemsCursorTo(position)) {
+            return;
+        }
         // mEditItemPosition = position;
         long itemId = mItemsView.mCursorItems.getLong(mStringItemsITEMID);
 
@@ -2182,21 +2204,34 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
         if (debug) {
             Log.d(TAG, "EditItems: Position: " + position);
         }
-        mItemsView.mCursorItems.moveToPosition(position);
-        mDeleteItemPosition = position;
+        if (!moveItemsCursorTo(position)) {
+            return;
+        }
+        mDeleteItemId = mItemsView.mCursorItems.getString(mStringItemsITEMID);
+        mDeleteItemName = mItemsView.mCursorItems.getString(mStringItemsITEMNAME);
 
         showDialog(DIALOG_DELETE_ITEM);
     }
 
     /**
+     * Moves the items cursor to the given position.
+     *
+     * @return false if the cursor is not (yet) available, e.g. while the
+     * list is being reloaded.
+     */
+    private boolean moveItemsCursorTo(int position) {
+        Cursor c = mItemsView.mCursorItems;
+        return c != null && !c.isClosed() && c.moveToPosition(position);
+    }
+
+    /**
      * delete item
      */
-    void deleteItem(int position) {
-        Cursor c = mItemsView.mCursorItems;
-        c.moveToPosition(position);
-
+    void deleteItem(String itemId) {
+        if (itemId == null) {
+            return;
+        }
         String listId = mListUri.getLastPathSegment();
-        String itemId = c.getString(mStringItemsITEMID);
         ShoppingUtils.deleteItem(this, itemId, listId);
 
         // c.requery();
@@ -2207,20 +2242,8 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
     /**
      * move item
      */
-    void moveItem(int position, int targetListId) {
-        Cursor c = mItemsView.mCursorItems;
-        mItemsView.mCursorItems.requery();
-        c.moveToPosition(position);
-
-        long listId = getSelectedListId();
-        if (false && listId < 0) {
-            // No valid list - probably view is not active
-            // and no item is selected.
-            return;
-        }
-
+    void moveItem(String containsId, int targetListId) {
         // Attach item to new list, preserving all other fields
-        String containsId = c.getString(mStringItemsCONTAINSID);
         ContentValues cv = new ContentValues(1);
         cv.put(Contains.LIST_ID, targetListId);
         getContentResolver().update(
@@ -2234,9 +2257,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
      * copy item
      */
     void copyItem(int position) {
+        if (!moveItemsCursorTo(position)) {
+            return;
+        }
         Cursor c = mItemsView.mCursorItems;
-        mItemsView.mCursorItems.requery();
-        c.moveToPosition(position);
         String containsId = c.getString(mStringItemsCONTAINSID);
         Long newContainsId;
         Long newItemId;
@@ -2267,8 +2291,10 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
      * removeItemFromList
      */
     void removeItemFromList(int position) {
+        if (!moveItemsCursorTo(position)) {
+            return;
+        }
         Cursor c = mItemsView.mCursorItems;
-        c.moveToPosition(position);
         // Remember old values before delete (for share below)
         String itemName = c.getString(mStringItemsITEMNAME);
         long oldstatus = c.getLong(mStringItemsSTATUS);
@@ -2438,7 +2464,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,
                                                         int whichButton) {
-                                        deleteItem(mDeleteItemPosition);
+                                        deleteItem(mDeleteItemId);
+                                        mDeleteItemId = null;
+                                        mDeleteItemName = null;
                                     }
                                 }
                         )
@@ -2498,18 +2526,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 DownloadOIAppDialog.onPrepareDialog(this, dialog);
                 break;
             case DIALOG_DELETE_ITEM:
-                if (mItemsView != null && dialog instanceof AlertDialog) {
-                    ListAdapter adapter = mItemsView.getAdapter();
-                    if (adapter != null && adapter instanceof CursorAdapter) {
-                        Cursor c = (Cursor) adapter.getItem(mDeleteItemPosition);
-                        if (c != null) {
-                            String itemName = c.getString(mStringItemsITEMNAME);
-                            if (itemName != null) {
-                                ((AlertDialog) dialog).setMessage(
-                                        getResources().getString(R.string.delete_item_confirm, itemName));
-                            }
-                        }
-                    }
+                if (dialog instanceof AlertDialog && mDeleteItemName != null) {
+                    ((AlertDialog) dialog).setMessage(
+                            getResources().getString(R.string.delete_item_confirm, mDeleteItemName));
                 }
                 break;
             default:
@@ -2991,15 +3010,13 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
                 Log.d(TAG, "result received");
             }
 
-            if (RESULT_OK == resultCode) {
-                int position = mMoveItemPosition;
-                if (mMoveItemPosition >= 0) {
-                    moveItem(position, Integer.parseInt(data.getData()
-                            .getLastPathSegment()));
-                }
+            if (RESULT_OK == resultCode && mMoveContainsId != null
+                    && data != null && data.getData() != null) {
+                moveItem(mMoveContainsId, Integer.parseInt(data.getData()
+                        .getLastPathSegment()));
             }
 
-            mMoveItemPosition = -1;
+            mMoveContainsId = null;
         }
     }
 
@@ -3043,7 +3060,9 @@ public class ShoppingActivity extends DistributionLibraryFragmentActivity
 
     @Override
     public void onItemChanged() {
-        mItemsView.mCursorItems.requery();
+        if (mItemsView.mCursorItems != null) {
+            mItemsView.mCursorItems.requery();
+        }
         fillAutoCompleteTextViewAdapter(mEditText);
     }
 

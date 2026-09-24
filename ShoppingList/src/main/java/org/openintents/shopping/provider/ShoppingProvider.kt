@@ -117,13 +117,14 @@ class ShoppingProvider : ContentProvider() {
             CONTAINS_FULL -> {
 
                 val inSearchMode = appIsInSearchMode()
+                val listIdArg = selectionArgs?.getOrNull(0)?.toLongOrNull() ?: -1L
 
                 // all callers pass list id as selection_args[0]. perhaps not so
                 // nice to depend on that, but... need to choose the projection map
                 // based on the list's store filter.
                 if (!inSearchMode
                     && PreferenceActivity.getUsingFiltersFromPrefs(context!!)
-                    && listUsesStoreFilter(selectionArgs!![0]!!)
+                    && listUsesStoreFilter(listIdArg)
                 ) {
                     // actually there are two ways we could do the query when
                     // filtering by stores. perhaps
@@ -171,7 +172,7 @@ class ShoppingProvider : ContentProvider() {
                     )
                 }
                 defaultOrderBy = ContainsFull.DEFAULT_SORT_ORDER
-                val tagFilter = getListTagsFilter(selectionArgs!![0]!!)
+                val tagFilter = getListTagsFilter(listIdArg)
                 if (!inSearchMode && !TextUtils.isEmpty(tagFilter)) {
                     qb.appendWhere(" AND items.tags like '%" + escapeSQLChars(tagFilter!!) + "%' ESCAPE '`'")
                 }
@@ -179,7 +180,7 @@ class ShoppingProvider : ContentProvider() {
 
             CONTAINS_FULL_ID -> {
                 qb.tables = "contains, items, lists"
-                qb.appendWhere("_id=" + url.pathSegments[1])
+                qb.appendWhere("contains._id=" + url.pathSegments[1] + " AND ")
                 qb.appendWhere(
                     "contains.item_id = items._id AND "
                             + "contains.list_id = lists._id"
@@ -233,7 +234,7 @@ class ShoppingProvider : ContentProvider() {
 
             ITEMSTORES_ID -> {
                 qb.tables = "itemstores, items, stores"
-                qb.appendWhere("_id=" + url.pathSegments[1])
+                qb.appendWhere("itemstores._id=" + url.pathSegments[1] + " AND ")
                 qb.appendWhere("itemstores.item_id = items._id AND itemstores.store_id = stores._id")
             }
 
@@ -395,7 +396,7 @@ class ShoppingProvider : ContentProvider() {
         return c
     }
 
-    private fun listUsesStoreFilter(listId: String): Boolean {
+    private fun listUsesStoreFilter(listId: Long): Boolean {
         val db = mOpenHelper!!.readableDatabase
         val qb = SQLiteQueryBuilder()
         qb.tables = "lists"
@@ -405,6 +406,7 @@ class ShoppingProvider : ContentProvider() {
             null, null, null, null
         )
         if (c.count != 1) {
+            c.close()
             return false
         }
 
@@ -416,7 +418,7 @@ class ShoppingProvider : ContentProvider() {
         return (storeId != -1L)
     }
 
-    private fun getListTagsFilter(listId: String): String? {
+    private fun getListTagsFilter(listId: Long): String? {
         val db = mOpenHelper!!.readableDatabase
         val qb = SQLiteQueryBuilder()
         qb.tables = "lists"
@@ -426,6 +428,7 @@ class ShoppingProvider : ContentProvider() {
             null, null, null
         )
         if (c.count != 1) {
+            c.close()
             return null
         }
 
@@ -462,6 +465,7 @@ class ShoppingProvider : ContentProvider() {
             null, null, null
         )
         if (c.count != 1) {
+            c.close()
             return null
         }
 
@@ -476,6 +480,7 @@ class ShoppingProvider : ContentProvider() {
         qb.appendWhere("_id=$oldItemId")
         c = qb.query(db, Items.PROJECTION_TO_COPY, null, null, null, null, null)
         if (c.count != 1) {
+            c.close()
             return null
         }
         c.moveToFirst()
@@ -493,6 +498,7 @@ class ShoppingProvider : ContentProvider() {
             null
         )
         if (c.count != 1) {
+            c.close()
             return null
         }
         c.moveToFirst()
@@ -608,7 +614,7 @@ class ShoppingProvider : ContentProvider() {
         val rowID: Long
 
         val now = java.lang.Long.valueOf(System.currentTimeMillis())
-        val r = android.content.res.Resources.getSystem()
+        val r = context!!.resources
 
         // Make sure that the fields are all set
         if (!values.containsKey(Lists.NAME)) {

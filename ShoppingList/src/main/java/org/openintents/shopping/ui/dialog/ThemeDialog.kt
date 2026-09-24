@@ -102,7 +102,8 @@ open class ThemeDialog : AlertDialog, OnClickListener, OnCancelListener, OnItemC
         ll.setPadding(20, 10, 20, 10)
         ll.addView(b, lp)
         ll.gravity = Gravity.CENTER
-        mListView.addFooterView(ll)
+        // not selectable: it is not a theme entry (see getSelectedTheme())
+        mListView.addFooterView(ll, null, false)
 
         mCheckBox = view.findViewById(R.id.check1)
 
@@ -223,7 +224,7 @@ open class ThemeDialog : AlertDialog, OnClickListener, OnCancelListener, OnItemC
     private fun getSelectedTheme(): String? {
         val pos = mListView.checkedItemPosition
 
-        return if (pos != ListView.INVALID_POSITION) {
+        return if (pos in mListInfo.indices) {
             val ti = mListInfo[pos]
             ti.styleName
         } else {

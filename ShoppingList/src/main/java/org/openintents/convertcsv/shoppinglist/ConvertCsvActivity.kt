@@ -68,7 +68,7 @@ open class ConvertCsvActivity : ConvertCsvBaseActivity() {
         if (mSpinner != null) {
             mSpinner!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
-                    parentView: AdapterView<*>, selectedItemView: View, position: Int, id: Long
+                    parentView: AdapterView<*>, selectedItemView: View?, position: Int, id: Long
                 ) {
                     updateInfo()
                 }
@@ -171,19 +171,21 @@ open class ConvertCsvActivity : ConvertCsvBaseActivity() {
 
         // Try the URI with which Convert CSV has been called:
         val uri: Uri? = intent.data
-        val c: Cursor? = contentResolver.query(
-            uri!!,
-            arrayOf(ShoppingContract.Lists._ID), null, null, null
-        )
-        if (c != null) {
-            if (c.moveToFirst()) {
-                listId = c.getLong(0)
+        if (isShoppingListUri(uri)) {
+            val c: Cursor? = contentResolver.query(
+                uri!!,
+                arrayOf(ShoppingContract.Lists._ID), null, null, null
+            )
+            if (c != null) {
+                if (c.moveToFirst()) {
+                    listId = c.getLong(0)
+                }
+                c.close()
             }
-            c.close()
         }
 
         // Use default list if URI is not valid.
-        if (listId < 0) {
+        if (listId <= 0) {
             listId = ShoppingUtils.getDefaultList(this)
         }
         return listId
@@ -191,7 +193,10 @@ open class ConvertCsvActivity : ConvertCsvBaseActivity() {
 
     open fun getListName(listId: Long): String? {
         var listname: String? = null
-        val uri: Uri? = intent.data
+        var uri: Uri? = intent.data
+        if (!isShoppingListUri(uri)) {
+            uri = Uri.withAppendedPath(ShoppingContract.Lists.CONTENT_URI, listId.toString())
+        }
         val c: Cursor? = contentResolver.query(
             uri!!,
             arrayOf(ShoppingContract.Lists.NAME), null, null, null
@@ -203,5 +208,14 @@ open class ConvertCsvActivity : ConvertCsvBaseActivity() {
             c.close()
         }
         return listname
+    }
+
+    /**
+     * The activity may also be started with the URI of a CSV document
+     * (VIEW text/csv), which must not be queried as a shopping list.
+     */
+    private fun isShoppingListUri(uri: Uri?): Boolean {
+        return uri != null && ShoppingContract.AUTHORITY == uri.authority &&
+                uri.pathSegments.firstOrNull() == "lists"
     }
 }

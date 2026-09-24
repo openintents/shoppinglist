@@ -13,9 +13,15 @@ class FakeShoppingRepository : ShoppingRepository {
     private val storesByList = mutableMapOf<Long, MutableList<StoreInfo>>()
     private var nextId = 1L
 
+    var activeListId: Long? = null
+
     override fun getDefaultListId(): Long {
         if (lists.isEmpty()) createList("My list")
-        return lists.first().id
+        return activeListId?.takeIf { id -> lists.any { it.id == id } } ?: lists.first().id
+    }
+
+    override fun setActiveList(listId: Long) {
+        activeListId = listId
     }
 
     override fun getLists(): List<ShoppingListInfo> = lists.toList()

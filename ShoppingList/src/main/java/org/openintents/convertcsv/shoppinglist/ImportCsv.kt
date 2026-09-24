@@ -171,10 +171,12 @@ class ImportCsv(private val mContext: Context, importPolicy: Int) {
 
             // example value for column 11:    Big Y=/0.50;BJ's=11/0.42
             if (nextLine!![11].isNotEmpty() && importStores) {
-                stores = nextLine!![11].split(";").toTypedArray()
+                // Unlike Java's split(), Kotlin's keeps trailing empty strings.
+                stores = nextLine!![11].split(";").filter { it.isNotEmpty() }.toTypedArray()
 
                 for (i_store in stores.indices) {
-                    val key_vals = stores[i_store].split("=").toTypedArray()
+                    val key_vals = stores[i_store].split("=", limit = 2)
+                    if (key_vals.size < 2) continue
                     val store_name = key_vals[0]
                     val aisle_price = key_vals[1].split("/").toTypedArray()
                     if (aisle_price.isEmpty()) continue
@@ -196,7 +198,7 @@ class ImportCsv(private val mContext: Context, importPolicy: Int) {
             }
 
             if (nextLine!![10].isNotEmpty()) {
-                stores = nextLine!![10].split(";").toTypedArray()
+                stores = nextLine!![10].split(";").filter { it.isNotEmpty() }.toTypedArray()
                 for (i_store in stores.indices) {
                     if (importStores) {    // real store import
                         var storeId = item_stores[stores[i_store]]

@@ -12,6 +12,7 @@ import org.openintents.shopping.library.provider.ShoppingContract.Lists
 import org.openintents.shopping.library.provider.ShoppingContract.Status
 import org.openintents.shopping.library.provider.ShoppingContract.Stores
 import org.openintents.shopping.library.util.ShoppingUtils
+import org.openintents.shopping.ui.PreferenceActivity
 
 /**
  * [ShoppingRepository] backed by the app's ContentProvider + SQLite.
@@ -39,10 +40,20 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
         // A fresh install has an empty lists table; create the default list
         // ("My shopping list"), mirroring the legacy ShoppingActivity. Without
         // this, items get added to a non-existent list and never display.
-        if (getLists().isEmpty()) {
+        val lists = getLists()
+        if (lists.isEmpty()) {
             return ShoppingUtils.getList(context, context.getString(R.string.my_shopping_list))
         }
-        return ShoppingUtils.getDefaultList(context)
+        // The last-used list may have been deleted; fall back to the first list.
+        val id = ShoppingUtils.getDefaultList(context)
+        return if (lists.any { it.id == id }) id else lists.first().id
+    }
+
+    override fun setActiveList(listId: Long) {
+        if (listId < 0) return
+        // Same file + key the legacy UI and the provider's ACTIVELIST query use.
+        context.getSharedPreferences("org.openintents.shopping_preferences", Context.MODE_PRIVATE)
+            .edit().putInt(PreferenceActivity.PREFS_LASTUSED, listId.toInt()).apply()
     }
 
     override fun getItems(listId: Long): List<ShoppingItem> =
@@ -86,9 +97,13 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
     override fun addItem(listId: Long, name: String): Long {
         val trimmed = name.trim()
         if (trimmed.isEmpty()) return -1L
-        val itemId = ShoppingUtils.updateOrCreateItem(
-            context, trimmed, null, null, null, listId.toString()
-        )
+        // Like the legacy UI: reuse a catalogue item of the same name (keeping its
+        // price, tags and store prices) unless the user limited that to this list.
+        val scope = if (PreferenceActivity.getCompleteFromCurrentListOnlyFromPrefs(context)) {
+            listId.toString()
+        } else null
+        val itemId = ShoppingUtils.updateOrCreateItem(context, trimmed, null, null, null, scope)
+        if (itemId < 0) return -1L
         ShoppingUtils.addItemToList(
             context, itemId, listId, Status.WANT_TO_BUY,
             null, null, false, false, false
@@ -165,7 +180,7 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
     }
 
     override fun setListTheme(listId: Long, theme: ListTheme) {
-        val values = ContentValues().apply { put(Lists.SKIN_BACKGROUND, theme.name) }
+        val values = ContentValues().apply { put(Lists.SKIN_BACKGROUND, theme.storedValue) }
         resolver.update(Uri.withAppendedPath(Lists.CONTENT_URI, listId.toString()), values, null, null)
     }
 

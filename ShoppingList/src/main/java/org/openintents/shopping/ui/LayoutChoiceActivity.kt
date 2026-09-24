@@ -10,7 +10,7 @@ import android.view.View
 import android.widget.RadioGroup
 import org.openintents.shopping.R
 
-class LayoutChoiceActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListener {
+class LayoutChoiceActivity : AppCompatActivity() {
 
     companion object {
         @JvmStatic
@@ -36,14 +36,14 @@ class LayoutChoiceActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeList
         } else {
             radioGroup.check(R.id.layout_choice_bottom)
         }
-        radioGroup.setOnCheckedChangeListener(this)
-
-        findViewById<View>(R.id.image_actionbar).setOnClickListener {
-            radioGroup.check(R.id.layout_choice_actionbar)
-        }
-        findViewById<View>(R.id.image_bottom).setOnClickListener {
-            radioGroup.check(R.id.layout_choice_bottom)
-        }
+        // Use click listeners rather than OnCheckedChangeListener: the current
+        // choice is pre-checked, and re-checking it would not fire a change.
+        val chooseActionBar = View.OnClickListener { choose(R.id.layout_choice_actionbar) }
+        val chooseBottom = View.OnClickListener { choose(R.id.layout_choice_bottom) }
+        findViewById<View>(R.id.layout_choice_actionbar).setOnClickListener(chooseActionBar)
+        findViewById<View>(R.id.image_actionbar).setOnClickListener(chooseActionBar)
+        findViewById<View>(R.id.layout_choice_bottom).setOnClickListener(chooseBottom)
+        findViewById<View>(R.id.image_bottom).setOnClickListener(chooseBottom)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -55,7 +55,7 @@ class LayoutChoiceActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeList
         }
     }
 
-    override fun onCheckedChanged(group: RadioGroup, @IdRes checkedId: Int) {
+    private fun choose(@IdRes checkedId: Int) {
         PreferenceActivity.setUsingHoloSearch(this, checkedId == R.id.layout_choice_actionbar)
         PreferenceActivity.setShowLayoutChoice(this, false)
         startActivity(Intent(this, org.openintents.shopping.ShoppingActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))

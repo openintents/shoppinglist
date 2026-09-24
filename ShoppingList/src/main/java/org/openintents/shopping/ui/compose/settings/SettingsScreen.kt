@@ -34,6 +34,7 @@ import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import org.openintents.shopping.R
 
 @Composable
 fun SettingsRoute(viewModel: SettingsViewModel, onBack: () -> Unit) {
@@ -59,10 +60,10 @@ fun SettingsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Settings") },
+                title = { Text(stringResource(R.string.preferences)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.compose_back))
                     }
                 }
             )
@@ -131,7 +132,7 @@ private fun ChoiceRow(
                 Text(title, style = MaterialTheme.typography.bodyLarge)
                 Text(selectedLabel, style = MaterialTheme.typography.bodySmall)
             }
-            TextButton(onClick = { expanded = true }) { Text("Change") }
+            TextButton(onClick = { expanded = true }) { Text(stringResource(R.string.compose_change)) }
         }
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             entries.forEachIndexed { index, label ->
