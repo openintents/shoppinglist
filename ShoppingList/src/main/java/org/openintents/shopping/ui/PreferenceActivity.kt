@@ -21,7 +21,6 @@ import org.openintents.shopping.R
 import org.openintents.shopping.library.provider.ShoppingContract.Contains
 import org.openintents.shopping.library.provider.ShoppingContract.Lists
 import org.openintents.shopping.library.util.ShoppingUtils
-import org.openintents.shopping.ui.widget.ShoppingItemsView
 import org.openintents.util.BackupManagerWrapper
 import org.openintents.util.IntentUtils
 
@@ -35,6 +34,8 @@ class PreferenceActivity : android.preference.PreferenceActivity(),
     companion object {
         const val PREFS_SAMESORTFORPICK = "samesortforpick"
         const val PREFS_SAMESORTFORPICK_DEFAULT = false
+        /** Sort mode for the shopping list (other values: Pick items). */
+        const val MODE_IN_SHOP = 1
         const val PREFS_SORTORDER = "sortorder"
         const val PREFS_PICKITEMS_SORTORDER = "sortorderForPickItems"
         const val PREFS_SORTORDER_DEFAULT = "3"
@@ -204,17 +205,17 @@ class PreferenceActivity : android.preference.PreferenceActivity(),
             var sortOrder = 0
             var effectiveMode = mode
 
-            if (effectiveMode != ShoppingItemsView.MODE_IN_SHOP) {
+            if (effectiveMode != MODE_IN_SHOP) {
                 val followShopping = PreferenceManager
                         .getDefaultSharedPreferences(context).getBoolean(
                                 PREFS_SAMESORTFORPICK,
                                 PREFS_SAMESORTFORPICK_DEFAULT)
                 if (followShopping) {
-                    effectiveMode = ShoppingItemsView.MODE_IN_SHOP
+                    effectiveMode = MODE_IN_SHOP
                 }
             }
 
-            if (effectiveMode != ShoppingItemsView.MODE_IN_SHOP) {
+            if (effectiveMode != MODE_IN_SHOP) {
                 // use the pick-items-specific value, if there is one
                 try {
                     sortOrder = Integer.parseInt(PreferenceManager
@@ -225,11 +226,11 @@ class PreferenceActivity : android.preference.PreferenceActivity(),
                     // Guess somebody messed with the preferences and put a string
                     // into
                     // this field. We'll follow shopping mode then.
-                    effectiveMode = ShoppingItemsView.MODE_IN_SHOP
+                    effectiveMode = MODE_IN_SHOP
                 }
             }
 
-            if (effectiveMode == ShoppingItemsView.MODE_IN_SHOP) {
+            if (effectiveMode == MODE_IN_SHOP) {
 
                 var set = false
                 if (getUsingPerListSortFromPrefs(context)) {
@@ -289,7 +290,7 @@ class PreferenceActivity : android.preference.PreferenceActivity(),
         fun prefsStatusAffectsSort(context: Context, mode: Int): Boolean {
             val index = getSortOrderIndexFromPrefs(context, mode)
             var affects = Contains.StatusAffectsSortOrder[index]
-            if (mode == ShoppingItemsView.MODE_IN_SHOP && !affects) {
+            if (mode == MODE_IN_SHOP && !affects) {
                 // in shopping mode we should also invalidate display when
                 // marking items if we are hiding checked items.
                 affects = getHideCheckedItemsFromPrefs(context)

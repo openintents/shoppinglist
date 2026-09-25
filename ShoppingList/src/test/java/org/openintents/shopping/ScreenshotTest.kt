@@ -22,7 +22,7 @@ import org.robolectric.RobolectricTestRunner
 import java.io.File
 
 /**
- * Renders the legacy and the Compose UI with the same sample data to PNGs in
+ * Renders the UI with the same sample data to PNGs in
  * ShoppingList/build/screenshots/. Skipped unless run with -Pscreenshots, e.g.
  *   ./gradlew :ShoppingList:testPlayDebugUnitTest --tests "*ScreenshotTest.composeUiClassic" -Pscreenshots
  * Run one test per Gradle invocation: several activities in one run can leave
@@ -58,9 +58,6 @@ class ScreenshotTest {
         repo.toggleItemBought(items.first { it.name == "Eggs" })
         repo.setActiveList(listId)
     }
-
-    @Test
-    fun legacyUi() = capture(org.openintents.shopping.ui.ShoppingActivity::class.java, "legacy-ui.png")
 
     @Test
     fun composeUi() = capture(ShoppingActivity::class.java, "compose-ui.png")

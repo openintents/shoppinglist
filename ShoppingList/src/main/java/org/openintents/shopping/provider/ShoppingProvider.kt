@@ -44,7 +44,6 @@ import org.openintents.shopping.library.provider.ShoppingContract.Status
 import org.openintents.shopping.library.provider.ShoppingContract.Stores
 import org.openintents.shopping.library.provider.ShoppingContract.Units
 import org.openintents.shopping.ui.PreferenceActivity
-import org.openintents.shopping.ui.widget.ShoppingItemsView
 
 /**
  * Provides access to a database of shopping items and shopping lists.
@@ -288,7 +287,7 @@ class ShoppingProvider : ContentProvider() {
                 // assumes only one projection will ever be used,
                 // asking only for the id of the active list.
                 val sortOrder = PreferenceActivity.getSortOrderFromPrefs(
-                    context!!, ShoppingItemsView.MODE_IN_SHOP
+                    context!!, PreferenceActivity.MODE_IN_SHOP
                 )
                 m.addRow(arrayOf<Any>(sortOrder))
                 return m

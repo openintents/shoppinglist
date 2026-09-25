@@ -66,6 +66,6 @@ enum class ListTheme(
     }
 }
 
-/** Tiny is derived from small like the legacy ShoppingItemsView (12/18). */
+/** Tiny is derived from small, like the legacy UI did (12/18). */
 private fun sizes(small: Float, medium: Float, large: Float) =
     listOf(small * 12f / 18f, small, medium, large)

@@ -9,7 +9,6 @@ import org.openintents.shopping.ui.compose.ComposeShoppingActivity
  * list shortcuts and the widget link to this component, therefore this class
  * must never be renamed or moved.
  *
- * It hosts the Compose UI (see [ComposeShoppingActivity]). The legacy View UI
- * (.ui.ShoppingActivity) only serves the item pick/edit intents of other apps.
+ * It hosts the Compose UI (see [ComposeShoppingActivity]).
  */
 open class ShoppingActivity : ComposeShoppingActivity()

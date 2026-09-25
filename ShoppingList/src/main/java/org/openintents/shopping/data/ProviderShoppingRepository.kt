@@ -14,7 +14,6 @@ import org.openintents.shopping.library.provider.ShoppingContract.Stores
 import org.openintents.shopping.library.util.PriceConverter
 import org.openintents.shopping.library.util.ShoppingUtils
 import org.openintents.shopping.ui.PreferenceActivity
-import org.openintents.shopping.ui.widget.ShoppingItemsView
 
 /**
  * [ShoppingRepository] backed by the app's ContentProvider + SQLite.
@@ -71,7 +70,7 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
 
     // The stored values are indices into Contains.SORT_ORDERS.
     override fun getSortOrder(listId: Long): Int =
-        PreferenceActivity.getSortOrderIndexFromPrefs(context, ShoppingItemsView.MODE_IN_SHOP, listId)
+        PreferenceActivity.getSortOrderIndexFromPrefs(context, PreferenceActivity.MODE_IN_SHOP, listId)
 
     override fun setSortOrder(listId: Long, sortOrder: Int) {
         if (PreferenceActivity.getUsingPerListSortFromPrefs(context)) {
@@ -86,7 +85,7 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
 
     private fun queryListItems(listId: Long, includeRemoved: Boolean): List<ShoppingItem> {
         // Same sort orders as the legacy UI (Pick items can have its own).
-        val mode = if (includeRemoved) MODE_PICK_ITEMS else ShoppingItemsView.MODE_IN_SHOP
+        val mode = if (includeRemoved) MODE_PICK_ITEMS else PreferenceActivity.MODE_IN_SHOP
         val sortOrder = PreferenceActivity.getSortOrderFromPrefs(context, mode, listId)
         val out = ArrayList<ShoppingItem>()
         resolver.query(

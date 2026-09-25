@@ -15,7 +15,6 @@ import org.openintents.shopping.ShoppingActivity
 import org.openintents.shopping.library.provider.ShoppingContract
 import org.openintents.shopping.library.provider.ShoppingContract.ContainsFull
 import org.openintents.shopping.ui.PreferenceActivity
-import org.openintents.shopping.ui.widget.ShoppingItemsView
 
 open class CheckItemsWidget : AppWidgetProvider() {
 
@@ -251,14 +250,14 @@ open class CheckItemsWidget : AppWidgetProvider() {
         @JvmStatic
         fun fillItems(context: Context, listId: Long): Cursor {
             val sortOrder = PreferenceActivity.getSortOrderFromPrefs(
-                context, ShoppingItemsView.MODE_IN_SHOP
+                context, PreferenceActivity.MODE_IN_SHOP
             )
             val selection = "list_id = ? AND " +
                     ShoppingContract.Contains.STATUS + " == " +
                     ShoppingContract.Status.WANT_TO_BUY
 
             return context.contentResolver.query(
-                ContainsFull.CONTENT_URI, org.openintents.shopping.ui.ShoppingActivity.PROJECTION_ITEMS,
+                ContainsFull.CONTENT_URI, arrayOf(ContainsFull._ID, ContainsFull.ITEM_NAME),
                 selection, arrayOf(listId.toString()), sortOrder
             )!!
         }
