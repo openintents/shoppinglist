@@ -466,4 +466,17 @@ class ShoppingListViewModelTest {
         assertEquals(null, vm.state.value.unknownBarcode)
         assertTrue(vm.state.value.items.any { it.name == "Batteries" })
     }
+
+    @Test
+    fun scanButton_canBeHiddenInTheSettings() = runTest(dispatcher) {
+        val settings = FakeSettingsRepository()
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher, settings = settings)
+        advanceUntilIdle()
+        assertTrue(vm.state.value.showScanButton)
+
+        settings.setBoolean("barcode_button", false)
+        vm.onResume()
+        advanceUntilIdle()
+        assertFalse(vm.state.value.showScanButton)
+    }
 }

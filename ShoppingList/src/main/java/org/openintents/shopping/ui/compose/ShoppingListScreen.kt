@@ -375,7 +375,7 @@ fun ShoppingListScreen(
                                 placeholder = state.currentListName.ifEmpty { stringResource(R.string.app_name) },
                                 capitalization = state.capitalization,
                                 onSubmit = submitAdd,
-                                onScan = scanBarcode,
+                                onScan = scanBarcode.takeIf { state.showScanButton },
                             )
                         } else Column {
                             Text(
@@ -567,7 +567,7 @@ fun ShoppingListScreen(
                         capitalization = state.capitalization,
                         onAdd = { onAddItem(it); addText = "" },
                         onSubmit = submitAdd,
-                        onScan = scanBarcode,
+                        onScan = scanBarcode.takeIf { state.showScanButton },
                     )
                 }
             }
@@ -1594,7 +1594,8 @@ private fun AddItemRow(
     capitalization: Int,
     onAdd: (String) -> Unit,
     onSubmit: () -> Unit,
-    onScan: () -> Unit,
+    /** Null hides the scan button ("barcode_button" setting). */
+    onScan: (() -> Unit)?,
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         SuggestionRow(query = text, suggestions = suggestions, onPick = onAdd)
@@ -1614,7 +1615,7 @@ private fun AddItemRow(
                 keyboardActions = KeyboardActions(onDone = { onSubmit() }),
                 modifier = Modifier.weight(1f)
             )
-            if (text.isEmpty()) {
+            if (text.isEmpty() && onScan != null) {
                 IconButton(onClick = onScan) {
                     Icon(
                         painterResource(R.drawable.ic_barcode),
@@ -1640,7 +1641,8 @@ private fun TopBarAddField(
     placeholder: String,
     capitalization: Int,
     onSubmit: () -> Unit,
-    onScan: () -> Unit,
+    /** Null hides the scan button ("barcode_button" setting). */
+    onScan: (() -> Unit)?,
 ) {
     TextField(
         value = text,
@@ -1649,7 +1651,7 @@ private fun TopBarAddField(
         leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
         trailingIcon = {
             if (text.isEmpty()) {
-                IconButton(onClick = onScan) {
+                if (onScan != null) IconButton(onClick = onScan) {
                     Icon(
                         painterResource(R.drawable.ic_barcode),
                         contentDescription = stringResource(R.string.compose_scan_barcode),

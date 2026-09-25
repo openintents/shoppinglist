@@ -82,6 +82,8 @@ data class ShoppingUiState(
     val unknownBarcode: String? = null,
     /** Name of an item just added from a barcode (the UI confirms it, then consumes it). */
     val addedFromBarcode: String? = null,
+    /** "barcode_button" setting: show the scan button next to the add field. */
+    val showScanButton: Boolean = true,
     /** "barcode_lookup" setting: look up scanned barcodes on Open Food Facts. */
     val barcodeLookup: Boolean = true,
     /** "compact" setting: denser rows, more items on the screen. */
@@ -192,6 +194,7 @@ class ShoppingListViewModel(
                 useFilters = s.getBoolean("use_filters", false),
                 compact = s.getBoolean("compact", false),
                 barcodeLookup = s.getBoolean(PREF_BARCODE_LOOKUP, true),
+                showScanButton = s.getBoolean("barcode_button", true),
                 fastScroll = s.getBoolean("fastscroll", false),
             )
         }
@@ -206,7 +209,7 @@ class ShoppingListViewModel(
                 prioritySubtotalIncludesChecked = loaded.prioritySubtotalIncludesChecked,
                 useFilters = loaded.useFilters,
                 compact = loaded.compact, fastScroll = loaded.fastScroll,
-                barcodeLookup = loaded.barcodeLookup,
+                barcodeLookup = loaded.barcodeLookup, showScanButton = loaded.showScanButton,
             )
         }
     }
