@@ -13,10 +13,13 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import org.openintents.shopping.data.FakeSettingsRepository
 import org.openintents.shopping.data.FakeShoppingRepository
 import org.openintents.shopping.data.ItemEdit
 import org.openintents.shopping.data.ListMode
 import org.openintents.shopping.data.ListTheme
+import org.openintents.shopping.data.LookupResult
+import org.openintents.shopping.data.NewItem
 
 /**
  * Pure-JVM ViewModel tests (no Robolectric): a fake repository + a test
@@ -207,13 +210,67 @@ class ShoppingListViewModelTest {
         val item = vm.state.value.items.single { it.name == "Coffee" }
         val store = vm.state.value.stores.single()
 
+        // The edit dialog loads the item's data first, then edits it.
+        vm.loadItemEditData(item.itemId)
+        advanceUntilIdle()
         vm.setStorePrice(item.itemId, store.id, 350L)
         advanceUntilIdle()
         assertEquals(350L, vm.state.value.editingStorePrices[store.id])
 
+        // Reopening the editor reloads the stored value.
+        vm.endItemEdit()
+        assertTrue(vm.state.value.editingStorePrices.isEmpty())
         vm.loadItemEditData(item.itemId)
         advanceUntilIdle()
         assertEquals(350L, vm.state.value.editingStorePrices[store.id])
+    }
+
+    @Test
+    fun selectList_isRememberedForNextStart() = runTest(dispatcher) {
+        val repo = FakeShoppingRepository()
+        val vm = ShoppingListViewModel(repo, dispatcher)
+        advanceUntilIdle()
+        vm.createList("Second")
+        advanceUntilIdle()
+        val second = vm.state.value.currentListId
+        val first = vm.state.value.lists.first { it.id != second }.id
+
+        vm.selectList(first)
+        advanceUntilIdle()
+        assertEquals(first, repo.getDefaultListId())
+
+        vm.selectList(second)
+        advanceUntilIdle()
+        val restarted = ShoppingListViewModel(repo, dispatcher)
+        advanceUntilIdle()
+        assertEquals(second, restarted.state.value.currentListId)
+    }
+
+    @Test
+    fun hideChecked_isReadFromAndSavedToSettings() = runTest(dispatcher) {
+        val settings = FakeSettingsRepository()
+        settings.setBoolean("hidechecked", true)
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher, settings = settings)
+        advanceUntilIdle()
+        assertTrue(vm.state.value.hideChecked)
+
+        vm.toggleHideChecked()
+        advanceUntilIdle()
+        assertFalse(vm.state.value.hideChecked)
+        assertFalse(settings.getBoolean("hidechecked", true))
+    }
+
+    @Test
+    fun onResume_picksUpChangesMadeElsewhere() = runTest(dispatcher) {
+        val repo = FakeShoppingRepository()
+        val vm = ShoppingListViewModel(repo, dispatcher)
+        advanceUntilIdle()
+        // e.g. the widget or the legacy UI adds an item while we are paused.
+        repo.addItem(vm.state.value.currentListId, "Bread")
+
+        vm.onResume()
+        advanceUntilIdle()
+        assertTrue(vm.state.value.items.any { it.name == "Bread" })
     }
 
     @Test
@@ -339,5 +396,112 @@ class ShoppingListViewModelTest {
         vm.selectList(a)
         advanceUntilIdle()
         assertTrue(vm.state.value.items.any { it.name == "OnlyOnA" })
+    }
+
+    @Test
+    fun addBarOnTop_isReadFromTheHolosearchSetting() = runTest(dispatcher) {
+        val settings = FakeSettingsRepository()
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher, settings = settings)
+        advanceUntilIdle()
+        assertFalse(vm.state.value.addBarOnTop)
+
+        settings.setBoolean("holosearch", true)
+        vm.onResume()
+        advanceUntilIdle()
+        assertTrue(vm.state.value.addBarOnTop)
+    }
+
+    @Test
+    fun addItemsFromIntent_addsToTheRequestedList() = runTest(dispatcher) {
+        val repo = FakeShoppingRepository()
+        val vm = ShoppingListViewModel(repo, dispatcher)
+        val other = repo.createList("Other")
+        vm.addItemsFromIntent(other, listOf(NewItem("Tea"), NewItem("Honey")))
+        advanceUntilIdle()
+        assertEquals(other, vm.state.value.currentListId)
+        assertEquals(setOf("Tea", "Honey"), vm.state.value.items.map { it.name }.toSet())
+    }
+
+    @Test
+    fun selectStore_whileReloading_keepsTheReload() = runTest(dispatcher) {
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher)
+        advanceUntilIdle()
+        vm.addStore("Shop"); advanceUntilIdle()
+        vm.addItem("Tea"); advanceUntilIdle()
+        val item = vm.state.value.items.single()
+        vm.toggle(item)
+        vm.selectStore(vm.state.value.stores.single().id) // before the toggle's reload finished
+        advanceUntilIdle()
+        assertTrue(vm.state.value.items.single().isBought)
+    }
+
+    @Test
+    fun scannedBarcode_usesTheLookupAndRemembersTheBarcode() = runTest(dispatcher) {
+        var lookups = 0
+        val repo = FakeShoppingRepository()
+        val vm = ShoppingListViewModel(
+            repo, dispatcher, productLookup = { code ->
+                lookups++
+                if (code == "4000417025005") LookupResult.Found("Mineral water") else LookupResult.NotFound
+            }
+        )
+        advanceUntilIdle()
+        vm.addScannedBarcode("4000417025005")
+        advanceUntilIdle()
+        assertTrue(vm.state.value.items.any { it.name == "Mineral water" })
+        assertEquals("Mineral water", vm.state.value.addedFromBarcode)
+
+        // Second scan: the catalogue knows the barcode, no lookup needed.
+        vm.addScannedBarcode("4000417025005")
+        advanceUntilIdle()
+        assertEquals(1, lookups)
+    }
+
+    @Test
+    fun unknownBarcode_asksForAName() = runTest(dispatcher) {
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher, productLookup = { LookupResult.NotFound })
+        advanceUntilIdle()
+        vm.addScannedBarcode("12345670")
+        advanceUntilIdle()
+        assertEquals("12345670", vm.state.value.unknownBarcode)
+        assertFalse(vm.state.value.unknownBarcodeOffline)
+
+        vm.nameUnknownBarcode("Batteries")
+        advanceUntilIdle()
+        assertEquals(null, vm.state.value.unknownBarcode)
+        assertTrue(vm.state.value.items.any { it.name == "Batteries" })
+    }
+
+    @Test
+    fun barcodeLookup_showsProgressAndReportsOffline() = runTest(dispatcher) {
+        var progressDuringLookup = false
+        lateinit var vm: ShoppingListViewModel
+        vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher, productLookup = {
+            progressDuringLookup = vm.state.value.lookingUpBarcode
+            LookupResult.Offline
+        })
+        advanceUntilIdle()
+        vm.addScannedBarcode("12345670")
+        advanceUntilIdle()
+        assertTrue(progressDuringLookup)
+        assertFalse(vm.state.value.lookingUpBarcode)
+        assertEquals("12345670", vm.state.value.unknownBarcode)
+        assertTrue(vm.state.value.unknownBarcodeOffline)
+
+        vm.dismissUnknownBarcode()
+        assertFalse(vm.state.value.unknownBarcodeOffline)
+    }
+
+    @Test
+    fun scanButton_canBeHiddenInTheSettings() = runTest(dispatcher) {
+        val settings = FakeSettingsRepository()
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher, settings = settings)
+        advanceUntilIdle()
+        assertTrue(vm.state.value.showScanButton)
+
+        settings.setBoolean("barcode_button", false)
+        vm.onResume()
+        advanceUntilIdle()
+        assertFalse(vm.state.value.showScanButton)
     }
 }

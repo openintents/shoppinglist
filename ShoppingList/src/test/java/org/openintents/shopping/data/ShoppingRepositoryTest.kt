@@ -45,6 +45,31 @@ class ShoppingRepositoryTest {
     }
 
     @Test
+    fun addItem_reusesTheCatalogueItemFromAnotherList() {
+        // Like the legacy UI: "Milk" on a second list is the same item (same
+        // price/tags/store prices), not a duplicate catalogue entry.
+        val a = repo.createList("ReuseA")
+        val b = repo.createList("ReuseB")
+        val first = repo.addItem(a, "Milk")
+        val second = repo.addItem(b, "milk")
+        assertEquals(first, second)
+        assertTrue(repo.getItems(b).any { it.itemId == first })
+    }
+
+    @Test
+    fun getDefaultListId_fallsBackWhenLastUsedListWasDeleted() {
+        val a = repo.createList("LastUsedA")
+        val b = repo.createList("LastUsedB")
+        repo.setActiveList(b)
+        assertEquals(b, repo.getDefaultListId())
+
+        repo.deleteList(b)
+        val id = repo.getDefaultListId()
+        assertTrue(repo.getLists().any { it.id == id })
+        assertEquals(a, id)
+    }
+
+    @Test
     fun createList_thenItAppears() {
         val id = repo.createList("Groceries")
         assertTrue(id >= 0)
@@ -122,7 +147,7 @@ class ShoppingRepositoryTest {
 
         val removed = repo.cleanupList(listId)
 
-        assertEquals(1, removed)
+        assertEquals(1, removed.size)
         val names = repo.getItems(listId).map { it.name }
         assertFalse(names.contains("Milk"))
         assertTrue(names.contains("Eggs"))
@@ -247,5 +272,96 @@ class ShoppingRepositoryTest {
 
         assertTrue(repo.getItems(listA).any { it.name == "OnlyA" })
         assertFalse(repo.getItems(listB).any { it.name == "OnlyA" })
+    }
+
+    @Test
+    fun addItems_fromAnotherApp_keepsQuantityAndPrice() {
+        val listId = repo.createList("Shared")
+        val added = repo.addItems(
+            listId,
+            listOf(NewItem("Tea", "2", "1.50"), NewItem("  "), NewItem("Honey", null, "abc"))
+        )
+        assertEquals(2, added)
+        val tea = repo.getItems(listId).single { it.name == "Tea" }
+        assertEquals("2", tea.quantity)
+        assertEquals(150L, tea.priceCents)
+        // An unparsable price is ignored instead of failing the item.
+        assertEquals(null, repo.getItems(listId).single { it.name == "Honey" }.priceCents)
+    }
+
+    @Test
+    fun toggleItemBought_usesTheStoredStatus() {
+        val listId = repo.createList("DoubleTap")
+        repo.addItem(listId, "Salt")
+        val stale = repo.getItems(listId).single()
+        repo.toggleItemBought(stale)
+        // A second tap on the same (stale) row flips it back.
+        repo.toggleItemBought(stale)
+        assertEquals(Status.WANT_TO_BUY, repo.getItems(listId).single().status)
+    }
+
+    @Test
+    fun tagFilter_hidesOtherItemsUntilCleared() {
+        val listId = repo.createList("Filtered")
+        repo.addItem(listId, "Pepper")
+        repo.addItem(listId, "Soap")
+        val soap = repo.getItems(listId).single { it.name == "Soap" }
+        repo.updateItem(soap, ItemEdit("Soap", null, null, null, null, "drugstore, bath"))
+        assertEquals(listOf("bath", "drugstore"), repo.getListTags(listId))
+
+        repo.setTagFilter(listId, "drugstore")
+        assertEquals(ListFilters(tag = "drugstore"), repo.getListFilters(listId))
+        assertEquals(listOf("Soap"), repo.getItems(listId).map { it.name })
+
+        repo.setTagFilter(listId, null)
+        assertEquals(2, repo.getItems(listId).size)
+    }
+
+    @Test
+    fun moveCopyAndDeleteItems() {
+        val a = repo.createList("MoveA")
+        val b = repo.createList("MoveB")
+        repo.addItem(a, "Rice")
+        repo.addItem(a, "Beans")
+        val rice = repo.getItems(a).single { it.name == "Rice" }
+        repo.moveItem(rice, b)
+        assertEquals(listOf("Rice"), repo.getItems(b).map { it.name })
+        assertFalse(repo.getItems(a).any { it.name == "Rice" })
+
+        val beans = repo.getItems(a).single()
+        val copy = repo.copyItem(beans)
+        assertTrue(copy != null && repo.getItems(a).any { it.containsId == copy })
+        assertEquals(2, repo.getItems(a).size)
+
+        repo.deleteItem(a, beans)
+        assertFalse(repo.getAllListItems(a).any { it.containsId == beans.containsId })
+    }
+
+    @Test
+    fun markAllAndCleanup_canBeUndone() {
+        val listId = repo.createList("Undo")
+        repo.addItem(listId, "x")
+        repo.addItem(listId, "y")
+        val marked = repo.markAllItems(listId, true)
+        assertEquals(2, marked.size)
+        val cleaned = repo.cleanupList(listId)
+        assertTrue(repo.getItems(listId).isEmpty())
+        repo.restore(cleaned)
+        assertTrue(repo.getItems(listId).all { it.isBought })
+        repo.restore(marked)
+        assertTrue(repo.getItems(listId).none { it.isBought })
+    }
+
+    @Test
+    fun exportCsv_marksRemovedItems() {
+        val listId = repo.createList("ExportRemoved")
+        repo.addItem(listId, "Kept")
+        repo.addItem(listId, "Gone")
+        repo.removeItem(listId, repo.getItems(listId).single { it.name == "Gone" })
+        val out = java.io.StringWriter()
+        repo.exportCsv(out)
+        val csv = out.toString()
+        assertTrue(csv, csv.lines().any { it.contains("Gone") && it.contains("-1") })
+        assertTrue(csv, csv.lines().any { it.contains("Kept") && it.contains(",0,") })
     }
 }

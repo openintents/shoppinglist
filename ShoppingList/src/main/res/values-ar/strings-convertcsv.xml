@@ -24,7 +24,7 @@
 	<string name="info_app_notepad">المفكرة OI</string>
 	
 	<!-- %s is the name of an application (e.g. "Launch OI Notepad and select menu > About.") -->
-	<string name="info_instructions">s% إطلاق  وحدد القائمة ;gt </string>
+	<string name="info_instructions">%s إطلاق  وحدد القائمة ;gt </string>
 	
 	<!-- ***************************
 	     Applicatio-specific strings
@@ -38,7 +38,7 @@
     <string name="convert_csv_shoppinglist">تحويل CSV إلى قائمة التسوق</string>
     <string name="convert_all_notes">تحويل كافة الملاحظات</string>
     <string name="convert_all_shoppinglists">تحويل جميع قوائم التسوق</string>
-    <string name="convert_list">تحويل قائمة \'s%\'</string>
+    <string name="convert_list">تحويل قائمة \'%s\'</string>
     <string name="file_path">مسار ملف</string>
     <string name="file_import">استيراد</string>
     <string name="file_export">التصدير</string>

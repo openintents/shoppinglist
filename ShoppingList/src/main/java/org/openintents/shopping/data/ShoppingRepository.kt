@@ -11,13 +11,26 @@ import org.openintents.shopping.library.provider.ShoppingContract.Status
  */
 interface ShoppingRepository {
 
-    /** All shopping lists, in the provider's default order. */
+    /**
+     * The sort order of [listId]: one of the legacy sort order values
+     * (res/values/strings_not_for_translation.xml preference_sortorder_entryvalues).
+     * Per list when "perListSort" is on, else the global "sortorder" setting.
+     */
+    fun getSortOrder(listId: Long): Int
+
+    /** Sets the sort order (for this list with "perListSort", else globally). */
+    fun setSortOrder(listId: Long, sortOrder: Int)
+
+    /** All shopping lists, in the order chosen in the settings. */
     fun getLists(): List<ShoppingListInfo>
 
     /** The id of the list to show by default (creates the initial list if needed). */
     fun getDefaultListId(): Long
 
-    /** The items currently on [listId] (excludes items removed from the list). */
+    /** Remembers [listId] as the list to open next time. */
+    fun setActiveList(listId: Long)
+
+    /** The items currently on [listId] (excludes items removed from the list), sorted per [getSortOrder]. */
     fun getItems(listId: Long): List<ShoppingItem>
 
     /**
@@ -28,6 +41,44 @@ interface ShoppingRepository {
 
     /** Adds (or reuses) an item by name on [listId] as "want to buy". Returns item id, or -1 for blank. */
     fun addItem(listId: Long, name: String): Long
+
+    /**
+     * Adds items sent by another app (shared text, INSERT_FROM_EXTRAS). Quantity
+     * and price are optional and may be null. Returns the number of items added.
+     */
+    fun addItems(listId: Long, items: List<NewItem>): Int
+
+    /** The filters set on [listId]. */
+    fun getListFilters(listId: Long): ListFilters
+
+    /** Only show items stocked at [storeId] (null = all stores; needs "use_filters"). */
+    fun setStoreFilter(listId: Long, storeId: Long?)
+
+    /** Only show items tagged [tag] (null = all). */
+    fun setTagFilter(listId: Long, tag: String?)
+
+    /** The name of the catalogue item with this barcode, or null. */
+    fun getItemNameForBarcode(barcode: String): String?
+
+    /** The distinct tags of the items on [listId], sorted. */
+    fun getListTags(listId: Long): List<String>
+
+    /** Moves an item (its row, with quantity/priority/status) to another list. */
+    fun moveItem(item: ShoppingItem, targetListId: Long)
+
+    /** Copies an item (a new catalogue item on the same list). Returns the new row id, or null. */
+    fun copyItem(item: ShoppingItem): Long?
+
+    /**
+     * Deletes an item from [listId] for good, and from the catalogue if no other
+     * list has it (with its store prices).
+     */
+    fun deleteItem(listId: Long, item: ShoppingItem)
+
+    /** Restores rows to a previous state (undo of mark all / clean up). */
+    fun restore(snapshots: List<ItemSnapshot>) {
+        snapshots.forEach { setItemStatus(it.containsId, it.status) }
+    }
 
     /**
      * Distinct item names from the whole catalogue (every list), sorted, for the
@@ -52,17 +103,25 @@ interface ShoppingRepository {
         setItemStatus(item.containsId, if (onList) Status.WANT_TO_BUY else Status.REMOVED_FROM_LIST)
     }
 
-    /** Flips an item between WANT_TO_BUY and BOUGHT. */
-    fun toggleItemBought(item: ShoppingItem) {
-        val newStatus = if (item.status == Status.BOUGHT) Status.WANT_TO_BUY else Status.BOUGHT
+    /**
+     * Flips an item between WANT_TO_BUY and BOUGHT, based on its current stored
+     * status (so two quick taps flip it twice). Returns the new status.
+     */
+    fun toggleItemBought(item: ShoppingItem): Long {
+        val current = getItemStatus(item.containsId) ?: item.status
+        val newStatus = if (current == Status.BOUGHT) Status.WANT_TO_BUY else Status.BOUGHT
         setItemStatus(item.containsId, newStatus)
+        return newStatus
     }
 
-    /** Removes every bought item from [listId] (marks them removed-from-list). Returns the count. */
-    fun cleanupList(listId: Long): Int {
+    /** The stored status of a relation row, or null if it does not exist. */
+    fun getItemStatus(containsId: Long): Long?
+
+    /** Removes every bought item from [listId]. Returns their previous state (for undo). */
+    fun cleanupList(listId: Long): List<ItemSnapshot> {
         val bought = getItems(listId).filter { it.status == Status.BOUGHT }
-        bought.forEach { setItemStatus(it.containsId, Status.REMOVED_FROM_LIST) }
-        return bought.size
+        bought.forEach { removeItem(listId, it) }
+        return bought.map { ItemSnapshot(it.containsId, it.status, it.quantity) }
     }
 
     /** Creates a list by name, or returns the id of the existing list with that name. */
@@ -80,10 +139,15 @@ interface ShoppingRepository {
     /** Deletes a list (and its items' membership). */
     fun deleteList(listId: Long)
 
-    /** Marks every item on [listId] as bought (true) or want-to-buy (false). */
-    fun markAllItems(listId: Long, bought: Boolean) {
+    /**
+     * Marks every item on [listId] as bought (true) or want-to-buy (false).
+     * Returns the previous state of the changed items (for undo).
+     */
+    fun markAllItems(listId: Long, bought: Boolean): List<ItemSnapshot> {
         val target = if (bought) Status.BOUGHT else Status.WANT_TO_BUY
-        getItems(listId).forEach { if (it.status != target) setItemStatus(it.containsId, target) }
+        val changed = getItems(listId).filter { it.status != target }
+        changed.forEach { setItemStatus(it.containsId, target) }
+        return changed.map { ItemSnapshot(it.containsId, it.status, it.quantity) }
     }
 
     /** The stores defined for [listId]. */

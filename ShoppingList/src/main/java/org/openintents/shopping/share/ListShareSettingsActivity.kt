@@ -57,7 +57,10 @@ class ListShareSettingsActivity : Activity() {
         setContentView(R.layout.activity_list_share_settings)
 
         // Get the uri of the list
-        mUri = intent.data!!
+        mUri = intent.data ?: run {
+            finish()
+            return
+        }
 
         // Get a cursor to access the note
         mCursor = managedQuery(mUri, mProjectionLists, null, null, null)
@@ -86,8 +89,7 @@ class ListShareSettingsActivity : Activity() {
         super.onResume()
 
         // Initialize the text with the title column from the cursor
-        if (mCursor != null) {
-            mCursor!!.moveToFirst()
+        if (mCursor != null && mCursor!!.moveToFirst()) {
             val sn = mCursor!!.getString(mProjectionListsSHARENAME)
             mShareName.setText(sn)
             val contacts = mCursor!!.getString(mProjectionListsSHARECONTACTS)
@@ -113,7 +115,7 @@ class ListShareSettingsActivity : Activity() {
         }
 
         // Write the text back into the cursor
-        if (mCursor != null) {
+        if (mCursor != null && mCursor!!.moveToFirst()) {
             val values = ContentValues()
             values.put(Lists.SHARE_NAME, sharename)
             values.put(Lists.SHARE_CONTACTS, contacts)

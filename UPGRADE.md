@@ -8,6 +8,57 @@ Written 2026-06-09 against commit `81bc3c2` (versionName 2.2.1, versionCode 1002
 
 ---
 
+## 0a. RELEASE 2.3.0 PREP (2026-09-24)
+
+versionName 2.3.0 / versionCode 100230. Release notes: `res/raw/recent_changes.txt`,
+`src/play/play/en-US/whatsnew`, `fastlane/.../changelogs/100230.txt` (F-Droid).
+
+Done in this pass (source audit, all components):
+- Compose UI: stale-refresh race, last-used list persisted/validated, catalogue item
+  reuse on add (no duplicates), refresh on resume, CSV import policy KEEP, price
+  validation, rotation-safe dialogs/input, settings honored (hidechecked, showprice,
+  capitalization), all strings translatable (`values/strings_compose.xml`), a11y labels,
+  list themes shared with the legacy UI (stored as "1"/"2"/"3").
+- CSV: persistable SAF grants, crash fixes (HandyShopper import/export, non-list URIs),
+  export truncates ("wt").
+- Provider/DB: SQL fixes for `containsfull/#` and `itemstores/#`, no selection-arg SQL
+  concatenation, cursor leaks, WAL off so the backup agent captures all data.
+- Legacy UI: move/delete by id (rotation-safe), cursor-reload crashes, first-run layout
+  chooser, edge-to-edge opt-out for all full-screen legacy activities (values-v35).
+- Widget receiver no longer exported; per-widget settings PendingIntents.
+- Removed dead ShoppingListWear/, src/playInternet/, Ant build.xml, Travis CI,
+  aTrackDog meta-data. CI is now `.github/workflows/build.yml` (unit tests, tstore APK,
+  play AAB, lint).
+
+Feature parity with the legacy UI (checked before release 2.3.0). The legacy screens
+are no longer in the manifest; their sources (ui/ShoppingActivity.java, ui/widget/
+ShoppingItemsView.kt, ui/dialog/*, share/*, theme/*, provider/Alert|Location|Hardware|Tag,
+PickItemsActivity, AddLocationAlertActivity, ...) can be deleted:
+
+| Legacy feature | New UI |
+|---|---|
+| Add / check / edit / remove items, undo | yes (tap = check, long-press = edit) |
+| Search / add in the action bar | yes, setting "Search/add items in action bar" |
+| 10 sort orders, per-list sort, Pick items sort, list order | yes (same settings) |
+| Store filter / tag filter ("use_filters") | yes, chips above the list |
+| Mark all / unmark all / clean up with undo, shake to clean up | yes |
+| Move / copy / delete item permanently | yes (edit dialog) |
+| Per-item stores (stocks, aisle, price) | yes (edit dialog -> Stores..., legacy screen) |
+| Priority subtotal, show price/tags/units/quantity/priority | yes |
+| Themes incl. "use for all lists", font size | yes |
+| Keep screen on, orientation, reset quantity, completion scope | yes |
+| Convert CSV (HandyShopper, encoding, policy), About | yes (menu) |
+| Items from other apps (SEND text, INSERT_FROM_EXTRAS), list shortcuts, widget | yes |
+| Other apps picking items (PICK/GET_CONTENT item) | removed with the legacy screen (2.3.0) |
+| Quick edit mode (tap quantity/priority) | replaced by long-press edit |
+| Fast scroll | yes ("Fast scrolling" setting) |
+| - | new: compact view, barcode scanning (scanner app + Open Food Facts) |
+| Location alerts (OI Locations), GTalk sharing, Wear sync, theme packs from other apps, Market add-on links | dropped: the partner apps/services no longer exist |
+
+Release channels: F-Droid (tag + `.fdroid.yml`), GitHub releases for Obtainium and
+Zapstore (`.github/workflows/release.yml`, needs the signing secrets and
+`ZAPSTORE_SIGN_WITH`), Google Play (`bundlePlayRelease`, uploaded by hand).
+
 ## 0b. ARCHITECTURE DIRECTION (updated 2026-06-09)
 
 After the Google-Play upgrade + Kotlin migration, the project pivoted to:

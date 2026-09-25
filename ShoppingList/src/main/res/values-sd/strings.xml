@@ -85,13 +85,13 @@
     <string name="menu_start_shopping">खरीदारी</string>
 
     <!-- Title supplement. \'%s\' is the name of the current list. -->
-    <string name="pick_items_title">s - आइटम चुन्द्यो%</string>
+    <string name="pick_items_title">%s - आइटम चुन्द्यो</string>
 
     <!-- Title supplement. \'%s\' is the name of the current list. -->
-    <string name="shopping_title">s - खरीदारी %</string>
+    <string name="shopping_title">%s - खरीदारी</string>
 
     <!-- Title supplement. \'%s\' is the name of the current item. -->
-    <string name="item_stores_title">s - स्टोर्स%</string>
+    <string name="item_stores_title">%s - स्टोर्स</string>
     <string name="item_stores_activity_label">आइटम स्टोर खे सम्पादित कयो</string>
 
     <string name="tags">टैग्स</string>

@@ -1,4 +1,15 @@
 ----------------
+release 2.3.0
+date: 2026-09-24
+
+- New main screen: tap to check, long-press to edit. All list themes kept.
+- Add items by scanning barcodes (names from Open Food Facts).
+- Compact view, fast scroll, search/add in the top bar.
+- Updated for Android 15; CSV via the system file picker.
+- Fixed crashes (CSV, widget, automation, translations) and wrong item moved after rotating.
+- Backups include the latest changes.
+- Smaller app.
+----------------
 release 2.2.1
 date: 2020-06-13
 

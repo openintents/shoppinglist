@@ -35,6 +35,13 @@ class SettingsViewModel(private val repository: SettingsRepository) : ViewModel(
         load()
     }
 
+    /** "Reset all settings": every setting back to its default. */
+    fun resetAll() {
+        AppSettingsCatalog.toggles.forEach { repository.setBoolean(it.key, it.default) }
+        AppSettingsCatalog.choices.forEach { repository.setString(it.key, it.default) }
+        load()
+    }
+
     private fun load() {
         _state.value = SettingsUiState(
             bools = AppSettingsCatalog.toggles.associate { it.key to repository.getBoolean(it.key, it.default) },

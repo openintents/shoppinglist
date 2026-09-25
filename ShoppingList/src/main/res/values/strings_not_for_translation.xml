@@ -150,7 +150,7 @@
          *************************** -->
     <!-- Header -->
     <string name="header_subject" translatable="false">Subject</string>
-    <string name="header_percent_complete" translatable="false">% Complete</string>
+    <string name="header_percent_complete" formatted="false" translatable="false">% Complete</string>
     <string name="header_categories" translatable="false">Categories</string>
     <string name="header_tags" translatable="false">Tags</string>
 

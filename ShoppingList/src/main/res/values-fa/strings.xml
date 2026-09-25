@@ -95,7 +95,7 @@
     <string name="shopping_title">%s - خرید</string>
 
     <!-- Title supplement. \'%s\' is the name of the current item. -->
-    <string name="item_stores_title">فروشگاهی-s%</string>
+    <string name="item_stores_title">فروشگاهی-%s</string>
     <string name="item_stores_activity_label">ویرایش فروشگاه مورد</string>
 
     <string name="tags">برچسب ها</string>
@@ -118,10 +118,10 @@
 
     <!-- Sum of all prices of the checked items. \'%s\' is the sum -->
     <string name="total_checked">بررسی شد: %s</string>
-    <string name="priority1_total">اولویت 1 :s%</string>
-    <string name="priority2_total">اولویت 1-2 :s%</string>
-    <string name="priority3_total">اولویت 1-3 :s%</string>
-    <string name="priority4_total">اولویت 1-4 :s%</string>
+    <string name="priority1_total">اولویت 1 :%s</string>
+    <string name="priority2_total">اولویت 1-2 :%s</string>
+    <string name="priority3_total">اولویت 1-3 :%s</string>
+    <string name="priority4_total">اولویت 1-4 :%s</string>
 
     <string name="delete_item_confirm">آیا شما مطمئن هستید که می خواهید به طور دائم حذف این آیتم (\"%s\")؟</string>
     <string name="delete">حذف</string>
@@ -371,5 +371,5 @@
     <string name="widget_prev_page">صفحه قبلی</string>
     <string name="widget_next_page">صفحه بعدی</string>
     <string name="widget_choose_a_list">یک لیست را انتخاب کنید</string>
-    <string name="widget_no_items">هیچ مطلبی در صفحه d%</string>
+    <string name="widget_no_items">هیچ مطلبی در صفحه %d</string>
 </resources>

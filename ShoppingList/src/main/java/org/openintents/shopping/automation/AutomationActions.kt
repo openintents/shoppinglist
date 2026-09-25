@@ -12,7 +12,8 @@ object AutomationActions {
     @JvmStatic
     fun cleanUpList(context: Context, uri: Uri?) {
         if (uri != null) {
-            val id = uri.lastPathSegment!!.toInt().toLong()
+            // The URI comes from an external (automation) intent: ignore malformed ones.
+            val id = uri.lastPathSegment?.toLongOrNull() ?: return
 
             // by changing state
             val values = ContentValues()

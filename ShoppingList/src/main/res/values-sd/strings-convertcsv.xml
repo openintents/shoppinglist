@@ -38,7 +38,7 @@
     <string name="convert_csv_shoppinglist">CSV खे खरीदारी सूचीमें परिवर्तित कयो</string>
     <string name="convert_all_notes">सद्यूं नोट्स परिवर्तित कयो</string>
     <string name="convert_all_shoppinglists">सभी खरीदारी सूचियन खे परिवर्तित कयो</string>
-    <string name="convert_list">s\' सूची खे  परिवर्तित कयो%\'</string>
+    <string name="convert_list">\'%s\' सूची खे परिवर्तित कयो</string>
     <string name="file_path">फ़ाइल जो  पथ</string>
     <string name="file_import">आयात</string>
     <string name="file_export">निर्यात</string>

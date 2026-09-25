@@ -40,7 +40,7 @@ class ShoppingBackupAgent : BackupAgentHelper() {
 
     @Throws(IOException::class)
     override fun onBackup(
-        oldState: ParcelFileDescriptor,
+        oldState: ParcelFileDescriptor?,
         data: BackupDataOutput,
         newState: ParcelFileDescriptor
     ) {

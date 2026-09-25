@@ -1,0 +1,22 @@
+# Zapstore listing (https://zapstore.dev), published by .github/workflows/release.yml
+# with `zsp publish zapstore.yaml`. The APK comes from the GitHub release of the tag.
+repository: https://github.com/openintents/shoppinglist
+match: tstore-release\.apk$
+name: OI Shopping List
+summary: Simple, ad-free shopping list with list themes and prices per store
+license: Apache-2.0
+website: https://github.com/openintents/shoppinglist
+tags:
+  - shopping
+  - productivity
+  - lists
+icon: ./fastlane/metadata/android/en-US/images/icon.png
+images:
+  - ./fastlane/metadata/android/en-US/images/phoneScreenshots/1.png
+  - ./fastlane/metadata/android/en-US/images/phoneScreenshots/2.png
+  - ./fastlane/metadata/android/en-US/images/phoneScreenshots/3.png
+  - ./fastlane/metadata/android/en-US/images/phoneScreenshots/4.png
+  - ./fastlane/metadata/android/en-US/images/phoneScreenshots/5.png
+release_notes: ./fastlane/metadata/android/en-US/changelogs/100230.txt
+metadata_sources:
+  - fastlane

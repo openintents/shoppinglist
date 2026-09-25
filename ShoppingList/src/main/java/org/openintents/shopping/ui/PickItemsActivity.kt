@@ -15,6 +15,7 @@ class PickItemsActivity : Activity() {
 
         val listItems = findViewById<ShoppingItemsView>(R.id.list_items)
         listItems.setPickItemsDlgMode()
+        listItems.initTotals()
 
         val listId = intent.data!!.lastPathSegment
         listItems.fillItems(this, listId!!.toLong())

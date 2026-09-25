@@ -163,14 +163,16 @@ class StoreListView : ListView {
                         "store_id = ? AND item_id = ?", arrayOf(storeId,
                                 mItemId.toString()), null
                 )
-                if (existingItems!!.count > 0) {
-                    existingItems.moveToFirst()
-                    val id = existingItems.getLong(cursorColumnID)
-                    cr.delete(
-                            ItemStores.CONTENT_URI.buildUpon()
-                                    .appendPath(id.toString()).build(),
-                            null, null
-                    )
+                if (existingItems != null) {
+                    if (existingItems.count > 0) {
+                        existingItems.moveToFirst()
+                        val id = existingItems.getLong(cursorColumnID)
+                        cr.delete(
+                                ItemStores.CONTENT_URI.buildUpon()
+                                        .appendPath(id.toString()).build(),
+                                null, null
+                        )
+                    }
                     existingItems.close()
                 }
             } else {

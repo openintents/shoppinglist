@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- API 35+: opt the legacy View UI out of edge-to-edge enforcement, so
+         content is not drawn under the status and navigation bars.
+         See values/styles.xml. -->
+    <style name="OITheme" parent="Base.OITheme">
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+    </style>
+
+    <style name="OIAppCompatTheme" parent="@style/Theme.AppCompat">
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+    </style>
+
+    <style name="OIFrameworkTheme" parent="@android:style/Theme.DeviceDefault.Light.DarkActionBar">
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+    </style>
+</resources>

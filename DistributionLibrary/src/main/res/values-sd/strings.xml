@@ -22,7 +22,7 @@
 	
 	<!-- EULA welcome message. %s is an application name, e.g. "... (EULA) for OI Notepad".
 		Translation can be as long as required. -->
-	<string name="oi_distribution_eula_message">|s जे लाये हेठ लिख्यल एंड यूज़र लायसेंस एग्रीमेंट (EULA) पढ़यो अऊँ स्वीकार क्यो%</string>
+	<string name="oi_distribution_eula_message">%s जे लाये हेठ लिख्यल एंड यूज़र लायसेंस एग्रीमेंट (EULA) पढ़यो अऊँ स्वीकार क्यो</string>
 	
 	<!-- Button: Accept terms of EULA. -->
 	<string name="oi_distribution_eula_accept">|स्वीकार क्यो</string>
@@ -36,7 +36,7 @@
 	<string name="oi_distribution_name_and_version">%1$s %2$s</string>
 	
 	<!-- Welcome message. %s is an application name. -->
-	<string name="oi_distribution_newversion_message">|s जे हिन्न नए संस्करण में तहन्जो स्वागत तव%</string>
+	<string name="oi_distribution_newversion_message">%s जे हिन्न नए संस्करण में तहन्जो स्वागत तव</string>
 	
 	<string name="oi_distribution_newversion_recent_changes">|हालिय में थ्यल बदलाव</string>
 	

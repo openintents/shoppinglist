@@ -24,6 +24,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.material3.AlertDialog
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,6 +36,7 @@ import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import org.openintents.shopping.R
 
 @Composable
 fun SettingsRoute(viewModel: SettingsViewModel, onBack: () -> Unit) {
@@ -43,6 +46,7 @@ fun SettingsRoute(viewModel: SettingsViewModel, onBack: () -> Unit) {
         choices = state.choices,
         onSetBool = viewModel::setBool,
         onSetChoice = viewModel::setChoice,
+        onResetAll = viewModel::resetAll,
         onBack = onBack,
     )
 }
@@ -55,14 +59,15 @@ fun SettingsScreen(
     onSetBool: (String, Boolean) -> Unit,
     onSetChoice: (String, String) -> Unit,
     onBack: () -> Unit,
+    onResetAll: () -> Unit = {},
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Settings") },
+                title = { Text(stringResource(R.string.preferences)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.compose_back))
                     }
                 }
             )
@@ -71,23 +76,54 @@ fun SettingsScreen(
         Column(
             modifier = Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState())
         ) {
-            AppSettingsCatalog.choices.forEach { setting ->
-                ChoiceRow(
-                    title = stringResource(setting.titleRes),
-                    entries = stringArrayResource(setting.entriesRes),
-                    values = stringArrayResource(setting.valuesRes),
-                    selectedValue = choices[setting.key] ?: setting.default,
-                    onSelect = { onSetChoice(setting.key, it) },
+            AppSettingsCatalog.sections.forEach { section ->
+                Text(
+                    stringResource(section.titleRes),
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 20.dp, bottom = 4.dp),
                 )
-                HorizontalDivider()
+                section.settings.forEach { setting ->
+                    when (setting) {
+                        is ChoiceSetting -> ChoiceRow(
+                            title = stringResource(setting.titleRes),
+                            entries = stringArrayResource(setting.entriesRes),
+                            values = stringArrayResource(setting.valuesRes),
+                            selectedValue = choices[setting.key] ?: setting.default,
+                            onSelect = { onSetChoice(setting.key, it) },
+                        )
+                        is BoolSetting -> SwitchRow(
+                            title = stringResource(setting.titleRes),
+                            checked = bools[setting.key] ?: setting.default,
+                            onCheckedChange = { onSetBool(setting.key, it) },
+                        )
+                    }
+                    HorizontalDivider()
+                }
             }
-            AppSettingsCatalog.toggles.forEach { setting ->
-                SwitchRow(
-                    title = stringResource(setting.titleRes),
-                    checked = bools[setting.key] ?: setting.default,
-                    onCheckedChange = { onSetBool(setting.key, it) },
+            var confirmReset by remember { mutableStateOf(false) }
+            TextButton(
+                onClick = { confirmReset = true },
+                modifier = Modifier.padding(16.dp),
+            ) { Text(stringResource(R.string.preference_reset_all_settings)) }
+            if (confirmReset) {
+                val context = LocalContext.current
+                AlertDialog(
+                    onDismissRequest = { confirmReset = false },
+                    title = { Text(stringResource(R.string.preference_reset_all_settings)) },
+                    confirmButton = {
+                        TextButton(onClick = {
+                            confirmReset = false
+                            onResetAll()
+                            android.widget.Toast.makeText(
+                                context, R.string.preference_reset_all_settings_done, android.widget.Toast.LENGTH_SHORT
+                            ).show()
+                        }) { Text(stringResource(R.string.ok)) }
+                    },
+                    dismissButton = {
+                        TextButton(onClick = { confirmReset = false }) { Text(stringResource(R.string.cancel)) }
+                    },
                 )
-                HorizontalDivider()
             }
         }
     }
@@ -131,7 +167,7 @@ private fun ChoiceRow(
                 Text(title, style = MaterialTheme.typography.bodyLarge)
                 Text(selectedLabel, style = MaterialTheme.typography.bodySmall)
             }
-            TextButton(onClick = { expanded = true }) { Text("Change") }
+            TextButton(onClick = { expanded = true }) { Text(stringResource(R.string.compose_change)) }
         }
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             entries.forEachIndexed { index, label ->

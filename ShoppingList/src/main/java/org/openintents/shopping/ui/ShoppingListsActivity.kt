@@ -121,7 +121,9 @@ open class ShoppingListsActivity : ListActivity() {
             arrayOf(ShoppingContract.Lists.NAME), null, null, null
         )
         if (c != null && c.moveToFirst()) {
-            return c.getString(0)
+            val title = c.getString(0)
+            c.close()
+            return title ?: getString(R.string.app_name)
         }
         c?.close()
 

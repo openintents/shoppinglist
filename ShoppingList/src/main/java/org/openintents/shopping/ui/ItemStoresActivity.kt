@@ -37,12 +37,20 @@ open class ItemStoresActivity : Activity() {
     private var mItemId: Long = 0
     private lateinit var mItemStores: StoreListView
 
-    private var mSelectedStorePosition: Int = 0
+    // Selected store is remembered by id (and saved across recreation),
+    // not by list position.
+    private var mSelectedStoreId: String? = null
+    private var mSelectedStoreName: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_itemstores)
+
+        if (savedInstanceState != null) {
+            mSelectedStoreId = savedInstanceState.getString(BUNDLE_SELECTED_STORE_ID)
+            mSelectedStoreName = savedInstanceState.getString(BUNDLE_SELECTED_STORE_NAME) ?: ""
+        }
 
         mItemStores = findViewById(R.id.list_stores)
 
@@ -83,6 +91,20 @@ open class ItemStoresActivity : Activity() {
         })
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(BUNDLE_SELECTED_STORE_ID, mSelectedStoreId)
+        outState.putString(BUNDLE_SELECTED_STORE_NAME, mSelectedStoreName)
+    }
+
+    override fun onDestroy() {
+        // unregisters the content observer registered in fillItems()
+        if (::mItemStores.isInitialized) {
+            mItemStores.onPause()
+        }
+        super.onDestroy()
+    }
+
     override fun onCreateDialog(id: Int): Dialog? {
         return when (id) {
             DIALOG_NEW_STORE ->
@@ -117,7 +139,8 @@ open class ItemStoresActivity : Activity() {
     override fun onContextItemSelected(item: MenuItem): Boolean {
         val menuInfo = item.menuInfo as AdapterView.AdapterContextMenuInfo
 
-        mSelectedStorePosition = menuInfo.position
+        mSelectedStoreId = mItemStores.getStoreId(menuInfo.position)
+        mSelectedStoreName = mItemStores.getStoreName(menuInfo.position)
 
         when (item.itemId) {
             MENU_RENAME_STORE -> {
@@ -131,7 +154,7 @@ open class ItemStoresActivity : Activity() {
     }
 
     private fun getSelectedStoreName(): String {
-        return mItemStores.getStoreName(mSelectedStorePosition)
+        return mSelectedStoreName
     }
 
     private fun createStore(name: String) {
@@ -152,7 +175,7 @@ open class ItemStoresActivity : Activity() {
             return
         }
 
-        val storeId = mItemStores.getStoreId(mSelectedStorePosition)
+        val storeId = mSelectedStoreId ?: return
         val values = ContentValues()
         values.put(Stores.NAME, newName)
         contentResolver.update(
@@ -192,8 +215,8 @@ open class ItemStoresActivity : Activity() {
      * Deletes currently selected store.
      */
     private fun deleteStore() {
-        val storeId = mItemStores.getStoreId(mSelectedStorePosition)
-        ShoppingUtils.deleteStore(this, storeId!!)
+        val storeId = mSelectedStoreId ?: return
+        ShoppingUtils.deleteStore(this, storeId)
 
         mItemStores.requery()
     }
@@ -226,5 +249,7 @@ open class ItemStoresActivity : Activity() {
         val MENU_DELETE_STORE: Int = Menu.FIRST + 1
         private const val DIALOG_NEW_STORE = 1
         private const val DIALOG_RENAME_STORE = 2
+        private const val BUNDLE_SELECTED_STORE_ID = "selected_store_id"
+        private const val BUNDLE_SELECTED_STORE_NAME = "selected_store_name"
     }
 }

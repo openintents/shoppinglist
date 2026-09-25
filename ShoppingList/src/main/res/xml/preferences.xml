@@ -33,9 +33,6 @@
             android:key="sortorder"
             android:summary="@string/preference_sortorder_summary"
             android:title="@string/preference_sortorder_title" />
-        <Preference
-            android:key="layout_choice"
-            android:title="@string/layout_choice_title" />
         <PreferenceScreen
             android:key="preference_screen_advanced"
             android:summary="@string/preference_advanced_summary"

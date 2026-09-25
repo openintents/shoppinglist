@@ -361,7 +361,8 @@ open class ShoppingItemsView : ListView, LoaderManager.LoaderCallbacks<Cursor> {
      */
     fun fillItems(activity: Activity, listId: Long) {
 
-        mCursorItems = null
+        // Keep the previous cursor until onLoadFinished() swaps in the new one:
+        // the adapter still shows (and lets the user click) the old rows.
         mCursorActivity = activity
 
         mListId = listId
@@ -747,6 +748,10 @@ open class ShoppingItemsView : ListView, LoaderManager.LoaderCallbacks<Cursor> {
      * @param on if true all want_to_buy items are set to bought, if false all bought items are set to want_to_buy
      */
     fun toggleAllItems(on: Boolean) {
+        val cursor = mCursorItems
+        if (cursor == null || cursor.isClosed) {
+            return
+        }
         val op_type = if (on) SnackbarUndoMultipleItemStatusOperation.MARK_ALL else SnackbarUndoMultipleItemStatusOperation.UNMARK_ALL
         var op: SnackbarUndoMultipleItemStatusOperation? = null
 
@@ -757,7 +762,7 @@ open class ShoppingItemsView : ListView, LoaderManager.LoaderCallbacks<Cursor> {
             )
         }
 
-        for (i in 0 until mCursorItems!!.getCount()) {
+        for (i in 0 until cursor.getCount()) {
             mCursorItems!!.moveToPosition(i)
 
             val oldstatus = mCursorItems!!
@@ -814,7 +819,12 @@ open class ShoppingItemsView : ListView, LoaderManager.LoaderCallbacks<Cursor> {
     fun toggleItemBought(position: Int) {
         var shouldFocusItem = false
 
-        if (mCursorItems!!.getCount() <= position) {
+        val cursor = mCursorItems
+        if (cursor == null || cursor.isClosed) {
+            Log.e(TAG, "toggle item while list is reloading.")
+            return
+        }
+        if (cursor.getCount() <= position) {
             Log.e(TAG, "toggle inexistent item. Probably clicked too quickly?")
             return
         }
@@ -975,11 +985,12 @@ open class ShoppingItemsView : ListView, LoaderManager.LoaderCallbacks<Cursor> {
         if (mSyncSupport!!.isAvailable()) {
             object : Thread() {
                 override fun run() {
-                    val cursor = createItemsCursor(mListId, null)
-                    Log.d(TAG, "pushing " + cursor!!.getCount() + " items")
-                    cursor.moveToFirst()
-                    while (cursor.moveToNext()) {
-                        mSyncSupport!!.pushListItem(mListId, cursor)
+                    val cursor = createItemsCursor(mListId, null) ?: return
+                    Log.d(TAG, "pushing " + cursor.getCount() + " items")
+                    cursor.use {
+                        while (it.moveToNext()) {
+                            mSyncSupport!!.pushListItem(mListId, it)
+                        }
                     }
                 }
             }.start()
@@ -1816,8 +1827,11 @@ open class ShoppingItemsView : ListView, LoaderManager.LoaderCallbacks<Cursor> {
                 if (debug) {
                     Log.d(TAG, "Click on has_note: $cursorpos")
                 }
-                mCursorItems!!.moveToPosition(cursorpos)
-                val note_id = mCursorItems!!.getLong(ShoppingActivity.mStringItemsITEMID)
+                val cursor = mCursorItems
+                if (cursor == null || cursor.isClosed || !cursor.moveToPosition(cursorpos)) {
+                    return
+                }
+                val note_id = cursor.getLong(ShoppingActivity.mStringItemsITEMID)
                 val uri = ContentUris.withAppendedId(ShoppingContract.Notes.CONTENT_URI, note_id)
                 i.setData(uri)
                 val context = getContext()

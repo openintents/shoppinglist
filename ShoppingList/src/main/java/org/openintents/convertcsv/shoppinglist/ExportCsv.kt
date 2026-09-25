@@ -119,7 +119,13 @@ class ExportCsv(private val mContext: Context) {
                         ConvertCsvBaseActivity.dispatchConversionProgress(progress++)
                         val itemname = ci.getString(ci.getColumnIndexOrThrow(ContainsFull.ITEM_NAME))
                         val status = ci.getLong(ci.getColumnIndexOrThrow(ContainsFull.STATUS))
-                        val percentage = if (status == Status.BOUGHT) 1 else 0
+                        // 1 = bought, 0 = to buy; removed items as -1 so that an
+                        // import (which maps anything else to REMOVED) keeps them off the list.
+                        val percentage = when (status) {
+                            Status.BOUGHT -> 1
+                            Status.WANT_TO_BUY -> 0
+                            else -> -1
+                        }
                         val tags = ci.getString(ci.getColumnIndexOrThrow(ContainsFull.ITEM_TAGS))
                         csvwriter.write(itemname)
                         csvwriter.write(percentage)
@@ -127,8 +133,10 @@ class ExportCsv(private val mContext: Context) {
                         csvwriter.write(tags)
                         csvwriter.writeNewline()
                     }
+                    ci.close()
                 }
             }
+            c.close()
         }
 
         csvwriter.close()
@@ -167,15 +175,15 @@ class ExportCsv(private val mContext: Context) {
                 val itemname = ci.getString(ci.getColumnIndexOrThrow(ContainsFull.ITEM_NAME))
                 val status = ci.getLong(ci.getColumnIndexOrThrow(ContainsFull.STATUS))
                 val tags = ci.getString(ci.getColumnIndexOrThrow(ContainsFull.ITEM_TAGS))
-                val priority = ci.getString(ci.getColumnIndex(ContainsFull.PRIORITY))
-                val quantity = ci.getString(ci.getColumnIndex(ContainsFull.QUANTITY))
-                val price = ci.getLong(ci.getColumnIndex(ContainsFull.ITEM_PRICE))
+                val priority = ci.getString(ci.getColumnIndexOrThrow(ContainsFull.PRIORITY))
+                val quantity = ci.getString(ci.getColumnIndexOrThrow(ContainsFull.QUANTITY))
+                val price = ci.getLong(ci.getColumnIndexOrThrow(ContainsFull.ITEM_PRICE))
                 var pricestring = ""
                 if (price != 0L) {
                     pricestring += price.toDouble() / 100.0
                 }
-                val unit = ci.getString(ci.getColumnIndex(ContainsFull.ITEM_UNITS))
-                val itemId = ci.getInt(ci.getColumnIndex(ContainsFull.ITEM_ID)).toLong()
+                val unit = ci.getString(ci.getColumnIndexOrThrow(ContainsFull.ITEM_UNITS))
+                val itemId = ci.getInt(ci.getColumnIndexOrThrow(ContainsFull.ITEM_ID)).toLong()
 
                 val statusText = getHandyShopperStatusText(status)
 
@@ -243,10 +251,10 @@ class ExportCsv(private val mContext: Context) {
         }
     }
 
-    private fun getHandyShopperNote(itemId: Long): String {
+    private fun getHandyShopperNote(itemId: Long): String? {
         val uri: Uri = ContentUris.withAppendedId(ShoppingContract.Items.CONTENT_URI, itemId)
 
-        var note = ""
+        var note: String? = null
         val c1 = mContext.contentResolver.query(
             uri,
             arrayOf(ShoppingContract.Items.NOTE), null, null, null
@@ -331,7 +339,7 @@ class ExportCsv(private val mContext: Context) {
                         val storeName = c2.getString(c2.getColumnIndexOrThrow(ShoppingContract.Stores.NAME))
 
                         if (price != 0L) {
-                            val info = "$storeName=$aisle/$pricestring"
+                            val info = "$storeName=${aisle ?: ""}/$pricestring"
                             perStoreInfo = if (perStoreInfo == "") {
                                 info
                             } else {

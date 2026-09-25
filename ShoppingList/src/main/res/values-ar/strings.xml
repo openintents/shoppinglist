@@ -34,7 +34,7 @@ Launchpad Contributions:
          Applicatio-specific strings
          *************************** -->
     <!-- Name of application. Can be localized. OI = OpenIntents should stay unmodified. -->
-    <string name="app_name">"قائمة التسوق OI</string>
+    <string name="app_name">قائمة التسوق OI</string>
 
     <string name="new_item">عنصر جديد</string>
     <string name="new_list">قائمة جديدة</string>
