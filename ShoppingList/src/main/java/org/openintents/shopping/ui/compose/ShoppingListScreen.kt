@@ -34,6 +34,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -52,6 +53,7 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -376,6 +378,7 @@ fun ShoppingListScreen(
                                 capitalization = state.capitalization,
                                 onSubmit = submitAdd,
                                 onScan = scanBarcode.takeIf { state.showScanButton },
+                                scanBusy = state.lookingUpBarcode,
                             )
                         } else Column {
                             Text(
@@ -568,6 +571,7 @@ fun ShoppingListScreen(
                         onAdd = { onAddItem(it); addText = "" },
                         onSubmit = submitAdd,
                         onScan = scanBarcode.takeIf { state.showScanButton },
+                        scanBusy = state.lookingUpBarcode,
                     )
                 }
             }
@@ -631,6 +635,7 @@ fun ShoppingListScreen(
     state.unknownBarcode?.let { code ->
         TextEntryDialog(
             title = stringResource(R.string.compose_unknown_product, code),
+            message = if (state.unknownBarcodeOffline) stringResource(R.string.compose_lookup_offline) else null,
             label = stringResource(R.string.item),
             confirmLabel = stringResource(R.string.add),
             onDismiss = onDismissUnknownBarcode,
@@ -1596,6 +1601,8 @@ private fun AddItemRow(
     onSubmit: () -> Unit,
     /** Null hides the scan button ("barcode_button" setting). */
     onScan: (() -> Unit)?,
+    /** A scanned barcode is being looked up. */
+    scanBusy: Boolean,
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         SuggestionRow(query = text, suggestions = suggestions, onPick = onAdd)
@@ -1615,17 +1622,27 @@ private fun AddItemRow(
                 keyboardActions = KeyboardActions(onDone = { onSubmit() }),
                 modifier = Modifier.weight(1f)
             )
-            if (text.isEmpty() && onScan != null) {
-                IconButton(onClick = onScan) {
-                    Icon(
-                        painterResource(R.drawable.ic_barcode),
-                        contentDescription = stringResource(R.string.compose_scan_barcode),
-                    )
-                }
-            }
+            if (text.isEmpty() && onScan != null) ScanButton(onScan, busy = scanBusy)
             IconButton(onClick = onSubmit) {
                 Icon(Icons.Filled.Add, contentDescription = stringResource(R.string.add))
             }
+        }
+    }
+}
+
+/** The barcode scan button; a spinner while a scanned barcode is looked up. */
+@Composable
+private fun ScanButton(onScan: () -> Unit, busy: Boolean) {
+    if (busy) {
+        Box(Modifier.size(48.dp), contentAlignment = Alignment.Center) {
+            CircularProgressIndicator(modifier = Modifier.size(24.dp), strokeWidth = 2.dp)
+        }
+    } else {
+        IconButton(onClick = onScan) {
+            Icon(
+                painterResource(R.drawable.ic_barcode),
+                contentDescription = stringResource(R.string.compose_scan_barcode),
+            )
         }
     }
 }
@@ -1643,6 +1660,8 @@ private fun TopBarAddField(
     onSubmit: () -> Unit,
     /** Null hides the scan button ("barcode_button" setting). */
     onScan: (() -> Unit)?,
+    /** A scanned barcode is being looked up. */
+    scanBusy: Boolean,
 ) {
     TextField(
         value = text,
@@ -1651,12 +1670,7 @@ private fun TopBarAddField(
         leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
         trailingIcon = {
             if (text.isEmpty()) {
-                if (onScan != null) IconButton(onClick = onScan) {
-                    Icon(
-                        painterResource(R.drawable.ic_barcode),
-                        contentDescription = stringResource(R.string.compose_scan_barcode),
-                    )
-                }
+                if (onScan != null) ScanButton(onScan, busy = scanBusy)
             } else {
                 Row {
                     IconButton(onClick = { onTextChange("") }) {
@@ -1687,6 +1701,8 @@ private fun TopBarAddField(
 @Composable
 private fun TextEntryDialog(
     title: String,
+    /** Optional text above the field. */
+    message: String? = null,
     label: String,
     initial: String = "",
     confirmLabel: String,
@@ -1698,12 +1714,17 @@ private fun TextEntryDialog(
         onDismissRequest = onDismiss,
         title = { Text(title) },
         text = {
-            OutlinedTextField(
-                value = text,
-                onValueChange = { text = it },
-                label = { Text(label) },
-                singleLine = true,
-            )
+            Column {
+                if (message != null) {
+                    Text(message, modifier = Modifier.padding(bottom = 8.dp))
+                }
+                OutlinedTextField(
+                    value = text,
+                    onValueChange = { text = it },
+                    label = { Text(label) },
+                    singleLine = true,
+                )
+            }
         },
         confirmButton = {
             TextButton(onClick = { if (text.isNotBlank()) onConfirm(text) }) { Text(confirmLabel) }

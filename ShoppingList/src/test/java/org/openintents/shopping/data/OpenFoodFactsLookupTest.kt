@@ -15,6 +15,12 @@ import org.robolectric.annotation.Config
 class OpenFoodFactsLookupTest {
 
     @Test
+    fun textThatIsNoBarcode_isNotLookedUp() {
+        // Returns without going online (no network in unit tests).
+        assertEquals(LookupResult.NotFound, OpenFoodFactsLookup("test").lookup("hello"))
+    }
+
+    @Test
     fun parsesLocalizedNameAndBrand() {
         val json = """{"code":"3017620422003","status":1,"product":
             {"product_name":"Nutella","product_name_de":"Nutella Nuss-Nougat-Creme","brands":"Ferrero, Nutella"}}"""

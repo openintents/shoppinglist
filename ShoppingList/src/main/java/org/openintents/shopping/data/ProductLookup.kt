@@ -5,9 +5,18 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.util.Locale
 
-/** Finds a product name for a barcode (EAN/UPC), or null if unknown or offline. */
+/** Result of looking up a barcode online. */
+sealed interface LookupResult {
+    data class Found(val name: String) : LookupResult
+    /** The service answered but doesn't know the product. */
+    data object NotFound : LookupResult
+    /** No connection, or the service didn't answer in time. */
+    data object Offline : LookupResult
+}
+
+/** Finds a product name for a barcode (EAN/UPC). */
 fun interface ProductLookup {
-    fun productName(barcode: String): String?
+    fun lookup(barcode: String): LookupResult
 }
 
 /**
@@ -16,31 +25,40 @@ fun interface ProductLookup {
  */
 class OpenFoodFactsLookup(private val userAgent: String) : ProductLookup {
 
-    override fun productName(barcode: String): String? {
+    override fun lookup(barcode: String): LookupResult {
         val code = barcode.trim()
-        if (!isBarcode(code)) return null
+        if (!isBarcode(code)) return LookupResult.NotFound
         val lang = Locale.getDefault().language
         val url = URL(
             "https://world.openfoodfacts.org/api/v2/product/$code" +
                 "?fields=product_name,product_name_$lang,generic_name,brands"
         )
-        val connection = url.openConnection() as HttpURLConnection
         return try {
-            connection.connectTimeout = 8000
-            connection.readTimeout = 8000
+            val connection = url.openConnection() as HttpURLConnection
+            try {
+                // Short timeouts: the user is waiting with the product in the hand.
+                connection.connectTimeout = TIMEOUT_MS
+                connection.readTimeout = TIMEOUT_MS
             // Open Food Facts asks apps to identify themselves.
-            connection.setRequestProperty("User-Agent", userAgent)
-            if (connection.responseCode != HttpURLConnection.HTTP_OK) return null
-            val body = connection.inputStream.bufferedReader().use { it.readText() }
-            parseProductName(body, lang)
+                connection.setRequestProperty("User-Agent", userAgent)
+                when (connection.responseCode) {
+                    HttpURLConnection.HTTP_OK -> {
+                        val body = connection.inputStream.bufferedReader().use { it.readText() }
+                        parseProductName(body, lang)?.let { LookupResult.Found(it) } ?: LookupResult.NotFound
+                    }
+                    HttpURLConnection.HTTP_NOT_FOUND -> LookupResult.NotFound
+                    else -> LookupResult.Offline // server error, rate limit, captive portal...
+                }
+            } finally {
+                connection.disconnect()
+            }
         } catch (e: java.io.IOException) {
-            null
-        } finally {
-            connection.disconnect()
+            LookupResult.Offline // no network, DNS failure, timeout
         }
     }
 
     companion object {
+        private const val TIMEOUT_MS = 3000
         /** EAN-8, UPC-A, EAN-13 or GTIN-14: digits only. */
         fun isBarcode(text: String): Boolean = text.length in 8..14 && text.all { it in '0'..'9' }
 

@@ -24,6 +24,7 @@ import org.openintents.shopping.data.ListTotals
 import org.openintents.shopping.BuildConfig
 import org.openintents.shopping.data.NewItem
 import org.openintents.shopping.data.OpenFoodFactsLookup
+import org.openintents.shopping.data.LookupResult
 import org.openintents.shopping.data.ProductLookup
 import org.openintents.shopping.data.ProviderShoppingRepository
 import org.openintents.shopping.data.ShoppingItem
@@ -80,6 +81,10 @@ data class ShoppingUiState(
     val prioritySubtotalIncludesChecked: Boolean = true,
     /** A scanned barcode no product name was found for: the UI asks for a name. */
     val unknownBarcode: String? = null,
+    /** The online lookup of [unknownBarcode] failed for lack of a connection. */
+    val unknownBarcodeOffline: Boolean = false,
+    /** A scanned barcode is being looked up (the UI shows progress). */
+    val lookingUpBarcode: Boolean = false,
     /** Name of an item just added from a barcode (the UI confirms it, then consumes it). */
     val addedFromBarcode: String? = null,
     /** "barcode_button" setting: show the scan button next to the add field. */
@@ -399,24 +404,33 @@ class ShoppingListViewModel(
         val code = barcode.trim()
         if (code.isEmpty() || _state.value.currentListId < 0) return@launch
         val lookup = productLookup?.takeIf { _state.value.barcodeLookup }
-        val name = withContext(ioDispatcher) {
-            repository.getItemNameForBarcode(code) ?: lookup?.productName(code)
+        _state.update { it.copy(lookingUpBarcode = true) }
+        val result = try {
+            withContext(ioDispatcher) {
+                repository.getItemNameForBarcode(code)?.let { LookupResult.Found(it) }
+                    ?: lookup?.lookup(code)
+                    ?: LookupResult.NotFound
+            }
+        } finally {
+            _state.update { it.copy(lookingUpBarcode = false) }
         }
-        if (name == null) {
-            _state.update { it.copy(unknownBarcode = code) }
+        if (result is LookupResult.Found) {
+            addWithBarcode(result.name, code)
         } else {
-            addWithBarcode(name, code)
+            _state.update {
+                it.copy(unknownBarcode = code, unknownBarcodeOffline = result == LookupResult.Offline)
+            }
         }
     }
 
     /** The user named a product whose barcode was unknown. */
     fun nameUnknownBarcode(name: String) {
         val code = _state.value.unknownBarcode ?: return
-        _state.update { it.copy(unknownBarcode = null) }
+        _state.update { it.copy(unknownBarcode = null, unknownBarcodeOffline = false) }
         if (name.isNotBlank()) viewModelScope.launch { addWithBarcode(name.trim(), code) }
     }
 
-    fun dismissUnknownBarcode() = _state.update { it.copy(unknownBarcode = null) }
+    fun dismissUnknownBarcode() = _state.update { it.copy(unknownBarcode = null, unknownBarcodeOffline = false) }
 
     fun consumeAddedFromBarcode() = _state.update { it.copy(addedFromBarcode = null) }
 

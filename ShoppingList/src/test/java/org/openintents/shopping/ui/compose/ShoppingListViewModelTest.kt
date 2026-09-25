@@ -18,6 +18,7 @@ import org.openintents.shopping.data.FakeShoppingRepository
 import org.openintents.shopping.data.ItemEdit
 import org.openintents.shopping.data.ListMode
 import org.openintents.shopping.data.ListTheme
+import org.openintents.shopping.data.LookupResult
 import org.openintents.shopping.data.NewItem
 
 /**
@@ -439,7 +440,10 @@ class ShoppingListViewModelTest {
         var lookups = 0
         val repo = FakeShoppingRepository()
         val vm = ShoppingListViewModel(
-            repo, dispatcher, productLookup = { code -> lookups++; if (code == "4000417025005") "Mineral water" else null }
+            repo, dispatcher, productLookup = { code ->
+                lookups++
+                if (code == "4000417025005") LookupResult.Found("Mineral water") else LookupResult.NotFound
+            }
         )
         advanceUntilIdle()
         vm.addScannedBarcode("4000417025005")
@@ -455,16 +459,37 @@ class ShoppingListViewModelTest {
 
     @Test
     fun unknownBarcode_asksForAName() = runTest(dispatcher) {
-        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher, productLookup = { null })
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher, productLookup = { LookupResult.NotFound })
         advanceUntilIdle()
         vm.addScannedBarcode("12345670")
         advanceUntilIdle()
         assertEquals("12345670", vm.state.value.unknownBarcode)
+        assertFalse(vm.state.value.unknownBarcodeOffline)
 
         vm.nameUnknownBarcode("Batteries")
         advanceUntilIdle()
         assertEquals(null, vm.state.value.unknownBarcode)
         assertTrue(vm.state.value.items.any { it.name == "Batteries" })
+    }
+
+    @Test
+    fun barcodeLookup_showsProgressAndReportsOffline() = runTest(dispatcher) {
+        var progressDuringLookup = false
+        lateinit var vm: ShoppingListViewModel
+        vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher, productLookup = {
+            progressDuringLookup = vm.state.value.lookingUpBarcode
+            LookupResult.Offline
+        })
+        advanceUntilIdle()
+        vm.addScannedBarcode("12345670")
+        advanceUntilIdle()
+        assertTrue(progressDuringLookup)
+        assertFalse(vm.state.value.lookingUpBarcode)
+        assertEquals("12345670", vm.state.value.unknownBarcode)
+        assertTrue(vm.state.value.unknownBarcodeOffline)
+
+        vm.dismissUnknownBarcode()
+        assertFalse(vm.state.value.unknownBarcodeOffline)
     }
 
     @Test
