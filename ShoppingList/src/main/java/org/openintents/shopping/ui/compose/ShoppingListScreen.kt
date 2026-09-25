@@ -4,6 +4,19 @@ import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.gestures.detectVerticalDragGestures
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.material3.LocalMinimumInteractiveComponentSize
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
+import kotlin.math.roundToInt
 import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.clickable
@@ -234,7 +247,9 @@ fun ShoppingListScreen(
     }
 
     val theme = state.theme
-    val rowDetails = RowDetails(state.showQuantity, state.showUnits, state.showTags, state.showPriority)
+    val rowDetails = RowDetails(
+        state.showQuantity, state.showUnits, state.showTags, state.showPriority, state.compact
+    )
     val sendTitle = stringResource(R.string.send)
     val markedFormat = stringResource(R.string.undoable_marked_item)
     val unmarkedFormat = stringResource(R.string.undoable_unmarked_item)
@@ -431,6 +446,11 @@ fun ShoppingListScreen(
                         modifier = Modifier.fillMaxWidth().padding(32.dp),
                     )
                 }
+                // Compact view: rows without the 48dp touch-target padding of the checkbox.
+                CompositionLocalProvider(
+                    LocalMinimumInteractiveComponentSize provides
+                        if (state.compact) Dp.Unspecified else LocalMinimumInteractiveComponentSize.current
+                ) {
                 LazyColumn(
                     state = listState,
                     modifier = Modifier.fillMaxSize()
@@ -442,6 +462,7 @@ fun ShoppingListScreen(
                                 theme = theme,
                                 fontFamily = fontFamily,
                                 fontSize = state.fontSize,
+                                compact = state.compact,
                                 onToggle = { onPickToggle(item) },
                             )
                             if (theme.showDivider) HorizontalDivider()
@@ -479,6 +500,15 @@ fun ShoppingListScreen(
                         )
                         if (theme.showDivider) HorizontalDivider()
                     }
+                }
+                }
+                if (state.fastScroll) {
+                    FastScrollbar(
+                        listState = listState,
+                        itemCount = if (state.mode == ListMode.PICK_ITEMS) pickItemsSorted.size else shownItems.size,
+                        color = Color(theme.checkedTextArgb),
+                        modifier = Modifier.align(Alignment.TopEnd),
+                    )
                 }
                 }
                 if (state.totals.hasAny) {
@@ -917,7 +947,7 @@ private fun ManageStoresDialog(
 private fun ThemedListArea(
     theme: ListTheme,
     modifier: Modifier = Modifier,
-    content: @Composable () -> Unit,
+    content: @Composable BoxScope.() -> Unit,
 ) {
     val context = LocalContext.current
     val paper = remember(theme) {
@@ -951,6 +981,53 @@ private fun ThemedListArea(
     }
 }
 
+/**
+ * Fast scroll ("fastscroll" setting): a thumb at the right edge that shows the
+ * position in the list; dragging or tapping the track jumps through the list.
+ */
+@Composable
+private fun FastScrollbar(
+    listState: LazyListState,
+    itemCount: Int,
+    color: Color,
+    modifier: Modifier = Modifier,
+) {
+    val visibleCount = listState.layoutInfo.visibleItemsInfo.size
+    if (itemCount == 0 || visibleCount >= itemCount) return
+    val scope = rememberCoroutineScope()
+    val density = LocalDensity.current
+    BoxWithConstraints(modifier = modifier.fillMaxHeight().width(28.dp)) {
+        val trackPx = constraints.maxHeight.toFloat()
+        val thumbPx = maxOf(trackPx * visibleCount / itemCount, with(density) { 40.dp.toPx() })
+        val scrollable = (itemCount - visibleCount).coerceAtLeast(1)
+        val fraction = (listState.firstVisibleItemIndex.toFloat() / scrollable).coerceIn(0f, 1f)
+        val jumpTo = { y: Float ->
+            val target = ((y / trackPx) * itemCount).toInt().coerceIn(0, itemCount - 1)
+            scope.launch { listState.scrollToItem(target) }
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .pointerInput(itemCount, trackPx) {
+                    detectVerticalDragGestures(
+                        onDragStart = { jumpTo(it.y) },
+                        onVerticalDrag = { change, _ -> jumpTo(change.position.y) },
+                    )
+                }
+                .pointerInput(itemCount, trackPx) { detectTapGestures { jumpTo(it.y) } }
+        )
+        Box(
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .offset { IntOffset(0, ((trackPx - thumbPx) * fraction).roundToInt()) }
+                .padding(end = 4.dp)
+                .width(6.dp)
+                .height(with(density) { thumbPx.toDp() })
+                .background(color, RoundedCornerShape(3.dp))
+        )
+    }
+}
+
 /** An item's name as the theme shows it (upper-case fonts, "... OK" suffix). */
 @Composable
 private fun themedName(theme: ListTheme, text: String, checked: Boolean): String {
@@ -964,6 +1041,8 @@ private data class RowDetails(
     val units: Boolean = true,
     val tags: Boolean = true,
     val priority: Boolean = true,
+    /** Compact view: less padding, so more items fit on the screen. */
+    val compact: Boolean = false,
 )
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -993,8 +1072,8 @@ private fun ShoppingItemRow(
                 onLongClick = onEdit,
                 onLongClickLabel = editLabel,
             )
-            .padding(horizontal = 8.dp, vertical = 4.dp)
-            .heightIn(min = 40.dp),
+            .padding(horizontal = 8.dp, vertical = if (details.compact) 0.dp else 4.dp)
+            .heightIn(min = if (details.compact) 28.dp else 40.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (theme.showCheckBox) {
@@ -1060,6 +1139,7 @@ private fun PickItemRow(
     fontFamily: FontFamily?,
     fontSize: Int,
     onToggle: () -> Unit,
+    compact: Boolean = false,
 ) {
     // In pick mode the checkbox means "on this list"; off-list items are dimmed.
     val color = Color(if (item.isOnList) theme.textArgb else theme.checkedTextArgb)
@@ -1067,8 +1147,8 @@ private fun PickItemRow(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onToggle)
-            .padding(horizontal = 8.dp, vertical = 4.dp)
-            .heightIn(min = 40.dp),
+            .padding(horizontal = 8.dp, vertical = if (compact) 0.dp else 4.dp)
+            .heightIn(min = if (compact) 28.dp else 40.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (theme.showCheckBox) {

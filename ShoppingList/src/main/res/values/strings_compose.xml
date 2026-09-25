@@ -20,6 +20,7 @@
     <string name="compose_back">Back</string>
     <string name="compose_change">Change</string>
     <string name="compose_clear">Clear</string>
+    <string name="compose_compact_view">Compact view</string>
     <!-- Sample items in the theme picker preview -->
     <string name="theme_preview_item_1">Milk</string>
     <string name="theme_preview_item_2">Bread</string>

@@ -45,6 +45,8 @@ object AppSettingsCatalog {
                     R.array.preference_orientation_entries, R.array.preference_orientation_entryvalues
                 ),
                 BoolSetting("holosearch", R.string.preference_holo_search_title, false),
+                BoolSetting("compact", R.string.compose_compact_view, false),
+                BoolSetting("fastscroll", R.string.preference_fastscroll_title, false),
                 BoolSetting("hidechecked", R.string.preference_hidechecked_title, false),
                 BoolSetting("screenlock", R.string.preference_screenlock_title, false),
                 BoolSetting("shake", R.string.preference_shake_title, false),

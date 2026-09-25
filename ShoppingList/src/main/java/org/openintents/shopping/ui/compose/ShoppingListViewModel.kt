@@ -75,6 +75,10 @@ data class ShoppingUiState(
     /** "priority_subtotal_threshold" (0 = off) and "priosubtotal_includes_checked". */
     val prioritySubtotalThreshold: Int = 0,
     val prioritySubtotalIncludesChecked: Boolean = true,
+    /** "compact" setting: denser rows, more items on the screen. */
+    val compact: Boolean = false,
+    /** "fastscroll" setting: a draggable scroll thumb for long lists. */
+    val fastScroll: Boolean = false,
     /** "use_filters" setting: offer the store / tag filter. */
     val useFilters: Boolean = false,
     /** The list's filters and the tags that can be filtered by. */
@@ -176,6 +180,8 @@ class ShoppingListViewModel(
                     .toIntOrNull()?.takeIf { it in 0..4 } ?: 0,
                 prioritySubtotalIncludesChecked = s.getBoolean("priosubtotal_includes_checked", true),
                 useFilters = s.getBoolean("use_filters", false),
+                compact = s.getBoolean("compact", false),
+                fastScroll = s.getBoolean("fastscroll", false),
             )
         }
         _state.update {
@@ -188,6 +194,7 @@ class ShoppingListViewModel(
                 prioritySubtotalThreshold = loaded.prioritySubtotalThreshold,
                 prioritySubtotalIncludesChecked = loaded.prioritySubtotalIncludesChecked,
                 useFilters = loaded.useFilters,
+                compact = loaded.compact, fastScroll = loaded.fastScroll,
             )
         }
     }

@@ -71,6 +71,19 @@ class ScreenshotTest {
     }
 
     @Test
+    fun composeUiCompact() {
+        @Suppress("DEPRECATION")
+        android.preference.PreferenceManager.getDefaultSharedPreferences(context).edit()
+            .putBoolean("compact", true).putBoolean("fastscroll", true).commit()
+        listOf(
+            "Bananas", "Carrots", "Cheese", "Chocolate", "Cucumber", "Flour", "Garlic", "Ham",
+            "Juice", "Lemons", "Onions", "Pasta", "Pepper", "Potatoes", "Rice", "Salad", "Salt",
+            "Soap", "Sugar", "Tea", "Tomatoes", "Toothpaste", "Water", "Yoghurt",
+        ).forEach { repo.addItem(listId, it) }
+        capture(ShoppingActivity::class.java, "compose-ui-compact.png")
+    }
+
+    @Test
     fun composeUiClassic() {
         repo.setListTheme(listId, ListTheme.CLASSIC)
         capture(ShoppingActivity::class.java, "compose-ui-classic.png")
