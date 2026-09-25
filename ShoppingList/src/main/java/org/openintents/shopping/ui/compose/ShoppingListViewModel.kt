@@ -21,7 +21,10 @@ import org.openintents.shopping.data.ListTheme
 import org.openintents.shopping.data.ItemSnapshot
 import org.openintents.shopping.data.ListFilters
 import org.openintents.shopping.data.ListTotals
+import org.openintents.shopping.BuildConfig
 import org.openintents.shopping.data.NewItem
+import org.openintents.shopping.data.OpenFoodFactsLookup
+import org.openintents.shopping.data.ProductLookup
 import org.openintents.shopping.data.ProviderShoppingRepository
 import org.openintents.shopping.data.ShoppingItem
 import org.openintents.shopping.data.ShoppingListInfo
@@ -75,6 +78,12 @@ data class ShoppingUiState(
     /** "priority_subtotal_threshold" (0 = off) and "priosubtotal_includes_checked". */
     val prioritySubtotalThreshold: Int = 0,
     val prioritySubtotalIncludesChecked: Boolean = true,
+    /** A scanned barcode no product name was found for: the UI asks for a name. */
+    val unknownBarcode: String? = null,
+    /** Name of an item just added from a barcode (the UI confirms it, then consumes it). */
+    val addedFromBarcode: String? = null,
+    /** "barcode_lookup" setting: look up scanned barcodes on Open Food Facts. */
+    val barcodeLookup: Boolean = true,
     /** "compact" setting: denser rows, more items on the screen. */
     val compact: Boolean = false,
     /** "fastscroll" setting: a draggable scroll thumb for long lists. */
@@ -132,6 +141,7 @@ class ShoppingListViewModel(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val contentResolver: android.content.ContentResolver? = null,
     private val settings: SettingsRepository? = null,
+    private val productLookup: ProductLookup? = null,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ShoppingUiState())
@@ -181,6 +191,7 @@ class ShoppingListViewModel(
                 prioritySubtotalIncludesChecked = s.getBoolean("priosubtotal_includes_checked", true),
                 useFilters = s.getBoolean("use_filters", false),
                 compact = s.getBoolean("compact", false),
+                barcodeLookup = s.getBoolean(PREF_BARCODE_LOOKUP, true),
                 fastScroll = s.getBoolean("fastscroll", false),
             )
         }
@@ -195,6 +206,7 @@ class ShoppingListViewModel(
                 prioritySubtotalIncludesChecked = loaded.prioritySubtotalIncludesChecked,
                 useFilters = loaded.useFilters,
                 compact = loaded.compact, fastScroll = loaded.fastScroll,
+                barcodeLookup = loaded.barcodeLookup,
             )
         }
     }
@@ -374,6 +386,44 @@ class ShoppingListViewModel(
     }
 
     fun consumeScrollTarget() = _state.update { it.copy(scrollToContainsId = null) }
+
+    /**
+     * Adds the product with this barcode: an item that already has the barcode,
+     * else the name from Open Food Facts (if enabled); if neither is known the UI
+     * asks for a name ([ShoppingUiState.unknownBarcode]).
+     */
+    fun addScannedBarcode(barcode: String) = viewModelScope.launch {
+        val code = barcode.trim()
+        if (code.isEmpty() || _state.value.currentListId < 0) return@launch
+        val lookup = productLookup?.takeIf { _state.value.barcodeLookup }
+        val name = withContext(ioDispatcher) {
+            repository.getItemNameForBarcode(code) ?: lookup?.productName(code)
+        }
+        if (name == null) {
+            _state.update { it.copy(unknownBarcode = code) }
+        } else {
+            addWithBarcode(name, code)
+        }
+    }
+
+    /** The user named a product whose barcode was unknown. */
+    fun nameUnknownBarcode(name: String) {
+        val code = _state.value.unknownBarcode ?: return
+        _state.update { it.copy(unknownBarcode = null) }
+        if (name.isNotBlank()) viewModelScope.launch { addWithBarcode(name.trim(), code) }
+    }
+
+    fun dismissUnknownBarcode() = _state.update { it.copy(unknownBarcode = null) }
+
+    fun consumeAddedFromBarcode() = _state.update { it.copy(addedFromBarcode = null) }
+
+    private suspend fun addWithBarcode(name: String, barcode: String) {
+        val listId = _state.value.currentListId
+        withContext(ioDispatcher) { repository.addItems(listId, listOf(NewItem(name, barcode = barcode))) }
+        refresh().join()
+        val added = _state.value.items.firstOrNull { it.name.equals(name, ignoreCase = true) }
+        _state.update { it.copy(addedFromBarcode = name, scrollToContainsId = added?.containsId) }
+    }
 
     fun toggle(item: ShoppingItem) = viewModelScope.launch {
         // The repository flips the stored status, so quick double taps work.
@@ -603,6 +653,7 @@ class ShoppingListViewModel(
         private const val PREF_SHOW_PRICE = "showprice"
         private const val PREF_CAPITALIZATION = "capitalization"
         private const val PREF_FONT_SIZE = "fontsize"
+        private const val PREF_BARCODE_LOOKUP = "barcode_lookup"
         /** Same key as the legacy "search/add items in action bar" layout choice. */
         private const val PREF_ADD_BAR_ON_TOP = "holosearch"
 
@@ -614,6 +665,9 @@ class ShoppingListViewModel(
                     ProviderShoppingRepository(app),
                     contentResolver = app.contentResolver,
                     settings = SharedPrefsSettingsRepository(app),
+                    productLookup = OpenFoodFactsLookup(
+                        "OI Shopping List/${BuildConfig.VERSION_NAME} (https://github.com/openintents/shoppinglist)"
+                    ),
                 )
             }
         }

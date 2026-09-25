@@ -433,4 +433,37 @@ class ShoppingListViewModelTest {
         advanceUntilIdle()
         assertTrue(vm.state.value.items.single().isBought)
     }
+
+    @Test
+    fun scannedBarcode_usesTheLookupAndRemembersTheBarcode() = runTest(dispatcher) {
+        var lookups = 0
+        val repo = FakeShoppingRepository()
+        val vm = ShoppingListViewModel(
+            repo, dispatcher, productLookup = { code -> lookups++; if (code == "4000417025005") "Mineral water" else null }
+        )
+        advanceUntilIdle()
+        vm.addScannedBarcode("4000417025005")
+        advanceUntilIdle()
+        assertTrue(vm.state.value.items.any { it.name == "Mineral water" })
+        assertEquals("Mineral water", vm.state.value.addedFromBarcode)
+
+        // Second scan: the catalogue knows the barcode, no lookup needed.
+        vm.addScannedBarcode("4000417025005")
+        advanceUntilIdle()
+        assertEquals(1, lookups)
+    }
+
+    @Test
+    fun unknownBarcode_asksForAName() = runTest(dispatcher) {
+        val vm = ShoppingListViewModel(FakeShoppingRepository(), dispatcher, productLookup = { null })
+        advanceUntilIdle()
+        vm.addScannedBarcode("12345670")
+        advanceUntilIdle()
+        assertEquals("12345670", vm.state.value.unknownBarcode)
+
+        vm.nameUnknownBarcode("Batteries")
+        advanceUntilIdle()
+        assertEquals(null, vm.state.value.unknownBarcode)
+        assertTrue(vm.state.value.items.any { it.name == "Batteries" })
+    }
 }

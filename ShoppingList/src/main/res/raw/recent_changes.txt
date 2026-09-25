@@ -2,13 +2,13 @@
 release 2.3.0
 date: 2026-09-24
 
-- New, faster main screen: tap to check off, long-press to edit, add items from the bottom bar with suggestions. All list themes (Default, Classic, Bugdroid) are kept.
-- Updated for Android 15: targets API 35, AndroidX, Kotlin.
-- CSV import/export uses the system file picker and keeps access to the chosen file.
-- Fixed crashes in CSV import/export, list sharing settings, automation and the widget.
-- Fixed wrong item being moved/deleted after rotating the screen.
-- Backups now include the latest changes.
-- Smaller app: dead code and unused dependencies removed.
+- New main screen: tap to check, long-press to edit. All list themes kept.
+- Add items by scanning barcodes (names from Open Food Facts).
+- Compact view, fast scroll, search/add in the top bar.
+- Updated for Android 15; CSV via the system file picker.
+- Fixed crashes (CSV, widget, automation, translations) and wrong item moved after rotating.
+- Backups include the latest changes.
+- Smaller app.
 ----------------
 release 2.2.1
 date: 2020-06-13

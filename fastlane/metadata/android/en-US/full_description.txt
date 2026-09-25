@@ -1,16 +1,16 @@
 <p>OI Shopping List makes it easy to create and manage shopping lists and other checklists. Add items to a list, check them off in the shop, and clean up the list when you are done.</p>
 
-<p>Free, open source and ad-free since 2009. The app needs no internet permission: your lists stay on your device.</p>
+<p>Free, open source and ad-free since 2009. Your lists stay on your device. The app only goes online to look up the names of scanned barcodes on Open Food Facts, which you can turn off.</p>
 
 <p><b>Features</b></p>
 <ul>
 <li>Several lists, e.g. groceries, hardware store, wish list</li>
-<li>Add items quickly, with suggestions from items you used before</li>
+<li>Add items quickly, with suggestions from items you used before, or by scanning a barcode (product names from Open Food Facts)</li>
 <li>Check items off with undo; clean up bought items with one tap</li>
 <li>Pick mode: re-add items you bought before</li>
 <li>Quantity, units, priority, tags and notes for each item</li>
 <li>Prices per store, with totals for the list</li>
-<li>Sort order, hide checked items, font size and themes</li>
+<li>Many sort orders, store and tag filters, hide checked items, compact view, fast scroll, font size and themes</li>
 <li>Home screen widget</li>
 <li>Import and export lists as CSV (OI Shopping List and HandyShopper formats)</li>
 <li>Share a list as text, or add items shared from other apps</li>

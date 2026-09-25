@@ -1,16 +1,16 @@
 <p>Mit der OI Einkaufsliste erstellen und verwalten Sie Einkaufslisten und andere Checklisten. Fügen Sie Artikel zur Liste hinzu, haken Sie sie im Geschäft ab und räumen Sie die Liste danach auf.</p>
 
-<p>Kostenlos, quelloffen und werbefrei seit 2009. Die App benötigt keine Internetberechtigung: Ihre Listen bleiben auf Ihrem Gerät.</p>
+<p>Kostenlos, quelloffen und werbefrei seit 2009. Ihre Listen bleiben auf Ihrem Gerät. Die App geht nur online, um die Namen gescannter Barcodes bei Open Food Facts nachzuschlagen – das lässt sich abschalten.</p>
 
 <p><b>Funktionen</b></p>
 <ul>
 <li>Mehrere Listen, z. B. Lebensmittel, Baumarkt, Wunschliste</li>
-<li>Artikel schnell hinzufügen, mit Vorschlägen aus bereits verwendeten Artikeln</li>
+<li>Artikel schnell hinzufügen, mit Vorschlägen aus bereits verwendeten Artikeln oder per Barcode-Scan (Produktnamen von Open Food Facts)</li>
 <li>Artikel abhaken mit Rückgängig-Funktion; gekaufte Artikel mit einem Tipp entfernen</li>
 <li>Auswahlmodus: früher gekaufte Artikel wieder hinzufügen</li>
 <li>Menge, Einheit, Priorität, Tags und Notizen für jeden Artikel</li>
 <li>Preise pro Geschäft, mit Summen für die Liste</li>
-<li>Sortierung, erledigte Artikel ausblenden, Schriftgröße und Themen</li>
+<li>Viele Sortierungen, Filter nach Geschäft und Tag, erledigte Artikel ausblenden, kompakte Ansicht, Schnell-Scrollen, Schriftgröße und Themen</li>
 <li>Widget für den Startbildschirm</li>
 <li>Listen als CSV importieren und exportieren (OI Shopping List und HandyShopper)</li>
 <li>Liste als Text teilen oder Artikel aus anderen Apps übernehmen</li>

@@ -1,7 +1,7 @@
-- New main screen: tap to check off, long-press to edit, add items with suggestions. All list themes are kept.
-- Updated for Android 15.
-- CSV import/export uses the system file picker.
-- Fixed crashes in CSV import/export, widget, automation and some translations.
-- Fixed wrong item moved/deleted after rotating.
+- New main screen: tap to check, long-press to edit. All list themes kept.
+- Add items by scanning barcodes (names from Open Food Facts).
+- Compact view, fast scroll, search/add in the top bar.
+- Updated for Android 15; CSV via the system file picker.
+- Fixed crashes (CSV, widget, automation, translations) and wrong item moved after rotating.
 - Backups include the latest changes.
 - Smaller app.

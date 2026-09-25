@@ -61,8 +61,15 @@ class FakeShoppingRepository : ShoppingRepository {
         return id
     }
 
+    private val barcodes = mutableMapOf<String, String>()
+
     override fun addItems(listId: Long, items: List<NewItem>): Int =
-        items.count { addItem(listId, it.name) >= 0 }
+        items.count { item ->
+            item.barcode?.let { barcodes[it] = item.name.trim() }
+            addItem(listId, item.name) >= 0
+        }
+
+    override fun getItemNameForBarcode(barcode: String): String? = barcodes[barcode]
 
     override fun getItemStatus(containsId: Long): Long? =
         itemsByList.values.flatten().firstOrNull { it.containsId == containsId }?.status

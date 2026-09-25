@@ -230,6 +230,11 @@ class ProviderShoppingRepository(private val context: Context) : ShoppingReposit
         resolver.update(Uri.withAppendedPath(Lists.CONTENT_URI, listId.toString()), values, null, null)
     }
 
+    override fun getItemNameForBarcode(barcode: String): String? =
+        resolver.query(
+            Items.CONTENT_URI, arrayOf(Items.NAME), "${Items.BARCODE} = ?", arrayOf(barcode), null
+        )?.use { c -> if (c.moveToFirst()) c.getString(0)?.takeIf { it.isNotBlank() } else null }
+
     override fun getListTags(listId: Long): List<String> {
         val tags = sortedSetOf(String.CASE_INSENSITIVE_ORDER)
         resolver.query(

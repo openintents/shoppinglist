@@ -21,6 +21,11 @@
     <string name="compose_change">Change</string>
     <string name="compose_clear">Clear</string>
     <string name="compose_compact_view">Compact view</string>
+    <string name="compose_scan_barcode">Scan barcode</string>
+    <string name="compose_no_scanner">Scanning barcodes needs a barcode scanner app, for example Binary Eye.</string>
+    <string name="compose_install">Install</string>
+    <string name="compose_unknown_product">Unknown product %1$s</string>
+    <string name="compose_barcode_lookup">Look up scanned products on Open Food Facts</string>
     <!-- Sample items in the theme picker preview -->
     <string name="theme_preview_item_1">Milk</string>
     <string name="theme_preview_item_2">Bread</string>

@@ -1,7 +1,7 @@
-- Neuer Hauptbildschirm: Tippen hakt ab, langes Drücken bearbeitet, Artikel mit Vorschlägen hinzufügen. Alle Listen-Themen bleiben.
-- Aktualisiert für Android 15.
-- CSV-Import/-Export über die Dateiauswahl des Systems.
-- Abstürze bei CSV, Widget, Automatisierung und einigen Übersetzungen behoben.
-- Falscher Artikel nach Drehen verschoben/gelöscht: behoben.
+- Neuer Hauptbildschirm: Tippen hakt ab, langes Drücken bearbeitet. Alle Themen bleiben.
+- Artikel per Barcode-Scan hinzufügen (Namen von Open Food Facts).
+- Kompakte Ansicht, Schnell-Scrollen, Suchen/Hinzufügen oben.
+- Für Android 15 aktualisiert; CSV über die Dateiauswahl.
+- Abstürze (CSV, Widget, Automatisierung, Übersetzungen) behoben.
 - Sicherungen enthalten die neuesten Änderungen.
 - Kleinere App.

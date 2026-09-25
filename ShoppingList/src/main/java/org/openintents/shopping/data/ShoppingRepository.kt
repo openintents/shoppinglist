@@ -57,6 +57,9 @@ interface ShoppingRepository {
     /** Only show items tagged [tag] (null = all). */
     fun setTagFilter(listId: Long, tag: String?)
 
+    /** The name of the catalogue item with this barcode, or null. */
+    fun getItemNameForBarcode(barcode: String): String?
+
     /** The distinct tags of the items on [listId], sorted. */
     fun getListTags(listId: Long): List<String>
 

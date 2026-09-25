@@ -52,6 +52,7 @@ object AppSettingsCatalog {
                 BoolSetting("shake", R.string.preference_shake_title, false),
                 BoolSetting("use_filters", R.string.preference_usefilters_title, false),
                 BoolSetting("resetquantity", R.string.preference_reset_quantity, false),
+                BoolSetting("barcode_lookup", R.string.compose_barcode_lookup, true),
                 BoolSetting("autocomplete_only_this_list", R.string.preference_complete_by_list_title, false),
             )
         ),

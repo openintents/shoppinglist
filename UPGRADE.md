@@ -30,7 +30,10 @@ Done in this pass (source audit, all components):
   aTrackDog meta-data. CI is now `.github/workflows/build.yml` (unit tests, tstore APK,
   play AAB, lint).
 
-Feature parity with the legacy UI (checked before release 2.3.0):
+Feature parity with the legacy UI (checked before release 2.3.0). The legacy screens
+are no longer in the manifest; their sources (ui/ShoppingActivity.java, ui/widget/
+ShoppingItemsView.kt, ui/dialog/*, share/*, theme/*, provider/Alert|Location|Hardware|Tag,
+PickItemsActivity, AddLocationAlertActivity, ...) can be deleted:
 
 | Legacy feature | New UI |
 |---|---|
@@ -46,10 +49,11 @@ Feature parity with the legacy UI (checked before release 2.3.0):
 | Keep screen on, orientation, reset quantity, completion scope | yes |
 | Convert CSV (HandyShopper, encoding, policy), About | yes (menu) |
 | Items from other apps (SEND text, INSERT_FROM_EXTRAS), list shortcuts, widget | yes |
-| Other apps picking items (PICK/GET_CONTENT item) | served by the legacy screen |
+| Other apps picking items (PICK/GET_CONTENT item) | removed with the legacy screen (2.3.0) |
 | Quick edit mode (tap quantity/priority) | replaced by long-press edit |
-| Fast scroll | not ported (Compose list) |
-| Barcode add via "OI Barcode Scanner", location alerts (OI Locations), GTalk sharing, Wear sync, theme packs from other apps, Market add-on links | dropped: the partner apps/services no longer exist |
+| Fast scroll | yes ("Fast scrolling" setting) |
+| - | new: compact view, barcode scanning (scanner app + Open Food Facts) |
+| Location alerts (OI Locations), GTalk sharing, Wear sync, theme packs from other apps, Market add-on links | dropped: the partner apps/services no longer exist |
 
 Release channels: F-Droid (tag + `.fdroid.yml`), GitHub releases for Obtainium and
 Zapstore (`.github/workflows/release.yml`, needs the signing secrets and

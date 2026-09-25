@@ -96,6 +96,7 @@ import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -172,6 +173,10 @@ fun ShoppingListRoute(viewModel: ShoppingListViewModel) {
         onDeleteItem = viewModel::deleteItem,
         onConsumeEditRequest = viewModel::consumeEditRequest,
         onSetThemeForAllLists = viewModel::setThemeForAllLists,
+        onScannedBarcode = viewModel::addScannedBarcode,
+        onNameUnknownBarcode = viewModel::nameUnknownBarcode,
+        onDismissUnknownBarcode = viewModel::dismissUnknownBarcode,
+        onConsumeAddedFromBarcode = viewModel::consumeAddedFromBarcode,
     )
 }
 
@@ -214,6 +219,10 @@ fun ShoppingListScreen(
     onDeleteItem: (ShoppingItem) -> Unit = {},
     onConsumeEditRequest: () -> Unit = {},
     onSetThemeForAllLists: (ListTheme) -> Unit = {},
+    onScannedBarcode: (String) -> Unit = {},
+    onNameUnknownBarcode: (String) -> Unit = {},
+    onDismissUnknownBarcode: () -> Unit = {},
+    onConsumeAddedFromBarcode: () -> Unit = {},
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val listState = rememberLazyListState()
@@ -264,6 +273,29 @@ fun ShoppingListScreen(
     val importLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.OpenDocument()
     ) { uri -> uri?.let(onImport) }
+
+    // Barcodes are scanned by a scanner app (ZXing intent, e.g. Binary Eye).
+    var showNoScanner by rememberSaveable { mutableStateOf(false) }
+    val scanLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        result.data?.getStringExtra("SCAN_RESULT")?.takeIf { it.isNotBlank() }?.let(onScannedBarcode)
+    }
+    val scanBarcode = {
+        try {
+            scanLauncher.launch(
+                Intent("com.google.zxing.client.android.SCAN").putExtra("SCAN_MODE", "PRODUCT_MODE")
+            )
+        } catch (e: android.content.ActivityNotFoundException) {
+            showNoScanner = true
+        }
+    }
+    val addedFormat = stringResource(R.string.undoable_added_item)
+    LaunchedEffect(state.addedFromBarcode) {
+        val name = state.addedFromBarcode ?: return@LaunchedEffect
+        android.widget.Toast.makeText(context, String.format(addedFormat, name), android.widget.Toast.LENGTH_SHORT).show()
+        onConsumeAddedFromBarcode()
+    }
 
     // Undo for mark all / unmark all / clean up.
     val resources = context.resources
@@ -343,6 +375,7 @@ fun ShoppingListScreen(
                                 placeholder = state.currentListName.ifEmpty { stringResource(R.string.app_name) },
                                 capitalization = state.capitalization,
                                 onSubmit = submitAdd,
+                                onScan = scanBarcode,
                             )
                         } else Column {
                             Text(
@@ -534,6 +567,7 @@ fun ShoppingListScreen(
                         capitalization = state.capitalization,
                         onAdd = { onAddItem(it); addText = "" },
                         onSubmit = submitAdd,
+                        onScan = scanBarcode,
                     )
                 }
             }
@@ -575,6 +609,32 @@ fun ShoppingListScreen(
             dismissButton = {
                 TextButton(onClick = { showDeleteConfirm = false }) { Text(stringResource(R.string.cancel)) }
             }
+        )
+    }
+
+    if (showNoScanner) {
+        AlertDialog(
+            onDismissRequest = { showNoScanner = false },
+            text = { Text(stringResource(R.string.compose_no_scanner)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    showNoScanner = false
+                    openStore(context, "de.markusfisch.android.binaryeye")
+                }) { Text(stringResource(R.string.compose_install)) }
+            },
+            dismissButton = {
+                TextButton(onClick = { showNoScanner = false }) { Text(stringResource(R.string.cancel)) }
+            },
+        )
+    }
+
+    state.unknownBarcode?.let { code ->
+        TextEntryDialog(
+            title = stringResource(R.string.compose_unknown_product, code),
+            label = stringResource(R.string.item),
+            confirmLabel = stringResource(R.string.add),
+            onDismiss = onDismissUnknownBarcode,
+            onConfirm = onNameUnknownBarcode,
         )
     }
 
@@ -1534,6 +1594,7 @@ private fun AddItemRow(
     capitalization: Int,
     onAdd: (String) -> Unit,
     onSubmit: () -> Unit,
+    onScan: () -> Unit,
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         SuggestionRow(query = text, suggestions = suggestions, onPick = onAdd)
@@ -1553,6 +1614,14 @@ private fun AddItemRow(
                 keyboardActions = KeyboardActions(onDone = { onSubmit() }),
                 modifier = Modifier.weight(1f)
             )
+            if (text.isEmpty()) {
+                IconButton(onClick = onScan) {
+                    Icon(
+                        painterResource(R.drawable.ic_barcode),
+                        contentDescription = stringResource(R.string.compose_scan_barcode),
+                    )
+                }
+            }
             IconButton(onClick = onSubmit) {
                 Icon(Icons.Filled.Add, contentDescription = stringResource(R.string.add))
             }
@@ -1571,6 +1640,7 @@ private fun TopBarAddField(
     placeholder: String,
     capitalization: Int,
     onSubmit: () -> Unit,
+    onScan: () -> Unit,
 ) {
     TextField(
         value = text,
@@ -1578,7 +1648,14 @@ private fun TopBarAddField(
         placeholder = { Text(placeholder, maxLines = 1) },
         leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
         trailingIcon = {
-            if (text.isNotEmpty()) {
+            if (text.isEmpty()) {
+                IconButton(onClick = onScan) {
+                    Icon(
+                        painterResource(R.drawable.ic_barcode),
+                        contentDescription = stringResource(R.string.compose_scan_barcode),
+                    )
+                }
+            } else {
                 Row {
                     IconButton(onClick = { onTextChange("") }) {
                         Icon(Icons.Filled.Clear, contentDescription = stringResource(R.string.compose_clear))
@@ -1631,6 +1708,18 @@ private fun TextEntryDialog(
         },
         dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) } }
     )
+}
+
+/** Opens an app's page in the installed app store (F-Droid, Play...), else on F-Droid's website. */
+private fun openStore(context: android.content.Context, packageName: String) {
+    val market = Intent(Intent.ACTION_VIEW, android.net.Uri.parse("market://details?id=$packageName"))
+    try {
+        context.startActivity(market)
+    } catch (e: android.content.ActivityNotFoundException) {
+        context.startActivity(
+            Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://f-droid.org/packages/$packageName/"))
+        )
+    }
 }
 
 private fun shareList(
